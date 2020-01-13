@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Citta_T1", "Citta_T1\Citta_T1.csproj", "{6FE47E67-232B-4A47-B905-8385DEAF2A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZH_Controls", "..\HZH_Controls\HZH_Controls\HZH_Controls.csproj", "{AF32E163-C577-4CBC-A072-0DC1CE0E1DA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZH_Controls", "HZH_Controls\HZH_Controls\HZH_Controls.csproj", "{AF32E163-C577-4CBC-A072-0DC1CE0E1DA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
