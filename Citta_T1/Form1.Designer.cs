@@ -44,6 +44,8 @@
             this.localDataTabPage = new System.Windows.Forms.TabPage();
             this.exDataTabPage = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new Citta_T1.DataGridView1();
+            this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -68,6 +70,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.flowControl1 = new Citta_T1.FlowControl();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -248,12 +251,33 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.dataGridView1);
+            this.panel3.Controls.Add(this.dataGridView2);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(276, 507);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1011, 176);
             this.panel3.TabIndex = 3;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1011, 137);
+            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(1011, 137);
+            this.dataGridView2.TabIndex = 2;
+            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // panel4
             // 
@@ -297,6 +321,7 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
+            this.panel8.Paint += new System.Windows.Forms.PaintEventHandler(this.panel8_Paint);
             // 
             // label6
             // 
@@ -329,6 +354,7 @@
             this.label4.Size = new System.Drawing.Size(92, 27);
             this.label4.TabIndex = 1;
             this.label4.Text = "运行结果";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -518,6 +544,16 @@
             this.panel7.TabIndex = 5;
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
+            // flowControl1
+            // 
+            this.flowControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.flowControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl1.BackgroundImage")));
+            this.flowControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl1.Location = new System.Drawing.Point(784, 42);
+            this.flowControl1.Name = "flowControl1";
+            this.flowControl1.Size = new System.Drawing.Size(209, 51);
+            this.flowControl1.TabIndex = 3;
+            // 
             // pictureBox3
             // 
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
@@ -668,6 +704,8 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private FlowControl flowControl1;
+        private DataGridView1 dataGridView1;
+        private DataGridView2 dataGridView2;
     }
 }
 

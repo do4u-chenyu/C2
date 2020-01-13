@@ -71,17 +71,20 @@ namespace Citta_T1
 
         private void label3_Click(object sender, EventArgs e)
         {
-            
+            this.dataGridView1.Visible = true;
+            this.dataGridView2.Visible = false;
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-
+            this.dataGridView1.Visible = false;
+            this.dataGridView2.Visible = true;
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
-
+            this.dataGridView1.Visible = false;
+            this.dataGridView2.Visible = true;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -183,7 +186,37 @@ namespace Citta_T1
             g.DrawLine(pen,300,200,800,200);
         }
 
-        private void flowControl1_Load(object sender, EventArgs e)
+        private void flowControl1_Load(object sender, EventArgs e) { }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ucDataGridView1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void dataGridView2_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void label4_Click(object sender, EventArgs e)
+        {
+            this.dataGridView1.Visible = true;
+            this.dataGridView2.Visible = false;
+        }
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -45,6 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataGridView2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGridView2.Designer.cs">
+      <DependentUpon>DataGridView2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogModel.cs" />
+    <Compile Include="TestGridModel.cs" />
+    <Compile Include="DataGridView1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGridView1.Designer.cs">
+      <DependentUpon>DataGridView1.cs</DependentUpon>
+    </Compile>
     <Compile Include="FlowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -65,6 +79,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DataGridView1.resx">
+      <DependentUpon>DataGridView1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGridView2.resx">
+      <DependentUpon>DataGridView2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,7 +116,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="res\flow\flow.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
@@ -120,6 +139,12 @@
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />
     <Content Include="res\toolbox\union.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HZH_Controls\HZH_Controls\HZH_Controls.csproj">
+      <Project>{af32e163-c577-4cbc-a072-0dc1ce0e1da3}</Project>
+      <Name>HZH_Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
