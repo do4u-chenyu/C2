@@ -117,6 +117,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\displaypanel\maxunfold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="res\displaypanel\minfold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="res\flow\flow.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
     <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />

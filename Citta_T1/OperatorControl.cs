@@ -12,7 +12,6 @@ namespace Citta_T1
 {
     public partial class OperatorControl : UserControl
     {
-        private bool leftFlag;
         public OperatorControl()
         {
             InitializeComponent();
