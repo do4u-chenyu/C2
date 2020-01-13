@@ -187,6 +187,7 @@ namespace Citta_T1
         }
 
         private void flowControl1_Load(object sender, EventArgs e) { }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
