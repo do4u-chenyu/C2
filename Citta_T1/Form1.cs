@@ -18,8 +18,9 @@ namespace Citta_T1
             InitializeComponent();
             this.panel3Minimum = false;
             InitializePanel10Location();
-            
-            
+            InitializeFlowControlLoaction();
+
+
         }
         private void InitializePanel10Location()
         {
@@ -31,6 +32,13 @@ namespace Citta_T1
             if (y - 100 - this.panel10.Height> 0)
                 y = y - 100 - this.panel10.Height;
             this.panel10.Location = new Point(x, y);
+        }
+
+        private void InitializeFlowControlLoaction()
+        {
+            Point org = new Point(this.panel7.Width, 0);
+            Point loc = new Point(org.X - 20 - this.flowControl1.Width, org.Y + 50);
+            this.flowControl1.Location = loc;
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
@@ -88,11 +96,13 @@ namespace Citta_T1
                 this.panel3.Height = 40;
             }
             InitializePanel10Location();
+           
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             InitializePanel10Location();
+            InitializeFlowControlLoaction();
         }
 
         private void panel9_Paint(object sender, PaintEventArgs e)
