@@ -74,6 +74,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
+            this.flowControl1 = new Citta_T1.FlowControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -518,6 +519,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.panel7.Controls.Add(this.flowControl1);
             this.panel7.Controls.Add(this.pictureBox3);
             this.panel7.Controls.Add(this.panel11);
             this.panel7.Controls.Add(this.panel10);
@@ -589,6 +591,15 @@
             this.ucDataGridView1.Size = new System.Drawing.Size(1011, 137);
             this.ucDataGridView1.TabIndex = 3;
             this.ucDataGridView1.Load += new System.EventHandler(this.ucDataGridView1_Load);
+            // flowControl1
+            // 
+            this.flowControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.flowControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl1.BackgroundImage")));
+            this.flowControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl1.Location = new System.Drawing.Point(784, 42);
+            this.flowControl1.Name = "flowControl1";
+            this.flowControl1.Size = new System.Drawing.Size(209, 51);
+            this.flowControl1.TabIndex = 3;
             // 
             // Form1
             // 
@@ -678,6 +689,7 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
+        private FlowControl flowControl1;
     }
 }
 

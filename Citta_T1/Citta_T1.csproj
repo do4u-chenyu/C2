@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowControl.Designer.cs">
+      <DependentUpon>FlowControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FlowControl.resx">
+      <DependentUpon>FlowControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +103,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\flow\flow.png" />
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
