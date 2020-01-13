@@ -13,6 +13,7 @@ namespace Citta_T1
     public partial class Form1 : Form
     {
         private bool panel3Minimum;
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +28,19 @@ namespace Citta_T1
             Panel parentPanel = (Panel)this.panel10.Parent;
             int x = parentPanel.Location.X + parentPanel.Width;
             int y = parentPanel.Location.Y + parentPanel.Height;
+            int buttonRunx,buttonRuny,buttonDownloadx,buttonDownloady;
             if (x - 300 - this.panel10.Width> 0)
                 x = x - 300 - this.panel10.Width;
+                buttonRunx = x - 700;
+                buttonDownloadx = x - 650;
             if (y - 100 - this.panel10.Height> 0)
                 y = y - 100 - this.panel10.Height;
+                buttonRuny = y + 50;
+                buttonDownloady = y + 50;
             this.panel10.Location = new Point(x, y);
+            this.ButtonDownload.Location = new Point(buttonDownloadx, buttonRuny);
+            this.ButtonRun.Location      = new Point(buttonRunx, buttonDownloady);
+            
         }
 
         private void InitializeFlowControlLoaction()
@@ -93,10 +102,14 @@ namespace Citta_T1
             {
                 this.panel3Minimum = false;
                 this.panel3.Height = 180;
+                this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("minfold.Image")));
+                this.pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\minfold.png");
             }
             else {
                 this.panel3Minimum = true;
                 this.panel3.Height = 40;
+                this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("maxunfold.Image")));
+                this.pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
             InitializePanel10Location();
            
@@ -186,7 +199,9 @@ namespace Citta_T1
             g.DrawLine(pen,300,200,800,200);
         }
 
-        private void flowControl1_Load(object sender, EventArgs e) { }
+        private void flowControl1_Load(object sender, EventArgs e)
+        {
+        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

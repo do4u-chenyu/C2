@@ -43,6 +43,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.localDataTabPage = new System.Windows.Forms.TabPage();
             this.exDataTabPage = new System.Windows.Forms.TabPage();
+            this.panel12 = new Citta_T1.OperatorControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
@@ -70,13 +71,14 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.ButtonDownload = new System.Windows.Forms.Button();
+            this.ButtonRun = new System.Windows.Forms.Button();
             this.flowControl1 = new Citta_T1.FlowControl();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.flowControl1 = new Citta_T1.FlowControl();
-            this.panel12 = new Citta_T1.OperatorControl();
+            this.label7 = new System.Windows.Forms.Label();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -122,6 +124,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Help;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(200, 10);
             this.pictureBox5.Name = "pictureBox5";
@@ -249,6 +252,16 @@
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
             // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(138, 635);
+            this.panel12.TabIndex = 0;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.dataGridView1);
@@ -303,9 +316,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(71, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(115, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(74, 24);
+            this.pictureBox1.Size = new System.Drawing.Size(25, 24);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -380,6 +393,7 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label7);
             this.panel6.Controls.Add(this.MoreButton);
             this.panel6.Controls.Add(this.TypeSettingButton);
             this.panel6.Controls.Add(this.histogramButton);
@@ -532,7 +546,9 @@
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Controls.Add(this.ButtonDownload);
+            this.panel7.Controls.Add(this.ButtonRun);
             this.panel7.Controls.Add(this.flowControl1);
             this.panel7.Controls.Add(this.pictureBox3);
             this.panel7.Controls.Add(this.panel11);
@@ -544,6 +560,38 @@
             this.panel7.TabIndex = 5;
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
+            // ButtonDownload
+            // 
+            this.ButtonDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonDownload.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatAppearance.BorderSize = 0;
+            this.ButtonDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonDownload.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
+            this.ButtonDownload.Location = new System.Drawing.Point(450, 354);
+            this.ButtonDownload.Name = "ButtonDownload";
+            this.ButtonDownload.Size = new System.Drawing.Size(52, 53);
+            this.ButtonDownload.TabIndex = 21;
+            this.ButtonDownload.UseVisualStyleBackColor = true;
+            // 
+            // ButtonRun
+            // 
+            this.ButtonRun.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonRun.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatAppearance.BorderSize = 0;
+            this.ButtonRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonRun.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.ButtonRun.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRun.Image")));
+            this.ButtonRun.Location = new System.Drawing.Point(398, 354);
+            this.ButtonRun.Name = "ButtonRun";
+            this.ButtonRun.Size = new System.Drawing.Size(52, 53);
+            this.ButtonRun.TabIndex = 20;
+            this.ButtonRun.UseVisualStyleBackColor = true;
+            // 
             // flowControl1
             // 
             this.flowControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
@@ -553,6 +601,7 @@
             this.flowControl1.Name = "flowControl1";
             this.flowControl1.Size = new System.Drawing.Size(209, 51);
             this.flowControl1.TabIndex = 3;
+            this.flowControl1.Load += new System.EventHandler(this.flowControl1_Load);
             // 
             // pictureBox3
             // 
@@ -595,26 +644,15 @@
             this.panel10.Size = new System.Drawing.Size(200, 100);
             this.panel10.TabIndex = 0;
             // 
-            // flowControl1
+            // label7
             // 
-            this.flowControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.flowControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl1.BackgroundImage")));
-            this.flowControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl1.Location = new System.Drawing.Point(784, 42);
-            this.flowControl1.Name = "flowControl1";
-            this.flowControl1.Size = new System.Drawing.Size(209, 51);
-            this.flowControl1.TabIndex = 3;
-            this.flowControl1.Load += new System.EventHandler(this.flowControl1_Load);
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.White;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(138, 635);
-            this.panel12.TabIndex = 0;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(70, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 21);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "常用";
             // 
             // Form1
             // 
@@ -648,6 +686,7 @@
             this.panel8.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -706,6 +745,9 @@
         private FlowControl flowControl1;
         private DataGridView1 dataGridView1;
         private DataGridView2 dataGridView2;
+        private System.Windows.Forms.Button ButtonDownload;
+        private System.Windows.Forms.Button ButtonRun;
+        private System.Windows.Forms.Label label7;
     }
 }
 
