@@ -87,7 +87,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\HZH_Controls\HZH_Controls\HZH_Controls.csproj">
+      <Project>{af32e163-c577-4cbc-a072-0dc1ce0e1da3}</Project>
+      <Name>HZH_Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />

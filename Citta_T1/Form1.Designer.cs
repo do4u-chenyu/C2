@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.headPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
@@ -41,6 +43,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.localDataTabPage = new System.Windows.Forms.TabPage();
             this.exDataTabPage = new System.Windows.Forms.TabPage();
+            this.panel12 = new Citta_T1.OperatorControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -70,11 +73,11 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.panel12 = new Citta_T1.OperatorControl();
+            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -90,8 +93,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -115,6 +116,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(327, 46);
             this.panel2.TabIndex = 1;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
+            this.pictureBox5.Location = new System.Drawing.Point(200, 10);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 3;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(230, 10);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox4.TabIndex = 3;
+            this.pictureBox4.TabStop = false;
             // 
             // label2
             // 
@@ -226,8 +246,19 @@
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
             // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(138, 635);
+            this.panel12.TabIndex = 0;
+            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.ucDataGridView1);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(276, 507);
@@ -538,34 +569,26 @@
             this.panel10.Size = new System.Drawing.Size(200, 100);
             this.panel10.TabIndex = 0;
             // 
-            // pictureBox4
+            // ucDataGridView1
             // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(230, 10);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(200, 10);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 3;
-            this.pictureBox5.TabStop = false;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.White;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(138, 635);
-            this.panel12.TabIndex = 0;
+            this.ucDataGridView1.AutoScroll = true;
+            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
+            this.ucDataGridView1.Columns = null;
+            this.ucDataGridView1.DataSource = null;
+            this.ucDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.ucDataGridView1.HeadHeight = 40;
+            this.ucDataGridView1.HeadPadingLeft = 0;
+            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
+            this.ucDataGridView1.IsShowCheckBox = false;
+            this.ucDataGridView1.IsShowHead = true;
+            this.ucDataGridView1.Location = new System.Drawing.Point(0, 39);
+            this.ucDataGridView1.Name = "ucDataGridView1";
+            this.ucDataGridView1.RowHeight = 40;
+            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
+            this.ucDataGridView1.Size = new System.Drawing.Size(1011, 137);
+            this.ucDataGridView1.TabIndex = 3;
+            this.ucDataGridView1.Load += new System.EventHandler(this.ucDataGridView1_Load);
             // 
             // Form1
             // 
@@ -586,6 +609,8 @@
             this.headPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
@@ -602,8 +627,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -654,6 +677,7 @@
         private OperatorControl panel12;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
     }
 }
 
