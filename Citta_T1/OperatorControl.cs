@@ -12,9 +12,20 @@ namespace Citta_T1
 {
     public partial class OperatorControl : UserControl
     {
+        private bool leftFlag;
         public OperatorControl()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

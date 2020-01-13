@@ -43,7 +43,6 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.localDataTabPage = new System.Windows.Forms.TabPage();
             this.exDataTabPage = new System.Windows.Forms.TabPage();
-            this.panel12 = new Citta_T1.OperatorControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -74,6 +73,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.flowControl1 = new Citta_T1.FlowControl();
+            this.panel12 = new Citta_T1.OperatorControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -245,16 +245,6 @@
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.White;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(138, 635);
-            this.panel12.TabIndex = 0;
             // 
             // panel3
             // 
@@ -484,33 +474,33 @@
             // 
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button6.Location = new System.Drawing.Point(98, 12);
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(102, 8);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(71, 26);
+            this.button6.Size = new System.Drawing.Size(79, 32);
             this.button6.TabIndex = 2;
-            this.button6.Text = "保存模型";
             this.button6.UseVisualStyleBackColor = false;
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.White;
             this.button5.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(181, 12);
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.Location = new System.Drawing.Point(189, 8);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(71, 26);
+            this.button5.Size = new System.Drawing.Size(79, 32);
             this.button5.TabIndex = 1;
-            this.button5.Text = "导入数据";
             this.button5.UseVisualStyleBackColor = false;
             // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(15, 12);
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.Location = new System.Drawing.Point(15, 8);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(71, 26);
+            this.button4.Size = new System.Drawing.Size(79, 32);
             this.button4.TabIndex = 0;
-            this.button4.Text = "新建模型";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -578,6 +568,17 @@
             this.flowControl1.Name = "flowControl1";
             this.flowControl1.Size = new System.Drawing.Size(209, 51);
             this.flowControl1.TabIndex = 3;
+            this.flowControl1.Load += new System.EventHandler(this.flowControl1_Load);
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(138, 635);
+            this.panel12.TabIndex = 0;
             // 
             // Form1
             // 

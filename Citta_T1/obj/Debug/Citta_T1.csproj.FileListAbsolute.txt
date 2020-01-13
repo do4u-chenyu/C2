@@ -26,3 +26,4 @@ E:\CitaKAIFA\Citta_T1\Citta_T1\obj\Debug\Citta_T1.csproj.GenerateResource.cache
 E:\CitaKAIFA\Citta_T1\Citta_T1\obj\Debug\Citta_T1.exe
 E:\CitaKAIFA\Citta_T1\Citta_T1\obj\Debug\Citta_T1.pdb
 D:\work\Citta_T1\Citta_T1\obj\Debug\Citta_T1.OperatorControl.resources
+D:\work\Citta_T1\Citta_T1\obj\Debug\Citta_T1.FlowControl.resources

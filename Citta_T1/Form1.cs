@@ -182,5 +182,10 @@ namespace Citta_T1
             Pen pen = new Pen(Color.Black, 100); ;
             g.DrawLine(pen,300,200,800,200);
         }
+
+        private void flowControl1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
