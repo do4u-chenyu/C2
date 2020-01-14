@@ -12,6 +12,8 @@ namespace Citta_T1
 {
     public partial class OperatorControl : UserControl
     {
+        private bool isMouseDown = false;
+        private Point mouseOffset; //记录鼠标指针的坐标
         public OperatorControl()
         {
             InitializeComponent();
@@ -26,5 +28,25 @@ namespace Citta_T1
         {
 
         }
+
+        private void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                LeftPanelOpIntersect.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+        }
+
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mouseOffset.X = e.X;
+                mouseOffset.Y = e.Y;
+                isMouseDown = true;
+            }
+        }
+
+
     }
 }

@@ -46,7 +46,7 @@
             this.LeftpanelOpFilter = new System.Windows.Forms.Button();
             this.LeftpanelOpMax = new System.Windows.Forms.Button();
             this.LeftpanelOpMin = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.LeftpanelOpMean = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -70,6 +70,7 @@
             this.LeftpanelOpConect.TabIndex = 0;
             this.LeftpanelOpConect.Text = "连接算子";
             this.LeftpanelOpConect.UseVisualStyleBackColor = true;
+            this.LeftpanelOpConect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox1
             // 
@@ -155,6 +156,7 @@
             this.LeftPanelOpIntersect.TabIndex = 18;
             this.LeftPanelOpIntersect.Text = "取交集";
             this.LeftPanelOpIntersect.UseVisualStyleBackColor = true;
+            this.LeftPanelOpIntersect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox10
             // 
@@ -177,6 +179,7 @@
             this.LefpanelOpUnion.TabIndex = 19;
             this.LefpanelOpUnion.Text = "取并集";
             this.LefpanelOpUnion.UseVisualStyleBackColor = true;
+            this.LefpanelOpUnion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // LeftpanelOpDiffer
             // 
@@ -190,6 +193,7 @@
             this.LeftpanelOpDiffer.TabIndex = 20;
             this.LeftpanelOpDiffer.Text = "取差集";
             this.LeftpanelOpDiffer.UseVisualStyleBackColor = true;
+            this.LeftpanelOpDiffer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // LeftpanelOpRandom
             // 
@@ -203,6 +207,7 @@
             this.LeftpanelOpRandom.TabIndex = 21;
             this.LeftpanelOpRandom.Text = "随机采样";
             this.LeftpanelOpRandom.UseVisualStyleBackColor = true;
+            this.LeftpanelOpRandom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // LeftpanelOpFilter
             // 
@@ -216,6 +221,7 @@
             this.LeftpanelOpFilter.TabIndex = 22;
             this.LeftpanelOpFilter.Text = "过滤算子";
             this.LeftpanelOpFilter.UseVisualStyleBackColor = true;
+            this.LeftpanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // LeftpanelOpMax
             // 
@@ -229,6 +235,7 @@
             this.LeftpanelOpMax.TabIndex = 23;
             this.LeftpanelOpMax.Text = "取最大值";
             this.LeftpanelOpMax.UseVisualStyleBackColor = true;
+            this.LeftpanelOpMax.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // LeftpanelOpMin
             // 
@@ -242,28 +249,32 @@
             this.LeftpanelOpMin.TabIndex = 24;
             this.LeftpanelOpMin.Text = "取最小值";
             this.LeftpanelOpMin.UseVisualStyleBackColor = true;
+            this.LeftpanelOpMin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // button1
+            // LeftpanelOpMean
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button1.Location = new System.Drawing.Point(39, 501);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 40);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "取平均值";
-            this.button1.UseMnemonic = false;
-            this.button1.UseVisualStyleBackColor = true;
+            this.LeftpanelOpMean.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.LeftpanelOpMean.FlatAppearance.BorderSize = 0;
+            this.LeftpanelOpMean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LeftpanelOpMean.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.LeftpanelOpMean.Location = new System.Drawing.Point(39, 501);
+            this.LeftpanelOpMean.Name = "LeftpanelOpMean";
+            this.LeftpanelOpMean.Size = new System.Drawing.Size(74, 40);
+            this.LeftpanelOpMean.TabIndex = 25;
+            this.LeftpanelOpMean.Text = "取平均值";
+            this.LeftpanelOpMean.UseMnemonic = false;
+            this.LeftpanelOpMean.UseVisualStyleBackColor = true;
+            this.LeftpanelOpMean.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // OperatorControl
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LeftpanelOpConect);
+            this.Controls.Add(this.LeftpanelOpMean);
             this.Controls.Add(this.LeftpanelOpMin);
             this.Controls.Add(this.LeftpanelOpMax);
             this.Controls.Add(this.LeftpanelOpFilter);
@@ -280,7 +291,6 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.LeftpanelOpConect);
             this.Name = "OperatorControl";
             this.Size = new System.Drawing.Size(140, 637);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -315,6 +325,6 @@
         private System.Windows.Forms.Button LeftpanelOpFilter;
         private System.Windows.Forms.Button LeftpanelOpMax;
         private System.Windows.Forms.Button LeftpanelOpMin;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button LeftpanelOpMean;
     }
 }

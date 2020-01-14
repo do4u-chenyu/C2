@@ -247,13 +247,14 @@
             this.exDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.exDataTabPage.Name = "exDataTabPage";
             this.exDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exDataTabPage.Size = new System.Drawing.Size(130, 609);
+            this.exDataTabPage.Size = new System.Drawing.Size(130, 385);
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
             // 
             // panel12
             // 
+            this.panel12.AllowDrop = true;
             this.panel12.BackColor = System.Drawing.Color.White;
             this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -556,6 +557,7 @@
             // 
             // panel7
             // 
+            this.panel7.AllowDrop = true;
             this.panel7.BackColor = System.Drawing.Color.White;
             this.panel7.Controls.Add(this.ButtonDownload);
             this.panel7.Controls.Add(this.ButtonRun);
@@ -568,6 +570,8 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1011, 413);
             this.panel7.TabIndex = 5;
+            this.panel7.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel7_DragDrop);
+            this.panel7.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel7_DragEnter);
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
             // 
             // ButtonDownload

@@ -13,6 +13,8 @@ namespace Citta_T1
     public partial class Form1 : Form
     {
         private bool panel3Minimum;
+        private bool isMouseDown = false;
+        private Point mouseOffset; //记录鼠标指针的坐标
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace Citta_T1
             Panel parentPanel = (Panel)this.panel10.Parent;
             int x = parentPanel.Location.X + parentPanel.Width;
             int y = parentPanel.Location.Y + parentPanel.Height;
-            int buttonRunx,buttonDownloadx;
+            int buttonRunx;
             if (x - 300 - this.panel10.Width> 0)
                 x = x - 300 - this.panel10.Width;
                 buttonRunx = x - (this.panel7.Width)/2+100;       
@@ -234,6 +236,53 @@ namespace Citta_T1
         private void panel10_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void panel7_DragDrop(object sender, DragEventArgs e)
+        {
+            Button btn = new Button();
+            btn.Size = button4.Size;
+            btn.Location = this.PointToClient(new Point(e.X-300, e.Y-100));
+            this.panel7.Controls.Add(btn);
+            btn.Text = e.Data.GetData("Text").ToString();  
+            btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_MouseDown);
+            btn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btn_MouseMove);
+            btn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_MouseUp);
+        }
+
+        private void panel7_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void btn_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mouseOffset.X = e.X;
+                mouseOffset.Y = e.Y;
+                isMouseDown = true;
+            }
+        }
+        private void btn_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown)
+            {
+                int left = (sender as Button).Left + e.X - mouseOffset.X;
+                int top = (sender as Button).Top + e.Y - mouseOffset.Y;
+                (sender as Button).Location = new Point(left, top);
+            }
+        }
+
+        private void btn_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isMouseDown = false;
+            }
         }
     }
 }
