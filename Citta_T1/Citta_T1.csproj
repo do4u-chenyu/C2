@@ -117,7 +117,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\displaypanel\maxunfold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="res\displaypanel\minfold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="res\flow\flow.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_intersect.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_max.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_random.png" />
+    <Content Include="res\leftpanelmenu\leftpanel_union.png" />
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
@@ -126,7 +138,10 @@
     <Content Include="res\toolbox\filter.png" />
     <Content Include="res\toolbox\group.png" />
     <Content Include="res\toolbox\histogram.png" />
+    <Content Include="res\toolbox\importfile.png" />
     <Content Include="res\toolbox\intersection.png" />
+    <Content Include="res\toolbox\newfile.png" />
+    <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />
     <Content Include="res\toolbox\union.png" />

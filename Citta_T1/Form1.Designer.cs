@@ -57,6 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.MoreButton = new System.Windows.Forms.Button();
             this.TypeSettingButton = new System.Windows.Forms.Button();
             this.histogramButton = new System.Windows.Forms.Button();
@@ -71,6 +72,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.ButtonDownload = new System.Windows.Forms.Button();
+            this.ButtonRun = new System.Windows.Forms.Button();
             this.flowControl1 = new Citta_T1.FlowControl();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -121,6 +124,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Help;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(200, 10);
             this.pictureBox5.Name = "pictureBox5";
@@ -243,13 +247,14 @@
             this.exDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.exDataTabPage.Name = "exDataTabPage";
             this.exDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exDataTabPage.Size = new System.Drawing.Size(130, 609);
+            this.exDataTabPage.Size = new System.Drawing.Size(130, 385);
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
             // 
             // panel12
             // 
+            this.panel12.AllowDrop = true;
             this.panel12.BackColor = System.Drawing.Color.White;
             this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -312,9 +317,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(71, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(115, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(74, 24);
+            this.pictureBox1.Size = new System.Drawing.Size(25, 24);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -389,6 +394,7 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label7);
             this.panel6.Controls.Add(this.MoreButton);
             this.panel6.Controls.Add(this.TypeSettingButton);
             this.panel6.Controls.Add(this.histogramButton);
@@ -403,6 +409,16 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(713, 48);
             this.panel6.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(70, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 21);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "常用";
             // 
             // MoreButton
             // 
@@ -509,39 +525,42 @@
             // 
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button6.Location = new System.Drawing.Point(98, 12);
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(102, 8);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(71, 26);
+            this.button6.Size = new System.Drawing.Size(79, 32);
             this.button6.TabIndex = 2;
-            this.button6.Text = "保存模型";
             this.button6.UseVisualStyleBackColor = false;
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.White;
             this.button5.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(181, 12);
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.Location = new System.Drawing.Point(189, 8);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(71, 26);
+            this.button5.Size = new System.Drawing.Size(79, 32);
             this.button5.TabIndex = 1;
-            this.button5.Text = "导入数据";
             this.button5.UseVisualStyleBackColor = false;
             // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(15, 12);
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.Location = new System.Drawing.Point(15, 8);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(71, 26);
+            this.button4.Size = new System.Drawing.Size(79, 32);
             this.button4.TabIndex = 0;
-            this.button4.Text = "新建模型";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.panel7.AllowDrop = true;
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Controls.Add(this.ButtonDownload);
+            this.panel7.Controls.Add(this.ButtonRun);
             this.panel7.Controls.Add(this.flowControl1);
             this.panel7.Controls.Add(this.pictureBox3);
             this.panel7.Controls.Add(this.panel11);
@@ -551,7 +570,41 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(1011, 413);
             this.panel7.TabIndex = 5;
+            this.panel7.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel7_DragDrop);
+            this.panel7.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel7_DragEnter);
             this.panel7.Paint += new System.Windows.Forms.PaintEventHandler(this.panel7_Paint);
+            // 
+            // ButtonDownload
+            // 
+            this.ButtonDownload.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonDownload.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatAppearance.BorderSize = 0;
+            this.ButtonDownload.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.ButtonDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonDownload.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.ButtonDownload.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDownload.Image")));
+            this.ButtonDownload.Location = new System.Drawing.Point(450, 354);
+            this.ButtonDownload.Name = "ButtonDownload";
+            this.ButtonDownload.Size = new System.Drawing.Size(52, 53);
+            this.ButtonDownload.TabIndex = 21;
+            this.ButtonDownload.UseVisualStyleBackColor = true;
+            // 
+            // ButtonRun
+            // 
+            this.ButtonRun.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonRun.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatAppearance.BorderSize = 0;
+            this.ButtonRun.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.ButtonRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonRun.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.ButtonRun.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRun.Image")));
+            this.ButtonRun.Location = new System.Drawing.Point(398, 354);
+            this.ButtonRun.Name = "ButtonRun";
+            this.ButtonRun.Size = new System.Drawing.Size(52, 53);
+            this.ButtonRun.TabIndex = 20;
+            this.ButtonRun.UseVisualStyleBackColor = true;
             // 
             // flowControl1
             // 
@@ -562,6 +615,7 @@
             this.flowControl1.Name = "flowControl1";
             this.flowControl1.Size = new System.Drawing.Size(209, 51);
             this.flowControl1.TabIndex = 3;
+            this.flowControl1.Load += new System.EventHandler(this.flowControl1_Load);
             // 
             // pictureBox3
             // 
@@ -603,6 +657,7 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(200, 100);
             this.panel10.TabIndex = 0;
+            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
             // Form1
             // 
@@ -636,6 +691,7 @@
             this.panel8.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -694,6 +750,9 @@
         private FlowControl flowControl1;
         private DataGridView1 dataGridView1;
         private DataGridView2 dataGridView2;
+        private System.Windows.Forms.Button ButtonDownload;
+        private System.Windows.Forms.Button ButtonRun;
+        private System.Windows.Forms.Label label7;
     }
 }
 
