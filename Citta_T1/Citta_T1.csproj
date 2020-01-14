@@ -52,6 +52,12 @@
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
+    <Compile Include="NaviViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NaviViewControl.Designer.cs">
+      <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestGridModel.cs" />
     <Compile Include="DataGridView1.cs">
       <SubType>UserControl</SubType>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NaviViewControl.resx">
+      <DependentUpon>NaviViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>

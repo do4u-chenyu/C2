@@ -78,7 +78,7 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.naviViewControl = new Citta_T1.NaviViewControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -247,7 +247,7 @@
             this.exDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.exDataTabPage.Name = "exDataTabPage";
             this.exDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exDataTabPage.Size = new System.Drawing.Size(130, 385);
+            this.exDataTabPage.Size = new System.Drawing.Size(130, 609);
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
@@ -564,7 +564,7 @@
             this.panel7.Controls.Add(this.flowControl1);
             this.panel7.Controls.Add(this.pictureBox3);
             this.panel7.Controls.Add(this.panel11);
-            this.panel7.Controls.Add(this.panel10);
+            this.panel7.Controls.Add(this.naviViewControl);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(276, 94);
             this.panel7.Name = "panel7";
@@ -650,14 +650,13 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // panel10
+            // naviViewControl
             // 
-            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel10.Location = new System.Drawing.Point(793, 190);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(200, 100);
-            this.panel10.TabIndex = 0;
-            this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
+            this.naviViewControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.naviViewControl.Location = new System.Drawing.Point(793, 190);
+            this.naviViewControl.Name = "naviViewControl";
+            this.naviViewControl.Size = new System.Drawing.Size(200, 100);
+            this.naviViewControl.TabIndex = 0;
             // 
             // Form1
             // 
@@ -730,7 +729,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel10;
+        private NaviViewControl naviViewControl;
         private System.Windows.Forms.Button MoreButton;
         private System.Windows.Forms.Button TypeSettingButton;
         private System.Windows.Forms.Button histogramButton;
