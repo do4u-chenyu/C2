@@ -247,7 +247,7 @@
             this.exDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.exDataTabPage.Name = "exDataTabPage";
             this.exDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exDataTabPage.Size = new System.Drawing.Size(130, 385);
+            this.exDataTabPage.Size = new System.Drawing.Size(130, 609);
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;

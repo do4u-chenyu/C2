@@ -12,7 +12,6 @@ namespace Citta_T1
 {
     public partial class OperatorControl : UserControl
     {
-        private bool isMouseDown = false;
         private Point mouseOffset; //记录鼠标指针的坐标
         public OperatorControl()
         {
@@ -43,7 +42,6 @@ namespace Citta_T1
             {
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                isMouseDown = true;
             }
         }
 
