@@ -57,6 +57,18 @@
     <Compile Include="DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormInputData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputData.Designer.cs">
+      <DependentUpon>FormInputData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputDataForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InputDataForm.Designer.cs">
+      <DependentUpon>InputDataForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogModel.cs" />
     <Compile Include="NaviViewControl.cs">
       <SubType>UserControl</SubType>
@@ -105,6 +117,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInputData.resx">
+      <DependentUpon>FormInputData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputDataForm.resx">
+      <DependentUpon>InputDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>

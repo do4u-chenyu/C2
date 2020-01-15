@@ -1,4 +1,7 @@
-﻿namespace Citta_T1
+﻿using System.Windows.Forms;
+
+
+namespace Citta_T1
 {
     partial class DataGridView
     {
@@ -70,14 +73,22 @@
 
         private void _InitializeRows()
         {
-            for (int i = 0; i < this.numOfRows; i++)
-            {
-                this.dataGridView1.Rows.Add();
+            for (int i = 0; i < this.numOfRows; i=this.dataGridView1.Rows.Add())
+            {   
+                //this.dataGridView1.Rows.Add();
                 for (int j = 0; j < this.numOfCols; j++)
                 {
                     this.dataGridView1.Rows[i].Cells[j].Value = i.ToString() + "_" + j.ToString();
+                    //var cell = ((DataGridViewButtonCell)this.dataGridView1.Rows[i].Cells[j]);
+                    //cell.FlatStyle = FlatStyle.Flat;
+                    //if (i % 2 == 0)
+                    //{
+                    //    cell.Style.BackColor = System.Drawing.Color.Green;
+                    //}
                 }
             }
+            // TODO change styel
+            
         }
         #endregion
 

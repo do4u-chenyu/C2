@@ -287,5 +287,10 @@ namespace Citta_T1
                 this.naviViewControl.UpdateNaviView();
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.forminputdata1.Show();
+        }
     }
 }

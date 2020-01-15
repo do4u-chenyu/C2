@@ -45,6 +45,7 @@
             this.exDataTabPage = new System.Windows.Forms.TabPage();
             this.panel12 = new Citta_T1.OperatorControl();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView3 = new Citta_T1.DataGridView();
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -58,6 +59,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.forminputdata1 = new Citta_T1.FormInputData();
             this.MoreButton = new System.Windows.Forms.Button();
             this.TypeSettingButton = new System.Windows.Forms.Button();
             this.histogramButton = new System.Windows.Forms.Button();
@@ -78,8 +80,6 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.dataGridView3 = new Citta_T1.DataGridView();
             this.naviViewControl = new Citta_T1.NaviViewControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -277,6 +277,14 @@
             this.panel3.Size = new System.Drawing.Size(1011, 176);
             this.panel3.TabIndex = 3;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(1011, 137);
+            this.dataGridView3.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -534,6 +542,7 @@
             this.button6.Size = new System.Drawing.Size(79, 32);
             this.button6.TabIndex = 2;
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -661,14 +670,6 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
-            // dataGridView3
-            // 
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(1011, 137);
-            this.dataGridView3.TabIndex = 3;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -764,6 +765,7 @@
         private System.Windows.Forms.Button ButtonRun;
         private System.Windows.Forms.Label label7;
         private DataGridView dataGridView3;
+        private FormInputData forminputdata1;
     }
 }
 
