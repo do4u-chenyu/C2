@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Citta_T1
 {
     public partial class MoveOpControl : UserControl
@@ -23,6 +24,14 @@ namespace Citta_T1
         {
             if (isMouseDown)
             {
+                if (sender is Button)
+                {
+                    sender = (sender as Button).Parent;
+                }
+                if (sender is PictureBox)
+                {
+                    sender = (sender as PictureBox).Parent;
+                }
                 int left = (sender as MoveOpControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveOpControl).Top + e.Y - mouseOffset.Y;
                 (sender as MoveOpControl).Location = new Point(left, top);
@@ -45,29 +54,24 @@ namespace Citta_T1
             if (e.Button == MouseButtons.Left)
             {
                 isMouseDown = false;
-            }
+                if (sender is Button)
+                {
+                    sender = (sender as Button).Parent;
+                }
+                if (sender is PictureBox)
+                {
+                    sender = (sender as PictureBox).Parent;
+                }
+                Control parent = (sender as MoveOpControl).Parent;
+                foreach (Control ct in parent.Controls)
+                {
+                    if (ct.Name == "naviViewControl")
+                    {
+                        (ct as NaviViewControl).UpdateNaviView();
+                        break;
+                    }
+                }
 
-        }
-
-
-        private void OpButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                int left = (sender as Button).Parent.Left + e.X - mouseOffset.X;
-                int top = (sender as Button).Parent.Top + e.Y - mouseOffset.Y;
-                (sender as Button).Parent.Location = new Point(left, top);
-            }
-
-        }
-
-        private void OpPicture_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown)
-            {
-                int left = (sender as PictureBox).Parent.Left + e.X - mouseOffset.X;
-                int top = (sender as PictureBox).Parent.Top + e.Y - mouseOffset.Y;
-                (sender as PictureBox).Parent.Location = new Point(left, top);
             }
 
         }

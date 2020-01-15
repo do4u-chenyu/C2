@@ -52,6 +52,12 @@
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
+    <Compile Include="NaviViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NaviViewControl.Designer.cs">
+      <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestGridModel.cs" />
     <Compile Include="DataGridView1.cs">
       <SubType>UserControl</SubType>
@@ -100,6 +106,9 @@
     <EmbeddedResource Include="MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NaviViewControl.resx">
+      <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,7 +151,7 @@
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
-    <Content Include="res\toolbox\Background.png" />
+    <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\connect.png" />
     <Content Include="res\toolbox\difference.png" />
     <Content Include="res\toolbox\filter.png" />
