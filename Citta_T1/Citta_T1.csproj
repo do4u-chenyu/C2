@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGridView.Designer.cs">
+      <DependentUpon>DataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataGridView2.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DataGridView.resx">
+      <DependentUpon>DataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </EmbeddedResource>

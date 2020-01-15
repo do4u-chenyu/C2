@@ -79,6 +79,7 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.dataGridView3 = new Citta_T1.DataGridView();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -247,7 +248,7 @@
             this.exDataTabPage.Location = new System.Drawing.Point(4, 22);
             this.exDataTabPage.Name = "exDataTabPage";
             this.exDataTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.exDataTabPage.Size = new System.Drawing.Size(130, 385);
+            this.exDataTabPage.Size = new System.Drawing.Size(130, 609);
             this.exDataTabPage.TabIndex = 1;
             this.exDataTabPage.Text = "外部数据";
             this.exDataTabPage.UseVisualStyleBackColor = true;
@@ -265,6 +266,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.dataGridView3);
             this.panel3.Controls.Add(this.dataGridView1);
             this.panel3.Controls.Add(this.dataGridView2);
             this.panel3.Controls.Add(this.panel4);
@@ -659,6 +661,14 @@
             this.panel10.TabIndex = 0;
             this.panel10.Paint += new System.Windows.Forms.PaintEventHandler(this.panel10_Paint);
             // 
+            // dataGridView3
+            // 
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(1011, 137);
+            this.dataGridView3.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -753,6 +763,7 @@
         private System.Windows.Forms.Button ButtonDownload;
         private System.Windows.Forms.Button ButtonRun;
         private System.Windows.Forms.Label label7;
+        private DataGridView dataGridView3;
     }
 }
 

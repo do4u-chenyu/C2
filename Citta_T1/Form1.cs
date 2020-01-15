@@ -78,20 +78,29 @@ namespace Citta_T1
 
         private void label3_Click(object sender, EventArgs e)
         {
+            this.dataGridView1.Visible = false;
+            this.dataGridView2.Visible = false;
+            this.dataGridView3.Visible = true;
+        }
+        private void label4_Click(object sender, EventArgs e)
+        {
             this.dataGridView1.Visible = true;
             this.dataGridView2.Visible = false;
+            this.dataGridView3.Visible = false;
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
             this.dataGridView1.Visible = false;
             this.dataGridView2.Visible = true;
+            this.dataGridView3.Visible = false;
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
             this.dataGridView1.Visible = false;
             this.dataGridView2.Visible = true;
+            this.dataGridView3.Visible = false;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -221,11 +230,6 @@ namespace Citta_T1
         private void dataGridView2_Load(object sender, EventArgs e)
         {
 
-        }
-        private void label4_Click(object sender, EventArgs e)
-        {
-            this.dataGridView1.Visible = true;
-            this.dataGridView2.Visible = false;
         }
 
         private void panel8_Paint(object sender, PaintEventArgs e)
