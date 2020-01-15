@@ -79,6 +79,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MoveOpControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoveOpControl.Designer.cs">
+      <DependentUpon>MoveOpControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoveOpControl.resx">
+      <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
@@ -133,6 +142,7 @@
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
+    <Content Include="res\toolbox\Background.png" />
     <Content Include="res\toolbox\connect.png" />
     <Content Include="res\toolbox\difference.png" />
     <Content Include="res\toolbox\filter.png" />
