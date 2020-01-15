@@ -26,16 +26,16 @@ namespace Citta_T1
         }
         private void InitializePanel10Location()
         {
-            Panel parentPanel = (Panel)this.panel10.Parent;
+            Panel parentPanel = (Panel)this.naviViewControl.Parent;
             int x = parentPanel.Location.X + parentPanel.Width;
             int y = parentPanel.Location.Y + parentPanel.Height;
             int buttonRunx;
-            if (x - 300 - this.panel10.Width> 0)
-                x = x - 300 - this.panel10.Width;
+            if (x - 300 - this.naviViewControl.Width> 0)
+                x = x - 300 - this.naviViewControl.Width;
                 buttonRunx = x - (this.panel7.Width)/2+100;       
-            if (y - 100 - this.panel10.Height> 0)
-                y = y - 100 - this.panel10.Height;
-            this.panel10.Location = new Point(x, y);
+            if (y - 100 - this.naviViewControl.Height> 0)
+                y = y - 100 - this.naviViewControl.Height;
+            this.naviViewControl.Location = new Point(x, y);
             this.ButtonDownload.Location = new Point(buttonRunx+50, y+50);
             this.ButtonRun.Location      = new Point(buttonRunx, y+50);
             
@@ -116,7 +116,7 @@ namespace Citta_T1
                 this.panel3.Height = 40;
                 this.pictureBox1.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
-            InitializePanel10Location();
+            InitializePanel10Location();         
            
         }
 
@@ -237,11 +237,6 @@ namespace Citta_T1
 
         }
 
-        private void panel10_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void panel7_DragDrop(object sender, DragEventArgs e)
         {
             Button btn = new Button();
@@ -252,6 +247,9 @@ namespace Citta_T1
             btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btn_MouseDown);
             btn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btn_MouseMove);
             btn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btn_MouseUp);
+            this.naviViewControl.AddControl(btn);
+            this.naviViewControl.UpdateNaviView();
+            
         }
 
         private void panel7_DragEnter(object sender, DragEventArgs e)
@@ -286,6 +284,7 @@ namespace Citta_T1
             if (e.Button == MouseButtons.Left)
             {
                 isMouseDown = false;
+                this.naviViewControl.UpdateNaviView();
             }
         }
     }
