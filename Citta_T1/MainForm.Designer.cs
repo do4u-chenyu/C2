@@ -54,6 +54,7 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
+            this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -78,6 +79,7 @@
             this.modelTitlePanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
+            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -89,6 +91,7 @@
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.panel8.SuspendLayout();
+            this.formInputData.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -365,6 +368,16 @@
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
+            // formInputData
+            // 
+            this.formInputData.ClientSize = new System.Drawing.Size(812, 472);
+            this.formInputData.Controls.Add(this.ucDataGridView1);
+            this.formInputData.Location = new System.Drawing.Point(175, 175);
+            this.formInputData.Name = "formInputData";
+            this.formInputData.ShowIcon = false;
+            this.formInputData.Text = "FormInputData";
+            this.formInputData.Visible = false;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
@@ -538,7 +551,6 @@
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
             this.newModelButton.UseVisualStyleBackColor = false;
-            this.newModelButton.Click += new System.EventHandler(this.NewModelButton_Click);
             // 
             // canvasPanel
             // 
@@ -640,7 +652,26 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
-            // mainForm
+            // ucDataGridView1
+            // 
+            this.ucDataGridView1.AutoScroll = true;
+            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
+            this.ucDataGridView1.Columns = null;
+            this.ucDataGridView1.DataSource = null;
+            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.ucDataGridView1.HeadHeight = 40;
+            this.ucDataGridView1.HeadPadingLeft = 0;
+            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
+            this.ucDataGridView1.IsShowCheckBox = false;
+            this.ucDataGridView1.IsShowHead = true;
+            this.ucDataGridView1.Location = new System.Drawing.Point(788, 0);
+            this.ucDataGridView1.Name = "ucDataGridView1";
+            this.ucDataGridView1.RowHeight = 40;
+            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
+            this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
+            this.ucDataGridView1.TabIndex = 13;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -652,7 +683,7 @@
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.headPanel.ResumeLayout(false);
@@ -669,6 +700,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.formInputData.ResumeLayout(false);
+            this.formInputData.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -732,6 +765,8 @@
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;
         private DataGridView dataGridView3;
+        private Citta_T1.Dialogs.FormInputData formInputData;
+        private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
     }
 }
 

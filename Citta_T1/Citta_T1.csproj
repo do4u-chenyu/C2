@@ -63,11 +63,23 @@
     <Compile Include="DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\anewModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\anewModel.Designer.cs">
+      <DependentUpon>anewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\FormInputData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialogs\FormInputData.Designer.cs">
       <DependentUpon>FormInputData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormCreateModel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FormCreateModel.Designer.cs">
+      <DependentUpon>FormCreateModel.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
     <Compile Include="Controls\NaviViewControl.cs">
@@ -124,6 +136,12 @@
     <EmbeddedResource Include="Controls\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FormCreateModel.resx">
+      <DependentUpon>FormCreateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\anewModel.resx">
+      <DependentUpon>anewModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +165,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,6 +181,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\X.jpg" />
     <Content Include="res\displaypanel\maxunfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
