@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1
+namespace Citta_T1.Controls
 {
     public partial class FlowControl : UserControl
     {
@@ -17,7 +17,7 @@ namespace Citta_T1
             InitializeComponent();
         }
 
-        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        private void PictureBox1_MouseEnter(object sender, EventArgs e)
         {
             this.pictureBox1.BackColor = Color.FromArgb(135, 135, 135);
         }
@@ -27,17 +27,17 @@ namespace Citta_T1
             this.pictureBox1.BackColor = Color.FromArgb(235, 235, 235);
         }
 
-        private void pictureBox2_MouseEnter(object sender, EventArgs e)
+        private void PictureBox2_MouseEnter(object sender, EventArgs e)
         {
             this.pictureBox2.BackColor = Color.FromArgb(135, 135, 135);
         }
 
-        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        private void PictureBox2_MouseLeave(object sender, EventArgs e)
         {
             this.pictureBox2.BackColor = Color.FromArgb(235, 235, 235);
         }
 
-        private void pictureBox3_MouseEnter(object sender, EventArgs e)
+        private void PictureBox3_MouseEnter(object sender, EventArgs e)
         {
             this.pictureBox3.BackColor = Color.FromArgb(135, 135, 135);
         }

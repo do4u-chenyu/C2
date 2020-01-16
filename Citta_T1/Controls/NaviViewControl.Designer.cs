@@ -1,4 +1,4 @@
-﻿namespace Citta_T1
+﻿namespace Citta_T1.Controls
 {
     partial class NaviViewControl
     {

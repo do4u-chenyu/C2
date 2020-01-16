@@ -8,11 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1
+namespace Citta_T1.Controls
 {
     public partial class OperatorControl : UserControl
     {
-        private bool isMouseDown = false;
         private Point mouseOffset; //记录鼠标指针的坐标
         public OperatorControl()
         {
@@ -33,7 +32,7 @@ namespace Citta_T1
         {
             if (e.Button == MouseButtons.Left)
             {
-                LeftPanelOpIntersect.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
+                leftPanelOpIntersect.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
 
@@ -43,7 +42,6 @@ namespace Citta_T1
             {
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                isMouseDown = true;
             }
         }
 

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1
+namespace Citta_T1.Dialogs
 {
     public partial class FormInputData : Form
     {
