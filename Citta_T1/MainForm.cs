@@ -64,11 +64,11 @@ namespace  Citta_T1
             this.operatorControl.Visible = false;
         }
 
-        private void NewModelButton_Click(object sender, EventArgs e)
-        {
-            this.anewModel.StartPosition = FormStartPosition.CenterParent;
-            this.anewModel.ShowDialog();
-        }
+        //private void NewModelButton_Click(object sender, EventArgs e)
+        //{
+        //    this.anewModel.StartPosition = FormStartPosition.CenterParent;
+        //    this.anewModel.ShowDialog();
+        //}
 
 
         private void PreviewLabel_Click(object sender, EventArgs e)
@@ -196,7 +196,7 @@ namespace  Citta_T1
         private void ImportButton_Click(object sender, EventArgs e)
         {
 
-            //this.forminputdata1.ShowDialog();
+            this.formInputData.ShowDialog();
         }
 
         private void CanvasPanel_DragDrop(object sender, DragEventArgs e)
@@ -207,6 +207,11 @@ namespace  Citta_T1
             btn.textButton.Text = e.Data.GetData("Text").ToString();
             this.naviViewControl.AddControl(btn);
             this.naviViewControl.UpdateNaviView();
+        }
+
+        private void formInputData_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

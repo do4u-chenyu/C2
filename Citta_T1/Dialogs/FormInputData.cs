@@ -45,8 +45,30 @@ namespace Citta_T1.Dialogs
             if (file1.ShowDialog() == DialogResult.OK)
             {
                 System.IO.StreamReader sr = File.OpenText(file1.FileName);
-                while (sr.EndOfStream != true)
-                    System.Console.Write(sr.ReadLine());
+                String header = sr.ReadLine();
+                String[] headers = header.Split('\t');
+                int numOfCol = header.Split('\t').Length;
+                int maxNumOfRow = 10;
+                System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCol];
+                // 初始化表头
+                for (int i = 0; i < numOfCol; i++)
+                {
+                    ColumnList[i] = new System.Windows.Forms.DataGridViewTextBoxColumn();
+                    ColumnList[i].HeaderText = headers[i];
+                    ColumnList[i].Name = "Col " + i.ToString();
+                }
+                this.dataGridView1.Columns.AddRange(ColumnList);
+                for (int row = 0; row < maxNumOfRow; row++)
+                {
+                    String line = sr.ReadLine();
+                    String[] eles = line.Split('\t');
+                    System.Windows.Forms.DataGridViewRow dr = new System.Windows.Forms.DataGridViewRow();
+                    this.dataGridView1.Rows.Add(dr);
+                    for (int col = 0; col < numOfCol; col++)
+                    {
+                        this.dataGridView1.Rows[row].Cells[col].Value = eles[col];
+                    }
+                }
 
             }
         }
