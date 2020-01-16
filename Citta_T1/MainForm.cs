@@ -205,6 +205,8 @@ namespace  Citta_T1
             btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
             this.canvasPanel.Controls.Add(btn);
             btn.textButton.Text = e.Data.GetData("Text").ToString();
+            btn.doublelPinFlag  = btn.doublePin.Contains(btn.textButton.Text.ToString());
+            btn.InitializeOpPinPicture();
             this.naviViewControl.AddControl(btn);
             this.naviViewControl.UpdateNaviView();
         }
