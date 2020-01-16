@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,15 @@ namespace Citta_T1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            OpenFileDialog file1 = new OpenFileDialog();
+            file1.Filter = "files|*.txt";
+            if (file1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamReader sr = File.OpenText(file1.FileName);
+                while (sr.EndOfStream != true)
+                    System.Console.Write(sr.ReadLine());
 
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -63,6 +72,16 @@ namespace Citta_T1
         }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
         }

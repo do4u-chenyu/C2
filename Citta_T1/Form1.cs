@@ -290,7 +290,22 @@ namespace Citta_T1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            this.forminputdata1.Show();
+            this.forminputdata1.ShowDialog();
+            //this.inputdataform1.Visible = false;
+        }
+
+        private void forminputdata1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inputDataForm2_Load(object sender, EventArgs e)
+        {
+                    }
+
+        private void inputDataForm2_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

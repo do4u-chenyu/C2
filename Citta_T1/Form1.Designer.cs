@@ -59,7 +59,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.forminputdata1 = new Citta_T1.FormInputData();
             this.MoreButton = new System.Windows.Forms.Button();
             this.TypeSettingButton = new System.Windows.Forms.Button();
             this.histogramButton = new System.Windows.Forms.Button();
@@ -73,6 +72,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.forminputdata1 = new Citta_T1.FormInputData();
             this.panel7 = new System.Windows.Forms.Panel();
             this.ButtonDownload = new System.Windows.Forms.Button();
             this.ButtonRun = new System.Windows.Forms.Button();
@@ -566,6 +566,16 @@
             this.button4.TabIndex = 0;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // forminputdata1
+            // 
+            //this.forminputdata1.ClientSize = new System.Drawing.Size(812, 472);
+            //this.forminputdata1.Location = new System.Drawing.Point(75, 75);
+            //this.forminputdata1.Name = "forminputdata1";
+            //this.forminputdata1.ShowIcon = false;
+            //this.forminputdata1.Text = "FormInputData";
+            //this.forminputdata1.Visible = false;
+            //this.forminputdata1.Load += new System.EventHandler(this.forminputdata1_Load);
             // 
             // panel7
             // 
