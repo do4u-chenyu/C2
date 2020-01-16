@@ -167,7 +167,7 @@ namespace HZH_Controls.Controls
                     Size size = new Size(intCom * intWidth, intRow * 50);
                     ucTime.Size = size;
                     ucTime.FirstEvent = true;
-                    ucTime.SelectSourceEvent += ucTime_SelectSourceEvent;
+                    ucTime.SelectSourceEvent += UcTime_SelectSourceEvent;
                     ucTime.Row = intRow;
                     ucTime.Column = intCom;
 
@@ -195,7 +195,7 @@ namespace HZH_Controls.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        void ucTime_SelectSourceEvent(object sender, EventArgs e)
+        void UcTime_SelectSourceEvent(object sender, EventArgs e)
         {
             if (_frmAnchor != null && !_frmAnchor.IsDisposed && _frmAnchor.Visible)
             {
