@@ -66,7 +66,8 @@ namespace  Citta_T1
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
-
+            this.anewModel.StartPosition = FormStartPosition.CenterParent;
+            this.anewModel.ShowDialog();
         }
 
 
