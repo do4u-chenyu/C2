@@ -44,6 +44,13 @@ namespace Citta_T1.Dialogs
             file1.Filter = "files|*.txt";
             if (file1.ShowDialog() == DialogResult.OK)
             {
+                //1.读取文件
+                //2.抽第一行，初始化列头
+                //3.余下行作为数据，展示在dgv中
+
+                //todo
+                //1.设置dgv中的字体
+                //2.设置dgv中的列宽
                 System.IO.StreamReader sr = File.OpenText(file1.FileName);
                 String header = sr.ReadLine();
                 String[] headers = header.Split('\t');
@@ -58,6 +65,7 @@ namespace Citta_T1.Dialogs
                     ColumnList[i].Name = "Col " + i.ToString();
                 }
                 this.dataGridView1.Columns.AddRange(ColumnList);
+                // 写入数据
                 for (int row = 0; row < maxNumOfRow; row++)
                 {
                     String line = sr.ReadLine();
