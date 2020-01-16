@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace Citta_T1
+namespace Citta_T1.Controls
 {
     public partial class MoveOpControl : UserControl
     {

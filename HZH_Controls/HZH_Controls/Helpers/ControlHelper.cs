@@ -292,8 +292,8 @@ namespace HZH_Controls
             }
             else
             {
-                parent.VisibleChanged -= new EventHandler(parent_VisibleChanged);
-                parent.VisibleChanged += new EventHandler(parent_VisibleChanged);
+                parent.VisibleChanged -= new EventHandler(Parent_VisibleChanged);
+                parent.VisibleChanged += new EventHandler(Parent_VisibleChanged);
                 parent.FindForm().FormClosing -= ControlHelper_FormClosing;
                 parent.FindForm().FormClosing += ControlHelper_FormClosing;
                 Control control = null;
@@ -329,10 +329,10 @@ namespace HZH_Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private static void parent_VisibleChanged(object sender, EventArgs e)
+        private static void Parent_VisibleChanged(object sender, EventArgs e)
         {
             Control control = sender as Control;
-            control.VisibleChanged -= new EventHandler(parent_VisibleChanged);
+            control.VisibleChanged -= new EventHandler(Parent_VisibleChanged);
             if (!control.Visible)
             {
                 CloseWaiting(control);
@@ -729,7 +729,7 @@ namespace HZH_Controls
             if (blnToFreeze && control.IsHandleCreated && control.Visible && !control.IsDisposed && (!m_lstFreezeControl.ContainsKey(control) || (m_lstFreezeControl.ContainsKey(control) && m_lstFreezeControl[control] == false)))
             {
                 m_lstFreezeControl[control] = true;
-                control.Disposed += control_Disposed;
+                control.Disposed += Control_Disposed;
                 NativeMethods.SendMessage(control.Handle, 11, 0, 0);
             }
             else if (!blnToFreeze && !control.IsDisposed && m_lstFreezeControl.ContainsKey(control) && m_lstFreezeControl[control] == true)
@@ -745,7 +745,7 @@ namespace HZH_Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        static void control_Disposed(object sender, EventArgs e)
+        static void Control_Disposed(object sender, EventArgs e)
         {
             try
             {

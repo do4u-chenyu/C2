@@ -45,17 +45,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DataSourceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataSourceControl.Designer.cs">
+      <DependentUpon>DataSourceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataGridView.Designer.cs">
+      <DependentUpon>DataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataGridView2.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\FormInputData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\FormInputData.Designer.cs">
+      <DependentUpon>FormInputData.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogModel.cs" />
-    <Compile Include="NaviViewControl.cs">
+    <Compile Include="Controls\NaviViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NaviViewControl.Designer.cs">
+    <Compile Include="Controls\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TestGridModel.cs" />
@@ -65,51 +83,60 @@
     <Compile Include="DataGridView1.Designer.cs">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FlowControl.cs">
+    <Compile Include="Controls\FlowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FlowControl.Designer.cs">
+    <Compile Include="Controls\FlowControl.Designer.cs">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorControl.cs">
+    <Compile Include="Controls\OperatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="OperatorControl.Designer.cs">
+    <Compile Include="Controls\OperatorControl.Designer.cs">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MoveOpControl.cs">
+    <Compile Include="Controls\MoveOpControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MoveOpControl.Designer.cs">
+    <Compile Include="Controls\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controls\DataSourceControl.resx">
+      <DependentUpon>DataSourceControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataGridView.resx">
+      <DependentUpon>DataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataGridView2.resx">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FlowControl.resx">
+    <EmbeddedResource Include="Controls\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MoveOpControl.resx">
+    <EmbeddedResource Include="Controls\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NaviViewControl.resx">
+    <EmbeddedResource Include="Dialogs\FormInputData.resx">
+      <DependentUpon>FormInputData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperatorControl.resx">
+    <EmbeddedResource Include="Controls\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
