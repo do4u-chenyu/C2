@@ -63,11 +63,11 @@
     <Compile Include="DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AnewModel.cs">
+    <Compile Include="Dialogs\CreateNewModel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\AnewModel.Designer.cs">
-      <DependentUpon>AnewModel.cs</DependentUpon>
+    <Compile Include="Dialogs\CreateNewModel.Designer.cs">
+      <DependentUpon>CreateNewModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\FormInputData.cs">
       <SubType>Form</SubType>
@@ -139,8 +139,8 @@
     <EmbeddedResource Include="Controls\FormCreateModel.resx">
       <DependentUpon>FormCreateModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\AnewModel.resx">
-      <DependentUpon>AnewModel.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
+      <DependentUpon>CreateNewModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

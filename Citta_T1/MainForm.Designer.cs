@@ -56,7 +56,7 @@
             this.previewLabel = new System.Windows.Forms.Label();
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
-            this.anewModel = new Citta_T1.Dialogs.AnewModel();
+            this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -401,11 +401,11 @@
             // 
             // anewModel
             // 
-            this.anewModel.ClientSize = new System.Drawing.Size(558, 252);
-            this.anewModel.Location = new System.Drawing.Point(250, 250);
-            this.anewModel.Name = "anewModel";
-            this.anewModel.Text = "anewModel";
-            this.anewModel.Visible = false;
+            this.createNewModel.ClientSize = new System.Drawing.Size(558, 252);
+            this.createNewModel.Location = new System.Drawing.Point(250, 250);
+            this.createNewModel.Name = "createNewModel";
+            this.createNewModel.Text = "createNewModel";
+            this.createNewModel.Visible = false;
             // 
             // panel1
             // 
@@ -778,7 +778,7 @@
         private DataGridView dataGridView3;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
-        private Citta_T1.Dialogs.AnewModel anewModel; // 新建模型
+        private Citta_T1.Dialogs.CreateNewModel createNewModel; // 新建模型
     }
 }
 
