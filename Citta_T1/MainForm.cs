@@ -221,5 +221,10 @@ namespace  Citta_T1
             this.anewModel.StartPosition = FormStartPosition.CenterScreen;
             this.anewModel.ShowDialog();
         }
+
+        private void formInputData_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

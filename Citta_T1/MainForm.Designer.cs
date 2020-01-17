@@ -378,6 +378,7 @@
             this.formInputData.ShowIcon = false;
             this.formInputData.Text = "FormInputData";
             this.formInputData.Visible = false;
+            this.formInputData.Load += new System.EventHandler(this.formInputData_Load_1);
             // 
             // ucDataGridView1
             // 
