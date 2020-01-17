@@ -197,6 +197,18 @@
     <Content Include="res\displaypanel\minfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="res\flowchart\diamond.png" />
+    <Content Include="res\flowchart\downarrow.png" />
+    <Content Include="res\flowchart\ellipse.png" />
+    <Content Include="res\flowchart\flag.png" />
+    <Content Include="res\flowchart\leftarrow.png" />
+    <Content Include="res\flowchart\person.png" />
+    <Content Include="res\flowchart\picture.png" />
+    <Content Include="res\flowchart\questionmark.png" />
+    <Content Include="res\flowchart\rectange.png" />
+    <Content Include="res\flowchart\rightarrow.png" />
+    <Content Include="res\flowchart\roundrectange.png" />
+    <Content Include="res\flowchart\uparrow.png" />
     <Content Include="res\flow\flow.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
     <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />
@@ -227,5 +239,6 @@
       <Name>HZH_Controls</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
