@@ -51,11 +51,11 @@
     <Compile Include="Controls\DataSourceControl.Designer.cs">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataGridView.cs">
+    <Compile Include="DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataGridView.Designer.cs">
-      <DependentUpon>DataGridView.cs</DependentUpon>
+    <Compile Include="DataGridView0.Designer.cs">
+      <DependentUpon>DataGridView0.cs</DependentUpon>
     </Compile>
     <Compile Include="DataGridView2.cs">
       <SubType>UserControl</SubType>
@@ -124,8 +124,8 @@
     <EmbeddedResource Include="Controls\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataGridView.resx">
-      <DependentUpon>DataGridView.cs</DependentUpon>
+    <EmbeddedResource Include="DataGridView0.resx">
+      <DependentUpon>DataGridView0.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>

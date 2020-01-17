@@ -14,8 +14,10 @@ namespace  Citta_T1
     public partial class MainForm : Form
     {
         private bool isBottomViewPanelMinimum;
+        private Citta_T1.Dialogs.FormInputData formInputData;
         public MainForm()
         {
+            this.formInputData = new Citta_T1.Dialogs.FormInputData();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             InitializeControlsLocation();
