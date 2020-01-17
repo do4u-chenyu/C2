@@ -45,10 +45,16 @@ namespace  Citta_T1
             this.downloadButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
-            // 顶层浮动工具栏定位
+            // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point org = new Point(this.canvasPanel.Width, 0);
-            Point loc = new Point(org.X - 20 - this.flowControl.Width, org.Y + 50);
+            Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
+            Point loc_flowcontrol2 = new Point(org.X - this.flowControl2.Width, loc.Y);
+            Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.flowControl3.Width + 10);
+            Point loc_panel3 = new Point(loc.X, loc.Y + this.flowControl.Height + 10);
             this.flowControl.Location = loc;
+            this.flowControl2.Location = loc_flowcontrol2;
+            this.flowControl3.Location = loc_flowcontrol3;
+            this.panel3.Location = loc_panel3;
 
         }
 

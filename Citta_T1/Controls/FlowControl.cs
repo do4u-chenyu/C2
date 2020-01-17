@@ -12,9 +12,11 @@ namespace Citta_T1.Controls
 {
     public partial class FlowControl : UserControl
     {
+        private bool tmpTag;
         public FlowControl()
         {
             InitializeComponent();
+            tmpTag = true;
         }
 
         private void PictureBox1_MouseEnter(object sender, EventArgs e)
@@ -65,6 +67,35 @@ namespace Citta_T1.Controls
         private void pictureBox5_MouseLeave(object sender, EventArgs e)
         {
             this.pictureBox5.BackColor = Color.FromArgb(235, 235, 235);
+        }
+        private void HideFlowControl()//单击备注按钮，备注出现和隐藏功能
+        {
+            foreach (Control ct in this.Parent.Controls)
+            {
+                if (ct.Name == "panel3")
+                    ct.Visible = false;
+            }
+        }
+
+        private void ShowFlowControl()//单击备注按钮，备注出现和隐藏功能
+        {
+            foreach (Control ct in this.Parent.Controls)
+            {
+                if (ct.Name == "panel3")
+                    ct.Visible = true;
+            }
+
+        }
+
+        
+        private void pictureBox4_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
+        {
+            if (tmpTag)
+                ShowFlowControl();
+            else
+                HideFlowControl();
+
+            tmpTag = !tmpTag;
         }
     }
 }

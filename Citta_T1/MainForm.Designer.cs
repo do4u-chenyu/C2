@@ -45,7 +45,6 @@
             this.flowChartControl = new Citta_T1.Controls.FlowChartControl();
             this.dataSourceControl = new Citta_T1.Controls.DataSourceControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.dataGridView3 = new Citta_T1.DataGridView0();
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -74,13 +73,17 @@
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.canvasPanel = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.flowControl3 = new Citta_T1.Controls.FlowControl3();
+            this.flowControl2 = new Citta_T1.Controls.FlowControl2();
             this.downloadButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
-            this.flowControl = new Citta_T1.Controls.FlowControl();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.modelTitlePanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
+            this.flowControl = new Citta_T1.Controls.FlowControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -96,6 +99,7 @@
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.canvasPanel.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.modelTitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -270,7 +274,6 @@
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView3);
             this.bottomViewPanel.Controls.Add(this.dataGridView1);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
@@ -279,14 +282,6 @@
             this.bottomViewPanel.Name = "bottomViewPanel";
             this.bottomViewPanel.Size = new System.Drawing.Size(964, 280);
             this.bottomViewPanel.TabIndex = 3;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(964, 241);
-            this.dataGridView3.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -590,9 +585,12 @@
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.flowControl);
+            this.canvasPanel.Controls.Add(this.panel3);
+            this.canvasPanel.Controls.Add(this.flowControl3);
+            this.canvasPanel.Controls.Add(this.flowControl2);
             this.canvasPanel.Controls.Add(this.downloadButton);
             this.canvasPanel.Controls.Add(this.runButton);
-            this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.pictureBox3);
             this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.naviViewControl);
@@ -603,6 +601,48 @@
             this.canvasPanel.TabIndex = 5;
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
+            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Location = new System.Drawing.Point(359, 78);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(159, 159);
+            this.panel3.TabIndex = 24;
+            this.panel3.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(37)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(3, 2);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(145, 145);
+            this.textBox1.TabIndex = 0;
+            // 
+            // flowControl3
+            // 
+            this.flowControl3.BackColor = System.Drawing.Color.Transparent;
+            this.flowControl3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl3.BackgroundImage")));
+            this.flowControl3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl3.Location = new System.Drawing.Point(909, 111);
+            this.flowControl3.Name = "flowControl3";
+            this.flowControl3.Size = new System.Drawing.Size(55, 55);
+            this.flowControl3.TabIndex = 23;
+            // 
+            // flowControl2
+            // 
+            this.flowControl2.BackColor = System.Drawing.Color.Transparent;
+            this.flowControl2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl2.BackgroundImage")));
+            this.flowControl2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl2.Location = new System.Drawing.Point(909, 50);
+            this.flowControl2.Name = "flowControl2";
+            this.flowControl2.Size = new System.Drawing.Size(55, 55);
+            this.flowControl2.TabIndex = 22;
             // 
             // downloadButton
             // 
@@ -635,16 +675,6 @@
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
             this.runButton.UseVisualStyleBackColor = true;
-            // 
-            // flowControl
-            // 
-            this.flowControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
-            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Location = new System.Drawing.Point(784, 42);
-            this.flowControl.Name = "flowControl";
-            this.flowControl.Size = new System.Drawing.Size(209, 51);
-            this.flowControl.TabIndex = 3;
             // 
             // pictureBox3
             // 
@@ -686,6 +716,16 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
+            // flowControl
+            // 
+            this.flowControl.BackColor = System.Drawing.Color.Transparent;
+            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
+            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl.Location = new System.Drawing.Point(694, 50);
+            this.flowControl.Name = "flowControl";
+            this.flowControl.Size = new System.Drawing.Size(209, 51);
+            this.flowControl.TabIndex = 25;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -721,6 +761,8 @@
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.modelTitlePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -773,7 +815,6 @@
         private Citta_T1.Controls.DataSourceControl dataSourceControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private Controls.FlowControl flowControl;
         private DataGridView1 dataGridView1;
         private DataGridView2 dataGridView2;
         private System.Windows.Forms.Button downloadButton;
@@ -782,6 +823,11 @@
         private DataGridView0 dataGridView3;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private System.Windows.Forms.Button flowChartButton;
+        private Controls.FlowControl3 flowControl3;
+        private Controls.FlowControl2 flowControl2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox textBox1;
+        private Controls.FlowControl flowControl;
     }
 }
 
