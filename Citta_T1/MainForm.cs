@@ -34,8 +34,8 @@ namespace  Citta_T1
             int y = canvasPanel.Location.Y + canvasPanel.Height;
 
             // 缩略图定位
-            if (x - 300 - this.naviViewControl.Width> 0)
-                x = x - 300 - this.naviViewControl.Width;      
+            if (x - 330 - this.naviViewControl.Width> 0)
+                x = x - 330 - this.naviViewControl.Width;      
             if (y - 100 - this.naviViewControl.Height> 0)
                 y = y - 100 - this.naviViewControl.Height;
             this.naviViewControl.Location = new Point(x, y);
