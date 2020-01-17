@@ -778,7 +778,7 @@
         private DataGridView dataGridView3;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
-        private Citta_T1.Dialogs.AnewModel anewModel; // 弹出框-新建模型
+        private Citta_T1.Dialogs.AnewModel anewModel; // 新建模型-弹出框
     }
 }
 
