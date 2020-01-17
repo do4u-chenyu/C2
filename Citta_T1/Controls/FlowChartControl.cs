@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Dialogs
+namespace Citta_T1.Controls
 {
-    public partial class anewModel : Form
+    public partial class FlowChartControl : UserControl
     {
-        public anewModel()
+        public FlowChartControl()
         {
             InitializeComponent();
         }

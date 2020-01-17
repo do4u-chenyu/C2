@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.Dialogs
 {
-    partial class anewModel
+    partial class CreateNewModel
     {
         /// <summary>
         /// Required designer variable.
