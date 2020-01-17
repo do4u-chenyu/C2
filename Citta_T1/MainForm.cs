@@ -24,6 +24,8 @@ namespace  Citta_T1
             this.isBottomViewPanelMinimum = false;
             InitializeControlsLocation();
         }
+      
+       
         private void InitializeControlsLocation()
         {
             // 根据父控件对缩略图控件和底层工具按钮定位
@@ -199,7 +201,7 @@ namespace  Citta_T1
         }
         private void ImportButton_Click(object sender, EventArgs e)
         {
-
+            this.formInputData.StartPosition = FormStartPosition.CenterScreen;
             this.formInputData.ShowDialog();
         }
 
@@ -226,9 +228,5 @@ namespace  Citta_T1
             this.createNewModel.ShowDialog();
         }
 
-        private void formInputData_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

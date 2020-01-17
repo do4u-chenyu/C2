@@ -36,17 +36,19 @@
             this.formCreateModel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.formCreateModel1.Location = new System.Drawing.Point(-2, -1);
             this.formCreateModel1.Name = "formCreateModel1";
-            this.formCreateModel1.Size = new System.Drawing.Size(567, 274);
+            this.formCreateModel1.Size = new System.Drawing.Size(558, 252);
             this.formCreateModel1.TabIndex = 0;
             // 
-            // anewModel
+            // CreateNewModel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(558, 252);
             this.Controls.Add(this.formCreateModel1);
-            this.Name = "anewModel";
-            this.Text = "anewModel";
+            this.Location = new System.Drawing.Point(250, 250);
+            this.Name = "CreateNewModel";
+            this.ShowIcon = false;
+            this.Text = "新建模型";
             this.ResumeLayout(false);
 
         }

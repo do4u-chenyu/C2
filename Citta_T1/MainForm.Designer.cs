@@ -90,7 +90,6 @@
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.panel8.SuspendLayout();
-            this.formInputData.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -366,17 +365,7 @@
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
-            // 
-            // formInputData
-            // 
-            this.formInputData.ClientSize = new System.Drawing.Size(812, 472);
-            this.formInputData.Controls.Add(this.ucDataGridView1);
-            this.formInputData.Location = new System.Drawing.Point(175, 175);
-            this.formInputData.Name = "formInputData";
-            this.formInputData.ShowIcon = false;
-            this.formInputData.Text = "FormInputData";
-            this.formInputData.Visible = false;
-            this.formInputData.Load += new System.EventHandler(this.formInputData_Load_1);
+ 
             // 
             // ucDataGridView1
             // 
@@ -399,11 +388,7 @@
             // 
             // anewModel
             // 
-            this.createNewModel.ClientSize = new System.Drawing.Size(558, 252);
-            this.createNewModel.Location = new System.Drawing.Point(250, 250);
-            this.createNewModel.Name = "createNewModel";
-            this.createNewModel.Text = "createNewModel";
-            this.createNewModel.Visible = false;
+
             // 
             // panel1
             // 
@@ -709,8 +694,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.formInputData.ResumeLayout(false);
-            this.formInputData.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
