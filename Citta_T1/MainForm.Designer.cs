@@ -56,7 +56,6 @@
             this.previewLabel = new System.Windows.Forms.Label();
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
-            this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -777,7 +776,6 @@
         private System.Windows.Forms.Label label7;
         private DataGridView0 dataGridView3;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
-        private Citta_T1.Dialogs.CreateNewModel createNewModel; // 新建模型
     }
 }
 
