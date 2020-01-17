@@ -36,11 +36,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
+            this.flowChartButton = new System.Windows.Forms.Button();
             this.dataButton = new System.Windows.Forms.Button();
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
             this.operatorControl = new Citta_T1.Controls.OperatorControl();
+            this.flowChartControl = new Citta_T1.Controls.FlowChartControl();
             this.dataSourceControl = new Citta_T1.Controls.DataSourceControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
@@ -167,6 +169,7 @@
             // leftMainMenuPanel
             // 
             this.leftMainMenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(97)))), ((int)(((byte)(125)))));
+            this.leftMainMenuPanel.Controls.Add(this.flowChartButton);
             this.leftMainMenuPanel.Controls.Add(this.dataButton);
             this.leftMainMenuPanel.Controls.Add(this.oprateButton);
             this.leftMainMenuPanel.Controls.Add(this.myModelButton);
@@ -175,6 +178,17 @@
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
             this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 637);
             this.leftMainMenuPanel.TabIndex = 1;
+            // 
+            // flowChartButton
+            // 
+            this.flowChartButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.flowChartButton.Location = new System.Drawing.Point(4, 150);
+            this.flowChartButton.Name = "flowChartButton";
+            this.flowChartButton.Size = new System.Drawing.Size(124, 42);
+            this.flowChartButton.TabIndex = 3;
+            this.flowChartButton.Text = "思维导图";
+            this.flowChartButton.UseVisualStyleBackColor = true;
+            this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
             // dataButton
             // 
@@ -213,6 +227,7 @@
             // 
             this.leftToolBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.leftToolBoxPanel.Controls.Add(this.operatorControl);
+            this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
@@ -230,6 +245,17 @@
             this.operatorControl.Name = "operatorControl";
             this.operatorControl.Size = new System.Drawing.Size(138, 635);
             this.operatorControl.TabIndex = 0;
+            // 
+            // flowChartControl
+            // 
+            this.flowChartControl.AllowDrop = true;
+            this.flowChartControl.BackColor = System.Drawing.Color.White;
+            this.flowChartControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowChartControl.Location = new System.Drawing.Point(0, 0);
+            this.flowChartControl.Name = "flowChartControl";
+            this.flowChartControl.Size = new System.Drawing.Size(138, 635);
+            this.flowChartControl.TabIndex = 0;
             // 
             // dataSourceControl
             // 
@@ -365,7 +391,6 @@
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
- 
             // 
             // ucDataGridView1
             // 
@@ -385,10 +410,6 @@
             this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
             this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
             this.ucDataGridView1.TabIndex = 13;
-            // 
-            // anewModel
-            // 
-
             // 
             // panel1
             // 
@@ -747,6 +768,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button importButton;
         private Controls.OperatorControl operatorControl;
+        private Controls.FlowChartControl flowChartControl;
         private Citta_T1.Controls.DataSourceControl dataSourceControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -758,6 +780,7 @@
         private System.Windows.Forms.Label label7;
         private DataGridView0 dataGridView3;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
+        private System.Windows.Forms.Button flowChartButton;
     }
 }
 

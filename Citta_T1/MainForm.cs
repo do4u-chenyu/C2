@@ -56,18 +56,32 @@ namespace  Citta_T1
         {
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
+            this.flowChartControl.Visible = false;
         }
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
-            this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = true;
+
+            this.dataSourceControl.Visible = false;
+            this.flowChartControl.Visible = false;
         }
 
         private void DataButton_Click(object sender, EventArgs e)
         {
             this.dataSourceControl.Visible = true;
+
             this.operatorControl.Visible = false;
+            this.flowChartControl.Visible = false;
+        }
+
+        private void FlowChartButton_Click(object sender, EventArgs e)
+        {
+            this.flowChartControl.Visible = true;
+
+            this.dataSourceControl.Visible = false;
+            this.operatorControl.Visible = false;
+            
         }
 
         //private void NewModelButton_Click(object sender, EventArgs e)
@@ -227,6 +241,7 @@ namespace  Citta_T1
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
             this.createNewModel.ShowDialog();
         }
+
 
     }
 }
