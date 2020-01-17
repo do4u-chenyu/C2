@@ -33,7 +33,6 @@ namespace Citta_T1
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this._InitializeColumns();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,56 +59,73 @@ namespace Citta_T1
             this.ResumeLayout(false);
 
         }
-        private void _InitializeColumns()
+
+        private void InitializeDgv(string fileName)
+        {
+            List<List<string>> datas = this.OverViewFile(fileName);
+            List<string> headers = datas[0];
+            int numOfCols = headers.ToArray().Length;
+            _InitializeColumns(headers);
+            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
+
+        }
+        private void _InitializeColumns(List<string> headers)
         {
             /*
              * 初始化列
              */
-            System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfRows];
-            for (int i = 0; i < this.numOfCols; i++)
+            int numOfCols = headers.ToArray().Length;
+            System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCols];
+            for (int i = 0; i < numOfCols; i++)
             {
                 ColumnList[i] = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                ColumnList[i].HeaderText = "Col" + i.ToString();
-                ColumnList[i].Name = "列" + i.ToString();
+                ColumnList[i].HeaderText = headers[i];
+                ColumnList[i].Name = "Col_" + i.ToString();
             }
             this.dataGridView1.Columns.AddRange(ColumnList);
         }
 
-        private void _InitializeRowsFromFile(string fileName)
+        private void _InitializeRowse(List<List<string>> datas, int numOfCols)
         {
             /*
              * 初始化行
              * TODO
              * 使用样例数据
              */
-            for (int i = 0; i < this.numOfRows; i=this.dataGridView1.Rows.Add())
-            {   
+            string data;
+            for (int i = 0; i < maxNumOfRows; i=this.dataGridView1.Rows.Add())
+            {
                 //this.dataGridView1.Rows.Add();
-                for (int j = 0; j < this.numOfCols; j++)
+                for (int j = 0; j < numOfCols; j++)
                 {
-                    this.dataGridView1.Rows[i].Cells[j].Value = i.ToString() + "_" + j.ToString();
+                    try
+                    {
+                        data = datas[i][j];
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        data = "";
+                    }
+                    this.dataGridView1.Rows[i].Cells[j].Value = data;
                 }
-            }            
+            }
         }
         #endregion
 
-        //private List<List<string>> OverViewFile(string fileName, int maxNumOfFile = 50, char sep='\t')
-        //{
-        //    System.IO.StreamReader file = new System.IO.StreamReader(fileName);
-        //    int rowCounter = 0;
-        //    List<List<string>> datas;
-        //    string line;
-        //    char[] seps = new char[sep];
-        //    while(((line = file.ReadLine()) != null) && (rowCounter < maxNumOfFile))
-        //    {
-        //        List<string> eles = new List<string>(line.Split(seps));
-        //        datas.Add(eles);
-        //    }
-        //    return datas;
-            
-        //}
+        private List<List<string>> OverViewFile(string fileName, int maxNumOfFile = 50, char sep = '\t')
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader(fileName);
+            int rowCounter = 0;
+            List<List<string>> datas = new List<List<string>> { };
+            string line;
+            while (((line = file.ReadLine()) != null) && (rowCounter < maxNumOfFile))
+            {
+                List<string> eles = new List<string>(line.Split(sep));
+                datas.Add(eles);
+            }
+            return datas;
+        }
         private System.Windows.Forms.DataGridView dataGridView1;
-        private int numOfCols = 20;
-        private int numOfRows = 20;
+        private int maxNumOfRows = 20;
     }
 }
