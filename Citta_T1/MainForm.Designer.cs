@@ -54,7 +54,6 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
-            this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
             this.panel1 = new System.Windows.Forms.Panel();
