@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Dialogs
 {
-    public partial class anewModel : Form
+    public partial class AnewModel : Form
     {
-        public anewModel()
+        public AnewModel()
         {
             InitializeComponent();
         }

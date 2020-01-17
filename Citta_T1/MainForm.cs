@@ -215,5 +215,11 @@ namespace  Citta_T1
         {
 
         }
+
+        private void newModelButton_Click(object sender, EventArgs e)
+        {
+            this.anewModel.StartPosition = FormStartPosition.CenterScreen;
+            this.anewModel.ShowDialog();
+        }
     }
 }

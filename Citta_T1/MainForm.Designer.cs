@@ -55,6 +55,8 @@
             this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
+            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
+            this.anewModel = new Citta_T1.Dialogs.AnewModel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -79,7 +81,6 @@
             this.modelTitlePanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
-            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -378,6 +379,33 @@
             this.formInputData.Text = "FormInputData";
             this.formInputData.Visible = false;
             // 
+            // ucDataGridView1
+            // 
+            this.ucDataGridView1.AutoScroll = true;
+            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
+            this.ucDataGridView1.Columns = null;
+            this.ucDataGridView1.DataSource = null;
+            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.ucDataGridView1.HeadHeight = 40;
+            this.ucDataGridView1.HeadPadingLeft = 0;
+            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
+            this.ucDataGridView1.IsShowCheckBox = false;
+            this.ucDataGridView1.IsShowHead = true;
+            this.ucDataGridView1.Location = new System.Drawing.Point(788, 0);
+            this.ucDataGridView1.Name = "ucDataGridView1";
+            this.ucDataGridView1.RowHeight = 40;
+            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
+            this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
+            this.ucDataGridView1.TabIndex = 13;
+            // 
+            // anewModel
+            // 
+            this.anewModel.ClientSize = new System.Drawing.Size(558, 252);
+            this.anewModel.Location = new System.Drawing.Point(250, 250);
+            this.anewModel.Name = "anewModel";
+            this.anewModel.Text = "anewModel";
+            this.anewModel.Visible = false;
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
@@ -551,6 +579,7 @@
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
             this.newModelButton.UseVisualStyleBackColor = false;
+            this.newModelButton.Click += new System.EventHandler(this.newModelButton_Click);
             // 
             // canvasPanel
             // 
@@ -652,25 +681,6 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
-            // ucDataGridView1
-            // 
-            this.ucDataGridView1.AutoScroll = true;
-            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
-            this.ucDataGridView1.Columns = null;
-            this.ucDataGridView1.DataSource = null;
-            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.ucDataGridView1.HeadHeight = 40;
-            this.ucDataGridView1.HeadPadingLeft = 0;
-            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
-            this.ucDataGridView1.IsShowCheckBox = false;
-            this.ucDataGridView1.IsShowHead = true;
-            this.ucDataGridView1.Location = new System.Drawing.Point(788, 0);
-            this.ucDataGridView1.Name = "ucDataGridView1";
-            this.ucDataGridView1.RowHeight = 40;
-            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
-            this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
-            this.ucDataGridView1.TabIndex = 13;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -767,6 +777,7 @@
         private DataGridView dataGridView3;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
+        private Citta_T1.Dialogs.AnewModel anewModel;
     }
 }
 
