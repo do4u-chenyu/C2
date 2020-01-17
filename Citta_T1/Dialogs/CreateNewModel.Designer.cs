@@ -34,7 +34,8 @@
             // formCreateModel1
             // 
             this.formCreateModel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.formCreateModel1.Location = new System.Drawing.Point(-2, -1);
+            this.formCreateModel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formCreateModel1.Location = new System.Drawing.Point(0, 0);
             this.formCreateModel1.Name = "formCreateModel1";
             this.formCreateModel1.Size = new System.Drawing.Size(558, 252);
             this.formCreateModel1.TabIndex = 0;
@@ -46,8 +47,11 @@
             this.ClientSize = new System.Drawing.Size(558, 252);
             this.Controls.Add(this.formCreateModel1);
             this.Location = new System.Drawing.Point(250, 250);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "CreateNewModel";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "新建模型";
             this.ResumeLayout(false);
 
