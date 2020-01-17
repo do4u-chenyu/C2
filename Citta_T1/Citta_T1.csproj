@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\X.jpg" />
+    <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

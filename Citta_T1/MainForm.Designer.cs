@@ -243,7 +243,7 @@
             this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operatorControl.Location = new System.Drawing.Point(0, 0);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(146, 635);
+            this.operatorControl.Size = new System.Drawing.Size(185, 635);
             this.operatorControl.TabIndex = 0;
             // 
             // flowChartControl
@@ -254,7 +254,7 @@
             this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowChartControl.Location = new System.Drawing.Point(0, 0);
             this.flowChartControl.Name = "flowChartControl";
-            this.flowChartControl.Size = new System.Drawing.Size(146, 635);
+            this.flowChartControl.Size = new System.Drawing.Size(185, 635);
             this.flowChartControl.TabIndex = 0;
             // 
             // dataSourceControl
@@ -265,7 +265,7 @@
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.Size = new System.Drawing.Size(146, 635);
+            this.dataSourceControl.Size = new System.Drawing.Size(185, 635);
             this.dataSourceControl.TabIndex = 0;
             // 
             // bottomViewPanel
@@ -275,9 +275,9 @@
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(284, 403);
+            this.bottomViewPanel.Location = new System.Drawing.Point(323, 403);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(1003, 280);
+            this.bottomViewPanel.Size = new System.Drawing.Size(964, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
             // dataGridView3
@@ -285,7 +285,7 @@
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView3.Location = new System.Drawing.Point(0, 39);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(1003, 241);
+            this.dataGridView3.Size = new System.Drawing.Size(964, 241);
             this.dataGridView3.TabIndex = 3;
             // 
             // dataGridView1
@@ -293,7 +293,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 39);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1003, 241);
+            this.dataGridView1.Size = new System.Drawing.Size(964, 241);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
@@ -302,7 +302,7 @@
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 39);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1003, 241);
+            this.dataGridView2.Size = new System.Drawing.Size(964, 241);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
@@ -314,14 +314,14 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1003, 39);
+            this.panel4.Size = new System.Drawing.Size(964, 39);
             this.panel4.TabIndex = 0;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(855, 0);
+            this.panel9.Location = new System.Drawing.Point(816, 0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(148, 39);
             this.panel9.TabIndex = 2;
@@ -417,9 +417,9 @@
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(284, 46);
+            this.panel1.Location = new System.Drawing.Point(323, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1003, 48);
+            this.panel1.Size = new System.Drawing.Size(964, 48);
             this.panel1.TabIndex = 4;
             // 
             // panel6
@@ -435,7 +435,7 @@
             this.panel6.Controls.Add(this.filterButton);
             this.panel6.Controls.Add(this.connectOpButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(290, 0);
+            this.panel6.Location = new System.Drawing.Point(251, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(713, 48);
             this.panel6.TabIndex = 5;
@@ -597,9 +597,9 @@
             this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.naviViewControl);
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasPanel.Location = new System.Drawing.Point(284, 94);
+            this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(1003, 309);
+            this.canvasPanel.Size = new System.Drawing.Size(964, 309);
             this.canvasPanel.TabIndex = 5;
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
@@ -653,7 +653,7 @@
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Location = new System.Drawing.Point(0, 36);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(1003, 36);
+            this.pictureBox3.Size = new System.Drawing.Size(964, 36);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -663,7 +663,7 @@
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(1003, 36);
+            this.modelTitlePanel.Size = new System.Drawing.Size(964, 36);
             this.modelTitlePanel.TabIndex = 1;
             // 
             // pictureBox2
@@ -673,7 +673,7 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox2.Location = new System.Drawing.Point(0, 33);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1003, 3);
+            this.pictureBox2.Size = new System.Drawing.Size(964, 3);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -681,7 +681,7 @@
             // naviViewControl
             // 
             this.naviViewControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.naviViewControl.Location = new System.Drawing.Point(793, 190);
+            this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
@@ -698,6 +698,7 @@
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
