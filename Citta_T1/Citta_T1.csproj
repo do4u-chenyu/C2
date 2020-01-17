@@ -130,12 +130,11 @@
     <EmbeddedResource Include="Controls\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
-      <DependentUpon>DataGridView0.cs</DependentUpon>
     <EmbeddedResource Include="Controls\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataGridView0.resx">
-      <DependentUpon>DataGridView.cs</DependentUpon>
+      <DependentUpon>DataGridView0.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>
