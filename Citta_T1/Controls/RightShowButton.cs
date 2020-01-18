@@ -10,26 +10,26 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    public partial class FlowControl2 : UserControl
+    public partial class RightShowButton : UserControl
     {
-        public FlowControl2()
+        public RightShowButton()
         {
             InitializeComponent();
         }
 
-        private void FlowControl2_MouseEnter(object sender, EventArgs e)
+        private void RightShowButton_MouseEnter(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
             this.label1.ForeColor = Color.White;
         }
 
-        private void FlowControl2_MouseLeave(object sender, EventArgs e)
+        private void RightShowButton_MouseLeave(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
             this.label1.ForeColor = Color.Black;
         }
 
-        private void FlowControl2_Click(object sender, EventArgs e)
+        private void RightShowButton_Click(object sender, EventArgs e)
         {
             foreach (Control ct in this.Parent.Controls)
             {

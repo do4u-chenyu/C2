@@ -500,7 +500,7 @@
         RudN65tdA8sHzg46DF645Xrr8m2v29fvrLwzMBQydHc4cnjkLvvu5L2key/vZ9yff7DpIfph4SOpR+WP
         lR7X/aj3Y+uI5ciZUdfRvidBTx6Mscae/5T+04fx/Kfkp+UTqhONk2aTp6fcp24+W/1s/Hnq8/npgp+l
         f65+ofviu18cf+mbWTUz/pL/cuHX4lfyr468Xva6e9Z/9vGb5Dfzc4Vv5d8efcd41/s+7P3EfOYH7IeK
-        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEAAACxABrSO9dQAABupJREFUeF7tnctOVUsQ
+        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALDwAACw8BkvkDpQAABupJREFUeF7tnctOVUsQ
         hnknX0R9EHXKmKDRKCEkagJhoHHibYY6EAZegpfEgVHjNUYCXgBF8QVav+X5t7XLXvd1co6hBp97rerq
         7qrq/nezF4Y9kVIqZWlpKZ05cyYdP348TU5OBsGegn0/NTWVFhYW0sOHD39KIq+TrPHChQtpdnY23bhx
         Iz179iytr6+n79+/B8Gegn3//PnztLKyks6ePZvm5+fT6urqT4mM62Xs5smTJ+nYsWPp5s2b6evXr2l3
@@ -536,7 +536,7 @@
   <data name="panel3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJ8AAACeCAYAAAAsR9hFAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAX9SURBVHhe7dtdcxNVHMdx3osV
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAX9SURBVHhe7dtdcxNVHMdx3osV
         Xhn6CpQZAWe8FMXxwgvHcbjxgitufRHOkOYB8tCEbZJGSC2hKg9FhvJ3z6bbbk5OupsmzY8234tPmpM9
         u82cfNlNaHvFzACJ5Caq37fd5q3EsDXm7v/Vun38eGj7uY5bXyX87c+2xqbmH419/vZFx9Pf/+vEyTi8
         vy/d7ku378X3HX++P/al21e1f2i8u3XbevV7cVrh6FLJjdvBulftw/anU1+nbRwp+ngxh0dC2y4ii64l
@@ -565,7 +565,7 @@
         DbmWXFPZ1ibCA1bHrvwPzXFS8UezZagAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="flowControl3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="rightHideButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADcAAAA2CAYAAABjhwHjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAFZSURBVGhD7ZrJqoQwEEXz//+ljaAbRRAR2gEanBBEoXFT
@@ -577,7 +577,7 @@
         M2QkK5nJ/lMD3uQDyTWiz3M4uEAAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="flowControl2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="rightShowButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADcAAAA2CAYAAABjhwHjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAFZSURBVGhD7ZrJqoQwEEXz//+ljaAbRRAR2gEanBBEoXFT

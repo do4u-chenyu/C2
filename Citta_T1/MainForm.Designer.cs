@@ -73,17 +73,17 @@
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.canvasPanel = new System.Windows.Forms.Panel();
+            this.flowControl = new Citta_T1.Controls.FlowControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.flowControl3 = new Citta_T1.Controls.FlowControl3();
-            this.flowControl2 = new Citta_T1.Controls.FlowControl2();
+            this.rightHideButton = new Citta_T1.Controls.RightHideButton();
+            this.rightShowButton = new Citta_T1.Controls.RightShowButton();
             this.downloadButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.modelTitlePanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
-            this.flowControl = new Citta_T1.Controls.FlowControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -587,8 +587,8 @@
             this.canvasPanel.BackColor = System.Drawing.Color.White;
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.panel3);
-            this.canvasPanel.Controls.Add(this.flowControl3);
-            this.canvasPanel.Controls.Add(this.flowControl2);
+            this.canvasPanel.Controls.Add(this.rightHideButton);
+            this.canvasPanel.Controls.Add(this.rightShowButton);
             this.canvasPanel.Controls.Add(this.downloadButton);
             this.canvasPanel.Controls.Add(this.runButton);
             this.canvasPanel.Controls.Add(this.pictureBox3);
@@ -602,13 +602,23 @@
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             // 
+            // flowControl
+            // 
+            this.flowControl.BackColor = System.Drawing.Color.Transparent;
+            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
+            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl.Location = new System.Drawing.Point(694, 50);
+            this.flowControl.Name = "flowControl";
+            this.flowControl.Size = new System.Drawing.Size(209, 51);
+            this.flowControl.TabIndex = 25;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
             this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel3.Controls.Add(this.textBox1);
-            this.panel3.Location = new System.Drawing.Point(359, 78);
+            this.panel3.Location = new System.Drawing.Point(744, 107);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(159, 159);
             this.panel3.TabIndex = 24;
@@ -624,25 +634,25 @@
             this.textBox1.Size = new System.Drawing.Size(145, 145);
             this.textBox1.TabIndex = 0;
             // 
-            // flowControl3
+            // rightHideButton
             // 
-            this.flowControl3.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl3.BackgroundImage")));
-            this.flowControl3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl3.Location = new System.Drawing.Point(909, 111);
-            this.flowControl3.Name = "flowControl3";
-            this.flowControl3.Size = new System.Drawing.Size(55, 55);
-            this.flowControl3.TabIndex = 23;
+            this.rightHideButton.BackColor = System.Drawing.Color.Transparent;
+            this.rightHideButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightHideButton.BackgroundImage")));
+            this.rightHideButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rightHideButton.Location = new System.Drawing.Point(909, 111);
+            this.rightHideButton.Name = "rightHideButton";
+            this.rightHideButton.Size = new System.Drawing.Size(55, 55);
+            this.rightHideButton.TabIndex = 23;
             // 
-            // flowControl2
+            // rightShowButton
             // 
-            this.flowControl2.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl2.BackgroundImage")));
-            this.flowControl2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl2.Location = new System.Drawing.Point(909, 50);
-            this.flowControl2.Name = "flowControl2";
-            this.flowControl2.Size = new System.Drawing.Size(55, 55);
-            this.flowControl2.TabIndex = 22;
+            this.rightShowButton.BackColor = System.Drawing.Color.Transparent;
+            this.rightShowButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("rightShowButton.BackgroundImage")));
+            this.rightShowButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rightShowButton.Location = new System.Drawing.Point(909, 50);
+            this.rightShowButton.Name = "rightShowButton";
+            this.rightShowButton.Size = new System.Drawing.Size(55, 55);
+            this.rightShowButton.TabIndex = 22;
             // 
             // downloadButton
             // 
@@ -715,16 +725,6 @@
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
-            // 
-            // flowControl
-            // 
-            this.flowControl.BackColor = System.Drawing.Color.Transparent;
-            this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
-            this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Location = new System.Drawing.Point(694, 50);
-            this.flowControl.Name = "flowControl";
-            this.flowControl.Size = new System.Drawing.Size(209, 51);
-            this.flowControl.TabIndex = 25;
             // 
             // MainForm
             // 
@@ -823,8 +823,8 @@
         private DataGridView0 dataGridView3;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private System.Windows.Forms.Button flowChartButton;
-        private Controls.FlowControl3 flowControl3;
-        private Controls.FlowControl2 flowControl2;
+        private Controls.RightHideButton rightHideButton;
+        private Controls.RightShowButton rightShowButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox textBox1;
         private Controls.FlowControl flowControl;

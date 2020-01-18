@@ -10,28 +10,28 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    public partial class FlowControl3 : UserControl
+    public partial class RightHideButton : UserControl
     {
-        public FlowControl3()
+        public RightHideButton()
         {
             InitializeComponent();
         }
 
-        private void FlowControl3_MouseEnter(object sender, EventArgs e)
+        private void RightHideButton_MouseEnter(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
            // this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\blueshadow.png");
             this.label1.ForeColor = Color.White;
         }
 
-        private void FlowControl3_MouseLeave(object sender, EventArgs e)
+        private void RightHideButton_MouseLeave(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
             //this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\shadow.png");
             this.label1.ForeColor = Color.Black;
         }
 
-        private void FlowControl3_Click(object sender, EventArgs e)
+        private void RightHideButton_Click(object sender, EventArgs e)
         {
             foreach (Control ct in this.Parent.Controls)
             {
