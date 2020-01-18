@@ -63,6 +63,16 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap blueshadow {
+            get {
+                object obj = ResourceManager.GetObject("blueshadow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap diamond {
             get {
                 object obj = ResourceManager.GetObject("diamond", resourceCulture);
@@ -166,6 +176,16 @@ namespace Citta_T1.Properties {
         internal static System.Drawing.Bitmap roundrectange {
             get {
                 object obj = ResourceManager.GetObject("roundrectange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap shadow {
+            get {
+                object obj = ResourceManager.GetObject("shadow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

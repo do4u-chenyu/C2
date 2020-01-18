@@ -218,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\X.jpg" />
+    <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -225,6 +226,7 @@
     <Content Include="res\displaypanel\minfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="res\displaypanel\shadow.png" />
     <Content Include="res\flowchart\diamond.png" />
     <Content Include="res\flowchart\downarrow.png" />
     <Content Include="res\flowchart\ellipse.png" />

@@ -19,13 +19,15 @@ namespace Citta_T1.Controls
 
         private void FlowControl3_MouseEnter(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin2.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
+           // this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\blueshadow.png");
             this.label1.ForeColor = Color.White;
         }
 
         private void FlowControl3_MouseLeave(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
+            //this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\shadow.png");
             this.label1.ForeColor = Color.Black;
         }
 
@@ -42,13 +44,15 @@ namespace Citta_T1.Controls
 
         private void label1_MouseEnter(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin2.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
+           // this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\blueshadow.png");
             this.label1.ForeColor = Color.White;
         }
 
         private void label1_MouseLeave(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
+           // this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\shadow.png");
             this.label1.ForeColor = Color.Black;
         }
 

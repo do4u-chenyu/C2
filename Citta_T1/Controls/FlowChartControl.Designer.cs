@@ -155,7 +155,6 @@
             this.label9.Size = new System.Drawing.Size(51, 20);
             this.label9.TabIndex = 19;
             this.label9.Text = "上箭头";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
@@ -166,7 +165,6 @@
             this.label10.Size = new System.Drawing.Size(51, 20);
             this.label10.TabIndex = 18;
             this.label10.Text = "右箭头";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label11
             // 
@@ -177,7 +175,6 @@
             this.label11.Size = new System.Drawing.Size(37, 20);
             this.label11.TabIndex = 23;
             this.label11.Text = "问号";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label12
             // 

@@ -19,13 +19,13 @@ namespace Citta_T1.Controls
 
         private void FlowControl2_MouseEnter(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin2.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
             this.label1.ForeColor = Color.White;
         }
 
         private void FlowControl2_MouseLeave(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
             this.label1.ForeColor = Color.Black;
         }
 
@@ -40,13 +40,13 @@ namespace Citta_T1.Controls
 
         private void label1_MouseEnter(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin2.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
             this.label1.ForeColor = Color.White;
         }
 
         private void label1_MouseLeave(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\yin.png");
+            this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
             this.label1.ForeColor = Color.Black;
         }
 
