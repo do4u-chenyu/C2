@@ -15,6 +15,7 @@ namespace Citta_T1.Controls.Small
         public ModelTitleControl()
         {
             InitializeComponent();
+           
         }
     }
 }

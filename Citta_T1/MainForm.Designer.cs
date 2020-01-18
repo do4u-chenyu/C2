@@ -83,6 +83,7 @@
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.modelTitlePanel = new System.Windows.Forms.Panel();
+            this.modelTitleControl1 = new Citta_T1.Controls.Small.ModelTitleControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
             this.headPanel.SuspendLayout();
@@ -711,12 +712,21 @@
             // 
             // modelTitlePanel
             // 
+            this.modelTitlePanel.Controls.Add(this.modelTitleControl1);
             this.modelTitlePanel.Controls.Add(this.pictureBox2);
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(908, 36);
             this.modelTitlePanel.TabIndex = 1;
+            // 
+            // modelTitleControl1
+            // 
+            this.modelTitleControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
+            this.modelTitleControl1.Location = new System.Drawing.Point(1, 7);
+            this.modelTitleControl1.Name = "modelTitleControl1";
+            this.modelTitleControl1.Size = new System.Drawing.Size(127, 26);
+            this.modelTitleControl1.TabIndex = 1;
             // 
             // pictureBox2
             // 
@@ -843,6 +853,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private Controls.FlowControl flowControl;
         private Controls.Small.DragLineControl dragLineControl;
+        private Controls.Small.ModelTitleControl modelTitleControl1;
     }
 }
 
