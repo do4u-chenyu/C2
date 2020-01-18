@@ -31,11 +31,7 @@ namespace Citta_T1.Controls.Small
         private void DragLineControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseDown && this.bottomViewPanel != null)
-            {
-                //System.Console.WriteLine(this.bottomViewPanel.Height.ToString());
-                //System.Console.WriteLine(e.Y);
                 this.bottomViewPanel.Height = this.bottomViewPanel.Height - e.Y;
-            }
         }
 
         private void DragLineControl_MouseUp(object sender, MouseEventArgs e)
