@@ -12,10 +12,13 @@ namespace Citta_T1.Controls
 {
     public partial class FlowControl : UserControl
     {
-        private bool tmpTag;
+        public bool tmpTag;
+        
+        //public bool TmpTag { get => tmpTag; set => tmpTag }
         public FlowControl()
         {
             InitializeComponent();
+            
             tmpTag = true;
         }
 
@@ -72,7 +75,7 @@ namespace Citta_T1.Controls
         {
             foreach (Control ct in this.Parent.Controls)
             {
-                if (ct.Name == "panel3")
+                if (ct.Name == "remarkControl")
                     ct.Visible = false;
             }
         }
@@ -81,7 +84,7 @@ namespace Citta_T1.Controls
         {
             foreach (Control ct in this.Parent.Controls)
             {
-                if (ct.Name == "panel3")
+                if (ct.Name == "remarkControl")
                     ct.Visible = true;
             }
 

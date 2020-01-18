@@ -57,6 +57,12 @@
     <Compile Include="Controls\FlowChartControl.Designer.cs">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RemarkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RemarkControl.Designer.cs">
+      <DependentUpon>RemarkControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RightShowButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     <EmbeddedResource Include="Controls\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemarkControl.resx">
+      <DependentUpon>RemarkControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\RightShowButton.resx">
       <DependentUpon>RightShowButton.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +199,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
@@ -236,6 +246,7 @@
     <Content Include="res\displaypanel\minfold.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="res\displaypanel\remark.png" />
     <Content Include="res\displaypanel\shadow.png" />
     <Content Include="res\flowchart\diamond.png" />
     <Content Include="res\flowchart\downarrow.png" />

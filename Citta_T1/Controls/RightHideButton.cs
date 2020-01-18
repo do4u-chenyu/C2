@@ -37,8 +37,22 @@ namespace Citta_T1.Controls
             {
                 if (ct.Name == "flowControl")
                     ct.Visible = false;
-                if (ct.Name == "panel3")
-                    ct.Visible = false;
+                if (ct.Name == "remarkControl")
+                {
+                    if (ct.Visible)
+                    {
+                        ct.Visible = false;
+                        foreach (Control ct2 in this.Parent.Controls)
+                        {
+                            if (ct2.Name == "flowControl")
+                            {
+                                (ct2 as FlowControl).tmpTag = true;
+                            }
+                        }
+                           
+                            
+                    }
+                }
             }
         }
 
@@ -60,11 +74,27 @@ namespace Citta_T1.Controls
         {
             foreach (Control ct in this.Parent.Controls)
             {
+                  
+
+                if (ct.Name == "remarkControl")
+                {
+                    if (ct.Visible)
+                    {
+                        ct.Visible = false;
+                        foreach (Control ct2 in this.Parent.Controls)
+                        {
+                            if (ct2.Name == "flowControl")
+                            {
+                                (ct2 as FlowControl).tmpTag = true;
+                            }
+                        }
+                    }
+                }
                 if (ct.Name == "flowControl")
                     ct.Visible = false;
-                if (ct.Name == "panel3")
-                    ct.Visible = false;
+
             }
+     
         }
     }
 }

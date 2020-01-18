@@ -54,7 +54,7 @@ namespace  Citta_T1
             this.flowControl.Location = loc;
             this.rightShowButton.Location = loc_flowcontrol2;
             this.rightHideButton.Location = loc_flowcontrol3;
-            this.panel3.Location = loc_panel3;
+            this.remarkControl.Location = loc_panel3;
 
         }
 

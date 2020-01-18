@@ -75,8 +75,6 @@
             this.newModelButton = new System.Windows.Forms.Button();
             this.canvasPanel = new System.Windows.Forms.Panel();
             this.flowControl = new Citta_T1.Controls.FlowControl();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.rightHideButton = new Citta_T1.Controls.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.RightShowButton();
             this.downloadButton = new System.Windows.Forms.Button();
@@ -86,6 +84,7 @@
             this.modelTitleControl1 = new Citta_T1.Controls.Small.ModelTitleControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
+            this.remarkControl = new Citta_T1.Controls.RemarkControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -101,7 +100,6 @@
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.canvasPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.modelTitlePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -598,8 +596,8 @@
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.remarkControl);
             this.canvasPanel.Controls.Add(this.flowControl);
-            this.canvasPanel.Controls.Add(this.panel3);
             this.canvasPanel.Controls.Add(this.rightHideButton);
             this.canvasPanel.Controls.Add(this.rightShowButton);
             this.canvasPanel.Controls.Add(this.downloadButton);
@@ -624,28 +622,6 @@
             this.flowControl.Name = "flowControl";
             this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel3.BackgroundImage")));
-            this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel3.Controls.Add(this.textBox1);
-            this.panel3.Location = new System.Drawing.Point(744, 107);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(159, 159);
-            this.panel3.TabIndex = 24;
-            this.panel3.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(37)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(3, 2);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 145);
-            this.textBox1.TabIndex = 0;
             // 
             // rightHideButton
             // 
@@ -748,6 +724,16 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
+            // remarkControl
+            // 
+            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
+            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.remarkControl.Location = new System.Drawing.Point(694, 111);
+            this.remarkControl.Name = "remarkControl";
+            this.remarkControl.Size = new System.Drawing.Size(160, 160);
+            this.remarkControl.TabIndex = 26;
+            this.remarkControl.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -785,8 +771,6 @@
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.modelTitlePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -849,11 +833,10 @@
         private System.Windows.Forms.Button flowChartButton;
         private Controls.RightHideButton rightHideButton;
         private Controls.RightShowButton rightShowButton;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox1;
         private Controls.FlowControl flowControl;
         private Controls.Small.DragLineControl dragLineControl;
         private Controls.Small.ModelTitleControl modelTitleControl1;
+        private Controls.RemarkControl remarkControl;
     }
 }
 
