@@ -48,6 +48,7 @@
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dragLineControl = new Citta_T1.Controls.Small.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -113,7 +114,7 @@
             this.headPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headPanel.Location = new System.Drawing.Point(0, 0);
             this.headPanel.Name = "headPanel";
-            this.headPanel.Size = new System.Drawing.Size(1287, 46);
+            this.headPanel.Size = new System.Drawing.Size(1231, 46);
             this.headPanel.TabIndex = 0;
             // 
             // panel2
@@ -122,7 +123,7 @@
             this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(960, 0);
+            this.panel2.Location = new System.Drawing.Point(904, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(327, 46);
             this.panel2.TabIndex = 1;
@@ -180,7 +181,7 @@
             this.leftMainMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 46);
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
-            this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 637);
+            this.leftMainMenuPanel.Size = new System.Drawing.Size(136, 571);
             this.leftMainMenuPanel.TabIndex = 1;
             // 
             // flowChartButton
@@ -236,7 +237,7 @@
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
-            this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 637);
+            this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 571);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
             // operatorControl
@@ -247,7 +248,7 @@
             this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.operatorControl.Location = new System.Drawing.Point(0, 0);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(185, 635);
+            this.operatorControl.Size = new System.Drawing.Size(185, 569);
             this.operatorControl.TabIndex = 0;
             // 
             // flowChartControl
@@ -258,7 +259,7 @@
             this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowChartControl.Location = new System.Drawing.Point(0, 0);
             this.flowChartControl.Name = "flowChartControl";
-            this.flowChartControl.Size = new System.Drawing.Size(185, 635);
+            this.flowChartControl.Size = new System.Drawing.Size(185, 569);
             this.flowChartControl.TabIndex = 0;
             // 
             // dataSourceControl
@@ -269,7 +270,7 @@
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.Size = new System.Drawing.Size(185, 635);
+            this.dataSourceControl.Size = new System.Drawing.Size(185, 569);
             this.dataSourceControl.TabIndex = 0;
             // 
             // bottomViewPanel
@@ -278,9 +279,9 @@
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(323, 403);
+            this.bottomViewPanel.Location = new System.Drawing.Point(323, 337);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(964, 280);
+            this.bottomViewPanel.Size = new System.Drawing.Size(908, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
             // dataGridView1
@@ -288,7 +289,7 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 39);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(964, 241);
+            this.dataGridView1.Size = new System.Drawing.Size(908, 241);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
@@ -297,26 +298,37 @@
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 39);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(964, 241);
+            this.dataGridView2.Size = new System.Drawing.Size(908, 241);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.panel4.Controls.Add(this.dragLineControl);
             this.panel4.Controls.Add(this.panel9);
             this.panel4.Controls.Add(this.panel8);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(964, 39);
+            this.panel4.Size = new System.Drawing.Size(908, 39);
             this.panel4.TabIndex = 0;
+            // 
+            // dragLineControl
+            // 
+            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Name = "dragLineControl";
+            this.dragLineControl.Size = new System.Drawing.Size(366, 3);
+            this.dragLineControl.TabIndex = 3;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(816, 0);
+            this.panel9.Location = new System.Drawing.Point(760, 0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(148, 39);
             this.panel9.TabIndex = 2;
@@ -414,7 +426,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(323, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(964, 48);
+            this.panel1.Size = new System.Drawing.Size(908, 48);
             this.panel1.TabIndex = 4;
             // 
             // panel6
@@ -430,7 +442,7 @@
             this.panel6.Controls.Add(this.filterButton);
             this.panel6.Controls.Add(this.connectOpButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(251, 0);
+            this.panel6.Location = new System.Drawing.Point(195, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(713, 48);
             this.panel6.TabIndex = 5;
@@ -597,7 +609,7 @@
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(964, 309);
+            this.canvasPanel.Size = new System.Drawing.Size(908, 243);
             this.canvasPanel.TabIndex = 5;
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
@@ -693,7 +705,7 @@
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Location = new System.Drawing.Point(0, 36);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(964, 36);
+            this.pictureBox3.Size = new System.Drawing.Size(908, 36);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -703,7 +715,7 @@
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(964, 36);
+            this.modelTitlePanel.Size = new System.Drawing.Size(908, 36);
             this.modelTitlePanel.TabIndex = 1;
             // 
             // pictureBox2
@@ -713,7 +725,7 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox2.Location = new System.Drawing.Point(0, 33);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(964, 3);
+            this.pictureBox2.Size = new System.Drawing.Size(908, 3);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -730,16 +742,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1287, 683);
+            this.ClientSize = new System.Drawing.Size(1231, 617);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
+            this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.Text = "烽火FiberHome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.headPanel.ResumeLayout(false);
@@ -828,6 +842,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox textBox1;
         private Controls.FlowControl flowControl;
+        private Controls.Small.DragLineControl dragLineControl;
     }
 }
 
