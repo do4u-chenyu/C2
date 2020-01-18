@@ -443,16 +443,16 @@
             this.panel6.Controls.Add(this.filterButton);
             this.panel6.Controls.Add(this.connectOpButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(195, 0);
+            this.panel6.Location = new System.Drawing.Point(274, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(713, 48);
+            this.panel6.Size = new System.Drawing.Size(634, 48);
             this.panel6.TabIndex = 5;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(70, 14);
+            this.label7.Location = new System.Drawing.Point(-1, 14);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 21);
             this.label7.TabIndex = 22;
@@ -461,7 +461,7 @@
             // moreButton
             // 
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.Location = new System.Drawing.Point(680, 13);
+            this.moreButton.Location = new System.Drawing.Point(607, 13);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 1;
@@ -471,7 +471,7 @@
             // formatButton
             // 
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.Location = new System.Drawing.Point(587, 9);
+            this.formatButton.Location = new System.Drawing.Point(512, 9);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(89, 32);
             this.formatButton.TabIndex = 8;
@@ -481,7 +481,7 @@
             // histogramButton
             // 
             this.histogramButton.Image = ((System.Drawing.Image)(resources.GetObject("histogramButton.Image")));
-            this.histogramButton.Location = new System.Drawing.Point(508, 9);
+            this.histogramButton.Location = new System.Drawing.Point(433, 9);
             this.histogramButton.Name = "histogramButton";
             this.histogramButton.Size = new System.Drawing.Size(75, 32);
             this.histogramButton.TabIndex = 7;
@@ -491,7 +491,7 @@
             // GroupButton
             // 
             this.GroupButton.Image = ((System.Drawing.Image)(resources.GetObject("GroupButton.Image")));
-            this.GroupButton.Location = new System.Drawing.Point(443, 9);
+            this.GroupButton.Location = new System.Drawing.Point(368, 9);
             this.GroupButton.Name = "GroupButton";
             this.GroupButton.Size = new System.Drawing.Size(61, 32);
             this.GroupButton.TabIndex = 6;
@@ -501,7 +501,7 @@
             // interOpButton
             // 
             this.interOpButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
-            this.interOpButton.Location = new System.Drawing.Point(182, 9);
+            this.interOpButton.Location = new System.Drawing.Point(107, 9);
             this.interOpButton.Name = "interOpButton";
             this.interOpButton.Size = new System.Drawing.Size(61, 32);
             this.interOpButton.TabIndex = 5;
@@ -511,7 +511,7 @@
             // UnionButton
             // 
             this.UnionButton.Image = ((System.Drawing.Image)(resources.GetObject("UnionButton.Image")));
-            this.UnionButton.Location = new System.Drawing.Point(247, 9);
+            this.UnionButton.Location = new System.Drawing.Point(172, 9);
             this.UnionButton.Name = "UnionButton";
             this.UnionButton.Size = new System.Drawing.Size(61, 32);
             this.UnionButton.TabIndex = 4;
@@ -521,7 +521,7 @@
             // diffButton
             // 
             this.diffButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
-            this.diffButton.Location = new System.Drawing.Point(314, 9);
+            this.diffButton.Location = new System.Drawing.Point(239, 9);
             this.diffButton.Name = "diffButton";
             this.diffButton.Size = new System.Drawing.Size(61, 32);
             this.diffButton.TabIndex = 3;
@@ -531,7 +531,7 @@
             // filterButton
             // 
             this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
-            this.filterButton.Location = new System.Drawing.Point(379, 9);
+            this.filterButton.Location = new System.Drawing.Point(304, 9);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(61, 32);
             this.filterButton.TabIndex = 2;
@@ -541,7 +541,7 @@
             // connectOpButton
             // 
             this.connectOpButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
-            this.connectOpButton.Location = new System.Drawing.Point(118, 9);
+            this.connectOpButton.Location = new System.Drawing.Point(43, 9);
             this.connectOpButton.Name = "connectOpButton";
             this.connectOpButton.Size = new System.Drawing.Size(61, 32);
             this.connectOpButton.TabIndex = 1;
