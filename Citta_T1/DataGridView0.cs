@@ -12,7 +12,7 @@ namespace Citta_T1
 {
     public partial class DataGridView0 : UserControl
     {
-        private string overViewFilePath = "D:/work/Citta/Citta_T1/datas/text.txt";
+        private string overViewFilePath = "D:/work/Citta_T1/datas/text.txt";
         public DataGridView0()
         {
             InitializeComponent();
