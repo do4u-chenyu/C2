@@ -87,16 +87,16 @@
     <Compile Include="Controls\Small\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataGridView0.cs">
+    <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataGridView0.Designer.cs">
+    <Compile Include="Dgvs\DataGridView0.Designer.cs">
       <DependentUpon>DataGridView0.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataGridView2.cs">
+    <Compile Include="Dgvs\DataGridView2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataGridView2.Designer.cs">
+    <Compile Include="Dgvs\DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\CreateNewModel.cs">
@@ -119,10 +119,10 @@
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TestGridModel.cs" />
-    <Compile Include="DataGridView1.cs">
+    <Compile Include="Dgvs\DataGridView1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataGridView1.Designer.cs">
+    <Compile Include="Dgvs\DataGridView1.Designer.cs">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FlowControl.cs">
@@ -173,13 +173,13 @@
     <EmbeddedResource Include="Controls\Small\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataGridView0.resx">
+    <EmbeddedResource Include="Dgvs\DataGridView0.resx">
       <DependentUpon>DataGridView0.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataGridView1.resx">
+    <EmbeddedResource Include="Dgvs\DataGridView1.resx">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataGridView2.resx">
+    <EmbeddedResource Include="Dgvs\DataGridView2.resx">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlowControl.resx">
@@ -230,6 +230,8 @@
   <ItemGroup>
     <None Include="Resources\X.jpg" />
     <None Include="datas\text.txt" />
+    <None Include="datas\text_gbk.txt" />
+    <None Include="datas\text_utf8.txt" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">

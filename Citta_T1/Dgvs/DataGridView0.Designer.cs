@@ -66,7 +66,7 @@ namespace Citta_T1
             List<List<string>> datas;
             if (fileName == "")
             {
-                datas  = this.OverViewFileFromResx(Properties.Resources.text);
+                datas  = this.OverViewFileFromResx(Properties.Resources.text_utf8);
             }
             else
             {

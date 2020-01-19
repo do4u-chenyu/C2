@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,19 +55,21 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(308, 33);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label2.Location = new System.Drawing.Point(310, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 4;
-            this.label2.Text = "打开文件";
+            this.label2.Text = "* 打开文件";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(391, 28);
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.button1.Location = new System.Drawing.Point(391, 23);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(77, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "浏览";
             this.button1.UseVisualStyleBackColor = false;
@@ -76,23 +79,25 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(566, 33);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.label3.Location = new System.Drawing.Point(563, 26);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.Size = new System.Drawing.Size(103, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "选择文件编码";
+            this.label3.Text = "* 选择文件编码";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.Location = new System.Drawing.Point(657, 31);
+            this.label4.Location = new System.Drawing.Point(664, 27);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 21);
+            this.label4.Size = new System.Drawing.Size(44, 22);
             this.label4.TabIndex = 7;
             this.label4.Text = "GBK";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -100,11 +105,12 @@
             this.label5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label5.Location = new System.Drawing.Point(695, 31);
+            this.label5.Location = new System.Drawing.Point(707, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 21);
             this.label5.TabIndex = 8;
             this.label5.Text = "UTF-8";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label7
             // 
@@ -119,22 +125,24 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 28);
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox1.Location = new System.Drawing.Point(95, 24);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(147, 29);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Text = "请输入数据名称";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Location = new System.Drawing.Point(11, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 20);
+            this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "数据名称";
+            this.label1.Text = "* 数据名称";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label10
@@ -168,7 +176,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(12, 83);
+            this.label6.Location = new System.Drawing.Point(19, 83);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 20);
             this.label6.TabIndex = 9;
@@ -225,13 +233,16 @@
             this.button3.TabIndex = 18;
             this.button3.Text = "取消";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HighlightText;
             this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label6);
@@ -246,12 +257,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(812, 472);
             this.panel1.TabIndex = 12;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(99, 83);
             this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(590, 150);
             this.dataGridView1.TabIndex = 19;
@@ -266,11 +281,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 472);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormInputData";
