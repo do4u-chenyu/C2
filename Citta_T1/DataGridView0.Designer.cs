@@ -61,9 +61,17 @@ namespace Citta_T1
 
         }
 
-        private void InitializeDgv(string fileName)
+        private void InitializeDgv(string fileName="")
         {
-            List<List<string>> datas = this.OverViewFile(fileName);
+            List<List<string>> datas;
+            if (fileName == "")
+            {
+                datas  = this.OverViewFileFromResx(Properties.Resources.text);
+            }
+            else
+            {
+                datas = this.OverViewFileFromPath(fileName);
+            }
             List<string> headers = datas[0];
             int numOfCols = headers.ToArray().Length;
             _InitializeColumns(headers);
@@ -113,16 +121,28 @@ namespace Citta_T1
         }
         #endregion
 
-        private List<List<string>> OverViewFile(string fileName, int maxNumOfFile = 50, char sep = '\t')
+        private List<List<string>> OverViewFileFromPath(string fileNameOrFile="", int maxNumOfFile = 50, char sep = '\t')
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(fileName);
+            List<List<string>> datas = new List<List<string>> { }; 
+            System.IO.StreamReader file = new System.IO.StreamReader(fileNameOrFile);
             int rowCounter = 0;
-            List<List<string>> datas = new List<List<string>> { };
             string line;
             while (((line = file.ReadLine()) != null) && (rowCounter < maxNumOfFile))
             {
                 List<string> eles = new List<string>(line.Split(sep));
                 datas.Add(eles);
+            }
+            return datas;
+        }
+        private List<List<string>> OverViewFileFromResx(string resx = "", int maxNumOfFile = 50, char sep = '\t')
+        {
+            List<List<string>> datas = new List<List<string>> { };
+            string[] contents = resx.Split('\n');
+            int numOfRows = contents.Length;
+            List<string> rows = new List<string>(contents);
+            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
+            {
+                datas.Add(new List<string>(rows[i].Split('\t')));
             }
             return datas;
         }

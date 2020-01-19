@@ -229,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\X.jpg" />
+    <None Include="datas\text.txt" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">

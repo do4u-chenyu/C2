@@ -12,11 +12,13 @@ namespace Citta_T1
 {
     public partial class DataGridView0 : UserControl
     {
-        private string overViewFilePath = "D:/work/Citta_T1/datas/text.txt";
+        //private string overViewFilePath = "../../datas/text.txt";
+        private string overViewFilePath = ""; // Properties.Resources.text
+
         public DataGridView0()
         {
             InitializeComponent();
-            InitializeDgv(overViewFilePath);
+            InitializeDgv("");
         }
 
         private void DataGridView_Load(object sender, EventArgs e)
