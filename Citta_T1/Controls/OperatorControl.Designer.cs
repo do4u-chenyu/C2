@@ -70,6 +70,7 @@
             this.leftpanelOpConect.TabIndex = 0;
             this.leftpanelOpConect.Text = "连接算子";
             this.leftpanelOpConect.UseVisualStyleBackColor = true;
+            this.leftpanelOpConect.Click += new System.EventHandler(this.leftpanelOpConect_Click);
             this.leftpanelOpConect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox1
@@ -184,6 +185,7 @@
             // leftpanelOpDiffer
             // 
             this.leftpanelOpDiffer.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftpanelOpDiffer.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.leftpanelOpDiffer.FlatAppearance.BorderSize = 0;
             this.leftpanelOpDiffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftpanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);

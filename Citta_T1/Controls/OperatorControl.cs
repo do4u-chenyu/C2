@@ -45,6 +45,9 @@ namespace Citta_T1.Controls
             }
         }
 
+        private void leftpanelOpConect_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
