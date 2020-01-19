@@ -111,12 +111,6 @@
     <Compile Include="Dialogs\FormInputData.Designer.cs">
       <DependentUpon>FormInputData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FormCreateModel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\FormCreateModel.Designer.cs">
-      <DependentUpon>FormCreateModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogModel.cs" />
     <Compile Include="Controls\NaviViewControl.cs">
       <SubType>UserControl</SubType>
@@ -190,9 +184,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FormCreateModel.resx">
-      <DependentUpon>FormCreateModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
       <DependentUpon>CreateNewModel.cs</DependentUpon>
