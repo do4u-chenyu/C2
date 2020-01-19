@@ -45,8 +45,7 @@
             this.flowChartControl = new Citta_T1.Controls.FlowChartControl();
             this.dataSourceControl = new Citta_T1.Controls.DataSourceControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new Citta_T1.DataGridView1();
-            this.dataGridView2 = new Citta_T1.DataGridView2();
+            this.dataGridView3 = new Citta_T1.DataGridView0();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Small.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -56,6 +55,8 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
+            this.dataGridView1 = new Citta_T1.DataGridView1();
+            this.dataGridView2 = new Citta_T1.DataGridView2();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -74,6 +75,7 @@
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.canvasPanel = new System.Windows.Forms.Panel();
+            this.remarkControl = new Citta_T1.Controls.RemarkControl();
             this.flowControl = new Citta_T1.Controls.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.RightShowButton();
@@ -84,7 +86,6 @@
             this.modelTitleControl1 = new Citta_T1.Controls.Small.ModelTitleControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
-            this.remarkControl = new Citta_T1.Controls.RemarkControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -274,32 +275,23 @@
             // 
             // bottomViewPanel
             // 
+            this.bottomViewPanel.Controls.Add(this.dataGridView3);
+            this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Controls.Add(this.dataGridView1);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
-            this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(323, 337);
             this.bottomViewPanel.Name = "bottomViewPanel";
             this.bottomViewPanel.Size = new System.Drawing.Size(908, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
-            // dataGridView1
+            // dataGridView3
             // 
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(908, 241);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(908, 241);
-            this.dataGridView2.TabIndex = 2;
-            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
+            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(908, 241);
+            this.dataGridView3.TabIndex = 27;
             // 
             // panel4
             // 
@@ -397,6 +389,24 @@
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(908, 280);
+            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(908, 280);
+            this.dataGridView2.TabIndex = 2;
+            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // ucDataGridView1
             // 
@@ -613,6 +623,16 @@
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             // 
+            // remarkControl
+            // 
+            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
+            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.remarkControl.Location = new System.Drawing.Point(694, 111);
+            this.remarkControl.Name = "remarkControl";
+            this.remarkControl.Size = new System.Drawing.Size(160, 160);
+            this.remarkControl.TabIndex = 26;
+            this.remarkControl.Visible = false;
+            // 
             // flowControl
             // 
             this.flowControl.BackColor = System.Drawing.Color.Transparent;
@@ -724,16 +744,6 @@
             this.naviViewControl.Size = new System.Drawing.Size(200, 100);
             this.naviViewControl.TabIndex = 0;
             // 
-            // remarkControl
-            // 
-            this.remarkControl.BackColor = System.Drawing.Color.Transparent;
-            this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.remarkControl.Location = new System.Drawing.Point(694, 111);
-            this.remarkControl.Name = "remarkControl";
-            this.remarkControl.Size = new System.Drawing.Size(160, 160);
-            this.remarkControl.TabIndex = 26;
-            this.remarkControl.Visible = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -828,7 +838,6 @@
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;
-        private DataGridView0 dataGridView3;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private System.Windows.Forms.Button flowChartButton;
         private Controls.RightHideButton rightHideButton;
@@ -837,6 +846,7 @@
         private Controls.Small.DragLineControl dragLineControl;
         private Controls.Small.ModelTitleControl modelTitleControl1;
         private Controls.RemarkControl remarkControl;
+        private DataGridView0 dataGridView3;
     }
 }
 
