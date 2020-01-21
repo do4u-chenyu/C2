@@ -52,6 +52,16 @@ namespace Citta_T1.Controls.Small
         {
             //TODO 需要在某个地方确定标题控件析构
             models.Remove(mtControl);
+            this.Controls.Remove(mtControl);
+            mtControl.Dispose();
+            if (models.Count == 0)
+                InitializeDefaultModelTitleControl();
+            ResetModelLocation();
+        }
+
+        private void ResetModelLocation()
+        { 
+        
         }
 
     }

@@ -28,6 +28,12 @@ namespace Citta_T1.Controls.Small
             else
                 this.label1.Text = modelTitle;
         }
+
+        private void ClosePictureBox_Click(object sender, EventArgs e)
+        {
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
+            parentPanel.RemoveModel(this);
+        }
     }
 
 
