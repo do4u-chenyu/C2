@@ -12,10 +12,22 @@ namespace Citta_T1.Controls.Small
 {
     public partial class ModelTitleControl : UserControl
     {
+        private string modelTitle;
         public ModelTitleControl()
         {
             InitializeComponent();
-           
+            SetModelTitle("新建模型");
+        }
+
+        public void SetModelTitle(string modelTitle)
+        {
+            this.modelTitle = modelTitle;
+            if (modelTitle.Length > 10)
+                this.label1.Text = modelTitle.Substring(0, 10) + "...";
+            else
+                this.label1.Text = modelTitle;
         }
     }
+
+
 }

@@ -245,7 +245,8 @@ namespace  Citta_T1
         private void newModelButton_Click(object sender, EventArgs e)
         {
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
-            this.createNewModel.ShowDialog();
+            DialogResult dialogResult = this.createNewModel.ShowDialog();
+            Console.WriteLine(dialogResult.ToString());
         }
 
 

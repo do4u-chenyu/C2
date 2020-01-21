@@ -31,8 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -81,36 +81,38 @@
             this.textBoxEx1.Size = new System.Drawing.Size(150, 21);
             this.textBoxEx1.TabIndex = 4;
             // 
-            // button2
+            // AddButton
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(218, 106);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(55, 28);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "添加";
-            this.button2.UseVisualStyleBackColor = false;
+            this.AddButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.AddButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.AddButton.FlatAppearance.BorderSize = 0;
+            this.AddButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.AddButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AddButton.Location = new System.Drawing.Point(218, 106);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(55, 28);
+            this.AddButton.TabIndex = 18;
+            this.AddButton.Text = "添加";
+            this.AddButton.UseVisualStyleBackColor = false;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // button3
+            // cancelButton
             // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.button3.Location = new System.Drawing.Point(291, 106);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 28);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "取消";
-            this.button3.UseVisualStyleBackColor = true;
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.cancelButton.Location = new System.Drawing.Point(291, 106);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(55, 28);
+            this.cancelButton.TabIndex = 19;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // CreateNewModel
             // 
             this.ClientSize = new System.Drawing.Size(434, 172);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.AddButton);
             this.Controls.Add(this.textBoxEx1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -129,7 +131,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private HZH_Controls.Controls.TextBoxEx textBoxEx1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

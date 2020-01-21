@@ -82,7 +82,7 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.modelTitlePanel = new System.Windows.Forms.Panel();
+            this.modelTitlePanel = new Citta_T1.Controls.Small.ModelTitlePanel();
             this.modelTitleControl1 = new Citta_T1.Controls.Small.ModelTitleControl();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
@@ -824,7 +824,7 @@
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private System.Windows.Forms.Panel modelTitlePanel;
+        private Citta_T1.Controls.Small.ModelTitlePanel modelTitlePanel;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button importButton;

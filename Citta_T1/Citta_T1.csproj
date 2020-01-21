@@ -87,6 +87,12 @@
     <Compile Include="Controls\Small\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Small\ModelTitlePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
+      <DependentUpon>ModelTitlePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Small\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Small\ModelTitlePanel.resx">
+      <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
       <DependentUpon>DataGridView0.cs</DependentUpon>
