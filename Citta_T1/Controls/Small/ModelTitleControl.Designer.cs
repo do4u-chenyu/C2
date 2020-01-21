@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
             this.closePictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +69,12 @@
             this.label1.Text = "新建模型";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // toolTip
+            // 
+            this.toolTip.AutoPopDelay = 5000;
+            this.toolTip.InitialDelay = 500;
+            this.toolTip.ReshowDelay = 100;
+            // 
             // ModelTitleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -74,6 +82,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
+            this.DoubleBuffered = true;
             this.Name = "ModelTitleControl";
             this.Size = new System.Drawing.Size(140, 26);
             this.panel2.ResumeLayout(false);
@@ -86,5 +95,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox closePictureBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

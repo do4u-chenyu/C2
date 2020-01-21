@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.headPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -85,6 +86,7 @@
             this.modelTitlePanel = new Citta_T1.Controls.Small.ModelTitlePanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -575,6 +577,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件");
             this.importButton.UseVisualStyleBackColor = false;
             this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -587,6 +590,7 @@
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(79, 32);
             this.saveModelButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
             // 
             // newModelButton
@@ -598,6 +602,7 @@
             this.newModelButton.Name = "newModelButton";
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.newModelButton, "新建模型");
             this.newModelButton.UseVisualStyleBackColor = false;
             this.newModelButton.Click += new System.EventHandler(this.newModelButton_Click);
             // 
@@ -713,6 +718,7 @@
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(908, 36);
             this.modelTitlePanel.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
             // 
             // pictureBox2
             // 
@@ -836,6 +842,7 @@
         private Controls.Small.DragLineControl dragLineControl;
         private Controls.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

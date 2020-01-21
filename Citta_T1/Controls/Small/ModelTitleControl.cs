@@ -27,6 +27,7 @@ namespace Citta_T1.Controls.Small
                 this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
             else
                 this.label1.Text = modelTitle;
+            this.toolTip.SetToolTip(this.label1, modelTitle);
         }
 
         private void ClosePictureBox_Click(object sender, EventArgs e)
