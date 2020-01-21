@@ -65,10 +65,8 @@ namespace Citta_T1.Controls.Small
 
         private void ResetModelLocation()
         {
-            if (models.Count == 1)
-            {
+            if (models.Count > 0)
                 models[0].Location = OriginalLocation;
-            }
             for (int i = 1; i < models.Count; i++)
             {
                 ModelTitleControl preMTC = models[i - 1];

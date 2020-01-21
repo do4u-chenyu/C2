@@ -48,5 +48,17 @@ namespace Citta_T1.Dialogs
             if (this.DialogResult != DialogResult.OK)
                 this.modelTitle = "";
         }
+
+        private void textBoxEx1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 按下回车键
+            if (e.KeyChar == 13)
+            {
+                if (this.textBoxEx1.Text.Length == 0)
+                    return;
+                this.modelTitle = this.textBoxEx1.Text;
+                this.DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

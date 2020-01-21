@@ -80,6 +80,7 @@
             this.textBoxEx1.RegexPattern = "";
             this.textBoxEx1.Size = new System.Drawing.Size(150, 21);
             this.textBoxEx1.TabIndex = 4;
+            this.textBoxEx1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEx1_KeyPress);
             // 
             // AddButton
             // 
