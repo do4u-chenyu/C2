@@ -34,6 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            
             this.DoubleBuffered = true;
             this.Name = "ModelTitlePanel";
             this.Size = new System.Drawing.Size(908, 36);
@@ -42,5 +43,7 @@
         }
 
         #endregion
+
+     
     }
 }

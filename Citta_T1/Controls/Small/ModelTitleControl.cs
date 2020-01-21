@@ -22,8 +22,9 @@ namespace Citta_T1.Controls.Small
         public void SetModelTitle(string modelTitle)
         {
             this.modelTitle = modelTitle;
-            if (modelTitle.Length > 10)
-                this.label1.Text = modelTitle.Substring(0, 10) + "...";
+            int maxLength = 6;
+            if (modelTitle.Length > maxLength)
+                this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
             else
                 this.label1.Text = modelTitle;
         }

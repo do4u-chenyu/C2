@@ -122,6 +122,7 @@
             this.Name = "CreateNewModel";
             this.ShowIcon = false;
             this.Text = "新建模型";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateNewModel_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -246,7 +246,9 @@ namespace  Citta_T1
         {
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
             DialogResult dialogResult = this.createNewModel.ShowDialog();
-            Console.WriteLine(dialogResult.ToString());
+            // 模型标题栏添加新标题
+            if (dialogResult == DialogResult.OK)
+                this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
 

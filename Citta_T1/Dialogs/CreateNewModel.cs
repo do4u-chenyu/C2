@@ -13,6 +13,9 @@ namespace Citta_T1.Dialogs
     public partial class CreateNewModel : Form
     {
         private string modelTitle;
+
+        public string ModelTitle { get => modelTitle; }
+
         public CreateNewModel()
         {
             InitializeComponent();
@@ -32,8 +35,18 @@ namespace Citta_T1.Dialogs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
+            if (this.textBoxEx1.Text.Length == 0)
+                return;
             this.modelTitle = this.textBoxEx1.Text;
             this.DialogResult = DialogResult.OK;
+
+        }
+
+        private void CreateNewModel_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.textBoxEx1.Text = "";
+            if (this.DialogResult != DialogResult.OK)
+                this.modelTitle = "";
         }
     }
 }

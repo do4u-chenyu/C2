@@ -39,7 +39,7 @@
             // 
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(100, 0);
+            this.panel2.Location = new System.Drawing.Point(113, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(27, 26);
             this.panel2.TabIndex = 1;
@@ -61,9 +61,9 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 26);
+            this.label1.Size = new System.Drawing.Size(113, 26);
             this.label1.TabIndex = 2;
-            this.label1.Text = "摩托车盗抢";
+            this.label1.Text = "新建模型";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ModelTitleControl
@@ -74,7 +74,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
             this.Name = "ModelTitleControl";
-            this.Size = new System.Drawing.Size(127, 26);
+            this.Size = new System.Drawing.Size(140, 26);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
