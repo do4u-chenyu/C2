@@ -13,6 +13,10 @@ namespace Citta_T1.Controls.Small
     public partial class ModelTitleControl : UserControl
     {
         private string modelTitle;
+        private bool selected;
+
+        public bool Selected { get => selected; set => selected = value; }
+
         public ModelTitleControl()
         {
             InitializeComponent();
@@ -34,6 +38,19 @@ namespace Citta_T1.Controls.Small
         {
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             parentPanel.RemoveModel(this);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            ShowSelectedBorder();
+        }
+
+        public void ShowSelectedBorder()
+        {
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
+            parentPanel.ClearSelectedBorder();
+            this.BorderStyle = BorderStyle.FixedSingle;
+            this.selected = true;
         }
     }
 

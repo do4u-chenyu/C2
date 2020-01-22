@@ -25,7 +25,8 @@ namespace Citta_T1.Controls.Small
         {
             ModelTitleControl defaultModelTitleControl = new ModelTitleControl();
             defaultModelTitleControl.Location = OriginalLocation;
-           // defaultModelTitleControl.t
+            defaultModelTitleControl.BorderStyle = BorderStyle.FixedSingle;
+           
             this.Controls.Add(defaultModelTitleControl);
             models.Add(defaultModelTitleControl);
         }
@@ -52,6 +53,18 @@ namespace Citta_T1.Controls.Small
 
         public void RemoveModel(ModelTitleControl mtControl)
         {
+            // 关闭正是当前文档，需要重新选定左右两边的文档中的一个
+            if (mtControl.Selected)
+            {
+                int index = models.IndexOf(mtControl);
+                // 优先选择右边的
+                if (index != -1 && index + 1 < models.Count)
+                    models[index + 1].ShowSelectedBorder();
+                // 其次选择左边的
+                else if (index != -1 && index - 1 >= 0)
+                    models[index - 1].ShowSelectedBorder();
+            }
+
 
             models.Remove(mtControl);
             this.Controls.Remove(mtControl);
@@ -59,6 +72,8 @@ namespace Citta_T1.Controls.Small
             // 当文档全部关闭时，自动创建一个新的默认文档
             if (models.Count == 0)
                 InitializeDefaultModelTitleControl();
+            //else
+
             // 重新排版
             ResetModelLocation();
         }
@@ -75,6 +90,13 @@ namespace Citta_T1.Controls.Small
                 newLocation.Y = 6;
                 models[i].Location  = newLocation;
             }
+        }
+
+        public void ClearSelectedBorder()
+        {
+            foreach (ModelTitleControl mtc in this.models)
+                mtc.BorderStyle = BorderStyle.None;
+
         }
 
     }
