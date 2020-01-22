@@ -36,6 +36,7 @@ namespace Citta_T1.Controls.Small
             ModelTitleControl mtControl = new ModelTitleControl();
             mtControl.SetModelTitle(modelTitle);
             models.Add(mtControl);
+            mtControl.ShowSelectedBorder();
             // 根据容器中最后一个ModelTitleControl的Location
             // 设置新控件在ModelTitlePanel中的Location
             if (models.Count == 1)
