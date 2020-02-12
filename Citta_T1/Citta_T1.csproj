@@ -94,6 +94,7 @@
     <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>

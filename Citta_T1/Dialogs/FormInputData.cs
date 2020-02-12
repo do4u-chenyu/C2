@@ -11,12 +11,15 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Dialogs
 {
+    public delegate void delegateInputData(Citta_T1.Data data);
     public partial class FormInputData : Form
     {
         private bool isUTF8 = false;
         private System.Drawing.Font bold_font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private bool textboxHasText = false;
+        private List<Citta_T1.Data> contents;
+        private int numOfContents = 0;
         public FormInputData()
         {
             InitializeComponent();
@@ -65,13 +68,17 @@ namespace Citta_T1.Dialogs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog file1 = new OpenFileDialog();
-            file1.Filter = "files|*.txt";
-            if (file1.ShowDialog() == DialogResult.OK)
+            /*
+             * 数据预览
+             */
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "files|*.txt";
+            if (fd.ShowDialog() == DialogResult.OK)
             {
                 // 1.读取文件
-                // 2.抽第一行，初始化列头
-                // 3.余下行作为数据，展示在dgv中
+                // 2.将文件内容存在contents数组中
+                // 3.抽第一行，初始化列头
+                // 4.余下行作为数据，展示在dgv中
 
                 // TODO
                 // 1.设置dgv中的字体
@@ -80,12 +87,16 @@ namespace Citta_T1.Dialogs
                 System.IO.StreamReader sr;
                 if (this.isUTF8)
                 {
-                    sr = File.OpenText(file1.FileName);
+                    sr = File.OpenText(fd.FileName);
+                    string content = File.ReadAllText(fd.FileName, Encoding.UTF8);
+                    contents[numOfContents] = new Citta_T1.Data("",content);
                 }
                 else
                 {
-                    FileStream fs = new FileStream(file1.FileName, FileMode.Open, FileAccess.Read);
+                    FileStream fs = new FileStream(fd.FileName, FileMode.Open, FileAccess.Read);
                     sr = new StreamReader(fs, System.Text.Encoding.Default);
+                    string content = File.ReadAllText(fd.FileName, Encoding.Default);
+                    contents[numOfContents] = new Citta_T1.Data("", content);
                 }
                 String header = sr.ReadLine();
                 String[] headers = header.Split('\t');
@@ -144,9 +155,13 @@ namespace Citta_T1.Dialogs
 
         }
 
+        public event delegateInputData InputDataEvent;
         private void button2_Click(object sender, EventArgs e)
         {
-
+            string name = this.textBox1.Text;
+            this.contents[numOfContents].name = name;
+            InputDataEvent(this.contents[numOfContents]);
+            numOfContents += 1;
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -178,5 +193,6 @@ namespace Citta_T1.Dialogs
         {
 
         }
+
     }
 }

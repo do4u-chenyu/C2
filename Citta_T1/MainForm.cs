@@ -19,6 +19,7 @@ namespace  Citta_T1
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
+            this.formInputData.InputDataEvent += frm_InputDataEvent;
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
@@ -251,6 +252,9 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-
+        void frm_InputDataEvent(Citta_T1.Data data)
+        {
+            this.dataSourceControl.AddData(data);
+        }
     }
 }

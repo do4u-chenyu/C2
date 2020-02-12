@@ -18,6 +18,11 @@ namespace Citta_T1.Controls
             
         }
 
+        public void AddData(Citta_T1.Data data)
+        {
+
+        }
+
         private void LocalFrame_Paint(object sender, PaintEventArgs e)
         {
 
@@ -38,6 +43,5 @@ namespace Citta_T1.Controls
              this.LocalFrame.Visible = true;
              this.ExternalFrame.Visible = false;
          }
-
     }
 }
