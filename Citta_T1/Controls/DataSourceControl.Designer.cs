@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.DataSourceFrame = new System.Windows.Forms.Panel();
+            this.ExternalData = new System.Windows.Forms.Label();
+            this.LocalData = new System.Windows.Forms.Label();
             this.LocalFrame = new System.Windows.Forms.Panel();
             this.ExternalFrame = new System.Windows.Forms.Panel();
-            this.LocalData = new System.Windows.Forms.Label();
-            this.ExternalData = new System.Windows.Forms.Label();
             this.DataSourceFrame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,29 +43,24 @@
             this.DataSourceFrame.Controls.Add(this.LocalData);
             this.DataSourceFrame.Dock = System.Windows.Forms.DockStyle.Top;
             this.DataSourceFrame.Location = new System.Drawing.Point(0, 0);
+            this.DataSourceFrame.Margin = new System.Windows.Forms.Padding(4);
             this.DataSourceFrame.Name = "DataSourceFrame";
-            this.DataSourceFrame.Size = new System.Drawing.Size(185, 51);
+            this.DataSourceFrame.Size = new System.Drawing.Size(278, 76);
             this.DataSourceFrame.TabIndex = 0;
             // 
-            // LocalFrame
+            // ExternalData
             // 
-            this.LocalFrame.BackColor = System.Drawing.Color.White;
-            this.LocalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LocalFrame.Location = new System.Drawing.Point(0, 51);
-            this.LocalFrame.Name = "LocalFrame";
-            this.LocalFrame.Size = new System.Drawing.Size(185, 586);
-            this.LocalFrame.TabIndex = 1;
-            this.LocalFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.LocalFrame_Paint);
-            // 
-            // ExternalFrame
-            // 
-            this.ExternalFrame.BackColor = System.Drawing.Color.White;
-            this.ExternalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ExternalFrame.Location = new System.Drawing.Point(0, 51);
-            this.ExternalFrame.Name = "ExternalFrame";
-            this.ExternalFrame.Size = new System.Drawing.Size(185, 586);
-            this.ExternalFrame.TabIndex = 2;
-            this.ExternalFrame.Visible = false;
+            this.ExternalData.BackColor = System.Drawing.Color.Transparent;
+            this.ExternalData.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExternalData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ExternalData.Location = new System.Drawing.Point(140, 0);
+            this.ExternalData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ExternalData.Name = "ExternalData";
+            this.ExternalData.Size = new System.Drawing.Size(138, 76);
+            this.ExternalData.TabIndex = 1;
+            this.ExternalData.Text = "外部数据";
+            this.ExternalData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ExternalData.Click += new System.EventHandler(this.ExternalData_Click);
             // 
             // LocalData
             // 
@@ -73,35 +68,46 @@
             this.LocalData.Dock = System.Windows.Forms.DockStyle.Left;
             this.LocalData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.LocalData.Location = new System.Drawing.Point(0, 0);
+            this.LocalData.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LocalData.Name = "LocalData";
-            this.LocalData.Size = new System.Drawing.Size(99, 51);
+            this.LocalData.Size = new System.Drawing.Size(148, 76);
             this.LocalData.TabIndex = 0;
             this.LocalData.Text = "本地数据";
             this.LocalData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LocalData.Click += new System.EventHandler(this.LocalData_Click);
             // 
-            // ExternalData
+            // LocalFrame
             // 
-            this.ExternalData.BackColor = System.Drawing.Color.Transparent;
-            this.ExternalData.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ExternalData.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExternalData.Location = new System.Drawing.Point(93, 0);
-            this.ExternalData.Name = "ExternalData";
-            this.ExternalData.Size = new System.Drawing.Size(92, 51);
-            this.ExternalData.TabIndex = 1;
-            this.ExternalData.Text = "外部数据";
-            this.ExternalData.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ExternalData.Click += new System.EventHandler(this.ExternalData_Click);
+            this.LocalFrame.BackColor = System.Drawing.Color.White;
+            this.LocalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LocalFrame.Location = new System.Drawing.Point(0, 76);
+            this.LocalFrame.Margin = new System.Windows.Forms.Padding(4);
+            this.LocalFrame.Name = "LocalFrame";
+            this.LocalFrame.Size = new System.Drawing.Size(278, 880);
+            this.LocalFrame.TabIndex = 1;
+            this.LocalFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.LocalFrame_Paint);
+            // 
+            // ExternalFrame
+            // 
+            this.ExternalFrame.BackColor = System.Drawing.Color.White;
+            this.ExternalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ExternalFrame.Location = new System.Drawing.Point(0, 76);
+            this.ExternalFrame.Margin = new System.Windows.Forms.Padding(4);
+            this.ExternalFrame.Name = "ExternalFrame";
+            this.ExternalFrame.Size = new System.Drawing.Size(278, 880);
+            this.ExternalFrame.TabIndex = 2;
+            this.ExternalFrame.Visible = false;
             // 
             // DataSourceControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ExternalFrame);
             this.Controls.Add(this.LocalFrame);
             this.Controls.Add(this.DataSourceFrame);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DataSourceControl";
-            this.Size = new System.Drawing.Size(185, 637);
+            this.Size = new System.Drawing.Size(278, 956);
             this.DataSourceFrame.ResumeLayout(false);
             this.ResumeLayout(false);
 

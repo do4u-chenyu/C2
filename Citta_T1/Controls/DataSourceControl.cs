@@ -12,14 +12,35 @@ namespace Citta_T1.Controls
 {
     public partial class DataSourceControl : UserControl
     {
+        // 从输入导入模块收到的数据
+        private List<Citta_T1.Data> contents = new List<Citta_T1.Data>();
+        private System.Windows.Forms.Button tempButton = new System.Windows.Forms.Button();
         public DataSourceControl()
         {
             InitializeComponent();
             
         }
 
+        private void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                tempButton.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+        }
         public void AddData(Citta_T1.Data data)
         {
+            // 动态生成一个panel
+            this.contents.Add(data);
+            System.Windows.Forms.Button b = new System.Windows.Forms.Button();
+            b.Location = new System.Drawing.Point(46, 50 * this.contents.Count()); // 递增
+            b.Name = "button1";
+            b.Size = new System.Drawing.Size(100, 40); // 固定的
+            b.TabIndex = 0;
+            b.Text = data.name;
+            b.UseVisualStyleBackColor = true;
+            b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.LocalFrame.Controls.Add(b);
 
         }
 

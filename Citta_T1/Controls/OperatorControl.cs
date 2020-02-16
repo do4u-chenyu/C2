@@ -44,10 +44,5 @@ namespace Citta_T1.Controls
                 mouseOffset.Y = e.Y;
             }
         }
-
-        private void leftpanelOpConect_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

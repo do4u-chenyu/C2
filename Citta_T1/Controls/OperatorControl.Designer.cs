@@ -70,7 +70,6 @@
             this.leftpanelOpConect.TabIndex = 0;
             this.leftpanelOpConect.Text = "连接算子";
             this.leftpanelOpConect.UseVisualStyleBackColor = true;
-            this.leftpanelOpConect.Click += new System.EventHandler(this.leftpanelOpConect_Click);
             this.leftpanelOpConect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox1
