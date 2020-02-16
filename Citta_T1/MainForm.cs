@@ -16,6 +16,7 @@ namespace  Citta_T1
         private bool isBottomViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
+        
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -24,6 +25,7 @@ namespace  Citta_T1
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             InitializeControlsLocation();
+   
         }
       
        
@@ -255,6 +257,16 @@ namespace  Citta_T1
         void frm_InputDataEvent(Citta_T1.Data data)
         {
             this.dataSourceControl.AddData(data);
+        }
+
+        private void canvasPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.usernamelabel.Text = this.Tag.ToString();
         }
     }
 }

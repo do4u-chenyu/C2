@@ -34,7 +34,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.helpPictureBox = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
             this.flowChartButton = new System.Windows.Forms.Button();
@@ -87,6 +87,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -122,7 +123,7 @@
             // 
             this.panel2.Controls.Add(this.helpPictureBox);
             this.panel2.Controls.Add(this.pictureBox4);
-            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.usernamelabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(904, 0);
             this.panel2.Name = "panel2";
@@ -149,17 +150,17 @@
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
             // 
-            // label2
+            // usernamelabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(260, 12);
-            this.label2.Name = "label2";
-            this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label2.Size = new System.Drawing.Size(58, 22);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "李警官";
+            this.usernamelabel.AutoSize = true;
+            this.usernamelabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.usernamelabel.ForeColor = System.Drawing.Color.White;
+            this.usernamelabel.Location = new System.Drawing.Point(260, 12);
+            this.usernamelabel.Name = "usernamelabel";
+            this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.usernamelabel.Size = new System.Drawing.Size(58, 22);
+            this.usernamelabel.TabIndex = 3;
+            this.usernamelabel.Text = "李警官";
             // 
             // label1
             // 
@@ -427,6 +428,7 @@
             this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
             this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
             this.ucDataGridView1.TabIndex = 13;
+            this.scrollbarComponent1.SetUserCustomScrollbar(this.ucDataGridView1, true);
             // 
             // panel1
             // 
@@ -626,6 +628,7 @@
             this.canvasPanel.TabIndex = 5;
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
+            this.canvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPanel_Paint);
             // 
             // remarkControl
             // 
@@ -757,6 +760,7 @@
             this.Name = "MainForm";
             this.Text = "烽火FiberHome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.headPanel.ResumeLayout(false);
             this.headPanel.PerformLayout();
@@ -789,7 +793,7 @@
         private System.Windows.Forms.Panel headPanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label usernamelabel;
         private System.Windows.Forms.Panel leftMainMenuPanel;
         private System.Windows.Forms.Button myModelButton;
         private System.Windows.Forms.Button dataButton;
@@ -843,6 +847,7 @@
         private Controls.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;
     }
 }
 
