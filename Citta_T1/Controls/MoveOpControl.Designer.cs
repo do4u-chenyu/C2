@@ -104,7 +104,7 @@
             // rightPinPictureBox
             // 
             this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(133, 19);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(137, 19);
             this.rightPinPictureBox.Name = "rightPinPictureBox";
             this.rightPinPictureBox.Size = new System.Drawing.Size(10, 10);
             this.rightPinPictureBox.TabIndex = 4;
@@ -132,7 +132,7 @@
             this.菜单1ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单1ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.菜单1ToolStripMenuItem.Name = "菜单1ToolStripMenuItem";
-            this.菜单1ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.菜单1ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单1ToolStripMenuItem.Text = "设置";
             // 
             // 菜单2ToolStripMenuItem
@@ -141,7 +141,7 @@
             this.菜单2ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单2ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
-            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单2ToolStripMenuItem.Text = "重命名";
             // 
             // 备注ToolStripMenuItem
@@ -170,7 +170,7 @@
             this.异常日志ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.异常日志ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.异常日志ToolStripMenuItem.Name = "异常日志ToolStripMenuItem";
-            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.异常日志ToolStripMenuItem.Text = "异常日志";
             // 
             // 删除ToolStripMenuItem
@@ -179,7 +179,7 @@
             this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.删除ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             // 
             // MoveOpControl
@@ -200,6 +200,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
             this.Size = new System.Drawing.Size(150, 47);
+            this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);

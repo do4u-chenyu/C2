@@ -114,6 +114,10 @@ namespace Citta_T1.Controls
             (sender as PictureBox).Size = new System.Drawing.Size(10, 10);
         }
 
+        private void MoveOpControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
