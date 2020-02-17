@@ -119,12 +119,6 @@
     <Compile Include="Dialogs\FormInputData.Designer.cs">
       <DependentUpon>FormInputData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\RenameModel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialogs\RenameModel.Designer.cs">
-      <DependentUpon>RenameModel.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,9 +204,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
       <DependentUpon>CreateNewModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\RenameModel.resx">
-      <DependentUpon>RenameModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

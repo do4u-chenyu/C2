@@ -9,25 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
+
 namespace Citta_T1.Controls
 {
     public partial class MoveOpControl : UserControl
     {
         private string opControlName;
-        private Citta_T1.Dialogs.RenameModel renameModel;
         private bool isMouseDown = false;
         private Point mouseOffset;
         public string doublePin = "连接算子 取差集 取交集 取并集 ";
         public bool doublelPinFlag = false;
         public MoveOpControl()
         {
-            this.renameModel = new Citta_T1.Dialogs.RenameModel();
+            
             InitializeComponent();
         }
 
         public void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textButton.Text);
+            SetOpControlName(this.textBox1.Text);
             System.Console.WriteLine(doublelPinFlag);
             if (doublelPinFlag)
             {
@@ -130,9 +130,8 @@ namespace Citta_T1.Controls
 
         public void SetOpControlName(string opControlName)
         {
-
             this.opControlName = opControlName;
-            int maxLength = 20;
+            int maxLength = 10;
             int sumcount = 0;
 
             sumcount = Regex.Matches(opControlName.Substring(0, Math.Min(maxLength, opControlName.Length)), "[a-zA-Z0-9]").Count;
@@ -140,30 +139,37 @@ namespace Citta_T1.Controls
             if (opControlName.Length > maxLength && sumcount >= 4)
             {
                 if (opControlName.Length <= 8 || sumcount == 6 && opControlName.Length <= 9)
-                    this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+                    this.textLabel.Text = opControlName.Substring(0, opControlName.Length);
                 else if (sumcount == 6 && opControlName.Length > 9)
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
+                    this.textLabel.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
                 else
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
+                    this.textLabel.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
             }
             else if (opControlName.Length > maxLength && sumcount < 4)
             {
-                this.textButton.Text = opControlName.Substring(0, maxLength) + "...";
+                this.textLabel.Text = opControlName.Substring(0, maxLength) + "...";
             }
             else
             {
-                this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+                this.textLabel.Text = opControlName.Substring(0, opControlName.Length);
             }
-            this.toolTip1.SetToolTip(this.textButton, opControlName);
+            this.toolTip1.SetToolTip(this.textLabel, opControlName);        
         }
 
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            this.renameModel.StartPosition = FormStartPosition.CenterScreen;
-            DialogResult dialogResult = this.renameModel.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-                this.textButton.Text = this.renameModel.opControlName;
-                SetOpControlName(this.textButton.Text);
+            //this.renameModel.StartPosition = FormStartPosition.CenterScreen;
+            //DialogResult dialogResult = this.renameModel.ShowDialog();
+            //if (dialogResult == DialogResult.OK)
+            //this.textBox1.Text = this.renameModel.opControlName;
+            //SetOpControlName(this.textBox1.Text);
+            //this.textBox1.Enabled  = true;
+            this.textBox1.ReadOnly = false;
+
+            this.textLabel.Visible = false;
+            this.textBox1.Visible = true;
+            this.textBox1.Focus();//获取焦点
+            this.textBox1.Select(this.textBox1.TextLength, 0);
         }
 
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,6 +184,19 @@ namespace Citta_T1.Controls
                     (ct as NaviViewControl).UpdateNaviView();
                     break;
                 }
+            }
+        }
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 按下回车键
+            if (e.KeyChar == 13)
+            {
+                if (this.textBox1.Text.Length == 0)
+                    return;
+                this.textBox1.ReadOnly = true;
+                SetOpControlName(this.textBox1.Text);
+                this.textBox1.Visible = false;
+                this.textLabel.Visible = true; 
             }
         }
     }

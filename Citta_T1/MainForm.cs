@@ -233,8 +233,8 @@ namespace  Citta_T1
             MoveOpControl btn = new MoveOpControl();
             btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
             this.CanvasPanel.Controls.Add(btn);
-            btn.textButton.Text = e.Data.GetData("Text").ToString();
-            btn.doublelPinFlag  = btn.doublePin.Contains(btn.textButton.Text.ToString());
+            btn.textBox1.Text = e.Data.GetData("Text").ToString();
+            btn.doublelPinFlag  = btn.doublePin.Contains(btn.textBox1.Text.ToString());
             btn.InitializeOpPinPicture();
             this.naviViewControl.AddControl(btn);
             this.naviViewControl.UpdateNaviView();
