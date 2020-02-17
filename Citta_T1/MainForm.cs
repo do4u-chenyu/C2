@@ -44,12 +44,12 @@ namespace  Citta_T1
             this.naviViewControl.Location = new Point(x, y);
 
             // 底层工具按钮定位
-            x = x - (this.canvasPanel.Width) / 2 + 100;
+            x = x - (this.CanvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            Point org = new Point(this.canvasPanel.Width, 0);
+            Point org = new Point(this.CanvasPanel.Width, 0);
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
             Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
@@ -232,7 +232,7 @@ namespace  Citta_T1
         {
             MoveOpControl btn = new MoveOpControl();
             btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
-            this.canvasPanel.Controls.Add(btn);
+            this.CanvasPanel.Controls.Add(btn);
             btn.textButton.Text = e.Data.GetData("Text").ToString();
             btn.doublelPinFlag  = btn.doublePin.Contains(btn.textButton.Text.ToString());
             btn.InitializeOpPinPicture();

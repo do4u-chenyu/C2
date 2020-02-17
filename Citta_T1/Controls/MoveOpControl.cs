@@ -7,23 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
 
 namespace Citta_T1.Controls
 {
     public partial class MoveOpControl : UserControl
     {
+        private string opControlName;
+        private Citta_T1.Dialogs.RenameModel renameModel;
         private bool isMouseDown = false;
         private Point mouseOffset;
         public string doublePin = "连接算子 取差集 取交集 取并集 ";
         public bool doublelPinFlag = false;
         public MoveOpControl()
         {
+            this.renameModel = new Citta_T1.Dialogs.RenameModel();
             InitializeComponent();
         }
 
         public void InitializeOpPinPicture()
         {
+            SetOpControlName(this.textButton.Text);
             System.Console.WriteLine(doublelPinFlag);
             if (doublelPinFlag)
             {
@@ -117,6 +121,64 @@ namespace Citta_T1.Controls
         private void MoveOpControl_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void SetOpControlName(string opControlName)
+        {
+
+            this.opControlName = opControlName;
+            int maxLength = 20;
+            int sumcount = 0;
+
+            sumcount = Regex.Matches(opControlName.Substring(0, Math.Min(maxLength, opControlName.Length)), "[a-zA-Z0-9]").Count;
+
+            if (opControlName.Length > maxLength && sumcount >= 4)
+            {
+                if (opControlName.Length <= 8 || sumcount == 6 && opControlName.Length <= 9)
+                    this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+                else if (sumcount == 6 && opControlName.Length > 9)
+                    this.textButton.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
+                else
+                    this.textButton.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
+            }
+            else if (opControlName.Length > maxLength && sumcount < 4)
+            {
+                this.textButton.Text = opControlName.Substring(0, maxLength) + "...";
+            }
+            else
+            {
+                this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+            }
+            this.toolTip1.SetToolTip(this.textButton, opControlName);
+        }
+
+        private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.renameModel.StartPosition = FormStartPosition.CenterScreen;
+            DialogResult dialogResult = this.renameModel.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+                this.textButton.Text = this.renameModel.opControlName;
+                SetOpControlName(this.textButton.Text);
+        }
+
+        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Panel parentPanel = (Panel)this.Parent;
+            parentPanel.Controls.Remove(this);
+            foreach (Control ct in parentPanel.Controls)
+            {
+                if (ct.Name == "naviViewControl")
+                {
+                    (ct as NaviViewControl).RemoveControl(this);
+                    (ct as NaviViewControl).UpdateNaviView();
+                    break;
+                }
+            }
         }
     }
 }
