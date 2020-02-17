@@ -292,6 +292,7 @@
     <Content Include="res\toolbox\histogram.png" />
     <Content Include="res\toolbox\importfile.png" />
     <Content Include="res\toolbox\intersection.png" />
+    <Content Include="res\toolbox\MoveOpBackground.png" />
     <Content Include="res\toolbox\newfile.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />

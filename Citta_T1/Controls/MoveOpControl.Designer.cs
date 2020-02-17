@@ -43,7 +43,7 @@
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textLabel = new System.Windows.Forms.Label();
+            this.textButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -54,8 +54,8 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(321, 28);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightPictureBox.Location = new System.Drawing.Point(227, 4);
+            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(28, 32);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -68,10 +68,10 @@
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(51, 28);
-            this.leftPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.leftPicture.Location = new System.Drawing.Point(23, 3);
+            this.leftPicture.Margin = new System.Windows.Forms.Padding(4);
             this.leftPicture.Name = "leftPicture";
-            this.leftPicture.Size = new System.Drawing.Size(36, 45);
+            this.leftPicture.Size = new System.Drawing.Size(27, 35);
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
@@ -81,10 +81,10 @@
             // leftPinPictureBox
             // 
             this.leftPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftPinPictureBox.Location = new System.Drawing.Point(28, 39);
-            this.leftPinPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.leftPinPictureBox.Location = new System.Drawing.Point(6, 17);
+            this.leftPinPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(14, 14);
+            this.leftPinPictureBox.Size = new System.Drawing.Size(6, 6);
             this.leftPinPictureBox.TabIndex = 3;
             this.leftPinPictureBox.TabStop = false;
             this.leftPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
@@ -93,10 +93,10 @@
             // rightPinPictureBox
             // 
             this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(364, 39);
-            this.rightPinPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(257, 18);
+            this.rightPinPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(14, 14);
+            this.rightPinPictureBox.Size = new System.Drawing.Size(6, 6);
             this.rightPinPictureBox.TabIndex = 4;
             this.rightPinPictureBox.TabStop = false;
             this.rightPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
@@ -179,27 +179,27 @@
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Font = new System.Drawing.Font("楷体", 9F);
-            this.textBox1.Location = new System.Drawing.Point(96, 33);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(56, 6);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(216, 28);
+            this.textBox1.Size = new System.Drawing.Size(165, 28);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "连接算子";
             this.textBox1.Visible = false;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // textLabel
+            // textButton
             // 
-            this.textLabel.AutoSize = true;
-            this.textLabel.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.textLabel.Font = new System.Drawing.Font("楷体", 9F);
-            this.textLabel.Location = new System.Drawing.Point(96, 33);
-            this.textLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(80, 18);
-            this.textLabel.TabIndex = 6;
-            this.textLabel.Text = "连接算子";
+            this.textButton.FlatAppearance.BorderSize = 0;
+            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textButton.Font = new System.Drawing.Font("楷体", 9F);
+            this.textButton.Location = new System.Drawing.Point(50, 1);
+            this.textButton.Name = "textButton";
+            this.textButton.Size = new System.Drawing.Size(178, 36);
+            this.textButton.TabIndex = 6;
+            this.textButton.Text = "连接算子";
+            this.textButton.UseVisualStyleBackColor = true;
             // 
             // MoveOpControl
             // 
@@ -208,9 +208,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
-            this.Controls.Add(this.textLabel);
+            this.Controls.Add(this.textButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rightPinPictureBox);
             this.Controls.Add(this.leftPinPictureBox);
@@ -218,9 +218,9 @@
             this.Controls.Add(this.leftPicture);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(411, 96);
+            this.Size = new System.Drawing.Size(279, 39);
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
@@ -250,6 +250,6 @@
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         public System.Windows.Forms.TextBox textBox1;
-        public  System.Windows.Forms.Label textLabel;
+        private System.Windows.Forms.Button textButton;
     }
 }

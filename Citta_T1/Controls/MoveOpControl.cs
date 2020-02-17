@@ -33,10 +33,10 @@ namespace Citta_T1.Controls
             {
                 int x = this.leftPinPictureBox.Location.X;
                 int y = this.leftPinPictureBox.Location.Y;
-                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y-7);
+                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y-4);
                 PictureBox leftPinPictureBox1 = new PictureBox();
                 leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                leftPinPictureBox1.Location = new System.Drawing.Point(x, y+7);
+                leftPinPictureBox1.Location = new System.Drawing.Point(x, y+4);
                 leftPinPictureBox1.Name = "leftPinPictureBox1";
                 leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
                 leftPinPictureBox1.TabIndex = 3;
@@ -63,6 +63,10 @@ namespace Citta_T1.Controls
                 if (sender is PictureBox)
                 {
                     sender = (sender as PictureBox).Parent;
+                }
+                if (sender is TextBox)
+                {
+                    sender = (sender as TextBox).Parent;
                 }
                 int left = (sender as MoveOpControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveOpControl).Top + e.Y - mouseOffset.Y;
@@ -110,12 +114,12 @@ namespace Citta_T1.Controls
 
         private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(15, 15);
+            (sender as PictureBox).Size = new System.Drawing.Size(10, 10);
         }
 
         private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(10, 10);
+            (sender as PictureBox).Size = new System.Drawing.Size(6, 6);
         }
 
         private void MoveOpControl_Load(object sender, EventArgs e)
@@ -131,7 +135,7 @@ namespace Citta_T1.Controls
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 10;
+            int maxLength = 7;
             int sumcount = 0;
 
             sumcount = Regex.Matches(opControlName.Substring(0, Math.Min(maxLength, opControlName.Length)), "[a-zA-Z0-9]").Count;
@@ -139,21 +143,21 @@ namespace Citta_T1.Controls
             if (opControlName.Length > maxLength && sumcount >= 4)
             {
                 if (opControlName.Length <= 8 || sumcount == 6 && opControlName.Length <= 9)
-                    this.textLabel.Text = opControlName.Substring(0, opControlName.Length);
+                    this.textButton.Text = opControlName.Substring(0, opControlName.Length);
                 else if (sumcount == 6 && opControlName.Length > 9)
-                    this.textLabel.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
+                    this.textButton.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
                 else
-                    this.textLabel.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
+                    this.textButton.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
             }
             else if (opControlName.Length > maxLength && sumcount < 4)
             {
-                this.textLabel.Text = opControlName.Substring(0, maxLength) + "...";
+                this.textButton.Text = opControlName.Substring(0, maxLength) + "...";
             }
             else
             {
-                this.textLabel.Text = opControlName.Substring(0, opControlName.Length);
+                this.textButton.Text = opControlName.Substring(0, opControlName.Length);
             }
-            this.toolTip1.SetToolTip(this.textLabel, opControlName);        
+            this.toolTip1.SetToolTip(this.textButton, opControlName);        
         }
 
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -166,7 +170,7 @@ namespace Citta_T1.Controls
             //this.textBox1.Enabled  = true;
             this.textBox1.ReadOnly = false;
 
-            this.textLabel.Visible = false;
+            this.textButton.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
@@ -196,7 +200,7 @@ namespace Citta_T1.Controls
                 this.textBox1.ReadOnly = true;
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
-                this.textLabel.Visible = true; 
+                this.textButton.Visible = true; 
             }
         }
     }
