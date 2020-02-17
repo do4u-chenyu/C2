@@ -13,6 +13,11 @@ namespace  Citta_T1
 {
     public partial class MainForm : Form
     {
+        bool MouseIsDown = false;
+        Point basepoint;
+        Bitmap i;
+        Graphics g;
+        Pen p;
         private bool isBottomViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
@@ -267,6 +272,54 @@ namespace  Citta_T1
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.usernamelabel.Text = this.Tag.ToString();
+        }
+
+        private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseIsDown = true;
+            basepoint = e.Location;
+        }
+
+        private void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (MouseIsDown)
+            {
+                //实例化一个和窗口一样大的位图
+                i = new Bitmap(this.Width, this.Height);
+                //创建位图的gdi对象
+                g = Graphics.FromImage(i);
+                //创建画笔
+                p = new Pen(Color.Gray, 0.0001f);
+                //指定线条的样式为划线段
+                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                //根据当前位置画图，使用math的abs()方法求绝对值
+                if (e.X < basepoint.X && e.Y < basepoint.Y)
+                    g.DrawRectangle(p, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                else if (e.X > basepoint.X && e.Y < basepoint.Y)
+                    g.DrawRectangle(p, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                else if (e.X < basepoint.X && e.Y > basepoint.Y)
+                    g.DrawRectangle(p, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                else
+                    g.DrawRectangle(p, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+
+                //将位图贴到窗口上
+                this.CanvasPanel.BackgroundImage = i;
+                //释放gid和pen资源
+                g.Dispose();
+                p.Dispose();
+            }
+        }
+
+        private void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            i = new Bitmap(this.Width, this.Height);
+            g = Graphics.FromImage(i);
+            g.Clear(Color.Transparent);
+            this.CanvasPanel.BackgroundImage = i;
+            g.Dispose();
+
+            //标志位置低
+            MouseIsDown = false;
         }
     }
 }
