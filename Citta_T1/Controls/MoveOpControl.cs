@@ -163,23 +163,47 @@ namespace Citta_T1.Controls
             System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
             if (sumcount + sumcountDigit > maxLength)
             {
-                resize();
+                resizetoBig();
                 this.txtLabel.Text = SubstringByte(opControlName, 0, maxLength) + "...";
             }
             else
             {
+                resizetoNormal();
+                if (sumcount + sumcountDigit <= 8) 
+                { 
+                    resizetoSmall(); 
+                }              
                 this.txtLabel.Text = opControlName;
+
             }
-            this.toolTip1.SetToolTip(this.txtLabel, opControlName);
+            this.nameToolTip.SetToolTip(this.txtLabel, opControlName);
         }
 
-        public void resize()
+        public void resizetoBig()
         {
-            this.Size = new System.Drawing.Size(200, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(165, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(185, 11);
-            this.txtLabel.Size = new System.Drawing.Size(130, 20);
+            this.Size = new System.Drawing.Size(185, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(150, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(172, 11);
+            this.txtLabel.Size = new System.Drawing.Size(115, 20);
+            this.textBox1.Size = new System.Drawing.Size(115, 20);
         }
+        public void resizetoSmall()
+        {
+            this.Size = new System.Drawing.Size(140, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(105, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(130, 11);
+            this.txtLabel.Size = new System.Drawing.Size(70, 20);
+            this.textBox1.Size = new System.Drawing.Size(70, 20);
+        }
+        public void resizetoNormal()
+        {
+            this.Size = new System.Drawing.Size(175, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(140, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(162, 11);
+            this.txtLabel.Size = new System.Drawing.Size(105, 20);
+            this.textBox1.Size = new System.Drawing.Size(105, 20);
+        }
+
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
@@ -247,6 +271,12 @@ namespace Citta_T1.Controls
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtLabel.Visible = true;
+        }
+
+        private void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            String helpInfo = "温馨提示";
+            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
     }
 }

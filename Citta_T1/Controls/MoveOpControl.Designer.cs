@@ -42,9 +42,10 @@ namespace Citta_T1.Controls
             this.运行到此ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.异常日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.txtLabel = new System.Windows.Forms.Label();
+            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -63,6 +64,7 @@ namespace Citta_T1.Controls
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
             this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.rightPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
@@ -255,8 +257,9 @@ namespace Citta_T1.Controls
         private System.Windows.Forms.ToolStripMenuItem 运行到此ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 异常日志ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label txtLabel;
+        private System.Windows.Forms.ToolTip helpToolTip;
     }
 }
