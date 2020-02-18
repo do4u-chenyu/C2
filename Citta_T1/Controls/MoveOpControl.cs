@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace Citta_T1.Controls
 {
-    
+
     public partial class MoveOpControl : UserControl
     {
         private static Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -29,7 +29,7 @@ namespace Citta_T1.Controls
 
         public MoveOpControl()
         {
-            
+
             InitializeComponent();
         }
 
@@ -41,10 +41,10 @@ namespace Citta_T1.Controls
             {
                 int x = this.leftPinPictureBox.Location.X;
                 int y = this.leftPinPictureBox.Location.Y;
-                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y-4);
+                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
                 PictureBox leftPinPictureBox1 = new PictureBox();
                 leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                leftPinPictureBox1.Location = new System.Drawing.Point(x, y+4);
+                leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
                 leftPinPictureBox1.Name = "leftPinPictureBox1";
                 leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
                 leftPinPictureBox1.TabIndex = 3;
@@ -64,9 +64,9 @@ namespace Citta_T1.Controls
         {
             if (isMouseDown)
             {
-                if (sender is Button)
+                if (sender is Label)
                 {
-                    sender = (sender as Button).Parent;
+                    sender = (sender as Label).Parent;
                 }
                 if (sender is PictureBox)
                 {
@@ -96,13 +96,11 @@ namespace Citta_T1.Controls
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-
-
             {
                 isMouseDown = false;
-                if (sender is Button)
+                if (sender is Label)
                 {
-                    sender = (sender as Button).Parent;
+                    sender = (sender as Label).Parent;
                 }
                 if (sender is PictureBox)
                 {
@@ -141,7 +139,7 @@ namespace Citta_T1.Controls
         {
 
         }
-        
+
 
         private string SubstringByte(string text, int startIndex, int length)
         {
@@ -152,11 +150,11 @@ namespace Citta_T1.Controls
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 12;
-         
+            int maxLength = 16;
+
             int sumcount = 0;
             int sumcountDigit = 0;
-            
+
             sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
             sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
 
@@ -166,27 +164,27 @@ namespace Citta_T1.Controls
             if (sumcount + sumcountDigit > maxLength)
             {
                 resize();
-                this.textButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
+                this.txtLabel.Text = SubstringByte(opControlName, 0, maxLength) + "...";
             }
             else
             {
-                this.textButton.Text = opControlName;
+                this.txtLabel.Text = opControlName;
             }
-            this.toolTip1.SetToolTip(this.textButton, opControlName);        
+            this.toolTip1.SetToolTip(this.txtLabel, opControlName);
         }
 
         public void resize()
         {
-            this.Size = new System.Drawing.Size(200, 26);
-            this.rightPictureBox.Location = new System.Drawing.Point(165, 3);
+            this.Size = new System.Drawing.Size(200, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(165, 2);
             this.rightPinPictureBox.Location = new System.Drawing.Point(185, 11);
-            this.textButton.Size = new System.Drawing.Size(133, 24);
+            this.txtLabel.Size = new System.Drawing.Size(130, 20);
         }
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
 
-            this.textButton.Visible = false;
+            this.txtLabel.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
@@ -216,11 +214,11 @@ namespace Citta_T1.Controls
                 this.textBox1.ReadOnly = true;
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
-                this.textButton.Visible = true; 
+                this.txtLabel.Visible = true;
             }
         }
 
-        private void textButton_Click(object sender, EventArgs e)
+        private void txtLabel_Click(object sender, EventArgs e)
         {
             if (isClicked)
             {
@@ -228,7 +226,7 @@ namespace Citta_T1.Controls
                 clickTime = DateTime.Now;
                 if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
 
-                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
                 {
                     重命名ToolStripMenuItem_Click_1(this, e);
                     isClicked = false;
@@ -248,19 +246,8 @@ namespace Citta_T1.Controls
             this.textBox1.ReadOnly = true;
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
-            this.textButton.Visible = true;
+            this.txtLabel.Visible = true;
         }
-
-        private void textBox1_Validated(object sender, EventArgs e)
-        {
-            if (this.textBox1.Text.Length == 0)
-                return;
-            this.textBox1.ReadOnly = true;
-            SetOpControlName(this.textBox1.Text);
-            this.textBox1.Visible = false;
-            this.textButton.Visible = true;
-        }
-
     }
 }
 
