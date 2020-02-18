@@ -1,4 +1,5 @@
-﻿namespace Citta_T1.Controls
+﻿
+namespace Citta_T1.Controls
 {
     partial class MoveOpControl
     {
@@ -54,7 +55,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(227, 4);
+            this.rightPictureBox.Location = new System.Drawing.Point(224, 4);
             this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(28, 32);
@@ -178,28 +179,35 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("楷体", 9F);
-            this.textBox1.Location = new System.Drawing.Point(56, 6);
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.textBox1.Location = new System.Drawing.Point(56, 1);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(165, 28);
+            this.textBox1.Size = new System.Drawing.Size(165, 34);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "连接算子";
             this.textBox1.Visible = false;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.textBox1.Validated += new System.EventHandler(this.textBox1_Validated);
             // 
             // textButton
             // 
             this.textButton.FlatAppearance.BorderSize = 0;
             this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.textButton.Font = new System.Drawing.Font("楷体", 9F);
+            this.textButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textButton.Location = new System.Drawing.Point(50, 1);
+            this.textButton.Margin = new System.Windows.Forms.Padding(0);
             this.textButton.Name = "textButton";
-            this.textButton.Size = new System.Drawing.Size(178, 36);
+            this.textButton.Size = new System.Drawing.Size(171, 36);
             this.textButton.TabIndex = 6;
             this.textButton.Text = "连接算子";
             this.textButton.UseVisualStyleBackColor = true;
+            this.textButton.Click += new System.EventHandler(this.textButton_Click);
+            this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.textButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.textButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 
@@ -220,7 +228,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(279, 39);
+            this.Size = new System.Drawing.Size(278, 41);
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);

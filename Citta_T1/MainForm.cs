@@ -278,11 +278,12 @@ namespace  Citta_T1
         {
             MouseIsDown = true;
             basepoint = e.Location;
+            this.blankButton.Focus();
         }
 
         private void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (MouseIsDown)
+        {   
+            if (MouseIsDown && flowControl.selectFrame)
             {
                 //实例化一个和窗口一样大的位图
                 i = new Bitmap(this.Width, this.Height);

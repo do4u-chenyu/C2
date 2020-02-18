@@ -12,13 +12,21 @@ using System.Text.RegularExpressions;
 
 namespace Citta_T1.Controls
 {
+    
     public partial class MoveOpControl : UserControl
     {
+        private static Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
         public string doublePin = "连接算子 取差集 取交集 取并集 ";
         public bool doublelPinFlag = false;
+
+        DateTime clickTime;
+        bool isClicked = false;
+
+
+
         public MoveOpControl()
         {
             
@@ -76,7 +84,7 @@ namespace Citta_T1.Controls
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.Write("Control");
+            System.Console.WriteLine("移动开始");
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -88,6 +96,8 @@ namespace Citta_T1.Controls
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+
+
             {
                 isMouseDown = false;
                 if (sender is Button)
@@ -119,7 +129,7 @@ namespace Citta_T1.Controls
 
         private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(6, 6);
+            (sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
 
         private void MoveOpControl_Load(object sender, EventArgs e)
@@ -131,43 +141,49 @@ namespace Citta_T1.Controls
         {
 
         }
+        
 
+        private string SubstringByte(string text, int startIndex, int length)
+        {
+            byte[] bytes = _encoding.GetBytes(text);
+            System.Console.WriteLine("bytes:" + bytes);
+            return _encoding.GetString(bytes, startIndex, length);
+        }
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 7;
+            int maxLength = 12;
+         
             int sumcount = 0;
+            int sumcountDigit = 0;
+            
+            sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
+            sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
 
-            sumcount = Regex.Matches(opControlName.Substring(0, Math.Min(maxLength, opControlName.Length)), "[a-zA-Z0-9]").Count;
-
-            if (opControlName.Length > maxLength && sumcount >= 4)
+            System.Console.WriteLine("算子长度:" + opControlName.Length);
+            System.Console.WriteLine("sumcount:" + sumcount);
+            System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
+            if (sumcount + sumcountDigit > maxLength)
             {
-                if (opControlName.Length <= 8 || sumcount == 6 && opControlName.Length <= 9)
-                    this.textButton.Text = opControlName.Substring(0, opControlName.Length);
-                else if (sumcount == 6 && opControlName.Length > 9)
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
-                else
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
-            }
-            else if (opControlName.Length > maxLength && sumcount < 4)
-            {
-                this.textButton.Text = opControlName.Substring(0, maxLength) + "...";
+                resize();
+                this.textButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
             }
             else
             {
-                this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+                this.textButton.Text = opControlName;
             }
             this.toolTip1.SetToolTip(this.textButton, opControlName);        
         }
 
+        public void resize()
+        {
+            this.Size = new System.Drawing.Size(200, 26);
+            this.rightPictureBox.Location = new System.Drawing.Point(165, 3);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(185, 11);
+            this.textButton.Size = new System.Drawing.Size(133, 24);
+        }
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            //this.renameModel.StartPosition = FormStartPosition.CenterScreen;
-            //DialogResult dialogResult = this.renameModel.ShowDialog();
-            //if (dialogResult == DialogResult.OK)
-            //this.textBox1.Text = this.renameModel.opControlName;
-            //SetOpControlName(this.textBox1.Text);
-            //this.textBox1.Enabled  = true;
             this.textBox1.ReadOnly = false;
 
             this.textButton.Visible = false;
@@ -203,6 +219,48 @@ namespace Citta_T1.Controls
                 this.textButton.Visible = true; 
             }
         }
+
+        private void textButton_Click(object sender, EventArgs e)
+        {
+            if (isClicked)
+            {
+                TimeSpan span = DateTime.Now - clickTime;
+                clickTime = DateTime.Now;
+                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+
+                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                {
+                    重命名ToolStripMenuItem_Click_1(this, e);
+                    isClicked = false;
+                }
+            }
+            else
+            {
+                isClicked = true;
+                clickTime = DateTime.Now;
+            }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (this.textBox1.Text.Length == 0)
+                return;
+            this.textBox1.ReadOnly = true;
+            SetOpControlName(this.textBox1.Text);
+            this.textBox1.Visible = false;
+            this.textButton.Visible = true;
+        }
+
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            if (this.textBox1.Text.Length == 0)
+                return;
+            this.textBox1.ReadOnly = true;
+            SetOpControlName(this.textBox1.Text);
+            this.textBox1.Visible = false;
+            this.textButton.Visible = true;
+        }
+
     }
 }
 

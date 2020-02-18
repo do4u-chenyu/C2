@@ -76,6 +76,7 @@
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.CanvasPanel = new System.Windows.Forms.Panel();
+            this.blankButton = new System.Windows.Forms.Button();
             this.remarkControl = new Citta_T1.Controls.RemarkControl();
             this.flowControl = new Citta_T1.Controls.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.RightHideButton();
@@ -656,6 +657,7 @@
             // 
             this.CanvasPanel.AllowDrop = true;
             this.CanvasPanel.BackColor = System.Drawing.Color.White;
+            this.CanvasPanel.Controls.Add(this.blankButton);
             this.CanvasPanel.Controls.Add(this.remarkControl);
             this.CanvasPanel.Controls.Add(this.flowControl);
             this.CanvasPanel.Controls.Add(this.rightHideButton);
@@ -677,6 +679,15 @@
             this.CanvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
             this.CanvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
             this.CanvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
+            // 
+            // blankButton
+            // 
+            this.blankButton.Location = new System.Drawing.Point(691, 60);
+            this.blankButton.Name = "blankButton";
+            this.blankButton.Size = new System.Drawing.Size(0, 0);
+            this.blankButton.TabIndex = 6;
+            this.blankButton.Text = "button1";
+            this.blankButton.UseVisualStyleBackColor = true;
             // 
             // remarkControl
             // 
@@ -906,6 +917,7 @@
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
         private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;
+        private System.Windows.Forms.Button blankButton;
     }
 }
 
