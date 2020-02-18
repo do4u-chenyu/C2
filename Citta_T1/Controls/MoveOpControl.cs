@@ -19,12 +19,18 @@ namespace Citta_T1.Controls
         private Point mouseOffset;
         public string doublePin = "连接算子 取差集 取交集 取并集 ";
         public bool doublelPinFlag = false;
+        public bool isDataOp = false;
         public MoveOpControl()
         {
             
             InitializeComponent();
         }
 
+        public MoveOpControl(bool isNoLeftPin)
+        {
+            InitializeComponent();
+            this.leftPinPictureBox.Visible = false;
+        }
         public void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox1.Text);

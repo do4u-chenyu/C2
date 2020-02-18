@@ -30,7 +30,7 @@ namespace Citta_T1.Controls
         }
         public void AddData(Citta_T1.Data data)
         {
-            // 动态生成一个panel
+            // 根据导入数据动态生成一个panel
             this.contents.Add(data);
             System.Windows.Forms.Button b = new System.Windows.Forms.Button();
             b.Location = new System.Drawing.Point(46, 50 * this.contents.Count()); // 递增
@@ -41,7 +41,6 @@ namespace Citta_T1.Controls
             b.UseVisualStyleBackColor = true;
             b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             this.LocalFrame.Controls.Add(b);
-
         }
 
         private void LocalFrame_Paint(object sender, PaintEventArgs e)

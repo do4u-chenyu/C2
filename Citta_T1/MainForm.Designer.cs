@@ -117,7 +117,7 @@
             this.headPanel.Location = new System.Drawing.Point(0, 0);
             this.headPanel.Margin = new System.Windows.Forms.Padding(4);
             this.headPanel.Name = "headPanel";
-            this.headPanel.Size = new System.Drawing.Size(1284, 69);
+            this.headPanel.Size = new System.Drawing.Size(2187, 69);
             this.headPanel.TabIndex = 0;
             // 
             // panel2
@@ -126,7 +126,7 @@
             this.panel2.Controls.Add(this.pictureBox4);
             this.panel2.Controls.Add(this.usernamelabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(794, 0);
+            this.panel2.Location = new System.Drawing.Point(1697, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(490, 69);
@@ -190,7 +190,7 @@
             this.leftMainMenuPanel.Location = new System.Drawing.Point(0, 69);
             this.leftMainMenuPanel.Margin = new System.Windows.Forms.Padding(4);
             this.leftMainMenuPanel.Name = "leftMainMenuPanel";
-            this.leftMainMenuPanel.Size = new System.Drawing.Size(204, 631);
+            this.leftMainMenuPanel.Size = new System.Drawing.Size(204, 969);
             this.leftMainMenuPanel.TabIndex = 1;
             // 
             // flowChartButton
@@ -251,7 +251,7 @@
             this.leftToolBoxPanel.Location = new System.Drawing.Point(204, 69);
             this.leftToolBoxPanel.Margin = new System.Windows.Forms.Padding(4);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
-            this.leftToolBoxPanel.Size = new System.Drawing.Size(280, 631);
+            this.leftToolBoxPanel.Size = new System.Drawing.Size(280, 969);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
             // operatorControl
@@ -263,7 +263,7 @@
             this.operatorControl.Location = new System.Drawing.Point(0, 0);
             this.operatorControl.Margin = new System.Windows.Forms.Padding(6);
             this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(278, 629);
+            this.operatorControl.Size = new System.Drawing.Size(278, 967);
             this.operatorControl.TabIndex = 0;
             // 
             // flowChartControl
@@ -275,7 +275,7 @@
             this.flowChartControl.Location = new System.Drawing.Point(0, 0);
             this.flowChartControl.Margin = new System.Windows.Forms.Padding(6);
             this.flowChartControl.Name = "flowChartControl";
-            this.flowChartControl.Size = new System.Drawing.Size(278, 629);
+            this.flowChartControl.Size = new System.Drawing.Size(278, 967);
             this.flowChartControl.TabIndex = 0;
             // 
             // dataSourceControl
@@ -287,7 +287,7 @@
             this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
             this.dataSourceControl.Margin = new System.Windows.Forms.Padding(6);
             this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.Size = new System.Drawing.Size(278, 629);
+            this.dataSourceControl.Size = new System.Drawing.Size(278, 967);
             this.dataSourceControl.TabIndex = 0;
             // 
             // bottomViewPanel
@@ -297,10 +297,10 @@
             this.bottomViewPanel.Controls.Add(this.dataGridView1);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomViewPanel.Location = new System.Drawing.Point(484, 280);
+            this.bottomViewPanel.Location = new System.Drawing.Point(484, 618);
             this.bottomViewPanel.Margin = new System.Windows.Forms.Padding(4);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(800, 420);
+            this.bottomViewPanel.Size = new System.Drawing.Size(1703, 420);
             this.bottomViewPanel.TabIndex = 3;
             // 
             // dataGridView3
@@ -309,7 +309,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(0, 58);
             this.dataGridView3.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(800, 362);
+            this.dataGridView3.Size = new System.Drawing.Size(1703, 362);
             this.dataGridView3.TabIndex = 27;
             // 
             // panel4
@@ -322,7 +322,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(800, 58);
+            this.panel4.Size = new System.Drawing.Size(1703, 58);
             this.panel4.TabIndex = 0;
             // 
             // dragLineControl
@@ -333,14 +333,14 @@
             this.dragLineControl.Location = new System.Drawing.Point(591, 54);
             this.dragLineControl.Margin = new System.Windows.Forms.Padding(6);
             this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(0, 4);
+            this.dragLineControl.Size = new System.Drawing.Size(890, 4);
             this.dragLineControl.TabIndex = 3;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(578, 0);
+            this.panel9.Location = new System.Drawing.Point(1481, 0);
             this.panel9.Margin = new System.Windows.Forms.Padding(4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(222, 58);
@@ -424,7 +424,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(800, 420);
+            this.dataGridView1.Size = new System.Drawing.Size(1703, 420);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
@@ -434,7 +434,7 @@
             this.dataGridView2.Location = new System.Drawing.Point(0, 0);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(800, 420);
+            this.dataGridView2.Size = new System.Drawing.Size(1703, 420);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
@@ -467,7 +467,7 @@
             this.panel1.Location = new System.Drawing.Point(484, 69);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 72);
+            this.panel1.Size = new System.Drawing.Size(1703, 72);
             this.panel1.TabIndex = 4;
             // 
             // panel6
@@ -483,7 +483,7 @@
             this.panel6.Controls.Add(this.filterButton);
             this.panel6.Controls.Add(this.connectOpButton);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(-151, 0);
+            this.panel6.Location = new System.Drawing.Point(752, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(951, 72);
@@ -669,7 +669,7 @@
             this.CanvasPanel.Location = new System.Drawing.Point(484, 141);
             this.CanvasPanel.Margin = new System.Windows.Forms.Padding(4);
             this.CanvasPanel.Name = "CanvasPanel";
-            this.CanvasPanel.Size = new System.Drawing.Size(800, 139);
+            this.CanvasPanel.Size = new System.Drawing.Size(1703, 477);
             this.CanvasPanel.TabIndex = 5;
             this.CanvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.CanvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
@@ -764,7 +764,7 @@
             this.pictureBox3.Location = new System.Drawing.Point(0, 54);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(800, 54);
+            this.pictureBox3.Size = new System.Drawing.Size(1703, 54);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -775,7 +775,7 @@
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(6);
             this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(800, 54);
+            this.modelTitlePanel.Size = new System.Drawing.Size(1703, 54);
             this.modelTitlePanel.TabIndex = 1;
             this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
             // 
@@ -786,7 +786,7 @@
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox2.Location = new System.Drawing.Point(0, 51);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(800, 3);
+            this.pictureBox2.Size = new System.Drawing.Size(1703, 3);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -804,7 +804,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 700);
+            this.ClientSize = new System.Drawing.Size(2187, 1038);
             this.Controls.Add(this.CanvasPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bottomViewPanel);
