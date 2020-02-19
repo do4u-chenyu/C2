@@ -21,7 +21,8 @@ namespace  Citta_T1
         private bool isBottomViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
-        
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -50,7 +51,8 @@ namespace  Citta_T1
 
             // 底层工具按钮定位
             x = x - (this.CanvasPanel.Width) / 2 + 100;
-            this.downloadButton.Location = new Point(x + 50, y + 50);
+            this.downloadButton.Location = new Point(x + 100, y + 50);
+            this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
@@ -322,5 +324,33 @@ namespace  Citta_T1
             //标志位置低
             MouseIsDown = false;
         }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+
+            if (this.runButton.Name == "pauseButton")
+            {
+                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                this.runButton.Name = "runButton";
+            }
+
+        }
+
+        private void runButton_Click(object sender, EventArgs e)
+        {
+
+            if (this.runButton.Name == "runButton")
+            {
+                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Name = "pauseButton";
+            }
+            else if (this.runButton.Name == "pauseButton")
+            {
+                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                this.runButton.Name = "runButton";
+            }
+
+        }
+
     }
 }

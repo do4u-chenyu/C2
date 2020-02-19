@@ -82,6 +82,7 @@
             this.rightHideButton = new Citta_T1.Controls.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.RightShowButton();
             this.downloadButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.modelTitlePanel = new Citta_T1.Controls.Small.ModelTitlePanel();
@@ -663,6 +664,7 @@
             this.CanvasPanel.Controls.Add(this.rightHideButton);
             this.CanvasPanel.Controls.Add(this.rightShowButton);
             this.CanvasPanel.Controls.Add(this.downloadButton);
+            this.CanvasPanel.Controls.Add(this.stopButton);
             this.CanvasPanel.Controls.Add(this.runButton);
             this.CanvasPanel.Controls.Add(this.pictureBox3);
             this.CanvasPanel.Controls.Add(this.modelTitlePanel);
@@ -743,12 +745,30 @@
             this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.downloadButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
-            this.downloadButton.Location = new System.Drawing.Point(675, 531);
+            this.downloadButton.Location = new System.Drawing.Point(760, 531);
             this.downloadButton.Margin = new System.Windows.Forms.Padding(4);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(78, 80);
             this.downloadButton.TabIndex = 21;
             this.downloadButton.UseVisualStyleBackColor = true;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
+            this.stopButton.Location = new System.Drawing.Point(675, 531);
+            this.stopButton.Margin = new System.Windows.Forms.Padding(4);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(78, 80);
+            this.stopButton.TabIndex = 20;
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // runButton
             // 
@@ -766,6 +786,7 @@
             this.runButton.Size = new System.Drawing.Size(78, 80);
             this.runButton.TabIndex = 20;
             this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // pictureBox3
             // 
@@ -905,6 +926,7 @@
         private DataGridView1 dataGridView1;
         private DataGridView2 dataGridView2;
         private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
