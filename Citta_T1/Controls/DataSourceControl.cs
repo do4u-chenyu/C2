@@ -12,8 +12,8 @@ namespace Citta_T1.Controls
 {
     public partial class DataSourceControl : UserControl
     {
-        // 从输入导入模块收到的数据
-        private List<Citta_T1.Data> contents = new List<Citta_T1.Data>();
+        // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
+        private List<string> contents = new List<string>();
         private System.Windows.Forms.Button tempButton = new System.Windows.Forms.Button();
         public DataSourceControl()
         {
@@ -25,23 +25,27 @@ namespace Citta_T1.Controls
         {
             if (e.Button == MouseButtons.Left)
             {
-                tempButton.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
+                // 使用`DataObject`对象来传参数，更加自由
+                DataObject data = new DataObject();
+                data.SetData("isData", true);
+                data.SetData("index", (sender as Button).Name);
+                data.SetData("Text", (sender as Button).Text);
+                (sender as Button).DoDragDrop(data, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        public void AddData(Citta_T1.Data data)
+        public void genDataButton(string index, string dataName, string filePath)
         {
-            // 动态生成一个panel
-            this.contents.Add(data);
+            // 根据导入数据动态生成一个button
+            this.contents.Add(index);
             System.Windows.Forms.Button b = new System.Windows.Forms.Button();
             b.Location = new System.Drawing.Point(46, 50 * this.contents.Count()); // 递增
-            b.Name = "button1";
+            b.Name = index;
             b.Size = new System.Drawing.Size(100, 40); // 固定的
             b.TabIndex = 0;
-            b.Text = data.name;
+            b.Text = dataName;
             b.UseVisualStyleBackColor = true;
             b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             this.LocalFrame.Controls.Add(b);
-
         }
 
         private void LocalFrame_Paint(object sender, PaintEventArgs e)

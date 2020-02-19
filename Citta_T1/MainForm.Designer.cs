@@ -118,6 +118,7 @@
             this.headPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headPanel.Location = new System.Drawing.Point(0, 0);
             this.headPanel.Name = "headPanel";
+            this.headPanel.Size = new System.Drawing.Size(2187, 69);
             this.headPanel.Size = new System.Drawing.Size(1252, 46);
             this.headPanel.TabIndex = 0;
             // 
@@ -634,7 +635,6 @@
             this.CanvasPanel.Controls.Add(this.naviViewControl);
             this.CanvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CanvasPanel.Location = new System.Drawing.Point(323, 94);
-            this.CanvasPanel.Name = "CanvasPanel";
             this.CanvasPanel.Size = new System.Drawing.Size(929, 93);
             this.CanvasPanel.TabIndex = 5;
             this.CanvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);

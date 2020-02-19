@@ -1,32 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 
 namespace Citta_T1.Controls
 {
-
+    public delegate void delegateOverViewData(string index);
     public partial class MoveOpControl : UserControl
     {
-        private static Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
+        private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
-        public string doublePin = "连接算子 取差集 取交集 取并集 ";
+        public string doublePin = "连接算子 取差集 取交集 取并集";
         public bool doublelPinFlag = false;
 
         DateTime clickTime;
         bool isClicked = false;
 
-
-
+        public bool isData;
+        public string index;
+        public event delegateOverViewData overViewData;
         public MoveOpControl()
         {
 
@@ -37,6 +32,11 @@ namespace Citta_T1.Controls
         {
             SetOpControlName(this.textBox1.Text);
             System.Console.WriteLine(doublelPinFlag);
+            
+            if (isData)
+            {
+                this.Controls.Remove(this.leftPinPictureBox);
+            }
             if (doublelPinFlag)
             {
                 int x = this.leftPinPictureBox.Location.X;
@@ -261,24 +261,34 @@ namespace Citta_T1.Controls
 
         private void txtButton_Click(object sender, EventArgs e)
         {
-            System.Console.WriteLine("isClicked:" + isClicked);
-            if (isClicked)
+            if (isData)
             {
-                TimeSpan span = DateTime.Now - clickTime;
-                clickTime = DateTime.Now;
-                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
-
-                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                {
-                    重命名ToolStripMenuItem_Click_1(this, e);
-                    isClicked = false;
-                }
+                // TODO 一层一层找爸爸方法有点蠢
+                MainForm prt = (MainForm)Parent.Parent;
+                prt.OverViewDataByIndex(this.index);
             }
             else
             {
-                isClicked = true;
-                clickTime = DateTime.Now;
+                System.Console.WriteLine("isClicked:" + isClicked);
+                if (isClicked)
+                {
+                    TimeSpan span = DateTime.Now - clickTime;
+                    clickTime = DateTime.Now;
+                    if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+
+                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                    {
+                        重命名ToolStripMenuItem_Click_1(this, e);
+                        isClicked = false;
+                    }
+                }
+                else
+                {
+                    isClicked = true;
+                    clickTime = DateTime.Now;
+                }
             }
+
         }
     }
 }
