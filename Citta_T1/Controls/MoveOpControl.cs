@@ -1,40 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 
 namespace Citta_T1.Controls
 {
+    public delegate void delegateOverViewData(string index);
     public partial class MoveOpControl : UserControl
     {
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
-        public string doublePin = "连接算子 取差集 取交集 取并集 ";
+        public string doublePin = "连接算子 取差集 取交集 取并集";
         public bool doublelPinFlag = false;
-        public bool isDataOp = false;
+
+        public bool isData;
+        public string index;
+        public event delegateOverViewData overViewData;
+
         public MoveOpControl()
         {
             
             InitializeComponent();
         }
 
-        public MoveOpControl(bool isNoLeftPin)
-        {
-            InitializeComponent();
-            this.leftPinPictureBox.Visible = false;
-        }
         public void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox1.Text);
             System.Console.WriteLine(doublelPinFlag);
+            
+            if (isData)
+            {
+                this.Controls.Remove(this.leftPinPictureBox);
+            }
             if (doublelPinFlag)
             {
                 int x = this.leftPinPictureBox.Location.X;
@@ -208,6 +207,14 @@ namespace Citta_T1.Controls
                 this.textBox1.Visible = false;
                 this.textButton.Visible = true; 
             }
+        }
+
+        
+        private void textButton_Click(object sender, EventArgs e)
+        {
+            // TODO 一层一层找爸爸方法有点蠢
+            MainForm prt = (MainForm)Parent.Parent;
+            prt.OverViewDataByIndex(this.index);
         }
     }
 }

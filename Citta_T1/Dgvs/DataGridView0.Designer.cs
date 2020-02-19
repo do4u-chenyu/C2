@@ -6,6 +6,9 @@ namespace Citta_T1
 {
     partial class DataGridView0
     {
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private int maxNumOfRows = 20;
+
         /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
@@ -66,7 +69,7 @@ namespace Citta_T1
             List<List<string>> datas;
             if (fileName == "")
             {
-                datas  = this.OverViewFileFromResx(Properties.Resources.text_utf8);
+                datas  = this.OverViewFileFromResx(Properties.Resources.text_utf8_1);
             }
             else
             {
@@ -146,7 +149,26 @@ namespace Citta_T1
             }
             return datas;
         }
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private int maxNumOfRows = 20;
+        public void OverViewDataByIndex(string index, int maxNumOfFile = 50, char sep = '\t')
+        {
+            List<List<string>> datas = new List<List<string>> { };
+            Citta_T1.Data data = Program.inputDataDict[index];
+            string content = data.content;
+            string[] contents = content.Split('\n');
+            int numOfRows = contents.Length;
+            List<string> rows = new List<string>(contents);
+            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
+            {
+                datas.Add(new List<string>(rows[i].Split('\t')));
+            }
+
+            this.dataGridView1.Rows.Clear();
+            this.dataGridView1.Columns.Clear();
+            this.dataGridView1.DataSource = null;
+            List<string> headers = datas[0];
+            int numOfCols = headers.ToArray().Length;
+            _InitializeColumns(headers);
+            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
+        }
     }
 }

@@ -8,12 +8,14 @@ namespace Citta_T1
 {
     public class Data
     {
-        public string name;
+        public string dataName;
+        public string filePath;
         public string content;
-        public Data(string n, string c)
+        public Data(string n, string fp, string c)
         {
-            this.name = n;
-            this.content = c;
+            this.dataName = n;
+            this.filePath = fp;
+            this.content = c; 
         }
     }
 

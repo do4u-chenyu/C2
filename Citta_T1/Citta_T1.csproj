@@ -94,7 +94,8 @@
     <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data.cs" />
+    <Compile Include="data_struct\Data.cs" />
+    <Compile Include="data_struct\DataButtonInfo.cs" />
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +132,11 @@
     </Compile>
     <Compile Include="Controls\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TestGridModel.cs" />
     <Compile Include="Dgvs\DataGridView1.cs">
@@ -226,14 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -252,6 +253,9 @@
     <None Include="datas\text.txt" />
     <None Include="datas\text_gbk.txt" />
     <None Include="datas\text_utf8.txt" />
+    <None Include="Resources\text_gbk_1.bmp" />
+    <None Include="datas\text_gbk_1.txt" />
+    <None Include="datas\text_utf8_1.txt" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">

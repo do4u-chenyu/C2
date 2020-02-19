@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Dialogs
 {
+    // 
     public delegate void delegateInputData(Citta_T1.Data data);
     public partial class FormInputData : Form
     {
@@ -19,7 +20,8 @@ namespace Citta_T1.Dialogs
         private System.Drawing.Font bold_font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private bool textboxHasText = false;
-        private List<Citta_T1.Data> contents = new List<Citta_T1.Data>();
+        // 数据的存储形式，采用dict
+        private Dictionary<string, string> contents = new Dictionary<string, string>();
         private int numOfContents = 0;
         public FormInputData()
         {
@@ -87,8 +89,16 @@ namespace Citta_T1.Dialogs
                 // 3.关闭窗口后清除表格数据
                 // string content;
                 // Citta_T1.Data data;
-                fileName = fd.FileName;
-                overViewFile();
+                if (this.textBox1.Text == "请输入数据名称")
+                {
+                    MessageBox.Show("请输入数据名称！");
+                }
+                else
+                {
+                    fileName = fd.FileName;
+                    overViewFile();
+                }
+
             }
 
         }
@@ -132,8 +142,7 @@ namespace Citta_T1.Dialogs
             {
                 content = File.ReadAllText(fileName, Encoding.Default);
             }
-            data = new Citta_T1.Data(name, content);
-            this.contents.Add(data);
+            data = new Citta_T1.Data(name, fileName, content);
             InputDataEvent(data);
             Close();
         }

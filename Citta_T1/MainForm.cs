@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace  Citta_T1
         Bitmap i;
         Graphics g;
         Pen p;
+        public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
@@ -235,10 +237,21 @@ namespace  Citta_T1
 
         private void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
+            // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             MoveOpControl btn = new MoveOpControl();
             btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
             this.CanvasPanel.Controls.Add(btn);
             btn.textBox1.Text = e.Data.GetData("Text").ToString();
+            try
+            {
+                btn.isData = (bool)e.Data.GetData("isData");
+                btn.index = e.Data.GetData("index").ToString();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            // 根据button的名字来初始化画布中的button针脚数
             btn.doublelPinFlag  = btn.doublePin.Contains(btn.textBox1.Text.ToString());
             btn.InitializeOpPinPicture();
             this.naviViewControl.AddControl(btn);
@@ -261,7 +274,15 @@ namespace  Citta_T1
 
         void frm_InputDataEvent(Citta_T1.Data data)
         {
-            this.dataSourceControl.AddData(data);
+            // `FormInputData`中的数据添加处理方式
+            string index = GenerateMD5(data.content + new Random().Next().ToString());
+            Program.inputDataDict.Add(index, data);
+            this.dataSourceControl.genDataButton(index, data.dataName, data.filePath);
+        }
+
+        public void OverViewDataByIndex(string index)
+        {
+            this.dataGridView3.OverViewDataByIndex(index);
         }
 
         private void canvasPanel_Paint(object sender, PaintEventArgs e)
@@ -320,6 +341,26 @@ namespace  Citta_T1
 
             //标志位置低
             MouseIsDown = false;
+        }
+        /// <summary>
+        /// MD5字符串加密
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns>加密后字符串</returns>
+        public static string GenerateMD5(string txt)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(txt);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }

@@ -200,6 +200,7 @@
             this.textButton.TabIndex = 6;
             this.textButton.Text = "连接算子";
             this.textButton.UseVisualStyleBackColor = true;
+            this.textButton.Click += new System.EventHandler(this.textButton_Click);
             // 
             // MoveOpControl
             // 

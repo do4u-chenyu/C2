@@ -16,7 +16,7 @@ namespace Citta_T1
         public DataGridView0()
         {
             InitializeComponent();
-            InitializeDgv("");
+            //InitializeDgv("");
         }
 
         private void DataGridView_Load(object sender, EventArgs e)
