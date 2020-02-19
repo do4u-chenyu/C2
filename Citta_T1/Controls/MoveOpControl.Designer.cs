@@ -1,4 +1,5 @@
-﻿namespace Citta_T1.Controls
+﻿
+namespace Citta_T1.Controls
 {
     partial class MoveOpControl
     {
@@ -41,9 +42,10 @@
             this.运行到此ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.异常日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textButton = new System.Windows.Forms.Button();
+            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.txtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -54,7 +56,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(227, 4);
+            this.rightPictureBox.Location = new System.Drawing.Point(224, 3);
             this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(28, 32);
@@ -62,13 +64,14 @@
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
             this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.rightPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(23, 3);
+            this.leftPicture.Location = new System.Drawing.Point(23, 2);
             this.leftPicture.Margin = new System.Windows.Forms.Padding(4);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(27, 35);
@@ -93,7 +96,7 @@
             // rightPinPictureBox
             // 
             this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(257, 18);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(257, 17);
             this.rightPinPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPinPictureBox.Name = "rightPinPictureBox";
             this.rightPinPictureBox.Size = new System.Drawing.Size(6, 6);
@@ -178,29 +181,33 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("楷体", 9F);
-            this.textBox1.Location = new System.Drawing.Point(56, 6);
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox1.Location = new System.Drawing.Point(56, 1);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(165, 28);
+            this.textBox1.Size = new System.Drawing.Size(165, 31);
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "连接算子";
             this.textBox1.Visible = false;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // textButton
+            // txtButton
             // 
-            this.textButton.FlatAppearance.BorderSize = 0;
-            this.textButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.textButton.Font = new System.Drawing.Font("楷体", 9F);
-            this.textButton.Location = new System.Drawing.Point(50, 1);
-            this.textButton.Name = "textButton";
-            this.textButton.Size = new System.Drawing.Size(178, 36);
-            this.textButton.TabIndex = 6;
-            this.textButton.Text = "连接算子";
-            this.textButton.UseVisualStyleBackColor = true;
-            this.textButton.Click += new System.EventHandler(this.textButton_Click);
+            this.txtButton.FlatAppearance.BorderSize = 0;
+            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtButton.Location = new System.Drawing.Point(56, 1);
+            this.txtButton.Name = "txtButton";
+            this.txtButton.Size = new System.Drawing.Size(165, 37);
+            this.txtButton.TabIndex = 8;
+            this.txtButton.Text = "button1";
+            this.txtButton.UseVisualStyleBackColor = true;
+            this.txtButton.Click += new System.EventHandler(this.txtButton_Click);
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 
@@ -211,7 +218,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
-            this.Controls.Add(this.textButton);
+            this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rightPinPictureBox);
             this.Controls.Add(this.leftPinPictureBox);
@@ -221,7 +228,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(279, 39);
+            this.Size = new System.Drawing.Size(278, 38);
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
@@ -249,8 +256,9 @@
         private System.Windows.Forms.ToolStripMenuItem 运行到此ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 异常日志ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button textButton;
+        private System.Windows.Forms.ToolTip helpToolTip;
+        private System.Windows.Forms.Button txtButton;
     }
 }

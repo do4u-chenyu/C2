@@ -9,19 +9,22 @@ namespace Citta_T1.Controls
     public delegate void delegateOverViewData(string index);
     public partial class MoveOpControl : UserControl
     {
+        private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
         public string doublePin = "连接算子 取差集 取交集 取并集";
         public bool doublelPinFlag = false;
 
+        DateTime clickTime;
+        bool isClicked = false;
+
         public bool isData;
         public string index;
         public event delegateOverViewData overViewData;
-
         public MoveOpControl()
         {
-            
+
             InitializeComponent();
         }
 
@@ -38,10 +41,10 @@ namespace Citta_T1.Controls
             {
                 int x = this.leftPinPictureBox.Location.X;
                 int y = this.leftPinPictureBox.Location.Y;
-                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y-4);
+                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
                 PictureBox leftPinPictureBox1 = new PictureBox();
                 leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                leftPinPictureBox1.Location = new System.Drawing.Point(x, y+4);
+                leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
                 leftPinPictureBox1.Name = "leftPinPictureBox1";
                 leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
                 leftPinPictureBox1.TabIndex = 3;
@@ -81,7 +84,7 @@ namespace Citta_T1.Controls
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.Write("Control");
+            System.Console.WriteLine("移动开始");
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -124,7 +127,7 @@ namespace Citta_T1.Controls
 
         private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(6, 6);
+            (sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
 
         private void MoveOpControl_Load(object sender, EventArgs e)
@@ -137,45 +140,76 @@ namespace Citta_T1.Controls
 
         }
 
+
+        private string SubstringByte(string text, int startIndex, int length)
+        {
+            byte[] bytes = _encoding.GetBytes(text);
+            System.Console.WriteLine("bytes:" + bytes);
+            return _encoding.GetString(bytes, startIndex, length);
+        }
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 7;
+            int maxLength = 14;
+
             int sumcount = 0;
+            int sumcountDigit = 0;
 
-            sumcount = Regex.Matches(opControlName.Substring(0, Math.Min(maxLength, opControlName.Length)), "[a-zA-Z0-9]").Count;
+            sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
+            sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
 
-            if (opControlName.Length > maxLength && sumcount >= 4)
+            System.Console.WriteLine("算子长度:" + opControlName.Length);
+            System.Console.WriteLine("sumcount:" + sumcount);
+            System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
+            if (sumcount + sumcountDigit > maxLength)
             {
-                if (opControlName.Length <= 8 || sumcount == 6 && opControlName.Length <= 9)
-                    this.textButton.Text = opControlName.Substring(0, opControlName.Length);
-                else if (sumcount == 6 && opControlName.Length > 9)
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(9, opControlName.Length)) + "...";
-                else
-                    this.textButton.Text = opControlName.Substring(0, Math.Min(7, opControlName.Length)) + "...";
-            }
-            else if (opControlName.Length > maxLength && sumcount < 4)
-            {
-                this.textButton.Text = opControlName.Substring(0, maxLength) + "...";
+                resizetoBig();
+                this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
+                System.Console.WriteLine("sumcountDigit:" + this.txtButton.Text);
             }
             else
             {
-                this.textButton.Text = opControlName.Substring(0, opControlName.Length);
+                resizetoNormal();
+                if (sumcount + sumcountDigit <= 8) 
+                { 
+                    resizetoSmall(); 
+                }              
+                this.txtButton.Text = opControlName;
+
             }
-            this.toolTip1.SetToolTip(this.textButton, opControlName);        
+            this.nameToolTip.SetToolTip(this.txtButton, opControlName);
+        }
+
+        public void resizetoBig()
+        {
+            this.Size = new System.Drawing.Size(194, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(159, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(179, 11);
+            this.txtButton.Size = new System.Drawing.Size(124, 23);
+            this.textBox1.Size = new System.Drawing.Size(124, 23);
+        }
+        public void resizetoSmall()
+        {
+            this.Size = new System.Drawing.Size(142, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(107, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(131, 11);
+            this.txtButton.Size = new System.Drawing.Size(72, 23);
+            this.textBox1.Size = new System.Drawing.Size(72, 23);
+        }
+        public void resizetoNormal()
+        {
+            this.Size = new System.Drawing.Size(184, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(151, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(170, 11);
+            this.txtButton.Size = new System.Drawing.Size(114, 23);
+            this.textBox1.Size = new System.Drawing.Size(110, 23);
         }
 
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            //this.renameModel.StartPosition = FormStartPosition.CenterScreen;
-            //DialogResult dialogResult = this.renameModel.ShowDialog();
-            //if (dialogResult == DialogResult.OK)
-            //this.textBox1.Text = this.renameModel.opControlName;
-            //SetOpControlName(this.textBox1.Text);
-            //this.textBox1.Enabled  = true;
             this.textBox1.ReadOnly = false;
 
-            this.textButton.Visible = false;
+            this.txtButton.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
@@ -205,16 +239,56 @@ namespace Citta_T1.Controls
                 this.textBox1.ReadOnly = true;
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
-                this.textButton.Visible = true; 
+                this.txtButton.Visible = true;
             }
         }
 
-        
-        private void textButton_Click(object sender, EventArgs e)
+        private void textBox1_Leave(object sender, EventArgs e)
         {
-            // TODO 一层一层找爸爸方法有点蠢
-            MainForm prt = (MainForm)Parent.Parent;
-            prt.OverViewDataByIndex(this.index);
+            if (this.textBox1.Text.Length == 0)
+                return;
+            this.textBox1.ReadOnly = true;
+            SetOpControlName(this.textBox1.Text);
+            this.textBox1.Visible = false;
+            this.txtButton.Visible = true;
+        }
+
+        private void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            String helpInfo = "温馨提示";
+            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+        }
+
+        private void txtButton_Click(object sender, EventArgs e)
+        {
+            if (isData)
+            {
+                // TODO 一层一层找爸爸方法有点蠢
+                MainForm prt = (MainForm)Parent.Parent;
+                prt.OverViewDataByIndex(this.index);
+            }
+            else
+            {
+                System.Console.WriteLine("isClicked:" + isClicked);
+                if (isClicked)
+                {
+                    TimeSpan span = DateTime.Now - clickTime;
+                    clickTime = DateTime.Now;
+                    if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+
+                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                    {
+                        重命名ToolStripMenuItem_Click_1(this, e);
+                        isClicked = false;
+                    }
+                }
+                else
+                {
+                    isClicked = true;
+                    clickTime = DateTime.Now;
+                }
+            }
+
         }
     }
 }

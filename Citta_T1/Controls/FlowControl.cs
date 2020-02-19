@@ -13,12 +13,12 @@ namespace Citta_T1.Controls
     public partial class FlowControl : UserControl
     {
         public bool tmpTag;
-        
+        public bool selectFrame;
         //public bool TmpTag { get => tmpTag; set => tmpTag }
         public FlowControl()
         {
             InitializeComponent();
-            
+            selectFrame = false;
             tmpTag = true;
         }
 
@@ -99,6 +99,12 @@ namespace Citta_T1.Controls
                 HideFlowControl();
 
             tmpTag = !tmpTag;
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            selectFrame = !selectFrame;
+            
         }
     }
 }
