@@ -33,7 +33,7 @@
             this.headPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.helpPictureBox = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.portraitpictureBox = new System.Windows.Forms.PictureBox();
             this.usernamelabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.leftMainMenuPanel = new System.Windows.Forms.Panel();
@@ -93,7 +93,7 @@
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).BeginInit();
             this.leftMainMenuPanel.SuspendLayout();
             this.leftToolBoxPanel.SuspendLayout();
             this.bottomViewPanel.SuspendLayout();
@@ -124,7 +124,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.helpPictureBox);
-            this.panel2.Controls.Add(this.pictureBox4);
+            this.panel2.Controls.Add(this.portraitpictureBox);
             this.panel2.Controls.Add(this.usernamelabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(925, 0);
@@ -136,28 +136,28 @@
             // 
             this.helpPictureBox.Cursor = System.Windows.Forms.Cursors.Help;
             this.helpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("helpPictureBox.Image")));
-            this.helpPictureBox.Location = new System.Drawing.Point(168, 10);
+            this.helpPictureBox.Location = new System.Drawing.Point(192, 10);
             this.helpPictureBox.Name = "helpPictureBox";
             this.helpPictureBox.Size = new System.Drawing.Size(24, 24);
             this.helpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.helpPictureBox.TabIndex = 3;
             this.helpPictureBox.TabStop = false;
             // 
-            // pictureBox4
+            // portraitpictureBox
             // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(198, 10);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
+            this.portraitpictureBox.Image = ((System.Drawing.Image)(resources.GetObject("portraitpictureBox.Image")));
+            this.portraitpictureBox.Location = new System.Drawing.Point(222, 10);
+            this.portraitpictureBox.Name = "portraitpictureBox";
+            this.portraitpictureBox.Size = new System.Drawing.Size(24, 24);
+            this.portraitpictureBox.TabIndex = 3;
+            this.portraitpictureBox.TabStop = false;
             // 
             // usernamelabel
             // 
             this.usernamelabel.AutoSize = true;
             this.usernamelabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.usernamelabel.ForeColor = System.Drawing.Color.White;
-            this.usernamelabel.Location = new System.Drawing.Point(229, 12);
+            this.usernamelabel.Location = new System.Drawing.Point(257, 12);
             this.usernamelabel.Name = "usernamelabel";
             this.usernamelabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.usernamelabel.Size = new System.Drawing.Size(58, 22);
@@ -815,7 +815,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.portraitpictureBox)).EndInit();
             this.leftMainMenuPanel.ResumeLayout(false);
             this.leftToolBoxPanel.ResumeLayout(false);
             this.bottomViewPanel.ResumeLayout(false);
@@ -880,7 +880,7 @@
         private Controls.FlowChartControl flowChartControl;
         private Citta_T1.Controls.DataSourceControl dataSourceControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox portraitpictureBox;
         private DataGridView1 dataGridView1;
         private DataGridView2 dataGridView2;
         private System.Windows.Forms.Button downloadButton;
