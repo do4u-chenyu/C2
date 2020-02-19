@@ -97,10 +97,10 @@ namespace Citta_T1.Controls.Small
             int num = 0;
             int num2 = 0;
             
-            if (models.Count > 1)
+            
+            
+            if (models.Count < 12 && removeit)
             {
-                if (models.Count < 12 && removeit)
-                {
                     if (models.Count > 0)
                         models[0].Location = OriginalLocation;
                         models[0].Size = new Size(140, 26);
@@ -113,9 +113,9 @@ namespace Citta_T1.Controls.Small
                         newLocation.Y = 6;
                         models[j].Location = newLocation;
                     }
-                }
-                if (models.Count >= 12)
-                {
+            }
+            if (models.Count >= 12)
+            {
                     foreach (ModelTitleControl obj in models)
                     {
                         if (distance1 == 0)
@@ -144,8 +144,8 @@ namespace Citta_T1.Controls.Small
 
                     }
 
-                }
             }
+            
             removeit = false;
         }
 
