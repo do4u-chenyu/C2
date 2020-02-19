@@ -1,0 +1,10 @@
+num	groupid	user	location	label
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
+ 	 	 	 	 
