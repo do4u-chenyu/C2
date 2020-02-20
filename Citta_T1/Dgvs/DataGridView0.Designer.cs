@@ -101,7 +101,6 @@ namespace Citta_T1
         {
             /*
              * 初始化行
-             * TODO
              * 使用样例数据
              */
             string data;

@@ -276,10 +276,9 @@ namespace  Citta_T1
 
         void frm_InputDataEvent(Citta_T1.Data data)
         {
-            // `FormInputData`中的数据添加处理方式
-            string index = GenerateMD5(data.content + new Random().Next().ToString());
-            Program.inputDataDict.Add(index, data);
-            this.dataSourceControl.genDataButton(index, data.dataName, data.filePath);
+            // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
+            string index = GenerateMD5(data.content);
+            this.dataSourceControl.GenDataButton(index, data.dataName, data.filePath);
         }
 
         public void OverViewDataByIndex(string index)
@@ -400,6 +399,11 @@ namespace  Citta_T1
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                 this.runButton.Name = "runButton";
             }
+        }
+
+        public void RenameDataButton(string index, string dstName)
+        {
+            this.dataSourceControl.RenameDataButton(index, dstName);
         }
     }
 }

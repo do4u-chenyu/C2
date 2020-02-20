@@ -13,7 +13,7 @@ namespace Citta_T1.Controls
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        private List<string> contents = new List<string>();
+        private Dictionary<string, Button> dataSourceDictI2B = new Dictionary<string, Button>();
         private System.Windows.Forms.Button tempButton = new System.Windows.Forms.Button();
         public DataSourceControl()
         {
@@ -33,19 +33,25 @@ namespace Citta_T1.Controls
                 (sender as Button).DoDragDrop(data, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        public void genDataButton(string index, string dataName, string filePath)
+        public void GenDataButton(string index, string dataName, string filePath)
         {
             // 根据导入数据动态生成一个button
-            this.contents.Add(index);
             System.Windows.Forms.Button b = new System.Windows.Forms.Button();
-            b.Location = new System.Drawing.Point(46, 50 * this.contents.Count()); // 递增
+            b.Location = new System.Drawing.Point(46, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
             b.Name = index;
             b.Size = new System.Drawing.Size(100, 40); // 固定的
             b.TabIndex = 0;
             b.Text = dataName;
             b.UseVisualStyleBackColor = true;
             b.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.dataSourceDictI2B.Add(index, b);
             this.LocalFrame.Controls.Add(b);
+        }
+
+        public void RenameDataButton(string index, string dstName)
+        {
+            // 根据index重命名button
+            this.dataSourceDictI2B[index].Text = dstName;
         }
 
         private void LocalFrame_Paint(object sender, PaintEventArgs e)
