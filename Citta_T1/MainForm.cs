@@ -19,6 +19,7 @@ namespace  Citta_T1
         Graphics g;
         Pen p;
         private bool isBottomViewPanelMinimum;
+        private bool isLeftViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -30,6 +31,7 @@ namespace  Citta_T1
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
+            this.isLeftViewPanelMinimum = false;
             InitializeControlsLocation();
    
         }
@@ -352,5 +354,23 @@ namespace  Citta_T1
 
         }
 
+        private void leftFoldButton_Click(object sender, EventArgs e)
+        {
+            if (this.isLeftViewPanelMinimum == true)
+            {
+                this.isLeftViewPanelMinimum = false;
+                this.leftToolBoxPanel.Width = 187;
+                //this.panel3.Location = new System.Drawing.Point(430, 300);
+                this.leftFoldButton.Image = ((System.Drawing.Image)resources.GetObject("leftFoldButton.Image"));
+            }
+            else
+            {
+                this.isLeftViewPanelMinimum = true;
+                this.leftToolBoxPanel.Width = 10;
+                //this.panel3.Location = new System.Drawing.Point(253, 300);
+                this.leftFoldButton.Image = ((System.Drawing.Image)resources.GetObject("rightFoldButton.Image"));
+            }
+            InitializeControlsLocation();
+        }
     }
 }
