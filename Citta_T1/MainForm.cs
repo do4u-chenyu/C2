@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace  Citta_T1
         Bitmap i;
         Graphics g;
         Pen p;
+        public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         private Citta_T1.Dialogs.FormInputData formInputData;
@@ -239,10 +241,21 @@ namespace  Citta_T1
 
         private void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
+            // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             MoveOpControl btn = new MoveOpControl();
             btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
             this.CanvasPanel.Controls.Add(btn);
             btn.textBox1.Text = e.Data.GetData("Text").ToString();
+            try
+            {
+                btn.isData = (bool)e.Data.GetData("isData");
+                btn.index = e.Data.GetData("index").ToString();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            // 根据button的名字来初始化画布中的button针脚数
             btn.doublelPinFlag  = btn.doublePin.Contains(btn.textBox1.Text.ToString());
             btn.InitializeOpPinPicture();
             this.naviViewControl.AddControl(btn);
@@ -265,7 +278,15 @@ namespace  Citta_T1
 
         void frm_InputDataEvent(Citta_T1.Data data)
         {
-            this.dataSourceControl.AddData(data);
+            // `FormInputData`中的数据添加处理方式
+            string index = GenerateMD5(data.content + new Random().Next().ToString());
+            Program.inputDataDict.Add(index, data);
+            this.dataSourceControl.genDataButton(index, data.dataName, data.filePath);
+        }
+
+        public void OverViewDataByIndex(string index)
+        {
+            this.dataGridView3.OverViewDataByIndex(index);
         }
 
         private void canvasPanel_Paint(object sender, PaintEventArgs e)
@@ -275,7 +296,17 @@ namespace  Citta_T1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            int lettercount=0;
+            int newstringcount;
+            lettercount = System.Text.RegularExpressions.Regex.Matches(this.Tag.ToString(), "[a-zA-Z0-9]").Count;
+            newstringcount = this.Tag.ToString().Length - lettercount/2;
+            newstringcount =( newstringcount - 3)*15;
             this.usernamelabel.Text = this.Tag.ToString();
+            Point newusernameLocation = new Point(185,10);
+            this.usernamelabel.Location =new Point(newusernameLocation.X+65- newstringcount, newusernameLocation.Y+2);
+            this.helpPictureBox.Location = new Point(newusernameLocation.X-newstringcount, newusernameLocation.Y);
+            this.portraitpictureBox.Location = new Point(newusernameLocation.X+30- newstringcount, newusernameLocation.Y+1);
+
         }
 
         private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
@@ -327,6 +358,26 @@ namespace  Citta_T1
             MouseIsDown = false;
         }
 
+        /// <summary>
+        /// MD5字符串加密
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns>加密后字符串</returns>
+        public static string GenerateMD5(string txt)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(txt);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
         private void stopButton_Click(object sender, EventArgs e)
         {
 
@@ -351,7 +402,6 @@ namespace  Citta_T1
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                 this.runButton.Name = "runButton";
             }
-
         }
 
         private void leftFoldButton_Click(object sender, EventArgs e)
@@ -362,6 +412,7 @@ namespace  Citta_T1
                 this.leftToolBoxPanel.Width = 187;
                 //this.panel3.Location = new System.Drawing.Point(430, 300);
                 this.leftFoldButton.Image = ((System.Drawing.Image)resources.GetObject("leftFoldButton.Image"));
+
             }
             else
             {
@@ -372,5 +423,6 @@ namespace  Citta_T1
             }
             InitializeControlsLocation();
         }
+
     }
 }

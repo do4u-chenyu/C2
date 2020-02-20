@@ -8,6 +8,7 @@ namespace Citta_T1
 {
     static class Program
     {
+        public static Dictionary<string, Citta_T1.Data> inputDataDict = new Dictionary<string, Citta_T1.Data>();
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

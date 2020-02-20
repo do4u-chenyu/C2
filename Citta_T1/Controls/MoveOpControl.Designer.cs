@@ -44,8 +44,8 @@ namespace Citta_T1.Controls
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtLabel = new System.Windows.Forms.Label();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.txtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -193,22 +193,21 @@ namespace Citta_T1.Controls
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // txtLabel
+            // txtButton
             // 
-            this.txtLabel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.txtLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtLabel.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.txtLabel.Location = new System.Drawing.Point(53, 3);
-            this.txtLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.txtLabel.Name = "txtLabel";
-            this.txtLabel.Size = new System.Drawing.Size(168, 32);
-            this.txtLabel.TabIndex = 7;
-            this.txtLabel.Text = "连接算子";
-            this.txtLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.txtLabel.Click += new System.EventHandler(this.txtLabel_Click);
-            this.txtLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
-            this.txtLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
-            this.txtLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
+            this.txtButton.FlatAppearance.BorderSize = 0;
+            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtButton.Location = new System.Drawing.Point(56, 1);
+            this.txtButton.Name = "txtButton";
+            this.txtButton.Size = new System.Drawing.Size(165, 37);
+            this.txtButton.TabIndex = 8;
+            this.txtButton.Text = "button1";
+            this.txtButton.UseVisualStyleBackColor = true;
+            this.txtButton.Click += new System.EventHandler(this.txtButton_Click);
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 
@@ -219,7 +218,7 @@ namespace Citta_T1.Controls
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
-            this.Controls.Add(this.txtLabel);
+            this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rightPinPictureBox);
             this.Controls.Add(this.leftPinPictureBox);
@@ -259,7 +258,7 @@ namespace Citta_T1.Controls
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label txtLabel;
         private System.Windows.Forms.ToolTip helpToolTip;
+        private System.Windows.Forms.Button txtButton;
     }
 }

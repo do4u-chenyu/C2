@@ -1,32 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 
 namespace Citta_T1.Controls
 {
-
+    public delegate void delegateOverViewData(string index);
     public partial class MoveOpControl : UserControl
     {
-        private static Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
+        private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
-        public string doublePin = "连接算子 取差集 取交集 取并集 ";
+        public string doublePin = "连接算子 取差集 取交集 取并集";
         public bool doublelPinFlag = false;
 
         DateTime clickTime;
         bool isClicked = false;
 
-
-
+        public bool isData;
+        public string index;
+        public event delegateOverViewData overViewData;
         public MoveOpControl()
         {
 
@@ -37,6 +32,11 @@ namespace Citta_T1.Controls
         {
             SetOpControlName(this.textBox1.Text);
             System.Console.WriteLine(doublelPinFlag);
+            
+            if (isData)
+            {
+                this.Controls.Remove(this.leftPinPictureBox);
+            }
             if (doublelPinFlag)
             {
                 int x = this.leftPinPictureBox.Location.X;
@@ -64,9 +64,9 @@ namespace Citta_T1.Controls
         {
             if (isMouseDown)
             {
-                if (sender is Label)
+                if (sender is Button)
                 {
-                    sender = (sender as Label).Parent;
+                    sender = (sender as Button).Parent;
                 }
                 if (sender is PictureBox)
                 {
@@ -98,9 +98,9 @@ namespace Citta_T1.Controls
             if (e.Button == MouseButtons.Left)
             {
                 isMouseDown = false;
-                if (sender is Label)
+                if (sender is Button)
                 {
-                    sender = (sender as Label).Parent;
+                    sender = (sender as Button).Parent;
                 }
                 if (sender is PictureBox)
                 {
@@ -150,7 +150,7 @@ namespace Citta_T1.Controls
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 16;
+            int maxLength = 14;
 
             int sumcount = 0;
             int sumcountDigit = 0;
@@ -164,7 +164,8 @@ namespace Citta_T1.Controls
             if (sumcount + sumcountDigit > maxLength)
             {
                 resizetoBig();
-                this.txtLabel.Text = SubstringByte(opControlName, 0, maxLength) + "...";
+                this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
+                System.Console.WriteLine("sumcountDigit:" + this.txtButton.Text);
             }
             else
             {
@@ -173,42 +174,42 @@ namespace Citta_T1.Controls
                 { 
                     resizetoSmall(); 
                 }              
-                this.txtLabel.Text = opControlName;
+                this.txtButton.Text = opControlName;
 
             }
-            this.nameToolTip.SetToolTip(this.txtLabel, opControlName);
+            this.nameToolTip.SetToolTip(this.txtButton, opControlName);
         }
 
         public void resizetoBig()
         {
-            this.Size = new System.Drawing.Size(185, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(150, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(172, 11);
-            this.txtLabel.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.Size = new System.Drawing.Size(115, 20);
+            this.Size = new System.Drawing.Size(194, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(159, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(179, 11);
+            this.txtButton.Size = new System.Drawing.Size(124, 23);
+            this.textBox1.Size = new System.Drawing.Size(124, 23);
         }
         public void resizetoSmall()
         {
-            this.Size = new System.Drawing.Size(140, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(105, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(130, 11);
-            this.txtLabel.Size = new System.Drawing.Size(70, 20);
-            this.textBox1.Size = new System.Drawing.Size(70, 20);
+            this.Size = new System.Drawing.Size(142, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(107, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(131, 11);
+            this.txtButton.Size = new System.Drawing.Size(72, 23);
+            this.textBox1.Size = new System.Drawing.Size(72, 23);
         }
         public void resizetoNormal()
         {
-            this.Size = new System.Drawing.Size(175, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(140, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(162, 11);
-            this.txtLabel.Size = new System.Drawing.Size(105, 20);
-            this.textBox1.Size = new System.Drawing.Size(105, 20);
+            this.Size = new System.Drawing.Size(184, 25);
+            this.rightPictureBox.Location = new System.Drawing.Point(151, 2);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(170, 11);
+            this.txtButton.Size = new System.Drawing.Size(114, 23);
+            this.textBox1.Size = new System.Drawing.Size(110, 23);
         }
 
         private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
 
-            this.txtLabel.Visible = false;
+            this.txtButton.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
@@ -238,28 +239,7 @@ namespace Citta_T1.Controls
                 this.textBox1.ReadOnly = true;
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
-                this.txtLabel.Visible = true;
-            }
-        }
-
-        private void txtLabel_Click(object sender, EventArgs e)
-        {
-            if (isClicked)
-            {
-                TimeSpan span = DateTime.Now - clickTime;
-                clickTime = DateTime.Now;
-                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
-
-                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                {
-                    重命名ToolStripMenuItem_Click_1(this, e);
-                    isClicked = false;
-                }
-            }
-            else
-            {
-                isClicked = true;
-                clickTime = DateTime.Now;
+                this.txtButton.Visible = true;
             }
         }
 
@@ -270,13 +250,45 @@ namespace Citta_T1.Controls
             this.textBox1.ReadOnly = true;
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
-            this.txtLabel.Visible = true;
+            this.txtButton.Visible = true;
         }
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+        }
+
+        private void txtButton_Click(object sender, EventArgs e)
+        {
+            if (isData)
+            {
+                // TODO 一层一层找爸爸方法有点蠢
+                MainForm prt = (MainForm)Parent.Parent;
+                prt.OverViewDataByIndex(this.index);
+            }
+            else
+            {
+                System.Console.WriteLine("isClicked:" + isClicked);
+                if (isClicked)
+                {
+                    TimeSpan span = DateTime.Now - clickTime;
+                    clickTime = DateTime.Now;
+                    if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+
+                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                    {
+                        重命名ToolStripMenuItem_Click_1(this, e);
+                        isClicked = false;
+                    }
+                }
+                else
+                {
+                    isClicked = true;
+                    clickTime = DateTime.Now;
+                }
+            }
+
         }
     }
 }
