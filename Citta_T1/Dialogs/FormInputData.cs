@@ -230,7 +230,7 @@ namespace Citta_T1.Dialogs
                     ColumnList[i].Name = "Col " + i.ToString();
                 }
                 // 预览表格清理
-                DvgClean();
+                DvgClean(false);
                 this.dataGridView1.Columns.AddRange(ColumnList);
                 // 写入数据
                 for (int row = 0; row < maxNumOfRow; row++)
@@ -251,9 +251,9 @@ namespace Citta_T1.Dialogs
                 // TODO 异常处理
             }
         }
-        public void DvgClean()
+        public void DvgClean(bool isClearDataName = true)
         {
-            this.textBox1.Text = null;
+            if (isClearDataName) { this.textBox1.Text = null; }
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
         }
