@@ -278,10 +278,9 @@ namespace  Citta_T1
 
         void frm_InputDataEvent(Citta_T1.Data data)
         {
-            // `FormInputData`中的数据添加处理方式
-            string index = GenerateMD5(data.content + new Random().Next().ToString());
-            Program.inputDataDict.Add(index, data);
-            this.dataSourceControl.genDataButton(index, data.dataName, data.filePath);
+            // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
+            string index = GenerateMD5(data.content);
+            this.dataSourceControl.GenDataButton(index, data.dataName, data.filePath);
         }
 
         public void OverViewDataByIndex(string index)
@@ -410,19 +409,19 @@ namespace  Citta_T1
             {
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
-                //this.panel3.Location = new System.Drawing.Point(430, 300);
-                this.leftFoldButton.Image = ((System.Drawing.Image)resources.GetObject("leftFoldButton.Image"));
 
             }
             else
             {
                 this.isLeftViewPanelMinimum = true;
                 this.leftToolBoxPanel.Width = 10;
-                //this.panel3.Location = new System.Drawing.Point(253, 300);
-                this.leftFoldButton.Image = ((System.Drawing.Image)resources.GetObject("rightFoldButton.Image"));
             }
             InitializeControlsLocation();
         }
 
+        public void RenameDataButton(string index, string dstName)
+        {
+            this.dataSourceControl.RenameDataButton(index, dstName);
+        }
     }
 }

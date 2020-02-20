@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Document.cs" />
+    <Compile Include="Controls\DataButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DataButton.Designer.cs">
+      <DependentUpon>DataButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataSourceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,9 @@
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ControlUtil.cs" />
+    <EmbeddedResource Include="Controls\DataButton.resx">
+      <DependentUpon>DataButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +266,10 @@
     <None Include="Resources\text_gbk_1.bmp" />
     <None Include="datas\text_gbk_1.txt" />
     <None Include="datas\text_utf8_1.txt" />
+    <None Include="Resources\dataButton.bmp" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\u72.png" />
+    <None Include="Resources\u721.png" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">

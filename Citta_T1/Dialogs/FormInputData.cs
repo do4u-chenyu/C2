@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -83,7 +84,6 @@ namespace Citta_T1.Dialogs
                 // 3.抽第一行，初始化列头
                 // 4.余下行作为数据，展示在dgv中
 
-                // TODO
                 // 1.设置dgv中的字体
                 // 2.设置dgv中的列宽
                 // 3.关闭窗口后清除表格数据
@@ -142,9 +142,24 @@ namespace Citta_T1.Dialogs
                     content = File.ReadAllText(fileName, Encoding.Default);
                 }
                 data = new Citta_T1.Data(name, fileName, content);
-                InputDataEvent(data);
-                DvgClean();
-                Close();
+                // 数据的内部唯一标识
+                string index = GenerateMD5(data.content);
+                if (!Program.inputDataDict.ContainsKey(index) && !Program.inputDataDictN2I.ContainsKey(name))
+                {
+                    Program.inputDataDict.Add(index, data);
+                    Program.inputDataDictN2I.Add(name, index);
+                    InputDataEvent(data);
+                    DvgClean();
+                    Close();
+                }
+                else if (Program.inputDataDict.ContainsKey(index))
+                {
+                    MessageBox.Show("该文件已存在！数据源名称：" + Program.inputDataDict[index].dataName);
+                }
+                else if (Program.inputDataDictN2I.ContainsKey(name))
+                {
+                    MessageBox.Show("该数据源名称已存在！请修改数据原名称。");
+                }
             }
         }
 
@@ -215,7 +230,7 @@ namespace Citta_T1.Dialogs
                     ColumnList[i].Name = "Col " + i.ToString();
                 }
                 // 预览表格清理
-                DvgClean();
+                DvgClean(false);
                 this.dataGridView1.Columns.AddRange(ColumnList);
                 // 写入数据
                 for (int row = 0; row < maxNumOfRow; row++)
@@ -236,11 +251,31 @@ namespace Citta_T1.Dialogs
                 // TODO 异常处理
             }
         }
-        public void DvgClean()
+        public void DvgClean(bool isClearDataName = true)
         {
-            this.textBox1.Text = null;
+            if (isClearDataName) { this.textBox1.Text = null; }
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
+        }
+        /// <summary>
+        /// MD5字符串加密
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns>加密后字符串</returns>
+        public static string GenerateMD5(string txt)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(txt);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
 
     }

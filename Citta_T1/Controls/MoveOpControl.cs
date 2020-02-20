@@ -7,6 +7,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Controls
 {
     public delegate void delegateOverViewData(string index);
+    public delegate void delegateRenameData(string index);
     public partial class MoveOpControl : UserControl
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -240,6 +241,11 @@ namespace Citta_T1.Controls
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
+                // 数据button
+                if (isData)
+                {
+                    ReNameDataButton(index, this.textBox1.Text);
+                }
             }
         }
 
@@ -251,6 +257,11 @@ namespace Citta_T1.Controls
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
+            // 数据button
+            if (isData)
+            {
+                ReNameDataButton(index, this.textBox1.Text);
+            }
         }
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -264,31 +275,41 @@ namespace Citta_T1.Controls
             if (isData)
             {
                 // TODO 一层一层找爸爸方法有点蠢
+                // TODO 需要所有数据控件都更新名称
                 MainForm prt = (MainForm)Parent.Parent;
                 prt.OverViewDataByIndex(this.index);
             }
-            else
+            System.Console.WriteLine("isClicked:" + isClicked);
+            if (isClicked)
             {
-                System.Console.WriteLine("isClicked:" + isClicked);
-                if (isClicked)
-                {
-                    TimeSpan span = DateTime.Now - clickTime;
-                    clickTime = DateTime.Now;
-                    if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+                TimeSpan span = DateTime.Now - clickTime;
+                clickTime = DateTime.Now;
+                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
 
-                    //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                    {
-                        重命名ToolStripMenuItem_Click_1(this, e);
-                        isClicked = false;
-                    }
-                }
-                else
+                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
                 {
-                    isClicked = true;
-                    clickTime = DateTime.Now;
+                    重命名ToolStripMenuItem_Click_1(this, e);
+                    isClicked = false;
                 }
             }
+            else
+            {
+                isClicked = true;
+                clickTime = DateTime.Now;
+            }
 
+        }
+        public void ReNameDataButton(string index, string dstName)
+        {
+            // 修改数据字典里的数据
+            Citta_T1.Data data = Program.inputDataDict[index];
+            data.dataName = dstName;
+            string srcName = data.dataName;
+            Program.inputDataDictN2I.Remove(srcName);
+            Program.inputDataDictN2I.Add(dstName, index);
+            // 修改DataSourceControl.cs中的展示名称
+            MainForm prt = (MainForm)Parent.Parent;
+            prt.RenameDataButton(this.index, dstName);
         }
     }
 }
