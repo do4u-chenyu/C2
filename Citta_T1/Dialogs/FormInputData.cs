@@ -89,16 +89,8 @@ namespace Citta_T1.Dialogs
                 // 3.关闭窗口后清除表格数据
                 // string content;
                 // Citta_T1.Data data;
-                if (this.textBox1.Text == "请输入数据名称")
-                {
-                    MessageBox.Show("请输入数据名称！");
-                }
-                else
-                {
-                    fileName = fd.FileName;
-                    overViewFile();
-                }
-
+                fileName = fd.FileName;
+                overViewFile();
             }
 
         }
@@ -131,20 +123,29 @@ namespace Citta_T1.Dialogs
         public event delegateInputData InputDataEvent;
         private void button2_Click(object sender, EventArgs e)
         {
+            // 添加按钮
             string content;
             Citta_T1.Data data;
             string name = this.textBox1.Text;
-            if (this.isUTF8)
+            if (this.textBox1.Text == "请输入数据名称")
             {
-                content = File.ReadAllText(fileName, Encoding.UTF8);
+                MessageBox.Show("请输入数据名称！");
             }
             else
             {
-                content = File.ReadAllText(fileName, Encoding.Default);
+                if (this.isUTF8)
+                {
+                    content = File.ReadAllText(fileName, Encoding.UTF8);
+                }
+                else
+                {
+                    content = File.ReadAllText(fileName, Encoding.Default);
+                }
+                data = new Citta_T1.Data(name, fileName, content);
+                InputDataEvent(data);
+                DvgClean();
+                Close();
             }
-            data = new Citta_T1.Data(name, fileName, content);
-            InputDataEvent(data);
-            Close();
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -154,6 +155,8 @@ namespace Citta_T1.Dialogs
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // 关闭按钮
+            DvgClean();
             Close();
         }
 
@@ -212,8 +215,7 @@ namespace Citta_T1.Dialogs
                     ColumnList[i].Name = "Col " + i.ToString();
                 }
                 // 预览表格清理
-                this.dataGridView1.Rows.Clear();
-                this.dataGridView1.Columns.Clear();
+                DvgClean();
                 this.dataGridView1.Columns.AddRange(ColumnList);
                 // 写入数据
                 for (int row = 0; row < maxNumOfRow; row++)
@@ -233,6 +235,12 @@ namespace Citta_T1.Dialogs
             {
                 // TODO 异常处理
             }
+        }
+        public void DvgClean()
+        {
+            this.textBox1.Text = null;
+            this.dataGridView1.Rows.Clear();
+            this.dataGridView1.Columns.Clear();
         }
 
     }
