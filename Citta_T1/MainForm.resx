@@ -436,7 +436,7 @@
   </data>
   <data name="leftFoldButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAABkCAYAAACRiYAFAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAABkCAIAAAAe6xdSAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
         DwAAjA8AAP1SAACBQAAAfXkAAOmLAAA85QAAGcxzPIV3AAAKOWlDQ1BQaG90b3Nob3AgSUNDIHByb2Zp
         bGUAAEjHnZZ3VFTXFofPvXd6oc0w0hl6ky4wgPQuIB0EURhmBhjKAMMMTWyIqEBEEREBRZCggAGjoUis
         iGIhKKhgD0gQUGIwiqioZEbWSnx5ee/l5ffHvd/aZ+9z99l7n7UuACRPHy4vBZYCIJkn4Ad6ONNXhUfQ
@@ -481,18 +481,12 @@
         RudN65tdA8sHzg46DF645Xrr8m2v29fvrLwzMBQydHc4cnjkLvvu5L2key/vZ9yff7DpIfph4SOpR+WP
         lR7X/aj3Y+uI5ciZUdfRvidBTx6Mscae/5T+04fx/Kfkp+UTqhONk2aTp6fcp24+W/1s/Hnq8/npgp+l
         f65+ofviu18cf+mbWTUz/pL/cuHX4lfyr468Xva6e9Z/9vGb5Dfzc4Vv5d8efcd41/s+7P3EfOYH7IeK
-        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAnFJREFUaEPtmrvKGlEU
-        hQ9JilwgeYA8QKq8TB4iz+AdRcVG8AaagBi8YGOhKIqKd6u/yquE1CE7Zw9zZIyrO2fO3+zi69biYzZb
-        p5itEokEab4RkfKJSiaTLGZeokBcqEKhYMQdFIgLVa/XjZh5gUJxoAaDAWUyGSP+gEJxoBaLBZXLZSP+
-        jkJxoI7HI3U6HYos2SsUdI26Xq80mUwom80asZclC8SbzYaq1aoRM7EvWSDmcfd6PUqlUkb8BoVdEogv
-        lwvNZjMqFotGHPs/WSBmdrsdNRqN6JLF+k92E5/PZxqPx9Hf9HtUcMVNzKzXa6pUKkYc67jvxKfTibrd
-        rpdx34l5yabTKeXzeSP+iEouuBMz2+2WIi+OL6jkggcxj5tfHKG4hkoueBAz/OIIxU+o5AIoPhwORvwL
-        lVwAxbxkofgPKrkAiplQrDO4aIuIRawzuGiLiEWsM7hoi4hFrDO4aIuIRawzuGiLiEWsM7hoi4hFrDO4
-        aIuIRawzuGiLiEWsM7hoi4hFrDO4aIuIRawzuGiLiEWsM7hoCxRHPnj9RSUXQDEfK4Ti36jkAiheLpdG
-        /BOVXPAgNrcCofgHKrngQbzf76ndbhvxV1RywYN4tVpFj44+o5IL7sS8zTzmdDptxO9QyQV3Yv5g3Wq1
-        /F9F/Hfb5ecOhLd5NBr5v3zhbeYxh9IhCrvkJuYxR66bPqGwSwIxj3k4HHrZZkMg5pOqZrPp7aSKUfzb
-        nc/nVCqVjNTLOawCY36Lgq5RvM18uRZKGS/XqIrH/Bz3t6rf70evE1+jUByoWq1mpIy/o99cLmekfs+c
-        n+NpGSP2+rREpP4BoyPjOnLm4JwAAAAASUVORK5CYII=
+        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAR5JREFUaEPt2sEKRVAQ
+        xnHv/1oiyUIsZCPZyEIsJEXco76SL7szs7nNb3XN1P8B7pxgWZZLR9A0DX5KC5IkOc8TX6KCMAzHccSX
+        qDtdVRW+RN3pKIr2fcdAzp12+r7HQA7SeZ5jIAdpZ11XzIQ86bZtMRPypNM0xUzIk3bmecZYwitd1zXG
+        El7pOI6P48DG2yvtDMOAjTdOl2WJjTdOO9u2YennI911HZZ+PtJZlmHp5yPtYOnH0sTSxNLE0sTSxNLE
+        0sTSxNLE0sTSxNLE0sTSxNLE0sTSxNLE0sTS5G/Siv9fK/7rrnUrKIoCG2+c1rrLKF6TFG9g0zRhLOFJ
+        K94bFa+kWrddxYu01h1d8fqv+GZB66WF4vsQrVct1/UDfo5y004FlhQAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="flowControl.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
