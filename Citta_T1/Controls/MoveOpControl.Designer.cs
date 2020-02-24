@@ -246,8 +246,8 @@ namespace Citta_T1.Controls
         #endregion
 
         private System.Windows.Forms.PictureBox rightPictureBox;
-        private System.Windows.Forms.PictureBox leftPicture;
-        private System.Windows.Forms.PictureBox leftPinPictureBox;
+        public System.Windows.Forms.PictureBox leftPicture;
+        public System.Windows.Forms.PictureBox leftPinPictureBox;
         private System.Windows.Forms.PictureBox rightPinPictureBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 菜单1ToolStripMenuItem;
@@ -259,6 +259,6 @@ namespace Citta_T1.Controls
         private System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolTip helpToolTip;
-        private System.Windows.Forms.Button txtButton;
+        public System.Windows.Forms.Button txtButton;
     }
 }

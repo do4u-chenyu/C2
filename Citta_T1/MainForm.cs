@@ -241,25 +241,45 @@ namespace  Citta_T1
 
         private void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
-            MoveOpControl btn = new MoveOpControl();
-            btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
-            this.CanvasPanel.Controls.Add(btn);
-            btn.textBox1.Text = e.Data.GetData("Text").ToString();
+            bool isData = false;
+            string index = null;
             try
             {
-                btn.isData = (bool)e.Data.GetData("isData");
-                btn.index = e.Data.GetData("index").ToString();
+                isData = (bool)e.Data.GetData("isData");
+                index = e.Data.GetData("index").ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            // 根据button的名字来初始化画布中的button针脚数
-            btn.doublelPinFlag  = btn.doublePin.Contains(btn.textBox1.Text.ToString());
-            btn.InitializeOpPinPicture();
-            this.naviViewControl.AddControl(btn);
-            this.naviViewControl.UpdateNaviView();
+            // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
+            if (isData)
+            {
+                Console.WriteLine("创建一个`MoveDtControl`对象");
+                MoveDtControl btn = new MoveDtControl();
+                btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
+                btn.index = index;
+                this.CanvasPanel.Controls.Add(btn);
+                btn.textBox1.Text = e.Data.GetData("Text").ToString();
+
+                btn.InitializeOpPinPicture();
+                this.naviViewControl.AddControl(btn);
+                this.naviViewControl.UpdateNaviView();
+            }
+            else
+            {
+                MoveOpControl btn = new MoveOpControl();
+                btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
+                this.CanvasPanel.Controls.Add(btn);
+                btn.textBox1.Text = e.Data.GetData("Text").ToString();
+
+                // 根据button的名字来初始化画布中的button针脚数
+                btn.doublelPinFlag = btn.doublePin.Contains(btn.textBox1.Text.ToString());
+                btn.InitializeOpPinPicture();
+                this.naviViewControl.AddControl(btn);
+                this.naviViewControl.UpdateNaviView();
+            }
+
         }
 
         private void formInputData_Load(object sender, EventArgs e)

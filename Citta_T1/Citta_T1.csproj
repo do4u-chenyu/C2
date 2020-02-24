@@ -64,6 +64,12 @@
     <Compile Include="Controls\FlowChartControl.Designer.cs">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MoveDtControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MoveDtControl.Designer.cs">
+      <DependentUpon>MoveDtControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RemarkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MoveDtControl.resx">
+      <DependentUpon>MoveDtControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>

@@ -17,12 +17,8 @@ namespace Citta_T1.Controls
         public string doublePin = "连接算子 取差集 取交集 取并集";
         public bool doublelPinFlag = false;
 
-        DateTime clickTime;
-        bool isClicked = false;
-
-        public bool isData;
-        public string index;
-        public event delegateOverViewData overViewData;
+        public DateTime clickTime;
+        public bool isClicked = false;
         public MoveOpControl()
         {
 
@@ -34,10 +30,6 @@ namespace Citta_T1.Controls
             SetOpControlName(this.textBox1.Text);
             System.Console.WriteLine(doublelPinFlag);
             
-            if (isData)
-            {
-                this.Controls.Remove(this.leftPinPictureBox);
-            }
             if (doublelPinFlag)
             {
                 int x = this.leftPinPictureBox.Location.X;
@@ -206,7 +198,7 @@ namespace Citta_T1.Controls
             this.textBox1.Size = new System.Drawing.Size(110, 23);
         }
 
-        private void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
 
@@ -230,7 +222,7 @@ namespace Citta_T1.Controls
                 }
             }
         }
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public virtual void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下回车键
             if (e.KeyChar == 13)
@@ -241,15 +233,10 @@ namespace Citta_T1.Controls
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
-                // 数据button
-                if (isData)
-                {
-                    ReNameDataButton(index, this.textBox1.Text);
-                }
             }
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
+        public virtual void textBox1_Leave(object sender, EventArgs e)
         {
             if (this.textBox1.Text.Length == 0)
                 return;
@@ -257,11 +244,6 @@ namespace Citta_T1.Controls
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
-            // 数据button
-            if (isData)
-            {
-                ReNameDataButton(index, this.textBox1.Text);
-            }
         }
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -270,15 +252,8 @@ namespace Citta_T1.Controls
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
 
-        private void txtButton_Click(object sender, EventArgs e)
+        public virtual void txtButton_Click(object sender, EventArgs e)
         {
-            if (isData)
-            {
-                // TODO 一层一层找爸爸方法有点蠢
-                // TODO 需要所有数据控件都更新名称
-                MainForm prt = (MainForm)Parent.Parent;
-                prt.OverViewDataByIndex(this.index);
-            }
             System.Console.WriteLine("isClicked:" + isClicked);
             if (isClicked)
             {
@@ -298,18 +273,6 @@ namespace Citta_T1.Controls
                 clickTime = DateTime.Now;
             }
 
-        }
-        public void ReNameDataButton(string index, string dstName)
-        {
-            // 修改数据字典里的数据
-            Citta_T1.Data data = Program.inputDataDict[index];
-            data.dataName = dstName;
-            string srcName = data.dataName;
-            Program.inputDataDictN2I.Remove(srcName);
-            Program.inputDataDictN2I.Add(dstName, index);
-            // 修改DataSourceControl.cs中的展示名称
-            MainForm prt = (MainForm)Parent.Parent;
-            prt.RenameDataButton(this.index, dstName);
         }
     }
 }
