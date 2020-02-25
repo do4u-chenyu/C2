@@ -13,15 +13,33 @@ namespace Citta_T1.Controls
     public partial class MoveDtControl : MoveOpControl
     {
         public string index;
+        private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
         public MoveDtControl()
         {
             InitializeComponent();
+            AddOverViewToMenu();
         }
 
         public new void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox1.Text);
             this.Controls.Remove(this.leftPinPictureBox);
+        }
+
+        private void AddOverViewToMenu()
+        {
+            this.overViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overViewMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.overViewMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("菜单1ToolStripMenuItem.BackgroundImage")));
+            this.overViewMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.overViewMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.overViewMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.overViewMenuItem.Name = "菜单1ToolStripMenuItem";
+            this.overViewMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.overViewMenuItem.Text = "预览";
+            this.overViewMenuItem.Click += new System.EventHandler(this.overViewMenuItem_Click);
+            this.contextMenuStrip.Items.Insert(0, this.overViewMenuItem);
         }
         public override void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -87,6 +105,18 @@ namespace Citta_T1.Controls
             // 修改DataSourceControl.cs中的展示名称
             MainForm prt = (MainForm)Parent.Parent;
             prt.RenameDataButton(this.index, dstName);
+        }
+
+        public void overViewMenuItem_Click(object sender, EventArgs e)
+        {
+            MainForm prt = (MainForm)Parent.Parent;
+            prt.OverViewDataByIndex(this.index);
+        }
+
+        public override void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            String helpInfo = Program.inputDataDict[index].filePath;
+            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
     }
 }

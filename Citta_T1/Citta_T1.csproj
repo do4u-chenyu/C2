@@ -106,8 +106,8 @@
     <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="data_struct\Data.cs" />
-    <Compile Include="data_struct\DataButtonInfo.cs" />
+    <Compile Include="DataStruct\Data.cs" />
+    <Compile Include="DataStruct\DataButtonInfo.cs" />
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +183,7 @@
     <Compile Include="Controls\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Bezier.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <EmbeddedResource Include="Controls\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>

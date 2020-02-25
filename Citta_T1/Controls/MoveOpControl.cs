@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -19,6 +20,15 @@ namespace Citta_T1.Controls
 
         public DateTime clickTime;
         public bool isClicked = false;
+
+        // 鼠标放在Pin上，Size的缩放倍率
+        int multiFactor = 2;
+
+        // 绘制贝塞尔曲线的起点
+        private int startX;
+        private int startY;
+        private Graphics g;
+
         public MoveOpControl()
         {
 
@@ -115,12 +125,26 @@ namespace Citta_T1.Controls
 
         private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(10, 10);
+            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
+            System.Drawing.Size oriSize = (sender as PictureBox).Size;
+            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
+            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
+            (sender as PictureBox).Location = dstLtCorner;
+            (sender as PictureBox).Size = dstSize;
+            //(sender as PictureBox).Size = new System.Drawing.Size(10, 10);
         }
 
         private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            (sender as PictureBox).Size = new System.Drawing.Size(5, 5);
+            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
+            System.Drawing.Size oriSize = (sender as PictureBox).Size;
+            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
+            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
+            (sender as PictureBox).Location = dstLtCorner;
+            (sender as PictureBox).Size = dstSize;
+            //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
 
         private void MoveOpControl_Load(object sender, EventArgs e)
@@ -246,7 +270,7 @@ namespace Citta_T1.Controls
             this.txtButton.Visible = true;
         }
 
-        private void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
@@ -273,6 +297,47 @@ namespace Citta_T1.Controls
                 clickTime = DateTime.Now;
             }
 
+        }
+
+        private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 绘制贝塞尔曲线，起点只能是rightPin
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            Console.WriteLine(this.Location.ToString());
+            isMouseDown = true;
+        }
+
+        private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
+            // TODO 绘制速度太慢了，体验非常不好
+            if (g != null)
+            {
+                g.Clear(Color.White);
+            }
+            if (isMouseDown)
+            {
+                int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+                int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+                PointF a = new PointF((startX + nowX) / 2, startY);
+                PointF b = new PointF((startX + nowX) / 2, nowY);
+                PointF[] pointList = new PointF[] { new PointF(startX, startY), a, b, new PointF(nowX, nowY) };
+                PointF[] aa = Bezier.draw_bezier_curves(pointList, pointList.Length, 0.001F);
+                g = this.Parent.CreateGraphics();
+                foreach (var item in aa)
+                {
+                    // 绘制曲线点
+                    // 下面是C#绘制到Panel画板控件上的代码
+                    g.DrawEllipse(new Pen(Color.Green), new RectangleF(item, new SizeF(2, 2)));
+                }
+            }
+        }
+
+        private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+            
         }
     }
 }
