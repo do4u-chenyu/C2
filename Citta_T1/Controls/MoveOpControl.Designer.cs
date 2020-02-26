@@ -127,6 +127,7 @@ namespace Citta_T1.Controls
             this.菜单1ToolStripMenuItem.Name = "菜单1ToolStripMenuItem";
             this.菜单1ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单1ToolStripMenuItem.Text = "设置";
+            this.菜单1ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click_1);
             // 
             // 菜单2ToolStripMenuItem
             // 

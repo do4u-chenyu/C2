@@ -29,6 +29,7 @@ namespace Citta_T1.Controls
         private int startY;
         private Graphics g;
 
+        private Citta_T1.OperatorViews.SortOperatorView randomOperatorView;
         public MoveOpControl()
         {
 
@@ -220,6 +221,13 @@ namespace Citta_T1.Controls
             this.rightPinPictureBox.Location = new System.Drawing.Point(170, 11);
             this.txtButton.Size = new System.Drawing.Size(114, 23);
             this.textBox1.Size = new System.Drawing.Size(110, 23);
+        }
+
+        public void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            this.randomOperatorView = new Citta_T1.OperatorViews.SortOperatorView();
+            this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
+            DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
         public void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
