@@ -106,5 +106,15 @@ namespace Citta_T1.Controls
             selectFrame = !selectFrame;
             
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            ((CanvasPanel)this.Parent).changeSize(true);
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            ((CanvasPanel)this.Parent).changeSize(false);
+        }
     }
 }

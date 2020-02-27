@@ -329,7 +329,7 @@ namespace Citta_T1.Controls
                 {
                     // 绘制曲线点
                     // 下面是C#绘制到Panel画板控件上的代码
-                    g.DrawEllipse(new Pen(Color.Green), new RectangleF(item, new SizeF(2, 2)));
+                    g.DrawEllipse(new Pen(Color.Green), new RectangleF(item, new SizeF(1, 1)));
                 }
             }
         }

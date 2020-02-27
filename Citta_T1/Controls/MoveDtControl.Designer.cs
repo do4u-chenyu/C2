@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -37,6 +38,7 @@
             this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
             this.leftPicture.Location = new System.Drawing.Point(15, 4);
             this.leftPicture.Size = new System.Drawing.Size(17, 20);
+            this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             // 
             // txtButton
             // 
@@ -44,9 +46,14 @@
             // 
             // MoveDtControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Name = "MoveDtControl";
+            this.Controls.SetChildIndex(this.leftPicture, 0);
+            this.Controls.SetChildIndex(this.rightPictureBox, 0);
+            this.Controls.SetChildIndex(this.leftPinPictureBox, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.txtButton, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();
             this.ResumeLayout(false);

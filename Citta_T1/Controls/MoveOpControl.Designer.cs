@@ -73,6 +73,7 @@ namespace Citta_T1.Controls
             this.leftPicture.Location = new System.Drawing.Point(15, 1);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(18, 23);
+            this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
@@ -197,7 +198,7 @@ namespace Citta_T1.Controls
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtButton.Location = new System.Drawing.Point(37, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(110, 25);
             this.txtButton.TabIndex = 8;
@@ -211,8 +212,7 @@ namespace Citta_T1.Controls
             // MoveOpControl
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
