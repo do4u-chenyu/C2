@@ -20,8 +20,6 @@ namespace Citta_T1.Controls.Small
             InitializeComponent();
             models = new List<ModelTitleControl>();
             InitializeDefaultModelTitleControl();
-
-
         }
 
         private void InitializeDefaultModelTitleControl()
@@ -33,32 +31,20 @@ namespace Citta_T1.Controls.Small
             this.Controls.Add(defaultModelTitleControl);
             models.Add(defaultModelTitleControl);
         }
-        public void updatetext()
+        public void UpModelTitle()
         {
             for (int h = 0; h < models.Count; h++)
             {
                 if (models.Count < 12 && removeit)
-                {
                     models[h].SetModelTitle(models[h].storeModelName());
-                }
                 else if (models.Count >= 12 && models.Count < 17)
-                {
-
-                    models[h].SetModelTitle3(models[h].storeModelName());
-
-                }
+                    models[h].SetModelTitle(models[h].storeModelName(), 3);
                 else if (models.Count >= 17 && models.Count < 20)
-                {
-                    models[h].SetModelTitle2(models[h].storeModelName());
-                }
+                    models[h].SetModelTitle(models[h].storeModelName(), 2);
                 else if (models.Count >= 20 && models.Count < 24)
-                {
-                    models[h].SetModelTitle1(models[h].storeModelName());
-                }
+                    models[h].SetModelTitle(models[h].storeModelName(), 1);
                 else if (models.Count >= 24)
-                {
-                    models[h].SetModelTitle0();
-                }
+                    models[h].SetEmptyModelTitle();
             }
         }
 
@@ -68,18 +54,13 @@ namespace Citta_T1.Controls.Small
             ModelTitleControl mtControl = new ModelTitleControl();
             models.Add(mtControl);
             mtControl.SetModelTitle(modelTitle);
-            updatetext();
-
+            UpModelTitle();
             // 根据容器中最后一个ModelTitleControl的Location
             // 设置新控件在ModelTitlePanel中的Location
             if (models.Count == 1)
                 mtControl.Location = new System.Drawing.Point(1, 6);
-
             else if (models.Count > 1)
             {
-
-
-
                 ModelTitleControl preMTC = models[models.Count - 2];
                 Point newLocation = new Point();
                 newLocation.X = preMTC.Location.X + preMTC.Width + 2;
@@ -95,10 +76,7 @@ namespace Citta_T1.Controls.Small
         {
             int distance1 = 0;
             int num = 0;
-            int num2 = 0;
-            
-            
-            
+            int num2 = 0;           
             if (models.Count < 12 && removeit)
             {
                     if (models.Count > 0)
@@ -119,9 +97,7 @@ namespace Citta_T1.Controls.Small
                     foreach (ModelTitleControl obj in models)
                     {
                         if (distance1 == 0)
-                        {
                             distance1 = obj.Size.Width;
-                        }
                         obj.Width = this.Size.Width / models.Count - 2;
                         int orig_width = obj.Width;
                         if (num >= models.Count - 3)
@@ -143,12 +119,10 @@ namespace Citta_T1.Controls.Small
                         num += 1;
 
                     }
-
             }
             
             removeit = false;
         }
-
         public void RemoveModel(ModelTitleControl mtControl)
         {
             // 关闭正是当前文档，需要重新选定左右两边的文档中的一个
@@ -162,8 +136,6 @@ namespace Citta_T1.Controls.Small
                 else if (index != -1 && index - 1 >= 0)
                     models[index - 1].ShowSelectedBorder();
             }
-
-
             models.Remove(mtControl);
             this.Controls.Remove(mtControl);
             mtControl.Dispose();
@@ -173,7 +145,7 @@ namespace Citta_T1.Controls.Small
             //else
             // ResetModelLocation();// 重新排版
             removeit = true;
-            updatetext();
+            UpModelTitle();
             ResizeModel(mtControl);//重新设置model大小
            
         }
@@ -191,14 +163,10 @@ namespace Citta_T1.Controls.Small
                 models[i].Location  = newLocation;
             }
         }
-
         public void ClearSelectedBorder()
         {
             foreach (ModelTitleControl mtc in this.models)
                 mtc.BorderStyle = BorderStyle.None;
-
         }
-
-
     }
 }
