@@ -52,6 +52,7 @@
     <Compile Include="Controls\CanvasPanel.Designer.cs">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,6 +151,60 @@
     </Compile>
     <Compile Include="Controls\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\AvgOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
+      <DependentUpon>AvgOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\CollideOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\CollideOperatorView.Designer.cs">
+      <DependentUpon>CollideOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\DifferOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\DifferOperatorView.Designer.cs">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\FreqOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\FreqOperatorView.Designer.cs">
+      <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\MaxOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\MaxOperatorView.Designer.cs">
+      <DependentUpon>MaxOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\MinOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\MinOperatorView.Designer.cs">
+      <DependentUpon>MinOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\RandomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\RandomOperatorView.Designer.cs">
+      <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\SortOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\SortOperatorView.Designer.cs">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\UnionOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\UnionOperatorView.Designer.cs">
+      <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -255,6 +310,33 @@
     <EmbeddedResource Include="Controls\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">
+      <DependentUpon>AvgOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\CollideOperatorView.resx">
+      <DependentUpon>CollideOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\DifferOperatorView.resx">
+      <DependentUpon>DifferOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\FreqOperatorView.resx">
+      <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
+      <DependentUpon>MaxOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\MinOperatorView.resx">
+      <DependentUpon>MinOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\RandomOperatorView.resx">
+      <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\SortOperatorView.resx">
+      <DependentUpon>SortOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\UnionOperatorView.resx">
+      <DependentUpon>UnionOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -337,6 +419,10 @@
     <ProjectReference Include="..\HZH_Controls\HZH_Controls\HZH_Controls.csproj">
       <Project>{af32e163-c577-4cbc-a072-0dc1ce0e1da3}</Project>
       <Name>HZH_Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserControlDLL\UserControlDLL.csproj">
+      <Project>{fac026d0-0c0f-4415-baba-9713ec1337cb}</Project>
+      <Name>UserControlDLL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

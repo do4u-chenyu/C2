@@ -52,31 +52,14 @@ namespace Citta_T1.Controls.Small
             }
             this.toolTip.SetToolTip(this.label1, modelTitle);
         }
-        public void SetModelTitle3(string modelTitle)
+        public void SetModelTitle(string modelTitle, int nr)
         {
-            if (modelTitle.Length > 3)
-                this.label1.Text = modelTitle.Substring(0, 3) + "...";
+            if (modelTitle.Length > nr)
+                this.label1.Text = modelTitle.Substring(0, nr) + "...";
             else
-                this.label1.Text = modelTitle.Substring(0,Math.Min(modelTitle.Length, 3));
-
+                this.label1.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, nr));
         }
-        public void SetModelTitle2(string modelTitle)
-        {
-            if(modelTitle.Length>2)
-                this.label1.Text = modelTitle.Substring(0,  2) + "...";
-            else
-                this.label1.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, 2));
-
-        }
-        public void SetModelTitle1(string modelTitle)
-        {
-            if (modelTitle.Length > 1)
-                this.label1.Text = modelTitle.Substring(0, 1) + "...";
-            else
-                this.label1.Text = modelTitle.Substring(0,Math.Min(modelTitle.Length, 1));
-
-        }
-        public void SetModelTitle0()
+        public void SetEmptyModelTitle()
         {
        
             this.label1.Text ="";
