@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Document.cs" />
+    <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

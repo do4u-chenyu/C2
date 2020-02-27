@@ -18,7 +18,7 @@ namespace Citta_T1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new loginform());
+            Application.Run(new LoginForm());
         }
     }
 }
