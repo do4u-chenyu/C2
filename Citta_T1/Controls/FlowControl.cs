@@ -111,6 +111,7 @@ namespace Citta_T1.Controls
             
         }
 
+        #region 放大与缩小
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             ((CanvasPanel)this.Parent).changeSize(true);
@@ -136,5 +137,6 @@ namespace Citta_T1.Controls
                 this.Parent.Cursor = Cursors.Default;
             }
         }
+        #endregion
     }
 }

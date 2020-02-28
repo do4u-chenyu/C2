@@ -131,6 +131,10 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请输入数据名称！");
             }
+            else if (fileName == null)
+            {
+                MessageBox.Show("请选择数据路径！");
+            }
             else
             {
                 if (this.isUTF8)

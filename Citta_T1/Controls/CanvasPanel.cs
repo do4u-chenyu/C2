@@ -12,7 +12,7 @@ namespace Citta_T1.Controls
 {
     public partial class CanvasPanel : Panel
     {
-        private int sizeLevel = 0;
+        public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
         private float deltaY;
@@ -96,12 +96,6 @@ namespace Citta_T1.Controls
                     {
                         moc = (MoveOpControl)con;
                     }
-                    Console.WriteLine(con.GetType().ToString());
-                    if (moc != null)
-                    {
-                        Console.WriteLine("MOC' Width: " + moc.Width);
-                        Console.WriteLine("MOC' Height: " + moc.Height);
-                    }
                     string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
                     //根据窗体缩放的比例确定控件的值
                     con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * newx);//宽度
@@ -111,12 +105,11 @@ namespace Citta_T1.Controls
                     Single currentSize = System.Convert.ToSingle(mytag[4]) * newy;//字体大小
                     // Note 字体变化会导致MoveOpControl的Width和Height也变化
                     con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
-                    Console.WriteLine(con.Name + "'Width变化之前: " + mytag[0] + ", 变化之后： " + con.Width.ToString());
-                    Console.WriteLine(con.Name + "'Height变化之前: " + mytag[1] + ", 变化之后： " + con.Height.ToString());
-                    Console.WriteLine(con.Name + "'Left变化之前: " + mytag[2] + ", 变化之后： " + con.Left.ToString());
-                    Console.WriteLine(con.Name + "'Top变化之前: " + mytag[3] + ", 变化之后： " + con.Top.ToString());
-                    Console.WriteLine(con.Name + "'Font变化之前: " + mytag[4] + ", 变化之后： " + currentSize.ToString());
-                    Console.WriteLine(con.Name + "'deep = " + deep.ToString());
+                    //Console.WriteLine(con.Name + "'Width变化之前: " + mytag[0] + ", 变化之后： " + con.Width.ToString());
+                    //Console.WriteLine(con.Name + "'Height变化之前: " + mytag[1] + ", 变化之后： " + con.Height.ToString());
+                    //Console.WriteLine(con.Name + "'Left变化之前: " + mytag[2] + ", 变化之后： " + con.Left.ToString());
+                    //Console.WriteLine(con.Name + "'Top变化之前: " + mytag[3] + ", 变化之后： " + con.Top.ToString());
+                    //Console.WriteLine(con.Name + "'Font变化之前: " + mytag[4] + ", 变化之后： " + currentSize.ToString());
                     if (con.Controls.Count > 0)
                     {
                         setControlsBySize(newx, newy, con);
@@ -132,32 +125,7 @@ namespace Citta_T1.Controls
         public int startY;
         public int nowX;
         public int nowY;
-        //public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
-        //{
-        //    if (e.Button == MouseButtons.Left)
-        //    {
-        //        startX = e.X;
-        //        startY = e.Y;
-        //        isLeftMouseDown = true;
-        //        Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
-        //    }
-            
-        //}
-        //public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
-        //{
 
-        //}
-        //public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    if (isLeftMouseDown)
-        //    {
-        //        nowX = e.X;
-        //        nowY = e.Y;
-        //        changLoc(nowX - startX, nowY - startY);
-        //        Console.WriteLine("After, X = " + startX.ToString() + ", Y = " + startY.ToString());
-        //    }
-
-        //}
         private void setControlsByDelta(float dx, float dy, Control cons)
         {
             deep += 1;
@@ -174,18 +142,11 @@ namespace Citta_T1.Controls
                         moc = (MoveOpControl)con;
                     }
                     Console.WriteLine(con.GetType().ToString());
-                    if (moc != null)
-                    {
-                        Console.WriteLine("MOC' Width: " + moc.Width);
-                        Console.WriteLine("MOC' Height: " + moc.Height);
-                    }
+
                     string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
                     //根据窗体缩放的比例确定控件的值
                     con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) + dx);//左边距
                     con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) + dy);//顶边距
-                    Console.WriteLine(con.Name + "'deep = " + deep.ToString());
-                    Console.WriteLine(con.Name + "'Left变化之前: " + mytag[2] + ", 变化之后： " + con.Left.ToString());
-                    Console.WriteLine(con.Name + "'Top变化之前: " + mytag[3] + ", 变化之后： " + con.Top.ToString());
                     if (con.Controls.Count > 0)
                     {
                         setControlsByDelta(dx, dy, con);

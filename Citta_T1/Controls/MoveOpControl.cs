@@ -32,8 +32,28 @@ namespace Citta_T1.Controls
         private Citta_T1.OperatorViews.SortOperatorView randomOperatorView;
         public MoveOpControl()
         {
-
             InitializeComponent();
+        }
+        public MoveOpControl(int sizeL, string text, Point p)
+        {
+            InitializeComponent();
+            textBox1.Text = text;
+            Location = p;
+            doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
+            InitializeOpPinPicture();
+            resetSize(sizeL);
+        }
+        public void resetSize(int sizeL)
+        {
+            Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+            while (sizeL > 0)
+            {
+                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+                changSize(true);
+                Console.WriteLine("MoveOpButton 放大一次");
+                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+                sizeL -= 1;
+            }
         }
 
         public void InitializeOpPinPicture()
@@ -306,7 +326,7 @@ namespace Citta_T1.Controls
             }
 
         }
-
+        #region 绘制贝塞尔曲线
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // 绘制贝塞尔曲线，起点只能是rightPin
@@ -347,6 +367,101 @@ namespace Citta_T1.Controls
             isMouseDown = false;
             
         }
+        #endregion
+
+        #region 托块的放大与缩小
+        private int deep = 0;
+        private MoveOpControl moc;
+        public int sizeLevel = 0;
+        public int canvasSizeLevel;
+        public void changSize(bool isLarger, float factor = 1.3F)
+        {
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+
+            setTag(this);
+            setControlsBySize(factor, factor, this);
+        }
+        
+        private void setTag(Control cons)
+        {
+            deep += 1;
+            if (deep == 1)
+            {
+                cons.Tag = cons.Width + ";" + cons.Height + ";" + cons.Left + ";" + cons.Top + ";" + cons.Font.Size;
+            }
+            foreach (Control con in cons.Controls)
+            {
+                con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
+                if (con.Controls.Count > 0)
+                {
+                    Console.WriteLine("setTag:" + con.GetType().ToString());
+                    setTag(con);
+                }
+            }
+            deep -= 1;
+        }
+        public static void SetDouble(Control cc)
+        {
+
+            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
+                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
+
+        }
+        private void setControlsBySize(float fx, float fy, Control cons)
+        {
+            deep += 1;
+            if (deep == 1)
+            {
+                Console.WriteLine(cons.GetType().ToString());
+                SetDouble(this);
+                SetDouble(cons);
+                string[] mytag = cons.Tag.ToString().Split(new char[] { ';' });
+                cons.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
+                cons.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
+                cons.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
+                cons.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
+                Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
+                // Note 字体变化会导致MoveOpControl的Width和Height也变化
+                cons.Font = new Font(cons.Font.Name, currentSize, cons.Font.Style, cons.Font.Unit);
+                Console.WriteLine(cons.Name + "'Width变化之前: " + mytag[0] + ", 变化之后： " + cons.Width.ToString());
+                Console.WriteLine(cons.Name + "'Height变化之前: " + mytag[1] + ", 变化之后： " + cons.Height.ToString());
+                Console.WriteLine(cons.Name + "'Left变化之前: " + mytag[2] + ", 变化之后： " + cons.Left.ToString());
+                Console.WriteLine(cons.Name + "'Top变化之前: " + mytag[3] + ", 变化之后： " + cons.Top.ToString());
+                Console.WriteLine(cons.Name + "'Font变化之前: " + mytag[4] + ", 变化之后： " + currentSize.ToString());
+                Console.WriteLine(cons.Name + "'deep = " + deep.ToString());
+            }
+            //遍历窗体中的控件，重新设置控件的值
+            foreach (Control con in cons.Controls)
+            {
+                ////获取控件的Tag属性值，并分割后存储字符串数组
+                SetDouble(this);
+                SetDouble(con);
+                if (con.Tag != null)
+                {
+                    if (con.Name == "MoveOpControl")
+                    {
+                        moc = (MoveOpControl)con;
+                    }
+                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
+                    //根据窗体缩放的比例确定控件的值
+                    con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
+                    con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
+                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
+                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
+                    Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
+                    // Note 字体变化会导致MoveOpControl的Width和Height也变化
+                    con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
+                    if (con.Controls.Count > 0)
+                    {
+                        setControlsBySize(fx, fy, con);
+                    }
+                }
+            }
+            deep -= 1;
+        }
+        #endregion
     }
 }
 

@@ -20,7 +20,16 @@ namespace Citta_T1.Controls
             InitializeComponent();
             AddOverViewToMenu();
         }
-
+        public MoveDtControl(string idx, int sizeL, string text, Point p)
+        {
+            InitializeComponent();
+            AddOverViewToMenu();
+            textBox1.Text = text;
+            Location = p;
+            doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
+            InitializeOpPinPicture();
+            resetSize(sizeL);
+        }
         public new void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox1.Text);

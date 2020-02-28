@@ -256,26 +256,24 @@ namespace  Citta_T1
             if (isData)
             {
                 Console.WriteLine("创建一个`MoveDtControl`对象");
-                MoveDtControl btn = new MoveDtControl();
-                btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
-                btn.index = index;
+                MoveDtControl btn = new MoveDtControl(
+                    index,
+                    this.CanvasPanel.sizeLevel,
+                    e.Data.GetData("Text").ToString(),
+                    this.PointToClient(new Point(e.X - 300, e.Y - 100))
+                );
                 this.CanvasPanel.Controls.Add(btn);
-                btn.textBox1.Text = e.Data.GetData("Text").ToString();
-
-                btn.InitializeOpPinPicture();
                 this.naviViewControl.AddControl(btn);
                 this.naviViewControl.UpdateNaviView();
             }
             else
             {
-                MoveOpControl btn = new MoveOpControl();
-                btn.Location = this.PointToClient(new Point(e.X - 300, e.Y - 100));
+                MoveOpControl btn = new MoveOpControl(
+                    this.CanvasPanel.sizeLevel, 
+                    e.Data.GetData("Text").ToString(), 
+                    this.PointToClient(new Point(e.X - 300, e.Y - 100))
+                );
                 this.CanvasPanel.Controls.Add(btn);
-                btn.textBox1.Text = e.Data.GetData("Text").ToString();
-
-                // 根据button的名字来初始化画布中的button针脚数
-                btn.doublelPinFlag = btn.doublePin.Contains(btn.textBox1.Text.ToString());
-                btn.InitializeOpPinPicture();
                 this.naviViewControl.AddControl(btn);
                 this.naviViewControl.UpdateNaviView();
             }
@@ -369,7 +367,6 @@ namespace  Citta_T1
                 g.Dispose();
                 p.Dispose();
             }
-            Console.WriteLine("e.Button == MouseButtons.Left: " + (e.Button == MouseButtons.Left).ToString());
             if (e.Button == MouseButtons.Left && this.flowControl.isClick)
             {
                 this.CanvasPanel.nowX = e.X;
