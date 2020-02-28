@@ -14,114 +14,105 @@ namespace Citta_T1.Controls.Small
     {
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
         private List<ModelTitleControl> models;
-        private bool removeit=false;
+        private int rawModelTitleNum = 9;
         public ModelTitlePanel()
         {
             InitializeComponent();
             models = new List<ModelTitleControl>();
-            InitializeDefaultModelTitleControl();
+            InitializeDefaultModelTitleControl(); //new 用户,老用户没有模型;老用户有模型,       
         }
 
         private void InitializeDefaultModelTitleControl()
         {
-            ModelTitleControl defaultModelTitleControl = new ModelTitleControl();
-            defaultModelTitleControl.Location = OriginalLocation;
-            defaultModelTitleControl.BorderStyle = BorderStyle.FixedSingle;
-           
-            this.Controls.Add(defaultModelTitleControl);
-            models.Add(defaultModelTitleControl);
+            AddModel("新建模型");
         }
         public void UpModelTitle()
         {
-            for (int h = 0; h < models.Count; h++)
+
+            foreach (ModelTitleControl mt in models)
             {
-                if (models.Count < 12 && removeit)
-                    models[h].SetModelTitle(models[h].storeModelName());
-                else if (models.Count >= 12 && models.Count < 17)
-                    models[h].SetModelTitle(models[h].storeModelName(), 3);
+                if (models.Count < rawModelTitleNum)
+                    mt.SetModelTitle(mt.ModelTitle);
+                else if (models.Count >= rawModelTitleNum && models.Count < 17)
+                    mt.SetModelTitle(mt.ModelTitle, 3);
                 else if (models.Count >= 17 && models.Count < 20)
-                    models[h].SetModelTitle(models[h].storeModelName(), 2);
+                    mt.SetModelTitle(mt.ModelTitle, 2);
                 else if (models.Count >= 20 && models.Count < 24)
-                    models[h].SetModelTitle(models[h].storeModelName(), 1);
+                    mt.SetModelTitle(mt.ModelTitle, 1);
                 else if (models.Count >= 24)
-                    models[h].SetEmptyModelTitle();
+                    mt.SetEmptyModelTitle();
             }
         }
 
         public void AddModel(string modelTitle)
         {
-           
+            //TODO
             ModelTitleControl mtControl = new ModelTitleControl();
             models.Add(mtControl);
             mtControl.SetModelTitle(modelTitle);
             UpModelTitle();
             // 根据容器中最后一个ModelTitleControl的Location
             // 设置新控件在ModelTitlePanel中的Location
-            if (models.Count == 1)
-                mtControl.Location = new System.Drawing.Point(1, 6);
-            else if (models.Count > 1)
+            if (models.Count <= 1)
+            {
+                mtControl.Location = OriginalLocation;
+                mtControl.BorderStyle = BorderStyle.FixedSingle;
+                this.Controls.Add(mtControl);
+            }
+            else // models.Count > 1
             {
                 ModelTitleControl preMTC = models[models.Count - 2];
-                Point newLocation = new Point();
-                newLocation.X = preMTC.Location.X + preMTC.Width + 2;
-                newLocation.Y = 6;
-                mtControl.Location = newLocation;
+                mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                 this.Controls.Add(mtControl);
-                ResizeModel(mtControl);
+                ResizeModel();
+                mtControl.ShowSelectedBorder();
             }
-            mtControl.ShowSelectedBorder();
-            removeit = false;
         }
-       public void ResizeModel(ModelTitleControl mtControl)
-        {
-            int distance1 = 0;
-            int num = 0;
-            int num2 = 0;           
-            if (models.Count < 12 && removeit)
-            {
-                    if (models.Count > 0)
-                        models[0].Location = OriginalLocation;
-                        models[0].Size = new Size(140, 26);
-                    for (int j = 1; j < models.Count; j++)
-                    {
-                        models[j].Size = new Size(140, 26);
-                        ModelTitleControl preMTC = models[j - 1];
-                        Point newLocation = new Point();
-                        newLocation.X = preMTC.Location.X + preMTC.Width + 2;
-                        newLocation.Y = 6;
-                        models[j].Location = newLocation;
-                    }
-            }
-            if (models.Count >= 12)
-            {
-                    foreach (ModelTitleControl obj in models)
-                    {
-                        if (distance1 == 0)
-                            distance1 = obj.Size.Width;
-                        obj.Width = this.Size.Width / models.Count - 2;
-                        int orig_width = obj.Width;
-                        if (num >= models.Count - 3)
-                        {
-                            obj.Width = (this.Size.Width - (orig_width + 2) * (models.Count)) / 3 + orig_width;
-                            obj.Location = new Point((orig_width + 2) * (models.Count - 3) + (obj.Width + 2) * num2,6);
-                            num2 += 1;
-                        }
-                        else
-                        {
-                            if (num == 0)
-                            {
-                                obj.Width = this.Size.Width / models.Count - 3;
-                                obj.Location = new Point(1, 6);
-                            }
-                            else
-                                obj.Location = new Point((obj.Width + 2) * num, 6);
-                        }
-                        num += 1;
 
-                    }
+        /*
+         * removeTag  删除动作引起的ResizeModel
+         */
+        public void ResizeModel(bool removeTag = false)
+        {
+
+            if (models.Count < rawModelTitleNum && removeTag)
+            {
+                if (models.Count > 0)
+                {
+                    models[0].Location = OriginalLocation;
+                    models[0].Size = new Size(140, 26);
+                }
+
+                for (int i = 1; i < models.Count; i++)
+                {
+                    models[i].Size = new Size(140, 26);
+                    ModelTitleControl preMTC = models[i - 1];
+                    models[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
+                }
             }
-            
-            removeit = false;
+            if (models.Count >= rawModelTitleNum)
+            {
+                int num2 = 0;
+                for (int i = 0; i < models.Count; i++)
+                {
+                    ModelTitleControl mtc = models[i];
+                    mtc.Width = this.Size.Width / models.Count - 2;
+                    int origWidth = mtc.Width;
+                    if (i == 0)
+                    {
+                        mtc.Width = this.Size.Width / models.Count - 3;
+                        mtc.Location = OriginalLocation;
+                    }
+                    else if (i >= models.Count - 3)
+                    {
+                        mtc.Width = (this.Size.Width - (origWidth + 2) * (models.Count)) / 3 + origWidth;
+                        mtc.Location = new Point((origWidth + 2) * (models.Count - 3) + (mtc.Width + 2) * num2, 6);
+                        num2 += 1; // num2 == index - models.Count -3 - ?
+                    }
+                    else
+                        mtc.Location = new Point((mtc.Width + 2) * i, 6);
+                }
+            }
         }
         public void RemoveModel(ModelTitleControl mtControl)
         {
@@ -142,26 +133,9 @@ namespace Citta_T1.Controls.Small
             // 当文档全部关闭时，自动创建一个新的默认文档
             if (models.Count == 0)
                 InitializeDefaultModelTitleControl();
-            //else
-            // ResetModelLocation();// 重新排版
-            removeit = true;
             UpModelTitle();
-            ResizeModel(mtControl);//重新设置model大小
-           
-        }
+            ResizeModel(true);//重新设置model大小
 
-        private void ResetModelLocation()
-        {
-            if (models.Count > 0)
-                models[0].Location = OriginalLocation;
-            for (int i = 1; i < models.Count; i++)
-            {
-                ModelTitleControl preMTC = models[i - 1];
-                Point newLocation = new Point();
-                newLocation.X = preMTC.Location.X + preMTC.Width + 2;
-                newLocation.Y = 6;
-                models[i].Location  = newLocation;
-            }
         }
         public void ClearSelectedBorder()
         {
