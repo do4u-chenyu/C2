@@ -333,10 +333,16 @@ namespace  Citta_T1
             MouseIsDown = true;
             basepoint = e.Location;
             this.blankButton.Focus();
+            if (e.Button == MouseButtons.Left)
+            {
+                this.CanvasPanel.startX = e.X;
+                this.CanvasPanel.startY = e.Y;
+                Console.WriteLine("Before, X = " + this.CanvasPanel.startX.ToString() + ", Y = " + this.CanvasPanel.startY.ToString());
+            }
         }
 
         private void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        {   
+        {
             if (MouseIsDown && flowControl.selectFrame)
             {
                 //实例化一个和窗口一样大的位图
@@ -362,6 +368,16 @@ namespace  Citta_T1
                 //释放gid和pen资源
                 g.Dispose();
                 p.Dispose();
+            }
+            Console.WriteLine("e.Button == MouseButtons.Left: " + (e.Button == MouseButtons.Left).ToString());
+            if (e.Button == MouseButtons.Left && this.flowControl.isClick)
+            {
+                this.CanvasPanel.nowX = e.X;
+                this.CanvasPanel.nowY = e.Y;
+                this.CanvasPanel.changLoc(this.CanvasPanel.nowX - this.CanvasPanel.startX, this.CanvasPanel.nowY - this.CanvasPanel.startY);
+                this.CanvasPanel.startX = e.X;
+                this.CanvasPanel.startY = e.Y;
+                Console.WriteLine("After, X = " + this.CanvasPanel.startX.ToString() + ", Y = " + this.CanvasPanel.startY.ToString());
             }
         }
 

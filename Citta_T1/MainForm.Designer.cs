@@ -918,13 +918,13 @@
         private System.Windows.Forms.Button flowChartButton;
         private Controls.RightHideButton rightHideButton;
         private Controls.RightShowButton rightShowButton;
-        private Controls.FlowControl flowControl;
+        public Controls.FlowControl flowControl;
         private Controls.Small.DragLineControl dragLineControl;
         private Controls.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
         private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;
-        private System.Windows.Forms.Button blankButton;
+        public System.Windows.Forms.Button blankButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel CanvasPanel;

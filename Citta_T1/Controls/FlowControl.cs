@@ -14,6 +14,7 @@ namespace Citta_T1.Controls
     {
         public bool tmpTag;
         public bool selectFrame;
+        public bool isClick = false;
         //public bool TmpTag { get => tmpTag; set => tmpTag }
         public FlowControl()
         {
@@ -29,7 +30,10 @@ namespace Citta_T1.Controls
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox1.BackColor = Color.FromArgb(235, 235, 235);
+            if (!isClick)
+            {
+                this.pictureBox1.BackColor = Color.FromArgb(235, 235, 235);
+            }   
         }
 
         private void PictureBox2_MouseEnter(object sender, EventArgs e)
@@ -115,6 +119,22 @@ namespace Citta_T1.Controls
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             ((CanvasPanel)this.Parent).changeSize(false);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            // 1. 点击之后图标变色
+            // 2. 鼠标变成手的图标
+            // 3. 画布中触发MouseDown MouseMove MouseUp动作
+            this.isClick = !this.isClick;
+            if (isClick)
+            {
+                this.Parent.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                this.Parent.Cursor = Cursors.Default;
+            }
         }
     }
 }
