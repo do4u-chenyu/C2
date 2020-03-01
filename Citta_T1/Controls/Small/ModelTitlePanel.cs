@@ -31,9 +31,9 @@ namespace Citta_T1.Controls.Small
             rawModelTitleNum = this.Width / 142;
             foreach (ModelTitleControl mt in models)
             {
-                if (models.Count < rawModelTitleNum)
+                if (models.Count <= rawModelTitleNum)
                     mt.SetOriginalModelTitle(mt.ModelTitle);
-                else if (models.Count >= rawModelTitleNum && models.Count < 17)
+                else if (models.Count > rawModelTitleNum && models.Count < 17)
                     mt.SetNewModelTitle(mt.ModelTitle, 3);
                 else if (models.Count >= 17 && models.Count < 20)
                     mt.SetNewModelTitle(mt.ModelTitle, 2);

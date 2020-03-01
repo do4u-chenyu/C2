@@ -33,27 +33,7 @@ namespace Citta_T1.Controls
 
         private void RightHideButton_Click(object sender, EventArgs e)
         {
-            foreach (Control ct in this.Parent.Controls)
-            {
-                if (ct.Name == "flowControl")
-                    ct.Visible = false;
-                if (ct.Name == "remarkControl")
-                {
-                    if (ct.Visible)
-                    {
-                        ct.Visible = false;
-                        foreach (Control ct2 in this.Parent.Controls)
-                        {
-                            if (ct2.Name == "flowControl")
-                            {
-                                (ct2 as FlowControl).tmpTag = true;
-                            }
-                        }
-                           
-                            
-                    }
-                }
-            }
+            FlowControlHidden();
         }
 
         private void label1_MouseEnter(object sender, EventArgs e)
@@ -72,29 +52,23 @@ namespace Citta_T1.Controls
 
         private void label1_Click(object sender, EventArgs e)
         {
+            FlowControlHidden();
+        }
+        private void FlowControlHidden()
+        {
             foreach (Control ct in this.Parent.Controls)
             {
-                  
+                if (ct.Name == "flowControl")
+                {
+                    ct.Visible = false;
+                    (ct as FlowControl).SelectRemark = true;
+                }
 
                 if (ct.Name == "remarkControl")
                 {
-                    if (ct.Visible)
-                    {
-                        ct.Visible = false;
-                        foreach (Control ct2 in this.Parent.Controls)
-                        {
-                            if (ct2.Name == "flowControl")
-                            {
-                                (ct2 as FlowControl).tmpTag = true;
-                            }
-                        }
-                    }
-                }
-                if (ct.Name == "flowControl")
                     ct.Visible = false;
-
+                }
             }
-     
         }
     }
 }

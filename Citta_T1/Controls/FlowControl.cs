@@ -12,15 +12,15 @@ namespace Citta_T1.Controls
 {
     public partial class FlowControl : UserControl
     {
-        public bool tmpTag;
+        private bool selectRemark;
         public bool selectFrame;
         public bool isClick = false;
-        //public bool TmpTag { get => tmpTag; set => tmpTag }
+        public bool SelectRemark { get => selectRemark; set => selectRemark = value; }
         public FlowControl()
         {
             InitializeComponent();
             selectFrame = false;
-            tmpTag = true;
+            selectRemark = true;
         }
 
         private void PictureBox1_MouseEnter(object sender, EventArgs e)
@@ -97,12 +97,12 @@ namespace Citta_T1.Controls
         
         private void pictureBox4_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
-            if (tmpTag)
+            if (selectRemark)
                 ShowFlowControl();
             else
                 HideFlowControl();
 
-            tmpTag = !tmpTag;
+            selectRemark = !selectRemark;
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)

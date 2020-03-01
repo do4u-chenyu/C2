@@ -43,7 +43,7 @@ namespace Citta_T1
             {
                 if (this.loginCheckBox.Checked && !users.Contains(name))
                 {
-                    lgInfo.CreatNewXml(name);
+                    lgInfo.CreatNewXml();
                     lgInfo.WriteUserInfo(name);
                 }
                 lgInfo.WriteLastLogin(name);

@@ -313,16 +313,13 @@ namespace  Citta_T1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int lettercount=0;
-            int newstringcount;
-            lettercount = System.Text.RegularExpressions.Regex.Matches(this.Tag.ToString(), "[a-zA-Z0-9]").Count;
-            newstringcount = this.Tag.ToString().Length - lettercount/2;
-            newstringcount =( newstringcount - 3)*15;
+            int count = System.Text.RegularExpressions.Regex.Matches(this.Tag.ToString(), "[a-z0-9]").Count;
+            int rightMargin = (this.Tag.ToString().Length - (count / 3) - 3) * 14;
             this.usernamelabel.Text = this.Tag.ToString();
-            Point newusernameLocation = new Point(185,10);
-            this.usernamelabel.Location =new Point(newusernameLocation.X+65- newstringcount, newusernameLocation.Y+2);
-            this.helpPictureBox.Location = new Point(newusernameLocation.X-newstringcount, newusernameLocation.Y);
-            this.portraitpictureBox.Location = new Point(newusernameLocation.X+30- newstringcount, newusernameLocation.Y+1);
+            Point userNameLocation = new Point(185,10);
+            this.usernamelabel.Location = new Point(userNameLocation.X+65- rightMargin, userNameLocation.Y+2);
+            this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
+            this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
 
         }
 
