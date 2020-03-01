@@ -25,54 +25,47 @@ namespace Citta_T1.Controls.Small
         public ModelTitleControl()
         {
             InitializeComponent();
-            SetModelTitle("新建模型");
+            SetOriginalModelTitle("新建模型");
 
 
         }
 
-        public void SetModelTitle(string modelTitle)
+        public void SetOriginalModelTitle(string modelTitle)
         {
 
             this.modelTitle = modelTitle;
             int maxLength = 6;
-            int sumcount = 0;
-
-            sumcount = Regex.Matches(modelTitle.Substring(0, Math.Min(maxLength, modelTitle.Length)), "[a-zA-Z0-9]").Count;
-
-            if (modelTitle.Length > maxLength && sumcount >= 4)
-            {
-                if (modelTitle.Length <= 8 || sumcount == 6 && modelTitle.Length <= 9)
-                    this.label1.Text = modelTitle.Substring(0, modelTitle.Length);
-                else if (sumcount == 6 && modelTitle.Length > 9)
-                    this.label1.Text = modelTitle.Substring(0, Math.Min(9, modelTitle.Length)) + "...";
-                else
-                    this.label1.Text = modelTitle.Substring(0, Math.Min(7, modelTitle.Length)) + "...";
-            }
-            else if (modelTitle.Length > maxLength && sumcount < 4)
-            {
-                this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
-            }
+            int digitLetterCount = 0;
+            if (modelTitle.Length <= maxLength)
+                this.label1.Text = modelTitle;
             else
             {
-                this.label1.Text = modelTitle.Substring(0, modelTitle.Length);
+                digitLetterCount = Regex.Matches(modelTitle.Substring(0, maxLength), "[a-zA-Z0-9]").Count;
+                if (digitLetterCount < 4)
+                    this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
+                else
+                {
+                    this.label1.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
+                    if (modelTitle.Length > 8)
+                        this.label1.Text += "...";
+                    else
+                        return;
+                }
             }
             this.toolTip.SetToolTip(this.label1, modelTitle);
         }
-        public void SetModelTitle(string modelTitle, int nr)
+        public void SetNewModelTitle(string modelTitle, int nr)
         {
-            if (modelTitle.Length > nr)
-                this.label1.Text = modelTitle.Substring(0, nr) + "...";
+            if (nr == 0)
+                this.label1.Text = "";
             else
+            {
                 this.label1.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, nr));
+                if (modelTitle.Length > nr)
+                    this.label1.Text += "...";
+            }
         }
-        public void SetEmptyModelTitle()
-        {
-
-            this.label1.Text = "";
-
-        }
-        public string storeModelName()
-        { return modelTitle; }
+ 
 
         private void ClosePictureBox_Click(object sender, EventArgs e)
         {
@@ -100,6 +93,7 @@ namespace Citta_T1.Controls.Small
             this.selected = true;
         }
 
+  
     }
 
 

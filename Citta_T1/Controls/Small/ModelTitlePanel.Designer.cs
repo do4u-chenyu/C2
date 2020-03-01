@@ -37,6 +37,7 @@
             this.DoubleBuffered = true;
             this.Name = "ModelTitlePanel";
             this.Size = new System.Drawing.Size(908, 36);
+            this.SizeChanged += new System.EventHandler(this.ModelTitlePanel_SizeChanged);
             this.ResumeLayout(false);
 
         }
