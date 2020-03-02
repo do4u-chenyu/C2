@@ -140,7 +140,7 @@ namespace Citta_T1.Controls.Small
 
         private void ModelTitlePanel_SizeChanged(object sender, EventArgs e)
         {
-            ResizeModel();
+            ResizeModel(true);
             UpModelTitle();
         }
     }

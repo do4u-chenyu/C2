@@ -146,6 +146,7 @@
             this.helpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.helpPictureBox.TabIndex = 3;
             this.helpPictureBox.TabStop = false;
+            this.helpPictureBox.Click += new System.EventHandler(this.helpPictureBox_Click);
             // 
             // portraitpictureBox
             // 
