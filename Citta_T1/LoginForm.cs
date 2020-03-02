@@ -36,23 +36,23 @@ namespace Citta_T1
         }
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            LoginInfo lgInfo = new LoginInfo();
-            string name = this.userNameComboBox.Text;
+            
+            string userName = this.userNameComboBox.Text;
+            if (userName == "")
+                return;
 
-            if (userNameComboBox.Text != "")
-            {
-                if (this.loginCheckBox.Checked && !users.Contains(name))
-                {
-                    lgInfo.CreatNewXml();
-                    lgInfo.WriteUserInfo(name);
-                }
-                lgInfo.WriteLastLogin(name);
-                this.Hide();
-                MainForm mainForm1 = new MainForm();
-                mainForm1.Tag = userNameComboBox.Text;
-                mainForm1.ShowDialog();
-                this.Close();
-            }
+            LoginInfo lgInfo = new LoginInfo();
+            lgInfo.CreatNewXml();
+            if (this.loginCheckBox.Checked && !users.Contains(userName))             
+                lgInfo.WriteUserInfo(userName);
+            lgInfo.WriteLastLogin(userName);
+             
+            this.Hide();
+            MainForm mainForm = new MainForm();
+            mainForm.GetUserName(userName);
+            mainForm.ShowDialog();
+            this.Close();
+           
         }
     }
 }

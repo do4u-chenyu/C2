@@ -22,6 +22,7 @@ namespace  Citta_T1
         public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
+        private string userName;
         private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -313,16 +314,19 @@ namespace  Citta_T1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int count = System.Text.RegularExpressions.Regex.Matches(this.Tag.ToString(), "[a-z0-9]").Count;
-            int rightMargin = (this.Tag.ToString().Length - (count / 3) - 3) * 14;
-            this.usernamelabel.Text = this.Tag.ToString();
+            int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
+            int rightMargin = (userName.Length - (count / 3) - 3) * 14;
+            this.usernamelabel.Text = userName;
             Point userNameLocation = new Point(185,10);
             this.usernamelabel.Location = new Point(userNameLocation.X+65- rightMargin, userNameLocation.Y+2);
             this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
 
         }
-
+        public void GetUserName(string userName)
+        {
+            this.userName = userName;
+        }
         private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             MouseIsDown = true;
