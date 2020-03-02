@@ -75,7 +75,7 @@
             this.importButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
-            this.CanvasPanel = new Citta_T1.Controls.CanvasPanel();
+            this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.blankButton = new System.Windows.Forms.Button();
@@ -106,7 +106,7 @@
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.CanvasPanel.SuspendLayout();
+            this.canvasPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -622,34 +622,34 @@
             this.newModelButton.UseVisualStyleBackColor = false;
             this.newModelButton.Click += new System.EventHandler(this.newModelButton_Click);
             // 
-            // CanvasPanel
+            // canvasPanel
             // 
-            this.CanvasPanel.AllowDrop = true;
-            this.CanvasPanel.BackColor = System.Drawing.Color.White;
-            this.CanvasPanel.Controls.Add(this.panel3);
-            this.CanvasPanel.Controls.Add(this.blankButton);
-            this.CanvasPanel.Controls.Add(this.remarkControl);
-            this.CanvasPanel.Controls.Add(this.flowControl);
-            this.CanvasPanel.Controls.Add(this.rightHideButton);
-            this.CanvasPanel.Controls.Add(this.rightShowButton);
-            this.CanvasPanel.Controls.Add(this.downloadButton);
-            this.CanvasPanel.Controls.Add(this.stopButton);
-            this.CanvasPanel.Controls.Add(this.runButton);
-            this.CanvasPanel.Controls.Add(this.pictureBox3);
-            this.CanvasPanel.Controls.Add(this.modelTitlePanel);
-            this.CanvasPanel.Controls.Add(this.naviViewControl);
-            this.CanvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CanvasPanel.Location = new System.Drawing.Point(323, 94);
-            this.CanvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.CanvasPanel.Name = "CanvasPanel";
-            this.CanvasPanel.Size = new System.Drawing.Size(906, 232);
-            this.CanvasPanel.TabIndex = 5;
-            this.CanvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
-            this.CanvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
-            this.CanvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPanel_Paint);
-            this.CanvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
-            this.CanvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
-            this.CanvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
+            this.canvasPanel.AllowDrop = true;
+            this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.panel3);
+            this.canvasPanel.Controls.Add(this.blankButton);
+            this.canvasPanel.Controls.Add(this.remarkControl);
+            this.canvasPanel.Controls.Add(this.flowControl);
+            this.canvasPanel.Controls.Add(this.rightHideButton);
+            this.canvasPanel.Controls.Add(this.rightShowButton);
+            this.canvasPanel.Controls.Add(this.downloadButton);
+            this.canvasPanel.Controls.Add(this.stopButton);
+            this.canvasPanel.Controls.Add(this.runButton);
+            this.canvasPanel.Controls.Add(this.pictureBox3);
+            this.canvasPanel.Controls.Add(this.modelTitlePanel);
+            this.canvasPanel.Controls.Add(this.naviViewControl);
+            this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasPanel.Location = new System.Drawing.Point(323, 94);
+            this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.canvasPanel.Name = "canvasPanel";
+            this.canvasPanel.Size = new System.Drawing.Size(906, 232);
+            this.canvasPanel.TabIndex = 5;
+            this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
+            this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
+            this.canvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPanel_Paint);
+            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
+            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
+            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
             // 
             // panel3
             // 
@@ -689,6 +689,7 @@
             this.remarkControl.Location = new System.Drawing.Point(694, 111);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
+            this.remarkControl.RemarkText = "";
             this.remarkControl.Size = new System.Drawing.Size(160, 160);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;
@@ -825,7 +826,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1229, 606);
-            this.Controls.Add(this.CanvasPanel);
+            this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
@@ -857,7 +858,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
-            this.CanvasPanel.ResumeLayout(false);
+            this.canvasPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -930,7 +931,7 @@
         public System.Windows.Forms.Button blankButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
-        private Controls.CanvasPanel CanvasPanel;
+        private Controls.CanvasPanel canvasPanel;
     }
 }
 

@@ -36,6 +36,8 @@ namespace Citta_T1.Controls.Small
             this.modelTitle = modelTitle;
             int maxLength = 6;
             int digitLetterCount = 0;
+            this.toolTip.SetToolTip(this.label1, modelTitle);
+
             if (modelTitle.Length <= maxLength)
                 this.label1.Text = modelTitle;
             else
@@ -43,16 +45,14 @@ namespace Citta_T1.Controls.Small
                 digitLetterCount = Regex.Matches(modelTitle.Substring(0, maxLength), "[a-zA-Z0-9]").Count;
                 if (digitLetterCount < 4)
                     this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
-                else
+                else //>=4
                 {
                     this.label1.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
                     if (modelTitle.Length > 8)
                         this.label1.Text += "...";
-                    else
-                        return;
                 }
             }
-            this.toolTip.SetToolTip(this.label1, modelTitle);
+            
         }
         public void SetNewModelTitle(string modelTitle, int nr)
         {

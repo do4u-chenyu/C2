@@ -27,6 +27,10 @@ namespace  Citta_T1
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
+        private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
+
+
+
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -36,10 +40,23 @@ namespace  Citta_T1
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
             InitializeControlsLocation();
-   
+            InitializeMainFormEventHandler();
+
+            modelDocumentDao = new Business.ModelDocumentDao();
         }
-      
-       
+
+        private void InitializeMainFormEventHandler()
+        {
+            // 新增文档事件
+            this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
+            //this.canvasPanel.NewOperator += 
+        }
+
+        private void ModelTitlePanel_NewModelDocument(object sender)
+        {
+            modelDocumentDao.ProcessNewModelDocument(sender);
+        }
+
         private void InitializeControlsLocation()
         {
             // 根据父控件对缩略图控件和底层工具按钮定位
@@ -55,13 +72,13 @@ namespace  Citta_T1
             this.naviViewControl.Location = new Point(x, y);
 
             // 底层工具按钮定位
-            x = x - (this.CanvasPanel.Width) / 2 + 100;
+            x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            Point org = new Point(this.CanvasPanel.Width, 0);
+            Point org = new Point(this.canvasPanel.Width, 0);
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
             Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
@@ -259,22 +276,22 @@ namespace  Citta_T1
                 Console.WriteLine("创建一个`MoveDtControl`对象");
                 MoveDtControl btn = new MoveDtControl(
                     index,
-                    this.CanvasPanel.sizeLevel,
+                    this.canvasPanel.sizeLevel,
                     e.Data.GetData("Text").ToString(),
                     this.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
-                this.CanvasPanel.Controls.Add(btn);
+                this.canvasPanel.Controls.Add(btn);
                 this.naviViewControl.AddControl(btn);
                 this.naviViewControl.UpdateNaviView();
             }
             else
             {
                 MoveOpControl btn = new MoveOpControl(
-                    this.CanvasPanel.sizeLevel, 
+                    this.canvasPanel.sizeLevel, 
                     e.Data.GetData("Text").ToString(), 
                     this.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
-                this.CanvasPanel.Controls.Add(btn);
+                this.canvasPanel.Controls.Add(btn);
                 this.naviViewControl.AddControl(btn);
                 this.naviViewControl.UpdateNaviView();
             }
@@ -334,9 +351,9 @@ namespace  Citta_T1
             this.blankButton.Focus();
             if (e.Button == MouseButtons.Left)
             {
-                this.CanvasPanel.startX = e.X;
-                this.CanvasPanel.startY = e.Y;
-                Console.WriteLine("Before, X = " + this.CanvasPanel.startX.ToString() + ", Y = " + this.CanvasPanel.startY.ToString());
+                this.canvasPanel.startX = e.X;
+                this.canvasPanel.startY = e.Y;
+                Console.WriteLine("Before, X = " + this.canvasPanel.startX.ToString() + ", Y = " + this.canvasPanel.startY.ToString());
             }
         }
 
@@ -363,19 +380,19 @@ namespace  Citta_T1
                     g.DrawRectangle(p, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
 
                 //将位图贴到窗口上
-                this.CanvasPanel.BackgroundImage = i;
+                this.canvasPanel.BackgroundImage = i;
                 //释放gid和pen资源
                 g.Dispose();
                 p.Dispose();
             }
             if (e.Button == MouseButtons.Left && this.flowControl.isClick)
             {
-                this.CanvasPanel.nowX = e.X;
-                this.CanvasPanel.nowY = e.Y;
-                this.CanvasPanel.changLoc(this.CanvasPanel.nowX - this.CanvasPanel.startX, this.CanvasPanel.nowY - this.CanvasPanel.startY);
-                this.CanvasPanel.startX = e.X;
-                this.CanvasPanel.startY = e.Y;
-                Console.WriteLine("After, X = " + this.CanvasPanel.startX.ToString() + ", Y = " + this.CanvasPanel.startY.ToString());
+                this.canvasPanel.nowX = e.X;
+                this.canvasPanel.nowY = e.Y;
+                this.canvasPanel.changLoc(this.canvasPanel.nowX - this.canvasPanel.startX, this.canvasPanel.nowY - this.canvasPanel.startY);
+                this.canvasPanel.startX = e.X;
+                this.canvasPanel.startY = e.Y;
+                Console.WriteLine("After, X = " + this.canvasPanel.startX.ToString() + ", Y = " + this.canvasPanel.startY.ToString());
             }
         }
 
@@ -384,7 +401,7 @@ namespace  Citta_T1
             i = new Bitmap(this.Width, this.Height);
             g = Graphics.FromImage(i);
             g.Clear(Color.Transparent);
-            this.CanvasPanel.BackgroundImage = i;
+            this.canvasPanel.BackgroundImage = i;
             g.Dispose();
 
             //标志位置低

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DocumentSaveLoad.cs" />
+    <Compile Include="Business\ModelDocumentDao.cs" />
     <Compile Include="Business\ModelDocument.cs" />
     <Compile Include="Business\ModelElement.cs" />
     <Compile Include="Controls\CanvasPanel.cs">

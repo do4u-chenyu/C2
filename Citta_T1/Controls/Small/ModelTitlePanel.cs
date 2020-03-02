@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Small
 {
+    public delegate void NewDocumentEventHandler(object sender);
     public partial class ModelTitlePanel : UserControl
     {
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
         private List<ModelTitleControl> models;
         private int rawModelTitleNum = 9;
+        public event NewDocumentEventHandler NewModelDocument;
         public ModelTitlePanel()
         {
             InitializeComponent();
             models = new List<ModelTitleControl>();
-            InitializeDefaultModelTitleControl(); //new 用户,老用户没有模型;老用户有模型,       
+            InitializeDefaultModelTitleControl(); //new 用户,老用户没有模型;老用户有模型,  
         }
 
         private void InitializeDefaultModelTitleControl()
@@ -49,7 +51,14 @@ namespace Citta_T1.Controls.Small
             //TODO
             ModelTitleControl mtControl = new ModelTitleControl();
             models.Add(mtControl);
-            mtControl.SetOriginalModelTitle(modelTitle);           
+            mtControl.SetOriginalModelTitle(modelTitle);
+
+            //TODO 创建事件
+
+            NewModelDocument?.Invoke(this);
+
+
+
             // 根据容器中最后一个ModelTitleControl的Location
             // 设置新控件在ModelTitlePanel中的Location
             if (models.Count <= 1)
