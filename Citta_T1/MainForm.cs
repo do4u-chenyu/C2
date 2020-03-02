@@ -59,16 +59,12 @@ namespace  Citta_T1
 
         private void InitializeControlsLocation()
         {
-            // 根据父控件对缩略图控件和底层工具按钮定位
-            Panel canvasPanel = (Panel)this.naviViewControl.Parent;
-            int x = canvasPanel.Location.X + canvasPanel.Width;
-            int y = canvasPanel.Location.Y + canvasPanel.Height;
+            Point org = new Point(this.canvasPanel.Width, 0);
+            Point org2 = new Point(0, this.canvasPanel.Height);
+            int x = org.X - 10 - this.naviViewControl.Width;
+            int y = org2.Y - 10 - this.naviViewControl.Height;
 
             // 缩略图定位
-            if (x - 330 - this.naviViewControl.Width> 0)
-                x = x - 330 - this.naviViewControl.Width;      
-            if (y - 100 - this.naviViewControl.Height> 0)
-                y = y - 100 - this.naviViewControl.Height;
             this.naviViewControl.Location = new Point(x, y);
 
             // 底层工具按钮定位
@@ -78,7 +74,6 @@ namespace  Citta_T1
             this.runButton.Location      = new Point(x, y + 50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            Point org = new Point(this.canvasPanel.Width, 0);
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
             Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
