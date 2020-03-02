@@ -14,60 +14,56 @@ namespace Citta_T1.Business
     {
         private string modelPath;
         private string modelFilePath;
-        private string rootName;
-        public DocumentSaveLoad(string userName, string modelTitle, string rootName)
+        public DocumentSaveLoad(string modelPath, string modelTitle)
         {
-            this.modelPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
+            this.modelPath = modelPath;
             this.modelFilePath = modelPath + modelTitle + ".xml";
-            this.rootName = rootName;
-
         }
-        public void CreatNewXml()
+        public void WriteXml(List<ModelElement> elementList)
         {
-
             Directory.CreateDirectory(modelPath);
-            FileStream fs1 = new FileStream(modelFilePath, FileMode.Create);
-            fs1.Close();
             XmlDocument xDoc = new XmlDocument();
-            XmlElement rootElement = xDoc.CreateElement(rootName);
-            xDoc.AppendChild(rootElement);
-            xDoc.Save(modelFilePath);
+            XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
+            xDoc.AppendChild(modelDocumentXml);
 
-        }
-        public void WriteXml(List<ModelElement> elementList, string subNodeName)
-        {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(modelFilePath);
-            var node2 = xDoc.SelectSingleNode(rootName);
-            foreach (ModelElement mele in elementList)
+            foreach (ModelElement me in elementList)
             {
-                XmlElement childElement1 = xDoc.CreateElement(subNodeName);
-                node2.AppendChild(childElement1);
+                XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
+                modelDocumentXml.AppendChild(modelElementXml);
+
                 XmlElement nameNode = xDoc.CreateElement("name");
-                childElement1.AppendChild(nameNode);
-                nameNode.InnerText = mele.GetName();
+                nameNode.InnerText = me.GetName();
+                modelElementXml.AppendChild(nameNode);
+
+               
                 XmlElement typeNode = xDoc.CreateElement("type");
-                childElement1.AppendChild(typeNode);
-                typeNode.InnerText = mele.Type.ToString();
-                if (mele.Type == ElementType.DataSource || mele.Type == ElementType.Operate)//类型判断，如是否为算子类型
+                typeNode.InnerText = me.Type.ToString();
+                modelElementXml.AppendChild(typeNode);
+                
+                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operate)//类型判断，如是否为算子类型
                 {
 
                     XmlElement subTypeNode = xDoc.CreateElement("subtype");
-                    childElement1.AppendChild(subTypeNode);
-                    subTypeNode.InnerText = mele.SubType.ToString();
+                    subTypeNode.InnerText = me.SubType.ToString();
+                    modelElementXml.AppendChild(subTypeNode);
+                    
                     XmlElement locationNode = xDoc.CreateElement("location");
-                    childElement1.AppendChild(locationNode);
-                    locationNode.InnerText = mele.Location.ToString();
+                    locationNode.InnerText = me.Location.ToString();
+                    modelElementXml.AppendChild(locationNode);
+                    
+
                     XmlElement statusNode = xDoc.CreateElement("status");
-                    childElement1.AppendChild(statusNode);
-                    statusNode.InnerText = mele.Status.ToString();
-                    if (mele.Type == ElementType.DataSource)
+                    statusNode.InnerText = me.Status.ToString();
+                    modelElementXml.AppendChild(statusNode);
+                    
+                    if (me.Type == ElementType.DataSource)
                     {
                         XmlElement pathNode = xDoc.CreateElement("path");
-                        childElement1.AppendChild(pathNode);
-                        pathNode.InnerText = mele.GetPath();
+                        pathNode.InnerText = me.GetPath();
+                        modelElementXml.AppendChild(pathNode);            
                     }
                 }
+
                 xDoc.Save(modelFilePath);
             }
 
@@ -77,17 +73,18 @@ namespace Citta_T1.Business
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
             List<ModelElement> modelElements = new List<ModelElement>();
-            XmlNode node = xDoc.SelectSingleNode(rootName);
-            var nodeLists = node.SelectNodes("modelelement");
-            foreach (XmlNode xn1 in nodeLists)
+            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
+
+            var nodeLists = rootNode.SelectNodes("ModelElement");
+            foreach (XmlNode xn in nodeLists)
             {
-                string type = xn1.SelectSingleNode("type").InnerText;
-                String name = xn1.SelectSingleNode("name").InnerText;
+                string type = xn.SelectSingleNode("type").InnerText;
+                String name = xn.SelectSingleNode("name").InnerText;
                 if ("Operate".Equals(type))
                 {
-                    string[] location = xn1.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
-                    string status = xn1.SelectSingleNode("status").InnerText;
-                    string subType = xn1.SelectSingleNode("subtype").InnerText;
+                    string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
+                    string status = xn.SelectSingleNode("status").InnerText;
+                    string subType = xn.SelectSingleNode("subtype").InnerText;
                     MoveOpControl cotl = new MoveOpControl();
                     cotl.textBox1.Text = name;
                     cotl.Location = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
@@ -95,27 +92,24 @@ namespace Citta_T1.Business
                     modelElements.Add(mElement);
 
                 }
-                if (type == "DataSource")
+                else if (type == "DataSource")
                 {
-                    string[] location = xn1.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
-                    string status = xn1.SelectSingleNode("status").InnerText;
-                    string subType = xn1.SelectSingleNode("subtype").InnerText;
-                    string path = xn1.SelectSingleNode("path").InnerText;
+                    string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
+                    string status = xn.SelectSingleNode("status").InnerText;
+                    string subType = xn.SelectSingleNode("subtype").InnerText;
+                    string path = xn.SelectSingleNode("path").InnerText;
                     MoveOpControl cotl = new MoveOpControl();//暂时定为为moveopctrol
                     cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     cotl.Location = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
                     ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType), path);
                     modelElements.Add(mElement);
                 }
-                if (type == "remark")
+                else if (type == "remark")
                 {
                     RemarkControl cotl = new RemarkControl();
                     ModelElement mElement = new ModelElement(EType(type), name, cotl);
                     modelElements.Add(mElement);
                 }
-
-
-
             }
             return modelElements;
 

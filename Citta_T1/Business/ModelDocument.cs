@@ -29,16 +29,15 @@ namespace Citta_T1.Business
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
-            this.savePath = "D:\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
+            this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*
          * 保存功能
          */
         public void Save()
         {
-            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(userName, modelTitle, "modeldocument");
-            dSaveLoad.CreatNewXml();
-            dSaveLoad.WriteXml(modelElements, "modelelement");
+            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
+            dSaveLoad.WriteXml(modelElements);
         }
         public void AddModelElement(ModelElement modelElement)
         {
@@ -48,7 +47,7 @@ namespace Citta_T1.Business
         }
         public void Load()
         {
-            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(userName, modelTitle, "modeldocument");
+            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
             modelElements = dSaveLoad.ReadXml();
         }
         public void Show()

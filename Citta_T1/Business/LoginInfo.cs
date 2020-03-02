@@ -23,8 +23,6 @@ namespace Citta_T1.Business
             Directory.CreateDirectory(path);
             if (!File.Exists(UserInfoPath))
             {
-                FileStream fs = new FileStream(UserInfoPath, FileMode.Create);
-                fs.Close();
                 XmlDocument xDoc = new XmlDocument();
                 XmlElement rootElement = xDoc.CreateElement("login");
                 xDoc.AppendChild(rootElement);
