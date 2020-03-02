@@ -339,6 +339,7 @@
             // 
             // minMaxPictureBox
             // 
+            this.minMaxPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minMaxPictureBox.Image")));
             this.minMaxPictureBox.Location = new System.Drawing.Point(115, 12);
             this.minMaxPictureBox.Name = "minMaxPictureBox";
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
@@ -699,6 +700,7 @@
             this.flowControl.Location = new System.Drawing.Point(694, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";
+            this.flowControl.SelectRemark = true;
             this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
             // 
