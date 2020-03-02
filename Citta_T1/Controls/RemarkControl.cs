@@ -16,5 +16,6 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
         }
+        public string RemarkText { get => textBox1.Text; set => textBox1.Text = value; }
     }
 }
