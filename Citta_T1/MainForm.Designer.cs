@@ -45,6 +45,7 @@
             this.operatorControl = new Citta_T1.Controls.OperatorControl();
             this.flowChartControl = new Citta_T1.Controls.FlowChartControl();
             this.dataSourceControl = new Citta_T1.Controls.DataSourceControl();
+            this.myModelControl = new Controls.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -243,6 +244,7 @@
             this.leftToolBoxPanel.Controls.Add(this.operatorControl);
             this.leftToolBoxPanel.Controls.Add(this.flowChartControl);
             this.leftToolBoxPanel.Controls.Add(this.dataSourceControl);
+            this.leftToolBoxPanel.Controls.Add(this.myModelControl);
             this.leftToolBoxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftToolBoxPanel.Location = new System.Drawing.Point(136, 46);
             this.leftToolBoxPanel.Name = "leftToolBoxPanel";
@@ -284,6 +286,15 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
+            // 
+            // myModelControl
+            // 
+            this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.myModelControl.Location = new System.Drawing.Point(0, 0);
+            this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
+            this.myModelControl.Name = "myModelControl";
+            this.myModelControl.Size = new System.Drawing.Size(185, 558);
+            this.myModelControl.TabIndex = 0;
             // 
             // bottomViewPanel
             // 
@@ -909,7 +920,8 @@
         private System.Windows.Forms.Button importButton;
         private Controls.OperatorControl operatorControl;
         private Controls.FlowChartControl flowChartControl;
-        private Citta_T1.Controls.DataSourceControl dataSourceControl;
+        private Controls.DataSourceControl dataSourceControl;
+        private Controls.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private DataGridView1 dataGridView1;

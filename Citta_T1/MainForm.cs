@@ -87,9 +87,11 @@ namespace  Citta_T1
 
         private void MyModelButton_Click(object sender, EventArgs e)
         {
+            this.myModelControl.Visible = true;
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
+
         }
 
         private void OprateButton_Click(object sender, EventArgs e)
@@ -98,6 +100,7 @@ namespace  Citta_T1
 
             this.dataSourceControl.Visible = false;
             this.flowChartControl.Visible = false;
+            this.myModelControl.Visible = false;
         }
 
         private void DataButton_Click(object sender, EventArgs e)
@@ -106,6 +109,7 @@ namespace  Citta_T1
 
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
+            this.myModelControl.Visible = false;
         }
 
         private void FlowChartButton_Click(object sender, EventArgs e)
@@ -114,7 +118,8 @@ namespace  Citta_T1
 
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
-            
+            this.myModelControl.Visible = false;
+
         }
 
         //private void NewModelButton_Click(object sender, EventArgs e)
