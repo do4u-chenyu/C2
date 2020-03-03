@@ -16,5 +16,21 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
         }
+
+        public void AddModel(string modelName)
+        {
+            ModelButton mb = new ModelButton();
+            mb.SetModelName(modelName);
+            // 获得当前要添加的model button的初始位置
+            Point startPoint = new Point(25, 30);
+            if (this.Controls.Count > 0)
+                startPoint = this.Controls[this.Controls.Count - 1].Location;
+
+            startPoint.Y += mb.Height + 10;
+            mb.Location = startPoint;
+
+            this.Controls.Add(mb);
+
+        }
     }
 }
