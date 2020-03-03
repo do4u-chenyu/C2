@@ -34,5 +34,21 @@ namespace Citta_T1.Controls
             String helpInfo = Program.inputDataDict[txtButton.Name].filePath;
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
+        #region 右键菜单
+        private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Parent.Controls.Remove(this);
+        }
+        #endregion
     }
 }

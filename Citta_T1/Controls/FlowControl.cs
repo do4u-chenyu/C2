@@ -114,12 +114,12 @@ namespace Citta_T1.Controls
         #region 放大与缩小
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            ((CanvasPanel)this.Parent).changeSize(true);
+            ((CanvasPanel)this.Parent).ChangSize(true);
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            ((CanvasPanel)this.Parent).changeSize(false);
+            ((CanvasPanel)this.Parent).ChangSize(false);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

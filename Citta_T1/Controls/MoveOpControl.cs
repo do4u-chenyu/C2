@@ -9,7 +9,7 @@ namespace Citta_T1.Controls
 {
     public delegate void delegateOverViewData(string index);
     public delegate void delegateRenameData(string index);
-    public partial class MoveOpControl : UserControl
+    public partial class MoveOpControl : UserControl, Scalable
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
@@ -21,8 +21,11 @@ namespace Citta_T1.Controls
         public DateTime clickTime;
         public bool isClicked = false;
 
+        // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
+        // 画布上的缩放倍率
+        float factor = 1.3F;
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -173,10 +176,6 @@ namespace Citta_T1.Controls
 
         }
 
-        private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
         private string SubstringByte(string text, int startIndex, int length)
@@ -185,6 +184,8 @@ namespace Citta_T1.Controls
             System.Console.WriteLine("bytes:" + bytes);
             return _encoding.GetString(bytes, startIndex, length);
         }
+
+        #region 控件名称长短改变时改变控件大小
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
@@ -201,16 +202,16 @@ namespace Citta_T1.Controls
             System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
             if (sumcount + sumcountDigit > maxLength)
             {
-                resizetoBig();
+                ResizeToBig();
                 this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
                 System.Console.WriteLine("sumcountDigit:" + this.txtButton.Text);
             }
             else
             {
-                resizetoNormal();
+                ResizeToNormal();
                 if (sumcount + sumcountDigit <= 8) 
                 { 
-                    resizetoSmall(); 
+                    ResizeToSmall(); 
                 }              
                 this.txtButton.Text = opControlName;
 
@@ -218,31 +219,35 @@ namespace Citta_T1.Controls
             this.nameToolTip.SetToolTip(this.txtButton, opControlName);
         }
 
-        public void resizetoBig()
+        public void ResizeToBig()
         {
-            this.Size = new System.Drawing.Size(194, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(159, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(179, 11);
-            this.txtButton.Size = new System.Drawing.Size(124, 23);
-            this.textBox1.Size = new System.Drawing.Size(124, 23);
+            this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            Console.WriteLine(this.Size);
+            Console.WriteLine(sizeLevel);
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
+            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
-        public void resizetoSmall()
+        public void ResizeToSmall()
         {
-            this.Size = new System.Drawing.Size(142, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(107, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(131, 11);
-            this.txtButton.Size = new System.Drawing.Size(72, 23);
-            this.textBox1.Size = new System.Drawing.Size(72, 23);
+            this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(107 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
+            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
-        public void resizetoNormal()
+        public void ResizeToNormal()
         {
-            this.Size = new System.Drawing.Size(184, 25);
-            this.rightPictureBox.Location = new System.Drawing.Point(151, 2);
-            this.rightPinPictureBox.Location = new System.Drawing.Point(170, 11);
-            this.txtButton.Size = new System.Drawing.Size(114, 23);
-            this.textBox1.Size = new System.Drawing.Size(110, 23);
+            this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
+            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
+        #endregion
 
+        #region 右键菜单
         public void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             this.randomOperatorView = new Citta_T1.OperatorViews.SortOperatorView();
@@ -274,6 +279,11 @@ namespace Citta_T1.Controls
                 }
             }
         }
+        private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
         public virtual void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下回车键
@@ -380,11 +390,11 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            setTag(this);
-            setControlsBySize(factor, factor, this);
+            SetTag(this);
+            SetControlsBySize(factor, factor, this);
         }
         
-        private void setTag(Control cons)
+        public void SetTag(Control cons)
         {
             deep += 1;
             if (deep == 1)
@@ -397,7 +407,7 @@ namespace Citta_T1.Controls
                 if (con.Controls.Count > 0)
                 {
                     Console.WriteLine("setTag:" + con.GetType().ToString());
-                    setTag(con);
+                    SetTag(con);
                 }
             }
             deep -= 1;
@@ -409,7 +419,7 @@ namespace Citta_T1.Controls
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-        private void setControlsBySize(float fx, float fy, Control cons)
+        public void SetControlsBySize(float fx, float fy, Control cons)
         {
             deep += 1;
             if (deep == 1)
@@ -455,12 +465,14 @@ namespace Citta_T1.Controls
                     con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                     if (con.Controls.Count > 0)
                     {
-                        setControlsBySize(fx, fy, con);
+                        SetControlsBySize(fx, fy, con);
                     }
                 }
             }
             deep -= 1;
         }
+
+
         #endregion
     }
 }

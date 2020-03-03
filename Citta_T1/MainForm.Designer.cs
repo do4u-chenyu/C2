@@ -642,12 +642,11 @@
             this.CanvasPanel.Name = "CanvasPanel";
             this.CanvasPanel.Size = new System.Drawing.Size(906, 232);
             this.CanvasPanel.TabIndex = 5;
-            this.CanvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
-            this.CanvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
-            this.CanvasPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPanel_Paint);
-            this.CanvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
-            this.CanvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
-            this.CanvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
+            this.CanvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel.CanvasPanel_DragDrop);
+            this.CanvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel.CanvasPanel_DragEnter);
+            this.CanvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel.CanvasPanel_MouseDown);
+            this.CanvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel.CanvasPanel_MouseMove);
+            this.CanvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel.CanvasPanel_MouseUp);
             // 
             // panel3
             // 
@@ -889,7 +888,7 @@
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
-        private Controls.NaviViewControl naviViewControl;
+        public Controls.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button histogramButton;
