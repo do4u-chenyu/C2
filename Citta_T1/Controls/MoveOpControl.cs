@@ -26,6 +26,8 @@ namespace Citta_T1.Controls
         int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = 1.3F;
+        // 缩放等级
+        public int sizeLevel = 0;
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -45,6 +47,7 @@ namespace Citta_T1.Controls
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
             resetSize(sizeL);
+            Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
         public void resetSize(int sizeL)
         {
@@ -52,10 +55,11 @@ namespace Citta_T1.Controls
             while (sizeL > 0)
             {
                 Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                changSize(true);
+                changSize();
                 Console.WriteLine("MoveOpButton 放大一次");
                 Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
                 sizeL -= 1;
+                sizeLevel += 1;
             }
         }
 
@@ -221,9 +225,8 @@ namespace Citta_T1.Controls
 
         public void ResizeToBig()
         {
+            Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            Console.WriteLine(this.Size);
-            Console.WriteLine(sizeLevel);
             this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
@@ -231,6 +234,7 @@ namespace Citta_T1.Controls
         }
         public void ResizeToSmall()
         {
+            Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(107 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -239,6 +243,7 @@ namespace Citta_T1.Controls
         }
         public void ResizeToNormal()
         {
+            Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -381,10 +386,7 @@ namespace Citta_T1.Controls
 
         #region 托块的放大与缩小
         private int deep = 0;
-        private MoveOpControl moc;
-        public int sizeLevel = 0;
-        public int canvasSizeLevel;
-        public void changSize(bool isLarger, float factor = 1.3F)
+        public void changSize(float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -435,27 +437,17 @@ namespace Citta_T1.Controls
                 Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
                 // Note 字体变化会导致MoveOpControl的Width和Height也变化
                 cons.Font = new Font(cons.Font.Name, currentSize, cons.Font.Style, cons.Font.Unit);
-                Console.WriteLine(cons.Name + "'Width变化之前: " + mytag[0] + ", 变化之后： " + cons.Width.ToString());
-                Console.WriteLine(cons.Name + "'Height变化之前: " + mytag[1] + ", 变化之后： " + cons.Height.ToString());
-                Console.WriteLine(cons.Name + "'Left变化之前: " + mytag[2] + ", 变化之后： " + cons.Left.ToString());
-                Console.WriteLine(cons.Name + "'Top变化之前: " + mytag[3] + ", 变化之后： " + cons.Top.ToString());
-                Console.WriteLine(cons.Name + "'Font变化之前: " + mytag[4] + ", 变化之后： " + currentSize.ToString());
-                Console.WriteLine(cons.Name + "'deep = " + deep.ToString());
             }
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in cons.Controls)
             {
-                ////获取控件的Tag属性值，并分割后存储字符串数组
+                // 获取控件的Tag属性值，并分割后存储字符串数组
                 SetDouble(this);
                 SetDouble(con);
                 if (con.Tag != null)
                 {
-                    if (con.Name == "MoveOpControl")
-                    {
-                        moc = (MoveOpControl)con;
-                    }
                     string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
-                    //根据窗体缩放的比例确定控件的值
+                    // 根据窗体缩放的比例确定控件的值
                     con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
                     con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
                     con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
@@ -471,8 +463,6 @@ namespace Citta_T1.Controls
             }
             deep -= 1;
         }
-
-
         #endregion
     }
 }

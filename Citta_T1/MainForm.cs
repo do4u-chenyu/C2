@@ -252,6 +252,9 @@ namespace  Citta_T1
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             string index = GenerateMD5(data.content);
             this.dataSourceControl.GenDataButton(index, data.dataName, data.filePath);
+            this.dataSourceControl.Visible = true;
+            this.operatorControl.Visible = false;
+            this.flowChartControl.Visible = false;
         }
 
         public void OverViewDataByIndex(string index)

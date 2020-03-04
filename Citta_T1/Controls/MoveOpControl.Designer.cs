@@ -169,7 +169,7 @@ namespace Citta_T1.Controls
             this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.异常日志ToolStripMenuItem.Text = "异常日志";
             // 
-            // DeleteToolStripMenuItem
+            // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("删除ToolStripMenuItem.BackgroundImage")));
             this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);

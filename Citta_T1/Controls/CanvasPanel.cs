@@ -40,23 +40,31 @@ namespace Citta_T1.Controls
             SetTag(this);
             if (isLarger && sizeLevel <= 2)
             {
+                Console.WriteLine("放大");
                 SetControlsBySize(factor, factor, this);
                 sizeLevel += 1;
-                Control[] mocs = Controls.Find("MoveOpControl", true);
-                foreach(MoveOpControl moc in mocs)
+                List<Control> mocs = new List<Control> { };
+                foreach(Control con in Controls)
                 {
-                    moc.sizeLevel += 1;
+                    if (con is Scalable)
+                    {
+                        ((MoveOpControl)(con)).sizeLevel += 1;
+                    }
                 }
 
             }
             else if (!isLarger && sizeLevel > 0)
             {
+                Console.WriteLine("缩小");
                 sizeLevel -= 1;
                 SetControlsBySize(1 / factor, 1 / factor, this);
-                Control[] mocs = Controls.Find("MoveOpControl", true);
-                foreach (MoveOpControl moc in mocs)
+                List<Control> mocs = new List<Control> { };
+                foreach (Control con in Controls)
                 {
-                    moc.sizeLevel -= 1;
+                    if (con is Scalable)
+                    {
+                        ((MoveOpControl)(con)).sizeLevel -= 1;
+                    }
                 }
             }
         }
@@ -75,7 +83,6 @@ namespace Citta_T1.Controls
 
         #region 控件大小随窗体大小等比例缩放
         private int deep = 0;
-        private MoveOpControl moc;
 
         //设置双缓冲区、解决闪屏问题
         public static void SetDouble(Control cc)
@@ -107,20 +114,15 @@ namespace Citta_T1.Controls
         private void SetControlsBySize(float newx, float newy, Control cons)
         {
             deep += 1;
-            //遍历窗体中的控件，重新设置控件的值
+            // 遍历窗体中的控件，重新设置控件的值
             foreach (Control con in cons.Controls)
             {
-                ////获取控件的Tag属性值，并分割后存储字符串数组
+                // 获取控件的Tag属性值，并分割后存储字符串数组
                 SetDouble(this);
                 SetDouble(con);
-                //if (con.Tag != null && ((deep == 1 && con is MoveOpControl) || deep != 1))
                 if (con.Tag != null && (con is Scalable))
                 {
-                    if (con.Name == "MoveOpControl")
-                    {
-                        moc = (MoveOpControl)con;
-                    }
-                    // 通过反射调用方法
+                    // 通过反射调用子控件的`SetControlsBySize`方法
                     object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
                     MethodInfo mi = con.GetType().GetMethod("SetControlsBySize");
                     mi.Invoke(obj, new Object[] { newx, newy, con});//调用方法
@@ -147,10 +149,6 @@ namespace Citta_T1.Controls
                 SetDouble(con);
                 if (con.Tag != null && ((deep == 1 && con is MoveOpControl)))
                 {
-                    if (con.Name == "MoveOpControl")
-                    {
-                        moc = (MoveOpControl)con;
-                    }
                     Console.WriteLine(con.GetType().ToString());
 
                     string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
@@ -179,9 +177,10 @@ namespace Citta_T1.Controls
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
+            Console.WriteLine("Trying to create a moc, Canvas'SizeLevel = " + sizeLevel);
             if (isData)
             {
                 Console.WriteLine("创建一个`MoveDtControl`对象");
@@ -189,7 +188,7 @@ namespace Citta_T1.Controls
                     index,
                     sizeLevel,
                     e.Data.GetData("Text").ToString(),
-                    this.PointToClient(new Point(e.X - 300, e.Y - 100))
+                    this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
@@ -200,7 +199,7 @@ namespace Citta_T1.Controls
                 MoveOpControl btn = new MoveOpControl(
                     sizeLevel,
                     e.Data.GetData("Text").ToString(),
-                    this.PointToClient(new Point(e.X - 300, e.Y - 100))
+                    this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);

@@ -26,9 +26,11 @@ namespace Citta_T1.Controls
             AddOverViewToMenu();
             textBox1.Text = text;
             Location = p;
+            index = idx;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
             resetSize(sizeL);
+            Console.WriteLine("Create a MoveDtControl, sizeLevel = " + sizeLevel);
         }
         public new void InitializeOpPinPicture()
         {

@@ -90,7 +90,7 @@ namespace Citta_T1.Dialogs
                 // string content;
                 // Citta_T1.Data data;
                 fileName = fd.FileName;
-                overViewFile();
+                OverViewFile();
             }
 
         }
@@ -120,10 +120,10 @@ namespace Citta_T1.Dialogs
 
         }
 
+        // 添加按钮
         public event delegateInputData InputDataEvent;
         private void button2_Click(object sender, EventArgs e)
         {
-            // 添加按钮
             string content;
             Citta_T1.Data data;
             string name = this.textBox1.Text;
@@ -155,6 +155,8 @@ namespace Citta_T1.Dialogs
                     InputDataEvent(data);
                     DvgClean();
                     Close();
+                    // 触发事件，点击DataSource
+                    
                 }
                 else if (Program.inputDataDict.ContainsKey(index))
                 {
@@ -184,7 +186,7 @@ namespace Citta_T1.Dialogs
             this.label4.Font = bold_font;
             this.label5.Font = font;
             this.isUTF8 = false;
-            overViewFile();
+            OverViewFile();
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -192,7 +194,7 @@ namespace Citta_T1.Dialogs
             this.label4.Font = font;
             this.label5.Font = bold_font;
             this.isUTF8 = true;
-            overViewFile();
+            OverViewFile();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -200,7 +202,7 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void overViewFile()
+        private void OverViewFile()
         {
             /*
              * @param this.isUTF8
@@ -261,6 +263,7 @@ namespace Citta_T1.Dialogs
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
         }
+
         /// <summary>
         /// MD5字符串加密
         /// </summary>

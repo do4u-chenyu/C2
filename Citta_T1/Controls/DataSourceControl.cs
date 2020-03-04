@@ -14,15 +14,14 @@ namespace Citta_T1.Controls
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
         //private Dictionary<string, Button> dataSourceDictI2B = new Dictionary<string, Button>();
-        private Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
+        public Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
         private System.Windows.Forms.Button tempButton = new System.Windows.Forms.Button();
         public DataSourceControl()
         {
             InitializeComponent();
-            
         }
 
-        private void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
+        public void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -37,15 +36,9 @@ namespace Citta_T1.Controls
         public void GenDataButton(string index, string dataName, string filePath)
         {
             // 根据导入数据动态生成一个button
-            //System.Windows.Forms.Button b = new System.Windows.Forms.Button();
-            DataButton b = new DataButton();
+            DataButton b = new DataButton(index, dataName);
             b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
-            b.txtButton.Name = index;
-            b.txtButton.Text = dataName;
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            //b.Size = new System.Drawing.Size(100, 40); // 固定的
-            b.TabIndex = 0;
-            //b.UseVisualStyleBackColor = true;
             this.dataSourceDictI2B.Add(index, b);
             this.LocalFrame.Controls.Add(b);
         }

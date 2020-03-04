@@ -17,13 +17,13 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
         }
-        //public DataButton(string n, string i, Delegate d)
-        //{
-        //    InitializeComponent();
-        //    this.txtButton.Text = n;
-        //    this.index = i;
-        //    this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(d);
-        //}
+        public DataButton(string index, string dataName)
+        {
+            InitializeComponent();
+            Name = index;
+            txtButton.Name = index;
+            txtButton.Text = dataName;
+        }
         private void moveOpControl1_Load(object sender, EventArgs e)
         {
 
@@ -37,17 +37,26 @@ namespace Citta_T1.Controls
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
+           // TODO 1. 怎么呈现这个预览？
 
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            // 1. DataSource中重命名
+            // 2. Program中重命名
+            // TODO 3. 画布中已存在的该如何处理？ 
+            ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
         }
 
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 1. DataSource中删除控件
+            // 2. Program中删除数据
+            // TODO 3. 画布中已存在的该如何处理？ 
             this.Parent.Controls.Remove(this);
+            Program.inputDataDict.Remove(this.txtButton.Name);
+            Program.inputDataDictN2I.Remove(this.Name);
         }
         #endregion
     }
