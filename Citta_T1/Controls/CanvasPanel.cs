@@ -101,10 +101,7 @@ namespace Citta_T1.Controls
             {
                 if (con is Scalable)
                 {
-                    // 通过反射调用方法
-                    object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
-                    MethodInfo mi = con.GetType().GetMethod("SetTag");
-                    mi.Invoke(obj, new Object[] {con});//调用方法
+                    (con as Scalable).SetTag(con);
                 }
             }
             deep -= 1;
@@ -122,10 +119,7 @@ namespace Citta_T1.Controls
                 SetDouble(con);
                 if (con.Tag != null && (con is Scalable))
                 {
-                    // 通过反射调用子控件的`SetControlsBySize`方法
-                    object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
-                    MethodInfo mi = con.GetType().GetMethod("SetControlsBySize");
-                    mi.Invoke(obj, new Object[] { newx, newy, con});//调用方法
+                    (con as Scalable).SetControlsBySize(newx, newy, con);
                 }
             }
             deep -= 1;
@@ -251,11 +245,11 @@ namespace Citta_T1.Controls
             }
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.isClick)
             {
-                ((CanvasPanel)(this.Parent)).nowX = e.X;
-                ((CanvasPanel)(this.Parent)).nowY = e.Y;
-                ((CanvasPanel)(this.Parent)).ChangLoc(nowX - startX, nowY - startY);
-                ((CanvasPanel)(this.Parent)).startX = e.X;
-                ((CanvasPanel)(this.Parent)).startY = e.Y;
+                nowX = e.X;
+                nowY = e.Y;
+                ChangLoc(nowX - startX, nowY - startY);
+                startX = e.X;
+                startY = e.Y;
                 Console.WriteLine("After, X = " + startX.ToString() + ", Y = " + startY.ToString());
             }
         }
