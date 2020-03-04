@@ -18,13 +18,11 @@ namespace Citta_T1.Business
             this.path = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument";
             this.UserInfoPath = path + "\\UserInformation.xml";
         }
-        public void CreatNewXml(string userName)
+        public void CreatNewXml()
         {
             Directory.CreateDirectory(path);
             if (!File.Exists(UserInfoPath))
             {
-                FileStream fs = new FileStream(UserInfoPath, FileMode.Create);
-                fs.Close();
                 XmlDocument xDoc = new XmlDocument();
                 XmlElement rootElement = xDoc.CreateElement("login");
                 xDoc.AppendChild(rootElement);

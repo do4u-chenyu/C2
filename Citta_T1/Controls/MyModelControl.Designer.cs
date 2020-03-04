@@ -1,6 +1,6 @@
-﻿namespace Citta_T1.Controls.Small
+﻿namespace Citta_T1.Controls
 {
-    partial class ModelTitlePanel
+    partial class MyModelControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,21 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.modelButton1 = new Citta_T1.Controls.ModelButton();
             this.SuspendLayout();
             // 
-            // ModelTitlePanel
+            // modelButton1
+            // 
+            this.modelButton1.BackColor = System.Drawing.Color.White;
+            this.modelButton1.Location = new System.Drawing.Point(25, 30);
+            this.modelButton1.Name = "modelButton1";
+            this.modelButton1.Size = new System.Drawing.Size(141, 27);
+            this.modelButton1.TabIndex = 0;
+            // 
+            // MyModelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
-            this.Name = "ModelTitlePanel";
-            this.Size = new System.Drawing.Size(908, 36);
-            this.SizeChanged += new System.EventHandler(this.ModelTitlePanel_SizeChanged);
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.modelButton1);
+            this.Name = "MyModelControl";
+            this.Size = new System.Drawing.Size(187, 637);
             this.ResumeLayout(false);
 
         }
 
-
         #endregion
+
+        private ModelButton modelButton1;
     }
 }

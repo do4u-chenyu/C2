@@ -48,7 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Document.cs" />
+    <Compile Include="Business\DocumentSaveLoad.cs" />
+    <Compile Include="Business\ModelDocumentDao.cs" />
+    <Compile Include="Business\ModelDocument.cs" />
+    <Compile Include="Business\ModelElement.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,11 +77,23 @@
     <Compile Include="Controls\FlowChartControl.Designer.cs">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ModelButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModelButton.Designer.cs">
+      <DependentUpon>ModelButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MoveDtControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\MoveDtControl.Designer.cs">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyModelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyModelControl.Designer.cs">
+      <DependentUpon>MyModelControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\RemarkControl.cs">
       <SubType>UserControl</SubType>
@@ -173,6 +188,12 @@
     <Compile Include="OperatorViews\DifferOperatorView.Designer.cs">
       <DependentUpon>DifferOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\FilterOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\FilterOperatorView.Designer.cs">
+      <DependentUpon>FilterOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\FreqOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,8 +280,14 @@
     <EmbeddedResource Include="Controls\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModelButton.resx">
+      <DependentUpon>ModelButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MoveDtControl.resx">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyModelControl.resx">
+      <DependentUpon>MyModelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>
@@ -323,6 +350,9 @@
     <EmbeddedResource Include="OperatorViews\DifferOperatorView.resx">
       <DependentUpon>DifferOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\FilterOperatorView.resx">
+      <DependentUpon>FilterOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\FreqOperatorView.resx">
       <DependentUpon>FreqOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -346,6 +376,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Doc\citta帮助文档.chm" />
     <None Include="Doc\DesignDocument.docx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -415,6 +446,7 @@
     <Content Include="res\toolbox\intersection.png" />
     <Content Include="res\toolbox\MoveOpBackground.png" />
     <Content Include="res\toolbox\newfile.png" />
+    <None Include="res\toolbox\pause.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />

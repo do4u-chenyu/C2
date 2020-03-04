@@ -10,12 +10,18 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    public partial class RemarkControl : UserControl
+    public partial class ModelButton : UserControl
     {
-        public RemarkControl()
+        public ModelButton()
         {
             InitializeComponent();
         }
-        public string RemarkText { get => textBox1.Text; set => textBox1.Text = value; }
+
+        public void SetModelName(string modelName)
+        {
+            this.textButton.Text = modelName;
+        }
     }
+
+
 }
