@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Small
 {
-    public delegate void NewDocumentEventHandler(object sender);
+    public delegate void NewDocumentEventHandler(string modelTitle);
+    public delegate void DocumentSwitchHandler(string modelTitle);
     public partial class ModelTitlePanel : UserControl
     {
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
         private List<ModelTitleControl> models;
         private int rawModelTitleNum = 9;
         public event NewDocumentEventHandler NewModelDocument;
+        public event DocumentSwitchHandler ModelDocumentSwitch;
         public ModelTitlePanel()
         {
             InitializeComponent();
@@ -50,12 +52,13 @@ namespace Citta_T1.Controls.Small
         {
             //TODO
             ModelTitleControl mtControl = new ModelTitleControl();
+            mtControl.ModelDocumentSwitch += DocumentSwitch;
             models.Add(mtControl);
             mtControl.SetOriginalModelTitle(modelTitle);
 
             //TODO 创建事件
 
-            NewModelDocument?.Invoke(this);
+            NewModelDocument?.Invoke(modelTitle);
 
 
 
@@ -64,8 +67,8 @@ namespace Citta_T1.Controls.Small
             if (models.Count <= 1)
             {
                 mtControl.Location = OriginalLocation;
-                mtControl.BorderStyle = BorderStyle.FixedSingle;
                 this.Controls.Add(mtControl);
+                mtControl.ShowSelectedBorder();
             }
             else // models.Count > 1
             {
@@ -146,11 +149,24 @@ namespace Citta_T1.Controls.Small
             foreach (ModelTitleControl mtc in this.models)
                 mtc.BorderStyle = BorderStyle.None;
         }
+        public void SelectedModel(string modelTitle)
+        {
+            foreach (ModelTitleControl mtc in this.models)
+            {
+                if(mtc.ModelTitle == modelTitle)
+                 mtc.ShowSelectedBorder();
+            }
+               
+        }
 
         private void ModelTitlePanel_SizeChanged(object sender, EventArgs e)
         {
             ResizeModel(true);
             UpModelTitle();
+        }
+        public void DocumentSwitch(string modelTitle)
+        {
+            ModelDocumentSwitch?.Invoke(modelTitle);//------------------------------------------
         }
     }
 }

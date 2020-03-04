@@ -12,12 +12,14 @@ using System.Reflection;
 
 namespace Citta_T1.Controls
 {
+    public delegate void NewOperateEventHandler(Control ct);
     public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
         private float deltaY;
+        public event NewOperateEventHandler NewOperatorEvent;
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -185,8 +187,10 @@ namespace Citta_T1.Controls
                     this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
+               
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
+                NewOperatorEvent?.Invoke(btn);
             }
             else
             {
@@ -196,8 +200,10 @@ namespace Citta_T1.Controls
                     this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
+               
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
+                NewOperatorEvent?.Invoke(btn);
             }
 
         }

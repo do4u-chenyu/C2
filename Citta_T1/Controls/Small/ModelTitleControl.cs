@@ -14,13 +14,14 @@ using Citta_T1.Controls;
 
 namespace Citta_T1.Controls.Small
 {
+    public delegate void DocumentSwitchEventHandler(string modelTitle);
     public partial class ModelTitleControl : UserControl
     {
         private string modelTitle;
         private bool selected;
-
         public bool Selected { get => selected; set => selected = value; }
         public string ModelTitle { get => modelTitle; }
+        public event DocumentSwitchEventHandler ModelDocumentSwitch;
 
         public ModelTitleControl()
         {
@@ -79,10 +80,13 @@ namespace Citta_T1.Controls.Small
         private void label1_Click(object sender, EventArgs e)
         {
             ShowSelectedBorder();
-
-
-
-            // TODO
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
+            if (parentPanel != null)
+                parentPanel.ClearSelectedBorder();
+            this.BorderStyle = BorderStyle.FixedSingle;
+            this.selected = true;
+            ModelDocumentSwitch?.Invoke(modelTitle);
+            // TODO文档切换
         }
 
         public void ShowSelectedBorder()

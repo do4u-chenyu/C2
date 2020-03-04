@@ -25,10 +25,12 @@ namespace Citta_T1.Business
         /*
          * 传入参数为模型文档名称，当前用户名
          */
+        public string ModelDocumentTitle {get => this.modelTitle;}
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
+            modelElements = new List<ModelElement>();
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*
@@ -41,14 +43,18 @@ namespace Citta_T1.Business
         }
         public void AddModelElement(ModelElement modelElement)
         {
-            modelElements = new List<ModelElement>();
+           // modelElements = new List<ModelElement>();
             modelElements.Add(modelElement);
             dirty = true;
         }
-        public void Load()
+        public List<ModelElement> Load()
         {
-            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-            modelElements = dSaveLoad.ReadXml();
+            if (File.Exists(savePath + modelTitle +".xml"))//-------------------------------
+            {
+                DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
+                modelElements = dSaveLoad.ReadXml();
+            }          
+            return modelElements;
         }
         public void Show()
         {

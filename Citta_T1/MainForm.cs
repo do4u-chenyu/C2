@@ -9,9 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls;
+using Citta_T1.Business;
+using System.IO;
 
 namespace  Citta_T1
 {
+    public delegate void DocumentLoadEventHandler();
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -28,6 +31,7 @@ namespace  Citta_T1
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
+        public event DocumentLoadEventHandler DocumentLoadEvent;
 
 
 
@@ -41,7 +45,7 @@ namespace  Citta_T1
             this.isLeftViewPanelMinimum = false;
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
-
+            this.DocumentLoadEvent += DocumentsLoad;
             modelDocumentDao = new Business.ModelDocumentDao();
         }
 
@@ -49,14 +53,67 @@ namespace  Citta_T1
         {
             // 新增文档事件
             this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
-            //this.canvasPanel.NewOperator += 
+            this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
+            this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
+
+
+
         }
 
-        private void ModelTitlePanel_NewModelDocument(object sender)
+        private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            modelDocumentDao.ProcessNewModelDocument(sender);
+            modelDocumentDao.AddDocument(modelTitle,this.userName);
+            
         }
+        private void NewDocumentOperator(Control ct)
+        {
+            modelDocumentDao.AddDocumentOperator(ct);
 
+        }
+        private void ModelTitlePanel_DocumentSwitch(string modelTitle)
+        {
+            modelDocumentDao.SwitchDocument(modelTitle);
+        }
+        private void DocumentsLoad()
+        {
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\"))
+            { 
+                modelDocumentDao.AddDocument("新建模型", this.userName);
+                return;
+            }
+               
+           
+            try
+            {
+                
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
+                DirectoryInfo[] modelTitleList = di.GetDirectories();
+                foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
+                {
+                    List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
+                    foreach (Control ct in controls)
+                    {
+                        this.canvasPanel.Controls.Add(ct);
+                        this.naviViewControl.AddControl(ct);
+                        this.naviViewControl.UpdateNaviView();
+                        if (modelTitle.ToString() == "三月模型")//当前文件
+                            ct.Show();
+                        else
+                            ct.Hide();
+                    }
+                    this.modelTitlePanel.AddModel(modelTitle.ToString());
+                    this.modelTitlePanel.SelectedModel("三月模型");
+                    
+                }
+            }
+            catch
+            {
+                
+                Console.WriteLine("不存在模型文档");
+            }
+
+
+        }
         private void InitializeControlsLocation()
         {
             Point org = new Point(this.canvasPanel.Width, 0);
@@ -225,15 +282,9 @@ namespace  Citta_T1
         }
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+    
 
-        }
-
-        private void ucDataGridView1_Load(object sender, EventArgs e)
-        {
-
-        }
+     
 
         private void dataGridView1_Load(object sender, EventArgs e)
         {
@@ -251,10 +302,9 @@ namespace  Citta_T1
             this.formInputData.ShowDialog();
         }
 
-        private void formInputData_Load(object sender, EventArgs e)
-        {
 
-        }
+       // NewOperatorEvent?.Invoke(btn);
+          
 
         private void newModelButton_Click(object sender, EventArgs e)
         {
@@ -289,8 +339,10 @@ namespace  Citta_T1
             this.usernamelabel.Location = new Point(userNameLocation.X+65- rightMargin, userNameLocation.Y+2);
             this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
-
+            //文档加载事件
+            DocumentLoadEvent?.Invoke();
         }
+        
         public void GetUserName(string userName)
         {
             this.userName = userName;
@@ -379,6 +431,11 @@ namespace  Citta_T1
             string helpfile = Application.StartupPath.Substring(0, Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")).LastIndexOf("\\")); 
             helpfile += @"\Doc\citta帮助文档.chm";
             Help.ShowHelp(this, helpfile);
+        }
+
+        private void saveModelButton_Click(object sender, EventArgs e)
+        {
+            modelDocumentDao.SaveDocument();
         }
     }
 }

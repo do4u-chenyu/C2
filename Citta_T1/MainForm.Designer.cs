@@ -619,6 +619,7 @@
             this.saveModelButton.TabIndex = 1;
             this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
+            this.saveModelButton.Click += new System.EventHandler(this.saveModelButton_Click);
             // 
             // newModelButton
             // 

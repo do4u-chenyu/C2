@@ -27,6 +27,7 @@ namespace Citta_T1.Business
         FilterOperator,
         MaximumValueOperator,
         MinmumValueOperator,
+        MeanValueOperator,
         Null
     }
     enum ElementStatus
@@ -49,6 +50,7 @@ namespace Citta_T1.Business
         public ElementSubType SubType { get => subType; set => subType = value; }
 
         public Point Location { get => ctl.Location; }
+        public Control GetControl { get => ctl; }
 
         public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "")
         {

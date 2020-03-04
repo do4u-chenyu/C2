@@ -21,7 +21,10 @@ namespace Citta_T1.Controls
         public DateTime clickTime;
         public bool isClicked = false;
 
+
         // 一些倍率
+        public string ReName { get => textBox1.Text; }
+         
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
