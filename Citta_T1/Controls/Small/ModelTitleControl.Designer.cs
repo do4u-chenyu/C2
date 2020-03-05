@@ -93,8 +93,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.Controls.Add(this.modelTitlelabel);
             this.Controls.Add(this.dirtyPictureBox);
+            this.Controls.Add(this.modelTitlelabel);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
             this.Name = "ModelTitleControl";
