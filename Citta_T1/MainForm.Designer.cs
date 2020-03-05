@@ -644,11 +644,11 @@
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.rightHideButton);
             this.canvasPanel.Controls.Add(this.rightShowButton);
+            this.canvasPanel.Controls.Add(this.pictureBox3);
+            this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.downloadButton);
             this.canvasPanel.Controls.Add(this.stopButton);
             this.canvasPanel.Controls.Add(this.runButton);
-            this.canvasPanel.Controls.Add(this.pictureBox3);
-            this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.naviViewControl);
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
