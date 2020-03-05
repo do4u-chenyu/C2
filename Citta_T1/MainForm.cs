@@ -15,6 +15,7 @@ using System.IO;
 namespace  Citta_T1
 {
     public delegate void DocumentLoadEventHandler();
+    public delegate void DocumentReSaveEventHandler(string modelTitle);
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -32,6 +33,8 @@ namespace  Citta_T1
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public event DocumentLoadEventHandler DocumentLoadEvent;
+        public event DocumentReSaveEventHandler DocumentReSaveEvent;
+        public string GetUserName { get => this.userName; set => this.userName = value; }
 
 
 
@@ -45,7 +48,7 @@ namespace  Citta_T1
             this.isLeftViewPanelMinimum = false;
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
-            this.DocumentLoadEvent += DocumentsLoad;
+            
             modelDocumentDao = new Business.ModelDocumentDao();
         }
 
@@ -55,7 +58,9 @@ namespace  Citta_T1
             this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
             this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
             this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
-
+            this.createNewModel.CoverModelDocument += ReSaveDocument;
+            this.DocumentLoadEvent += DocumentsLoad;
+            this.DocumentReSaveEvent += ReSaveDocument;
 
 
         }
@@ -69,6 +74,12 @@ namespace  Citta_T1
         {
             modelDocumentDao.AddDocumentOperator(ct);
 
+        }
+        private void  ReSaveDocument(string modelTitle)
+        {
+            this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
+            modelDocumentDao.SaveDocument();
+            Console.WriteLine("覆盖文件-------------");
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
@@ -309,7 +320,9 @@ namespace  Citta_T1
         private void newModelButton_Click(object sender, EventArgs e)
         {
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
+            this.createNewModel.Owner = this;
             DialogResult dialogResult = this.createNewModel.ShowDialog();
+            
             // 模型标题栏添加新标题
             if (dialogResult == DialogResult.OK)
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
@@ -342,11 +355,7 @@ namespace  Citta_T1
             //文档加载事件
             DocumentLoadEvent?.Invoke();
         }
-        
-        public void GetUserName(string userName)
-        {
-            this.userName = userName;
-        }
+      
         private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             MouseIsDown = true;
