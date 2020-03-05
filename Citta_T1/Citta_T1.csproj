@@ -56,28 +56,28 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
-    <Compile Include="Controls\DataButton.cs">
+    <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataButton.Designer.cs">
+    <Compile Include="Controls\Left\DataButton.Designer.cs">
       <DependentUpon>DataButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataSourceControl.cs">
+    <Compile Include="Controls\Left\DataSourceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataSourceControl.Designer.cs">
+    <Compile Include="Controls\Left\DataSourceControl.Designer.cs">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlowChartControl.cs">
+    <Compile Include="Controls\Left\FlowChartControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FlowChartControl.Designer.cs">
+    <Compile Include="Controls\Left\FlowChartControl.Designer.cs">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ModelButton.cs">
+    <Compile Include="Controls\Left\ModelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ModelButton.Designer.cs">
+    <Compile Include="Controls\Left\ModelButton.Designer.cs">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Move\MoveDtControl.cs">
@@ -86,10 +86,10 @@
     <Compile Include="Controls\Move\MoveDtControl.Designer.cs">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MyModelControl.cs">
+    <Compile Include="Controls\Left\MyModelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MyModelControl.Designer.cs">
+    <Compile Include="Controls\Left\MyModelControl.Designer.cs">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flow\RemarkControl.cs">
@@ -251,10 +251,10 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperatorControl.cs">
+    <Compile Include="Controls\Left\OperatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OperatorControl.Designer.cs">
+    <Compile Include="Controls\Left\OperatorControl.Designer.cs">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -268,22 +268,22 @@
     <Compile Include="Utils\Bezier.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Utils\Scalable.cs" />
-    <EmbeddedResource Include="Controls\DataButton.resx">
+    <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataSourceControl.resx">
+    <EmbeddedResource Include="Controls\Left\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FlowChartControl.resx">
+    <EmbeddedResource Include="Controls\Left\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ModelButton.resx">
+    <EmbeddedResource Include="Controls\Left\ModelButton.resx">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Move\MoveDtControl.resx">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MyModelControl.resx">
+    <EmbeddedResource Include="Controls\Left\MyModelControl.resx">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\RemarkControl.resx">
@@ -335,7 +335,7 @@
     <EmbeddedResource Include="Controls\Flow\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OperatorControl.resx">
+    <EmbeddedResource Include="Controls\Left\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">

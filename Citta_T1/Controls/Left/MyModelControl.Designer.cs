@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls
+﻿namespace Citta_T1.Controls.Left
 {
     partial class MyModelControl
     {

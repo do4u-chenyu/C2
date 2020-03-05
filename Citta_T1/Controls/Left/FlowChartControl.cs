@@ -8,20 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls
+namespace Citta_T1.Controls.Left
 {
-    public partial class ModelButton : UserControl
+    public partial class FlowChartControl : UserControl
     {
-        public ModelButton()
+        public FlowChartControl()
         {
             InitializeComponent();
         }
-
-        public void SetModelName(string modelName)
-        {
-            this.textButton.Text = modelName;
-        }
     }
-
-
 }
