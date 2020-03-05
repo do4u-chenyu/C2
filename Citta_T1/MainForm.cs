@@ -437,6 +437,10 @@ namespace  Citta_T1
         {
             this.modelDocumentDao.SaveDocument();
             this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
+
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
+            mtc.ClearDirtyPictureBox();
         }
     }
 }
