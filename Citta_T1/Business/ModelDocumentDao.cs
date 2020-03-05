@@ -31,7 +31,8 @@ namespace Citta_T1.Business
         }
         public void SaveDocument()
         {
-            currentDocument.Save();
+            this.currentDocument.Save();
+            this.currentDocument.Dirty = false;
         }
         public List<Control>  LoadDocuments(string modelTitle,string userName)
         {
@@ -81,6 +82,7 @@ namespace Citta_T1.Business
         }
         public void AddDocumentOperator(Control ct)
         {
+            this.currentDocument.Dirty = true;
             if (ct.Name == "MoveOpControl")
             {
                 ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct,ElementStatus.Null, SEType((ct as MoveOpControl).ReName));

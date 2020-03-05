@@ -19,15 +19,18 @@ namespace Citta_T1.Controls.Small
     {
         private string modelTitle;
         private bool selected;
+        private bool dirty;
         public bool Selected { get => selected; set => selected = value; }
         public string ModelTitle { get => modelTitle; }
+        public bool Dirty { get => dirty; set => dirty = value; }
+
         public event DocumentSwitchEventHandler ModelDocumentSwitch;
 
         public ModelTitleControl()
         {
             InitializeComponent();
             SetOriginalModelTitle("新建模型");
-
+            dirty = true;
 
         }
 
@@ -97,7 +100,8 @@ namespace Citta_T1.Controls.Small
             this.selected = true;
         }
 
-  
+        
+
     }
 
 
