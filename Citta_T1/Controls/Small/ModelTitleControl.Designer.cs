@@ -34,10 +34,10 @@
             this.closePictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dirtyPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -79,21 +79,21 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // pictureBox1
+            // dirtyPictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(12, 13);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
+            this.dirtyPictureBox.Location = new System.Drawing.Point(-1, 0);
+            this.dirtyPictureBox.Name = "dirtyPictureBox";
+            this.dirtyPictureBox.Size = new System.Drawing.Size(12, 13);
+            this.dirtyPictureBox.TabIndex = 3;
+            this.dirtyPictureBox.TabStop = false;
             // 
             // ModelTitleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.dirtyPictureBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
@@ -101,7 +101,7 @@
             this.Size = new System.Drawing.Size(140, 26);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -111,6 +111,6 @@
         private System.Windows.Forms.PictureBox closePictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox dirtyPictureBox;
     }
 }

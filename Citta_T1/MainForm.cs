@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls;
+using Citta_T1.Controls.Small;
 using Citta_T1.Business;
 using System.IO;
 
@@ -67,29 +67,32 @@ namespace  Citta_T1
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            modelDocumentDao.AddDocument(modelTitle,this.userName);
+            this.modelDocumentDao.AddDocument(modelTitle,this.userName);
             
         }
         private void NewDocumentOperator(Control ct)
         {
-            modelDocumentDao.AddDocumentOperator(ct);
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
+            mtc.SetDirtyPictureBox();
+            this.modelDocumentDao.AddDocumentOperator(ct);
 
         }
         private void  ReSaveDocument(string modelTitle)
         {
             this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
-            modelDocumentDao.SaveDocument();
+            this.modelDocumentDao.SaveDocument();
             Console.WriteLine("覆盖文件-------------");
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
-            modelDocumentDao.SwitchDocument(modelTitle);
+            this.modelDocumentDao.SwitchDocument(modelTitle);
         }
         private void DocumentsLoad()
         {
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\"))
             { 
-                modelDocumentDao.AddDocument("新建模型", this.userName);
+                this.modelDocumentDao.AddDocument("新建模型", this.userName);
                 return;
             }
                
