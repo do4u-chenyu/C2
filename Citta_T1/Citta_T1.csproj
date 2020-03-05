@@ -92,22 +92,22 @@
     <Compile Include="Controls\MyModelControl.Designer.cs">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RemarkControl.cs">
+    <Compile Include="Controls\Flow\RemarkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RemarkControl.Designer.cs">
+    <Compile Include="Controls\Flow\RemarkControl.Designer.cs">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RightShowButton.cs">
+    <Compile Include="Controls\Flow\RightShowButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RightShowButton.Designer.cs">
+    <Compile Include="Controls\Flow\RightShowButton.Designer.cs">
       <DependentUpon>RightShowButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RightHideButton.cs">
+    <Compile Include="Controls\Flow\RightHideButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RightHideButton.Designer.cs">
+    <Compile Include="Controls\Flow\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Title\ModelTitleControl.cs">
@@ -161,10 +161,10 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
-    <Compile Include="Controls\NaviViewControl.cs">
+    <Compile Include="Controls\Flow\NaviViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NaviViewControl.Designer.cs">
+    <Compile Include="Controls\Flow\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\AvgOperatorView.cs">
@@ -239,10 +239,10 @@
     <Compile Include="Dgvs\DataGridView1.Designer.cs">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlowControl.cs">
+    <Compile Include="Controls\Flow\FlowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FlowControl.Designer.cs">
+    <Compile Include="Controls\Flow\FlowControl.Designer.cs">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -286,13 +286,13 @@
     <EmbeddedResource Include="Controls\MyModelControl.resx">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RemarkControl.resx">
+    <EmbeddedResource Include="Controls\Flow\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RightShowButton.resx">
+    <EmbeddedResource Include="Controls\Flow\RightShowButton.resx">
       <DependentUpon>RightShowButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RightHideButton.resx">
+    <EmbeddedResource Include="Controls\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\ModelTitleControl.resx">
@@ -313,7 +313,7 @@
     <EmbeddedResource Include="Dgvs\DataGridView2.resx">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FlowControl.resx">
+    <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
@@ -332,7 +332,7 @@
     <EmbeddedResource Include="Dialogs\FormInputData.resx">
       <DependentUpon>FormInputData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NaviViewControl.resx">
+    <EmbeddedResource Include="Controls\Flow\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OperatorControl.resx">
