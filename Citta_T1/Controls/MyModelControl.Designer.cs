@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.modelButton1 = new Citta_T1.Controls.ModelButton();
             this.SuspendLayout();
-            // 
-            // modelButton1
-            // 
-            this.modelButton1.BackColor = System.Drawing.Color.White;
-            this.modelButton1.Location = new System.Drawing.Point(25, 30);
-            this.modelButton1.Name = "modelButton1";
-            this.modelButton1.Size = new System.Drawing.Size(141, 27);
-            this.modelButton1.TabIndex = 0;
             // 
             // MyModelControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.modelButton1);
             this.Name = "MyModelControl";
             this.Size = new System.Drawing.Size(187, 637);
             this.ResumeLayout(false);
@@ -52,7 +42,5 @@
         }
 
         #endregion
-
-        private ModelButton modelButton1;
     }
 }

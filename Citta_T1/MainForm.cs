@@ -436,6 +436,7 @@ namespace  Citta_T1
         private void saveModelButton_Click(object sender, EventArgs e)
         {
             modelDocumentDao.SaveDocument();
+            this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
         }
     }
 }

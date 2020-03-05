@@ -26,6 +26,8 @@ namespace Citta_T1.Business
          * 传入参数为模型文档名称，当前用户名
          */
         public string ModelDocumentTitle {get => this.modelTitle;}
+        public bool Dirty { get => dirty; set => dirty = value; }
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;

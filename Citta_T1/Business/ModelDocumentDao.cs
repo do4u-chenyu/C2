@@ -13,6 +13,9 @@ namespace Citta_T1.Business
     {
         private List<ModelDocument> modelDocuments;
         private ModelDocument currentDocument;
+
+        internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
+
         public ModelDocumentDao()
         {
             modelDocuments = new List<ModelDocument>();
