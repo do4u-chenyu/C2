@@ -320,7 +320,7 @@ namespace  Citta_T1
        // NewOperatorEvent?.Invoke(btn);
           
 
-        private void newModelButton_Click(object sender, EventArgs e)
+        private void NewModelButton_Click(object sender, EventArgs e)
         {
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
             this.createNewModel.Owner = this;
@@ -358,19 +358,7 @@ namespace  Citta_T1
             //文档加载事件
             DocumentLoadEvent?.Invoke();
         }
-      
-        private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseIsDown = true;
-            basepoint = e.Location;
-            this.blankButton.Focus();
-            if (e.Button == MouseButtons.Left)
-            {
-                this.canvasPanel.startX = e.X;
-                this.canvasPanel.startY = e.Y;
-                Console.WriteLine("Before, X = " + this.canvasPanel.startX.ToString() + ", Y = " + this.canvasPanel.startY.ToString());
-            }
-        }
+     
         /// <summary>
         /// MD5字符串加密
         /// </summary>
@@ -391,7 +379,7 @@ namespace  Citta_T1
                 return sb.ToString();
             }
         }
-        private void stopButton_Click(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
 
             if (this.runButton.Name == "pauseButton")
@@ -402,7 +390,7 @@ namespace  Citta_T1
 
         }
 
-        private void runButton_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
 
             if (this.runButton.Name == "runButton")
@@ -417,7 +405,7 @@ namespace  Citta_T1
             }
         }
 
-        private void leftFoldButton_Click(object sender, EventArgs e)
+        private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
             {
@@ -438,16 +426,16 @@ namespace  Citta_T1
             this.dataSourceControl.RenameDataButton(index, dstName);
         }
 
-        private void helpPictureBox_Click(object sender, EventArgs e)
+        private void HelpPictureBox_Click(object sender, EventArgs e)
         {
             string helpfile = Application.StartupPath.Substring(0, Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")).LastIndexOf("\\")); 
             helpfile += @"\Doc\citta帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
 
-        private void saveModelButton_Click(object sender, EventArgs e)
+        private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            modelDocumentDao.SaveDocument();
+            this.modelDocumentDao.SaveDocument();
             this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
         }
     }

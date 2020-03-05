@@ -147,7 +147,7 @@
             this.helpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.helpPictureBox.TabIndex = 3;
             this.helpPictureBox.TabStop = false;
-            this.helpPictureBox.Click += new System.EventHandler(this.helpPictureBox_Click);
+            this.helpPictureBox.Click += new System.EventHandler(this.HelpPictureBox_Click);
             // 
             // portraitpictureBox
             // 
@@ -619,7 +619,7 @@
             this.saveModelButton.TabIndex = 1;
             this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
-            this.saveModelButton.Click += new System.EventHandler(this.saveModelButton_Click);
+            this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // newModelButton
             // 
@@ -632,7 +632,7 @@
             this.newModelButton.TabIndex = 0;
             this.toolTip1.SetToolTip(this.newModelButton, "新建模型");
             this.newModelButton.UseVisualStyleBackColor = false;
-            this.newModelButton.Click += new System.EventHandler(this.newModelButton_Click);
+            this.newModelButton.Click += new System.EventHandler(this.NewModelButton_Click);
             // 
             // canvasPanel
             // 
@@ -681,7 +681,7 @@
             this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
-            this.leftFoldButton.Click += new System.EventHandler(this.leftFoldButton_Click);
+            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // blankButton
             // 
@@ -770,7 +770,7 @@
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
             this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // runButton
             // 
@@ -787,7 +787,7 @@
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
             this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // pictureBox3
             // 
