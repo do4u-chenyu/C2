@@ -32,12 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelTitleControl));
             this.panel2 = new System.Windows.Forms.Panel();
             this.closePictureBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.modelTitlelabel = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dirtyPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -61,17 +61,17 @@
             this.closePictureBox.TabStop = false;
             this.closePictureBox.Click += new System.EventHandler(this.ClosePictureBox_Click);
             // 
-            // label1
+            // modelTitlelabel
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 26);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "新建模型";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.modelTitlelabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelTitlelabel.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            this.modelTitlelabel.Location = new System.Drawing.Point(0, 0);
+            this.modelTitlelabel.Name = "modelTitlelabel";
+            this.modelTitlelabel.Size = new System.Drawing.Size(113, 26);
+            this.modelTitlelabel.TabIndex = 2;
+            this.modelTitlelabel.Text = "新建模型";
+            this.modelTitlelabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.modelTitlelabel.Click += new System.EventHandler(this.MdelTitlelabel_Click);
             // 
             // toolTip
             // 
@@ -79,29 +79,29 @@
             this.toolTip.InitialDelay = 500;
             this.toolTip.ReshowDelay = 100;
             // 
-            // pictureBox1
+            // dirtyPictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(17, 17);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
+            this.dirtyPictureBox.Location = new System.Drawing.Point(-1, 0);
+            this.dirtyPictureBox.Name = "dirtyPictureBox";
+            this.dirtyPictureBox.Size = new System.Drawing.Size(12, 13);
+            this.dirtyPictureBox.TabIndex = 3;
+            this.dirtyPictureBox.TabStop = false;
             // 
             // ModelTitleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dirtyPictureBox);
+            this.Controls.Add(this.modelTitlelabel);
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
             this.Name = "ModelTitleControl";
             this.Size = new System.Drawing.Size(140, 26);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -109,8 +109,8 @@
         #endregion
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox closePictureBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label modelTitlelabel;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox dirtyPictureBox;
     }
 }

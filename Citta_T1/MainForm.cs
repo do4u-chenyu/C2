@@ -8,14 +8,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls;
+using Citta_T1.Controls.Small;
 using Citta_T1.Business;
 using System.IO;
 
 namespace  Citta_T1
 {
     public delegate void DocumentLoadEventHandler();
-    public delegate void DocumentReSaveEventHandler(string modelTitle);
+    public delegate void DocumentSaveEventHandler();
+
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -33,7 +34,8 @@ namespace  Citta_T1
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public event DocumentLoadEventHandler DocumentLoadEvent;
-        public event DocumentReSaveEventHandler DocumentReSaveEvent;
+  
+        public event DocumentSaveEventHandler DocumenSaveEvent;
         public string GetUserName { get => this.userName; set => this.userName = value; }
 
 
@@ -60,36 +62,45 @@ namespace  Citta_T1
             this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
             this.createNewModel.CoverModelDocument += ReSaveDocument;
             this.DocumentLoadEvent += DocumentsLoad;
-            this.DocumentReSaveEvent += ReSaveDocument;
+            this.DocumenSaveEvent += SaveDocument;
+
 
 
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            modelDocumentDao.AddDocument(modelTitle,this.userName);
+            this.modelDocumentDao.AddDocument(modelTitle,this.userName);
             
         }
         private void NewDocumentOperator(Control ct)
         {
-            modelDocumentDao.AddDocumentOperator(ct);
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
+            mtc.SetDirtyPictureBox();
+            this.modelDocumentDao.AddDocumentOperator(ct);
 
         }
-        private void  ReSaveDocument(string modelTitle)
+        
+        public void SaveDocument()
+        {
+            modelDocumentDao.SaveDocument();
+        }
+        private void  ReSaveDocument()
         {
             this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
             modelDocumentDao.SaveDocument();
-            Console.WriteLine("覆盖文件-------------");
+
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
-            modelDocumentDao.SwitchDocument(modelTitle);
+            this.modelDocumentDao.SwitchDocument(modelTitle);
         }
         private void DocumentsLoad()
         {
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\"))
             { 
-                modelDocumentDao.AddDocument("新建模型", this.userName);
+                this.modelDocumentDao.AddDocument("新建模型", this.userName);
                 return;
             }
                
@@ -100,7 +111,7 @@ namespace  Citta_T1
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
-                {
+                {                
                     List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
                     foreach (Control ct in controls)
                     {
@@ -114,16 +125,21 @@ namespace  Citta_T1
                     }
                     this.modelTitlePanel.AddModel(modelTitle.ToString());
                     this.modelTitlePanel.SelectedModel("三月模型");
-                    
+                  
+                }
+                foreach (Citta_T1.Controls.Small.ModelTitleControl ct in this.modelTitlePanel.Controls)
+                {
+                    if (ct.Location.X == 1)
+                    {
+                        this.modelTitlePanel.RemoveModel(ct);
+                        return;
+                    }                   
                 }
             }
             catch
-            {
-                
+            {               
                 Console.WriteLine("不存在模型文档");
             }
-
-
         }
         private void InitializeControlsLocation()
         {
@@ -317,7 +333,7 @@ namespace  Citta_T1
        // NewOperatorEvent?.Invoke(btn);
           
 
-        private void newModelButton_Click(object sender, EventArgs e)
+        private void NewModelButton_Click(object sender, EventArgs e)
         {
             this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
             this.createNewModel.Owner = this;
@@ -355,19 +371,7 @@ namespace  Citta_T1
             //文档加载事件
             DocumentLoadEvent?.Invoke();
         }
-      
-        private void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            MouseIsDown = true;
-            basepoint = e.Location;
-            this.blankButton.Focus();
-            if (e.Button == MouseButtons.Left)
-            {
-                this.canvasPanel.startX = e.X;
-                this.canvasPanel.startY = e.Y;
-                Console.WriteLine("Before, X = " + this.canvasPanel.startX.ToString() + ", Y = " + this.canvasPanel.startY.ToString());
-            }
-        }
+     
         /// <summary>
         /// MD5字符串加密
         /// </summary>
@@ -388,7 +392,7 @@ namespace  Citta_T1
                 return sb.ToString();
             }
         }
-        private void stopButton_Click(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
 
             if (this.runButton.Name == "pauseButton")
@@ -399,7 +403,7 @@ namespace  Citta_T1
 
         }
 
-        private void runButton_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
 
             if (this.runButton.Name == "runButton")
@@ -414,7 +418,7 @@ namespace  Citta_T1
             }
         }
 
-        private void leftFoldButton_Click(object sender, EventArgs e)
+        private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
             {
@@ -435,17 +439,21 @@ namespace  Citta_T1
             this.dataSourceControl.RenameDataButton(index, dstName);
         }
 
-        private void helpPictureBox_Click(object sender, EventArgs e)
+        private void HelpPictureBox_Click(object sender, EventArgs e)
         {
             string helpfile = Application.StartupPath.Substring(0, Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")).LastIndexOf("\\")); 
             helpfile += @"\Doc\citta帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
 
-        private void saveModelButton_Click(object sender, EventArgs e)
+        private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            modelDocumentDao.SaveDocument();
+
+            DocumenSaveEvent?.Invoke();
             this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
+            mtc.ClearDirtyPictureBox();
         }
     }
 }
