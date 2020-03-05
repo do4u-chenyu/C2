@@ -15,7 +15,8 @@ using System.IO;
 namespace  Citta_T1
 {
     public delegate void DocumentLoadEventHandler();
-    public delegate void DocumentReSaveEventHandler(string modelTitle);
+    public delegate void DocumentSaveEventHandler();
+
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -33,7 +34,8 @@ namespace  Citta_T1
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public event DocumentLoadEventHandler DocumentLoadEvent;
-        public event DocumentReSaveEventHandler DocumentReSaveEvent;
+  
+        public event DocumentSaveEventHandler DocumenSaveEvent;
         public string GetUserName { get => this.userName; set => this.userName = value; }
 
 
@@ -60,7 +62,8 @@ namespace  Citta_T1
             this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
             this.createNewModel.CoverModelDocument += ReSaveDocument;
             this.DocumentLoadEvent += DocumentsLoad;
-            this.DocumentReSaveEvent += ReSaveDocument;
+            this.DocumenSaveEvent += SaveDocument;
+
 
 
         }
@@ -75,11 +78,15 @@ namespace  Citta_T1
             modelDocumentDao.AddDocumentOperator(ct);
 
         }
-        private void  ReSaveDocument(string modelTitle)
+        
+        public void SaveDocument()
+        {
+            modelDocumentDao.SaveDocument();
+        }
+        private void  ReSaveDocument()
         {
             this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
             modelDocumentDao.SaveDocument();
-            Console.WriteLine("覆盖文件-------------");
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
@@ -100,7 +107,7 @@ namespace  Citta_T1
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
-                {
+                {                
                     List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
                     foreach (Control ct in controls)
                     {
@@ -114,16 +121,21 @@ namespace  Citta_T1
                     }
                     this.modelTitlePanel.AddModel(modelTitle.ToString());
                     this.modelTitlePanel.SelectedModel("三月模型");
-                    
+                  
+                }
+                foreach (Citta_T1.Controls.Small.ModelTitleControl ct in this.modelTitlePanel.Controls)
+                {
+                    if (ct.Location.X == 1)
+                    {
+                        this.modelTitlePanel.RemoveModel(ct);
+                        return;
+                    }                   
                 }
             }
             catch
-            {
-                
+            {               
                 Console.WriteLine("不存在模型文档");
             }
-
-
         }
         private void InitializeControlsLocation()
         {
@@ -444,8 +456,8 @@ namespace  Citta_T1
 
         private void saveModelButton_Click(object sender, EventArgs e)
         {
-            modelDocumentDao.SaveDocument();
-            this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
+            
+            DocumenSaveEvent?.Invoke();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace Citta_T1.Business
         }
         public void SaveDocument()
         {
+
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
         }

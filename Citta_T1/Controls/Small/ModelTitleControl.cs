@@ -40,20 +40,20 @@ namespace Citta_T1.Controls.Small
             this.modelTitle = modelTitle;
             int maxLength = 6;
             int digitLetterCount = 0;
-            this.toolTip.SetToolTip(this.label1, modelTitle);
+            this.toolTip.SetToolTip(this.modelTitlelabel, modelTitle);
 
             if (modelTitle.Length <= maxLength)
-                this.label1.Text = modelTitle;
+                this.modelTitlelabel.Text = modelTitle;
             else
             {
                 digitLetterCount = Regex.Matches(modelTitle.Substring(0, maxLength), "[a-zA-Z0-9]").Count;
                 if (digitLetterCount < 4)
-                    this.label1.Text = modelTitle.Substring(0, maxLength) + "...";
+                    this.modelTitlelabel.Text = modelTitle.Substring(0, maxLength) + "...";
                 else //>=4
                 {
-                    this.label1.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
+                    this.modelTitlelabel.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
                     if (modelTitle.Length > 8)
-                        this.label1.Text += "...";
+                        this.modelTitlelabel.Text += "...";
                 }
             }
             
@@ -61,47 +61,48 @@ namespace Citta_T1.Controls.Small
         public void SetNewModelTitle(string modelTitle, int nr)
         {
             if (nr == 0)
-                this.label1.Text = "";
+                this.modelTitlelabel.Text = "";
             else
             {
-                this.label1.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, nr));
+                this.modelTitlelabel.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, nr));
                 if (modelTitle.Length > nr)
-                    this.label1.Text += "...";
+                    this.modelTitlelabel.Text += "...";
             }
         }
  
 
         private void ClosePictureBox_Click(object sender, EventArgs e)
         {
-            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
-            parentPanel.RemoveModel(this);
-
-            //MessageBox.Show("文件尚未保存","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;            
+            DialogResult result= MessageBox.Show("保存文件"+"\""+modelTitle + "\"" + "?","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                MainForm mainForm =(MainForm) this.ParentForm;
+                mainForm.SaveDocument();
+                parentPanel.RemoveModel(this); 
+            }
+            else if (result == DialogResult.No)
+            { parentPanel.RemoveModel(this); }
+            else
+                return;
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        public void ShowSelectedBorder()
         {
-            ShowSelectedBorder();
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             if (parentPanel != null)
                 parentPanel.ClearSelectedBorder();
             this.BorderStyle = BorderStyle.FixedSingle;
             this.selected = true;
             ModelDocumentSwitch?.Invoke(modelTitle);
-            // TODO文档切换
         }
-
-        public void ShowSelectedBorder()
-        {
-            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
-            parentPanel.ClearSelectedBorder();
-            this.BorderStyle = BorderStyle.FixedSingle;
-            this.selected = true;
-        }
-
         
-
+        private void MdelTitlelabel_Click(object sender, EventArgs e)
+        {
+            ShowSelectedBorder();
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
+        }
     }
 
 
