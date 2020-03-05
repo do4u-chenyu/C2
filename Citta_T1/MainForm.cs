@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls.Small;
+using Citta_T1.Controls.Title;
 using Citta_T1.Business;
 using System.IO;
 
@@ -127,7 +127,7 @@ namespace  Citta_T1
                     this.modelTitlePanel.SelectedModel("三月模型");
                   
                 }
-                foreach (Citta_T1.Controls.Small.ModelTitleControl ct in this.modelTitlePanel.Controls)
+                foreach (Citta_T1.Controls.Title.ModelTitleControl ct in this.modelTitlePanel.Controls)
                 {
                     if (ct.Location.X == 1)
                     {

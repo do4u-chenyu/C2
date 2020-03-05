@@ -12,7 +12,7 @@ using Citta_T1.Business;
 using Citta_T1.Utils;
 using Citta_T1.Controls;
 
-namespace Citta_T1.Controls.Small
+namespace Citta_T1.Controls.Title
 {
     public delegate void DocumentSwitchEventHandler(string modelTitle);
     public partial class ModelTitleControl : UserControl

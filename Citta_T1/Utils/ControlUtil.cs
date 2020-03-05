@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls.Small;
+using Citta_T1.Controls.Title;
 
 namespace Citta_T1.Utils
 {

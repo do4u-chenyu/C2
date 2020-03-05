@@ -80,10 +80,10 @@
     <Compile Include="Controls\ModelButton.Designer.cs">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MoveDtControl.cs">
+    <Compile Include="Controls\Move\MoveDtControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MoveDtControl.Designer.cs">
+    <Compile Include="Controls\Move\MoveDtControl.Designer.cs">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MyModelControl.cs">
@@ -110,22 +110,22 @@
     <Compile Include="Controls\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitleControl.cs">
+    <Compile Include="Controls\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitleControl.Designer.cs">
+    <Compile Include="Controls\Title\ModelTitleControl.Designer.cs">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\DragLineControl.cs">
+    <Compile Include="Controls\Title\DragLineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\DragLineControl.Designer.cs">
+    <Compile Include="Controls\Title\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitlePanel.cs">
+    <Compile Include="Controls\Title\ModelTitlePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
+    <Compile Include="Controls\Title\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStruct\Data.cs" />
@@ -259,10 +259,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\MoveOpControl.cs">
+    <Compile Include="Controls\Move\MoveOpControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MoveOpControl.Designer.cs">
+    <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Bezier.cs" />
@@ -280,7 +280,7 @@
     <EmbeddedResource Include="Controls\ModelButton.resx">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MoveDtControl.resx">
+    <EmbeddedResource Include="Controls\Move\MoveDtControl.resx">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MyModelControl.resx">
@@ -295,13 +295,13 @@
     <EmbeddedResource Include="Controls\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\ModelTitleControl.resx">
+    <EmbeddedResource Include="Controls\Title\ModelTitleControl.resx">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\DragLineControl.resx">
+    <EmbeddedResource Include="Controls\Title\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\ModelTitlePanel.resx">
+    <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
@@ -326,7 +326,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MoveOpControl.resx">
+    <EmbeddedResource Include="Controls\Move\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FormInputData.resx">

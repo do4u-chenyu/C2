@@ -1,6 +1,6 @@
-﻿namespace Citta_T1.Controls.Small
+﻿namespace Citta_T1.Controls.Title
 {
-    partial class ModelTitlePanel
+    partial class DragLineControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,18 +30,19 @@
         {
             this.SuspendLayout();
             // 
-            // ModelTitlePanel
+            // DragLineControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
-            this.Name = "ModelTitlePanel";
-            this.Size = new System.Drawing.Size(908, 36);
-            this.SizeChanged += new System.EventHandler(this.ModelTitlePanel_SizeChanged);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.Name = "DragLineControl";
+            this.Size = new System.Drawing.Size(150, 3);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DragLineControl_MouseUp);
             this.ResumeLayout(false);
 
         }
-
 
         #endregion
     }

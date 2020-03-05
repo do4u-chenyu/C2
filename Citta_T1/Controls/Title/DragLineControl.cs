@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Small
+namespace Citta_T1.Controls.Title
 {
     public partial class DragLineControl : UserControl
     {

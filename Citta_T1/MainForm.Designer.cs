@@ -49,7 +49,7 @@
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new Citta_T1.Controls.Small.DragLineControl();
+            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -88,7 +88,7 @@
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.modelTitlePanel = new Citta_T1.Controls.Small.ModelTitlePanel();
+            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -914,7 +914,7 @@
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private Citta_T1.Controls.Small.ModelTitlePanel modelTitlePanel;
+        private Citta_T1.Controls.Title.ModelTitlePanel modelTitlePanel;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button importButton;
@@ -935,7 +935,7 @@
         private Controls.RightHideButton rightHideButton;
         private Controls.RightShowButton rightShowButton;
         public Controls.FlowControl flowControl;
-        private Controls.Small.DragLineControl dragLineControl;
+        private Controls.Title.DragLineControl dragLineControl;
         private Controls.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;

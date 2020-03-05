@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Citta_T1.Controls.Small
+namespace Citta_T1.Controls.Title
 {
     public delegate void NewDocumentEventHandler(string modelTitle);
     public delegate void DocumentSwitchHandler(string modelTitle);

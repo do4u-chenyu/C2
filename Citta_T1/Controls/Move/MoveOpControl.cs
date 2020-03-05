@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
-namespace Citta_T1.Controls
+namespace Citta_T1.Controls.Move
 {
     public delegate void delegateOverViewData(string index);
     public delegate void delegateRenameData(string index);

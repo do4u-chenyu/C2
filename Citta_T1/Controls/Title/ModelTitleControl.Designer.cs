@@ -1,4 +1,4 @@
-﻿namespace Citta_T1.Controls.Small
+﻿namespace Citta_T1.Controls.Title
 {
     partial class ModelTitleControl
     {
