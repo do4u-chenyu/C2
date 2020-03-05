@@ -30,8 +30,20 @@ namespace Citta_T1.Controls.Small
         {
             InitializeComponent();
             SetOriginalModelTitle("新建模型");
-            dirty = true;
+            dirty = false;
+            ClearDirtyPictureBox();
 
+        }
+
+        public void SetDirtyPictureBox()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelTitleControl));
+            this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
+        }
+
+        public void ClearDirtyPictureBox()
+        {
+            this.dirtyPictureBox.Image = null;
         }
 
         public void SetOriginalModelTitle(string modelTitle)

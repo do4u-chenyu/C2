@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls.Small;
 
 namespace Citta_T1.Utils
 {
@@ -39,6 +40,18 @@ namespace Citta_T1.Utils
                 }          
             }
             return null;
+        }
+
+        public static ModelTitleControl FindMTCByName(string modelTitle, ModelTitlePanel mtp)
+        {
+            ModelTitleControl ret = new ModelTitleControl();
+            foreach (Control ct in mtp.Controls)
+            {
+                if (ct is ModelTitleControl)
+                    if ((ct as ModelTitleControl).ModelTitle == modelTitle)
+                        ret = (ct as ModelTitleControl);
+            }
+            return ret;
         }
        
     }
