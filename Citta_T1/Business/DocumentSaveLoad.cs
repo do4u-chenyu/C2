@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Citta_T1.Controls;
+using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Business
 {
@@ -25,7 +26,12 @@ namespace Citta_T1.Business
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
-
+            //没有模型元素，只写入根节点
+            if (elementList.Count == 0)//----------------------------------------------------------
+            {
+                xDoc.Save(modelFilePath);
+                return;
+            }              
             foreach (ModelElement me in elementList)
             {
                 XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
@@ -74,7 +80,9 @@ namespace Citta_T1.Business
             xDoc.Load(modelFilePath);
             List<ModelElement> modelElements = new List<ModelElement>();
             XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
-
+            XmlNode me = rootNode.SelectSingleNode("ModelElement");
+            if (me == null)
+                return modelElements;//------------------------------------------
             var nodeLists = rootNode.SelectNodes("ModelElement");
             foreach (XmlNode xn in nodeLists)
             {

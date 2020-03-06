@@ -7,17 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
-using System.Reflection;
 
 namespace Citta_T1.Controls
 {
+    public delegate void NewOperateEventHandler(Control ct);
     public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
         private float deltaY;
+        public event NewOperateEventHandler NewOperatorEvent;
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -104,10 +106,7 @@ namespace Citta_T1.Controls
             {
                 if (con is IScalable)
                 {
-                    // 通过反射调用方法
-                    object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
-                    MethodInfo mi = con.GetType().GetMethod("SetTag");
-                    mi.Invoke(obj, new Object[] {con});//调用方法
+                    (con as Scalable).SetTag(con);
                 }
             }
             deep -= 1;
@@ -125,10 +124,7 @@ namespace Citta_T1.Controls
                 SetDouble(con);
                 if (con.Tag != null && (con is IScalable))
                 {
-                    // 通过反射调用子控件的`SetControlsBySize`方法
-                    object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
-                    MethodInfo mi = con.GetType().GetMethod("SetControlsBySize");
-                    mi.Invoke(obj, new Object[] { newx, newy, con});//调用方法
+                    (con as Scalable).SetControlsBySize(newx, newy, con);
                 }
             }
             deep -= 1;
@@ -194,8 +190,10 @@ namespace Citta_T1.Controls
                     this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
+               
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
+                NewOperatorEvent?.Invoke(btn);
             }
             else
             {
@@ -205,8 +203,10 @@ namespace Citta_T1.Controls
                     this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
                 );
                 Controls.Add(btn);
+               
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
+                NewOperatorEvent?.Invoke(btn);
             }
 
         }

@@ -42,14 +42,14 @@
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
-            this.operatorControl = new Citta_T1.Controls.OperatorControl();
-            this.flowChartControl = new Citta_T1.Controls.FlowChartControl();
-            this.dataSourceControl = new Citta_T1.Controls.DataSourceControl();
-            this.myModelControl = new Controls.MyModelControl();
+            this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
+            this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
+            this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
+            this.myModelControl = new Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dragLineControl = new Citta_T1.Controls.Small.DragLineControl();
+            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -80,17 +80,17 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.blankButton = new System.Windows.Forms.Button();
-            this.remarkControl = new Citta_T1.Controls.RemarkControl();
-            this.flowControl = new Citta_T1.Controls.FlowControl();
-            this.rightHideButton = new Citta_T1.Controls.RightHideButton();
-            this.rightShowButton = new Citta_T1.Controls.RightShowButton();
+            this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
+            this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
+            this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
+            this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
             this.downloadButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.modelTitlePanel = new Citta_T1.Controls.Small.ModelTitlePanel();
+            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.naviViewControl = new Citta_T1.Controls.NaviViewControl();
+            this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
             this.headPanel.SuspendLayout();
@@ -147,7 +147,7 @@
             this.helpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.helpPictureBox.TabIndex = 3;
             this.helpPictureBox.TabStop = false;
-            this.helpPictureBox.Click += new System.EventHandler(this.helpPictureBox_Click);
+            this.helpPictureBox.Click += new System.EventHandler(this.HelpPictureBox_Click);
             // 
             // portraitpictureBox
             // 
@@ -619,6 +619,7 @@
             this.saveModelButton.TabIndex = 1;
             this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
+            this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
             // 
             // newModelButton
             // 
@@ -631,7 +632,7 @@
             this.newModelButton.TabIndex = 0;
             this.toolTip1.SetToolTip(this.newModelButton, "新建模型");
             this.newModelButton.UseVisualStyleBackColor = false;
-            this.newModelButton.Click += new System.EventHandler(this.newModelButton_Click);
+            this.newModelButton.Click += new System.EventHandler(this.NewModelButton_Click);
             // 
             // canvasPanel
             // 
@@ -643,11 +644,11 @@
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.rightHideButton);
             this.canvasPanel.Controls.Add(this.rightShowButton);
+            this.canvasPanel.Controls.Add(this.pictureBox3);
+            this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.downloadButton);
             this.canvasPanel.Controls.Add(this.stopButton);
             this.canvasPanel.Controls.Add(this.runButton);
-            this.canvasPanel.Controls.Add(this.pictureBox3);
-            this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.naviViewControl);
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
@@ -680,7 +681,7 @@
             this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
-            this.leftFoldButton.Click += new System.EventHandler(this.leftFoldButton_Click);
+            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // blankButton
             // 
@@ -769,7 +770,7 @@
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
             this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // runButton
             // 
@@ -786,7 +787,7 @@
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
             this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // pictureBox3
             // 
@@ -903,7 +904,7 @@
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
-        public Controls.NaviViewControl naviViewControl;
+        public Controls.Flow.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button histogramButton;
@@ -913,14 +914,14 @@
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private Citta_T1.Controls.Small.ModelTitlePanel modelTitlePanel;
+        private Citta_T1.Controls.Title.ModelTitlePanel modelTitlePanel;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button importButton;
-        private Controls.OperatorControl operatorControl;
-        private Controls.FlowChartControl flowChartControl;
-        private Controls.DataSourceControl dataSourceControl;
-        private Controls.MyModelControl myModelControl;
+        private Controls.Left.OperatorControl operatorControl;
+        private Controls.Left.FlowChartControl flowChartControl;
+        private Controls.Left.DataSourceControl dataSourceControl;
+        private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private DataGridView1 dataGridView1;
@@ -931,11 +932,11 @@
         private System.Windows.Forms.Label label7;
         private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private System.Windows.Forms.Button flowChartButton;
-        private Controls.RightHideButton rightHideButton;
-        private Controls.RightShowButton rightShowButton;
-        public Controls.FlowControl flowControl;
-        private Controls.Small.DragLineControl dragLineControl;
-        private Controls.RemarkControl remarkControl;
+        private Controls.Flow.RightHideButton rightHideButton;
+        private Controls.Flow.RightShowButton rightShowButton;
+        public Controls.Flow.FlowControl flowControl;
+        private Controls.Title.DragLineControl dragLineControl;
+        private Controls.Flow.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
         private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;

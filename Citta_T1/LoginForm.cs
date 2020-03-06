@@ -49,7 +49,7 @@ namespace Citta_T1
              
             this.Hide();
             MainForm mainForm = new MainForm();
-            mainForm.GetUserName(userName);
+            mainForm.GetUserName=userName;
             mainForm.ShowDialog();
             this.Close();
            

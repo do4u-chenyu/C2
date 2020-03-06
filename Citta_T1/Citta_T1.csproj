@@ -34,9 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,76 +56,76 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
-    <Compile Include="Controls\DataButton.cs">
+    <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataButton.Designer.cs">
+    <Compile Include="Controls\Left\DataButton.Designer.cs">
       <DependentUpon>DataButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\DataSourceControl.cs">
+    <Compile Include="Controls\Left\DataSourceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\DataSourceControl.Designer.cs">
+    <Compile Include="Controls\Left\DataSourceControl.Designer.cs">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlowChartControl.cs">
+    <Compile Include="Controls\Left\FlowChartControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FlowChartControl.Designer.cs">
+    <Compile Include="Controls\Left\FlowChartControl.Designer.cs">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ModelButton.cs">
+    <Compile Include="Controls\Left\ModelButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\ModelButton.Designer.cs">
+    <Compile Include="Controls\Left\ModelButton.Designer.cs">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MoveDtControl.cs">
+    <Compile Include="Controls\Move\MoveDtControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MoveDtControl.Designer.cs">
+    <Compile Include="Controls\Move\MoveDtControl.Designer.cs">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\MyModelControl.cs">
+    <Compile Include="Controls\Left\MyModelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MyModelControl.Designer.cs">
+    <Compile Include="Controls\Left\MyModelControl.Designer.cs">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RemarkControl.cs">
+    <Compile Include="Controls\Flow\RemarkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RemarkControl.Designer.cs">
+    <Compile Include="Controls\Flow\RemarkControl.Designer.cs">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RightShowButton.cs">
+    <Compile Include="Controls\Flow\RightShowButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RightShowButton.Designer.cs">
+    <Compile Include="Controls\Flow\RightShowButton.Designer.cs">
       <DependentUpon>RightShowButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\RightHideButton.cs">
+    <Compile Include="Controls\Flow\RightHideButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\RightHideButton.Designer.cs">
+    <Compile Include="Controls\Flow\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitleControl.cs">
+    <Compile Include="Controls\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitleControl.Designer.cs">
+    <Compile Include="Controls\Title\ModelTitleControl.Designer.cs">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\DragLineControl.cs">
+    <Compile Include="Controls\Title\DragLineControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\DragLineControl.Designer.cs">
+    <Compile Include="Controls\Title\DragLineControl.Designer.cs">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitlePanel.cs">
+    <Compile Include="Controls\Title\ModelTitlePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Small\ModelTitlePanel.Designer.cs">
+    <Compile Include="Controls\Title\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStruct\Data.cs" />
@@ -164,10 +161,10 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
-    <Compile Include="Controls\NaviViewControl.cs">
+    <Compile Include="Controls\Flow\NaviViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\NaviViewControl.Designer.cs">
+    <Compile Include="Controls\Flow\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\AvgOperatorView.cs">
@@ -242,10 +239,10 @@
     <Compile Include="Dgvs\DataGridView1.Designer.cs">
       <DependentUpon>DataGridView1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlowControl.cs">
+    <Compile Include="Controls\Flow\FlowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\FlowControl.Designer.cs">
+    <Compile Include="Controls\Flow\FlowControl.Designer.cs">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -254,57 +251,57 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OperatorControl.cs">
+    <Compile Include="Controls\Left\OperatorControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\OperatorControl.Designer.cs">
+    <Compile Include="Controls\Left\OperatorControl.Designer.cs">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\MoveOpControl.cs">
+    <Compile Include="Controls\Move\MoveOpControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\MoveOpControl.Designer.cs">
+    <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Controls\Interface\IScalable.cs" />
-    <EmbeddedResource Include="Controls\DataButton.resx">
+    <EmbeddedResource Include="Controls\Left\DataButton.resx"> 
       <DependentUpon>DataButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\DataSourceControl.resx">
+    <EmbeddedResource Include="Controls\Left\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FlowChartControl.resx">
+    <EmbeddedResource Include="Controls\Left\FlowChartControl.resx">
       <DependentUpon>FlowChartControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\ModelButton.resx">
+    <EmbeddedResource Include="Controls\Left\ModelButton.resx">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MoveDtControl.resx">
+    <EmbeddedResource Include="Controls\Move\MoveDtControl.resx">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MyModelControl.resx">
+    <EmbeddedResource Include="Controls\Left\MyModelControl.resx">
       <DependentUpon>MyModelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RemarkControl.resx">
+    <EmbeddedResource Include="Controls\Flow\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RightShowButton.resx">
+    <EmbeddedResource Include="Controls\Flow\RightShowButton.resx">
       <DependentUpon>RightShowButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\RightHideButton.resx">
+    <EmbeddedResource Include="Controls\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\ModelTitleControl.resx">
+    <EmbeddedResource Include="Controls\Title\ModelTitleControl.resx">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\DragLineControl.resx">
+    <EmbeddedResource Include="Controls\Title\DragLineControl.resx">
       <DependentUpon>DragLineControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Small\ModelTitlePanel.resx">
+    <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
@@ -316,7 +313,7 @@
     <EmbeddedResource Include="Dgvs\DataGridView2.resx">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\FlowControl.resx">
+    <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
@@ -329,16 +326,16 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MoveOpControl.resx">
+    <EmbeddedResource Include="Controls\Move\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\FormInputData.resx">
       <DependentUpon>FormInputData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NaviViewControl.resx">
+    <EmbeddedResource Include="Controls\Flow\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OperatorControl.resx">
+    <EmbeddedResource Include="Controls\Left\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">
@@ -378,7 +375,6 @@
     </EmbeddedResource>
     <None Include="Doc\citta帮助文档.chm" />
     <None Include="Doc\DesignDocument.docx" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
