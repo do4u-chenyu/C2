@@ -4,11 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls;
+using Citta_T1.Utils;
 
 namespace  Citta_T1
 {
@@ -268,7 +268,7 @@ namespace  Citta_T1
         void frm_InputDataEvent(Citta_T1.Data data)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            string index = GenerateMD5(data.content);
+            string index = OpUtil.GenerateMD5(data.content);
             this.dataSourceControl.GenDataButton(index, data.dataName, data.filePath);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
@@ -307,26 +307,7 @@ namespace  Citta_T1
                 Console.WriteLine("Before, X = " + this.canvasPanel.startX.ToString() + ", Y = " + this.canvasPanel.startY.ToString());
             }
         }
-        /// <summary>
-        /// MD5字符串加密
-        /// </summary>
-        /// <param name="txt"></param>
-        /// <returns>加密后字符串</returns>
-        public static string GenerateMD5(string txt)
-        {
-            using (MD5 mi = MD5.Create())
-            {
-                byte[] buffer = Encoding.Default.GetBytes(txt);
-                //开始加密
-                byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < newBuffer.Length; i++)
-                {
-                    sb.Append(newBuffer[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-        }
+
         private void stopButton_Click(object sender, EventArgs e)
         {
 

@@ -32,7 +32,7 @@ namespace Citta_T1.Controls
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        private Graphics g;
+        LineUtil.Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         public MoveOpControl()
@@ -91,6 +91,7 @@ namespace Citta_T1.Controls
             */
         }
 
+        #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown)
@@ -150,7 +151,13 @@ namespace Citta_T1.Controls
             }
 
         }
+        private void MoveOpControl_Load(object sender, EventArgs e)
+        {
 
+        }
+        #endregion
+
+        #region 针脚事件
         private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
         {
             System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
@@ -174,22 +181,15 @@ namespace Citta_T1.Controls
             (sender as PictureBox).Size = dstSize;
             //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
+        #endregion
 
-        private void MoveOpControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
+        #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
             byte[] bytes = _encoding.GetBytes(text);
             System.Console.WriteLine("bytes:" + bytes);
             return _encoding.GetString(bytes, startIndex, length);
         }
-
-        #region 控件名称长短改变时改变控件大小
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
@@ -289,6 +289,8 @@ namespace Citta_T1.Controls
 
         }
         #endregion
+
+        #region textBox
         public virtual void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下回车键
@@ -312,12 +314,7 @@ namespace Citta_T1.Controls
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
         }
-
-        public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            String helpInfo = "温馨提示";
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-        }
+        #endregion
 
         public virtual void txtButton_Click(object sender, EventArgs e)
         {
@@ -341,7 +338,13 @@ namespace Citta_T1.Controls
             }
 
         }
-        #region 绘制贝塞尔曲线
+        public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            String helpInfo = "温馨提示";
+            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+        }
+        #region 右针脚事件
+        // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // 绘制贝塞尔曲线，起点只能是rightPin
@@ -355,32 +358,26 @@ namespace Citta_T1.Controls
         {
             // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
             // TODO 绘制速度太慢了，体验非常不好
+            Graphics g = this.Parent.CreateGraphics();
             if (g != null)
             {
                 g.Clear(Color.White);
             }
             if (isMouseDown)
             {
+                //this.Refresh();
                 int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
                 int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                PointF a = new PointF((startX + nowX) / 2, startY);
-                PointF b = new PointF((startX + nowX) / 2, nowY);
-                PointF[] pointList = new PointF[] { new PointF(startX, startY), a, b, new PointF(nowX, nowY) };
-                PointF[] aa = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
-                g = this.Parent.CreateGraphics();
-                foreach (var item in aa)
-                {
-                    // 绘制曲线点
-                    // 下面是C#绘制到Panel画板控件上的代码
-                    g.DrawEllipse(new Pen(Color.Green), new RectangleF(item, new SizeF(1, 1)));
-                }
+                line = new LineUtil.Line(new PointF(startX, startY), new PointF(nowX, nowY));
+                line.DrawLine(g);
             }
+            g.Dispose();
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            
+            (this.Parent as CanvasPanel).lines.Add(line);
         }
         #endregion
 

@@ -25,6 +25,9 @@ namespace Citta_T1.Controls
         Graphics g;
         Pen p;
 
+        // 绘图
+        public List<LineUtil.Line> lines = new List<LineUtil.Line>() { };
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -277,6 +280,20 @@ namespace Citta_T1.Controls
             if (e.Data.GetDataPresent(DataFormats.Text))
             {
                 e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            // `Invalidate`方法会强制重绘panel，因为调用该方法
+            base.OnPaint(e);
+            Graphics g = e.Graphics;
+            if (lines.Count() > 0)
+            {
+                foreach(LineUtil.Line line in lines)
+                {
+                    line.DrawLine(g);
+                }
             }
         }
         #endregion
