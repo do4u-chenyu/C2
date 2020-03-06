@@ -51,8 +51,8 @@ namespace Citta_T1.Business
                         //name = (ctl as MoveOpControl).textBox1.Text;
                         break;
                     case ElementType.Operate:
-                        MoveOpControl moControl = new MoveOpControl(0, me.GetName(),me.Location);//默认是0,缩放比例
-                        controls.Add(moControl);
+                        //MoveOpControl moControl = new MoveOpControl(0, me.GetName(),me.Location);//默认是0,缩放比例
+                        controls.Add(me.GetControl);
                         break;
                     case ElementType.remark:
                         //name = (ctl as RemarkControl).RemarkText;

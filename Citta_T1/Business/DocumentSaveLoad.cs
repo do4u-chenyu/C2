@@ -97,9 +97,10 @@ namespace Citta_T1.Business
                     string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
-                    MoveOpControl cotl = new MoveOpControl();
+                    Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
+                    MoveOpControl cotl = new MoveOpControl(0,name, loc);
                     cotl.textBox1.Text = name;
-                    cotl.Location = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
+                    cotl.Location = loc;
                     ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType));
                     modelElements.Add(mElement);
 
