@@ -10,7 +10,8 @@ namespace Citta_T1.Controls.Move
 {
     public delegate void delegateOverViewData(string index);
     public delegate void delegateRenameData(string index);
-    public partial class MoveOpControl : UserControl, IScalable
+    public delegate void ModelDocumentDirtyEventHandler();
+    public partial class MoveOpControl : UserControl, IScalable   
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
@@ -21,11 +22,12 @@ namespace Citta_T1.Controls.Move
 
         public DateTime clickTime;
         public bool isClicked = false;
-
+        private string sizeL;
+        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
         // 一些倍率
         public string ReName { get => textBox1.Text; }
-         
+        public string SizeL { get => this.sizeL; }
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
@@ -45,6 +47,7 @@ namespace Citta_T1.Controls.Move
         }
         public MoveOpControl(int sizeL, string text, Point p)
         {
+            
             InitializeComponent();
             textBox1.Text = text;
             Location = p;
@@ -55,6 +58,7 @@ namespace Citta_T1.Controls.Move
         }
         public void resetSize(int sizeL)
         {
+            this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             while (sizeL > 0)
             {
@@ -117,7 +121,6 @@ namespace Citta_T1.Controls.Move
                 (sender as MoveOpControl).Location = new Point(left, top);
             }
         }
-
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("移动开始");
@@ -127,6 +130,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
+           
         }
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
@@ -153,7 +157,7 @@ namespace Citta_T1.Controls.Move
                 }
 
             }
-
+            
         }
         private void MoveOpControl_Load(object sender, EventArgs e)
         {
@@ -465,6 +469,17 @@ namespace Citta_T1.Controls.Move
             deep -= 1;
         }
         #endregion
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            ModelDocumentDirtyEvent?.Invoke();
+        }
+
+        private void MoveOpControl_LocationChanged(object sender, EventArgs e)
+        {
+            ModelDocumentDirtyEvent?.Invoke();
+        }
     }
 }
 

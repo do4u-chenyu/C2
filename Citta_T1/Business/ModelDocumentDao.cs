@@ -12,7 +12,7 @@ namespace Citta_T1.Business
     {
         private List<ModelDocument> modelDocuments;
         private ModelDocument currentDocument;
-
+        internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
 
         public ModelDocumentDao()
@@ -88,7 +88,7 @@ namespace Citta_T1.Business
             this.currentDocument.Dirty = true;
             if (ct.Name == "MoveOpControl")
             {
-                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct,ElementStatus.Null, SEType((ct as MoveOpControl).ReName));
+                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct,ElementStatus.Null, SEType((ct as MoveOpControl).ReName), (ct as MoveOpControl).SizeL);
                 this.currentDocument.AddModelElement(modelElement);
             }
            

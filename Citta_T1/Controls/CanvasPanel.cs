@@ -13,13 +13,16 @@ using Citta_T1.Utils;
 namespace Citta_T1.Controls
 {
     public delegate void NewOperateEventHandler(Control ct);
+    public delegate void DocumentDirtyEventHandler();
     public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
-        private float deltaY;
+        private float deltaY; 
         public event NewOperateEventHandler NewOperatorEvent;
+        public event DocumentDirtyEventHandler DocumentDirtyEvent;
+
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -106,7 +109,7 @@ namespace Citta_T1.Controls
             {
                 if (con is IScalable)
                 {
-                    (con as Scalable).SetTag(con);
+                    (con as IScalable).SetTag(con);
                 }
             }
             deep -= 1;
@@ -124,7 +127,7 @@ namespace Citta_T1.Controls
                 SetDouble(con);
                 if (con.Tag != null && (con is IScalable))
                 {
-                    (con as Scalable).SetControlsBySize(newx, newy, con);
+                    (con as IScalable).SetControlsBySize(newx, newy, con);
                 }
             }
             deep -= 1;
@@ -206,8 +209,11 @@ namespace Citta_T1.Controls
                
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
+                btn.ModelDocumentDirtyEvent += DocumentDirty;
                 NewOperatorEvent?.Invoke(btn);
             }
+           
+
 
         }
 
@@ -297,5 +303,7 @@ namespace Citta_T1.Controls
             }
         }
         #endregion
+        public void DocumentDirty()
+        { DocumentDirtyEvent?.Invoke(); }
     }
 }

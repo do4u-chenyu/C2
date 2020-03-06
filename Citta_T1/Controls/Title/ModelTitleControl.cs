@@ -91,10 +91,14 @@ namespace Citta_T1.Controls.Title
             {
                 MainForm mainForm =(MainForm) this.ParentForm;
                 mainForm.SaveDocument();
-                parentPanel.RemoveModel(this); 
+                if(parentPanel.Controls.Count!=2)
+                    parentPanel.RemoveModel(this);
             }
             else if (result == DialogResult.No)
-            { parentPanel.RemoveModel(this); }
+            {
+                if (parentPanel.Controls.Count != 2)
+                    parentPanel.RemoveModel(this); 
+            }
             else
                 return;
 

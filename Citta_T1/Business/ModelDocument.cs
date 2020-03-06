@@ -54,9 +54,9 @@ namespace Citta_T1.Business
             if (File.Exists(savePath + modelTitle +".xml"))//-------------------------------
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-                modelElements = dSaveLoad.ReadXml();
+                this.modelElements = dSaveLoad.ReadXml();
             }          
-            return modelElements;
+            return this.modelElements;
         }
         public void Show()
         {
@@ -70,6 +70,7 @@ namespace Citta_T1.Business
             foreach (ModelElement el1 in modelElements)
             {
                 el1.Hide();
+                Console.WriteLine("隐藏===");
             }
         }
 

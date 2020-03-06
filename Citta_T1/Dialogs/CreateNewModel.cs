@@ -11,12 +11,11 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Dialogs
 {
-    public delegate void CoverDocumentEventHandler();
+
     public partial class CreateNewModel : Form
     {
         private string modelTitle;
         public string ModelTitle { get => modelTitle; }
-        public event CoverDocumentEventHandler CoverModelDocument;
 
         public CreateNewModel()
         {
@@ -49,22 +48,10 @@ namespace Citta_T1.Dialogs
                 {
                     if (this.textBoxEx1.Text == modelTitle.ToString())
                     {
-                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，要替换它吗？", "确认另存为", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (DialogResult.Yes == result)
-                        {
-                            this.modelTitle = this.textBoxEx1.Text;
-                            CoverModelDocument?.Invoke();                          
-                            this.DialogResult = DialogResult.Cancel;
-                            this.Close();
-                            return;
-                        }
-                        else
-                        { 
-                            return;
-                        }
-
-                    }
-                                            
+                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (DialogResult.OK == result)
+                             return;
+                    }                                           
                 }
             }
             catch
