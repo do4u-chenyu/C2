@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
-    interface Scalable
+    interface IScalable
     {
         void SetTag(Control cons);
         void SetControlsBySize(float fx, float fy, Control cons);

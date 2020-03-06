@@ -268,9 +268,9 @@
     <Compile Include="Controls\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Bezier.cs" />
+    <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
-    <Compile Include="Utils\Scalable.cs" />
+    <Compile Include="Controls\Interface\IScalable.cs" />
     <EmbeddedResource Include="Controls\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
     </EmbeddedResource>

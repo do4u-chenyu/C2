@@ -46,7 +46,7 @@ namespace Citta_T1.Controls
                 List<Control> mocs = new List<Control> { };
                 foreach(Control con in Controls)
                 {
-                    if (con is Scalable)
+                    if (con is IScalable)
                     {
                         ((MoveOpControl)(con)).sizeLevel += 1;
                     }
@@ -61,7 +61,7 @@ namespace Citta_T1.Controls
                 List<Control> mocs = new List<Control> { };
                 foreach (Control con in Controls)
                 {
-                    if (con is Scalable)
+                    if (con is IScalable)
                     {
                         ((MoveOpControl)(con)).sizeLevel -= 1;
                     }
@@ -99,7 +99,7 @@ namespace Citta_T1.Controls
             deep += 1;
             foreach (Control con in cons.Controls)
             {
-                if (con is Scalable)
+                if (con is IScalable)
                 {
                     // 通过反射调用方法
                     object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
@@ -120,7 +120,7 @@ namespace Citta_T1.Controls
                 // 获取控件的Tag属性值，并分割后存储字符串数组
                 SetDouble(this);
                 SetDouble(con);
-                if (con.Tag != null && (con is Scalable))
+                if (con.Tag != null && (con is IScalable))
                 {
                     // 通过反射调用子控件的`SetControlsBySize`方法
                     object obj = Activator.CreateInstance(con.GetType());//创建一个obj对象
@@ -249,13 +249,13 @@ namespace Citta_T1.Controls
                 g.Dispose();
                 p.Dispose();
             }
-            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.isClick)
+            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
-                ((CanvasPanel)(this.Parent)).nowX = e.X;
-                ((CanvasPanel)(this.Parent)).nowY = e.Y;
-                ((CanvasPanel)(this.Parent)).ChangLoc(nowX - startX, nowY - startY);
-                ((CanvasPanel)(this.Parent)).startX = e.X;
-                ((CanvasPanel)(this.Parent)).startY = e.Y;
+                nowX = e.X;
+                nowY = e.Y;
+                ChangLoc(nowX - startX, nowY - startY);
+                startX = e.X;
+                startY = e.Y;
                 Console.WriteLine("After, X = " + startX.ToString() + ", Y = " + startY.ToString());
             }
         }

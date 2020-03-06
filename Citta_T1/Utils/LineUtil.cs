@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Utils    
 {
-    public static class Bezier
+    public static class LineUtil
     {
         /// <summary>
         /// 绘制n阶贝塞尔曲线路径

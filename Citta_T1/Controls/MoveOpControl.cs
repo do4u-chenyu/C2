@@ -9,7 +9,7 @@ namespace Citta_T1.Controls
 {
     public delegate void delegateOverViewData(string index);
     public delegate void delegateRenameData(string index);
-    public partial class MoveOpControl : UserControl, Scalable
+    public partial class MoveOpControl : UserControl, IScalable
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
@@ -366,7 +366,7 @@ namespace Citta_T1.Controls
                 PointF a = new PointF((startX + nowX) / 2, startY);
                 PointF b = new PointF((startX + nowX) / 2, nowY);
                 PointF[] pointList = new PointF[] { new PointF(startX, startY), a, b, new PointF(nowX, nowY) };
-                PointF[] aa = Bezier.draw_bezier_curves(pointList, pointList.Length, 0.001F);
+                PointF[] aa = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
                 g = this.Parent.CreateGraphics();
                 foreach (var item in aa)
                 {
