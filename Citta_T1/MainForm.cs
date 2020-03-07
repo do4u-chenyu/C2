@@ -81,6 +81,7 @@ namespace  Citta_T1
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.SetDirtyPictureBox();
+            this.saveModelButton.Image= global::Citta_T1.Properties.Resources.clicksavebutton;
         }
         private void NewDocumentOperator(Control ct)
         {
@@ -91,6 +92,7 @@ namespace  Citta_T1
         
         public void SaveDocument()
         {
+            this.saveModelButton.Image = ((System.Drawing.Image)resources.GetObject("saveModelButton.Image"));
             DirectoryInfo[] modelTitleList =new DirectoryInfo[1];
             try
             {
@@ -139,8 +141,9 @@ namespace  Citta_T1
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
                    List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
-                    foreach (Control ct in controls)
+                    foreach ( Citta_T1.Controls.Move.MoveOpControl ct in controls)
                     {
+                        ct.ModelDocumentDirtyEvent += DocumentDirty;
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
@@ -458,7 +461,6 @@ namespace  Citta_T1
         {
 
             DocumenSaveEvent?.Invoke();
-           
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.ClearDirtyPictureBox();

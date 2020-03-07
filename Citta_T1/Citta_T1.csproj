@@ -434,6 +434,7 @@
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
     <Content Include="res\toolbox\background.png" />
+    <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
     <Content Include="res\toolbox\difference.png" />
     <Content Include="res\toolbox\filter.png" />
