@@ -22,6 +22,7 @@ namespace Citta_T1.Business
         private string savePath;
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
+        private ModelElement mlElement;
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -47,6 +48,18 @@ namespace Citta_T1.Business
         {
             modelElements.Add(modelElement);
             dirty = true;
+        }
+        
+        public void DeleteModelElement(Control control)
+        {
+            
+            foreach (ModelElement me in this.modelElements)
+            {
+                if (me.GetControl.Equals(control))
+                    mlElement = me;
+                
+            }
+            this.modelElements.Remove(mlElement);
         }
         public List<ModelElement> Load()
         {

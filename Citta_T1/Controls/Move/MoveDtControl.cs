@@ -17,7 +17,7 @@ namespace Citta_T1.Controls.Move
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
         public string GetIndex { get =>index; }
-        public string mdControlName { get => textBox1.Text; }
+        public string mdControlName { get => this.textBox1.Text; }
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent; 
         public MoveDtControl()
         {
@@ -143,5 +143,12 @@ namespace Citta_T1.Controls.Move
         {
             DtDocumentDirtyEvent?.Invoke();
         }
+        public override void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            base.删除ToolStripMenuItem_Click(sender, e);
+            DtDocumentDirtyEvent?.Invoke();
+
+        }
+        
     }
 }

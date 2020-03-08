@@ -78,6 +78,10 @@ namespace Citta_T1.Business
             }
            
         }
+        public void DeleteDocumentOperator(Control ct)
+        {
+            this.currentDocument.DeleteModelElement(ct);
+        }
         public ElementSubType SEType(string subType)
         {
             string type = "";

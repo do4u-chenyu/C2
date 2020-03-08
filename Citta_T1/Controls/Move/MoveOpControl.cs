@@ -8,8 +8,9 @@ using Citta_T1.Controls.Flow;
 
 namespace Citta_T1.Controls.Move
 {
-    public delegate void delegateOverViewData(string index);
+    public delegate void delegateOverViewData(string index);   
     public delegate void delegateRenameData(string index);
+    public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
     public partial class MoveOpControl : UserControl, IScalable   
     {
@@ -24,6 +25,7 @@ namespace Citta_T1.Controls.Move
         public bool isClicked = false;
         private string sizeL;
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+        public event DeleteOperatorEventHandler DeleteOperatorEvent;
         private string typeName;
         
         // 一些倍率
@@ -278,9 +280,10 @@ namespace Citta_T1.Controls.Move
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
-        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        public virtual void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Panel parentPanel = (Panel)this.Parent;
             parentPanel.Controls.Remove(this);
@@ -293,6 +296,10 @@ namespace Citta_T1.Controls.Move
                     break;
                 }
             }
+            ModelDocumentDirtyEvent?.Invoke();
+            DeleteOperatorEvent?.Invoke(this);
+           MainForm mainForm = (MainForm)parentPanel.Parent;
+            mainForm.DeleteDocumentOperator(this);
         }
         private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
         {

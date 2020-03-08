@@ -106,7 +106,12 @@ namespace  Citta_T1
             this.modelDocumentDao.AddDocumentOperator(ct);
 
         }
-        
+        internal void DeleteDocumentOperator(Control ct)
+        {
+            this.modelDocumentDao.DeleteDocumentOperator(ct);
+        }
+
+
         public void SaveDocument()
         {
             this.saveModelButton.Image = ((System.Drawing.Image)resources.GetObject("saveModelButton.Image"));
@@ -166,6 +171,7 @@ namespace  Citta_T1
                             (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;
                             Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
                             Program.inputDataDict.Add((ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex, data);
+                            Program.inputDataDictN2I.Add(me.GetName(), (ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex);
                         }                                                   
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
