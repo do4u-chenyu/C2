@@ -83,6 +83,23 @@ namespace  Citta_T1
             mtc.SetDirtyPictureBox();
             this.saveModelButton.Image= global::Citta_T1.Properties.Resources.clicksavebutton;
         }
+        internal void DeleteCurrentDocument()
+        {
+            List<ModelElement> modelElements =modelDocumentDao.DeleteDocumentElements();
+            foreach (ModelElement me in modelElements)
+            {
+                this.canvasPanel.Controls.Remove(me.GetControl);
+                foreach (Control ct in this.canvasPanel.Controls)
+                {
+                    if (ct.Name == "naviViewControl")
+                    {
+                        (ct as NaviViewControl).RemoveControl(me.GetControl);
+                        (ct as NaviViewControl).UpdateNaviView();
+                        break;
+                    }
+                }
+            }
+        }
         private void NewDocumentOperator(Control ct)
         {
             DocumentDirty();
@@ -138,13 +155,18 @@ namespace  Citta_T1
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
-                   List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
-                    foreach ( Control ct in controls)
+                   List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
+                    foreach ( ModelElement me in modelElements)
                     {
+                       Control ct = me.GetControl;
                         if (ct.Name == "MoveOpControl")
-                            (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty; 
+                            (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty;
                         else
-                            (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;                        
+                        {
+                            (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;
+                            Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
+                            Program.inputDataDict.Add((ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex, data);
+                        }                                                   
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();

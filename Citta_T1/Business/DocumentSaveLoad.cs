@@ -63,14 +63,18 @@ namespace Citta_T1.Business
                     modelElementXml.AppendChild(statusNode);
 
                     XmlElement indexLNode = xDoc.CreateElement("index");
-                    indexLNode.InnerText = me.GetSizeL;
+                    indexLNode.InnerText = me.GetIndex;
                     modelElementXml.AppendChild(indexLNode);
 
                     if (me.Type == ElementType.DataSource)
                     {
                         XmlElement pathNode = xDoc.CreateElement("path");
                         pathNode.InnerText = me.GetPath();
-                        modelElementXml.AppendChild(pathNode);            
+                        modelElementXml.AppendChild(pathNode);
+
+                        XmlElement codeNode = xDoc.CreateElement("code");
+                        codeNode.InnerText = me.GetCode; 
+                        modelElementXml.AppendChild(codeNode);
                     }
                 }
 

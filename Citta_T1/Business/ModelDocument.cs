@@ -45,7 +45,6 @@ namespace Citta_T1.Business
         }
         public void AddModelElement(ModelElement modelElement)
         {
-           // modelElements = new List<ModelElement>();
             modelElements.Add(modelElement);
             dirty = true;
         }
@@ -60,19 +59,20 @@ namespace Citta_T1.Business
         }
         public void Show()
         {
-            foreach (ModelElement el1 in modelElements)
+            foreach (ModelElement el1 in this.modelElements)
             {
                 el1.Show();
             }
         }
         public void Hide()
         {
-            foreach (ModelElement el1 in modelElements)
+            foreach (ModelElement el1 in this.modelElements)
             {
                 el1.Hide();
                 Console.WriteLine("隐藏===");
             }
         }
-
+        public List<ModelElement> CurrentDocumentElement()
+        { return this.modelElements; }
     }
 }

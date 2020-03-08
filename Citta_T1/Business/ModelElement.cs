@@ -47,15 +47,17 @@ namespace Citta_T1.Business
         private Control ctl;
         private string dataSourcePath;
         private string index;
+        private string dataCode;
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
 
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
-        public string GetSizeL { get => this.index; }
+        public string GetIndex { get => this.index; }
+        public string GetCode { get => this.dataCode; }
 
-        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index="")
+        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index = "",string datacode = "") 
         {
             this.type = type;
             this.index = index;
@@ -64,6 +66,7 @@ namespace Citta_T1.Business
             this.status = status;
             this.dataSourcePath = path;
             this.SetName(name);
+            this.dataCode = datacode;
         }
 
         public string GetName()

@@ -38,27 +38,13 @@ namespace Citta_T1.Business
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
         }
-        public List<Control>  LoadDocuments(string modelTitle,string userName)
+        public List<ModelElement>  LoadDocuments(string modelTitle,string userName)
         {
             List<Control> controls = new List<Control>();
             ModelDocument md = new ModelDocument(modelTitle, userName);
             this.modelDocuments.Add(md);
             List<ModelElement> modelElements = md.Load();
-            foreach (ModelElement me in modelElements)
-            {
-                switch (me.Type)
-                {
-                    case ElementType.DataSource:
-                    case ElementType.Operate:
-                        controls.Add(me.GetControl);
-                        break;
-                    case ElementType.remark:
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return controls;
+            return modelElements;
 
         }
         public void SwitchDocument(string modelTitle)//----------------------------------------
@@ -67,17 +53,14 @@ namespace Citta_T1.Business
             Console.WriteLine(modelTitle+"默认打开的模型");
 
             if (this.currentDocument == null)
-            {
                 throw new NullReferenceException();
-            }
             foreach (ModelDocument md in this.modelDocuments)
             {
                 if (md.ModelDocumentTitle == modelTitle)
                     md.Show();
                 else
                     md.Hide();
-            }
-            
+            }           
         }
         public void AddDocumentOperator(Control ct)
         {
@@ -89,8 +72,9 @@ namespace Citta_T1.Business
             }
             else if (ct.Name == "MoveDtControl")
             {
-                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).mdControlName, ct, ElementStatus.Null, ElementSubType.Null,"", (ct as MoveDtControl).GetIndex); 
+                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).mdControlName, ct, ElementStatus.Null, ElementSubType.Null, Program.inputDataDict[(ct as MoveDtControl).GetIndex].filePath, (ct as MoveDtControl).GetIndex, Program.inputDataDict[(ct as MoveDtControl).GetIndex].content); 
                 this.currentDocument.AddModelElement(modelElement);
+                Console.WriteLine("数据源的index位" + (ct as MoveDtControl).GetIndex);
             }
            
         }
@@ -140,6 +124,14 @@ namespace Citta_T1.Business
             }
             return null;
         }
-
+        public List<ModelElement> DeleteDocumentElements()
+        {
+            if (this.currentDocument == null)
+                throw new NullReferenceException();
+            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            this.ModelDocuments.Remove(this.currentDocument);
+            Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
+            return modelElements; 
+        }
     }
 }
