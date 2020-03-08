@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls;
+using Citta_T1.Business;
 
 namespace Citta_T1.Dialogs
 {
@@ -41,7 +43,6 @@ namespace Citta_T1.Dialogs
             try
             {
                 MainForm mainForm = (MainForm)this.Owner;
-                Console.WriteLine(mainForm.GetUserName+"--------------");
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.GetUserName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
@@ -52,6 +53,17 @@ namespace Citta_T1.Dialogs
                         if (DialogResult.OK == result)
                              return;
                     }                                           
+                }
+                //与内存中命名相同
+                
+                foreach(ModelDocument md in mainForm.DocumentsList())
+                {
+                    if (this.textBoxEx1.Text == md.ModelDocumentTitle)
+                    {
+                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (DialogResult.OK == result)
+                            return;
+                    }
                 }
             }
             catch

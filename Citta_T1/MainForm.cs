@@ -136,11 +136,9 @@ namespace  Citta_T1
             { }
             this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
         }
-        private void  ReSaveDocument()
-        {
-            this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
-            modelDocumentDao.SaveDocument();
-
+        internal List<ModelDocument>  DocumentsList()
+        {            
+            return modelDocumentDao.ModelDocuments;
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {

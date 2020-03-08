@@ -20,6 +20,7 @@ namespace Citta_T1.Controls.Title
         private int rawModelTitleNum = 9;
         public event NewDocumentEventHandler NewModelDocument;
         public event DocumentSwitchHandler ModelDocumentSwitch;
+ 
         public ModelTitlePanel()
         {
             InitializeComponent();
