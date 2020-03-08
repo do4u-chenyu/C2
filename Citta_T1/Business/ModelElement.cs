@@ -46,19 +46,19 @@ namespace Citta_T1.Business
         private ElementSubType subType;
         private Control ctl;
         private string dataSourcePath;
-        private string sizeL;
+        private string index;
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
 
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
-        public string GetSizeL { get => this.sizeL; }
+        public string GetSizeL { get => this.index; }
 
-        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string sizeL="")
+        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index="")
         {
             this.type = type;
-            this.sizeL = sizeL;
+            this.index = index;
             this.subType = subType;
             this.ctl = ctl;
             this.status = status;
@@ -72,7 +72,7 @@ namespace Citta_T1.Business
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    name = (ctl as MoveOpControl).textBox1.Text;
+                    name = (ctl as MoveDtControl).textBox1.Text;
                     break;
                 case ElementType.Operate:
                     name = (ctl as MoveOpControl).textBox1.Text;
@@ -92,7 +92,7 @@ namespace Citta_T1.Business
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    (ctl as MoveOpControl).textBox1.Text = name;
+                    (ctl as MoveDtControl).textBox1.Text = name;
                     break;
                 case ElementType.Operate:
                     (ctl as MoveOpControl).textBox1.Text = name;

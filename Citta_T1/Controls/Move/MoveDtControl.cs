@@ -10,11 +10,15 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move
 {
+    public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl : MoveOpControl
     {
         public string index;
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
+        public string GetIndex { get =>index; }
+        public string mdControlName { get => textBox1.Text; }
+        public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent; 
         public MoveDtControl()
         {
             InitializeComponent();
@@ -128,6 +132,16 @@ namespace Citta_T1.Controls.Move
         {
             String helpInfo = Program.inputDataDict[index].filePath;
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            DtDocumentDirtyEvent?.Invoke();
+        }
+
+        private void MoveDtControl_LocationChanged(object sender, EventArgs e)
+        {
+            DtDocumentDirtyEvent?.Invoke();
         }
     }
 }

@@ -24,10 +24,11 @@ namespace Citta_T1.Controls.Move
         public bool isClicked = false;
         private string sizeL;
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-
+        private string typeName;
+        
         // 一些倍率
         public string ReName { get => textBox1.Text; }
-        public string SizeL { get => this.sizeL; }
+        public string subTypeName { get => typeName; }
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
@@ -50,6 +51,7 @@ namespace Citta_T1.Controls.Move
             
             InitializeComponent();
             textBox1.Text = text;
+            typeName = text;
             Location = p;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();

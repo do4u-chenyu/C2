@@ -16,7 +16,7 @@ using System.IO;
 
 namespace  Citta_T1
 {
-    public delegate void DocumentLoadEventHandler();
+    public delegate void DocumentLoadEventHandler(string userName);
     public delegate void DocumentSaveEventHandler();
 
     public partial class MainForm : Form
@@ -125,25 +125,26 @@ namespace  Citta_T1
             this.modelDocumentDao.SwitchDocument(modelTitle);
 
         }
-        private void DocumentsLoad()
+        private void DocumentsLoad(string userName)
         {
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\"))
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\"))
             { 
-                this.modelDocumentDao.AddDocument("新建模型", this.userName);
+                this.modelDocumentDao.AddDocument("新建模型", userName);
                 return;
             }
-
             try
-            {
-                
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
+            {                
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
-                   List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
-                    foreach ( Citta_T1.Controls.Move.MoveOpControl ct in controls)
+                   List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
+                    foreach ( Control ct in controls)
                     {
-                        ct.ModelDocumentDirtyEvent += DocumentDirty;
+                        if (ct.Name == "MoveOpControl")
+                            (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty; 
+                        else
+                            (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;                        
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
@@ -400,7 +401,7 @@ namespace  Citta_T1
             this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
             //文档加载事件
-            DocumentLoadEvent?.Invoke();
+            DocumentLoadEvent?.Invoke(userName);
         }
 
         private void StopButton_Click(object sender, EventArgs e)

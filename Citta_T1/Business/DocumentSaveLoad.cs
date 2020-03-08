@@ -62,9 +62,9 @@ namespace Citta_T1.Business
                     statusNode.InnerText = me.Status.ToString();
                     modelElementXml.AppendChild(statusNode);
 
-                    XmlElement sizeLNode = xDoc.CreateElement("sizeL");
-                    sizeLNode.InnerText = me.GetSizeL;
-                    modelElementXml.AppendChild(sizeLNode);
+                    XmlElement indexLNode = xDoc.CreateElement("index");
+                    indexLNode.InnerText = me.GetSizeL;
+                    modelElementXml.AppendChild(indexLNode);
 
                     if (me.Type == ElementType.DataSource)
                     {
@@ -111,9 +111,9 @@ namespace Citta_T1.Business
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
                     string path = xn.SelectSingleNode("path").InnerText;
-                    int sizeL =Convert.ToInt32(xn.SelectSingleNode("sizeL").InnerText);
+                    string index =xn.SelectSingleNode("index").InnerText;
                     Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
-                    MoveOpControl cotl = new MoveOpControl(sizeL,name, xnlocation);//暂时定为为moveopctrol
+                    MoveOpControl cotl = new MoveDtControl(index,0,name, xnlocation);//暂时定为为moveopctrol
                     //cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     
                     ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType), path);

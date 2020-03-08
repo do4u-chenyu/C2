@@ -196,7 +196,7 @@ namespace Citta_T1.Controls
                
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
-                
+                btn.DtDocumentDirtyEvent += DocumentDirty;
                 NewOperatorEvent?.Invoke(btn);
             }
             else

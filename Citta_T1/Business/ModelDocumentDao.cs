@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,14 +49,10 @@ namespace Citta_T1.Business
                 switch (me.Type)
                 {
                     case ElementType.DataSource:
-                        //name = (ctl as MoveOpControl).textBox1.Text;
-                        break;
                     case ElementType.Operate:
-                        //MoveOpControl moControl = new MoveOpControl(0, me.GetName(),me.Location);//默认是0,缩放比例
                         controls.Add(me.GetControl);
                         break;
                     case ElementType.remark:
-                        //name = (ctl as RemarkControl).RemarkText;
                         break;
                     default:
                         break;
@@ -64,7 +61,6 @@ namespace Citta_T1.Business
             return controls;
 
         }
-
         public void SwitchDocument(string modelTitle)//----------------------------------------
         {
             this.currentDocument = FindModelDocument(modelTitle);
@@ -88,7 +84,12 @@ namespace Citta_T1.Business
             this.currentDocument.Dirty = true;
             if (ct.Name == "MoveOpControl")
             {
-                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct,ElementStatus.Null, SEType((ct as MoveOpControl).ReName), (ct as MoveOpControl).SizeL);
+                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct, ElementStatus.Null, SEType((ct as MoveOpControl).subTypeName));
+                this.currentDocument.AddModelElement(modelElement);
+            }
+            else if (ct.Name == "MoveDtControl")
+            {
+                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).mdControlName, ct, ElementStatus.Null, ElementSubType.Null,"", (ct as MoveDtControl).GetIndex); 
                 this.currentDocument.AddModelElement(modelElement);
             }
            
