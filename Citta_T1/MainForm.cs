@@ -374,7 +374,7 @@ namespace  Citta_T1
             DocumentLoadEvent?.Invoke();
         }
 
-        private void stopButton_Click(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
 
             if (this.runButton.Name == "pauseButton")

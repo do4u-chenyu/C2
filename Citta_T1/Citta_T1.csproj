@@ -268,7 +268,8 @@
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Controls\Interface\IScalable.cs" />
-    <EmbeddedResource Include="Controls\Left\DataButton.resx"> 
+    <Compile Include="Utils\OpUtil.cs" />
+    <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\DataSourceControl.resx">

@@ -106,7 +106,7 @@ namespace Citta_T1.Controls
             {
                 if (con is IScalable)
                 {
-                    (con as Scalable).SetTag(con);
+                    (con as IScalable).SetTag(con);
                 }
             }
             deep -= 1;
@@ -124,7 +124,7 @@ namespace Citta_T1.Controls
                 SetDouble(con);
                 if (con.Tag != null && (con is IScalable))
                 {
-                    (con as Scalable).SetControlsBySize(newx, newy, con);
+                    (con as IScalable).SetControlsBySize(newx, newy, con);
                 }
             }
             deep -= 1;
