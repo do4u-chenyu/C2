@@ -265,6 +265,7 @@
     <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Global.cs" />
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Controls\Interface\IScalable.cs" />

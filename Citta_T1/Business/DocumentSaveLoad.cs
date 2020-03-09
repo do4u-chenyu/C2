@@ -27,7 +27,7 @@ namespace Citta_T1.Business
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
             //没有模型元素，只写入根节点
-            if (elementList.Count == 0)//----------------------------------------------------------
+            if (elementList.Count == 0)
             {
                 xDoc.Save(modelFilePath);
                 return;
@@ -37,26 +37,25 @@ namespace Citta_T1.Business
                 XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
                 modelDocumentXml.AppendChild(modelElementXml);
 
-                XmlElement nameNode = xDoc.CreateElement("name");
-                nameNode.InnerText = me.GetName();
-                modelElementXml.AppendChild(nameNode);
-
                
                 XmlElement typeNode = xDoc.CreateElement("type");
                 typeNode.InnerText = me.Type.ToString();
                 modelElementXml.AppendChild(typeNode);
-                
+
                 if (me.Type == ElementType.DataSource || me.Type == ElementType.Operate)//类型判断，如是否为算子类型
                 {
+                    XmlElement nameNode = xDoc.CreateElement("name");
+                    nameNode.InnerText = me.GetName();
+                    modelElementXml.AppendChild(nameNode);
 
                     XmlElement subTypeNode = xDoc.CreateElement("subtype");
                     subTypeNode.InnerText = me.SubType.ToString();
                     modelElementXml.AppendChild(subTypeNode);
-                    
+
                     XmlElement locationNode = xDoc.CreateElement("location");
                     locationNode.InnerText = me.Location.ToString();
                     modelElementXml.AppendChild(locationNode);
-                    
+
 
                     XmlElement statusNode = xDoc.CreateElement("status");
                     statusNode.InnerText = me.Status.ToString();
@@ -73,9 +72,15 @@ namespace Citta_T1.Business
                         modelElementXml.AppendChild(pathNode);
 
                         XmlElement codeNode = xDoc.CreateElement("code");
-                        codeNode.InnerText = me.GetCode; 
+                        codeNode.InnerText = me.GetCode;
                         modelElementXml.AppendChild(codeNode);
                     }
+                }
+                else if (me.Type == ElementType.remark)
+                {
+                    XmlElement nameNode = xDoc.CreateElement("name");
+                    nameNode.InnerText = me.RemarkName;
+                    modelElementXml.AppendChild(nameNode);
                 }
 
                 xDoc.Save(modelFilePath);
@@ -125,8 +130,8 @@ namespace Citta_T1.Business
                 }
                 else if (type == "remark")
                 {
-                    RemarkControl cotl = new RemarkControl();
-                    ModelElement mElement = new ModelElement(EType(type), name, cotl);
+                    RemarkControl remarkControl = new RemarkControl();
+                    ModelElement mElement = new ModelElement(EType(type), name, remarkControl);
                     modelElements.Add(mElement);
                 }
             }
