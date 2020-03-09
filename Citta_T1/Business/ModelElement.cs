@@ -46,21 +46,27 @@ namespace Citta_T1.Business
         private ElementSubType subType;
         private Control ctl;
         private string dataSourcePath;
+        private string index;
+        private string dataCode;
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
 
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
+        public string GetIndex { get => this.index; }
+        public string GetCode { get => this.dataCode; }
 
-        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "")
+        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index = "",string datacode = "") 
         {
             this.type = type;
+            this.index = index;
             this.subType = subType;
             this.ctl = ctl;
             this.status = status;
             this.dataSourcePath = path;
             this.SetName(name);
+            this.dataCode = datacode;
         }
 
         public string GetName()
@@ -69,7 +75,7 @@ namespace Citta_T1.Business
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    name = (ctl as MoveOpControl).textBox1.Text;
+                    name = (ctl as MoveDtControl).textBox1.Text;
                     break;
                 case ElementType.Operate:
                     name = (ctl as MoveOpControl).textBox1.Text;
@@ -89,7 +95,7 @@ namespace Citta_T1.Business
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    (ctl as MoveOpControl).textBox1.Text = name;
+                    (ctl as MoveDtControl).textBox1.Text = name;
                     break;
                 case ElementType.Operate:
                     (ctl as MoveOpControl).textBox1.Text = name;

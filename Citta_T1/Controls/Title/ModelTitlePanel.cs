@@ -20,6 +20,7 @@ namespace Citta_T1.Controls.Title
         private int rawModelTitleNum = 9;
         public event NewDocumentEventHandler NewModelDocument;
         public event DocumentSwitchHandler ModelDocumentSwitch;
+ 
         public ModelTitlePanel()
         {
             InitializeComponent();
@@ -134,6 +135,7 @@ namespace Citta_T1.Controls.Title
                 // 其次选择左边的
                 else if (index != -1 && index - 1 >= 0)
                     models[index - 1].ShowSelectedBorder();
+                Console.WriteLine("删除的index为" + index.ToString());
             }
             models.Remove(mtControl);
             this.Controls.Remove(mtControl);
@@ -143,6 +145,7 @@ namespace Citta_T1.Controls.Title
                 InitializeDefaultModelTitleControl();
             UpModelTitle();
             ResizeModel(true);//重新设置model大小
+           
 
         }
         public void ClearSelectedBorder()

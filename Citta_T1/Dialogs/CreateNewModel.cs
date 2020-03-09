@@ -8,15 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls;
+using Citta_T1.Business;
 
 namespace Citta_T1.Dialogs
 {
-    public delegate void CoverDocumentEventHandler();
+
     public partial class CreateNewModel : Form
     {
         private string modelTitle;
         public string ModelTitle { get => modelTitle; }
-        public event CoverDocumentEventHandler CoverModelDocument;
 
         public CreateNewModel()
         {
@@ -42,29 +43,27 @@ namespace Citta_T1.Dialogs
             try
             {
                 MainForm mainForm = (MainForm)this.Owner;
-                Console.WriteLine(mainForm.GetUserName+"--------------");
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.GetUserName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
                 {
                     if (this.textBoxEx1.Text == modelTitle.ToString())
                     {
-                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，要替换它吗？", "确认另存为", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (DialogResult.Yes == result)
-                        {
-                            this.modelTitle = this.textBoxEx1.Text;
-                            CoverModelDocument?.Invoke();                          
-                            this.DialogResult = DialogResult.Cancel;
-                            this.Close();
+                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (DialogResult.OK == result)
+                             return;
+                    }                                           
+                }
+                //与内存中命名相同
+                
+                foreach(ModelDocument md in mainForm.DocumentsList())
+                {
+                    if (this.textBoxEx1.Text == md.ModelDocumentTitle)
+                    {
+                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        if (DialogResult.OK == result)
                             return;
-                        }
-                        else
-                        { 
-                            return;
-                        }
-
                     }
-                                            
                 }
             }
             catch

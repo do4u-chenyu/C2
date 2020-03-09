@@ -16,7 +16,7 @@ using System.IO;
 
 namespace  Citta_T1
 {
-    public delegate void DocumentLoadEventHandler();
+    public delegate void DocumentLoadEventHandler(string userName);
     public delegate void DocumentSaveEventHandler();
 
     public partial class MainForm : Form
@@ -53,6 +53,7 @@ namespace  Citta_T1
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
             
+            
             modelDocumentDao = new Business.ModelDocumentDao();
         }
 
@@ -62,7 +63,7 @@ namespace  Citta_T1
             this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
             this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
             this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
-            this.createNewModel.CoverModelDocument += ReSaveDocument;
+            this.canvasPanel.DocumentDirtyEvent += DocumentDirty;
             this.DocumentLoadEvent += DocumentsLoad;
             this.DocumenSaveEvent += SaveDocument;
 
@@ -75,68 +76,123 @@ namespace  Citta_T1
             this.modelDocumentDao.AddDocument(modelTitle,this.userName);
             
         }
-        private void NewDocumentOperator(Control ct)
+        internal void DocumentDirty()
         {
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.SetDirtyPictureBox();
+            this.saveModelButton.Image= global::Citta_T1.Properties.Resources.clicksavebutton;
+        }
+        internal void DeleteCurrentDocument()
+        {
+            List<ModelElement> modelElements =modelDocumentDao.DeleteDocumentElements();
+            foreach (ModelElement me in modelElements)
+            {
+                this.canvasPanel.Controls.Remove(me.GetControl);
+                foreach (Control ct in this.canvasPanel.Controls)
+                {
+                    if (ct.Name == "naviViewControl")
+                    {
+                        (ct as NaviViewControl).RemoveControl(me.GetControl);
+                        (ct as NaviViewControl).UpdateNaviView();
+                        break;
+                    }
+                }
+            }
+        }
+        private void NewDocumentOperator(Control ct)
+        {
+            DocumentDirty();
             this.modelDocumentDao.AddDocumentOperator(ct);
 
         }
-        
+        internal void DeleteDocumentOperator(Control ct)
+        {
+            this.modelDocumentDao.DeleteDocumentOperator(ct);
+        }
+
+
         public void SaveDocument()
         {
+            this.saveModelButton.Image = ((System.Drawing.Image)resources.GetObject("saveModelButton.Image"));
+            DirectoryInfo[] modelTitleList =new DirectoryInfo[1];
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
+                modelTitleList = di.GetDirectories();              
+            }
+            catch
+            { }
             modelDocumentDao.SaveDocument();
+            try
+            {
+                foreach (DirectoryInfo modelTitle in modelTitleList)
+                {
+                    if (modelTitle.ToString() == modelDocumentDao.CurrentDocument.ModelDocumentTitle)
+                        return;
+                }
+            }
+            catch
+            { }
+            this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
         }
-        private void  ReSaveDocument()
-        {
-            this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
-            modelDocumentDao.SaveDocument();
-
+        internal List<ModelDocument>  DocumentsList()
+        {            
+            return modelDocumentDao.ModelDocuments;
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
             this.modelDocumentDao.SwitchDocument(modelTitle);
+
         }
-        private void DocumentsLoad()
+        private void DocumentsLoad(string userName)
         {
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\"))
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\"))
             { 
-                this.modelDocumentDao.AddDocument("新建模型", this.userName);
+                this.modelDocumentDao.AddDocument("新建模型", userName);
                 return;
             }
-               
-           
             try
-            {
-                
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
+            {                
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
-                    List<Control> controls = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), this.userName);
-                    foreach (Control ct in controls)
+                   List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
+                    foreach ( ModelElement me in modelElements)
                     {
+                       Control ct = me.GetControl;
+                        if (ct.Name == "MoveOpControl")
+                            (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty;
+                        else
+                        {
+                            (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;
+                            Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
+                            Program.inputDataDict.Add((ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex, data);
+                            Program.inputDataDictN2I.Add(me.GetName(), (ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex);
+                        }                                                   
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
-                        if (modelTitle.ToString() == "三月模型")//当前文件
+                        if (modelTitle.ToString() == modelTitleList[modelTitleList.Length - 1].ToString())//当前文件
                             ct.Show();
                         else
                             ct.Hide();
                     }
+                    this.myModelControl.AddModel(modelTitle.ToString());
                     this.modelTitlePanel.AddModel(modelTitle.ToString());
-                    this.modelTitlePanel.SelectedModel("三月模型");
-                  
+                    this.modelDocumentDao.ModelDocuments.RemoveAt(this.modelDocumentDao.ModelDocuments.Count-1);
                 }
                 foreach (Citta_T1.Controls.Title.ModelTitleControl ct in this.modelTitlePanel.Controls)
                 {
                     if (ct.Location.X == 1)
                     {
                         this.modelTitlePanel.RemoveModel(ct);
+                        this.modelTitlePanel.SelectedModel(modelTitleList[modelTitleList.Length - 1].ToString());
                         return;
                     }                   
                 }
+                
             }
             catch
             {               
@@ -371,7 +427,7 @@ namespace  Citta_T1
             this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
             //文档加载事件
-            DocumentLoadEvent?.Invoke();
+            DocumentLoadEvent?.Invoke(userName);
         }
 
         private void StopButton_Click(object sender, EventArgs e)
@@ -432,7 +488,6 @@ namespace  Citta_T1
         {
 
             DocumenSaveEvent?.Invoke();
-            this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.ClearDirtyPictureBox();

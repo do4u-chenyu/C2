@@ -8,9 +8,11 @@ using Citta_T1.Controls.Flow;
 
 namespace Citta_T1.Controls.Move
 {
-    public delegate void delegateOverViewData(string index);
+    public delegate void delegateOverViewData(string index);   
     public delegate void delegateRenameData(string index);
-    public partial class MoveOpControl : UserControl, IScalable
+    public delegate void DeleteOperatorEventHandler(Control control); 
+    public delegate void ModelDocumentDirtyEventHandler();
+    public partial class MoveOpControl : UserControl, IScalable   
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
@@ -21,11 +23,14 @@ namespace Citta_T1.Controls.Move
 
         public DateTime clickTime;
         public bool isClicked = false;
-
-
+        private string sizeL;
+        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+        public event DeleteOperatorEventHandler DeleteOperatorEvent;
+        private string typeName;
+        
         // 一些倍率
         public string ReName { get => textBox1.Text; }
-         
+        public string subTypeName { get => typeName; }
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
@@ -45,8 +50,10 @@ namespace Citta_T1.Controls.Move
         }
         public MoveOpControl(int sizeL, string text, Point p)
         {
+            
             InitializeComponent();
             textBox1.Text = text;
+            typeName = text;
             Location = p;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
@@ -55,6 +62,7 @@ namespace Citta_T1.Controls.Move
         }
         public void resetSize(int sizeL)
         {
+            this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             while (sizeL > 0)
             {
@@ -117,7 +125,6 @@ namespace Citta_T1.Controls.Move
                 (sender as MoveOpControl).Location = new Point(left, top);
             }
         }
-
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("移动开始");
@@ -127,6 +134,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
+           
         }
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
@@ -153,7 +161,7 @@ namespace Citta_T1.Controls.Move
                 }
 
             }
-
+            
         }
         private void MoveOpControl_Load(object sender, EventArgs e)
         {
@@ -272,9 +280,10 @@ namespace Citta_T1.Controls.Move
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
-        private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        public virtual void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Panel parentPanel = (Panel)this.Parent;
             parentPanel.Controls.Remove(this);
@@ -287,6 +296,10 @@ namespace Citta_T1.Controls.Move
                     break;
                 }
             }
+            ModelDocumentDirtyEvent?.Invoke();
+            DeleteOperatorEvent?.Invoke(this);
+           MainForm mainForm = (MainForm)parentPanel.Parent;
+            mainForm.DeleteDocumentOperator(this);
         }
         private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -465,6 +478,17 @@ namespace Citta_T1.Controls.Move
             deep -= 1;
         }
         #endregion
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            ModelDocumentDirtyEvent?.Invoke();
+        }
+
+        private void MoveOpControl_LocationChanged(object sender, EventArgs e)
+        {
+            ModelDocumentDirtyEvent?.Invoke();
+        }
     }
 }
 
