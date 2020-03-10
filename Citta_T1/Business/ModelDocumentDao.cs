@@ -33,11 +33,12 @@ namespace Citta_T1.Business
                     document.Hide();
             }
         }
-        public void SaveDocument()
+        public string SaveDocument()
         {
 
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
+            return this.currentDocument.ModelDocumentTitle;
         }
         public List<ModelElement>  LoadDocuments(string modelTitle,string userName)
         {
@@ -79,7 +80,7 @@ namespace Citta_T1.Business
             }
            
         }
-        public void DeleteDocumentOperator(Control ct)
+        public void DeleteDocumentElement(Control ct)
         {
             this.currentDocument.DeleteModelElement(ct);
         }

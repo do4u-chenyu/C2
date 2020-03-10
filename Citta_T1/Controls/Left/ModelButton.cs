@@ -21,6 +21,11 @@ namespace Citta_T1.Controls.Left
         {
             this.textButton.Text = modelName;
         }
+
+        public string GetModelName()
+        {
+            return this.textButton.Text;
+        }
     }
 
 

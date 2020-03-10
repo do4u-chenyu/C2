@@ -60,8 +60,7 @@ namespace  Citta_T1
             // 新增文档事件
             this.modelTitlePanel.NewModelDocument += ModelTitlePanel_NewModelDocument;
             this.modelTitlePanel.ModelDocumentSwitch += ModelTitlePanel_DocumentSwitch;
-            this.canvasPanel.NewOperatorEvent += NewDocumentOperator;
-            this.canvasPanel.DocumentDirtyEvent += DocumentDirty;
+            this.canvasPanel.NewElementEvent += NewDocumentOperator;
             this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         private void InitializeGlobalVariable()
@@ -82,7 +81,7 @@ namespace  Citta_T1
             this.modelDocumentDao.AddDocument(modelTitle,this.userName);
             
         }
-        internal void DocumentDirty()
+        public void SetDocumentDirty()
         {
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
@@ -96,6 +95,7 @@ namespace  Citta_T1
             foreach (ModelElement me in modelElements)
             {
                 this.canvasPanel.Controls.Remove(me.GetControl);
+                //TODO 全局访问
                 foreach (Control ct in this.canvasPanel.Controls)
                 {
                     if (ct.Name == "naviViewControl")
@@ -109,39 +109,22 @@ namespace  Citta_T1
         }
         private void NewDocumentOperator(Control ct)
         {
-            DocumentDirty();
+            SetDocumentDirty();
             this.modelDocumentDao.AddDocumentOperator(ct);
 
         }
-        internal void DeleteDocumentOperator(Control ct)
+        public void DeleteDocumentElement(Control ct)
         {
-            this.modelDocumentDao.DeleteDocumentOperator(ct);
+            SetDocumentDirty();
+            this.modelDocumentDao.DeleteDocumentElement(ct);
         }
 
 
         public void SaveDocument()
         {
-            
-            DirectoryInfo[] modelTitleList =new DirectoryInfo[1];
-            try
-            {
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + this.userName + "\\");
-                modelTitleList = di.GetDirectories();              
-            }
-            catch
-            { }
-            modelDocumentDao.SaveDocument();
-            try
-            {
-                foreach (DirectoryInfo modelTitle in modelTitleList)
-                {
-                    if (modelTitle.ToString() == modelDocumentDao.CurrentDocument.ModelDocumentTitle)
-                        return;
-                }
-            }
-            catch
-            { }
-            this.myModelControl.AddModel(modelDocumentDao.CurrentDocument.ModelDocumentTitle);
+            string modelTitle = this.modelDocumentDao.SaveDocument();
+            if (!this.myModelControl.ContainModel(modelTitle))
+                this.myModelControl.AddModel(modelTitle);
         }
         internal List<ModelDocument>  DocumentsList()
         {            
@@ -152,8 +135,11 @@ namespace  Citta_T1
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
-        private void DocumentsLoad(string userName)
+
+        //TODO 蛋疼
+        private void LoadDocuments(string userName)
         {
+            //TODO
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\"))
             { 
                 this.modelDocumentDao.AddDocument("新建模型", userName);
@@ -170,10 +156,11 @@ namespace  Citta_T1
                     {
                        Control ct = me.GetControl;
                         if (ct.Name == "MoveOpControl")
-                            (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty;
+                        {
+                            ;
+                        }
                         else if (ct.Name == "MoveDtControl")
                         {
-                            (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;
                             Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
                             Program.inputDataDict.Add((ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex, data);
                             Program.inputDataDictN2I.Add(me.GetName(), (ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex);
@@ -432,11 +419,19 @@ namespace  Citta_T1
             int rightMargin = (userName.Length - (count / 3) - 3) * 14;
             this.usernamelabel.Text = userName;
             Point userNameLocation = new Point(185,10);
-            this.usernamelabel.Location = new Point(userNameLocation.X+65- rightMargin, userNameLocation.Y+2);
-            this.helpPictureBox.Location = new Point(userNameLocation.X-rightMargin, userNameLocation.Y);
-            this.portraitpictureBox.Location = new Point(userNameLocation.X+30- rightMargin, userNameLocation.Y+1);
+            this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
+            this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y);
+            this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
             //文档加载事件
-            DocumentsLoad(this.userName);
+            //用户首次登陆
+                //创建用户名文件夹
+                //创建个默认的文档
+            //用户非首次登陆但没有模型
+                //创建个默认的文档
+            //用户登录且模型要加载
+                //加载模型
+            LoadDocuments(this.userName);
+
         }
 
         private void StopButton_Click(object sender, EventArgs e)

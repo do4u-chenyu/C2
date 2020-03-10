@@ -39,10 +39,6 @@
             this.leftPicture.Location = new System.Drawing.Point(15, 4);
             this.leftPicture.Size = new System.Drawing.Size(17, 20);
             // 
-            // textBox1
-            // 
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // txtButton
             // 
             this.txtButton.FlatAppearance.BorderSize = 0;
@@ -51,7 +47,6 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.Name = "MoveDtControl";
-            this.LocationChanged += new System.EventHandler(this.MoveDtControl_LocationChanged);
             this.Controls.SetChildIndex(this.leftPicture, 0);
             this.Controls.SetChildIndex(this.rightPictureBox, 0);
             this.Controls.SetChildIndex(this.leftPinPictureBox, 0);

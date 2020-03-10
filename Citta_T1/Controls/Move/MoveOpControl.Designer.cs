@@ -190,7 +190,6 @@ namespace Citta_T1.Controls.Move
             this.textBox1.TabIndex = 5;
             this.textBox1.Text = "连接算子";
             this.textBox1.Visible = false;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -232,7 +231,6 @@ namespace Citta_T1.Controls.Move
             this.Name = "MoveOpControl";
             this.Size = new System.Drawing.Size(185, 25);
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
-            this.LocationChanged += new System.EventHandler(this.MoveOpControl_LocationChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);

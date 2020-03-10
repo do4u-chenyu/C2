@@ -90,7 +90,7 @@ namespace Citta_T1.Controls.Title
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             MainForm mainForm = (MainForm)this.ParentForm;
             if (this.dirtyPictureBox.Image == null)
-            {
+            {   // 
                 if (parentPanel.Controls.Count != 2)
                 {
                     mainForm.DeleteCurrentDocument();

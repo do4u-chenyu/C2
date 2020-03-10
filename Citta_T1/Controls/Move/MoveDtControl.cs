@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Move
 {
-    public delegate void DtDocumentDirtyEventHandler();
+
     public partial class MoveDtControl : MoveOpControl
     {
         public string index;
@@ -18,7 +19,7 @@ namespace Citta_T1.Controls.Move
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
         public string GetIndex { get =>index; }
         public string mdControlName { get => this.textBox1.Text; }
-        public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent; 
+
         public MoveDtControl()
         {
             InitializeComponent();
@@ -81,31 +82,10 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Visible = true;
             // 数据button
             ReNameDataButton(index, this.textBox1.Text);
+            Global.GetMainForm().SetDocumentDirty();
         }
         public override void txtButton_Click(object sender, EventArgs e)
         {
-            // TODO 一层一层找爸爸方法有点蠢
-            // TODO 需要所有数据控件都更新名称
-            MainForm prt = (MainForm)Parent.Parent;
-            prt.OverViewDataByIndex(this.index);
-            System.Console.WriteLine("[MoveDtControl] isClicked:" + isClicked);
-            if (isClicked)
-            {
-                TimeSpan span = DateTime.Now - clickTime;
-                clickTime = DateTime.Now;
-                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
-
-                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                {
-                    重命名ToolStripMenuItem_Click_1(this, e);
-                    isClicked = false;
-                }
-            }
-            else
-            {
-                isClicked = true;
-                clickTime = DateTime.Now;
-            }
 
         }
         public void ReNameDataButton(string index, string dstName)
@@ -134,21 +114,6 @@ namespace Citta_T1.Controls.Move
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            DtDocumentDirtyEvent?.Invoke();
-        }
 
-        private void MoveDtControl_LocationChanged(object sender, EventArgs e)
-        {
-            DtDocumentDirtyEvent?.Invoke();
-        }
-        public override void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            base.删除ToolStripMenuItem_Click(sender, e);
-            DtDocumentDirtyEvent?.Invoke();
-
-        }
-        
     }
 }
