@@ -223,11 +223,14 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            // 强制编辑控件失去焦点,触发算子控件的Leave事件 
+            ((MainForm)(this.Parent)).blankButton.Focus();
+            
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 MouseIsDown = true;
                 basepoint = e.Location;
-                ((MainForm)(this.Parent)).blankButton.Focus();
+                
                 if (e.Button == MouseButtons.Left)
                 {
                     startX = e.X;

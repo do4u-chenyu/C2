@@ -137,6 +137,17 @@ namespace Citta_T1.Controls.Move
            
         }
 
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 单击鼠标, 移动控件
+            if (e.Clicks == 1)
+                MoveOpControl_MouseDown(sender, e);
+            // 双击鼠标, 改名字
+            if (e.Clicks == 2)
+                RenameMenuItem_Click(this, e);
+
+        }
+
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -246,7 +257,7 @@ namespace Citta_T1.Controls.Move
             DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
-        public void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void RenameMenuItem_Click(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
 
@@ -257,7 +268,7 @@ namespace Citta_T1.Controls.Move
             ModelDocumentDirtyEvent?.Invoke();
         }
 
-        public virtual void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        public virtual void DeleteMenuItem_Click(object sender, EventArgs e)
         {
             Panel parentPanel = (Panel)this.Parent;
             parentPanel.Controls.Remove(this);
@@ -272,7 +283,7 @@ namespace Citta_T1.Controls.Move
             }
             ModelDocumentDirtyEvent?.Invoke();
             DeleteOperatorEvent?.Invoke(this);
-           MainForm mainForm = (MainForm)parentPanel.Parent;
+            MainForm mainForm = (MainForm)parentPanel.Parent;
             mainForm.DeleteDocumentOperator(this);
         }
         private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -307,28 +318,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        public virtual void txtButton_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("isClicked:" + isClicked);
-            if (isClicked)
-            {
-                TimeSpan span = DateTime.Now - clickTime;
-                clickTime = DateTime.Now;
-                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
-
-                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                {
-                    重命名ToolStripMenuItem_Click_1(this, e);
-                    isClicked = false;
-                }
-            }
-            else
-            {
-                isClicked = true;
-                clickTime = DateTime.Now;
-            }
-
-        }
         public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             String helpInfo = "温馨提示";

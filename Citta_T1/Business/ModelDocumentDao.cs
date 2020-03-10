@@ -149,7 +149,7 @@ namespace Citta_T1.Business
                 throw new NullReferenceException();
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
             RemarkControl remarkControl = new RemarkControl();
-            ModelElement modelElement= new ModelElement(ElementType.remark, (control as RemarkControl).RemarkText, remarkControl);
+            ModelElement modelElement= new ModelElement(ElementType.Remark, (control as RemarkControl).RemarkText, remarkControl);
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type.ToString() == "remark")

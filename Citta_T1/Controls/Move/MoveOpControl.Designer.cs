@@ -138,7 +138,7 @@ namespace Citta_T1.Controls.Move
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
             this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单2ToolStripMenuItem.Text = "重命名";
-            this.菜单2ToolStripMenuItem.Click += new System.EventHandler(this.重命名ToolStripMenuItem_Click_1);
+            this.菜单2ToolStripMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
             // 备注ToolStripMenuItem
             // 
@@ -177,7 +177,7 @@ namespace Citta_T1.Controls.Move
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
             this.删除ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
             // textBox1
             // 
@@ -207,8 +207,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.TabIndex = 8;
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = true;
-            this.txtButton.Click += new System.EventHandler(this.txtButton_Click);
-            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 

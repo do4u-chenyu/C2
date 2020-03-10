@@ -52,7 +52,7 @@ namespace Citta_T1.Controls.Move
             this.overViewMenuItem.Name = "菜单1ToolStripMenuItem";
             this.overViewMenuItem.Size = new System.Drawing.Size(133, 24);
             this.overViewMenuItem.Text = "预览";
-            this.overViewMenuItem.Click += new System.EventHandler(this.overViewMenuItem_Click);
+            this.overViewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
             this.contextMenuStrip.Items.Insert(0, this.overViewMenuItem);
         }
         public override void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -77,7 +77,7 @@ namespace Citta_T1.Controls.Move
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
         }
-        public override void txtButton_Click(object sender, EventArgs e)
+        public void txtButton_Click(object sender, EventArgs e)
         {
             // TODO 一层一层找爸爸方法有点蠢
             MainForm prt = (MainForm)Parent.Parent;
@@ -91,7 +91,7 @@ namespace Citta_T1.Controls.Move
 
                 //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
                 {
-                    重命名ToolStripMenuItem_Click_1(this, e);
+                    RenameMenuItem_Click(this, e);
                     isClicked = false;
                 }
             }
@@ -103,7 +103,7 @@ namespace Citta_T1.Controls.Move
 
         }
 
-        public void overViewMenuItem_Click(object sender, EventArgs e)
+        public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
             prt.PreViewDataByBcpPath(this.Name);
@@ -123,9 +123,9 @@ namespace Citta_T1.Controls.Move
         {
            // DtDocumentDirtyEvent?.Invoke();
         }
-        public override void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        public override void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            base.删除ToolStripMenuItem_Click(sender, e);
+            base.DeleteMenuItem_Click(sender, e);
             DtDocumentDirtyEvent?.Invoke();
 
         }
