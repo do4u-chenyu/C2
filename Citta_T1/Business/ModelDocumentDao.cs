@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Flow;
 
 namespace Citta_T1.Business
 {
@@ -141,6 +142,41 @@ namespace Citta_T1.Business
             this.ModelDocuments.Remove(this.currentDocument);
             Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
             return modelElements; 
+        }
+        public void UpdateRemark(Control control)
+        { 
+             if (this.currentDocument == null)
+                throw new NullReferenceException();
+            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            RemarkControl remarkControl = new RemarkControl();
+            ModelElement modelElement= new ModelElement(ElementType.remark, (control as RemarkControl).RemarkText, remarkControl);
+            foreach (ModelElement me in modelElements)
+            {
+                if (me.Type.ToString() == "remark")
+                {
+                    modelElements.Remove(me);
+                    modelElements.Add(modelElement);
+                    return;
+                }            
+            }
+            modelElements.Add(modelElement);
+        }
+        public string GetRemark()
+        {
+            string remark = "";
+            if (this.currentDocument == null)
+            {
+                return remark;
+                throw new NullReferenceException();
+            }
+            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            foreach (ModelElement me in modelElements)
+            {
+                if (me.Type.ToString() == "remark")
+                  remark=me.RemarkName;
+            }
+            return remark;
+
         }
     }
 }

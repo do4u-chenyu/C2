@@ -49,6 +49,8 @@ namespace Citta_T1.Business
         private string dataSourcePath;
         private string index;
         private string dataCode;
+        private string name;
+   
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
@@ -57,6 +59,8 @@ namespace Citta_T1.Business
         public Control GetControl { get => ctl; }
         public string GetIndex { get => this.index; }
         public string GetCode { get => this.dataCode; }
+        public string RemarkName { get => this.name; }
+
 
         public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index = "",string datacode = "") 
         {
@@ -68,6 +72,8 @@ namespace Citta_T1.Business
             this.dataSourcePath = path;
             this.SetName(name);
             this.dataCode = datacode;
+            this.name = name;
+ 
         }
 
         public string GetName()
@@ -120,11 +126,17 @@ namespace Citta_T1.Business
 
         public void Show()
         {
-            ctl.Show();
+            if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
+                ctl.Show();
+            else
+                return;
         }
         public void Hide()
         {
-            ctl.Hide();
+            if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
+                ctl.Hide();
+            else
+                return;
         }
 
 

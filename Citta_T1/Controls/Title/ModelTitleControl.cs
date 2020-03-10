@@ -87,9 +87,18 @@ namespace Citta_T1.Controls.Title
         {
             if (this.BorderStyle != BorderStyle.FixedSingle)
                 return;
-            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;            
-            DialogResult result= MessageBox.Show("保存文件"+"\""+modelTitle + "\"" + "?","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             MainForm mainForm = (MainForm)this.ParentForm;
+            if (this.dirtyPictureBox.Image == null)
+            {
+                if (parentPanel.Controls.Count != 2)
+                {
+                    mainForm.DeleteCurrentDocument();
+                    parentPanel.RemoveModel(this);
+                }
+                return;
+            }                       
+            DialogResult result= MessageBox.Show("保存文件"+"\""+modelTitle + "\"" + "?","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {                
                 mainForm.SaveDocument();
