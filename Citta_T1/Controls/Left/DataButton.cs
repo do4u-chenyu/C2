@@ -12,16 +12,14 @@ namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
-        private string index;
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string index, string dataName)
+        public DataButton(string ffp, string dataName)
         {
             InitializeComponent();
-            Name = index;
-            txtButton.Name = index;
+            txtButton.Name = ffp;
             txtButton.Text = dataName;
         }
         private void moveOpControl1_Load(object sender, EventArgs e)
@@ -31,7 +29,8 @@ namespace Citta_T1.Controls.Left
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo = Program.inputDataDict[txtButton.Name].filePath;
+            //String helpInfo = Program.inputDataDict[txtButton.Name].filePath;
+            String helpInfo = txtButton.Name;
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
         #region 右键菜单
@@ -55,8 +54,8 @@ namespace Citta_T1.Controls.Left
             // 2. Program中删除数据
             // TODO 3. 画布中已存在的该如何处理？ 
             this.Parent.Controls.Remove(this);
-            Program.inputDataDict.Remove(this.txtButton.Name);
-            Program.inputDataDictN2I.Remove(this.Name);
+            Program.DataPreviewDict.Remove(this.txtButton.Name);
+
         }
         #endregion
     }

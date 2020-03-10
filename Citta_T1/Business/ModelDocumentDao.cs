@@ -67,14 +67,19 @@ namespace Citta_T1.Business
             this.currentDocument.Dirty = true;
             if (ct.Name == "MoveOpControl")
             {
-                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct, ElementStatus.Null, SEType((ct as MoveOpControl).subTypeName));
+                ModelElement modelElement = new ModelElement(ElementType.Operator, (ct as MoveOpControl).ReName, ct, 
+                    ElementStatus.Null, SEType((ct as MoveOpControl).subTypeName));
                 this.currentDocument.AddModelElement(modelElement);
             }
             else if (ct.Name == "MoveDtControl")
             {
-                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).mdControlName, ct, ElementStatus.Null, ElementSubType.Null, Program.inputDataDict[(ct as MoveDtControl).GetIndex].filePath, (ct as MoveDtControl).GetIndex, Program.inputDataDict[(ct as MoveDtControl).GetIndex].content); 
+                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).MDCName, ct, 
+                    ElementStatus.Null, ElementSubType.Null, 
+                    (ct as MoveDtControl).Name,//Program.inputDataDict[(ct as MoveDtControl).GetIndex].filePath, 
+                    (ct as MoveDtControl).GetBcpPath(), 
+                    Program.DataPreviewDict[(ct as MoveDtControl).GetBcpPath()]);//Program.inputDataDict[(ct as MoveDtControl).GetIndex].content); 
                 this.currentDocument.AddModelElement(modelElement);
-                Console.WriteLine("数据源的index位" + (ct as MoveDtControl).GetIndex);
+                Console.WriteLine("数据源对应的BCP文件路径:" + (ct as MoveDtControl).GetBcpPath());
             }
            
         }

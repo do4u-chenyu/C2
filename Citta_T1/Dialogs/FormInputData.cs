@@ -13,11 +13,12 @@ using System.Windows.Forms;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(Citta_T1.Data data);
+    public delegate void delegateInputData(string name, string filePath);
     public partial class FormInputData : Form
     {
-        private bool isUTF8 = false;
-        private string fileName;
+        private bool m_isUTF8 = false;
+        private string m_filePath;
+        private int m_maxNumOfRow = 100;
         private System.Drawing.Font bold_font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private bool textboxHasText = false;
@@ -79,17 +80,7 @@ namespace Citta_T1.Dialogs
             fd.Filter = "files|*.txt";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                // 1.读取文件
-                // 2.将文件内容存在contents数组中
-                // 3.抽第一行，初始化列头
-                // 4.余下行作为数据，展示在dgv中
-
-                // 1.设置dgv中的字体
-                // 2.设置dgv中的列宽
-                // 3.关闭窗口后清除表格数据
-                // string content;
-                // Citta_T1.Data data;
-                fileName = fd.FileName;
+                m_filePath = fd.FileName;
                 OverViewFile();
             }
 
@@ -125,47 +116,30 @@ namespace Citta_T1.Dialogs
         private void button2_Click(object sender, EventArgs e)
         {
             string content;
-            Citta_T1.Data data;
             string name = this.textBox1.Text;
             if (this.textBox1.Text == "请输入数据名称")
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (fileName == null)
+            else if (m_filePath == null)
             {
                 MessageBox.Show("请选择数据路径！");
             }
             else
             {
-                if (this.isUTF8)
-                {
-                    content = File.ReadAllText(fileName, Encoding.UTF8);
-                }
-                else
-                {
-                    content = File.ReadAllText(fileName, Encoding.Default);
-                }
-                data = new Citta_T1.Data(name, fileName, content);
-                // 数据的内部唯一标识
-                string index = GenerateMD5(data.content);
-                if (!Program.inputDataDict.ContainsKey(index) && !Program.inputDataDictN2I.ContainsKey(name))
-                {
-                    Program.inputDataDict.Add(index, data);
-                    Program.inputDataDictN2I.Add(name, index);
-                    InputDataEvent(data);
-                    DvgClean();
-                    Close();
-                    // 触发事件，点击DataSource
-                    
-                }
-                else if (Program.inputDataDict.ContainsKey(index))
-                {
-                    MessageBox.Show("该文件已存在！数据源名称：" + Program.inputDataDict[index].dataName);
-                }
-                else if (Program.inputDataDictN2I.ContainsKey(name))
-                {
-                    MessageBox.Show("该数据源名称已存在！请修改数据原名称。");
-                }
+                PreLoadFile(m_filePath);
+                InputDataEvent(name, m_filePath);
+                DvgClean();
+                Close();
+                //if (this.m_isUTF8)
+                //{
+                //    content = File.ReadAllText(m_fileName, Encoding.UTF8);
+                //}
+                //else
+                //{
+                //    content = File.ReadAllText(m_fileName, Encoding.Default);
+                //}
+
             }
         }
 
@@ -185,7 +159,7 @@ namespace Citta_T1.Dialogs
         {
             this.label4.Font = bold_font;
             this.label5.Font = font;
-            this.isUTF8 = false;
+            this.m_isUTF8 = false;
             OverViewFile();
         }
 
@@ -193,7 +167,7 @@ namespace Citta_T1.Dialogs
         {
             this.label4.Font = font;
             this.label5.Font = bold_font;
-            this.isUTF8 = true;
+            this.m_isUTF8 = true;
             OverViewFile();
         }
 
@@ -210,21 +184,18 @@ namespace Citta_T1.Dialogs
              * 预览文件
              */
             System.IO.StreamReader sr;
-            if (this.isUTF8)
+            if (this.m_isUTF8)
             {
-                sr = File.OpenText(fileName);
-                //content = File.ReadAllText(fd.FileName, Encoding.UTF8);
+                sr = File.OpenText(m_filePath);
             }
             else
             {
-                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
-                //content = File.ReadAllText(fd.FileName, Encoding.Default);
             }
             String header = sr.ReadLine();
             String[] headers = header.Split('\t');
             int numOfCol = header.Split('\t').Length;
-            int maxNumOfRow = 10;
             System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCol];
             try
             {
@@ -239,8 +210,9 @@ namespace Citta_T1.Dialogs
                 DvgClean(false);
                 this.dataGridView1.Columns.AddRange(ColumnList);
                 // 写入数据
-                for (int row = 0; row < maxNumOfRow; row++)
+                for (int row = 0; row < m_maxNumOfRow; row++)
                 {
+                    // 读取数据
                     String line = sr.ReadLine();
                     String[] eles = line.Split('\t');
                     System.Windows.Forms.DataGridViewRow dr = new System.Windows.Forms.DataGridViewRow();
@@ -256,6 +228,28 @@ namespace Citta_T1.Dialogs
             {
                 // TODO 异常处理
             }
+        }
+
+        public void PreLoadFile(string filePath)
+        {
+            System.IO.StreamReader sr;
+            string contents = "";
+            if (this.m_isUTF8)
+            {
+                sr = File.OpenText(filePath);
+            }
+            else
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs, System.Text.Encoding.Default);
+            }
+            for (int row = 0; row < m_maxNumOfRow; row++)
+            {
+                // 读取数据
+                String line = sr.ReadLine();
+                contents += (line + "\n");
+            }
+            Program.DataPreviewDict[filePath] = contents;
         }
         public void DvgClean(bool isClearDataName = true)
         {

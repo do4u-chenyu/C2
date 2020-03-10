@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Business;
 
 namespace Citta_T1.Controls.Left
 {
@@ -26,20 +27,20 @@ namespace Citta_T1.Controls.Left
             if (e.Button == MouseButtons.Left)
             {
                 // 使用`DataObject`对象来传参数，更加自由
-                DataObject data = new DataObject();
-                data.SetData("isData", true);
-                data.SetData("index", (sender as Button).Name);
-                data.SetData("Text", (sender as Button).Text);
-                (sender as Button).DoDragDrop(data, DragDropEffects.Copy | DragDropEffects.Move);
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.DataSource);
+                dragDropData.SetData("Path", (sender as Button).Name);
+                dragDropData.SetData("Text", (sender as Button).Text);
+                (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        public void GenDataButton(string index, string dataName, string filePath)
+        public void GenDataButton(string dataName, string filePath)
         {
             // 根据导入数据动态生成一个button
-            DataButton b = new DataButton(index, dataName);
+            DataButton b = new DataButton(filePath, dataName);
             b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            this.dataSourceDictI2B.Add(index, b);
+            this.dataSourceDictI2B.Add(filePath, b);
             this.LocalFrame.Controls.Add(b);
         }
 

@@ -69,11 +69,11 @@ namespace Citta_T1
             List<List<string>> datas;
             if (fileName == "")
             {
-                datas  = this.OverViewFileFromResx(Properties.Resources.text_utf8);
+                datas  = this.PreViewFileFromResx(Properties.Resources.text_utf8);
             }
             else
             {
-                datas = this.OverViewFileFromPath(fileName);
+                datas = this.PreViewFileFromPath(fileName);
             }
             List<string> headers = datas[0];
             int numOfCols = headers.ToArray().Length;
@@ -123,7 +123,7 @@ namespace Citta_T1
         }
         #endregion
 
-        private List<List<string>> OverViewFileFromPath(string fileNameOrFile="", int maxNumOfFile = 50, char sep = '\t')
+        private List<List<string>> PreViewFileFromPath(string fileNameOrFile="", int maxNumOfFile = 50, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { }; 
             System.IO.StreamReader file = new System.IO.StreamReader(fileNameOrFile);
@@ -136,7 +136,7 @@ namespace Citta_T1
             }
             return datas;
         }
-        private List<List<string>> OverViewFileFromResx(string resx = "", int maxNumOfFile = 50, char sep = '\t')
+        private List<List<string>> PreViewFileFromResx(string resx = "", int maxNumOfFile = 50, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
             string[] contents = resx.Split('\n');
@@ -148,14 +148,17 @@ namespace Citta_T1
             }
             return datas;
         }
-        public void OverViewDataByIndex(string index, int maxNumOfFile = 50, char sep = '\t')
+        public void PreViewDataByBcpPath(string bcpPath, int maxNumOfFile = 100, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
-            Citta_T1.Data data = Program.inputDataDict[index];
-            string content = data.content;
-            string[] contents = content.Split('\n');
-            int numOfRows = contents.Length;
-            List<string> rows = new List<string>(contents);
+
+            if (!Program.DataPreviewDict.ContainsKey(bcpPath) || Program.DataPreviewDict[bcpPath] == "")
+            {
+                (this.Parent.Parent as MainForm).formInputData.PreLoadFile(bcpPath);
+            }
+
+            List<string> rows = new List<string >(Program.DataPreviewDict[bcpPath].Split('\n'));
+            int numOfRows = rows.Count;
             for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
             {
                 datas.Add(new List<string>(rows[i].Split('\t')));

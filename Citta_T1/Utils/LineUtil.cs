@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Controls.Move;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -73,28 +74,32 @@ namespace Citta_T1.Utils
             return result[k];
         }
 
-        // 划线类
-        public class Line
-        {
-            PointF startP;
-            PointF endP;
-            PointF[] points;
-            public Line(PointF p1, PointF p2)
-            {
-                startP = p1;
-                endP = p2;
-                PointF a = new PointF((p1.X + p2.X) / 2, p1.Y);
-                PointF b = new PointF((p1.X + p2.X) / 2, p2.Y);
-                PointF[] pointList = new PointF[] { new PointF(p1.X, p1.Y), a, b, new PointF(p2.X, p2.Y) };
-                points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
-            }
 
-            public void DrawLine(Graphics g)
-            {
-                Pen pen = new Pen(Color.Green);
-                g.DrawCurve(pen, points);
-                pen.Dispose();
-            }
+    }
+
+    // 划线类
+    public class Line
+    {
+        PointF startP;
+        PointF endP;
+        MoveOpControl m_start;
+        MoveOpControl m_end;
+        PointF[] points;
+        public Line(PointF p1, PointF p2)
+        {
+            startP = p1;
+            endP = p2;
+            PointF a = new PointF((p1.X + p2.X) / 2, p1.Y);
+            PointF b = new PointF((p1.X + p2.X) / 2, p2.Y);
+            PointF[] pointList = new PointF[] { new PointF(p1.X, p1.Y), a, b, new PointF(p2.X, p2.Y) };
+            points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
+        }
+
+        public void DrawLine(Graphics g)
+        {
+            Pen pen = new Pen(Color.Green);
+            g.DrawCurve(pen, points);
+            pen.Dispose();
         }
     }
 }

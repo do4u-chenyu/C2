@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
+using Citta_T1.Business;
 
 namespace Citta_T1.Controls
 {
@@ -31,8 +32,7 @@ namespace Citta_T1.Controls
         Pen p;
 
         // 绘图
-        public List<LineUtil.Line> lines = new List<LineUtil.Line>() { };
-
+        public List<Line> lines = new List<Line>() { };
         public CanvasPanel()
         {
             InitializeComponent();
@@ -170,43 +170,46 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            bool isData = false;
-            string index = null;
+            ElementType type = ElementType.Null;
+            string path = "";
+            string text = "";
+            Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             try
             {
-                isData = (bool)e.Data.GetData("isData");
-                index = e.Data.GetData("index").ToString();
+                type = (ElementType)e.Data.GetData("Type");
+                path = e.Data.GetData("Path").ToString();
+                text = e.Data.GetData("Text").ToString();
             }
             catch (Exception ex)
             {
-                
+                System.Console.WriteLine(ex.Message);
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             Console.WriteLine("Trying to create a moc, Canvas'SizeLevel = " + sizeLevel);
-            if (isData)
+            if (type == ElementType.DataSource)
             {
                 Console.WriteLine("创建一个`MoveDtControl`对象");
                 MoveDtControl btn = new MoveDtControl(
-                    index,
+                    path,
                     sizeLevel,
-                    e.Data.GetData("Text").ToString(),
-                    this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
-                );
-                Controls.Add(btn);
+                    text,
+                    location);
+
+                this.Controls.Add(btn);
                
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
                 btn.DtDocumentDirtyEvent += DocumentDirty;
                 NewOperatorEvent?.Invoke(btn);
             }
-            else
+            else if (type == ElementType.Operator)
             {
                 MoveOpControl btn = new MoveOpControl(
                     sizeLevel,
-                    e.Data.GetData("Text").ToString(),
-                    this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100))
-                );
-                Controls.Add(btn);
+                    text,
+                    location);
+
+                this.Controls.Add(btn);
                
                 ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
                 ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
@@ -220,14 +223,17 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            MouseIsDown = true;
-            basepoint = e.Location;
-            ((MainForm)(this.Parent)).blankButton.Focus();
-            if (e.Button == MouseButtons.Left)
+            if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
-                startX = e.X;
-                startY = e.Y;
-                Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
+                MouseIsDown = true;
+                basepoint = e.Location;
+                ((MainForm)(this.Parent)).blankButton.Focus();
+                if (e.Button == MouseButtons.Left)
+                {
+                    startX = e.X;
+                    startY = e.Y;
+                    Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
+                }
             }
         }
 
@@ -272,14 +278,17 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            i = new Bitmap(this.Width, this.Height);
-            g = Graphics.FromImage(i);
-            g.Clear(Color.Transparent);
-            BackgroundImage = i;
-            g.Dispose();
+            if (((MainForm)(this.Parent)).flowControl.selectFrame)
+            {
+                i = new Bitmap(this.Width, this.Height);
+                g = Graphics.FromImage(i);
+                g.Clear(Color.Transparent);
+                BackgroundImage = i;
+                g.Dispose();
 
-            //标志位置低
-            MouseIsDown = false;
+                //标志位置低
+                MouseIsDown = false;
+            }
         }
 
         public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
@@ -297,7 +306,7 @@ namespace Citta_T1.Controls
             Graphics g = e.Graphics;
             if (lines.Count() > 0)
             {
-                foreach(LineUtil.Line line in lines)
+                foreach(Line line in lines)
                 {
                     line.DrawLine(g);
                 }

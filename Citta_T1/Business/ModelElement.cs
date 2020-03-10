@@ -10,15 +10,16 @@ using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Business
 {
-    enum ElementType
+    public enum ElementType
     {
-        Operate,
+        Operator,
         DataSource,
         Relatetion,
         Result,
-        remark
+        Remark,
+        Null
     }
-    enum ElementSubType
+    public enum ElementSubType
     {
         JoinOperator,
         IntersectionOperator,
@@ -31,7 +32,7 @@ namespace Citta_T1.Business
         MeanValueOperator,
         Null
     }
-    enum ElementStatus
+    public enum ElementStatus
     {
         Runnnig,//正在计算
         Stop,//停止
@@ -77,10 +78,10 @@ namespace Citta_T1.Business
                 case ElementType.DataSource:
                     name = (ctl as MoveDtControl).textBox1.Text;
                     break;
-                case ElementType.Operate:
+                case ElementType.Operator:
                     name = (ctl as MoveOpControl).textBox1.Text;
                     break;
-                case ElementType.remark:
+                case ElementType.Remark:
                     name = (ctl as RemarkControl).RemarkText;
                     break;
                 default:
@@ -97,10 +98,10 @@ namespace Citta_T1.Business
                 case ElementType.DataSource:
                     (ctl as MoveDtControl).textBox1.Text = name;
                     break;
-                case ElementType.Operate:
+                case ElementType.Operator:
                     (ctl as MoveOpControl).textBox1.Text = name;
                     break;
-                case ElementType.remark:
+                case ElementType.Remark:
                     (ctl as RemarkControl).RemarkText = name;
                     break;
                 default:

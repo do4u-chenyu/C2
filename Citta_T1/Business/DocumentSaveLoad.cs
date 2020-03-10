@@ -46,7 +46,7 @@ namespace Citta_T1.Business
                 typeNode.InnerText = me.Type.ToString();
                 modelElementXml.AppendChild(typeNode);
                 
-                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operate)//类型判断，如是否为算子类型
+                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)//类型判断，如是否为算子类型
                 {
 
                     XmlElement subTypeNode = xDoc.CreateElement("subtype");

@@ -13,27 +13,26 @@ namespace Citta_T1.Controls.Move
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl : MoveOpControl
     {
-        public string index;
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
-        public string GetIndex { get =>index; }
-        public string mdControlName { get => this.textBox1.Text; }
-        public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent; 
-        public MoveDtControl()
+        public string MDCName { get => this.textBox1.Text; }
+        public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
+
+        public string GetBcpPath()
         {
-            InitializeComponent();
-            AddOverViewToMenu();
+            return this.Name;
         }
-        public MoveDtControl(string idx, int sizeL, string text, Point p)
+
+        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc)
         {
             InitializeComponent();
             AddOverViewToMenu();
-            textBox1.Text = text;
-            Location = p;
-            index = idx;
-            doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
+            this.textBox1.Text = name;
+            this.Location = loc;
+            this.Name = bcpPath;
+            this.doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
-            resetSize(sizeL);
+            ResetSize(sizeL);
             Console.WriteLine("Create a MoveDtControl, sizeLevel = " + sizeLevel);
         }
         public new void InitializeOpPinPicture()
@@ -67,8 +66,6 @@ namespace Citta_T1.Controls.Move
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
-                // 数据button
-                ReNameDataButton(index, this.textBox1.Text);
             }
         }
         public override void textBox1_Leave(object sender, EventArgs e)
@@ -79,15 +76,12 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
-            // 数据button
-            ReNameDataButton(index, this.textBox1.Text);
         }
         public override void txtButton_Click(object sender, EventArgs e)
         {
             // TODO 一层一层找爸爸方法有点蠢
-            // TODO 需要所有数据控件都更新名称
             MainForm prt = (MainForm)Parent.Parent;
-            prt.OverViewDataByIndex(this.index);
+            prt.PreViewDataByBcpPath(this.GetBcpPath());
             System.Console.WriteLine("[MoveDtControl] isClicked:" + isClicked);
             if (isClicked)
             {
@@ -108,30 +102,16 @@ namespace Citta_T1.Controls.Move
             }
 
         }
-        public void ReNameDataButton(string index, string dstName)
-        {
-            Console.WriteLine("MoveDtControl重命名");
-            // 修改数据字典里的数据
-            Citta_T1.Data data = Program.inputDataDict[index];
-            data.dataName = dstName;
-            string srcName = data.dataName;
-            Program.inputDataDictN2I.Remove(srcName);
-            Program.inputDataDictN2I.Add(dstName, index);
-            // 修改DataSourceControl.cs中的展示名称
-            MainForm prt = (MainForm)Parent.Parent;
-            prt.RenameDataButton(this.index, dstName);
-        }
 
         public void overViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.OverViewDataByIndex(this.index);
+            prt.PreViewDataByBcpPath(this.Name);
         }
 
         public override void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo = Program.inputDataDict[index].filePath;
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Name);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -141,7 +121,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveDtControl_LocationChanged(object sender, EventArgs e)
         {
-            DtDocumentDirtyEvent?.Invoke();
+           // DtDocumentDirtyEvent?.Invoke();
         }
         public override void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {

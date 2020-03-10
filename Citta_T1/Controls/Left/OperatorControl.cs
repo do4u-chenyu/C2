@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Business;
 
 namespace Citta_T1.Controls.Left
 {
@@ -32,7 +33,11 @@ namespace Citta_T1.Controls.Left
         {
             if (e.Button == MouseButtons.Left)
             {
-                leftPanelOpIntersect.DoDragDrop((sender as Button).Text, DragDropEffects.Copy | DragDropEffects.Move);
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.Operator);
+                dragDropData.SetData("Path", "");
+                dragDropData.SetData("Text", (sender as Button).Text);
+                leftPanelOpIntersect.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
 

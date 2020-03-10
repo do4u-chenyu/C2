@@ -30,7 +30,7 @@ namespace  Citta_T1
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         private string userName;
-        private Citta_T1.Dialogs.FormInputData formInputData;
+        public Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
@@ -165,12 +165,8 @@ namespace  Citta_T1
                         if (ct.Name == "MoveOpControl")
                             (ct as Citta_T1.Controls.Move.MoveOpControl).ModelDocumentDirtyEvent += DocumentDirty;
                         else
-                        {
                             (ct as Citta_T1.Controls.Move.MoveDtControl).DtDocumentDirtyEvent += DocumentDirty;
-                            Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
-                            Program.inputDataDict.Add((ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex, data);
-                            Program.inputDataDictN2I.Add(me.GetName(), (ct as Citta_T1.Controls.Move.MoveDtControl).GetIndex);
-                        }                                                   
+                                                 
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
@@ -402,19 +398,18 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(Citta_T1.Data data)
+        void frm_InputDataEvent(string name, string filePath)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            string index = OpUtil.GenerateMD5(data.content);
-            this.dataSourceControl.GenDataButton(index, data.dataName, data.filePath);
+            this.dataSourceControl.GenDataButton(name, filePath);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void OverViewDataByIndex(string index)
+        public void PreViewDataByBcpPath(string bcpPath)
         {
-            this.dataGridView3.OverViewDataByIndex(index);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
