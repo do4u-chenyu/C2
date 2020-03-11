@@ -45,18 +45,15 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            SetTag(this);
             if (isLarger && sizeLevel <= 2)
             {
                 Console.WriteLine("放大");
-                SetControlsBySize(factor, factor, this);
                 sizeLevel += 1;
-                List<Control> mocs = new List<Control> { };
                 foreach(Control con in Controls)
                 {
                     if (con is IScalable)
                     {
-                        ((MoveOpControl)(con)).sizeLevel += 1;
+                        (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
 
@@ -65,13 +62,11 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("缩小");
                 sizeLevel -= 1;
-                SetControlsBySize(1 / factor, 1 / factor, this);
-                List<Control> mocs = new List<Control> { };
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
                     {
-                        ((MoveOpControl)(con)).sizeLevel -= 1;
+                        (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
             }
@@ -84,8 +79,14 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            SetTag(this);
-            SetControlByDelta(dx, dy, this);
+            //SetControlByDelta(dx, dy, this);
+            foreach (Control con in Controls)
+            {
+                if (con is IDragable)
+                {
+                    (con as IDragable).ChangeLoc(dx, dy);
+                }
+            }
         }
         #endregion
 
@@ -99,38 +100,6 @@ namespace Citta_T1.Controls
             cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
-        }
-        
-        // 保存大小信息
-        private void SetTag(Control cons)
-        {
-            deep += 1;
-            foreach (Control con in cons.Controls)
-            {
-                if (con is IScalable)
-                {
-                    (con as IScalable).SetTag(con);
-                }
-            }
-            deep -= 1;
-        }
-
-        // 缩放画布中的托块
-        private void SetControlsBySize(float newx, float newy, Control cons)
-        {
-            deep += 1;
-            // 遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-            {
-                // 获取控件的Tag属性值，并分割后存储字符串数组
-                SetDouble(this);
-                SetDouble(con);
-                if (con.Tag != null && (con is IScalable))
-                {
-                    (con as IScalable).SetControlsBySize(newx, newy, con);
-                }
-            }
-            deep -= 1;
         }
         #endregion
 
@@ -195,18 +164,18 @@ namespace Citta_T1.Controls
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
-            
+
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 MouseIsDown = true;
                 basepoint = e.Location;
                 
-                if (e.Button == MouseButtons.Left)
-                {
-                    startX = e.X;
-                    startY = e.Y;
-                    Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
-                }
+            }
+            else if ((this.Parent as MainForm).flowControl.selectDrag && e.Button == MouseButtons.Left)
+            {
+                startX = e.X;
+                startY = e.Y;
+                Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
             }
         }
 

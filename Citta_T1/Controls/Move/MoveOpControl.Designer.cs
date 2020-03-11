@@ -213,8 +213,7 @@ namespace Citta_T1.Controls.Move
             // MoveOpControl
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
@@ -249,7 +248,7 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.PictureBox rightPictureBox;
         public System.Windows.Forms.PictureBox leftPicture;
         public System.Windows.Forms.PictureBox leftPinPictureBox;
-        private System.Windows.Forms.PictureBox rightPinPictureBox;
+        public System.Windows.Forms.PictureBox rightPinPictureBox;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 菜单1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 菜单2ToolStripMenuItem;

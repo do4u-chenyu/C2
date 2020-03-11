@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Flow
 {
-    public delegate void RemarkChangeEventHandler(Control ct);
+    public delegate void RemarkChangeEventHandler(RemarkControl ct);
     public partial class RemarkControl : UserControl
     {
         public event RemarkChangeEventHandler RemarkChangeEvent;

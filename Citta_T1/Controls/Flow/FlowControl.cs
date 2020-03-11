@@ -24,6 +24,17 @@ namespace Citta_T1.Controls.Flow
         }
 
         #region 拖动
+        private void ChangeCursor()
+        {
+            if (selectDrag)
+            {
+                this.Parent.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                this.Parent.Cursor = Cursors.Default;
+            }
+        }
         private void PictureBox1_MouseEnter(object sender, EventArgs e)
         {
             this.pictureBox1.BackColor = Color.FromArgb(135, 135, 135);
@@ -34,16 +45,10 @@ namespace Citta_T1.Controls.Flow
             // 2. 鼠标变成手的图标
             // 3. 画布中触发MouseDown MouseMove MouseUp动作
             selectDrag = !selectDrag;
-            if (selectDrag)
-            {
-                this.Parent.Cursor = Cursors.Hand;
-            }
-            else
-            {
-                this.Parent.Cursor = Cursors.Default;
-            }
+            
             selectFrame = false;
             selectRemark = false;
+            ChangeCursor();
         }
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
@@ -121,9 +126,10 @@ namespace Citta_T1.Controls.Flow
                 HideFlowControl();
 
             selectRemark = !selectRemark;
-
+            
             selectDrag = false;
             selectFrame = false;
+            ChangeCursor();
         }
         #endregion
 
@@ -141,9 +147,10 @@ namespace Citta_T1.Controls.Flow
         private void pictureBox5_Click(object sender, EventArgs e)
         {
             selectFrame = !selectFrame;
-
+            
             selectDrag = false;
             selectRemark = false;
+            ChangeCursor();
         }
         #endregion
     }

@@ -12,8 +12,8 @@ namespace Citta_T1.Controls.Move
     public delegate void delegateRenameData(string index);
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
-    
-    public partial class MoveOpControl : UserControl, IScalable   
+
+    public partial class MoveOpControl : UserControl, IScalable, IDragable
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         private string opControlName;
@@ -32,6 +32,7 @@ namespace Citta_T1.Controls.Move
         // 一些倍率
         public string ReName { get => textBox1.Text; }
         public string subTypeName { get => typeName; }
+        // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
@@ -58,22 +59,30 @@ namespace Citta_T1.Controls.Move
             Location = loc;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
-            ResetSize(sizeL);
+            ChangeSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
-        public void ResetSize(int sizeL)
+        public void ChangeSize(int sizeL)
         {
             this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-            while (sizeL > 0)
+            if (sizeL > sizeLevel)
             {
-                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                changSize();
-                Console.WriteLine("MoveOpButton 放大一次");
-                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                sizeL -= 1;
-                sizeLevel += 1;
+                while (sizeL > sizeLevel)
+                {
+                    ChangeSize(true);
+                    sizeLevel += 1;
+                }
             }
+            else
+            {
+                while (sizeL < sizeLevel)
+                {
+                    ChangeSize(false);
+                    sizeLevel -= 1;
+                }
+            }
+
         }
 
         public void InitializeOpPinPicture()
@@ -391,14 +400,22 @@ namespace Citta_T1.Controls.Move
 
         #region 托块的放大与缩小
         private int deep = 0;
-        public void changSize(float factor = 1.3F)
+        public void ChangeSize(bool isLarger, float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
             SetTag(this);
-            SetControlsBySize(factor, factor, this);
+            if (isLarger)
+            {
+                SetControlsBySize(factor, factor, this);
+            }
+            else if (!isLarger)
+            {
+                SetControlsBySize(1 / factor, 1 / factor, this);
+            }
+            
         }
         
         public void SetTag(Control cons)
@@ -470,6 +487,16 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
+        #region 拖动实现
+
+        public void ChangeLoc(float dx, float dy)
+        {
+            int left = this.Left + (int)dx;
+            int top = this.Top + (int)dy;
+            this.Location = new Point(left, top);
+        }
+        #endregion
+
         #region 重绘
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -477,8 +504,6 @@ namespace Citta_T1.Controls.Move
             //(this.Parent as CanvasPanel).Invalidate();
         }
         #endregion
-
- 
 
     }
 }
