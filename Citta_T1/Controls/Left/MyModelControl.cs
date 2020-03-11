@@ -32,5 +32,16 @@ namespace Citta_T1.Controls.Left
             this.Controls.Add(mb);
 
         }
+
+        public bool ContainModel(string modelTitle)
+        {
+            foreach (Control ct in this.Controls)
+            {
+                if (ct is ModelButton)
+                    if ((ct as ModelButton).GetModelName() == modelTitle)
+                        return true;
+            }
+            return false;
+        }
     }
 }

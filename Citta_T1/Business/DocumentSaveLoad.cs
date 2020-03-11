@@ -45,7 +45,7 @@ namespace Citta_T1.Business
                 if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)//类型判断，如是否为算子类型
                 {
                     XmlElement nameNode = xDoc.CreateElement("name");
-                    nameNode.InnerText = me.GetName();
+                    nameNode.InnerText = me.GetDescription();
                     modelElementXml.AppendChild(nameNode);
 
                     XmlElement subTypeNode = xDoc.CreateElement("subtype");
@@ -61,9 +61,6 @@ namespace Citta_T1.Business
                     statusNode.InnerText = me.Status.ToString();
                     modelElementXml.AppendChild(statusNode);
 
-                    XmlElement indexLNode = xDoc.CreateElement("index");
-                    indexLNode.InnerText = me.GetIndex;
-                    modelElementXml.AppendChild(indexLNode);
 
                     if (me.Type == ElementType.DataSource)
                     {
@@ -71,9 +68,7 @@ namespace Citta_T1.Business
                         pathNode.InnerText = me.GetPath();
                         modelElementXml.AppendChild(pathNode);
 
-                        XmlElement codeNode = xDoc.CreateElement("code");
-                        codeNode.InnerText = me.GetCode;
-                        modelElementXml.AppendChild(codeNode);
+  
                     }
                 }
                 else if (me.Type == ElementType.Remark)
@@ -101,17 +96,17 @@ namespace Citta_T1.Business
             {
                 string type = xn.SelectSingleNode("type").InnerText;
                 String name = xn.SelectSingleNode("name").InnerText;
-                if ("Operate".Equals(type))
+                if (type == "Operator")
                 {
                     string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
                     Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
-                    MoveOpControl cotl = new MoveOpControl(0,name, loc);
-                    cotl.textBox1.Text = name;
-                    cotl.Location = loc;
-                    ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType));
-                    modelElements.Add(mElement);
+                    MoveOpControl ctl = new MoveOpControl(0, name, loc);
+                    ctl.textBox1.Text = name;
+                    ctl.Location = loc;
+                    ModelElement e = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
+                    modelElements.Add(e);
 
                 }
                 else if (type == "DataSource")
@@ -119,20 +114,19 @@ namespace Citta_T1.Business
                     string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
-                    string path = xn.SelectSingleNode("path").InnerText;
-                    string index =xn.SelectSingleNode("index").InnerText;
+                    string bcpPath = xn.SelectSingleNode("path").InnerText;
                     Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
-                    MoveDtControl cotl = new MoveDtControl(index,0,name, xnlocation);//暂时定为为moveopctrol
+
+                    MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);//暂时定为为moveopctrol
                     //cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     
-                    ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType), path);
+                    ModelElement mElement = new ModelElement(EType(type), cotl, name, bcpPath, EStatus(status), SEType(subType));
                     modelElements.Add(mElement);
                 }
-                else if (type == "remark")
+                else if (type == "Remark")
                 {
-                    RemarkControl remarkControl = new RemarkControl();
-                    ModelElement mElement = new ModelElement(EType(type), name, remarkControl);
-                    modelElements.Add(mElement);
+                    ModelElement remarkElement = ModelElement.CreateRemarkElement(name);
+                    modelElements.Add(remarkElement);
                 }
             }
             return modelElements;

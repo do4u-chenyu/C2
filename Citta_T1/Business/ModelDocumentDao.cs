@@ -33,11 +33,12 @@ namespace Citta_T1.Business
                     document.Hide();
             }
         }
-        public void SaveDocument()
+        public string SaveDocument()
         {
 
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
+            return this.currentDocument.ModelDocumentTitle;
         }
         public List<ModelElement>  LoadDocuments(string modelTitle,string userName)
         {
@@ -66,25 +67,27 @@ namespace Citta_T1.Business
         public void AddDocumentOperator(Control ct)
         {
             this.currentDocument.Dirty = true;
-            if (ct.Name == "MoveOpControl")
+
+
+            if (ct is MoveDtControl)
             {
-                ModelElement modelElement = new ModelElement(ElementType.Operator, (ct as MoveOpControl).ReName, ct, 
-                    ElementStatus.Null, SEType((ct as MoveOpControl).subTypeName));
-                this.currentDocument.AddModelElement(modelElement);
+                MoveDtControl dt = (ct as MoveDtControl);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath());
+                this.currentDocument.AddModelElement(e);
+                Console.WriteLine("数据源对应的BCP文件路径:" + dt.GetBcpPath());
+                return;
             }
-            else if (ct.Name == "MoveDtControl")
+
+            if (ct is MoveOpControl)
             {
-                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).MDCName, ct, 
-                    ElementStatus.Null, ElementSubType.Null, 
-                    (ct as MoveDtControl).Name,//Program.inputDataDict[(ct as MoveDtControl).GetIndex].filePath, 
-                    (ct as MoveDtControl).GetBcpPath(), 
-                    Program.DataPreviewDict[(ct as MoveDtControl).GetBcpPath()]);//Program.inputDataDict[(ct as MoveDtControl).GetIndex].content); 
-                this.currentDocument.AddModelElement(modelElement);
-                Console.WriteLine("数据源对应的BCP文件路径:" + (ct as MoveDtControl).GetBcpPath());
+                MoveOpControl op = (ct as MoveOpControl);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.subTypeName));
+                this.currentDocument.AddModelElement(e);
+                return;
             }
-           
+
         }
-        public void DeleteDocumentOperator(Control ct)
+        public void DeleteDocumentElement(Control ct)
         {
             this.currentDocument.DeleteModelElement(ct);
         }
@@ -143,23 +146,22 @@ namespace Citta_T1.Business
             Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
             return modelElements; 
         }
-        public void UpdateRemark(Control control)
+        public void UpdateRemark(RemarkControl remarkControl)
         { 
-             if (this.currentDocument == null)
+            if (this.currentDocument == null)
                 throw new NullReferenceException();
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
-            RemarkControl remarkControl = new RemarkControl();
-            ModelElement modelElement= new ModelElement(ElementType.Remark, (control as RemarkControl).RemarkText, remarkControl);
+            
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "remark")
+                if (me.Type == ElementType.Remark)
                 {
-                    modelElements.Remove(me);
-                    modelElements.Add(modelElement);
+                    me.RemarkName = remarkControl.RemarkText;
                     return;
                 }            
             }
-            modelElements.Add(modelElement);
+            ModelElement remarkElement = ModelElement.CreateRemarkElement(remarkControl.RemarkText);
+            modelElements.Add(remarkElement);
         }
         public string GetRemark()
         {
@@ -172,7 +174,7 @@ namespace Citta_T1.Business
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "remark")
+                if (me.Type.ToString() == "Remark")
                   remark=me.RemarkName;
             }
             return remark;

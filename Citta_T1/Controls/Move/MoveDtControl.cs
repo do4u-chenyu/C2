@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
+
 using Citta_T1.Controls.Flow;
 using System.Text.RegularExpressions;
 
@@ -15,10 +16,12 @@ namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: UserControl, IScalable, IDragable
+
     {
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string MDCName { get => this.textBox1.Text; }
+
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -46,6 +49,7 @@ namespace Citta_T1.Controls.Move
         private int startY;
 
         #endregion
+
 
         public string GetBcpPath()
         {
@@ -95,22 +99,11 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            Panel parentPanel = (Panel)this.Parent;
-            parentPanel.Controls.Remove(this);
-            foreach (Control ct in parentPanel.Controls)
-            {
-                if (ct.Name == "naviViewControl")
-                {
-                    (ct as NaviViewControl).RemoveControl(this);
-                    (ct as NaviViewControl).UpdateNaviView();
-                    break;
-                }
-            }
-            ModelDocumentDirtyEvent?.Invoke();
-            DeleteOperatorEvent?.Invoke(this);
-            MainForm mainForm = (MainForm)parentPanel.Parent;
-            mainForm.DeleteDocumentOperator(this);
-            DtDocumentDirtyEvent?.Invoke();
+            Global.GetCanvasPanel().DeleteElement(this);
+            Global.GetNaviViewControl().RemoveControl(this);
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().DeleteDocumentElement(this);
+            Global.GetMainForm().SetDocumentDirty();
         }
         #endregion
 

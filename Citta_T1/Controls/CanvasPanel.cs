@@ -13,16 +13,16 @@ using Citta_T1.Business;
 
 namespace Citta_T1.Controls
 {
-    public delegate void NewOperateEventHandler(Control ct);
-    public delegate void DocumentDirtyEventHandler();
+    public delegate void NewElementEventHandler(Control ct);
+
     public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
         private float deltaY; 
-        public event NewOperateEventHandler NewOperatorEvent;
-        public event DocumentDirtyEventHandler DocumentDirtyEvent;
+        public event NewElementEventHandler NewElementEvent;
+ 
 
 
         bool MouseIsDown = false;
@@ -154,40 +154,10 @@ namespace Citta_T1.Controls
                 System.Console.WriteLine(ex.Message);
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
-            Console.WriteLine("Trying to create a moc, Canvas'SizeLevel = " + sizeLevel);
             if (type == ElementType.DataSource)
-            {
-                Console.WriteLine("创建一个`MoveDtControl`对象");
-                MoveDtControl btn = new MoveDtControl(
-                    path,
-                    sizeLevel,
-                    text,
-                    location);
-
-                this.Controls.Add(btn);
-               
-                ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
-                ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
-                btn.DtDocumentDirtyEvent += DocumentDirty;
-                NewOperatorEvent?.Invoke(btn);
-            }
+                AddNewDataSource(path, sizeLevel, text, location);
             else if (type == ElementType.Operator)
-            {
-                MoveOpControl btn = new MoveOpControl(
-                    sizeLevel,
-                    text,
-                    location);
-
-                this.Controls.Add(btn);
-               
-                ((MainForm)(this.Parent)).naviViewControl.AddControl(btn);
-                ((MainForm)(this.Parent)).naviViewControl.UpdateNaviView();
-                btn.ModelDocumentDirtyEvent += DocumentDirty;
-                NewOperatorEvent?.Invoke(btn);
-            }
-           
-
-
+                AddNewOperator(sizeLevel, text, location);
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
@@ -285,7 +255,36 @@ namespace Citta_T1.Controls
             }
         }
         #endregion
-        public void DocumentDirty()
-        { DocumentDirtyEvent?.Invoke(); }
+
+        public void DeleteElement(Control ctl)
+        {
+            this.Controls.Remove(ctl);
+        }
+        public void AddNewOperator(int sizeL, string text, Point location)
+        {
+            MoveOpControl btn = new MoveOpControl(
+                                sizeL,
+                                text,
+                                location);
+            AddNewElement(btn);
+        }
+
+        public void AddNewDataSource(string path, int sizeL, string text, Point location)
+        {
+            MoveDtControl btn = new MoveDtControl(
+                path,
+                sizeL,
+                text,
+                location);
+            AddNewElement(btn);
+        }
+
+        private void AddNewElement(Control btn)
+        {
+            this.Controls.Add(btn);
+            Global.GetNaviViewControl().AddControl(btn);
+            Global.GetNaviViewControl().UpdateNaviView();
+            NewElementEvent?.Invoke(btn);
+        }
     }
 }

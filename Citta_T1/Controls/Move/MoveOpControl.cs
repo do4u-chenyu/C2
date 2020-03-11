@@ -12,6 +12,7 @@ namespace Citta_T1.Controls.Move
     public delegate void delegateRenameData(string index);
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
+
     public partial class MoveOpControl : UserControl, IScalable, IDragable
     {
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -25,9 +26,10 @@ namespace Citta_T1.Controls.Move
         public bool isClicked = false;
         private string sizeL;
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-        public event DeleteOperatorEventHandler DeleteOperatorEvent;
         private string typeName;
+        private string oldTextString;
 
+        // 一些倍率
         public string ReName { get => textBox1.Text; }
         public string subTypeName { get => typeName; }
         // 一些倍率
@@ -268,31 +270,22 @@ namespace Citta_T1.Controls.Move
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
-
+            this.oldTextString = this.textBox1.Text;
             this.txtButton.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点
             this.textBox1.Select(this.textBox1.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
+             ModelDocumentDirtyEvent?.Invoke();
         }
 
         public virtual void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            Panel parentPanel = (Panel)this.Parent;
-            parentPanel.Controls.Remove(this);
-            foreach (Control ct in parentPanel.Controls)
-            {
-                if (ct.Name == "naviViewControl")
-                {
-                    (ct as NaviViewControl).RemoveControl(this);
-                    (ct as NaviViewControl).UpdateNaviView();
-                    break;
-                }
-            }
-            ModelDocumentDirtyEvent?.Invoke();
-            DeleteOperatorEvent?.Invoke(this);
-            MainForm mainForm = (MainForm)parentPanel.Parent;
-            mainForm.DeleteDocumentOperator(this);
+
+            Global.GetCanvasPanel().DeleteElement(this);
+            Global.GetNaviViewControl().RemoveControl(this);
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().DeleteDocumentElement(this);
+            Global.GetMainForm().SetDocumentDirty();
         }
         private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -312,6 +305,12 @@ namespace Citta_T1.Controls.Move
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
+                if (this.oldTextString != this.textBox1.Text)
+                {
+                    this.oldTextString = this.textBox1.Text;
+                    Global.GetMainForm().SetDocumentDirty();
+                }
+
             }
         }
 
@@ -323,6 +322,11 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
+            if (this.oldTextString != this.textBox1.Text)
+            {
+                this.oldTextString = this.textBox1.Text;
+                Global.GetMainForm().SetDocumentDirty();
+            }
         }
         #endregion
 
@@ -501,18 +505,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        #region 文档修改事件
-        
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            ModelDocumentDirtyEvent?.Invoke();
-        }
-
-        private void MoveOpControl_LocationChanged(object sender, EventArgs e)
-        {
-           // ModelDocumentDirtyEvent?.Invoke();
-        }
-        #endregion
     }
 }
 

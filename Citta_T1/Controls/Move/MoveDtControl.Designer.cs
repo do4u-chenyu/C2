@@ -239,6 +239,15 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
+
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Name = "MoveDtControl";
+            this.Controls.SetChildIndex(this.leftPicture, 0);
+            this.Controls.SetChildIndex(this.rightPictureBox, 0);
+            this.Controls.SetChildIndex(this.leftPinPictureBox, 0);
+            this.Controls.SetChildIndex(this.textBox1, 0);
+            this.Controls.SetChildIndex(this.txtButton, 0);
+
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();

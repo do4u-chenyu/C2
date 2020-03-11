@@ -47,9 +47,7 @@ namespace Citta_T1.Business
         private ElementSubType subType;
         private Control ctl;
         private string dataSourcePath;
-        private string index;
-        private string dataCode;
-        private string name;
+        private string description;
    
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
@@ -57,47 +55,64 @@ namespace Citta_T1.Business
 
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
-        public string GetIndex { get => this.index; }
-        public string GetCode { get => this.dataCode; }
-        public string RemarkName { get => this.name; }
-
-
-        public ModelElement(ElementType type, string name, Control ctl, ElementStatus status = ElementStatus.Null, ElementSubType subType = ElementSubType.Null, string path = "",string index = "",string datacode = "") 
-        {
-            this.type = type;
-            this.index = index;
-            this.subType = subType;
-            this.ctl = ctl;
-            this.status = status;
-            this.dataSourcePath = path;
-            this.SetName(name);
-            this.dataCode = datacode;
-            this.name = name;
  
+        public string RemarkName { get => this.description; set => description = value; }
+
+       
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType) 
+        {
+            Init(type, ctl, des, bcpPath, status, subType);
         }
 
-        public string GetName()
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType)
         {
-            string name = "";
+            return new ModelElement(ElementType.Operator, ctl, des, "", status, subType);
+        }
+
+        public static ModelElement CreateRemarkElement(string remarkText)
+        {
+            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null);
+        }
+
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath)
+        {
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null);
+        }
+
+
+        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType)
+        {
+            this.type = type;
+            this.subType = subType;
+            this.ctl = ctl;
+            this.status = ElementStatus.Null;
+            this.dataSourcePath = bcpPath;
+            this.SetName(des);
+            this.description = des;
+        }
+
+        public string GetDescription()
+        {
+            string des = "";
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    name = (ctl as MoveDtControl).textBox1.Text;
+                    des = (ctl as MoveDtControl).textBox1.Text;
                     break;
                 case ElementType.Operator:
-                    name = (ctl as MoveOpControl).textBox1.Text;
+                    des = (ctl as MoveOpControl).textBox1.Text;
                     break;
-                case ElementType.Remark:
-                    name = (ctl as RemarkControl).RemarkText;
-                    break;
+                //case ElementType.Remark:
+                //    name = (ctl as RemarkControl).RemarkText;
+                //    break;
                 default:
                     break;
             }
-            return name;
+            return des;
 
         }
 
-        public void SetName(string name)
+        private void SetName(string name)
         {
             switch (this.type)
             {
@@ -107,9 +122,9 @@ namespace Citta_T1.Business
                 case ElementType.Operator:
                     (ctl as MoveOpControl).textBox1.Text = name;
                     break;
-                case ElementType.Remark:
-                    (ctl as RemarkControl).RemarkText = name;
-                    break;
+                //case ElementType.Remark:
+                //    (ctl as RemarkControl).RemarkText = name;
+                //    break;
                 default:
                     break;
             }
