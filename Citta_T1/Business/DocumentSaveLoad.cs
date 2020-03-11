@@ -96,17 +96,17 @@ namespace Citta_T1.Business
             {
                 string type = xn.SelectSingleNode("type").InnerText;
                 String name = xn.SelectSingleNode("name").InnerText;
-                if ("Operator".Equals(type))
+                if (type == "Operator")
                 {
                     string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
                     Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
-                    MoveOpControl cotl = new MoveOpControl(0,name, loc);
-                    cotl.textBox1.Text = name;
-                    cotl.Location = loc;
-                    ModelElement mElement = new ModelElement(EType(type), cotl, name, EStatus(status), SEType(subType));
-                    modelElements.Add(mElement);
+                    MoveOpControl ctl = new MoveOpControl(0, name, loc);
+                    ctl.textBox1.Text = name;
+                    ctl.Location = loc;
+                    ModelElement e = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
+                    modelElements.Add(e);
 
                 }
                 else if (type == "DataSource")
@@ -124,9 +124,8 @@ namespace Citta_T1.Business
                 }
                 else if (type == "Remark")
                 {
-                    RemarkControl remarkControl = new RemarkControl();
-                    ModelElement mElement = new ModelElement(EType(type), remarkControl, name);
-                    modelElements.Add(mElement);
+                    ModelElement remarkElement = ModelElement.CreateRemarkElement(name);
+                    modelElements.Add(remarkElement);
                 }
             }
             return modelElements;

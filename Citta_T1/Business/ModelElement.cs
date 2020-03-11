@@ -56,7 +56,7 @@ namespace Citta_T1.Business
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
  
-        public string RemarkName { get => this.description; }
+        public string RemarkName { get => this.description; set => description = value; }
 
        
         public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType) 
@@ -64,27 +64,21 @@ namespace Citta_T1.Business
             Init(type, ctl, des, bcpPath, status, subType);
         }
 
-        // 加载和界面拖入时构造DataSource元素
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType)
         {
-            Init(type, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null);
+            return new ModelElement(ElementType.Operator, ctl, des, "", status, subType);
         }
 
-        // 加载时构造Operator元素
-        public ModelElement(ElementType type, Control ctl, string des, ElementStatus status, ElementSubType subType)
+        public static ModelElement CreateRemarkElement(string remarkText)
         {
-            Init(type, ctl, des, "", status, subType);
+            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null);
         }
-        // 拖入时构造Operator元素
-        public ModelElement(ElementType type, Control ctl, string des, ElementSubType subType)
+
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath)
         {
-            Init(type, ctl, des, "", ElementStatus.Null, subType);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null);
         }
-        // 加载Remark元素
-        public ModelElement(ElementType type, Control ctl, string des)
-        {
-            Init(type, ctl, des, "", ElementStatus.Null, ElementSubType.Null);
-        }
+
 
         private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType)
         {

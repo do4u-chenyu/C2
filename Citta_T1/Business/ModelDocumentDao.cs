@@ -72,17 +72,17 @@ namespace Citta_T1.Business
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
-                ModelElement modelElement = new ModelElement(ElementType.DataSource, dt, dt.MDCName, dt.GetBcpPath());
-                this.currentDocument.AddModelElement(modelElement);
-                Console.WriteLine("数据源对应的BCP文件路径:" + (ct as MoveDtControl).GetBcpPath());
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath());
+                this.currentDocument.AddModelElement(e);
+                Console.WriteLine("数据源对应的BCP文件路径:" + dt.GetBcpPath());
                 return;
             }
 
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement modelElement = new ModelElement(ElementType.Operator, op, op.ReName, SEType(op.subTypeName));
-                this.currentDocument.AddModelElement(modelElement);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.subTypeName));
+                this.currentDocument.AddModelElement(e);
                 return;
             }
 
@@ -146,23 +146,22 @@ namespace Citta_T1.Business
             Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
             return modelElements; 
         }
-        public void UpdateRemark(Control control)
+        public void UpdateRemark(RemarkControl remarkControl)
         { 
-             if (this.currentDocument == null)
+            if (this.currentDocument == null)
                 throw new NullReferenceException();
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
-            RemarkControl remarkControl = new RemarkControl();
-            ModelElement modelElement= new ModelElement(ElementType.Remark, remarkControl, (control as RemarkControl).RemarkText);
+            
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "Remark")
+                if (me.Type == ElementType.Remark)
                 {
-                    modelElements.Remove(me);
-                    modelElements.Add(modelElement);
+                    me.RemarkName = remarkControl.RemarkText;
                     return;
                 }            
             }
-            modelElements.Add(modelElement);
+            ModelElement remarkElement = ModelElement.CreateRemarkElement(remarkControl.RemarkText);
+            modelElements.Add(remarkElement);
         }
         public string GetRemark()
         {

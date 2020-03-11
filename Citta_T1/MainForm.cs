@@ -72,9 +72,9 @@ namespace  Citta_T1
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
         }
-        private void RemarkChange(Control control)
+        private void RemarkChange(RemarkControl rc)
         {
-            this.modelDocumentDao.UpdateRemark(control);
+            this.modelDocumentDao.UpdateRemark(rc);
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
@@ -154,27 +154,16 @@ namespace  Citta_T1
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
                    List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
-                    foreach ( ModelElement me in modelElements)
+                    foreach (ModelElement me in modelElements)
                     {
                        Control ct = me.GetControl;
-                        if (ct is MoveOpControl)
-                        {
-                            ;
-                        }
-                        else if (ct is MoveDtControl)
-                        {
-                           // Citta_T1.Data data = new Citta_T1.Data(me.GetName(), me.GetPath(), me.GetCode);
-
-                        }
-                        else
-                            continue;
-                      
-                        
+                        if (ct is RemarkControl)
+                            continue;                   
                        
                         if (modelTitle.ToString() == modelTitleList[modelTitleList.Length - 1].ToString())//当前文件
                             ct.Show();
                         else
-                            ct.Visible=false;
+                            ct.Visible = false;
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
