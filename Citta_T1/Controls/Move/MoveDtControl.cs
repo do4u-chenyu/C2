@@ -14,27 +14,26 @@ namespace Citta_T1.Controls.Move
 
     public partial class MoveDtControl : MoveOpControl
     {
-        public string index;
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
-        public string GetIndex { get =>index; }
-        public string mdControlName { get => this.textBox1.Text; }
+        public string MDCName { get => this.textBox1.Text; }
 
-        public MoveDtControl()
+
+        public string GetBcpPath()
         {
-            InitializeComponent();
-            AddOverViewToMenu();
+            return this.Name;
         }
-        public MoveDtControl(string idx, int sizeL, string text, Point p)
+
+        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc)
         {
             InitializeComponent();
             AddOverViewToMenu();
-            textBox1.Text = text;
-            Location = p;
-            index = idx;
-            doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
+            this.textBox1.Text = name;
+            this.Location = loc;
+            this.Name = bcpPath;
+            this.doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
-            resetSize(sizeL);
+            ResetSize(sizeL);
             Console.WriteLine("Create a MoveDtControl, sizeLevel = " + sizeLevel);
         }
         public new void InitializeOpPinPicture()
@@ -54,7 +53,7 @@ namespace Citta_T1.Controls.Move
             this.overViewMenuItem.Name = "菜单1ToolStripMenuItem";
             this.overViewMenuItem.Size = new System.Drawing.Size(133, 24);
             this.overViewMenuItem.Text = "预览";
-            this.overViewMenuItem.Click += new System.EventHandler(this.overViewMenuItem_Click);
+            this.overViewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
             this.contextMenuStrip.Items.Insert(0, this.overViewMenuItem);
         }
         public override void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -68,8 +67,6 @@ namespace Citta_T1.Controls.Move
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
-                // 数据button
-                ReNameDataButton(index, this.textBox1.Text);
             }
         }
         public override void textBox1_Leave(object sender, EventArgs e)
@@ -80,40 +77,49 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
-            // 数据button
-            ReNameDataButton(index, this.textBox1.Text);
             Global.GetMainForm().SetDocumentDirty();
-        }
-        public override void txtButton_Click(object sender, EventArgs e)
-        {
 
         }
-        public void ReNameDataButton(string index, string dstName)
+        public void txtButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("MoveDtControl重命名");
-            // 修改数据字典里的数据
-            Citta_T1.Data data = Program.inputDataDict[index];
-            data.dataName = dstName;
-            string srcName = data.dataName;
-            Program.inputDataDictN2I.Remove(srcName);
-            Program.inputDataDictN2I.Add(dstName, index);
-            // 修改DataSourceControl.cs中的展示名称
+
+            // TODO 一层一层找爸爸方法有点蠢
             MainForm prt = (MainForm)Parent.Parent;
-            prt.RenameDataButton(this.index, dstName);
+            prt.PreViewDataByBcpPath(this.GetBcpPath());
+            System.Console.WriteLine("[MoveDtControl] isClicked:" + isClicked);
+            if (isClicked)
+            {
+                TimeSpan span = DateTime.Now - clickTime;
+                clickTime = DateTime.Now;
+                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
+
+                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
+                {
+                    RenameMenuItem_Click(this, e);
+                    isClicked = false;
+                }
+            }
+            else
+            {
+                isClicked = true;
+                clickTime = DateTime.Now;
+            }
+
         }
 
-        public void overViewMenuItem_Click(object sender, EventArgs e)
+        public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.OverViewDataByIndex(this.index);
+            prt.PreViewDataByBcpPath(this.Name);
         }
 
         public override void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo = Program.inputDataDict[index].filePath;
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Name);
         }
-
-
+        public override void DeleteMenuItem_Click(object sender, EventArgs e)
+        {
+            base.DeleteMenuItem_Click(sender, e);
+        }
     }
 }

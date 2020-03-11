@@ -67,18 +67,25 @@ namespace Citta_T1.Business
         public void AddDocumentOperator(Control ct)
         {
             this.currentDocument.Dirty = true;
-            if (ct.Name == "MoveOpControl")
+
+
+            if (ct is MoveDtControl)
             {
-                ModelElement modelElement = new ModelElement(ElementType.Operate, (ct as MoveOpControl).ReName, ct, ElementStatus.Null, SEType((ct as MoveOpControl).subTypeName));
+                MoveDtControl dt = (ct as MoveDtControl);
+                ModelElement modelElement = new ModelElement(ElementType.DataSource, dt, dt.MDCName, dt.GetBcpPath());
                 this.currentDocument.AddModelElement(modelElement);
+                Console.WriteLine("数据源对应的BCP文件路径:" + (ct as MoveDtControl).GetBcpPath());
+                return;
             }
-            else if (ct.Name == "MoveDtControl")
+
+            if (ct is MoveOpControl)
             {
-                ModelElement modelElement = new ModelElement(ElementType.DataSource, (ct as MoveDtControl).mdControlName, ct, ElementStatus.Null, ElementSubType.Null, Program.inputDataDict[(ct as MoveDtControl).GetIndex].filePath, (ct as MoveDtControl).GetIndex, Program.inputDataDict[(ct as MoveDtControl).GetIndex].content); 
+                MoveOpControl op = (ct as MoveOpControl);
+                ModelElement modelElement = new ModelElement(ElementType.Operator, op, op.ReName, SEType(op.subTypeName));
                 this.currentDocument.AddModelElement(modelElement);
-                Console.WriteLine("数据源的index位" + (ct as MoveDtControl).GetIndex);
+                return;
             }
-           
+
         }
         public void DeleteDocumentElement(Control ct)
         {
@@ -145,10 +152,10 @@ namespace Citta_T1.Business
                 throw new NullReferenceException();
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
             RemarkControl remarkControl = new RemarkControl();
-            ModelElement modelElement= new ModelElement(ElementType.remark, (control as RemarkControl).RemarkText, remarkControl);
+            ModelElement modelElement= new ModelElement(ElementType.Remark, remarkControl, (control as RemarkControl).RemarkText);
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "remark")
+                if (me.Type.ToString() == "Remark")
                 {
                     modelElements.Remove(me);
                     modelElements.Add(modelElement);
@@ -168,7 +175,7 @@ namespace Citta_T1.Business
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "remark")
+                if (me.Type.ToString() == "Remark")
                   remark=me.RemarkName;
             }
             return remark;

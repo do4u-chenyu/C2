@@ -29,17 +29,13 @@ namespace Citta_T1.Controls.Flow
         {
             this.rate = rate;
             //System.Console.WriteLine(mainPanelSize.ToString());
-
-
             this.Invalidate(true);
         }
         public void AddControl(Control ct)
         {
             this.controls.Add(ct);
+                       
         }
-
-
-
         public void RemoveControl(Control ct)
         {
             this.controls.Remove(ct);

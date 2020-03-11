@@ -42,26 +42,26 @@ namespace Citta_T1.Controls.Move
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        LineUtil.Line line;
+        Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         public MoveOpControl()
         {
             InitializeComponent();
         }
-        public MoveOpControl(int sizeL, string text, Point p)
+        public MoveOpControl(int sizeL, string text, Point loc)
         {
             
             InitializeComponent();
             textBox1.Text = text;
             typeName = text;
-            Location = p;
+            Location = loc;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
-            resetSize(sizeL);
+            ResetSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
-        public void resetSize(int sizeL)
+        public void ResetSize(int sizeL)
         {
             this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
@@ -138,6 +138,17 @@ namespace Citta_T1.Controls.Move
            
         }
 
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 单击鼠标, 移动控件
+            if (e.Clicks == 1)
+                MoveOpControl_MouseDown(sender, e);
+            // 双击鼠标, 改名字
+            if (e.Clicks == 2)
+                RenameMenuItem_Click(this, e);
+
+        }
+
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -167,32 +178,6 @@ namespace Citta_T1.Controls.Move
         private void MoveOpControl_Load(object sender, EventArgs e)
         {
 
-        }
-        #endregion
-
-        #region 针脚事件
-        private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
-            System.Drawing.Size oriSize = (sender as PictureBox).Size;
-            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
-            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
-            //(sender as PictureBox).Size = new System.Drawing.Size(10, 10);
-        }
-
-        private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
-            System.Drawing.Size oriSize = (sender as PictureBox).Size;
-            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
-            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
-            //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
         #endregion
 
@@ -273,7 +258,7 @@ namespace Citta_T1.Controls.Move
             DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
-        public void 重命名ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void RenameMenuItem_Click(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
             this.oldTextString = this.textBox1.Text;
@@ -284,8 +269,9 @@ namespace Citta_T1.Controls.Move
              ModelDocumentDirtyEvent?.Invoke();
         }
 
-        public virtual void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
+        public virtual void DeleteMenuItem_Click(object sender, EventArgs e)
         {
+
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
@@ -335,33 +321,37 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        public virtual void txtButton_Click(object sender, EventArgs e)
-        {
-            System.Console.WriteLine("isClicked:" + isClicked);
-            if (isClicked)
-            {
-                TimeSpan span = DateTime.Now - clickTime;
-                clickTime = DateTime.Now;
-                if (span.TotalMilliseconds < SystemInformation.DoubleClickTime)
-
-                //  把milliseconds改成totalMilliseconds 因为前者不是真正的时间间隔，totalMilliseconds才是真正的时间间隔
-                {
-                    重命名ToolStripMenuItem_Click_1(this, e);
-                    isClicked = false;
-                }
-            }
-            else
-            {
-                isClicked = true;
-                clickTime = DateTime.Now;
-            }
-
-        }
         public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
         }
+
+        #region 针脚事件
+        private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
+            System.Drawing.Size oriSize = (sender as PictureBox).Size;
+            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
+            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
+            (sender as PictureBox).Location = dstLtCorner;
+            (sender as PictureBox).Size = dstSize;
+            //(sender as PictureBox).Size = new System.Drawing.Size(10, 10);
+        }
+
+        private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
+            System.Drawing.Size oriSize = (sender as PictureBox).Size;
+            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
+            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
+            (sender as PictureBox).Location = dstLtCorner;
+            (sender as PictureBox).Size = dstSize;
+            //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
+        }
+        #endregion
         #region 右针脚事件
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -376,7 +366,6 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            // TODO 绘制速度太慢了，体验非常不好
             Graphics g = this.Parent.CreateGraphics();
             if (g != null)
             {
@@ -387,7 +376,7 @@ namespace Citta_T1.Controls.Move
                 //this.Refresh();
                 int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
                 int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                line = new LineUtil.Line(new PointF(startX, startY), new PointF(nowX, nowY));
+                line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
                 line.DrawLine(g);
             }
             g.Dispose();
@@ -480,6 +469,17 @@ namespace Citta_T1.Controls.Move
             deep -= 1;
         }
         #endregion
+
+        #region 重绘
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            //(this.Parent as CanvasPanel).Invalidate();
+        }
+        #endregion
+
+ 
+
     }
 }
 

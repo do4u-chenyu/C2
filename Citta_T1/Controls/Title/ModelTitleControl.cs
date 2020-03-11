@@ -102,14 +102,17 @@ namespace Citta_T1.Controls.Title
             if (result == DialogResult.Yes)
             {                
                 mainForm.SaveDocument();
+                ClearDirtyPictureBox();
                 if (parentPanel.Controls.Count != 2)
                 {
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                     
                 }
-                    
                 
+
+
+
             }
             else if (result == DialogResult.No)
             {
