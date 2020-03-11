@@ -135,6 +135,7 @@ namespace  Citta_T1
         {
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.naviViewControl.UpdateNaviView();
         }
 
         //TODO 蛋疼
@@ -168,10 +169,12 @@ namespace  Citta_T1
                         else
                             continue;
                       
+                        
+                       
                         if (modelTitle.ToString() == modelTitleList[modelTitleList.Length - 1].ToString())//当前文件
-                            ct.Show();                                                  
+                            ct.Show();
                         else
-                            ct.Hide();
+                            ct.Visible=false;
                         this.canvasPanel.Controls.Add(ct);
                         this.naviViewControl.AddControl(ct);
                         this.naviViewControl.UpdateNaviView();
