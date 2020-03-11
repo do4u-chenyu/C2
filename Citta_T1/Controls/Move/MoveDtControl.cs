@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
-    public partial class MoveDtControl: UserControl, IScalable
+    public partial class MoveDtControl: UserControl, IScalable, IDragable
     {
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
@@ -154,44 +154,42 @@ namespace Citta_T1.Controls.Move
         {
             this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-            while (sizeL > 0)
+            if (sizeL > sizeLevel)
             {
-                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                ChangeSize();
-                Console.WriteLine("MoveOpButton 放大一次");
-                Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                sizeL -= 1;
-                sizeLevel += 1;
+                while (sizeL > sizeLevel)
+                {
+                    ChangeSize(true);
+                    sizeLevel += 1;
+                }
             }
+            else
+            {
+                while (sizeL < sizeLevel)
+                {
+                    ChangeSize(false);
+                    sizeLevel -= 1;
+                }
+            }
+
         }
 
-        //public void InitializeOpPinPicture()
-        //{
-        //    SetOpControlName(this.textBox1.Text);
-        //    System.Console.WriteLine(doublelPinFlag);
+        public void ChangeSize(bool isLarger, float factor = 1.3F)
+        {
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-        //    if (doublelPinFlag)
-        //    {
-        //        int x = this.leftPinPictureBox.Location.X;
-        //        int y = this.leftPinPictureBox.Location.Y;
-        //        this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-        //        PictureBox leftPinPictureBox1 = new PictureBox();
-        //        leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        //        leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
-        //        leftPinPictureBox1.Name = "leftPinPictureBox1";
-        //        leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
-        //        leftPinPictureBox1.TabIndex = 3;
-        //        leftPinPictureBox1.TabStop = false;
-        //        leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-        //        leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-        //        this.leftPinPictureBox.Parent.Controls.Add(leftPinPictureBox1);
-        //    }
-        //    /*
-        //    System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
-        //    leftPicture1.Location = new System.Drawing.Point(16, 24);
-        //    this.Controls.Add(leftPicture1);
-        //    */
-        //}
+            SetTag(this);
+            if (isLarger)
+            {
+                SetControlsBySize(factor, factor, this);
+            }
+            else if (!isLarger)
+            {
+                SetControlsBySize(1 / factor, 1 / factor, this);
+            }
+
+        }
 
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
@@ -423,6 +421,7 @@ namespace Citta_T1.Controls.Move
             //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
         #endregion
+
         #region 右针脚事件
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -541,6 +540,14 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
+        #region 拖动实现
+        public void ChangeLoc(float dx, float dy)
+        {
+            int left = this.Left + (int)dx;
+            int top = this.Top + (int)dy;
+            this.Location = new Point(left, top);
+        }
+        #endregion
 
         #region 重绘
         protected override void OnPaint(PaintEventArgs e)

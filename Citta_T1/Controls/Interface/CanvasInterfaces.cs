@@ -12,9 +12,6 @@ namespace Citta_T1.Utils
     // 缩放接口
     public interface IScalable
     {
-        void SetTag(Control cons);
-        void SetControlsBySize(float fx, float fy, Control cons);
-        // TODO 重写接口
         void ChangeSize(int sizeL);
     }
 
@@ -23,5 +20,10 @@ namespace Citta_T1.Utils
     {
         // 判断是否鼠标在当前目标中
         bool PointInObject(Point p);
+    }
+
+    public interface IDragable
+    {
+        void ChangeLoc(float dx, float dy);
     }
 }
