@@ -27,10 +27,10 @@ namespace Citta_T1.Controls.Move
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
         public event DeleteOperatorEventHandler DeleteOperatorEvent;
         private string typeName;
-        
-        // 一些倍率
+
         public string ReName { get => textBox1.Text; }
         public string subTypeName { get => typeName; }
+        // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
@@ -57,17 +57,17 @@ namespace Citta_T1.Controls.Move
             Location = loc;
             doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
             InitializeOpPinPicture();
-            ResetSize(sizeL);
+            ChangeSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
-        public void ResetSize(int sizeL)
+        public void ChangeSize(int sizeL)
         {
             this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             while (sizeL > 0)
             {
                 Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-                changSize();
+                ChangeSize();
                 Console.WriteLine("MoveOpButton 放大一次");
                 Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
                 sizeL -= 1;
@@ -388,7 +388,7 @@ namespace Citta_T1.Controls.Move
 
         #region 托块的放大与缩小
         private int deep = 0;
-        public void changSize(float factor = 1.3F)
+        public void ChangeSize(float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -476,6 +476,8 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
+        #region 文档修改事件
+        
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             ModelDocumentDirtyEvent?.Invoke();
@@ -485,6 +487,7 @@ namespace Citta_T1.Controls.Move
         {
            // ModelDocumentDirtyEvent?.Invoke();
         }
+        #endregion
     }
 }
 

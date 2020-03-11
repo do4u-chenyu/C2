@@ -51,8 +51,11 @@ namespace Citta_T1.Controls.Flow
          
             foreach (Control ct in controls)
             {
-                Rectangle rect = new Rectangle(ct.Location.X / rate, ct.Location.Y / rate, ct.Width / rate, ct.Height / rate);
-                gc.DrawRectangle(pen, rect);
+                if (ct.Visible)
+                {
+                    Rectangle rect = new Rectangle(ct.Location.X / rate, ct.Location.Y / rate, ct.Width / rate, ct.Height / rate);
+                    gc.DrawRectangle(pen, rect);
+                }
             }
         }
     }

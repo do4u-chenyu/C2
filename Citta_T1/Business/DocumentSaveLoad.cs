@@ -122,7 +122,7 @@ namespace Citta_T1.Business
                     string path = xn.SelectSingleNode("path").InnerText;
                     string index =xn.SelectSingleNode("index").InnerText;
                     Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
-                    MoveOpControl cotl = new MoveDtControl(index,0,name, xnlocation);//暂时定为为moveopctrol
+                    MoveDtControl cotl = new MoveDtControl(index,0,name, xnlocation);//暂时定为为moveopctrol
                     //cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     
                     ModelElement mElement = new ModelElement(EType(type), name, cotl, EStatus(status), SEType(subType), path);

@@ -49,14 +49,14 @@ namespace Citta_T1.Controls
             if (isLarger && sizeLevel <= 2)
             {
                 Console.WriteLine("放大");
-                SetControlsBySize(factor, factor, this);
+                //SetControlsBySize(factor, factor, this);
                 sizeLevel += 1;
-                List<Control> mocs = new List<Control> { };
                 foreach(Control con in Controls)
                 {
                     if (con is IScalable)
                     {
-                        ((MoveOpControl)(con)).sizeLevel += 1;
+                        //((MoveOpControl)(con)).sizeLevel += 1;
+                        (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
 
@@ -66,12 +66,12 @@ namespace Citta_T1.Controls
                 Console.WriteLine("缩小");
                 sizeLevel -= 1;
                 SetControlsBySize(1 / factor, 1 / factor, this);
-                List<Control> mocs = new List<Control> { };
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
                     {
-                        ((MoveOpControl)(con)).sizeLevel -= 1;
+                        //((MoveOpControl)(con)).sizeLevel -= 1;
+                        (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
             }

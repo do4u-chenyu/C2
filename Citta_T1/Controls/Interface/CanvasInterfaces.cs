@@ -14,6 +14,8 @@ namespace Citta_T1.Utils
     {
         void SetTag(Control cons);
         void SetControlsBySize(float fx, float fy, Control cons);
+        // TODO 重写接口
+        void ChangeSize(int sizeL);
     }
 
     // 绘制接口

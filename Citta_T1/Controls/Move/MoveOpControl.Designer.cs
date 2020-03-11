@@ -250,7 +250,7 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.PictureBox rightPictureBox;
         public System.Windows.Forms.PictureBox leftPicture;
         public System.Windows.Forms.PictureBox leftPinPictureBox;
-        private System.Windows.Forms.PictureBox rightPinPictureBox;
+        public System.Windows.Forms.PictureBox rightPinPictureBox;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 菜单1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 菜单2ToolStripMenuItem;
