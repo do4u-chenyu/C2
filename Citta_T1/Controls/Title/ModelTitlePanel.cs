@@ -25,14 +25,9 @@ namespace Citta_T1.Controls.Title
         {
             InitializeComponent();
             models = new List<ModelTitleControl>();
-            InitializeDefaultModelTitleControl(); //new 用户,老用户没有模型;老用户有模型,  
         }
 
-        private void InitializeDefaultModelTitleControl()
-        {
-            //TODO
-            AddModel("新建模型");
-        }
+
         public void UpModelTitle()
         {
             rawModelTitleNum = this.Width / 142;
@@ -49,6 +44,35 @@ namespace Citta_T1.Controls.Title
                 else if (models.Count >= 24)
                     mt.SetNewModelTitle(mt.ModelTitle, 0);
             }
+        }
+        public void LoadModelDocument(DirectoryInfo[] directoryInfos) 
+        {
+            int docCounts = directoryInfos.Count()-1;
+            for (int i = 0; i <= docCounts; i++)
+            {
+                string modelTitle = directoryInfos[i].ToString();
+                ModelTitleControl mtControl = new ModelTitleControl();
+                mtControl.ModelDocumentSwitch += DocumentSwitch;
+                models.Add(mtControl);
+                mtControl.SetOriginalModelTitle(modelTitle);
+                if (i == 0)
+                    mtControl.Location = OriginalLocation;
+                else
+                {
+                    ModelTitleControl preMTC = models[models.Count - 2];
+                    mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
+                    ResizeModel();
+                    UpModelTitle();
+                }
+                if (i == docCounts)
+                { 
+                    mtControl.BorderStyle = BorderStyle.FixedSingle;
+                    mtControl.Selected = true;
+                }
+                    
+                this.Controls.Add(mtControl);
+            }
+           
         }
 
         public void AddModel(string modelTitle)
@@ -143,7 +167,7 @@ namespace Citta_T1.Controls.Title
             mtControl.Dispose();
             // 当文档全部关闭时，自动创建一个新的默认文档
             if (models.Count == 0)
-                InitializeDefaultModelTitleControl();
+                AddModel("新建模型");
             UpModelTitle();
             ResizeModel(true);//重新设置model大小
            
@@ -171,7 +195,7 @@ namespace Citta_T1.Controls.Title
         }
         public void DocumentSwitch(string modelTitle)
         {
-            ModelDocumentSwitch?.Invoke(modelTitle);//------------------------------------------
+            ModelDocumentSwitch?.Invoke(modelTitle);
         }
     }
 }

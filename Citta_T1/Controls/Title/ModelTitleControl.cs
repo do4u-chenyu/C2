@@ -140,7 +140,6 @@ namespace Citta_T1.Controls.Title
         private void MdelTitlelabel_Click(object sender, EventArgs e)
         {
             ShowSelectedBorder();
-            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
         }
     }
 

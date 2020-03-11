@@ -138,12 +138,12 @@ namespace  Citta_T1
             this.naviViewControl.UpdateNaviView();
         }
 
-        //TODO 蛋疼
+
         private void LoadDocuments(string userName)
         {
-            //TODO
             if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\"))
-            { 
+            {
+                this.modelTitlePanel.AddModel("新建模型");
                 this.modelDocumentDao.AddDocument("新建模型", userName);
                 return;
             }
@@ -151,6 +151,7 @@ namespace  Citta_T1
             {                
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
+                this.modelTitlePanel.LoadModelDocument(modelTitleList);
                 foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
                 {                
                    List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
@@ -169,19 +170,8 @@ namespace  Citta_T1
                         this.naviViewControl.UpdateNaviView();
                     }
                     this.myModelControl.AddModel(modelTitle.ToString());
-                    this.modelTitlePanel.AddModel(modelTitle.ToString());
-                    this.modelDocumentDao.ModelDocuments.RemoveAt(this.modelDocumentDao.ModelDocuments.Count-1);
-                }
-                foreach (Citta_T1.Controls.Title.ModelTitleControl ct in this.modelTitlePanel.Controls)
-                {
-                    if (ct.Location.X == 1)
-                    {
-                        this.modelTitlePanel.RemoveModel(ct);
-                        this.modelTitlePanel.SelectedModel(modelTitleList[modelTitleList.Length - 1].ToString());
-                        return;
-                    }                   
-                }
-                
+                    
+                }               
             }
             catch
             {               
