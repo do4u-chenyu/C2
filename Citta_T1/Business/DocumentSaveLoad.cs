@@ -103,7 +103,7 @@ namespace Citta_T1.Business
                     string subType = xn.SelectSingleNode("subtype").InnerText;
                     Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
                     MoveOpControl ctl = new MoveOpControl(0, name, loc);
-                    ctl.textBox1.Text = name;
+                    ctl.textBox.Text = name;
                     ctl.Location = loc;
                     ModelElement e = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
                     modelElements.Add(e);

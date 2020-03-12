@@ -100,7 +100,7 @@ namespace Citta_T1.Business
                     des = (ctl as MoveDtControl).textBox1.Text;
                     break;
                 case ElementType.Operator:
-                    des = (ctl as MoveOpControl).textBox1.Text;
+                    des = (ctl as MoveOpControl).textBox.Text;
                     break;
                 //case ElementType.Remark:
                 //    name = (ctl as RemarkControl).RemarkText;
@@ -120,7 +120,7 @@ namespace Citta_T1.Business
                     (ctl as MoveDtControl).textBox1.Text = name;
                     break;
                 case ElementType.Operator:
-                    (ctl as MoveOpControl).textBox1.Text = name;
+                    (ctl as MoveOpControl).textBox.Text = name;
                     break;
                 //case ElementType.Remark:
                 //    (ctl as RemarkControl).RemarkText = name;

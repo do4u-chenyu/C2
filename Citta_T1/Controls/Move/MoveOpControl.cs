@@ -30,7 +30,7 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
 
         // 一些倍率
-        public string ReName { get => textBox1.Text; }
+        public string ReName { get => textBox.Text; }
         public string subTypeName { get => typeName; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -54,10 +54,10 @@ namespace Citta_T1.Controls.Move
         {
             
             InitializeComponent();
-            textBox1.Text = text;
+            textBox.Text = text;
             typeName = text;
             Location = loc;
-            doublelPinFlag = doublePin.Contains(this.textBox1.Text.ToString());
+            doublelPinFlag = doublePin.Contains(this.textBox.Text.ToString());
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
@@ -87,7 +87,7 @@ namespace Citta_T1.Controls.Move
 
         public void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textBox1.Text);
+            SetOpControlName(this.textBox.Text);
             System.Console.WriteLine(doublelPinFlag);
             
             if (doublelPinFlag)
@@ -118,21 +118,9 @@ namespace Citta_T1.Controls.Move
         {
             if (isMouseDown)
             {
-                if (sender is Button)
-                {
-                    sender = (sender as Button).Parent;
-                }
-                if (sender is PictureBox)
-                {
-                    sender = (sender as PictureBox).Parent;
-                }
-                if (sender is TextBox)
-                {
-                    sender = (sender as TextBox).Parent;
-                }
-                int left = (sender as MoveOpControl).Left + e.X - mouseOffset.X;
-                int top = (sender as MoveOpControl).Top + e.Y - mouseOffset.Y;
-                (sender as MoveOpControl).Location = new Point(left, top);
+                int left = this.Left + e.X - mouseOffset.X;
+                int top = this.Top + e.Y - mouseOffset.Y;
+                this.Location = new Point(left, top);
             }
         }
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
@@ -162,25 +150,8 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
-                isMouseDown = false;
-                if (sender is Button)
-                {
-                    sender = (sender as Button).Parent;
-                }
-                if (sender is PictureBox)
-                {
-                    sender = (sender as PictureBox).Parent;
-                }
-                Control parent = (sender as MoveOpControl).Parent;
-                foreach (Control ct in parent.Controls)
-                {
-                    if (ct.Name == "naviViewControl")
-                    {
-                        (ct as NaviViewControl).UpdateNaviView();
-                        break;
-                    }
-                }
-
+                this.isMouseDown = false;
+                Global.GetNaviViewControl().UpdateNaviView();
             }
             
         }
@@ -237,7 +208,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToSmall()
         {
@@ -246,7 +217,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new System.Drawing.Point((int)(107 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToNormal()
         {
@@ -255,7 +226,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.textBox.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
         }
         #endregion
 
@@ -269,12 +240,12 @@ namespace Citta_T1.Controls.Move
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
-            this.textBox1.ReadOnly = false;
-            this.oldTextString = this.textBox1.Text;
+            this.textBox.ReadOnly = false;
+            this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
-            this.textBox1.Visible = true;
-            this.textBox1.Focus();//获取焦点
-            this.textBox1.Select(this.textBox1.TextLength, 0);
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
              ModelDocumentDirtyEvent?.Invoke();
         }
 
@@ -294,43 +265,43 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region textBox
-        public virtual void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下回车键
             if (e.KeyChar == 13)
             {
-                if (this.textBox1.Text.Length == 0)
+                if (this.textBox.Text.Length == 0)
                     return;
-                this.textBox1.ReadOnly = true;
-                SetOpControlName(this.textBox1.Text);
-                this.textBox1.Visible = false;
+                this.textBox.ReadOnly = true;
+                SetOpControlName(this.textBox.Text);
+                this.textBox.Visible = false;
                 this.txtButton.Visible = true;
-                if (this.oldTextString != this.textBox1.Text)
+                if (this.oldTextString != this.textBox.Text)
                 {
-                    this.oldTextString = this.textBox1.Text;
+                    this.oldTextString = this.textBox.Text;
                     Global.GetMainForm().SetDocumentDirty();
                 }
 
             }
         }
 
-        public virtual void textBox1_Leave(object sender, EventArgs e)
+        public void textBox1_Leave(object sender, EventArgs e)
         {
-            if (this.textBox1.Text.Length == 0)
+            if (this.textBox.Text.Length == 0)
                 return;
-            this.textBox1.ReadOnly = true;
-            SetOpControlName(this.textBox1.Text);
-            this.textBox1.Visible = false;
+            this.textBox.ReadOnly = true;
+            SetOpControlName(this.textBox.Text);
+            this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox1.Text)
+            if (this.oldTextString != this.textBox.Text)
             {
-                this.oldTextString = this.textBox1.Text;
+                this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
         }
         #endregion
 
-        public virtual void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
@@ -497,13 +468,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        #region 重绘
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            //(this.Parent as CanvasPanel).Invalidate();
-        }
-        #endregion
 
     }
 }
