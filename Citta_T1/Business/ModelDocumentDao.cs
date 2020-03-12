@@ -33,7 +33,6 @@ namespace Citta_T1.Business
         }
         public string SaveDocument()
         {
-
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
             return this.currentDocument.ModelDocumentTitle;
@@ -51,10 +50,6 @@ namespace Citta_T1.Business
         public void SwitchDocument(string modelTitle)//----------------------------------------
         {
             this.currentDocument = FindModelDocument(modelTitle);
-            Console.WriteLine(modelTitle+"默认打开的模型");
-
-            if (this.currentDocument == null)
-                throw new NullReferenceException();
             foreach (ModelDocument md in this.modelDocuments)
             {
                 if (md.ModelDocumentTitle == modelTitle)
@@ -65,9 +60,6 @@ namespace Citta_T1.Business
         }
         public void AddDocumentOperator(Control ct)
         {
-            this.currentDocument.Dirty = true;
-
-
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
@@ -149,8 +141,7 @@ namespace Citta_T1.Business
         { 
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();
-            
+            List<ModelElement> modelElements = this.currentDocument.ModelElements();          
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)
@@ -166,10 +157,7 @@ namespace Citta_T1.Business
         {
             string remark = "";
             if (this.currentDocument == null)
-            {
                 throw new NullReferenceException();
-            }
-               
             List<ModelElement> modelElements = this.currentDocument.ModelElements();
             foreach (ModelElement me in modelElements)
             {

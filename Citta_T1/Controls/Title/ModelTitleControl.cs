@@ -37,12 +37,14 @@ namespace Citta_T1.Controls.Title
 
         public void SetDirtyPictureBox()
         {
+            dirty = true;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelTitleControl));
             this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
         }
 
         public void ClearDirtyPictureBox()
         {
+            dirty = false;
             this.dirtyPictureBox.Image = null;
         }
 
@@ -89,7 +91,7 @@ namespace Citta_T1.Controls.Title
                 return;
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             MainForm mainForm = (MainForm)this.ParentForm;
-            if (this.dirtyPictureBox.Image == null)
+            if (!Global.GetCurrentDocument().Dirty)
             {   // 
                 if (parentPanel.Controls.Count != 2)
                 {
@@ -106,13 +108,8 @@ namespace Citta_T1.Controls.Title
                 if (parentPanel.Controls.Count != 2)
                 {
                     mainForm.DeleteCurrentDocument();
-                    parentPanel.RemoveModel(this);
-                    
+                    parentPanel.RemoveModel(this);                    
                 }
-                
-
-
-
             }
             else if (result == DialogResult.No)
             {

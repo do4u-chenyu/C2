@@ -43,6 +43,7 @@ namespace Citta_T1.Controls.Move
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
+        private Point oldcontrolPosition;
         Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
@@ -144,10 +145,10 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-           
-        }
+            oldcontrolPosition=this.Location;
+    }
 
-        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+    private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -180,10 +181,14 @@ namespace Citta_T1.Controls.Move
                         break;
                     }
                 }
-
+               
             }
-            
+            if (oldcontrolPosition != this.Location)
+                Global.GetMainForm().SetDocumentDirty();
+
+
         }
+ 
         private void MoveOpControl_Load(object sender, EventArgs e)
         {
 
@@ -334,6 +339,7 @@ namespace Citta_T1.Controls.Move
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+         
         }
 
         #region 针脚事件

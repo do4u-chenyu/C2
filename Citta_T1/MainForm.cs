@@ -26,9 +26,11 @@ namespace  Citta_T1
         Bitmap i;
         Graphics g;
         Pen p;
+        internal bool mainFormLoaded = false;
         public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
+        
         private string userName;
         public Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
@@ -36,6 +38,7 @@ namespace  Citta_T1
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
+        private bool documentSwitch;
 
 
 
@@ -51,10 +54,8 @@ namespace  Citta_T1
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
             InitializeGlobalVariable();
-            
-
-
-            
+           
+                     
         }
 
         private void InitializeMainFormEventHandler()
@@ -72,10 +73,15 @@ namespace  Citta_T1
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
+            
         }
+
         private void RemarkChange(RemarkControl rc)
         {
-            this.modelDocumentDao.UpdateRemark(rc);
+            this.modelDocumentDao.UpdateRemark(rc);            
+            if(!this.documentSwitch && mainFormLoaded)    
+                SetDocumentDirty();
+            this.documentSwitch = false;
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
@@ -85,9 +91,11 @@ namespace  Citta_T1
         }
         public void SetDocumentDirty()
         {
+            this.modelDocumentDao.CurrentDocument.Dirty = true;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.SetDirtyPictureBox();
+           
            
         }
         internal void DeleteCurrentDocument()
@@ -127,9 +135,11 @@ namespace  Citta_T1
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
+            this.documentSwitch = true;
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.naviViewControl.UpdateNaviView();
+          
         }
 
 
@@ -140,8 +150,7 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel("新建模型");
                 this.modelDocumentDao.AddBlankDocument("新建模型", this.userName);
                 return;
-            }
-     
+            }     
             DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
             DirectoryInfo[] modelTitleList = userDir.GetDirectories();
             this.modelTitlePanel.LoadModelDocument(modelTitleList);
@@ -161,6 +170,7 @@ namespace  Citta_T1
                 this.myModelControl.AddModel(modelTitle);        
             } 
             this.modelDocumentDao.CurrentDocument.Show();
+            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
 
         private void InitializeControlsLocation()
@@ -330,11 +340,6 @@ namespace  Citta_T1
 
         }
 
-
-    
-
-     
-
         private void dataGridView1_Load(object sender, EventArgs e)
         {
 
@@ -391,6 +396,7 @@ namespace  Citta_T1
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
 
             LoadDocuments(this.userName);
+            mainFormLoaded = true;
 
         }
 
@@ -450,11 +456,13 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-
-            SaveDocument();
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            mtc.ClearDirtyPictureBox();
+            if (mtc.Dirty == true)
+            {
+                SaveDocument();
+                mtc.ClearDirtyPictureBox();
+            }            
         }
     }
 }

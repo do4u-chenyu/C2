@@ -17,17 +17,22 @@ namespace Citta_T1.Utils
         private static NaviViewControl naviViewControl;
         private static CanvasPanel canvasPanel;
         private static ModelDocumentDao modelDocumentDao;
+        private static FlowControl flowControl;
 
-        public static MainForm GetMainForm() { return mainForm; }
+      public static MainForm GetMainForm() { return mainForm; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
         public static NaviViewControl GetNaviViewControl() { return naviViewControl; }
         public static CanvasPanel GetCanvasPanel() { return canvasPanel; }
         public static ModelDocumentDao GetModelDocumentDao() { return modelDocumentDao; }
+
+        public static ModelDocument GetCurrentDocument() { return GetModelDocumentDao().CurrentDocument; }
+        public static FlowControl GetFlowControl() { return flowControl; }
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetModelTitlePanel(ModelTitlePanel mtp) { modelTitlePanel = mtp; }
         public static void SetNaviViewControl(NaviViewControl nvc) { naviViewControl = nvc; }
         public static void SetCanvasPanel(CanvasPanel cp) { canvasPanel = cp; }
         public static void SetModelDocumentDao(ModelDocumentDao mdd) { modelDocumentDao = mdd; }
+        public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
     }
 }
