@@ -64,7 +64,7 @@ namespace Citta_T1.Controls.Move
         public void ChangeSize(int sizeL)
         {
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-            this.SuspendLayout();
+
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -81,9 +81,6 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
         }
 
         private void InitializeOpPinPicture()
