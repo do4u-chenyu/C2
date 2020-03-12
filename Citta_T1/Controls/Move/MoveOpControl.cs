@@ -64,6 +64,7 @@ namespace Citta_T1.Controls.Move
         public void ChangeSize(int sizeL)
         {
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+            this.SuspendLayout();
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -80,6 +81,8 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -344,43 +347,28 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 托块的放大与缩小
-        private int deep = 0;
-        public void ChangeSize(bool isLarger, float factor = 1.3F)
+        private void ChangeSize(bool zoomUp, float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
-            SetTag(this);
-            if (isLarger)
-            {
-                SetControlsBySize(factor, factor, this);
-            }
-            else if (!isLarger)
-            {
-                SetControlsBySize(1 / factor, 1 / factor, this);
-            }
             
+            SetTag(this);
+            SetDouble(this);
+            if (zoomUp)
+                SetControlsBySize(factor, factor, this);
+            else 
+                SetControlsBySize(1 / factor, 1 / factor, this);
+
         }
         
-        public void SetTag(Control cons)
+        private void SetTag(Control control)
         {
-            deep += 1;
-            if (deep == 1)
-            {
-                cons.Tag = cons.Width + ";" + cons.Height + ";" + cons.Left + ";" + cons.Top + ";" + cons.Font.Size;
-            }
-            foreach (Control con in cons.Controls)
-            {
-                con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
-                if (con.Controls.Count > 0)
-                {
-                    Console.WriteLine("setTag:" + con.GetType().ToString());
-                    SetTag(con);
-                }
-            }
-            deep -= 1;
+            control.Tag = control.Width + ";" + control.Height + ";" + control.Left + ";" + control.Top + ";" + control.Font.Size;
+            foreach (Control con in control.Controls)
+                SetTag(con);
         }
+
         public static void SetDouble(Control cc)
         {
 
@@ -388,47 +376,22 @@ namespace Citta_T1.Controls.Move
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-        public void SetControlsBySize(float fx, float fy, Control cons)
-        {
-            deep += 1;
-            if (deep == 1)
-            {
-                Console.WriteLine(cons.GetType().ToString());
-                SetDouble(this);
-                SetDouble(cons);
-                string[] mytag = cons.Tag.ToString().Split(new char[] { ';' });
-                cons.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
-                cons.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
-                cons.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
-                cons.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
-                Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
-                // Note 字体变化会导致MoveOpControl的Width和Height也变化
-                cons.Font = new Font(cons.Font.Name, currentSize, cons.Font.Style, cons.Font.Unit);
-            }
+        public void SetControlsBySize(float fx, float fy, Control control)
+        {      
+            SetDouble(control);
+            string[] mytag = control.Tag.ToString().Split(new char[] { ';' });
+            control.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
+            control.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
+            control.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
+            control.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
+            Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
+            // Note 字体变化会导致MoveOpControl的Width和Height也变化
+            control.Font = new Font(control.Font.Name, currentSize, control.Font.Style, control.Font.Unit);
+   
             //遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-            {
-                // 获取控件的Tag属性值，并分割后存储字符串数组
-                SetDouble(this);
-                SetDouble(con);
-                if (con.Tag != null)
-                {
-                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
-                    // 根据窗体缩放的比例确定控件的值
-                    con.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
-                    con.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
-                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
-                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
-                    Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
-                    // Note 字体变化会导致MoveOpControl的Width和Height也变化
-                    con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
-                    if (con.Controls.Count > 0)
-                    {
-                        SetControlsBySize(fx, fy, con);
-                    }
-                }
-            }
-            deep -= 1;
+            foreach (Control con in control.Controls)
+                SetControlsBySize(fx, fy, con);
+
         }
         #endregion
 
