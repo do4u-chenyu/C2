@@ -66,10 +66,7 @@ namespace Citta_T1.Controls.Move
         public void ChangeSize(int sizeL)
         {
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-            this.leftPinPictureBox.Hide();
-            this.leftPinPictureBox1.Hide();
-            this.rightPinPictureBox.Hide();
-            this.rightPictureBox.Hide();
+            this.Hide();  // 解决控件放大缩小闪烁的问题
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -86,10 +83,7 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            this.leftPinPictureBox.Show();
-            this.leftPinPictureBox1.Show();
-            this.rightPinPictureBox.Show();
-            this.rightPictureBox.Show();
+            this.Show();
         }
 
         private void InitializeOpPinPicture()
@@ -111,7 +105,7 @@ namespace Citta_T1.Controls.Move
                 leftPinPictureBox1.TabStop = false;
                 leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
                 leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-                this.leftPinPictureBox.Parent.Controls.Add(leftPinPictureBox1);
+                this.Controls.Add(leftPinPictureBox1);
             }
             /*
             System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
