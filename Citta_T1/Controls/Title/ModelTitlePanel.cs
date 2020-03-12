@@ -47,13 +47,16 @@ namespace Citta_T1.Controls.Title
         }
         public void LoadModelDocument(DirectoryInfo[] directoryInfos) 
         {
-            int docCounts = directoryInfos.Count()-1;
-            for (int i = 0; i <= docCounts; i++)
+            int end = directoryInfos.Count() - 1;
+            for (int i = 0; i < directoryInfos.Count(); i++)
             {
                 string modelTitle = directoryInfos[i].ToString();
                 ModelTitleControl mtControl = new ModelTitleControl();
                 mtControl.ModelDocumentSwitch += DocumentSwitch;
-                models.Add(mtControl);
+                this.models.Add(mtControl);
+                this.Controls.Add(mtControl);
+
+                // 根据元素个数调整位置和大小
                 mtControl.SetOriginalModelTitle(modelTitle);
                 if (i == 0)
                     mtControl.Location = OriginalLocation;
@@ -64,13 +67,13 @@ namespace Citta_T1.Controls.Title
                     ResizeModel();
                     UpModelTitle();
                 }
-                if (i == docCounts)
+                if (i == end)
                 { 
                     mtControl.BorderStyle = BorderStyle.FixedSingle;
                     mtControl.Selected = true;
                 }
                     
-                this.Controls.Add(mtControl);
+                
             }
            
         }

@@ -43,7 +43,7 @@ namespace Citta_T1.Dialogs
             try
             {
                 MainForm mainForm = (MainForm)this.Owner;
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.GetUserName + "\\");
+                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.UserName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
                 {

@@ -35,7 +35,7 @@ namespace  Citta_T1
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
-        public string GetUserName { get => this.userName; set => this.userName = value; }
+        public string UserName { get => this.userName; set => this.userName = value; }
 
 
 
@@ -47,10 +47,11 @@ namespace  Citta_T1
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
-            modelDocumentDao = new Business.ModelDocumentDao();
+            this.modelDocumentDao = new Business.ModelDocumentDao();
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
             InitializeGlobalVariable();
+            
 
 
             
@@ -79,7 +80,7 @@ namespace  Citta_T1
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddDocument(modelTitle,this.userName);
+            this.modelDocumentDao.AddBlankDocument(modelTitle,this.userName);
             
         }
         public void SetDocumentDirty()
@@ -141,43 +142,34 @@ namespace  Citta_T1
 
         private void LoadDocuments(string userName)
         {
-            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\"))
+            if (this.modelDocumentDao.NewUserLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("新建模型");
-                this.modelDocumentDao.AddDocument("新建模型", userName);
+                this.modelDocumentDao.AddBlankDocument("新建模型", this.userName);
                 return;
             }
-            try
-            {                
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\");
-                DirectoryInfo[] modelTitleList = di.GetDirectories();
-                this.modelTitlePanel.LoadModelDocument(modelTitleList);
-                foreach (DirectoryInfo modelTitle in modelTitleList)//---------------------------------------
-                {                
-                   List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle.ToString(), userName);
-                    foreach (ModelElement me in modelElements)
-                    {
-                       Control ct = me.GetControl;
-                        if (ct is RemarkControl)
-                            continue;                   
-                       
-                        if (modelTitle.ToString() == modelTitleList[modelTitleList.Length - 1].ToString())//当前文件
-                            ct.Show();
-                        else
-                            ct.Visible = false;
-                        this.canvasPanel.Controls.Add(ct);
-                        this.naviViewControl.AddControl(ct);
-                        this.naviViewControl.UpdateNaviView();
-                    }
-                    this.myModelControl.AddModel(modelTitle.ToString());
-                    
-                }               
+     
+            DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+            DirectoryInfo[] modelTitleList = userDir.GetDirectories();
+            this.modelTitlePanel.LoadModelDocument(modelTitleList);
+            foreach (DirectoryInfo di in modelTitleList)//---------------------------------------
+            {
+                string modelTitle = di.ToString();
+                List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle, this.userName);
+                foreach (ModelElement me in modelElements)
+                {
+                    Control ct = me.GetControl;
+                    if (ct is RemarkControl)
+                        continue;
+                    this.canvasPanel.Controls.Add(ct);
+                    this.naviViewControl.AddControl(ct);
+                    this.naviViewControl.UpdateNaviView();
+                }
+                this.myModelControl.AddModel(modelTitle);        
             }
-            catch
-            {               
-                Console.WriteLine("不存在模型文档");
-            }
+            this.modelDocumentDao.CurrentDocument.Show();
         }
+
         private void InitializeControlsLocation()
         {
             Point org = new Point(this.canvasPanel.Width, 0);
@@ -398,20 +390,13 @@ namespace  Citta_T1
         private void MainForm_Load(object sender, EventArgs e)
         {
             int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
-            int rightMargin = (userName.Length - (count / 3) - 3) * 14;
-            this.usernamelabel.Text = userName;
+            int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
+            this.usernamelabel.Text = this.userName;
             Point userNameLocation = new Point(185,10);
             this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-            //文档加载事件
-            //用户首次登陆
-                //创建用户名文件夹
-                //创建个默认的文档
-            //用户非首次登陆但没有模型
-                //创建个默认的文档
-            //用户登录且模型要加载
-                //加载模型
+
             LoadDocuments(this.userName);
 
         }

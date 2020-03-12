@@ -12,26 +12,24 @@ namespace Citta_T1.Business
 {
     class ModelDocumentDao
     {
-        private List<ModelDocument> modelDocuments;
         private ModelDocument currentDocument;
+        private List<ModelDocument> modelDocuments;
+        
         internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
 
         public ModelDocumentDao()
         {
             modelDocuments = new List<ModelDocument>();
+            
         }
-        public void AddDocument( string modelTitle,  string userName)
+        public void AddBlankDocument( string modelTitle,  string userName)
         {
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
-            Console.WriteLine(modelTitle+"--是新建模型的名称");
+            foreach (ModelDocument md in this.modelDocuments)
+                md.Hide();
             this.modelDocuments.Add(modelDocument);
             this.currentDocument = modelDocument;    
-            foreach (ModelDocument document in modelDocuments)
-            {
-                if (document != currentDocument)
-                    document.Hide();
-            }
         }
         public string SaveDocument()
         {
@@ -44,7 +42,9 @@ namespace Citta_T1.Business
         {
             List<Control> controls = new List<Control>();
             ModelDocument md = new ModelDocument(modelTitle, userName);
+            md.Hide();
             this.modelDocuments.Add(md);
+            this.currentDocument = md;
             List<ModelElement> modelElements = md.Load();
             return modelElements;
 
@@ -168,17 +168,26 @@ namespace Citta_T1.Business
             string remark = "";
             if (this.currentDocument == null)
             {
-                return remark;
                 throw new NullReferenceException();
             }
+               
             List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type.ToString() == "Remark")
-                  remark=me.RemarkName;
+                if (me.Type == ElementType.Remark)
+                {
+                    remark = me.RemarkName;
+                    break;
+                }     
             }
             return remark;
 
+        }
+
+        public bool NewUserLogin(string username)
+        {
+            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + username;
+            return !Directory.Exists(userDir);
         }
     }
 }
