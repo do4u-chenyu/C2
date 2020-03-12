@@ -38,15 +38,14 @@ namespace Citta_T1.Business
             this.currentDocument.Dirty = false;
             return this.currentDocument.ModelDocumentTitle;
         }
-        public List<ModelElement>  LoadDocuments(string modelTitle,string userName)
+        public ModelDocument LoadDocument(string modelTitle,string userName)
         {
-            List<Control> controls = new List<Control>();
             ModelDocument md = new ModelDocument(modelTitle, userName);
+            md.Load();
             md.Hide();
             this.modelDocuments.Add(md);
             this.currentDocument = md;
-            List<ModelElement> modelElements = md.Load();
-            return modelElements;
+            return md;
 
         }
         public void SwitchDocument(string modelTitle)//----------------------------------------
@@ -141,7 +140,7 @@ namespace Citta_T1.Business
         {
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements();
             this.ModelDocuments.Remove(this.currentDocument);
             Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
             return modelElements; 
@@ -150,7 +149,7 @@ namespace Citta_T1.Business
         { 
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements();
             
             foreach (ModelElement me in modelElements)
             {
@@ -171,7 +170,7 @@ namespace Citta_T1.Business
                 throw new NullReferenceException();
             }
                
-            List<ModelElement> modelElements = this.currentDocument.CurrentDocumentElement();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements();
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)

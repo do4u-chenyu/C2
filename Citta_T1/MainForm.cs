@@ -80,7 +80,7 @@ namespace  Citta_T1
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddBlankDocument(modelTitle,this.userName);
+            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
             
         }
         public void SetDocumentDirty()
@@ -93,22 +93,15 @@ namespace  Citta_T1
         internal void DeleteCurrentDocument()
         {
             
-            List<ModelElement> modelElements =modelDocumentDao.DeleteDocumentElements();
+            List<ModelElement> modelElements = modelDocumentDao.DeleteDocumentElements();
             foreach (ModelElement me in modelElements)
             {
                 this.canvasPanel.Controls.Remove(me.GetControl);
-                //TODO 全局访问
-                foreach (Control ct in this.canvasPanel.Controls)
-                {
-                    if (ct.Name == "naviViewControl")
-                    {
-                        (ct as NaviViewControl).RemoveControl(me.GetControl);
-                        (ct as NaviViewControl).UpdateNaviView();
-                        break;
-                    }
-                }
+                this.naviViewControl.RemoveControl(me.GetControl);
             }
+            this.naviViewControl.UpdateNaviView();
         }
+
         private void NewDocumentOperator(Control ct)
         {
             SetDocumentDirty();
@@ -155,8 +148,8 @@ namespace  Citta_T1
             foreach (DirectoryInfo di in modelTitleList)//---------------------------------------
             {
                 string modelTitle = di.ToString();
-                List<ModelElement> modelElements = this.modelDocumentDao.LoadDocuments(modelTitle, this.userName);
-                foreach (ModelElement me in modelElements)
+                ModelDocument doc = this.modelDocumentDao.LoadDocument(modelTitle, this.userName);
+                foreach (ModelElement me in doc.ModelElements())
                 {
                     Control ct = me.GetControl;
                     if (ct is RemarkControl)
@@ -166,7 +159,7 @@ namespace  Citta_T1
                     this.naviViewControl.UpdateNaviView();
                 }
                 this.myModelControl.AddModel(modelTitle);        
-            }
+            } 
             this.modelDocumentDao.CurrentDocument.Show();
         }
 

@@ -61,14 +61,13 @@ namespace Citta_T1.Business
             }
             this.modelElements.Remove(mlElement);
         }
-        public List<ModelElement> Load()
+        public void Load()
         {
             if (File.Exists(savePath + modelTitle +".xml"))//-------------------------------
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
                 this.modelElements = dSaveLoad.ReadXml();
             }          
-            return this.modelElements;
         }
         public void Show()
         {
@@ -85,7 +84,7 @@ namespace Citta_T1.Business
                 Console.WriteLine("隐藏===");
             }
         }
-        public List<ModelElement> CurrentDocumentElement()
+        public List<ModelElement> ModelElements()
         { return this.modelElements; }
     }
 }
