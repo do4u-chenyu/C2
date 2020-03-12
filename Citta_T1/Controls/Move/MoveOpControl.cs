@@ -24,7 +24,9 @@ namespace Citta_T1.Controls.Move
         
         private bool doublelPinFlag = false;
 
-        
+        private PictureBox leftPinPictureBox1 = new PictureBox();
+
+
         private string typeName;
         private string oldTextString;
 
@@ -64,7 +66,10 @@ namespace Citta_T1.Controls.Move
         public void ChangeSize(int sizeL)
         {
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
-
+            this.leftPinPictureBox.Hide();
+            this.leftPinPictureBox1.Hide();
+            this.rightPinPictureBox.Hide();
+            this.rightPictureBox.Hide();
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -81,6 +86,10 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
+            this.leftPinPictureBox.Show();
+            this.leftPinPictureBox1.Show();
+            this.rightPinPictureBox.Show();
+            this.rightPictureBox.Show();
         }
 
         private void InitializeOpPinPicture()
@@ -93,7 +102,7 @@ namespace Citta_T1.Controls.Move
                 int x = this.leftPinPictureBox.Location.X;
                 int y = this.leftPinPictureBox.Location.Y;
                 this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-                PictureBox leftPinPictureBox1 = new PictureBox();
+                
                 leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
                 leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
                 leftPinPictureBox1.Name = "leftPinPictureBox1";
