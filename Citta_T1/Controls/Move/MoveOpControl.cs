@@ -7,38 +7,37 @@ using Citta_T1.Controls.Flow;
 
 
 namespace Citta_T1.Controls.Move
-{
-    public delegate void delegateOverViewData(string index);   
-    public delegate void delegateRenameData(string index);
+{ 
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
 
     public partial class MoveOpControl : UserControl, IScalable, IDragable
     {
-        private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
+        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+
+        private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
+        private static string doublePin = "连接算子 取差集 取交集 取并集";
+
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
-        public string doublePin = "连接算子 取差集 取交集 取并集";
-        public bool doublelPinFlag = false;
+        
+        private bool doublelPinFlag = false;
 
-        public DateTime clickTime;
-        public bool isClicked = false;
-        private string sizeL;
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+        
         private string typeName;
         private string oldTextString;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
-        public string subTypeName { get => typeName; }
+        public string SubTypeName { get => typeName; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = 1.3F;
         // 缩放等级
-        public int sizeLevel = 0;
+        private int sizeLevel = 0;
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -58,14 +57,13 @@ namespace Citta_T1.Controls.Move
             textBox.Text = text;
             typeName = text;
             Location = loc;
-            doublelPinFlag = doublePin.Contains(this.textBox.Text.ToString());
+            doublelPinFlag = doublePin.Contains(this.textBox.Text);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
         public void ChangeSize(int sizeL)
         {
-            this.sizeL = sizeL.ToString();
             Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             if (sizeL > sizeLevel)
             {
@@ -86,7 +84,7 @@ namespace Citta_T1.Controls.Move
 
         }
 
-        public void InitializeOpPinPicture()
+        private void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox.Text);
             System.Console.WriteLine(doublelPinFlag);
@@ -160,84 +158,76 @@ namespace Citta_T1.Controls.Move
 
 
         }
- 
-        private void MoveOpControl_Load(object sender, EventArgs e)
-        {
 
-        }
+ 
+
         #endregion
 
         #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = _encoding.GetBytes(text);
-            System.Console.WriteLine("bytes:" + bytes);
-            return _encoding.GetString(bytes, startIndex, length);
+            byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            return EncodingOfGB2312.GetString(bytes, startIndex, length);
         }
-        public void SetOpControlName(string opControlName)
+        public void SetOpControlName(string name)
         {
-            this.opControlName = opControlName;
+            this.opControlName = name;
             int maxLength = 14;
 
-            int sumcount = 0;
-            int sumcountDigit = 0;
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
+            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
 
-            sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
-            sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
-
-            System.Console.WriteLine("算子长度:" + opControlName.Length);
-            System.Console.WriteLine("sumcount:" + sumcount);
-            System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
-            if (sumcount + sumcountDigit > maxLength)
+            if (sumCount + sumCountDigit > maxLength)
             {
                 ResizeToBig();
-                this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
-                System.Console.WriteLine("sumcountDigit:" + this.txtButton.Text);
+                this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
             else
             {
-                ResizeToNormal();
-                if (sumcount + sumcountDigit <= 8) 
-                { 
-                    ResizeToSmall(); 
-                }              
-                this.txtButton.Text = opControlName;
-
+                this.txtButton.Text = name;
+                
+                if (sumCount + sumCountDigit <= 8) 
+                    ResizeToSmall();
+                else
+                    ResizeToNormal();
             }
-            this.nameToolTip.SetToolTip(this.txtButton, opControlName);
+            this.nameToolTip.SetToolTip(this.txtButton, name);
         }
 
-        public void ResizeToBig()
+        private void ResizeToBig()
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
-            this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox.Size = new System.Drawing.Size((int)(124 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            double f = Math.Pow(factor, sizeLevel);
+            this.Size = new Size((int)(194 * f), (int)(25 * f));
+            this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
+            this.rightPinPictureBox.Location = new Point((int)(179 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(124 * f),(int)(23 * f));
+            this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
         }
-        public void ResizeToSmall()
+        private void ResizeToSmall()
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
-            this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(107 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            double f = Math.Pow(factor, sizeLevel);
+            this.Size = new Size((int)(142 * f), (int)(25 * f));
+            this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
+            this.rightPinPictureBox.Location = new Point((int)(131 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(72 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
         }
-        public void ResizeToNormal()
+        private void ResizeToNormal()
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
-            this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(2 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            double f = Math.Pow(factor, sizeLevel);
+            this.Size = new Size((int)(184 * f), (int)(25 * f));
+            this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
+            this.rightPinPictureBox.Location = new Point((int)(170 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(114 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
         }
         #endregion
 
         #region 右键菜单
-        public void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void OptionMenuItem_Click(object sender, EventArgs e)
         {
             this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
@@ -255,7 +245,7 @@ namespace Citta_T1.Controls.Move
              ModelDocumentDirtyEvent?.Invoke();
         }
 
-        public virtual void DeleteMenuItem_Click(object sender, EventArgs e)
+        public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
 
             Global.GetCanvasPanel().DeleteElement(this);
@@ -264,34 +254,22 @@ namespace Citta_T1.Controls.Move
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
         }
-        private void 菜单2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
 
         #region textBox
-        public void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 按下回车键
             if (e.KeyChar == 13)
-            {
-                if (this.textBox.Text.Length == 0)
-                    return;
-                this.textBox.ReadOnly = true;
-                SetOpControlName(this.textBox.Text);
-                this.textBox.Visible = false;
-                this.txtButton.Visible = true;
-                if (this.oldTextString != this.textBox.Text)
-                {
-                    this.oldTextString = this.textBox.Text;
-                    Global.GetMainForm().SetDocumentDirty();
-                }
-
-            }
+                FinishTextChange();
         }
 
         public void textBox1_Leave(object sender, EventArgs e)
+        {
+            FinishTextChange();
+        }
+
+        private void FinishTextChange()
         {
             if (this.textBox.Text.Length == 0)
                 return;
@@ -317,26 +295,24 @@ namespace Citta_T1.Controls.Move
         #region 针脚事件
         private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
-            System.Drawing.Size oriSize = (sender as PictureBox).Size;
-            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
-            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
+            Point oriLtCorner = (sender as PictureBox).Location;
+            Size oriSize = (sender as PictureBox).Size;
+            Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
+            Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
             (sender as PictureBox).Location = dstLtCorner;
             (sender as PictureBox).Size = dstSize;
-            //(sender as PictureBox).Size = new System.Drawing.Size(10, 10);
         }
 
         private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            System.Drawing.Point oriLtCorner = (sender as PictureBox).Location;
-            System.Drawing.Size oriSize = (sender as PictureBox).Size;
-            System.Drawing.Point oriCenter = new System.Drawing.Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            System.Drawing.Point dstLtCorner = new System.Drawing.Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
-            System.Drawing.Size dstSize = new System.Drawing.Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
+            Point oriLtCorner = (sender as PictureBox).Location;
+            Size oriSize = (sender as PictureBox).Size;
+            Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
+            Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
             (sender as PictureBox).Location = dstLtCorner;
             (sender as PictureBox).Size = dstSize;
-            //(sender as PictureBox).Size = new System.Drawing.Size(5, 5);
         }
         #endregion
         #region 右针脚事件

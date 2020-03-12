@@ -72,7 +72,7 @@ namespace Citta_T1.Business
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.subTypeName));
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName));
                 this.currentDocument.AddModelElement(e);
                 return;
             }

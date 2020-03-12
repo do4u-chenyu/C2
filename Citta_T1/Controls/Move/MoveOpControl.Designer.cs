@@ -128,7 +128,7 @@ namespace Citta_T1.Controls.Move
             this.菜单1ToolStripMenuItem.Name = "菜单1ToolStripMenuItem";
             this.菜单1ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单1ToolStripMenuItem.Text = "设置";
-            this.菜单1ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click_1);
+            this.菜单1ToolStripMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
             // 菜单2ToolStripMenuItem
             // 
@@ -190,7 +190,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // txtButton
@@ -229,7 +229,6 @@ namespace Citta_T1.Controls.Move
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
             this.Size = new System.Drawing.Size(185, 25);
-            this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
