@@ -43,7 +43,7 @@ namespace Citta_T1.Controls.Move
             this.异常日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.txtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
@@ -181,17 +181,17 @@ namespace Citta_T1.Controls.Move
             // 
             // textBox1
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox1.Location = new System.Drawing.Point(37, 1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(111, 23);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "连接算子";
-            this.textBox1.Visible = false;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox.Location = new System.Drawing.Point(37, 1);
+            this.textBox.Name = "textBox1";
+            this.textBox.ReadOnly = true;
+            this.textBox.Size = new System.Drawing.Size(111, 23);
+            this.textBox.TabIndex = 5;
+            this.textBox.Text = "连接算子";
+            this.textBox.Visible = false;
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // txtButton
             // 
@@ -220,7 +220,7 @@ namespace Citta_T1.Controls.Move
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.txtButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPinPictureBox);
             this.Controls.Add(this.leftPinPictureBox);
             this.Controls.Add(this.rightPictureBox);
@@ -257,7 +257,7 @@ namespace Citta_T1.Controls.Move
         private System.Windows.Forms.ToolStripMenuItem 异常日志ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         public System.Windows.Forms.ToolTip nameToolTip;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolTip helpToolTip;
         public System.Windows.Forms.Button txtButton;
     }
