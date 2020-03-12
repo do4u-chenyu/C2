@@ -101,7 +101,7 @@ namespace  Citta_T1
         internal void DeleteCurrentDocument()
         {
             
-            List<ModelElement> modelElements = modelDocumentDao.DeleteDocumentElements();
+            List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
             foreach (ModelElement me in modelElements)
             {
                 this.canvasPanel.Controls.Remove(me.GetControl);
@@ -148,7 +148,6 @@ namespace  Citta_T1
             if (this.modelDocumentDao.NewUserLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("新建模型");
-                this.modelDocumentDao.AddBlankDocument("新建模型", this.userName);
                 return;
             }     
             DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);

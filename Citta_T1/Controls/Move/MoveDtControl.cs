@@ -21,7 +21,8 @@ namespace Citta_T1.Controls.Move
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string MDCName { get => this.textBox1.Text; }
-
+        private string oldTextString;
+        private Point oldcontrolPosition;
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -81,7 +82,13 @@ namespace Citta_T1.Controls.Move
                 SetOpControlName(this.textBox1.Text);
                 this.textBox1.Visible = false;
                 this.txtButton.Visible = true;
+                if (this.oldTextString != this.textBox1.Text)
+                {
+                    this.oldTextString = this.textBox1.Text;
+                    Global.GetMainForm().SetDocumentDirty();
+                }
             }
+           
         }
         public void textBox1_Leave(object sender, EventArgs e)
         {
@@ -91,6 +98,11 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox1.Text);
             this.textBox1.Visible = false;
             this.txtButton.Visible = true;
+            if (this.oldTextString != this.textBox1.Text)
+            {
+                this.oldTextString = this.textBox1.Text;
+                Global.GetMainForm().SetDocumentDirty();
+            }
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -215,7 +227,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-
+            oldcontrolPosition = this.Location;
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -228,7 +240,7 @@ namespace Citta_T1.Controls.Move
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
                 RenameMenuItem_Click(this, e);
-
+            oldcontrolPosition = this.Location;
         }
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
@@ -253,6 +265,8 @@ namespace Citta_T1.Controls.Move
                         break;
                     }
                 }
+                if (oldcontrolPosition != this.Location)
+                    Global.GetMainForm().SetDocumentDirty();
 
             }
 
@@ -343,7 +357,7 @@ namespace Citta_T1.Controls.Move
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
             this.textBox1.ReadOnly = false;
-
+            this.oldTextString = this.textBox1.Text;
             this.txtButton.Visible = false;
             this.textBox1.Visible = true;
             this.textBox1.Focus();//获取焦点

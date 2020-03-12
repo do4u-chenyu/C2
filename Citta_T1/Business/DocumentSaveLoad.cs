@@ -105,8 +105,8 @@ namespace Citta_T1.Business
                     MoveOpControl ctl = new MoveOpControl(0, name, loc);
                     ctl.textBox.Text = name;
                     ctl.Location = loc;
-                    ModelElement e = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
-                    modelElements.Add(e);
+                    ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
+                    modelElements.Add(operatorElement);
 
                 }
                 else if (type == "DataSource")
@@ -120,8 +120,8 @@ namespace Citta_T1.Business
                     MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);//暂时定为为moveopctrol
                     //cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     
-                    ModelElement mElement = new ModelElement(EType(type), cotl, name, bcpPath, EStatus(status), SEType(subType));
-                    modelElements.Add(mElement);
+                    ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath);
+                    modelElements.Add(dataSourceElement);
                 }
                 else if (type == "Remark")
                 {

@@ -128,13 +128,12 @@ namespace Citta_T1.Business
             }
             return null;
         }
-        public List<ModelElement> DeleteDocumentElements()
+        public List<ModelElement> DeleteCurrentDocument()
         {
             if (this.currentDocument == null)
                 throw new NullReferenceException();
             List<ModelElement> modelElements = this.currentDocument.ModelElements();
             this.ModelDocuments.Remove(this.currentDocument);
-            Console.WriteLine(currentDocument.ModelDocumentTitle+"删除的模型文档");
             return modelElements; 
         }
         public void UpdateRemark(RemarkControl remarkControl)
@@ -151,7 +150,7 @@ namespace Citta_T1.Business
                 }            
             }
             ModelElement remarkElement = ModelElement.CreateRemarkElement(remarkControl.RemarkText);
-            modelElements.Add(remarkElement);
+            this.currentDocument.AddModelElement(remarkElement);
         }
         public string GetRemark()
         {
