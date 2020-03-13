@@ -6,24 +6,16 @@ using System.Windows.Forms;
 
 
 namespace Citta_T1.Controls.Move
-{ 
-    public delegate void DeleteOperatorEventHandler(Control control); 
-    public delegate void ModelDocumentDirtyEventHandler();
-
-    public partial class MoveOpControl : UserControl, IScalable, IDragable
+{
+    public partial class MoveRsControl : UserControl, IScalable, IDragable
     {
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "连接算子 取差集 取交集 取并集";
 
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
-        
-        private bool doublelPinFlag = false;
-
-        private PictureBox leftPinPictureBox1 = new PictureBox();
 
 
         private string typeName;
@@ -47,25 +39,23 @@ namespace Citta_T1.Controls.Move
         Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
-        public MoveOpControl()
+        public MoveRsControl()
         {
             InitializeComponent();
         }
-        public MoveOpControl(int sizeL, string text, Point loc)
+        public MoveRsControl(int sizeL, string text, Point loc)
         {
-            
+
             InitializeComponent();
-            textBox.Text = text;
-            typeName = text;
-            Location = loc;
-            doublelPinFlag = doublePin.Contains(this.textBox.Text);
-            InitializeOpPinPicture();
+            this.textBox.Text = text;
+            this.typeName = text;
+            this.Location = loc;
+            SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
-            Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
         }
         public void ChangeSize(int sizeL)
         {
-            Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+       
             this.Hide();  // 解决控件放大缩小闪烁的问题
             if (sizeL > sizeLevel)
             {
@@ -86,36 +76,15 @@ namespace Citta_T1.Controls.Move
             this.Show();
         }
 
-        private void InitializeOpPinPicture()
-        {
-            SetOpControlName(this.textBox.Text);
-            System.Console.WriteLine(doublelPinFlag);
-            
-            if (doublelPinFlag)
-            {
-                int x = this.leftPinPictureBox.Location.X;
-                int y = this.leftPinPictureBox.Location.Y;
-                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-                
-                leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
-                leftPinPictureBox1.Name = "leftPinPictureBox1";
-                leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
-                leftPinPictureBox1.TabIndex = 3;
-                leftPinPictureBox1.TabStop = false;
-                leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-                leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-                this.Controls.Add(leftPinPictureBox1);
-            }
             /*
             System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
             leftPicture1.Location = new System.Drawing.Point(16, 24);
             this.Controls.Add(leftPicture1);
             */
-        }
+      
 
         #region MOC的事件
-        private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
+        private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown)
             {
@@ -124,7 +93,7 @@ namespace Citta_T1.Controls.Move
                 this.Location = new Point(left, top);
             }
         }
-        private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
+        private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("移动开始");
             if (e.Button == MouseButtons.Left)
@@ -133,21 +102,21 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-            oldcontrolPosition=this.Location;
-    }
+            oldcontrolPosition = this.Location;
+        }
 
-    private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
-                MoveOpControl_MouseDown(sender, e);
+                MoveRsControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
                 RenameMenuItem_Click(this, e);
 
         }
 
-        private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
+        private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -161,7 +130,7 @@ namespace Citta_T1.Controls.Move
 
         }
 
- 
+
 
         #endregion
 
@@ -187,8 +156,8 @@ namespace Citta_T1.Controls.Move
             else
             {
                 this.txtButton.Text = name;
-                
-                if (sumCount + sumCountDigit <= 8) 
+
+                if (sumCount + sumCountDigit <= 8)
                     ResizeToSmall();
                 else
                     ResizeToNormal();
@@ -203,7 +172,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new Size((int)(194 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
             this.rightPinPictureBox.Location = new Point((int)(179 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(124 * f),(int)(23 * f));
+            this.txtButton.Size = new Size((int)(124 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
         }
         private void ResizeToSmall()
@@ -244,7 +213,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-             ModelDocumentDirtyEvent?.Invoke();
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -291,7 +260,7 @@ namespace Citta_T1.Controls.Move
         {
             String helpInfo = "温馨提示";
             this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-         
+
         }
 
         #region 针脚事件
@@ -360,16 +329,16 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-            
+
             SetTag(this);
             SetDouble(this);
             if (zoomUp)
                 SetControlsBySize(factor, factor, this);
-            else 
+            else
                 SetControlsBySize(1 / factor, 1 / factor, this);
 
         }
-        
+
         private void SetTag(Control control)
         {
             control.Tag = control.Width + ";" + control.Height + ";" + control.Left + ";" + control.Top + ";" + control.Font.Size;
@@ -385,7 +354,7 @@ namespace Citta_T1.Controls.Move
 
         }
         public void SetControlsBySize(float fx, float fy, Control control)
-        {      
+        {
             SetDouble(control);
             string[] mytag = control.Tag.ToString().Split(new char[] { ';' });
             control.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
@@ -393,9 +362,8 @@ namespace Citta_T1.Controls.Move
             control.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
             control.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
             Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
-            // Note 字体变化会导致MoveOpControl的Width和Height也变化
             control.Font = new Font(control.Font.Name, currentSize, control.Font.Style, control.Font.Unit);
-   
+
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
                 SetControlsBySize(fx, fy, con);
