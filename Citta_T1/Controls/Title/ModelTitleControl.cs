@@ -11,10 +11,12 @@ using System.Text.RegularExpressions;
 using Citta_T1.Business;
 using Citta_T1.Utils;
 using Citta_T1.Controls;
+using Citta_T1.Controls.Left;
 
 namespace Citta_T1.Controls.Title
 {
     public delegate void DocumentSwitchEventHandler(string modelTitle);
+    
     public partial class ModelTitleControl : UserControl
     {
         private string modelTitle;
@@ -23,8 +25,8 @@ namespace Citta_T1.Controls.Title
         public bool Selected { get => selected; set => selected = value; }
         public string ModelTitle { get => modelTitle; }
         public bool Dirty { get => dirty; set => dirty = value; }
-
         public event DocumentSwitchEventHandler ModelDocumentSwitch;
+    
 
         public ModelTitleControl()
         {
@@ -92,9 +94,10 @@ namespace Citta_T1.Controls.Title
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
             MainForm mainForm = (MainForm)this.ParentForm;
             if (!Global.GetCurrentDocument().Dirty)
-            {   // 
+            {    
                 if (parentPanel.Controls.Count != 2)
                 {
+                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                 }
@@ -107,6 +110,7 @@ namespace Citta_T1.Controls.Title
                 ClearDirtyPictureBox();
                 if (parentPanel.Controls.Count != 2)
                 {
+                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);                    
                 }
@@ -115,6 +119,7 @@ namespace Citta_T1.Controls.Title
             {
                 if (parentPanel.Controls.Count != 2)
                 {
+                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);                  
                 }

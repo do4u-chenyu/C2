@@ -19,7 +19,7 @@ using Citta_T1.Controls.Left;
 namespace  Citta_T1
 {
 
-    public delegate void DeleteDocumentEventHandler(string modelTitle);
+   
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -40,7 +40,7 @@ namespace  Citta_T1
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
         private bool documentSwitch;
-        public event DeleteDocumentEventHandler DeleteDocumentEvent; 
+  
 
 
         public MainForm()
@@ -74,6 +74,7 @@ namespace  Citta_T1
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
+            Global.SetMyModelControl(this.myModelControl);
             
         }
 
@@ -109,7 +110,7 @@ namespace  Citta_T1
                 this.naviViewControl.RemoveControl(me.GetControl);
             }
             this.naviViewControl.UpdateNaviView();
-            DeleteDocumentEvent?.Invoke(this.modelDocumentDao.CurrentDocument.ModelDocumentTitle);
+  
         }
 
         private void NewDocumentOperator(Control ct)
@@ -139,9 +140,14 @@ namespace  Citta_T1
         {
             this.documentSwitch = true;
             this.modelDocumentDao.SwitchDocument(modelTitle);
-            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.naviViewControl.UpdateNaviView();
-          
+            if (this.modelDocumentDao.CurrentDocument.Dirty == false)
+            {
+                this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+                this.modelDocumentDao.CurrentDocument.Dirty = false;
+            }
+            else
+                this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
 
         internal void LoadDocument(string modelTitle)

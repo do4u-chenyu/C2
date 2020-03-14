@@ -45,17 +45,12 @@ namespace Citta_T1.Controls.Left
             }
             return false;
         }
-        private void EnableOpenDocument(string modelTitle)
+        public void EnableOpenDocument(string modelTitle)
         {
             foreach (ModelButton mb in this.Controls)
                 if (mb.GetModelName() == modelTitle)
                     mb.EnableOpenDocument = true;
 
-        }
-
-        private void MyModelControl_Load(object sender, EventArgs e)
-        {
-            Global.GetMainForm().DeleteDocumentEvent += EnableOpenDocument;
         }
     }
 }
