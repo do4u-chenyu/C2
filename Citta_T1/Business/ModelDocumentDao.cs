@@ -23,13 +23,19 @@ namespace Citta_T1.Business
             modelDocuments = new List<ModelDocument>();
             
         }
-        public void AddBlankDocument( string modelTitle,  string userName)
+        public void AddBlankDocument(string modelTitle,  string userName)
         {
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
             foreach (ModelDocument md in this.modelDocuments)
                 md.Hide();
             this.modelDocuments.Add(modelDocument);
             this.currentDocument = modelDocument;    
+        }
+        public void LoadDocumentElements()
+        {           
+            this.currentDocument.Load();
+            this.currentDocument.Show();
+            this.currentDocument.Dirty = false;
         }
         public string SaveDocument()
         {
@@ -41,13 +47,13 @@ namespace Citta_T1.Business
         {
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
-            md.Hide();
-            this.modelDocuments.Add(md);
+            md.Hide();         
             this.currentDocument = md;
+            this.modelDocuments.Add(md);          
             return md;
 
         }
-        public void SwitchDocument(string modelTitle)//----------------------------------------
+        public void SwitchDocument(string modelTitle)
         {
             this.currentDocument = FindModelDocument(modelTitle);
             foreach (ModelDocument md in this.modelDocuments)
@@ -65,7 +71,6 @@ namespace Citta_T1.Business
                 MoveDtControl dt = (ct as MoveDtControl);
                 ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath());
                 this.currentDocument.AddModelElement(e);
-                Console.WriteLine("数据源对应的BCP文件路径:" + dt.GetBcpPath());
                 return;
             }
 

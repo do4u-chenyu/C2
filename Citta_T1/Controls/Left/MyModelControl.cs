@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
@@ -15,6 +16,7 @@ namespace Citta_T1.Controls.Left
         public MyModelControl()
         {
             InitializeComponent();
+            
         }
 
         public void AddModel(string modelName)
@@ -42,6 +44,18 @@ namespace Citta_T1.Controls.Left
                         return true;
             }
             return false;
+        }
+        private void EnableOpenDocument(string modelTitle)
+        {
+            foreach (ModelButton mb in this.Controls)
+                if (mb.GetModelName() == modelTitle)
+                    mb.EnableOpenDocument = true;
+
+        }
+
+        private void MyModelControl_Load(object sender, EventArgs e)
+        {
+            Global.GetMainForm().DeleteDocumentEvent += EnableOpenDocument;
         }
     }
 }

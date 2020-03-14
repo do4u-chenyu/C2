@@ -37,6 +37,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Name = "MyModelControl";
             this.Size = new System.Drawing.Size(187, 637);
+            this.Load += new System.EventHandler(this.MyModelControl_Load);
             this.ResumeLayout(false);
 
         }

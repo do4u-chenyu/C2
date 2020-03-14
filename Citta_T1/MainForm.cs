@@ -14,11 +14,12 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Business;
 using System.IO;
 using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Left;
 
 namespace  Citta_T1
 {
 
-
+    public delegate void DeleteDocumentEventHandler(string modelTitle);
     public partial class MainForm : Form
     {
         bool MouseIsDown = false;
@@ -39,7 +40,7 @@ namespace  Citta_T1
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
         private bool documentSwitch;
-
+        public event DeleteDocumentEventHandler DeleteDocumentEvent; 
 
 
         public MainForm()
@@ -108,6 +109,7 @@ namespace  Citta_T1
                 this.naviViewControl.RemoveControl(me.GetControl);
             }
             this.naviViewControl.UpdateNaviView();
+            DeleteDocumentEvent?.Invoke(this.modelDocumentDao.CurrentDocument.ModelDocumentTitle);
         }
 
         private void NewDocumentOperator(Control ct)
@@ -142,7 +144,15 @@ namespace  Citta_T1
           
         }
 
+        internal void LoadDocument(string modelTitle)
+        {
+            this.modelTitlePanel.AddModel(modelTitle);
+            this.modelDocumentDao.LoadDocumentElements();
+            LoadInterfaceElement(this.modelDocumentDao.CurrentDocument);
+            this.documentSwitch = true;
+            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
 
+        }
         private void LoadDocuments(string userName)
         {
             if (this.modelDocumentDao.NewUserLogin(this.userName))
@@ -151,27 +161,30 @@ namespace  Citta_T1
                 return;
             }     
             DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
-            DirectoryInfo[] modelTitleList = userDir.GetDirectories();
-            this.modelTitlePanel.LoadModelDocument(modelTitleList);
-            foreach (DirectoryInfo di in modelTitleList)//---------------------------------------
+            DirectoryInfo[] dir = userDir.GetDirectories();
+            string[] modelTitles = Array.ConvertAll(dir,value => Convert.ToString(value));
+            this.modelTitlePanel.LoadModelDocument(modelTitles);
+            foreach (string mt in modelTitles)
             {
-                string modelTitle = di.ToString();
-                ModelDocument doc = this.modelDocumentDao.LoadDocument(modelTitle, this.userName);
-                foreach (ModelElement me in doc.ModelElements())
-                {
-                    Control ct = me.GetControl;
-                    if (ct is RemarkControl)
-                        continue;
-                    this.canvasPanel.Controls.Add(ct);
-                    this.naviViewControl.AddControl(ct);
-                    this.naviViewControl.UpdateNaviView();
-                }
-                this.myModelControl.AddModel(modelTitle);        
+                ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
+                LoadInterfaceElement(doc);
+                this.myModelControl.AddModel(mt);        
             } 
             this.modelDocumentDao.CurrentDocument.Show();
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
-
+        private void LoadInterfaceElement(ModelDocument doc)
+        {
+            foreach (ModelElement me in doc.ModelElements())
+            {
+                Control ct = me.GetControl;
+                if (ct is RemarkControl)
+                    continue;
+                this.canvasPanel.Controls.Add(ct);
+                this.naviViewControl.AddControl(ct);
+                this.naviViewControl.UpdateNaviView();
+            }
+        }
         private void InitializeControlsLocation()
         {
             Point org = new Point(this.canvasPanel.Width, 0);
