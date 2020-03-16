@@ -203,11 +203,13 @@ namespace  Citta_T1
         }
         private void InitializeControlsLocation()
         {
+            Console.WriteLine("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
+            
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 10 - this.naviViewControl.Height;
-
+            Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
 

@@ -26,4 +26,9 @@ namespace Citta_T1.Utils
     {
         void ChangeLoc(float dx, float dy);
     }
+
+    public interface LocChangeValue
+    {
+        Point NoteDrage();
+    }
 }
