@@ -11,6 +11,7 @@ namespace Citta_T1.Controls.Move
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
 
+
     public partial class MoveOpControl : UserControl, IScalable, IDragable
     {
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
@@ -46,6 +47,9 @@ namespace Citta_T1.Controls.Move
         private int startY;
         private Point oldcontrolPosition;
         Line line;
+
+
+
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         public MoveOpControl()
@@ -411,9 +415,10 @@ namespace Citta_T1.Controls.Move
             int left = this.Left + (int)dx;
             int top = this.Top + (int)dy;
             this.Location = new Point(left, top);
+            Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
         }
         #endregion
-
+         
 
     }
 }

@@ -15,15 +15,17 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel
+    public partial class CanvasPanel : Panel, LocChangeValue
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
         private float deltaX;
         private float deltaY; 
         public event NewElementEventHandler NewElementEvent;
- 
 
+        //记录拖动引起的坐标变化量
+        public int dragChangeX = 0;
+        public int dragChangeY = 0;
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -212,9 +214,10 @@ namespace Citta_T1.Controls
                 nowX = e.X;
                 nowY = e.Y;
                 ChangLoc(nowX - startX, nowY - startY);
+                this.dragChangeX = this.dragChangeX + nowX - startX;
+                this.dragChangeY = this.dragChangeY + nowY - startY;
                 startX = e.X;
                 startY = e.Y;
-                Console.WriteLine("After, X = " + startX.ToString() + ", Y = " + startY.ToString());
             }
         }
 
@@ -231,6 +234,9 @@ namespace Citta_T1.Controls
                 //标志位置低
                 MouseIsDown = false;
             }
+            Console.WriteLine("拖拽结束");
+            Global.GetNaviViewControl().UpdateNaviView();
+
         }
 
         public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
@@ -285,6 +291,11 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().AddControl(btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
+        }
+
+        public Point NoteDrage()
+        {
+            return new Point(this.dragChangeX, this.dragChangeY);
         }
     }
 }
