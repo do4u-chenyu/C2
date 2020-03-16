@@ -366,9 +366,9 @@ namespace Citta_T1.Controls.Move
             
             SetDouble(this);
             if (zoomUp)
-                SetControlsBySize(factor, factor, this);
+                SetControlsBySize(factor, this);
             else 
-                SetControlsBySize(1 / factor, 1 / factor, this);
+                SetControlsBySize(1 / factor, this);
 
         }
 
@@ -379,19 +379,17 @@ namespace Citta_T1.Controls.Move
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-        public void SetControlsBySize(float fx, float fy, Control control)
+        public void SetControlsBySize(float f, Control control)
         {      
-            //SetDouble(control);
-
-            control.Width = Convert.ToInt32(control.Width * fx);
-            control.Height = Convert.ToInt32(control.Height * fy);
-            control.Left = Convert.ToInt32(control.Left * fx);
-            control.Top = Convert.ToInt32(control.Top * fy);
-            control.Font = new Font(control.Font.Name, control.Font.Size * fy, control.Font.Style, control.Font.Unit);
+            control.Width = Convert.ToInt32(control.Width * f);
+            control.Height = Convert.ToInt32(control.Height * f);
+            control.Left = Convert.ToInt32(control.Left * f);
+            control.Top = Convert.ToInt32(control.Top * f);
+            control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
 
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
-                SetControlsBySize(fx, fy, con);
+                SetControlsBySize(f, con);
         }
         #endregion
 
