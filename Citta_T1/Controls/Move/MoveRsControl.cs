@@ -55,8 +55,10 @@ namespace Citta_T1.Controls.Move
         }
         public void ChangeSize(int sizeL)
         {
-       
-            this.Hide();  // 解决控件放大缩小闪烁的问题
+
+            bool originVisible = this.Visible;
+            if (originVisible)
+                this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -73,7 +75,8 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            this.Show();
+            if (originVisible)
+                this.Show();
         }
 
             /*
@@ -330,20 +333,12 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            SetTag(this);
             SetDouble(this);
             if (zoomUp)
-                SetControlsBySize(factor, factor, this);
+                SetControlsBySize(factor, this);
             else
-                SetControlsBySize(1 / factor, 1 / factor, this);
+                SetControlsBySize(1 / factor, this);
 
-        }
-
-        private void SetTag(Control control)
-        {
-            control.Tag = control.Width + ";" + control.Height + ";" + control.Left + ";" + control.Top + ";" + control.Font.Size;
-            foreach (Control con in control.Controls)
-                SetTag(con);
         }
 
         public static void SetDouble(Control cc)
@@ -353,20 +348,17 @@ namespace Citta_T1.Controls.Move
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-        public void SetControlsBySize(float fx, float fy, Control control)
+        public void SetControlsBySize(float f, Control control)
         {
-            SetDouble(control);
-            string[] mytag = control.Tag.ToString().Split(new char[] { ';' });
-            control.Width = Convert.ToInt32(System.Convert.ToSingle(mytag[0]) * fx);//宽度
-            control.Height = Convert.ToInt32(System.Convert.ToSingle(mytag[1]) * fy);//高度
-            control.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) * fx);//左边距
-            control.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) * fy);//顶边距
-            Single currentSize = System.Convert.ToSingle(mytag[4]) * fy;//字体大小
-            control.Font = new Font(control.Font.Name, currentSize, control.Font.Style, control.Font.Unit);
+            control.Width = Convert.ToInt32(control.Width * f);
+            control.Height = Convert.ToInt32(control.Height * f);
+            control.Left = Convert.ToInt32(control.Left * f);
+            control.Top = Convert.ToInt32(control.Top * f);
+            control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
 
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
-                SetControlsBySize(fx, fy, con);
+                SetControlsBySize(f, con);
 
         }
         #endregion
