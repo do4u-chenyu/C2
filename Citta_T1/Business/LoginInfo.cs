@@ -35,9 +35,11 @@ namespace Citta_T1.Business
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(UserInfoPath);
             var node = xDoc.SelectSingleNode("login");
-            XmlElement childElement = xDoc.CreateElement("user");
-            node.AppendChild(childElement);
-            childElement.InnerText = userName;
+            XmlElement userNode = xDoc.CreateElement("user");
+            node.AppendChild(userNode);
+            XmlElement nameNode = xDoc.CreateElement("name");
+            nameNode.InnerText = userName;
+            userNode.AppendChild(nameNode);           
             xDoc.Save(UserInfoPath);
         }
         public void WriteLastLogin(string userName)
@@ -50,10 +52,13 @@ namespace Citta_T1.Business
             {
                 XmlElement childElement = xDoc.CreateElement("lastlogin");
                 node.AppendChild(childElement);
-                childElement.InnerText = userName;
+                XmlElement nameNode = xDoc.CreateElement("name");
+                nameNode.InnerText = userName;
+                childElement.AppendChild(nameNode);
+                
             }
             else
-                bodyNode[0].InnerText = userName;
+                bodyNode[0].SelectSingleNode("name").InnerText = userName;
             xDoc.Save(UserInfoPath);
         }
         public List<string> LoadUserInfo(string userType)
@@ -67,7 +72,7 @@ namespace Citta_T1.Business
             XmlNodeList nodeLists = node.ChildNodes;
             foreach (XmlNode xn in nodeLists)
                 if (xn.Name == userType)
-                    usersList.Add(xn.InnerText);
+                    usersList.Add(xn.SelectSingleNode("name").InnerText);
             return usersList;
         }
     }

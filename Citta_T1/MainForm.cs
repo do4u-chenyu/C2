@@ -55,8 +55,13 @@ namespace  Citta_T1
             InitializeControlsLocation();
             InitializeMainFormEventHandler();
             InitializeGlobalVariable();
-           
-                     
+            this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
+            this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
+            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
+            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseMove);
+            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseUp);
+
+
         }
 
         private void InitializeMainFormEventHandler()
@@ -122,7 +127,7 @@ namespace  Citta_T1
         public void DeleteDocumentElement(Control ct)
         {
             SetDocumentDirty();
-            this.modelDocumentDao.DeleteDocumentElement(ct);
+            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct);
         }
 
 
@@ -144,6 +149,7 @@ namespace  Citta_T1
             if (this.modelDocumentDao.CurrentDocument.Dirty == false)
             {
                 this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+                this.documentSwitch = false;
                 this.modelDocumentDao.CurrentDocument.Dirty = false;
             }
             else
@@ -165,17 +171,21 @@ namespace  Citta_T1
             {
                 this.modelTitlePanel.AddModel("新建模型");
                 return;
-            }     
-            DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
-            DirectoryInfo[] dir = userDir.GetDirectories();
-            string[] modelTitles = Array.ConvertAll(dir,value => Convert.ToString(value));
+            }              
+            string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
             this.modelTitlePanel.LoadModelDocument(modelTitles);
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
-                LoadInterfaceElement(doc);
-                this.myModelControl.AddModel(mt);        
-            } 
+                LoadInterfaceElement(doc);                    
+            }
+            string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
+            foreach (string modelTitle in allModelTitle)
+            {
+                this.myModelControl.AddModel(modelTitle);
+                if (!modelTitles.Contains(modelTitle))
+                    this.myModelControl.EnableOpenDocument(modelTitle);
+            }               
             this.modelDocumentDao.CurrentDocument.Show();
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
@@ -481,6 +491,25 @@ namespace  Citta_T1
                 SaveDocument();
                 mtc.ClearDirtyPictureBox();
             }            
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.modelDocumentDao.SaveEndDocuments(this.userName);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
+            {
+                if (md.Dirty == true)
+                {
+                    DialogResult result = MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (result == DialogResult.OK)
+                        e.Cancel=true;
+                    return;
+                }
+            }
         }
     }
 }

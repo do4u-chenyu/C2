@@ -45,7 +45,7 @@
             this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
             this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
             this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
-            this.myModelControl = new Controls.Left.MyModelControl();
+            this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -84,12 +84,12 @@
             this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
@@ -289,6 +289,7 @@
             // 
             // myModelControl
             // 
+            this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
             this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
@@ -656,11 +657,6 @@
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
             this.canvasPanel.TabIndex = 5;
-            this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
-            this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
-            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
-            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseMove);
-            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseUp);
             // 
             // panel3
             // 
@@ -739,6 +735,40 @@
             this.rightShowButton.Size = new System.Drawing.Size(55, 55);
             this.rightShowButton.TabIndex = 22;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pictureBox3.Location = new System.Drawing.Point(0, 36);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(906, 36);
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
+            // modelTitlePanel
+            // 
+            this.modelTitlePanel.Controls.Add(this.pictureBox2);
+            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
+            this.modelTitlePanel.Name = "modelTitlePanel";
+            this.modelTitlePanel.Size = new System.Drawing.Size(906, 36);
+            this.modelTitlePanel.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(906, 3);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
             // downloadButton
             // 
             this.downloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -789,40 +819,6 @@
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 36);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(906, 36);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // modelTitlePanel
-            // 
-            this.modelTitlePanel.Controls.Add(this.pictureBox2);
-            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(906, 36);
-            this.modelTitlePanel.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(906, 3);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
             // naviViewControl
             // 
             this.naviViewControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -849,6 +845,8 @@
             this.Name = "MainForm";
             this.Text = "烽火FiberHome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.headPanel.ResumeLayout(false);

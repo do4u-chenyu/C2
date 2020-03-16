@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
+using System.Xml;
 
 namespace Citta_T1.Business
 {
@@ -17,11 +18,10 @@ namespace Citta_T1.Business
         
         internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-
+        string UserInfoPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument" + "\\UserInformation.xml";
         public ModelDocumentDao()
         {
-            modelDocuments = new List<ModelDocument>();
-            
+            modelDocuments = new List<ModelDocument>();         
         }
         public void AddBlankDocument(string modelTitle,  string userName)
         {
@@ -82,10 +82,6 @@ namespace Citta_T1.Business
                 return;
             }
 
-        }
-        public void DeleteDocumentElement(Control ct)
-        {
-            this.currentDocument.DeleteModelElement(ct);
         }
         public ElementSubType SEType(string subType)
         {
@@ -179,6 +175,65 @@ namespace Citta_T1.Business
         {
             string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + username;
             return !Directory.Exists(userDir);
+        }
+        public void SaveEndDocuments(string userName)
+        {
+           
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(UserInfoPath);
+            var node = xDoc.SelectSingleNode("login");
+            XmlNodeList bodyNodes = xDoc.GetElementsByTagName("user");
+            foreach (XmlNode xn in bodyNodes)
+            {
+                if (xn.SelectSingleNode("name").InnerText == userName)
+                {
+                    XmlNodeList childNodes = xn.SelectNodes("modeltitle");
+                    foreach (XmlNode xmlNode in childNodes)
+                        xn.RemoveChild(xmlNode);
+                    foreach (ModelDocument mb in this.modelDocuments)
+                    {
+                        XmlElement childElement = xDoc.CreateElement("modeltitle");
+                        childElement.InnerText = mb.ModelDocumentTitle;
+                        xn.AppendChild(childElement);                     
+                    }
+                    xDoc.Save(UserInfoPath);
+                    return;
+                }
+            }
+            
+
+        }
+        public string[] LoadSaveModelTitle(string userName)
+        {
+            string[] modelTitles;
+            List<string> modelTitleList = new List<string>();
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(UserInfoPath);
+            XmlNodeList userNode = xDoc.GetElementsByTagName("user");
+            foreach (XmlNode xn1 in userNode)
+            {
+                if (xn1.SelectSingleNode("name").InnerText == userName)
+                { 
+                    XmlNodeList childNodes = xn1.SelectNodes("modeltitle");
+                    if (childNodes.Count > 0)
+                    {
+                        foreach (XmlNode xn2 in childNodes)
+                            modelTitleList.Add(xn2.InnerText);
+                        modelTitles = modelTitleList.ToArray();
+                        return modelTitles;
+                    }                   
+                }                   
+            }                       
+            modelTitles = LoadAllModelTitle(userName);
+            return modelTitles;
+        }
+        public string[] LoadAllModelTitle(string userName)
+        {
+            string[] modelTitles;
+            DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+            DirectoryInfo[] dir = userDir.GetDirectories();
+            modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
+            return modelTitles;
         }
     }
 }
