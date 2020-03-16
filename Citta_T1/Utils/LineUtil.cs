@@ -82,15 +82,17 @@ namespace Citta_T1.Utils
     {
         PointF startP;
         PointF endP;
-        MoveOpControl m_start;
-        MoveOpControl m_end;
+        PointF a;
+        PointF b;
         PointF[] points;
+        //Pen pen;
         public Line(PointF p1, PointF p2)
         {
             startP = p1;
             endP = p2;
-            PointF a = new PointF((p1.X + p2.X) / 2, p1.Y);
-            PointF b = new PointF((p1.X + p2.X) / 2, p2.Y);
+            this.a = new PointF((p1.X + p2.X) / 2, p1.Y);
+            this.b = new PointF((p1.X + p2.X) / 2, p2.Y);
+            //pen = new Pen(Color.Green);
             PointF[] pointList = new PointF[] { new PointF(p1.X, p1.Y), a, b, new PointF(p2.X, p2.Y) };
             points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
         }
@@ -99,6 +101,7 @@ namespace Citta_T1.Utils
         {
             Pen pen = new Pen(Color.Green);
             g.DrawCurve(pen, points);
+            //g.DrawBezier(this.pen, this.startP, this.a, this.b, this.endP);
             pen.Dispose();
         }
     }

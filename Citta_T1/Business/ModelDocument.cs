@@ -81,7 +81,6 @@ namespace Citta_T1.Business
             foreach (ModelElement el1 in this.modelElements)
             {
                 el1.Hide();
-                Console.WriteLine("隐藏===");
             }
         }
         public List<ModelElement> ModelElements()

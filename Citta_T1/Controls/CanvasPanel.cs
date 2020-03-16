@@ -22,6 +22,7 @@ namespace Citta_T1.Controls
         private float deltaX;
         private float deltaY; 
         public event NewElementEventHandler NewElementEvent;
+        private Bitmap staticImage;
 
         //记录拖动引起的坐标变化量
         public int dragChangeX = 0;
@@ -33,11 +34,14 @@ namespace Citta_T1.Controls
         Graphics g;
         Pen p;
 
+        private Pen p1 = new Pen(Color.Gray, 0.0001f);
+
         // 绘图
         public List<Line> lines = new List<Line>() { };
         public CanvasPanel()
         {
             InitializeComponent();
+            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
@@ -171,6 +175,10 @@ namespace Citta_T1.Controls
             {
                 MouseIsDown = true;
                 basepoint = e.Location;
+                staticImage = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
+                Graphics g = Graphics.FromImage(staticImage);
+                g.CopyFromScreen(this.PointToScreen(this.ClientRectangle.Location), new Point(0, 0), this.ClientRectangle.Size);
+                g.Dispose();
                 
             }
             else if ((this.Parent as MainForm).flowControl.selectDrag && e.Button == MouseButtons.Left)
@@ -181,10 +189,28 @@ namespace Citta_T1.Controls
             }
         }
 
+        
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
             {
+                //Bitmap i = new Bitmap(this.staticImage);
+                //g = Graphics.FromImage(i);
+
+                //if (e.X < basepoint.X && e.Y < basepoint.Y)
+                //    g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                //else if (e.X > basepoint.X && e.Y < basepoint.Y)
+                //    g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                //else if (e.X < basepoint.X && e.Y > basepoint.Y)
+                //    g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                //else
+                //    g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+
+                //Graphics n = this.CreateGraphics();
+                //n.DrawImageUnscaled(i, 0, 0);
+                //n.Dispose();
+
+
                 //实例化一个和窗口一样大的位图
                 i = new Bitmap(this.Width, this.Height);
                 //创建位图的gdi对象
@@ -205,6 +231,7 @@ namespace Citta_T1.Controls
 
                 //将位图贴到窗口上
                 BackgroundImage = i;
+
                 //释放gid和pen资源
                 g.Dispose();
                 p.Dispose();

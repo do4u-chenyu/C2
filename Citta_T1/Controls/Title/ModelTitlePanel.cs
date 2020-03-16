@@ -45,19 +45,18 @@ namespace Citta_T1.Controls.Title
                     mt.SetNewModelTitle(mt.ModelTitle, 0);
             }
         }
-        public void LoadModelDocument(DirectoryInfo[] directoryInfos) 
+        public void LoadModelDocument(string[] modelTitles) 
         {
-            int end = directoryInfos.Count() - 1;
-            for (int i = 0; i < directoryInfos.Count(); i++)
+            int end = modelTitles.Count() - 1;
+            for (int i = 0; i < modelTitles.Count(); i++)
             {
-                string modelTitle = directoryInfos[i].ToString();
                 ModelTitleControl mtControl = new ModelTitleControl();
                 mtControl.ModelDocumentSwitch += DocumentSwitch;
                 this.models.Add(mtControl);
                 this.Controls.Add(mtControl);
 
                 // 根据元素个数调整位置和大小
-                mtControl.SetOriginalModelTitle(modelTitle);
+                mtControl.SetOriginalModelTitle(modelTitles[i]);
                 if (i == 0)
                     mtControl.Location = OriginalLocation;
                 else
