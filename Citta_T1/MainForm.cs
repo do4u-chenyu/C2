@@ -85,7 +85,7 @@ namespace  Citta_T1
 
         private void RemarkChange(RemarkControl rc)
         {
-            this.modelDocumentDao.UpdateRemark(rc);            
+            //this.modelDocumentDao.UpdateRemark(rc);            
             if(!this.documentSwitch && mainFormLoaded)    
                 SetDocumentDirty();
             this.documentSwitch = false;
@@ -486,19 +486,11 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            int count = 0;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            foreach (ModelElement me in this.modelDocumentDao.CurrentDocument.ModelElements())
-            {
-                if (me.Type != ElementType.Remark)
-                    count += 1;
-            }              
-            if (mtc.Dirty == true || count == 0)
-            {
-                SaveDocument();
-                mtc.ClearDirtyPictureBox();
-            }            
+            this.modelDocumentDao.UpdateRemark(this.remarkControl);
+            SaveDocument();
+            mtc.ClearDirtyPictureBox();            
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
