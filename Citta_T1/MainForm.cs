@@ -486,15 +486,9 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            int count = 0;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            foreach (ModelElement me in this.modelDocumentDao.CurrentDocument.ModelElements())
-            {
-                if (me.Type != ElementType.Remark)
-                    count += 1;
-            }              
-            if (mtc.Dirty == true || count == 0)
+            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);         
+            if (mtc.Dirty == true || this.modelDocumentDao.CurrentDocument.ModelElements().Count == 1)
             {
                 SaveDocument();
                 mtc.ClearDirtyPictureBox();
