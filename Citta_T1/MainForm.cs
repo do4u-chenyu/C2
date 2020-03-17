@@ -151,7 +151,9 @@ namespace  Citta_T1
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
+            this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkChangeEvent += RemarkChange;
 
         }
         private void LoadDocuments(string userName)
