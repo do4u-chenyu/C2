@@ -27,7 +27,6 @@ namespace  Citta_T1
         Bitmap i;
         Graphics g;
         Pen p;
-        internal bool mainFormLoaded = false;
         public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
@@ -39,7 +38,6 @@ namespace  Citta_T1
 
         private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
-        private bool documentSwitch;
   
 
 
@@ -53,7 +51,7 @@ namespace  Citta_T1
             this.isLeftViewPanelMinimum = false;
             this.modelDocumentDao = new Business.ModelDocumentDao();
             InitializeControlsLocation();
-            InitializeMainFormEventHandler();
+            
             InitializeGlobalVariable();
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
@@ -84,11 +82,8 @@ namespace  Citta_T1
         }
 
         private void RemarkChange(RemarkControl rc)
-        {
-            //this.modelDocumentDao.UpdateRemark(rc);            
-            if(!this.documentSwitch && mainFormLoaded)    
-                SetDocumentDirty();
-            this.documentSwitch = false;
+        { 
+            SetDocumentDirty();
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
@@ -143,17 +138,12 @@ namespace  Citta_T1
         }
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
-            this.documentSwitch = true;
+
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.naviViewControl.UpdateNaviView();
-            if (this.modelDocumentDao.CurrentDocument.Dirty == false)
-            {
-                this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
-                this.documentSwitch = false;
-                this.modelDocumentDao.CurrentDocument.Dirty = false;
-            }
-            else
-                this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkChangeEvent -= RemarkChange;
+            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
 
         internal void LoadDocument(string modelTitle)
@@ -161,7 +151,6 @@ namespace  Citta_T1
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
-            this.documentSwitch = true;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
 
         }
@@ -426,7 +415,8 @@ namespace  Citta_T1
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
 
             LoadDocuments(this.userName);
-            mainFormLoaded = true;
+
+            InitializeMainFormEventHandler();
 
         }
 
