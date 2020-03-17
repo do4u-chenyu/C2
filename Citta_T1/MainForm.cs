@@ -160,7 +160,7 @@ namespace  Citta_T1
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
-            LoadInterfaceElement(this.modelDocumentDao.CurrentDocument);
+            LoadSurfaceElement(this.modelDocumentDao.CurrentDocument);
             this.documentSwitch = true;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
 
@@ -177,7 +177,7 @@ namespace  Citta_T1
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
-                LoadInterfaceElement(doc);                    
+                LoadSurfaceElement(doc);                    
             }
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
@@ -189,7 +189,7 @@ namespace  Citta_T1
             this.modelDocumentDao.CurrentDocument.Show();
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
-        private void LoadInterfaceElement(ModelDocument doc)
+        private void LoadSurfaceElement(ModelDocument doc)
         {
             foreach (ModelElement me in doc.ModelElements())
             {

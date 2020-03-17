@@ -168,7 +168,6 @@ namespace Citta_T1.Business
                 }     
             }
             return remark;
-
         }
 
         public bool NewUserLogin(string username)
@@ -185,7 +184,7 @@ namespace Citta_T1.Business
             XmlNodeList bodyNodes = xDoc.GetElementsByTagName("user");
             foreach (XmlNode xn in bodyNodes)
             {
-                if (xn.SelectSingleNode("name").InnerText == userName)
+                if (xn.SelectSingleNode("name")!=null && xn.SelectSingleNode("name").InnerText == userName)
                 {
                     XmlNodeList childNodes = xn.SelectNodes("modeltitle");
                     foreach (XmlNode xmlNode in childNodes)
@@ -210,11 +209,11 @@ namespace Citta_T1.Business
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(UserInfoPath);
             XmlNodeList userNode = xDoc.GetElementsByTagName("user");
-            foreach (XmlNode xn1 in userNode)
+            foreach (XmlNode xn in userNode)
             {
-                if (xn1.SelectSingleNode("name").InnerText == userName)
+                if (xn.SelectSingleNode("name") != null && xn.SelectSingleNode("name").InnerText == userName)
                 { 
-                    XmlNodeList childNodes = xn1.SelectNodes("modeltitle");
+                    XmlNodeList childNodes = xn.SelectNodes("modeltitle");
                     if (childNodes.Count > 0)
                     {
                         foreach (XmlNode xn2 in childNodes)
