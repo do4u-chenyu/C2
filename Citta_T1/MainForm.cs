@@ -160,7 +160,7 @@ namespace  Citta_T1
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
-            LoadSurfaceElement(this.modelDocumentDao.CurrentDocument);
+            CanvasAddElement(this.modelDocumentDao.CurrentDocument);
             this.documentSwitch = true;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
 
@@ -177,7 +177,7 @@ namespace  Citta_T1
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
-                LoadSurfaceElement(doc);                    
+                CanvasAddElement(doc);                    
             }
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
@@ -189,7 +189,7 @@ namespace  Citta_T1
             this.modelDocumentDao.CurrentDocument.Show();
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
-        private void LoadSurfaceElement(ModelDocument doc)
+        private void CanvasAddElement(ModelDocument doc)
         {
             foreach (ModelElement me in doc.ModelElements())
             {
@@ -486,9 +486,15 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
+            int count = 0;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            if (mtc.Dirty == true)
+            foreach (ModelElement me in this.modelDocumentDao.CurrentDocument.ModelElements())
+            {
+                if (me.Type != ElementType.Remark)
+                    count += 1;
+            }              
+            if (mtc.Dirty == true || count == 0)
             {
                 SaveDocument();
                 mtc.ClearDirtyPictureBox();
