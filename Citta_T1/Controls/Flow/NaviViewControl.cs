@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Flow
     {
         private List<Control> controls;
         private Pen pen;
-        private Point viewBoxPosition,ctWorldPosition;
+        private Point viewBoxPosition,ctWorldPosition, moveOffset;
         private int rate;
         private Pen p1 = new Pen(Color.LightGray, 0.0001f);
 
@@ -45,27 +45,6 @@ namespace Citta_T1.Controls.Flow
             this.controls.Remove(ct);
         }
         
-        public Point ScreenToWorld(Point Ps,String op)
-        {
-            Point Pm = (this.Parent as LocChangeValue).NoteDrage();
-            Point Pw = new Point();
-            if (op == "add")
-            {
-                Pw.X = Ps.X + Pm.X;
-                Pw.Y = Ps.Y + Pm.Y;
-            }
-            else if (op == "sub")
-            {
-                Pw.X = Ps.X - Pm.X;
-                Pw.Y = Ps.Y - Pm.Y;
-            }
-            return Pw;
-        }
-        // 边界处理
-        private void VieBox_BoundProcess()
-        {
-
-        }
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
             Console.WriteLine("浮动窗, X = " + this.Location.X.ToString() + ", Y = " + this.Location.Y.ToString());
@@ -73,7 +52,7 @@ namespace Citta_T1.Controls.Flow
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
-            viewBoxPosition = ScreenToWorld(new Point(1, 1), "sub");
+            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(1, 1), "sub");
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, width / rate, height / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
@@ -83,11 +62,9 @@ namespace Citta_T1.Controls.Flow
             {
                 if (ct.Visible == true)
                 {
-                    ctWorldPosition = ScreenToWorld(ct.Location,"sub") ;
-                    //rect = new Rectangle(ctWorldPosition.X / rate, ctWorldPosition.Y / rate, ct.Width / rate, ct.Height / rate);
-                    //gc.DrawRectangle(pen, rect);
-                    Rectangle rect1 = new Rectangle(ctWorldPosition.X / rate, ctWorldPosition.Y / rate, ct.Width / rate, ct.Height / rate);
-                    gc.DrawRectangle(pen, rect1);
+                    ctWorldPosition = (this.Parent as IWorldLoc).ScreenToWorld(ct.Location,"sub") ;
+                    rect = new Rectangle(ctWorldPosition.X / rate, ctWorldPosition.Y / rate, ct.Width / rate, ct.Height / rate);
+                    gc.DrawRectangle(pen, rect);
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel, LocChangeValue
+    public partial class CanvasPanel : Panel, IWorldLoc
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
@@ -301,5 +301,22 @@ namespace Citta_T1.Controls
         {
             return new Point(this.dragChangeX, this.dragChangeY);
         }
+        #region 屏幕拖拽涉及的世界坐标转换、界限控制部分
+        public Point ScreenToWorld(Point Ps, String op)
+        {
+            Point Pw = new Point();
+            if (op == "add")
+            {
+                Pw.X = Ps.X + this.dragChangeX;
+                Pw.Y = Ps.Y + this.dragChangeY;
+            }
+            else if (op == "sub")
+            {
+                Pw.X = Ps.X - this.dragChangeX;
+                Pw.Y = Ps.Y - this.dragChangeY;
+            }
+            return Pw;
+        }
+        #endregion
     }
 }
