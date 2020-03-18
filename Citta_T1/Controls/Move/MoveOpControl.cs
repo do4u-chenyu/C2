@@ -66,6 +66,12 @@ namespace Citta_T1.Controls.Move
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
+
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+            
+            
         }
         public void ChangeSize(int sizeL)
         {
@@ -404,7 +410,7 @@ namespace Citta_T1.Controls.Move
             int left = this.Left + (int)dx;
             int top = this.Top + (int)dy;
             this.Location = new Point(left, top);
-            Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
+           // Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
         }
         #endregion
          

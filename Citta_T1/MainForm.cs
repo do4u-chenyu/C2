@@ -93,6 +93,9 @@ namespace  Citta_T1
         }
         public void SetDocumentDirty()
         {
+            // 已经为dirty了，就不需要再操作了，以提高性能
+            if (this.modelDocumentDao.CurrentDocument.Dirty)
+                return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
@@ -146,7 +149,7 @@ namespace  Citta_T1
             this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
 
-        internal void LoadDocument(string modelTitle)
+        public void LoadDocument(string modelTitle)
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
@@ -478,6 +481,11 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
+            // 如果文档不dirty的情况下, 对于大文档, 不做重复保存,以提高性能
+            if (!this.modelDocumentDao.CurrentDocument.Dirty)
+                if (this.modelDocumentDao.CurrentDocument.ModelElements().Count > 10)
+                    return;
+
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
@@ -498,7 +506,7 @@ namespace  Citta_T1
                 {
                     DialogResult result = MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     if (result == DialogResult.OK)
-                        e.Cancel=true;
+                        e.Cancel = true;
                     return;
                 }
             }
