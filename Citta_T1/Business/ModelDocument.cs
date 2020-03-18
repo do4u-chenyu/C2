@@ -33,7 +33,7 @@ namespace Citta_T1.Business
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
-            modelElements = new List<ModelElement>();
+            this.modelElements = new List<ModelElement>();
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*
@@ -46,7 +46,7 @@ namespace Citta_T1.Business
         }
         public void AddModelElement(ModelElement modelElement)
         {
-            modelElements.Add(modelElement);
+            this.modelElements.Add(modelElement);
             dirty = true;
         }
         

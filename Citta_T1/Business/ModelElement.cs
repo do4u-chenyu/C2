@@ -133,9 +133,7 @@ namespace Citta_T1.Business
         {
             string path = "";
             if (this.type == ElementType.DataSource)
-            {
                 path = dataSourcePath;
-            }
             return path;
         }
 
@@ -143,15 +141,12 @@ namespace Citta_T1.Business
         {
             if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
                 ctl.Show();
-            else
-                return;
+
         }
         public void Hide()
         {
             if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
                 ctl.Hide();
-            else
-                return;
         }
 
 
