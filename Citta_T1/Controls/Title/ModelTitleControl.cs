@@ -89,6 +89,7 @@ namespace Citta_T1.Controls.Title
 
         private void ClosePictureBox_Click(object sender, EventArgs e)
         {
+            //文档没有被选中返回
             if (this.BorderStyle != BorderStyle.FixedSingle)
                 return;
             ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;

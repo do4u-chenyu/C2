@@ -40,17 +40,16 @@ namespace Citta_T1
             string userName = this.userNameComboBox.Text;
             if (userName == "")
                 return;
-
             LoginInfo lgInfo = new LoginInfo();
             lgInfo.CreatNewXml();
-            if (this.loginCheckBox.Checked && !users.Contains(userName))             
+            if (this.loginCheckBox.Checked && !users.Contains(userName))
                 lgInfo.WriteUserInfo(userName);
-            lgInfo.WriteLastLogin(userName);
-             
+            lgInfo.WriteLastLogin(userName);            
             this.Hide();
             MainForm mainForm = new MainForm();
             mainForm.UserName = userName;
             mainForm.ShowDialog();
+
             this.Close();
            
         }

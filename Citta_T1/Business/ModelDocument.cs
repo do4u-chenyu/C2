@@ -63,7 +63,7 @@ namespace Citta_T1.Business
         }
         public void Load()
         {
-            if (File.Exists(savePath + modelTitle +".xml"))//-------------------------------
+            if (File.Exists(savePath + modelTitle +".xml"))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
                 this.modelElements = dSaveLoad.ReadXml();

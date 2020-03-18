@@ -40,9 +40,9 @@ namespace Citta_T1.Dialogs
         {
             if (this.textBoxEx1.Text.Length == 0)
                 return;
+            MainForm mainForm = (MainForm)this.Owner;
             try
-            {
-                MainForm mainForm = (MainForm)this.Owner;
+            {             
                 DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.UserName + "\\");
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
@@ -54,20 +54,20 @@ namespace Citta_T1.Dialogs
                              return;
                     }                                           
                 }
-                //与内存中命名相同
-                
-                foreach(ModelDocument md in mainForm.DocumentsList())
-                {
-                    if (this.textBoxEx1.Text == md.ModelDocumentTitle)
-                    {
-                        DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        if (DialogResult.OK == result)
-                            return;
-                    }
-                }
+             
             }
             catch
             { }
+            //与内存中命名相同
+            foreach (ModelDocument md in mainForm.DocumentsList())
+            {
+                if (this.textBoxEx1.Text == md.ModelDocumentTitle)
+                {
+                    DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (DialogResult.OK == result)
+                        return;
+                }
+            }
             this.modelTitle = this.textBoxEx1.Text;
             this.DialogResult = DialogResult.OK;
 
