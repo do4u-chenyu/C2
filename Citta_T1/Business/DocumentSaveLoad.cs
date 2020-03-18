@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using Citta_T1.Controls.Flow;
@@ -61,6 +62,10 @@ namespace Citta_T1.Business
                     statusNode.InnerText = me.Status.ToString();
                     modelElementXml.AppendChild(statusNode);
 
+                    XmlElement identifyingNode = xDoc.CreateElement("identifying");
+                    identifyingNode.InnerText = me.Identifying.ToString();
+                    modelElementXml.AppendChild(identifyingNode);
+
 
                     if (me.Type == ElementType.DataSource)
                     {
@@ -98,29 +103,33 @@ namespace Citta_T1.Business
                 String name = xn.SelectSingleNode("name").InnerText;
                 if (type == "Operator")
                 {
-                    string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
+                    string coordinate = Regex.Replace(xn.SelectSingleNode("location").InnerText, @"[^\d,]*", "");
+                    string[] location = coordinate.Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
-                    Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
+                    int identifying = Convert.ToInt32(xn.SelectSingleNode("identifying").InnerText);
+                    Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1]));
                     MoveOpControl ctl = new MoveOpControl(0, name, loc);
                     ctl.textBox.Text = name;
                     ctl.Location = loc;
-                    ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType));
+                    ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType), identifying);
                     modelElements.Add(operatorElement);
 
                 }
                 else if (type == "DataSource")
                 {
-                    string[] location = xn.SelectSingleNode("location").InnerText.Trim('{', 'X', '=', '}').Split(',');
+                    string coordinate = Regex.Replace(xn.SelectSingleNode("location").InnerText, @"[^\d,]*", "");
+                    string[] location = coordinate.Split(',');
                     string status = xn.SelectSingleNode("status").InnerText;
                     string subType = xn.SelectSingleNode("subtype").InnerText;
                     string bcpPath = xn.SelectSingleNode("path").InnerText;
-                    Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1].Trim('Y', '=')));
+                    int identifying = Convert.ToInt32(xn.SelectSingleNode("identifying").InnerText);
+                    Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1]));
 
                     MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);//暂时定为为moveopctrol
                     //cotl.textBox1.Text = name;//暂时定为为moveopctrol
                     
-                    ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath);
+                    ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, identifying);
                     modelElements.Add(dataSourceElement);
                 }
                 else if (type == "Remark")

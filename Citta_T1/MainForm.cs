@@ -149,7 +149,10 @@ namespace  Citta_T1
         internal void LoadDocument(string modelTitle)
         {
             this.modelTitlePanel.AddModel(modelTitle);
-            this.modelDocumentDao.LoadDocumentElements();
+            this.modelDocumentDao.CurrentDocument.Load();
+            this.modelDocumentDao.CurrentDocument.ResetCount();
+            this.modelDocumentDao.CurrentDocument.Show();
+            this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
@@ -158,7 +161,7 @@ namespace  Citta_T1
         }
         private void LoadDocuments(string userName)
         {
-            if (this.modelDocumentDao.NewUserLogin(this.userName))
+            if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("新建模型");
                 return;
@@ -415,7 +418,7 @@ namespace  Citta_T1
             this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-
+            //加载文件
             LoadDocuments(this.userName);
 
             InitializeMainFormEventHandler();
@@ -497,9 +500,8 @@ namespace  Citta_T1
             {
                 if (md.Dirty == true)
                 {
-                    DialogResult result = MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    if (result == DialogResult.OK)
-                        e.Cancel=true;
+                    MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel=true;
                     return;
                 }
             }

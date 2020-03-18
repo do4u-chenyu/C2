@@ -23,11 +23,13 @@ namespace Citta_T1.Business
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
         private ModelElement mlElement;
+        private int elementCount = 0;
         /*
          * 传入参数为模型文档名称，当前用户名
          */
         public string ModelDocumentTitle {get => this.modelTitle;}
         public bool Dirty { get => dirty; set => dirty = value; }
+        public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -85,5 +87,15 @@ namespace Citta_T1.Business
         }
         public List<ModelElement> ModelElements()
         { return this.modelElements; }
+        public void ResetCount()
+        {
+            int num = 0;
+            foreach (ModelElement me in this.modelElements)
+            {
+                if (me.Identifying > num)
+                    num = me.Identifying;
+            }
+            this.elementCount = num;   
+        }
     }
 }

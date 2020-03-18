@@ -31,12 +31,6 @@ namespace Citta_T1.Business
             this.modelDocuments.Add(modelDocument);
             this.currentDocument = modelDocument;    
         }
-        public void LoadDocumentElements()
-        {           
-            this.currentDocument.Load();
-            this.currentDocument.Show();
-            this.currentDocument.Dirty = false;
-        }
         public string SaveDocument()
         {
             this.currentDocument.Save();
@@ -47,7 +41,8 @@ namespace Citta_T1.Business
         {
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
-            md.Hide();         
+            md.Hide();
+            md.ResetCount();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
@@ -66,10 +61,11 @@ namespace Citta_T1.Business
         }
         public void AddDocumentOperator(Control ct)
         {
+            this.currentDocument.ElementCount += 1;
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath());
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -77,7 +73,7 @@ namespace Citta_T1.Business
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName));
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -170,10 +166,16 @@ namespace Citta_T1.Business
             return remark;
         }
 
-        public bool NewUserLogin(string username)
+        public bool WithoutDocumentLogin(string userName)
         {
-            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + username;
-            return !Directory.Exists(userDir);
+            //新用户登录
+            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName;
+            if (!Directory.Exists(userDir))
+                return true;
+            //非新用户但无模型文档
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+            DirectoryInfo[] directoryInfos = di.GetDirectories();
+            return (directoryInfos.Length == 0); 
         }
         public void SaveEndDocuments(string userName)
         {

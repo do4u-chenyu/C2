@@ -48,7 +48,9 @@ namespace Citta_T1.Business
         private Control ctl;
         private string dataSourcePath;
         private string description;
-   
+        private int identifying;
+
+
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
@@ -56,31 +58,33 @@ namespace Citta_T1.Business
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
  
-        public string RemarkName { get => this.description; set => description = value; }
+        public string RemarkName { get => this.description; set => this.description = value; }
+        public int Identifying { get => this.identifying; set => this.identifying = value; }
 
-       
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType) 
+
+
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int identifying) 
         {
-            Init(type, ctl, des, bcpPath, status, subType);
+            Init(type, ctl, des, bcpPath, status, subType, identifying);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType, int identifying)
         {
-            return new ModelElement(ElementType.Operator, ctl, des, "", status, subType);
+            return new ModelElement(ElementType.Operator, ctl, des, "", status, subType, identifying);
         }
 
         public static ModelElement CreateRemarkElement(string remarkText)
         {
-            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null);
+            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null,0);
         }
 
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath)
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int identifying)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null, identifying);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int identifying)
         {
             this.type = type;
             this.subType = subType;
@@ -89,6 +93,7 @@ namespace Citta_T1.Business
             this.dataSourcePath = bcpPath;
             this.SetName(des);
             this.description = des;
+            this.identifying = identifying;
         }
 
         public string GetDescription()
