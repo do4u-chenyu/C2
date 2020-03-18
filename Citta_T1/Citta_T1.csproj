@@ -110,12 +110,6 @@
     <Compile Include="Controls\Flow\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Move\MoveRsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\Move\MoveRsControl.Designer.cs">
-      <DependentUpon>MoveRsControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -303,9 +297,6 @@
     <EmbeddedResource Include="Controls\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Move\MoveRsControl.resx">
-      <DependentUpon>MoveRsControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\ModelTitleControl.resx">
       <DependentUpon>ModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,6 +376,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Doc\citta帮助文档.chm" />
+    <None Include="Doc\导航地图设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
     <None Include="Doc\运行模型设计文档v1.docx" />
     <None Include="Properties\Settings.settings">

@@ -25,7 +25,6 @@ namespace Citta_T1.Controls.Flow
             this.pen = new Pen(Color.DimGray,0.0001f);
             this.rate = 10;
             
-            
         }
 
 
@@ -62,17 +61,10 @@ namespace Citta_T1.Controls.Flow
             }
             return Pw;
         }
-        private void VieBox_Draw()
+        // 边界处理
+        private void VieBox_BoundProcess()
         {
-            Graphics g = this.CreateGraphics();
-            int width = this.Location.X + this.Width;
-            int height = this.Location.Y + this.Height;
 
-            viewBoxPosition = ScreenToWorld(new Point(0, 0), "sub");
-            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, width / rate, height / rate);
-            g.DrawRectangle(p1, rect);
-            SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
-            g.FillRectangle(trnsRedBrush, rect);
         }
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
@@ -81,7 +73,7 @@ namespace Citta_T1.Controls.Flow
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
-            viewBoxPosition = ScreenToWorld(new Point(0, 0), "sub");
+            viewBoxPosition = ScreenToWorld(new Point(1, 1), "sub");
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, width / rate, height / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
