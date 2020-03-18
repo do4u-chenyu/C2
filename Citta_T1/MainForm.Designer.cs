@@ -825,7 +825,7 @@
             // 
             // naviViewControl
             // 
-            this.naviViewControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            
             this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
             this.naviViewControl.Name = "naviViewControl";

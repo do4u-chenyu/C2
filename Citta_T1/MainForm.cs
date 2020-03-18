@@ -198,11 +198,11 @@ namespace  Citta_T1
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
-            int y = org2.Y - 10 - this.naviViewControl.Height;
+            int y = org2.Y - 5 - this.naviViewControl.Height;
             Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-
+            this.naviViewControl.Invalidate();
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
@@ -218,7 +218,7 @@ namespace  Citta_T1
             this.rightShowButton.Location = loc_flowcontrol2;
             this.rightHideButton.Location = loc_flowcontrol3;
             this.remarkControl.Location = loc_panel3;
-
+            
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)

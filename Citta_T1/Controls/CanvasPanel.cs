@@ -30,7 +30,8 @@ namespace Citta_T1.Controls
 
         bool MouseIsDown = false;
         Point basepoint;
-        Bitmap i;
+
+
         Graphics g;
         Pen p;
 
@@ -175,11 +176,11 @@ namespace Citta_T1.Controls
             {
                 MouseIsDown = true;
                 basepoint = e.Location;
-                staticImage = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
+
+                staticImage = new Bitmap(this.Width,this.Height);
                 Graphics g = Graphics.FromImage(staticImage);
-                g.CopyFromScreen(this.PointToScreen(this.ClientRectangle.Location), new Point(0, 0), this.ClientRectangle.Size);
+                g.Clear(this.BackColor);
                 g.Dispose();
-                
             }
             else if ((this.Parent as MainForm).flowControl.selectDrag && e.Button == MouseButtons.Left)
             {
@@ -194,47 +195,25 @@ namespace Citta_T1.Controls
         {
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
             {
-                //Bitmap i = new Bitmap(this.staticImage);
-                //g = Graphics.FromImage(i);
-
-                //if (e.X < basepoint.X && e.Y < basepoint.Y)
-                //    g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                //else if (e.X > basepoint.X && e.Y < basepoint.Y)
-                //    g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                //else if (e.X < basepoint.X && e.Y > basepoint.Y)
-                //    g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                //else
-                //    g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-
-                //Graphics n = this.CreateGraphics();
-                //n.DrawImageUnscaled(i, 0, 0);
-                //n.Dispose();
-
-
-                //实例化一个和窗口一样大的位图
-                i = new Bitmap(this.Width, this.Height);
-                //创建位图的gdi对象
+                Bitmap i = new Bitmap(staticImage);
+               
                 g = Graphics.FromImage(i);
-                //创建画笔
-                p = new Pen(Color.Gray, 0.0001f);
-                //指定线条的样式为划线段
-                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                //根据当前位置画图，使用math的abs()方法求绝对值
+
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                    g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else if (e.X > basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                    g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else if (e.X < basepoint.X && e.Y > basepoint.Y)
-                    g.DrawRectangle(p, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                    g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else
-                    g.DrawRectangle(p, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+                    g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
 
-                //将位图贴到窗口上
-                BackgroundImage = i;
+                Graphics n = this.CreateGraphics();
+                n.DrawImageUnscaled(i, 0, 0);
 
-                //释放gid和pen资源
+                n.Dispose();
                 g.Dispose();
-                p.Dispose();
+
             }
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
@@ -252,12 +231,10 @@ namespace Citta_T1.Controls
         {
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
-                i = new Bitmap(this.Width, this.Height);
-                g = Graphics.FromImage(i);
-                g.Clear(Color.Transparent);
-                BackgroundImage = i;
-                g.Dispose();
-
+                Bitmap i = new Bitmap(this.staticImage);
+                Graphics n = this.CreateGraphics();
+                n.DrawImageUnscaled(i, 0, 0);
+                n.Dispose();
                 //标志位置低
                 MouseIsDown = false;
             }
