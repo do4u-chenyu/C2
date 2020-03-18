@@ -825,7 +825,7 @@
             this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
             this.naviViewControl.Name = "naviViewControl";
-            this.naviViewControl.Size = new System.Drawing.Size(200, 100);
+            this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
             // MainForm

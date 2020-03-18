@@ -25,8 +25,8 @@ namespace Citta_T1.Controls
         private Bitmap staticImage;
 
         //记录拖动引起的坐标变化量
-        public int dragChangeX = 0;
-        public int dragChangeY = 0;
+        public Point dragChange = new Point(0,0);
+        
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -217,11 +217,16 @@ namespace Citta_T1.Controls
             }
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
+                
                 nowX = e.X;
                 nowY = e.Y;
-                ChangLoc(nowX - startX, nowY - startY);
-                this.dragChangeX = this.dragChangeX + nowX - startX;
-                this.dragChangeY = this.dragChangeY + nowY - startY;
+                this.dragChange.X = this.dragChange.X + nowX - startX;
+                this.dragChange.Y = this.dragChange.Y + nowY - startY;
+                Console.WriteLine("横坐标该变量：" + (nowX - startX - WorldBoundControl().X).ToString());
+                Console.WriteLine("纵坐标该变量：" + (nowY - startY - WorldBoundControl().Y).ToString());
+                ChangLoc(nowX - startX - WorldBoundControl().X, nowY - startY - WorldBoundControl().Y);
+                this.dragChange.X = this.dragChange.X - WorldBoundControl().X;
+                this.dragChange.Y = this.dragChange.Y - WorldBoundControl().Y;
                 startX = e.X;
                 startY = e.Y;
             }
@@ -297,25 +302,46 @@ namespace Citta_T1.Controls
             NewElementEvent?.Invoke(btn);
         }
 
-        public Point NoteDrage()
-        {
-            return new Point(this.dragChangeX, this.dragChangeY);
-        }
+
         #region 屏幕拖拽涉及的世界坐标转换、界限控制部分
         public Point ScreenToWorld(Point Ps, String op)
         {
             Point Pw = new Point();
             if (op == "add")
             {
-                Pw.X = Ps.X + this.dragChangeX;
-                Pw.Y = Ps.Y + this.dragChangeY;
+                Pw.X = Ps.X + this.dragChange.X;
+                Pw.Y = Ps.Y + this.dragChange.Y;
             }
-            else if (op == "sub")
+            if (op == "sub")
             {
-                Pw.X = Ps.X - this.dragChangeX;
-                Pw.Y = Ps.Y - this.dragChangeY;
+                Pw.X = Ps.X - this.dragChange.X;
+                Pw.Y = Ps.Y - this.dragChange.Y;
             }
             return Pw;
+        }
+        public Point WorldBoundControl()
+        {
+            Point dragOffset = new Point(0,0);
+            Point Pw = ScreenToWorld(new Point(50, 50), "sub");
+            if (Pw.X < 50)
+            {
+                dragOffset.X =  50 - Pw.X;
+            }
+            if (Pw.Y < 50)
+            {
+                dragOffset.Y =  50 - Pw.Y;
+            }
+            if (Pw.X > 2000 - this.Width)
+            {
+                dragOffset.X = 2000 - this.Width - Pw.X;
+            }
+            if (Pw.Y > 1000 - this.Height)
+            {
+                dragOffset.Y = 1000 - this.Height -Pw.Y;
+            }
+            return dragOffset;
+
+
         }
         #endregion
     }

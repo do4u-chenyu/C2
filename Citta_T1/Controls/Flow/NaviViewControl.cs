@@ -52,7 +52,7 @@ namespace Citta_T1.Controls.Flow
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
-            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(1, 1), "sub");
+            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(50, 50), "sub");
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, width / rate, height / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
