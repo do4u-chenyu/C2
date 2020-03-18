@@ -144,6 +144,7 @@ namespace  Citta_T1
 
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.naviViewControl.UpdateNaviView();
+            // 切换文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
@@ -154,6 +155,7 @@ namespace  Citta_T1
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.LoadDocumentElements();
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
+            // 加载文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
@@ -162,25 +164,32 @@ namespace  Citta_T1
         private void LoadDocuments(string userName)
         {
             if (this.modelDocumentDao.NewUserLogin(this.userName))
-            {
-                this.modelTitlePanel.AddModel("新建模型");
+            {   // 加载阶段，事件不起作用，需要手工将模型加入到Dao类中
+                this.modelTitlePanel.AddModel("我的新模型");
+                this.modelDocumentDao.AddBlankDocument("我的新模型", this.userName);
                 return;
-            }              
+            } 
+            // 穷举当前用户空间的所有模型
             string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
+            // 多文档面板加载控件
             this.modelTitlePanel.LoadModelDocument(modelTitles);
+            //加载用户空间的所有模型,并加入到canvas面板中
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
                 CanvasAddElement(doc);                    
             }
+            // 这里我就看不懂了
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
             {
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
                     this.myModelControl.EnableOpenDocument(modelTitle);
-            }               
+            }   
+            // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
+            // 更新当前模型备注信息
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
         private void CanvasAddElement(ModelDocument doc)
