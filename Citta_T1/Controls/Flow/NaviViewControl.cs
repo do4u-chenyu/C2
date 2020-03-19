@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Flow
     {
         private List<Control> controls;
         private Pen pen;
-        private Point viewBoxPosition,ctWorldPosition, moveOffset;
+        private Point viewBoxPosition, ctWorldPosition, moveOffset;
         private int rate;
         private Pen p1 = new Pen(Color.LightGray, 0.0001f);
 
@@ -51,9 +51,9 @@ namespace Citta_T1.Controls.Flow
             Graphics gc = e.Graphics;
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
-
-            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(50, 50), "sub");
-            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, width / rate, height / rate);
+            float factor = (this.Parent as IScreenFactor).ScreenFactor();
+            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(50 , 50 ), "sub");
+            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width * factor) / rate , Convert.ToInt32(height * factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
@@ -62,8 +62,8 @@ namespace Citta_T1.Controls.Flow
             {
                 if (ct.Visible == true)
                 {
-                    ctWorldPosition = (this.Parent as IWorldLoc).ScreenToWorld(ct.Location,"sub") ;
-                    rect = new Rectangle(ctWorldPosition.X / rate, ctWorldPosition.Y / rate, ct.Width / rate, ct.Height / rate);
+                    ctWorldPosition = (this.Parent as IWorldLoc).ScreenToWorld(ct.Location, "sub") ;
+                    rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X * factor) / rate, Convert.ToInt32(ctWorldPosition.Y * factor) / rate, 142 / rate, 25 / rate);
                     gc.DrawRectangle(pen, rect);
                 }
             }

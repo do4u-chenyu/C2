@@ -15,25 +15,21 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel, IWorldLoc
+    public partial class CanvasPanel : Panel, IWorldLoc, IScreenFactor
     {
         public int sizeLevel = 0;
-        private bool isLeftMouseDown;
-        private float deltaX;
-        private float deltaY; 
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
 
         //记录拖动引起的坐标变化量
         public Point dragChange = new Point(0,0);
-        
+        public float screenChange = 1;
 
         bool MouseIsDown = false;
         Point basepoint;
 
 
         Graphics g;
-        Pen p;
 
         private Pen p1 = new Pen(Color.Gray, 0.0001f);
 
@@ -56,7 +52,8 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("放大");
                 sizeLevel += 1;
-                foreach(Control con in Controls)
+                this.screenChange = this.screenChange * factor;
+                foreach (Control con in Controls)
                 {
                     if (con is IScalable)
                     {
@@ -69,6 +66,7 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("缩小");
                 sizeLevel -= 1;
+                this.screenChange = this.screenChange / factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
@@ -77,6 +75,7 @@ namespace Citta_T1.Controls
                     }
                 }
             }
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         
         // 画布右上角的拖动功能实现
@@ -98,8 +97,6 @@ namespace Citta_T1.Controls
         #endregion
 
         #region 控件大小随窗体大小等比例缩放
-        private int deep = 0;
-
         //设置双缓冲区、解决闪屏问题
         public static void SetDouble(Control cc)
         {
@@ -116,31 +113,6 @@ namespace Citta_T1.Controls
         public int nowX;
         public int nowY;
 
-        private void SetControlByDelta(float dx, float dy, Control cons)
-        {
-            deep += 1;
-            // 遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-            {
-                ////获取控件的Tag属性值，并分割后存储字符串数组
-                SetDouble(this);
-                SetDouble(con);
-                if (con.Tag != null && ((deep == 1 && con is MoveOpControl)))
-                {
-                    Console.WriteLine(con.GetType().ToString());
-
-                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
-                    //根据窗体缩放的比例确定控件的值
-                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) + dx);//左边距
-                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) + dy);//顶边距
-                    if (con.Controls.Count > 0)
-                    {
-                        SetControlByDelta(dx, dy, con);
-                    }
-                }
-            }
-            deep -= 1;
-            }
         #endregion
 
         #region 各种事件
@@ -220,11 +192,10 @@ namespace Citta_T1.Controls
                 
                 nowX = e.X;
                 nowY = e.Y;
-                this.dragChange.X = this.dragChange.X + nowX - startX;
-                this.dragChange.Y = this.dragChange.Y + nowY - startY;
-                Console.WriteLine("横坐标该变量：" + (nowX - startX - WorldBoundControl().X).ToString());
-                Console.WriteLine("纵坐标该变量：" + (nowY - startY - WorldBoundControl().Y).ToString());
-                ChangLoc(nowX - startX - WorldBoundControl().X, nowY - startY - WorldBoundControl().Y);
+                this.dragChange.X = this.dragChange.X + Convert.ToInt32((nowX - startX)/this.screenChange);
+                this.dragChange.Y = this.dragChange.Y + Convert.ToInt32((nowY - startY)/this.screenChange);
+
+                ChangLoc(Convert.ToInt32((nowX - startX) / this.screenChange) - WorldBoundControl().X, Convert.ToInt32((nowY - startY) / this.screenChange) - WorldBoundControl().Y);
                 this.dragChange.X = this.dragChange.X - WorldBoundControl().X;
                 this.dragChange.Y = this.dragChange.Y - WorldBoundControl().Y;
                 startX = e.X;
@@ -315,7 +286,7 @@ namespace Citta_T1.Controls
             if (op == "sub")
             {
                 Pw.X = Ps.X - this.dragChange.X;
-                Pw.Y = Ps.Y - this.dragChange.Y;
+                Pw.Y = Ps.Y  - this.dragChange.Y;
             }
             return Pw;
         }
@@ -323,26 +294,30 @@ namespace Citta_T1.Controls
         {
             Point dragOffset = new Point(0,0);
             Point Pw = ScreenToWorld(new Point(50, 50), "sub");
-            if (Pw.X < 50)
+            if (Pw.X < 50 )
             {
-                dragOffset.X =  50 - Pw.X;
+                dragOffset.X = 50 - Pw.X;
             }
-            if (Pw.Y < 50)
+            if (Pw.Y < 50 )
             {
                 dragOffset.Y =  50 - Pw.Y;
             }
-            if (Pw.X > 2000 - this.Width)
+            if (Pw.X > 2000 - Convert.ToInt32(this.Width / this.screenChange))
             {
-                dragOffset.X = 2000 - this.Width - Pw.X;
+                dragOffset.X = 2000 - Convert.ToInt32(this.Width / this.screenChange) - Pw.X;
             }
-            if (Pw.Y > 1000 - this.Height)
+            if (Pw.Y > 1000 - Convert.ToInt32(this.Height / this.screenChange))
             {
-                dragOffset.Y = 1000 - this.Height -Pw.Y;
+                dragOffset.Y = 1000 - Convert.ToInt32(this.Height / this.screenChange) - Pw.Y;
             }
             return dragOffset;
-
-
         }
         #endregion
+
+        public float ScreenFactor()
+        {
+            return 1 / this.screenChange;
+        }
+
     }
 }
