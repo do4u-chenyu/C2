@@ -15,7 +15,7 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel, IWorldLoc
+    public partial class CanvasPanel : Panel, IWorldLoc, IScreenFactor
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
@@ -26,7 +26,7 @@ namespace Citta_T1.Controls
 
         //记录拖动引起的坐标变化量
         public Point dragChange = new Point(0,0);
-        
+        public float screenChange = 1;
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -56,7 +56,8 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("放大");
                 sizeLevel += 1;
-                foreach(Control con in Controls)
+                this.screenChange = this.screenChange * factor;
+                foreach (Control con in Controls)
                 {
                     if (con is IScalable)
                     {
@@ -69,6 +70,7 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("缩小");
                 sizeLevel -= 1;
+                this.screenChange = this.screenChange / factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
@@ -77,6 +79,7 @@ namespace Citta_T1.Controls
                     }
                 }
             }
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         
         // 画布右上角的拖动功能实现
@@ -220,11 +223,10 @@ namespace Citta_T1.Controls
                 
                 nowX = e.X;
                 nowY = e.Y;
-                this.dragChange.X = this.dragChange.X + nowX - startX;
-                this.dragChange.Y = this.dragChange.Y + nowY - startY;
-                Console.WriteLine("横坐标该变量：" + (nowX - startX - WorldBoundControl().X).ToString());
-                Console.WriteLine("纵坐标该变量：" + (nowY - startY - WorldBoundControl().Y).ToString());
-                ChangLoc(nowX - startX - WorldBoundControl().X, nowY - startY - WorldBoundControl().Y);
+                this.dragChange.X = this.dragChange.X + Convert.ToInt32((nowX - startX)/this.screenChange);
+                this.dragChange.Y = this.dragChange.Y + Convert.ToInt32((nowY - startY)/this.screenChange);
+
+                ChangLoc(Convert.ToInt32((nowX - startX) / this.screenChange) - WorldBoundControl().X, Convert.ToInt32((nowY - startY) / this.screenChange) - WorldBoundControl().Y);
                 this.dragChange.X = this.dragChange.X - WorldBoundControl().X;
                 this.dragChange.Y = this.dragChange.Y - WorldBoundControl().Y;
                 startX = e.X;
@@ -315,7 +317,7 @@ namespace Citta_T1.Controls
             if (op == "sub")
             {
                 Pw.X = Ps.X - this.dragChange.X;
-                Pw.Y = Ps.Y - this.dragChange.Y;
+                Pw.Y = Ps.Y  - this.dragChange.Y;
             }
             return Pw;
         }
@@ -323,26 +325,30 @@ namespace Citta_T1.Controls
         {
             Point dragOffset = new Point(0,0);
             Point Pw = ScreenToWorld(new Point(50, 50), "sub");
-            if (Pw.X < 50)
+            if (Pw.X < 50 )
             {
-                dragOffset.X =  50 - Pw.X;
+                dragOffset.X = 50 - Pw.X;
             }
-            if (Pw.Y < 50)
+            if (Pw.Y < 50 )
             {
                 dragOffset.Y =  50 - Pw.Y;
             }
-            if (Pw.X > 2000 - this.Width)
+            if (Pw.X > 2000 - Convert.ToInt32(this.Width / this.screenChange))
             {
-                dragOffset.X = 2000 - this.Width - Pw.X;
+                dragOffset.X = 2000 - Convert.ToInt32(this.Width / this.screenChange) - Pw.X;
             }
-            if (Pw.Y > 1000 - this.Height)
+            if (Pw.Y > 1000 - Convert.ToInt32(this.Height / this.screenChange))
             {
-                dragOffset.Y = 1000 - this.Height -Pw.Y;
+                dragOffset.Y = 1000 - Convert.ToInt32(this.Height / this.screenChange) - Pw.Y;
             }
             return dragOffset;
-
-
         }
         #endregion
+
+        public float ScreenFactor()
+        {
+            return 1 / this.screenChange;
+        }
+
     }
 }

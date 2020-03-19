@@ -31,5 +31,8 @@ namespace Citta_T1.Utils
     {
         Point ScreenToWorld(Point Ps, String op);
     }
-
+    public interface IScreenFactor
+    {
+        float ScreenFactor();
+    }
 }
