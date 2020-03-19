@@ -21,7 +21,7 @@ namespace Citta_T1.Utils
         private static FlowControl flowControl;
         private static MyModelControl myModelControl;
 
-      public static MainForm GetMainForm() { return mainForm; }
+        public static MainForm GetMainForm() { return mainForm; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
         public static NaviViewControl GetNaviViewControl() { return naviViewControl; }
         public static CanvasPanel GetCanvasPanel() { return canvasPanel; }

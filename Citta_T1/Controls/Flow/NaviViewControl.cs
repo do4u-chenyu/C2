@@ -8,16 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
+
 namespace Citta_T1.Controls.Flow
 {
     public partial class NaviViewControl : UserControl
     {
         private List<Control> controls;
         private Pen pen;
-        private Point viewBoxPosition,ctWorldPosition, moveOffset;
+        private Point viewBoxPosition,ctWorldPosition;
         private int rate;
         private Pen p1 = new Pen(Color.LightGray, 0.0001f);
-
+        public int startX;
+        public int startY;
+        public int nowX;
+        public int nowY;
+        public bool startNaviView = false;
         public NaviViewControl()
         {
             InitializeComponent();
@@ -44,15 +49,45 @@ namespace Citta_T1.Controls.Flow
         {
             this.controls.Remove(ct);
         }
-        
+
+        private void NaviViewControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                startX = e.X;
+                startY = e.Y;
+                startNaviView = true;
+            }
+        }
+
+
+
+        private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
+        {
+
+            Global.GetNaviViewControl().UpdateNaviView();
+            startNaviView = false;
+        }
+
+        private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+            }
+            
+        }
+
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
-            Console.WriteLine("浮动窗, X = " + this.Location.X.ToString() + ", Y = " + this.Location.Y.ToString());
+            
             Graphics gc = e.Graphics;
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
-            float factor = (this.Parent as IScreenFactor).ScreenFactor();
-            viewBoxPosition = (this.Parent as IWorldLoc).ScreenToWorld(new Point(50 , 50 ), "sub");
+            
+            float factor = 1/(this.Parent as CanvasPanel).screenChange;
+            Point dragMove1 = Global.GetCurrentDocument().MapOrigin;
+            viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), dragMove1);
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width * factor) / rate , Convert.ToInt32(height * factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
@@ -62,7 +97,7 @@ namespace Citta_T1.Controls.Flow
             {
                 if (ct.Visible == true)
                 {
-                    ctWorldPosition = (this.Parent as IWorldLoc).ScreenToWorld(ct.Location, "sub") ;
+                    ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ct.Location, dragMove1);
                     rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X * factor) / rate, Convert.ToInt32(ctWorldPosition.Y * factor) / rate, 142 / rate, 25 / rate);
                     gc.DrawRectangle(pen, rect);
                 }

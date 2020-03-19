@@ -56,7 +56,6 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
-    <Compile Include="Controls\Interface\NaviewInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

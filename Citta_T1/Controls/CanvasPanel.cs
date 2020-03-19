@@ -15,7 +15,7 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel, IWorldLoc, IScreenFactor
+    public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
         private bool isLeftMouseDown;
@@ -25,7 +25,7 @@ namespace Citta_T1.Controls
         private Bitmap staticImage;
 
         //记录拖动引起的坐标变化量
-        public Point dragChange = new Point(0,0);
+        public Point dragMove = new Point(0,0);
         public float screenChange = 1;
 
         bool MouseIsDown = false;
@@ -223,12 +223,16 @@ namespace Citta_T1.Controls
                 
                 nowX = e.X;
                 nowY = e.Y;
-                this.dragChange.X = this.dragChange.X + Convert.ToInt32((nowX - startX)/this.screenChange);
-                this.dragChange.Y = this.dragChange.Y + Convert.ToInt32((nowY - startY)/this.screenChange);
+                //this.dragMove.X = this.dragMove.X + Convert.ToInt32((nowX - startX)/this.screenChange);
+                //this.dragMove.Y = this.dragMove.Y + Convert.ToInt32((nowY - startY)/this.screenChange);
+                Global.GetCurrentDocument().MapOrigin =new Point( Global.GetCurrentDocument().MapOrigin.X + Convert.ToInt32((nowX - startX) / this.screenChange), 
+                                                                  Global.GetCurrentDocument().MapOrigin.Y + Convert.ToInt32((nowY - startY) / this.screenChange));
+                ChangLoc(Convert.ToInt32((nowX - startX) / this.screenChange) - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).X, Convert.ToInt32((nowY - startY) / this.screenChange) - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).Y);
+                //this.dragMove.X = this.dragMove.X - WorldBoundControl(this.dragMove).X;
+                //this.dragMove.Y = this.dragMove.Y - WorldBoundControl(this.dragMove).Y;
+                Global.GetCurrentDocument().MapOrigin = new Point(Global.GetCurrentDocument().MapOrigin.X - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).X ,
+                                                  Global.GetCurrentDocument().MapOrigin.Y - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).Y);
 
-                ChangLoc(Convert.ToInt32((nowX - startX) / this.screenChange) - WorldBoundControl().X, Convert.ToInt32((nowY - startY) / this.screenChange) - WorldBoundControl().Y);
-                this.dragChange.X = this.dragChange.X - WorldBoundControl().X;
-                this.dragChange.Y = this.dragChange.Y - WorldBoundControl().Y;
                 startX = e.X;
                 startY = e.Y;
             }
@@ -305,33 +309,20 @@ namespace Citta_T1.Controls
         }
 
 
-        #region 屏幕拖拽涉及的世界坐标转换、界限控制部分
-        public Point ScreenToWorld(Point Ps, String op)
+        #region 屏幕拖拽界限控制部分
+
+        public Point WorldBoundControl(Point Pm)
         {
-            Point Pw = new Point();
-            if (op == "add")
-            {
-                Pw.X = Ps.X + this.dragChange.X;
-                Pw.Y = Ps.Y + this.dragChange.Y;
-            }
-            if (op == "sub")
-            {
-                Pw.X = Ps.X - this.dragChange.X;
-                Pw.Y = Ps.Y  - this.dragChange.Y;
-            }
-            return Pw;
-        }
-        public Point WorldBoundControl()
-        {
+            
             Point dragOffset = new Point(0,0);
-            Point Pw = ScreenToWorld(new Point(50, 50), "sub");
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
             if (Pw.X < 50 )
             {
                 dragOffset.X = 50 - Pw.X;
             }
-            if (Pw.Y < 50 )
+            if (Pw.Y < 30 )
             {
-                dragOffset.Y =  50 - Pw.Y;
+                dragOffset.Y =  30 - Pw.Y;
             }
             if (Pw.X > 2000 - Convert.ToInt32(this.Width / this.screenChange))
             {
@@ -344,11 +335,5 @@ namespace Citta_T1.Controls
             return dragOffset;
         }
         #endregion
-
-        public float ScreenFactor()
-        {
-            return 1 / this.screenChange;
-        }
-
     }
 }

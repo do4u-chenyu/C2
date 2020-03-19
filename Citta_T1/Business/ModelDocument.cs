@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -22,13 +23,13 @@ namespace Citta_T1.Business
         private string savePath;
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
-        
+        private Point mapOrigin = new Point(-500,-100);
         /*
          * 传入参数为模型文档名称，当前用户名
          */
         public string ModelDocumentTitle {get => this.modelTitle;}
         public bool Dirty { get => dirty; set => dirty = value; }
-
+        public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
@@ -85,6 +86,15 @@ namespace Citta_T1.Business
                 el1.Hide();
             }
         }
+        
+        public Point ScreenToWorld(Point Ps, Point Pm)
+        {
+            Point Pw = new Point();
+            Pw.X = Ps.X - Pm.X;
+            Pw.Y = Ps.Y - Pm.Y;
+            return Pw;
+        }
+
         public List<ModelElement> ModelElements()
         { return this.modelElements; }
     }
