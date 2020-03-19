@@ -61,7 +61,7 @@ namespace Citta_T1.Dialogs
             //与内存中命名相同
             foreach (ModelDocument md in mainForm.DocumentsList())
             {
-                if (this.textBoxEx1.Text == md.ModelDocumentTitle)
+                if (this.textBoxEx1.Text == md.ModelTitle)
                 {
                     DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     if (DialogResult.OK == result)

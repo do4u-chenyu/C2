@@ -22,20 +22,24 @@ namespace Citta_T1.Business
         private string savePath;
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
-        private ModelElement mlElement;
         private int elementCount = 0;
+        private List<ModelRelation> modelRelations;
         /*
          * 传入参数为模型文档名称，当前用户名
          */
-        public string ModelDocumentTitle {get => this.modelTitle;}
+        public string ModelTitle {get => this.modelTitle;}
         public bool Dirty { get => dirty; set => dirty = value; }
         public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
+        public string SavePath { get => savePath; set => savePath = value; }
+        internal List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
+        internal List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
-            modelElements = new List<ModelElement>();
+            this.modelElements = new List<ModelElement>();
+            this.modelRelations = new List<ModelRelation>();
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*
@@ -43,34 +47,41 @@ namespace Citta_T1.Business
          */
         public void Save()
         {
-            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-            dSaveLoad.WriteXml(modelElements);
+            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
+            dSaveLoad.WriteXml();
+    
         }
         public void AddModelElement(ModelElement modelElement)
         {
-            modelElements.Add(modelElement);
+            this.modelElements.Add(modelElement);
             dirty = true;
         }
-        
+        public void AddModelRelation(ModelRelation modelRelation)
+        {
+            this.modelRelations.Add(modelRelation);
+            dirty = true;
+        }
+
         public void DeleteModelElement(Control control)
         {
-            
             foreach (ModelElement me in this.modelElements)
             {
-                if (me.GetControl.Equals(control))
-                    mlElement = me;
-                
-            }
-            this.modelElements.Remove(mlElement);
+                if (!me.GetControl.Equals(control))
+                    continue;
+                this.modelElements.Remove(me);
+                break;
+            }   
         }
+
         public void Load()
         {
             if (File.Exists(savePath + modelTitle +".xml"))
             {
-                DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-                this.modelElements = dSaveLoad.ReadXml();
+                DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
+                dSaveLoad.ReadXml();
             }          
         }
+
         public void Show()
         {
             foreach (ModelElement el1 in this.modelElements)
@@ -78,6 +89,7 @@ namespace Citta_T1.Business
                 el1.Show();
             }
         }
+
         public void Hide()
         {
             foreach (ModelElement el1 in this.modelElements)
@@ -85,15 +97,15 @@ namespace Citta_T1.Business
                 el1.Hide();
             }
         }
-        public List<ModelElement> ModelElements()
-        { return this.modelElements; }
+        //public List<ModelElement> ModelElements()
+        //{ return this.modelElements; }
         public void ResetCount()
         {
             int num = 0;
             foreach (ModelElement me in this.modelElements)
             {
-                if (me.Identifying > num)
-                    num = me.Identifying;
+                if (me.ID > num)
+                    num = me.ID;
             }
             this.elementCount = num;   
         }

@@ -26,9 +26,10 @@ namespace Citta_T1.Utils
     {
         void ChangeLoc(float dx, float dy);
     }
-
-    public interface LocChangeValue
+    //坐标转换接口
+    public interface IWorldLoc
     {
-        Point NoteDrage();
+        Point ScreenToWorld(Point Ps, String op);
     }
+
 }

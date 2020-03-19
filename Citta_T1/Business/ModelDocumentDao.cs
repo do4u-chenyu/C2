@@ -16,6 +16,7 @@ namespace Citta_T1.Business
         private ModelDocument currentDocument;
         private List<ModelDocument> modelDocuments;
         
+        
         internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
         string UserInfoPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument" + "\\UserInformation.xml";
@@ -33,9 +34,11 @@ namespace Citta_T1.Business
         }
         public string SaveDocument()
         {
+            AddDocumentRelation();
+            AddDocumentRelation();
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
-            return this.currentDocument.ModelDocumentTitle;
+            return this.currentDocument.ModelTitle;
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {
@@ -53,7 +56,7 @@ namespace Citta_T1.Business
             this.currentDocument = FindModelDocument(modelTitle);
             foreach (ModelDocument md in this.modelDocuments)
             {
-                if (md.ModelDocumentTitle == modelTitle)
+                if (md.ModelTitle == modelTitle)
                     md.Show();
                 else
                     md.Hide();
@@ -78,6 +81,11 @@ namespace Citta_T1.Business
                 return;
             }
 
+        }
+        public void AddDocumentRelation()
+        {
+            ModelRelation e = new ModelRelation("1", "2", "{X=1,Y=2}", "{3,4}", "1");
+            this.currentDocument.AddModelRelation(e);
         }
         public ElementSubType SEType(string subType)
         {
@@ -120,7 +128,7 @@ namespace Citta_T1.Business
         {
             foreach (ModelDocument md in this.modelDocuments)
             {
-                if (md.ModelDocumentTitle == modelTitle)
+                if (md.ModelTitle == modelTitle)
                     return md;
             }
             return null;
@@ -129,7 +137,7 @@ namespace Citta_T1.Business
         {
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;
             this.ModelDocuments.Remove(this.currentDocument);
             return modelElements; 
         }
@@ -137,7 +145,7 @@ namespace Citta_T1.Business
         { 
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();          
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;          
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)
@@ -154,7 +162,7 @@ namespace Citta_T1.Business
             string remark = "";
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)
@@ -194,7 +202,7 @@ namespace Citta_T1.Business
                     foreach (ModelDocument mb in this.modelDocuments)
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
-                        childElement.InnerText = mb.ModelDocumentTitle;
+                        childElement.InnerText = mb.ModelTitle;
                         xn.AppendChild(childElement);                     
                     }
                     xDoc.Save(UserInfoPath);

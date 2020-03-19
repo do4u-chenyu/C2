@@ -32,10 +32,15 @@
             // 
             // NaviViewControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NaviViewControl";
-            this.Size = new System.Drawing.Size(200, 100);
+            this.Size = new System.Drawing.Size(349, 135);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NaviViewControl_Paint);
             this.ResumeLayout(false);
 

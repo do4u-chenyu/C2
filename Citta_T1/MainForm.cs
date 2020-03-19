@@ -93,8 +93,11 @@ namespace  Citta_T1
         }
         public void SetDocumentDirty()
         {
+            // 已经为dirty了，就不需要再操作了，以提高性能
+            if (this.modelDocumentDao.CurrentDocument.Dirty)
+                return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
-            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.SetDirtyPictureBox();
            
@@ -141,12 +144,13 @@ namespace  Citta_T1
 
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.naviViewControl.UpdateNaviView();
+            // 切换文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
 
-        internal void LoadDocument(string modelTitle)
+        public void LoadDocument(string modelTitle)
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.CurrentDocument.Load();
@@ -154,6 +158,7 @@ namespace  Citta_T1
             this.modelDocumentDao.CurrentDocument.Show();
             this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
+            // 加载文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
@@ -161,31 +166,39 @@ namespace  Citta_T1
         }
         private void LoadDocuments(string userName)
         {
+
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
-                this.modelTitlePanel.AddModel("新建模型");
+                this.modelTitlePanel.AddModel("我的新模型");
+                this.modelDocumentDao.AddBlankDocument("我的新模型", this.userName);
                 return;
-            }              
+            } 
+            // 穷举当前用户空间的所有模型
             string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
+            // 多文档面板加载控件
             this.modelTitlePanel.LoadModelDocument(modelTitles);
+            //加载用户空间的所有模型,并加入到canvas面板中
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
                 CanvasAddElement(doc);                    
             }
+            // 这里我就看不懂了,将用户本地保存的模型文档加载到左侧myModelControl
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
             {
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
                     this.myModelControl.EnableOpenDocument(modelTitle);
-            }               
+            }   
+            // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
+            // 更新当前模型备注信息
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
         }
         private void CanvasAddElement(ModelDocument doc)
         {
-            foreach (ModelElement me in doc.ModelElements())
+            foreach (ModelElement me in doc.ModelElements)
             {
                 Control ct = me.GetControl;
                 if (ct is RemarkControl)
@@ -202,11 +215,11 @@ namespace  Citta_T1
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
-            int y = org2.Y - 10 - this.naviViewControl.Height;
+            int y = org2.Y - 5 - this.naviViewControl.Height;
             Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-
+            this.naviViewControl.Invalidate();
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
@@ -222,7 +235,7 @@ namespace  Citta_T1
             this.rightShowButton.Location = loc_flowcontrol2;
             this.rightHideButton.Location = loc_flowcontrol3;
             this.remarkControl.Location = loc_panel3;
-
+            
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
@@ -481,7 +494,12 @@ namespace  Citta_T1
 
         private void SaveModelButton_Click(object sender, EventArgs e)
         {
-            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            // 如果文档不dirty的情况下, 对于大文档, 不做重复保存,以提高性能
+            if (!this.modelDocumentDao.CurrentDocument.Dirty)
+                if (this.modelDocumentDao.CurrentDocument.ModelElements.Count > 10)
+                    return;
+
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
             SaveDocument();

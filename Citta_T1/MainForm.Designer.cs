@@ -664,7 +664,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 200);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(38, 163);
+            this.panel3.Size = new System.Drawing.Size(8, 101);
             this.panel3.TabIndex = 1;
             // 
             // leftFoldButton
@@ -673,8 +673,8 @@
             this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
             this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
             this.leftFoldButton.Name = "leftFoldButton";
-            this.leftFoldButton.Size = new System.Drawing.Size(38, 153);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
+            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
@@ -821,11 +821,11 @@
             // 
             // naviViewControl
             // 
-            this.naviViewControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            
             this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
             this.naviViewControl.Name = "naviViewControl";
-            this.naviViewControl.Size = new System.Drawing.Size(200, 100);
+            this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
             // MainForm

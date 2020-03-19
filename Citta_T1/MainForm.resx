@@ -278,9 +278,9 @@
         Bf9k0yUCin7J9CQCCocyfYmAv/AWsisE/JJUSIg+/FCA6aSx+JkAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="scrollbarComponent1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="scrollbarComponent1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>118, 17</value>
-  </metadata>
+  </data>
   <data name="moreButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -406,9 +406,9 @@
         ej0EjZMtHvBCqlA1TfMfOqY5Guh5ytQAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="saveModelButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAE8AAAAgCAIAAADc9LJeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -445,7 +445,7 @@
   </data>
   <data name="leftFoldButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAABkCAIAAAAe6xdSAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
+        iVBORw0KGgoAAAANSUhEUgAAAAcAAABkCAYAAABKMionAAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
         DwAAjA8AAP1SAACBQAAAfXkAAOmLAAA85QAAGcxzPIV3AAAKOWlDQ1BQaG90b3Nob3AgSUNDIHByb2Zp
         bGUAAEjHnZZ3VFTXFofPvXd6oc0w0hl6ky4wgPQuIB0EURhmBhjKAMMMTWyIqEBEEREBRZCggAGjoUis
         iGIhKKhgD0gQUGIwiqioZEbWSnx5ee/l5ffHvd/aZ+9z99l7n7UuACRPHy4vBZYCIJkn4Ad6ONNXhUfQ
@@ -490,12 +490,11 @@
         RudN65tdA8sHzg46DF645Xrr8m2v29fvrLwzMBQydHc4cnjkLvvu5L2key/vZ9yff7DpIfph4SOpR+WP
         lR7X/aj3Y+uI5ciZUdfRvidBTx6Mscae/5T+04fx/Kfkp+UTqhONk2aTp6fcp24+W/1s/Hnq8/npgp+l
         f65+ofviu18cf+mbWTUz/pL/cuHX4lfyr468Xva6e9Z/9vGb5Dfzc4Vv5d8efcd41/s+7P3EfOYH7IeK
-        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEAAACxABrSO9dQAAAR5JREFUaEPt2sEKRVAQ
-        xnHv/1oiyUIsZCPZyEIsJEXco76SL7szs7nNb3XN1P8B7pxgWZZLR9A0DX5KC5IkOc8TX6KCMAzHccSX
-        qDtdVRW+RN3pKIr2fcdAzp12+r7HQA7SeZ5jIAdpZ11XzIQ86bZtMRPypNM0xUzIk3bmecZYwitd1zXG
-        El7pOI6P48DG2yvtDMOAjTdOl2WJjTdOO9u2YennI911HZZ+PtJZlmHp5yPtYOnH0sTSxNLE0sTSxNLE
-        0sTSxNLE0sTSxNLE0sTSxNLE0sTSxNLE0sTS5G/Siv9fK/7rrnUrKIoCG2+c1rrLKF6TFG9g0zRhLOFJ
-        K94bFa+kWrddxYu01h1d8fqv+GZB66WF4vsQrVct1/UDfo5y004FlhQAAAAASUVORK5CYII=
+        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAN5JREFUSEvtlkEKhDAQ
+        BPP/b4ki4kH0IF5EvIgHiQcRQXE20UHJbno+sGloSLoeMKWWZSEU1bYtP3+j0jSl8zz560ZFUUTTNPHX
+        zQXruuavmwvGcUz7vvP05oK2wzDw9OaBRVHw9OaBtuu68nzHgV3X8XzHgVmW8XzHgbbzPDPywKZpGHlg
+        kiR0HIcf2o7jiGFVVRjabtuGYd/3GOZ5jqFtgKYBmgZoGqBpgKYBmv49FO+neHnhzS7LEl976AmiYYhu
+        orVm9AVFHxJNCjqYaG/Q+0RjFF0TWqrot9iMiT5VIFGjVmVB6gAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="flowControl.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -750,9 +749,10 @@
         +EtVQ5M8k/Gpee3hQ8ojdwE29yzXgyPPe2MWKBZh/278VfJ5fgPBtfnTonvAjgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>38</value>
-  </metadata>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAgIAAAAEAIAAoCAEAFgAAACgAAACAAAAAAAEAAAEAIAAAAAAAAAABAMMOAADDDgAAAAAAAAAA

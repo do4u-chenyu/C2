@@ -14,7 +14,7 @@ namespace Citta_T1.Business
     {
         Operator,
         DataSource,
-        Relatetion,
+        Relation,
         Result,
         Remark,
         Null
@@ -36,7 +36,7 @@ namespace Citta_T1.Business
     {
         Runnnig,//正在计算
         Stop,//停止
-        Done,
+        Done,//运算完毕
         Null,
         Suspend//暂停
     }
@@ -48,22 +48,21 @@ namespace Citta_T1.Business
         private Control ctl;
         private string dataSourcePath;
         private string description;
-        private int identifying;
+        private int id;
+
 
 
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status { get => status; set => status = value; }
         public ElementSubType SubType { get => subType; set => subType = value; }
-
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
- 
         public string RemarkName { get => this.description; set => this.description = value; }
-        public int Identifying { get => this.identifying; set => this.identifying = value; }
+        public int ID { get => this.id; set => this.id = value; }
+       
 
 
-
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int identifying) 
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int identifying)
         {
             Init(type, ctl, des, bcpPath, status, subType, identifying);
         }
@@ -75,12 +74,12 @@ namespace Citta_T1.Business
 
         public static ModelElement CreateRemarkElement(string remarkText)
         {
-            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null,0);
+            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null, 0);
         }
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int identifying)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Null, ElementSubType.Null, identifying);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, identifying);
         }
 
 
@@ -93,9 +92,9 @@ namespace Citta_T1.Business
             this.dataSourcePath = bcpPath;
             this.SetName(des);
             this.description = des;
-            this.identifying = identifying;
+            this.id = identifying;
         }
-
+        
         public string GetDescription()
         {
             string des = "";
@@ -107,9 +106,6 @@ namespace Citta_T1.Business
                 case ElementType.Operator:
                     des = (ctl as MoveOpControl).textBox.Text;
                     break;
-                //case ElementType.Remark:
-                //    name = (ctl as RemarkControl).RemarkText;
-                //    break;
                 default:
                     break;
             }
@@ -138,9 +134,7 @@ namespace Citta_T1.Business
         {
             string path = "";
             if (this.type == ElementType.DataSource)
-            {
                 path = dataSourcePath;
-            }
             return path;
         }
 
@@ -148,15 +142,12 @@ namespace Citta_T1.Business
         {
             if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
                 ctl.Show();
-            else
-                return;
+
         }
         public void Hide()
         {
             if (this.type == ElementType.DataSource || this.type == ElementType.Operator)
                 ctl.Hide();
-            else
-                return;
         }
 
 
