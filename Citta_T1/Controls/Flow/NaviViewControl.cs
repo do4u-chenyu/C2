@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Flow
     {
         private List<Control> controls;
         private Pen pen;
-        private Point viewBoxPosition,ctWorldPosition, moveOffset;
+        private Point viewBoxPosition, ctWorldPosition, moveOffset;
         private int rate;
         private Pen p1 = new Pen(Color.LightGray, 0.0001f);
 
