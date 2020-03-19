@@ -97,8 +97,7 @@ namespace Citta_T1.Business
                 el1.Hide();
             }
         }
-        //public List<ModelElement> ModelElements()
-        //{ return this.modelElements; }
+
         public void ResetCount()
         {
             int num = 0;

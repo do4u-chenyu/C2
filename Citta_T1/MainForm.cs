@@ -77,8 +77,10 @@ namespace  Citta_T1
         }
 
         private void RemarkChange(RemarkControl rc)
-        { 
+        {
             SetDocumentDirty();
+            this.modelDocumentDao.UpdateRemark(rc);
+            
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)

@@ -34,8 +34,7 @@ namespace Citta_T1.Business
         }
         public string SaveDocument()
         {
-            AddDocumentRelation();
-            AddDocumentRelation();
+
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
             return this.currentDocument.ModelTitle;
