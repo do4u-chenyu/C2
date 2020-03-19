@@ -26,13 +26,5 @@ namespace Citta_T1.Utils
     {
         void ChangeLoc(float dx, float dy);
     }
-    //坐标转换接口
-    public interface IWorldLoc
-    {
-        Point ScreenToWorld(Point Ps, String op);
-    }
-    public interface IScreenFactor
-    {
-        float ScreenFactor();
-    }
+
 }

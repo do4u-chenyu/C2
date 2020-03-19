@@ -57,7 +57,6 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
-    <Compile Include="Controls\Interface\NaviewInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,7 +111,9 @@
     <Compile Include="Controls\Flow\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Move\MoveRsControl.cs" />
+    <Compile Include="Controls\Move\MoveRsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\Move\MoveRsControl.Designer.cs">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>

@@ -36,12 +36,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NaviViewControl";
             this.Size = new System.Drawing.Size(349, 135);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NaviViewControl_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseUp);
             this.ResumeLayout(false);
 
         }
