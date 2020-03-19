@@ -22,7 +22,6 @@ namespace Citta_T1.Controls
         private Bitmap staticImage;
 
         //记录拖动引起的坐标变化量
-        public Point dragMove = new Point(0,0);
         public float screenChange = 1;
 
         bool MouseIsDown = false;
@@ -182,16 +181,15 @@ namespace Citta_T1.Controls
                 
                 nowX = e.X;
                 nowY = e.Y;
-                //this.dragMove.X = this.dragMove.X + Convert.ToInt32((nowX - startX)/this.screenChange);
-                //this.dragMove.Y = this.dragMove.Y + Convert.ToInt32((nowY - startY)/this.screenChange);
-                Global.GetCurrentDocument().MapOrigin =new Point( Global.GetCurrentDocument().MapOrigin.X + Convert.ToInt32((nowX - startX) / this.screenChange), 
-                                                                  Global.GetCurrentDocument().MapOrigin.Y + Convert.ToInt32((nowY - startY) / this.screenChange));
-                ChangLoc(Convert.ToInt32((nowX - startX) / this.screenChange) - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).X, Convert.ToInt32((nowY - startY) / this.screenChange) - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).Y);
-                //this.dragMove.X = this.dragMove.X - WorldBoundControl(this.dragMove).X;
-                //this.dragMove.Y = this.dragMove.Y - WorldBoundControl(this.dragMove).Y;
-                Global.GetCurrentDocument().MapOrigin = new Point(Global.GetCurrentDocument().MapOrigin.X - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).X ,
-                                                  Global.GetCurrentDocument().MapOrigin.Y - WorldBoundControl(Global.GetCurrentDocument().MapOrigin).Y);
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin; 
+                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
+                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
 
+                
+                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                Point moveOffset = WorldBoundControl(mapOrigin);
+                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 startX = e.X;
                 startY = e.Y;
             }

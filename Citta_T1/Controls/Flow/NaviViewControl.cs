@@ -18,11 +18,11 @@ namespace Citta_T1.Controls.Flow
         private Point viewBoxPosition,ctWorldPosition;
         private int rate;
         private Pen p1 = new Pen(Color.LightGray, 0.0001f);
-        public int startX;
-        public int startY;
-        public int nowX;
-        public int nowY;
-        public bool startNaviView = false;
+        private int startX;
+        private int startY;
+        private int nowX;
+        private int nowY;
+        
         public NaviViewControl()
         {
             InitializeComponent();
@@ -56,24 +56,32 @@ namespace Citta_T1.Controls.Flow
             {
                 startX = e.X;
                 startY = e.Y;
-                startNaviView = true;
             }
         }
-
-
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
 
             Global.GetNaviViewControl().UpdateNaviView();
-            startNaviView = false;
         }
 
         private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
         {
+            
             if (e.Button == MouseButtons.Left)
             {
-
+                float factor = 1 / (this.Parent as CanvasPanel).screenChange;
+                nowX = e.X;
+                nowY = e.Y;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                int dx = Convert.ToInt32((-nowX + startX) * rate * factor);
+                int dy = Convert.ToInt32((-nowY + startY) * rate * factor);
+                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
+                (this.Parent as CanvasPanel).ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                startX = e.X;
+                startY = e.Y;
             }
             
         }
@@ -84,10 +92,10 @@ namespace Citta_T1.Controls.Flow
             Graphics gc = e.Graphics;
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
-            
-            float factor = 1/(this.Parent as CanvasPanel).screenChange;
-            Point dragMove1 = Global.GetCurrentDocument().MapOrigin;
-            viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), dragMove1);
+
+            float factor = 1 / (this.Parent as CanvasPanel).screenChange;
+            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width * factor) / rate , Convert.ToInt32(height * factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
@@ -97,7 +105,7 @@ namespace Citta_T1.Controls.Flow
             {
                 if (ct.Visible == true)
                 {
-                    ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ct.Location, dragMove1);
+                    ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                     rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X * factor) / rate, Convert.ToInt32(ctWorldPosition.Y * factor) / rate, 142 / rate, 25 / rate);
                     gc.DrawRectangle(pen, rect);
                 }
