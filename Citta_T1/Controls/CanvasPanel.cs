@@ -18,9 +18,6 @@ namespace Citta_T1.Controls
     public partial class CanvasPanel : Panel
     {
         public int sizeLevel = 0;
-        private bool isLeftMouseDown;
-        private float deltaX;
-        private float deltaY; 
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
 
@@ -33,7 +30,6 @@ namespace Citta_T1.Controls
 
 
         Graphics g;
-        Pen p;
 
         private Pen p1 = new Pen(Color.Gray, 0.0001f);
 
@@ -46,7 +42,7 @@ namespace Citta_T1.Controls
         }
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
-        public void ChangSize(bool isLarger, float factor=1.3F)
+        public void ChangSize(bool isLarger, float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -91,8 +87,8 @@ namespace Citta_T1.Controls
 
             //SetControlByDelta(dx, dy, this);
             foreach (Control con in Controls)
-            {
-                if (con is IDragable)
+            {   // 仅当前文档中的元素需要拖动
+                if (con.Visible && con is IDragable)
                 {
                     (con as IDragable).ChangeLoc(dx, dy);
                 }
@@ -100,18 +96,6 @@ namespace Citta_T1.Controls
         }
         #endregion
 
-        #region 控件大小随窗体大小等比例缩放
-        private int deep = 0;
-
-        //设置双缓冲区、解决闪屏问题
-        public static void SetDouble(Control cc)
-        {
-
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
-                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
-
-        }
-        #endregion
 
         #region 画布中鼠标拖动的事件
         public int startX;
@@ -119,31 +103,6 @@ namespace Citta_T1.Controls
         public int nowX;
         public int nowY;
 
-        private void SetControlByDelta(float dx, float dy, Control cons)
-        {
-            deep += 1;
-            // 遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-            {
-                ////获取控件的Tag属性值，并分割后存储字符串数组
-                SetDouble(this);
-                SetDouble(con);
-                if (con.Tag != null && ((deep == 1 && con is MoveOpControl)))
-                {
-                    Console.WriteLine(con.GetType().ToString());
-
-                    string[] mytag = con.Tag.ToString().Split(new char[] { ';' });
-                    //根据窗体缩放的比例确定控件的值
-                    con.Left = Convert.ToInt32(System.Convert.ToSingle(mytag[2]) + dx);//左边距
-                    con.Top = Convert.ToInt32(System.Convert.ToSingle(mytag[3]) + dy);//顶边距
-                    if (con.Controls.Count > 0)
-                    {
-                        SetControlByDelta(dx, dy, con);
-                    }
-                }
-            }
-            deep -= 1;
-            }
         #endregion
 
         #region 各种事件
