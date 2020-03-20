@@ -8,5 +8,7 @@ namespace Citta_T1.Business.Option
 {
     class BcpInfo
     {
+        private string fullBcpPath;
+        private List<ColumnInfo> columnInfos;
     }
 }

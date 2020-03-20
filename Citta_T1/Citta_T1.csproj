@@ -52,7 +52,6 @@
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
-    <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Schedule\Manager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGeneration.cs" />
