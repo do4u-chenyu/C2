@@ -23,14 +23,12 @@ namespace Citta_T1.Business.Model
         private string savePath;
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
-<<<<<<< HEAD:Citta_T1/Business/ModelDocument.cs
-        private Point mapOrigin = new Point(0,0);
-=======
+
         private int elementCount = 0;
         private List<ModelRelation> modelRelations;
         private Point mapOrigin = new Point(-600,-300);
 
->>>>>>> de7954ca04dc817595676b868292ea382e2690f3:Citta_T1/Business/Model/ModelDocument.cs
+
         /*
          * 传入参数为模型文档名称，当前用户名
          */

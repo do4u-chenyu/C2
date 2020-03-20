@@ -217,9 +217,9 @@ namespace Citta_T1.Controls.Move
                 }
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
-<<<<<<< HEAD
+
                 (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
-=======
+
                 (sender as MoveDtControl).Location = new Point(left, top);
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 // 更新相连点的坐标
@@ -228,8 +228,8 @@ namespace Citta_T1.Controls.Move
                  * TODO 会有闪烁的问题，`Invalidate`方法必须要带个重绘范围，要不然就是整个`CanvasPanel`重绘
                  * 最好不要调用`base.OnPaint(e)`，这样我只重绘一下背景板，其他的
                  */
-                (this.Parent.Parent as MainForm).panel3.Invalidate();
->>>>>>> de7954ca04dc817595676b868292ea382e2690f3
+                //(this.Parent.Parent as MainForm).panel3.Invalidate();
+
             }
         }
 
