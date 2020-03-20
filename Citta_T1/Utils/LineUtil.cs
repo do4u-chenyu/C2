@@ -1,4 +1,5 @@
-﻿using Citta_T1.Controls.Move;
+﻿using Citta_T1.Controls;
+using Citta_T1.Controls.Move;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -74,6 +75,11 @@ namespace Citta_T1.Utils
             return result[k];
         }
 
+        public static Rectangle ConvertRect(RectangleF r)
+        {
+            return new Rectangle((int)r.Left, (int)r.Top, (int)r.Width, (int)r.Height);
+        }
+
 
     }
 
@@ -85,6 +91,10 @@ namespace Citta_T1.Utils
         PointF a;
         PointF b;
         PointF[] points;
+
+        public PointF StartP { get => startP; set => startP = value; }
+        public PointF EndP { get => endP; set => endP = value; }
+
         //Pen pen;
         public Line(PointF p1, PointF p2)
         {
@@ -97,12 +107,40 @@ namespace Citta_T1.Utils
             points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
         }
 
+        public void Draw(CanvasWrapper canvas, RectangleF rect)
+        {
+            // TODO 这里并不是精准的局部划线
+            DrawLine(canvas.Graphics);
+        }
         public void DrawLine(Graphics g)
         {
             Pen pen = new Pen(Color.Green);
             g.DrawCurve(pen, points);
             //g.DrawBezier(this.pen, this.startP, this.a, this.b, this.endP);
             pen.Dispose();
+        }
+        public RectangleF GetBoundingRect()
+        {
+            // TODO 没有考虑到坐标系放大系数
+            return GetRect(startP, endP, 0);
+        }
+        public static RectangleF GetRect(PointF p1, PointF p2, double width)
+        {
+            double x = Math.Min(p1.X, p2.X);
+            double y = Math.Min(p1.Y, p2.Y);
+            double w = Math.Abs(p1.X - p2.X);
+            double h = Math.Abs(p1.Y - p2.Y);
+            RectangleF rect = GetRect(x, y, w, h);
+            rect.Inflate((float)width, (float)width);
+            return rect;
+        }
+        public static RectangleF GetRect(double x, double y, double w, double h)
+        {
+            return new RectangleF((float)x, (float)y, (float)w, (float)h);
+        }
+        public void OnMouseMove(PointF p)
+        {
+            endP = p;
         }
     }
 }

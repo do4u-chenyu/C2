@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath);
+    public delegate void delegateInputData(string name, string filePath, bool isutf8);
     public partial class FormInputData : Form
     {
         private bool m_isUTF8 = false;
@@ -24,7 +24,6 @@ namespace Citta_T1.Dialogs
         private bool textboxHasText = false;
         // 数据的存储形式，采用dict
         private Dictionary<string, string> contents = new Dictionary<string, string>();
-        private int numOfContents = 0;
         public FormInputData()
         {
             InitializeComponent();
@@ -76,12 +75,14 @@ namespace Citta_T1.Dialogs
             /*
              * 数据预览
              */
-            OpenFileDialog fd = new OpenFileDialog();
+            OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt";
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 m_filePath = fd.FileName;
+                string fileName = Path.GetFileNameWithoutExtension(@m_filePath);                
                 OverViewFile();
+                this.textBox1.Text = fileName;
             }
 
         }
@@ -115,7 +116,6 @@ namespace Citta_T1.Dialogs
         public event delegateInputData InputDataEvent;
         private void button2_Click(object sender, EventArgs e)
         {
-            string content;
             string name = this.textBox1.Text;
             if (this.textBox1.Text == "请输入数据名称")
             {
@@ -127,8 +127,8 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                PreLoadFile(m_filePath);
-                InputDataEvent(name, m_filePath);
+                PreLoadFile(m_filePath, this.m_isUTF8);
+                InputDataEvent(name, m_filePath, this.m_isUTF8);
                 DvgClean();
                 Close();
                 //if (this.m_isUTF8)
@@ -225,16 +225,16 @@ namespace Citta_T1.Dialogs
             }
 
             catch
-            {
-                // TODO 异常处理
+            {;
+                Console.WriteLine("FromInputData.OverViewFile occurs error! ");
             }
         }
 
-        public void PreLoadFile(string filePath)
+        public void PreLoadFile(string filePath, bool isUTF8)
         {
             System.IO.StreamReader sr;
             string contents = "";
-            if (this.m_isUTF8)
+            if (isUTF8)
             {
                 sr = File.OpenText(filePath);
             }

@@ -70,7 +70,7 @@ namespace Citta_T1.Business
             XmlNode node = xDoc.SelectSingleNode("login");
             XmlNodeList nodeLists = node.ChildNodes;
             foreach (XmlNode xn in nodeLists)
-                if (xn.Name == userType && xn.SelectSingleNode("name")!=null)
+                if (xn.Name == userType && xn.SelectSingleNode("name") != null)
                     usersList.Add(xn.SelectSingleNode("name").InnerText);
             return usersList;
         }

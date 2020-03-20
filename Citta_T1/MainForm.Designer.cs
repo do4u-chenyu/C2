@@ -939,7 +939,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;
         public System.Windows.Forms.Button blankButton;
-        private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
     }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Title;
-using Citta_T1.Business;
+using Citta_T1.Business.Model;
 using Citta_T1.Controls;
 using Citta_T1.Controls.Left;
 

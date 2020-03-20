@@ -11,7 +11,7 @@ using Citta_T1.Controls;
 using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
-using Citta_T1.Business;
+using Citta_T1.Business.Model;
 using System.IO;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
@@ -31,7 +31,7 @@ namespace  Citta_T1
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
-        private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
+        private ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
   
 
@@ -44,7 +44,7 @@ namespace  Citta_T1
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
-            this.modelDocumentDao = new Business.ModelDocumentDao();
+            this.modelDocumentDao = new ModelDocumentDao();
             InitializeControlsLocation();
             
             InitializeGlobalVariable();
@@ -77,8 +77,10 @@ namespace  Citta_T1
         }
 
         private void RemarkChange(RemarkControl rc)
-        { 
+        {
             SetDocumentDirty();
+            this.modelDocumentDao.UpdateRemark(rc);
+            
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
@@ -92,7 +94,7 @@ namespace  Citta_T1
             if (this.modelDocumentDao.CurrentDocument.Dirty)
                 return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
-            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             mtc.SetDirtyPictureBox();
            
@@ -148,7 +150,10 @@ namespace  Citta_T1
         public void LoadDocument(string modelTitle)
         {
             this.modelTitlePanel.AddModel(modelTitle);
-            this.modelDocumentDao.LoadDocumentElements();
+            this.modelDocumentDao.CurrentDocument.Load();
+            this.modelDocumentDao.CurrentDocument.ResetCount();
+            this.modelDocumentDao.CurrentDocument.Show();
+            this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
             // 加载文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
@@ -158,8 +163,9 @@ namespace  Citta_T1
         }
         private void LoadDocuments(string userName)
         {
-            if (this.modelDocumentDao.NewUserLogin(this.userName))
-            {   // 加载阶段，事件不起作用，需要手工将模型加入到Dao类中
+
+            if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
+            {
                 this.modelTitlePanel.AddModel("我的新模型");
                 this.modelDocumentDao.AddBlankDocument("我的新模型", this.userName);
                 return;
@@ -174,7 +180,7 @@ namespace  Citta_T1
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
                 CanvasAddElement(doc);                    
             }
-            // 这里我就看不懂了
+            // 这里我就看不懂了,将用户本地保存的模型文档加载到左侧myModelControl
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
             {
@@ -189,7 +195,7 @@ namespace  Citta_T1
         }
         private void CanvasAddElement(ModelDocument doc)
         {
-            foreach (ModelElement me in doc.ModelElements())
+            foreach (ModelElement me in doc.ModelElements)
             {
                 Control ct = me.GetControl;
                 if (ct is RemarkControl)
@@ -399,18 +405,18 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath)
+        void frm_InputDataEvent(string name, string filePath, bool isutf8)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            this.dataSourceControl.GenDataButton(name, filePath);
+            this.dataSourceControl.GenDataButton(name, filePath, isutf8);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath)
+        public void PreViewDataByBcpPath(string bcpPath, bool isUTF8)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, isUTF8);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -422,7 +428,7 @@ namespace  Citta_T1
             this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-
+            //加载文件
             LoadDocuments(this.userName);
 
             InitializeMainFormEventHandler();
@@ -487,14 +493,15 @@ namespace  Citta_T1
         {
             // 如果文档不dirty的情况下, 对于大文档, 不做重复保存,以提高性能
             if (!this.modelDocumentDao.CurrentDocument.Dirty)
-                if (this.modelDocumentDao.CurrentDocument.ModelElements().Count > 10)
+                if (this.modelDocumentDao.CurrentDocument.ModelElements.Count > 10)
                     return;
 
-            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelDocumentTitle;
+            string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
             SaveDocument();
             mtc.ClearDirtyPictureBox();            
+
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -508,9 +515,8 @@ namespace  Citta_T1
             {
                 if (md.Dirty == true)
                 {
-                    DialogResult result = MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    if (result == DialogResult.OK)
-                        e.Cancel = true;
+                    MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel=true;
                     return;
                 }
             }

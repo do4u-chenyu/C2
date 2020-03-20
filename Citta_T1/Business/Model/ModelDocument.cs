@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Business
+namespace Citta_T1.Business.Model
 {
 
     /*
@@ -23,18 +23,34 @@ namespace Citta_T1.Business
         private string savePath;
         //private bool selected;
         private bool dirty;//字段表示模型是否被修改
+<<<<<<< HEAD:Citta_T1/Business/ModelDocument.cs
         private Point mapOrigin = new Point(0,0);
+=======
+        private int elementCount = 0;
+        private List<ModelRelation> modelRelations;
+        private Point mapOrigin = new Point(-600,-300);
+
+>>>>>>> de7954ca04dc817595676b868292ea382e2690f3:Citta_T1/Business/Model/ModelDocument.cs
         /*
          * 传入参数为模型文档名称，当前用户名
          */
-        public string ModelDocumentTitle {get => this.modelTitle;}
+        public string ModelTitle {get => this.modelTitle;}
         public bool Dirty { get => dirty; set => dirty = value; }
+
+        public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
+        public string SavePath { get => savePath; set => savePath = value; }
+        internal List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
+        internal List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
+
+
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
+            this.modelRelations = new List<ModelRelation>();
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*
@@ -42,15 +58,21 @@ namespace Citta_T1.Business
          */
         public void Save()
         {
-            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-            dSaveLoad.WriteXml(modelElements);
+            DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
+            dSaveLoad.WriteXml();
+    
         }
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
             dirty = true;
         }
-        
+        public void AddModelRelation(ModelRelation modelRelation)
+        {
+            this.modelRelations.Add(modelRelation);
+            dirty = true;
+        }
+
         public void DeleteModelElement(Control control)
         {
             foreach (ModelElement me in this.modelElements)
@@ -66,8 +88,8 @@ namespace Citta_T1.Business
         {
             if (File.Exists(savePath + modelTitle +".xml"))
             {
-                DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(savePath, modelTitle);
-                this.modelElements = dSaveLoad.ReadXml();
+                DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
+                dSaveLoad.ReadXml();
             }          
         }
 
@@ -86,6 +108,18 @@ namespace Citta_T1.Business
                 el1.Hide();
             }
         }
+
+        public void ResetCount()
+        {
+            int num = 0;
+            foreach (ModelElement me in this.modelElements)
+            {
+                if (me.ID > num)
+                    num = me.ID;
+            }
+            this.elementCount = num;   
+        }
+
         
         public Point ScreenToWorld(Point Ps, Point Pm)
         {
@@ -95,7 +129,5 @@ namespace Citta_T1.Business
             return Pw;
         }
 
-        public List<ModelElement> ModelElements()
-        { return this.modelElements; }
     }
 }

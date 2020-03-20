@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.Business;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Dialogs
 {
@@ -57,11 +49,13 @@ namespace Citta_T1.Dialogs
              
             }
             catch
-            { }
+            { 
+                Console.WriteLine("CreateNewMode.AddButton_Click occurs error!");
+            }
             //与内存中命名相同
             foreach (ModelDocument md in mainForm.DocumentsList())
             {
-                if (this.textBoxEx1.Text == md.ModelDocumentTitle)
+                if (this.textBoxEx1.Text == md.ModelTitle)
                 {
                     DialogResult result = MessageBox.Show(this.textBoxEx1.Text + "已存在，请重名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     if (DialogResult.OK == result)

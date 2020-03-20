@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using Citta_T1.Business;
+using Citta_T1.Controls.Interface;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls
 {
@@ -33,7 +31,24 @@ namespace Citta_T1.Controls
         private Pen p1 = new Pen(Color.Gray, 0.0001f);
 
         // 绘图
+        // 绘图
         public List<Line> lines = new List<Line>() { };
+        public enum eCommandType
+        {
+            draw,
+            select
+        }
+        public eCommandType cmd = eCommandType.select;
+        public PointF startP;
+        private Control startC;
+        private Control endC;
+        Rectangle invalidateRectWhenMoving;
+        Line lineWhenMoving;
+
+        public void SetStartP(PointF p)
+        {
+            startP = p;
+        }
         public CanvasPanel()
         {
             InitializeComponent();
@@ -106,7 +121,12 @@ namespace Citta_T1.Controls
         public int startY;
         public int nowX;
         public int nowY;
-        private bool selectFrame = false;
+
+
+        public Control SetStartC { set => startC = value; }
+        public Control SetEndC { set => endC = value; }
+
+
         #endregion
 
         #region 各种事件
@@ -115,12 +135,14 @@ namespace Citta_T1.Controls
             ElementType type = ElementType.Null;
             string path = "";
             string text = "";
+            bool isutf8 = false;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             try
             {
                 type = (ElementType)e.Data.GetData("Type");
                 path = e.Data.GetData("Path").ToString();
                 text = e.Data.GetData("Text").ToString();
+                isutf8 = (bool)e.Data.GetData("isUTF8");
             }
             catch (Exception ex)
             {
@@ -141,7 +163,7 @@ namespace Citta_T1.Controls
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 MouseIsDown = true;
-                selectFrame = true;
+                
                 basepoint = e.Location;
 
                 staticImage = new Bitmap(this.Width, this.Height);
@@ -179,6 +201,7 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
+            // 画框
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
             {
 
@@ -202,29 +225,109 @@ namespace Citta_T1.Controls
                 g.Dispose();
 
             }
-            //else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
-            //{
-            //    Bitmap i = new Bitmap(this.staticImage);
-            //    Graphics n = this.CreateGraphics();
-            //    n.DrawImageUnscaled(i, e.X-startX, e.Y-startY);
-            //    n.Dispose();
-            //}
+
+            // 控件移动
+            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
+            {
+
+                nowX = e.X;
+                nowY = e.Y;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin; 
+                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
+                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
+
+                
+                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                Point moveOffset = WorldBoundControl(mapOrigin);
+                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                startX = e.X;
+                startY = e.Y;
+            }
+            // 绘制
+            else if (cmd == eCommandType.draw)
+            {
+                nowX = e.X;
+                nowY = e.Y;
+                PointF nowP = new PointF(nowX, nowY);
+                if (lineWhenMoving != null)
+                    invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
+                else
+                    invalidateRectWhenMoving = new Rectangle();
+
+                Console.WriteLine("line'count = " + lines.Count().ToString());
+                lineWhenMoving = new Line(startP, nowP);
+                Console.WriteLine("line'count = " + lines.Count().ToString());
+                // TODO 这里可能受到分辨率的影响
+                RepaintStatic(invalidateRectWhenMoving);
+                lineWhenMoving.OnMouseMove(nowP);
+                // 重绘曲线
+                RepaintObject(lineWhenMoving);
+
+            }
+        }
+
+        private void RepaintObject(Line line)
+        {
+            //RelationLine line = new RelationLine();
+            //Global.GetModelDocumentDao().CurrentDocument.Relations.Remove(line);
+            if (line == null)
+                return;
+            //Bitmap bgc = (Bitmap)staticImage.Clone();
+            //CanvasWrapper dc = new CanvasWrapper(this, Graphics.FromImage(bgc), ClientRectangle);
+            //CanvasWrapper dc = new CanvasWrapper(this, this.Parent.CreateGraphics(), ClientRectangle);
+            //RectangleF invalidaterect = obj.GetBoundingRect();
+            //obj.Draw(dc, invalidaterect);
+            //dc.Graphics.Dispose();
+            //dc.Dispose();
+            //BackgroundImage = bgc;
+            //bgc.Save("Citta_repaint.png");
+            g = this.CreateGraphics();
+            line.DrawLine(g);
+            g.Dispose();
+        }
+
+        private void RepaintStatic(Rectangle r)
+        {
+            if (this.staticImage == null)
+                return;
+            //g = Graphics.FromImage(BackgroundImage);
+            g = this.CreateGraphics();
+            if (r.X < 0) r.X = 0;
+            if (r.X > this.staticImage.Width) r.X = 0;
+            if (r.Y < 0) r.Y = 0;
+            if (r.Y > this.staticImage.Height) r.Y = 0;
+
+            if (r.Width > this.staticImage.Width || r.Width < 0)
+                r.Width = this.staticImage.Width;
+            if (r.Height > this.staticImage.Height || r.Height < 0)
+                r.Height = this.staticImage.Height;
+            // 用保存好的图来局部覆盖当前背景图
+            this.staticImage.Save("Citta_repaintStatic.png");
+            Pen pen = new Pen(Color.Red);
+            //g.DrawRectangle(pen, r);
+            pen.Dispose();
+            this.staticImage.Save("Citta_repaintStatic.png");
+            r.Inflate(1, 1);
+            g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
+            g.Dispose();
 
         }
 
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            selectFrame = false;
+
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 Bitmap i = new Bitmap(this.staticImage);
                 Graphics n = this.CreateGraphics();
                 n.DrawImageUnscaled(i, 0, 0);
                 n.Dispose();
-                //标志位置低
+                // 标志位置低
                 MouseIsDown = false;
             }
-            if (((MainForm)(this.Parent)).flowControl.selectDrag)
+
+            else if (((MainForm)(this.Parent)).flowControl.selectDrag)
             {
                 Console.WriteLine("拖拽结束");
 
@@ -234,8 +337,6 @@ namespace Citta_T1.Controls
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
                 int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
-
-
                 mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
                 Point moveOffset = WorldBoundControl(mapOrigin);
                 ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
@@ -244,8 +345,27 @@ namespace Citta_T1.Controls
                 startY = e.Y;
 
                 Global.GetNaviViewControl().UpdateNaviView();
-
             }
+
+            else if (cmd == eCommandType.draw)
+            {
+                Line line = new Line(startP, new PointF(e.X, e.Y));
+                lines.Add(line);
+                Console.WriteLine("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                /* 
+                 * TODO 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
+                 * 只保存线索引
+                 *         __________
+                 * endP1  | MControl | startP
+                 * endP2  |          |
+                 *         ----------
+                 */
+                int line_index = lines.IndexOf(line);
+                (this.startC as IMoveControl).SaveStartLines(line_index);
+                (this.endC as IMoveControl).SaveEndLines(line_index);
+                cmd = eCommandType.select;
+            }
+            
         }
 
         //public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
@@ -321,15 +441,60 @@ namespace Citta_T1.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            // `Invalidate`方法会强制重绘panel，因为调用该方法
+            Console.WriteLine("开始重绘！" + "重绘范围： " + e.ClipRectangle.ToString());
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            if (lines.Count() > 0)
+            Rectangle clipRectangle = e.ClipRectangle;
+            //注释掉后看划线区域
+            //MainForm mainF = Global.GetMainForm();
+            //Rectangle clipRectangle = new Rectangle(mainF.panel3.Location, new Size(mainF.panel3.Width, mainF.panel3.Height));
+            //g = this.CreateGraphics();
+            //Pen p = new Pen(Color.Green);
+            //g.DrawRectangle(p, clipRectangle);
+            //p.Dispose();
+            //g.Dispose();
+            // 保存重绘前的图
+            if (this.staticImage == null)
             {
-                foreach(Line line in lines)
+                clipRectangle = ClientRectangle;
+                this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
+                //BackgroundImage = (Bitmap)this.staticImage.Clone();
+                this.staticImage.Save("static_image_save.bmp");
+            }
+            CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+            // 给staticImage上色
+            dcStatic.DrawBackgroud(clipRectangle);
+            // 将`需要重绘`IDrawable对象重绘在静态图上
+            Draw(dcStatic, clipRectangle);
+            // 将静态图绘制在CanvasPanle里
+            //g = Graphics.FromImage(BackgroundImage);
+            g = this.CreateGraphics();
+            g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
+            g.Dispose();
+            dcStatic.Dispose();
+
+        }
+
+        private void Draw(CanvasWrapper dcStatic, RectangleF rect)
+        {
+            // TODO
+            int cnt = 0;
+            Console.WriteLine("line'number = " + lines.Count() + ", ");
+            foreach (Line line in lines)
+            {
+                if (line == null)
                 {
-                    line.DrawLine(g);
+                    Console.WriteLine("line == null!");
+                    continue;
                 }
+                // 不在该区域内就别重绘了
+                //bool isInRect = (line as IDrawObject).ObjectInRectangle(rect);
+                //if (isInRect == false)
+                //    Console.WriteLine("line 不在区域" + rect.ToString() + "内");
+                //    continue;
+                line.Draw(dcStatic, rect);
+                Console.WriteLine("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
+                cnt += 1;
+                Console.WriteLine("已重绘" + cnt + "条曲线");
             }
 
         }
@@ -393,22 +558,6 @@ namespace Citta_T1.Controls
             return dragOffset;
         }
         #endregion
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        if (selectFrame)
-        //        {
-        //            return base.CreateParams;
-        //        }
-        //        else
-        //        {
-        //            CreateParams cp = base.CreateParams;
-        //            cp.ExStyle |= 0x02000000;//用双缓冲绘制窗口的所有子控件
-        //            return cp;
-        //        }
 
-        //    }
-        //}
     }
 }
