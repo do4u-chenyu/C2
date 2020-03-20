@@ -30,15 +30,15 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
-            List<ModelElement> elementList = this.modelDocument.ModelElements;
+            List<ModelElement> modelElements = this.modelDocument.ModelElements;
             List<ModelRelation> modelRelations = this.modelDocument.ModelRelations;
-            WriteModelElements(xDoc, modelDocumentXml, elementList);
+            WriteModelElements(xDoc, modelDocumentXml, modelElements);
             WriteModelRelations(xDoc, modelDocumentXml, modelRelations);
             xDoc.Save(modelFilePath);
         }
-        private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> elementList)
+        private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
         {
-            foreach (ModelElement me in elementList)
+            foreach (ModelElement me in modelElements)
             {
                 XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
                 modelDocumentXml.AppendChild(modelElementXml);
@@ -189,12 +189,12 @@ namespace Citta_T1.Business.Model
                 }
                 else if (type == "Relation")
                 {
-                    string startControl = xn.SelectSingleNode("start").InnerText;
-                    string endControl = xn.SelectSingleNode("end").InnerText;
+                    string startID = xn.SelectSingleNode("start").InnerText;
+                    string endID = xn.SelectSingleNode("end").InnerText;
                     string startLocation = xn.SelectSingleNode("startlocation").InnerText;
                     string endLocation = xn.SelectSingleNode("endlocation").InnerText;
                     string endPin = xn.SelectSingleNode("endpin").InnerText;
-                    ModelRelation modelRelationElement = new ModelRelation(startControl, endControl, startLocation, endLocation, endPin);
+                    ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
                     this.modelDocument.ModelRelations.Add(modelRelationElement);
                 }
             }
