@@ -12,11 +12,11 @@ namespace Citta_T1.Business.Model
 {
     public enum ElementType
     {
-        Operator,
-        DataSource,
-        Relation,
-        Result,
-        Remark,
+        Operator,   // 算子
+        DataSource, // 数据源
+        Relation,   // 画线关系
+        Result,     // 算子运算结果
+        Remark,     // 模型文档备注
         Null
     }
     public enum ElementSubType
