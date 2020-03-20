@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\Model\DocumentSaveLoad.cs" />
     <Compile Include="Business\Model\ModelDocumentDao.cs" />
     <Compile Include="Business\Model\ModelDocument.cs" />
