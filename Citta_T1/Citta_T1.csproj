@@ -56,6 +56,8 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
+    <Compile Include="Controls\CanvasWrapper.cs" />
+    <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +280,7 @@
     <Compile Include="Utils\OpUtil.cs" />
     <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\DataSourceControl.resx">
       <DependentUpon>DataSourceControl.cs</DependentUpon>
@@ -296,12 +299,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\RemarkControl.resx">
       <DependentUpon>RemarkControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\RightShowButton.resx">
       <DependentUpon>RightShowButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Move\MoveRsControl.resx">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
@@ -326,6 +332,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
       <DependentUpon>CreateNewModel.cs</DependentUpon>
@@ -345,6 +352,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\OperatorControl.resx">
       <DependentUpon>OperatorControl.cs</DependentUpon>

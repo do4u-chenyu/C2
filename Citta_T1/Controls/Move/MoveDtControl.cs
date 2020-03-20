@@ -11,11 +11,13 @@ using Citta_T1.Utils;
 
 using Citta_T1.Controls.Flow;
 using System.Text.RegularExpressions;
+using static Citta_T1.Controls.CanvasPanel;
+using Citta_T1.Controls.Interface;
 
 namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
-    public partial class MoveDtControl: UserControl, IScalable, IDragable
+    public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
 
     {
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
@@ -23,6 +25,7 @@ namespace Citta_T1.Controls.Move
         public string MDCName { get => this.textBox1.Text; }
         private string oldTextString;
         private Point oldcontrolPosition;
+        private bool isUTF8;
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -49,6 +52,9 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
 
+        // 以该控件为起点的所有点
+        private List<int> startPointsIndex = new List<int>() { };
+        // 以该控件为终点的所有点
         #endregion
 
 
@@ -142,7 +148,7 @@ namespace Citta_T1.Controls.Move
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.PreViewDataByBcpPath(this.Name);
+            prt.PreViewDataByBcpPath(this.Name, this.isUTF8);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -199,6 +205,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
+            // 按住拖拽
             if (isMouseDown)
             {
                 if (sender is Button)
@@ -216,6 +223,14 @@ namespace Citta_T1.Controls.Move
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
                 (sender as MoveDtControl).Location = new Point(left, top);
+                Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
+                // 更新相连点的坐标
+                UpdateLineWhenMoving();
+                /* 
+                 * TODO 会有闪烁的问题，`Invalidate`方法必须要带个重绘范围，要不然就是整个`CanvasPanel`重绘
+                 * 最好不要调用`base.OnPaint(e)`，这样我只重绘一下背景板，其他的
+                 */
+                (this.Parent.Parent as MainForm).panel3.Invalidate();
             }
         }
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
@@ -233,7 +248,7 @@ namespace Citta_T1.Controls.Move
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.PreViewDataByBcpPath(this.GetBcpPath());
+            prt.PreViewDataByBcpPath(this.GetBcpPath(), this.isUTF8);
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveOpControl_MouseDown(sender, e);
@@ -438,6 +453,11 @@ namespace Citta_T1.Controls.Move
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
             Console.WriteLine(this.Location.ToString());
             isMouseDown = true;
+            CanvasPanel canvas = (this.Parent as CanvasPanel);
+            canvas.cmd = eCommandType.draw;
+            canvas.SetStartC = this;
+            canvas.SetStartP(new PointF(startX, startY));
+            canvas.Invalidate();
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -462,7 +482,11 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            (this.Parent as CanvasPanel).lines.Add(line);
+            CanvasPanel canvas = (this.Parent as CanvasPanel);
+            if (canvas.cmd == eCommandType.draw)
+            {
+                canvas.SetEndC = this;
+            }
         }
         #endregion
 
@@ -557,11 +581,11 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 重绘
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            //(this.Parent as CanvasPanel).Invalidate();
-        }
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    base.OnPaint(e);
+        //    //(this.Parent as CanvasPanel).Invalidate();
+        //}
         #endregion
 
         #region 文档修改事件
@@ -575,9 +599,41 @@ namespace Citta_T1.Controls.Move
         {
             // ModelDocumentDirtyEvent?.Invoke();
         }
+
         #endregion
+        #endregion
+        /*
+         * 当空间移动的时候，更新该控件连接线的坐标
+         */
+        public void UpdateLineWhenMoving()
+        {
+            // TODO 重绘的时候有问题，需要考虑到控件移动影响到的区域
+            int index;
+            Line line;
+            CanvasPanel canvas = this.Parent as CanvasPanel;
+            for(int i = 0;i < startPointsIndex.Count(); i++)
+            {
+                index = startPointsIndex[i];
+                line = canvas.lines[index];
+                Console.WriteLine("准备更新Line坐标，索引：" + index.ToString() + ", 坐标： " + line.StartP.ToString() + ", 当前点坐标: " + this.Location.ToString());
+                //line.StartP = canvas.PointToClient(this.rightPictureBox.Location);
+                line.StartP = this.Location;
+                Console.WriteLine("已更新一条曲线坐标！曲线索引： " + index);
+            }
+        }
+        public void SaveStartLines(int line_index)
+        {
+            this.startPointsIndex.Add(line_index);
+        }
+
+        public void SaveEndLines(int line_index)
+        {
+            
+        }
     }
-    #endregion
+
+
+
 
 
 
