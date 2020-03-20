@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Option
 {
-    class BcpInfo
+    class CollideOperatorOption
     {
-        private string fullBcpPath;
-        private List<ColumnInfo> columnInfos;
     }
 }

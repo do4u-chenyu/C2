@@ -12,15 +12,17 @@ namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
+        public bool isUTF8;
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName)
+        public DataButton(string ffp, string dataName, bool isutf8)
         {
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = dataName;
+            this.isUTF8 = isutf8;
         }
         private void moveOpControl1_Load(object sender, EventArgs e)
         {

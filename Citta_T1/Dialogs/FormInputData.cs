@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath);
+    public delegate void delegateInputData(string name, string filePath, bool isutf8);
     public partial class FormInputData : Form
     {
         private bool m_isUTF8 = false;
@@ -127,9 +127,8 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                PreLoadFile(m_filePath);
-                InputDataEvent(name, m_filePath);
-                
+                PreLoadFile(m_filePath, this.m_isUTF8);
+                InputDataEvent(name, m_filePath, this.m_isUTF8);
                 DvgClean();
                 Close();
                 //if (this.m_isUTF8)
@@ -226,16 +225,16 @@ namespace Citta_T1.Dialogs
             }
 
             catch
-            {
-                // TODO 异常处理
+            {;
+                Console.WriteLine("FromInputData.OverViewFile occurs error! ");
             }
         }
 
-        public void PreLoadFile(string filePath)
+        public void PreLoadFile(string filePath, bool isUTF8)
         {
             System.IO.StreamReader sr;
             string contents = "";
-            if (this.m_isUTF8)
+            if (isUTF8)
             {
                 sr = File.OpenText(filePath);
             }

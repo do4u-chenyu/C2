@@ -49,7 +49,9 @@ namespace Citta_T1.Dialogs
              
             }
             catch
-            { }
+            { 
+                Console.WriteLine("CreateNewMode.AddButton_Click occurs error!");
+            }
             //与内存中命名相同
             foreach (ModelDocument md in mainForm.DocumentsList())
             {

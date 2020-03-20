@@ -34,11 +34,12 @@ namespace Citta_T1.Business.Model
     }
     public enum ElementStatus
     {
-        Runnnig,//正在计算
-        Stop,//停止
-        Done,//运算完毕
-        Null,
-        Suspend//暂停
+        Runnnig, //正在计算
+        Stop,    //停止
+        Done,    //运算完毕
+        Suspend, //暂停
+        Ready,   //已经完成算子配置,随时可以开始运算
+        Null,    //初始状态
     }
     class ModelElement
     {

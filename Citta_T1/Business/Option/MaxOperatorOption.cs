@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Option
 {
-    class BcpInfo
+    class MaxOperatorOption
     {
-        private string fullBcpPath;
-        private List<ColumnInfo> columnInfos;
     }
 }
