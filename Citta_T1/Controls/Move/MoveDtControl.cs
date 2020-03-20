@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
 
@@ -28,7 +22,7 @@ namespace Citta_T1.Controls.Move
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-        public event DeleteOperatorEventHandler DeleteOperatorEvent;
+        //public event DeleteOperatorEventHandler DeleteOperatorEvent;
 
         private bool isMouseDown = false;
         public bool isClicked = false;
@@ -134,7 +128,7 @@ namespace Citta_T1.Controls.Move
             this.overViewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
             this.contextMenuStrip.Items.Insert(0, this.overViewMenuItem);
         }
-        public new void InitializeOpPinPicture()
+        public void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox1.Text);
             this.Controls.Remove(this.leftPinPictureBox);

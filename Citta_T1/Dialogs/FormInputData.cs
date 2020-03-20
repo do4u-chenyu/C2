@@ -24,7 +24,6 @@ namespace Citta_T1.Dialogs
         private bool textboxHasText = false;
         // 数据的存储形式，采用dict
         private Dictionary<string, string> contents = new Dictionary<string, string>();
-        private int numOfContents = 0;
         public FormInputData()
         {
             InitializeComponent();
@@ -115,7 +114,6 @@ namespace Citta_T1.Dialogs
         public event delegateInputData InputDataEvent;
         private void button2_Click(object sender, EventArgs e)
         {
-            string content;
             string name = this.textBox1.Text;
             if (this.textBox1.Text == "请输入数据名称")
             {

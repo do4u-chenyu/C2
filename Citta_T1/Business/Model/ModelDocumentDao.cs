@@ -9,7 +9,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
 using System.Xml;
 
-namespace Citta_T1.Business
+namespace Citta_T1.Business.Model
 {
     class ModelDocumentDao
     {

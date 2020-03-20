@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Citta_T1.Business
+namespace Citta_T1.Business.Model
 {
     class ModelRelation
     {

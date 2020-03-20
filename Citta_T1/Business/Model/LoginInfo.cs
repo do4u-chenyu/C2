@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Citta_T1.Business
+namespace Citta_T1.Business.Model
 {
     class LoginInfo
     {

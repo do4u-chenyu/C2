@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
-using Citta_T1.Business;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls
 {
@@ -178,7 +174,7 @@ namespace Citta_T1.Controls
             }
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
-                
+
                 nowX = e.X;
                 nowY = e.Y;
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin; 

@@ -45,18 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\DocumentSaveLoad.cs" />
-    <Compile Include="Business\ModelDocumentDao.cs" />
-    <Compile Include="Business\ModelDocument.cs" />
-    <Compile Include="Business\ModelElement.cs" />
-    <Compile Include="Business\ModelRelationElement.cs" />
+    <Compile Include="Business\Model\DocumentSaveLoad.cs" />
+    <Compile Include="Business\Model\ModelDocumentDao.cs" />
+    <Compile Include="Business\Model\ModelDocument.cs" />
+    <Compile Include="Business\Model\ModelElement.cs" />
+    <Compile Include="Business\Model\ModelRelation.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\CanvasPanel.Designer.cs">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\LoginInfo.cs" />
+    <Compile Include="Business\Model\LoginInfo.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
     </Compile>

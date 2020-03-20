@@ -11,7 +11,7 @@ using Citta_T1.Controls;
 using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
-using Citta_T1.Business;
+using Citta_T1.Business.Model;
 using System.IO;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
@@ -31,7 +31,7 @@ namespace  Citta_T1
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
-        private Citta_T1.Business.ModelDocumentDao modelDocumentDao;
+        private ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
   
 
@@ -44,7 +44,7 @@ namespace  Citta_T1
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
-            this.modelDocumentDao = new Business.ModelDocumentDao();
+            this.modelDocumentDao = new ModelDocumentDao();
             InitializeControlsLocation();
             
             InitializeGlobalVariable();
