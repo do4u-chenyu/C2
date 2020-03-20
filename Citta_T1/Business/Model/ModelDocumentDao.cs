@@ -95,28 +95,28 @@ namespace Citta_T1.Business.Model
                     type = "JoinOperator";
                     break;
                 case "取交集":
-                    type = "IntersectionOperator";
+                    type = "CollideOperator";
                     break;
                 case "取并集":
                     type = "UnionOperator";
                     break;
                 case "取差集":
-                    type = "DifferenceOperator";
+                    type = "DifferOperator";
                     break;
                 case "随机采样":
-                    type = "RandomSamplingOperator";
+                    type = "RandomOperator";
                     break;
                 case "过滤算子":
                     type = "FilterOperator";
                     break;
                 case "取最大值":
-                    type = "MaximumValueOperator";
+                    type = "MaxOperator";
                     break;
                 case "取最小值":
-                    type = "MinmumValueOperator";
+                    type = "MinOperator";
                     break;
                 case "取平均值":
-                    type = "MeanValueOperator";
+                    type = "AvgOperator";
                     break;
                 default:
                     break;
