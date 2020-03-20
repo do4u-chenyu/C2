@@ -75,12 +75,14 @@ namespace Citta_T1.Dialogs
             /*
              * 数据预览
              */
-            OpenFileDialog fd = new OpenFileDialog();
+            OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt";
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 m_filePath = fd.FileName;
+                string fileName = Path.GetFileNameWithoutExtension(@m_filePath);                
                 OverViewFile();
+                this.textBox1.Text = fileName;
             }
 
         }
@@ -127,6 +129,7 @@ namespace Citta_T1.Dialogs
             {
                 PreLoadFile(m_filePath);
                 InputDataEvent(name, m_filePath);
+                
                 DvgClean();
                 Close();
                 //if (this.m_isUTF8)
