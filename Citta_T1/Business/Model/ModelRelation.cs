@@ -20,14 +20,14 @@ namespace Citta_T1.Business.Model
         public string End { get => this.end; set => this.end = value; }
         public string StartLocation { get => this.startLocation; set => this.startLocation = value; }
         public string EndLocation { get => endLocation; set => endLocation = value; }
-        public ModelRelation( string startControl, string endControl, string startLocation, string endLocation, string endPinLabel)
+        public ModelRelation(string startID, string endID, string startLocation, string endLocation, string endPin)
         {
           
-            this.start = startControl;
-            this.end = endControl;
+            this.start = startID;
+            this.end = endID;
             this.startLocation = startLocation;
             this.endLocation = endLocation;
-            this.endPin = endPinLabel;
+            this.endPin = endPin;
             this.type = ElementType.Relation;
 
         }
