@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Citta_T1.Business.Model;
+using Citta_T1.Business;
 
 namespace Citta_T1
 {
