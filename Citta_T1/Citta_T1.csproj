@@ -45,11 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Option\BcpInfo.cs" />
+    <Compile Include="Business\Option\ColumnInfo.cs" />
     <Compile Include="Business\Model\DocumentSaveLoad.cs" />
     <Compile Include="Business\Model\ModelDocumentDao.cs" />
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
+    <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -474,8 +477,6 @@
       <Name>UserControlDLL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\Bcp\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
