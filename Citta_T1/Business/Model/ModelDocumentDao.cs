@@ -9,12 +9,13 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
 using System.Xml;
 
-namespace Citta_T1.Business
+namespace Citta_T1.Business.Model
 {
     class ModelDocumentDao
     {
         private ModelDocument currentDocument;
         private List<ModelDocument> modelDocuments;
+        
         
         internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
@@ -31,23 +32,19 @@ namespace Citta_T1.Business
             this.modelDocuments.Add(modelDocument);
             this.currentDocument = modelDocument;    
         }
-        public void LoadDocumentElements()
-        {           
-            this.currentDocument.Load();
-            this.currentDocument.Show();
-            this.currentDocument.Dirty = false;
-        }
         public string SaveDocument()
         {
+
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
-            return this.currentDocument.ModelDocumentTitle;
+            return this.currentDocument.ModelTitle;
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
-            md.Hide();         
+            md.Hide();
+            md.ResetCount();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
@@ -58,7 +55,7 @@ namespace Citta_T1.Business
             this.currentDocument = FindModelDocument(modelTitle);
             foreach (ModelDocument md in this.modelDocuments)
             {
-                if (md.ModelDocumentTitle == modelTitle)
+                if (md.ModelTitle == modelTitle)
                     md.Show();
                 else
                     md.Hide();
@@ -66,10 +63,11 @@ namespace Citta_T1.Business
         }
         public void AddDocumentOperator(Control ct)
         {
+            this.currentDocument.ElementCount += 1;
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath());
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -77,11 +75,16 @@ namespace Citta_T1.Business
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName));
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
 
+        }
+        public void AddDocumentRelation()
+        {
+            ModelRelation e = new ModelRelation("1", "2", "{X=1,Y=2}", "{3,4}", "1");
+            this.currentDocument.AddModelRelation(e);
         }
         public ElementSubType SEType(string subType)
         {
@@ -124,7 +127,7 @@ namespace Citta_T1.Business
         {
             foreach (ModelDocument md in this.modelDocuments)
             {
-                if (md.ModelDocumentTitle == modelTitle)
+                if (md.ModelTitle == modelTitle)
                     return md;
             }
             return null;
@@ -133,7 +136,7 @@ namespace Citta_T1.Business
         {
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;
             this.ModelDocuments.Remove(this.currentDocument);
             return modelElements; 
         }
@@ -141,7 +144,7 @@ namespace Citta_T1.Business
         { 
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();          
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;          
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)
@@ -158,7 +161,7 @@ namespace Citta_T1.Business
             string remark = "";
             if (this.currentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements();
+            List<ModelElement> modelElements = this.currentDocument.ModelElements;
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.Remark)
@@ -170,10 +173,16 @@ namespace Citta_T1.Business
             return remark;
         }
 
-        public bool NewUserLogin(string username)
+        public bool WithoutDocumentLogin(string userName)
         {
-            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + username;
-            return !Directory.Exists(userDir);
+            //新用户登录
+            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName;
+            if (!Directory.Exists(userDir))
+                return true;
+            //非新用户但无模型文档
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+            DirectoryInfo[] directoryInfos = di.GetDirectories();
+            return (directoryInfos.Length == 0); 
         }
         public void SaveEndDocuments(string userName)
         {
@@ -192,7 +201,7 @@ namespace Citta_T1.Business
                     foreach (ModelDocument mb in this.modelDocuments)
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
-                        childElement.InnerText = mb.ModelDocumentTitle;
+                        childElement.InnerText = mb.ModelTitle;
                         xn.AppendChild(childElement);                     
                     }
                     xDoc.Save(UserInfoPath);

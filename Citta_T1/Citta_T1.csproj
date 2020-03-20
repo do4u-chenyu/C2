@@ -45,10 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\DocumentSaveLoad.cs" />
-    <Compile Include="Business\ModelDocumentDao.cs" />
-    <Compile Include="Business\ModelDocument.cs" />
-    <Compile Include="Business\ModelElement.cs" />
+    <Compile Include="Business\Option\BcpInfo.cs" />
+    <Compile Include="Business\Option\ColumnInfo.cs" />
+    <Compile Include="Business\Model\DocumentSaveLoad.cs" />
+    <Compile Include="Business\Model\ModelDocumentDao.cs" />
+    <Compile Include="Business\Model\ModelDocument.cs" />
+    <Compile Include="Business\Model\ModelElement.cs" />
+    <Compile Include="Business\Model\ModelRelation.cs" />
+    <Compile Include="Business\Schedule\Manager.cs" />
+    <Compile Include="Business\Schedule\Triple.cs" />
+    <Compile Include="Business\Schedule\TripleListGeneration.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
