@@ -20,7 +20,7 @@ namespace Citta_T1.Controls
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
-
+        private bool startDrag = false;
         //记录拖动引起的坐标变化量
         public float screenChange = 1;
 
@@ -38,15 +38,17 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+
+
         }
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
+            this.UpdateStyles();
             if (isLarger && sizeLevel <= 2)
             {
                 Console.WriteLine("放大");
@@ -76,21 +78,24 @@ namespace Citta_T1.Controls
             }
             Global.GetNaviViewControl().UpdateNaviView();
         }
-        
+
         // 画布右上角的拖动功能实现
         public void ChangLoc(float dx, float dy)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
+            this.UpdateStyles();
             //SetControlByDelta(dx, dy, this);
             foreach (Control con in Controls)
             {   // 仅当前文档中的元素需要拖动
+                
                 if (con.Visible && con is IDragable)
                 {
+                    
                     (con as IDragable).ChangeLoc(dx, dy);
                 }
+                
             }
         }
         #endregion
@@ -101,7 +106,7 @@ namespace Citta_T1.Controls
         public int startY;
         public int nowX;
         public int nowY;
-
+        private bool selectFrame = false;
         #endregion
 
         #region 各种事件
@@ -136,28 +141,49 @@ namespace Citta_T1.Controls
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 MouseIsDown = true;
+                selectFrame = true;
                 basepoint = e.Location;
 
-                staticImage = new Bitmap(this.Width,this.Height);
+                staticImage = new Bitmap(this.Width, this.Height);
+                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
                 Graphics g = Graphics.FromImage(staticImage);
-                g.Clear(this.BackColor);
+
                 g.Dispose();
             }
             else if ((this.Parent as MainForm).flowControl.selectDrag && e.Button == MouseButtons.Left)
             {
                 startX = e.X;
                 startY = e.Y;
-                Console.WriteLine("Before, X = " + startX.ToString() + ", Y = " + startY.ToString());
+                //List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements();
+                //foreach (ModelElement me in modelElements)
+                //{
+                //    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)
+                //    {
+                //        continue;
+                //    }
+                //    me.Hide();
+                //}
+                //Bitmap staticImage = new Bitmap(2000, 1000);
+                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                //foreach (ModelElement me in modelElements)
+                //{
+                //    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)
+                //    {
+                //        me.Hide();
+                //    }
+                //    me.Show();
+                //}
             }
+
         }
 
-        
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
             {
+
                 Bitmap i = new Bitmap(staticImage);
-               
+
                 g = Graphics.FromImage(i);
 
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
@@ -176,27 +202,19 @@ namespace Citta_T1.Controls
                 g.Dispose();
 
             }
-            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
-            {
-                
-                nowX = e.X;
-                nowY = e.Y;
-                Point mapOrigin = Global.GetCurrentDocument().MapOrigin; 
-                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
-                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
+            //else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
+            //{
+            //    Bitmap i = new Bitmap(this.staticImage);
+            //    Graphics n = this.CreateGraphics();
+            //    n.DrawImageUnscaled(i, e.X-startX, e.Y-startY);
+            //    n.Dispose();
+            //}
 
-                
-                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-                Point moveOffset = WorldBoundControl(mapOrigin);
-                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
-                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                startX = e.X;
-                startY = e.Y;
-            }
         }
 
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            selectFrame = false;
             if (((MainForm)(this.Parent)).flowControl.selectFrame)
             {
                 Bitmap i = new Bitmap(this.staticImage);
@@ -206,10 +224,92 @@ namespace Citta_T1.Controls
                 //标志位置低
                 MouseIsDown = false;
             }
-            Console.WriteLine("拖拽结束");
-            Global.GetNaviViewControl().UpdateNaviView();
+            if (((MainForm)(this.Parent)).flowControl.selectDrag)
+            {
+                Console.WriteLine("拖拽结束");
 
+                startDrag = true;
+                nowX = e.X;
+                nowY = e.Y;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
+                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
+
+
+                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                Point moveOffset = WorldBoundControl(mapOrigin);
+                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                startX = e.X;
+                startY = e.Y;
+
+                Global.GetNaviViewControl().UpdateNaviView();
+
+            }
         }
+
+        //public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
+        //    {
+
+        //        Bitmap i = new Bitmap(staticImage);
+
+        //        g = Graphics.FromImage(i);
+
+        //        if (e.X < basepoint.X && e.Y < basepoint.Y)
+        //            g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+        //        else if (e.X > basepoint.X && e.Y < basepoint.Y)
+        //            g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+        //        else if (e.X < basepoint.X && e.Y > basepoint.Y)
+        //            g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+        //        else
+        //            g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
+
+        //        Graphics n = this.CreateGraphics();
+        //        n.DrawImageUnscaled(i, 0, 0);
+
+        //        n.Dispose();
+        //        g.Dispose();
+
+        //    }
+        //    else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
+        //    {
+        //        Console.WriteLine("拖拽:" + startDrag);
+        //        startDrag = true;
+        //        nowX = e.X;
+        //        nowY = e.Y;
+        //        Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+        //        int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
+        //        int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
+
+
+        //        mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+        //        Point moveOffset = WorldBoundControl(mapOrigin);
+        //        ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+        //        Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+        //        startX = e.X;
+        //        startY = e.Y;
+        //    }
+        //}
+
+        //public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
+        //{
+        //    selectFrame = false;
+        //    if (((MainForm)(this.Parent)).flowControl.selectFrame)
+        //    {
+        //        Bitmap i = new Bitmap(this.staticImage);
+        //        Graphics n = this.CreateGraphics();
+        //        n.DrawImageUnscaled(i, 0, 0);
+        //        n.Dispose();
+        //        //标志位置低
+        //        MouseIsDown = false;
+        //    }
+        //    Console.WriteLine("拖拽结束");
+        //    Global.GetNaviViewControl().UpdateNaviView();
+        //    startDrag = false;
+
+        //}
 
         public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
         {
@@ -231,6 +331,7 @@ namespace Citta_T1.Controls
                     line.DrawLine(g);
                 }
             }
+
         }
         #endregion
 
@@ -292,5 +393,22 @@ namespace Citta_T1.Controls
             return dragOffset;
         }
         #endregion
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        if (selectFrame)
+        //        {
+        //            return base.CreateParams;
+        //        }
+        //        else
+        //        {
+        //            CreateParams cp = base.CreateParams;
+        //            cp.ExStyle |= 0x02000000;//用双缓冲绘制窗口的所有子控件
+        //            return cp;
+        //        }
+
+        //    }
+        //}
     }
 }
