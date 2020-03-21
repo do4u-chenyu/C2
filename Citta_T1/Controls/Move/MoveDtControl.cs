@@ -218,6 +218,9 @@ namespace Citta_T1.Controls.Move
                 }
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
+
+                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
+
                 (sender as MoveDtControl).Location = new Point(left, top);
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 // 更新相连点的坐标
@@ -226,9 +229,33 @@ namespace Citta_T1.Controls.Move
                  * TODO 会有闪烁的问题，`Invalidate`方法必须要带个重绘范围，要不然就是整个`CanvasPanel`重绘
                  * 最好不要调用`base.OnPaint(e)`，这样我只重绘一下背景板，其他的
                  */
-                (this.Parent.Parent as MainForm).panel3.Invalidate();
+                //(this.Parent.Parent as MainForm).panel3.Invalidate();
+
             }
         }
+
+        public Point WorldBoundControl(Point Pm)
+        {
+
+            if (Pm.X < 0)
+            {
+                Pm.X = 0;
+            }
+            if (Pm.Y < 70)
+            {
+                Pm.Y = 70;
+            }
+            if (Pm.X > this.Parent.Width - this.Width)
+            {
+                Pm.X = this.Parent.Width - this.Width;
+            }
+            if (Pm.Y > this.Parent.Height - this.Height)
+            {
+                Pm.Y = this.Parent.Height - this.Height;
+            }
+            return Pm;
+        }
+
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("移动开始");
@@ -570,9 +597,20 @@ namespace Citta_T1.Controls.Move
         #region 拖动实现
         public void ChangeLoc(float dx, float dy)
         {
+            Bitmap staticImage = new Bitmap(this.Width, this.Height);
+            this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+
+            this.Visible = false;
+            this.Left = this.Left + (int)dx;
+            this.Top = this.Top + (int)dy;
+
+            Graphics n = this.CreateGraphics();
+            n.DrawImageUnscaled(staticImage, this.Left, this.Top);
+            n.Dispose();
+            this.Visible = true;
             int left = this.Left + (int)dx;
             int top = this.Top + (int)dy;
-            this.Location = new Point(left, top);
+            
         }
         #endregion
 
