@@ -88,15 +88,24 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
-            
+
             Graphics gc = e.Graphics;
+            Point mapOrigin;
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
             float factor = 1 / (this.Parent as CanvasPanel).screenChange;
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
-            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width * factor) / rate , Convert.ToInt32(height * factor) / rate);
+            try
+            {
+                mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
+            }
+            catch
+            {
+                mapOrigin = new Point(-600, -300);
+                viewBoxPosition = new Point(650, 330);
+            }
+            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width * factor) / rate, Convert.ToInt32(height * factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);

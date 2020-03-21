@@ -84,7 +84,7 @@ namespace Citta_T1.Dialogs
                 fileName = Path.GetFileNameWithoutExtension(@m_filePath);
                 OverViewFile();              
             }
-            if (fileName != "" && fileName == "请输入数据名称")
+            if (this.textBox1.Text == "请输入数据名称"|| this.textBox1.Text == "")
                 this.textBox1.Text = fileName;
 
         }
@@ -281,5 +281,6 @@ namespace Citta_T1.Dialogs
             }
         }
 
+  
     }
 }

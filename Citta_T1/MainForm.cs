@@ -42,10 +42,11 @@ namespace  Citta_T1
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.formInputData.InputDataEvent += frm_InputDataEvent;
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
+            this.modelDocumentDao = new ModelDocumentDao();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
-            this.modelDocumentDao = new ModelDocumentDao();
+            
             InitializeControlsLocation();
             
             InitializeGlobalVariable();
