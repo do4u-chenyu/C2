@@ -143,7 +143,7 @@ namespace Citta_T1.Controls
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             if (type == ElementType.DataSource)
-                AddNewDataSource(path, sizeLevel, text, location);
+                AddNewDataSource(path, sizeLevel, text, location, isutf8);
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
         }
@@ -399,13 +399,14 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, bool encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
                 text,
                 location);
+            btn.Encoding = encoding;
             AddNewElement(btn);
         }
 

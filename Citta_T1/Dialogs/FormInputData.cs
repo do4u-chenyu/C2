@@ -75,15 +75,17 @@ namespace Citta_T1.Dialogs
             /*
              * 数据预览
              */
+            string fileName="";
             OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt";
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                m_filePath = fd.FileName;
-                string fileName = Path.GetFileNameWithoutExtension(@m_filePath);                
-                OverViewFile();
-                this.textBox1.Text = fileName;
+                m_filePath = fd.FileName;     
+                fileName = Path.GetFileNameWithoutExtension(@m_filePath);
+                OverViewFile();              
             }
+            if (fileName != "" && fileName == "请输入数据名称")
+                this.textBox1.Text = fileName;
 
         }
 

@@ -13,6 +13,12 @@ namespace Citta_T1.Controls.Left
     public partial class DataButton : UserControl
     {
         public bool isUTF8;
+        private int count = 0;
+        public bool Encoding { get => this.isUTF8; set => this.isUTF8 = value; }
+        public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
+        public int Count { get => this.count; set => this.count = value; }
+
         public DataButton()
         {
             InitializeComponent();

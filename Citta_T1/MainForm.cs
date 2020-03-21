@@ -15,6 +15,7 @@ using Citta_T1.Business.Model;
 using System.IO;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
+using Citta_T1.Business.DataSource;
 
 namespace  Citta_T1
 {
@@ -68,12 +69,12 @@ namespace  Citta_T1
         private void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
-            Global.SetModelTitlePanel(this.modelTitlePanel);
-            Global.SetNaviViewControl(this.naviViewControl);
+            Global.SetModelTitlePanel(this.modelTitlePanel);           
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
             Global.SetMyModelControl(this.myModelControl);
-            
+            Global.SetNaviViewControl(this.naviViewControl);
+
         }
 
         private void RemarkChange(RemarkControl rc)
@@ -428,11 +429,18 @@ namespace  Citta_T1
             this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y);
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-            //加载文件
+            //加载文件及数据源
             LoadDocuments(this.userName);
-
+            LoadDataSource(this.userName);
             InitializeMainFormEventHandler();
 
+        }
+        private void LoadDataSource(string userName)
+        {
+            DataSourceInfo dataSource = new DataSourceInfo(userName);
+            List<DataButton> dataButtons = dataSource.LoadDataSourceInfo();
+            foreach (DataButton dataButton in dataButtons)
+                this.dataSourceControl.GenDataButton(dataButton);
         }
 
         private void StopButton_Click(object sender, EventArgs e)

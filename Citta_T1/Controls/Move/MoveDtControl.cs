@@ -21,6 +21,7 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private Point oldcontrolPosition;
         private bool isUTF8;
+        public bool Encoding { get => this.isUTF8; set => this.isUTF8 = value; }
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
