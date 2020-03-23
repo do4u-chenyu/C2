@@ -7,10 +7,10 @@ using Citta_T1.Utils;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, bool isutf8);
+    public delegate void delegateInputData(string name, string filePath, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
-        private bool m_isUTF8 = false;
+        private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private string m_filePath;
         private int m_maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
@@ -82,9 +82,8 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                
-                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.m_isUTF8);
-                InputDataEvent(name, m_filePath, this.m_isUTF8);
+                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.encoding);
+                InputDataEvent(name, m_filePath, this.encoding);
                 DvgClean();
                 Close();
             }
@@ -101,7 +100,7 @@ namespace Citta_T1.Dialogs
         {
             this.gbkLable.Font = font;
             this.utf8Lable.Font = bold_font;
-            this.m_isUTF8 = true;
+            this.encoding = DSUtil.Encoding.UTF8;
             PreViewFile();
         }
 
@@ -113,7 +112,7 @@ namespace Citta_T1.Dialogs
              * 预览文件
              */
             System.IO.StreamReader sr;
-            if (this.m_isUTF8)
+            if (this.encoding == DSUtil.Encoding.UTF8)
             {
                 sr = File.OpenText(m_filePath);
             }
@@ -159,7 +158,6 @@ namespace Citta_T1.Dialogs
             }
         }
 
-
         public void DvgClean(bool isClearDataName = true)
         {
             if (isClearDataName) { this.textBox1.Text = null; }
@@ -171,7 +169,7 @@ namespace Citta_T1.Dialogs
         {
             this.gbkLable.Font = bold_font;
             this.utf8Lable.Font = font;
-            this.m_isUTF8 = false;
+            this.encoding = DSUtil.Encoding.GBK;
             PreViewFile();
         }
     }
