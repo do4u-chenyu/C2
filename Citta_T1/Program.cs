@@ -7,8 +7,6 @@ namespace Citta_T1
 {
     static class Program
     {
-        // 数据预览字典
-        public static BCPBuffer GlobalBCPBuffer = new BCPBuffer();
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

@@ -153,7 +153,7 @@ namespace Citta_T1
         {
             List<List<string>> datas = new List<List<string>> { };
 
-            List<string> rows = new List<string >(Program.GlobalBCPBuffer.GetCacheBcpPreVewContent(bcpPath, isUTF8).Split('\n'));
+            List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, isUTF8).Split('\n'));
             int numOfRows = rows.Count;
             for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
             {

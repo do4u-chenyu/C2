@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Citta_T1.Utils;
 using Citta_T1.Business.Model;
 
 namespace Citta_T1.Business.Option
@@ -19,7 +20,13 @@ namespace Citta_T1.Business.Option
             this.name = name;
             this.type = type;
             this.encoding = encoding;
+            InitColumnInfo();
 
+        }
+        // 根据第一行初始化列信息
+        private void InitColumnInfo()
+        {
+           // string columnLine = 
         }
     }
 }

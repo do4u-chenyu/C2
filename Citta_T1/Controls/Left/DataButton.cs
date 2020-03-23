@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
@@ -62,7 +57,7 @@ namespace Citta_T1.Controls.Left
             // 2. Program中删除数据
             // TODO 3. 画布中已存在的该如何处理？ 
             this.Parent.Controls.Remove(this);
-            Program.GlobalBCPBuffer.Remove(this.txtButton.Name);
+            BCPBuffer.GetInstance().Remove(this.txtButton.Name);
 
         }
         #endregion

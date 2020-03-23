@@ -11,6 +11,8 @@ namespace Citta_T1.Utils
         private Dictionary<string, string> columnDict = new Dictionary<string, string>();
         private int maxRow = 100;
 
+        private static BCPBuffer BcpBufferSingleInstance;
+
         public string GetCacheBcpPreVewContent(string bcpFullPath, bool isUTF8)
         {
             string ret = "";
@@ -71,6 +73,16 @@ namespace Citta_T1.Utils
 
             dataPreviewDict[filePath] = sb.ToString();
             columnDict[filePath] = firstLine;
+        }
+
+        // 数据字典, 全局单例
+        public static BCPBuffer GetInstance()
+        {
+            if (BcpBufferSingleInstance == null)
+            {
+                BcpBufferSingleInstance = new BCPBuffer();
+            }
+            return BcpBufferSingleInstance;
         }
     }
 }
