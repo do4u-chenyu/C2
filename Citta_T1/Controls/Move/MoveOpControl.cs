@@ -142,11 +142,11 @@ namespace Citta_T1.Controls.Move
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
 
-            if (Pw.X < 50)
+            if (Pw.X < 20)
             {
-                Pm.X = 0;
+                Pm.X = 20;
             }
-            if (Pw.Y < 30)
+            if (Pw.Y < 70)
             {
                 Pm.Y = 70;
             }
@@ -154,7 +154,7 @@ namespace Citta_T1.Controls.Move
             {
                 Pm.X = this.Parent.Width - this.Width;
             }
-            if (Pw.Y > 1000 - this.Height)
+            if (Pw.Y > 980 - this.Height)
             {
                 Pm.Y = this.Parent.Height - this.Height;
             }

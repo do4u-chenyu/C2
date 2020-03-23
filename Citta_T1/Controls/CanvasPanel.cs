@@ -186,8 +186,6 @@ namespace Citta_T1.Controls
                 startX = e.X;
                 startY = e.Y;
                 staticImage = new Bitmap(2000, 1000);
-                // this.DrawToBitmap(staticImage, new Rectangle(C, 0, this.Width, this.Height));
-
                 List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -202,8 +200,6 @@ namespace Citta_T1.Controls
                     }
                     me.Hide();
                 }
-                //Bitmap staticImage = new Bitmap(2000, 1000);
-                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
 
         }
@@ -242,6 +238,12 @@ namespace Citta_T1.Controls
                 SetStyle(ControlStyles.UserPaint, true);
                 SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
                 SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+                this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                this.SetStyle(ControlStyles.DoubleBuffer, true);
+                this.SetStyle(ControlStyles.UserPaint, true);
+                this.SetStyle(ControlStyles.ResizeRedraw, true);
+
+
                 this.UpdateStyles();
                 Console.WriteLine("正在拖拽");
 
@@ -254,8 +256,12 @@ namespace Citta_T1.Controls
                 Bitmap i = new Bitmap(this.staticImage);
                 
                 Graphics n = this.CreateGraphics();
+                n.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 n.Clear(this.BackColor);
                 n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+
+
+
                 n.Dispose();
             }
             //绘制

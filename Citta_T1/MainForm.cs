@@ -223,7 +223,8 @@ namespace  Citta_T1
             Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-            //this.naviViewControl.Invalidate();
+            
+            this.naviViewControl.Invalidate();
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
