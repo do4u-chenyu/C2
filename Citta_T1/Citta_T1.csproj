@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\DataSource\DataSourceInfo.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
     <Compile Include="Business\Model\DocumentSaveLoad.cs" />
@@ -280,6 +281,7 @@
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\DSUtil.cs" />
+    <Compile Include="Utils\BCPBuffer.cs" />
     <Compile Include="Utils\Global.cs" />
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />

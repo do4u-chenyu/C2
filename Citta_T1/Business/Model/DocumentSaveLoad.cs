@@ -30,6 +30,10 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
+            XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
+            mapOriginNode.InnerText = this.modelDocument.MapOrigin.ToString();
+            modelDocumentXml.AppendChild(mapOriginNode);
+
             List<ModelElement> modelElements = this.modelDocument.ModelElements;
             List<ModelRelation> modelRelations = this.modelDocument.ModelRelations;
             WriteModelElements(xDoc, modelDocumentXml, modelElements);
@@ -73,6 +77,10 @@ namespace Citta_T1.Business.Model
                         XmlElement pathNode = xDoc.CreateElement("path");
                         pathNode.InnerText = me.GetPath();
                         modelElementXml.AppendChild(pathNode);
+
+                        XmlElement encodingNode = xDoc.CreateElement("encoding");
+                        encodingNode.InnerText = me.Encoding.ToString();
+                        modelElementXml.AppendChild(encodingNode);
                     }
                 }
                 else if (me.Type == ElementType.Remark)
@@ -122,7 +130,11 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
 
-            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");           
+            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");    
+            XmlNode mapOriginNode = rootNode.SelectSingleNode("MapOrigin");
+            if(mapOriginNode != null)
+                this.modelDocument.MapOrigin = ToPointType(mapOriginNode.InnerText);
+
             var nodeLists = rootNode.SelectNodes("ModelElement");
             foreach (XmlNode xn in nodeLists)
             {
@@ -131,13 +143,11 @@ namespace Citta_T1.Business.Model
                 {
                     try
                     {
-                        String name = xn.SelectSingleNode("name").InnerText;
-                        string coordinate = Regex.Replace(xn.SelectSingleNode("location").InnerText, @"[^\d,]*", "");
-                        string[] location = coordinate.Split(',');
+                        String name = xn.SelectSingleNode("name").InnerText;                       
                         string status = xn.SelectSingleNode("status").InnerText;
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1]));
+                        Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, loc);
                         ctl.textBox.Text = name;
                         ctl.Location = loc;
@@ -151,16 +161,13 @@ namespace Citta_T1.Business.Model
                     try
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
-                        string coordinate = Regex.Replace(xn.SelectSingleNode("location").InnerText, @"[^\d,]*", "");
-                        string[] location = coordinate.Split(',');
                         string status = xn.SelectSingleNode("status").InnerText;
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point xnlocation = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1]));
-
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);//暂时定为为moveopctrol
-                                                                                             //cotl.textBox1.Text = name;//暂时定为为moveopctrol
+                        Point xnlocation =ToPointType(xn.SelectSingleNode("location").InnerText);
+                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        cotl.Encoding = Convert.ToBoolean(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
@@ -174,18 +181,20 @@ namespace Citta_T1.Business.Model
                 }
                 else if (type == "Result")
                 {
-                    String name = xn.SelectSingleNode("name").InnerText;
-                    string coordinate = Regex.Replace(xn.SelectSingleNode("location").InnerText, @"[^\d,]*", "");
-                    string[] location = coordinate.Split(',');
-                    string status = xn.SelectSingleNode("status").InnerText;
-                    string subType = xn.SelectSingleNode("subtype").InnerText;
-                    int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                    Point loc = new Point(Convert.ToInt32(location[0]), Convert.ToInt32(location[1]));
-                    MoveRsControl ctl = new MoveRsControl(0, name, loc);
-                    ctl.textBox.Text = name;
-                    ctl.Location = loc;
-                    ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, EStatus(status), SEType(subType), id);
-                    this.modelDocument.ModelElements.Add(resultElement); 
+                    try 
+                    {
+                        String name = xn.SelectSingleNode("name").InnerText;
+                        string status = xn.SelectSingleNode("status").InnerText;
+                        string subType = xn.SelectSingleNode("subtype").InnerText;
+                        int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
+                        Point loc =ToPointType(xn.SelectSingleNode("location").InnerText);
+                        MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        ctl.textBox.Text = name;
+                        ctl.Location = loc;
+                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, EStatus(status), SEType(subType), id);
+                        this.modelDocument.ModelElements.Add(resultElement);
+                    }
+                    catch (Exception e) { System.Console.WriteLine(e.Message); }
                 }
                 else if (type == "Relation")
                 {
@@ -204,6 +213,17 @@ namespace Citta_T1.Business.Model
         { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
-
+        private Point ToPointType(string point)
+        {
+            Point location = new Point();
+            try
+            {
+                string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
+                string[] xy = coordinate.Split(',');
+                location = new Point(Convert.ToInt32(xy[0]), Convert.ToInt32(xy[1]));
+            }
+            catch (Exception e) { System.Console.WriteLine(e.Message); }
+            return location;
+        }
     }
 }

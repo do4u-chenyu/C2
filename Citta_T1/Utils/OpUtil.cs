@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Security.Cryptography;
 
 namespace Citta_T1.Utils
@@ -29,5 +27,6 @@ namespace Citta_T1.Utils
                 return sb.ToString();
             }
         }
+
     }
 }

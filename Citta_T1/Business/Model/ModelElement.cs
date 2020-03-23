@@ -12,24 +12,26 @@ namespace Citta_T1.Business.Model
 {
     public enum ElementType
     {
-        Operator,
-        DataSource,
-        Relation,
-        Result,
-        Remark,
+        Operator,   // 算子
+        DataSource, // 数据源
+        Relation,   // 画线关系
+        Result,     // 算子运算结果
+        Remark,     // 模型文档备注
         Null
     }
     public enum ElementSubType
     {
-        JoinOperator,
-        IntersectionOperator,
+        JoinOperator,//连接算子
+        CollideOperator,//交集
         UnionOperator,
-        DifferenceOperator,
-        RandomSamplingOperator,
+        DifferOperator,
+        RandomOperator,
         FilterOperator,
-        MaximumValueOperator,
-        MinmumValueOperator,
-        MeanValueOperator,
+        MaxOperator,
+        MinOperator,
+        AvgOperator,//平均
+        SortOperator,//排序算子
+        FreqQperator,//频率算子
         Null
     }
     public enum ElementStatus
@@ -50,6 +52,7 @@ namespace Citta_T1.Business.Model
         private string dataSourcePath;
         private string description;
         private int id;
+        private bool encoding;
 
 
 
@@ -60,12 +63,11 @@ namespace Citta_T1.Business.Model
         public Control GetControl { get => ctl; }
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
-       
+        public bool Encoding { get => this.encoding; set => this.encoding = value; }
 
-
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id)
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding = false)
         {
-            Init(type, ctl, des, bcpPath, status, subType, id);
+            Init(type, ctl, des, bcpPath, status, subType, id, encoding);
         }
 
         public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType, int id)
@@ -84,11 +86,11 @@ namespace Citta_T1.Business.Model
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id,ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding)
         {
             this.type = type;
             this.subType = subType;
@@ -98,6 +100,7 @@ namespace Citta_T1.Business.Model
             this.SetName(des);
             this.description = des;
             this.id = id;
+            this.encoding = encoding;
         }
         
         public string GetDescription()

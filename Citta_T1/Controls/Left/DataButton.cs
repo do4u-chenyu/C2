@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
+
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
@@ -14,6 +9,13 @@ namespace Citta_T1.Controls.Left
     public partial class DataButton : UserControl
     {
         public DSUtil.Encoding encoding;
+        public bool isUTF8;
+        private int count = 0;
+        public bool Encoding { get => this.isUTF8; set => this.isUTF8 = value; }
+        public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
+        public int Count { get => this.count; set => this.count = value; }
+
         public DataButton()
         {
             InitializeComponent();
@@ -57,7 +59,7 @@ namespace Citta_T1.Controls.Left
             // 2. Program中删除数据
             // TODO 3. 画布中已存在的该如何处理？ 
             this.Parent.Controls.Remove(this);
-            Program.DataPreviewDict.Remove(this.txtButton.Name);
+            BCPBuffer.GetInstance().Remove(this.txtButton.Name);
 
         }
         #endregion
