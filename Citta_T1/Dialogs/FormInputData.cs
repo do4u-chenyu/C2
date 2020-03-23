@@ -83,7 +83,7 @@ namespace Citta_T1.Dialogs
             else
             {
                 
-                OpUtil.PreLoadFile(m_filePath, this.m_isUTF8);
+                Program.GlobalBCPBuffer.TryLoadBCP(m_filePath, this.m_isUTF8);
                 InputDataEvent(name, m_filePath, this.m_isUTF8);
                 DvgClean();
                 Close();

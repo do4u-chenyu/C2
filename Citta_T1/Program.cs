@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Citta_T1.Utils;
 
 namespace Citta_T1
 {
     static class Program
     {
         // 数据预览字典
-        public static Dictionary<string, string> DataPreviewDict = new Dictionary<string, string>();
+        public static BCPBuffer GlobalBCPBuffer = new BCPBuffer();
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
