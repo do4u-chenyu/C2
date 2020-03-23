@@ -37,20 +37,20 @@ namespace Citta_T1.Business.DataSource
             XmlElement dataSourceNode = xDoc.CreateElement("DataSource");
             node.AppendChild(dataSourceNode);
             XmlElement nameNode = xDoc.CreateElement("name");
-            nameNode.InnerText = "";
+            nameNode.InnerText = db.DataName;
             dataSourceNode.AppendChild(nameNode);
 
-            XmlElement codeNode = xDoc.CreateElement("code");//encode
-            nameNode.InnerText = "";//该字段不存在
+            XmlElement codeNode = xDoc.CreateElement("encoding");
+            codeNode.InnerText = db.Encoding.ToString();
             dataSourceNode.AppendChild(codeNode);
 
             XmlElement pathNode = xDoc.CreateElement("path");
-            nameNode.InnerText = "";
+            pathNode.InnerText = db.FilePath;
             dataSourceNode.AppendChild(pathNode);
 
-            XmlElement frequencyNode = xDoc.CreateElement("frequency");//count
-            nameNode.InnerText = "0";//默认为0
-            dataSourceNode.AppendChild(frequencyNode);
+            XmlElement countNode = xDoc.CreateElement("count");
+            countNode.InnerText = "0";//默认为0
+            dataSourceNode.AppendChild(countNode);
             xDoc.Save(DataSourcePath);
         }
         public List<DataButton> LoadDataSourceInfo() 
@@ -60,13 +60,20 @@ namespace Citta_T1.Business.DataSource
             if (!File.Exists(DataSourcePath))
                 return dataSourceList;
             xDoc.Load(DataSourcePath);
-            XmlNodeList nodeList = xDoc.SelectNodes("DataSource");
+            XmlNode rootNode = xDoc.SelectSingleNode("DataSourceDocument");
+            XmlNodeList nodeList = rootNode.SelectNodes("DataSource");
             foreach (XmlNode xn in nodeList)
             {
-                DataButton dataButton = new DataButton();
-                //TODO
-                //dataButton的属性设置通过xn得到
-                dataSourceList.Add(dataButton);
+                try
+                {
+                    string filePath = xn.SelectSingleNode("path").InnerText;
+                    string dataName = xn.SelectSingleNode("name").InnerText;
+                    bool isutf8 = Convert.ToBoolean(xn.SelectSingleNode("encoding").InnerText);
+                    DataButton dataButton = new DataButton(filePath, dataName, isutf8);
+                    dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
+                    dataSourceList.Add(dataButton);
+                }
+                catch (Exception e) { System.Console.WriteLine(e.Message); }
             }
             return dataSourceList;
         }

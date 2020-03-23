@@ -52,6 +52,7 @@ namespace Citta_T1.Business.Model
         private string dataSourcePath;
         private string description;
         private int id;
+        private bool encoding;
 
 
 
@@ -62,12 +63,11 @@ namespace Citta_T1.Business.Model
         public Control GetControl { get => ctl; }
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
-       
+        public bool Encoding { get => this.encoding; set => this.encoding = value; }
 
-
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id)
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding = false)
         {
-            Init(type, ctl, des, bcpPath, status, subType, id);
+            Init(type, ctl, des, bcpPath, status, subType, id, encoding);
         }
 
         public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType, int id)
@@ -86,11 +86,11 @@ namespace Citta_T1.Business.Model
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id,ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding)
         {
             this.type = type;
             this.subType = subType;
@@ -100,6 +100,7 @@ namespace Citta_T1.Business.Model
             this.SetName(des);
             this.description = des;
             this.id = id;
+            this.encoding = encoding;
         }
         
         public string GetDescription()

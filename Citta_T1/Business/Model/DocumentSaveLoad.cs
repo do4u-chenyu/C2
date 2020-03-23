@@ -77,6 +77,10 @@ namespace Citta_T1.Business.Model
                         XmlElement pathNode = xDoc.CreateElement("path");
                         pathNode.InnerText = me.GetPath();
                         modelElementXml.AppendChild(pathNode);
+
+                        XmlElement encodingNode = xDoc.CreateElement("encoding");
+                        encodingNode.InnerText = me.Encoding.ToString();
+                        modelElementXml.AppendChild(encodingNode);
                     }
                 }
                 else if (me.Type == ElementType.Remark)
@@ -162,8 +166,8 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation =ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);//暂时定为为moveopctrol
-                                                                                             //cotl.textBox1.Text = name;//暂时定为为moveopctrol
+                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        cotl.Encoding = Convert.ToBoolean(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }

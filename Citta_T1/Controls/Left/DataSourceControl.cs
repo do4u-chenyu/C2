@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
@@ -40,6 +42,18 @@ namespace Citta_T1.Controls.Left
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             this.dataSourceDictI2B.Add(filePath, b);
             this.LocalFrame.Controls.Add(b);
+            //数据源持久化存储
+            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
+            dataSource.WriteDataSourceInfo(b);
+        }
+        public void GenDataButton(DataButton dataButton)
+        {
+            // 供load时调用
+
+            dataButton.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
+            dataButton.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.dataSourceDictI2B.Add(dataButton.FilePath, dataButton);
+            this.LocalFrame.Controls.Add(dataButton);
         }
 
         public void RenameDataButton(string index, string dstName)
