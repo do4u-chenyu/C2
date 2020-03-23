@@ -405,18 +405,18 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, bool isutf8)
+        void frm_InputDataEvent(string name, string filePath, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            this.dataSourceControl.GenDataButton(name, filePath, isutf8);
+            this.dataSourceControl.GenDataButton(name, filePath, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, bool isUTF8)
+        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, isUTF8);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Citta_T1;
+using Citta_T1.Utils;
 
 namespace Citta_T1
 {
@@ -150,14 +151,14 @@ namespace Citta_T1
             }
             return datas;
         }
-        public void PreViewDataByBcpPath(string bcpPath, bool isUTF8 = true, int maxNumOfFile = 100, char sep = '\t')
+        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding, int maxNumOfFile = 100, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
 
             if (!Program.DataPreviewDict.ContainsKey(bcpPath) || Program.DataPreviewDict[bcpPath] == "")
             {
                 // 数据不存在时 按照路径重新读取
-                (this.Parent.Parent as MainForm).formInputData.PreLoadFile(bcpPath, isUTF8);
+                (this.Parent.Parent as MainForm).formInputData.PreLoadFile(bcpPath, encoding);
             }
 
             List<string> rows = new List<string >(Program.DataPreviewDict[bcpPath].Split('\n'));

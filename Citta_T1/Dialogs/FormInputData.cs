@@ -9,14 +9,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, bool isutf8);
+    public delegate void delegateInputData(string name, string filePath, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
-        private bool m_isUTF8 = false;
+        private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private string m_filePath;
         private int m_maxNumOfRow = 100;
         private System.Drawing.Font bold_font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -125,8 +126,8 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                PreLoadFile(m_filePath, this.m_isUTF8);
-                InputDataEvent(name, m_filePath, this.m_isUTF8);
+                PreLoadFile(m_filePath, this.encoding);
+                InputDataEvent(name, m_filePath, this.encoding);
                 DvgClean();
                 Close();
                 //if (this.m_isUTF8)
@@ -157,7 +158,7 @@ namespace Citta_T1.Dialogs
         {
             this.label4.Font = bold_font;
             this.label5.Font = font;
-            this.m_isUTF8 = false;
+            this.encoding = DSUtil.Encoding.GBK;
             OverViewFile();
         }
 
@@ -165,7 +166,7 @@ namespace Citta_T1.Dialogs
         {
             this.label4.Font = font;
             this.label5.Font = bold_font;
-            this.m_isUTF8 = true;
+            this.encoding = DSUtil.Encoding.UTF8;
             OverViewFile();
         }
 
@@ -182,7 +183,7 @@ namespace Citta_T1.Dialogs
              * 预览文件
              */
             System.IO.StreamReader sr;
-            if (this.m_isUTF8)
+            if (this.encoding == DSUtil.Encoding.UTF8)
             {
                 sr = File.OpenText(m_filePath);
             }
@@ -228,16 +229,25 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        public void PreLoadFile(string filePath, bool isUTF8)
+        public void PreLoadFile(string filePath, DSUtil.Encoding encoding)
         {
             System.IO.StreamReader sr;
             string contents = "";
-            if (isUTF8)
+            if (encoding == DSUtil.Encoding.UTF8)
             {
                 sr = File.OpenText(filePath);
             }
+            else if (encoding == DSUtil.Encoding.GBK)
+            {
+                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs, System.Text.Encoding.Default);
+            }
             else
             {
+                // TODO 编码格式添加
+                String info = "暂不支持的编码格式";
+                MessageBox.Show(info);
+                Console.WriteLine(info);
                 FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }

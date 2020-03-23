@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
@@ -28,16 +29,23 @@ namespace Citta_T1.Controls.Left
                 dragDropData.SetData("Path", (sender as Button).Name);
                 dragDropData.SetData("Text", (sender as Button).Text);
                 // 需要记录他的编码格式
-                dragDropData.SetData("isUTF8", ((sender as Button).Parent as DataButton).isUTF8);
+                dragDropData.SetData("Encoding", ((sender as Button).Parent as DataButton).encoding);
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        public void GenDataButton(string dataName, string filePath, bool isutf8)
+        public void GenDataButton(string dataName, string filePath, DSUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
-            DataButton b = new DataButton(filePath, dataName, isutf8);
+            DataButton b = new DataButton(filePath, dataName, encoding);
             b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 判断是否有路径文件
+            if (this.dataSourceDictI2B.ContainsKey(filePath))
+            {
+                String name = this.dataSourceDictI2B[filePath].txtButton.Text;
+                MessageBox.Show("该文件已存在，数据名为：" + name);
+                return;
+            }
             this.dataSourceDictI2B.Add(filePath, b);
             this.LocalFrame.Controls.Add(b);
         }

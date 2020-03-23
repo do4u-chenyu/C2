@@ -100,11 +100,7 @@ namespace Citta_T1.Utils
         {
             startP = p1;
             endP = p2;
-            this.a = new PointF((p1.X + p2.X) / 2, p1.Y);
-            this.b = new PointF((p1.X + p2.X) / 2, p2.Y);
-            //pen = new Pen(Color.Green);
-            PointF[] pointList = new PointF[] { new PointF(p1.X, p1.Y), a, b, new PointF(p2.X, p2.Y) };
-            points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
+            UpdatePoints();
         }
 
         public void Draw(CanvasWrapper canvas, RectangleF rect)
@@ -141,6 +137,15 @@ namespace Citta_T1.Utils
         public void OnMouseMove(PointF p)
         {
             endP = p;
+        }
+
+        public void UpdatePoints()
+        {
+            this.a = new PointF((startP.X + endP.X) / 2, startP.Y);
+            this.b = new PointF((startP.X + endP.X) / 2, endP.Y);
+            //pen = new Pen(Color.Green);
+            PointF[] pointList = new PointF[] { new PointF(startP.X, startP.Y), a, b, new PointF(endP.X, endP.Y) };
+            points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
         }
     }
 }

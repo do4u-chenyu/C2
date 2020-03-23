@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
-        public bool isUTF8;
+        public DSUtil.Encoding encoding;
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, bool isutf8)
+        public DataButton(string ffp, string dataName, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = dataName;
-            this.isUTF8 = isutf8;
+            this.encoding = encoding;
         }
         private void moveOpControl1_Load(object sender, EventArgs e)
         {
