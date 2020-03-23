@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Citta_T1.Business.Model;
+
 namespace Citta_T1.Business.Option
 {
     class BcpInfo
@@ -13,5 +10,16 @@ namespace Citta_T1.Business.Option
         private string name;         //对应的数据源名称
         private ElementType type;    //对应的类型:数据源 或 Result
         private List<ColumnInfo> columnInfos;
+        private string encoding;    //BCP文件对应的编码
+
+        public BcpInfo(string fullBcpPath, string name, ElementType type, string encoding)
+        {
+            this.fullBcpPath = fullBcpPath;
+            fileName = System.IO.Path.GetFileName(this.fullBcpPath);
+            this.name = name;
+            this.type = type;
+            this.encoding = encoding;
+
+        }
     }
 }

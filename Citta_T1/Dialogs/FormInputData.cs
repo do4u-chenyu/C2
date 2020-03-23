@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs
 {
@@ -22,8 +20,7 @@ namespace Citta_T1.Dialogs
         private System.Drawing.Font bold_font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private System.Drawing.Font font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         private bool textboxHasText = false;
-        // 数据的存储形式，采用dict
-        private Dictionary<string, string> contents = new Dictionary<string, string>();
+
         public FormInputData()
         {
             InitializeComponent();
@@ -77,14 +74,14 @@ namespace Citta_T1.Dialogs
              */
             string fileName="";
             OpenFileDialog fd = new OpenFileDialog();           
-            fd.Filter = "files|*.txt";
+            fd.Filter = "files|*.txt;*.bcp";
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 m_filePath = fd.FileName;     
                 fileName = Path.GetFileNameWithoutExtension(@m_filePath);
-                OverViewFile();              
+                PreViewFile();              
             }
-            if (this.textBox1.Text == "请输入数据名称"|| this.textBox1.Text == "")
+            if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
                 this.textBox1.Text = fileName;
 
         }
@@ -129,19 +126,11 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                PreLoadFile(m_filePath, this.m_isUTF8);
+                
+                OpUtil.PreLoadFile(m_filePath, this.m_isUTF8);
                 InputDataEvent(name, m_filePath, this.m_isUTF8);
                 DvgClean();
                 Close();
-                //if (this.m_isUTF8)
-                //{
-                //    content = File.ReadAllText(m_fileName, Encoding.UTF8);
-                //}
-                //else
-                //{
-                //    content = File.ReadAllText(m_fileName, Encoding.Default);
-                //}
-
             }
         }
 
@@ -162,7 +151,7 @@ namespace Citta_T1.Dialogs
             this.label4.Font = bold_font;
             this.label5.Font = font;
             this.m_isUTF8 = false;
-            OverViewFile();
+            PreViewFile();
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -170,7 +159,7 @@ namespace Citta_T1.Dialogs
             this.label4.Font = font;
             this.label5.Font = bold_font;
             this.m_isUTF8 = true;
-            OverViewFile();
+            PreViewFile();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -178,7 +167,7 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void OverViewFile()
+        private void PreViewFile()
         {
             /*
              * @param this.isUTF8
@@ -232,55 +221,13 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        public void PreLoadFile(string filePath, bool isUTF8)
-        {
-            System.IO.StreamReader sr;
-            string contents = "";
-            if (isUTF8)
-            {
-                sr = File.OpenText(filePath);
-            }
-            else
-            {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs, System.Text.Encoding.Default);
-            }
-            for (int row = 0; row < m_maxNumOfRow; row++)
-            {
-                // 读取数据
-                String line = sr.ReadLine();
-                contents += (line + "\n");
-            }
-            Program.DataPreviewDict[filePath] = contents;
-        }
+
         public void DvgClean(bool isClearDataName = true)
         {
             if (isClearDataName) { this.textBox1.Text = null; }
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
         }
-
-        /// <summary>
-        /// MD5字符串加密
-        /// </summary>
-        /// <param name="txt"></param>
-        /// <returns>加密后字符串</returns>
-        public static string GenerateMD5(string txt)
-        {
-            using (MD5 mi = MD5.Create())
-            {
-                byte[] buffer = Encoding.Default.GetBytes(txt);
-                //开始加密
-                byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < newBuffer.Length; i++)
-                {
-                    sb.Append(newBuffer[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-        }
-
   
     }
 }

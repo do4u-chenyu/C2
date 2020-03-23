@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using Citta_T1;
+using Citta_T1.Utils;
 
 namespace Citta_T1
 {
@@ -157,7 +156,7 @@ namespace Citta_T1
             if (!Program.DataPreviewDict.ContainsKey(bcpPath) || Program.DataPreviewDict[bcpPath] == "")
             {
                 // 数据不存在时 按照路径重新读取
-                (this.Parent.Parent as MainForm).formInputData.PreLoadFile(bcpPath, isUTF8);
+                OpUtil.PreLoadFile(bcpPath, isUTF8);
             }
 
             List<string> rows = new List<string >(Program.DataPreviewDict[bcpPath].Split('\n'));
