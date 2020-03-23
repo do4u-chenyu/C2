@@ -26,7 +26,8 @@ namespace Citta_T1.Business.Option
         // 根据第一行初始化列信息
         private void InitColumnInfo()
         {
-           // string columnLine = 
+            string columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullBcpPath, encoding == "UTF8"? true : false);
+
         }
     }
 }
