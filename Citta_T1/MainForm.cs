@@ -45,9 +45,10 @@ namespace  Citta_T1
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
             this.modelDocumentDao = new ModelDocumentDao();
+            InitializeGlobalVariable();
             InitializeControlsLocation();
             
-            InitializeGlobalVariable();
+            
             this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
             this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
             this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
@@ -69,11 +70,11 @@ namespace  Citta_T1
         {
             Global.SetMainForm(this);
             Global.SetModelTitlePanel(this.modelTitlePanel);
-            Global.SetNaviViewControl(this.naviViewControl);
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
             Global.SetMyModelControl(this.myModelControl);
-            
+            Global.SetNaviViewControl(this.naviViewControl);
+
         }
 
         private void RemarkChange(RemarkControl rc)
@@ -135,7 +136,8 @@ namespace  Citta_T1
         internal List<ModelDocument>  DocumentsList()
         {            
             return modelDocumentDao.ModelDocuments;
-        }
+
+        } 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
 
@@ -216,7 +218,7 @@ namespace  Citta_T1
             Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-            this.naviViewControl.Invalidate();
+            //this.naviViewControl.Invalidate();
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);

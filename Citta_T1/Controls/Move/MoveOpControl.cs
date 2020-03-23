@@ -139,20 +139,22 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
+            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
 
-            if (Pm.X < 0)
+            if (Pw.X < 50)
             {
                 Pm.X = 0;
             }
-            if (Pm.Y < 70)
+            if (Pw.Y < 30)
             {
                 Pm.Y = 70;
             }
-            if (Pm.X > this.Parent.Width - this.Width)
+            if (Pw.X > 2000 - this.Width)
             {
                 Pm.X = this.Parent.Width - this.Width;
             }
-            if (Pm.Y > this.Parent.Height - this.Height)
+            if (Pw.Y > 1000 - this.Height)
             {
                 Pm.Y = this.Parent.Height - this.Height;
             }
