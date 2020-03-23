@@ -207,6 +207,7 @@ namespace Citta_T1.Controls.Move
             // 按住拖拽
             if (isMouseDown)
             {
+                Console.WriteLine("[MoveDtControl]开始移动");
                 #region 控件移动部分
                 if (sender is Button)
                 {
@@ -244,8 +245,12 @@ namespace Citta_T1.Controls.Move
                 List<float> affectedPointsX = new List<float> { };
                 List<float> affectedPointsY = new List<float> { };
 
-                if (!(affectedLines.Count == 0 && this.startLineIndexs.Count != 0))
+                if (this.startLineIndexs.Count == 0)
+                {
+                    Console.WriteLine("[MoveDtControl] 不满足线移动条件");
                     return;
+                }
+                Console.WriteLine("[MoveDtControl] 满足线移动条件");
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];

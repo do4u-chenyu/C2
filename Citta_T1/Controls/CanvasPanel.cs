@@ -8,6 +8,7 @@ using Citta_T1.Utils;
 using Citta_T1.Business;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Business.Model;
+using System.Runtime.InteropServices;
 
 namespace Citta_T1.Controls
 {
@@ -18,6 +19,7 @@ namespace Citta_T1.Controls
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
+        private bool startDrag = false;
         //记录拖动引起的坐标变化量
         public float screenChange = 1;
 
@@ -55,6 +57,7 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+            SetStyle(ControlStyles.ResizeRedraw, true);
 
         }
         #region 右上角功能实现部分
@@ -164,49 +167,9 @@ namespace Citta_T1.Controls
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
         }
-
-        public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (((MainForm)(this.Parent)).flowControl.selectFrame)
-            {
-                Bitmap i = new Bitmap(this.staticImage);
-                Graphics n = this.CreateGraphics();
-                n.DrawImageUnscaled(i, 0, 0);
-                n.Dispose();
-                // 标志位置低
-                MouseIsDown = false;
-            }
-            else if (cmd == eCommandType.draw)
-            {
-                Line line = new Line(startP, new PointF(e.X, e.Y));
-                lines.Add(line);
-                Console.WriteLine("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
-                /* 
-                 * TODO 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
-                 * 只保存线索引
-                 *         __________
-                 * endP1  | MControl | startP
-                 * endP2  |          |
-                 *         ----------
-                 */
-                int line_index = lines.IndexOf(line);
-                (this.startC as IMoveControl).SaveStartLines(line_index);
-                (this.endC as IMoveControl).SaveEndLines(line_index);
-                cmd = eCommandType.select;
-            }
-            Console.WriteLine("拖拽结束");
-            Global.GetNaviViewControl().UpdateNaviView();
-
-        }
-
-        public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Text))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
-
+        [DllImport("user32")]
+        private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, IntPtr lParam);
+        private const int WM_SETREDRAW = 0xB;
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
@@ -229,6 +192,9 @@ namespace Citta_T1.Controls
                 startX = e.X;
                 startY = e.Y;
                 staticImage = new Bitmap(2000, 1000);
+                Graphics g = Graphics.FromImage(staticImage);
+                g.Clear(this.BackColor);
+
                 List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -237,12 +203,19 @@ namespace Citta_T1.Controls
                 {
                     if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
                     {
+
                         Control ct = me.GetControl;
                         Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                         ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
+                        me.Hide();
                     }
-                    me.Hide();
+                   
                 }
+                staticImage.Save("cs1.png");
+
+                //g.Dispose();
+                startDrag = true;
+               // SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
             }
 
         }
@@ -278,18 +251,18 @@ namespace Citta_T1.Controls
             // 控件移动
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
-                SetStyle(ControlStyles.UserPaint, true);
-                SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-                SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-                this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-                this.SetStyle(ControlStyles.DoubleBuffer, true);
-                this.SetStyle(ControlStyles.UserPaint, true);
-                this.SetStyle(ControlStyles.ResizeRedraw, true);
 
 
-                this.UpdateStyles();
-                Console.WriteLine("正在拖拽");
+                //SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
+                //if (((e.X - startX) %2 == 0 && (e.Y - startY) % 2 == 0) || ((e.X - startX) % 2 != 0 && (e.Y - startY) % 2 != 0))
+                //{
+                //    SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+                //}
+                //Console.WriteLine("开始移动！");
+                nowX = e.X;
+                nowY = e.Y;
 
+                //this.Invalidate();
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 mapOrigin.X = mapOrigin.X + e.X - startX;
                 mapOrigin.Y = mapOrigin.Y + e.Y - startY;
@@ -297,13 +270,22 @@ namespace Citta_T1.Controls
 
 
                 Bitmap i = new Bitmap(this.staticImage);
-                
+                //g = Graphics.FromImage(i);
+
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+
+         
+
+
+     
+
                 Graphics n = this.CreateGraphics();
                 n.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                n.Clear(this.BackColor);
+                
+                //n.DrawImageUnscaled(i, 0, 0);
                 n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-
-
+                //n.DrawImage(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                //n.Clear(this.BackColor);
 
                 n.Dispose();
             }
@@ -317,7 +299,7 @@ namespace Citta_T1.Controls
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
-
+                
                 Console.WriteLine("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Line(startP, nowP);
                 Console.WriteLine("line'count = " + lines.Count().ToString());
@@ -387,12 +369,82 @@ namespace Citta_T1.Controls
             g.Dispose();
 
         }
-
-
-        protected override void OnPaint(PaintEventArgs e)
+        public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("开始重绘！" + "重绘范围： " + e.ClipRectangle.ToString());
-            base.OnPaint(e);
+
+            if (((MainForm)(this.Parent)).flowControl.selectFrame)
+            {
+                Bitmap i = new Bitmap(this.staticImage);
+                Graphics n = this.CreateGraphics();
+                n.DrawImageUnscaled(i, 0, 0);
+                n.Dispose();
+                // 标志位置低
+                MouseIsDown = false;
+            }
+
+            else if (((MainForm)(this.Parent)).flowControl.selectDrag)
+            {
+
+                // SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+                startDrag = false;
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+
+
+                    
+                nowX = e.X;
+                nowY = e.Y;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
+                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
+                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                Point moveOffset = WorldBoundControl(mapOrigin);
+                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+                   
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                startX = e.X;
+                startY = e.Y;
+
+                foreach (ModelElement me in modelElements)
+                {
+                    me.Show();
+                }
+
+                Global.GetNaviViewControl().UpdateNaviView();
+            }
+
+            else if (cmd == eCommandType.draw)
+            {
+                Line line = new Line(startP, new PointF(e.X, e.Y));
+                lines.Add(line);
+                Console.WriteLine("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                /* 
+                 * TODO 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
+                 * 只保存线索引
+                 *         __________
+                 * endP1  | MControl | startP
+                 * endP2  |          |
+                 *         ----------
+                 */
+                int line_index = lines.IndexOf(line);
+                (this.startC as IMoveControl).SaveStartLines(line_index);
+                (this.endC as IMoveControl).SaveEndLines(line_index);
+                cmd = eCommandType.select;
+            }
+            
+        }
+
+
+        public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+        private void CanvasPanel_Paint(object sender, PaintEventArgs e)
+        {
+            //Console.WriteLine("开始重绘！" + "重绘范围： " + e.ClipRectangle.ToString());
+            
             Rectangle clipRectangle = e.ClipRectangle;
             //注释掉后看划线区域
             //MainForm mainF = Global.GetMainForm();
@@ -403,25 +455,44 @@ namespace Citta_T1.Controls
             //p.Dispose();
             //g.Dispose();
             // 保存重绘前的图
-            if (this.staticImage == null)
+            if (startDrag)
             {
-                clipRectangle = ClientRectangle;
-                this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-                //BackgroundImage = (Bitmap)this.staticImage.Clone();
-            }
-            CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
-            this.staticImage.Save("static_image_save.png");
-            RepaintStatic(dcStatic, clipRectangle);
-            this.staticImage.Save("static_image_save.png");
-            // 将静态图绘制在CanvasPanle里
-            //g = Graphics.FromImage(BackgroundImage);
-            g = this.CreateGraphics();
-            g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
-            g.Dispose();
-            dcStatic.Dispose();
 
+                //n.Dispose();
+            }
+            else
+            {
+                if (this.staticImage == null)
+                {
+                    clipRectangle = ClientRectangle;
+                    this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
+                    //BackgroundImage = (Bitmap)this.staticImage.Clone();
+                    this.staticImage.Save("static_image_save.bmp");
+                }
+                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+                // 给staticImage上色
+                dcStatic.DrawBackgroud(clipRectangle);
+                // 将`需要重绘`IDrawable对象重绘在静态图上
+                Draw(dcStatic, clipRectangle);
+                // 将静态图绘制在CanvasPanle里
+                //g = Graphics.FromImage(BackgroundImage);
+                g = this.CreateGraphics();
+                g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
+                g.Dispose();
+                dcStatic.Dispose();
+            }
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            //Console.WriteLine("========================");
+            if (!startDrag)
+            {
+                Console.WriteLine("+++++++++++++++++++++++++++");
+                base.OnPaint(e);
+            }
+        }
+        
         private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
         {
             // TODO
