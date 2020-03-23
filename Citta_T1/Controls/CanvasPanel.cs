@@ -53,7 +53,9 @@ namespace Citta_T1.Controls
         {
             InitializeComponent();
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
         }
         #region 右上角功能实现部分
