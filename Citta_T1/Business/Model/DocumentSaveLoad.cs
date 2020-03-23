@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business.Model
 {
@@ -167,7 +168,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation =ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
-                        cotl.Encoding = Convert.ToBoolean(xn.SelectSingleNode("encoding").InnerText);
+                        cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
@@ -213,6 +214,8 @@ namespace Citta_T1.Business.Model
         { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
+        public DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private Point ToPointType(string point)
         {
             Point location = new Point();

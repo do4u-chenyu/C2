@@ -143,14 +143,14 @@ namespace Citta_T1.Controls
             ElementType type = ElementType.Null;
             string path = "";
             string text = "";
-            bool isutf8 = false;
+            DSUtil.Encoding isutf8 = DSUtil.Encoding.UTF8;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             try
             {
                 type = (ElementType)e.Data.GetData("Type");
                 path = e.Data.GetData("Path").ToString();
                 text = e.Data.GetData("Text").ToString();
-                isutf8 = (bool)e.Data.GetData("isUTF8");
+                isutf8 = (DSUtil.Encoding)e.Data.GetData("Encoding");
             }
             catch (Exception ex)
             {
@@ -460,7 +460,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, bool encoding)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,

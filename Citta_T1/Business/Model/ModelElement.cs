@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business.Model
 {
@@ -52,7 +53,7 @@ namespace Citta_T1.Business.Model
         private string dataSourcePath;
         private string description;
         private int id;
-        private bool encoding;
+        private DSUtil.Encoding encoding;
 
 
 
@@ -63,9 +64,9 @@ namespace Citta_T1.Business.Model
         public Control GetControl { get => ctl; }
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
-        public bool Encoding { get => this.encoding; set => this.encoding = value; }
+        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding = false)
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             Init(type, ctl, des, bcpPath, status, subType, id, encoding);
         }
@@ -90,7 +91,7 @@ namespace Citta_T1.Business.Model
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, bool encoding)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, DSUtil.Encoding encoding)
         {
             this.type = type;
             this.subType = subType;
