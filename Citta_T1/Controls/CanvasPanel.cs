@@ -196,7 +196,7 @@ namespace Citta_T1.Controls
                     {
                         Control ct = me.GetControl;
                         Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                        ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, 142, 25));
+                        ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                     }
                     me.Hide();
                 }
