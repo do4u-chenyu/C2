@@ -182,7 +182,7 @@ namespace  Citta_T1
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
                 CanvasAddElement(doc);                    
             }
-            // 这里我就看不懂了,将用户本地保存的模型文档加载到左侧myModelControl
+            // 将用户本地保存的模型文档加载到左侧myModelControl
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
             foreach (string modelTitle in allModelTitle)
             {

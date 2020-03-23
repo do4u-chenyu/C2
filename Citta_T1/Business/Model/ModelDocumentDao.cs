@@ -198,11 +198,21 @@ namespace Citta_T1.Business.Model
                     XmlNodeList childNodes = xn.SelectNodes("modeltitle");
                     foreach (XmlNode xmlNode in childNodes)
                         xn.RemoveChild(xmlNode);
+                    string[] saveTitle = LoadAllModelTitle(userName);
                     foreach (ModelDocument mb in this.modelDocuments)
                     {
+                        if (!saveTitle.Contains(mb.ModelTitle))
+                            continue;
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = mb.ModelTitle;
                         xn.AppendChild(childElement);                     
+                    }
+                    //关闭界面，用户只留下一个未保存的文档，则加载时随机打开一个文档
+                    if (this.modelDocuments.Count == 1 && !saveTitle.Contains(this.modelDocuments[0].ModelTitle))
+                    {
+                        XmlElement childElement = xDoc.CreateElement("modeltitle");
+                        childElement.InnerText = saveTitle[0];
+                        xn.AppendChild(childElement);
                     }
                     xDoc.Save(UserInfoPath);
                     return;
