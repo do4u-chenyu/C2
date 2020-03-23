@@ -221,7 +221,7 @@ namespace Citta_T1.Controls.Move
 
                 (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
 
-                (sender as MoveDtControl).Location = new Point(left, top);
+                //(sender as MoveDtControl).Location = new Point(left, top);
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 // 更新相连点的坐标
                 UpdateLineWhenMoving();
@@ -237,19 +237,22 @@ namespace Citta_T1.Controls.Move
         public Point WorldBoundControl(Point Pm)
         {
 
-            if (Pm.X < 0)
+            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
+
+            if (Pw.X < 20)
             {
-                Pm.X = 0;
+                Pm.X = 20;
             }
-            if (Pm.Y < 70)
+            if (Pw.Y < 70)
             {
                 Pm.Y = 70;
             }
-            if (Pm.X > this.Parent.Width - this.Width)
+            if (Pw.X > 2000 - this.Width)
             {
                 Pm.X = this.Parent.Width - this.Width;
             }
-            if (Pm.Y > this.Parent.Height - this.Height)
+            if (Pw.Y > 980 - this.Height)
             {
                 Pm.Y = this.Parent.Height - this.Height;
             }

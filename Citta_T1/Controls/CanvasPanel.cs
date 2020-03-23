@@ -102,15 +102,24 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             this.UpdateStyles();
             //SetControlByDelta(dx, dy, this);
-            foreach (Control con in Controls)
-            {   // 仅当前文档中的元素需要拖动
-                
-                if (con.Visible && con is IDragable)
+            //foreach (Control con in Controls)
+            //{   // 仅当前文档中的元素需要拖动
+
+            //    if (con.Visible && con is IDragable)
+            //    {
+
+            //        (con as IDragable).ChangeLoc(dx, dy);
+            //    }
+
+            //}
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            foreach (ModelElement me in modelElements)
+            {
+                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
                 {
-                    
-                    (con as IDragable).ChangeLoc(dx, dy);
+                    Control ct = me.GetControl;
+                    (ct as IDragable).ChangeLoc(dx, dy); ;
                 }
-                
             }
         }
         #endregion
@@ -176,37 +185,34 @@ namespace Citta_T1.Controls
             {
                 startX = e.X;
                 startY = e.Y;
-                //List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements();
-                //foreach (ModelElement me in modelElements)
-                //{
-                //    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)
-                //    {
-                //        continue;
-                //    }
-                //    me.Hide();
-                //}
-                //Bitmap staticImage = new Bitmap(2000, 1000);
-                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
-                //foreach (ModelElement me in modelElements)
-                //{
-                //    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator)
-                //    {
-                //        me.Hide();
-                //    }
-                //    me.Show();
-                //}
+                staticImage = new Bitmap(2000, 1000);
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
+                foreach (ModelElement me in modelElements)
+                {
+                    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
+                    {
+                        Control ct = me.GetControl;
+                        Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                        ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, 142, 25));
+                    }
+                    me.Hide();
+                }
             }
 
         }
 
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
+
             // 画框
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
             {
 
                 Bitmap i = new Bitmap(staticImage);
-
+                
                 g = Graphics.FromImage(i);
 
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
@@ -229,22 +235,36 @@ namespace Citta_T1.Controls
             // 控件移动
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
+                SetStyle(ControlStyles.UserPaint, true);
+                SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+                SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+                this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                this.SetStyle(ControlStyles.DoubleBuffer, true);
+                this.SetStyle(ControlStyles.UserPaint, true);
+                this.SetStyle(ControlStyles.ResizeRedraw, true);
 
-                nowX = e.X;
-                nowY = e.Y;
-                Point mapOrigin = Global.GetCurrentDocument().MapOrigin; 
-                int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
-                int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
 
-                
-                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+                this.UpdateStyles();
+                Console.WriteLine("正在拖拽");
+
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                mapOrigin.X = mapOrigin.X + e.X - startX;
+                mapOrigin.Y = mapOrigin.Y + e.Y - startY;
                 Point moveOffset = WorldBoundControl(mapOrigin);
-                ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
-                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                startX = e.X;
-                startY = e.Y;
+
+
+                Bitmap i = new Bitmap(this.staticImage);
+                
+                Graphics n = this.CreateGraphics();
+                n.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                n.Clear(this.BackColor);
+                n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+
+
+
+                n.Dispose();
             }
-            // 绘制
+            //绘制
             else if (cmd == eCommandType.draw)
             {
                 nowX = e.X;
@@ -330,8 +350,10 @@ namespace Citta_T1.Controls
             else if (((MainForm)(this.Parent)).flowControl.selectDrag)
             {
                 Console.WriteLine("拖拽结束");
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
-                startDrag = true;
+
+                    
                 nowX = e.X;
                 nowY = e.Y;
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -340,9 +362,15 @@ namespace Citta_T1.Controls
                 mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
                 Point moveOffset = WorldBoundControl(mapOrigin);
                 ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+                   
                 Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 startX = e.X;
                 startY = e.Y;
+
+                foreach (ModelElement me in modelElements)
+                {
+                    me.Show();
+                }
 
                 Global.GetNaviViewControl().UpdateNaviView();
             }

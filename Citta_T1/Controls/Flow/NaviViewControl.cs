@@ -61,29 +61,23 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
-
+            float factor = 1 / (this.Parent as CanvasPanel).screenChange;
+            nowX = e.X;
+            nowY = e.Y;
+            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            int dx = Convert.ToInt32((-nowX + startX) * rate * factor);
+            int dy = Convert.ToInt32((-nowY + startY) * rate * factor);
+            mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
+            (this.Parent as CanvasPanel).ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
+            Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            startX = e.X;
+            startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
         private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            
-            if (e.Button == MouseButtons.Left)
-            {
-                float factor = 1 / (this.Parent as CanvasPanel).screenChange;
-                nowX = e.X;
-                nowY = e.Y;
-                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                int dx = Convert.ToInt32((-nowX + startX) * rate * factor);
-                int dy = Convert.ToInt32((-nowY + startY) * rate * factor);
-                mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-                Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
-                (this.Parent as CanvasPanel).ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
-                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                startX = e.X;
-                startY = e.Y;
-            }
-            
+        {   
         }
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
@@ -94,10 +88,22 @@ namespace Citta_T1.Controls.Flow
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
+
+
             float factor = 1 / (this.Parent as CanvasPanel).screenChange;
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                
+                Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
+                
+                if (moveOffset != new Point(0,0))
+                {
+                    Console.WriteLine("发生越界");
+                    (this.Parent as CanvasPanel).ChangLoc( - moveOffset.X,  - moveOffset.Y);
+                    Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                    mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                }
                 viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
             }
             catch

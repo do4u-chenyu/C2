@@ -32,8 +32,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.gbkLable = new System.Windows.Forms.Label();
+            this.utf8Lable = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,7 +61,6 @@
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "* 打开文件";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button1
             // 
@@ -86,31 +85,31 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "* 选择文件编码";
             // 
-            // label4
+            // gbkLable
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label4.Location = new System.Drawing.Point(664, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 22);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "GBK";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.gbkLable.AutoSize = true;
+            this.gbkLable.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.gbkLable.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gbkLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbkLable.Location = new System.Drawing.Point(664, 27);
+            this.gbkLable.Name = "gbkLable";
+            this.gbkLable.Size = new System.Drawing.Size(44, 22);
+            this.gbkLable.TabIndex = 7;
+            this.gbkLable.Text = "GBK";
+            this.gbkLable.Click += new System.EventHandler(this.GBKLable_Click);
             // 
-            // label5
+            // utf8Lable
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label5.Location = new System.Drawing.Point(707, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 21);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "UTF-8";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.utf8Lable.AutoSize = true;
+            this.utf8Lable.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.utf8Lable.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.utf8Lable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.utf8Lable.Location = new System.Drawing.Point(707, 27);
+            this.utf8Lable.Name = "utf8Lable";
+            this.utf8Lable.Size = new System.Drawing.Size(56, 21);
+            this.utf8Lable.TabIndex = 8;
+            this.utf8Lable.Text = "UTF-8";
+            this.utf8Lable.Click += new System.EventHandler(this.UTF8Lable_Click);
             // 
             // label7
             // 
@@ -121,7 +120,6 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "说明：\r\n1. 上传文件支持bcp、txt、csv、excel；\r\n2. 上传的文件必须包括表头；\r\n3. 编码格式默认GBK格式，如文件预览出现乱码，请修改文件" +
     "编码；\r\n4. 建议使用数据导入模板。";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // textBox1
             // 
@@ -143,7 +141,6 @@
             this.label1.Size = new System.Drawing.Size(75, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "* 数据名称";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label10
             // 
@@ -156,7 +153,6 @@
             this.label10.Size = new System.Drawing.Size(82, 22);
             this.label10.TabIndex = 15;
             this.label10.Text = "excel模板";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
@@ -169,7 +165,6 @@
             this.label9.Size = new System.Drawing.Size(67, 22);
             this.label9.TabIndex = 14;
             this.label9.Text = "csv模板";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label6
             // 
@@ -181,7 +176,6 @@
             this.label6.Size = new System.Drawing.Size(65, 20);
             this.label6.TabIndex = 9;
             this.label6.Text = "表格预览";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label8
             // 
@@ -194,7 +188,6 @@
             this.label8.Size = new System.Drawing.Size(65, 22);
             this.label8.TabIndex = 13;
             this.label8.Text = "txt模板";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label11
             // 
@@ -239,7 +232,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HighlightText;
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.utf8Lable);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.label2);
@@ -281,7 +274,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 472);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.gbkLable);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -301,8 +294,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label gbkLable;
+        private System.Windows.Forms.Label utf8Lable;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
