@@ -143,33 +143,15 @@ namespace Citta_T1.Business.Model
         public void UpdateRemark(RemarkControl remarkControl)
         { 
             if (this.currentDocument == null)
-                throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements;          
-            foreach (ModelElement me in modelElements)
-            {
-                if (me.Type == ElementType.Remark)
-                {
-                    me.RemarkName = remarkControl.RemarkText;
-                    return;
-                }            
-            }
-            ModelElement remarkElement = ModelElement.CreateRemarkElement(remarkControl.RemarkText);
-            this.currentDocument.AddModelElement(remarkElement);
+                return;
+            this.currentDocument.RemarkDescription = remarkControl.RemarkText;
         }
+
         public string GetRemark()
         {
             string remark = "";
-            if (this.currentDocument == null)
-                throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements;
-            foreach (ModelElement me in modelElements)
-            {
-                if (me.Type == ElementType.Remark)
-                {
-                    remark = me.RemarkName;
-                    break;
-                }     
-            }
+            if (this.currentDocument != null)
+                remark = this.currentDocument.RemarkDescription;
             return remark;
         }
 

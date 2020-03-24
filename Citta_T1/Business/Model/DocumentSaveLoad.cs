@@ -31,14 +31,18 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
+            // 写坐标原点
             XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
             mapOriginNode.InnerText = this.modelDocument.MapOrigin.ToString();
             modelDocumentXml.AppendChild(mapOriginNode);
-
+            // 写算子,数据源，Result
             List<ModelElement> modelElements = this.modelDocument.ModelElements;
-            List<ModelRelation> modelRelations = this.modelDocument.ModelRelations;
             WriteModelElements(xDoc, modelDocumentXml, modelElements);
+            // 写关系
+            List<ModelRelation> modelRelations = this.modelDocument.ModelRelations;    
             WriteModelRelations(xDoc, modelDocumentXml, modelRelations);
+            // 写备注
+            WriteModelRemark(xDoc, modelDocumentXml, this.modelDocument.RemarkDescription);
             xDoc.Save(modelFilePath);
         }
         private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
@@ -51,45 +55,38 @@ namespace Citta_T1.Business.Model
                 XmlElement typeNode = xDoc.CreateElement("type");
                 typeNode.InnerText = me.Type.ToString();
                 modelElementXml.AppendChild(typeNode);
-                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
+            
+                XmlElement nameNode = xDoc.CreateElement("name");
+                nameNode.InnerText = me.GetDescription();
+                modelElementXml.AppendChild(nameNode);
+
+                XmlElement subTypeNode = xDoc.CreateElement("subtype");
+                subTypeNode.InnerText = me.SubType.ToString();
+                modelElementXml.AppendChild(subTypeNode);
+
+                XmlElement locationNode = xDoc.CreateElement("location");
+                locationNode.InnerText = me.Location.ToString();
+                modelElementXml.AppendChild(locationNode);
+
+                XmlElement statusNode = xDoc.CreateElement("status");
+                statusNode.InnerText = me.Status.ToString();
+                modelElementXml.AppendChild(statusNode);
+
+                XmlElement idNode = xDoc.CreateElement("id");
+                idNode.InnerText = me.ID.ToString();
+                modelElementXml.AppendChild(idNode);
+
+                if (me.Type == ElementType.DataSource)
                 {
-                    XmlElement nameNode = xDoc.CreateElement("name");
-                    nameNode.InnerText = me.GetDescription();
-                    modelElementXml.AppendChild(nameNode);
+                    XmlElement pathNode = xDoc.CreateElement("path");
+                    pathNode.InnerText = me.GetPath();
+                    modelElementXml.AppendChild(pathNode);
 
-                    XmlElement subTypeNode = xDoc.CreateElement("subtype");
-                    subTypeNode.InnerText = me.SubType.ToString();
-                    modelElementXml.AppendChild(subTypeNode);
-
-                    XmlElement locationNode = xDoc.CreateElement("location");
-                    locationNode.InnerText = me.Location.ToString();
-                    modelElementXml.AppendChild(locationNode);
-
-                    XmlElement statusNode = xDoc.CreateElement("status");
-                    statusNode.InnerText = me.Status.ToString();
-                    modelElementXml.AppendChild(statusNode);
-
-                    XmlElement idNode = xDoc.CreateElement("id");
-                    idNode.InnerText = me.ID.ToString();
-                    modelElementXml.AppendChild(idNode);
-
-                    if (me.Type == ElementType.DataSource)
-                    {
-                        XmlElement pathNode = xDoc.CreateElement("path");
-                        pathNode.InnerText = me.GetPath();
-                        modelElementXml.AppendChild(pathNode);
-
-                        XmlElement encodingNode = xDoc.CreateElement("encoding");
-                        encodingNode.InnerText = me.Encoding.ToString();
-                        modelElementXml.AppendChild(encodingNode);
-                    }
+                    XmlElement encodingNode = xDoc.CreateElement("encoding");
+                    encodingNode.InnerText = me.Encoding.ToString();
+                    modelElementXml.AppendChild(encodingNode);
                 }
-                else if (me.Type == ElementType.Remark)
-                {
-                    XmlElement nameNode = xDoc.CreateElement("name");
-                    nameNode.InnerText = me.RemarkName;
-                    modelElementXml.AppendChild(nameNode);
-                }
+                
             }
         }
         private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml,List<ModelRelation> modelRelations)
@@ -125,7 +122,19 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(endPinLabelNode);
             }
         }
-       
+        private void WriteModelRemark(XmlDocument xDoc, XmlElement modelDocumentXml, string remarkDescription)
+        {
+            XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
+
+            XmlElement typeNode = xDoc.CreateElement("type");
+            typeNode.InnerText = "Remark";
+            modelElementXml.AppendChild(typeNode);
+
+            XmlElement nameNode = xDoc.CreateElement("name");
+            nameNode.InnerText = remarkDescription;
+            modelElementXml.AppendChild(nameNode);
+            modelDocumentXml.AppendChild(modelElementXml);
+        }
         public void ReadXml()
         {
             XmlDocument xDoc = new XmlDocument();
@@ -177,8 +186,7 @@ namespace Citta_T1.Business.Model
                 else if (type == "Remark")
                 {
                     String name = xn.SelectSingleNode("name").InnerText;
-                    ModelElement remarkElement = ModelElement.CreateRemarkElement(name);
-                    this.modelDocument.ModelElements.Add(remarkElement);
+                    this.modelDocument.RemarkDescription = name;
                 }
                 else if (type == "Result")
                 {
