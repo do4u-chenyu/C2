@@ -101,28 +101,14 @@ namespace Citta_T1.Controls
         // 画布右上角的拖动功能实现
         public void ChangLoc(float dx, float dy)
         {
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-            this.UpdateStyles();
-            //SetControlByDelta(dx, dy, this);
-            //foreach (Control con in Controls)
-            //{   // 仅当前文档中的元素需要拖动
 
-            //    if (con.Visible && con is IDragable)
-            //    {
-
-            //        (con as IDragable).ChangeLoc(dx, dy);
-            //    }
-
-            //}
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelElement me in modelElements)
             {
                 if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
                 {
                     Control ct = me.GetControl;
-                    (ct as IDragable).ChangeLoc(dx, dy); ;
+                    (ct as IDragable).ChangeLoc(dx, dy);
                 }
             }
         }
@@ -167,9 +153,7 @@ namespace Citta_T1.Controls
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
         }
-        [DllImport("user32")]
-        private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, IntPtr lParam);
-        private const int WM_SETREDRAW = 0xB;
+
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
@@ -207,15 +191,15 @@ namespace Citta_T1.Controls
                         Control ct = me.GetControl;
                         Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                         ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
-                        me.Hide();
-                    }
-                   
+                        
+                    }  
                 }
-                staticImage.Save("cs1.png");
+                g.Dispose();
 
-                //g.Dispose();
-                startDrag = true;
-               // SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
+
+
+
+               
             }
 
         }
@@ -252,42 +236,26 @@ namespace Citta_T1.Controls
             else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
             {
 
-
-                //SendMessage(this.Handle, WM_SETREDRAW, 0, IntPtr.Zero);
-                //if (((e.X - startX) %2 == 0 && (e.Y - startY) % 2 == 0) || ((e.X - startX) % 2 != 0 && (e.Y - startY) % 2 != 0))
-                //{
-                //    SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
-                //}
-                //Console.WriteLine("开始移动！");
                 nowX = e.X;
-                nowY = e.Y;
-
-                //this.Invalidate();
+                nowY = e.Y;      
                 Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 mapOrigin.X = mapOrigin.X + e.X - startX;
                 mapOrigin.Y = mapOrigin.Y + e.Y - startY;
                 Point moveOffset = WorldBoundControl(mapOrigin);
-
-
                 Bitmap i = new Bitmap(this.staticImage);
-                //g = Graphics.FromImage(i);
-
-                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-
-         
-
-
-     
-
                 Graphics n = this.CreateGraphics();
-                n.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                
-                //n.DrawImageUnscaled(i, 0, 0);
                 n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                //n.DrawImage(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                //n.Clear(this.BackColor);
-
+                
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+                foreach (ModelElement me in modelElements)
+                {
+                    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
+                    {
+                        me.Hide();
+                    }
+                }
                 n.Dispose();
+
             }
             //绘制
             else if (cmd == eCommandType.draw)
@@ -314,19 +282,8 @@ namespace Citta_T1.Controls
 
         private void RepaintObject(Line line)
         {
-            //RelationLine line = new RelationLine();
-            //Global.GetModelDocumentDao().CurrentDocument.Relations.Remove(line);
             if (line == null)
                 return;
-            //Bitmap bgc = (Bitmap)staticImage.Clone();
-            //CanvasWrapper dc = new CanvasWrapper(this, Graphics.FromImage(bgc), ClientRectangle);
-            //CanvasWrapper dc = new CanvasWrapper(this, this.Parent.CreateGraphics(), ClientRectangle);
-            //RectangleF invalidaterect = obj.GetBoundingRect();
-            //obj.Draw(dc, invalidaterect);
-            //dc.Graphics.Dispose();
-            //dc.Dispose();
-            //BackgroundImage = bgc;
-            //bgc.Save("Citta_repaint.png");
             g = this.CreateGraphics();
             line.DrawLine(g);
             g.Dispose();
@@ -336,7 +293,6 @@ namespace Citta_T1.Controls
         {
             if (this.staticImage == null)
                 return;
-            //g = Graphics.FromImage(BackgroundImage);
             g = this.CreateGraphics();
             if (r.X < 0) r.X = 0;
             if (r.X > this.staticImage.Width) r.X = 0;
@@ -376,6 +332,17 @@ namespace Citta_T1.Controls
             {
 
                 // SendMessage(this.Handle, WM_SETREDRAW, 1, IntPtr.Zero);
+                nowX = e.X;
+                nowY = e.Y;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                mapOrigin.X = mapOrigin.X + e.X - startX;
+                mapOrigin.Y = mapOrigin.Y + e.Y - startY;
+                Point moveOffset = WorldBoundControl(mapOrigin);
+                Bitmap i = new Bitmap(this.staticImage);
+                Graphics n = this.CreateGraphics();
+                n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                n.Dispose();
+
                 startDrag = false;
                 List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
@@ -383,11 +350,11 @@ namespace Citta_T1.Controls
                     
                 nowX = e.X;
                 nowY = e.Y;
-                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 int dx = Convert.ToInt32((nowX - startX) / this.screenChange);
                 int dy = Convert.ToInt32((nowY - startY) / this.screenChange);
                 mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-                Point moveOffset = WorldBoundControl(mapOrigin);
+                moveOffset = WorldBoundControl(mapOrigin);
                 ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
                    
                 Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
@@ -396,7 +363,10 @@ namespace Citta_T1.Controls
 
                 foreach (ModelElement me in modelElements)
                 {
-                    me.Show();
+                    if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
+                    {
+                        me.Show();
+                    }
                 }
 
                 Global.GetNaviViewControl().UpdateNaviView();
@@ -433,69 +403,30 @@ namespace Citta_T1.Controls
         }
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
-            //Console.WriteLine("开始重绘！" + "重绘范围： " + e.ClipRectangle.ToString());
             
             Rectangle clipRectangle = e.ClipRectangle;
-            //注释掉后看划线区域
-            //MainForm mainF = Global.GetMainForm();
-            //Rectangle clipRectangle = new Rectangle(mainF.panel3.Location, new Size(mainF.panel3.Width, mainF.panel3.Height));
-            //g = this.CreateGraphics();
-            //Pen p = new Pen(Color.Green);
-            //g.DrawRectangle(p, clipRectangle);
-            //p.Dispose();
-            //g.Dispose();
-            // 保存重绘前的图
-            if (startDrag)
+            if (this.staticImage == null)
             {
-                //Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                //mapOrigin.X = mapOrigin.X + nowX - startX;
-                //mapOrigin.Y = mapOrigin.Y + nowY - startY;
-                //Point moveOffset = WorldBoundControl(mapOrigin);
-
-
-                //Bitmap i = new Bitmap(this.staticImage);
-                //Graphics n = this.CreateGraphics();
-                //n.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                //n.Clear(this.BackColor);
-                //n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-
-
-
-                //n.Dispose();
+                clipRectangle = ClientRectangle;
+                this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
+                //BackgroundImage = (Bitmap)this.staticImage.Clone();
+                this.staticImage.Save("static_image_save.bmp");
             }
-            else
-            {
-                if (this.staticImage == null)
-                {
-                    clipRectangle = ClientRectangle;
-                    this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-                    //BackgroundImage = (Bitmap)this.staticImage.Clone();
-                    this.staticImage.Save("static_image_save.bmp");
-                }
-                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
-                // 给staticImage上色
-                dcStatic.DrawBackgroud(clipRectangle);
-                // 将`需要重绘`IDrawable对象重绘在静态图上
-                Draw(dcStatic, clipRectangle);
-                // 将静态图绘制在CanvasPanle里
-                //g = Graphics.FromImage(BackgroundImage);
-                g = this.CreateGraphics();
-                g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
-                g.Dispose();
-                dcStatic.Dispose();
-            }
+            CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+            // 给staticImage上色
+            dcStatic.DrawBackgroud(clipRectangle);
+            // 将`需要重绘`IDrawable对象重绘在静态图上
+            Draw(dcStatic, clipRectangle);
+            // 将静态图绘制在CanvasPanle里
+            //g = Graphics.FromImage(BackgroundImage);
+            g = this.CreateGraphics();
+            g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
+            g.Dispose();
+            dcStatic.Dispose();
+            
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            //Console.WriteLine("========================");
-            if (!startDrag)
-            {
-                Console.WriteLine("+++++++++++++++++++++++++++");
-                base.OnPaint(e);
-            }
-        }
-        
+
         private void Draw(CanvasWrapper dcStatic, RectangleF rect)
         {
             // TODO
