@@ -26,7 +26,7 @@ namespace Citta_T1.Business.Schedule
 
         public List<Task> ParallelTasks { get => parallelTasks; set => parallelTasks = value; }
 
-        public Manager(int maxAllowCount, List<Triple> currentModelTripleList)
+        public Manager(int maxAllowCount, List<Triple> currentModelTripleList, List<ModelElement> currentModelElements)
         {
             this.maxAllowCount = maxAllowCount;
             this.currentModelTripleList = currentModelTripleList;
@@ -39,6 +39,7 @@ namespace Citta_T1.Business.Schedule
         {
             thread = new Thread(new ThreadStart(() => StartData()));
             thread.Start();
+
         }
 
         public void Pause()
@@ -83,16 +84,19 @@ namespace Citta_T1.Business.Schedule
                  *    2.2 存在，循环
                  *        2.2.1 判断数据节点的类型，都为数据源直接算，如果有“result”需要判断状态
                  */
-                if (tmpTri.IsOperated)
+                if (tmpTri.ResultElement.Status == ElementStatus.Done)
+                {
+                    Console.WriteLine("该三元组已算过，下一个");
                     continue;
+                }
                 else
                 {
                     //判断数据节点是否算完
                     foreach (ModelElement tmpDE in tmpTri.DataElements)
                     {
-                        if (tmpDE.Type.Equals("Result"))
+                        if (tmpDE.Type == ElementType.Result)
                         {
-                            while (!tmpDE.Type.Equals("Done"))
+                            while (tmpDE.Status != ElementStatus.Done)
                             {
                                 Thread.Sleep(1000);
                             }
@@ -118,19 +122,22 @@ namespace Citta_T1.Business.Schedule
             try
             {
                 tokenSource.Token.ThrowIfCancellationRequested();
-                Console.WriteLine("线程被执行");
+                string dataName = "";
+                foreach (ModelElement d in triple.DataElements)
+                {
+                    dataName = dataName + d.RemarkName;
+                }
 
-                Console.WriteLine("结果项{0}开始运行，状态为{1}", triple.ResultElement.RemarkName, triple.ResultElement.Status);
-                Thread.Sleep(3000);
+                Console.WriteLine("{0}-{1}-{2}开始运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
+                Thread.Sleep(5000);
                 //此处写处理数据方法
 
 
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
-                string newStatus = "Done";
-                triple.ResultElement.Status = (ElementStatus)Enum.Parse(typeof(ElementStatus), newStatus);
+                triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
-                Console.WriteLine("结果项{0}结束运行，状态为{1}", triple.ResultElement.RemarkName, triple.ResultElement.Status);
+                Console.WriteLine("{0}-{1}-{2}结束运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
 
             }
             catch (Exception ex)
