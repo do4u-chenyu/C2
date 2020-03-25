@@ -64,12 +64,14 @@ namespace Citta_T1.Controls.Flow
             float factor = 1 / (this.Parent as CanvasPanel).screenChange;
             nowX = e.X;
             nowY = e.Y;
+            DragWrapper dragWrapper = new DragWrapper(this.Parent.Size,1/factor);
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             int dx = Convert.ToInt32((-nowX + startX) * rate * factor);
             int dy = Convert.ToInt32((-nowY + startY) * rate * factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
-            (this.Parent as CanvasPanel).ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
+
+            Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
+            dragWrapper.ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -94,13 +96,13 @@ namespace Citta_T1.Controls.Flow
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                
-                Point moveOffset = (this.Parent as CanvasPanel).WorldBoundControl(mapOrigin);
+                DragWrapper dragWrapper = new DragWrapper(this.Parent.Size, 1 / factor);
+                Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
                 
                 if (moveOffset != new Point(0,0))
                 {
                     Console.WriteLine("发生越界");
-                    (this.Parent as CanvasPanel).ChangLoc( - moveOffset.X,  - moveOffset.Y);
+                    dragWrapper.ChangLoc( - moveOffset.X,  - moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 }

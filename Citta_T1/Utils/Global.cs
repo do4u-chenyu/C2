@@ -20,6 +20,7 @@ namespace Citta_T1.Utils
         private static ModelDocumentDao modelDocumentDao;
         private static FlowControl flowControl;
         private static MyModelControl myModelControl;
+        private static RemarkControl remarkControl;
 
         public static MainForm GetMainForm() { return mainForm; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
@@ -30,6 +31,7 @@ namespace Citta_T1.Utils
         public static ModelDocument GetCurrentDocument() { return GetModelDocumentDao().CurrentDocument; }
         public static FlowControl GetFlowControl() { return flowControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
+        public static RemarkControl GetRemarkControl() { return remarkControl; }
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetModelTitlePanel(ModelTitlePanel mtp) { modelTitlePanel = mtp; }
@@ -38,5 +40,6 @@ namespace Citta_T1.Utils
         public static void SetModelDocumentDao(ModelDocumentDao mdd) { modelDocumentDao = mdd; }
         public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
+        public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
     }
 }

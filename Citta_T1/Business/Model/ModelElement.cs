@@ -80,11 +80,6 @@ namespace Citta_T1.Business.Model
             return new ModelElement(ElementType.Result, ctl, des, "", status, ElementSubType.Null, id);
         }
 
-        public static ModelElement CreateRemarkElement(string remarkText)
-        {
-            return new ModelElement(ElementType.Remark, new RemarkControl(), remarkText, "", ElementStatus.Null, ElementSubType.Null, 0);
-        }
-
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
         {
             return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id,ctl.Encoding);
