@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\CanvasWrapper.cs" />
+    <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
@@ -281,6 +282,7 @@
     <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
     <Compile Include="Utils\Global.cs" />
     <Compile Include="Utils\LineUtil.cs" />

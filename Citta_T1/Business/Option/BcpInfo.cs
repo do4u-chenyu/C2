@@ -11,9 +11,9 @@ namespace Citta_T1.Business.Option
         private string name;         //对应的数据源名称
         private ElementType type;    //对应的类型:数据源 或 Result
         private List<ColumnInfo> columnInfos;
-        private string encoding;    //BCP文件对应的编码
+        private DSUtil.Encoding encoding;     //BCP文件对应的编码
 
-        public BcpInfo(string fullBcpPath, string name, ElementType type, string encoding)
+        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
         {
             this.fullBcpPath = fullBcpPath;
             fileName = System.IO.Path.GetFileName(this.fullBcpPath);
@@ -26,7 +26,7 @@ namespace Citta_T1.Business.Option
         // 根据第一行初始化列信息
         private void InitColumnInfo()
         {
-            string columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullBcpPath, encoding == "UTF8"? true : false);
+            string columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullBcpPath, encoding);
 
         }
     }

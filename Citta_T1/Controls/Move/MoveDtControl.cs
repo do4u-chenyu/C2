@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using static Citta_T1.Controls.CanvasPanel;
 using Citta_T1.Controls.Interface;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Citta_T1.Controls.Move
 {
@@ -20,8 +21,8 @@ namespace Citta_T1.Controls.Move
         public string MDCName { get => this.textBox1.Text; }
         private string oldTextString;
         private Point oldcontrolPosition;
-        private bool isUTF8;
-        public bool Encoding { get => this.isUTF8; set => this.isUTF8 = value; }
+        private DSUtil.Encoding encoding;
+        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -49,9 +50,11 @@ namespace Citta_T1.Controls.Move
         private int startY;
 
         // 以该控件为起点的所有点
-        private List<int> startPointsIndex = new List<int>() { };
+        private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
         #endregion
+        // 受影响的线
+        List<Line> affectedLines = new List<Line>() { };
 
 
         public string GetBcpPath()
@@ -144,7 +147,7 @@ namespace Citta_T1.Controls.Move
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.PreViewDataByBcpPath(this.Name, this.isUTF8);
+            prt.PreViewDataByBcpPath(this.Name, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -204,6 +207,8 @@ namespace Citta_T1.Controls.Move
             // 按住拖拽
             if (isMouseDown)
             {
+                Console.WriteLine("[MoveDtControl]开始移动");
+                #region 控件移动部分
                 if (sender is Button)
                 {
                     sender = (sender as Button).Parent;
@@ -218,6 +223,80 @@ namespace Citta_T1.Controls.Move
                 }
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
+                (sender as MoveDtControl).Location = new Point(left, top);
+                #endregion
+
+                #region 线移动部分
+                /*
+                 * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
+                 * 2. 重绘静态图
+                 * 3. 用静态图盖住变化区域
+                 * 4. 更新坐标
+                 * 5. 绘线
+                 * 6. 更新canvas.lines
+                 */
+                
+                Line line;
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                List<Line> lines = canvas.lines;
+                PointF startP;
+                PointF endP;
+                // 受影响的点
+                List<float> affectedPointsX = new List<float> { };
+                List<float> affectedPointsY = new List<float> { };
+
+                if (this.startLineIndexs.Count == 0)
+                {
+                    Console.WriteLine("[MoveDtControl] 不满足线移动条件");
+                    return;
+                }
+                Console.WriteLine("[MoveDtControl] 满足线移动条件");
+                foreach (int index in startLineIndexs)
+                {
+                    line = lines[index];
+                    affectedLines.Add(line);
+                    startP = line.StartP;
+                    endP = line.EndP;
+                }
+
+                // 受影响区域
+                foreach (Line l in affectedLines)
+                {
+                    if (!affectedPointsX.Contains(l.StartP.X))
+                        affectedPointsX.Add(l.StartP.X);
+                    if (!affectedPointsY.Contains(l.StartP.Y))
+                        affectedPointsY.Add(l.StartP.Y);
+                    if (!affectedPointsX.Contains(l.EndP.X))
+                        affectedPointsX.Add(l.EndP.X);
+                    if (!affectedPointsY.Contains(l.EndP.Y))
+                        affectedPointsY.Add(l.EndP.Y);
+                }
+                int minX = (int)affectedPointsX.Min();
+                int maxX = (int)affectedPointsX.Max();
+                int minY = (int)affectedPointsY.Min();
+                int maxY = (int)affectedPointsY.Max();
+                Rectangle affectedArea = new Rectangle(
+                    new Point(minX, minY),
+                    new Size(maxX - minX, maxY - minY)
+                );
+                // 重绘静态图
+                // TODO 不用每次都重新计算
+                canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
+                Rectangle clipRectangle = canvas.ClientRectangle;
+                CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
+                canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
+                canvas.staticImage.Save("Dt_static_image_save.png");
+                canvas.CoverPanelByRect(affectedArea);
+                // TODO 更新坐标并重新计算线轨迹，这里还是不对，需要改
+                foreach (int index in startLineIndexs)
+                {
+                    line = lines[index];
+                    line.StartP = new PointF(line.StartP.X + e.X - mouseOffset.X, line.StartP.Y + e.Y - mouseOffset.Y);
+                    line.UpdatePoints();
+                    canvas.RepaintObject(line);
+                }
+                Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
+                #endregion
 
                 (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
 
@@ -274,7 +353,7 @@ namespace Citta_T1.Controls.Move
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.PreViewDataByBcpPath(this.GetBcpPath(), this.isUTF8);
+            prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveOpControl_MouseDown(sender, e);
@@ -483,7 +562,7 @@ namespace Citta_T1.Controls.Move
             canvas.cmd = eCommandType.draw;
             canvas.SetStartC = this;
             canvas.SetStartP(new PointF(startX, startY));
-            canvas.Invalidate();
+            //canvas.Invalidate();
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -640,27 +719,16 @@ namespace Citta_T1.Controls.Move
         #endregion
         #endregion
         /*
+         * TODO 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
          */
         public void UpdateLineWhenMoving()
         {
-            // TODO 重绘的时候有问题，需要考虑到控件移动影响到的区域
-            int index;
-            Line line;
-            CanvasPanel canvas = this.Parent as CanvasPanel;
-            for(int i = 0;i < startPointsIndex.Count; i++)
-            {
-                index = startPointsIndex[i];
-                line = canvas.lines[index];
-                Console.WriteLine("准备更新Line坐标，索引：" + index.ToString() + ", 坐标： " + line.StartP.ToString() + ", 当前点坐标: " + this.Location.ToString());
-                //line.StartP = canvas.PointToClient(this.rightPictureBox.Location);
-                line.StartP = this.Location;
-                Console.WriteLine("已更新一条曲线坐标！曲线索引： " + index);
-            }
+
         }
         public void SaveStartLines(int line_index)
         {
-            this.startPointsIndex.Add(line_index);
+            this.startLineIndexs.Add(line_index);
         }
 
         public void SaveEndLines(int line_index)

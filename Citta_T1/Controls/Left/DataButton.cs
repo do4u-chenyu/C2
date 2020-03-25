@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
-
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
-        public bool isUTF8;
+        public DSUtil.Encoding encoding;
         private int count = 0;
-        public bool Encoding { get => this.isUTF8; set => this.isUTF8 = value; }
+        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count { get => this.count; set => this.count = value; }
@@ -18,12 +17,12 @@ namespace Citta_T1.Controls.Left
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, bool isutf8)
+        public DataButton(string ffp, string dataName, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = dataName;
-            this.isUTF8 = isutf8;
+            this.encoding = encoding;
         }
         private void moveOpControl1_Load(object sender, EventArgs e)
         {

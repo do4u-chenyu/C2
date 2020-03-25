@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Citta_T1.Controls.Left;
-
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business.DataSource
 {
@@ -68,8 +68,8 @@ namespace Citta_T1.Business.DataSource
                 {
                     string filePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
-                    bool isutf8 = Convert.ToBoolean(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(filePath, dataName, isutf8);
+                    DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
+                    DataButton dataButton = new DataButton(filePath, dataName, encoding);
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }
@@ -77,5 +77,7 @@ namespace Citta_T1.Business.DataSource
             }
             return dataSourceList;
         }
+        public DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }
 }

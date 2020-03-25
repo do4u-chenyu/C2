@@ -445,19 +445,10 @@ namespace Citta_T1.Controls.Move
             //this.Location = new Point(left, top);
             // Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
         }
-
-
         #endregion
 
-        private void MoveOpControl_MouseEnter(object sender, EventArgs e)
-        {
 
-            Rectangle rectangle = new Rectangle(4,11,5,5);
-            if (rectangle.Contains(MousePosition))
-            {
-                Console.WriteLine("左引脚。。。");
-            }
-        }
+
     }
 }
 

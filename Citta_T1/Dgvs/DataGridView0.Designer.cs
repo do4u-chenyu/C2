@@ -149,11 +149,10 @@ namespace Citta_T1
             }
             return datas;
         }
-        public void PreViewDataByBcpPath(string bcpPath, bool isUTF8 = true, int maxNumOfFile = 100, char sep = '\t')
+        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding, int maxNumOfFile = 100, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
-
-            List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, isUTF8).Split('\n'));
+            List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
             int numOfRows = rows.Count;
             for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
             {
