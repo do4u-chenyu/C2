@@ -75,7 +75,8 @@ namespace Citta_T1.Business.Model
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName), this.currentDocument.ElementCount);
+                op.ID = this.currentDocument.ElementCount;
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, op.Status, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -86,7 +87,7 @@ namespace Citta_T1.Business.Model
             ModelRelation e = new ModelRelation("1", "2", "{X=1,Y=2}", "{3,4}", "1");
             this.currentDocument.AddModelRelation(e);
         }
-        public ElementSubType SEType(string subType)
+        public static ElementSubType SEType(string subType)
         {
             string type = "";
             switch (subType)
