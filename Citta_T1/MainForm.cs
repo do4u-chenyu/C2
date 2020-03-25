@@ -17,6 +17,9 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
+using log4net;
+using System.Reflection;
+using System.Threading;
 
 namespace  Citta_T1
 {
@@ -38,7 +41,8 @@ namespace  Citta_T1
 
         private TripleListGen tripleListGen;
         private Manager currentManager;
-
+        Thread scheduleThread = null;
+        ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -453,14 +457,15 @@ namespace  Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-
-            if (this.runButton.Name == "pauseButton")
+            //记录警告信息
+            log.Warn("Test warn");
+            if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                 this.runButton.Name = "runButton";
                 currentManager.Stop();
+                CloseThread();
             }
-
         }
 
         private void RunButton_Click(object sender, EventArgs e)
@@ -483,19 +488,61 @@ namespace  Citta_T1
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
 
+
                 tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
                 tripleListGen.GenerateList();
+                /*
                 currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
                 currentManager.Start();
+                
+                //运行完了之后，图标要变
+                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                //this.runButton.Name = "continueButton";
+                */
+
+                scheduleThread = new Thread(new ThreadStart(StartManager));
+                scheduleThread.Start();
+
             }
             else if (this.runButton.Name == "pauseButton")
             {
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                this.runButton.Name = "runButton";
+                this.runButton.Name = "continueButton";
                 currentManager.Pause();
+            }
+            else if (this.runButton.Name == "continueButton")
+            {
+                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Name = "pauseButton";
+                currentManager.Continue();
             }
         }
 
+        private void StartManager()
+        {
+            try
+            {
+                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
+                currentManager.StartData();
+            }
+            catch
+            {
+                return;
+            }
+            CloseThread();
+        }
+
+
+        private void CloseThread()
+        {
+            if (scheduleThread != null)
+            {
+                if (scheduleThread.IsAlive)
+                {
+                    scheduleThread.Abort();
+                }
+            }
+        }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
@@ -555,6 +602,7 @@ namespace  Citta_T1
                     return;
                 }
             }
+            CloseThread();
         }
 
 
