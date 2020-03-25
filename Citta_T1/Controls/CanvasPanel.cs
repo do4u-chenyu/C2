@@ -490,6 +490,13 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("+++++++++++++++++++++++++++");
                 base.OnPaint(e);
+                Console.WriteLine("开始重绘！" + "重绘范围： " + e.ClipRectangle.ToString());
+                Rectangle clipRectangle = e.ClipRectangle;
+                g = this.CreateGraphics();
+                Pen p = new Pen(Color.Green);
+                g.DrawRectangle(p, clipRectangle);
+                p.Dispose();
+                g.Dispose();
             }
         }
         

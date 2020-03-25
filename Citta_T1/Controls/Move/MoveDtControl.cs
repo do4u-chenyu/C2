@@ -223,9 +223,10 @@ namespace Citta_T1.Controls.Move
                 }
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
-                (sender as MoveDtControl).Location = new Point(left, top);
+                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
                 #endregion
 
+                // TODO 拖影严重
                 #region 线移动部分
                 /*
                  * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
@@ -235,7 +236,7 @@ namespace Citta_T1.Controls.Move
                  * 5. 绘线
                  * 6. 更新canvas.lines
                  */
-                
+
                 Line line;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 List<Line> lines = canvas.lines;
@@ -291,14 +292,18 @@ namespace Citta_T1.Controls.Move
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
-                    line.StartP = new PointF(line.StartP.X + e.X - mouseOffset.X, line.StartP.Y + e.Y - mouseOffset.Y);
+                    line.StartP = new PointF(
+                        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
+                        
+                    );
                     line.UpdatePoints();
                     canvas.RepaintObject(line);
                 }
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 #endregion
 
-                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
+               
 
                 //(sender as MoveDtControl).Location = new Point(left, top);
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
@@ -697,11 +702,16 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 重绘
-        //protected override void OnPaint(PaintEventArgs e)
-        //{
-        //    base.OnPaint(e);
-        //    //(this.Parent as CanvasPanel).Invalidate();
-        //}
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Rectangle clipRectangle = e.ClipRectangle;
+            Graphics g = this.CreateGraphics();
+            Pen p = new Pen(Color.Red);
+            g.DrawRectangle(p, clipRectangle);
+            p.Dispose();
+            g.Dispose();
+        }
         #endregion
 
         #region 文档修改事件
