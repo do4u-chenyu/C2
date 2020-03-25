@@ -143,7 +143,7 @@ namespace Citta_T1.Controls
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
-            if (((MainForm)(this.Parent)).flowControl.selectFrame)
+            if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
                 MouseIsDown = true;
                 
@@ -155,14 +155,14 @@ namespace Citta_T1.Controls
 
                 g.Dispose();
             }
-            else if ((this.Parent as MainForm).flowControl.selectDrag && e.Button == MouseButtons.Left)
+            else if ((this.Parent as MainForm).flowControl.SelectDrag && e.Button == MouseButtons.Left)
             {
                 startDrag = true;
                 start = e.Location;
                 if (staticImage != null)
                     staticImage.Dispose();
                 DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                staticImage = dragWrapper.worldImage_create(this.BackColor);
+                staticImage = dragWrapper.CreateWorldImage();
             }
 
         }
@@ -170,7 +170,7 @@ namespace Citta_T1.Controls
         {
             now = e.Location;
             // 画框
-            if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.selectFrame)
+            if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
 
                 Bitmap i = new Bitmap(staticImage);
@@ -194,13 +194,13 @@ namespace Citta_T1.Controls
             }
 
             // 控件移动
-            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.selectDrag)
+            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
                 DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
                 
                 Graphics n = this.CreateGraphics();
    
-                dragWrapper.worldImage_move(n, this.staticImage, start, now);
+                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
                 n.Dispose();
             }
             //绘制
@@ -273,7 +273,7 @@ namespace Citta_T1.Controls
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
 
-            if (((MainForm)(this.Parent)).flowControl.selectFrame)
+            if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
                 Bitmap i = new Bitmap(this.staticImage);
                 Graphics n = this.CreateGraphics();
@@ -283,7 +283,7 @@ namespace Citta_T1.Controls
                 MouseIsDown = false;
             }
 
-            else if (((MainForm)(this.Parent)).flowControl.selectDrag)
+            else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
 
                 
@@ -291,7 +291,7 @@ namespace Citta_T1.Controls
                 Graphics n = this.CreateGraphics();
                 now = e.Location;
 
-                dragWrapper.worldImage_move(n, this.staticImage, start, now);
+                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
                 dragWrapper.controlChange(start, now);
 
                 startDrag = false;
@@ -336,7 +336,7 @@ namespace Citta_T1.Controls
             if (startDrag && staticImage != null)
             {
                 DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                dragWrapper.worldImage_move(e.Graphics, this.staticImage, start, now);
+                dragWrapper.MoveWorldImage(e.Graphics, this.staticImage, start, now);
                 return;
             }
             
@@ -420,7 +420,18 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
         }
-        
+
+        private bool SelectDrag()
+        {
+            return Global.GetFlowControl().SelectDrag;
+        }
+
+        private bool SelectFrame()
+        {
+            return Global.GetFlowControl().SelectFrame;
+        }
+
+
 
     }
 }

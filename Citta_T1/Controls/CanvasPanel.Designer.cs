@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);
-            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
         
         #endregion

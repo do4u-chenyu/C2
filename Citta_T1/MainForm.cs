@@ -74,13 +74,12 @@ namespace  Citta_T1
         private void InitializeGlobalVariable()
         {
             Global.SetMainForm(this);
-
             Global.SetModelTitlePanel(this.modelTitlePanel);
-
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
+            Global.SetRemarkControl(this.remarkControl);
 
         }
 

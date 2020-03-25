@@ -16,40 +16,41 @@ namespace Citta_T1.Controls
         private int height;
         private float screenChange;
 
+        private int worldWidth;
+        private int worldHeight;
+
         public DragWrapper(Size canaPanel_size, float canaPanel_screenChange)
         {
             width = canaPanel_size.Width;
             height = canaPanel_size.Height;
+            worldWidth = 2000;
+            worldHeight = 1000;
             screenChange = canaPanel_screenChange;
         }
 
         //生成当前模型控件快照
-        public Bitmap worldImage_create(Color backColor)
+        public Bitmap CreateWorldImage()
         {
-            Bitmap staticImage = new Bitmap(2000, 1000);
+            Bitmap staticImage = new Bitmap(worldWidth, worldHeight);
             Graphics g = Graphics.FromImage(staticImage);
-            g.Clear(backColor);
+            g.Clear(Color.White);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
-                {
-
-                    Control ct = me.GetControl;
-                    Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                    ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
-                    me.Hide();
-                }
+                Control ct = me.GetControl;
+                Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
+                me.Hide();
             }
 
             g.Dispose();
             return staticImage;
         }
 
-        public void worldImage_move(Graphics n, Bitmap staticImage, Point start, Point now)
+        public void MoveWorldImage(Graphics n, Bitmap staticImage, Point start, Point now)
         {
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             mapOrigin.X = mapOrigin.X + now.X - start.X;
@@ -70,16 +71,14 @@ namespace Citta_T1.Controls
             int dy = Convert.ToInt32((now.Y - start.Y) / this.screenChange);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             Point moveOffset = WorldBoundControl(mapOrigin);
-            ChangLoc(dx - WorldBoundControl(mapOrigin).X, dy - moveOffset.Y);
+
+            ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
 
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
-                {
-                    me.Show();
-                }
+                me.Show();
             }
 
             Global.GetNaviViewControl().UpdateNaviView();
@@ -91,11 +90,9 @@ namespace Citta_T1.Controls
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type == ElementType.DataSource || me.Type == ElementType.Operator || me.Type == ElementType.Result)
-                {
-                    Control ct = me.GetControl;
+                 Control ct = me.GetControl;
+                 if (ct is IDragable)
                     (ct as IDragable).ChangeLoc(dx, dy);
-                }
             }
         }
 
