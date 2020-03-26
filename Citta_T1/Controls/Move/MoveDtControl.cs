@@ -226,7 +226,7 @@ namespace Citta_T1.Controls.Move
                 (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
                 #endregion
 
-                // TODO 拖影严重
+                // TODO [DK] 拖影严重
                 #region 线移动部分
                 /*
                  * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
@@ -281,40 +281,30 @@ namespace Citta_T1.Controls.Move
                     new Size(maxX - minX, maxY - minY)
                 );
                 // 重绘静态图
-                // TODO 不用每次都重新计算
+                // TODO [DK] 不用每次都重新计算
                 canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
                 Rectangle clipRectangle = canvas.ClientRectangle;
                 CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
                 canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
                 canvas.staticImage.Save("Dt_static_image_save.png");
                 canvas.CoverPanelByRect(affectedArea);
-                // TODO 更新坐标并重新计算线轨迹，这里还是不对，需要改
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
+                    // 边界坐标修正
                     line.StartP = new PointF(
                         Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
                         Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
                         
                     );
+                    // 坐标更新
                     line.UpdatePoints();
                     canvas.RepaintObject(line);
                 }
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 #endregion
 
-               
-
-                //(sender as MoveDtControl).Location = new Point(left, top);
                 Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
-                // 更新相连点的坐标
-                UpdateLineWhenMoving();
-                /* 
-                 * TODO 会有闪烁的问题，`Invalidate`方法必须要带个重绘范围，要不然就是整个`CanvasPanel`重绘
-                 * 最好不要调用`base.OnPaint(e)`，这样我只重绘一下背景板，其他的
-                 */
-                //(this.Parent.Parent as MainForm).panel3.Invalidate();
-
             }
         }
 
@@ -573,20 +563,20 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            Graphics g = this.Parent.CreateGraphics();
-            if (g != null)
-            {
-                g.Clear(Color.White);
-            }
-            if (isMouseDown)
-            {
-                //this.Refresh();
-                int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-                int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-                line.DrawLine(g);
-            }
-            g.Dispose();
+            //Graphics g = this.Parent.CreateGraphics();
+            //if (g != null)
+            //{
+            //    g.Clear(Color.White);
+            //}
+            //if (isMouseDown)
+            //{
+            //    //this.Refresh();
+            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
+            //    line.DrawLine(g);
+            //}
+            //g.Dispose();
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
@@ -729,7 +719,7 @@ namespace Citta_T1.Controls.Move
         #endregion
         #endregion
         /*
-         * TODO 更新线坐标
+         * TODO [DK] 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
          */
         public void UpdateLineWhenMoving()
@@ -744,6 +734,13 @@ namespace Citta_T1.Controls.Move
         public void SaveEndLines(int line_index)
         {
             
+        }
+
+        // TODO
+        public PointF RevisePointLoc(PointF p)
+        {
+            // 不存在连DtControl 的 LeftPin的情况
+            return p;
         }
     }
 
