@@ -1,31 +1,27 @@
-﻿using Citta_T1.Business.Option;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
     public partial class MaxOperatorView : Form
     {
         private MoveOpControl opControl;
-        private string dataPath = "";
+        private string dataPath;
         private string oldMaxfield;
         private List<int> oldOutList; 
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            dataPath = "";
             this.opControl = opControl;
-            InitOptionInfor();
+            InitOptionInfo();
             LoadOption();
             this.oldMaxfield = this.MaxValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
@@ -33,19 +29,20 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            if (this.DataInfoBox.Text == "") return;
             SaveOption();
             //内容修改，引起文档dirty
-            if(this.oldMaxfield != this.MaxValueBox.Text)
+            if (this.oldMaxfield != this.MaxValueBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-                 Global.GetMainForm().SetDocumentDirty();
+                Global.GetMainForm().SetDocumentDirty();
 
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -55,9 +52,10 @@ namespace Citta_T1.OperatorViews
         {
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
-            //没有数据源，或者有数据源其他配置为空，直接返回
-            if (this.DataInforBox.Text == "" || this.MaxValueBox.Text == "" && outField == "") return;
-            this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
+            if(this.MaxValueBox.Text == "")
+                this.opControl.Option.SetOption("maxfield", "");
+            else
+                this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
             if (this.MaxValueBox.Text != "" && outField != "")
                 this.opControl.opViewStatus = true;
@@ -79,15 +77,15 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 初始化配置
-        private void InitOptionInfor()
+        private void InitOptionInfo()
         {
-            string startID = "";
+            int startID = -1;
             string encoding = "";
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.End == this.opControl.ID.ToString())
+                if (mr.End == this.opControl.ID)
                 {
                     startID = mr.Start;
                     break;
@@ -95,21 +93,22 @@ namespace Citta_T1.OperatorViews
             }
             foreach (ModelElement me in modelElements)
             {
-                if (me.ID.ToString() == startID)
+                if (me.ID == startID)
                 {
                     this.dataPath = me.GetPath();
                     //设置数据信息选项
-                    this.DataInforBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                    this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;
                 }
             }
-            SetOption(this.dataPath, this.DataInforBox.Text, encoding);
+            if(this.dataPath != "") 
+                SetOption(this.dataPath, this.DataInfoBox.Text, encoding);
 
         }
         private void SetOption(string path, string dataName, string encoding)
         {
-            if (path == "") return;
+ 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');

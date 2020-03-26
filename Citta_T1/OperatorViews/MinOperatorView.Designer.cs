@@ -33,8 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.ConfirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.OutList = new UserControlDLL.ComCheckBoxList();
@@ -82,49 +82,49 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(434, 37);
+            this.topPanel.Size = new System.Drawing.Size(430, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
+            this.bottomPanel.Controls.Add(this.CancelButton);
+            this.bottomPanel.Controls.Add(this.ConfirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 225);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 221);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(434, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(430, 64);
             this.bottomPanel.TabIndex = 1;
             // 
-            // cancelButton
+            // CancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(326, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.CancelButton.FlatAppearance.BorderSize = 0;
+            this.CancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.CancelButton.Location = new System.Drawing.Point(326, 19);
+            this.CancelButton.Margin = new System.Windows.Forms.Padding(2);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(63, 27);
+            this.CancelButton.TabIndex = 1;
+            this.CancelButton.Text = "取消";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // confirmButton
+            // ConfirmButton
             // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(236, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.ConfirmButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.ConfirmButton.FlatAppearance.BorderSize = 0;
+            this.ConfirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.ConfirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ConfirmButton.Location = new System.Drawing.Point(236, 19);
+            this.ConfirmButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ConfirmButton.Name = "ConfirmButton";
+            this.ConfirmButton.Size = new System.Drawing.Size(60, 27);
+            this.ConfirmButton.TabIndex = 0;
+            this.ConfirmButton.Text = "确认";
+            this.ConfirmButton.UseVisualStyleBackColor = false;
+            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -133,9 +133,9 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 188);
+            this.keyPanel.Size = new System.Drawing.Size(116, 184);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -145,9 +145,9 @@
             this.valuePanel.Controls.Add(this.DataInforBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(318, 188);
+            this.valuePanel.Size = new System.Drawing.Size(314, 184);
             this.valuePanel.TabIndex = 3;
             // 
             // OutList
@@ -166,7 +166,7 @@
             "USERNAME 姓名",
             "AGE 年龄"});
             this.MinValueBox.Location = new System.Drawing.Point(0, 64);
-            this.MinValueBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinValueBox.Margin = new System.Windows.Forms.Padding(2);
             this.MinValueBox.Name = "MinValueBox";
             this.MinValueBox.Size = new System.Drawing.Size(136, 20);
             this.MinValueBox.TabIndex = 1;
@@ -177,7 +177,7 @@
             this.DataInforBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DataInforBox.InputType = HZH_Controls.TextInputType.NotControl;
             this.DataInforBox.Location = new System.Drawing.Point(0, 0);
-            this.DataInforBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DataInforBox.Margin = new System.Windows.Forms.Padding(2);
             this.DataInforBox.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -204,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 289);
+            this.ClientSize = new System.Drawing.Size(430, 285);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -212,7 +212,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MinOperatorView";
             this.ShowIcon = false;
             this.Text = "取最小值算子设置";
@@ -230,8 +230,8 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

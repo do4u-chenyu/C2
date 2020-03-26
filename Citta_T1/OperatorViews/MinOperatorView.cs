@@ -18,34 +18,47 @@ namespace Citta_T1.OperatorViews
     public partial class MinOperatorView : Form
     {
         private MoveOpControl opControl;
-        private string dataPath = "";
+        private string dataPath;
+        private string oldMinfield;
+        private List<int> oldOutList;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            dataPath = "";
             this.opControl = opControl;
-            InitOptionInfor();
+            InitOptionInfo();
             LoadOption();
+            this.oldMinfield = this.MinValueBox.Text;
+            this.oldOutList = this.OutList.GetItemCheckIndex();
         }
-
-        private void confirmButton_Click(object sender, EventArgs e)
+        #region 添加取消
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            if (this.DataInforBox.Text == "") return;
             SaveOption();
+            //内容修改，引起文档dirty
+            if (this.oldMinfield != this.MinValueBox.Text)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                Global.GetMainForm().SetDocumentDirty();
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        #endregion
         #region 配置信息的保存与加载
         private void SaveOption()
         {
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
-            //没有数据源，或者有数据源其他配置为空，直接返回
-            if (this.DataInforBox.Text == "" || this.MinValueBox.Text == "" && outField == "") return;
-            this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
+            if (this.MinValueBox.Text == "")
+                this.opControl.Option.SetOption("maxfield", "");
+            else
+                this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
             if (this.MinValueBox.Text != "" && outField != "")
                 this.opControl.opViewStatus = true;
@@ -67,15 +80,15 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 初始化配置
-        private void InitOptionInfor()
+        private void InitOptionInfo()
         {
-            string startID = "";
+            int startID = -1;
             string encoding = "";
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.End == this.opControl.ID.ToString())
+                if (mr.End == this.opControl.ID)
                 {
                     startID = mr.Start;
                     break;
@@ -83,7 +96,7 @@ namespace Citta_T1.OperatorViews
             }
             foreach (ModelElement me in modelElements)
             {
-                if (me.ID.ToString() == startID)
+                if (me.ID == startID)
                 {
                     this.dataPath = me.GetPath();
                     //设置数据信息选项
@@ -92,12 +105,12 @@ namespace Citta_T1.OperatorViews
                     break;
                 }
             }
-            SetOption(this.dataPath, this.DataInforBox.Text, encoding);
+            if (this.dataPath != "")
+                SetOption(this.dataPath, this.DataInforBox.Text, encoding);
 
         }
         private void SetOption(string path, string dataName, string encoding)
         {
-            if (path == "") return;
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
@@ -110,6 +123,6 @@ namespace Citta_T1.OperatorViews
 
         #endregion
         private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); } 
     }
 }

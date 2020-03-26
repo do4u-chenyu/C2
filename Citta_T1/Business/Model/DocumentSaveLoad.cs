@@ -145,23 +145,23 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(typeNode);
 
                 XmlElement startControlNode = xDoc.CreateElement("start");
-                startControlNode.InnerText = mr.Start;
+                startControlNode.InnerText = mr.Start.ToString();
                 modelElementXml.AppendChild(startControlNode);
 
                 XmlElement endControlNode = xDoc.CreateElement("end");
-                endControlNode.InnerText = mr.End;
+                endControlNode.InnerText = mr.End.ToString();
                 modelElementXml.AppendChild(endControlNode);
 
                 XmlElement startLocationNode = xDoc.CreateElement("startlocation");
-                startLocationNode.InnerText = mr.StartLocation;
+                startLocationNode.InnerText = mr.StartLocation.ToString();
                 modelElementXml.AppendChild(startLocationNode);
 
                 XmlElement endLocationNode = xDoc.CreateElement("endlocation");
-                endLocationNode.InnerText = mr.EndLocation;
+                endLocationNode.InnerText = mr.EndLocation.ToString();
                 modelElementXml.AppendChild(endLocationNode);
 
                 XmlElement endPinLabelNode = xDoc.CreateElement("endpin");
-                endPinLabelNode.InnerText = mr.EndPin;
+                endPinLabelNode.InnerText = mr.EndPin.ToString();
                 modelElementXml.AppendChild(endPinLabelNode);
             }
         }
@@ -241,11 +241,11 @@ namespace Citta_T1.Business.Model
                     }
                     else if (type == "Relation")
                     {
-                        string startID = xn.SelectSingleNode("start").InnerText;
-                        string endID = xn.SelectSingleNode("end").InnerText;
-                        string startLocation = xn.SelectSingleNode("startlocation").InnerText;
-                        string endLocation = xn.SelectSingleNode("endlocation").InnerText;
-                        string endPin = xn.SelectSingleNode("endpin").InnerText;
+                        int startID = Convert.ToInt32(xn.SelectSingleNode("start").InnerText);
+                        int endID = Convert.ToInt32(xn.SelectSingleNode("end").InnerText);
+                        Point startLocation = ToPointType(xn.SelectSingleNode("startlocation").InnerText);
+                        Point endLocation = ToPointType(xn.SelectSingleNode("endlocation").InnerText);
+                        int endPin = Convert.ToInt32(xn.SelectSingleNode("endpin").InnerText);
                         ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }

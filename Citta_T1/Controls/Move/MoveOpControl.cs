@@ -281,7 +281,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
         }
         #endregion
-        
+
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
@@ -301,7 +301,7 @@ namespace Citta_T1.Controls.Move
                     new DifferOperatorView(this.Option).ShowDialog();
                     break;
                 case "随机采样":
-                    new RandomOperatorView(this.Option).ShowDialog();
+                    new RandomOperatorView(this).ShowDialog();
                     break;
                 case "过滤算子":
                     new FilterOperatorView(this.Option).ShowDialog();
@@ -313,7 +313,7 @@ namespace Citta_T1.Controls.Move
                     new MinOperatorView(this).ShowDialog();
                     break;
                 case "取平均值":
-                    new AvgOperatorView(this.Option).ShowDialog();
+                    new AvgOperatorView(this).ShowDialog();
                     break;
                 default:
                     break;

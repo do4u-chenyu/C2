@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
 using System.Xml;
+using System.Drawing;
 
 namespace Citta_T1.Business.Model
 {
@@ -85,7 +86,8 @@ namespace Citta_T1.Business.Model
         }
         public void AddDocumentRelation()
         {
-            ModelRelation e = new ModelRelation("1", "2", "{X=1,Y=2}", "{3,4}", "1");
+
+            ModelRelation e = new ModelRelation(1, 2, new Point(1,2), new Point(3,4), 1);
             this.currentDocument.AddModelRelation(e);
         }
         public static ElementSubType SEType(string subType)

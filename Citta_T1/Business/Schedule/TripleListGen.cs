@@ -81,8 +81,8 @@ namespace Citta_T1.Business.Schedule
 
                 foreach (ModelRelation mr in modelRelations)
                 {
-                    starNodes.Add(mr.Start);
-                    endNodes.Add(mr.End);
+                    starNodes.Add(mr.Start.ToString());
+                    endNodes.Add(mr.End.ToString());
                 }
                 leafNodeIds = endNodes.Except(starNodes).ToList();
 
@@ -97,16 +97,16 @@ namespace Citta_T1.Business.Schedule
         public List<string> FindBeforeNodeIds(string id)
         {
             List<string> beforeNodeId = new List<string>();
-            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End == id))
+            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End.ToString() == id))
             {
-                beforeNodeId.Add(beforeNode.Start);
+                beforeNodeId.Add(beforeNode.Start.ToString());
             }
             return beforeNodeId;
         }
 
         public string FindNextNodeId(string id)
         {
-            return modelRelations.Find(c => c.Start == id).End;
+            return modelRelations.Find(c => c.Start.ToString() == id).End.ToString();
         }
 
 
