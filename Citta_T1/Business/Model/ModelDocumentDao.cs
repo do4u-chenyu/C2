@@ -79,6 +79,7 @@ namespace Citta_T1.Business.Model
                 ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, op.Status, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
+                
             }
 
         }
@@ -182,6 +183,8 @@ namespace Citta_T1.Business.Model
                     foreach (XmlNode xmlNode in childNodes)
                         xn.RemoveChild(xmlNode);
                     string[] saveTitle = LoadAllModelTitle(userName);
+                    if (saveTitle.Length == 0)
+                        return;
                     foreach (ModelDocument mb in this.modelDocuments)
                     {
                         if (!saveTitle.Contains(mb.ModelTitle))
@@ -230,10 +233,14 @@ namespace Citta_T1.Business.Model
         }
         public string[] LoadAllModelTitle(string userName)
         {
-            string[] modelTitles;
-            DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
-            DirectoryInfo[] dir = userDir.GetDirectories();
-            modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
+            string[] modelTitles=new string[0];
+            try
+            {
+                DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+                DirectoryInfo[] dir = userDir.GetDirectories();
+                modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
+            }
+            catch { }          
             return modelTitles;
         }
     }

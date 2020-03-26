@@ -18,12 +18,18 @@ namespace Citta_T1.OperatorViews
     public partial class MaxOperatorView : Form
     {
         private MoveOpControl opControl;
-        public MaxOperatorView( MoveOpControl opControl)
+        private string dataPath = "";
+        private string oldMaxfield;
+        private List<int> oldOutList; 
+        public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             this.opControl = opControl;
             InitOptionInfor();
             LoadOption();
+            this.oldMaxfield = this.MaxValueBox.Text;
+            this.oldOutList = this.OutList.GetItemCheckIndex();
+
 
         }
 
@@ -31,6 +37,12 @@ namespace Citta_T1.OperatorViews
         {
             this.DialogResult = DialogResult.OK;
             SaveOption();
+            //内容修改，引起文档dirty
+            if(this.oldMaxfield != this.MaxValueBox.Text)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                 Global.GetMainForm().SetDocumentDirty();
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -41,21 +53,27 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            this.opControl.Option.SetOption("max", this.MaxValueBox.Text);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
-            this.opControl.Option.SetOption("out", outField);
-            this.opControl.Option.SetOption("dataInfor",this.DataInforBox.Text);
-            this.opControl.opViewStatus = true;
+            //没有数据源，或者有数据源其他配置为空，直接返回
+            if (this.DataInforBox.Text == "" || this.MaxValueBox.Text == "" && outField == "") return;
+            this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("outfield", outField);
+            if (this.MaxValueBox.Text != "" && outField != "")
+                this.opControl.opViewStatus = true;
+
         }
 
         private void LoadOption()
-        {         
-            this.MaxValueBox.Text = this.opControl.Option.GetOption("max");
-            string outFields = this.opControl.Option.GetOption("out");
-            if (outFields != "")
+        {
+            if (this.opControl.Option.GetOption("maxfield") != "")
             {
-                string[] checkIndexs = outFields.Split(',');
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                this.MaxValueBox.Text = this.MaxValueBox.Items[index].ToString();
+            }
+            if (this.opControl.Option.GetOption("outfield") != "")
+            {
+                string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
             }
         }
@@ -63,8 +81,7 @@ namespace Citta_T1.OperatorViews
         #region 初始化配置
         private void InitOptionInfor()
         {
-            string dataName = "";
-            string startID="";
+            string startID = "";
             string encoding = "";
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
@@ -72,38 +89,42 @@ namespace Citta_T1.OperatorViews
             {
                 if (mr.End == this.opControl.ID.ToString())
                 {
-                    startID =mr.Start;
+                    startID = mr.Start;
                     break;
-                }                  
+                }
             }
             foreach (ModelElement me in modelElements)
             {
                 if (me.ID.ToString() == startID)
-                { 
-                    dataName = me.GetPath();
+                {
+                    this.dataPath = me.GetPath();
+                    //设置数据信息选项
+                    this.DataInforBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;
-                }                    
+                }
             }
-            //设置数据信息选项
-            this.DataInforBox.Text = Path.GetFileNameWithoutExtension(@dataName);
-            //设置输出选项与最大值选项
-            SetOption(dataName, this.DataInforBox.Text, encoding);
+            SetOption(this.dataPath, this.DataInforBox.Text, encoding);
+
         }
         private void SetOption(string path, string dataName, string encoding)
-        {            
+        {
+            if (path == "") return;
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
-            string column=bcpInfo.columnLine;
+            string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
             foreach (string name in columnName)
             {
                 this.OutList.AddItems(name);
                 this.MaxValueBox.Items.Add(name);
-            }              
+            }
         }
 
         #endregion
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
+
     }
+
 }

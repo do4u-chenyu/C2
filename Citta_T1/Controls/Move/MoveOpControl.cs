@@ -26,7 +26,6 @@ namespace Citta_T1.Controls.Move
         private Point mouseOffset;
         
         private bool doublelPinFlag = false;
-
         private PictureBox leftPinPictureBox1 = new PictureBox();
 
 
@@ -41,9 +40,10 @@ namespace Citta_T1.Controls.Move
         internal OperatorOption Option { get => this.option; set => this.option = value; }
         public ElementStatus Status { get => this.status; set => this.status = value; }
         public int ID { get => this.id; set => this.id = value; }
+        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
 
         private ElementStatus status;
-        private bool relationStatus = false;
+        private bool relationStatus = true;
         internal bool opViewStatus = false;
         private bool optionStatus;
 
@@ -70,8 +70,7 @@ namespace Citta_T1.Controls.Move
         }
         public MoveOpControl(int sizeL, string text, Point loc)
         {
-            this.optionStatus = relationStatus && opViewStatus;
-            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
+           
             InitializeComponent();
             textBox.Text = text;
             typeName = text;
@@ -84,8 +83,12 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-            
-            
+
+            this.optionStatus = relationStatus && opViewStatus;
+            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
+            this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
+
+
         }
         public void ChangeSize(int sizeL)
         {
@@ -307,7 +310,7 @@ namespace Citta_T1.Controls.Move
                     new MaxOperatorView(this).ShowDialog();
                     break;
                 case "取最小值":
-                    new MinOperatorView(this.Option).ShowDialog();
+                    new MinOperatorView(this).ShowDialog();
                     break;
                 case "取平均值":
                     new AvgOperatorView(this.Option).ShowDialog();
