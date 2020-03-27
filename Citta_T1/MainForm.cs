@@ -81,6 +81,7 @@ namespace  Citta_T1
             Global.SetModelTitlePanel(this.modelTitlePanel);
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
+            Global.SetFlowControl(this.flowControl);
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
