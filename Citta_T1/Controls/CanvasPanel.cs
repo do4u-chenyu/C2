@@ -14,7 +14,7 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel
+    public partial class CanvasPanel : UserControl
     {
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
@@ -143,6 +143,9 @@ namespace Citta_T1.Controls
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
+            if (e.Button != MouseButtons.Left)
+                return;
+
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
                 MouseIsDown = true;
@@ -161,6 +164,7 @@ namespace Citta_T1.Controls
                 start = e.Location;
                 if (staticImage != null)
                     staticImage.Dispose();
+
                 DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
                 staticImage = dragWrapper.CreateWorldImage();
             }
@@ -202,6 +206,8 @@ namespace Citta_T1.Controls
    
                 dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
                 n.Dispose();
+
+                   
             }
             //绘制
             else if (cmd == eCommandType.draw)
