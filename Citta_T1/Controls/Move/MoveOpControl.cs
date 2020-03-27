@@ -28,7 +28,6 @@ namespace Citta_T1.Controls.Move
 
         private PictureBox leftPinPictureBox1 = new PictureBox();
 
-
         private string typeName;
         private string oldTextString;
 
@@ -49,7 +48,9 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         Line line;
         private List<int> startLineIndexs = new List<int>{};
-        private List<PictureBox> leftPinArray = new List<PictureBox> { };
+        private List<int> endLineIndexs = new List<int>{};
+        private List<PictureBox> leftPinArray = new List<PictureBox>{};
+        private int revisedPinIndex;
 
 
 
@@ -109,7 +110,8 @@ namespace Citta_T1.Controls.Move
         {
             SetOpControlName(this.textBox.Text);
             System.Console.WriteLine(doublelPinFlag);
-            leftPinArray.Add(this.leftPinPictureBox);
+            this.leftPinArray.Add(this.leftPinPictureBox);
+            this.endLineIndexs.Add(0);
             if (doublelPinFlag)
             {
                 int x = this.leftPinPictureBox.Location.X;
@@ -126,6 +128,7 @@ namespace Citta_T1.Controls.Move
                 leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
                 this.Controls.Add(leftPinPictureBox1);
                 this.leftPinArray.Add(leftPinPictureBox1);
+                this.endLineIndexs.Add(0);
             }
             /*
             System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
@@ -471,7 +474,11 @@ namespace Citta_T1.Controls.Move
 
         public void SaveEndLines(int line_index)
         {
-
+            // TODO [DK] 实现接口
+            /*
+             * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
+             */
+            this.endLineIndexs[revisedPinIndex] = line_index;
         }
         public PointF RevisePointLoc(PointF p)
         {
@@ -510,6 +517,8 @@ namespace Citta_T1.Controls.Move
                         revisedP = new PointF(
                             pinLeftX + leftP.Width / 2,
                             pinTopY + leftP.Height / 2);
+                        canvas.SetEndC = this;
+                        revisedPinIndex = leftPinArray.IndexOf(leftP);
                         Console.WriteLine("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
