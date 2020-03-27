@@ -22,14 +22,14 @@ namespace Citta_T1.Controls.Flow
         private int startY;
         private int nowX;
         private int nowY;
-
+        private DragWrapper dragWrapper;
         public NaviViewControl()
         {
             InitializeComponent();
             this.controls = new List<Control>();
             this.pen = new Pen(Color.DimGray, 0.0001f);
             this.rate = 10;
-
+            dragWrapper = new DragWrapper();
         }
 
 
@@ -61,18 +61,20 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
+
+
             float factor = (this.Parent as CanvasPanel).ScreenFactor;
             nowX = e.X;
             nowY = e.Y;
-            DragWrapper dragWrapper = new DragWrapper();
+            
             dragWrapper.InitDragWrapper(this.Parent.Size, factor);
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            int dx = Convert.ToInt32((-nowX + startX) * rate / factor);
-            int dy = Convert.ToInt32((-nowY + startY) * rate / factor);
+            int dx = Convert.ToInt32((startX - nowX ) * rate / factor);
+            int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
             Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
-            dragWrapper.ChangLoc(dx - moveOffset.X, dy - moveOffset.Y);
+            dragWrapper.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -97,7 +99,7 @@ namespace Citta_T1.Controls.Flow
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                DragWrapper dragWrapper = new DragWrapper();
+                
                 dragWrapper.InitDragWrapper(this.Parent.Size, factor);
                 Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
 

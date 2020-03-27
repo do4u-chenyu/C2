@@ -480,19 +480,10 @@ namespace Citta_T1.Controls.Move
 
         public void ChangeLoc(float dx, float dy)
         {
-            Bitmap staticImage = new Bitmap(this.Width, this.Height);
-            this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
 
-            this.Visible = false;
-            this.Left = this.Left + (int)dx;
-            this.Top = this.Top + (int)dy;
-
-            Graphics n = this.CreateGraphics();
-            n.DrawImageUnscaled(staticImage, this.Left, this.Top);
-            n.Dispose();
-            this.Visible = true;
-            //this.Location = new Point(left, top);
-            // Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
+            int left = this.Left + Convert.ToInt32(dx);
+            int top = this.Top + Convert.ToInt32(dy);
+            this.Location = new Point(left, top);
         }
         #endregion
 
