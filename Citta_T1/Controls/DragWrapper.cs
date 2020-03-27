@@ -15,19 +15,72 @@ namespace Citta_T1.Controls
         private int width;
         private int height;
         private float factor;
+        private Point start, now;
+        private bool startDrag;
 
         private int worldWidth;
         private int worldHeight;
+        private Bitmap staticImage;
 
-        public DragWrapper(Size canavasSize, float canavasFactor)
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
+        public float Factor { get => factor; set => factor = value; }
+
+        public DragWrapper()
+        {
+            worldWidth = 2000;
+            worldHeight = 1000;
+            startDrag = false;
+        }
+        public void InitDragWrapper(Size canavasSize, float canavasFactor)
         {
             width = canavasSize.Width;
             height = canavasSize.Height;
-            worldWidth = 2000;
-            worldHeight = 1000;
             factor = canavasFactor;
         }
+        public void DragDown(Size canavasSize, float canavasFactor, MouseEventArgs e)
+        {
+            this.startDrag = true;
+            this.start = e.Location;
+            if (this.staticImage != null)
+                this.staticImage.Dispose();
 
+
+            this.InitDragWrapper(canavasSize, canavasFactor);
+            this.staticImage = this.CreateWorldImage();
+        }
+        public void DragMove(Size canavasSize, float canavasFactor, MouseEventArgs e)
+        {
+            this.now = e.Location;
+            this.InitDragWrapper(canavasSize, canavasFactor);
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+
+            this.MoveWorldImage(n, this.staticImage, this.start, this.now);
+            n.Dispose();
+        }
+        public void DragUp(Size canavasSize, float canavasFactor, MouseEventArgs e)
+        {
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+            this.now = e.Location;
+            this.InitDragWrapper(canavasSize, canavasFactor);
+            this.MoveWorldImage(n, this.staticImage, this.start, this.now);
+            this.controlChange(start, now);
+
+            this.startDrag = false;
+            this.start = e.Location;
+        }
+        public bool DragPaint(Size canavasSize, float canavasFactor, PaintEventArgs e)
+        {
+            if (this.startDrag && this.staticImage != null)
+            {
+
+                //DragWrapper dragWrapper = new DragWrapper();
+                this.InitDragWrapper(canavasSize, canavasFactor);
+                this.MoveWorldImage(e.Graphics, this.staticImage, this.start, this.now);
+                return true;
+            }
+            return false;
+        }
         //生成当前模型控件快照
         public Bitmap CreateWorldImage()
         {

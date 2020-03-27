@@ -156,7 +156,7 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-            float screenChange = (this.Parent as CanvasPanel).screenFactor;
+            float screenChange = (this.Parent as CanvasPanel).ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
 

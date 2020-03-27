@@ -61,10 +61,11 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
-            float factor = (this.Parent as CanvasPanel).screenFactor;
+            float factor = (this.Parent as CanvasPanel).ScreenFactor;
             nowX = e.X;
             nowY = e.Y;
-            DragWrapper dragWrapper = new DragWrapper(this.Parent.Size, 1 / factor);
+            DragWrapper dragWrapper = new DragWrapper();
+            dragWrapper.InitDragWrapper(this.Parent.Size, factor);
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             int dx = Convert.ToInt32((-nowX + startX) * rate / factor);
             int dy = Convert.ToInt32((-nowY + startY) * rate / factor);
@@ -92,11 +93,12 @@ namespace Citta_T1.Controls.Flow
 
 
 
-            float factor = (this.Parent as CanvasPanel).screenFactor;
+            float factor = (this.Parent as CanvasPanel).ScreenFactor;
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                DragWrapper dragWrapper = new DragWrapper(this.Parent.Size, factor);
+                DragWrapper dragWrapper = new DragWrapper();
+                dragWrapper.InitDragWrapper(this.Parent.Size, factor);
                 Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
 
                 if (moveOffset != new Point(0, 0))
