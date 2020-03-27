@@ -61,13 +61,13 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
-            float factor = (this.Parent as CanvasPanel).screenChange;
+            float factor = (this.Parent as CanvasPanel).screenFactor;
             nowX = e.X;
             nowY = e.Y;
-            DragWrapper dragWrapper = new DragWrapper(this.Parent.Size,  factor);
+            DragWrapper dragWrapper = new DragWrapper(this.Parent.Size, 1 / factor);
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            int dx = Convert.ToInt32((startX - nowX ) * rate / factor);
-            int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
+            int dx = Convert.ToInt32((-nowX + startX) * rate / factor);
+            int dy = Convert.ToInt32((-nowY + startY) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
             Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
@@ -92,11 +92,11 @@ namespace Citta_T1.Controls.Flow
 
 
 
-            float factor = (this.Parent as CanvasPanel).screenChange;
+            float factor = (this.Parent as CanvasPanel).screenFactor;
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                DragWrapper dragWrapper = new DragWrapper(new Size(width,height), factor);
+                DragWrapper dragWrapper = new DragWrapper(this.Parent.Size, factor);
                 Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
 
                 if (moveOffset != new Point(0, 0))
@@ -113,7 +113,7 @@ namespace Citta_T1.Controls.Flow
                 mapOrigin = new Point(-600, -300);
                 viewBoxPosition = new Point(650, 330);
             }
-            Rectangle rect = new Rectangle(Convert.ToInt32(viewBoxPosition.X / rate), Convert.ToInt32(viewBoxPosition.Y / rate), Convert.ToInt32((width / factor) / rate), Convert.ToInt32((height / factor )/ rate));
+            Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
@@ -124,9 +124,7 @@ namespace Citta_T1.Controls.Flow
                 {
                     Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
                     ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
-                    rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate) , Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate);
-
-                    gc.DrawRectangle(pen, rect);
+                    rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); gc.DrawRectangle(pen, rect);
                 }
             }
         }
