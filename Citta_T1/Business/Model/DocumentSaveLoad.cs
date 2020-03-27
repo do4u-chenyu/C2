@@ -10,6 +10,7 @@ using System.Xml;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
+using Citta_T1.Business.Option;
 
 namespace Citta_T1.Business.Model
 {
@@ -86,9 +87,51 @@ namespace Citta_T1.Business.Model
                     encodingNode.InnerText = me.Encoding.ToString();
                     modelElementXml.AppendChild(encodingNode);
                 }
+                if (me.Type == ElementType.Operator)
+                { 
+                    //有配置信息才保存到xml中
+                    if((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
+                        WriteModelOption(me.SubType, (me.GetControl as MoveOpControl).Option, xDoc, modelElementXml);
+                }
+                   
                 
             }
         }
+        #region 配置信息存到xml
+        private void WriteModelOption(ElementSubType type,OperatorOption option, XmlDocument xDoc, XmlElement modelElementXml)
+        {
+            XmlElement optionNode = xDoc.CreateElement("option");
+            modelElementXml.AppendChild(optionNode);
+            switch (type)
+            {
+                case ElementSubType.MaxOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "maxfield");
+                    WriteOptionElement(xDoc, optionNode, option, "outfield");
+                    break;
+                case ElementSubType.MinOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "minfield");
+                    WriteOptionElement(xDoc, optionNode, option, "outfield");
+                    break;
+                case ElementSubType.FilterOperator:
+                    break;
+                case ElementSubType.AvgOperator:
+                    break;
+
+                default:
+                    break;
+            }
+                
+        }
+        private void WriteOptionElement(XmlDocument xDoc, XmlElement optionNode, OperatorOption option, string key)
+        {
+            if (option.GetOption(key) != "")
+            {
+                XmlElement outFieldNode = xDoc.CreateElement(key);
+                outFieldNode.InnerText = option.GetOption(key);
+                optionNode.AppendChild(outFieldNode);
+            }
+        }
+        #endregion
         private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml,List<ModelRelation> modelRelations)
         {
            
@@ -149,75 +192,75 @@ namespace Citta_T1.Business.Model
             foreach (XmlNode xn in nodeLists)
             {
                 string type = xn.SelectSingleNode("type").InnerText;
-                if (type == "Operator")
+                try
                 {
-                    try
+                    if (type == "Operator")
                     {
-                        String name = xn.SelectSingleNode("name").InnerText;                       
+                        String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, loc);
-                        ctl.textBox.Text = name;
-                        ctl.Location = loc;
+                        ctl.ID = id;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
+                        if (xn.SelectSingleNode("option") != null)
+                            ctl.Option = ReadOption(xn);
+
+
                     }
-                    catch (Exception e) { System.Console.WriteLine(e.Message); }
-                }
-                else if (type == "DataSource")
-                {
-                    try
+                    else if (type == "DataSource")
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point xnlocation =ToPointType(xn.SelectSingleNode("location").InnerText);
+                        Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
                         cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
-                    catch (Exception e) { System.Console.WriteLine(e.Message); }
-                }
-                else if (type == "Remark")
-                {
-                    String name = xn.SelectSingleNode("name").InnerText;
-                    this.modelDocument.RemarkDescription = name;
-                }
-                else if (type == "Result")
-                {
-                    try 
+                    else if (type == "Remark")
+                    {
+                        String name = xn.SelectSingleNode("name").InnerText;
+                        this.modelDocument.RemarkDescription = name;
+                    }
+                    else if (type == "Result")
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point loc =ToPointType(xn.SelectSingleNode("location").InnerText);
+                        Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
-                        ctl.textBox.Text = name;
-                        ctl.Location = loc;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, EStatus(status), SEType(subType), id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
-                    catch (Exception e) { System.Console.WriteLine(e.Message); }
+                    else if (type == "Relation")
+                    {
+                        string startID = xn.SelectSingleNode("start").InnerText;
+                        string endID = xn.SelectSingleNode("end").InnerText;
+                        string startLocation = xn.SelectSingleNode("startlocation").InnerText;
+                        string endLocation = xn.SelectSingleNode("endlocation").InnerText;
+                        string endPin = xn.SelectSingleNode("endpin").InnerText;
+                        ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
+                        this.modelDocument.ModelRelations.Add(modelRelationElement);
+                    }
                 }
-                else if (type == "Relation")
-                {
-                    string startID = xn.SelectSingleNode("start").InnerText;
-                    string endID = xn.SelectSingleNode("end").InnerText;
-                    string startLocation = xn.SelectSingleNode("startlocation").InnerText;
-                    string endLocation = xn.SelectSingleNode("endlocation").InnerText;
-                    string endPin = xn.SelectSingleNode("endpin").InnerText;
-                    ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
-                    this.modelDocument.ModelRelations.Add(modelRelationElement);
-                }
+                catch(Exception e) { System.Console.WriteLine(e.Message); }
+               
             }
         }
-
+        private OperatorOption ReadOption(XmlNode xn)
+        {
+            OperatorOption option = new OperatorOption();
+                foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
+                    option.SetOption(node.Name, node.InnerText);
+            return option;
+        }
         public ElementSubType SEType(string subType)
         { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
         public ElementStatus EStatus(string status)

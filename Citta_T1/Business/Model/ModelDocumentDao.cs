@@ -75,9 +75,11 @@ namespace Citta_T1.Business.Model
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, ElementStatus.Null, SEType(op.SubTypeName), this.currentDocument.ElementCount);
+                op.ID = this.currentDocument.ElementCount;
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, op.Status, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
+                
             }
 
         }
@@ -86,7 +88,7 @@ namespace Citta_T1.Business.Model
             ModelRelation e = new ModelRelation("1", "2", "{X=1,Y=2}", "{3,4}", "1");
             this.currentDocument.AddModelRelation(e);
         }
-        public ElementSubType SEType(string subType)
+        public static ElementSubType SEType(string subType)
         {
             string type = "";
             switch (subType)
@@ -181,6 +183,8 @@ namespace Citta_T1.Business.Model
                     foreach (XmlNode xmlNode in childNodes)
                         xn.RemoveChild(xmlNode);
                     string[] saveTitle = LoadAllModelTitle(userName);
+                    if (saveTitle.Length == 0)
+                        return;
                     foreach (ModelDocument mb in this.modelDocuments)
                     {
                         if (!saveTitle.Contains(mb.ModelTitle))
@@ -229,10 +233,14 @@ namespace Citta_T1.Business.Model
         }
         public string[] LoadAllModelTitle(string userName)
         {
-            string[] modelTitles;
-            DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
-            DirectoryInfo[] dir = userDir.GetDirectories();
-            modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
+            string[] modelTitles=new string[0];
+            try
+            {
+                DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+                DirectoryInfo[] dir = userDir.GetDirectories();
+                modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
+            }
+            catch { }          
             return modelTitles;
         }
     }

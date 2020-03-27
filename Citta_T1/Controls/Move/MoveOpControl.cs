@@ -3,7 +3,10 @@ using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using Citta_T1.OperatorViews;
+using Citta_T1.Business.Option;
+using System.Collections.Generic;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Move
 { 
@@ -23,16 +26,27 @@ namespace Citta_T1.Controls.Move
         private Point mouseOffset;
         
         private bool doublelPinFlag = false;
-
         private PictureBox leftPinPictureBox1 = new PictureBox();
 
 
         private string typeName;
         private string oldTextString;
+        private OperatorOption option=new OperatorOption();
+        private int id;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => typeName; }
+        internal OperatorOption Option { get => this.option; set => this.option = value; }
+        public ElementStatus Status { get => this.status; set => this.status = value; }
+        public int ID { get => this.id; set => this.id = value; }
+        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+
+        private ElementStatus status;
+        private bool relationStatus = true;
+        internal bool opViewStatus = false;
+        private bool optionStatus;
+
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
@@ -50,14 +64,13 @@ namespace Citta_T1.Controls.Move
 
 
 
-        private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         public MoveOpControl()
         {
             InitializeComponent();
         }
         public MoveOpControl(int sizeL, string text, Point loc)
         {
-            
+           
             InitializeComponent();
             textBox.Text = text;
             typeName = text;
@@ -70,8 +83,12 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-            
-            
+
+            this.optionStatus = relationStatus && opViewStatus;
+            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
+            this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
+
+
         }
         public void ChangeSize(int sizeL)
         {
@@ -265,13 +282,44 @@ namespace Citta_T1.Controls.Move
             this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
         }
         #endregion
-
+        
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            DialogResult dialogResult = this.randomOperatorView.ShowDialog();
+            switch (this.typeName)
+            {
+
+                case "连接算子":
+                    new CollideOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取交集":
+                    new CollideOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取并集":
+                    new UnionOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取差集":
+                    new DifferOperatorView(this.Option).ShowDialog();
+                    break;
+                case "随机采样":
+                    new RandomOperatorView(this.Option).ShowDialog();
+                    break;
+                case "过滤算子":
+                    new FilterOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取最大值":
+                    new MaxOperatorView(this).ShowDialog();
+                    break;
+                case "取最小值":
+                    new MinOperatorView(this).ShowDialog();
+                    break;
+                case "取平均值":
+                    new AvgOperatorView(this.Option).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+                    
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)

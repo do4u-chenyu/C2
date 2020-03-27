@@ -12,6 +12,7 @@ namespace Citta_T1.Business.Option
         private ElementType type;    //对应的类型:数据源 或 Result
         private List<ColumnInfo> columnInfos;
         private DSUtil.Encoding encoding;     //BCP文件对应的编码
+        public string columnLine;
 
         public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
         {
@@ -26,7 +27,7 @@ namespace Citta_T1.Business.Option
         // 根据第一行初始化列信息
         private void InitColumnInfo()
         {
-            string columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullBcpPath, encoding);
+            this.columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullBcpPath, encoding);
 
         }
     }
