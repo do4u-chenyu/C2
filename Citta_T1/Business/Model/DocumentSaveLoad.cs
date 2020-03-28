@@ -208,6 +208,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, loc);
+                        ctl.Status = EStatus(status);
                         ctl.ID = id;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
