@@ -298,13 +298,13 @@ namespace Citta_T1.Controls.Move
                     new UnionOperatorView(this.Option).ShowDialog();
                     break;
                 case "取差集":
-                    new DifferOperatorView(this.Option).ShowDialog();
+                    new DifferOperatorView(this).ShowDialog();
                     break;
                 case "随机采样":
                     new RandomOperatorView(this).ShowDialog();
                     break;
                 case "过滤算子":
-                    new FilterOperatorView(this.Option).ShowDialog();
+                    new FilterOperatorView(this).ShowDialog();
                     break;
                 case "取最大值":
                     new MaxOperatorView(this).ShowDialog();

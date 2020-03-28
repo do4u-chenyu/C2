@@ -471,10 +471,12 @@
     <Content Include="res\leftpanelmenu\title.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
+    <None Include="res\toolbox\add.png" />
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
     <Content Include="res\toolbox\difference.png" />
+    <None Include="res\toolbox\div.png" />
     <Content Include="res\toolbox\filter.png" />
     <Content Include="res\toolbox\group.png" />
     <Content Include="res\toolbox\histogram.png" />

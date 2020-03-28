@@ -34,8 +34,19 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            //未设置字段警告
+            if (this.MinValueBox.Text == "")
+            {
+                MessageBox.Show("请选择最小值字段!");
+                return;
+            }
+            if (this.OutList.GetItemCheckIndex().Count == 0)
+            {
+                MessageBox.Show("请选择输出字段!");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
-            if (this.DataInforBox.Text == "") return;
+            if (this.DataInfoBox.Text == "") return;
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldMinfield != this.MinValueBox.Text)
@@ -100,13 +111,13 @@ namespace Citta_T1.OperatorViews
                 {
                     this.dataPath = me.GetPath();
                     //设置数据信息选项
-                    this.DataInforBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                    this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;
                 }
             }
             if (this.dataPath != "")
-                SetOption(this.dataPath, this.DataInforBox.Text, encoding);
+                SetOption(this.dataPath, this.DataInfoBox.Text, encoding);
 
         }
         private void SetOption(string path, string dataName, string encoding)

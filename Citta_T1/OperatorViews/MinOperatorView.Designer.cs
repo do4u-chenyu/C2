@@ -39,7 +39,7 @@
             this.valuePanel = new System.Windows.Forms.Panel();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.MinValueBox = new System.Windows.Forms.ComboBox();
-            this.DataInforBox = new HZH_Controls.Controls.TextBoxEx();
+            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -84,7 +84,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(430, 37);
+            this.topPanel.Size = new System.Drawing.Size(426, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -92,10 +92,10 @@
             this.bottomPanel.Controls.Add(this.CancelButton);
             this.bottomPanel.Controls.Add(this.ConfirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 221);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 217);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(430, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(426, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // CancelButton
@@ -135,19 +135,19 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 184);
+            this.keyPanel.Size = new System.Drawing.Size(116, 180);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Controls.Add(this.MinValueBox);
-            this.valuePanel.Controls.Add(this.DataInforBox);
+            this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(314, 184);
+            this.valuePanel.Size = new System.Drawing.Size(310, 180);
             this.valuePanel.TabIndex = 3;
             // 
             // OutList
@@ -171,40 +171,40 @@
             this.MinValueBox.Size = new System.Drawing.Size(136, 20);
             this.MinValueBox.TabIndex = 1;
             // 
-            // DataInforBox
+            // DataInfoBox
             // 
-            this.DataInforBox.DecLength = 2;
-            this.DataInforBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInforBox.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInforBox.Location = new System.Drawing.Point(0, 0);
-            this.DataInforBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInforBox.MaxValue = new decimal(new int[] {
+            this.DataInfoBox.DecLength = 2;
+            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
+            this.DataInfoBox.Location = new System.Drawing.Point(0, 0);
+            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
+            this.DataInfoBox.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.DataInforBox.MinValue = new decimal(new int[] {
+            this.DataInfoBox.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.DataInforBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInforBox.Name = "DataInforBox";
-            this.DataInforBox.OldText = null;
-            this.DataInforBox.PromptColor = System.Drawing.Color.Gray;
-            this.DataInforBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInforBox.PromptText = "";
-            this.DataInforBox.ReadOnly = true;
-            this.DataInforBox.RegexPattern = "";
-            this.DataInforBox.Size = new System.Drawing.Size(136, 25);
-            this.DataInforBox.TabIndex = 0;
-            this.DataInforBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.OldText = null;
+            this.DataInfoBox.PromptColor = System.Drawing.Color.Gray;
+            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.DataInfoBox.PromptText = "";
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.RegexPattern = "";
+            this.DataInfoBox.Size = new System.Drawing.Size(136, 25);
+            this.DataInfoBox.TabIndex = 0;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MinOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 285);
+            this.ClientSize = new System.Drawing.Size(426, 281);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -237,6 +237,6 @@
         private System.Windows.Forms.Label label2;
         private UserControlDLL.ComCheckBoxList OutList;
         private System.Windows.Forms.ComboBox MinValueBox;
-        private HZH_Controls.Controls.TextBoxEx DataInforBox;
+        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
     }
 }

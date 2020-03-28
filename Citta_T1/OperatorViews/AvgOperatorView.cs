@@ -73,6 +73,12 @@ namespace Citta_T1.OperatorViews
 
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            //未设置字段警告
+            if (this.AvgComBox.Text == "")
+            {
+                MessageBox.Show("请选择平均值字段!");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             if (this.DataInfo.Text == "") return;
             SaveOption();
@@ -102,7 +108,10 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             if (this.opControl.Option.GetOption("avgfield") != "")
-                this.AvgComBox.Text = this.opControl.Option.GetOption("avgfield");
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
+                this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
+            }
         }
         #endregion
         private DSUtil.Encoding EnType(string type)

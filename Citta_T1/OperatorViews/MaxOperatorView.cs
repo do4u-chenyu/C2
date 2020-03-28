@@ -28,9 +28,20 @@ namespace Citta_T1.OperatorViews
 
 
         }
-
+        #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            //未设置字段警告
+            if (this.MaxValueBox.Text == "")
+            {
+                MessageBox.Show("请选择最大值字段!");
+                return;
+            }
+            if (this.OutList.GetItemCheckIndex().Count == 0)
+            {
+                MessageBox.Show("请选择输出字段!");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             if (this.DataInfoBox.Text == "") return;
             SaveOption();
@@ -47,6 +58,7 @@ namespace Citta_T1.OperatorViews
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        #endregion
         #region 配置信息的保存与加载
         private void SaveOption()
         {

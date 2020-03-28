@@ -113,10 +113,16 @@ namespace Citta_T1.Business.Model
                     WriteOptionElement(xDoc, optionNode, option, "outfield");
                     break;
                 case ElementSubType.FilterOperator:
+                    foreach (string name in option.OptionDict.Keys)
+                    { WriteOptionElement(xDoc, optionNode, option, name); }
+                    break;
+                case ElementSubType.RandomOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "randomnum");
+                    WriteOptionElement(xDoc, optionNode, option, "outfield");
                     break;
                 case ElementSubType.AvgOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "avgfield");
                     break;
-
                 default:
                     break;
             }

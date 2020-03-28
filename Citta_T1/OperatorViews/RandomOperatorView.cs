@@ -102,6 +102,17 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            //未设置字段警告
+            if (this.RandomNumBox.Text == "")
+            {
+                MessageBox.Show("请选择随机条数字段!");
+                return;
+            }
+            if (this.OutList.GetItemCheckIndex().Count == 0)
+            {
+                MessageBox.Show("请选择输出字段!");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             if (this.DataInfoBox.Text == "") return;
             SaveOption();
