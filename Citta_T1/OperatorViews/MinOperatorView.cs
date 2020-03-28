@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
             if (this.MinValueBox.Text != "" && outField != "")
-                this.opControl.opViewStatus = true;
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 

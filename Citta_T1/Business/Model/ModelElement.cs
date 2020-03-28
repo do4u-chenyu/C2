@@ -91,7 +91,7 @@ namespace Citta_T1.Business.Model
             this.type = type;
             this.subType = subType;
             this.ctl = ctl;
-            this.status = ElementStatus.Null;
+            this.status = status;
             this.dataSourcePath = bcpPath;
             this.SetName(des);
             this.description = des;

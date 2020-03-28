@@ -160,7 +160,7 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.opViewStatus = true;
+            this.opControl.Status = ElementStatus.Ready;
 
         }
 

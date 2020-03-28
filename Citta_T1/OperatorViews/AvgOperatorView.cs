@@ -101,7 +101,7 @@ namespace Citta_T1.OperatorViews
             else
                 this.opControl.Option.SetOption("avgfield", this.AvgComBox.SelectedIndex.ToString());
             if (this.DataInfo.Text != "" && this.AvgComBox.Text != "") 
-                this.opControl.opViewStatus = true;
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 

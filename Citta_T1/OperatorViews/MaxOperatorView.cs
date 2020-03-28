@@ -70,7 +70,7 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
             if (this.MaxValueBox.Text != "" && outField != "")
-                this.opControl.opViewStatus = true;
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 
