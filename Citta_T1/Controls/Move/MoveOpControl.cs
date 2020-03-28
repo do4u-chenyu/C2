@@ -44,8 +44,7 @@ namespace Citta_T1.Controls.Move
 
         private ElementStatus status;
         private bool relationStatus = true;
-        internal bool opViewStatus = false;
-        private bool optionStatus;
+
 
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -84,8 +83,6 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            this.optionStatus = relationStatus && opViewStatus;
-            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
             this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
 
 
