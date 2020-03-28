@@ -46,6 +46,20 @@ namespace Citta_T1.Business.Schedule
             this.currentModelTripleList = new List<Triple>();
         }
 
+        public bool IsAllOperatorReady()
+        {
+            foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
+            {
+                if (op.Status != ElementStatus.Ready)
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+
         public void GenerateList()
         {
             //寻找当前模型的所有叶子节点

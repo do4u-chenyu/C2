@@ -42,6 +42,8 @@ namespace  Citta_T1
         private TripleListGen tripleListGen;
         private Manager currentManager;
         Thread scheduleThread = null;
+        delegate void AsynUpdateUI(int id);
+
         ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public MainForm()
         {
@@ -458,8 +460,6 @@ namespace  Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            //记录警告信息
-            log.Warn("Test warn");
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
@@ -486,24 +486,23 @@ namespace  Citta_T1
                     return;
                 }
 
+                tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
+                if (!tripleListGen.IsAllOperatorReady())
+                {
+                    MessageBox.Show("有未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
 
-
-                tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
                 tripleListGen.GenerateList();
-                /*
+
                 currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
-                currentManager.Start();
-                
-                //运行完了之后，图标要变
-                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                //this.runButton.Name = "continueButton";
-                */
+                currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
+                currentManager.TaskCallBack += Accomplish;//绑定完成任务要调用的委托
 
-                scheduleThread = new Thread(new ThreadStart(StartManager));
+                scheduleThread = new Thread(new ThreadStart(currentManager.Start));
                 scheduleThread.Start();
-
             }
             else if (this.runButton.Name == "pauseButton")
             {
@@ -519,17 +518,28 @@ namespace  Citta_T1
             }
         }
 
-        private void StartManager()
+        //更新UI
+        private void UpdataUIStatus(int id)
         {
-            try
+            if (InvokeRequired)
             {
-                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
-                currentManager.StartData();
+                this.Invoke(new AsynUpdateUI(delegate (int i)
+                {
+                    MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == i).GetControl as MoveOpControl;
+                    log.Info(op.ReName);
+                }), id);
             }
-            catch
+            else
             {
-                return;
+                MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == id).GetControl as MoveOpControl;
             }
+        }
+
+        //完成任务时需要调用
+        private void Accomplish()
+        {
+            this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+            this.runButton.Name = "runButton";
             CloseThread();
         }
 
