@@ -25,6 +25,7 @@ namespace Citta_T1.Controls
         public int Width { get => width; set => width = value; }
         public int Height { get => height; set => height = value; }
         public float Factor { get => factor; set => factor = value; }
+        public bool StartDrag { get => startDrag; set => startDrag = value; }
 
         public DragWrapper()
         {
@@ -65,7 +66,7 @@ namespace Citta_T1.Controls
             this.InitDragWrapper(canavasSize, canavasFactor);
             this.MoveWorldImage(n, this.staticImage, this.start, this.now);
             this.controlChange(start, now);
-
+            n.Dispose();
             this.startDrag = false;
             this.start = e.Location;
         }
@@ -88,11 +89,11 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(staticImage);
             g.Clear(Color.White);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-
+            
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * factor);
-
+            modelElements.Reverse();
             foreach (ModelElement me in modelElements)
             {
                 Control ct = me.GetControl;
@@ -123,6 +124,7 @@ namespace Citta_T1.Controls
             moveOffset.X = Convert.ToInt32(moveOffset.X * factor);
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * factor);
             n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            
             i.Dispose();
             i = null;
         }
@@ -140,6 +142,7 @@ namespace Citta_T1.Controls
 
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            modelElements.Reverse();
             foreach (ModelElement me in modelElements)
             {
                 me.Show();
@@ -177,9 +180,9 @@ namespace Citta_T1.Controls
             {
                 dragOffset.X = 2000 - Convert.ToInt32(this.width / factor) - Pw.X;
             }
-            if (Pw.Y > 1000 - Convert.ToInt32(this.height / factor))
+            if (Pw.Y > 1000 - Convert.ToInt32((this.height) / factor))
             {
-                dragOffset.Y = 1000 - Convert.ToInt32(this.height / factor) - Pw.Y;
+                dragOffset.Y = 1000 - Convert.ToInt32((this.height) / factor) - Pw.Y;
             }
             return dragOffset;
         }

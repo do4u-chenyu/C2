@@ -22,6 +22,7 @@ namespace Citta_T1.Controls
         
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
+        private bool startDrag = false;
         private DragWrapper dragWrapper;
 
 
@@ -54,7 +55,13 @@ namespace Citta_T1.Controls
         {
             startP = p;
         }
-        
+
+
+        public Control SetStartC { set => startC = value; }
+        public Control SetEndC { set => endC = value; }
+        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
+        public bool StartDrag { get => startDrag; set => startDrag = value; }
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -65,6 +72,10 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.ResizeRedraw, true);
             dragWrapper = new DragWrapper();
         }
+
+
+
+
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = 1.3F)
@@ -102,17 +113,6 @@ namespace Citta_T1.Controls
             }
             Global.GetNaviViewControl().UpdateNaviView();
         }
-
-        #endregion
-
-
-        #region 画布中鼠标拖动的事件
-        
-
-        public Control SetStartC { set => startC = value; }
-        public Control SetEndC { set => endC = value; }
-        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-
 
         #endregion
 
@@ -161,6 +161,7 @@ namespace Citta_T1.Controls
             }
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
+                startDrag = true;
                 dragWrapper.DragDown(this.Size, this.screenFactor,e);
             }
 
@@ -281,6 +282,7 @@ namespace Citta_T1.Controls
 
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
+                startDrag = false;
                 dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 

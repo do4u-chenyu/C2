@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -22,14 +23,16 @@ namespace Citta_T1.Controls.Flow
         private int startY;
         private int nowX;
         private int nowY;
-        private DragWrapper dragWrapper;
+        private bool startNaview = false;
+
         public NaviViewControl()
         {
             InitializeComponent();
             this.controls = new List<Control>();
             this.pen = new Pen(Color.DimGray, 0.0001f);
             this.rate = 10;
-            dragWrapper = new DragWrapper();
+            
+            
         }
 
 
@@ -56,6 +59,7 @@ namespace Citta_T1.Controls.Flow
             {
                 startX = e.X;
                 startY = e.Y;
+                startNaview = true;
             }
         }
 
@@ -67,18 +71,19 @@ namespace Citta_T1.Controls.Flow
             nowX = e.X;
             nowY = e.Y;
             
-            dragWrapper.InitDragWrapper(this.Parent.Size, factor);
+            
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             int dx = Convert.ToInt32((startX - nowX ) * rate / factor);
             int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
-            Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
-            dragWrapper.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
+            Point moveOffset = WorldBoundControl(mapOrigin, factor);
+            ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
+            startNaview = false;
         }
 
         private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
@@ -99,14 +104,14 @@ namespace Citta_T1.Controls.Flow
             try
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
                 
-                dragWrapper.InitDragWrapper(this.Parent.Size, factor);
-                Point moveOffset = dragWrapper.WorldBoundControl(mapOrigin);
+                Point moveOffset = WorldBoundControl(mapOrigin, factor);
 
                 if (moveOffset != new Point(0, 0))
                 {
                     Console.WriteLine("发生越界");
-                    dragWrapper.ChangLoc(-moveOffset.X, -moveOffset.Y);
+                    ChangLoc(-moveOffset.X, -moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 }
@@ -121,7 +126,9 @@ namespace Citta_T1.Controls.Flow
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
-
+            
+            if ((this.Parent as CanvasPanel).StartDrag || startNaview) 
+                return; 
             foreach (Control ct in controls)
             {
                 if (ct.Visible == true)
@@ -132,5 +139,42 @@ namespace Citta_T1.Controls.Flow
                 }
             }
         }
+        public void ChangLoc(float dx, float dy)
+        {
+
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            foreach (ModelElement me in modelElements)
+            {
+                Control ct = me.GetControl;
+                if (ct is IDragable)
+                    (ct as IDragable).ChangeLoc(dx, dy);
+            }
+        }
+
+        public Point WorldBoundControl(Point Pm,float factor)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            if (Pw.X < 50)
+            {
+                dragOffset.X = 50 - Pw.X;
+            }
+            if (Pw.Y < 30)
+            {
+                dragOffset.Y = 30 - Pw.Y;
+            }
+            if (Pw.X > 2000 - Convert.ToInt32(this.Parent.Width / factor))
+            {
+                dragOffset.X = 2000 - Convert.ToInt32(this.Parent.Width / factor) - Pw.X;
+            }
+            if (Pw.Y > 1000 - Convert.ToInt32((this.Parent.Height) / factor))
+            {
+                dragOffset.Y = 1000 - Convert.ToInt32((this.Parent.Height) / factor) - Pw.Y;
+            }
+            return dragOffset;
+        }
+
+
     }
 }

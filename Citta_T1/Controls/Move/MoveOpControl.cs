@@ -156,9 +156,13 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-            float screenChange = (this.Parent as CanvasPanel).ScreenFactor;
+            float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
+            
+            int orgX = Convert.ToInt32(Pm.X / screenFactor);
+            int orgY = Convert.ToInt32(Pm.Y / screenFactor);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(orgX, orgY), mapOrigin);
+            
 
             if (Pw.X < 20)
             {
@@ -172,7 +176,7 @@ namespace Citta_T1.Controls.Move
             {
                 Pm.X = this.Parent.Width - this.Width;
             }
-            if (Pw.Y > 980 - this.Height)
+            if (Pw.Y > 980  - this.Height)
             {
                 Pm.Y = this.Parent.Height - this.Height;
             }
