@@ -36,12 +36,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.textBoxEx2 = new HZH_Controls.Controls.TextBoxEx();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -93,7 +89,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(578, 46);
+            this.topPanel.Size = new System.Drawing.Size(583, 46);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -101,10 +97,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 309);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 251);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(578, 80);
+            this.bottomPanel.Size = new System.Drawing.Size(583, 80);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,7 +133,6 @@
             // 
             // keyPanel
             // 
-            this.keyPanel.Controls.Add(this.label5);
             this.keyPanel.Controls.Add(this.label4);
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
@@ -146,18 +141,8 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 46);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(155, 263);
+            this.keyPanel.Size = new System.Drawing.Size(155, 205);
             this.keyPanel.TabIndex = 2;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(43, 200);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 27);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "输出条数：";
             // 
             // label4
             // 
@@ -171,9 +156,6 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.textBoxEx2);
-            this.valuePanel.Controls.Add(this.label7);
-            this.valuePanel.Controls.Add(this.label6);
             this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.comCheckBoxList1);
@@ -182,51 +164,8 @@
             this.valuePanel.Location = new System.Drawing.Point(155, 46);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(423, 263);
+            this.valuePanel.Size = new System.Drawing.Size(428, 205);
             this.valuePanel.TabIndex = 3;
-            // 
-            // textBoxEx2
-            // 
-            this.textBoxEx2.DecLength = 2;
-            this.textBoxEx2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx2.Location = new System.Drawing.Point(31, 200);
-            this.textBoxEx2.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.textBoxEx2.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.textBoxEx2.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx2.Name = "textBoxEx2";
-            this.textBoxEx2.OldText = null;
-            this.textBoxEx2.PromptColor = System.Drawing.Color.Gray;
-            this.textBoxEx2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx2.PromptText = "";
-            this.textBoxEx2.RegexPattern = "";
-            this.textBoxEx2.Size = new System.Drawing.Size(50, 25);
-            this.textBoxEx2.TabIndex = 9;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(87, 208);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(187, 15);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "行（不填默认输出所有行）";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 208);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 15);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "前";
             // 
             // groupBox2
             // 
@@ -301,13 +240,10 @@
             this.comCheckBoxList1.Name = "comCheckBoxList1";
             this.comCheckBoxList1.Size = new System.Drawing.Size(180, 24);
             this.comCheckBoxList1.TabIndex = 1;
-            comCheckBoxList1.AddItems("1");
-            comCheckBoxList1.AddItems("2");
             // 
             // textBoxEx1
             // 
             this.textBoxEx1.DecLength = 2;
-            this.textBoxEx1.ReadOnly = true;
             this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
             this.textBoxEx1.Location = new System.Drawing.Point(0, 0);
@@ -327,6 +263,7 @@
             this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
             this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxEx1.PromptText = "";
+            this.textBoxEx1.ReadOnly = true;
             this.textBoxEx1.RegexPattern = "";
             this.textBoxEx1.Size = new System.Drawing.Size(180, 30);
             this.textBoxEx1.TabIndex = 0;
@@ -337,7 +274,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 393);
+            this.ClientSize = new System.Drawing.Size(583, 331);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -372,15 +309,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private UserControlDLL.ComCheckBoxList comCheckBoxList1;
         private HZH_Controls.Controls.TextBoxEx textBoxEx1;
-        private HZH_Controls.Controls.TextBoxEx textBoxEx2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;

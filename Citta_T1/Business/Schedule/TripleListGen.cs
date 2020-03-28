@@ -15,24 +15,24 @@ namespace Citta_T1.Business.Schedule
     {
         private List<Triple> currentModelTripleList;
         private ModelDocument currentModel;
-        private String state;
+        private string state;
         private ModelElement stopElement;
 
         private List<ModelElement> modelElements;
         private List<ModelRelation> modelRelations;
-        private List<string> starNodes;
-        private List<string> endNodes;
-        private List<string> leafNodeIds;
+        private List<int> starNodes;
+        private List<int> endNodes;
+        private List<int> leafNodeIds;
 
         //已经找过的节点，如果在里面，不需要再找了
-        private List<string> haveSearchedNodes;
+        private List<int> haveSearchedNodes;
 
         public TripleListGen(ModelDocument currentModel)
         {
             //“运行”构造方法
             this.currentModel = currentModel;
             this.state = "all";
-            this.haveSearchedNodes = new List<string>();
+            this.haveSearchedNodes = new List<int>();
             this.currentModelTripleList = new List<Triple>();
         }
 
@@ -42,9 +42,23 @@ namespace Citta_T1.Business.Schedule
             this.currentModel = currentModel;
             this.stopElement = stopElement;
             this.state = "mid";
-            this.haveSearchedNodes = new List<string>();
+            this.haveSearchedNodes = new List<int>();
             this.currentModelTripleList = new List<Triple>();
         }
+
+        public bool IsAllOperatorReady()
+        {
+            foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
+            {
+                if (op.Status != ElementStatus.Ready)
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
 
         public void GenerateList()
         {
@@ -68,7 +82,7 @@ namespace Citta_T1.Business.Schedule
             modelRelations = this.currentModel.ModelRelations;
 
             //叶子节点列表
-            leafNodeIds = new List<string>();
+            leafNodeIds = new List<int>();
 
             if (this.state == "all")
             {
@@ -76,13 +90,13 @@ namespace Citta_T1.Business.Schedule
                 //TODO
                 //结束元素可能有多个,需要判断每个元素的出度
 
-                starNodes = new List<string>();
-                endNodes = new List<string>();
+                starNodes = new List<int>();
+                endNodes = new List<int>();
 
                 foreach (ModelRelation mr in modelRelations)
                 {
-                    starNodes.Add(mr.Start.ToString());
-                    endNodes.Add(mr.End.ToString());
+                    starNodes.Add(mr.Start);
+                    endNodes.Add(mr.End);
                 }
                 leafNodeIds = endNodes.Except(starNodes).ToList();
 
@@ -90,38 +104,38 @@ namespace Citta_T1.Business.Schedule
             else if (this.state == "mid")
             {
                 //从“运行到此”右键选项进入
-                leafNodeIds.Add(FindNextNodeId(this.stopElement.ID.ToString()));
+                leafNodeIds.Add(FindNextNodeId(this.stopElement.ID));
             }
         }
 
-        public List<string> FindBeforeNodeIds(string id)
+        public List<int> FindBeforeNodeIds(int id)
         {
-            List<string> beforeNodeId = new List<string>();
-            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End.ToString() == id))
+            List<int> beforeNodeId = new List<int>();
+            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End == id))
             {
-                beforeNodeId.Add(beforeNode.Start.ToString());
+                beforeNodeId.Add(beforeNode.Start);
             }
             return beforeNodeId;
         }
 
-        public string FindNextNodeId(string id)
+        public int FindNextNodeId(int id)
         {
-            return modelRelations.Find(c => c.Start.ToString() == id).End.ToString();
+            return modelRelations.Find(c => c.Start == id).End;
         }
 
 
 
-        public void SearchNewTriple(List<string> needSearchNodeIds)
+        public void SearchNewTriple(List<int> needSearchNodeIds)
         {
             //下一次需要找上游的点
-            List<string> nextNeedSearchNodeIds = new List<string>();
+            List<int> nextNeedSearchNodeIds = new List<int>();
 
             if (needSearchNodeIds.Count == 0)
             {
                 return;
             }
 
-            foreach (string resultNodeId in needSearchNodeIds)
+            foreach (int resultNodeId in needSearchNodeIds)
             {
                 /*拿到一个待溯源的节点
                  * 1、判断这个节点是否在endnode列表里，不在，说明没有入度，即为根，不需要再找上游了。在，下一步。
@@ -135,15 +149,15 @@ namespace Citta_T1.Business.Schedule
                     continue;
                 }
 
-                string operateNodeId = FindBeforeNodeIds(resultNodeId).First();
-                List<string> dataNodeIds = FindBeforeNodeIds(operateNodeId);
+                int operateNodeId = FindBeforeNodeIds(resultNodeId).First();
+                List<int> dataNodeIds = FindBeforeNodeIds(operateNodeId);
 
-                ModelElement resultElement = modelElements.Find(c => c.ID.ToString() == resultNodeId);
-                ModelElement operateElement = modelElements.Find(c => c.ID.ToString() == operateNodeId);
+                ModelElement resultElement = modelElements.Find(c => c.ID == resultNodeId);
+                ModelElement operateElement = modelElements.Find(c => c.ID == operateNodeId);
                 List<ModelElement> dataElements = new List<ModelElement>();
-                foreach (string dataNodeId in dataNodeIds)
+                foreach (int dataNodeId in dataNodeIds)
                 {
-                    dataElements.Add(modelElements.Find(c => c.ID.ToString() == dataNodeId));
+                    dataElements.Add(modelElements.Find(c => c.ID == dataNodeId));
 
                     if (!this.haveSearchedNodes.Exists(c => c == dataNodeId))
                     {
