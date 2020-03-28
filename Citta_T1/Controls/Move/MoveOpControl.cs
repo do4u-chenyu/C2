@@ -233,7 +233,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 14;
+            int maxLength = 10;//初始14
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -259,31 +259,34 @@ namespace Citta_T1.Controls.Move
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(194 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(179 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(124 * f),(int)(23 * f));
-            this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
+            this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
+            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
+            this.statusBox.Location = new Point((int)(126 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(159 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
+            this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
         }
         private void ResizeToSmall()
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(142 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(131 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(72 * f), (int)(23 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
+            this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
+            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
+            this.statusBox.Location = new Point((int)(104 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(140 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
         }
         private void ResizeToNormal()
         {
             Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(184 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(170 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(114 * f), (int)(23 * f));
-            this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
+            this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
+            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
+            this.statusBox.Location = new Point((int)(120 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(154 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
         }
         #endregion
 
