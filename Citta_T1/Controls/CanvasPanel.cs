@@ -14,15 +14,20 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel
+    public partial class CanvasPanel : UserControl
     {
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
-        private bool startDrag = false;
-        //记录拖动引起的坐标变化量
-        public float screenChange = 1;
         
+        //屏幕拖动涉及的变量
+        private float screenFactor = 1;
+        private bool startDrag = false;
+        private DragWrapper dragWrapper;
+
+
+
+
         bool MouseIsDown = false;
         Point basepoint;
 
@@ -50,6 +55,13 @@ namespace Citta_T1.Controls
         {
             startP = p;
         }
+
+
+        public Control SetStartC { set => startC = value; }
+        public Control SetEndC { set => endC = value; }
+        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
+        public bool StartDrag { get => startDrag; set => startDrag = value; }
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -58,8 +70,12 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-
+            dragWrapper = new DragWrapper();
         }
+
+
+
+
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = 1.3F)
@@ -72,7 +88,7 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("放大");
                 sizeLevel += 1;
-                this.screenChange = this.screenChange * factor;
+                this.screenFactor = this.screenFactor * factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
@@ -86,7 +102,7 @@ namespace Citta_T1.Controls
             {
                 Console.WriteLine("缩小");
                 sizeLevel -= 1;
-                this.screenChange = this.screenChange / factor;
+                this.screenFactor = this.screenFactor / factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable)
@@ -97,19 +113,6 @@ namespace Citta_T1.Controls
             }
             Global.GetNaviViewControl().UpdateNaviView();
         }
-
-        #endregion
-
-
-        #region 画布中鼠标拖动的事件
-        private Point start;
-        private Point now;
-
-
-
-        public Control SetStartC { set => startC = value; }
-        public Control SetEndC { set => endC = value; }
-        
 
         #endregion
 
@@ -138,15 +141,16 @@ namespace Citta_T1.Controls
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
         }
-        
+
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
+            if (e.Button != MouseButtons.Left) return;
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
                 MouseIsDown = true;
-                
+
                 basepoint = e.Location;
 
                 staticImage = new Bitmap(this.Width, this.Height);
@@ -155,26 +159,23 @@ namespace Citta_T1.Controls
 
                 g.Dispose();
             }
-            else if ((this.Parent as MainForm).flowControl.SelectDrag && e.Button == MouseButtons.Left)
+            else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
                 startDrag = true;
-                start = e.Location;
-                if (staticImage != null)
-                    staticImage.Dispose();
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                staticImage = dragWrapper.CreateWorldImage();
+                dragWrapper.DragDown(this.Size, this.screenFactor,e);
             }
 
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            now = e.Location;
+            
+            if (e.Button != MouseButtons.Left) return;
             // 画框
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
 
                 Bitmap i = new Bitmap(staticImage);
-                
+
                 g = Graphics.FromImage(i);
 
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
@@ -194,25 +195,20 @@ namespace Citta_T1.Controls
             }
 
             // 控件移动
-            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.SelectDrag)
+            else if ( ((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                
-                Graphics n = this.CreateGraphics();
-   
-                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
-                n.Dispose();
+                dragWrapper.DragMove(this.Size, this.screenFactor, e);
             }
             //绘制
             else if (cmd == eCommandType.draw)
             {
-                
-                PointF nowP = now;
+
+                PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
-                
+
                 Console.WriteLine("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Line(startP, nowP);
                 Console.WriteLine("line'count = " + lines.Count().ToString());
@@ -272,6 +268,7 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left) return; 
 
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
@@ -285,17 +282,8 @@ namespace Citta_T1.Controls
 
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-
-                
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                Graphics n = this.CreateGraphics();
-                now = e.Location;
-
-                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
-                dragWrapper.controlChange(start, now);
-
                 startDrag = false;
-                start = e.Location;
+                dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
             else if (cmd == eCommandType.draw)
@@ -316,7 +304,7 @@ namespace Citta_T1.Controls
                 (this.endC as IMoveControl).SaveEndLines(line_index);
                 cmd = eCommandType.select;
             }
-            
+
         }
 
 
@@ -330,16 +318,13 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
 
-
-            Rectangle clipRectangle = e.ClipRectangle;
-            //解决屏幕拖动闪屏问题
-            if (startDrag && staticImage != null)
+            if (dragWrapper.DragPaint(this.Size, this.screenFactor, e))
             {
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenChange);
-                dragWrapper.MoveWorldImage(e.Graphics, this.staticImage, start, now);
                 return;
             }
-            
+
+            Rectangle clipRectangle = e.ClipRectangle;
+
             if (this.staticImage == null)
             {
                 clipRectangle = ClientRectangle;
@@ -430,8 +415,5 @@ namespace Citta_T1.Controls
         {
             return Global.GetFlowControl().SelectFrame;
         }
-
-
-
     }
 }
