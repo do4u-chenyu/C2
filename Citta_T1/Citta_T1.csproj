@@ -61,7 +61,7 @@
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGen.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\CanvasPanel.Designer.cs">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
@@ -469,9 +469,13 @@
     <Content Include="res\leftpanelmenu\leftpanel_random.png" />
     <Content Include="res\leftpanelmenu\leftpanel_union.png" />
     <Content Include="res\leftpanelmenu\title.png" />
+    <Content Include="res\menu\controlhelp.png" />
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
     <None Include="res\toolbox\add.png" />
+    <Content Include="res\menu\ready.png" />
+    <Content Include="res\menu\set.png" />
+    <Content Include="res\menu\warn.png" />
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />

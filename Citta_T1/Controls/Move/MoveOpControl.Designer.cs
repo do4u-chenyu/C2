@@ -46,19 +46,21 @@ namespace Citta_T1.Controls.Move
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.txtButton = new System.Windows.Forms.Button();
+            this.statusBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPinPictureBox)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.statusBox)).BeginInit();
             this.SuspendLayout();
             // 
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(149, 2);
+            this.rightPictureBox.Location = new System.Drawing.Point(154, 5);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
+            this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
@@ -94,7 +96,7 @@ namespace Citta_T1.Controls.Move
             // rightPinPictureBox
             // 
             this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(171, 11);
+            this.rightPinPictureBox.Location = new System.Drawing.Point(176, 11);
             this.rightPinPictureBox.Name = "rightPinPictureBox";
             this.rightPinPictureBox.Size = new System.Drawing.Size(5, 5);
             this.rightPinPictureBox.TabIndex = 4;
@@ -116,7 +118,7 @@ namespace Citta_T1.Controls.Move
             this.异常日志ToolStripMenuItem,
             this.删除ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
+            this.contextMenuStrip.Size = new System.Drawing.Size(134, 148);
             // 
             // OptionToolStripMenuItem
             // 
@@ -126,7 +128,7 @@ namespace Citta_T1.Controls.Move
             this.OptionToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem";
-            this.OptionToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.OptionToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.OptionToolStripMenuItem.Text = "设置";
             this.OptionToolStripMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
@@ -136,7 +138,7 @@ namespace Citta_T1.Controls.Move
             this.菜单2ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单2ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
-            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单2ToolStripMenuItem.Text = "重命名";
             this.菜单2ToolStripMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
@@ -146,7 +148,7 @@ namespace Citta_T1.Controls.Move
             this.备注ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.备注ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.备注ToolStripMenuItem.Name = "备注ToolStripMenuItem";
-            this.备注ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.备注ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.备注ToolStripMenuItem.Text = "备注";
             this.备注ToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -156,7 +158,7 @@ namespace Citta_T1.Controls.Move
             this.运行到此ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.运行到此ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.运行到此ToolStripMenuItem.Name = "运行到此ToolStripMenuItem";
-            this.运行到此ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.运行到此ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.运行到此ToolStripMenuItem.Text = "运行到此";
             this.运行到此ToolStripMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
@@ -166,7 +168,7 @@ namespace Citta_T1.Controls.Move
             this.异常日志ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.异常日志ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.异常日志ToolStripMenuItem.Name = "异常日志ToolStripMenuItem";
-            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.异常日志ToolStripMenuItem.Text = "异常日志";
             // 
             // 删除ToolStripMenuItem
@@ -175,18 +177,19 @@ namespace Citta_T1.Controls.Move
             this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.删除ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
             // textBox
             // 
+            this.textBox.BackColor = System.Drawing.SystemColors.Control;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(37, 1);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(111, 23);
+            this.textBox.Size = new System.Drawing.Size(93, 23);
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
@@ -196,19 +199,31 @@ namespace Citta_T1.Controls.Move
             // txtButton
             // 
             this.txtButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtButton.Location = new System.Drawing.Point(37, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(110, 25);
+            this.txtButton.Size = new System.Drawing.Size(93, 25);
             this.txtButton.TabIndex = 8;
             this.txtButton.Text = "button1";
-            this.txtButton.UseVisualStyleBackColor = true;
+            this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
+            // 
+            // statusBox
+            // 
+            this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
+            this.statusBox.Location = new System.Drawing.Point(131, 5);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(14, 14);
+            this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.statusBox.TabIndex = 9;
+            this.statusBox.TabStop = false;
             // 
             // MoveOpControl
             // 
@@ -219,6 +234,7 @@ namespace Citta_T1.Controls.Move
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
+            this.Controls.Add(this.statusBox);
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPinPictureBox);
@@ -228,7 +244,7 @@ namespace Citta_T1.Controls.Move
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(185, 25);
+            this.Size = new System.Drawing.Size(190, 25);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
@@ -237,6 +253,7 @@ namespace Citta_T1.Controls.Move
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPinPictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.statusBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,5 +276,6 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolTip helpToolTip;
         public System.Windows.Forms.Button txtButton;
+        private System.Windows.Forms.PictureBox statusBox;
     }
 }
