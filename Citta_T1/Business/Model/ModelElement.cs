@@ -58,7 +58,41 @@ namespace Citta_T1.Business.Model
 
 
         public ElementType Type { get => type; set => type = value; }
-        public ElementStatus Status { get => status; set => status = value; }
+        public ElementStatus Status
+        { 
+            get
+            {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        this.status = ElementStatus.Done;
+                        break;
+                    case ElementType.Operator:
+                        this.status = (ctl as MoveOpControl).Status;
+                        break;
+                    case ElementType.Result:
+                        this.status = (ctl as MoveRsControl).Status;
+                        break;
+                    default:
+                        break;
+                }
+                return this.status;
+            }
+            set
+            {
+                switch (this.type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveOpControl).Status = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Status = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         public ElementSubType SubType { get => subType; set => subType = value; }
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
@@ -66,37 +100,38 @@ namespace Citta_T1.Business.Model
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
-            Init(type, ctl, des, bcpPath, status, subType, id, encoding);
+            Init(type, ctl, des, bcpPath, subType, id, encoding);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementStatus status, ElementSubType subType, int id)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementSubType subType, int id)
         {
-            return new ModelElement(ElementType.Operator, ctl, des, "", status, subType, id);
+            return new ModelElement(ElementType.Operator, ctl, des, "", subType, id);
         }
-        public static ModelElement CreateResultElement(MoveRsControl ctl, string des, ElementStatus status, ElementSubType subType, int id)
+        public static ModelElement CreateResultElement(MoveRsControl ctl, string des, int id)
         {
-            return new ModelElement(ElementType.Result, ctl, des, "", status, ElementSubType.Null, id);
+            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id);
         }
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementStatus.Done, ElementSubType.Null, id,ctl.Encoding);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementSubType.Null, id,ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath, ElementStatus status, ElementSubType subType, int id, DSUtil.Encoding encoding)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath,  ElementSubType subType, int id, DSUtil.Encoding encoding)
         {
             this.type = type;
             this.subType = subType;
             this.ctl = ctl;
-            this.status = status;
             this.dataSourcePath = bcpPath;
             this.SetName(des);
             this.description = des;
             this.id = id;
             this.encoding = encoding;
+            
+
         }
         
         public string GetDescription()
@@ -119,6 +154,7 @@ namespace Citta_T1.Business.Model
             return des;
 
         }
+
 
         private void SetName(string name)
         {

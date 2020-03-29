@@ -397,6 +397,15 @@ namespace Citta_T1.Controls
             btn.Encoding = encoding;
             AddNewElement(btn);
         }
+        public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
+        {
+            MoveRsControl btn = new MoveRsControl(
+                                sizeL,
+                                text,
+                                location);
+            AddNewElement(btn);
+            return btn;
+        }
 
         private void AddNewElement(Control btn)
         {

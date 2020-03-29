@@ -210,7 +210,7 @@ namespace Citta_T1.Business.Model
                         MoveOpControl ctl = new MoveOpControl(0, name, loc);
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
-                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType), id);
+                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
                             ctl.Option = ReadOption(xn);
@@ -226,6 +226,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        cotl.ID = id;
                         cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
@@ -239,11 +240,10 @@ namespace Citta_T1.Business.Model
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
-                        string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
-                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, EStatus(status), SEType(subType), id);
+                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
                     else if (type == "Relation")

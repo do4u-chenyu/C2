@@ -4,6 +4,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,7 +16,8 @@ namespace Citta_T1.OperatorViews
         private MoveOpControl opControl;
         private string dataPath;
         private string oldMaxfield;
-        private List<int> oldOutList; 
+        private List<int> oldOutList;
+        private ElementStatus oldstatus;
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -23,8 +25,10 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
+            
             this.oldMaxfield = this.MaxValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
+            this.oldstatus = opControl.Status;
 
 
         }
@@ -50,6 +54,16 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation
+            if (this.oldstatus == ElementStatus.Null)
+            {
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                    if (mr.Start == this.opControl.ID) return;
+                int x = this.opControl.Location.X + this.opControl.Width + 15;
+                int y = this.opControl.Location.Y;
+                MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
+                Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
+            }
 
         }
 

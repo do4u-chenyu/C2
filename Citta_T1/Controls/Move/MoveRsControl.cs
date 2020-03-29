@@ -1,4 +1,5 @@
-﻿using Citta_T1.Utils;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -39,6 +40,11 @@ namespace Citta_T1.Controls.Move
         Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
+
+        private ElementStatus status;
+        private int id;
+        public int ID { get => this.id; set => this.id = value; }
+        public ElementStatus Status {get => this.status; set=>this.status = value;}
         public MoveRsControl()
         {
             InitializeComponent();
@@ -227,6 +233,7 @@ namespace Citta_T1.Controls.Move
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
+
         }
         #endregion
 

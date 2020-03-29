@@ -18,8 +18,8 @@ namespace Citta_T1.Business.Model
         private List<ModelDocument> modelDocuments;
         
         
-        internal List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
-        internal ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
+        public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
+        public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
         string UserInfoPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument" + "\\UserInformation.xml";
         public ModelDocumentDao()
         {
@@ -68,6 +68,7 @@ namespace Citta_T1.Business.Model
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
+                dt.ID = this.currentDocument.ElementCount;
                 ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
@@ -77,17 +78,25 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, op.Status, SEType(op.SubTypeName), this.currentDocument.ElementCount);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), this.currentDocument.ElementCount);
+                this.currentDocument.AddModelElement(e);
+                return;               
+            }
+            if (ct is MoveRsControl)
+            {
+                MoveRsControl op = (ct as MoveRsControl);
+                op.ID = this.currentDocument.ElementCount;
+                ModelElement e = ModelElement.CreateResultElement(op, op.ReName,this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
                 return;
-                
+
             }
 
         }
-        public void AddDocumentRelation()
+        public void AddDocumentRelation(int startID, int endID, Point startLocation, Point endLocation, int endPin)
         {
 
-            ModelRelation e = new ModelRelation(1, 2, new Point(1,2), new Point(3,4), 1);
+            ModelRelation e = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
             this.currentDocument.AddModelRelation(e);
         }
         public static ElementSubType SEType(string subType)

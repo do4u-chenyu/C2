@@ -12,11 +12,12 @@ namespace Citta_T1.Controls.Move
 { 
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
-
+  
 
     public partial class MoveOpControl : UserControl, IScalable, IDragable
     {
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+
 
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "连接算子 取差集 取交集 取并集";
@@ -38,11 +39,19 @@ namespace Citta_T1.Controls.Move
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => typeName; }
         internal OperatorOption Option { get => this.option; set => this.option = value; }
-        public ElementStatus Status { get => this.status; set => this.status = value; }
+        private ElementStatus status;
+        public ElementStatus Status { 
+            get => this.status;
+            set
+            {                
+                this.status = value;
+                OptionDirty();
+            }  
+        }
         public int ID { get => this.id; set => this.id = value; }
         public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
 
-        private ElementStatus status;
+        
         private bool relationStatus = true;
 
 
@@ -69,7 +78,7 @@ namespace Citta_T1.Controls.Move
         }
         public MoveOpControl(int sizeL, string text, Point loc)
         {
-           
+            this.status = ElementStatus.Null;
             InitializeComponent();
             textBox.Text = text;
             typeName = text;
@@ -339,12 +348,44 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-
+            //删除连接的结果控件
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.Start == this.id)
+                {
+                    DeleteResultControl(mr.End);
+                    break;
+                }
+                    
+            }
+            //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
+           
+        }
+        private void DeleteResultControl(int endID)
+        {
+            foreach (ModelElement mrc in Global.GetCurrentDocument().ModelElements)
+            {
+                if (mrc.ID == endID)
+                {
+                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
+                    Global.GetNaviViewControl().RemoveControl(mrc.GetControl);
+                    Global.GetNaviViewControl().UpdateNaviView();
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    return;
+                }
+            }
+        }
+        private void OptionDirty()
+        {
+            if (this.status == ElementStatus.Null)
+                this.statusBox.Image = Properties.Resources.set;
+            else if(this.status == ElementStatus.Ready)
+                this.statusBox.Image = Properties.Resources.ready;
         }
         #endregion
 

@@ -9,6 +9,7 @@ using static Citta_T1.Controls.CanvasPanel;
 using Citta_T1.Controls.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Move
 {
@@ -22,7 +23,9 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
+        private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public int ID { get => this.id; set => this.id = value; }
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -55,7 +58,7 @@ namespace Citta_T1.Controls.Move
         #endregion
         // 受影响的线
         List<Line> affectedLines = new List<Line>() { };
-
+        
 
         public string GetBcpPath()
         {
@@ -121,6 +124,8 @@ namespace Citta_T1.Controls.Move
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
+
+          
         }
         #endregion
 
