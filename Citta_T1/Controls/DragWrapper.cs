@@ -140,7 +140,7 @@ namespace Citta_T1.Controls
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
 
-            ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
+            OpUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
 
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
@@ -151,18 +151,6 @@ namespace Citta_T1.Controls
             }
 
             Global.GetNaviViewControl().UpdateNaviView();
-        }
-
-        private void ChangLoc(float dx, float dy)
-        {
-
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.GetControl;
-                if (ct is IDragable)
-                    (ct as IDragable).ChangeLoc(dx, dy);
-            }
         }
     }
 }

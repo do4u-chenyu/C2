@@ -79,7 +79,7 @@ namespace Citta_T1.Controls.Flow
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
             Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
-            ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
+            OpUtil.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -112,7 +112,7 @@ namespace Citta_T1.Controls.Flow
                 if (moveOffset != new Point(0, 0))
                 {
                     Console.WriteLine("发生越界");
-                    ChangLoc(-moveOffset.X, -moveOffset.Y);
+                    OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 }
@@ -141,17 +141,6 @@ namespace Citta_T1.Controls.Flow
             gc.FillRectangle(trnsRedBrush, rect);
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
 
-        }
-        public void ChangLoc(float dx, float dy)
-        {
-
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.GetControl;
-                if (ct is IDragable)
-                    (ct as IDragable).ChangeLoc(dx, dy);
-            }
         }
 
         private void UpdateImage(int width,int height,float factor,Point mapOrigin)

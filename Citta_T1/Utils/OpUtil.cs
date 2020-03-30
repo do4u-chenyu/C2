@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Text;
-using System.IO;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+
+using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
 
 namespace Citta_T1.Utils
 {
@@ -62,6 +65,18 @@ namespace Citta_T1.Utils
                 dragOffset.Y = 1000 - Convert.ToInt32(height / factor) - Pw.Y;
             }
             return dragOffset;
+        }
+
+        public static void ChangLoc(float dx, float dy)
+        {
+
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            foreach (ModelElement me in modelElements)
+            {
+                Control ct = me.GetControl;
+                if (ct is IDragable)
+                    (ct as IDragable).ChangeLoc(dx, dy);
+            }
         }
     }
 }
