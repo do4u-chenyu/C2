@@ -20,36 +20,36 @@ namespace Citta_T1
             InitializeComponent();
         }
 
-        public void ucDataGridView1_Load(List<object> scheduleLogs)
+        public void LogUpdate(string log)
         {
-            List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>();
-            // 表头
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "TripleInfo", HeadText = "三元组信息", Width = 50, WidthType = SizeType.Percent });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Status", HeadText = "运行状态", Width = 50, WidthType = SizeType.Percent });
-            this.ucDataGridView1.Columns = lstColumns;
-            //this.ucDataGridView1.IsShowCheckBox = true;
-            /*
-            List<object> lstSource = new List<object>();
-            for (int i = 0; i < 2; i++)
+            this.textBox1.AppendText(log + "\r\n");
+
+
+            if (this.textBox1.Lines.Length > 10000)
             {
-                ScheduleLog model = new ScheduleLog()
-                {
-                    ID = i.ToString(),
-                    TripleInfo = "三元组信息——" + i,
-                    Status = "状态——" + i,
-                };
-                lstSource.Add(model);
+                string[] newlines = new string[10000];
+                Array.Copy(this.textBox1.Lines, this.textBox1.Lines.Length - 10000, newlines, 0, 10000);
+                this.textBox1.Lines = newlines;
             }
-            */
-            this.ucDataGridView1.DataSource = scheduleLogs;
-            this.ucDataGridView1.First();
+
+
+            
         }
 
-        public void ucDataGridView1_Update(List<object> scheduleLogs)
+        private void MenuItem复制_Click(object sender, EventArgs e)
         {
-            this.ucDataGridView1.DataSource = scheduleLogs;
+            string copy = this.textBox1.SelectedText;
+            Clipboard.SetDataObject(copy);
         }
 
+        private void MenuItem全部清除_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
+        }
 
+        private void MenuItem全选_Click(object sender, EventArgs e)
+        {
+            this.textBox1.SelectAll();
+        }
     }
 }

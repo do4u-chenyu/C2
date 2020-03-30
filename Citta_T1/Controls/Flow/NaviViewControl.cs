@@ -151,10 +151,7 @@ namespace Citta_T1.Controls.Flow
 
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
-                    continue;
-                Control ct = me.GetControl;
-                
+                Control ct = me.GetControl;   
                 Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
                 ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
                 Rectangle rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); 
