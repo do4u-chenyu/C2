@@ -267,6 +267,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleLog.cs" />
     <Compile Include="TestGridModel.cs" />
     <Compile Include="Dgvs\DataGridView1.cs">
       <SubType>UserControl</SubType>
@@ -306,6 +307,7 @@
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Controls\Interface\CanvasInterfaces.cs" />
+    <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>

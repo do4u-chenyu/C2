@@ -155,6 +155,7 @@ namespace Citta_T1.Controls.Move
         {
             if (isMouseDown)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
@@ -192,6 +193,7 @@ namespace Citta_T1.Controls.Move
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
             System.Console.WriteLine("移动开始");
+            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -214,6 +216,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
+            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 this.isMouseDown = false;

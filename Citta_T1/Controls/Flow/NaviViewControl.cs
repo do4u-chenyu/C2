@@ -23,7 +23,7 @@ namespace Citta_T1.Controls.Flow
         private int startY;
         private int nowX;
         private int nowY;
-        private bool startNaview = false;
+        private Bitmap staticImage;
 
         public NaviViewControl()
         {
@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Flow
             {
                 startX = e.X;
                 startY = e.Y;
-                startNaview = true;
+                
             }
         }
 
@@ -83,7 +83,7 @@ namespace Citta_T1.Controls.Flow
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
-            startNaview = false;
+            
         }
 
         private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
@@ -122,22 +122,33 @@ namespace Citta_T1.Controls.Flow
                 mapOrigin = new Point(-600, -300);
                 viewBoxPosition = new Point(650, 330);
             }
+
+
+            if ((this.Parent as CanvasPanel).StartMove)
+            {
+                updateImage(this.Width, this.Height, factor, mapOrigin);
+                (this.Parent as CanvasPanel).StartMove = false;
+            }
+
+            
+
+
+
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
-            
-            if ((this.Parent as CanvasPanel).StartDrag || startNaview) 
-                return; 
-            foreach (Control ct in controls)
-            {
-                if (ct.Visible == true)
-                {
-                    Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
-                    ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
-                    rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); gc.DrawRectangle(pen, rect);
-                }
-            }
+            gc.DrawImageUnscaled(this.staticImage, 0, 0);
+            //foreach (Control ct in controls)
+            //{
+            //    if (ct.Visible == true)
+            //    {
+            //        Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
+            //        ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
+            //        rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate);
+            //        gc.DrawRectangle(pen, rect);
+            //    }
+            //}
         }
         public void ChangLoc(float dx, float dy)
         {
@@ -174,7 +185,28 @@ namespace Citta_T1.Controls.Flow
             }
             return dragOffset;
         }
+        public void updateImage(int width,int height,float factor,Point mapOrigin)
+        {
+            this.staticImage = new Bitmap(width,height);
+            Graphics g = Graphics.FromImage(staticImage);
+            //g.Clear(Color.White);
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
+            foreach (ModelElement me in modelElements)
+            {
+                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
+                    continue;
+                Control ct = me.GetControl;
+                
+                Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
+                ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
+                Rectangle rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); 
+                g.DrawRectangle(pen, rect);
+            }
+
+            g.Dispose();
+            
+        }
 
     }
 }

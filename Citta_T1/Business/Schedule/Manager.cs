@@ -10,7 +10,10 @@ namespace Citta_T1.Business.Schedule
 {
     class Manager
     {
-        public delegate void UpdateUI(int step);//声明一个更新主线程的委托
+        public delegate void UpdateLog();//声明一个更新主线程日志的委托
+        public UpdateLog UpdateLogDelegate;
+
+        public delegate void UpdateUI(int id);//声明一个更新主线程的委托
         public UpdateUI UpdateUIDelegate;
 
         public delegate void AccomplishTask();//声明一个在完成任务时通知主线程的委托
@@ -46,13 +49,13 @@ namespace Citta_T1.Business.Schedule
             foreach (Triple pauseTri in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
             {
                 pauseTri.OperateElement.Status = newStatus;
-                Console.WriteLine("{0}的状态改为{1}", pauseTri.OperateElement.RemarkName, pauseTri.OperateElement.Status);
             }
         }
 
         public void Pause()
         {
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Suspend);
+            UpdateLogDelegate();
             resetEvent.Reset();
         }
 
@@ -66,6 +69,7 @@ namespace Citta_T1.Business.Schedule
         {
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
+            UpdateLogDelegate();
             resetEvent.Dispose();
             foreach (Task currentTask in parallelTasks)
             {
@@ -98,7 +102,7 @@ namespace Citta_T1.Business.Schedule
                  */
                 if (tmpTri.ResultElement.Status == ElementStatus.Done)
                 {
-                    Console.WriteLine("该三元组已算过，下一个");
+                    //Console.WriteLine("该三元组已算过，下一个");
                     continue;
                 }
                 else
@@ -123,7 +127,7 @@ namespace Citta_T1.Business.Schedule
             }
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
-            Console.WriteLine("所有任务都已完成");
+            //Console.WriteLine("所有任务都已完成");
 
             TaskCallBack();
         }
@@ -142,14 +146,9 @@ namespace Citta_T1.Business.Schedule
                 //op控件 running
                 //TODO
                 triple.OperateElement.Status = ElementStatus.Runnnig;
+                UpdateLogDelegate();
 
-                string dataName = "";
-                foreach (ModelElement d in triple.DataElements)
-                {
-                    dataName = dataName + d.RemarkName;
-                }
 
-                Console.WriteLine("{0}-{1}-{2}开始运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
                 Thread.Sleep(5000);
                 //此处写处理数据方法
 
@@ -159,12 +158,12 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
-                Console.WriteLine("{0}-{1}-{2}结束运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
+                UpdateLogDelegate();
                 UpdateUIDelegate(triple.OperateElement.ID);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("线程被取消");
+                //Console.WriteLine("线程被取消");
             }
 
             return triple.IsOperated;

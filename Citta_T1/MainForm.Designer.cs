@@ -376,7 +376,7 @@
             // 
             this.logLabel.AutoSize = true;
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(292, 4);
+            this.logLabel.Location = new System.Drawing.Point(120 , 4);
             this.logLabel.Name = "logLabel";
             this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
@@ -391,19 +391,19 @@
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(52, 27);
             this.errorLabel.TabIndex = 2;
-            this.errorLabel.Text = "报错";
+            this.errorLabel.Text = "报错信息";
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
             // 
             // resultLabel
-            // 
+            //
+            // 待删除
             this.resultLabel.AutoSize = true;
             this.resultLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.resultLabel.Location = new System.Drawing.Point(120, 4);
+            this.resultLabel.Location = new System.Drawing.Point(350, 4);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(92, 27);
             this.resultLabel.TabIndex = 1;
             this.resultLabel.Text = "运行结果";
-            this.resultLabel.Click += new System.EventHandler(this.ResultLabel_Click);
             // 
             // previewLabel
             // 

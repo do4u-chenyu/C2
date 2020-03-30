@@ -74,8 +74,6 @@ namespace Citta_T1.Controls
         {
             if (this.startDrag && this.staticImage != null)
             {
-
-                //DragWrapper dragWrapper = new DragWrapper();
                 this.InitDragWrapper(canavasSize, canavasFactor);
                 this.MoveWorldImage(e.Graphics, this.staticImage, this.start, this.now);
                 return true;
@@ -96,9 +94,12 @@ namespace Citta_T1.Controls
             modelElements.Reverse();
             foreach (ModelElement me in modelElements)
             {
+                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
+                    continue;
                 Control ct = me.GetControl;
                 Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (Pw.X < 0 || Pw.Y < 0) { continue; }
+                if (Pw.X < 0 || Pw.Y < 0) 
+                    continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                 me.Hide();
             }
