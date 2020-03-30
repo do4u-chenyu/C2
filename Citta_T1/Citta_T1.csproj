@@ -305,7 +305,6 @@
     <Compile Include="Utils\Global.cs" />
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
-    <Compile Include="Controls\Interface\CanvasInterfaces.cs" />
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
     <EmbeddedResource Include="Controls\Left\DataButton.resx">

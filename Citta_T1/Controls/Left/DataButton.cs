@@ -38,7 +38,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // TODO 1. 怎么呈现这个预览？
+            // TODO [DK] 1. 怎么呈现这个预览？
 
         }
 
@@ -46,7 +46,7 @@ namespace Citta_T1.Controls.Left
         {
             // 1. DataSource中重命名
             // 2. Program中重命名
-            // TODO 3. 画布中已存在的该如何处理？ 
+            // TODO [DK] 3. 画布中已存在的该如何处理？ 
             ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
         }
 
@@ -54,11 +54,25 @@ namespace Citta_T1.Controls.Left
         {
             // 1. DataSource中删除控件
             // 2. Program中删除数据
-            // TODO 3. 画布中已存在的该如何处理？ 
+            // TODO [DK] 3. 画布中已存在的该如何处理？ 
             this.Parent.Controls.Remove(this);
             BCPBuffer.GetInstance().Remove(this.txtButton.Name);
 
         }
         #endregion
+
+        private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
+        {
+            int lastIndex = txtButton.Name.LastIndexOf("\\");
+            string FilePath = txtButton.Name.Substring(0, lastIndex);
+            string FileName = txtButton.Name.Substring(lastIndex + 1); 
+            System.Diagnostics.Process.Start("Explorer", "/select," + FilePath + "\\" + FileName);
+        }
+
+        private void CopyFilePathToClipboard(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtButton.Name);
+            
+        }
     }
 }

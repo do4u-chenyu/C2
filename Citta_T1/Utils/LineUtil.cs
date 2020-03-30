@@ -105,7 +105,7 @@ namespace Citta_T1.Utils
 
         public void Draw(CanvasWrapper canvas, RectangleF rect)
         {
-            // TODO 这里并不是精准的局部划线
+            // TODO [DK] 这里并不是精准的局部划线
             DrawLine(canvas.Graphics);
         }
         public void DrawLine(Graphics g)
@@ -117,7 +117,7 @@ namespace Citta_T1.Utils
         }
         public RectangleF GetBoundingRect()
         {
-            // TODO 没有考虑到坐标系放大系数
+            // TODO [DK] 没有考虑到坐标系放大系数
             return GetRect(startP, endP, 0);
         }
         public static RectangleF GetRect(PointF p1, PointF p2, double width)
