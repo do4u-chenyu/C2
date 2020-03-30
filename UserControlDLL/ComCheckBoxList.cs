@@ -241,6 +241,25 @@ namespace UserControlDLL
             tbSelectedValue.Text = "已选择" + nCount.ToString() + "项";
        
         }
+        #region 获取与加载被选中项的索引
+        public List<int> GetItemCheckIndex() 
+        {
+            List<int> checkIndexs = new List<int>();
+            for (int i = 0; i < checkListBox.Items.Count; i++)
+            {
+                if (checkListBox.GetItemChecked(i))
+                    checkIndexs.Add(i);
+            }
+            return checkIndexs;
+        }
+        public void LoadItemCheckIndex(int[] checkIndexs)
+        {
+            foreach (int index in checkIndexs)
+                checkListBox.SetItemChecked(index, true);
+            if(checkIndexs.Count()>0)
+                tbSelectedValue.Text = "已选择" + checkIndexs.Count().ToString() + "项";
+        }
+        #endregion
 
         /// <summary>
         /// 鼠标按下

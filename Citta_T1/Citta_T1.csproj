@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,10 +56,10 @@
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
-    <Compile Include="Business\Option\MaxOperatorOption.cs" />
+    <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Schedule\Manager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
-    <Compile Include="Business\Schedule\TripleListGeneration.cs" />
+    <Compile Include="Business\Schedule\TripleListGen.cs" />
     <Compile Include="Controls\CanvasPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -65,6 +68,7 @@
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\CanvasWrapper.cs" />
+    <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
       <SubType>UserControl</SubType>
@@ -406,6 +410,9 @@
     <None Include="Doc\用户数据保存设计文档.docx" />
     <None Include="Doc\运算关系保存与加载设计文档.docx" />
     <None Include="Doc\运行模型设计文档v1.docx" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -44,14 +44,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "用户名";
             // 
-            // usernamecomboBox
+            // userNameComboBox
             // 
             this.userNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.userNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.userNameComboBox.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.userNameComboBox.FormattingEnabled = true;
             this.userNameComboBox.Location = new System.Drawing.Point(104, 97);
-            this.userNameComboBox.Name = "usernamecomboBox";
+            this.userNameComboBox.Name = "userNameComboBox";
             this.userNameComboBox.Size = new System.Drawing.Size(191, 23);
             this.userNameComboBox.TabIndex = 2;
             // 
@@ -77,7 +77,7 @@
             this.loginbutton.UseVisualStyleBackColor = true;
             this.loginbutton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
-            // loginForm
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,7 +88,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "loginForm";
+            this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "用户登录";
             this.Load += new System.EventHandler(this.LoginForm_Load);

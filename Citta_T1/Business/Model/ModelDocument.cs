@@ -19,13 +19,18 @@ namespace Citta_T1.Business.Model
     {
         private string userName;//用户名
         private string modelTitle;
+
         private List<ModelElement> modelElements;
+        private List<ModelRelation> modelRelations;
+        private string remarkDescription;
+
         private string savePath;
         private bool dirty;//字段表示模型是否被修改
 
         private int elementCount = 0;
-        private List<ModelRelation> modelRelations;
+        
         private Point mapOrigin = new Point(-600,-300);
+        
 
 
         /*
@@ -41,6 +46,7 @@ namespace Citta_T1.Business.Model
 
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
+        public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -48,6 +54,7 @@ namespace Citta_T1.Business.Model
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
+            this.remarkDescription = "";
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
         }
         /*

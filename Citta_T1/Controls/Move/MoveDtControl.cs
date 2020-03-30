@@ -464,7 +464,7 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
+            //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
             DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
@@ -548,45 +548,33 @@ namespace Citta_T1.Controls.Move
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            Console.WriteLine("rightPinPictureBox_MouseDown beigin =========================");
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            Console.WriteLine(this.Location.ToString());
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
             isMouseDown = true;
             CanvasPanel canvas = (this.Parent as CanvasPanel);
-            canvas.cmd = eCommandType.draw;
-            canvas.SetStartC = this;
-            canvas.SetStartP(new PointF(startX, startY));
-            //canvas.Invalidate();
+            canvas.CanvasPanel_MouseDown(this, e1);
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            //Graphics g = this.Parent.CreateGraphics();
-            //if (g != null)
-            //{
-            //    g.Clear(Color.White);
-            //}
-            //if (isMouseDown)
-            //{
-            //    //this.Refresh();
-            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-            //    line.DrawLine(g);
-            //}
-            //g.Dispose();
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseMove(this, e1);
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            CanvasPanel canvas = (this.Parent as CanvasPanel);
-            if (canvas.cmd == eCommandType.draw)
-            {
-                canvas.SetEndC = this;
-            }
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseUp(this, e1);
         }
         #endregion
 
@@ -691,18 +679,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        #region 重绘
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            Rectangle clipRectangle = e.ClipRectangle;
-            Graphics g = this.CreateGraphics();
-            Pen p = new Pen(Color.Red);
-            g.DrawRectangle(p, clipRectangle);
-            p.Dispose();
-            g.Dispose();
-        }
-        #endregion
 
         #region 文档修改事件
 
@@ -742,6 +718,9 @@ namespace Citta_T1.Controls.Move
             // 不存在连DtControl 的 LeftPin的情况
             return p;
         }
+
+        #region 划线动作
+        #endregion
     }
 
 

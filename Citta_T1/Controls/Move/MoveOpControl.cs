@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Controls.Interface;
+using Citta_T1.OperatorViews;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,10 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static Citta_T1.Controls.CanvasPanel;
+using Citta_T1.OperatorViews;
+using Citta_T1.Business.Option;
+using System.Collections.Generic;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Move
 { 
@@ -25,15 +30,26 @@ namespace Citta_T1.Controls.Move
         private Point mouseOffset;
 
         private bool doublelPinFlag = false;
-
         private PictureBox leftPinPictureBox1 = new PictureBox();
 
         private string typeName;
         private string oldTextString;
+        private OperatorOption option=new OperatorOption();
+        private int id;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => typeName; }
+        internal OperatorOption Option { get => this.option; set => this.option = value; }
+        public ElementStatus Status { get => this.status; set => this.status = value; }
+        public int ID { get => this.id; set => this.id = value; }
+        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+
+        private ElementStatus status;
+        private bool relationStatus = true;
+        internal bool opViewStatus = false;
+        private bool optionStatus;
+
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
@@ -55,14 +71,13 @@ namespace Citta_T1.Controls.Move
 
 
 
-        private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         public MoveOpControl()
         {
             InitializeComponent();
         }
         public MoveOpControl(int sizeL, string text, Point loc)
         {
-            
+           
             InitializeComponent();
             textBox.Text = text;
             typeName = text;
@@ -76,9 +91,9 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            
-
-
+            this.optionStatus = relationStatus && opViewStatus;
+            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
+            this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
         }
         public void ChangeSize(int sizeL)
         {
@@ -149,6 +164,7 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
+            float screenChange = (this.Parent as CanvasPanel).screenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
 
@@ -274,13 +290,44 @@ namespace Citta_T1.Controls.Move
             this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
         }
         #endregion
-
+        
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            DialogResult dialogResult = this.randomOperatorView.ShowDialog();
+            switch (this.typeName)
+            {
+
+                case "连接算子":
+                    new CollideOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取交集":
+                    new CollideOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取并集":
+                    new UnionOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取差集":
+                    new DifferOperatorView(this.Option).ShowDialog();
+                    break;
+                case "随机采样":
+                    new RandomOperatorView(this.Option).ShowDialog();
+                    break;
+                case "过滤算子":
+                    new FilterOperatorView(this.Option).ShowDialog();
+                    break;
+                case "取最大值":
+                    new MaxOperatorView(this).ShowDialog();
+                    break;
+                case "取最小值":
+                    new MinOperatorView(this).ShowDialog();
+                    break;
+                case "取平均值":
+                    new AvgOperatorView(this.Option).ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+                    
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
@@ -368,40 +415,40 @@ namespace Citta_T1.Controls.Move
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            Console.WriteLine("rightPinPictureBox_MouseDown beigin =========================");
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            Console.WriteLine(this.Location.ToString());
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
             isMouseDown = true;
             CanvasPanel canvas = (this.Parent as CanvasPanel);
-            canvas.cmd = eCommandType.draw;
-            canvas.SetStartC = this;
-            canvas.SetStartP(new PointF(startX, startY));
+            canvas.CanvasPanel_MouseDown(this, e1);
+            Console.WriteLine("rightPinPictureBox_MouseDown end   =========================");
+            //Console.WriteLine(this.Location.ToString());
+
+            //canvas.cmd = eCommandType.draw;
+            //canvas.SetStartC = this;
+            //canvas.SetStartP(new PointF(startX, startY));
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            //Graphics g = this.Parent.CreateGraphics();
-            //if (g != null)
-            //{
-            //    g.Clear(Color.White);
-            //}
-            //if (isMouseDown)
-            //{
-            //    //this.Refresh();
-            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-            //    line.DrawLine(g);
-            //}
-            //g.Dispose();
+            // 转发给CanvasPanel
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseMove(this, e1);
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            (this.Parent as CanvasPanel).lines.Add(line);
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseUp(this, e1);
         }
         #endregion
 
