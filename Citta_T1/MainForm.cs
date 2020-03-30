@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls;
 using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Business.Model;
-using System.IO;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
-using log4net;
-using System.Reflection;
 using System.Threading;
 
 namespace  Citta_T1
@@ -44,7 +36,7 @@ namespace  Citta_T1
         Thread scheduleThread = null;
         delegate void AsynUpdateUI(int id);
 
-        ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -222,13 +214,13 @@ namespace  Citta_T1
         }
         private void InitializeControlsLocation()
         {
-            Console.WriteLine("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
+            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
             
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 5 - this.naviViewControl.Height;
-            Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
+            log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
             
