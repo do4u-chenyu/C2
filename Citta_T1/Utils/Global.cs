@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Citta_T1.Dgvs;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Title;
 using Citta_T1.Business.Model;
@@ -21,6 +17,7 @@ namespace Citta_T1.Utils
         private static FlowControl flowControl;
         private static MyModelControl myModelControl;
         private static RemarkControl remarkControl;
+        private static LogView logView;
 
         public static MainForm GetMainForm() { return mainForm; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
@@ -32,6 +29,7 @@ namespace Citta_T1.Utils
         public static FlowControl GetFlowControl() { return flowControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl() { return remarkControl; }
+        public static LogView GetLogView() { return logView; }
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetModelTitlePanel(ModelTitlePanel mtp) { modelTitlePanel = mtp; }
@@ -41,5 +39,6 @@ namespace Citta_T1.Utils
         public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
+        public static void SetLogView(LogView lv) { logView = lv; }
     }
 }

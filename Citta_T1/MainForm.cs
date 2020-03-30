@@ -43,7 +43,6 @@ namespace  Citta_T1
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.formInputData.InputDataEvent += frm_InputDataEvent;
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
-            this.modelDocumentDao = new ModelDocumentDao();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
@@ -80,6 +79,7 @@ namespace  Citta_T1
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
+            Global.SetLogView(this.logView);
 
         }
 
@@ -290,21 +290,21 @@ namespace  Citta_T1
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
+            this.logView.Visible = false;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = true;
         }
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
+            this.logView.Visible = false;
             this.dataGridView2.Visible = true;
             this.dataGridView3.Visible = false;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = true;
+            this.logView.Visible = true;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = false;
         }
@@ -514,12 +514,12 @@ namespace  Citta_T1
             {
                 this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.dataGridView1.LogUpdate(tlog);
+                    this.logView.LogUpdate(tlog);
                 }), log);
             }
             else
             {
-                this.dataGridView1.LogUpdate(log);
+                this.logView.LogUpdate(log);
             }
         }
 

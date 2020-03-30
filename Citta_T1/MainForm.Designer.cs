@@ -56,7 +56,7 @@
             this.logLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new Citta_T1.DataGridView1();
+            this.logView = new Citta_T1.Dgvs.LogView();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -299,7 +299,7 @@
             // bottomViewPanel
             // 
             this.bottomViewPanel.Controls.Add(this.dataGridView3); 
-            this.bottomViewPanel.Controls.Add(this.dataGridView1);
+            this.bottomViewPanel.Controls.Add(this.logView);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -319,13 +319,13 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
+            this.logView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logView.Location = new System.Drawing.Point(0, 39);
+            this.logView.Margin = new System.Windows.Forms.Padding(4);
+            this.logView.Name = "dataGridView1";
+            this.logView.Size = new System.Drawing.Size(906, 241);
+            this.logView.TabIndex = 1;
+            this.logView.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
             // dataGridView2
             // 
@@ -909,7 +909,7 @@
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private DataGridView1 dataGridView1;
+        private Citta_T1.Dgvs.LogView logView;
         private DataGridView2 dataGridView2;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button stopButton;

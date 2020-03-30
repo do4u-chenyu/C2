@@ -7,9 +7,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static Citta_T1.Controls.CanvasPanel;
-using Citta_T1.OperatorViews;
 using Citta_T1.Business.Option;
-using System.Collections.Generic;
 using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Move
