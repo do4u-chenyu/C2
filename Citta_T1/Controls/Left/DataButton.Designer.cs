@@ -110,6 +110,7 @@
             // 
             // DeleteToolStripMenuItem
             // 
+            this.DeleteToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
             this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.DeleteToolStripMenuItem.Text = "删除";
