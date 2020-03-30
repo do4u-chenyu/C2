@@ -10,7 +10,7 @@ namespace Citta_T1.Business.Schedule
 {
     class Manager
     {
-        public delegate void UpdateLog();//声明一个更新主线程日志的委托
+        public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
 
         public delegate void UpdateUI(int id);//声明一个更新主线程的委托
@@ -49,13 +49,14 @@ namespace Citta_T1.Business.Schedule
             foreach (Triple pauseTri in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
             {
                 pauseTri.OperateElement.Status = newStatus;
+                UpdateLogDelegate(pauseTri.TripleName + "的状态由" + oldStatus.ToString() + "变更为" + newStatus.ToString());
             }
         }
 
         public void Pause()
         {
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Suspend);
-            UpdateLogDelegate();
+            
             resetEvent.Reset();
         }
 
@@ -69,7 +70,6 @@ namespace Citta_T1.Business.Schedule
         {
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
-            UpdateLogDelegate();
             resetEvent.Dispose();
             foreach (Task currentTask in parallelTasks)
             {
@@ -146,7 +146,7 @@ namespace Citta_T1.Business.Schedule
                 //op控件 running
                 //TODO
                 triple.OperateElement.Status = ElementStatus.Runnnig;
-                UpdateLogDelegate();
+                UpdateLogDelegate(triple.TripleName + "开始运行");
 
 
                 Thread.Sleep(5000);
@@ -158,7 +158,7 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
-                UpdateLogDelegate();
+                UpdateLogDelegate(triple.TripleName + "结束运行");
                 UpdateUIDelegate(triple.OperateElement.ID);
             }
             catch (Exception ex)

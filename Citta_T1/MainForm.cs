@@ -34,7 +34,7 @@ namespace  Citta_T1
         private TripleListGen tripleListGen;
         private Manager currentManager;
         Thread scheduleThread = null;
-        delegate void AsynUpdateLog();
+        delegate void AsynUpdateLog(string log);
         delegate void AsynUpdateUI(int id);
 
         LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
@@ -481,12 +481,8 @@ namespace  Citta_T1
                 }
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
-                
+
                 tripleListGen.GenerateList();
-
-                //运行日志初始化
-                this.dataGridView1.ucDataGridView1_Load(CreateScheduleLogs());
-
 
                 currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
                 currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
@@ -510,36 +506,20 @@ namespace  Citta_T1
             }
         }
 
-        //
-        private List<object> CreateScheduleLogs()
-        {
-            List<object> scheduleLogs = new List<object>();
-            foreach (Triple tLog in tripleListGen.CurrentModelTripleList)
-            {
-                scheduleLogs.Add(new ScheduleLog()
-                {
-                    TripleInfo = "三元组信息——" + tLog.TripleName,
-                    Status = "状态——" + tLog.OperateElement.Status.ToString(),
-                });
-            }
-            return scheduleLogs;
-        }
 
-
-
-        //更新UI
-        private void UpdataLogStatus()
+        //更新log
+        private void UpdataLogStatus(string log)
         {
             if (InvokeRequired)
             {
-                this.Invoke(new AsynUpdateLog(delegate ()
+                this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
-                }));
+                    this.dataGridView1.LogUpdate(tlog);
+                }), log);
             }
             else
             {
-                this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
+                this.dataGridView1.LogUpdate(log);
             }
         }
 

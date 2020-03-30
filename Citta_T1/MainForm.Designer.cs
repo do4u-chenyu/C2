@@ -55,7 +55,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.logLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
@@ -299,10 +298,10 @@
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView3);
-            this.bottomViewPanel.Controls.Add(this.panel4);
+            this.bottomViewPanel.Controls.Add(this.dataGridView3); 
             this.bottomViewPanel.Controls.Add(this.dataGridView1);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
+            this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(323, 326);
             this.bottomViewPanel.Name = "bottomViewPanel";
@@ -317,6 +316,26 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.Size = new System.Drawing.Size(906, 241);
             this.dataGridView3.TabIndex = 27;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(906, 241);
+            this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView2.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(906, 241);
+            this.dataGridView2.TabIndex = 2;
+            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // panel4
             // 
@@ -364,7 +383,6 @@
             // 
             this.panel8.Controls.Add(this.logLabel);
             this.panel8.Controls.Add(this.errorLabel);
-            this.panel8.Controls.Add(this.resultLabel);
             this.panel8.Controls.Add(this.previewLabel);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
@@ -394,17 +412,6 @@
             this.errorLabel.Text = "报错信息";
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
             // 
-            // resultLabel
-            //
-            // 待删除
-            this.resultLabel.AutoSize = true;
-            this.resultLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.resultLabel.Location = new System.Drawing.Point(350, 4);
-            this.resultLabel.Name = "resultLabel";
-            this.resultLabel.Size = new System.Drawing.Size(92, 27);
-            this.resultLabel.TabIndex = 1;
-            this.resultLabel.Text = "运行结果";
-            // 
             // previewLabel
             // 
             this.previewLabel.AutoSize = true;
@@ -415,26 +422,7 @@
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(906, 280);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(906, 280);
-            this.dataGridView2.TabIndex = 2;
-            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
+            
             // 
             // ucDataGridView1
             // 
@@ -898,7 +886,6 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label previewLabel;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
