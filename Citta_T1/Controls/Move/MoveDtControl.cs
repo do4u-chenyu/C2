@@ -15,8 +15,8 @@ namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
-
     {
+        private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string MDCName { get => this.textBox1.Text; }
@@ -74,7 +74,7 @@ namespace Citta_T1.Controls.Move
             this.Name = bcpPath;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            Console.WriteLine("Create a MoveDtControl, sizeLevel = " + sizeLevel);
+            log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
         }
 
 
@@ -168,7 +168,7 @@ namespace Citta_T1.Controls.Move
         public void ChangeSize(int sizeL)
         {
             this.sizeL = sizeL.ToString();
-            Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+            log.Info("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -212,7 +212,9 @@ namespace Citta_T1.Controls.Move
             // 按住拖拽
             if (isMouseDown)
             {
-                Console.WriteLine("[MoveDtControl]开始移动");
+                (this.Parent as CanvasPanel).StartMove = true;
+                log.Info("[MoveDtControl]开始移动");
+
                 #region 控件移动部分
                 if (sender is Button)
                 {
@@ -228,9 +230,10 @@ namespace Citta_T1.Controls.Move
                 }
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
-                (sender as MoveDtControl).Location = new Point(left, top);
+                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
                 #endregion
 
+                // TODO [DK] 拖影严重
                 #region 线移动部分
                 /*
                  * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
@@ -240,7 +243,7 @@ namespace Citta_T1.Controls.Move
                  * 5. 绘线
                  * 6. 更新canvas.lines
                  */
-                
+
                 Line line;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 List<Line> lines = canvas.lines;
@@ -252,10 +255,10 @@ namespace Citta_T1.Controls.Move
 
                 if (this.startLineIndexs.Count == 0)
                 {
-                    Console.WriteLine("[MoveDtControl] 不满足线移动条件");
+                    log.Info("[MoveDtControl] 不满足线移动条件");
                     return;
                 }
-                Console.WriteLine("[MoveDtControl] 满足线移动条件");
+                log.Info("[MoveDtControl] 满足线移动条件");
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
@@ -285,36 +288,30 @@ namespace Citta_T1.Controls.Move
                     new Size(maxX - minX, maxY - minY)
                 );
                 // 重绘静态图
-                // TODO 不用每次都重新计算
+                // TODO [DK] 不用每次都重新计算
                 canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
                 Rectangle clipRectangle = canvas.ClientRectangle;
                 CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
                 canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
                 canvas.staticImage.Save("Dt_static_image_save.png");
                 canvas.CoverPanelByRect(affectedArea);
-                // TODO 更新坐标并重新计算线轨迹，这里还是不对，需要改
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
-                    line.StartP = new PointF(line.StartP.X + e.X - mouseOffset.X, line.StartP.Y + e.Y - mouseOffset.Y);
+                    // 边界坐标修正
+                    line.StartP = new PointF(
+                        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
+                        
+                    );
+                    // 坐标更新
                     line.UpdatePoints();
                     canvas.RepaintObject(line);
                 }
-                Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
+                log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 #endregion
 
-                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
-
-                //(sender as MoveDtControl).Location = new Point(left, top);
-                Console.WriteLine("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
-                // 更新相连点的坐标
-                UpdateLineWhenMoving();
-                /* 
-                 * TODO 会有闪烁的问题，`Invalidate`方法必须要带个重绘范围，要不然就是整个`CanvasPanel`重绘
-                 * 最好不要调用`base.OnPaint(e)`，这样我只重绘一下背景板，其他的
-                 */
-                //(this.Parent.Parent as MainForm).panel3.Invalidate();
-
+                log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
             }
         }
 
@@ -349,7 +346,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            System.Console.WriteLine("移动开始");
+            log.Info("移动开始");
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -376,6 +373,7 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 isMouseDown = false;
                 if (sender is Button)
                 {
@@ -410,7 +408,7 @@ namespace Citta_T1.Controls.Move
         private string SubstringByte(string text, int startIndex, int length)
         {
             byte[] bytes = _encoding.GetBytes(text);
-            System.Console.WriteLine("bytes:" + bytes);
+            log.Info("bytes:" + bytes);
             return _encoding.GetString(bytes, startIndex, length);
         }
         public void SetOpControlName(string opControlName)
@@ -424,14 +422,14 @@ namespace Citta_T1.Controls.Move
             sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
             sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
 
-            System.Console.WriteLine("算子长度:" + opControlName.Length);
-            System.Console.WriteLine("sumcount:" + sumcount);
-            System.Console.WriteLine("sumcountDigit:" + sumcountDigit);
+            log.Info("算子长度:" + opControlName.Length);
+            log.Info("sumcount:" + sumcount);
+            log.Info("sumcountDigit:" + sumcountDigit);
             if (sumcount + sumcountDigit > maxLength)
             {
                 ResizeToBig();
                 this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
-                System.Console.WriteLine("sumcountDigit:" + this.txtButton.Text);
+                log.Info("sumcountDigit:" + this.txtButton.Text);
             }
             else
             {
@@ -448,7 +446,7 @@ namespace Citta_T1.Controls.Move
 
         public void ResizeToBig()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -457,7 +455,7 @@ namespace Citta_T1.Controls.Move
         }
         public void ResizeToSmall()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(109 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -466,7 +464,7 @@ namespace Citta_T1.Controls.Move
         }
         public void ResizeToNormal()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -562,45 +560,33 @@ namespace Citta_T1.Controls.Move
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            log.Info("rightPinPictureBox_MouseDown beigin =========================");
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            Console.WriteLine(this.Location.ToString());
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
             isMouseDown = true;
             CanvasPanel canvas = (this.Parent as CanvasPanel);
-            canvas.cmd = eCommandType.draw;
-            canvas.SetStartC = this;
-            canvas.SetStartP(new PointF(startX, startY));
-            //canvas.Invalidate();
+            canvas.CanvasPanel_MouseDown(this, e1);
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            Graphics g = this.Parent.CreateGraphics();
-            if (g != null)
-            {
-                g.Clear(Color.White);
-            }
-            if (isMouseDown)
-            {
-                //this.Refresh();
-                int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-                int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-                line.DrawLine(g);
-            }
-            g.Dispose();
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseMove(this, e1);
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
-            CanvasPanel canvas = (this.Parent as CanvasPanel);
-            if (canvas.cmd == eCommandType.draw)
-            {
-                canvas.SetEndC = this;
-            }
+            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.CanvasPanel_MouseUp(this, e1);
         }
         #endregion
 
@@ -628,7 +614,7 @@ namespace Citta_T1.Controls.Move
                 con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
                 if (con.Controls.Count > 0)
                 {
-                    Console.WriteLine("setTag:" + con.GetType().ToString());
+                    log.Info("setTag:" + con.GetType().ToString());
                     SetTag(con);
                 }
             }
@@ -646,7 +632,7 @@ namespace Citta_T1.Controls.Move
             deep += 1;
             if (deep == 1)
             {
-                Console.WriteLine(cons.GetType().ToString());
+                log.Info(cons.GetType().ToString());
                 SetDouble(this);
                 SetDouble(cons);
                 string[] mytag = cons.Tag.ToString().Split(new char[] { ';' });
@@ -695,13 +681,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        #region 重绘
-        //protected override void OnPaint(PaintEventArgs e)
-        //{
-        //    base.OnPaint(e);
-        //    //(this.Parent as CanvasPanel).Invalidate();
-        //}
-        #endregion
 
         #region 文档修改事件
 
@@ -718,7 +697,7 @@ namespace Citta_T1.Controls.Move
         #endregion
         #endregion
         /*
-         * TODO 更新线坐标
+         * TODO [DK] 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
          */
         public void UpdateLineWhenMoving()
@@ -734,6 +713,16 @@ namespace Citta_T1.Controls.Move
         {
             
         }
+
+        // TODO
+        public PointF RevisePointLoc(PointF p)
+        {
+            // 不存在连DtControl 的 LeftPin的情况
+            return p;
+        }
+
+        #region 划线动作
+        #endregion
     }
 
 

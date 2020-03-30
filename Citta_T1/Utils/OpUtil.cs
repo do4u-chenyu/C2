@@ -2,10 +2,12 @@
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace Citta_T1.Utils
 {
-    class OpUtil
+    public class OpUtil
     {
         /// <summary>
         /// MD5字符串加密
@@ -26,6 +28,16 @@ namespace Citta_T1.Utils
                 }
                 return sb.ToString();
             }
+        }
+
+        public static float IOU(Rectangle rect1, Rectangle rect2)
+        {
+            // [top, left, bottom, right]
+            List<int> r1 = new List<int> { rect1.Location.Y, rect1.Location.X, rect1.Location.Y + rect1.Height, rect1.Location.X + rect1.Width };
+            List<int> r2 = new List<int> { rect2.Location.Y, rect2.Location.X, rect2.Location.Y + rect2.Height, rect1.Location.X + rect1.Width };
+            int inHeight = Math.Min(r1[2], r2[2]) - Math.Max(r1[0], r2[0]);
+            int inWidth = Math.Min(r1[3], r2[3]) - Math.Max(r1[1], r2[1]);
+            return inHeight > 0 && inWidth > 0 ? inHeight * inWidth : 0;
         }
 
     }

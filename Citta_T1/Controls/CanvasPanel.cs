@@ -45,6 +45,7 @@ namespace Citta_T1.Controls
         }
         public eCommandType cmd = eCommandType.select;
         public PointF startP;
+        public PointF endP;
         private Control startC;
         private Control endC;
         Rectangle invalidateRectWhenMoving;
@@ -143,8 +144,17 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            log.Info("CanvasPanel_MouseDown");
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
+            if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
+            {
+                this.cmd = eCommandType.draw;
+                // 不能乱写
+                this.SetStartC = sender as Control;
+                this.SetStartP(new PointF(e.X, e.Y));
+            }
+
             if (e.Button != MouseButtons.Left) return;
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
@@ -198,20 +208,36 @@ namespace Citta_T1.Controls
             {
                 dragWrapper.DragMove(this.Size, this.screenFactor, e);
             }
-            //绘制
+            // 绘制
             else if (cmd == eCommandType.draw)
             {
-
+                // 吸附效果实现
+                /*
+                 * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
+                 * 2. 如果在，对该点就行修正
+                 */
                 PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
-
+                foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
+                {
+                    Control con = modelEle.GetControl;
+                    if (
+                        (modelEle.Type == ElementType.Operator || modelEle.Type == ElementType.DataSource || modelEle.Type == ElementType.Result) &&
+                        con != startC
+                        )
+                    {
+                        // 修正坐标
+                        nowP = (con as IMoveControl).RevisePointLoc(nowP);
+                    }
+                    endP = nowP;
+                }
                 log.Info("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Line(startP, nowP);
                 log.Info("line'count = " + lines.Count().ToString());
-                // TODO 这里可能受到分辨率的影响
+                // TODO [DK] 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
                 // 重绘曲线
@@ -287,21 +313,31 @@ namespace Citta_T1.Controls
 
             else if (cmd == eCommandType.draw)
             {
-                Line line = new Line(startP, new PointF(e.X, e.Y));
-                lines.Add(line);
-                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                /* 不是所有位置Up都能形成曲线的
+                 * 如果没有endC，那就不形成线，结束绘线动作
+                 */
+                if (this.endC == null)
+                {
+                    cmd = eCommandType.select;
+                    lineWhenMoving = null;
+                    return;
+                }
                 /* 
-                 * TODO 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
+                 * TODO [DK] 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
                  * 只保存线索引
                  *         __________
                  * endP1  | MControl | startP
                  * endP2  |          |
                  *         ----------
                  */
+                Line line = new Line(startP, new PointF(e.X, e.Y));
+                lines.Add(line);
+                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
                 cmd = eCommandType.select;
+                lineWhenMoving = null;
             }
 
         }
@@ -348,7 +384,6 @@ namespace Citta_T1.Controls
 
         private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
         {
-            // TODO
             int cnt = 0;
             log.Info("line'number = " + lines.Count() + ", ");
             IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
@@ -362,7 +397,7 @@ namespace Citta_T1.Controls
                 // 不在该区域内就别重绘了
                 //bool isInRect = (line as IDrawObject).ObjectInRectangle(rect);
                 //if (isInRect == false)
-                //    Console.WriteLine("line 不在区域" + rect.ToString() + "内");
+                //    log.Info("line 不在区域" + rect.ToString() + "内");
                 //    continue;
                 line.Draw(dcStatic, rect);
                 log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
@@ -379,6 +414,7 @@ namespace Citta_T1.Controls
         }
         public void AddNewOperator(int sizeL, string text, Point location)
         {
+            startMove = true;
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
                                 text,
@@ -388,6 +424,7 @@ namespace Citta_T1.Controls
 
         public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.Encoding encoding)
         {
+            startMove = true;
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
@@ -398,6 +435,7 @@ namespace Citta_T1.Controls
         }
         public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
         {
+            startMove = true;
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
                                 text,
