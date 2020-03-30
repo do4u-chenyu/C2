@@ -406,8 +406,10 @@ namespace Citta_T1.Controls.Move
         {
             if (this.status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set;
-            else if(this.status == ElementStatus.Ready)
+            else if (this.status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.ready;
+            else if (this.status == ElementStatus.Ready)
+                this.statusBox.Image = null;
         }
         #endregion
 

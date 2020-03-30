@@ -11,6 +11,8 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using Citta_T1.Business.Option;
+using System.Globalization;
+using System.Threading;
 
 namespace Citta_T1.Business.Model
 {
@@ -186,6 +188,7 @@ namespace Citta_T1.Business.Model
         }
         public void ReadXml()
         {
+            TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
 
@@ -202,8 +205,10 @@ namespace Citta_T1.Business.Model
                 {
                     if (type == "Operator")
                     {
+                                              
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
@@ -221,6 +226,7 @@ namespace Citta_T1.Business.Model
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
@@ -240,6 +246,7 @@ namespace Citta_T1.Business.Model
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);

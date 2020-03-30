@@ -50,7 +50,6 @@
             this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
             this.ucDataGridView1.Size = new System.Drawing.Size(1011, 137);
             this.ucDataGridView1.TabIndex = 1;
-            this.ucDataGridView1.Load += new System.EventHandler(this.ucDataGridView1_Load);
             // 
             // DataGridView
             // 

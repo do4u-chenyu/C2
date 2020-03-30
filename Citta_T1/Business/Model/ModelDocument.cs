@@ -97,18 +97,32 @@ namespace Citta_T1.Business.Model
             {
                 if (mr.Start == ID || mr.End == ID)
                     relations.Add(mr);
-                if (mr.Start == ID)
-                {
-                    foreach (ModelElement element in this.ModelElements)
-                        if (element.ID == mr.End) element.Status = ElementStatus.Null;
-                }
-
             }
-            foreach(ModelRelation mr in relations) 
+            //后续所有算子状态变为null
+            StateChange(ID);
+            foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
 
         }
-
+        private void StateChange(int ID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.Start == ID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if (me.ID == mr.End)
+                        {
+                            if(me.Type==ElementType.Operator)
+                                me.Status = ElementStatus.Null;
+                            StateChange(mr.End);
+                        }
+                           
+                    }
+                }
+            }
+        }
         public void Load()
         {
             if (File.Exists(savePath + modelTitle +".xml"))

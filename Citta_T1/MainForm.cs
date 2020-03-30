@@ -34,6 +34,7 @@ namespace  Citta_T1
         private TripleListGen tripleListGen;
         private Manager currentManager;
         Thread scheduleThread = null;
+        delegate void AsynUpdateLog();
         delegate void AsynUpdateUI(int id);
 
         LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
@@ -293,12 +294,6 @@ namespace  Citta_T1
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = true;
         }
-        private void ResultLabel_Click(object sender, EventArgs e)
-        {
-            this.dataGridView1.Visible = true;
-            this.dataGridView2.Visible = false;
-            this.dataGridView3.Visible = false;
-        }
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
@@ -309,8 +304,8 @@ namespace  Citta_T1
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
-            this.dataGridView2.Visible = true;
+            this.dataGridView1.Visible = true;
+            this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = false;
         }
 
@@ -486,12 +481,17 @@ namespace  Citta_T1
                 }
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
-
+                
                 tripleListGen.GenerateList();
+
+                //运行日志初始化
+                this.dataGridView1.ucDataGridView1_Load(CreateScheduleLogs());
+
 
                 currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
                 currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
                 currentManager.TaskCallBack += Accomplish;//绑定完成任务要调用的委托
+                currentManager.UpdateLogDelegate += UpdataLogStatus;//绑定更新任务状态的委托
 
                 scheduleThread = new Thread(new ThreadStart(currentManager.Start));
                 scheduleThread.Start();
@@ -507,6 +507,39 @@ namespace  Citta_T1
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
                 currentManager.Continue();
+            }
+        }
+
+        //
+        private List<object> CreateScheduleLogs()
+        {
+            List<object> scheduleLogs = new List<object>();
+            foreach (Triple tLog in tripleListGen.CurrentModelTripleList)
+            {
+                scheduleLogs.Add(new ScheduleLog()
+                {
+                    TripleInfo = "三元组信息——" + tLog.TripleName,
+                    Status = "状态——" + tLog.OperateElement.Status.ToString(),
+                });
+            }
+            return scheduleLogs;
+        }
+
+
+
+        //更新UI
+        private void UpdataLogStatus()
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new AsynUpdateLog(delegate ()
+                {
+                    this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
+                }));
+            }
+            else
+            {
+                this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
             }
         }
 

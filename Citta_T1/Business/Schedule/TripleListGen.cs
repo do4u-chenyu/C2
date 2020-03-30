@@ -50,7 +50,7 @@ namespace Citta_T1.Business.Schedule
         {
             foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
             {
-                if (op.Status != ElementStatus.Ready)
+                if (op.Status == ElementStatus.Null)
                 {
                     return false;
                 }
