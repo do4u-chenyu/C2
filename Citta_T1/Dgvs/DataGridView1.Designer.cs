@@ -28,42 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // ucDataGridView1
+            // textBox1
             // 
-            this.ucDataGridView1.AutoScroll = true;
-            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
-            this.ucDataGridView1.Columns = null;
-            this.ucDataGridView1.DataSource = null;
-            this.ucDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.ucDataGridView1.HeadHeight = 40;
-            this.ucDataGridView1.HeadPadingLeft = 0;
-            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
-            this.ucDataGridView1.IsShowCheckBox = false;
-            this.ucDataGridView1.IsShowHead = true;
-            this.ucDataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.ucDataGridView1.Name = "ucDataGridView1";
-            this.ucDataGridView1.RowHeight = 40;
-            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
-            this.ucDataGridView1.Size = new System.Drawing.Size(1011, 137);
-            this.ucDataGridView1.TabIndex = 1;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(1348, 171);
+            this.textBox1.TabIndex = 0;
             // 
-            // DataGridView
+            // DataGridView1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ucDataGridView1);
-            this.Name = "DataGridView";
-            this.Size = new System.Drawing.Size(1011, 137);
+            this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "DataGridView1";
+            this.Size = new System.Drawing.Size(1348, 171);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
