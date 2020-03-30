@@ -240,15 +240,15 @@ namespace Citta_T1.Controls.Move
             this.Controls.Add(this.statusBox);
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox);
-            this.Controls.Add(this.rightPinPictureBox);
-            this.Controls.Add(this.leftPinPictureBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPicture);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
             this.Size = new System.Drawing.Size(190, 25);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.MoveOpControl_MouseEnter);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

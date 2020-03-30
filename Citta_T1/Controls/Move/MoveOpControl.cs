@@ -53,7 +53,7 @@ namespace Citta_T1.Controls.Move
 
         
         private bool relationStatus = true;
-
+        private LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -69,8 +69,16 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         Line line;
 
-
-
+        // 绘制引脚
+        private Point leftPin = new Point(3, 11);
+        private Point rightPin = new Point(140, 11);
+        private int pinWidth = 4;
+        private int pinHeight = 4;
+        private Pen pen = new Pen(Color.DarkGray, 0.0001f);
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
+        private Rectangle rectIn_down;
+        private Rectangle rectIn_up;
+        private Rectangle rectOut;
 
         public MoveOpControl()
         {
@@ -126,23 +134,34 @@ namespace Citta_T1.Controls.Move
         {
             SetOpControlName(this.textBox.Text);
             System.Console.WriteLine(doublelPinFlag);
-            
+            int dy = 0;
             if (doublelPinFlag)
             {
-                int x = this.leftPinPictureBox.Location.X;
-                int y = this.leftPinPictureBox.Location.Y;
-                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-                
-                leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
-                leftPinPictureBox1.Name = "leftPinPictureBox1";
-                leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
-                leftPinPictureBox1.TabIndex = 3;
-                leftPinPictureBox1.TabStop = false;
-                leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-                leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-                this.Controls.Add(leftPinPictureBox1);
+                dy = 4;
             }
+
+            rectIn_down = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
+            rectIn_up   = new Rectangle(this.leftPin.X, this.leftPin.Y + dy, this.pinWidth, this.pinHeight);
+            rectOut     = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            //SetOpControlName(this.textBox.Text);
+            //System.Console.WriteLine(doublelPinFlag);
+
+            //if (doublelPinFlag)
+            //{
+            //    int x = this.leftPinPictureBox.Location.X;
+            //    int y = this.leftPinPictureBox.Location.Y;
+            //    this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
+
+            //    leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //    leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
+            //    leftPinPictureBox1.Name = "leftPinPictureBox1";
+            //    leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
+            //    leftPinPictureBox1.TabIndex = 3;
+            //    leftPinPictureBox1.TabStop = false;
+            //    leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
+            //    leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
+            //    this.Controls.Add(leftPinPictureBox1);
+            //}
             /*
             System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
             leftPicture1.Location = new System.Drawing.Point(16, 24);
@@ -533,10 +552,24 @@ namespace Citta_T1.Controls.Move
             int top = this.Top + Convert.ToInt32(dy);
             this.Location = new Point(left, top);
         }
+
+
         #endregion
 
+        private void MoveOpControl_MouseEnter(object sender, EventArgs e)
+        {
+            log.Info("鼠标点" + this.PointToClient(MousePosition).ToString());
+        }
 
-
+        private void MoveOpControl_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
+            e.Graphics.DrawRectangle(pen, rectIn_down);
+            e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
+            e.Graphics.DrawRectangle(pen, rectIn_up);
+            e.Graphics.FillRectangle(trnsRedBrush, rectOut);
+            e.Graphics.DrawRectangle(pen, rectOut);
+        }
     }
 }
 

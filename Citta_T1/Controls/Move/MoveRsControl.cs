@@ -97,6 +97,7 @@ namespace Citta_T1.Controls.Move
         {
             if (isMouseDown)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
@@ -127,6 +128,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)
         {
+            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 this.isMouseDown = false;

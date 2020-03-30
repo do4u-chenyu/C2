@@ -139,16 +139,7 @@ namespace Citta_T1.Controls.Flow
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
-            //foreach (Control ct in controls)
-            //{
-            //    if (ct.Visible == true)
-            //    {
-            //        Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
-            //        ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
-            //        rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate);
-            //        gc.DrawRectangle(pen, rect);
-            //    }
-            //}
+
         }
         public void ChangLoc(float dx, float dy)
         {
@@ -189,7 +180,6 @@ namespace Citta_T1.Controls.Flow
         {
             this.staticImage = new Bitmap(width,height);
             Graphics g = Graphics.FromImage(staticImage);
-            //g.Clear(Color.White);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
 
             foreach (ModelElement me in modelElements)

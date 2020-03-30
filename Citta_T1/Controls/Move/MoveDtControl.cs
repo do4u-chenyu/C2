@@ -212,6 +212,7 @@ namespace Citta_T1.Controls.Move
             // 按住拖拽
             if (isMouseDown)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 Console.WriteLine("[MoveDtControl]开始移动");
                 #region 控件移动部分
                 if (sender is Button)
@@ -376,6 +377,7 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 isMouseDown = false;
                 if (sender is Button)
                 {
