@@ -9,6 +9,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
 using System.Xml;
 using System.Drawing;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business.Model
 {
@@ -42,6 +43,7 @@ namespace Citta_T1.Business.Model
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {
+            Global.GetCanvasPanel().StartMove = true;
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
@@ -53,6 +55,7 @@ namespace Citta_T1.Business.Model
         }
         public void SwitchDocument(string modelTitle)
         {
+            Global.GetCanvasPanel().StartMove = true;
             this.currentDocument = FindModelDocument(modelTitle);
             foreach (ModelDocument md in this.modelDocuments)
             {
@@ -64,6 +67,7 @@ namespace Citta_T1.Business.Model
         }
         public void AddDocumentOperator(Control ct)
         {
+            Global.GetCanvasPanel().StartMove = true;
             this.currentDocument.ElementCount += 1;
             if (ct is MoveDtControl)
             {

@@ -22,7 +22,7 @@ namespace Citta_T1.Controls
         
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
-        private bool startDrag = false;
+        private bool startMove = false;
         private DragWrapper dragWrapper;
 
 
@@ -60,7 +60,7 @@ namespace Citta_T1.Controls
         public Control SetStartC { set => startC = value; }
         public Control SetEndC { set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-        public bool StartDrag { get => startDrag; set => startDrag = value; }
+        public bool StartMove { get => startMove; set => startMove = value; }
 
         public CanvasPanel()
         {
@@ -161,7 +161,7 @@ namespace Citta_T1.Controls
             }
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
-                startDrag = true;
+                
                 dragWrapper.DragDown(this.Size, this.screenFactor,e);
             }
 
@@ -282,7 +282,7 @@ namespace Citta_T1.Controls
 
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-                startDrag = false;
+                
                 dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
