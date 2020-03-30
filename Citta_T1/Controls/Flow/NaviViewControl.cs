@@ -151,8 +151,6 @@ namespace Citta_T1.Controls.Flow
 
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
-                    continue;
                 Control ct = me.GetControl;
                 
                 Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
