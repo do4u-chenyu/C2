@@ -20,33 +20,36 @@ namespace Citta_T1
             InitializeComponent();
         }
 
-        private void ucDataGridView1_Load(object sender, EventArgs e)
+        public void ucDataGridView1_Load(List<object> scheduleLogs)
         {
             List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>();
             // 表头
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "ID", HeadText = "编号", Width = 70, WidthType = SizeType.Absolute });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Name", HeadText = "姓名", Width = 50, WidthType = SizeType.Percent });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Age", HeadText = "年龄", Width = 50, WidthType = SizeType.Percent });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Birthday", HeadText = "生日", Width = 50, WidthType = SizeType.Percent, Format = (a) => { return ((DateTime)a).ToString("yyyy-MM-dd"); } });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Sex", HeadText = "性别", Width = 50, WidthType = SizeType.Percent, Format = (a) => { return ((int)a) == 0 ? "女" : "男"; } });
+            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "TripleInfo", HeadText = "三元组信息", Width = 50, WidthType = SizeType.Percent });
+            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Status", HeadText = "运行状态", Width = 50, WidthType = SizeType.Percent });
             this.ucDataGridView1.Columns = lstColumns;
             //this.ucDataGridView1.IsShowCheckBox = true;
+            /*
             List<object> lstSource = new List<object>();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
-                TestGridModel model = new TestGridModel()
+                ScheduleLog model = new ScheduleLog()
                 {
                     ID = i.ToString(),
-                    Age = 3 * i,
-                    Name = "姓名——" + i,
-                    Birthday = DateTime.Now.AddYears(-10),
-                    Sex = i % 2
+                    TripleInfo = "三元组信息——" + i,
+                    Status = "状态——" + i,
                 };
                 lstSource.Add(model);
             }
-
-            this.ucDataGridView1.DataSource = lstSource;
+            */
+            this.ucDataGridView1.DataSource = scheduleLogs;
             this.ucDataGridView1.First();
         }
+
+        public void ucDataGridView1_Update(List<object> scheduleLogs)
+        {
+            this.ucDataGridView1.DataSource = scheduleLogs;
+        }
+
+
     }
 }

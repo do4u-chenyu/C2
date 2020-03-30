@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.leftPicture = new System.Windows.Forms.PictureBox();
             this.leftPinPictureBox = new System.Windows.Forms.PictureBox();
@@ -53,10 +53,11 @@
             // 
             // rightPictureBox
             // 
+            this.rightPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(149, 2);
+            this.rightPictureBox.Location = new System.Drawing.Point(151, 4);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
+            this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
@@ -67,20 +68,16 @@
             // 
             // leftPicture
             // 
-            //this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            //this.leftPicture.Location = new System.Drawing.Point(15, 1);
+            this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
+            this.leftPicture.Location = new System.Drawing.Point(15, 4);
             this.leftPicture.Name = "leftPicture";
-            //this.leftPicture.Size = new System.Drawing.Size(18, 23);
+            this.leftPicture.Size = new System.Drawing.Size(17, 20);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-
-            this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPicture.Location = new System.Drawing.Point(15, 4);
-            this.leftPicture.Size = new System.Drawing.Size(17, 20);
             // 
             // leftPinPictureBox
             // 
@@ -123,7 +120,6 @@
             // 菜单1ToolStripMenuItem
             // 
             this.菜单1ToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.菜单1ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("菜单1ToolStripMenuItem.BackgroundImage")));
             this.菜单1ToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.菜单1ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单1ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
@@ -134,7 +130,6 @@
             // 
             // 菜单2ToolStripMenuItem
             // 
-            this.菜单2ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("菜单2ToolStripMenuItem.BackgroundImage")));
             this.菜单2ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单2ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
@@ -144,7 +139,6 @@
             // 
             // 备注ToolStripMenuItem
             // 
-            this.备注ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("备注ToolStripMenuItem.BackgroundImage")));
             this.备注ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.备注ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.备注ToolStripMenuItem.Name = "备注ToolStripMenuItem";
@@ -154,7 +148,6 @@
             // 
             // 运行到此ToolStripMenuItem
             // 
-            this.运行到此ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("运行到此ToolStripMenuItem.BackgroundImage")));
             this.运行到此ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.运行到此ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.运行到此ToolStripMenuItem.Name = "运行到此ToolStripMenuItem";
@@ -164,7 +157,6 @@
             // 
             // 异常日志ToolStripMenuItem
             // 
-            this.异常日志ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("异常日志ToolStripMenuItem.BackgroundImage")));
             this.异常日志ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.异常日志ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.异常日志ToolStripMenuItem.Name = "异常日志ToolStripMenuItem";
@@ -173,7 +165,6 @@
             // 
             // 删除ToolStripMenuItem
             // 
-            this.删除ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("删除ToolStripMenuItem.BackgroundImage")));
             this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.删除ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
@@ -195,8 +186,6 @@
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // txtButton
             // 
@@ -215,10 +204,10 @@
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
-            // MoveOpControl
+            // MoveDtControl
             // 
             this.AllowDrop = true;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
@@ -226,28 +215,19 @@
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.rightPinPictureBox);
             this.Controls.Add(this.leftPinPictureBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPicture);
+            this.Controls.Add(this.rightPinPictureBox);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "MoveOpControl";
+            this.Name = "MoveDtControl";
             this.Size = new System.Drawing.Size(185, 25);
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.LocationChanged += new System.EventHandler(this.MoveOpControl_LocationChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.Name = "MoveDtControl";
-            this.Controls.SetChildIndex(this.leftPicture, 0);
-            this.Controls.SetChildIndex(this.rightPictureBox, 0);
-            this.Controls.SetChildIndex(this.leftPinPictureBox, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
-            this.Controls.SetChildIndex(this.txtButton, 0);
-
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();

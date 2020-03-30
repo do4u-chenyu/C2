@@ -5,23 +5,27 @@ using System.Linq;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
-using Citta_T1.Business;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Business.Model;
-using System.Runtime.InteropServices;
 
 namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
-    public partial class CanvasPanel : Panel
+    public partial class CanvasPanel : UserControl
     {
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
-        private bool startDrag = false;
-        //记录拖动引起的坐标变化量
-        public float screenFactor = 1;
+        
+        //屏幕拖动涉及的变量
+        private float screenFactor = 1;
+        private bool startMove = false;
+        private DragWrapper dragWrapper;
+
+
+
 
         bool MouseIsDown = false;
         Point basepoint;
@@ -51,6 +55,13 @@ namespace Citta_T1.Controls
         {
             startP = p;
         }
+
+
+        public Control SetStartC { set => startC = value; }
+        public Control SetEndC { set => endC = value; }
+        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
+        public bool StartMove { get => startMove; set => startMove = value; }
+
         public CanvasPanel()
         {
             InitializeComponent();
@@ -59,8 +70,12 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-
+            dragWrapper = new DragWrapper();
         }
+
+
+
+
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = 1.3F)
@@ -71,7 +86,7 @@ namespace Citta_T1.Controls
             this.UpdateStyles();
             if (isLarger && sizeLevel <= 2)
             {
-                Console.WriteLine("放大");
+                log.Info("放大");
                 sizeLevel += 1;
                 this.screenFactor = this.screenFactor * factor;
                 foreach (Control con in Controls)
@@ -85,7 +100,7 @@ namespace Citta_T1.Controls
             }
             else if (!isLarger && sizeLevel > 0)
             {
-                Console.WriteLine("缩小");
+                log.Info("缩小");
                 sizeLevel -= 1;
                 this.screenFactor = this.screenFactor / factor;
                 foreach (Control con in Controls)
@@ -98,19 +113,6 @@ namespace Citta_T1.Controls
             }
             Global.GetNaviViewControl().UpdateNaviView();
         }
-
-        #endregion
-
-
-        #region 画布中鼠标拖动的事件
-        private Point start;
-        private Point now;
-
-
-
-        public Control SetStartC { set => startC = value; }
-        public Control SetEndC { set => endC = value; }
-
 
         #endregion
 
@@ -131,7 +133,7 @@ namespace Citta_T1.Controls
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(ex.Message);
+                log.Warn(ex.Message);
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             if (type == ElementType.DataSource)
@@ -142,7 +144,7 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("CanvasPanel_MouseDown");
+            log.Info("CanvasPanel_MouseDown");
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
@@ -153,6 +155,7 @@ namespace Citta_T1.Controls
                 this.SetStartP(new PointF(e.X, e.Y));
             }
 
+            if (e.Button != MouseButtons.Left) return;
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
                 MouseIsDown = true;
@@ -165,20 +168,17 @@ namespace Citta_T1.Controls
 
                 g.Dispose();
             }
-            else if ((this.Parent as MainForm).flowControl.SelectDrag && e.Button == MouseButtons.Left)
+            else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
-                startDrag = true;
-                start = e.Location;
-                if (staticImage != null)
-                    staticImage.Dispose();
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenFactor);
-                staticImage = dragWrapper.CreateWorldImage();
+                
+                dragWrapper.DragDown(this.Size, this.screenFactor,e);
             }
 
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            now = e.Location;
+            
+            if (e.Button != MouseButtons.Left) return;
             // 画框
             if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
@@ -204,32 +204,23 @@ namespace Citta_T1.Controls
             }
 
             // 控件移动
-            else if (e.Button == MouseButtons.Left && ((MainForm)(this.Parent)).flowControl.SelectDrag)
+            else if ( ((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenFactor);
-
-                Graphics n = this.CreateGraphics();
-
-                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
-                n.Dispose();
+                dragWrapper.DragMove(this.Size, this.screenFactor, e);
             }
             // 绘制
             else if (cmd == eCommandType.draw)
             {
-                now.X = e.X;
-                now.Y = e.Y;
                 // 吸附效果实现
                 /*
                  * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
                  * 2. 如果在，对该点就行修正
                  */
-                
-                PointF nowP = new PointF(now.X, now.Y);
+                PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
-
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
@@ -243,9 +234,9 @@ namespace Citta_T1.Controls
                     }
                     endP = nowP;
                 }
-                Console.WriteLine("line'count = " + lines.Count().ToString());
+                log.Info("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Line(startP, nowP);
-                Console.WriteLine("line'count = " + lines.Count().ToString());
+                log.Info("line'count = " + lines.Count().ToString());
                 // TODO [DK] 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
@@ -302,6 +293,7 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button != MouseButtons.Left) return; 
 
             if (((MainForm)(this.Parent)).flowControl.SelectFrame)
             {
@@ -315,17 +307,8 @@ namespace Citta_T1.Controls
 
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-
-
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenFactor);
-                Graphics n = this.CreateGraphics();
-                now = e.Location;
-
-                dragWrapper.MoveWorldImage(n, this.staticImage, start, now);
-                dragWrapper.controlChange(start, now);
-
-                startDrag = false;
-                start = e.Location;
+                
+                dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
             else if (cmd == eCommandType.draw)
@@ -349,7 +332,7 @@ namespace Citta_T1.Controls
                  */
                 Line line = new Line(startP, new PointF(e.X, e.Y));
                 lines.Add(line);
-                Console.WriteLine("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
@@ -370,15 +353,12 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
 
-
-            Rectangle clipRectangle = e.ClipRectangle;
-            //解决屏幕拖动闪屏问题
-            if (startDrag && staticImage != null)
+            if (dragWrapper.DragPaint(this.Size, this.screenFactor, e))
             {
-                DragWrapper dragWrapper = new DragWrapper(this.Size, this.screenFactor);
-                dragWrapper.MoveWorldImage(e.Graphics, this.staticImage, start, now);
                 return;
             }
+
+            Rectangle clipRectangle = e.ClipRectangle;
 
             if (this.staticImage == null)
             {
@@ -405,24 +385,24 @@ namespace Citta_T1.Controls
         private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
         {
             int cnt = 0;
-            Console.WriteLine("line'number = " + lines.Count() + ", ");
+            log.Info("line'number = " + lines.Count() + ", ");
             IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
             foreach (Line line in drawLines)
             {
                 if (line == null)
                 {
-                    Console.WriteLine("line == null!");
+                    log.Info("line == null!");
                     continue;
                 }
                 // 不在该区域内就别重绘了
                 //bool isInRect = (line as IDrawObject).ObjectInRectangle(rect);
                 //if (isInRect == false)
-                //    Console.WriteLine("line 不在区域" + rect.ToString() + "内");
+                //    log.Info("line 不在区域" + rect.ToString() + "内");
                 //    continue;
                 line.Draw(dcStatic, rect);
-                Console.WriteLine("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
+                log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
                 cnt += 1;
-                Console.WriteLine("已重绘" + cnt + "条曲线");
+                log.Info("已重绘" + cnt + "条曲线");
             }
 
         }
@@ -451,6 +431,15 @@ namespace Citta_T1.Controls
             btn.Encoding = encoding;
             AddNewElement(btn);
         }
+        public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
+        {
+            MoveRsControl btn = new MoveRsControl(
+                                sizeL,
+                                text,
+                                location);
+            AddNewElement(btn);
+            return btn;
+        }
 
         private void AddNewElement(Control btn)
         {
@@ -469,8 +458,5 @@ namespace Citta_T1.Controls
         {
             return Global.GetFlowControl().SelectFrame;
         }
-
-
-
     }
 }

@@ -37,9 +37,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.comCheckBoxList1 = new UserControlDLL.ComCheckBoxList();
-            this.textBoxEx2 = new HZH_Controls.Controls.TextBoxEx();
-            this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
+            this.OutList = new UserControlDLL.ComCheckBoxList();
+            this.RandomNumBox = new HZH_Controls.Controls.TextBoxEx();
+            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -51,7 +51,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(420, 37);
+            this.topPanel.Size = new System.Drawing.Size(396, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -59,10 +59,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 211);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 187);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(420, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(396, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -102,7 +102,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 174);
+            this.keyPanel.Size = new System.Drawing.Size(116, 150);
             this.keyPanel.TabIndex = 2;
             // 
             // label3
@@ -140,90 +140,88 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.comCheckBoxList1);
-            this.valuePanel.Controls.Add(this.textBoxEx2);
-            this.valuePanel.Controls.Add(this.textBoxEx1);
+            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.RandomNumBox);
+            this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(304, 174);
+            this.valuePanel.Size = new System.Drawing.Size(280, 150);
             this.valuePanel.TabIndex = 3;
             // 
-            // comCheckBoxList1
+            // OutList
             // 
-            this.comCheckBoxList1.DataSource = null;
-            this.comCheckBoxList1.Location = new System.Drawing.Point(0, 128);
-            this.comCheckBoxList1.Margin = new System.Windows.Forms.Padding(0);
-            this.comCheckBoxList1.Name = "comCheckBoxList1";
-            this.comCheckBoxList1.Size = new System.Drawing.Size(135, 20);
-            this.comCheckBoxList1.TabIndex = 2;
+            this.OutList.DataSource = null;
+            this.OutList.Location = new System.Drawing.Point(0, 128);
+            this.OutList.Margin = new System.Windows.Forms.Padding(0);
+            this.OutList.Name = "OutList";
+            this.OutList.Size = new System.Drawing.Size(135, 20);
+            this.OutList.TabIndex = 2;
             // 
-            // textBoxEx2
+            // RandomNumBox
             // 
-            this.textBoxEx2.DecLength = 2;
-            this.textBoxEx2.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxEx2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx2.Location = new System.Drawing.Point(0, 64);
-            this.textBoxEx2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxEx2.MaxValue = new decimal(new int[] {
+            this.RandomNumBox.DecLength = 2;
+            this.RandomNumBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.RandomNumBox.InputType = HZH_Controls.TextInputType.NotControl;
+            this.RandomNumBox.Location = new System.Drawing.Point(0, 64);
+            this.RandomNumBox.Margin = new System.Windows.Forms.Padding(2);
+            this.RandomNumBox.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.textBoxEx2.MinValue = new decimal(new int[] {
+            this.RandomNumBox.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.textBoxEx2.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx2.Name = "textBoxEx2";
-            this.textBoxEx2.OldText = null;
-            this.textBoxEx2.PromptColor = System.Drawing.Color.Gray;
-            this.textBoxEx2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx2.PromptText = "";
-            this.textBoxEx2.RegexPattern = "";
-            this.textBoxEx2.Size = new System.Drawing.Size(136, 25);
-            this.textBoxEx2.TabIndex = 1;
-            this.textBoxEx2.Text = "10";
+            this.RandomNumBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.RandomNumBox.Name = "RandomNumBox";
+            this.RandomNumBox.OldText = null;
+            this.RandomNumBox.PromptColor = System.Drawing.Color.Gray;
+            this.RandomNumBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.RandomNumBox.PromptText = "";
+            this.RandomNumBox.RegexPattern = "";
+            this.RandomNumBox.Size = new System.Drawing.Size(136, 25);
+            this.RandomNumBox.TabIndex = 1;
             // 
-            // textBoxEx1
+            // DataInfoBox
             // 
-            this.textBoxEx1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBoxEx1.DecLength = 2;
-            this.textBoxEx1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(0, 0);
-            this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxEx1.MaxValue = new decimal(new int[] {
+            this.DataInfoBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DataInfoBox.DecLength = 2;
+            this.DataInfoBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
+            this.DataInfoBox.Location = new System.Drawing.Point(0, 0);
+            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
+            this.DataInfoBox.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.textBoxEx1.MinValue = new decimal(new int[] {
+            this.DataInfoBox.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.textBoxEx1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.OldText = null;
-            this.textBoxEx1.PromptColor = System.Drawing.Color.White;
-            this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx1.PromptText = "";
-            this.textBoxEx1.ReadOnly = true;
-            this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(136, 25);
-            this.textBoxEx1.TabIndex = 0;
-            this.textBoxEx1.Text = "test1.bcp";
-            this.textBoxEx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.OldText = null;
+            this.DataInfoBox.PromptColor = System.Drawing.Color.White;
+            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.DataInfoBox.PromptText = "";
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.RegexPattern = "";
+            this.DataInfoBox.Size = new System.Drawing.Size(136, 25);
+            this.DataInfoBox.TabIndex = 0;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // RandomOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 275);
+            this.ClientSize = new System.Drawing.Size(396, 251);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -255,8 +253,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private HZH_Controls.Controls.TextBoxEx textBoxEx1;
-        private HZH_Controls.Controls.TextBoxEx textBoxEx2;
-        private UserControlDLL.ComCheckBoxList comCheckBoxList1;
+        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
+        private HZH_Controls.Controls.TextBoxEx RandomNumBox;
+        private UserControlDLL.ComCheckBoxList OutList;
     }
 }

@@ -24,8 +24,18 @@ namespace Citta_T1.Business.Option
         {
             OptionDict[OpKey] = OpVaule;
         }
-         
 
+        public int KeysCount(string name)
+        {
+            int count = 0;
+            List<string> keys = this.OptionDict.Keys.ToList();
+            foreach (string key in keys)
+            { 
+                if(key.Contains(name))
+                    count += 1;
+            }
+            return count;
+        }
     }
    
 }

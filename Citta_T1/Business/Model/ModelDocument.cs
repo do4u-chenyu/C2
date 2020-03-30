@@ -79,15 +79,50 @@ namespace Citta_T1.Business.Model
 
         public void DeleteModelElement(Control control)
         {
+           
             foreach (ModelElement me in this.modelElements)
             {
                 if (!me.GetControl.Equals(control))
                     continue;
                 this.modelElements.Remove(me);
-                break;
+                //删除与控件连接的关系
+                DeleteModelRelation(me.ID);
+                return;
             }   
         }
+        public void DeleteModelRelation(int ID)
+        {
+            List<ModelRelation> relations = new List<ModelRelation>();
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.Start == ID || mr.End == ID)
+                    relations.Add(mr);
+            }
+            //后续所有算子状态变为null
+            StateChange(ID);
+            foreach (ModelRelation mr in relations) 
+                this.ModelRelations.Remove(mr);
 
+        }
+        private void StateChange(int ID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.Start == ID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if (me.ID == mr.End)
+                        {
+                            if(me.Type==ElementType.Operator)
+                                me.Status = ElementStatus.Null;
+                            StateChange(mr.End);
+                        }
+                           
+                    }
+                }
+            }
+        }
         public void Load()
         {
             if (File.Exists(savePath + modelTitle +".xml"))

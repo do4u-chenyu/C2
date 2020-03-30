@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls;
 using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Business.Model;
-using System.IO;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
-using log4net;
-using System.Reflection;
 using System.Threading;
 
 namespace  Citta_T1
@@ -42,7 +34,10 @@ namespace  Citta_T1
         private TripleListGen tripleListGen;
         private Manager currentManager;
         Thread scheduleThread = null;
-        ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        delegate void AsynUpdateLog();
+        delegate void AsynUpdateUI(int id);
+
+        LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -81,6 +76,7 @@ namespace  Citta_T1
             Global.SetModelTitlePanel(this.modelTitlePanel);
             Global.SetModelDocumentDao(this.modelDocumentDao);
             Global.SetCanvasPanel(this.canvasPanel);
+            Global.SetFlowControl(this.flowControl);
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
@@ -219,13 +215,13 @@ namespace  Citta_T1
         }
         private void InitializeControlsLocation()
         {
-            Console.WriteLine("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
+            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
             
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 5 - this.naviViewControl.Height;
-            Console.WriteLine("缩略图定位：" + x.ToString() + "," + y.ToString());
+            log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
             
@@ -298,12 +294,6 @@ namespace  Citta_T1
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = true;
         }
-        private void ResultLabel_Click(object sender, EventArgs e)
-        {
-            this.dataGridView1.Visible = true;
-            this.dataGridView2.Visible = false;
-            this.dataGridView3.Visible = false;
-        }
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
@@ -314,8 +304,8 @@ namespace  Citta_T1
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
-            this.dataGridView2.Visible = true;
+            this.dataGridView1.Visible = true;
+            this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = false;
         }
 
@@ -457,8 +447,6 @@ namespace  Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            //记录警告信息
-            log.Warn("Test warn");
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
@@ -485,24 +473,28 @@ namespace  Citta_T1
                     return;
                 }
 
+                tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
+                if (!tripleListGen.IsAllOperatorReady())
+                {
+                    MessageBox.Show("有未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
-
-
-                tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
-                tripleListGen.GenerateList();
-                /*
-                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
-                currentManager.Start();
                 
-                //运行完了之后，图标要变
-                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                //this.runButton.Name = "continueButton";
-                */
+                tripleListGen.GenerateList();
 
-                scheduleThread = new Thread(new ThreadStart(StartManager));
+                //运行日志初始化
+                this.dataGridView1.ucDataGridView1_Load(CreateScheduleLogs());
+
+
+                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
+                currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
+                currentManager.TaskCallBack += Accomplish;//绑定完成任务要调用的委托
+                currentManager.UpdateLogDelegate += UpdataLogStatus;//绑定更新任务状态的委托
+
+                scheduleThread = new Thread(new ThreadStart(currentManager.Start));
                 scheduleThread.Start();
-
             }
             else if (this.runButton.Name == "pauseButton")
             {
@@ -518,17 +510,61 @@ namespace  Citta_T1
             }
         }
 
-        private void StartManager()
+        //
+        private List<object> CreateScheduleLogs()
         {
-            try
+            List<object> scheduleLogs = new List<object>();
+            foreach (Triple tLog in tripleListGen.CurrentModelTripleList)
             {
-                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
-                currentManager.StartData();
+                scheduleLogs.Add(new ScheduleLog()
+                {
+                    TripleInfo = "三元组信息——" + tLog.TripleName,
+                    Status = "状态——" + tLog.OperateElement.Status.ToString(),
+                });
             }
-            catch
+            return scheduleLogs;
+        }
+
+
+
+        //更新UI
+        private void UpdataLogStatus()
+        {
+            if (InvokeRequired)
             {
-                return;
+                this.Invoke(new AsynUpdateLog(delegate ()
+                {
+                    this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
+                }));
             }
+            else
+            {
+                this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
+            }
+        }
+
+        //更新UI
+        private void UpdataUIStatus(int id)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new AsynUpdateUI(delegate (int i)
+                {
+                    MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == i).GetControl as MoveOpControl;
+                    log.Info(op.ReName);
+                }), id);
+            }
+            else
+            {
+                MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == id).GetControl as MoveOpControl;
+            }
+        }
+
+        //完成任务时需要调用
+        private void Accomplish()
+        {
+            this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+            this.runButton.Name = "runButton";
             CloseThread();
         }
 
@@ -595,7 +631,7 @@ namespace  Citta_T1
         {
             foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
             {
-                if (md.Dirty == true)
+                if (md.Dirty)
                 {
                     MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel=true;

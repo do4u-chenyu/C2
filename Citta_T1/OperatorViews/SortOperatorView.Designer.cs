@@ -39,6 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.textBoxEx3 = new HZH_Controls.Controls.TextBoxEx();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBoxEx2 = new HZH_Controls.Controls.TextBoxEx();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -93,7 +95,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(582, 46);
+            this.topPanel.Size = new System.Drawing.Size(595, 46);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -101,10 +103,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 313);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 303);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(582, 80);
+            this.bottomPanel.Size = new System.Drawing.Size(595, 80);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -146,7 +148,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 46);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(155, 267);
+            this.keyPanel.Size = new System.Drawing.Size(155, 257);
             this.keyPanel.TabIndex = 2;
             // 
             // label5
@@ -171,6 +173,8 @@
             // 
             // valuePanel
             // 
+            this.valuePanel.Controls.Add(this.textBoxEx3);
+            this.valuePanel.Controls.Add(this.label8);
             this.valuePanel.Controls.Add(this.textBoxEx2);
             this.valuePanel.Controls.Add(this.label7);
             this.valuePanel.Controls.Add(this.label6);
@@ -182,8 +186,42 @@
             this.valuePanel.Location = new System.Drawing.Point(155, 46);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(427, 267);
+            this.valuePanel.Size = new System.Drawing.Size(440, 257);
             this.valuePanel.TabIndex = 3;
+            // 
+            // textBoxEx3
+            // 
+            this.textBoxEx3.DecLength = 2;
+            this.textBoxEx3.InputType = HZH_Controls.TextInputType.NotControl;
+            this.textBoxEx3.Location = new System.Drawing.Point(130, 200);
+            this.textBoxEx3.MaxValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.textBoxEx3.MinValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.textBoxEx3.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.textBoxEx3.Name = "textBoxEx3";
+            this.textBoxEx3.OldText = null;
+            this.textBoxEx3.PromptColor = System.Drawing.Color.Gray;
+            this.textBoxEx3.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxEx3.PromptText = "";
+            this.textBoxEx3.RegexPattern = "";
+            this.textBoxEx3.Size = new System.Drawing.Size(57, 25);
+            this.textBoxEx3.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(87, 208);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(37, 15);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "行到";
             // 
             // textBoxEx2
             // 
@@ -213,7 +251,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(87, 208);
+            this.label7.Location = new System.Drawing.Point(197, 208);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(187, 15);
             this.label7.TabIndex = 8;
@@ -226,7 +264,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(22, 15);
             this.label6.TabIndex = 7;
-            this.label6.Text = "前";
+            this.label6.Text = "第";
             // 
             // groupBox2
             // 
@@ -301,9 +339,6 @@
             this.comCheckBoxList1.Name = "comCheckBoxList1";
             this.comCheckBoxList1.Size = new System.Drawing.Size(180, 24);
             this.comCheckBoxList1.TabIndex = 1;
-            comCheckBoxList1.AddItems("1");
-            comCheckBoxList1.AddItems("2");
-            comCheckBoxList1.AddItems("3");
             // 
             // textBoxEx1
             // 
@@ -327,18 +362,18 @@
             this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
             this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxEx1.PromptText = "";
+            this.textBoxEx1.ReadOnly = true;
             this.textBoxEx1.RegexPattern = "";
             this.textBoxEx1.Size = new System.Drawing.Size(180, 30);
             this.textBoxEx1.TabIndex = 0;
             this.textBoxEx1.Text = "test1.bcp";
             this.textBoxEx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxEx1.ReadOnly = true;
             // 
             // SortOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 393);
+            this.ClientSize = new System.Drawing.Size(595, 383);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -386,5 +421,7 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private HZH_Controls.Controls.TextBoxEx textBoxEx3;
+        private System.Windows.Forms.Label label8;
     }
 }

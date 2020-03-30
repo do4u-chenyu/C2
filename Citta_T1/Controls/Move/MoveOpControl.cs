@@ -16,11 +16,13 @@ namespace Citta_T1.Controls.Move
 { 
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
-
+  
 
     public partial class MoveOpControl : UserControl, IScalable, IDragable, IMoveControl
     {
+        private LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
+
 
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "连接算子 取差集 取交集 取并集";
@@ -41,14 +43,21 @@ namespace Citta_T1.Controls.Move
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => typeName; }
         internal OperatorOption Option { get => this.option; set => this.option = value; }
-        public ElementStatus Status { get => this.status; set => this.status = value; }
+        private ElementStatus status;
+        public ElementStatus Status { 
+            get => this.status;
+            set
+            {                
+                this.status = value;
+                OptionDirty();
+            }  
+        }
         public int ID { get => this.id; set => this.id = value; }
         public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
 
-        private ElementStatus status;
+        
         private bool relationStatus = true;
-        internal bool opViewStatus = false;
-        private bool optionStatus;
+
 
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -77,7 +86,7 @@ namespace Citta_T1.Controls.Move
         }
         public MoveOpControl(int sizeL, string text, Point loc)
         {
-           
+            this.status = ElementStatus.Null;
             InitializeComponent();
             textBox.Text = text;
             typeName = text;
@@ -85,19 +94,17 @@ namespace Citta_T1.Controls.Move
             doublelPinFlag = doublePin.Contains(this.textBox.Text);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            Console.WriteLine("Create a MoveOpControl, sizeLevel = " + sizeLevel);
+            log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
 
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            this.optionStatus = relationStatus && opViewStatus;
-            status = this.optionStatus ? ElementStatus.Ready : ElementStatus.Null;
             this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
         }
         public void ChangeSize(int sizeL)
         {
-            Console.WriteLine("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
+            log.Info("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             bool originVisible = this.Visible;
             if (originVisible)
                 this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
@@ -124,7 +131,6 @@ namespace Citta_T1.Controls.Move
         private void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox.Text);
-            System.Console.WriteLine(doublelPinFlag);
             this.leftPinArray.Add(this.leftPinPictureBox);
             this.endLineIndexs.Add(0);
             if (doublelPinFlag)
@@ -157,6 +163,7 @@ namespace Citta_T1.Controls.Move
         {
             if (isMouseDown)
             {
+                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
@@ -164,9 +171,13 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-            float screenChange = (this.Parent as CanvasPanel).screenFactor;
+            float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(Pm, mapOrigin);
+            
+            int orgX = Convert.ToInt32(Pm.X / screenFactor);
+            int orgY = Convert.ToInt32(Pm.Y / screenFactor);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(orgX, orgY), mapOrigin);
+            
 
             if (Pw.X < 20)
             {
@@ -180,7 +191,7 @@ namespace Citta_T1.Controls.Move
             {
                 Pm.X = this.Parent.Width - this.Width;
             }
-            if (Pw.Y > 980 - this.Height)
+            if (Pw.Y > 980  - this.Height)
             {
                 Pm.Y = this.Parent.Height - this.Height;
             }
@@ -189,7 +200,8 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            System.Console.WriteLine("移动开始");
+            log.Info("移动开始");
+            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -212,6 +224,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
+            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 this.isMouseDown = false;
@@ -237,7 +250,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 14;
+            int maxLength = 10;//初始14
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -261,36 +274,39 @@ namespace Citta_T1.Controls.Move
 
         private void ResizeToBig()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(194 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(179 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(124 * f),(int)(23 * f));
-            this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
+            this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
+            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
+            this.statusBox.Location = new Point((int)(126 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(159 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
+            this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
         }
         private void ResizeToSmall()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(142 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(131 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(72 * f), (int)(23 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
+            this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
+            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
+            this.statusBox.Location = new Point((int)(104 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(140 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
         }
         private void ResizeToNormal()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(184 * f), (int)(25 * f));
-            this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(170 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(114 * f), (int)(23 * f));
-            this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
+            this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
+            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
+            this.statusBox.Location = new Point((int)(120 * f), (int)(5 * f));//新增
+            this.rightPinPictureBox.Location = new Point((int)(154 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
+            this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
         }
         #endregion
-        
+
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
@@ -307,13 +323,13 @@ namespace Citta_T1.Controls.Move
                     new UnionOperatorView(this.Option).ShowDialog();
                     break;
                 case "取差集":
-                    new DifferOperatorView(this.Option).ShowDialog();
+                    new DifferOperatorView(this).ShowDialog();
                     break;
                 case "随机采样":
-                    new RandomOperatorView(this.Option).ShowDialog();
+                    new RandomOperatorView(this).ShowDialog();
                     break;
                 case "过滤算子":
-                    new FilterOperatorView(this.Option).ShowDialog();
+                    new FilterOperatorView(this).ShowDialog();
                     break;
                 case "取最大值":
                     new MaxOperatorView(this).ShowDialog();
@@ -322,7 +338,7 @@ namespace Citta_T1.Controls.Move
                     new MinOperatorView(this).ShowDialog();
                     break;
                 case "取平均值":
-                    new AvgOperatorView(this.Option).ShowDialog();
+                    new AvgOperatorView(this).ShowDialog();
                     break;
                 default:
                     break;
@@ -343,12 +359,46 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-
+            //删除连接的结果控件
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.Start == this.id)
+                {
+                    DeleteResultControl(mr.End);
+                    break;
+                }
+                    
+            }
+            //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
+           
+        }
+        private void DeleteResultControl(int endID)
+        {
+            foreach (ModelElement mrc in Global.GetCurrentDocument().ModelElements)
+            {
+                if (mrc.ID == endID)
+                {
+                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
+                    Global.GetNaviViewControl().RemoveControl(mrc.GetControl);
+                    Global.GetNaviViewControl().UpdateNaviView();
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    return;
+                }
+            }
+        }
+        private void OptionDirty()
+        {
+            if (this.status == ElementStatus.Null)
+                this.statusBox.Image = Properties.Resources.set;
+            else if (this.status == ElementStatus.Done)
+                this.statusBox.Image = Properties.Resources.ready;
+            else if (this.status == ElementStatus.Ready)
+                this.statusBox.Image = null;
         }
         #endregion
 
@@ -415,7 +465,7 @@ namespace Citta_T1.Controls.Move
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("rightPinPictureBox_MouseDown beigin =========================");
+            log.Info("rightPinPictureBox_MouseDown beigin =========================");
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
@@ -423,8 +473,8 @@ namespace Citta_T1.Controls.Move
             isMouseDown = true;
             CanvasPanel canvas = (this.Parent as CanvasPanel);
             canvas.CanvasPanel_MouseDown(this, e1);
-            Console.WriteLine("rightPinPictureBox_MouseDown end   =========================");
-            //Console.WriteLine(this.Location.ToString());
+            log.Info("rightPinPictureBox_MouseDown end   =========================");
+            //log.Info(this.Location.ToString());
 
             //canvas.cmd = eCommandType.draw;
             //canvas.SetStartC = this;
@@ -492,19 +542,10 @@ namespace Citta_T1.Controls.Move
 
         public void ChangeLoc(float dx, float dy)
         {
-            Bitmap staticImage = new Bitmap(this.Width, this.Height);
-            this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
 
-            this.Visible = false;
-            this.Left = this.Left + (int)dx;
-            this.Top = this.Top + (int)dy;
-
-            Graphics n = this.CreateGraphics();
-            n.DrawImageUnscaled(staticImage, this.Left, this.Top);
-            n.Dispose();
-            this.Visible = true;
-            //this.Location = new Point(left, top);
-            // Console.WriteLine("拖拽中 世界坐标: X=" + left.ToString() + ", Y = " + top.ToString());
+            int left = this.Left + Convert.ToInt32(dx);
+            int top = this.Top + Convert.ToInt32(dy);
+            this.Location = new Point(left, top);
         }
         #endregion
 
@@ -538,7 +579,7 @@ namespace Citta_T1.Controls.Move
             int pinR = 6;
             float maxIntersectPerct = 0.0F;
             PointF revisedP = new PointF(p.X, p.Y);
-            Console.WriteLine("当前点坐标: " + p.ToString());
+            log.Info("当前点坐标: " + p.ToString());
             Rectangle rect = new Rectangle(
                    new Point((int)p.X - mouseR / 2, (int)p.Y - mouseR / 2),
                    new Size(mouseR, mouseR));
@@ -556,17 +597,17 @@ namespace Citta_T1.Controls.Move
                 {
                     // 计算相交面积比
                     float iou = OpUtil.IOU(rect, leftPinRect);
-                    Console.WriteLine(leftP.Name + "'iou: " + iou);
+                    log.Info(leftP.Name + "'iou: " + iou);
                     if (iou > maxIntersectPerct)
                     {
                         maxIntersectPerct = iou;
-                        Console.WriteLine("修正鼠标坐标，修正前：" + p.ToString());
+                        log.Info("修正鼠标坐标，修正前：" + p.ToString());
                         revisedP = new PointF(
                             pinLeftX + leftP.Width / 2,
                             pinTopY + leftP.Height / 2);
                         canvas.SetEndC = this;
                         revisedPinIndex = leftPinArray.IndexOf(leftP);
-                        Console.WriteLine("修正鼠标坐标，修正后：" + revisedP.ToString());
+                        log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }

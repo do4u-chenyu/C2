@@ -55,6 +55,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.logLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.dataGridView1 = new Citta_T1.DataGridView1();
             this.dataGridView2 = new Citta_T1.DataGridView2();
@@ -288,7 +289,6 @@
             // 
             // myModelControl
             // 
-            this.myModelControl.AutoScroll = true;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
@@ -296,7 +296,6 @@
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.myModelControl, true);
             // 
             // bottomViewPanel
             // 
@@ -336,10 +335,10 @@
             this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
             this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(334, 36);
+            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
             this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(424, 3);
+            this.dragLineControl.Size = new System.Drawing.Size(364, 3);
             this.dragLineControl.TabIndex = 3;
             // 
             // panel9
@@ -365,18 +364,19 @@
             // 
             this.panel8.Controls.Add(this.logLabel);
             this.panel8.Controls.Add(this.errorLabel);
+            this.panel8.Controls.Add(this.resultLabel);
             this.panel8.Controls.Add(this.previewLabel);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(334, 39);
+            this.panel8.Size = new System.Drawing.Size(394, 39);
             this.panel8.TabIndex = 0;
             // 
             // logLabel
             // 
             this.logLabel.AutoSize = true;
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(207, 4);
+            this.logLabel.Location = new System.Drawing.Point(120 , 4);
             this.logLabel.Name = "logLabel";
             this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
@@ -387,12 +387,23 @@
             // 
             this.errorLabel.AutoSize = true;
             this.errorLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.errorLabel.Location = new System.Drawing.Point(129, 4);
+            this.errorLabel.Location = new System.Drawing.Point(226, 4);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(52, 27);
             this.errorLabel.TabIndex = 2;
-            this.errorLabel.Text = "报错";
+            this.errorLabel.Text = "报错信息";
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
+            // 
+            // resultLabel
+            //
+            // 待删除
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.resultLabel.Location = new System.Drawing.Point(350, 4);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(92, 27);
+            this.resultLabel.TabIndex = 1;
+            this.resultLabel.Text = "运行结果";
             // 
             // previewLabel
             // 
@@ -810,10 +821,7 @@
             // 
             // naviViewControl
             // 
-            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
+            
             this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
             this.naviViewControl.Name = "naviViewControl";
@@ -861,7 +869,6 @@
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.modelTitlePanel.ResumeLayout(false);
@@ -891,6 +898,7 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label previewLabel;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;

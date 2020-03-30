@@ -10,11 +10,20 @@ namespace Citta_T1.Business.Schedule
 {
     class Manager
     {
+        public delegate void UpdateLog();//声明一个更新主线程日志的委托
+        public UpdateLog UpdateLogDelegate;
+
+        public delegate void UpdateUI(int id);//声明一个更新主线程的委托
+        public UpdateUI UpdateUIDelegate;
+
+        public delegate void AccomplishTask();//声明一个在完成任务时通知主线程的委托
+        public AccomplishTask TaskCallBack;
+
+
 
         private List<Triple> currentModelTripleList = new List<Triple>();
         private int maxAllowCount = 3;
 
-        Thread thread = null;
         CancellationTokenSource tokenSource = new CancellationTokenSource();
         ManualResetEvent resetEvent = new ManualResetEvent(true);
 
@@ -35,25 +44,32 @@ namespace Citta_T1.Business.Schedule
             resetEvent = new ManualResetEvent(true);
         }
 
-        public void Start()
+        public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
-            thread = new Thread(new ThreadStart(() => StartData()));
-            thread.Start();
-
+            foreach (Triple pauseTri in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
+            {
+                pauseTri.OperateElement.Status = newStatus;
+            }
         }
 
         public void Pause()
         {
+            ChangeStatus(ElementStatus.Runnnig, ElementStatus.Suspend);
+            UpdateLogDelegate();
             resetEvent.Reset();
         }
 
         public void Continue()
         {
+            ChangeStatus(ElementStatus.Suspend, ElementStatus.Runnnig);
             resetEvent.Set();
         }
 
         public void Stop()
         {
+            ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
+            ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
+            UpdateLogDelegate();
             resetEvent.Dispose();
             foreach (Task currentTask in parallelTasks)
             {
@@ -66,10 +82,10 @@ namespace Citta_T1.Business.Schedule
                     }
                 }
             }
-            thread.Abort();
+            //thread.Abort();
         }
 
-        public void StartData()
+        public void Start()
         {
             parallelTasks = new List<Task>();
 
@@ -86,7 +102,7 @@ namespace Citta_T1.Business.Schedule
                  */
                 if (tmpTri.ResultElement.Status == ElementStatus.Done)
                 {
-                    Console.WriteLine("该三元组已算过，下一个");
+                    //Console.WriteLine("该三元组已算过，下一个");
                     continue;
                 }
                 else
@@ -111,6 +127,9 @@ namespace Citta_T1.Business.Schedule
             }
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
+            //Console.WriteLine("所有任务都已完成");
+
+            TaskCallBack();
         }
 
 
@@ -122,27 +141,29 @@ namespace Citta_T1.Business.Schedule
             try
             {
                 tokenSource.Token.ThrowIfCancellationRequested();
-                string dataName = "";
-                foreach (ModelElement d in triple.DataElements)
-                {
-                    dataName = dataName + d.RemarkName;
-                }
 
-                Console.WriteLine("{0}-{1}-{2}开始运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
+                //开始task先更新几个状态
+                //op控件 running
+                //TODO
+                triple.OperateElement.Status = ElementStatus.Runnnig;
+                UpdateLogDelegate();
+
+
                 Thread.Sleep(5000);
                 //此处写处理数据方法
 
 
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
+                triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
-                Console.WriteLine("{0}-{1}-{2}结束运行，状态为{3}", dataName, triple.OperateElement.RemarkName, triple.ResultElement.RemarkName, triple.ResultElement.Status);
-
+                UpdateLogDelegate();
+                UpdateUIDelegate(triple.OperateElement.ID);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("线程被取消");
+                //Console.WriteLine("线程被取消");
             }
 
             return triple.IsOperated;

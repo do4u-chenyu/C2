@@ -1,4 +1,6 @@
+
 ﻿using Citta_T1.Controls.Interface;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Utils;
 using System;
 using System.Drawing;
@@ -40,6 +42,11 @@ namespace Citta_T1.Controls.Move
         Line line;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
+
+        private ElementStatus status;
+        private int id;
+        public int ID { get => this.id; set => this.id = value; }
+        public ElementStatus Status {get => this.status; set=>this.status = value;}
         public MoveRsControl()
         {
             InitializeComponent();
@@ -228,6 +235,7 @@ namespace Citta_T1.Controls.Move
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
+
         }
         #endregion
 
@@ -368,8 +376,8 @@ namespace Citta_T1.Controls.Move
 
         public void ChangeLoc(float dx, float dy)
         {
-            int left = this.Left + (int)dx;
-            int top = this.Top + (int)dy;
+            int left = this.Left + Convert.ToInt32(dx);
+            int top = this.Top + Convert.ToInt32(dy);
             this.Location = new Point(left, top);
         }
         #endregion

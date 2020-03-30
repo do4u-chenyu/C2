@@ -11,6 +11,8 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using Citta_T1.Business.Option;
+using System.Globalization;
+using System.Threading;
 
 namespace Citta_T1.Business.Model
 {
@@ -113,10 +115,16 @@ namespace Citta_T1.Business.Model
                     WriteOptionElement(xDoc, optionNode, option, "outfield");
                     break;
                 case ElementSubType.FilterOperator:
+                    foreach (string name in option.OptionDict.Keys)
+                    { WriteOptionElement(xDoc, optionNode, option, name); }
+                    break;
+                case ElementSubType.RandomOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "randomnum");
+                    WriteOptionElement(xDoc, optionNode, option, "outfield");
                     break;
                 case ElementSubType.AvgOperator:
+                    WriteOptionElement(xDoc, optionNode, option, "avgfield");
                     break;
-
                 default:
                     break;
             }
@@ -145,23 +153,23 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(typeNode);
 
                 XmlElement startControlNode = xDoc.CreateElement("start");
-                startControlNode.InnerText = mr.Start;
+                startControlNode.InnerText = mr.Start.ToString();
                 modelElementXml.AppendChild(startControlNode);
 
                 XmlElement endControlNode = xDoc.CreateElement("end");
-                endControlNode.InnerText = mr.End;
+                endControlNode.InnerText = mr.End.ToString();
                 modelElementXml.AppendChild(endControlNode);
 
                 XmlElement startLocationNode = xDoc.CreateElement("startlocation");
-                startLocationNode.InnerText = mr.StartLocation;
+                startLocationNode.InnerText = mr.StartLocation.ToString();
                 modelElementXml.AppendChild(startLocationNode);
 
                 XmlElement endLocationNode = xDoc.CreateElement("endlocation");
-                endLocationNode.InnerText = mr.EndLocation;
+                endLocationNode.InnerText = mr.EndLocation.ToString();
                 modelElementXml.AppendChild(endLocationNode);
 
                 XmlElement endPinLabelNode = xDoc.CreateElement("endpin");
-                endPinLabelNode.InnerText = mr.EndPin;
+                endPinLabelNode.InnerText = mr.EndPin.ToString();
                 modelElementXml.AppendChild(endPinLabelNode);
             }
         }
@@ -180,6 +188,7 @@ namespace Citta_T1.Business.Model
         }
         public void ReadXml()
         {
+            TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
 
@@ -196,14 +205,17 @@ namespace Citta_T1.Business.Model
                 {
                     if (type == "Operator")
                     {
+                                              
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, loc);
+                        ctl.Status = EStatus(status);
                         ctl.ID = id;
-                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, EStatus(status), SEType(subType), id);
+                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
                             ctl.Option = ReadOption(xn);
@@ -214,11 +226,13 @@ namespace Citta_T1.Business.Model
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        cotl.ID = id;
                         cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
@@ -232,20 +246,20 @@ namespace Citta_T1.Business.Model
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
                         string status = xn.SelectSingleNode("status").InnerText;
-                        string subType = xn.SelectSingleNode("subtype").InnerText;
+                        status = textInfo.ToTitleCase(status).ToString();
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
-                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, EStatus(status), SEType(subType), id);
+                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
                     else if (type == "Relation")
                     {
-                        string startID = xn.SelectSingleNode("start").InnerText;
-                        string endID = xn.SelectSingleNode("end").InnerText;
-                        string startLocation = xn.SelectSingleNode("startlocation").InnerText;
-                        string endLocation = xn.SelectSingleNode("endlocation").InnerText;
-                        string endPin = xn.SelectSingleNode("endpin").InnerText;
+                        int startID = Convert.ToInt32(xn.SelectSingleNode("start").InnerText);
+                        int endID = Convert.ToInt32(xn.SelectSingleNode("end").InnerText);
+                        Point startLocation = ToPointType(xn.SelectSingleNode("startlocation").InnerText);
+                        Point endLocation = ToPointType(xn.SelectSingleNode("endlocation").InnerText);
+                        int endPin = Convert.ToInt32(xn.SelectSingleNode("endpin").InnerText);
                         ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }
