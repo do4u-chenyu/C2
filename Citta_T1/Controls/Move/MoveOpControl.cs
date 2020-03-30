@@ -138,7 +138,6 @@ namespace Citta_T1.Controls.Move
         private void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox.Text);
-            System.Console.WriteLine(doublelPinFlag);
             int dy = 0;
             if (doublelPinFlag)
             {
