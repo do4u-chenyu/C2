@@ -40,5 +40,28 @@ namespace Citta_T1.Utils
             return inHeight > 0 && inWidth > 0 ? inHeight * inWidth : 0;
         }
 
+        public static Point WorldBoundControl(Point Pm, float factor, int width, int height)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            if (Pw.X < 50)
+            {
+                dragOffset.X = 50 - Pw.X;
+            }
+            if (Pw.Y < 30)
+            {
+                dragOffset.Y = 30 - Pw.Y;
+            }
+            if (Pw.X > 2000 - Convert.ToInt32(width / factor))
+            {
+                dragOffset.X = 2000 - Convert.ToInt32(width / factor) - Pw.X;
+            }
+            if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
+            {
+                dragOffset.Y = 1000 - Convert.ToInt32(height / factor) - Pw.Y;
+            }
+            return dragOffset;
+        }
     }
 }

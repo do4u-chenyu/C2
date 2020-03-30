@@ -78,7 +78,7 @@ namespace Citta_T1.Controls.Flow
             int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
-            Point moveOffset = WorldBoundControl(mapOrigin, factor);
+            Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
             ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
@@ -106,8 +106,8 @@ namespace Citta_T1.Controls.Flow
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
-                
-                Point moveOffset = WorldBoundControl(mapOrigin, factor);
+
+                Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
 
                 if (moveOffset != new Point(0, 0))
                 {
@@ -127,7 +127,7 @@ namespace Citta_T1.Controls.Flow
 
             if ((this.Parent as CanvasPanel).StartMove)
             {
-                updateImage(this.Width, this.Height, factor, mapOrigin);
+                UpdateImage(this.Width, this.Height, factor, mapOrigin);
                 (this.Parent as CanvasPanel).StartMove = false;
             }
 
@@ -154,30 +154,7 @@ namespace Citta_T1.Controls.Flow
             }
         }
 
-        public Point WorldBoundControl(Point Pm,float factor)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
-            if (Pw.X < 50)
-            {
-                dragOffset.X = 50 - Pw.X;
-            }
-            if (Pw.Y < 30)
-            {
-                dragOffset.Y = 30 - Pw.Y;
-            }
-            if (Pw.X > 2000 - Convert.ToInt32(this.Parent.Width / factor))
-            {
-                dragOffset.X = 2000 - Convert.ToInt32(this.Parent.Width / factor) - Pw.X;
-            }
-            if (Pw.Y > 1000 - Convert.ToInt32((this.Parent.Height) / factor))
-            {
-                dragOffset.Y = 1000 - Convert.ToInt32((this.Parent.Height) / factor) - Pw.Y;
-            }
-            return dragOffset;
-        }
-        public void updateImage(int width,int height,float factor,Point mapOrigin)
+        private void UpdateImage(int width,int height,float factor,Point mapOrigin)
         {
             this.staticImage = new Bitmap(width,height);
             Graphics g = Graphics.FromImage(staticImage);
