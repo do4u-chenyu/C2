@@ -45,9 +45,6 @@ namespace Citta_T1.Controls
                 this.staticImage.Dispose();
                 this.staticImage = null;
             }
-               
-
-
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.staticImage = this.CreateWorldImage();
         }
@@ -92,18 +89,18 @@ namespace Citta_T1.Controls
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor);
-            modelElements.Reverse();
-            foreach (ModelElement me in modelElements)
+            for(int i = 0; i < modelElements.Count; i++)
             {
-                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
-                    continue;
+                ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
                 Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (Pw.X < 0 || Pw.Y < 0) 
+                if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                 me.Hide();
             }
+            
+
 
             g.Dispose();
             return staticImage;
@@ -143,8 +140,9 @@ namespace Citta_T1.Controls
             OpUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
 
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+           
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            modelElements.Reverse();
+                     
             foreach (ModelElement me in modelElements)
             {
                 me.Show();
