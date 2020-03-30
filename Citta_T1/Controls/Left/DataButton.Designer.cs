@@ -38,9 +38,9 @@
             this.ReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.打开所在文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.复制文件路径到剪切板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -92,7 +92,7 @@
             this.打开所在文件夹ToolStripMenuItem,
             this.复制文件路径到剪切板ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
             // 
             // ReviewToolStripMenuItem
             // 
@@ -115,23 +115,24 @@
             this.DeleteToolStripMenuItem.Text = "删除";
             this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            // 
             // 打开所在文件夹ToolStripMenuItem
             // 
             this.打开所在文件夹ToolStripMenuItem.Name = "打开所在文件夹ToolStripMenuItem";
             this.打开所在文件夹ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.打开所在文件夹ToolStripMenuItem.Text = "打开所在文件夹";
-            this.打开所在文件夹ToolStripMenuItem.Click += new System.EventHandler(this.打开所在文件夹ToolStripMenuItem_Click);
+            this.打开所在文件夹ToolStripMenuItem.Click += new System.EventHandler(this.OpenFilePathMenuItem_Click);
             // 
             // 复制文件路径到剪切板ToolStripMenuItem
             // 
             this.复制文件路径到剪切板ToolStripMenuItem.Name = "复制文件路径到剪切板ToolStripMenuItem";
             this.复制文件路径到剪切板ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.复制文件路径到剪切板ToolStripMenuItem.Text = "复制文件路径到剪切板";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.复制文件路径到剪切板ToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboard);
             // 
             // DataButton
             // 
