@@ -379,6 +379,7 @@ namespace Citta_T1.Controls
         }
         public void AddNewOperator(int sizeL, string text, Point location)
         {
+            startMove = true;
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
                                 text,
@@ -388,6 +389,7 @@ namespace Citta_T1.Controls
 
         public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.Encoding encoding)
         {
+            startMove = true;
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
@@ -398,6 +400,7 @@ namespace Citta_T1.Controls
         }
         public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
         {
+            startMove = true;
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
                                 text,

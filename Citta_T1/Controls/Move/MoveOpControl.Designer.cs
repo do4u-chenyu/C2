@@ -90,8 +90,8 @@ namespace Citta_T1.Controls.Move
             this.leftPinPictureBox.Size = new System.Drawing.Size(5, 5);
             this.leftPinPictureBox.TabIndex = 3;
             this.leftPinPictureBox.TabStop = false;
-            this.leftPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-            this.leftPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
+            //this.leftPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
+            //this.leftPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
             // 
             // rightPinPictureBox
             // 
@@ -102,8 +102,8 @@ namespace Citta_T1.Controls.Move
             this.rightPinPictureBox.TabIndex = 4;
             this.rightPinPictureBox.TabStop = false;
             this.rightPinPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseDown);
-            this.rightPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-            this.rightPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
+            //this.rightPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
+            //this.rightPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
             this.rightPinPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseMove);
             this.rightPinPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseUp);
             // 
@@ -249,7 +249,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new System.Drawing.Size(190, 25);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
-            this.MouseEnter += new System.EventHandler(this.MoveOpControl_MouseEnter);
+            //this.MouseEnter += new System.EventHandler(this.MoveOpControl_MouseEnter);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

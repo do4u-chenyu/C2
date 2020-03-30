@@ -79,7 +79,8 @@ namespace Citta_T1.Controls.Move
         private Rectangle rectIn_down;
         private Rectangle rectIn_up;
         private Rectangle rectOut;
-
+        private String pinStatus = "noEnter";
+        private String rectArea = "rectIn_down rectIn_up rectOut";
         public MoveOpControl()
         {
             InitializeComponent();
@@ -172,6 +173,10 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
+            log.Info("鼠标点" + this.PointToClient(MousePosition).ToString());
+            log.Info("区域" + rectIn_down.ToString());
+            PinOpLeaveAndEnter(this.PointToClient(MousePosition));
+
             if (isMouseDown)
             {
                 (this.Parent as CanvasPanel).StartMove = true;
@@ -220,9 +225,9 @@ namespace Citta_T1.Controls.Move
                 isMouseDown = true;
             }
             oldcontrolPosition=this.Location;
-    }
+         }
 
-    private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -450,26 +455,69 @@ namespace Citta_T1.Controls.Move
         }
 
         #region 针脚事件
-        private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
+        public void PinOpLeaveAndEnter(Point mousePosition)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            if (rectIn_down.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus))  return; 
+                log.Info("========================");
+                rectIn_down = rectEnter(rectIn_down);
+                this.Invalidate();
+                pinStatus = "rectIn_down";
+            }
+            else if(rectIn_up.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                log.Info("========================");
+                rectIn_up = rectEnter(rectIn_up);
+                this.Invalidate();
+                pinStatus = "rectIn_up";
+            }
+            else if(rectOut.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                log.Info("========================");
+                rectOut = rectEnter(rectOut);
+                this.Invalidate();
+                pinStatus = "rectOut";
+            }
+            else if (pinStatus != "noEnter")
+            {
+                log.Info("-----------------------------");
+                
+                switch (pinStatus)
+                {
+                    case "rectIn_down":
+                        rectIn_down = rectLeave(rectIn_down);
+                        break;
+                    case "rectIn_up":
+                        rectIn_up = rectLeave(rectIn_up);
+                        break;
+                    case "rectOut":
+                        rectOut = rectLeave(rectOut);
+                        break;
+                }
+                pinStatus = "noEnter";
+                this.Invalidate();
+            }
+        }
+        public Rectangle rectEnter(Rectangle rect)
+        {
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
             Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
-
-        private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
+        public Rectangle rectLeave(Rectangle rect)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
             Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
         #region 右针脚事件
@@ -558,17 +606,14 @@ namespace Citta_T1.Controls.Move
 
         #endregion
 
-        private void MoveOpControl_MouseEnter(object sender, EventArgs e)
-        {
-            log.Info("鼠标点" + this.PointToClient(MousePosition).ToString());
-        }
+
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
-            e.Graphics.DrawRectangle(pen, rectIn_down);
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
             e.Graphics.DrawRectangle(pen, rectIn_up);
+            e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
+            e.Graphics.DrawRectangle(pen, rectIn_down);
             e.Graphics.FillRectangle(trnsRedBrush, rectOut);
             e.Graphics.DrawRectangle(pen, rectOut);
         }
