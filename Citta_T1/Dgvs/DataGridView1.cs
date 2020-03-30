@@ -36,6 +36,20 @@ namespace Citta_T1
             
         }
 
+        private void MenuItem复制_Click(object sender, EventArgs e)
+        {
+            string copy = this.textBox1.SelectedText;
+            Clipboard.SetDataObject(copy);
+        }
 
+        private void MenuItem全部清除_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
+        }
+
+        private void MenuItem全选_Click(object sender, EventArgs e)
+        {
+            this.textBox1.SelectAll();
+        }
     }
 }
