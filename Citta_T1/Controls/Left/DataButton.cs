@@ -60,5 +60,13 @@ namespace Citta_T1.Controls.Left
 
         }
         #endregion
+
+        private void 打开所在文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int lastIndex = txtButton.Name.LastIndexOf("\\");
+            string FilePath = txtButton.Name.Substring(0, lastIndex);
+            string FileName = txtButton.Name.Substring(lastIndex + 1); 
+            System.Diagnostics.Process.Start("Explorer", "/select," + FilePath + "\\" + FileName);
+        }
     }
 }
