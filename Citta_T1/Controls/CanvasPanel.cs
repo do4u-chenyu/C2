@@ -5,10 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
-using Citta_T1.Business;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Business.Model;
-using System.Runtime.InteropServices;
 
 namespace Citta_T1.Controls
 {
@@ -16,13 +14,14 @@ namespace Citta_T1.Controls
 
     public partial class CanvasPanel : UserControl
     {
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
-        private bool startDrag = false;
+        private bool startMove = false;
         private DragWrapper dragWrapper;
 
 
@@ -60,7 +59,7 @@ namespace Citta_T1.Controls
         public Control SetStartC { set => startC = value; }
         public Control SetEndC { set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-        public bool StartDrag { get => startDrag; set => startDrag = value; }
+        public bool StartMove { get => startMove; set => startMove = value; }
 
         public CanvasPanel()
         {
@@ -86,7 +85,7 @@ namespace Citta_T1.Controls
             this.UpdateStyles();
             if (isLarger && sizeLevel <= 2)
             {
-                Console.WriteLine("放大");
+                log.Info("放大");
                 sizeLevel += 1;
                 this.screenFactor = this.screenFactor * factor;
                 foreach (Control con in Controls)
@@ -100,7 +99,7 @@ namespace Citta_T1.Controls
             }
             else if (!isLarger && sizeLevel > 0)
             {
-                Console.WriteLine("缩小");
+                log.Info("缩小");
                 sizeLevel -= 1;
                 this.screenFactor = this.screenFactor / factor;
                 foreach (Control con in Controls)
@@ -133,7 +132,7 @@ namespace Citta_T1.Controls
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(ex.Message);
+                log.Warn(ex.Message);
             }
             // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
             if (type == ElementType.DataSource)
@@ -161,7 +160,7 @@ namespace Citta_T1.Controls
             }
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
-                startDrag = true;
+                
                 dragWrapper.DragDown(this.Size, this.screenFactor,e);
             }
 
@@ -209,9 +208,9 @@ namespace Citta_T1.Controls
                 else
                     invalidateRectWhenMoving = new Rectangle();
 
-                Console.WriteLine("line'count = " + lines.Count().ToString());
+                log.Info("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Line(startP, nowP);
-                Console.WriteLine("line'count = " + lines.Count().ToString());
+                log.Info("line'count = " + lines.Count().ToString());
                 // TODO 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
@@ -282,7 +281,7 @@ namespace Citta_T1.Controls
 
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-                startDrag = false;
+                
                 dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
@@ -290,7 +289,7 @@ namespace Citta_T1.Controls
             {
                 Line line = new Line(startP, new PointF(e.X, e.Y));
                 lines.Add(line);
-                Console.WriteLine("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 /* 
                  * TODO 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
                  * 只保存线索引
@@ -351,13 +350,13 @@ namespace Citta_T1.Controls
         {
             // TODO
             int cnt = 0;
-            Console.WriteLine("line'number = " + lines.Count() + ", ");
+            log.Info("line'number = " + lines.Count() + ", ");
             IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
             foreach (Line line in drawLines)
             {
                 if (line == null)
                 {
-                    Console.WriteLine("line == null!");
+                    log.Info("line == null!");
                     continue;
                 }
                 // 不在该区域内就别重绘了
@@ -366,9 +365,9 @@ namespace Citta_T1.Controls
                 //    Console.WriteLine("line 不在区域" + rect.ToString() + "内");
                 //    continue;
                 line.Draw(dcStatic, rect);
-                Console.WriteLine("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
+                log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
                 cnt += 1;
-                Console.WriteLine("已重绘" + cnt + "条曲线");
+                log.Info("已重绘" + cnt + "条曲线");
             }
 
         }

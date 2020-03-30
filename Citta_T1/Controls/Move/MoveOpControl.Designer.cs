@@ -224,6 +224,9 @@ namespace Citta_T1.Controls.Move
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusBox.TabIndex = 9;
             this.statusBox.TabStop = false;
+            this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 
