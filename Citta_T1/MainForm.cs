@@ -53,11 +53,11 @@ namespace  Citta_T1
             InitializeControlsLocation();
             
             
-            this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
-            this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
-            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
-            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseMove);
-            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseUp);
+            //this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
+            //this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
+            //this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
+            //this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseMove);
+            //this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseUp);
 
 
         }

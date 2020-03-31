@@ -131,14 +131,14 @@ namespace Citta_T1.Controls.Flow
                 (this.Parent as CanvasPanel).StartMove = false;
             }
 
-            
-
-
-
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
+            if (this.staticImage == null)
+            {
+                UpdateImage(this.Width, this.Height, factor, mapOrigin);
+            }
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
 
         }
