@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Citta_T1.Controls;
+using Citta_T1.Controls.Move;
+using Citta_T1.Business.Option;
+using System.Diagnostics;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -30,6 +34,9 @@ namespace Citta_T1.Business.Schedule
         //并行任务集合
         private List<Task> parallelTasks;
 
+        public delegate string FuncDelegate(Triple triple);
+        Dictionary<ElementSubType, FuncDelegate> operatorFuncDict = new Dictionary<ElementSubType, FuncDelegate>();
+
         public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
         public int MaxAllowCount { get => maxAllowCount; set => maxAllowCount = value; }
 
@@ -42,7 +49,15 @@ namespace Citta_T1.Business.Schedule
 
             tokenSource = new CancellationTokenSource();
             resetEvent = new ManualResetEvent(true);
+            Adddic();
         }
+
+        private void Adddic()
+        {
+            operatorFuncDict.Add(ElementSubType.MaxOperator, MaxUnit);
+            operatorFuncDict.Add(ElementSubType.FilterOperator, FilterUnit);
+        }
+
 
         public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
@@ -131,7 +146,7 @@ namespace Citta_T1.Business.Schedule
         }
 
 
-
+        
 
 
         bool TaskMethod(Triple triple)
@@ -142,15 +157,13 @@ namespace Citta_T1.Business.Schedule
 
                 //开始task先更新几个状态
                 //op控件 running
-                //TODO
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
 
-
-                Thread.Sleep(5000);
-                //此处写处理数据方法
-
-
+                if (operatorFuncDict.ContainsKey(triple.OperateElement.SubType))
+                {
+                    RunLinuxCommand(FuncCmd(triple,operatorFuncDict[triple.OperateElement.SubType]));
+                }
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
@@ -162,10 +175,72 @@ namespace Citta_T1.Business.Schedule
             catch (Exception ex)
             {
             }
-
             return triple.IsOperated;
 
         }
+
+
+        public string FuncCmd(Triple triple, FuncDelegate OperatorUnit)
+        {
+            return OperatorUnit(triple);
+        }
+
+        public string MaxUnit(Triple triple)
+        {
+            string filePath = triple.DataElements.First().GetPath();
+            OperatorOption option = (triple.OperateElement.GetControl as MoveOpControl).Option;
+            string maxfield = option.GetOption("maxfield");
+            string[] outfield = option.GetOption("outfield").Split(',');
+            string outfieldCmd = "$"+(int.Parse(outfield[0]) + 1).ToString();
+            for(int i = 1; i < outfield.Length; i++)
+            {
+                outfieldCmd = outfieldCmd + "\"\\t\"$" + (int.Parse(outfield[i]) + 1).ToString();
+            }
+            string cmd = "sbin\\sort.exe -k " + (int.Parse(maxfield) + 1).ToString() + " " + filePath + " | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' '{print " + outfieldCmd + "}'> 1.txt";
+            return cmd;
+        }
+
+        public string FilterUnit(Triple triple)
+        {
+            
+            return "";
+        }
+
+
+
+
+
+        public void RunLinuxCommand(string cmd)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.Arguments = "/c " + cmd;
+            p.StartInfo.UseShellExecute = false; // 不显示用户界面
+            p.StartInfo.RedirectStandardOutput = true; // 是否重
+            p.StartInfo.CreateNoWindow = true;
+
+            try
+            {
+                if (p.Start())//开始进程  
+                {
+                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
+                }
+            }
+            catch (Exception ex)
+            {
+                //异常停止的处理方法
+                //TODO
+            }
+            finally
+            {
+                if (p != null)
+                    p.Close();
+            }
+        }
+
+
+
+
 
     }
 }
