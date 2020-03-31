@@ -46,7 +46,15 @@ namespace Citta_T1.Controls.Move
         private ElementStatus status;
         private int id;
         public int ID { get => this.id; set => this.id = value; }
-        public ElementStatus Status {get => this.status; set=>this.status = value;}
+        public ElementStatus Status
+        {
+            get => this.status;
+            set
+            {
+                this.status = value;
+                StatusDirty(); 
+            }
+        }
         public MoveRsControl()
         {
             InitializeComponent();
@@ -60,6 +68,7 @@ namespace Citta_T1.Controls.Move
             this.Location = loc;
             SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
+            this.status = ElementStatus.Null;
         }
         public void ChangeSize(int sizeL)
         {
@@ -384,7 +393,16 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
+        #region 状态改变
+        private void StatusDirty()
+        {
+            if (this.status == ElementStatus.Null)
+                this.leftPicture.Image = Properties.Resources.resultNull;
+            else if (this.status == ElementStatus.Done)
+                this.leftPicture.Image = Properties.Resources.resultDone;
 
+        }
+        #endregion
     }
 }
 

@@ -250,6 +250,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        ctl.Status = EStatus(status);
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
