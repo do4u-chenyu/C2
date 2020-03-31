@@ -115,7 +115,7 @@ namespace Citta_T1.Business.Schedule
                  *    2.2 存在，循环
                  *        2.2.1 判断数据节点的类型，都为数据源直接算，如果有“result”需要判断状态
                  */
-                if (tmpTri.ResultElement.Status == ElementStatus.Done)
+                if (tmpTri.OperateElement.Status == ElementStatus.Done)
                 {
                     continue;
                 }
