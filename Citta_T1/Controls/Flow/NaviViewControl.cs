@@ -15,6 +15,7 @@ namespace Citta_T1.Controls.Flow
 {
     public partial class NaviViewControl : UserControl
     {
+        private LogUtil log = LogUtil.GetInstance("NaviViewControl");
         private List<Control> controls;
         private Pen pen;
         private Point viewBoxPosition, ctWorldPosition;
@@ -111,7 +112,7 @@ namespace Citta_T1.Controls.Flow
 
                 if (moveOffset != new Point(0, 0))
                 {
-                    Console.WriteLine("发生越界");
+                    log.Error("发生越界");
                     OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;

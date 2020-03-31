@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Citta_T1.Dgvs;
 using System.Reflection;
 using log4net;
 
@@ -12,18 +8,16 @@ namespace Citta_T1.Utils
     {
         private static LogUtil instance = null;
         private ILog log;
-        private bool console;
         private string moduleName;
 
         public string ModuleName { get => moduleName; set => moduleName = value; }
 
-        public LogUtil(bool console = false)
+        public LogUtil()
         {
-            this.console = console;
             log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         }
 
-        public static LogUtil GetInstance(string moduleName = "Main")
+        public static LogUtil GetInstance(string moduleName = "MainForm")
         {
             if (instance == null)
                 instance = new LogUtil();
@@ -34,32 +28,32 @@ namespace Citta_T1.Utils
         public LogUtil Warn(string content)
         {
             log.WarnFormat("{0}:{1}", this.ModuleName, content);
-            if (this.console)
-                System.Console.WriteLine(content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().LogUpdate(content);
             return this;
         }
 
         public LogUtil Info(string content)
         {
             log.InfoFormat("{0}:{1}", this.ModuleName, content);
-            if (this.console)
-                System.Console.WriteLine(content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().LogUpdate(content);
             return this;
         }
 
         public LogUtil Error(string content)
         {
             log.ErrorFormat("{0}:{1}", this.ModuleName, content);
-            if (this.console)
-                System.Console.WriteLine(content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().LogUpdate(content);
             return this;
         }
 
         public LogUtil Fatal(string content)
         {
             log.FatalFormat("{0}:{1}", this.ModuleName, content);
-            if (this.console)
-                System.Console.WriteLine(content);
+            if (Global.GetLogView() != null)
+                Global.GetLogView().LogUpdate(content);
             return this;
         }
     }

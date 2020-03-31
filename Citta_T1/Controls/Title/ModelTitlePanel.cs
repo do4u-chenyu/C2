@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
+
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Title
 {
@@ -15,6 +11,8 @@ namespace Citta_T1.Controls.Title
     public delegate void DocumentSwitchHandler(string modelTitle);
     public partial class ModelTitlePanel : UserControl
     {
+        private LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
+
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
         private List<ModelTitleControl> models;
         private int rawModelTitleNum = 9;
@@ -47,8 +45,8 @@ namespace Citta_T1.Controls.Title
         }
         public void LoadModelDocument(string[] modelTitles) 
         {
-            int end = modelTitles.Count() - 1;
-            for (int i = 0; i < modelTitles.Count(); i++)
+            int end = modelTitles.Length - 1;
+            for (int i = 0; i < modelTitles.Length; i++)
             {
                 ModelTitleControl mtControl = new ModelTitleControl();
                 mtControl.ModelDocumentSwitch += DocumentSwitch;
@@ -162,7 +160,7 @@ namespace Citta_T1.Controls.Title
                 // 其次选择左边的
                 else if (index != -1 && index - 1 >= 0)
                     models[index - 1].ShowSelectedBorder();
-                Console.WriteLine("删除的index为" + index.ToString());
+                log.Info("删除的index为" + index.ToString());
             }
             models.Remove(mtControl);
             this.Controls.Remove(mtControl);

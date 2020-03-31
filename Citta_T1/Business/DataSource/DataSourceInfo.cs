@@ -14,6 +14,7 @@ namespace Citta_T1.Business.DataSource
     {
         private string userPath;
         private string DataSourcePath;
+        private LogUtil log = LogUtil.GetInstance("DataSourceInfo");
         public DataSourceInfo(string userName)
         {
            this.userPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument\\" + userName;
@@ -73,7 +74,7 @@ namespace Citta_T1.Business.DataSource
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }
-                catch (Exception e) { System.Console.WriteLine(e.Message); }
+                catch (Exception e) { log.Error(e.Message); }
             }
             return dataSourceList;
         }

@@ -64,7 +64,7 @@ namespace Citta_T1
 
         }
 
-        private void InitializeDgv(string fileName="")
+        private void InitializeDgv(string fileName = "")
         {
             List<List<string>> datas;
             if (fileName == "")
