@@ -11,8 +11,14 @@ namespace Citta_T1.Controls.Left
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
-        public int Count { get => this.count; set => this.count = value; }
-
+        public int Count
+        { get => this.count;
+            set
+            {
+                this.count = value;
+                EnableDeleteDataSource(this.count);
+            }
+        }
         public DataButton()
         {
             InitializeComponent();
@@ -65,14 +71,19 @@ namespace Citta_T1.Controls.Left
         {
             int lastIndex = txtButton.Name.LastIndexOf("\\");
             string FilePath = txtButton.Name.Substring(0, lastIndex);
-            string FileName = txtButton.Name.Substring(lastIndex + 1); 
+            string FileName = txtButton.Name.Substring(lastIndex + 1);
             System.Diagnostics.Process.Start("Explorer", "/select," + FilePath + "\\" + FileName);
         }
 
         private void CopyFilePathToClipboard(object sender, EventArgs e)
         {
             Clipboard.SetText(txtButton.Name);
-            
+        }
+        private void EnableDeleteDataSource(int count)
+        {
+            if(count>0)
+                this.DeleteToolStripMenuItem.Enabled = true;
+
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Citta_T1.Controls.Move
         private bool isMouseDown = false;
         private Point mouseOffset;
 
+        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         private string typeName;
         private string oldTextString;
@@ -107,7 +108,7 @@ namespace Citta_T1.Controls.Move
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
         {
-            System.Console.WriteLine("移动开始");
+            log.Info("移动开始");
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -180,7 +181,7 @@ namespace Citta_T1.Controls.Move
 
         private void ResizeToBig()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(194 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
@@ -190,7 +191,7 @@ namespace Citta_T1.Controls.Move
         }
         private void ResizeToSmall()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(142 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
@@ -200,7 +201,7 @@ namespace Citta_T1.Controls.Move
         }
         private void ResizeToNormal()
         {
-            Console.WriteLine("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(184 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
@@ -307,7 +308,7 @@ namespace Citta_T1.Controls.Move
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            Console.WriteLine(this.Location.ToString());
+            log.Info(this.Location.ToString());
             isMouseDown = true;
         }
 

@@ -102,7 +102,6 @@ namespace Citta_T1.Business.Schedule
                  */
                 if (tmpTri.ResultElement.Status == ElementStatus.Done)
                 {
-                    //Console.WriteLine("该三元组已算过，下一个");
                     continue;
                 }
                 else
@@ -127,7 +126,6 @@ namespace Citta_T1.Business.Schedule
             }
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
-            //Console.WriteLine("所有任务都已完成");
 
             TaskCallBack();
         }
@@ -163,7 +161,6 @@ namespace Citta_T1.Business.Schedule
             }
             catch (Exception ex)
             {
-                //Console.WriteLine("线程被取消");
             }
 
             return triple.IsOperated;

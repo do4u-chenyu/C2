@@ -22,6 +22,7 @@ namespace Citta_T1.Business.Model
         private string modelFilePath;
         private ModelDocument modelDocument;
 
+        private LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
@@ -264,7 +265,7 @@ namespace Citta_T1.Business.Model
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }
                 }
-                catch(Exception e) { System.Console.WriteLine(e.Message); }
+                catch(Exception e) { log.Error(e.Message); }
                
             }
         }
@@ -290,7 +291,7 @@ namespace Citta_T1.Business.Model
                 string[] xy = coordinate.Split(',');
                 location = new Point(Convert.ToInt32(xy[0]), Convert.ToInt32(xy[1]));
             }
-            catch (Exception e) { System.Console.WriteLine(e.Message); }
+            catch (Exception e) { log.Error(e.Message); }
             return location;
         }
     }

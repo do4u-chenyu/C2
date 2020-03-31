@@ -48,6 +48,8 @@
             this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.dataGridView3 = new Citta_T1.DataGridView0();
+            this.logView = new Citta_T1.Dgvs.LogView();
+            this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -56,8 +58,6 @@
             this.logLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new Citta_T1.DataGridView1();
-            this.dataGridView2 = new Citta_T1.DataGridView2();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -176,9 +176,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(312, 36);
+            this.label1.Size = new System.Drawing.Size(282, 36);
             this.label1.TabIndex = 0;
-            this.label1.Text = "CITTA解决方案建模平台";
+            this.label1.Text = "IAO解决方案建模平台";
             // 
             // leftMainMenuPanel
             // 
@@ -200,7 +200,7 @@
             this.flowChartButton.Name = "flowChartButton";
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
-            this.flowChartButton.Text = "思维导图";
+            this.flowChartButton.Text = "IAO实验室";
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
@@ -288,6 +288,7 @@
             // 
             // myModelControl
             // 
+            this.myModelControl.AutoScroll = true;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
@@ -295,11 +296,12 @@
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
+            this.scrollbarComponent1.SetUserCustomScrollbar(this.myModelControl, true);
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView3); 
-            this.bottomViewPanel.Controls.Add(this.dataGridView1);
+            this.bottomViewPanel.Controls.Add(this.dataGridView3);
+            this.bottomViewPanel.Controls.Add(this.logView);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -317,15 +319,15 @@
             this.dataGridView3.Size = new System.Drawing.Size(906, 241);
             this.dataGridView3.TabIndex = 27;
             // 
-            // dataGridView1
+            // logView
             // 
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Load += new System.EventHandler(this.dataGridView1_Load);
+            this.logView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logView.Location = new System.Drawing.Point(0, 39);
+            this.logView.Margin = new System.Windows.Forms.Padding(4);
+            this.logView.Name = "logView";
+            this.logView.Size = new System.Drawing.Size(906, 241);
+            this.logView.TabIndex = 1;
+            this.logView.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
             // dataGridView2
             // 
@@ -394,7 +396,7 @@
             // 
             this.logLabel.AutoSize = true;
             this.logLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.logLabel.Location = new System.Drawing.Point(120 , 4);
+            this.logLabel.Location = new System.Drawing.Point(120, 4);
             this.logLabel.Name = "logLabel";
             this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
@@ -407,7 +409,7 @@
             this.errorLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.errorLabel.Location = new System.Drawing.Point(226, 4);
             this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(52, 27);
+            this.errorLabel.Size = new System.Drawing.Size(92, 27);
             this.errorLabel.TabIndex = 2;
             this.errorLabel.Text = "报错信息";
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
@@ -422,7 +424,6 @@
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
-            
             // 
             // ucDataGridView1
             // 
@@ -643,7 +644,9 @@
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
+            this.canvasPanel.ScreenFactor = 1F;
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
+            this.canvasPanel.StartMove = false;
             this.canvasPanel.TabIndex = 5;
             // 
             // panel3
@@ -697,6 +700,8 @@
             this.flowControl.Location = new System.Drawing.Point(694, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";
+            this.flowControl.SelectDrag = false;
+            this.flowControl.SelectFrame = false;
             this.flowControl.SelectRemark = true;
             this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
@@ -809,7 +814,10 @@
             // 
             // naviViewControl
             // 
-            
+            this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.naviViewControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.naviViewControl.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.naviViewControl.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.naviViewControl.Location = new System.Drawing.Point(752, 190);
             this.naviViewControl.Margin = new System.Windows.Forms.Padding(4);
             this.naviViewControl.Name = "naviViewControl";
@@ -857,6 +865,7 @@
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.modelTitlePanel.ResumeLayout(false);
@@ -909,7 +918,7 @@
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private DataGridView1 dataGridView1;
+        private Citta_T1.Dgvs.LogView logView;
         private DataGridView2 dataGridView2;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.Button stopButton;
