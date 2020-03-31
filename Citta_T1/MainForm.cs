@@ -458,7 +458,6 @@ namespace  Citta_T1
 
         private void RunButton_Click(object sender, EventArgs e)
         {
-
             if (this.runButton.Name == "runButton")
             {
                 //点击按钮，把当前的模型传进来
@@ -479,7 +478,8 @@ namespace  Citta_T1
                     MessageBox.Show("有未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
 
                 tripleListGen.GenerateList();
@@ -500,7 +500,8 @@ namespace  Citta_T1
             }
             else if (this.runButton.Name == "continueButton")
             {
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
                 currentManager.Continue();
             }

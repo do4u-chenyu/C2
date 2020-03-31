@@ -1885,21 +1885,4 @@
         //////////////////////////////////8=
 </value>
   </data>
-  <data name="pauseButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAzCAYAAACAArhKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAqVJREFUWEftl+ut4jAUhNMTPVACJVACPVACVdAAJVACPVBCVp91Bw3DsRPQiv1x
-        d6SRooztOQ/bUaZ5JW6323w6nebj8Tjv9/t5t9vN2+22PR8Oh6YxZi0WjS+XS1t8s9msIgGdz+ef2X10
-        jYmejKrF15C51+v1Z7VXlMZkWS32CWlBhRdjelgtIFJK9RTyvNQKxiSejEeZLm2e+/3exvTak5k/jFm0
-        mkCGLLoWjO1VwHv+MK4irUq0FlXL8FASzbgqMZkKVINoRa8Az655O6rMddSacTXAF0+NyIWqUj43dc2d
-        qt5SJkfqUBhpgAxTpzITuy2F3L2pQ2GkAbJPnb0z5Sbw3gqui8JIEzByndZO2d9qJ7suCiNNyOTo85TN
-        z4MOXBeFkSZUff53xt8odW7gVuqsP4EkXBeFkSaUm6s6Tn4BgNShMNKE1El24jBXgiN1KIw0UPWXK7pd
-        mZxdF+jB6MqEQqX53FwbgmZcReW99o8A9JstPyBQyN5CnZrhZzFL/g6qvQNVjYcxkVYDyTw32xKqTCG9
-        FR7GoBcl1UBbCoCWVZWDWb0nY9CLVkRnEUwgAeUllKw+PC/GoJf5J+ztk9IY0PNe2dbSe5roGgN6Oupb
-        xbX7YWjsIHrKRj89EJ55hzbKMLHa+G/jv/HX8MuNdf05OCJ+TsU8OrxzaF7+HAjNeHQ/6wIZARMCrj76
-        SZIDj4wxZwHIs6DIkx4Mz4x7B824+nGDZEGEipLFM3sFJqDnOqKX/WVzecYMpHyagJafOJVX8PGO0njU
-        Y2ULMmM0zRVGfe5mTGmrCU7PWJXh/bt4MmYhsuqhKjXAGM0D7FHBvhhXg525uQDvMc47IMGYrvGnGQsf
-        9XhNxkvGDjZfrwpvZ9wrtcM3qZ8Kx5PxN/HbjOf5DxNLB2kAvlu3AAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>
