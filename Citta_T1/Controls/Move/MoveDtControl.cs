@@ -58,8 +58,6 @@ namespace Citta_T1.Controls.Move
         #endregion
         // 受影响的线
         List<Line> affectedLines = new List<Line>() { };
-        
-
         public string GetBcpPath()
         {
             return this.Name;

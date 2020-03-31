@@ -38,7 +38,7 @@ namespace Citta_T1.Controls.Left
         {
             // 根据导入数据动态生成一个button
             DataButton b = new DataButton(filePath, dataName, encoding);
-            b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
+            b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 判断是否有路径文件
             if (this.dataSourceDictI2B.ContainsKey(filePath))
@@ -57,7 +57,7 @@ namespace Citta_T1.Controls.Left
         {
             // 供load时调用
 
-            dataButton.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1)); // 递增
+            dataButton.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
             dataButton.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             this.dataSourceDictI2B.Add(dataButton.FilePath, dataButton);
             this.LocalFrame.Controls.Add(dataButton);

@@ -69,7 +69,7 @@ namespace Citta_T1.Controls.Move
             // 
             // leftPicture
             // 
-            this.leftPicture.Image = global::Citta_T1.Properties.Resources.dataButton;
+            this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
             this.leftPicture.Location = new System.Drawing.Point(15, 1);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(18, 23);
