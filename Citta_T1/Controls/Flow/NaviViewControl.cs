@@ -15,6 +15,7 @@ namespace Citta_T1.Controls.Flow
 {
     public partial class NaviViewControl : UserControl
     {
+        private LogUtil log = LogUtil.GetInstance("NaviViewControl");
         private List<Control> controls;
         private Pen pen;
         private Point viewBoxPosition, ctWorldPosition;
@@ -78,8 +79,8 @@ namespace Citta_T1.Controls.Flow
             int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
-            Point moveOffset = WorldBoundControl(mapOrigin, factor);
-            ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
+            Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
+            OpUtil.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -106,13 +107,13 @@ namespace Citta_T1.Controls.Flow
             {
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
-                
-                Point moveOffset = WorldBoundControl(mapOrigin, factor);
+
+                Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
 
                 if (moveOffset != new Point(0, 0))
                 {
-                    Console.WriteLine("发生越界");
-                    ChangLoc(-moveOffset.X, -moveOffset.Y);
+                    log.Error("发生越界");
+                    OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 }
@@ -127,57 +128,23 @@ namespace Citta_T1.Controls.Flow
 
             if ((this.Parent as CanvasPanel).StartMove)
             {
-                updateImage(this.Width, this.Height, factor, mapOrigin);
+                UpdateImage(this.Width, this.Height, factor, mapOrigin);
                 (this.Parent as CanvasPanel).StartMove = false;
             }
-
-            
-
-
 
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
             gc.DrawRectangle(p1, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
+            if (this.staticImage == null)
+            {
+                UpdateImage(this.Width, this.Height, factor, mapOrigin);
+            }
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
 
         }
-        public void ChangLoc(float dx, float dy)
-        {
 
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.GetControl;
-                if (ct is IDragable)
-                    (ct as IDragable).ChangeLoc(dx, dy);
-            }
-        }
-
-        public Point WorldBoundControl(Point Pm,float factor)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
-            if (Pw.X < 50)
-            {
-                dragOffset.X = 50 - Pw.X;
-            }
-            if (Pw.Y < 30)
-            {
-                dragOffset.Y = 30 - Pw.Y;
-            }
-            if (Pw.X > 2000 - Convert.ToInt32(this.Parent.Width / factor))
-            {
-                dragOffset.X = 2000 - Convert.ToInt32(this.Parent.Width / factor) - Pw.X;
-            }
-            if (Pw.Y > 1000 - Convert.ToInt32((this.Parent.Height) / factor))
-            {
-                dragOffset.Y = 1000 - Convert.ToInt32((this.Parent.Height) / factor) - Pw.Y;
-            }
-            return dragOffset;
-        }
-        public void updateImage(int width,int height,float factor,Point mapOrigin)
+        private void UpdateImage(int width,int height,float factor,Point mapOrigin)
         {
             this.staticImage = new Bitmap(width,height);
             Graphics g = Graphics.FromImage(staticImage);
@@ -185,10 +152,7 @@ namespace Citta_T1.Controls.Flow
 
             foreach (ModelElement me in modelElements)
             {
-                if (me.Type != ElementType.DataSource & me.Type != ElementType.Operator & me.Type != ElementType.Result)
-                    continue;
-                Control ct = me.GetControl;
-                
+                Control ct = me.GetControl;   
                 Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
                 ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
                 Rectangle rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); 

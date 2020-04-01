@@ -34,7 +34,7 @@ namespace  Citta_T1
         private TripleListGen tripleListGen;
         private Manager currentManager;
         Thread scheduleThread = null;
-        delegate void AsynUpdateLog();
+        delegate void AsynUpdateLog(string log);
         delegate void AsynUpdateUI(int id);
 
         LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
@@ -43,7 +43,6 @@ namespace  Citta_T1
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.formInputData.InputDataEvent += frm_InputDataEvent;
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
-            this.modelDocumentDao = new ModelDocumentDao();
             InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
@@ -51,13 +50,9 @@ namespace  Citta_T1
             this.modelDocumentDao = new ModelDocumentDao();
             InitializeGlobalVariable();
             InitializeControlsLocation();
-            
-            
-            this.canvasPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragDrop);
-            this.canvasPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.canvasPanel.CanvasPanel_DragEnter);
-            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseDown);
-            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseMove);
-            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvasPanel.CanvasPanel_MouseUp);
+
+
+
 
 
         }
@@ -80,6 +75,7 @@ namespace  Citta_T1
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
+            Global.SetLogView(this.logView);
 
         }
 
@@ -290,21 +286,21 @@ namespace  Citta_T1
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
+            this.logView.Visible = false;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = true;
         }
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = false;
+            this.logView.Visible = false;
             this.dataGridView2.Visible = true;
             this.dataGridView3.Visible = false;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.Visible = true;
+            this.logView.Visible = true;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = false;
         }
@@ -458,7 +454,6 @@ namespace  Citta_T1
 
         private void RunButton_Click(object sender, EventArgs e)
         {
-
             if (this.runButton.Name == "runButton")
             {
                 //点击按钮，把当前的模型传进来
@@ -479,14 +474,11 @@ namespace  Citta_T1
                     MessageBox.Show("有未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
-                
+
                 tripleListGen.GenerateList();
-
-                //运行日志初始化
-                this.dataGridView1.ucDataGridView1_Load(CreateScheduleLogs());
-
 
                 currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
                 currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
@@ -504,42 +496,27 @@ namespace  Citta_T1
             }
             else if (this.runButton.Name == "continueButton")
             {
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
+                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
                 this.runButton.Name = "pauseButton";
                 currentManager.Continue();
             }
         }
 
-        //
-        private List<object> CreateScheduleLogs()
-        {
-            List<object> scheduleLogs = new List<object>();
-            foreach (Triple tLog in tripleListGen.CurrentModelTripleList)
-            {
-                scheduleLogs.Add(new ScheduleLog()
-                {
-                    TripleInfo = "三元组信息——" + tLog.TripleName,
-                    Status = "状态——" + tLog.OperateElement.Status.ToString(),
-                });
-            }
-            return scheduleLogs;
-        }
 
-
-
-        //更新UI
-        private void UpdataLogStatus()
+        //更新log
+        private void UpdataLogStatus(string log)
         {
             if (InvokeRequired)
             {
-                this.Invoke(new AsynUpdateLog(delegate ()
+                this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
-                }));
+                    this.logView.LogUpdate(tlog);
+                }), log);
             }
             else
             {
-                this.dataGridView1.ucDataGridView1_Update(CreateScheduleLogs());
+                this.logView.LogUpdate(log);
             }
         }
 

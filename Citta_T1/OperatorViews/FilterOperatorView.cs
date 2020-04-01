@@ -143,6 +143,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
+            this.opControl.Option.OptionDict.Clear();
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
             string factor1 = this.comboBox1.Text + "," + this.comboBox2.Text + "," + this.textBoxEx1.Text;

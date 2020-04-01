@@ -6,10 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Citta_T1.Controls;
-using Citta_T1.OperatorViews;
 using Citta_T1.Business.Option;
-using System.Collections.Generic;
 using Citta_T1.Business.Model;
 using System.Linq;
 using Citta_T1.Utils;
@@ -119,7 +116,6 @@ namespace Citta_T1.Controls.Move
         }
         public void ChangeSize(int sizeL)
         {
-            log.Info("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             bool originVisible = this.Visible;
             if (originVisible)
                 this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
@@ -146,33 +142,10 @@ namespace Citta_T1.Controls.Move
         private void InitializeOpPinPicture()
         {
             SetOpControlName(this.textBox.Text);
-            System.Console.WriteLine(doublelPinFlag);
             int dy = 0;
             if (doublelPinFlag)
             {
                 dy = 4;
-                //=======
-                //            this.leftPinArray.Add(this.leftPinPictureBox);
-                //            this.endLineIndexs.Add(0);
-                //            if (doublelPinFlag)
-                //            {
-                //                int x = this.leftPinPictureBox.Location.X;
-                //                int y = this.leftPinPictureBox.Location.Y;
-                //                this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-
-                //                leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                //                leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
-                //                leftPinPictureBox1.Name = "leftPinPictureBox1";
-                //                leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
-                //                leftPinPictureBox1.TabIndex = 3;
-                //                leftPinPictureBox1.TabStop = false;
-                //                leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-                //                leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-                //                this.Controls.Add(leftPinPictureBox1);
-                //                this.leftPinArray.Add(leftPinPictureBox1);
-                //                this.endLineIndexs.Add(0);
-                //>>>>>>> 620c76785beea424ee18a0a91a2d7f0633e7afaf
-                //            }
             }
             rectIn_down = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
             this.leftPinArray.Add(rectIn_down);
@@ -181,30 +154,6 @@ namespace Citta_T1.Controls.Move
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            //SetOpControlName(this.textBox.Text);
-            //System.Console.WriteLine(doublelPinFlag);
-
-            //if (doublelPinFlag)
-            //{
-            //    int x = this.leftPinPictureBox.Location.X;
-            //    int y = this.leftPinPictureBox.Location.Y;
-            //    this.leftPinPictureBox.Location = new System.Drawing.Point(x, y - 4);
-
-            //    leftPinPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            //    leftPinPictureBox1.Location = new System.Drawing.Point(x, y + 4);
-            //    leftPinPictureBox1.Name = "leftPinPictureBox1";
-            //    leftPinPictureBox1.Size = this.leftPinPictureBox.Size;
-            //    leftPinPictureBox1.TabIndex = 3;
-            //    leftPinPictureBox1.TabStop = false;
-            //    leftPinPictureBox1.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-            //    leftPinPictureBox1.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-            //    this.Controls.Add(leftPinPictureBox1);
-            //}
-            /*
-            System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
-            leftPicture1.Location = new System.Drawing.Point(16, 24);
-            this.Controls.Add(leftPicture1);
-            */
         }
 
         #region MOC的事件
@@ -336,7 +285,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("移动开始");
+            
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -385,7 +334,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 10;//初始14
+            int maxLength = 10;
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -408,37 +357,35 @@ namespace Citta_T1.Controls.Move
         }
 
         private void ResizeToBig()
-        {
-            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+        {      
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
             this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
             this.statusBox.Location = new Point((int)(126 * f), (int)(5 * f));//新增
-            this.rightPinPictureBox.Location = new Point((int)(159 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(159 * f), (int)(11 * f));
+            
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
         }
         private void ResizeToSmall()
         {
-            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
             this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
             this.statusBox.Location = new Point((int)(104 * f), (int)(5 * f));//新增
-            this.rightPinPictureBox.Location = new Point((int)(140 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
+            this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
         }
         private void ResizeToNormal()
-        {
-            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+        {  
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
             this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
             this.statusBox.Location = new Point((int)(120 * f), (int)(5 * f));//新增
-            this.rightPinPictureBox.Location = new Point((int)(154 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
+            this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
         }
         #endregion
 
@@ -579,7 +526,6 @@ namespace Citta_T1.Controls.Move
             if (rectIn_down.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus))  return; 
-                log.Info("========================");
                 rectIn_down = rectEnter(rectIn_down);
                 this.Invalidate();
                 pinStatus = "rectIn_down";
@@ -587,7 +533,6 @@ namespace Citta_T1.Controls.Move
             else if(rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)) return;
-                log.Info("========================");
                 rectIn_up = rectEnter(rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
@@ -595,15 +540,12 @@ namespace Citta_T1.Controls.Move
             else if(rectOut.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)) return;
-                log.Info("========================");
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
             }
             else if (pinStatus != "noEnter")
-            {
-                log.Info("-----------------------------");
-                
+            {             
                 switch (pinStatus)
                 {
                     case "rectIn_down":
@@ -689,9 +631,21 @@ namespace Citta_T1.Controls.Move
             
             SetDouble(this);
             if (zoomUp)
+            {
                 SetControlsBySize(factor, this);
-            else 
+                this.rectOut = SetRectBySize(factor, this.rectOut);
+                this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
+                this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
+                this.Invalidate();
+            }
+            else
+            {
                 SetControlsBySize(1 / factor, this);
+                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
+                this.rectIn_down = SetRectBySize(1 / factor, this.rectIn_down);
+                this.rectIn_up = SetRectBySize(1 / factor, this.rectIn_up);
+            }
+
 
         }
 
@@ -713,6 +667,14 @@ namespace Citta_T1.Controls.Move
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
+        }
+        public Rectangle SetRectBySize(float f, Rectangle rect)
+        {
+            rect.Width = Convert.ToInt32(rect.Width * f);
+            rect.Height = Convert.ToInt32(rect.Height * f);
+            rect.X = Convert.ToInt32(rect.Left * f);
+            rect.Y = Convert.ToInt32(rect.Top * f);
+            return rect;
         }
         #endregion
 

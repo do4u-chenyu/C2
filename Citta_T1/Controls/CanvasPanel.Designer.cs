@@ -30,6 +30,11 @@
         {
             components = new System.ComponentModel.Container();
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
         }
         
         #endregion

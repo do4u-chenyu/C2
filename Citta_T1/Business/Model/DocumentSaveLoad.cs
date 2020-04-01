@@ -22,6 +22,7 @@ namespace Citta_T1.Business.Model
         private string modelFilePath;
         private ModelDocument modelDocument;
 
+        private LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
@@ -250,6 +251,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        ctl.Status = EStatus(status);
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -264,7 +266,7 @@ namespace Citta_T1.Business.Model
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }
                 }
-                catch(Exception e) { System.Console.WriteLine(e.Message); }
+                catch(Exception e) { log.Error(e.Message); }
                
             }
         }
@@ -290,7 +292,7 @@ namespace Citta_T1.Business.Model
                 string[] xy = coordinate.Split(',');
                 location = new Point(Convert.ToInt32(xy[0]), Convert.ToInt32(xy[1]));
             }
-            catch (Exception e) { System.Console.WriteLine(e.Message); }
+            catch (Exception e) { log.Error(e.Message); }
             return location;
         }
     }

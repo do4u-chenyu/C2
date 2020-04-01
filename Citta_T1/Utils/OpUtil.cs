@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Text;
-using System.IO;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+
+using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
 
 namespace Citta_T1.Utils
 {
@@ -48,5 +51,40 @@ namespace Citta_T1.Utils
                 );
         }
 
+        public static Point WorldBoundControl(Point Pm, float factor, int width, int height)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            if (Pw.X < 50)
+            {
+                dragOffset.X = 50 - Pw.X;
+            }
+            if (Pw.Y < 30)
+            {
+                dragOffset.Y = 30 - Pw.Y;
+            }
+            if (Pw.X > 2000 - Convert.ToInt32(width / factor))
+            {
+                dragOffset.X = 2000 - Convert.ToInt32(width / factor) - Pw.X;
+            }
+            if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
+            {
+                dragOffset.Y = 1000 - Convert.ToInt32(height / factor) - Pw.Y;
+            }
+            return dragOffset;
+        }
+
+        public static void ChangLoc(float dx, float dy)
+        {
+
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            foreach (ModelElement me in modelElements)
+            {
+                Control ct = me.GetControl;
+                if (ct is IDragable)
+                    (ct as IDragable).ChangeLoc(dx, dy);
+            }
+        }
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="Controls\Move\MoveRsControl.Designer.cs">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\QuickformatWrapper.cs" />
     <Compile Include="Controls\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -162,6 +163,12 @@
     </Compile>
     <Compile Include="Controls\Title\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Top\CommonUseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Top\CommonUseControl.Designer.cs">
+      <DependentUpon>CommonUseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStruct\Data.cs" />
     <Compile Include="DataStruct\DataButtonInfo.cs" />
@@ -267,13 +274,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleLog.cs" />
     <Compile Include="TestGridModel.cs" />
-    <Compile Include="Dgvs\DataGridView1.cs">
+    <Compile Include="Dgvs\LogView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\DataGridView1.Designer.cs">
-      <DependentUpon>DataGridView1.cs</DependentUpon>
+    <Compile Include="Dgvs\LogView.Designer.cs">
+      <DependentUpon>LogView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flow\FlowControl.cs">
       <SubType>UserControl</SubType>
@@ -351,11 +357,14 @@
     <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Top\CommonUseControl.resx">
+      <DependentUpon>CommonUseControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
       <DependentUpon>DataGridView0.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\DataGridView1.resx">
-      <DependentUpon>DataGridView1.cs</DependentUpon>
+    <EmbeddedResource Include="Dgvs\LogView.resx">
+      <DependentUpon>LogView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView2.resx">
       <DependentUpon>DataGridView2.cs</DependentUpon>
@@ -675,6 +684,8 @@
     </Content>
     <Content Include="res\displaypanel\remark.png" />
     <Content Include="res\displaypanel\shadow.png" />
+    <Content Include="res\element\resultDone.png" />
+    <Content Include="res\element\resultNull.png" />
     <Content Include="res\flowchart\diamond.png" />
     <Content Include="res\flowchart\downarrow.png" />
     <Content Include="res\flowchart\ellipse.png" />
@@ -715,6 +726,7 @@
     <Content Include="res\toolbox\MoveOpBackground.png" />
     <Content Include="res\toolbox\newfile.png" />
     <None Include="res\toolbox\pause.png" />
+    <Content Include="res\toolbox\RandomButton.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />

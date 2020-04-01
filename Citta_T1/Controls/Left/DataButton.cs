@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Citta_T1.Utils;
 
@@ -11,8 +12,14 @@ namespace Citta_T1.Controls.Left
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
-        public int Count { get => this.count; set => this.count = value; }
-
+        public int Count
+        { get => this.count;
+            set
+            {
+                this.count = value;
+                EnableDeleteDataSource(this.count);
+            }
+        }
         public DataButton()
         {
             InitializeComponent();
@@ -60,5 +67,28 @@ namespace Citta_T1.Controls.Left
 
         }
         #endregion
+
+        private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "explorer.exe";  //资源管理器
+                processStartInfo.Arguments = "/e,/select," + txtButton.Name;
+                System.Diagnostics.Process.Start(processStartInfo);
+            }
+            catch (Exception ex) { System.Console.WriteLine(ex.Message); }
+        }
+
+        private void CopyFilePathToClipboard(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtButton.Name);
+        }
+        private void EnableDeleteDataSource(int count)
+        {
+            if(count>0)
+                this.DeleteToolStripMenuItem.Enabled = true;
+
+        }
     }
 }
