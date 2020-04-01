@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Business.Schedule;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +12,6 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model
 {
-
     /*
      * 一个文档对应一个模型
      */
@@ -31,6 +31,9 @@ namespace Citta_T1.Business.Model
         
         private Point mapOrigin = new Point(-600,-300);
 
+        private Manager manager;
+
+
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -45,6 +48,7 @@ namespace Citta_T1.Business.Model
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
+        public Manager Manager { get => manager; set => manager = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -54,6 +58,8 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.remarkDescription = "";
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
+
+            this.manager = new Manager();
         }
         /*
          * 保存功能

@@ -12,21 +12,30 @@ using System.Diagnostics;
 
 namespace Citta_T1.Business.Schedule
 {
+    public enum ModelStatus
+    {
+        Running,   //模型的调度器正在运行
+        Pause,     //模型的调度器暂停
+        Stop,      //模型的调度器中止
+        Done,      //模型的调度器运行完成
+        Null       //模型的调度器未初始化
+    }
+
+
     class Manager
     {
+
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
-
-        public delegate void UpdateUI(int id);//声明一个更新主线程的委托
-        public UpdateUI UpdateUIDelegate;
 
         public delegate void AccomplishTask();//声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
 
-
+        private TripleListGen tripleList;
+        private Thread scheduleThread = null;
+        private ModelStatus modelStatus;
 
         private List<Triple> currentModelTripleList = new List<Triple>();
-        private int maxAllowCount = 3;
 
         CancellationTokenSource tokenSource = new CancellationTokenSource();
         ManualResetEvent resetEvent = new ManualResetEvent(true);
@@ -34,30 +43,21 @@ namespace Citta_T1.Business.Schedule
         //并行任务集合
         private List<Task> parallelTasks;
 
-        public delegate string FuncDelegate(Triple triple);
-        Dictionary<ElementSubType, FuncDelegate> operatorFuncDict = new Dictionary<ElementSubType, FuncDelegate>();
+        public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
+        public Thread ScheduleThread { get => scheduleThread; set => scheduleThread = value; }
+        public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
 
-        public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
-        public int MaxAllowCount { get => maxAllowCount; set => maxAllowCount = value; }
-
-        public List<Task> ParallelTasks { get => parallelTasks; set => parallelTasks = value; }
-
-        public Manager(int maxAllowCount, List<Triple> currentModelTripleList, List<ModelElement> currentModelElements)
+        public Manager()
         {
-            this.maxAllowCount = maxAllowCount;
-            this.currentModelTripleList = currentModelTripleList;
-
-            tokenSource = new CancellationTokenSource();
-            resetEvent = new ManualResetEvent(true);
-            Adddic();
+            this.modelStatus = ModelStatus.Null;
         }
 
-        private void Adddic()
+        public void GetCurrentModelTripleList(ModelDocument currentModel)
         {
-            operatorFuncDict.Add(ElementSubType.MaxOperator, MaxUnit);
-            operatorFuncDict.Add(ElementSubType.FilterOperator, FilterUnit);
+            this.tripleList = new TripleListGen(currentModel);
+            this.tripleList.GenerateList();
+            this.currentModelTripleList = this.tripleList.CurrentModelTripleList;
         }
-
 
         public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
@@ -70,19 +70,21 @@ namespace Citta_T1.Business.Schedule
 
         public void Pause()
         {
+            this.modelStatus = ModelStatus.Pause;
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Suspend);
-            
             resetEvent.Reset();
         }
 
         public void Continue()
         {
+            this.modelStatus = ModelStatus.Running;
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Runnnig);
             resetEvent.Set();
         }
 
         public void Stop()
         {
+            this.modelStatus = ModelStatus.Stop;
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
             resetEvent.Dispose();
@@ -97,24 +99,38 @@ namespace Citta_T1.Business.Schedule
                     }
                 }
             }
-            //thread.Abort();
+            CloseThread();
+
+        }
+
+        public void CloseThread()
+        {
+            if (scheduleThread != null)
+            {
+                if (scheduleThread.IsAlive)
+                {
+                    scheduleThread.Abort();
+                }
+            }
         }
 
         public void Start()
         {
-            parallelTasks = new List<Task>();
+            this.modelStatus = ModelStatus.Running;
+            this.tokenSource = new CancellationTokenSource();
+            this.resetEvent = new ManualResetEvent(true);
 
+            scheduleThread = new Thread(new ThreadStart(() => StartTask()));
+            scheduleThread.IsBackground = true;
+            scheduleThread.Start();
+            
+        }
+
+        public void StartTask()
+        {
+            parallelTasks = new List<Task>();
             foreach (Triple tmpTri in currentModelTripleList)
             {
-                /*
-                 * 1、判断tmpTri中的isOperated，是否算过
-                 *    1.1 算过continue；
-                 *    1.2 未算 → 2；
-                 * 2、判断tmpTri中的DataElements中的ModelElement的ElementType是否存在Result
-                 *    2.1 不存在，开运算线程，continue；
-                 *    2.2 存在，循环
-                 *        2.2.1 判断数据节点的类型，都为数据源直接算，如果有“result”需要判断状态
-                 */
                 if (tmpTri.OperateElement.Status == ElementStatus.Done)
                 {
                     continue;
@@ -142,6 +158,7 @@ namespace Citta_T1.Business.Schedule
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
 
+            this.modelStatus = ModelStatus.Done;
             TaskCallBack();
         }
 
@@ -155,22 +172,21 @@ namespace Citta_T1.Business.Schedule
             {
                 tokenSource.Token.ThrowIfCancellationRequested();
 
-                //开始task先更新几个状态
-                //op控件 running
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
 
-                if (operatorFuncDict.ContainsKey(triple.OperateElement.SubType))
-                {
-                    RunLinuxCommand(FuncCmd(triple,operatorFuncDict[triple.OperateElement.SubType]));
-                }
+                string cmd = new Engine(triple).ExcuteCmd();
+                UpdateLogDelegate("执行命令: " + cmd);
+                RunLinuxCommand(cmd);
+
+                //Thread.Sleep(5000);
+
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
                 UpdateLogDelegate(triple.TripleName + "结束运行");
-                UpdateUIDelegate(triple.OperateElement.ID);
             }
             catch (Exception ex)
             {
@@ -178,37 +194,6 @@ namespace Citta_T1.Business.Schedule
             return triple.IsOperated;
 
         }
-
-
-        public string FuncCmd(Triple triple, FuncDelegate OperatorUnit)
-        {
-            return OperatorUnit(triple);
-        }
-
-        public string MaxUnit(Triple triple)
-        {
-            string filePath = triple.DataElements.First().GetPath();
-            OperatorOption option = (triple.OperateElement.GetControl as MoveOpControl).Option;
-            string maxfield = option.GetOption("maxfield");
-            string[] outfield = option.GetOption("outfield").Split(',');
-            string outfieldCmd = "$"+(int.Parse(outfield[0]) + 1).ToString();
-            for(int i = 1; i < outfield.Length; i++)
-            {
-                outfieldCmd = outfieldCmd + "\"\\t\"$" + (int.Parse(outfield[i]) + 1).ToString();
-            }
-            string cmd = "sbin\\sort.exe -k " + (int.Parse(maxfield) + 1).ToString() + " " + filePath + " | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' '{print " + outfieldCmd + "}'> 1.txt";
-            return cmd;
-        }
-
-        public string FilterUnit(Triple triple)
-        {
-            
-            return "";
-        }
-
-
-
-
 
         public void RunLinuxCommand(string cmd)
         {
@@ -237,10 +222,6 @@ namespace Citta_T1.Business.Schedule
                     p.Close();
             }
         }
-
-
-
-
 
     }
 }

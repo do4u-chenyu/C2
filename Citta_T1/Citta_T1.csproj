@@ -72,6 +72,7 @@
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
+    <Compile Include="Business\Schedule\Engine.cs" />
     <Compile Include="Business\Schedule\Manager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGen.cs" />
@@ -750,5 +751,6 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
