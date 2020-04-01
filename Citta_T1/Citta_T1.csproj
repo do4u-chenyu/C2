@@ -726,6 +726,7 @@
     <Content Include="res\toolbox\MoveOpBackground.png" />
     <Content Include="res\toolbox\newfile.png" />
     <None Include="res\toolbox\pause.png" />
+    <Content Include="res\toolbox\RandomButton.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />
