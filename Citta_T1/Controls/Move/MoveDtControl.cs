@@ -261,8 +261,6 @@ namespace Citta_T1.Controls.Move
                 {
                     line = lines[index];
                     affectedLines.Add(line);
-                    startP = line.StartP;
-                    endP = line.EndP;
                 }
 
                 // 受影响区域
@@ -308,8 +306,6 @@ namespace Citta_T1.Controls.Move
                 }
                 //log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 #endregion
-
-                //log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
             }
         }
 
@@ -717,6 +713,11 @@ namespace Citta_T1.Controls.Move
         {
             // 不存在连DtControl 的 LeftPin的情况
             return p;
+        }
+
+        public int GetID()
+        {
+            return this.ID;
         }
 
         #region 划线动作

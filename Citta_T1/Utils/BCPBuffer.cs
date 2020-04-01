@@ -64,7 +64,6 @@ namespace Citta_T1.Utils
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
 
-            //TODO [DK] 文件少于100行，此处有bug
             string firstLine = sr.ReadLine();
             sb.AppendLine(firstLine);
 
