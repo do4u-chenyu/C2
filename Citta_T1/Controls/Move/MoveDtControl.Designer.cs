@@ -78,32 +78,7 @@
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-            // 
-            // leftPinPictureBox
-            // 
-            this.leftPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftPinPictureBox.Location = new System.Drawing.Point(4, 11);
-            this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(5, 5);
-            this.leftPinPictureBox.TabIndex = 3;
-            this.leftPinPictureBox.TabStop = false;
-            this.leftPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-            this.leftPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-            // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(171, 11);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(5, 5);
-            this.rightPinPictureBox.TabIndex = 4;
-            this.rightPinPictureBox.TabStop = false;
-            this.rightPinPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseDown);
-            this.rightPinPictureBox.MouseEnter += new System.EventHandler(this.PinOpPictureBox_MouseEnter);
-            this.rightPinPictureBox.MouseLeave += new System.EventHandler(this.PinOpPictureBox_MouseLeave);
-            this.rightPinPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseMove);
-            this.rightPinPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseUp);
-            // 
+        // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -215,10 +190,10 @@
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.leftPinPictureBox);
+             //this.Controls.Add(this.leftPinPictureBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPicture);
-            this.Controls.Add(this.rightPinPictureBox);
+            //this.Controls.Add(this.rightPinPictureBox);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveDtControl";
@@ -228,6 +203,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();

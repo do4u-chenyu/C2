@@ -6,11 +6,11 @@ using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using static Citta_T1.Controls.CanvasPanel;
 
 namespace Citta_T1.Controls.Move
 {
-    public partial class MoveRsControl : UserControl, IScalable, IDragable
+    public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
@@ -41,12 +41,26 @@ namespace Citta_T1.Controls.Move
         private int startY;
         private Point oldcontrolPosition;
         Line line;
+        public eCommandType cmd = eCommandType.select;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
 
         private ElementStatus status;
         private int id;
         public int ID { get => this.id; set => this.id = value; }
+
+        //绘制引脚
+        private Point leftPin = new Point(3, 11);
+        private Point rightPin = new Point(130, 11);
+        private int pinWidth = 4;
+        private int pinHeight = 4;
+        private Pen pen = new Pen(Color.DarkGray, 0.0001f);
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
+        public Rectangle rectIn;
+        public Rectangle rectOut;
+        private String pinStatus = "noEnter";
+        private String rectArea = "rectIn rectOut";
+
         public ElementStatus Status
         {
             get => this.status;
@@ -59,6 +73,7 @@ namespace Citta_T1.Controls.Move
         public MoveRsControl()
         {
             InitializeComponent();
+            InitializeOpPinPicture();
         }
         public MoveRsControl(int sizeL, string text, Point loc)
         {
@@ -69,7 +84,16 @@ namespace Citta_T1.Controls.Move
             this.Location = loc;
             SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
+            InitializeOpPinPicture();
             this.status = ElementStatus.Null;
+        }
+
+        private void InitializeOpPinPicture()
+        {
+            SetOpControlName(this.textBox.Text);
+
+            rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
+            rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
         }
         public void ChangeSize(int sizeL)
         {
@@ -107,8 +131,17 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
+            PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                    return;
+                }
                 (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
@@ -120,6 +153,17 @@ namespace Citta_T1.Controls.Move
             log.Info("移动开始");
             if (e.Button == MouseButtons.Left)
             {
+                if (rectOut.Contains(e.Location))
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    isMouseDown = true;
+                    cmd = eCommandType.draw;
+                    CanvasPanel canvas = (this.Parent as CanvasPanel);
+                    canvas.CanvasPanel_MouseDown(this, e1);
+                    return;
+                }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
@@ -143,6 +187,16 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    isMouseDown = false;
+                    cmd = eCommandType.select;
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    CanvasPanel canvas = Global.GetCanvasPanel();
+                    canvas.CanvasPanel_MouseUp(this, e1);
+                }
                 this.isMouseDown = false;
                 Global.GetNaviViewControl().UpdateNaviView();
 
@@ -288,26 +342,54 @@ namespace Citta_T1.Controls.Move
         }
 
         #region 针脚事件
-        private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
+        public void PinOpLeaveAndEnter(Point mousePosition)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            if (rectIn.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                rectIn = rectEnter(rectIn);
+                this.Invalidate();
+                pinStatus = "rectIn";
+            }
+            else if (rectOut.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                rectOut = rectEnter(rectOut);
+                this.Invalidate();
+                pinStatus = "rectOut";
+            }
+            else if (pinStatus != "noEnter")
+            {
+                switch (pinStatus)
+                {
+                    case "rectIn":
+                        rectIn = rectLeave(rectIn);
+                        break;
+                    case "rectOut":
+                        rectOut = rectLeave(rectOut);
+                        break;
+                }
+                pinStatus = "noEnter";
+                this.Invalidate();
+            }
+        }
+        private Rectangle rectEnter(Rectangle rect)
+        {
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
             Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
-
-        private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
+        private Rectangle rectLeave(Rectangle rect)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
             Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
         #region 右针脚事件
@@ -315,34 +397,35 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // 绘制贝塞尔曲线，起点只能是rightPin
-            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            log.Info(this.Location.ToString());
-            isMouseDown = true;
+            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //log.Info(this.Location.ToString());
+            //isMouseDown = true;
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            Graphics g = this.Parent.CreateGraphics();
-            if (g != null)
-            {
-                g.Clear(Color.White);
-            }
-            if (isMouseDown)
-            {
-                //this.Refresh();
-                int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-                int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-                line.DrawLine(g);
-            }
-            g.Dispose();
+            //Graphics g = this.Parent.CreateGraphics();
+            //if (g != null)
+            //{
+            //    g.Clear(Color.White);
+            //}
+            //if (isMouseDown)
+            //{
+            //    //this.Refresh();
+            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
+            //    line.DrawLine(g);
+            //}
+            //g.Dispose();
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
+            // TODO [DK] 这里要修改，划线应该和Dt划线一致
             (this.Parent as CanvasPanel).lines.Add(line);
         }
         #endregion
@@ -402,6 +485,38 @@ namespace Citta_T1.Controls.Move
             else if (this.status == ElementStatus.Done)
                 this.leftPicture.Image = Properties.Resources.resultDone;
 
+        }
+        #endregion
+        private void MoveOpControl_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(trnsRedBrush, rectIn);
+            e.Graphics.DrawRectangle(pen, rectIn);
+            e.Graphics.FillRectangle(trnsRedBrush, rectOut);
+            e.Graphics.DrawRectangle(pen, rectOut);
+        }
+
+        #region IMoveControl接口
+        public void UpdateLineWhenMoving()
+        {
+
+        }
+        public void SaveStartLines(int line_index)
+        {
+
+        }
+        public void SaveEndLines(int line_index)
+        {
+
+        }
+        // 修正坐标
+        public PointF RevisePointLoc(PointF p)
+        {
+            return p;
+        }
+
+        public int GetID()
+        {
+            return this.ID;
         }
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using Citta_T1.Business.Schedule;
+using Citta_T1.Business.Schedule;
+﻿using Citta_T1.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -132,8 +133,7 @@ namespace Citta_T1.Business.Model
             if (File.Exists(savePath + modelTitle +".xml"))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
-                dSaveLoad.ReadXml();
-            }          
+                dSaveLoad.ReadXml();            }          
         }
 
         public void Show()
