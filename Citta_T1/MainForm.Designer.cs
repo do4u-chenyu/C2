@@ -60,7 +60,12 @@
             this.previewLabel = new System.Windows.Forms.Label();
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.commonPanel = new System.Windows.Forms.Panel();
+            this.commonUseControl = new Citta_T1.Controls.Top.CommonUseControl();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.importButton = new System.Windows.Forms.Button();
+            this.saveModelButton = new System.Windows.Forms.Button();
+            this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.moreButton = new System.Windows.Forms.Button();
             this.formatButton = new System.Windows.Forms.Button();
@@ -71,10 +76,6 @@
             this.diffButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.importButton = new System.Windows.Forms.Button();
-            this.saveModelButton = new System.Windows.Forms.Button();
-            this.newModelButton = new System.Windows.Forms.Button();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
@@ -104,7 +105,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.commonPanel.SuspendLayout();
             this.panel5.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -448,7 +449,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.commonPanel);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(323, 46);
@@ -458,121 +459,19 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.label7);
-            this.panel6.Controls.Add(this.moreButton);
-            this.panel6.Controls.Add(this.formatButton);
-            this.panel6.Controls.Add(this.histogramButton);
-            this.panel6.Controls.Add(this.GroupButton);
-            this.panel6.Controls.Add(this.interOpButton);
-            this.panel6.Controls.Add(this.UnionButton);
-            this.panel6.Controls.Add(this.diffButton);
-            this.panel6.Controls.Add(this.filterButton);
-            this.panel6.Controls.Add(this.connectOpButton);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(272, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(634, 48);
-            this.panel6.TabIndex = 5;
+            this.commonPanel.Controls.Add(this.commonUseControl);
+            this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.commonPanel.Location = new System.Drawing.Point(272, 0);
+            this.commonPanel.Name = "panel6";
+            this.commonPanel.Size = new System.Drawing.Size(634, 48);
+            this.commonPanel.TabIndex = 5;
             // 
-            // label7
+            // commonUseControl
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(-1, 14);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 21);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "常用";
-            // 
-            // moreButton
-            // 
-            this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.Location = new System.Drawing.Point(607, 13);
-            this.moreButton.Name = "moreButton";
-            this.moreButton.Size = new System.Drawing.Size(25, 24);
-            this.moreButton.TabIndex = 1;
-            this.moreButton.UseVisualStyleBackColor = true;
-            this.moreButton.Click += new System.EventHandler(this.MoreButton_Click);
-            // 
-            // formatButton
-            // 
-            this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.Location = new System.Drawing.Point(512, 9);
-            this.formatButton.Name = "formatButton";
-            this.formatButton.Size = new System.Drawing.Size(89, 32);
-            this.formatButton.TabIndex = 8;
-            this.formatButton.UseVisualStyleBackColor = true;
-            this.formatButton.Click += new System.EventHandler(this.FormatButton_Click);
-            // 
-            // histogramButton
-            // 
-            this.histogramButton.Image = ((System.Drawing.Image)(resources.GetObject("histogramButton.Image")));
-            this.histogramButton.Location = new System.Drawing.Point(433, 9);
-            this.histogramButton.Name = "histogramButton";
-            this.histogramButton.Size = new System.Drawing.Size(75, 32);
-            this.histogramButton.TabIndex = 7;
-            this.histogramButton.UseVisualStyleBackColor = true;
-            this.histogramButton.Click += new System.EventHandler(this.HistogramButton_Click);
-            // 
-            // GroupButton
-            // 
-            this.GroupButton.Image = ((System.Drawing.Image)(resources.GetObject("GroupButton.Image")));
-            this.GroupButton.Location = new System.Drawing.Point(368, 9);
-            this.GroupButton.Name = "GroupButton";
-            this.GroupButton.Size = new System.Drawing.Size(61, 32);
-            this.GroupButton.TabIndex = 6;
-            this.GroupButton.UseVisualStyleBackColor = true;
-            this.GroupButton.Click += new System.EventHandler(this.GroupButton_Click);
-            // 
-            // interOpButton
-            // 
-            this.interOpButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
-            this.interOpButton.Location = new System.Drawing.Point(107, 9);
-            this.interOpButton.Name = "interOpButton";
-            this.interOpButton.Size = new System.Drawing.Size(61, 32);
-            this.interOpButton.TabIndex = 5;
-            this.interOpButton.UseVisualStyleBackColor = true;
-            this.interOpButton.Click += new System.EventHandler(this.InterOpButton_Click);
-            // 
-            // UnionButton
-            // 
-            this.UnionButton.Image = ((System.Drawing.Image)(resources.GetObject("UnionButton.Image")));
-            this.UnionButton.Location = new System.Drawing.Point(172, 9);
-            this.UnionButton.Name = "UnionButton";
-            this.UnionButton.Size = new System.Drawing.Size(61, 32);
-            this.UnionButton.TabIndex = 4;
-            this.UnionButton.UseVisualStyleBackColor = true;
-            this.UnionButton.Click += new System.EventHandler(this.UnionButton_Click);
-            // 
-            // diffButton
-            // 
-            this.diffButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
-            this.diffButton.Location = new System.Drawing.Point(239, 9);
-            this.diffButton.Name = "diffButton";
-            this.diffButton.Size = new System.Drawing.Size(61, 32);
-            this.diffButton.TabIndex = 3;
-            this.diffButton.UseVisualStyleBackColor = true;
-            this.diffButton.Click += new System.EventHandler(this.DiffButton_Click);
-            // 
-            // filterButton
-            // 
-            this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
-            this.filterButton.Location = new System.Drawing.Point(304, 9);
-            this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(61, 32);
-            this.filterButton.TabIndex = 2;
-            this.filterButton.UseVisualStyleBackColor = true;
-            this.filterButton.Click += new System.EventHandler(this.FilterButton_Click);
-            // 
-            // connectOpButton
-            // 
-            this.connectOpButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
-            this.connectOpButton.Location = new System.Drawing.Point(43, 9);
-            this.connectOpButton.Name = "connectOpButton";
-            this.connectOpButton.Size = new System.Drawing.Size(61, 32);
-            this.connectOpButton.TabIndex = 1;
-            this.connectOpButton.UseVisualStyleBackColor = true;
-            this.connectOpButton.Click += new System.EventHandler(this.ConnectOpButton_Click);
+            this.commonUseControl.Location = new System.Drawing.Point(6, 8);
+            this.commonUseControl.Name = "commonUseControl";
+            this.commonUseControl.Size = new System.Drawing.Size(637, 34);
+            this.commonUseControl.TabIndex = 23;
             // 
             // panel5
             // 
@@ -860,8 +759,7 @@
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.commonPanel.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -891,7 +789,7 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button saveModelButton;
         private System.Windows.Forms.Button newModelButton;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel commonPanel;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label previewLabel;
         private System.Windows.Forms.Label errorLabel;
@@ -938,6 +836,8 @@
         public System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
+        private Controls.Top.CommonUseControl commonUseControl;
+
     }
 }
 

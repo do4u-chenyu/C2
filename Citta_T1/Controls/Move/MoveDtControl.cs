@@ -213,7 +213,7 @@ namespace Citta_T1.Controls.Move
             if (isMouseDown)
             {
                 (this.Parent as CanvasPanel).StartMove = true;
-                log.Info("[MoveDtControl]开始移动");
+                //log.Info("[MoveDtControl]开始移动");
 
                 #region 控件移动部分
                 if (sender is Button)
@@ -308,10 +308,10 @@ namespace Citta_T1.Controls.Move
                     line.UpdatePoints();
                     canvas.RepaintObject(line);
                 }
-                log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
+                //log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
                 #endregion
 
-                log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
+                //log.Info("MoveDtControl 坐标更新, 点：" + (sender as MoveDtControl).Location.ToString());
             }
         }
 
@@ -346,7 +346,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("移动开始");
+           // log.Info("移动开始");
             if (e.Button == MouseButtons.Left)
             {
                 mouseOffset.X = e.X;
@@ -446,7 +446,7 @@ namespace Citta_T1.Controls.Move
 
         public void ResizeToBig()
         {
-            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+            //log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -455,7 +455,7 @@ namespace Citta_T1.Controls.Move
         }
         public void ResizeToSmall()
         {
-            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
+            //log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(109 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -464,7 +464,7 @@ namespace Citta_T1.Controls.Move
         }
         public void ResizeToNormal()
         {
-            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+            //log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
@@ -560,7 +560,7 @@ namespace Citta_T1.Controls.Move
         // 划线部分
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("rightPinPictureBox_MouseDown beigin =========================");
+            //log.Info("rightPinPictureBox_MouseDown beigin =========================");
             // 绘制贝塞尔曲线，起点只能是rightPin
             startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
             startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;

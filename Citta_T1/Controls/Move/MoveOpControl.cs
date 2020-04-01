@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static Citta_T1.Controls.CanvasPanel;
 using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 
@@ -111,7 +110,6 @@ namespace Citta_T1.Controls.Move
         }
         public void ChangeSize(int sizeL)
         {
-            log.Info("MoveOpControl: " + this.Width + ";" + this.Height + ";" + this.Left + ";" + this.Top + ";" + this.Font.Size);
             bool originVisible = this.Visible;
             if (originVisible)
                 this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
@@ -151,8 +149,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
-            log.Info("鼠标点" + this.PointToClient(MousePosition).ToString());
-            log.Info("区域" + rectIn_down.ToString());
+
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
             if (isMouseDown)
@@ -194,7 +191,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("移动开始");
+            
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -267,8 +264,7 @@ namespace Citta_T1.Controls.Move
         }
 
         private void ResizeToBig()
-        {
-            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
+        {      
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
             this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
@@ -280,7 +276,6 @@ namespace Citta_T1.Controls.Move
         }
         private void ResizeToSmall()
         {
-            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
             this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
@@ -290,8 +285,7 @@ namespace Citta_T1.Controls.Move
             this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
         }
         private void ResizeToNormal()
-        {
-            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
+        {  
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
             this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
@@ -439,7 +433,6 @@ namespace Citta_T1.Controls.Move
             if (rectIn_down.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus))  return; 
-                log.Info("========================");
                 rectIn_down = rectEnter(rectIn_down);
                 this.Invalidate();
                 pinStatus = "rectIn_down";
@@ -447,7 +440,6 @@ namespace Citta_T1.Controls.Move
             else if(rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)) return;
-                log.Info("========================");
                 rectIn_up = rectEnter(rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
@@ -455,15 +447,12 @@ namespace Citta_T1.Controls.Move
             else if(rectOut.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)) return;
-                log.Info("========================");
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
             }
             else if (pinStatus != "noEnter")
-            {
-                log.Info("-----------------------------");
-                
+            {             
                 switch (pinStatus)
                 {
                     case "rectIn_down":
