@@ -28,7 +28,6 @@ namespace Citta_T1.Controls.Move
         public int ID { get => this.id; set => this.id = value; }
 
         //绘制引脚
-        
         private Point rightPin = new Point(130, 11);
         private int pinWidth = 4;
         private int pinHeight = 4;
@@ -68,6 +67,7 @@ namespace Citta_T1.Controls.Move
         #endregion
         // 受影响的线
         List<Line> affectedLines = new List<Line>() { };
+        public eCommandType cmd = eCommandType.select;
         public string GetBcpPath()
         {
             return this.Name;
@@ -173,7 +173,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        #region 继承的方法
         public void ChangeSize(int sizeL)
         {
             this.sizeL = sizeL.ToString();
@@ -222,6 +221,14 @@ namespace Citta_T1.Controls.Move
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                    return;
+                }
                 (this.Parent as CanvasPanel).StartMove = true;
                 //log.Info("[MoveDtControl]开始移动");
 
@@ -241,85 +248,81 @@ namespace Citta_T1.Controls.Move
                 int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
                 int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
                 (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
+            #endregion
+
+                // TODO [DK] 拖影严重
+                /*
+                 * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
+                 * 2. 重绘静态图
+                 * 3. 用静态图盖住变化区域
+                 * 4. 更新坐标
+                 * 5. 绘线
+                 * 6. 更新canvas.lines
+                 */
+
+                Line line;
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                List<Line> lines = canvas.lines;
+                PointF startP;
+                PointF endP;
+                // 受影响的点
+                List<float> affectedPointsX = new List<float> { };
+                List<float> affectedPointsY = new List<float> { };
+
+                if (this.startLineIndexs.Count == 0)
+                {
+                    return;
+                }
+                foreach (int index in startLineIndexs)
+                {
+                    line = lines[index];
+                    affectedLines.Add(line);
+                }
+
+                // 受影响区域
+                foreach (Line l in affectedLines)
+                {
+                    if (!affectedPointsX.Contains(l.StartP.X))
+                        affectedPointsX.Add(l.StartP.X);
+                    if (!affectedPointsY.Contains(l.StartP.Y))
+                        affectedPointsY.Add(l.StartP.Y);
+                    if (!affectedPointsX.Contains(l.EndP.X))
+                        affectedPointsX.Add(l.EndP.X);
+                    if (!affectedPointsY.Contains(l.EndP.Y))
+                        affectedPointsY.Add(l.EndP.Y);
+                }
+                int minX = (int)affectedPointsX.Min();
+                int maxX = (int)affectedPointsX.Max();
+                int minY = (int)affectedPointsY.Min();
+                int maxY = (int)affectedPointsY.Max();
+                Rectangle affectedArea = new Rectangle(
+                    new Point(minX, minY),
+                    new Size(maxX - minX, maxY - minY)
+                );
+                // 重绘静态图
+                // TODO [DK] 不用每次都重新计算
+                canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
+                Rectangle clipRectangle = canvas.ClientRectangle;
+                CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
+                canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
+                canvas.staticImage.Save("Dt_static_image_save.png");
+                canvas.CoverPanelByRect(affectedArea);
+                foreach (int index in startLineIndexs)
+                {
+                    line = lines[index];
+                    // 边界坐标修正
+                    line.StartP = new PointF(
+                        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
+                    );
+                    // 坐标更新
+                    line.UpdatePoints();
+                    canvas.RepaintObject(line);
+                }
             }
-                #endregion
+        }
 
-                //    // TODO [DK] 拖影严重
-                //    #region 线移动部分
-                //    /*
-                //     * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
-                //     * 2. 重绘静态图
-                //     * 3. 用静态图盖住变化区域
-                //     * 4. 更新坐标
-                //     * 5. 绘线
-                //     * 6. 更新canvas.lines
-                //     */
-
-                //    Line line;
-                //    CanvasPanel canvas = Global.GetCanvasPanel();
-                //    List<Line> lines = canvas.lines;
-                //    PointF startP;
-                //    PointF endP;
-                //    // 受影响的点
-                //    List<float> affectedPointsX = new List<float> { };
-                //    List<float> affectedPointsY = new List<float> { };
-
-                //    if (this.startLineIndexs.Count == 0)
-                //    {
-                //        return;
-                //    }
-                //    foreach (int index in startLineIndexs)
-                //    {
-                //        line = lines[index];
-                //        affectedLines.Add(line);
-                //    }
-
-                //    // 受影响区域
-                //    foreach (Line l in affectedLines)
-                //    {
-                //        if (!affectedPointsX.Contains(l.StartP.X))
-                //            affectedPointsX.Add(l.StartP.X);
-                //        if (!affectedPointsY.Contains(l.StartP.Y))
-                //            affectedPointsY.Add(l.StartP.Y);
-                //        if (!affectedPointsX.Contains(l.EndP.X))
-                //            affectedPointsX.Add(l.EndP.X);
-                //        if (!affectedPointsY.Contains(l.EndP.Y))
-                //            affectedPointsY.Add(l.EndP.Y);
-                //    }
-                //    int minX = (int)affectedPointsX.Min();
-                //    int maxX = (int)affectedPointsX.Max();
-                //    int minY = (int)affectedPointsY.Min();
-                //    int maxY = (int)affectedPointsY.Max();
-                //    Rectangle affectedArea = new Rectangle(
-                //        new Point(minX, minY),
-                //        new Size(maxX - minX, maxY - minY)
-                //    );
-                //    // 重绘静态图
-                //    // TODO [DK] 不用每次都重新计算
-                //    canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
-                //    Rectangle clipRectangle = canvas.ClientRectangle;
-                //    CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
-                //    canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
-                //    canvas.staticImage.Save("Dt_static_image_save.png");
-                //    canvas.CoverPanelByRect(affectedArea);
-                //    foreach (int index in startLineIndexs)
-                //    {
-                //        line = lines[index];
-                //        // 边界坐标修正
-                //        line.StartP = new PointF(
-                //            Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                //            Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
-
-                //        );
-                //        // 坐标更新
-                //        line.UpdatePoints();
-                //        canvas.RepaintObject(line);
-                //    }
-                #endregion
-                //}
-            }
-
-            public Point WorldBoundControl(Point Pm)
+         public Point WorldBoundControl(Point Pm)
         {
             float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -352,6 +355,17 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
+                if (rectOut.Contains(e.Location))
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    isMouseDown = true;
+                    cmd = eCommandType.draw;
+                    CanvasPanel canvas = (this.Parent as CanvasPanel);
+                    canvas.CanvasPanel_MouseDown(this, e1);
+                    return;
+                }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
@@ -359,10 +373,19 @@ namespace Citta_T1.Controls.Move
             oldcontrolPosition = this.Location;
         }
 
+
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             MainForm prt = (MainForm)Parent.Parent;
-            prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
+            try
+            {
+                prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("该数据源路径发生改变，请检查数据源路径，当前数据源路径为: " + this.GetBcpPath());
+                return;
+            }
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveOpControl_MouseDown(sender, e);
@@ -376,6 +399,16 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    isMouseDown = false;
+                    cmd = eCommandType.select;
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    CanvasPanel canvas = Global.GetCanvasPanel();
+                    canvas.CanvasPanel_MouseUp(this, e1);
+                }
                 (this.Parent as CanvasPanel).StartMove = true;
                 isMouseDown = false;
                 if (sender is Button)
@@ -572,31 +605,31 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // 绘制贝塞尔曲线，起点只能是rightPin
-            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-            isMouseDown = true;
-            CanvasPanel canvas = (this.Parent as CanvasPanel);
-            canvas.CanvasPanel_MouseDown(this, e1);
+            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            //isMouseDown = true;
+            //CanvasPanel canvas = (this.Parent as CanvasPanel);
+            //canvas.CanvasPanel_MouseDown(this, e1);
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            canvas.CanvasPanel_MouseMove(this, e1);
+            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            //CanvasPanel canvas = Global.GetCanvasPanel();
+            //canvas.CanvasPanel_MouseMove(this, e1);
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            isMouseDown = false;
-            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            canvas.CanvasPanel_MouseUp(this, e1);
+            //isMouseDown = false;
+            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+            //CanvasPanel canvas = Global.GetCanvasPanel();
+            //canvas.CanvasPanel_MouseUp(this, e1);
         }
         #endregion
 
@@ -743,10 +776,5 @@ namespace Citta_T1.Controls.Move
         #region 划线动作
         #endregion
     }
-
-
-
-
-
 
 }

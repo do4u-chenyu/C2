@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
+using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
@@ -63,11 +64,22 @@ namespace Citta_T1.OperatorViews
                 int y = this.opControl.Location.Y;
                 MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
                 /*
-                 * 添加线
+                 * TODO [DK] 添加线
                  * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
                  * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
                  */
-                //Line line = new Line(this.opControl.rectOut.Location, mrc.re)
+                Line line = new Line(
+                    new PointF(
+                        this.opControl.rectOut.Location.X + this.opControl.Location.X,
+                        this.opControl.rectOut.Location.Y + this.opControl.Location.Y
+                        ),
+                    new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y)
+                );
+                    
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
+                canvas.RepaintObject(line);
+                canvas.lines.Add(line);
                 Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
             }
 

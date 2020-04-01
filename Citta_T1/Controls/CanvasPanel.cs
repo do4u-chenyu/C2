@@ -216,6 +216,7 @@ namespace Citta_T1.Controls
                  * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
                  * 2. 如果在，对该点就行修正
                  */
+                log.Info("开始划线");
                 PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
@@ -243,6 +244,29 @@ namespace Citta_T1.Controls
                 // 重绘曲线
                 RepaintObject(lineWhenMoving);
 
+            }
+        }
+        public void RepaintAllLines()
+        {
+            try
+            {
+                if (lines.Count() == 0)
+                {
+                    Line line;
+                    foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                    {
+                        line = new Line(mr.StartLocation, mr.EndLocation);
+                        lines.Add(line);
+                    }
+                }
+                foreach (Line line in this.lines)
+                {
+                    this.RepaintObject(line);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Warn("画板未加载完全");
             }
         }
         /*
@@ -323,7 +347,6 @@ namespace Citta_T1.Controls
                     return;
                 }
                 /* 
-                 * TODO [DK] 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
                  * 在Canvas_MouseMove的时候，对鼠标的终点进行
                  * 只保存线索引
                  *         __________
@@ -335,14 +358,16 @@ namespace Citta_T1.Controls
                 
                 lines.Add(line);
                 ModelRelation mr = new ModelRelation(
-                    line, 
-                    (startC as IMoveControl).GetID(), 
+                    line,
+                    (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
                     (endC as MoveOpControl).revisedPinIndex
                     );
+                log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
+                log.Info("线数量为 " + lines.Count());
                 Global.GetCurrentDocument().AddModelRelation(mr);
 
-               // log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
@@ -375,9 +400,9 @@ namespace Citta_T1.Controls
                 clipRectangle = ClientRectangle;
                 this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
                 //BackgroundImage = (Bitmap)this.staticImage.Clone();
-                this.staticImage.Save("static_image_save.bmp");
             }
             CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+            this.staticImage.Save("static_image_save.png");
             // 给staticImage上色
             dcStatic.DrawBackgroud(clipRectangle);
             // 将`需要重绘`IDrawable对象重绘在静态图上
@@ -388,7 +413,7 @@ namespace Citta_T1.Controls
             g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
             g.Dispose();
             dcStatic.Dispose();
-
+            this.RepaintAllLines();
         }
 
 

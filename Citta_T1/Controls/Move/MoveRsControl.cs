@@ -6,11 +6,11 @@ using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-
+using static Citta_T1.Controls.CanvasPanel;
 
 namespace Citta_T1.Controls.Move
 {
-    public partial class MoveRsControl : UserControl, IScalable, IDragable
+    public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
@@ -41,6 +41,7 @@ namespace Citta_T1.Controls.Move
         private int startY;
         private Point oldcontrolPosition;
         Line line;
+        public eCommandType cmd = eCommandType.select;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
 
@@ -54,8 +55,8 @@ namespace Citta_T1.Controls.Move
         private int pinWidth = 4;
         private int pinHeight = 4;
         private Pen pen = new Pen(Color.DarkGray, 0.0001f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);        
-        private Rectangle rectIn;
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
+        public Rectangle rectIn;
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
@@ -133,6 +134,14 @@ namespace Citta_T1.Controls.Move
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                    return;
+                }
                 (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
@@ -144,6 +153,17 @@ namespace Citta_T1.Controls.Move
             log.Info("移动开始");
             if (e.Button == MouseButtons.Left)
             {
+                if (rectOut.Contains(e.Location))
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    isMouseDown = true;
+                    cmd = eCommandType.draw;
+                    CanvasPanel canvas = (this.Parent as CanvasPanel);
+                    canvas.CanvasPanel_MouseDown(this, e1);
+                    return;
+                }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
@@ -167,6 +187,16 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
+                if (cmd == eCommandType.draw)
+                {
+                    isMouseDown = false;
+                    cmd = eCommandType.select;
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    CanvasPanel canvas = Global.GetCanvasPanel();
+                    canvas.CanvasPanel_MouseUp(this, e1);
+                }
                 this.isMouseDown = false;
                 Global.GetNaviViewControl().UpdateNaviView();
 
@@ -367,29 +397,29 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             // 绘制贝塞尔曲线，起点只能是rightPin
-            startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            log.Info(this.Location.ToString());
-            isMouseDown = true;
+            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //log.Info(this.Location.ToString());
+            //isMouseDown = true;
         }
 
         private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            Graphics g = this.Parent.CreateGraphics();
-            if (g != null)
-            {
-                g.Clear(Color.White);
-            }
-            if (isMouseDown)
-            {
-                //this.Refresh();
-                int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-                int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-                line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-                line.DrawLine(g);
-            }
-            g.Dispose();
+            //Graphics g = this.Parent.CreateGraphics();
+            //if (g != null)
+            //{
+            //    g.Clear(Color.White);
+            //}
+            //if (isMouseDown)
+            //{
+            //    //this.Refresh();
+            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
+            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
+            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
+            //    line.DrawLine(g);
+            //}
+            //g.Dispose();
         }
 
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
@@ -464,6 +494,31 @@ namespace Citta_T1.Controls.Move
             e.Graphics.FillRectangle(trnsRedBrush, rectOut);
             e.Graphics.DrawRectangle(pen, rectOut);
         }
+
+        #region IMoveControl接口
+        public void UpdateLineWhenMoving()
+        {
+
+        }
+        public void SaveStartLines(int line_index)
+        {
+
+        }
+        public void SaveEndLines(int line_index)
+        {
+
+        }
+        // 修正坐标
+        public PointF RevisePointLoc(PointF p)
+        {
+            return p;
+        }
+
+        public int GetID()
+        {
+            return this.ID;
+        }
+        #endregion
     }
 }
 
