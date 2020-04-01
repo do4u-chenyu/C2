@@ -223,9 +223,9 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-           // this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            DialogResult dialogResult = this.randomOperatorView.ShowDialog();
+            //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
+            //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
+            //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)

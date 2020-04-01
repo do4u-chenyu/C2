@@ -77,7 +77,11 @@ namespace Citta_T1.Controls.Left
                 processStartInfo.Arguments = "/e,/select," + txtButton.Name;
                 System.Diagnostics.Process.Start(processStartInfo);
             }
-            catch (Exception ex) { System.Console.WriteLine(ex.Message); }
+            catch (System.ComponentModel.Win32Exception ex) 
+            { 
+                //某些机器
+                System.Console.WriteLine(ex.Message);
+            }
         }
 
         private void CopyFilePathToClipboard(object sender, EventArgs e)
