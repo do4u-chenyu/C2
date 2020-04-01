@@ -78,12 +78,24 @@ namespace Citta_T1.Controls.Left
                 System.Diagnostics.Process.Start(processStartInfo);
             }
             catch (System.ComponentModel.Win32Exception ex) 
-            { 
-                //某些机器
-                System.Console.WriteLine(ex.Message);
+            {
+                LogUtil logUtil = new LogUtil();
+                logUtil.Error(ex.Message);
+                //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
+                ReplaceOpenMethod();
             }
         }
-
+        private void ReplaceOpenMethod()
+        {
+            try
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "explorer.exe";  //资源管理器
+                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(txtButton.Name);
+                System.Diagnostics.Process.Start(processStartInfo);
+            }
+            catch { };
+        }
         private void CopyFilePathToClipboard(object sender, EventArgs e)
         {
             Clipboard.SetText(txtButton.Name);

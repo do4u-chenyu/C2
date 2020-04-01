@@ -474,7 +474,7 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            /
+            
             //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
             //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
