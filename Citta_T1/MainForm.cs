@@ -534,18 +534,6 @@ namespace  Citta_T1
             }
         }
 
-        private void CloseThread()
-        {
-            Thread scheduleThread = this.modelDocumentDao.CurrentDocument.Manager.ScheduleThread;
-
-            if (scheduleThread != null)
-            {
-                if (scheduleThread.IsAlive)
-                {
-                    scheduleThread.Abort();
-                }
-            }
-        }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
@@ -605,7 +593,6 @@ namespace  Citta_T1
                     return;
                 }
             }
-            CloseThread();
         }
 
 
