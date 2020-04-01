@@ -457,12 +457,12 @@
             this.panel1.Size = new System.Drawing.Size(906, 48);
             this.panel1.TabIndex = 4;
             // 
-            // panel6
+            // commonPanel
             // 
             this.commonPanel.Controls.Add(this.commonUseControl);
             this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.commonPanel.Location = new System.Drawing.Point(272, 0);
-            this.commonPanel.Name = "panel6";
+            this.commonPanel.Name = "commonPanel";
             this.commonPanel.Size = new System.Drawing.Size(634, 48);
             this.commonPanel.TabIndex = 5;
             // 
