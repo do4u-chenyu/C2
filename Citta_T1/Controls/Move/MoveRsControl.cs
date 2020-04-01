@@ -47,6 +47,19 @@ namespace Citta_T1.Controls.Move
         private ElementStatus status;
         private int id;
         public int ID { get => this.id; set => this.id = value; }
+
+        //绘制引脚
+        private Point leftPin = new Point(3, 11);
+        private Point rightPin = new Point(130, 11);
+        private int pinWidth = 4;
+        private int pinHeight = 4;
+        private Pen pen = new Pen(Color.DarkGray, 0.0001f);
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);        
+        private Rectangle rectIn;
+        public Rectangle rectOut;
+        private String pinStatus = "noEnter";
+        private String rectArea = "rectIn rectOut";
+
         public ElementStatus Status
         {
             get => this.status;
@@ -59,6 +72,7 @@ namespace Citta_T1.Controls.Move
         public MoveRsControl()
         {
             InitializeComponent();
+            InitializeOpPinPicture();
         }
         public MoveRsControl(int sizeL, string text, Point loc)
         {
@@ -69,7 +83,16 @@ namespace Citta_T1.Controls.Move
             this.Location = loc;
             SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
+            InitializeOpPinPicture();
             this.status = ElementStatus.Null;
+        }
+
+        private void InitializeOpPinPicture()
+        {
+            SetOpControlName(this.textBox.Text);
+
+            rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
+            rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
         }
         public void ChangeSize(int sizeL)
         {
@@ -107,6 +130,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
+            PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
                 (this.Parent as CanvasPanel).StartMove = true;
@@ -288,26 +312,54 @@ namespace Citta_T1.Controls.Move
         }
 
         #region 针脚事件
-        private void PinOpPictureBox_MouseEnter(object sender, EventArgs e)
+        public void PinOpLeaveAndEnter(Point mousePosition)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            if (rectIn.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                rectIn = rectEnter(rectIn);
+                this.Invalidate();
+                pinStatus = "rectIn";
+            }
+            else if (rectOut.Contains(mousePosition))
+            {
+                if (rectArea.Contains(pinStatus)) return;
+                rectOut = rectEnter(rectOut);
+                this.Invalidate();
+                pinStatus = "rectOut";
+            }
+            else if (pinStatus != "noEnter")
+            {
+                switch (pinStatus)
+                {
+                    case "rectIn":
+                        rectIn = rectLeave(rectIn);
+                        break;
+                    case "rectOut":
+                        rectOut = rectLeave(rectOut);
+                        break;
+                }
+                pinStatus = "noEnter";
+                this.Invalidate();
+            }
+        }
+        private Rectangle rectEnter(Rectangle rect)
+        {
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
             Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
-
-        private void PinOpPictureBox_MouseLeave(object sender, EventArgs e)
+        private Rectangle rectLeave(Rectangle rect)
         {
-            Point oriLtCorner = (sender as PictureBox).Location;
-            Size oriSize = (sender as PictureBox).Size;
+            Point oriLtCorner = rect.Location;
+            Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
             Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
-            (sender as PictureBox).Location = dstLtCorner;
-            (sender as PictureBox).Size = dstSize;
+            return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
         #region 右针脚事件
@@ -405,6 +457,13 @@ namespace Citta_T1.Controls.Move
 
         }
         #endregion
+        private void MoveOpControl_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(trnsRedBrush, rectIn);
+            e.Graphics.DrawRectangle(pen, rectIn);
+            e.Graphics.FillRectangle(trnsRedBrush, rectOut);
+            e.Graphics.DrawRectangle(pen, rectOut);
+        }
     }
 }
 
