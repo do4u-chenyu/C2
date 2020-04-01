@@ -144,7 +144,7 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("CanvasPanel_MouseDown");
+            
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
@@ -225,8 +225,7 @@ namespace Citta_T1.Controls
                 {
                     Control con = modelEle.GetControl;
                     if (
-                        (modelEle.Type == ElementType.Operator || modelEle.Type == ElementType.DataSource || modelEle.Type == ElementType.Result) &&
-                        con != startC
+                        modelEle.Type == ElementType.Operator && con != startC
                         )
                     {
                         // 修正坐标
@@ -342,7 +341,7 @@ namespace Citta_T1.Controls
                     );
                 Global.GetCurrentDocument().AddModelRelation(mr);
 
-                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+               // log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
@@ -395,7 +394,6 @@ namespace Citta_T1.Controls
         private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
         {
             int cnt = 0;
-            log.Info("line'number = " + lines.Count() + ", ");
             IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
             foreach (Line line in drawLines)
             {
@@ -410,9 +408,9 @@ namespace Citta_T1.Controls
                 //    log.Info("line 不在区域" + rect.ToString() + "内");
                 //    continue;
                 line.Draw(dcStatic, rect);
-                log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
+               // log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
                 cnt += 1;
-                log.Info("已重绘" + cnt + "条曲线");
+                //log.Info("已重绘" + cnt + "条曲线");
             }
 
         }

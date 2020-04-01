@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
-using Citta_T1.Utils;
+
 
 namespace Citta_T1.Controls.Move
 { 
