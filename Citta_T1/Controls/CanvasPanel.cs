@@ -221,12 +221,12 @@ namespace Citta_T1.Controls
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
+                // 遍历所有OpControl的leftPin
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
                     if (
-                        (modelEle.Type == ElementType.Operator || modelEle.Type == ElementType.DataSource || modelEle.Type == ElementType.Result) &&
-                        con != startC
+                        modelEle.Type == ElementType.Operator && con != startC
                         )
                     {
                         // 修正坐标
