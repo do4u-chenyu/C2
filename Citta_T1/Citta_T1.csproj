@@ -684,6 +684,8 @@
     </Content>
     <Content Include="res\displaypanel\remark.png" />
     <Content Include="res\displaypanel\shadow.png" />
+    <Content Include="res\element\resultDone.png" />
+    <Content Include="res\element\resultNull.png" />
     <Content Include="res\flowchart\diamond.png" />
     <Content Include="res\flowchart\downarrow.png" />
     <Content Include="res\flowchart\ellipse.png" />

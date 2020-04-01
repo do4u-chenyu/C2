@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Citta_T1.Utils;
 
@@ -69,10 +70,14 @@ namespace Citta_T1.Controls.Left
 
         private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
         {
-            int lastIndex = txtButton.Name.LastIndexOf("\\");
-            string FilePath = txtButton.Name.Substring(0, lastIndex);
-            string FileName = txtButton.Name.Substring(lastIndex + 1);
-            System.Diagnostics.Process.Start("Explorer", "/select," + FilePath + "\\" + FileName);
+            try
+            {
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = "explorer.exe";  //资源管理器
+                processStartInfo.Arguments = "/e,/select," + txtButton.Name;
+                System.Diagnostics.Process.Start(processStartInfo);
+            }
+            catch (Exception ex) { System.Console.WriteLine(ex.Message); }
         }
 
         private void CopyFilePathToClipboard(object sender, EventArgs e)
