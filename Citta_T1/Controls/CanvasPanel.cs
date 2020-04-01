@@ -153,6 +153,9 @@ namespace Citta_T1.Controls
                 // 不能乱写
                 this.SetStartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
+                // 初始化静态图
+                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
+                this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
             }
 
             if (e.Button != MouseButtons.Left) return;
@@ -164,9 +167,6 @@ namespace Citta_T1.Controls
 
                 staticImage = new Bitmap(this.Width, this.Height);
                 this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
-                Graphics g = Graphics.FromImage(staticImage);
-
-                g.Dispose();
             }
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
@@ -324,6 +324,7 @@ namespace Citta_T1.Controls
                 }
                 /* 
                  * TODO [DK] 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
+                 * 在Canvas_MouseMove的时候，对鼠标的终点进行
                  * 只保存线索引
                  *         __________
                  * endP1  | MControl | startP
@@ -331,7 +332,16 @@ namespace Citta_T1.Controls
                  *         ----------
                  */
                 Line line = new Line(startP, new PointF(e.X, e.Y));
+                
                 lines.Add(line);
+                ModelRelation mr = new ModelRelation(
+                    line, 
+                    (startC as IMoveControl).GetID(), 
+                    (endC as IMoveControl).GetID(),
+                    (endC as MoveOpControl).revisedPinIndex
+                    );
+                Global.GetCurrentDocument().AddModelRelation(mr);
+
                 log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);

@@ -25,5 +25,7 @@ namespace Citta_T1.Controls.Interface
         void SaveEndLines(int line_index);
         // 修正坐标
         PointF RevisePointLoc(PointF p);
+
+        int GetID();
     }
 }

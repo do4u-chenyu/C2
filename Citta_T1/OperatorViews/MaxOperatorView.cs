@@ -62,6 +62,12 @@ namespace Citta_T1.OperatorViews
                 int x = this.opControl.Location.X + this.opControl.Width + 15;
                 int y = this.opControl.Location.Y;
                 MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
+                /*
+                 * 添加线
+                 * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
+                 * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
+                 */
+                //Line line = new Line(this.opControl.rectOut.Location, mrc.re)
                 Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
             }
 

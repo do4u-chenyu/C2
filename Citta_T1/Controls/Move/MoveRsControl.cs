@@ -333,6 +333,7 @@ namespace Citta_T1.Controls.Move
         private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             isMouseDown = false;
+            // TODO [DK] 这里要修改，划线应该和Dt划线一致
             (this.Parent as CanvasPanel).lines.Add(line);
         }
         #endregion

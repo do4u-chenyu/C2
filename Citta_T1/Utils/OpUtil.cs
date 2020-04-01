@@ -40,5 +40,13 @@ namespace Citta_T1.Utils
             return inHeight > 0 && inWidth > 0 ? inHeight * inWidth : 0;
         }
 
+        public static Rectangle GetAreaByLine(Line line)
+        {
+            return new Rectangle(
+                new Point((int)line.StartP.X, (int)line.StartP.Y),
+                new Size((int)Math.Abs(line.StartP.X - line.EndP.X), (int)Math.Abs(line.StartP.Y - line.EndP.Y))
+                );
+        }
+
     }
 }
