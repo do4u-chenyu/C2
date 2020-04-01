@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.OperatorViews
 {
@@ -54,15 +55,18 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation
+            //生成结果控件,创建relation,bcp结果文件
             if (this.oldstatus == ElementStatus.Null)
             {
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                     if (mr.Start == this.opControl.ID) return;
                 int x = this.opControl.Location.X + this.opControl.Width + 15;
                 int y = this.opControl.Location.Y;
-                MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
+                string tmpName = "Result" + DateTime.Now.ToString("yyyyMMdd") + this.opControl.ID.ToString();
+                MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x,y));
                 Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
+                string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName);
+                mrc.Path = path;
             }
 
         }
