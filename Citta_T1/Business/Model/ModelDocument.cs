@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -126,8 +127,7 @@ namespace Citta_T1.Business.Model
             if (File.Exists(savePath + modelTitle +".xml"))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
-                dSaveLoad.ReadXml();
-            }          
+                dSaveLoad.ReadXml();            }          
         }
 
         public void Show()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -31,6 +32,16 @@ namespace Citta_T1.Business.Model
             this.endPin = endPin;
             this.type = ElementType.Relation;
 
+        }
+        public ModelRelation(Line line, int startID, int endID, int endPin)
+        {
+            // TODO [DK] Canvas存的是Control
+            this.start = startID;
+            this.end = endID;
+            this.startLocation = new Point((int)line.StartP.X, (int)line.StartP.Y);
+            this.endLocation = new Point((int)line.EndP.X, (int)line.EndP.Y);
+            this.endPin = endPin;
+            this.type = ElementType.Relation;
         }
 
     }

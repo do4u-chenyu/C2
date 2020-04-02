@@ -145,6 +145,7 @@
     <Compile Include="Controls\Move\MoveRsControl.Designer.cs">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\QuickformatWrapper.cs" />
     <Compile Include="Controls\Title\ModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -162,6 +163,12 @@
     </Compile>
     <Compile Include="Controls\Title\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Top\CommonUseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Top\CommonUseControl.Designer.cs">
+      <DependentUpon>CommonUseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStruct\Data.cs" />
     <Compile Include="DataStruct\DataButtonInfo.cs" />
@@ -349,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Top\CommonUseControl.resx">
+      <DependentUpon>CommonUseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
       <DependentUpon>DataGridView0.cs</DependentUpon>
@@ -717,6 +727,7 @@
     <Content Include="res\toolbox\MoveOpBackground.png" />
     <Content Include="res\toolbox\newfile.png" />
     <None Include="res\toolbox\pause.png" />
+    <Content Include="res\toolbox\RandomButton.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />

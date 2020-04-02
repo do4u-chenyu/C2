@@ -144,7 +144,7 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("CanvasPanel_MouseDown");
+            
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
@@ -153,6 +153,9 @@ namespace Citta_T1.Controls
                 // 不能乱写
                 this.SetStartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
+                // 初始化静态图
+                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
+                this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
             }
 
             if (e.Button != MouseButtons.Left) return;
@@ -164,9 +167,6 @@ namespace Citta_T1.Controls
 
                 staticImage = new Bitmap(this.Width, this.Height);
                 this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
-                Graphics g = Graphics.FromImage(staticImage);
-
-                g.Dispose();
             }
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
@@ -216,17 +216,18 @@ namespace Citta_T1.Controls
                  * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
                  * 2. 如果在，对该点就行修正
                  */
+                log.Info("开始划线");
                 PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
+                // 遍历所有OpControl的leftPin
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
                     if (
-                        (modelEle.Type == ElementType.Operator || modelEle.Type == ElementType.DataSource || modelEle.Type == ElementType.Result) &&
-                        con != startC
+                        modelEle.Type == ElementType.Operator && con != startC
                         )
                     {
                         // 修正坐标
@@ -243,6 +244,29 @@ namespace Citta_T1.Controls
                 // 重绘曲线
                 RepaintObject(lineWhenMoving);
 
+            }
+        }
+        public void RepaintAllLines()
+        {
+            try
+            {
+                if (lines.Count() == 0)
+                {
+                    Line line;
+                    foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                    {
+                        line = new Line(mr.StartLocation, mr.EndLocation);
+                        lines.Add(line);
+                    }
+                }
+                foreach (Line line in this.lines)
+                {
+                    this.RepaintObject(line);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Warn("画板未加载完全");
             }
         }
         /*
@@ -323,7 +347,7 @@ namespace Citta_T1.Controls
                     return;
                 }
                 /* 
-                 * TODO [DK] 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
+                 * 在Canvas_MouseMove的时候，对鼠标的终点进行
                  * 只保存线索引
                  *         __________
                  * endP1  | MControl | startP
@@ -331,7 +355,18 @@ namespace Citta_T1.Controls
                  *         ----------
                  */
                 Line line = new Line(startP, new PointF(e.X, e.Y));
+                
                 lines.Add(line);
+                ModelRelation mr = new ModelRelation(
+                    line,
+                    (startC as IMoveControl).GetID(),
+                    (endC as IMoveControl).GetID(),
+                    (endC as MoveOpControl).revisedPinIndex
+                    );
+                log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
+                log.Info("线数量为 " + lines.Count());
+                Global.GetCurrentDocument().AddModelRelation(mr);
+
                 log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
@@ -365,9 +400,9 @@ namespace Citta_T1.Controls
                 clipRectangle = ClientRectangle;
                 this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
                 //BackgroundImage = (Bitmap)this.staticImage.Clone();
-                this.staticImage.Save("static_image_save.bmp");
             }
             CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+            this.staticImage.Save("static_image_save.png");
             // 给staticImage上色
             dcStatic.DrawBackgroud(clipRectangle);
             // 将`需要重绘`IDrawable对象重绘在静态图上
@@ -378,14 +413,13 @@ namespace Citta_T1.Controls
             g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
             g.Dispose();
             dcStatic.Dispose();
-
+            this.RepaintAllLines();
         }
 
 
         private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
         {
             int cnt = 0;
-            log.Info("line'number = " + lines.Count() + ", ");
             IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
             foreach (Line line in drawLines)
             {
@@ -400,9 +434,9 @@ namespace Citta_T1.Controls
                 //    log.Info("line 不在区域" + rect.ToString() + "内");
                 //    continue;
                 line.Draw(dcStatic, rect);
-                log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
+               // log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
                 cnt += 1;
-                log.Info("已重绘" + cnt + "条曲线");
+                //log.Info("已重绘" + cnt + "条曲线");
             }
 
         }
