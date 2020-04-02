@@ -102,6 +102,7 @@ namespace Citta_T1.Controls.Title
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                 }
+                Global.GetCurrentDocument().Manager.CloseThread();
                 return;
             }                       
             DialogResult result= MessageBox.Show("保存文件"+"\""+modelTitle + "\"" + "?","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -115,6 +116,7 @@ namespace Citta_T1.Controls.Title
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);                    
                 }
+                Global.GetCurrentDocument().Manager.CloseThread();
             }
             else if (result == DialogResult.No)
             {
@@ -124,6 +126,7 @@ namespace Citta_T1.Controls.Title
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);                  
                 }
+                Global.GetCurrentDocument().Manager.CloseThread();
             }
             else
                 return;

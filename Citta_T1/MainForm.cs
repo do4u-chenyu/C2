@@ -30,12 +30,9 @@ namespace  Citta_T1
 
         private ModelDocumentDao modelDocumentDao;
         public string UserName { get => this.userName; set => this.userName = value; }
-
-        private TripleListGen tripleListGen;
-        private Manager currentManager;
-        Thread scheduleThread = null;
+        
         delegate void AsynUpdateLog(string log);
-        delegate void AsynUpdateUI(int id);
+        
 
         LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
@@ -142,13 +139,14 @@ namespace  Citta_T1
         } 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
-
             this.modelDocumentDao.SwitchDocument(modelTitle);
             this.naviViewControl.UpdateNaviView();
             // 切换文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
+            //切换文档时，更新运行按钮图标
+            UpdateRunbuttonInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
         }
 
         public void LoadDocument(string modelTitle)
@@ -443,64 +441,52 @@ namespace  Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                this.runButton.Name = "runButton";
-                currentManager.Stop();
-                CloseThread();
+                Global.GetCurrentDocument().Manager.Stop();
+                UpdateRunbuttonInfo(Global.GetCurrentDocument().Manager.ModelStatus);
             }
         }
 
         private void RunButton_Click(object sender, EventArgs e)
         {
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+
+            //初次运行时，绑定线程与ui交互的委托
+            if(currentManager.ModelStatus == ModelStatus.Null)
+            {
+                currentManager.UpdateLogDelegate = UpdataLogStatus;
+                currentManager.TaskCallBack = Accomplish;
+            }
+
             if (this.runButton.Name == "runButton")
             {
-                //点击按钮，把当前的模型传进来
-                /* 1、先判断模型是否保存
-                 * 1.5、已保存改变图标和按钮名字，未保存弹出窗口并返回
-                 * 2、把this.modelDocumentDao.CurrentDocument传到TripleListGen，返回几个list<Triple> [一个模型有几个独立的小模型，就有几个list<Triple>]
-                 * 3、遍历几个list,每个list开一个manager类去处理
-                 */
-                if (this.modelDocumentDao.CurrentDocument.Dirty)
+                if (Global.GetCurrentDocument().Dirty)
                 {
                     MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                tripleListGen = new TripleListGen(this.modelDocumentDao.CurrentDocument);
-                if (!tripleListGen.IsAllOperatorReady())
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
+                int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
+                if (notReadyNum > 0)
                 {
-                    MessageBox.Show("有未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("有" + notReadyNum + "个未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
-                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
-                this.runButton.Name = "pauseButton";
 
-                tripleListGen.GenerateList();
-
-                currentManager = new Manager(5, tripleListGen.CurrentModelTripleList, this.modelDocumentDao.CurrentDocument.ModelElements);
-                currentManager.UpdateUIDelegate += UpdataUIStatus;//绑定更新任务状态的委托
-                currentManager.TaskCallBack += Accomplish;//绑定完成任务要调用的委托
-                currentManager.UpdateLogDelegate += UpdataLogStatus;//绑定更新任务状态的委托
-
-                scheduleThread = new Thread(new ThreadStart(currentManager.Start));
-                scheduleThread.Start();
+                currentManager.Start();
             }
             else if (this.runButton.Name == "pauseButton")
             {
-                this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                this.runButton.Name = "continueButton";
                 currentManager.Pause();
             }
             else if (this.runButton.Name == "continueButton")
             {
-                this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
-                //this.runButton.Image = ((System.Drawing.Image)resources.GetObject("pauseButton.Image"));
-                this.runButton.Name = "pauseButton";
                 currentManager.Continue();
             }
+
+            UpdateRunbuttonInfo(currentManager.ModelStatus);
         }
 
 
@@ -520,42 +506,34 @@ namespace  Citta_T1
             }
         }
 
-        //更新UI
-        private void UpdataUIStatus(int id)
-        {
-            if (InvokeRequired)
-            {
-                this.Invoke(new AsynUpdateUI(delegate (int i)
-                {
-                    MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == i).GetControl as MoveOpControl;
-                    log.Info(op.ReName);
-                }), id);
-            }
-            else
-            {
-                MoveOpControl op = this.modelDocumentDao.CurrentDocument.ModelElements.Find(c => c.ID == id).GetControl as MoveOpControl;
-            }
-        }
 
         //完成任务时需要调用
         private void Accomplish()
         {
-            this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-            this.runButton.Name = "runButton";
-            CloseThread();
+            UpdateRunbuttonInfo(Global.GetCurrentDocument().Manager.ModelStatus);
         }
 
 
-        private void CloseThread()
+
+        private void UpdateRunbuttonInfo(ModelStatus modelStatus)
         {
-            if (scheduleThread != null)
+            switch (modelStatus)
             {
-                if (scheduleThread.IsAlive)
-                {
-                    scheduleThread.Abort();
-                }
+                case ModelStatus.Pause:
+                    this.runButton.Name = "continueButton";
+                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    break;
+                case ModelStatus.Running:
+                    this.runButton.Name = "pauseButton";
+                    this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                    break;
+                default:
+                    this.runButton.Name = "runButton";
+                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    break;
             }
         }
+
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
@@ -615,7 +593,6 @@ namespace  Citta_T1
                     return;
                 }
             }
-            CloseThread();
         }
 
 
