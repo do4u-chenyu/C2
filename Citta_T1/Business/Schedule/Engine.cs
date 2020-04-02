@@ -13,8 +13,9 @@ namespace Citta_T1.Business.Schedule
     class Engine
     {
         private Triple triple;
-        private string inputFilePath;
+        private List<string> inputFilePaths = new List<string>();
         private OperatorOption option;
+        private string outputFilePath;
 
         public delegate string FuncDelegate();
         Dictionary<ElementSubType, FuncDelegate> operatorFuncDict = new Dictionary<ElementSubType, FuncDelegate>();
@@ -22,8 +23,9 @@ namespace Citta_T1.Business.Schedule
         public Engine(Triple triple)
         {
             this.triple = triple;
-            inputFilePath = triple.DataElements.First().GetPath();
+            triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
             option = (triple.OperateElement.GetControl as MoveOpControl).Option;
+            outputFilePath = triple.ResultElement.GetPath();
             AddDict();
         }
 
@@ -46,6 +48,33 @@ namespace Citta_T1.Business.Schedule
             operatorFuncDict.Add(ElementSubType.SortOperator, SortUnit);
             operatorFuncDict.Add(ElementSubType.FreqOperator, FreqUnit);
         }
+
+        public string TransChoiceToCmd(string choice)
+        {
+            switch (choice)
+            {
+                case "小于等于 ≦": return "<=";
+                case "大于等于 ≥": return ">=";
+                case "大于 &gt": return ">";
+                case "小于 &lt": return "<";
+                case "等于 =": return "=";
+                case "不等于 ≠": return "!=";
+                case "AND": return "&&";
+                case "OR": return "||";
+            }
+            return "无该选项";
+        }
+
+        public string TransOutputField(string[] outfield)
+        {
+            string outfieldLine = " $" + (int.Parse(outfield[0]) + 1).ToString();
+            for (int i = 1; i < outfield.Length; i++)
+            {
+                outfieldLine = outfieldLine + "\"\\t\"$" + (int.Parse(outfield[i]) + 1).ToString();
+            }
+            return outfieldLine;
+        }
+
 
         private string FreqUnit()
         {
@@ -103,29 +132,44 @@ namespace Citta_T1.Business.Schedule
 
         public string FilterUnit()
         {
-            Thread.Sleep(5000);
-            return "echo filter";
+            string inputFilePath = inputFilePaths.First();
+
+            //以后算子路径功能写完后去掉
+            if (inputFilePath == "")
+            {
+                Thread.Sleep(5000);
+                return "echo filter";
+            }
+
+            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
+
+            string[] factor1 = option.GetOption("factor1").Split(',');
+            string awkIfCmd = "$" + factor1[0] + TransChoiceToCmd(factor1[1]) + factor1[1];
+            for (int i = 2; i <= option.OptionDict.Count() - 1; i++)
+            {
+                string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
+                awkIfCmd = awkIfCmd + " " + TransChoiceToCmd(tmpfactor[0]) + " $" + tmpfactor[1] + TransChoiceToCmd(tmpfactor[2]) + tmpfactor[3];
+            }
+
+            string cmd = string.Format("sbin\\awk.exe -F'\\t' '{{if({0}) print {1} }}' >> {2}", awkIfCmd, outfieldLine, this.outputFilePath);
+            return cmd;
         }
 
         public string MaxUnit()
         {
-            if(inputFilePath == "")
+            string inputFilePath = inputFilePaths.First();
+
+            //以后算子路径功能写完后去掉
+            if (inputFilePath == "")
             {
                 Thread.Sleep(5000);
                 return "echo max";
             }
-            string maxfield = option.GetOption("maxfield");
-            string[] outfield = option.GetOption("outfield").Split(',');
 
-            string inputfieldLine = (int.Parse(maxfield) + 1).ToString();
-            string outfieldLine = "{print $" + (int.Parse(outfield[0]) + 1).ToString();
-            for (int i = 1; i < outfield.Length; i++)
-            {
-                outfieldLine = outfieldLine + "\"\\t\"$" + (int.Parse(outfield[i]) + 1).ToString();
-            }
-            outfieldLine = outfieldLine + "}";
-            string cmd = string.Format("sbin\\sort.exe -k {0} {1} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' '{2}'> 1.txt",inputfieldLine, inputFilePath, outfieldLine);
+            string inputfieldLine = (int.Parse(option.GetOption("maxfield")) + 1).ToString();
+            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
 
+            string cmd = string.Format("sbin\\sort.exe -k {0} {1} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' '{{ print {2}}}'>> {3}", inputfieldLine, inputFilePath, outfieldLine, this.outputFilePath);
             return cmd;
         }
 

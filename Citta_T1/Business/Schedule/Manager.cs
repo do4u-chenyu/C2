@@ -28,7 +28,7 @@ namespace Citta_T1.Business.Schedule
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
 
-        public delegate void AccomplishTask();//声明一个在完成任务时通知主线程的委托
+        public delegate void AccomplishTask(Manager manager);//声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
 
         private TripleListGen tripleList;
@@ -159,7 +159,7 @@ namespace Citta_T1.Business.Schedule
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
 
             this.modelStatus = ModelStatus.Done;
-            TaskCallBack();
+            TaskCallBack(this);
         }
 
 
@@ -179,7 +179,7 @@ namespace Citta_T1.Business.Schedule
                 UpdateLogDelegate("执行命令: " + cmd);
                 RunLinuxCommand(cmd);
 
-                //Thread.Sleep(5000);
+                //Thread.Sleep(10000);
 
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
