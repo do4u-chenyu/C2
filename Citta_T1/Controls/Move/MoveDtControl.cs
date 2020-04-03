@@ -42,7 +42,6 @@ namespace Citta_T1.Controls.Move
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
         //public event DeleteOperatorEventHandler DeleteOperatorEvent;
 
-        private bool isMouseDown = false;
         public bool isClicked = false;
         Bezier line;
         private string opControlName;
@@ -196,7 +195,8 @@ namespace Citta_T1.Controls.Move
             // 卡的版本
             // 按住拖拽
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
-            if (!isMouseDown)
+            //if (!isMouseDown)
+            if (cmd == eCommandType.Null)
                 return;
 
             // 开始划线
@@ -358,14 +358,13 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    isMouseDown = true;
                     cmd = eCommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                     return;
                 }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                isMouseDown = true;
+                cmd = eCommandType.Hold;
             }
             oldcontrolPosition = this.Location;
         }
@@ -388,14 +387,13 @@ namespace Citta_T1.Controls.Move
             {
                 if (cmd == eCommandType.PinDraw)
                 {
-                    isMouseDown = false;
                     cmd = eCommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                 }
                 Global.GetCanvasPanel().StartMove = true;
-                isMouseDown = false;
+                cmd = eCommandType.Null;
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)

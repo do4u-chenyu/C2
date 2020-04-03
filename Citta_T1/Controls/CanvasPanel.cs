@@ -42,7 +42,7 @@ namespace Citta_T1.Controls
         public List<Bezier> lines = new List<Bezier>() { };
         public enum eCommandType
         {
-            Move,
+            Hold,
             PinDraw,
             Null,
         }
