@@ -96,8 +96,15 @@ namespace Citta_T1.Business.Model
                     if((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
                         WriteModelOption(me.SubType, (me.GetControl as MoveOpControl).Option, xDoc, modelElementXml);
                 }
-                   
-                
+                if (me.Type == ElementType.Result)
+                {
+                    XmlElement pathNode = xDoc.CreateElement("path");
+                    pathNode.InnerText = me.GetPath();
+                    modelElementXml.AppendChild(pathNode);
+
+                }
+
+
             }
         }
         #region 配置信息存到xml
@@ -250,8 +257,10 @@ namespace Citta_T1.Business.Model
                         status = textInfo.ToTitleCase(status).ToString();
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        string bcpPath = xn.SelectSingleNode("path").InnerText;
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.Status = EStatus(status);
+                        ctl.Path = bcpPath;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }

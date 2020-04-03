@@ -10,6 +10,7 @@ using Citta_T1.Controls.Flow;
 using System.Xml;
 using System.Drawing;
 using Citta_T1.Utils;
+using Citta_T1.Business.Schedule;
 
 namespace Citta_T1.Business.Model
 {
@@ -258,5 +259,16 @@ namespace Citta_T1.Business.Model
             catch { }          
             return modelTitles;
         }
+
+        public ModelDocument GetManagerRelateModel(Manager manager)
+        {
+            foreach(ModelDocument md in modelDocuments)
+            {
+                if (md.Manager == manager)
+                    return md;
+            }
+            return null;
+        }
+
     }
 }

@@ -84,5 +84,17 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
+        public string CreateNewBCPFile(string filename)
+        {
+            string filePath = "";
+            filePath = Global.GetCurrentDocument().SavePath;
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+            filePath += filename + ".bcp";
+            if (!System.IO.File.Exists(filePath))
+                System.IO.File.Create(filePath).Close();
+            return filePath;
+
+        }
     }
 }
