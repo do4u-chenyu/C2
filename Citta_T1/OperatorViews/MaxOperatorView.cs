@@ -9,7 +9,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Utils;
 
 namespace Citta_T1.OperatorViews
 {
@@ -20,6 +19,7 @@ namespace Citta_T1.OperatorViews
         private string oldMaxfield;
         private List<int> oldOutList;
         private ElementStatus oldstatus;
+        private string[] columnName;
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -84,7 +84,7 @@ namespace Citta_T1.OperatorViews
                 canvas.lines.Add(line);
 
                 Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
-                string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName);
+                string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName,this.columnName);
                 mrc.Path = path;
             }
 
@@ -160,8 +160,8 @@ namespace Citta_T1.OperatorViews
  
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
-            foreach (string name in columnName)
+            this.columnName = column.Split('\t');
+            foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);
                 this.MaxValueBox.Items.Add(name);

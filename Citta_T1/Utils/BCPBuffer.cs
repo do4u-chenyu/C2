@@ -84,15 +84,25 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
-        public string CreateNewBCPFile(string filename)
+        public string CreateNewBCPFile(string filename,string[] columnName)
         {
             string filePath = "";
+            string columns = "";
             filePath = Global.GetCurrentDocument().SavePath;
             if (!Directory.Exists(filePath))
                 Directory.CreateDirectory(filePath);
             filePath += filename + ".bcp";
             if (!System.IO.File.Exists(filePath))
+            {
                 System.IO.File.Create(filePath).Close();
+                StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default);
+                foreach (string name in columnName)
+                    columns += name + "\t";
+                sw.WriteLine(columns.Trim('\t'));
+                sw.Flush();
+                sw.Close();
+            }
+               
             return filePath;
 
         }
