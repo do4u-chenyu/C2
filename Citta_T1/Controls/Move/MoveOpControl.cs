@@ -197,13 +197,6 @@ namespace Citta_T1.Controls.Move
                 //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
                 //List<Line> affectedLines = new List<Line> { };
                 //Rectangle affectedArea;
-                
-
-                //if (this.endLineIndexs.Count == 0)
-                //{
-                //    log.Info("[MoveDtControl] 不满足线移动条件");
-                //    return;
-                //}
                 //log.Info("[MoveDtControl] 满足线移动条件");
                 //foreach (int index in startLineIndexs)
                 //{
