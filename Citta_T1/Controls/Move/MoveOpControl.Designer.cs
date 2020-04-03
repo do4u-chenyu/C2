@@ -91,18 +91,6 @@ namespace Citta_T1.Controls.Move
             this.leftPinPictureBox.TabIndex = 3;
             this.leftPinPictureBox.TabStop = false;
             // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightPinPictureBox.Location = new System.Drawing.Point(176, 11);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(5, 5);
-            this.rightPinPictureBox.TabIndex = 4;
-            this.rightPinPictureBox.TabStop = false;
-            this.rightPinPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseDown);
-            this.rightPinPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseMove);
-            this.rightPinPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseUp);
-            // 
             // contextMenuStrip
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
