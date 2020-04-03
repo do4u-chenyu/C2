@@ -33,14 +33,14 @@ namespace Citta_T1.Controls.Move
         private bool doublelPinFlag = false;
         private PictureBox leftPinPictureBox1 = new PictureBox();
 
-        private string typeName;
+        private string subTypeName;
         private string oldTextString;
         private OperatorOption option=new OperatorOption();
         private int id;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
-        public string SubTypeName { get => typeName; }
+        public string SubTypeName { get => subTypeName; }
         internal OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
         public ElementStatus Status { 
@@ -97,14 +97,14 @@ namespace Citta_T1.Controls.Move
         {
             InitializeComponent();
         }
-        public MoveOpControl(int sizeL, string text, Point loc)
+        public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.status = ElementStatus.Null;
             InitializeComponent();
-            textBox.Text = text;
-            typeName = text;
+            textBox.Text = description;
+            this.subTypeName = subTypeName;
             Location = loc;
-            doublelPinFlag = doublePin.Contains(this.textBox.Text);
+            doublelPinFlag = doublePin.Contains(SubTypeName);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
@@ -434,7 +434,7 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            switch (this.typeName)
+            switch (this.subTypeName)
             {
 
                 case "连接算子":
