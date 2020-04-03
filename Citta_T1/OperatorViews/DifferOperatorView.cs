@@ -51,11 +51,11 @@ namespace Citta_T1.OperatorViews
             foreach (ModelRelation mr in modelRelations)
             {
                 //左侧数据源
-                if (mr.End == this.opControl.ID && mr.EndPin == 1)
-                    startID1 = mr.Start;
+                if (mr.EndID == this.opControl.ID && mr.EndPin == 1)
+                    startID1 = mr.StartID;
                 //右侧数据源
-                if (mr.End == this.opControl.ID && mr.EndPin == 2)
-                    startID2 = mr.Start;
+                if (mr.EndID == this.opControl.ID && mr.EndPin == 2)
+                    startID2 = mr.StartID;
             }
             foreach (ModelElement me in modelElements)
             {

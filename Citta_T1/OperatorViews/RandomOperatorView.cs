@@ -42,9 +42,9 @@ namespace Citta_T1.OperatorViews
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.End == this.opControl.ID)
+                if (mr.EndID == this.opControl.ID)
                 {
-                    startID = mr.Start;
+                    startID = mr.StartID;
                     break;
                 }
             }

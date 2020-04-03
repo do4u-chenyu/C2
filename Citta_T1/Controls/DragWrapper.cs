@@ -119,13 +119,11 @@ namespace Citta_T1.Controls
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + now.X - start.X;
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor) + now.Y - start.Y;
 
-            Bitmap i = new Bitmap(this.staticImage);
+            
             moveOffset.X = Convert.ToInt32(moveOffset.X * Factor);
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
-            n.DrawImageUnscaled(i, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            n.DrawImageUnscaled(this.staticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             
-            i.Dispose();
-            i = null;
         }
 
         private void ControlChange(Point start, Point now)

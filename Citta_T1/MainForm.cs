@@ -508,9 +508,11 @@ namespace  Citta_T1
 
 
         //完成任务时需要调用
-        private void Accomplish()
+        private void Accomplish(Manager manager)
         {
-            UpdateRunbuttonInfo(Global.GetCurrentDocument().Manager.ModelStatus);
+            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            doneModel.Save();
+            UpdateRunbuttonInfo(doneModel.Manager.ModelStatus);
         }
 
 

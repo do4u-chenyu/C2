@@ -100,7 +100,7 @@ namespace Citta_T1.Business.Model
             List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.Start == ID || mr.End == ID)
+                if (mr.StartID == ID || mr.EndID == ID)
                     relations.Add(mr);
             }
             //后续所有算子状态变为null
@@ -113,15 +113,15 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.Start == ID)
+                if (mr.StartID == ID)
                 {
                     foreach (ModelElement me in this.ModelElements)
                     {
-                        if (me.ID == mr.End)
+                        if (me.ID == mr.EndID)
                         {
                             if(me.Type==ElementType.Operator)
                                 me.Status = ElementStatus.Null;
-                            StateChange(mr.End);
+                            StateChange(mr.EndID);
                         }
                            
                     }
