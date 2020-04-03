@@ -42,7 +42,7 @@ namespace Citta_T1.Controls.Move
         private int startY;
         private Point oldcontrolPosition;
         Bezier line;
-        public eCommandType cmd = eCommandType.Null;
+        public ECommandType cmd = ECommandType.Null;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
 
@@ -138,7 +138,7 @@ namespace Citta_T1.Controls.Move
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
-                if (cmd == eCommandType.PinDraw)
+                if (cmd == ECommandType.PinDraw)
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
@@ -163,7 +163,7 @@ namespace Citta_T1.Controls.Move
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
-                    cmd = eCommandType.PinDraw;
+                    cmd = ECommandType.PinDraw;
                     CanvasPanel canvas = (this.Parent as CanvasPanel);
                     canvas.CanvasPanel_MouseDown(this, e1);
                     return;
@@ -191,10 +191,10 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
-                if (cmd == eCommandType.PinDraw)
+                if (cmd == ECommandType.PinDraw)
                 {
                     isMouseDown = false;
-                    cmd = eCommandType.Null;
+                    cmd = ECommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);

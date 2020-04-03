@@ -84,11 +84,13 @@ namespace Citta_T1.Controls
             Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * Factor), Convert.ToInt32(worldHeight * Factor));
             Graphics g = Graphics.FromImage(staticImage);
             g.Clear(Color.White);
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            
+            List<ModelElement>  modelElements  = Global.GetCurrentDocument().ModelElements;
+            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor);
+            // 反向遍历,解决Move时旧控件压在新控件上
             for(int i = 0; i < modelElements.Count; i++)
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
@@ -99,9 +101,19 @@ namespace Citta_T1.Controls
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                 me.Hide();
             }
-            
+            // TODO 上下曲线重叠问题
+            foreach (ModelRelation mr in modelRelations)
+            {
+                Point Pw = Global.GetCurrentDocument().ScreenToWorld(mr.GetBoundingRect().Location, mapOrigin);
+                if (Pw.X < 0 || Pw.Y < 0)
+                    continue;
 
-
+                PointF s = Global.GetCurrentDocument().ScreenToWorldF(mr.StartP, mapOrigin);
+                PointF a = Global.GetCurrentDocument().ScreenToWorldF(mr.A, mapOrigin);
+                PointF b = Global.GetCurrentDocument().ScreenToWorldF(mr.B, mapOrigin);
+                PointF e = Global.GetCurrentDocument().ScreenToWorldF(mr.EndP, mapOrigin);
+                g.DrawBezier(Pens.Green, s, a, b, e);
+            }
             g.Dispose();
             return staticImage;
         }

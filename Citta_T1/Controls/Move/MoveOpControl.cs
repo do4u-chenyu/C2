@@ -78,7 +78,7 @@ namespace Citta_T1.Controls.Move
         private List<int> endLineIndexs = new List<int>() { };
         List<Bezier> affectedStartLines = new List<Bezier>() { };
         List<Bezier> affectedEndLines = new List<Bezier>() { };
-        public eCommandType cmd = eCommandType.Null;
+        public ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
         private Point leftPin = new Point(3, 11);
@@ -161,7 +161,7 @@ namespace Citta_T1.Controls.Move
         {
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
-            if (cmd == eCommandType.Null)
+            if (cmd == ECommandType.Null)
                 return;
             // TODO [DK] 无用代码 过段时间删除
             //if (cmd == eCommandType.draw)
@@ -312,14 +312,14 @@ namespace Citta_T1.Controls.Move
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    cmd = eCommandType.PinDraw;
+                    cmd = ECommandType.PinDraw;
                     CanvasPanel canvas = (this.Parent as CanvasPanel);
                     canvas.CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                cmd = eCommandType.Hold;
+                cmd = ECommandType.Hold;
             }
             oldcontrolPosition=this.Location;
          }
@@ -340,16 +340,16 @@ namespace Citta_T1.Controls.Move
             if (e.Button == MouseButtons.Left)
             {
                 // TODO [DK] 无用代码 过段时间删除
-                if (cmd == eCommandType.PinDraw)
+                if (cmd == ECommandType.PinDraw)
                 {
-                    cmd = eCommandType.Null;
+                    cmd = ECommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     CanvasPanel canvas = Global.GetCanvasPanel();
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
-                cmd = eCommandType.Null;
+                cmd = ECommandType.Null;
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }

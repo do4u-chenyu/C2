@@ -66,7 +66,7 @@ namespace Citta_T1.Controls.Move
         #endregion
         // 受影响的线
         List<Bezier> affectedLines = new List<Bezier>() { };
-        public eCommandType cmd = eCommandType.Null;
+        public ECommandType cmd = ECommandType.Null;
         public string GetBcpPath()
         {
             return this.Name;
@@ -196,11 +196,11 @@ namespace Citta_T1.Controls.Move
             // 按住拖拽
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             //if (!isMouseDown)
-            if (cmd == eCommandType.Null)
+            if (cmd == ECommandType.Null)
                 return;
 
             // 开始划线
-            if (cmd == eCommandType.PinDraw)
+            if (cmd == ECommandType.PinDraw)
             {
                 startX = this.Location.X + e.X;
                 startY = this.Location.Y + e.Y;
@@ -358,13 +358,13 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    cmd = eCommandType.PinDraw;
+                    cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                     return;
                 }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                cmd = eCommandType.Hold;
+                cmd = ECommandType.Hold;
             }
             oldcontrolPosition = this.Location;
         }
@@ -385,15 +385,15 @@ namespace Citta_T1.Controls.Move
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (cmd == eCommandType.PinDraw)
+                if (cmd == ECommandType.PinDraw)
                 {
-                    cmd = eCommandType.Null;
+                    cmd = ECommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                 }
                 Global.GetCanvasPanel().StartMove = true;
-                cmd = eCommandType.Null;
+                cmd = ECommandType.Null;
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)

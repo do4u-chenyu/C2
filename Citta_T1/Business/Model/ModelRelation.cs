@@ -27,6 +27,9 @@ namespace Citta_T1.Business.Model
         public int EndID { get => this.endID; set => this.endID = value; }
         public PointF StartP { get => this.startP; set => this.startP = value; }
         public PointF EndP { get => endP; set => endP = value; }
+        public PointF A { get => a;}
+        public PointF B { get => b; }
+
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
           
@@ -57,7 +60,7 @@ namespace Citta_T1.Business.Model
             UpdatePoints();
         }
 
-        public RectangleF GetBoundingRect()
+        public RectangleF GetBoundingRectF()
         {
             float x = Math.Min(startP.X, endP.X);
             float y = Math.Min(startP.Y, endP.Y);
@@ -65,5 +68,16 @@ namespace Citta_T1.Business.Model
             float h = Math.Abs(startP.Y - endP.Y);
             return new RectangleF(x, y, w, h);
         }
+
+        public Rectangle GetBoundingRect()
+        {
+            float x = Math.Min(startP.X, endP.X);
+            float y = Math.Min(startP.Y, endP.Y);
+            float w = Math.Abs(startP.X - endP.X);
+            float h = Math.Abs(startP.Y - endP.Y);
+            return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(w), Convert.ToInt32(h));
+        }
+
+
     }
 }

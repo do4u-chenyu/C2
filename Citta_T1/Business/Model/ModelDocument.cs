@@ -172,5 +172,13 @@ namespace Citta_T1.Business.Model
             return Pw;
         }
 
+        public PointF ScreenToWorldF(PointF Ps, Point Pm)
+        {
+            PointF Pw = new PointF();
+            Pw.X = Ps.X - Pm.X;
+            Pw.Y = Ps.Y - Pm.Y;
+            return Pw;
+        }
+
     }
 }

@@ -145,6 +145,8 @@ namespace  Citta_T1
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
+            // 重绘所有Relation线
+            this.canvasPanel.Invalidate(false); 
             //切换文档时，更新运行按钮图标
             UpdateRunbuttonInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
         }

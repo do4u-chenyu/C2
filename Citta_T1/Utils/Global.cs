@@ -25,7 +25,12 @@ namespace Citta_T1.Utils
         public static CanvasPanel GetCanvasPanel() { return canvasPanel; }
         public static ModelDocumentDao GetModelDocumentDao() { return modelDocumentDao; }
 
-        public static ModelDocument GetCurrentDocument() { return GetModelDocumentDao().CurrentDocument; }
+        public static ModelDocument GetCurrentDocument() {
+            ModelDocument ret = null;
+            if (GetModelDocumentDao() != null)
+                ret = GetModelDocumentDao().CurrentDocument;
+            return ret; 
+        }
         public static FlowControl GetFlowControl() { return flowControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl() { return remarkControl; }
