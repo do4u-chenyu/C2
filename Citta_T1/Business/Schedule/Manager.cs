@@ -9,6 +9,7 @@ using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
 using Citta_T1.Business.Option;
 using System.Diagnostics;
+using Citta_T1.Business.Schedule.Cmd;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -175,9 +176,30 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
 
-                string cmd = new Engine(triple).ExcuteCmd();
+                string cmd = "";
+                switch (triple.OperateElement.SubType)
+                {
+                    case ElementSubType.MaxOperator: cmd = (new MaxOperatorCmd(triple)).GenCmd();break;
+                    case ElementSubType.FilterOperator: cmd = (new FilterOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.CollideOperator: cmd = (new CollideOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.UnionOperator: cmd = (new UnionOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.DifferOperator: cmd = (new DifferOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.RandomOperator: cmd = (new RandomOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.MinOperator: cmd = (new MinOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.AvgOperator: cmd = (new AvgOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.SortOperator: cmd = (new SortOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.FreqOperator: cmd = (new FreqOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.JoinOperator: cmd = (new JoinOperatorCmd(triple)).GenCmd(); break;
+                }
+
                 UpdateLogDelegate("执行命令: " + cmd);
                 RunLinuxCommand(cmd);
+
+
+
+
+
+
 
                 //Thread.Sleep(10000);
 
