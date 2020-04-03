@@ -79,7 +79,7 @@ namespace Citta_T1.Controls.Move
         private List<int> endLineIndexs = new List<int>() { };
         List<Bezier> affectedStartLines = new List<Bezier>() { };
         List<Bezier> affectedEndLines = new List<Bezier>() { };
-        public eCommandType cmd = eCommandType.select;
+        public eCommandType cmd = eCommandType.Null;
 
         // 绘制引脚
         private Point leftPin = new Point(3, 11);
@@ -315,7 +315,7 @@ namespace Citta_T1.Controls.Move
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
-                    cmd = eCommandType.draw;
+                    cmd = eCommandType.PinDraw;
                     CanvasPanel canvas = (this.Parent as CanvasPanel);
                     canvas.CanvasPanel_MouseDown(this, e1);
                     return;
@@ -343,10 +343,10 @@ namespace Citta_T1.Controls.Move
             if (e.Button == MouseButtons.Left)
             {
                 // TODO [DK] 无用代码 过段时间删除
-                if (cmd == eCommandType.draw)
+                if (cmd == eCommandType.PinDraw)
                 {
                     isMouseDown = false;
-                    cmd = eCommandType.select;
+                    cmd = eCommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);

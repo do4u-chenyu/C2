@@ -42,10 +42,11 @@ namespace Citta_T1.Controls
         public List<Bezier> lines = new List<Bezier>() { };
         public enum eCommandType
         {
-            draw,
-            select
+            Move,
+            PinDraw,
+            Null,
         }
-        public eCommandType cmd = eCommandType.select;
+        public eCommandType cmd = eCommandType.Null;
         public PointF startP;
         public PointF endP;
         private Control startC;
@@ -151,7 +152,7 @@ namespace Citta_T1.Controls
             ((MainForm)(this.Parent)).blankButton.Focus();
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
-                this.cmd = eCommandType.draw;
+                this.cmd = eCommandType.PinDraw;
                 // 不能乱写
                 this.SetStartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
@@ -211,7 +212,7 @@ namespace Citta_T1.Controls
                 dragWrapper.DragMove(this.Size, this.screenFactor, e);
             }
             // 绘制
-            else if (cmd == eCommandType.draw)
+            else if (cmd == eCommandType.PinDraw)
             {
                 // 吸附效果实现
                 /*
@@ -346,14 +347,14 @@ namespace Citta_T1.Controls
                 dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
-            else if (cmd == eCommandType.draw)
+            else if (cmd == eCommandType.PinDraw)
             {
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，那就不形成线，结束绘线动作
                  */
                 if (this.endC == null)
                 {
-                    cmd = eCommandType.select;
+                    cmd = eCommandType.Null;
                     lineWhenMoving = null;
                     return;
                 }
@@ -383,7 +384,7 @@ namespace Citta_T1.Controls
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
-                cmd = eCommandType.select;
+                cmd = eCommandType.Null;
                 lineWhenMoving = null;
             }
 
