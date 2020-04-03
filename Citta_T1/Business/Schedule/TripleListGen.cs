@@ -46,16 +46,17 @@ namespace Citta_T1.Business.Schedule
             this.currentModelTripleList = new List<Triple>();
         }
 
-        public bool IsAllOperatorReady()
+        public int AllOperatorNotReadyNum()
         {
+            int count = 0;
             foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
             {
                 if (op.Status == ElementStatus.Null)
                 {
-                    return false;
+                    count++;
                 }
             }
-            return true;
+            return count;
 
         }
 
@@ -95,8 +96,8 @@ namespace Citta_T1.Business.Schedule
 
                 foreach (ModelRelation mr in modelRelations)
                 {
-                    starNodes.Add(mr.Start);
-                    endNodes.Add(mr.End);
+                    starNodes.Add(mr.StartID);
+                    endNodes.Add(mr.EndID);
                 }
                 leafNodeIds = endNodes.Except(starNodes).ToList();
 
@@ -111,16 +112,16 @@ namespace Citta_T1.Business.Schedule
         public List<int> FindBeforeNodeIds(int id)
         {
             List<int> beforeNodeId = new List<int>();
-            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End == id))
+            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.EndID == id))
             {
-                beforeNodeId.Add(beforeNode.Start);
+                beforeNodeId.Add(beforeNode.StartID);
             }
             return beforeNodeId;
         }
 
         public int FindNextNodeId(int id)
         {
-            return modelRelations.Find(c => c.Start == id).End;
+            return modelRelations.Find(c => c.StartID == id).EndID;
         }
 
 

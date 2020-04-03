@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
+using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.OperatorViews
 {
@@ -54,21 +56,36 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation
+            //生成结果控件,创建relation,bcp结果文件
             if (this.oldstatus == ElementStatus.Null)
             {
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                    if (mr.Start == this.opControl.ID) return;
+                    if (mr.StartID == this.opControl.ID) return;
                 int x = this.opControl.Location.X + this.opControl.Width + 15;
                 int y = this.opControl.Location.Y;
-                MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
+                string tmpName = "Result" + DateTime.Now.ToString("yyyyMMdd") + this.opControl.ID.ToString();
+                MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x,y));
                 /*
-                 * 添加线
+                 * TODO [DK] 添加线
                  * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
                  * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
                  */
-                //Line line = new Line(this.opControl.rectOut.Location, mrc.re)
+                Bezier line = new Bezier(
+                    new PointF(
+                        this.opControl.rectOut.Location.X + this.opControl.Location.X,
+                        this.opControl.rectOut.Location.Y + this.opControl.Location.Y
+                        ),
+                    new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y)
+                );
+                    
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
+                canvas.RepaintObject(line);
+                canvas.lines.Add(line);
+
                 Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
+                string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName);
+                mrc.Path = path;
             }
 
         }
@@ -117,9 +134,9 @@ namespace Citta_T1.OperatorViews
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.End == this.opControl.ID)
+                if (mr.EndID == this.opControl.ID)
                 {
-                    startID = mr.Start;
+                    startID = mr.StartID;
                     break;
                 }
             }

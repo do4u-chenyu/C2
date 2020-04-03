@@ -43,7 +43,7 @@ namespace Citta_T1.Controls
 			this.graphics = null;
 		}
 
-		public void RepaintStatic(Rectangle r, List<Line> exceptLines = null)
+		public void RepaintStatic(Rectangle r, List<Bezier> exceptLines = null)
 		{
 			// 给staticImage上色
 			this.DrawBackgroud(r);
@@ -51,11 +51,11 @@ namespace Citta_T1.Controls
 			this.Draw(r, exceptLines);
 		}
 
-		private void Draw(RectangleF rect, List<Line> exceptLines = null)
+		private void Draw(RectangleF rect, List<Bezier> exceptLines = null)
 		{
 			int cnt = 0;
-			IEnumerable<Line> drawLines = exceptLines == null ? this.canvas.lines : this.canvas.lines.Except(exceptLines);
-			foreach (Line line in drawLines)
+			IEnumerable<Bezier> drawLines = exceptLines == null ? this.canvas.lines : this.canvas.lines.Except(exceptLines);
+			foreach (Bezier line in drawLines)
 			{
 				if (line == null)
 				{
@@ -67,7 +67,7 @@ namespace Citta_T1.Controls
 				//if (isInRect == false)
 				//    log.Info("line 不在区域" + rect.ToString() + "内");
 				//    continue;
-				line.Draw(this, rect);
+				line.DrawBezier(this.Graphics, rect);
 				log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
 				cnt += 1;
 				log.Info("已重绘" + cnt + "条曲线");
@@ -90,7 +90,7 @@ namespace Citta_T1.Controls
 			if (r.Height > this.canvas.staticImage.Height || r.Height < 0)
 				r.Height = this.canvas.staticImage.Height;
 			// 用保存好的图来局部覆盖当前背景图
-			this.canvas.staticImage.Save("Citta_repaintStatic.png");
+			//this.canvas.staticImage.Save("Citta_repaintStatic.png");
 			Pen pen = new Pen(Color.Red);
 			//g.DrawRectangle(pen, r);
 			pen.Dispose();
@@ -100,12 +100,12 @@ namespace Citta_T1.Controls
 
 		}
 
-		public void RepaintObject(Line line)
+		public void RepaintObject(Bezier line)
 		{
 			if (line == null)
 				return;
 			Graphics g = this.canvas.CreateGraphics();
-			line.DrawLine(g);
+			line.DrawBezier(g);
 			g.Dispose();
 		}
 	}

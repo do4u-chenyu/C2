@@ -1,4 +1,6 @@
-﻿using System;
+using Citta_T1.Business.Schedule;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +13,6 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model
 {
-
     /*
      * 一个文档对应一个模型
      */
@@ -31,6 +32,9 @@ namespace Citta_T1.Business.Model
         
         private Point mapOrigin = new Point(-600,-300);
 
+        private Manager manager;
+
+
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -45,6 +49,7 @@ namespace Citta_T1.Business.Model
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
+        public Manager Manager { get => manager; set => manager = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -54,6 +59,8 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.remarkDescription = "";
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
+
+            this.manager = new Manager();
         }
         /*
          * 保存功能
@@ -93,7 +100,7 @@ namespace Citta_T1.Business.Model
             List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.Start == ID || mr.End == ID)
+                if (mr.StartID == ID || mr.EndID == ID)
                     relations.Add(mr);
             }
             //后续所有算子状态变为null
@@ -106,15 +113,15 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.Start == ID)
+                if (mr.StartID == ID)
                 {
                     foreach (ModelElement me in this.ModelElements)
                     {
-                        if (me.ID == mr.End)
+                        if (me.ID == mr.EndID)
                         {
                             if(me.Type==ElementType.Operator)
                                 me.Status = ElementStatus.Null;
-                            StateChange(mr.End);
+                            StateChange(mr.EndID);
                         }
                            
                     }
@@ -126,8 +133,7 @@ namespace Citta_T1.Business.Model
             if (File.Exists(savePath + modelTitle +".xml"))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
-                dSaveLoad.ReadXml();
-            }          
+                dSaveLoad.ReadXml();            }          
         }
 
         public void Show()

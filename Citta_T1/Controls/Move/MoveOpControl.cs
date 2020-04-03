@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
-
+using static Citta_T1.Controls.CanvasPanel;
 
 namespace Citta_T1.Controls.Move
 { 
@@ -70,15 +70,16 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Line line;
+        Bezier line;
         private List<Rectangle> leftPinArray = new List<Rectangle> {};
         public int revisedPinIndex;
         // 以该控件为起点的所有点
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
-        List<Line> affectedStartLines = new List<Line>() { };
-        List<Line> affectedEndLines = new List<Line>() { };
+        List<Bezier> affectedStartLines = new List<Bezier>() { };
+        List<Bezier> affectedEndLines = new List<Bezier>() { };
+        public eCommandType cmd = eCommandType.Null;
 
         // 绘制引脚
         private Point leftPin = new Point(3, 11);
@@ -163,6 +164,15 @@ namespace Citta_T1.Controls.Move
 
             if (isMouseDown)
             {
+                // TODO [DK] 无用代码 过段时间删除
+                //if (cmd == eCommandType.draw)
+                //{
+                //    startX = this.Location.X + e.X;
+                //    startY = this.Location.Y + e.Y;
+                //    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                //    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                //    return;
+                //}
                 #region 控件移动
                 (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
@@ -179,7 +189,22 @@ namespace Citta_T1.Controls.Move
                 // * 5. 绘线                           -> 左右两边的线都要更新
                 // * 6. 更新canvas.lines               -> 左右两边的线都要更新
                 // */
+                //bool endLineIndexsAllNull = true;
+                //foreach (int index in this.endLineIndexs)
+                //{
+                //    if (index == -1)
+                //        continue;
+                //    else
+                //    {
+                //        endLineIndexsAllNull = false;
+                //        break;
+                //    }
+                //}
 
+                //if (endLineIndexsAllNull)
+                //{
+                //    return;
+                //}
                 //Line line;
                 //CanvasPanel canvas = Global.GetCanvasPanel();
                 //canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
@@ -197,6 +222,7 @@ namespace Citta_T1.Controls.Move
                 //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
                 //List<Line> affectedLines = new List<Line> { };
                 //Rectangle affectedArea;
+
                 //log.Info("[MoveDtControl] 满足线移动条件");
                 //foreach (int index in startLineIndexs)
                 //{
@@ -244,7 +270,7 @@ namespace Citta_T1.Controls.Move
                 //    line.UpdatePoints();
                 //    canvasWrp.RepaintObject(line);
                 //}
-                ////#endregion
+                //#endregion
             }
         }
         public Point WorldBoundControl(Point Pm)
@@ -282,6 +308,18 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
+                // TODO [DK] 无用代码 过段时间删除
+                if (rectOut.Contains(e.Location))
+                {
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    isMouseDown = true;
+                    cmd = eCommandType.PinDraw;
+                    CanvasPanel canvas = (this.Parent as CanvasPanel);
+                    canvas.CanvasPanel_MouseDown(this, e1);
+                    return;
+                }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
@@ -304,6 +342,17 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
+                // TODO [DK] 无用代码 过段时间删除
+                if (cmd == eCommandType.PinDraw)
+                {
+                    isMouseDown = false;
+                    cmd = eCommandType.Null;
+                    startX = this.Location.X + e.X;
+                    startY = this.Location.Y + e.Y;
+                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                    CanvasPanel canvas = Global.GetCanvasPanel();
+                    canvas.CanvasPanel_MouseUp(this, e1);
+                }
                 this.isMouseDown = false;
                 Global.GetNaviViewControl().UpdateNaviView();
 
@@ -437,9 +486,9 @@ namespace Citta_T1.Controls.Move
             //删除连接的结果控件
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
-                if (mr.Start == this.id)
+                if (mr.StartID == this.id)
                 {
-                    DeleteResultControl(mr.End);
+                    DeleteResultControl(mr.EndID);
                     break;
                 }
                     
@@ -471,9 +520,9 @@ namespace Citta_T1.Controls.Move
             if (this.status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set;
             else if (this.status == ElementStatus.Done)
-                this.statusBox.Image = Properties.Resources.ready;
+                this.statusBox.Image = Properties.Resources.done;
             else if (this.status == ElementStatus.Ready)
-                this.statusBox.Image = null;
+                this.statusBox.Image = Properties.Resources.setSuccess;
         }
         #endregion
 
@@ -771,4 +820,3 @@ namespace Citta_T1.Controls.Move
         }
     }
 }
-

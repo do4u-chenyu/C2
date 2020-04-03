@@ -96,8 +96,15 @@ namespace Citta_T1.Business.Model
                     if((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
                         WriteModelOption(me.SubType, (me.GetControl as MoveOpControl).Option, xDoc, modelElementXml);
                 }
-                   
-                
+                if (me.Type == ElementType.Result)
+                {
+                    XmlElement pathNode = xDoc.CreateElement("path");
+                    pathNode.InnerText = me.GetPath();
+                    modelElementXml.AppendChild(pathNode);
+
+                }
+
+
             }
         }
         #region 配置信息存到xml
@@ -154,19 +161,19 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(typeNode);
 
                 XmlElement startControlNode = xDoc.CreateElement("start");
-                startControlNode.InnerText = mr.Start.ToString();
+                startControlNode.InnerText = mr.StartID.ToString();
                 modelElementXml.AppendChild(startControlNode);
 
                 XmlElement endControlNode = xDoc.CreateElement("end");
-                endControlNode.InnerText = mr.End.ToString();
+                endControlNode.InnerText = mr.EndID.ToString();
                 modelElementXml.AppendChild(endControlNode);
 
                 XmlElement startLocationNode = xDoc.CreateElement("startlocation");
-                startLocationNode.InnerText = mr.StartLocation.ToString();
+                startLocationNode.InnerText = mr.StartP.ToString();
                 modelElementXml.AppendChild(startLocationNode);
 
                 XmlElement endLocationNode = xDoc.CreateElement("endlocation");
-                endLocationNode.InnerText = mr.EndLocation.ToString();
+                endLocationNode.InnerText = mr.EndP.ToString();
                 modelElementXml.AppendChild(endLocationNode);
 
                 XmlElement endPinLabelNode = xDoc.CreateElement("endpin");
@@ -250,8 +257,10 @@ namespace Citta_T1.Business.Model
                         status = textInfo.ToTitleCase(status).ToString();
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        string bcpPath = xn.SelectSingleNode("path").InnerText;
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.Status = EStatus(status);
+                        ctl.Path = bcpPath;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -259,8 +268,8 @@ namespace Citta_T1.Business.Model
                     {
                         int startID = Convert.ToInt32(xn.SelectSingleNode("start").InnerText);
                         int endID = Convert.ToInt32(xn.SelectSingleNode("end").InnerText);
-                        Point startLocation = ToPointType(xn.SelectSingleNode("startlocation").InnerText);
-                        Point endLocation = ToPointType(xn.SelectSingleNode("endlocation").InnerText);
+                        PointF startLocation = ToPointFType(xn.SelectSingleNode("startlocation").InnerText);
+                        PointF endLocation = ToPointFType(xn.SelectSingleNode("endlocation").InnerText);
                         int endPin = Convert.ToInt32(xn.SelectSingleNode("endpin").InnerText);
                         ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
@@ -283,6 +292,18 @@ namespace Citta_T1.Business.Model
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
         public DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+        private PointF ToPointFType(string point)
+        {
+            PointF location = new PointF();
+            try
+            {
+                string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
+                string[] xy = coordinate.Split(',');
+                location = new PointF(Convert.ToSingle(xy[0]), Convert.ToSingle(xy[1]));
+            }
+            catch (Exception e) { log.Error(e.Message); }
+            return location;
+        }
         private Point ToPointType(string point)
         {
             Point location = new Point();

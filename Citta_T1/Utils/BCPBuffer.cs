@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using System.Text;
-
+using System;
+using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
@@ -82,6 +83,18 @@ namespace Citta_T1.Utils
                 BcpBufferSingleInstance = new BCPBuffer();
             }
             return BcpBufferSingleInstance;
+        }
+        public string CreateNewBCPFile(string filename)
+        {
+            string filePath = "";
+            filePath = Global.GetCurrentDocument().SavePath;
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+            filePath += filename + ".bcp";
+            if (!System.IO.File.Exists(filePath))
+                System.IO.File.Create(filePath).Close();
+            return filePath;
+
         }
     }
 }

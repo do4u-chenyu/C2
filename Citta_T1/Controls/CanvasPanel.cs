@@ -18,7 +18,9 @@ namespace Citta_T1.Controls
         public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
-        
+        public Bitmap staticImage2;
+
+
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
         private bool startMove = false;
@@ -37,19 +39,20 @@ namespace Citta_T1.Controls
 
         // 绘图
         // 绘图
-        public List<Line> lines = new List<Line>() { };
+        public List<Bezier> lines = new List<Bezier>() { };
         public enum eCommandType
         {
-            draw,
-            select
+            Move,
+            PinDraw,
+            Null,
         }
-        public eCommandType cmd = eCommandType.select;
+        public eCommandType cmd = eCommandType.Null;
         public PointF startP;
         public PointF endP;
         private Control startC;
         private Control endC;
         Rectangle invalidateRectWhenMoving;
-        Line lineWhenMoving;
+        Bezier lineWhenMoving;
 
         public void SetStartP(PointF p)
         {
@@ -144,12 +147,12 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            // 卡的版本
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
-                this.cmd = eCommandType.draw;
+                this.cmd = eCommandType.PinDraw;
                 // 不能乱写
                 this.SetStartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
@@ -209,18 +212,20 @@ namespace Citta_T1.Controls
                 dragWrapper.DragMove(this.Size, this.screenFactor, e);
             }
             // 绘制
-            else if (cmd == eCommandType.draw)
+            else if (cmd == eCommandType.PinDraw)
             {
                 // 吸附效果实现
                 /*
                  * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
                  * 2. 如果在，对该点就行修正
                  */
+                log.Info("开始划线");
                 PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
+                // 遍历所有OpControl的leftPin
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
@@ -234,34 +239,66 @@ namespace Citta_T1.Controls
                     endP = nowP;
                 }
                 log.Info("line'count = " + lines.Count().ToString());
-                lineWhenMoving = new Line(startP, nowP);
+                lineWhenMoving = new Bezier(startP, nowP);
                 log.Info("line'count = " + lines.Count().ToString());
                 // TODO [DK] 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
+                
                 // 重绘曲线
                 RepaintObject(lineWhenMoving);
 
             }
         }
+        public void RepaintAllLines()
+        {
+            try
+            {
+                if (lines.Count() == 0)
+                {
+                    Bezier line;
+                    foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                    {
+                        line = new Bezier(mr.StartP, mr.EndP);
+                        lines.Add(line);
+                    }
+                }
+                foreach (Bezier line in this.lines)
+                {
+                    this.RepaintObject(line);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Warn("画板未加载完全");
+            }
+        }
         /*
          * 根据lines来重绘保存好的静态图
          */
-        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r, List<Line> exceptLines = null)
+        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r, List<Bezier> exceptLines = null)
         {
             // 给staticImage上色
-            canvasWrp.DrawBackgroud(r);
+            //canvasWrp.DrawBackgroud(r);
             // 将`需要重绘`IDrawable对象重绘在静态图上
             Draw(canvasWrp, r, exceptLines);
         }
-        public void RepaintObject(Line line)
+        public void RepaintObject(Bezier line, Graphics g)
         {
             if (line == null)
                 return;
-            g = this.CreateGraphics();
-            line.DrawLine(g);
+            line.DrawBezier(g);
+        }
+
+        public void RepaintObject(Bezier line)
+        {
+            Graphics g = this.CreateGraphics();
+            if (line == null)
+                return;
+            line.DrawBezier(g);
             g.Dispose();
         }
+
 
         /*
          * 使用静态图的指定位置的指定大小来覆盖当前屏幕的指定位置的指定大小
@@ -281,9 +318,9 @@ namespace Citta_T1.Controls
             if (r.Height > this.staticImage.Height || r.Height < 0)
                 r.Height = this.staticImage.Height;
             // 用保存好的图来局部覆盖当前背景图
-            this.staticImage.Save("Citta_repaintStatic.png");
+            //this.staticImage.Save("Citta_repaintStatic.png");
             Pen pen = new Pen(Color.Red);
-            //g.DrawRectangle(pen, r);
+            g.DrawRectangle(pen, r);
             pen.Dispose();
             r.Inflate(1, 1);
             g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
@@ -310,19 +347,18 @@ namespace Citta_T1.Controls
                 dragWrapper.DragUp(this.Size, this.screenFactor, e);
             }
 
-            else if (cmd == eCommandType.draw)
+            else if (cmd == eCommandType.PinDraw)
             {
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，那就不形成线，结束绘线动作
                  */
                 if (this.endC == null)
                 {
-                    cmd = eCommandType.select;
+                    cmd = eCommandType.Null;
                     lineWhenMoving = null;
                     return;
                 }
                 /* 
-                 * TODO [DK] 控件保存连接的曲线的点，对于endP，需要保存endP是哪一个针脚
                  * 在Canvas_MouseMove的时候，对鼠标的终点进行
                  * 只保存线索引
                  *         __________
@@ -330,22 +366,25 @@ namespace Citta_T1.Controls
                  * endP2  |          |
                  *         ----------
                  */
-                Line line = new Line(startP, new PointF(e.X, e.Y));
+                Bezier line = new Bezier(startP, new PointF(e.X, e.Y));
                 
                 lines.Add(line);
                 ModelRelation mr = new ModelRelation(
-                    line, 
-                    (startC as IMoveControl).GetID(), 
+                    (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
+                    startP,
+                    new PointF(e.X, e.Y),
                     (endC as MoveOpControl).revisedPinIndex
                     );
+                log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
+                log.Info("线数量为 " + lines.Count());
                 Global.GetCurrentDocument().AddModelRelation(mr);
 
-               // log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
+                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);
-                cmd = eCommandType.select;
+                cmd = eCommandType.Null;
                 lineWhenMoving = null;
             }
 
@@ -374,32 +413,33 @@ namespace Citta_T1.Controls
                 clipRectangle = ClientRectangle;
                 this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
                 //BackgroundImage = (Bitmap)this.staticImage.Clone();
-                this.staticImage.Save("static_image_save.bmp");
             }
-            CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
-            // 给staticImage上色
-            dcStatic.DrawBackgroud(clipRectangle);
-            // 将`需要重绘`IDrawable对象重绘在静态图上
-            Draw(dcStatic, clipRectangle);
-            // 将静态图绘制在CanvasPanle里
-            //g = Graphics.FromImage(BackgroundImage);
-            g = this.CreateGraphics();
-            g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
-            g.Dispose();
-            dcStatic.Dispose();
-
+            //CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
+            ////this.staticImage.Save("static_image_save.png");
+            //// 给staticImage上色
+            //dcStatic.DrawBackgroud(clipRectangle);
+            //// 将`需要重绘`IDrawable对象重绘在静态图上
+            //Draw(dcStatic, clipRectangle);
+            //// 将静态图绘制在CanvasPanle里
+            ////g = Graphics.FromImage(BackgroundImage);
+            //g = this.CreateGraphics();
+            //g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
+            //g.Dispose();
+            //dcStatic.Dispose();
+            //this.RepaintAllLines();
+            //log.Info("==============重绘==================");
         }
 
 
-        private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Line> exceptLines = null)
+        private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Bezier> exceptLines = null)
         {
             int cnt = 0;
-            IEnumerable<Line> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
-            foreach (Line line in drawLines)
+            IEnumerable<Bezier> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
+            foreach (Bezier line in drawLines)
             {
                 if (line == null)
                 {
-                    log.Info("line == null!");
+                    //log.Info("line == null!");
                     continue;
                 }
                 // 不在该区域内就别重绘了
@@ -407,7 +447,7 @@ namespace Citta_T1.Controls
                 //if (isInRect == false)
                 //    log.Info("line 不在区域" + rect.ToString() + "内");
                 //    continue;
-                line.Draw(dcStatic, rect);
+                line.DrawBezier(dcStatic.Graphics, rect);
                // log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
                 cnt += 1;
                 //log.Info("已重绘" + cnt + "条曲线");

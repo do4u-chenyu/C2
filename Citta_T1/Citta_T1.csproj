@@ -72,6 +72,7 @@
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
+    <Compile Include="Business\Schedule\Engine.cs" />
     <Compile Include="Business\Schedule\Manager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGen.cs" />
@@ -684,8 +685,12 @@
     </Content>
     <Content Include="res\displaypanel\remark.png" />
     <Content Include="res\displaypanel\shadow.png" />
+    <Content Include="res\element\done.png" />
     <Content Include="res\element\resultDone.png" />
     <Content Include="res\element\resultNull.png" />
+    <Content Include="res\element\set.png" />
+    <Content Include="res\element\setSuccess.png" />
+    <Content Include="res\element\warn.png" />
     <Content Include="res\flowchart\diamond.png" />
     <Content Include="res\flowchart\downarrow.png" />
     <Content Include="res\flowchart\ellipse.png" />
@@ -710,9 +715,6 @@
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
     <None Include="res\toolbox\add.png" />
-    <Content Include="res\menu\ready.png" />
-    <Content Include="res\menu\set.png" />
-    <Content Include="res\menu\warn.png" />
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
@@ -761,5 +763,6 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

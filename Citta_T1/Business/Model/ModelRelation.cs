@@ -11,38 +11,59 @@ namespace Citta_T1.Business.Model
     class ModelRelation
     {
         private ElementType type;
-        private int start;
-        private int end;
-        private Point startLocation;
-        private Point endLocation;
+        private int startID;
+        private int endID;
+        private PointF startP;
+        private PointF endP;
         int endPin;
+
+
+        private PointF a;
+        private PointF b;
+
         public ElementType Type { get => type;}
         public int EndPin { get => this.endPin; set => this.endPin = value; }
-        public int Start { get => this.start; set => this.start = value; }
-        public int End { get => this.end; set => this.end = value; }
-        public Point StartLocation { get => this.startLocation; set => this.startLocation = value; }
-        public Point EndLocation { get => endLocation; set => endLocation = value; }
-        public ModelRelation(int startID, int endID, Point startLocation, Point endLocation, int endPin)
+        public int StartID { get => this.startID; set => this.startID = value; }
+        public int EndID { get => this.endID; set => this.endID = value; }
+        public PointF StartP { get => this.startP; set => this.startP = value; }
+        public PointF EndP { get => endP; set => endP = value; }
+        public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
           
-            this.start = startID;
-            this.end = endID;
-            this.startLocation = startLocation;
-            this.endLocation = endLocation;
+            this.startID = startID;
+            this.endID = endID;
+            this.startP = startLocation;
+            this.endP = endLocation;
             this.endPin = endPin;
             this.type = ElementType.Relation;
-
+            UpdatePoints();
         }
-        public ModelRelation(Line line, int startID, int endID, int endPin)
+
+        public void UpdatePoints()
         {
-            // TODO [DK] Canvas存的是Control
-            this.start = startID;
-            this.end = endID;
-            this.startLocation = new Point((int)line.StartP.X, (int)line.StartP.Y);
-            this.endLocation = new Point((int)line.EndP.X, (int)line.EndP.Y);
-            this.endPin = endPin;
-            this.type = ElementType.Relation;
+            this.a = new PointF((startP.X + endP.X) / 2, startP.Y);
+            this.b = new PointF((startP.X + endP.X) / 2, endP.Y);
         }
 
+        public void OnMouseMoveEndP(PointF p)
+        {
+            endP = p;
+            UpdatePoints();
+        }
+
+        public void OnMouseMoveStartP(PointF p)
+        {
+            startP = p;
+            UpdatePoints();
+        }
+
+        public RectangleF GetBoundingRect()
+        {
+            float x = Math.Min(startP.X, endP.X);
+            float y = Math.Min(startP.Y, endP.Y);
+            float w = Math.Abs(startP.X - endP.X);
+            float h = Math.Abs(startP.Y - endP.Y);
+            return new RectangleF(x, y, w, h);
+        }
     }
 }

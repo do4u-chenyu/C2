@@ -30,9 +30,9 @@ namespace Citta_T1.Controls
         private List<int> FindBeforeNodeIds(int id)
         {
             List<int> beforeNodeId = new List<int>();
-            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.End == id))
+            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.EndID == id))
             {
-                beforeNodeId.Add(beforeNode.Start);
+                beforeNodeId.Add(beforeNode.StartID);
             }
             return beforeNodeId;
         }
@@ -47,8 +47,8 @@ namespace Citta_T1.Controls
             this.endNodes  = new List<int>();
             foreach (ModelRelation mr in modelRelations)
             {
-                this.starNodes.Add(mr.Start);
-                this.endNodes.Add(mr.End);
+                this.starNodes.Add(mr.StartID);
+                this.endNodes.Add(mr.EndID);
             }
             this.leafNodeIds = endNodes.Except(starNodes).ToList();
         }
