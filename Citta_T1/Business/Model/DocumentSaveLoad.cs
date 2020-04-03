@@ -220,7 +220,7 @@ namespace Citta_T1.Business.Model
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, loc);
+                        MoveOpControl ctl = new MoveOpControl(0, name, subType, loc);
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);

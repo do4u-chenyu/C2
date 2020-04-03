@@ -488,6 +488,7 @@ namespace Citta_T1.Controls
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
                                 text,
+                                text,
                                 location);
             AddNewElement(btn);
         }

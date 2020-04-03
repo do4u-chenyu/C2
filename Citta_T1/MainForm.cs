@@ -593,7 +593,7 @@ namespace  Citta_T1
                 if (md.Dirty)
                 {
                     MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    e.Cancel=true;
+                    e.Cancel = true;
                     return;
                 }
             }
