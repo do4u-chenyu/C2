@@ -63,7 +63,7 @@
             this.rightPictureBox.TabStop = false;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
-            this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.rightPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // leftPicture
@@ -76,7 +76,7 @@
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
-            this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
         // 
             // contextMenuStrip
@@ -176,7 +176,7 @@
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = true;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
-            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveDtControl
@@ -201,7 +201,7 @@
             this.Load += new System.EventHandler(this.MoveOpControl_Load);
             this.LocationChanged += new System.EventHandler(this.MoveOpControl_LocationChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

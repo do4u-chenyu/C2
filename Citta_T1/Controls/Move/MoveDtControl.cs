@@ -44,7 +44,7 @@ namespace Citta_T1.Controls.Move
 
         private bool isMouseDown = false;
         public bool isClicked = false;
-        Line line;
+        Bezier line;
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -66,7 +66,7 @@ namespace Citta_T1.Controls.Move
         // 以该控件为终点的所有点
         #endregion
         // 受影响的线
-        List<Line> affectedLines = new List<Line>() { };
+        List<Bezier> affectedLines = new List<Bezier>() { };
         public eCommandType cmd = eCommandType.select;
         public string GetBcpPath()
         {
@@ -213,14 +213,16 @@ namespace Citta_T1.Controls.Move
             }
 
         }
-
+        int i = 0;
         #region MOC的事件
-        private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
+        private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
+            // 卡的版本
             // 按住拖拽
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
+
                 if (cmd == eCommandType.draw)
                 {
                     startX = this.Location.X + e.X;
@@ -229,26 +231,16 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                     return;
                 }
-                (this.Parent as CanvasPanel).StartMove = true;
+
+                //(this.Parent as CanvasPanel).StartMove = true;
                 //log.Info("[MoveDtControl]开始移动");
 
                 #region 控件移动部分
-                if (sender is Button)
-                {
-                    sender = (sender as Button).Parent;
-                }
-                if (sender is PictureBox)
-                {
-                    sender = (sender as PictureBox).Parent;
-                }
-                if (sender is TextBox)
-                {
-                    sender = (sender as TextBox).Parent;
-                }
-                int left = (sender as MoveDtControl).Left + e.X - mouseOffset.X;
-                int top = (sender as MoveDtControl).Top + e.Y - mouseOffset.Y;
-                (sender as MoveDtControl).Location = WorldBoundControl(new Point(left, top));
-            #endregion
+                int left = this.Left + e.X - mouseOffset.X;
+                int top = this.Top + e.Y - mouseOffset.Y;
+                this.Location = WorldBoundControl(new Point(left, top));
+
+                #endregion
 
                 // TODO [DK] 拖影严重
                 /*
@@ -260,19 +252,21 @@ namespace Citta_T1.Controls.Move
                  * 6. 更新canvas.lines
                  */
 
-                Line line;
+                if (this.startLineIndexs.Count == 0)
+                {
+                    return;
+                }
+
+                Bezier line;
                 CanvasPanel canvas = Global.GetCanvasPanel();
-                List<Line> lines = canvas.lines;
+                List<Bezier> lines = canvas.lines;
                 PointF startP;
                 PointF endP;
                 // 受影响的点
                 List<float> affectedPointsX = new List<float> { };
                 List<float> affectedPointsY = new List<float> { };
 
-                if (this.startLineIndexs.Count == 0)
-                {
-                    return;
-                }
+
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
@@ -280,7 +274,7 @@ namespace Citta_T1.Controls.Move
                 }
 
                 // 受影响区域
-                foreach (Line l in affectedLines)
+                foreach (Bezier l in affectedLines)
                 {
                     if (!affectedPointsX.Contains(l.StartP.X))
                         affectedPointsX.Add(l.StartP.X);
@@ -301,12 +295,29 @@ namespace Citta_T1.Controls.Move
                 );
                 // 重绘静态图
                 // TODO [DK] 不用每次都重新计算
-                canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
-                Rectangle clipRectangle = canvas.ClientRectangle;
-                CanvasWrapper dcStatic = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
-                canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
-                canvas.staticImage.Save("Dt_static_image_save.png");
-                canvas.CoverPanelByRect(affectedArea);
+                if (canvas.staticImage2 == null)
+                {
+                    canvas.staticImage2 = new Bitmap(canvas.Width, canvas.Height);
+                    Graphics g2 = Graphics.FromImage(canvas.staticImage2);
+                    g2.Clear(Color.White);
+                    g2.Dispose();
+                }
+                //log.Info(canvas.Size.ToString());
+                Bitmap tmp = new Bitmap(canvas.staticImage2);
+                Graphics g = Graphics.FromImage(tmp);
+                this.DrawToBitmap(tmp, new Rectangle(this.Location.X, this.Location.Y, this.Width,this.Height));
+                //Bitmap tmp = new Bitmap(2000, 2000);
+               
+
+                //g2.Clear(Color.White);
+                //g2.Dispose();
+
+               // Rectangle clipRectangle = canvas.ClientRectangle;
+               // CanvasWrapper dcStatic = new CanvasWrapper(canvas, g1, canvas.ClientRectangle);
+               // canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
+                //canvas.staticImage.Save("Dt_static_image_save.png");
+               // canvas.CoverPanelByRect(affectedArea);
+                //Graphics g = this.CreateGraphics();
                 foreach (int index in startLineIndexs)
                 {
                     line = lines[index];
@@ -317,8 +328,19 @@ namespace Citta_T1.Controls.Move
                     );
                     // 坐标更新
                     line.UpdatePoints();
-                    canvas.RepaintObject(line);
+                    canvas.RepaintObject(line, g);
                 }
+                Graphics g1 = canvas.CreateGraphics();
+                g1.DrawImageUnscaled(tmp, 0,0);
+                g.Dispose();
+                g1.Dispose();
+                //tmp.Save(i.ToString() + ".bmp");
+                i++;
+                //tmp.Dispose();
+                //tmp = null;
+
+
+               //this.Hide();
             }
         }
 
@@ -379,7 +401,7 @@ namespace Citta_T1.Controls.Move
             MainForm prt = (MainForm)Parent.Parent;
             try
             {
-                prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
+               // prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
             }
             catch (Exception ex)
             {
@@ -431,6 +453,7 @@ namespace Citta_T1.Controls.Move
                 if (oldcontrolPosition != this.Location)
                     Global.GetMainForm().SetDocumentDirty();
 
+                affectedLines.Clear();
             }
 
         }

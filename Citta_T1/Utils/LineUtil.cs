@@ -84,19 +84,19 @@ namespace Citta_T1.Utils
     }
 
     // 划线类
-    public class Line
+    public class Bezier
     {
-        PointF startP;
-        PointF endP;
-        PointF a;
-        PointF b;
-        PointF[] points;
+        private PointF startP;
+        private PointF endP;
+        private PointF a;
+        private PointF b;
+ 
 
         public PointF StartP { get => startP; set => startP = value; }
         public PointF EndP { get => endP; set => endP = value; }
 
         //Pen pen;
-        public Line(PointF p1, PointF p2)
+        public Bezier(PointF p1, PointF p2)
         {
             startP = p1;
             endP = p2;
@@ -106,33 +106,37 @@ namespace Citta_T1.Utils
         public void Draw(CanvasWrapper canvas, RectangleF rect)
         {
             // TODO [DK] 这里并不是精准的局部划线
-            DrawLine(canvas.Graphics);
+            DrawBezier(canvas.Graphics);
         }
-        public void DrawLine(Graphics g)
+
+        public void DrawBezier(Graphics g, RectangleF rect)
         {
-            Pen pen = new Pen(Color.Green);
-            g.DrawCurve(pen, points);
-            //g.DrawBezier(this.pen, this.startP, this.a, this.b, this.endP);
-            pen.Dispose();
+            // TODO [DK] 这里并不是精准的局部划线
+            DrawBezier(g);
+        }
+
+        public void DrawBezier(Graphics g)
+        {
+            g.DrawBezier(Pens.Green, this.startP, this.a, this.b, this.endP);
         }
         public RectangleF GetBoundingRect()
         {
             // TODO [DK] 没有考虑到坐标系放大系数
-            return GetRect(startP, endP, 0);
+            return GetRect(startP, endP);
         }
-        public static RectangleF GetRect(PointF p1, PointF p2, double width)
+        private  RectangleF GetRect(PointF p1, PointF p2, float width = 0)
         {
-            double x = Math.Min(p1.X, p2.X);
-            double y = Math.Min(p1.Y, p2.Y);
-            double w = Math.Abs(p1.X - p2.X);
-            double h = Math.Abs(p1.Y - p2.Y);
-            RectangleF rect = GetRect(x, y, w, h);
-            rect.Inflate((float)width, (float)width);
+            float x = Math.Min(p1.X, p2.X);
+            float y = Math.Min(p1.Y, p2.Y);
+            float w = Math.Abs(p1.X - p2.X);
+            float h = Math.Abs(p1.Y - p2.Y);
+            RectangleF rect = new RectangleF(x, y, w, h); ;
+            rect.Inflate(width, width);
             return rect;
         }
-        public static RectangleF GetRect(double x, double y, double w, double h)
+        public static RectangleF GetRect(float x, float y, float w, float h)
         {
-            return new RectangleF((float)x, (float)y, (float)w, (float)h);
+            return new RectangleF(x, y, w, h);
         }
         public void OnMouseMove(PointF p)
         {
@@ -143,9 +147,6 @@ namespace Citta_T1.Utils
         {
             this.a = new PointF((startP.X + endP.X) / 2, startP.Y);
             this.b = new PointF((startP.X + endP.X) / 2, endP.Y);
-            //pen = new Pen(Color.Green);
-            PointF[] pointList = new PointF[] { new PointF(startP.X, startP.Y), a, b, new PointF(endP.X, endP.Y) };
-            points = LineUtil.draw_bezier_curves(pointList, pointList.Length, 0.001F);
         }
     }
 }

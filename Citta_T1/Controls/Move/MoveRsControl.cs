@@ -40,7 +40,7 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Line line;
+        Bezier line;
         public eCommandType cmd = eCommandType.select;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;

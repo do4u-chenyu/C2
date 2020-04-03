@@ -43,7 +43,7 @@ namespace Citta_T1.Utils
             return inHeight > 0 && inWidth > 0 ? inHeight * inWidth : 0;
         }
 
-        public static Rectangle GetAreaByLine(Line line)
+        public static Rectangle GetAreaByLine(Bezier line)
         {
             return new Rectangle(
                 new Point((int)line.StartP.X, (int)line.StartP.Y),

@@ -59,7 +59,7 @@ namespace Citta_T1.OperatorViews
             if (this.oldstatus == ElementStatus.Null)
             {
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                    if (mr.Start == this.opControl.ID) return;
+                    if (mr.StartID == this.opControl.ID) return;
                 int x = this.opControl.Location.X + this.opControl.Width + 15;
                 int y = this.opControl.Location.Y;
                 MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,"结果",new Point(x,y));
@@ -68,7 +68,7 @@ namespace Citta_T1.OperatorViews
                  * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
                  * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
                  */
-                Line line = new Line(
+                Bezier line = new Bezier(
                     new PointF(
                         this.opControl.rectOut.Location.X + this.opControl.Location.X,
                         this.opControl.rectOut.Location.Y + this.opControl.Location.Y
@@ -129,9 +129,9 @@ namespace Citta_T1.OperatorViews
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.End == this.opControl.ID)
+                if (mr.EndID == this.opControl.ID)
                 {
-                    startID = mr.Start;
+                    startID = mr.StartID;
                     break;
                 }
             }
