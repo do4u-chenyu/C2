@@ -99,7 +99,10 @@ namespace Citta_T1.Controls
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
-
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    mr.ZoomIn();
+                }
             }
             else if (!isLarger && sizeLevel > 0)
             {
@@ -112,6 +115,10 @@ namespace Citta_T1.Controls
                     {
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
+                }
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    mr.ZoomOut();
                 }
             }
             Global.GetNaviViewControl().UpdateNaviView();
