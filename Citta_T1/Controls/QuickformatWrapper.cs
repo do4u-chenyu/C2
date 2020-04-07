@@ -96,16 +96,33 @@ namespace Citta_T1.Controls
             }
             return results;
         }
-
-
+        
+        private bool ExitIntersect(List<List<int>> treeA, List<List<int>> treeB)
+        {
+            for(int i = 0;i < treeA.Count;i++)
+            {
+                for(int j = 0; j < treeB.Count; j++)
+                {
+                    for(int m = 0; m < treeA[i].Count;m++)
+                    {
+                        if (treeB[j].Contains(treeA[i][m]))
+                            return true;
+                    }
+                }
+            }
+            return false;
+        }
         private void TreeComplete(List<List<int>> treeA, List<List<int>> treeB)
         {
-
-
-            List<List<int>> commonList = treeA.Intersect(treeB).ToList();
+            //测试多层列表的取交集
+            //元素一样取交集结果不一
+            
+            /*
+             * TODO
+                List<List<int>> commonList = treeA.Intersect(treeB).ToList();
+                无效 原因未知。
+            */
             List<List<List<int>>> key = new List<List<List<int>>>();
-
-
             if (!this.recordSearch.Contains(treeA))
             {
                 this.recordSearch.Add(treeA);
@@ -114,21 +131,19 @@ namespace Citta_T1.Controls
 
             }
 
-            if (commonList.Count == 0)
+            if (!ExitIntersect(treeA,treeB))
                 return;
 
             foreach (List<List<List<int>>> tmp in ht.Keys)
             {
                 if (tmp.Contains(treeA) & !tmp.Contains(treeB))
                 {
-                    List<List<List<int>>> orgTmp = tmp;
                     tmp.Add(treeB);
                     this.recordSearch.Add(treeB);
                     if (treeA.Count < treeB.Count)
-                        ht.Add(tmp, TreeDeepSort(treeA, treeB));
-                    if (treeA.Count < treeB.Count)
-                        ht.Add(tmp, TreeDeepSort(treeB, treeA));
-                    this.ht.Remove(orgTmp);
+                        ht[tmp] =  TreeDeepSort(treeA, treeB);
+                    else
+                        ht[tmp] = TreeDeepSort(treeA, treeB);   
                     return;
                 }
             }
@@ -142,8 +157,8 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = ct.Width * dx + 40;
-                    ct.Top = ct.Height * dy + 70;
+                    ct.Left = (ct.Width + 20) * dx  + 40;
+                    ct.Top = (ct.Height + 40) * dx  + 70;
                 }
             }
         }
@@ -217,14 +232,14 @@ namespace Citta_T1.Controls
             foreach (List<List<int>> tree in ht.Values)
             {
                 log.Info("本轮调整模型层数:" + tree.Count.ToString());
-                tree.Reverse();
+                //tree.Reverse();
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
                     
                     foreach (int id in leavel)
                     {
-                        
+                        log.Info("本层遍历调整节点:" + tree.Count.ToString());
                         FormatLoc(id, countDeep, countWidth, modelElements);
                         countWidth = countWidth + 1;
                         leavelList.Add(id);
@@ -238,7 +253,7 @@ namespace Citta_T1.Controls
                 countDeep = 0;
             }
             //散元素沉底
-            ForamtSingleNode(leavelList, 0, count, modelElements);
+            ForamtSingleNode(leavelList, 0, 1, modelElements);
 
             Global.GetNaviViewControl().UpdateNaviView();
         }
