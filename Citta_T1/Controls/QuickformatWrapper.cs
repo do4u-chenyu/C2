@@ -91,7 +91,7 @@ namespace Citta_T1.Controls
             List<List<int>> results = new List<List<int>>();
             for (int i = 0; i < treeA.Count; i++)
             {
-                List<int> result = treeB[treeB.Count - i - 1].Union(treeA[treeA.Count - i - 1]).ToList();
+                List<int> result = treeB[i].Union(treeA[i]).ToList();
                 results.Add(result);
             }
             return results;
@@ -158,7 +158,7 @@ namespace Citta_T1.Controls
                 {
                     Control ct = me.GetControl;
                     ct.Left = (ct.Width + 20) * dx  + 40;
-                    ct.Top = (ct.Height + 40) * dx  + 70;
+                    ct.Top = (ct.Height + 40) * dy  + 70;
                 }
             }
         }
@@ -232,14 +232,14 @@ namespace Citta_T1.Controls
             foreach (List<List<int>> tree in ht.Values)
             {
                 log.Info("本轮调整模型层数:" + tree.Count.ToString());
-                //tree.Reverse();
+                tree.Reverse();
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
                     
                     foreach (int id in leavel)
                     {
-                        log.Info("本层遍历调整节点:" + tree.Count.ToString());
+                        log.Info("本层遍历调整节点:" + id + "," +  countWidth);
                         FormatLoc(id, countDeep, countWidth, modelElements);
                         countWidth = countWidth + 1;
                         leavelList.Add(id);
@@ -254,7 +254,7 @@ namespace Citta_T1.Controls
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, 1, modelElements);
-
+            //this.currentModel.UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
         }
 

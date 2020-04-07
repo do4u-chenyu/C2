@@ -180,9 +180,10 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
-
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public void UpdateAllLines()
         {
+            log.Info("划线更新");
             for (int i = 0;i < this.modelRelations.Count();i++)
             {
                 ModelRelation mr = this.modelRelations[i];
