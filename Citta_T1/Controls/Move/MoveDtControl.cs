@@ -132,9 +132,8 @@ namespace Citta_T1.Controls.Move
 
         public void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textBox1.Text);
-           
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            SetOpControlName(this.textBox1.Text);
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,10 +180,12 @@ namespace Citta_T1.Controls.Move
             if (isLarger)
             {
                 SetControlsBySize(factor, this);
+                this.rectOut = SetRectBySize(factor, this.rectOut);
             }
             else if (!isLarger)
             {
                 SetControlsBySize(1 / factor, this);
+                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
             }
 
         }
@@ -544,6 +545,14 @@ namespace Citta_T1.Controls.Move
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
+        }
+        public Rectangle SetRectBySize(float f, Rectangle rect)
+        {
+            rect.Width = Convert.ToInt32(rect.Width * f);
+            rect.Height = Convert.ToInt32(rect.Height * f);
+            rect.X = Convert.ToInt32(rect.Left * f);
+            rect.Y = Convert.ToInt32(rect.Top * f);
+            return rect;
         }
         #endregion
 
