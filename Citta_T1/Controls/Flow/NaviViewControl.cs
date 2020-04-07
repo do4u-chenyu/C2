@@ -146,6 +146,11 @@ namespace Citta_T1.Controls.Flow
 
         private void UpdateImage(int width,int height,float factor,Point mapOrigin)
         {
+            if (this.staticImage != null)
+            {   // bitmap是重型资源,需要强制释放
+                this.staticImage.Dispose();
+                this.staticImage = null;
+            }
             this.staticImage = new Bitmap(width,height);
             Graphics g = Graphics.FromImage(staticImage);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
