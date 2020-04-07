@@ -180,9 +180,10 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
-
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public void UpdateAllLines()
         {
+            log.Info("划线更新");
             for (int i = 0;i < this.modelRelations.Count();i++)
             {
                 ModelRelation mr = this.modelRelations[i];
@@ -192,9 +193,10 @@ namespace Citta_T1.Business.Model
                 // 坐标更新
                 mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                 mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                mr.UpdatePoints();
                 // 控件线绑定
-                (sEle.GetControl as IMoveControl).BindStartLine(i, 0);
-                (eEle.GetControl as IMoveControl).BindEndLine(i, mr.EndPin);
+                (sEle.GetControl as IMoveControl).BindStartLine(0, i);
+                (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
             }
         }
 
