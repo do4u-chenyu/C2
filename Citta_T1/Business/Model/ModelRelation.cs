@@ -98,6 +98,9 @@ namespace Citta_T1.Business.Model
             return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(w), Convert.ToInt32(h));
         }
 
-
+        //public Bezier GetLine()
+        //{
+        //    return new B
+        //}
     }
 }

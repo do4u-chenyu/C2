@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static Citta_T1.Controls.CanvasPanel;
+using System.Collections.Generic;
 
 namespace Citta_T1.Controls.Move
 {
@@ -49,6 +50,8 @@ namespace Citta_T1.Controls.Move
         private ElementStatus status;
         private int id;
         public int ID { get => this.id; set => this.id = value; }
+        List<int> startLineIndexs = new List<int>() { };
+        List<int> endLineIndexs = new List<int>() { };
 
         //绘制引脚
         private Point leftPin = new Point(3, 11);
@@ -90,6 +93,7 @@ namespace Citta_T1.Controls.Move
             ChangeSize(sizeL);
             InitializeOpPinPicture();
             this.status = ElementStatus.Null;
+            endLineIndexs.Add(-1);
         }
 
         private void InitializeOpPinPicture()
@@ -506,11 +510,11 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-
+            this.startLineIndexs.Add(line_index);
         }
         public void SaveEndLines(int line_index)
         {
-
+            this.endLineIndexs[0] = line_index;
         }
         // 修正坐标
         public PointF RevisePointLoc(PointF p)
@@ -534,6 +538,14 @@ namespace Citta_T1.Controls.Move
             return new PointF(
                 this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2, 
                 this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
+        }
+        public void BindStartLine(int pinIndex, int relationIndex)
+        {
+            this.startLineIndexs.Add(relationIndex);
+        }
+        public void BindEndLine(int pinIndex, int relationIndex)
+        {
+            this.endLineIndexs[pinIndex] = relationIndex;
         }
         #endregion
     }

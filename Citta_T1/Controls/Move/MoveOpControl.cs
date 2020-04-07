@@ -782,6 +782,14 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
+        public void BindStartLine(int pinIndex, int relationIndex)
+        {
+            this.startLineIndexs.Add(relationIndex);
+        }
+        public void BindEndLine(int pinIndex, int relationIndex)
+        {
+            this.endLineIndexs[pinIndex] = relationIndex;
+        }
         #endregion
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)

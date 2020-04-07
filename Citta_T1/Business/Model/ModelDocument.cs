@@ -183,14 +183,18 @@ namespace Citta_T1.Business.Model
 
         public void UpdateAllLines()
         {
-            foreach (ModelRelation mr in this.modelRelations)
+            for (int i = 0;i < this.modelRelations.Count();i++)
             {
+                ModelRelation mr = this.modelRelations[i];
                 // 0 被RemarkControl占用了
                 ModelElement sEle = this.modelElements[mr.StartID - 1];
                 ModelElement eEle = this.modelElements[mr.EndID - 1];
-                // TODO [DK] 需要获得针脚坐标
+                // 坐标更新
                 mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                 mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                // 控件线绑定
+                (sEle.GetControl as IMoveControl).BindStartLine(i, 0);
+                (eEle.GetControl as IMoveControl).BindEndLine(i, mr.EndPin);
             }
         }
 
