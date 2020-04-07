@@ -221,6 +221,9 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, SubTypeName(subType), loc);
+
+                        // 绑定线
+
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
@@ -240,6 +243,7 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        // 绑定线
                         cotl.ID = id;
                         cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);

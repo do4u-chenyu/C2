@@ -141,7 +141,12 @@ namespace Citta_T1.Dialogs
                 for (int row = 0; row < m_maxNumOfRow; row++)
                 {
                     // 读取数据
+                    
                     String line = sr.ReadLine();
+                    if(line == null)
+                    {
+                        return;
+                    }
                     String[] eles = line.Split('\t');
                     DataGridViewRow dr = new DataGridViewRow();
                     this.dataGridView1.Rows.Add(dr);
