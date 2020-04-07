@@ -188,7 +188,7 @@ namespace Citta_T1.Controls.Move
             }
 
         }
-
+        //int i = 0;
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -311,14 +311,15 @@ namespace Citta_T1.Controls.Move
             g1.DrawImageUnscaled(tmp, 0,0);
             g.Dispose();
             g1.Dispose();
+            //i++;
             //tmp.Save(i.ToString() + ".bmp");
- 
+
             //tmp.Dispose();
             //tmp = null;
 
 
             //this.Hide();
-           
+
         }
 
          public Point WorldBoundControl(Point Pm)
@@ -561,7 +562,7 @@ namespace Citta_T1.Controls.Move
         #region 文档修改事件
 
         #endregion
-       
+        #region 接口实现
         /*
          * TODO [DK] 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
@@ -591,6 +592,18 @@ namespace Citta_T1.Controls.Move
         {
             return this.ID;
         }
+        public PointF GetEndPinLoc(int pinIndex)
+        {
+            // 不应该被调用
+            return new PointF(0, 0);
+        }
+        public PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
+        #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(trnsRedBrush, rectOut);

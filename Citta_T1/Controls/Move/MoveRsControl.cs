@@ -522,6 +522,19 @@ namespace Citta_T1.Controls.Move
         {
             return this.ID;
         }
+
+        public PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
+        public PointF GetEndPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2, 
+                this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
+        }
         #endregion
     }
 }

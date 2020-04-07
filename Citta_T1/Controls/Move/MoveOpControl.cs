@@ -759,6 +759,29 @@ namespace Citta_T1.Controls.Move
         {
             return this.ID;
         }
+        public PointF GetEndPinLoc(int pinIndex)
+        {
+            switch (pinIndex)
+            {
+                case 0:
+                    return new PointF(
+                        this.Location.X + this.rectIn_up.Location.X + this.rectIn_up.Width / 2, 
+                        this.Location.Y + this.rectIn_up.Location.Y + this.rectIn_up.Height / 2);
+                case 1:
+                    return new PointF(
+                        this.Location.X + this.rectIn_down.Location.X + this.rectIn_down.Width / 2, 
+                        this.Location.Y + this.rectIn_down.Location.Y + this.rectIn_down.Height / 2);
+                default:
+                    // TODO [DK] 需要定义一个异常
+                    return new PointF(0, 0);
+            }
+        }
+        public PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
         #endregion
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
