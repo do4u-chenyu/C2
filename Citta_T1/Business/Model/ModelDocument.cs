@@ -1,5 +1,6 @@
 using Citta_T1.Business.Schedule;
-﻿using Citta_T1.Utils;
+using Citta_T1.Controls.Interface;
+using Citta_T1.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -178,6 +179,23 @@ namespace Citta_T1.Business.Model
             Pw.X = Ps.X - Pm.X;
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
+        }
+
+        public void UpdateAllLines()
+        {
+            for (int i = 0;i < this.modelRelations.Count();i++)
+            {
+                ModelRelation mr = this.modelRelations[i];
+                // 0 被RemarkControl占用了
+                ModelElement sEle = this.modelElements[mr.StartID - 1];
+                ModelElement eEle = this.modelElements[mr.EndID - 1];
+                // 坐标更新
+                mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
+                mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                // 控件线绑定
+                (sEle.GetControl as IMoveControl).BindStartLine(i, 0);
+                (eEle.GetControl as IMoveControl).BindEndLine(i, mr.EndPin);
+            }
         }
 
     }

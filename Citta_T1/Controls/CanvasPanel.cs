@@ -259,29 +259,6 @@ namespace Citta_T1.Controls
 
             }
         }
-        public void RepaintAllLines()
-        {
-            try
-            {
-                if (lines.Count() == 0)
-                {
-                    Bezier line;
-                    foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                    {
-                        line = new Bezier(mr.StartP, mr.EndP);
-                        lines.Add(line);
-                    }
-                }
-                foreach (Bezier line in this.lines)
-                {
-                    this.RepaintObject(line);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Warn("画板未加载完全");
-            }
-        }
         /*
          * 根据lines来重绘保存好的静态图
          */
