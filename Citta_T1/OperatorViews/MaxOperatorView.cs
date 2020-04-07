@@ -128,33 +128,15 @@ namespace Citta_T1.OperatorViews
         #region 初始化配置
         private void InitOptionInfo()
         {
-            int startID = -1;
-            string encoding = "";
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelRelation mr in modelRelations)
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetInputDataInfo(this.opControl.ID);
+            if (dataInfo.ContainsKey("dataPath") && dataInfo.ContainsKey("encoding"))
             {
-                if (mr.EndID == this.opControl.ID)
-                {
-                    startID = mr.StartID;
-                    break;
-                }
+                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath"]);
+                this.dataPath = dataInfo["dataPath"];
+                SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding"]);
             }
-            foreach (ModelElement me in modelElements)
-            {
-                if (me.ID == startID)
-                {
-                    this.dataPath = me.GetPath();
-                    //设置数据信息选项
-                    this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                    encoding = me.Encoding.ToString();
-                    break;
-                }
-            }
-            if(this.dataPath != "") 
-                SetOption(this.dataPath, this.DataInfoBox.Text, encoding);
-
         }
+
         private void SetOption(string path, string dataName, string encoding)
         {
  

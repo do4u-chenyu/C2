@@ -220,7 +220,7 @@ namespace Citta_T1.Business.Model
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, subType, loc);
+                        MoveOpControl ctl = new MoveOpControl(0, name, SubTypeName(subType), loc);
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
@@ -315,6 +315,43 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e) { log.Error(e.Message); }
             return location;
+        }
+        public string SubTypeName(string subType)
+        {
+            string type = "";
+            switch (subType)
+            {
+                case "JoinOperator":
+                    type = "连接算子";
+                    break;
+                case "CollideOperator":
+                    type = "取交集";
+                    break;
+                case "UnionOperator":
+                    type = "取并集";
+                    break;
+                case "DifferOperator":
+                    type = "取差集";
+                    break;
+                case "RandomOperator":
+                    type = "随机采样";
+                    break;
+                case "FilterOperator":
+                    type = "过滤算子";
+                    break;
+                case "MaxOperator":
+                    type = "取最大值";
+                    break;
+                case "MinOperator":
+                    type = "取最小值";
+                    break;
+                case "AvgOperator":
+                    type = "取平均值";
+                    break;
+                default:
+                    break;
+            }
+            return type;
         }
     }
 }

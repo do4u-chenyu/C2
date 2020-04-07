@@ -378,6 +378,7 @@ namespace Citta_T1.Controls
                  *         __________
                  * endP1  | MControl | startP
                  * endP2  |          |
+                 * 
                  *         ----------
                  */
                 Bezier line = new Bezier(startP, new PointF(e.X, e.Y));
@@ -390,6 +391,9 @@ namespace Citta_T1.Controls
                     new PointF(e.X, e.Y),
                     (endC as MoveOpControl).revisedPinIndex
                     );
+                //endC右键菜单设置Enable
+                Global.GetOptionDao().EnableControlOption(mr);
+
                 log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
                 log.Info("线数量为 " + lines.Count());
                 Global.GetCurrentDocument().AddModelRelation(mr);
