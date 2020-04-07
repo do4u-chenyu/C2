@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Top
 {
@@ -55,6 +56,11 @@ namespace Citta_T1.Controls.Top
             return text;
         }
 
-
+        private void formatButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            ModelDocument currentModel = Global.GetCurrentDocument();
+            QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
+            quickformatWrapper.TreeGroup();
+        }
     }
 }
