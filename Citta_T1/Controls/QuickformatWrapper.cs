@@ -258,8 +258,8 @@ namespace Citta_T1.Controls
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, 1, modelElements);
-            //this.currentModel.UpdateAllLines();
-            //Global.GetCanvasPanel().Invalidate(true);
+            this.currentModel.UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }
 

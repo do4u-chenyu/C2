@@ -788,7 +788,8 @@ namespace Citta_T1.Controls.Move
         }
         public void BindEndLine(int pinIndex, int relationIndex)
         {
-            this.endLineIndexs[pinIndex] = relationIndex;
+            if (pinIndex < this.endLineIndexs.Count())
+                this.endLineIndexs[pinIndex] = relationIndex;
         }
         #endregion
 
