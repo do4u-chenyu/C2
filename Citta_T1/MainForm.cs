@@ -470,7 +470,7 @@ namespace  Citta_T1
             {
                 if (Global.GetCurrentDocument().Dirty)
                 {
-                    MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型没有保存，请保存后再运行模型！", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
