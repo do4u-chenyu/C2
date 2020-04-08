@@ -143,7 +143,7 @@ namespace Citta_T1.Controls
                     if (treeA.Count < treeB.Count)
                         ht[tmp] =  TreeDeepSort(treeA, treeB);
                     else
-                        ht[tmp] = TreeDeepSort(treeA, treeB);   
+                        ht[tmp] = TreeDeepSort(treeB, treeA);   
                     return;
                 }
             }

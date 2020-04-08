@@ -451,14 +451,14 @@ namespace Citta_T1.Controls.Move
             {
                 SetControlsBySize(factor, this);
                 this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn  = SetRectBySize(factor, this.rectOut);
+                this.rectIn  = SetRectBySize(factor, this.rectIn);
             }
 
             else
             {
                 SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn  = SetRectBySize(1/factor, this.rectOut);
+                this.rectOut = SetRectBySize(1/factor, this.rectOut);
+                this.rectIn  = SetRectBySize(1/factor, this.rectIn);
             }
                 
 
