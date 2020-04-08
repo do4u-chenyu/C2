@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Business.Model
 {
@@ -134,7 +135,21 @@ namespace Citta_T1.Business.Model
             if (File.Exists(savePath + modelTitle +".xml"))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
-                dSaveLoad.ReadXml();            }          
+                dSaveLoad.ReadXml();        
+            }
+            foreach (ModelRelation mr in this.ModelRelations)
+                HasRelation(mr.EndID);
+        }
+        private void HasRelation(int ID)
+        {
+            foreach (ModelElement me in this.ModelElements)
+            {
+                if (ID == me.ID && me.Type == ElementType.Operator)
+                {
+                    (me.GetControl as MoveOpControl).EnableOpenOption = true;
+                    break;
+                }
+            }
         }
 
         public void Show()

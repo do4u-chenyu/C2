@@ -283,6 +283,7 @@ namespace Citta_T1.Business.Model
                
             }
         }
+
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();

@@ -42,6 +42,8 @@ namespace Citta_T1.Business.Option
              */
             Bezier line = new Bezier(
                 new PointF(
+
+
                     moveOpControl.rectOut.Location.X + moveOpControl.Location.X,
                     moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y
                     ),
@@ -65,7 +67,8 @@ namespace Citta_T1.Business.Option
         //删除relation
 
         //修改配置
-        //配置初始化,
+
+        //配置初始化
         public Dictionary<string, string> GetInputDataInfo(int ID)
         {
             int startID = -1;

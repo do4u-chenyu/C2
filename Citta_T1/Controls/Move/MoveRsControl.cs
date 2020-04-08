@@ -26,6 +26,7 @@ namespace Citta_T1.Controls.Move
         private string typeName;
         private string oldTextString;
         private string path;
+        private DSUtil.Encoding encoding;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -64,6 +65,7 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
+        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
         public ElementStatus Status
         {

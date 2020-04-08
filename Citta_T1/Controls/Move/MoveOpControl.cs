@@ -422,6 +422,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
+            if (!this.OptionToolStripMenuItem.Enabled)
+                return;
             switch (this.subTypeName)
             {
 

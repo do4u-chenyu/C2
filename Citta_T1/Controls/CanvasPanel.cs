@@ -494,6 +494,7 @@ namespace Citta_T1.Controls
                                 sizeL,
                                 text,
                                 location);
+            btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
             AddNewElement(btn);
             return btn;
         }
