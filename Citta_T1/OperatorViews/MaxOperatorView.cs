@@ -83,7 +83,7 @@ namespace Citta_T1.OperatorViews
                 canvas.RepaintObject(line);
                 canvas.lines.Add(line);
 
-                Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 1);
+                Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 0);
                 string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName,this.columnName);
                 mrc.Path = path;
             }

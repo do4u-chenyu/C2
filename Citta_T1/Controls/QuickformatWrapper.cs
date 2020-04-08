@@ -176,7 +176,7 @@ namespace Citta_T1.Controls
                     dx = dx + 1;
                 }
                 
-                if (dx == 10)
+                if (dx == 6)
                 {
                     dy = dy + 1;
                     dx = 0;
