@@ -12,11 +12,10 @@ using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
 using System.Threading;
+using Citta_T1.Business.Option;
 
 namespace  Citta_T1
-{
-
-   
+{ 
     public partial class MainForm : Form
     {
         public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
@@ -29,6 +28,7 @@ namespace  Citta_T1
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
         private ModelDocumentDao modelDocumentDao;
+        private OptionDao optionDao;
         public string UserName { get => this.userName; set => this.userName = value; }
         
         delegate void AsynUpdateLog(string log);
@@ -45,6 +45,7 @@ namespace  Citta_T1
             this.isLeftViewPanelMinimum = false;
 
             this.modelDocumentDao = new ModelDocumentDao();
+            this.optionDao = new OptionDao();
             InitializeGlobalVariable();
             InitializeControlsLocation();
 
@@ -73,6 +74,7 @@ namespace  Citta_T1
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
             Global.SetLogView(this.logView);
+            Global.SetOptionDao(this.optionDao); 
 
         }
 
@@ -468,7 +470,7 @@ namespace  Citta_T1
             {
                 if (Global.GetCurrentDocument().Dirty)
                 {
-                    MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型没有保存，请保存后再运行模型！", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());

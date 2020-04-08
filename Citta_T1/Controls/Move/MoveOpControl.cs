@@ -54,8 +54,6 @@ namespace Citta_T1.Controls.Move
         public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
 
         
-        private bool relationStatus = true;
-        
 
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -111,8 +109,6 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
-            this.EnableOpenOption = this.relationStatus;//设置选项是否可以打开
         }
         public void ChangeSize(int sizeL)
         {
@@ -426,6 +422,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
+            if (!this.OptionToolStripMenuItem.Enabled)
+                return;
             switch (this.subTypeName)
             {
 
@@ -801,6 +799,11 @@ namespace Citta_T1.Controls.Move
             e.Graphics.DrawRectangle(pen, rectIn_down);
             e.Graphics.FillRectangle(trnsRedBrush, rectOut);
             e.Graphics.DrawRectangle(pen, rectOut);
+        }
+
+        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

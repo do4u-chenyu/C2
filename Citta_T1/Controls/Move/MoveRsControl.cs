@@ -26,6 +26,7 @@ namespace Citta_T1.Controls.Move
         private string typeName;
         private string oldTextString;
         private string path;
+        private DSUtil.Encoding encoding;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -64,6 +65,7 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
+        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
         public ElementStatus Status
         {
@@ -98,10 +100,11 @@ namespace Citta_T1.Controls.Move
 
         private void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textBox.Text);
-
             rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            SetOpControlName(this.textBox.Text);
+
+
         }
         public void ChangeSize(int sizeL)
         {
@@ -256,7 +259,7 @@ namespace Citta_T1.Controls.Move
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(194 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(179 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(179 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(124 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
         }
@@ -266,7 +269,7 @@ namespace Citta_T1.Controls.Move
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(142 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(131 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(131 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(72 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
         }
@@ -276,7 +279,7 @@ namespace Citta_T1.Controls.Move
             double f = Math.Pow(factor, sizeLevel);
             this.Size = new Size((int)(184 * f), (int)(25 * f));
             this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
-            this.rightPinPictureBox.Location = new Point((int)(170 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(170 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(114 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
         }
@@ -447,9 +450,19 @@ namespace Citta_T1.Controls.Move
 
             SetDouble(this);
             if (zoomUp)
+            {
                 SetControlsBySize(factor, this);
+                this.rectOut = SetRectBySize(factor, this.rectOut);
+                this.rectIn  = SetRectBySize(factor, this.rectIn);
+            }
+
             else
+            {
                 SetControlsBySize(1 / factor, this);
+                this.rectOut = SetRectBySize(1/factor, this.rectOut);
+                this.rectIn  = SetRectBySize(1/factor, this.rectIn);
+            }
+                
 
         }
 
@@ -472,6 +485,14 @@ namespace Citta_T1.Controls.Move
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
 
+        }
+        public Rectangle SetRectBySize(float f, Rectangle rect)
+        {
+            rect.Width = Convert.ToInt32(rect.Width * f);
+            rect.Height = Convert.ToInt32(rect.Height * f);
+            rect.X = Convert.ToInt32(rect.Left * f);
+            rect.Y = Convert.ToInt32(rect.Top * f);
+            return rect;
         }
         #endregion
 
