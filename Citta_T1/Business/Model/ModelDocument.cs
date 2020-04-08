@@ -203,8 +203,8 @@ namespace Citta_T1.Business.Model
             {
                 ModelRelation mr = this.modelRelations[i];
                 // 0 被RemarkControl占用了
-                ModelElement sEle = this.modelElements[mr.StartID - 1];
-                ModelElement eEle = this.modelElements[mr.EndID - 1];
+                ModelElement sEle = this.modelElements[mr.StartID];
+                ModelElement eEle = this.modelElements[mr.EndID];
                 // 坐标更新
                 mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                 mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
