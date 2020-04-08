@@ -327,6 +327,9 @@
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
+    <EmbeddedResource Include="Controls\CanvasPanel.resx">
+      <DependentUpon>CanvasPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
       <SubType>Designer</SubType>
