@@ -69,13 +69,14 @@ namespace Citta_T1.Business.Model
         public void AddDocumentOperator(Control ct)
         {
             Global.GetCanvasPanel().StartMove = true;
-            this.currentDocument.ElementCount += 1;
+            
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount;
                 ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
+                this.currentDocument.ElementCount += 1;
                 return;
             }
 
@@ -85,6 +86,7 @@ namespace Citta_T1.Business.Model
                 op.ID = this.currentDocument.ElementCount;
                 ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
+                this.currentDocument.ElementCount += 1;
                 return;               
             }
             if (ct is MoveRsControl)
@@ -93,10 +95,11 @@ namespace Citta_T1.Business.Model
                 op.ID = this.currentDocument.ElementCount;
                 ModelElement e = ModelElement.CreateResultElement(op, op.ReName,this.currentDocument.ElementCount);
                 this.currentDocument.AddModelElement(e);
+                this.currentDocument.ElementCount += 1;
                 return;
 
             }
-
+           
         }
         public void AddDocumentRelation(int startID, int endID, Point startLocation, Point endLocation, int endPin)
         {
