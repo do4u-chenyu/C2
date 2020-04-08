@@ -42,6 +42,26 @@ namespace Citta_T1.Business.Model
             UpdatePoints();
         }
 
+        public void ChangLoc(float x, float y)
+        {
+            this.startP = new PointF(this.startP.X + x, this.startP.Y + y);
+            this.endP = new PointF(this.endP.X + x, this.endP.Y + y);
+            UpdatePoints();
+        }
+        // MoveOpControl.ChangeSize
+        public void ZoomOut(float zoomFactor = 1.3F)
+        {
+            this.startP = new PointF(this.startP.X / zoomFactor, this.startP.Y / zoomFactor);
+            this.endP = new PointF(this.endP.X / zoomFactor, this.endP.Y / zoomFactor);
+            UpdatePoints();
+        }
+
+        public void ZoomIn(float zoomFactor = 1.3F)
+        {
+            this.startP = new PointF(this.startP.X * zoomFactor, this.startP.Y * zoomFactor);
+            this.endP = new PointF(this.endP.X * zoomFactor, this.endP.Y * zoomFactor);
+            UpdatePoints();
+        }
         public void UpdatePoints()
         {
             this.a = new PointF((startP.X + endP.X) / 2, startP.Y);
@@ -78,6 +98,9 @@ namespace Citta_T1.Business.Model
             return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(w), Convert.ToInt32(h));
         }
 
-
+        //public Bezier GetLine()
+        //{
+        //    return new B
+        //}
     }
 }

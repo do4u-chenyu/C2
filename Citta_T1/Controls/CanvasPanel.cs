@@ -99,7 +99,10 @@ namespace Citta_T1.Controls
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
                 }
-
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    mr.ZoomIn();
+                }
             }
             else if (!isLarger && sizeLevel > 0)
             {
@@ -112,6 +115,10 @@ namespace Citta_T1.Controls
                     {
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
+                }
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    mr.ZoomOut();
                 }
             }
             Global.GetNaviViewControl().UpdateNaviView();
@@ -127,20 +134,15 @@ namespace Citta_T1.Controls
             string text = "";
             DSUtil.Encoding isutf8 = DSUtil.Encoding.UTF8;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
-            try
-            {
-                type = (ElementType)e.Data.GetData("Type");
-                path = e.Data.GetData("Path").ToString();
-                text = e.Data.GetData("Text").ToString();
-                isutf8 = (DSUtil.Encoding)e.Data.GetData("Encoding");
-            }
-            catch (Exception ex)
-            {
-                log.Warn(ex.Message);
-            }
-            // 首先根据数据`e`判断传入的是什么类型的button，分别创建不同的Control
+            type = (ElementType)e.Data.GetData("Type");
+            text = e.Data.GetData("Text").ToString();
+
             if (type == ElementType.DataSource)
+            {
+                path = e.Data.GetData("Path").ToString();                
+                isutf8 = (DSUtil.Encoding)e.Data.GetData("Encoding");
                 AddNewDataSource(path, sizeLevel, text, location, isutf8);
+            }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
         }
@@ -255,29 +257,6 @@ namespace Citta_T1.Controls
                 // 重绘曲线
                 RepaintObject(lineWhenMoving);
 
-            }
-        }
-        public void RepaintAllLines()
-        {
-            try
-            {
-                if (lines.Count() == 0)
-                {
-                    Bezier line;
-                    foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                    {
-                        line = new Bezier(mr.StartP, mr.EndP);
-                        lines.Add(line);
-                    }
-                }
-                foreach (Bezier line in this.lines)
-                {
-                    this.RepaintObject(line);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Warn("画板未加载完全");
             }
         }
         /*

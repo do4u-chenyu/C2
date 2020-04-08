@@ -163,113 +163,109 @@ namespace Citta_T1.Controls.Move
 
             if (cmd == ECommandType.Null)
                 return;
-            // TODO [DK] 无用代码 过段时间删除
-            //if (cmd == eCommandType.draw)
-            //{
-            //    startX = this.Location.X + e.X;
-            //    startY = this.Location.Y + e.Y;
-            //    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-            //    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
-            //    return;
-            //}
-            #region 控件移动
-            (this.Parent as CanvasPanel).StartMove = true;
-            int left = this.Left + e.X - mouseOffset.X;
-            int top = this.Top + e.Y - mouseOffset.Y;
-            this.Location = WorldBoundControl(new Point(left, top));
-            #endregion
+            else if(cmd == ECommandType.Hold)
+            {
+                #region 控件移动
+                (this.Parent as CanvasPanel).StartMove = true;
+                int left = this.Left + e.X - mouseOffset.X;
+                int top = this.Top + e.Y - mouseOffset.Y;
+                this.Location = WorldBoundControl(new Point(left, top));
+                #endregion
+                //#region 线移动部分
+                ///*
+                // * 1. 计算受影响的线, 计算受影响区域 -> 对于OpControl而言，目前左侧至多有{针脚数量}条线，右侧至多有一条线
+                // * 2. 重绘静态图                     -> 对于OpControl而言，两侧都存在无效区域
+                // * 3. 用静态图盖住变化区域           -> canvas提供封装好的方法完成
+                // * 4. 更新坐标                       -> 左右两边的线都要更新坐标
+                // * 5. 绘线                           -> 左右两边的线都要更新
+                // * 6. 更新canvas.lines               -> 左右两边的线都要更新
+                // */
+                //bool endLineIndexsAllNull = true;
+                //foreach (int index in this.endLineIndexs)
+                //{
+                //    if (index == -1)
+                //        continue;
+                //    else
+                //    {
+                //        endLineIndexsAllNull = false;
+                //        break;
+                //    }
+                //}
 
-            //#region 线移动部分
-            ///*
-            // * 1. 计算受影响的线, 计算受影响区域 -> 对于OpControl而言，目前左侧至多有{针脚数量}条线，右侧至多有一条线
-            // * 2. 重绘静态图                     -> 对于OpControl而言，两侧都存在无效区域
-            // * 3. 用静态图盖住变化区域           -> canvas提供封装好的方法完成
-            // * 4. 更新坐标                       -> 左右两边的线都要更新坐标
-            // * 5. 绘线                           -> 左右两边的线都要更新
-            // * 6. 更新canvas.lines               -> 左右两边的线都要更新
-            // */
-            //bool endLineIndexsAllNull = true;
-            //foreach (int index in this.endLineIndexs)
-            //{
-            //    if (index == -1)
-            //        continue;
-            //    else
-            //    {
-            //        endLineIndexsAllNull = false;
-            //        break;
-            //    }
-            //}
+                //if (endLineIndexsAllNull)
+                //{
+                //    return;
+                //}
+                //Line line;
+                //CanvasPanel canvas = Global.GetCanvasPanel();
+                //canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
+                //Rectangle clipRectangle = canvas.ClientRectangle;
 
-            //if (endLineIndexsAllNull)
-            //{
-            //    return;
-            //}
-            //Line line;
-            //CanvasPanel canvas = Global.GetCanvasPanel();
-            //canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
-            //Rectangle clipRectangle = canvas.ClientRectangle;
+                //CanvasWrapper canvasWrp = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
 
-            //CanvasWrapper canvasWrp = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
+                //List<Line> lines = canvas.lines;
+                //PointF startP;
+                //PointF endP;
+                //// 受影响的点
+                //List<float> affectedPointsX = new List<float> { };
+                //List<float> affectedPointsY = new List<float> { };
+                //// 受影响区域数组
+                //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
+                //List<Line> affectedLines = new List<Line> { };
+                //Rectangle affectedArea;
 
-            //List<Line> lines = canvas.lines;
-            //PointF startP;
-            //PointF endP;
-            //// 受影响的点
-            //List<float> affectedPointsX = new List<float> { };
-            //List<float> affectedPointsY = new List<float> { };
-            //// 受影响区域数组
-            //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
-            //List<Line> affectedLines = new List<Line> { };
-            //Rectangle affectedArea;
+                //log.Info("[MoveDtControl] 满足线移动条件");
+                //foreach (int index in startLineIndexs)
+                //{
+                //    line = lines[index];
+                //    affectedStartLines.Add(line);
+                //    affectedLines.Add(line);
+                //}
+                //foreach (int index in endLineIndexs)
+                //{
+                //    if (index == -1) return;
+                //    line = lines[index];
+                //    affectedEndLines.Add(line);
+                //    affectedLines.Add(line);
+                //}
+                //// 受影响左侧区域
 
-            //log.Info("[MoveDtControl] 满足线移动条件");
-            //foreach (int index in startLineIndexs)
-            //{
-            //    line = lines[index];
-            //    affectedStartLines.Add(line);
-            //    affectedLines.Add(line);
-            //}
-            //foreach (int index in endLineIndexs)
-            //{
-            //    if (index == -1) return;
-            //    line = lines[index];
-            //    affectedEndLines.Add(line);
-            //    affectedLines.Add(line);
-            //}
-            //// 受影响左侧区域
+                //foreach (Line l in affectedEndLines)
+                //{
+                //    affectedArea = OpUtil.GetAreaByLine(l);
+                //    affectedAreaArr.Add(affectedArea);
+                //}
+                //foreach (Line l in affectedStartLines)
+                //{
+                //    affectedArea = OpUtil.GetAreaByLine(l);
+                //    affectedAreaArr.Add(affectedArea);
+                //}
+                //// 重绘静态图
+                //canvasWrp.RepaintStatic(clipRectangle, affectedLines);
+                //canvas.staticImage.Save("Dt_static_image_save.png");
+                //foreach (Rectangle rect in affectedAreaArr)
+                //{
+                //    canvasWrp.CoverPanelByRect(rect);
+                //}
+                //// 坐标修正
+                //foreach (int index in startLineIndexs)
+                //{
+                //    line = lines[index];
+                //    // 边界坐标修正
+                //    line.StartP = new PointF(
+                //        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                //        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
 
-            //foreach (Line l in affectedEndLines)
-            //{
-            //    affectedArea = OpUtil.GetAreaByLine(l);
-            //    affectedAreaArr.Add(affectedArea);
-            //}
-            //foreach (Line l in affectedStartLines)
-            //{
-            //    affectedArea = OpUtil.GetAreaByLine(l);
-            //    affectedAreaArr.Add(affectedArea);
-            //}
-            //// 重绘静态图
-            //canvasWrp.RepaintStatic(clipRectangle, affectedLines);
-            //canvas.staticImage.Save("Dt_static_image_save.png");
-            //foreach (Rectangle rect in affectedAreaArr)
-            //{
-            //    canvasWrp.CoverPanelByRect(rect);
-            //}
-            //// 坐标修正
-            //foreach (int index in startLineIndexs)
-            //{
-            //    line = lines[index];
-            //    // 边界坐标修正
-            //    line.StartP = new PointF(
-            //        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-            //        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
+                //    );
+                //    // 坐标更新
+                //    line.UpdatePoints();
+                //    canvasWrp.RepaintObject(line);
+                //}
+                //#endregion
+            }
 
-            //    );
-            //    // 坐标更新
-            //    line.UpdatePoints();
-            //    canvasWrp.RepaintObject(line);
-            //}
-            //#endregion
+
+
         }
         public Point WorldBoundControl(Point Pm)
         {
@@ -762,6 +758,38 @@ namespace Citta_T1.Controls.Move
         public int GetID()
         {
             return this.ID;
+        }
+        public PointF GetEndPinLoc(int pinIndex)
+        {
+            switch (pinIndex)
+            {
+                case 0:
+                    return new PointF(
+                        this.Location.X + this.rectIn_up.Location.X + this.rectIn_up.Width / 2, 
+                        this.Location.Y + this.rectIn_up.Location.Y + this.rectIn_up.Height / 2);
+                case 1:
+                    return new PointF(
+                        this.Location.X + this.rectIn_down.Location.X + this.rectIn_down.Width / 2, 
+                        this.Location.Y + this.rectIn_down.Location.Y + this.rectIn_down.Height / 2);
+                default:
+                    // TODO [DK] 需要定义一个异常
+                    return new PointF(0, 0);
+            }
+        }
+        public PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
+        public void BindStartLine(int pinIndex, int relationIndex)
+        {
+            this.startLineIndexs.Add(relationIndex);
+        }
+        public void BindEndLine(int pinIndex, int relationIndex)
+        {
+            if (pinIndex < this.endLineIndexs.Count())
+                this.endLineIndexs[pinIndex] = relationIndex;
         }
         #endregion
 

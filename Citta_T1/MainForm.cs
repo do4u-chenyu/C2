@@ -208,6 +208,8 @@ namespace  Citta_T1
                 this.naviViewControl.AddControl(ct);
                 this.naviViewControl.UpdateNaviView();
             }
+            // TODO [DK] 控件绑定线
+            doc.UpdateAllLines();
         }
         private void InitializeControlsLocation()
         {

@@ -132,9 +132,8 @@ namespace Citta_T1.Controls.Move
 
         public void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textBox1.Text);
-           
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            SetOpControlName(this.textBox1.Text);
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,14 +180,16 @@ namespace Citta_T1.Controls.Move
             if (isLarger)
             {
                 SetControlsBySize(factor, this);
+                this.rectOut = SetRectBySize(factor, this.rectOut);
             }
             else if (!isLarger)
             {
                 SetControlsBySize(1 / factor, this);
+                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
             }
 
         }
-
+        //int i = 0;
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -237,6 +238,7 @@ namespace Citta_T1.Controls.Move
             Bezier line;
             CanvasPanel canvas = Global.GetCanvasPanel();
             List<Bezier> lines = canvas.lines;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             PointF startP;
             PointF endP;
             // 受影响的点
@@ -244,32 +246,32 @@ namespace Citta_T1.Controls.Move
             List<float> affectedPointsY = new List<float> { };
 
 
-            foreach (int index in startLineIndexs)
-            {
-                line = lines[index];
-                affectedLines.Add(line);
-            }
+            //foreach (int index in startLineIndexs)
+            //{
+            //    line = lines[index];
+            //    affectedLines.Add(line);
+            //}
 
-            // 受影响区域
-            foreach (Bezier l in affectedLines)
-            {
-                if (!affectedPointsX.Contains(l.StartP.X))
-                    affectedPointsX.Add(l.StartP.X);
-                if (!affectedPointsY.Contains(l.StartP.Y))
-                    affectedPointsY.Add(l.StartP.Y);
-                if (!affectedPointsX.Contains(l.EndP.X))
-                    affectedPointsX.Add(l.EndP.X);
-                if (!affectedPointsY.Contains(l.EndP.Y))
-                    affectedPointsY.Add(l.EndP.Y);
-            }
-            int minX = (int)affectedPointsX.Min();
-            int maxX = (int)affectedPointsX.Max();
-            int minY = (int)affectedPointsY.Min();
-            int maxY = (int)affectedPointsY.Max();
-            Rectangle affectedArea = new Rectangle(
-                new Point(minX, minY),
-                new Size(maxX - minX, maxY - minY)
-            );
+            //// 受影响区域
+            //foreach (Bezier l in affectedLines)
+            //{
+            //    if (!affectedPointsX.Contains(l.StartP.X))
+            //        affectedPointsX.Add(l.StartP.X);
+            //    if (!affectedPointsY.Contains(l.StartP.Y))
+            //        affectedPointsY.Add(l.StartP.Y);
+            //    if (!affectedPointsX.Contains(l.EndP.X))
+            //        affectedPointsX.Add(l.EndP.X);
+            //    if (!affectedPointsY.Contains(l.EndP.Y))
+            //        affectedPointsY.Add(l.EndP.Y);
+            //}
+            //int minX = (int)affectedPointsX.Min();
+            //int maxX = (int)affectedPointsX.Max();
+            //int minY = (int)affectedPointsY.Min();
+            //int maxY = (int)affectedPointsY.Max();
+            //Rectangle affectedArea = new Rectangle(
+            //    new Point(minX, minY),
+            //    new Size(maxX - minX, maxY - minY)
+            //);
             // 重绘静态图
             // TODO [DK] 不用每次都重新计算
             if (canvas.staticImage2 == null)
@@ -297,28 +299,27 @@ namespace Citta_T1.Controls.Move
             //Graphics g = this.CreateGraphics();
             foreach (int index in startLineIndexs)
             {
-                line = lines[index];
-                // 边界坐标修正
-                line.StartP = new PointF(
-                    Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                    Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
-                );
-                // 坐标更新
-                line.UpdatePoints();
-                canvas.RepaintObject(line, g);
+                ModelRelation mr = mrs[index];
+                mr.StartP = new PointF(
+                    Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                    Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
+                mr.UpdatePoints();
+                Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                canvas.RepaintObject(newLine, g);
             }
             Graphics g1 = canvas.CreateGraphics();
             g1.DrawImageUnscaled(tmp, 0,0);
             g.Dispose();
             g1.Dispose();
+            //i++;
             //tmp.Save(i.ToString() + ".bmp");
- 
+
             //tmp.Dispose();
             //tmp = null;
 
 
             //this.Hide();
-           
+
         }
 
          public Point WorldBoundControl(Point Pm)
@@ -545,6 +546,14 @@ namespace Citta_T1.Controls.Move
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
         }
+        public Rectangle SetRectBySize(float f, Rectangle rect)
+        {
+            rect.Width = Convert.ToInt32(rect.Width * f);
+            rect.Height = Convert.ToInt32(rect.Height * f);
+            rect.X = Convert.ToInt32(rect.Left * f);
+            rect.Y = Convert.ToInt32(rect.Top * f);
+            return rect;
+        }
         #endregion
 
         #region 拖动实现
@@ -561,7 +570,7 @@ namespace Citta_T1.Controls.Move
         #region 文档修改事件
 
         #endregion
-       
+        #region 接口实现
         /*
          * TODO [DK] 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
@@ -591,6 +600,23 @@ namespace Citta_T1.Controls.Move
         {
             return this.ID;
         }
+        public PointF GetEndPinLoc(int pinIndex)
+        {
+            // 不应该被调用
+            return new PointF(0, 0);
+        }
+        public PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
+        public void BindStartLine(int pinIndex, int relationIndex)
+        {
+            this.startLineIndexs.Add(relationIndex);
+        }
+        public void BindEndLine(int pinIndex, int relationIndex) { }
+        #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(trnsRedBrush, rectOut);

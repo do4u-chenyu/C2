@@ -64,9 +64,12 @@ namespace Citta_T1.Controls
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.MoveWorldImage(n);
             this.ControlChange(start, now);
+            // TODO [DK] 更新线坐标
             n.Dispose();
             this.startDrag = false;
             this.start = e.Location;
+            
+
         }
         public bool DragPaint(Size canvasSize, float canvasFactor, PaintEventArgs e)
         {
@@ -90,18 +93,7 @@ namespace Citta_T1.Controls
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor);
-            // 反向遍历,解决Move时旧控件压在新控件上
-            for(int i = 0; i < modelElements.Count; i++)
-            {
-                ModelElement me = modelElements[modelElements.Count - i - 1];
-                Control ct = me.GetControl;
-                Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (Pw.X < 0 || Pw.Y < 0)
-                    continue;
-                ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
-                me.Hide();
-            }
-            // TODO 上下曲线重叠问题
+            // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
                 Point Pw = Global.GetCurrentDocument().ScreenToWorld(mr.GetBoundingRect().Location, mapOrigin);
@@ -114,6 +106,18 @@ namespace Citta_T1.Controls
                 PointF e = Global.GetCurrentDocument().ScreenToWorldF(mr.EndP, mapOrigin);
                 g.DrawBezier(Pens.Green, s, a, b, e);
             }
+            // 反向遍历,解决Move时旧控件压在新控件上
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;
+                Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                if (Pw.X < 0 || Pw.Y < 0)
+                    continue;
+                ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
+                me.Hide();
+            }
+
             g.Dispose();
             return staticImage;
         }
@@ -146,11 +150,12 @@ namespace Citta_T1.Controls
             int dy = Convert.ToInt32((now.Y - start.Y) / this.Factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
-
+            // 移动当前文档中的所有控件
+            LineUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             OpUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
-
+            // 获得移动获得世界坐标原点
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-           
+            // 将所有控件都显示出来
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
                      
             foreach (ModelElement me in modelElements)
