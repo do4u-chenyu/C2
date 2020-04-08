@@ -284,6 +284,7 @@ namespace Citta_T1.Controls.Move
             //log.Info(canvas.Size.ToString());
             Bitmap tmp = new Bitmap(canvas.staticImage2);
             Graphics g = Graphics.FromImage(tmp);
+            // TODO [DK BUG] 将控件挪出`CanvasPanel`时，会出错，DrawToBitmap 坐标不能为负
             this.DrawToBitmap(tmp, new Rectangle(this.Location.X, this.Location.Y, this.Width,this.Height));
             //Bitmap tmp = new Bitmap(2000, 2000);
                
