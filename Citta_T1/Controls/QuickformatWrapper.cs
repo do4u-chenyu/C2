@@ -143,7 +143,7 @@ namespace Citta_T1.Controls
                     if (treeA.Count < treeB.Count)
                         ht[tmp] =  TreeDeepSort(treeA, treeB);
                     else
-                        ht[tmp] = TreeDeepSort(treeA, treeB);   
+                        ht[tmp] = TreeDeepSort(treeB, treeA);   
                     return;
                 }
             }
@@ -176,7 +176,7 @@ namespace Citta_T1.Controls
                     dx = dx + 1;
                 }
                 
-                if (dx == 10)
+                if (dx == 6)
                 {
                     dy = dy + 1;
                     dx = 0;
@@ -209,10 +209,14 @@ namespace Citta_T1.Controls
             log.Info("待合并数" + this.treeGroup.ToString());
             //对堆取交集
             this.recordSearch = new List<List<List<int>>>();
-            this.recordSearch.Add(this.treeGroup[0]);
             List<List<List<int>>> key = new List<List<List<int>>>();
-            key.Add(this.treeGroup[0]);
-            ht.Add(key, this.treeGroup[0]);
+            if (this.treeGroup.Count > 0)
+            {
+                this.recordSearch.Add(this.treeGroup[0]);
+                key.Add(this.treeGroup[0]);
+                ht.Add(key, this.treeGroup[0]);
+            }
+
 
             for (int i = 0; i < this.treeGroup.Count; i++)
             {
