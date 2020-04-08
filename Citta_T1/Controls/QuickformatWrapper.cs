@@ -136,14 +136,17 @@ namespace Citta_T1.Controls
 
             foreach (List<List<List<int>>> tmp in ht.Keys)
             {
+
                 if (tmp.Contains(treeA) & !tmp.Contains(treeB))
                 {
+
+                    treeA = (List<List<int>>) ht[tmp];
                     tmp.Add(treeB);
                     this.recordSearch.Add(treeB);
                     if (treeA.Count < treeB.Count)
-                        ht[tmp] =  TreeDeepSort(treeA, treeB);
+                        ht[tmp] = TreeDeepSort(treeA, treeB);
                     else
-                        ht[tmp] = TreeDeepSort(treeB, treeA);   
+                        ht[tmp] = TreeDeepSort(treeB, treeA);
                     return;
                 }
             }
@@ -206,7 +209,7 @@ namespace Citta_T1.Controls
                 SearchTree(tmp);
                 this.treeGroup.Add(this.treeNodes);
             }
-            log.Info("待合并数" + this.treeGroup.ToString());
+            log.Info("待合并数" + this.treeGroup.Count.ToString());
             //对堆取交集
             this.recordSearch = new List<List<List<int>>>();
             List<List<List<int>>> key = new List<List<List<int>>>();
@@ -258,8 +261,8 @@ namespace Citta_T1.Controls
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, 1, modelElements);
-            //this.currentModel.UpdateAllLines();
-            //Global.GetCanvasPanel().Invalidate();
+            this.currentModel.UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
