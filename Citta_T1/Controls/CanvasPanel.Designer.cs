@@ -1,4 +1,6 @@
-﻿namespace Citta_T1.Controls
+﻿
+
+namespace Citta_T1.Controls
 {
     partial class CanvasPanel
     {
@@ -34,6 +36,7 @@
             // 
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Name = "CanvasPanel";
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);

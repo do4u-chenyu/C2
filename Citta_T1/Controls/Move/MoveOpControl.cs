@@ -155,6 +155,8 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
             if (cmd == ECommandType.Null)
@@ -294,7 +296,10 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
+
             
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -318,6 +323,8 @@ namespace Citta_T1.Controls.Move
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveOpControl_MouseDown(sender, e);
@@ -328,6 +335,9 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
+
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -422,6 +432,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             if (!this.OptionToolStripMenuItem.Enabled)
                 return;
             switch (this.subTypeName)
@@ -462,6 +474,9 @@ namespace Citta_T1.Controls.Move
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
+
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
@@ -473,6 +488,8 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             //删除连接的结果控件
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
@@ -519,6 +536,8 @@ namespace Citta_T1.Controls.Move
         #region textBox
         public void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             // 按下回车键
             if (e.KeyChar == 13)
                 FinishTextChange();
@@ -526,6 +545,8 @@ namespace Citta_T1.Controls.Move
 
         public void textBox1_Leave(object sender, EventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             FinishTextChange();
         }
 

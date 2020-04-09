@@ -142,6 +142,8 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
@@ -161,7 +163,8 @@ namespace Citta_T1.Controls.Move
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("移动开始");
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             if (e.Button == MouseButtons.Left)
             {
                 if (rectOut.Contains(e.Location))
@@ -184,6 +187,8 @@ namespace Citta_T1.Controls.Move
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveRsControl_MouseDown(sender, e);
@@ -195,6 +200,8 @@ namespace Citta_T1.Controls.Move
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -288,6 +295,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
             //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
@@ -295,6 +304,8 @@ namespace Citta_T1.Controls.Move
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
@@ -306,7 +317,8 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+                return;
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();

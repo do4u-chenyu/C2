@@ -28,11 +28,15 @@ namespace Citta_T1.Controls.Flow
         {
             if (SelectDrag)
             {
-                this.Parent.Cursor = Cursors.Hand;
+                this.Parent.Cursor = Cursors.Cross;
+            }
+            else if(SelectFrame)
+            {
+                this.Parent.Cursor = Cursors.Default;
             }
             else
             {
-                this.Parent.Cursor = Cursors.Default;
+                this.Parent.Cursor = Cursors.Hand;
             }
         }
         private void PictureBox1_MouseEnter(object sender, EventArgs e)
