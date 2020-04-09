@@ -243,12 +243,27 @@ namespace Citta_T1.Controls.Move
             {
                 if (mr.StartID == this.id)
                 {
-                    mr.StartP = new PointF(
-                        Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                        Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
+                    mr.StartP = this.GetStartPinLoc(0);
+                    log.Info("MoveDtControl.MouseMove x = " + mr.StartP.X + ", y = " + mr.StartP.Y);
+                    log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
                     mr.UpdatePoints();
                 }
-                Bezier newLine = new Bezier(mr.StartP, mr.EndP);            
+                //if (mr.StartID == this.id)
+                //{
+                //    mr.StartP = new PointF(
+                //        Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                //        Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
+                //    mr.UpdatePoints();
+                //}
+                //if (mr.EndID == this.id)
+                //{
+                //    mr.EndP = new PointF(
+                //        Math.Min(Math.Max(mr.EndP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                //        Math.Min(Math.Max(mr.EndP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
+                //    mr.UpdatePoints();
+                //}
+                Bezier newLine = new Bezier(mr.StartP, mr.EndP);  
+
             }
             this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 

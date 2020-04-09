@@ -22,7 +22,7 @@ namespace Citta_T1.Controls.Move
         private LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
-
+        private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "连接算子 取差集 取交集 取并集";
 
@@ -102,6 +102,7 @@ namespace Citta_T1.Controls.Move
             this.subTypeName = subTypeName;
             Location = loc;
             doublelPinFlag = doublePin.Contains(SubTypeName);
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
@@ -167,97 +168,24 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
-                //#region 线移动部分
-                ///*
-                // * 1. 计算受影响的线, 计算受影响区域 -> 对于OpControl而言，目前左侧至多有{针脚数量}条线，右侧至多有一条线
-                // * 2. 重绘静态图                     -> 对于OpControl而言，两侧都存在无效区域
-                // * 3. 用静态图盖住变化区域           -> canvas提供封装好的方法完成
-                // * 4. 更新坐标                       -> 左右两边的线都要更新坐标
-                // * 5. 绘线                           -> 左右两边的线都要更新
-                // * 6. 更新canvas.lines               -> 左右两边的线都要更新
-                // */
-                //bool endLineIndexsAllNull = true;
-                //foreach (int index in this.endLineIndexs)
-                //{
-                //    if (index == -1)
-                //        continue;
-                //    else
-                //    {
-                //        endLineIndexsAllNull = false;
-                //        break;
-                //    }
-                //}
-
-                //if (endLineIndexsAllNull)
-                //{
-                //    return;
-                //}
-                //Line line;
-                //CanvasPanel canvas = Global.GetCanvasPanel();
-                //canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
-                //Rectangle clipRectangle = canvas.ClientRectangle;
-
-                //CanvasWrapper canvasWrp = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
-
-                //List<Line> lines = canvas.lines;
-                //PointF startP;
-                //PointF endP;
-                //// 受影响的点
-                //List<float> affectedPointsX = new List<float> { };
-                //List<float> affectedPointsY = new List<float> { };
-                //// 受影响区域数组
-                //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
-                //List<Line> affectedLines = new List<Line> { };
-                //Rectangle affectedArea;
-
-                //log.Info("[MoveDtControl] 满足线移动条件");
-                //foreach (int index in startLineIndexs)
-                //{
-                //    line = lines[index];
-                //    affectedStartLines.Add(line);
-                //    affectedLines.Add(line);
-                //}
-                //foreach (int index in endLineIndexs)
-                //{
-                //    if (index == -1) return;
-                //    line = lines[index];
-                //    affectedEndLines.Add(line);
-                //    affectedLines.Add(line);
-                //}
-                //// 受影响左侧区域
-
-                //foreach (Line l in affectedEndLines)
-                //{
-                //    affectedArea = OpUtil.GetAreaByLine(l);
-                //    affectedAreaArr.Add(affectedArea);
-                //}
-                //foreach (Line l in affectedStartLines)
-                //{
-                //    affectedArea = OpUtil.GetAreaByLine(l);
-                //    affectedAreaArr.Add(affectedArea);
-                //}
-                //// 重绘静态图
-                //canvasWrp.RepaintStatic(clipRectangle, affectedLines);
-                //canvas.staticImage.Save("Dt_static_image_save.png");
-                //foreach (Rectangle rect in affectedAreaArr)
-                //{
-                //    canvasWrp.CoverPanelByRect(rect);
-                //}
-                //// 坐标修正
-                //foreach (int index in startLineIndexs)
-                //{
-                //    line = lines[index];
-                //    // 边界坐标修正
-                //    line.StartP = new PointF(
-                //        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                //        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
-
-                //    );
-                //    // 坐标更新
-                //    line.UpdatePoints();
-                //    canvasWrp.RepaintObject(line);
-                //}
-                //#endregion
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        log.Info("MoveDtControl.MouseMove x = " + mr.StartP.X + ", y = " + mr.StartP.Y);
+                        log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
+                        mr.UpdatePoints();
+                    }
+                    if (mr.EndID == this.id)
+                    {
+                        mr.EndP = this.GetEndPinLoc(mr.EndPin);
+                        mr.UpdatePoints();
+                    }
+                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                }
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
 
 
@@ -312,7 +240,8 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            oldcontrolPosition=this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            oldcontrolPosition =this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -340,6 +269,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }

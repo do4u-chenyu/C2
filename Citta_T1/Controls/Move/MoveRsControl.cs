@@ -65,6 +65,7 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
+        private ControlMoveWrapper controlMoveWrapper;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
         public ElementStatus Status
@@ -94,6 +95,7 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
             InitializeOpPinPicture();
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
         }
@@ -157,6 +159,25 @@ namespace Citta_T1.Controls.Move
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
+
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        log.Info("MoveDtControl.MouseMove x = " + mr.StartP.X + ", y = " + mr.StartP.Y);
+                        log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
+                        mr.UpdatePoints();
+                    }
+                    if (mr.EndID == this.id)
+                    {
+                        mr.EndP = this.GetEndPinLoc(mr.EndPin);
+                        mr.UpdatePoints();
+                    }
+                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                }
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -180,6 +201,7 @@ namespace Citta_T1.Controls.Move
                 isMouseDown = true;
             }
             oldcontrolPosition = this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -209,6 +231,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 this.isMouseDown = false;
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }

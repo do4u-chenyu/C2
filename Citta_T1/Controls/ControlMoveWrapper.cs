@@ -14,6 +14,8 @@ namespace Citta_T1.Controls
     class ControlMoveWrapper : DragWrapper
     {
         private Control control;
+        private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+
         public ControlMoveWrapper(Control ctr)
         {
             this.control = ctr;
@@ -66,6 +68,7 @@ namespace Citta_T1.Controls
                     currentDoc.ScreenToWorldF(mr.B, mapOrigin),
                     currentDoc.ScreenToWorldF(mr.EndP, mapOrigin)
                 );
+                log.Info("CanvasWrapper.MoveWorldImage x = " + currentDoc.ScreenToWorldF(mr.StartP, mapOrigin));
             }
             g.Dispose();
             n.DrawImageUnscaled(StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
