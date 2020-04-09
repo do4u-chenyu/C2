@@ -75,7 +75,7 @@ namespace Citta_T1.Utils
             return dragOffset;
         }
 
-        public static void ChangLoc(float dx, float dy)
+        public static void ChangeLoc(float dx, float dy)
         {
 
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;

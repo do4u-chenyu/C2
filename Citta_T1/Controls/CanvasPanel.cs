@@ -247,9 +247,7 @@ namespace Citta_T1.Controls
                     }
                 }
                 endP = nowP;
-                log.Info("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Bezier(startP, nowP);
-                log.Info("line'count = " + lines.Count().ToString());
                 // TODO [DK] 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
@@ -366,11 +364,9 @@ namespace Citta_T1.Controls
                 //endC右键菜单设置Enable
                 Global.GetOptionDao().EnableControlOption(mr);
 
-                log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
-                log.Info("线数量为 " + lines.Count());
+
                 Global.GetCurrentDocument().AddModelRelation(mr);
 
-                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
                 int line_index = lines.IndexOf(line);
                 (this.startC as IMoveControl).SaveStartLines(line_index);
                 (this.endC as IMoveControl).SaveEndLines(line_index);

@@ -298,7 +298,6 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (rectOut.Contains(e.Location))
                 {
                     startX = this.Location.X + e.X;
@@ -331,7 +330,6 @@ namespace Citta_T1.Controls.Move
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;

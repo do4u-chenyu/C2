@@ -67,6 +67,8 @@ namespace Citta_T1.Controls.Move
         // 受影响的线
         List<Bezier> affectedLines = new List<Bezier>() { };
         public ECommandType cmd = ECommandType.Null;
+
+        ControlMoveWrapper controlMoveWrapper;
         public string GetBcpPath()
         {
             return this.Name;
@@ -81,6 +83,7 @@ namespace Citta_T1.Controls.Move
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
         }
 
 
@@ -196,7 +199,6 @@ namespace Citta_T1.Controls.Move
             // 卡的版本
             // 按住拖拽
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
-            //if (!isMouseDown)
             if (cmd == ECommandType.Null)
                 return;
 
@@ -210,8 +212,6 @@ namespace Citta_T1.Controls.Move
                 return;
             }
 
-            //(this.Parent as CanvasPanel).StartMove = true;
-            //log.Info("[MoveDtControl]开始移动");
 
             #region 控件移动部分
             int left = this.Left + e.X - mouseOffset.X;
@@ -220,7 +220,6 @@ namespace Citta_T1.Controls.Move
 
             #endregion
 
-            // TODO [DK] 拖影严重
             /*
                 * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
                 * 2. 重绘静态图
@@ -229,103 +228,34 @@ namespace Citta_T1.Controls.Move
                 * 5. 绘线
                 * 6. 更新canvas.lines
                 */
-
             if (this.startLineIndexs.Count == 0)
             {
                 return;
             }
 
-            Bezier line;
+            /*
+             * 1. 遍历所有关系
+             * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
+             * 3. 重绘线
+             */
             CanvasPanel canvas = Global.GetCanvasPanel();
-            List<Bezier> lines = canvas.lines;
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            PointF startP;
-            PointF endP;
-            // 受影响的点
-            List<float> affectedPointsX = new List<float> { };
-            List<float> affectedPointsY = new List<float> { };
-
-
-            //foreach (int index in startLineIndexs)
-            //{
-            //    line = lines[index];
-            //    affectedLines.Add(line);
-            //}
-
-            //// 受影响区域
-            //foreach (Bezier l in affectedLines)
-            //{
-            //    if (!affectedPointsX.Contains(l.StartP.X))
-            //        affectedPointsX.Add(l.StartP.X);
-            //    if (!affectedPointsY.Contains(l.StartP.Y))
-            //        affectedPointsY.Add(l.StartP.Y);
-            //    if (!affectedPointsX.Contains(l.EndP.X))
-            //        affectedPointsX.Add(l.EndP.X);
-            //    if (!affectedPointsY.Contains(l.EndP.Y))
-            //        affectedPointsY.Add(l.EndP.Y);
-            //}
-            //int minX = (int)affectedPointsX.Min();
-            //int maxX = (int)affectedPointsX.Max();
-            //int minY = (int)affectedPointsY.Min();
-            //int maxY = (int)affectedPointsY.Max();
-            //Rectangle affectedArea = new Rectangle(
-            //    new Point(minX, minY),
-            //    new Size(maxX - minX, maxY - minY)
-            //);
-            // 重绘静态图
-            // TODO [DK] 不用每次都重新计算
-            if (canvas.staticImage2 == null)
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
-                canvas.staticImage2 = new Bitmap(canvas.Width, canvas.Height);
-                Graphics g2 = Graphics.FromImage(canvas.staticImage2);
-                g2.Clear(Color.White);
-                g2.Dispose();
+                if (mr.StartID == this.id)
+                {
+                    mr.StartP = new PointF(
+                        Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
+                        Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
+                    mr.UpdatePoints();
+                }
+                Bezier newLine = new Bezier(mr.StartP, mr.EndP);            
             }
-            //log.Info(canvas.Size.ToString());
-            Bitmap tmp = new Bitmap(canvas.staticImage2);
-            Graphics g = Graphics.FromImage(tmp);
+            this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 
-            // TODO [DK BUG] 将控件挪出`CanvasPanel`时，会出错，DrawToBitmap 坐标不能为负
-            this.DrawToBitmap(tmp, new Rectangle(this.Location.X, this.Location.Y, this.Width,this.Height));
-            //Bitmap tmp = new Bitmap(2000, 2000);
-               
-
-
-            //g2.Clear(Color.White);
-            //g2.Dispose();
-
-            // Rectangle clipRectangle = canvas.ClientRectangle;
-            // CanvasWrapper dcStatic = new CanvasWrapper(canvas, g1, canvas.ClientRectangle);
-            // canvas.RepaintStatic(dcStatic, clipRectangle, affectedLines);
-            //canvas.staticImage.Save("Dt_static_image_save.png");
-            // canvas.CoverPanelByRect(affectedArea);
-            //Graphics g = this.CreateGraphics();
-            foreach (int index in startLineIndexs)
-            {
-                ModelRelation mr = mrs[index];
-                mr.StartP = new PointF(
-                    Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                    Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
-                mr.UpdatePoints();
-                Bezier newLine = new Bezier(mr.StartP, mr.EndP);
-                canvas.RepaintObject(newLine, g);
-            }
-            Graphics g1 = canvas.CreateGraphics();
-            g1.DrawImageUnscaled(tmp, 0,0);
-            g.Dispose();
-            g1.Dispose();
-            //i++;
-            //tmp.Save(i.ToString() + ".bmp");
-
-            //tmp.Dispose();
-            //tmp = null;
-
-
-            //this.Hide();
 
         }
 
-         public Point WorldBoundControl(Point Pm)
+        public Point WorldBoundControl(Point Pm)
         {
             float screenFactor = Global.GetCanvasPanel().ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -371,6 +301,7 @@ namespace Citta_T1.Controls.Move
                 cmd = ECommandType.Hold;
             }
             oldcontrolPosition = this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
 
@@ -385,7 +316,7 @@ namespace Citta_T1.Controls.Move
             oldcontrolPosition = this.Location;
         }
 
-        private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
+        private void MoveDtControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -398,6 +329,8 @@ namespace Citta_T1.Controls.Move
                 }
                 Global.GetCanvasPanel().StartMove = true;
                 cmd = ECommandType.Null;
+
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)
@@ -575,7 +508,6 @@ namespace Citta_T1.Controls.Move
         #endregion
         #region 接口实现
         /*
-         * TODO [DK] 更新线坐标
          * 当空间移动的时候，更新该控件连接线的坐标
          */
         public void UpdateLineWhenMoving()
@@ -632,15 +564,6 @@ namespace Citta_T1.Controls.Move
         private void txtButton_Click(object sender, EventArgs e)
         {
             MainForm prt = Global.GetMainForm();
-            try
-            {
-                prt.PreViewDataByBcpPath(this.GetBcpPath(), this.encoding);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("该数据源路径发生改变，请检查数据源路径，当前数据源路径为: " + this.GetBcpPath());
-                return;
-            }
         }
     }
 

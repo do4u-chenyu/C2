@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\CanvasWrapper.cs" />
+    <Compile Include="Controls\ControlMoveWrapper.cs" />
     <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">

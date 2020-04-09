@@ -80,7 +80,7 @@ namespace Citta_T1.Controls.Flow
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
             Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
-            OpUtil.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
+            OpUtil.ChangeLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -113,7 +113,7 @@ namespace Citta_T1.Controls.Flow
                 if (moveOffset != new Point(0, 0))
                 {
                     log.Error("发生越界");
-                    OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
+                    OpUtil.ChangeLoc(-moveOffset.X, -moveOffset.Y);
                     Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                     mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 }
