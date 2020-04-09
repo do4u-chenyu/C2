@@ -88,13 +88,13 @@ namespace Citta_T1.Controls
         }
         private List<List<int>> TreeDeepSort(List<List<int>> treeA, List<List<int>> treeB)
         {
-            List<List<int>> results = new List<List<int>>();
+            
             for (int i = 0; i < treeA.Count; i++)
             {
-                List<int> result = treeB[i].Union(treeA[i]).ToList();
-                results.Add(result);
+                int dx = i + treeB.Count - treeA.Count;
+                treeB[dx] = treeB[dx].Union(treeA[i]).ToList();
             }
-            return results;
+            return treeB;
         }
         
         private bool ExitIntersect(List<List<int>> treeA, List<List<int>> treeB)
@@ -132,7 +132,17 @@ namespace Citta_T1.Controls
             }
 
             if (!ExitIntersect(treeA,treeB))
+            {
+                if (!this.recordSearch.Contains(treeB))
+                {
+                    this.recordSearch.Add(treeB);
+                    key.Add(treeB);
+                    ht.Add(key, treeB);
+
+                }
                 return;
+            }
+                
 
             foreach (List<List<List<int>>> tmp in ht.Keys)
             {
