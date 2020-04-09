@@ -1,5 +1,4 @@
-﻿
-using Citta_T1.Business.Model;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Utils;
 using System;
 using System.Collections;
@@ -13,7 +12,6 @@ namespace Citta_T1.Controls
 {
     class QuickformatWrapper
     {
-        
         private List<ModelRelation> modelRelations;
         private ModelDocument currentModel;
         private List<ModelElement> modelElements;
@@ -78,17 +76,17 @@ namespace Citta_T1.Controls
                 {
                     List<int> beforeNodeIds = FindBeforeNodeIds(resultNodeId);
                     nextNeedSearchNodeIds = nextNeedSearchNodeIds.Union(beforeNodeIds).ToList();
-                    
+
                     this.treeNodes.Add(nextNeedSearchNodeIds);
                     break;
                 }
-                
+
             }
             SearchTree(nextNeedSearchNodeIds);
         }
         private List<List<int>> TreeDeepSort(List<List<int>> treeA, List<List<int>> treeB)
         {
-            
+
             for (int i = 0; i < treeA.Count; i++)
             {
                 int dx = i + treeB.Count - treeA.Count;
@@ -96,14 +94,14 @@ namespace Citta_T1.Controls
             }
             return treeB;
         }
-        
+
         private bool ExitIntersect(List<List<int>> treeA, List<List<int>> treeB)
         {
-            for(int i = 0;i < treeA.Count;i++)
+            for (int i = 0; i < treeA.Count; i++)
             {
-                for(int j = 0; j < treeB.Count; j++)
+                for (int j = 0; j < treeB.Count; j++)
                 {
-                    for(int m = 0; m < treeA[i].Count;m++)
+                    for (int m = 0; m < treeA[i].Count; m++)
                     {
                         if (treeB[j].Contains(treeA[i][m]))
                             return true;
@@ -116,7 +114,7 @@ namespace Citta_T1.Controls
         {
             //测试多层列表的取交集
             //元素一样取交集结果不一
-            
+
             /*
              * TODO
                 List<List<int>> commonList = treeA.Intersect(treeB).ToList();
@@ -130,36 +128,46 @@ namespace Citta_T1.Controls
                 ht.Add(key, treeA);
 
             }
-
-            if (!ExitIntersect(treeA,treeB))
+            key = new List<List<List<int>>>();
+            if (!ExitIntersect(treeA, treeB))
             {
                 if (!this.recordSearch.Contains(treeB))
                 {
                     this.recordSearch.Add(treeB);
                     key.Add(treeB);
                     ht.Add(key, treeB);
-
                 }
                 return;
             }
-                
-
+            key = new List<List<List<int>>>();
+            key.Add(treeB);
+            foreach (List<List<List<int>>> tmp in ht.Keys)
+            {
+                if (tmp.Contains(treeB) & tmp.Count == 1)
+                {
+                    ht.Remove(tmp);
+                    break;
+                }
+            }
             foreach (List<List<List<int>>> tmp in ht.Keys)
             {
 
                 if (tmp.Contains(treeA) & !tmp.Contains(treeB))
                 {
 
-                    treeA = (List<List<int>>) ht[tmp];
+                    treeA = (List<List<int>>)ht[tmp];
                     tmp.Add(treeB);
                     this.recordSearch.Add(treeB);
                     if (treeA.Count < treeB.Count)
-                        ht[tmp] = TreeDeepSort(treeA, treeB);
+                        ht[tmp] = TreeDeepSort(treeA.ToList(), treeB.ToList());
                     else
-                        ht[tmp] = TreeDeepSort(treeB, treeA);
+                        ht[tmp] = TreeDeepSort(treeB.ToList(), treeA.ToList());
                     return;
                 }
             }
+
+            
+
         }
 
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
@@ -170,8 +178,8 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = (ct.Width + 20) * dx  + 40;
-                    ct.Top = (ct.Height + 40) * dy  + 70;
+                    ct.Left = (ct.Width + 20) * dx + 40;
+                    ct.Top = (ct.Height + 40) * dy + 70;
                 }
             }
         }
@@ -180,7 +188,7 @@ namespace Citta_T1.Controls
             Global.GetCanvasPanel().StartMove = true;
             int screenHeight = Global.GetCanvasPanel().Height;
             foreach (ModelElement me in modelElements)
-            { 
+            {
                 if (!nodes.Contains(me.ID))
                 {
                     Control ct = me.GetControl;
@@ -188,7 +196,7 @@ namespace Citta_T1.Controls
                     ct.Top = screenHeight - (ct.Height * dy);
                     dx = dx + 1;
                 }
-                
+
                 if (dx == 6)
                 {
                     dy = dy + 1;
@@ -245,7 +253,7 @@ namespace Citta_T1.Controls
             List<int> countWidthList = new List<int>();
             List<int> leavelList = new List<int>();
             int count = 0;
-            
+
             foreach (List<List<int>> tree in ht.Values)
             {
                 log.Info("本轮调整模型层数:" + tree.Count.ToString());
@@ -253,18 +261,15 @@ namespace Citta_T1.Controls
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
-                    
+
                     foreach (int id in leavel)
                     {
-                        log.Info("本层遍历调整节点:" + id + "," +  countWidth);
                         FormatLoc(id, countDeep, countWidth, modelElements);
                         countWidth = countWidth + 1;
                         leavelList.Add(id);
                     }
                     countWidthList.Add(countWidth);
-                    countDeep = countDeep + 1;
-                    log.Info("一层遍历完成");
-                    
+                    countDeep = countDeep + 1; 
                 }
                 count = count + countWidthList.Max() + 1;
                 countDeep = 0;
@@ -275,8 +280,5 @@ namespace Citta_T1.Controls
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }
-
-
-
     }
 }
