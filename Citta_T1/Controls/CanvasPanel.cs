@@ -15,7 +15,7 @@ namespace Citta_T1.Controls
     public partial class CanvasPanel : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
-        public int sizeLevel = 0;
+        //public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         public Bitmap staticImage2;
@@ -88,14 +88,17 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
             this.UpdateStyles();
+            int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (isLarger && sizeLevel <= 2)
             {
                 log.Info("放大");
                 sizeLevel += 1;
-                this.screenFactor = this.screenFactor * factor;
+                Global.GetCurrentDocument().ScreenFactor *= factor;
+                log.Info(Global.GetCurrentDocument().ScreenFactor .ToString()+ "放大倍数");
+
                 foreach (Control con in Controls)
                 {
-                    if (con is IScalable)
+                    if (con is IScalable && con.Visible)
                     {
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
@@ -109,10 +112,11 @@ namespace Citta_T1.Controls
             {
                 log.Info("缩小");
                 sizeLevel -= 1;
-                this.screenFactor = this.screenFactor / factor;
+                Global.GetCurrentDocument().ScreenFactor /=  factor;
+                log.Info(Global.GetCurrentDocument().ScreenFactor.ToString() + "放大倍数");
                 foreach (Control con in Controls)
                 {
-                    if (con is IScalable)
+                    if (con is IScalable && con.Visible)
                     {
                         (con as IScalable).ChangeSize(sizeLevel);
                     }
@@ -122,6 +126,7 @@ namespace Citta_T1.Controls
                     mr.ZoomOut();
                 }
             }
+            Global.GetCurrentDocument().SizeL = sizeLevel;
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
@@ -137,7 +142,7 @@ namespace Citta_T1.Controls
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
-
+            int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (type == ElementType.DataSource)
             {
                 path = e.Data.GetData("Path").ToString();                
@@ -185,7 +190,7 @@ namespace Citta_T1.Controls
             else if ((this.Parent as MainForm).flowControl.SelectDrag)
             {
                 
-                dragWrapper.DragDown(this.Size, this.screenFactor,e);
+                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
 
         }
@@ -220,7 +225,7 @@ namespace Citta_T1.Controls
             // 控件移动
             else if ( ((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
-                dragWrapper.DragMove(this.Size, this.screenFactor, e);
+                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
             // 绘制
             else if (cmd == ECommandType.PinDraw)
@@ -331,7 +336,7 @@ namespace Citta_T1.Controls
             else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
             {
                 
-                dragWrapper.DragUp(this.Size, this.screenFactor, e);
+                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
 
             else if (cmd == ECommandType.PinDraw)
@@ -392,10 +397,13 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
             // 拖动时的OnPaint处理
-            if (dragWrapper.DragPaint(this.Size, this.screenFactor, e))
-            {
+
+            if (Global.GetCurrentDocument() == null)
                 return;
-            }
+
+            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
+                return;
+
 
             //TODO
             //普通状态下算子的OnPaint处理
@@ -409,31 +417,6 @@ namespace Citta_T1.Controls
                 e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
             }
 
-            //Rectangle clipRectangle = e.ClipRectangle;
-
-            //if (this.staticImage == null)
-            //{
-                //clipRectangle = ClientRectangle;
-                //this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-                //BackgroundImage = (Bitmap)this.staticImage.Clone();
-            //}
-            //TODO
-            //
-
-            //CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
-            ////this.staticImage.Save("static_image_save.png");
-            //// 给staticImage上色
-            //dcStatic.DrawBackgroud(clipRectangle);
-            //// 将`需要重绘`IDrawable对象重绘在静态图上
-            //Draw(dcStatic, clipRectangle);
-            //// 将静态图绘制在CanvasPanle里
-            ////g = Graphics.FromImage(BackgroundImage);
-            //g = this.CreateGraphics();
-            //g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
-            //g.Dispose();
-            //dcStatic.Dispose();
-            //this.RepaintAllLines();
-            //log.Info("==============重绘==================");
         }
 
 

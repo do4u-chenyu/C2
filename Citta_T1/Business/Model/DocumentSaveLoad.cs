@@ -21,6 +21,7 @@ namespace Citta_T1.Business.Model
         private string modelPath;
         private string modelFilePath;
         private ModelDocument modelDocument;
+        private float screenFactor;
 
         private LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
@@ -28,6 +29,7 @@ namespace Citta_T1.Business.Model
             this.modelPath = model.SavePath;
             this.modelFilePath = this.modelPath +  model.ModelTitle + ".xml";
             this.modelDocument = model;
+            this.screenFactor = model.ScreenFactor;
         }
         public void WriteXml()
         {
@@ -35,6 +37,8 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
+            //放大系数
+           
             // 写坐标原点
             XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
             mapOriginNode.InnerText = this.modelDocument.MapOrigin.ToString();
@@ -48,6 +52,7 @@ namespace Citta_T1.Business.Model
             // 写备注
             WriteModelRemark(xDoc, modelDocumentXml, this.modelDocument.RemarkDescription);
             xDoc.Save(modelFilePath);
+           
         }
         private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
         {
@@ -69,7 +74,9 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(subTypeNode);
 
                 XmlElement locationNode = xDoc.CreateElement("location");
-                locationNode.InnerText = me.Location.ToString();
+                int x = Convert.ToInt32(me.Location.X / screenFactor);
+                int y = Convert.ToInt32(me.Location.Y / screenFactor);
+                locationNode.InnerText = new Point(x,y).ToString();
                 modelElementXml.AppendChild(locationNode);
 
                 XmlElement statusNode = xDoc.CreateElement("status");
@@ -169,11 +176,15 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(endControlNode);
 
                 XmlElement startLocationNode = xDoc.CreateElement("startlocation");
-                startLocationNode.InnerText = mr.StartP.ToString();
+                int x1 = Convert.ToInt32(mr.StartP.X / screenFactor);
+                int y1 = Convert.ToInt32(mr.StartP.Y / screenFactor);
+                startLocationNode.InnerText = new Point(x1, y1).ToString();
                 modelElementXml.AppendChild(startLocationNode);
 
                 XmlElement endLocationNode = xDoc.CreateElement("endlocation");
-                endLocationNode.InnerText = mr.EndP.ToString();
+                int x2 = Convert.ToInt32(mr.EndP.X / screenFactor);
+                int y2 = Convert.ToInt32(mr.EndP.Y / screenFactor);
+                endLocationNode.InnerText = new Point(x2, y2).ToString();
                 modelElementXml.AppendChild(endLocationNode);
 
                 XmlElement endPinLabelNode = xDoc.CreateElement("endpin");
@@ -199,11 +210,14 @@ namespace Citta_T1.Business.Model
             TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
-
-            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");    
-            XmlNode mapOriginNode = rootNode.SelectSingleNode("MapOrigin");
-            if(mapOriginNode != null)
+            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
+            try
+            {             
+                XmlNode mapOriginNode = rootNode.SelectSingleNode("MapOrigin");
                 this.modelDocument.MapOrigin = ToPointType(mapOriginNode.InnerText);
+            }
+            catch (Exception e) { log.Error(e.Message); }
+
 
             var nodeLists = rootNode.SelectNodes("ModelElement");
             foreach (XmlNode xn in nodeLists)

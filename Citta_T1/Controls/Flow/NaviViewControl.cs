@@ -69,7 +69,8 @@ namespace Citta_T1.Controls.Flow
         {
 
 
-            float factor = (this.Parent as CanvasPanel).ScreenFactor;
+            //float factor = (this.Parent as CanvasPanel).ScreenFactor;
+            float factor = Global.GetCurrentDocument().ScreenFactor;
             nowX = e.X;
             nowY = e.Y;
             
@@ -102,9 +103,10 @@ namespace Citta_T1.Controls.Flow
 
 
 
-            float factor = (this.Parent as CanvasPanel).ScreenFactor;
+            float factor = (this.Parent as CanvasPanel).ScreenFactor;//
             try
             {
+                factor = Global.GetCurrentDocument().ScreenFactor;//
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
                 OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);

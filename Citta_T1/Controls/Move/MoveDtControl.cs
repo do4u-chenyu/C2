@@ -334,7 +334,8 @@ namespace Citta_T1.Controls.Move
 
          public Point WorldBoundControl(Point Pm)
         {
-            float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            // float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
             int orgX = Convert.ToInt32(Pm.X / screenFactor);
@@ -432,7 +433,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 12;
+            int maxLength = 8;
 
             int sumcount = 0;
             int sumcountDigit = 0;
@@ -452,7 +453,7 @@ namespace Citta_T1.Controls.Move
             else
             {
                 ResizeToNormal();
-                if (sumcount + sumcountDigit <= 8)
+                if (sumcount + sumcountDigit <= 6)
                 {
                     ResizeToSmall();
                 }
