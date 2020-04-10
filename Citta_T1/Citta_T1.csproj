@@ -718,6 +718,7 @@
     <Content Include="res\flowchart\rightarrow.png" />
     <Content Include="res\flowchart\roundrectange.png" />
     <Content Include="res\flowchart\uparrow.png" />
+    <Content Include="res\flow\drop.png" />
     <Content Include="res\flow\flow.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
     <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />
