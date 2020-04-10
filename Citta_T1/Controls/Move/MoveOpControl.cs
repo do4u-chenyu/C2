@@ -137,7 +137,6 @@ namespace Citta_T1.Controls.Move
 
         private void InitializeOpPinPicture()
         {
-            SetOpControlName(this.textBox.Text);
             int dy = 0;
             if (doublelPinFlag)
             {
@@ -150,6 +149,7 @@ namespace Citta_T1.Controls.Move
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            SetOpControlName(this.textBox.Text);
         }
 
         #region MOC的事件

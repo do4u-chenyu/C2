@@ -658,7 +658,6 @@ namespace Citta_T1.Controls.Move
                 return;
             }
         }
-
     }
 
 }
