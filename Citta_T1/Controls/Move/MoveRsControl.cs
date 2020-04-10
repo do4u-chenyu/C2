@@ -144,6 +144,8 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (isMouseDown)
             {
@@ -180,7 +182,8 @@ namespace Citta_T1.Controls.Move
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
         {
-            log.Info("移动开始");
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             if (e.Button == MouseButtons.Left)
             {
                 if (rectOut.Contains(e.Location))
@@ -204,6 +207,8 @@ namespace Citta_T1.Controls.Move
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveRsControl_MouseDown(sender, e);
@@ -215,6 +220,8 @@ namespace Citta_T1.Controls.Move
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
@@ -252,7 +259,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 14;
+            int maxLength = 8;
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -266,7 +273,7 @@ namespace Citta_T1.Controls.Move
             {
                 this.txtButton.Text = name;
 
-                if (sumCount + sumCountDigit <= 8)
+                if (sumCount + sumCountDigit <= 6)
                     ResizeToSmall();
                 else
                     ResizeToNormal();
@@ -309,6 +316,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
             //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
@@ -316,6 +325,8 @@ namespace Citta_T1.Controls.Move
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
@@ -327,9 +338,9 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();

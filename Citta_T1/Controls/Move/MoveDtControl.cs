@@ -90,6 +90,8 @@ namespace Citta_T1.Controls.Move
         #region 重写方法
         public void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             // 按下回车键
             if (e.KeyChar == 13)
                 FinishTextChange();
@@ -97,6 +99,8 @@ namespace Citta_T1.Controls.Move
         }
         public void textBox1_Leave(object sender, EventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             FinishTextChange();
         }
 
@@ -116,13 +120,15 @@ namespace Citta_T1.Controls.Move
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
+
             this.nameToolTip.SetToolTip(this.rightPictureBox, this.Name);
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
@@ -196,8 +202,8 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
-            // 卡的版本
-            // 按住拖拽
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
             if (cmd == ECommandType.Null)
                 return;
@@ -272,7 +278,8 @@ namespace Citta_T1.Controls.Move
 
         public Point WorldBoundControl(Point Pm)
         {
-            float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            // float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
             int orgX = Convert.ToInt32(Pm.X / screenFactor);
@@ -301,6 +308,8 @@ namespace Citta_T1.Controls.Move
 
         private void MoveDtControl_MouseDown(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             if (e.Button == MouseButtons.Left)
             {
                 if (rectOut.Contains(e.Location))
@@ -322,6 +331,8 @@ namespace Citta_T1.Controls.Move
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
                 MoveDtControl_MouseDown(sender, e);
@@ -333,6 +344,8 @@ namespace Citta_T1.Controls.Move
 
         private void MoveDtControl_MouseUp(object sender, MouseEventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             if (e.Button == MouseButtons.Left)
             {
                 if (cmd == ECommandType.PinDraw)
@@ -367,7 +380,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string opControlName)
         {
             this.opControlName = opControlName;
-            int maxLength = 12;
+            int maxLength = 8;
 
             int sumcount = 0;
             int sumcountDigit = 0;
@@ -387,7 +400,7 @@ namespace Citta_T1.Controls.Move
             else
             {
                 ResizeToNormal();
-                if (sumcount + sumcountDigit <= 8)
+                if (sumcount + sumcountDigit <= 6)
                 {
                     ResizeToSmall();
                 }
@@ -429,7 +442,8 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         private void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
             //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
             //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
@@ -437,6 +451,8 @@ namespace Citta_T1.Controls.Move
 
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
             this.textBox1.ReadOnly = false;
             this.oldTextString = this.textBox1.Text;
             this.txtButton.Visible = false;

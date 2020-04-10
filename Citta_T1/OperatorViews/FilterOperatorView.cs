@@ -146,7 +146,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
-            string factor1 = this.comboBox1.Text + "," + this.comboBox2.Text + "," + this.textBoxEx1.Text;
+            string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString() + "," + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -156,7 +156,7 @@ namespace Citta_T1.OperatorViews
                     Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 2];
                     Control control4 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 3];
-                    string factor = control1.Text + "," + control2.Text + "," + control3.Text + "," + control4.Text;
+                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + (control3 as ComboBox).SelectedIndex.ToString() + "," + control4.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -177,8 +177,9 @@ namespace Citta_T1.OperatorViews
             if (factor1 != "")
             {
                 string[] factorList = factor1.Split(',');
-                this.comboBox1.Text = factorList[0];
-                this.comboBox2.Text = factorList[1];
+                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
+                this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
                 this.textBoxEx1.Text = factorList[2];
             }
             if (count > 1) 
@@ -188,14 +189,16 @@ namespace Citta_T1.OperatorViews
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
                 string[] factorList = factor.Split(',');
+                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
+
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
-                control1.Text = factorList[0];
+                control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();
                 Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
                 foreach (string name in this.columnName)
                     (control2 as ComboBox).Items.Add(name);
-                control2.Text = factorList[1];
+                control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 2];
-                control3.Text = factorList[2];
+                control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
                 Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control4.Text = factorList[3];
             }

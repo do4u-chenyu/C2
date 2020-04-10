@@ -109,7 +109,6 @@ namespace  Citta_T1
             foreach (ModelElement me in modelElements)
             {
                 this.canvasPanel.Controls.Remove(me.GetControl);
-                this.naviViewControl.RemoveControl(me.GetControl);
             }
             this.naviViewControl.UpdateNaviView();
   
@@ -207,7 +206,6 @@ namespace  Citta_T1
                 if (ct is RemarkControl)
                     continue;
                 this.canvasPanel.Controls.Add(ct);
-                this.naviViewControl.AddControl(ct);
                 this.naviViewControl.UpdateNaviView();
             }
             // TODO [DK] 控件绑定线
