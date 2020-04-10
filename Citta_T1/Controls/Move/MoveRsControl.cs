@@ -155,7 +155,6 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                     return;
                 }
-                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
@@ -202,7 +201,6 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 if (cmd == ECommandType.PinDraw)

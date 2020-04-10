@@ -409,7 +409,7 @@ namespace Citta_T1.Controls.Move
                     startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                 }
-                Global.GetCanvasPanel().StartMove = true;
+
                 cmd = ECommandType.Null;
 
                 Global.GetNaviViewControl().UpdateNaviView();
