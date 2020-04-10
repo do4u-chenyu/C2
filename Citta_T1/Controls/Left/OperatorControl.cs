@@ -43,5 +43,24 @@ namespace Citta_T1.Controls.Left
                 mouseOffset.Y = e.Y;
             }
         }
+
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs e) 
+        {
+            base.OnGiveFeedback(e);
+            e.UseDefaultCursors = false;
+            Bitmap map = new Bitmap(this.pictureBox1.Image);
+            
+
+            Bitmap myNewCursor = new Bitmap(map.Width * 2 , map.Height * 2 );
+            Graphics g = Graphics.FromImage(myNewCursor);
+            g.Clear(Color.FromArgb(0, 0, 0, 0));
+            g.DrawImage(map, map.Width, map.Height, map.Width,map.Height);
+            
+            Cursor.Current = new Cursor(myNewCursor.GetHicon());
+
+            g.Dispose();
+            myNewCursor.Dispose();
+        }
+
     }
 }

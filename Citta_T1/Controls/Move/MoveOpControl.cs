@@ -10,6 +10,9 @@ using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
 using static Citta_T1.Controls.CanvasPanel;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
 
 namespace Citta_T1.Controls.Move
 { 
@@ -79,8 +82,11 @@ namespace Citta_T1.Controls.Move
         public ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
-        private Point leftPin = new Point(3, 11);
-        private Point rightPin = new Point(154, 11);
+
+        private Point leftPin = new Point(2, 11);
+        private Point rightPin = new Point(140, 11);
+
+
         private int pinWidth = 4;
         private int pinHeight = 4;
         private Pen pen = new Pen(Color.DarkGray, 0.0001f);
@@ -90,6 +96,9 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
+
+        private Bitmap staticImage;
+
         public MoveOpControl()
         {
             InitializeComponent();
@@ -310,33 +319,37 @@ namespace Citta_T1.Controls.Move
         private void ResizeToBig()
         {      
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
-            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
-            this.statusBox.Location = new Point((int)(126 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(167 * f), (int)(27 * f));//194，25
+            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(7 * f));//159,2
+            this.statusBox.Location = new Point((int)(126 * f), (int)(7 * f));//新增
             this.rectOut.Location = new Point((int)(159 * f), (int)(11 * f));
             
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
+            
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToSmall()
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
-            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
-            this.statusBox.Location = new Point((int)(104 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(148 * f), (int)(27 * f));//142，25
+            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(7 * f));//107,2
+            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
         {  
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
-            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
-            this.statusBox.Location = new Point((int)(120 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(163 * f), (int)(27 * f));//184，25
+            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(7 * f));//151,2
+            this.statusBox.Location = new Point((int)(120 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
 
@@ -352,7 +365,6 @@ namespace Citta_T1.Controls.Move
             }               
             switch (this.subTypeName)
             {
-
                 case "连接算子":
                     new CollideOperatorView(this.Option).ShowDialog();
                     break;
@@ -555,6 +567,8 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             
             SetDouble(this);
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -726,6 +740,14 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
+
+
+
+            Graphics g = e.Graphics;
+
+            
+
+            
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
             e.Graphics.DrawRectangle(pen, rectIn_up);
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
@@ -737,6 +759,48 @@ namespace Citta_T1.Controls.Move
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+        private void UpdateBackground()
+        {
+
+        }
+        private void DrawRoundedRect(int x, int y, int width, int height, int radius)
+        {
+            if (this.staticImage != null)
+            {   // bitmap是重型资源,需要强制释放
+                this.staticImage.Dispose();
+                this.staticImage = null;
+            }
+            this.staticImage = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(staticImage);
+            g.Clear(Color.White);
+            //去掉圆角的锯齿
+            System.Drawing.Pen p = new System.Drawing.Pen(Color.DarkGray, 1);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+
+            //上
+            g.DrawLine(pen, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            //下
+            g.DrawLine(pen, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            //左
+            g.DrawLine(pen, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            //右
+            g.DrawLine(pen, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+
+            //左上角
+            g.DrawArc(pen, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            //右上角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            //左下角
+            g.DrawArc(pen, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            //右下角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+            g.Dispose();
+            log.Info("-------------------");
+            this.BackgroundImage = this.staticImage;
         }
     }
 }

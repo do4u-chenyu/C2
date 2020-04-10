@@ -397,12 +397,13 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
             // 拖动时的OnPaint处理
-            try
-            {
-                if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
-                    return;
-             }
-            catch (System.NullReferenceException ex){ log.Error(ex.Message); }
+
+            if (Global.GetCurrentDocument() == null)
+                return;
+
+            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
+                return;
+
 
             //TODO
             //普通状态下算子的OnPaint处理
@@ -416,31 +417,6 @@ namespace Citta_T1.Controls
                 e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
             }
 
-            //Rectangle clipRectangle = e.ClipRectangle;
-
-            //if (this.staticImage == null)
-            //{
-                //clipRectangle = ClientRectangle;
-                //this.staticImage = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
-                //BackgroundImage = (Bitmap)this.staticImage.Clone();
-            //}
-            //TODO
-            //
-
-            //CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), ClientRectangle);
-            ////this.staticImage.Save("static_image_save.png");
-            //// 给staticImage上色
-            //dcStatic.DrawBackgroud(clipRectangle);
-            //// 将`需要重绘`IDrawable对象重绘在静态图上
-            //Draw(dcStatic, clipRectangle);
-            //// 将静态图绘制在CanvasPanle里
-            ////g = Graphics.FromImage(BackgroundImage);
-            //g = this.CreateGraphics();
-            //g.DrawImage(this.staticImage, clipRectangle, clipRectangle, GraphicsUnit.Pixel);
-            //g.Dispose();
-            //dcStatic.Dispose();
-            //this.RepaintAllLines();
-            //log.Info("==============重绘==================");
         }
 
 
@@ -523,5 +499,7 @@ namespace Citta_T1.Controls
         {
             return Global.GetFlowControl().SelectFrame;
         }
+
+
     }
 }
