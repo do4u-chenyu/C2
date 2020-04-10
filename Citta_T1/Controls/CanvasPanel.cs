@@ -510,7 +510,6 @@ namespace Citta_T1.Controls
         private void AddNewElement(Control btn)
         {
             this.Controls.Add(btn);
-            Global.GetNaviViewControl().AddControl(btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
         }

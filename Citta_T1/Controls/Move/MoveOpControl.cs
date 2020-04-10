@@ -416,7 +416,6 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
@@ -429,7 +428,6 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().RemoveControl(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     return;

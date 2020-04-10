@@ -320,7 +320,6 @@ namespace Citta_T1.Controls.Move
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
