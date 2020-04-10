@@ -59,8 +59,8 @@ namespace Citta_T1.Controls
         }
 
 
-        public Control SetStartC { set => startC = value; }
-        public Control SetEndC { set => endC = value; }
+        public Control StartC { get => startC; set => startC = value; }
+        public Control EndC { get => endC;  set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         
 
@@ -160,7 +160,7 @@ namespace Citta_T1.Controls
             {
                 this.cmd = ECommandType.PinDraw;
                 // 不能乱写
-                this.SetStartC = sender as Control;
+                this.StartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
                 // 初始化静态图
                 if (this.staticImage == null)
@@ -251,10 +251,7 @@ namespace Citta_T1.Controls
                     }
                 }
                 endP = nowP;
-                log.Info("line'count = " + lines.Count().ToString());
                 lineWhenMoving = new Bezier(startP, nowP);
-                log.Info("line'count = " + lines.Count().ToString());
-                // TODO [DK] 这里可能受到分辨率的影响
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
                 
@@ -308,9 +305,7 @@ namespace Citta_T1.Controls
             if (r.Height > this.staticImage.Height || r.Height < 0)
                 r.Height = this.staticImage.Height;
             // 用保存好的图来局部覆盖当前背景图
-            //this.staticImage.Save("Citta_repaintStatic.png");
             Pen pen = new Pen(Color.Red);
-            g.DrawRectangle(pen, r);
             pen.Dispose();
             r.Inflate(1, 1);
             g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
@@ -339,6 +334,8 @@ namespace Citta_T1.Controls
 
             else if (cmd == ECommandType.PinDraw)
             {
+                bool isDuplicatedRelation = false;
+                ModelDocument cd = Global.GetCurrentDocument();
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，那就不形成线，结束绘线动作
                  */
@@ -359,7 +356,6 @@ namespace Citta_T1.Controls
                  */
                 Bezier line = new Bezier(startP, new PointF(e.X, e.Y));
                 
-                lines.Add(line);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
@@ -367,17 +363,18 @@ namespace Citta_T1.Controls
                     new PointF(e.X, e.Y),
                     (endC as MoveOpControl).revisedPinIndex
                     );
-                //endC右键菜单设置Enable
-                Global.GetOptionDao().EnableControlOption(mr);
+                isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+                if (!isDuplicatedRelation)
+                {
+                    //endC右键菜单设置Enable
+                    Global.GetOptionDao().EnableControlOption(mr);
 
-                log.Info("添加新的关系！关系数为 " + Global.GetCurrentDocument().ModelRelations.Count());
-                log.Info("线数量为 " + lines.Count());
-                Global.GetCurrentDocument().AddModelRelation(mr);
 
-                log.Info("添加曲线，当前索引：" + (lines.Count() - 1).ToString() + "坐标：" + line.StartP.ToString());
-                int line_index = lines.IndexOf(line);
-                (this.startC as IMoveControl).SaveStartLines(line_index);
-                (this.endC as IMoveControl).SaveEndLines(line_index);
+                    cd.AddModelRelation(mr);
+                    cd.BindLineToControl(line, this.startC, this.endC);
+                }
+
+
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;
             }

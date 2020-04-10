@@ -12,7 +12,7 @@ namespace Citta_T1.Utils
 {
     public static class LineUtil
     {
-        public static void ChangLoc(float dx, float dy)
+        public static void ChangeLoc(float dx, float dy)
         {
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in modelRelations)
@@ -51,13 +51,11 @@ namespace Citta_T1.Utils
 
         public void Draw(CanvasWrapper canvas, RectangleF rect)
         {
-            // TODO [DK] 这里并不是精准的局部划线
             DrawBezier(canvas.Graphics);
         }
 
         public void DrawBezier(Graphics g, RectangleF rect)
         {
-            // TODO [DK] 这里并不是精准的局部划线
             DrawBezier(g);
         }
 

@@ -96,10 +96,6 @@ namespace Citta_T1.Controls.Move
             this.rightPinPictureBox.Size = new System.Drawing.Size(5, 5);
             this.rightPinPictureBox.TabIndex = 4;
             this.rightPinPictureBox.TabStop = false;
-            this.rightPinPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseDown);
-
-            this.rightPinPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseMove);
-            this.rightPinPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rightPinPictureBox_MouseUp);
             // 
             // contextMenuStrip
             // 

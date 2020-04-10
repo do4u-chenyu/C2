@@ -25,7 +25,7 @@ namespace Citta_T1.Controls.Move
         private LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
-
+        private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "连接算子 取差集 取交集 取并集";
 
@@ -111,6 +111,7 @@ namespace Citta_T1.Controls.Move
             this.subTypeName = subTypeName;
             Location = loc;
             doublelPinFlag = doublePin.Contains(SubTypeName);
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
@@ -178,6 +179,22 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        mr.UpdatePoints();
+                    }
+                    if (mr.EndID == this.id)
+                    {
+                        mr.EndP = this.GetEndPinLoc(mr.EndPin);
+                        mr.UpdatePoints();
+                    }
+                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                }
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
 
 
@@ -222,7 +239,6 @@ namespace Citta_T1.Controls.Move
 
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (rectOut.Contains(e.Location))
                 {
                     startX = this.Location.X + e.X;
@@ -237,7 +253,8 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            oldcontrolPosition=this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            oldcontrolPosition =this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -259,7 +276,6 @@ namespace Citta_T1.Controls.Move
 
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
@@ -270,6 +286,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -644,7 +661,18 @@ namespace Citta_T1.Controls.Move
             /*
              * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
              */
-            this.endLineIndexs[revisedPinIndex] = line_index;
+            try
+            {
+                this.endLineIndexs[revisedPinIndex] = line_index;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl SaveEndLines 出错: " + ex.ToString());
+            }
         }
         public PointF RevisePointLoc(PointF p)
         {
@@ -655,6 +683,7 @@ namespace Citta_T1.Controls.Move
              // 鼠标判定矩形大小
             int mouseR = 15;
             int pinR = 6;
+            bool isRevised = false;
             float maxIntersectPerct = 0.0F;
             PointF revisedP = new PointF(p.X, p.Y);
             Rectangle rect = new Rectangle(
@@ -664,12 +693,6 @@ namespace Citta_T1.Controls.Move
             
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                //int pinLeftX = leftP.Location.X + this.Location.X;
-                //int pinTopY = leftP.Location.Y + this.Location.Y;
-                //Rectangle leftPinRect = new Rectangle(
-                //        new Point(pinLeftX, pinTopY),
-                //        new Size(leftP.Width, leftP.Height)
-                //);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(_leftPinRect.Location.X + this.Location.X, _leftPinRect.Location.Y + this.Location.Y),
                     new Size(_leftPinRect.Width, _leftPinRect.Height));
@@ -688,13 +711,17 @@ namespace Citta_T1.Controls.Move
                         revisedP = new PointF(
                             pinLeftX + leftPinRect.Width / 2,
                             pinTopY + leftPinRect.Height / 2);
-                        canvas.SetEndC = this;
+                        // 绑定控件
+                        canvas.EndC = this;
+                        isRevised = true;
                         revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
                         log.Info("revisedPinIndex: " + revisedPinIndex);
                         log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }
+            if (!isRevised)
+                canvas.EndC = null;
             return revisedP;
         }
 
@@ -730,9 +757,19 @@ namespace Citta_T1.Controls.Move
             this.startLineIndexs.Add(relationIndex);
         }
         public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            if (pinIndex < this.endLineIndexs.Count())
+        { 
+            try
+            {
                 this.endLineIndexs[pinIndex] = relationIndex;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl BindEndLine 出错: " + ex.ToString());
+            }
         }
         #endregion
 

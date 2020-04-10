@@ -109,10 +109,12 @@ namespace Citta_T1.Controls.Flow
             {
                 factor = Global.GetCurrentDocument().ScreenFactor;//
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
                 Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;               
+
                 viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
             }
             catch
@@ -151,7 +153,7 @@ namespace Citta_T1.Controls.Flow
                 {
                     PointF loc = elementWorldLocDict[me];
                     // 如果本次该元素的世界坐标和缓存的世界左边很接近,就直接用缓存的世界左边
-                    if (Math.Abs(loc.X - ctScreenPos.X) + Math.Abs(loc.Y - ctScreenPos.Y) <= 2)
+                    if (Math.Abs(loc.X - ctScreenPos.X) + Math.Abs(loc.Y - ctScreenPos.Y) <= 1)
                         ctScreenPos = loc;
                     else
                     // 如果偏移过大,更新缓存的坐标

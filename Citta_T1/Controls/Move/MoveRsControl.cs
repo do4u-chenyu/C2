@@ -65,6 +65,7 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
+        private ControlMoveWrapper controlMoveWrapper;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
         public ElementStatus Status
@@ -94,6 +95,7 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
             ChangeSize(sizeL);
             InitializeOpPinPicture();
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
         }
@@ -158,6 +160,23 @@ namespace Citta_T1.Controls.Move
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
+
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        mr.UpdatePoints();
+                    }
+                    if (mr.EndID == this.id)
+                    {
+                        mr.EndP = this.GetEndPinLoc(mr.EndPin);
+                        mr.UpdatePoints();
+                    }
+                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                }
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -182,6 +201,7 @@ namespace Citta_T1.Controls.Move
                 isMouseDown = true;
             }
             oldcontrolPosition = this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -214,6 +234,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 this.isMouseDown = false;
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -412,43 +433,6 @@ namespace Citta_T1.Controls.Move
             return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
-        #region 右针脚事件
-        // 划线部分
-        private void rightPinPictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            // 绘制贝塞尔曲线，起点只能是rightPin
-            //startX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            //startY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            //log.Info(this.Location.ToString());
-            //isMouseDown = true;
-        }
-
-        private void rightPinPictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            // 绘制3阶贝塞尔曲线，共四个点，起点终点以及两个需要计算的点
-            //Graphics g = this.Parent.CreateGraphics();
-            //if (g != null)
-            //{
-            //    g.Clear(Color.White);
-            //}
-            //if (isMouseDown)
-            //{
-            //    //this.Refresh();
-            //    int nowX = this.Location.X + this.rightPinPictureBox.Location.X + e.X;
-            //    int nowY = this.Location.Y + this.rightPinPictureBox.Location.Y + e.Y;
-            //    line = new Line(new PointF(startX, startY), new PointF(nowX, nowY));
-            //    line.DrawLine(g);
-            //}
-            //g.Dispose();
-        }
-
-        private void rightPinPictureBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDown = false;
-            // TODO [DK] 这里要修改，划线应该和Dt划线一致
-            (this.Parent as CanvasPanel).lines.Add(line);
-        }
-        #endregion
 
         #region 托块的放大与缩小
         private void ChangeSize(bool zoomUp, float factor = 1.3F)
@@ -544,7 +528,18 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveEndLines(int line_index)
         {
-            this.endLineIndexs[0] = line_index;
+            try
+            {
+                this.endLineIndexs[0] = line_index;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveRsControl SaveEndLines 出错: " + ex.ToString());
+            }
         }
         // 修正坐标
         public PointF RevisePointLoc(PointF p)
@@ -575,7 +570,18 @@ namespace Citta_T1.Controls.Move
         }
         public void BindEndLine(int pinIndex, int relationIndex)
         {
-            this.endLineIndexs[pinIndex] = relationIndex;
+            try
+            {
+                this.endLineIndexs[pinIndex] = relationIndex;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveRsControl BindEndLine 出错: " + ex.ToString());
+            }
         }
         #endregion
     }

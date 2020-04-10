@@ -20,6 +20,7 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private ElementStatus oldstatus;
         private string[] columnName;
+        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
