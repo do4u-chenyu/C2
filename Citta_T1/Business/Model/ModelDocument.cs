@@ -34,6 +34,7 @@ namespace Citta_T1.Business.Model
         
         private Point mapOrigin = new Point(-600,-300);
         private int sizeL;
+        private float screenFactor;
 
         private Manager manager;
 
@@ -53,7 +54,8 @@ namespace Citta_T1.Business.Model
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
         public Manager Manager { get => manager; set => manager = value; }
-        public int SizeL { get => sizeL; set => sizeL = value; }
+        public int SizeL { get => this.sizeL; set => this.sizeL = value; }
+        public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -66,6 +68,7 @@ namespace Citta_T1.Business.Model
 
             this.manager = new Manager();
             this.sizeL = 0;
+            this.screenFactor = 1;
         }
         /*
          * 保存功能

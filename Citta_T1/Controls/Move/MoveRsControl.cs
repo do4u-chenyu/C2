@@ -231,7 +231,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 14;
+            int maxLength = 8;
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -245,7 +245,7 @@ namespace Citta_T1.Controls.Move
             {
                 this.txtButton.Text = name;
 
-                if (sumCount + sumCountDigit <= 8)
+                if (sumCount + sumCountDigit <= 6)
                     ResizeToSmall();
                 else
                     ResizeToNormal();

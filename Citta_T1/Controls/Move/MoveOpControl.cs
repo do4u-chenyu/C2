@@ -80,7 +80,7 @@ namespace Citta_T1.Controls.Move
 
         // 绘制引脚
         private Point leftPin = new Point(3, 11);
-        private Point rightPin = new Point(140, 11);
+        private Point rightPin = new Point(154, 11);
         private int pinWidth = 4;
         private int pinHeight = 4;
         private Pen pen = new Pen(Color.DarkGray, 0.0001f);
@@ -136,8 +136,7 @@ namespace Citta_T1.Controls.Move
         }
 
         private void InitializeOpPinPicture()
-        {
-            SetOpControlName(this.textBox.Text);
+        {          
             int dy = 0;
             if (doublelPinFlag)
             {
@@ -150,6 +149,7 @@ namespace Citta_T1.Controls.Move
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
+            SetOpControlName(this.textBox.Text);
         }
 
         #region MOC的事件
@@ -265,8 +265,9 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-            float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+           // float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
+             float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             
             int orgX = Convert.ToInt32(Pm.X / screenFactor);
             int orgY = Convert.ToInt32(Pm.Y / screenFactor);
@@ -364,7 +365,7 @@ namespace Citta_T1.Controls.Move
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 10;
+            int maxLength = 8;
 
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
@@ -378,7 +379,7 @@ namespace Citta_T1.Controls.Move
             {
                 this.txtButton.Text = name;
                 
-                if (sumCount + sumCountDigit <= 8) 
+                if (sumCount + sumCountDigit < 6) 
                     ResizeToSmall();
                 else
                     ResizeToNormal();
