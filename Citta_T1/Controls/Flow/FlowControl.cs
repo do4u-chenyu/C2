@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using Citta_T1.Properties;
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Flow
@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Flow
         public bool SelectRemark { get => selectRemark; set => selectRemark = value; }
         public bool SelectDrag { get => selectDrag; set => selectDrag = value; }
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
-
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
         public FlowControl()
         {
             InitializeComponent();
@@ -22,18 +22,36 @@ namespace Citta_T1.Controls.Flow
             SelectFrame = false;
             SelectRemark = true;
         }
-
-        #region 拖动
         private void ChangeCursor()
         {
             if (SelectDrag)
             {
-                this.Parent.Cursor = Cursors.Hand;
+                Bitmap map = new Bitmap(this.pictureBox1.Image);
+                SetCursor(map, new Point(0, 0));
             }
-            else
+            else if (SelectFrame)
             {
                 this.Parent.Cursor = Cursors.Default;
             }
+            else
+            {
+                this.Parent.Cursor = Cursors.Hand;
+            }
+        }
+        #region 拖动
+        public void SetCursor(Bitmap cursor, Point hotPoint)
+        {
+            int hotX = hotPoint.X;
+            int hotY = hotPoint.Y;
+            Bitmap myNewCursor = new Bitmap(cursor.Width * 2 - hotX, cursor.Height * 2 - hotY);
+            Graphics g = Graphics.FromImage(myNewCursor);
+            g.Clear(Color.FromArgb(0, 0, 0, 0));
+            g.DrawImage(cursor, cursor.Width - hotX, cursor.Height - hotY, cursor.Width,
+            cursor.Height);
+            this.Parent.Cursor = new Cursor(myNewCursor.GetHicon());
+
+            g.Dispose();
+            myNewCursor.Dispose();
         }
         private void PictureBox1_MouseEnter(object sender, EventArgs e)
         {

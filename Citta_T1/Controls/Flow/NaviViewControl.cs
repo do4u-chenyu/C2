@@ -108,17 +108,10 @@ namespace Citta_T1.Controls.Flow
             {
                 factor = Global.GetCurrentDocument().ScreenFactor;//
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
-
-
-                Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
-
-                if (moveOffset != new Point(0, 0))
-                {
-                    log.Error("发生越界");
-                    OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
-                    Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                    mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                }
+                Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
+                OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
+                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                mapOrigin = Global.GetCurrentDocument().MapOrigin;               
                 viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
             }
             catch

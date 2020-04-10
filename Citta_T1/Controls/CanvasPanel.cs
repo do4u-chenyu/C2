@@ -64,6 +64,7 @@ namespace Citta_T1.Controls
         public Control SetEndC { set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         public bool StartMove { get => startMove; set => startMove = value; }
+        
 
         public CanvasPanel()
         {
