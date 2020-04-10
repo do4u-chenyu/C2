@@ -220,6 +220,26 @@ namespace Citta_T1.Business.Model
                 (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
             }
         }
+        public ModelElement SearchElementByID(int ID)
+        {
+ 
+            foreach (ModelElement me in this.ModelElements)
+            {
+                if (me.ID == ID)
+                    return me;
+            }
+            return null;
+        }
+        public ModelRelation SearchRelationByID(int ID)
+        {
+
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == ID || mr.EndID == ID)
+                    return mr;
+            }
+            return null;
+        }
 
     }
 }
