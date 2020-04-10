@@ -59,6 +59,7 @@ namespace Citta_T1.Business.Model
         public Manager Manager { get => manager; set => manager = value; }
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
+        public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {

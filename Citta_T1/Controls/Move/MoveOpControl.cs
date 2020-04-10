@@ -180,6 +180,7 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
+                bool isUpdateLine = false;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
@@ -187,15 +188,18 @@ namespace Citta_T1.Controls.Move
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
+                        isUpdateLine = true;
                     }
                     if (mr.EndID == this.id)
                     {
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
+                        isUpdateLine = true;
                     }
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
-                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                if (isUpdateLine)
+                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
 
 
@@ -648,7 +652,6 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region IMoveControl 接口实现方法
-        // TODO [DK] 实现接口
         public void UpdateLineWhenMoving()
         {
 

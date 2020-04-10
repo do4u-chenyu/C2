@@ -254,6 +254,7 @@ namespace Citta_T1.Controls
                 }
                 endP = nowP;
                 lineWhenMoving = new Bezier(startP, nowP);
+                // TODO 这不不应该挡住其他的线
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
                 
@@ -265,12 +266,12 @@ namespace Citta_T1.Controls
         /*
          * 根据lines来重绘保存好的静态图
          */
-        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r, List<Bezier> exceptLines = null)
+        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r)
         {
             // 给staticImage上色
             //canvasWrp.DrawBackgroud(r);
             // 将`需要重绘`IDrawable对象重绘在静态图上
-            Draw(canvasWrp, r, exceptLines);
+            Draw(canvasWrp, r);
         }
         public void RepaintObject(Bezier line, Graphics g)
         {
@@ -417,26 +418,13 @@ namespace Citta_T1.Controls
         }
 
 
-        private void Draw(CanvasWrapper dcStatic, RectangleF rect, List<Bezier> exceptLines = null)
+        private void Draw(CanvasWrapper dcStatic, RectangleF rect)
         {
-            int cnt = 0;
-            IEnumerable<Bezier> drawLines = exceptLines == null ? this.lines : this.lines.Except(exceptLines);
-            foreach (Bezier line in drawLines)
+            Dictionary<int, Bezier> mld = Global.GetCurrentDocument().ModelLineDict;
+            foreach (int lineIndex in mld.Keys)
             {
-                if (line == null)
-                {
-                    //log.Info("line == null!");
-                    continue;
-                }
-                // 不在该区域内就别重绘了
-                //bool isInRect = (line as IDrawObject).ObjectInRectangle(rect);
-                //if (isInRect == false)
-                //    log.Info("line 不在区域" + rect.ToString() + "内");
-                //    continue;
+                Bezier line = mld[lineIndex];
                 line.DrawBezier(dcStatic.Graphics, rect);
-               // log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
-                cnt += 1;
-                //log.Info("已重绘" + cnt + "条曲线");
             }
 
         }
