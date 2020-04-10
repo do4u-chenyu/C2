@@ -269,6 +269,16 @@ namespace Citta_T1.Controls.Move
                 RenameMenuItem_Click(this, e);
         }
 
+        private void StatusBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks != 2)
+                return;
+            // 清空焦点
+            Global.GetMainForm().blankButton.Focus();
+            // 显示配置
+            ShowOptionDialog();
+        }
+
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
@@ -371,13 +381,16 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
+            ShowOptionDialog();
+        }
+
+        private void ShowOptionDialog()
+        {
             if (!this.OptionToolStripMenuItem.Enabled)
             {
-                MessageBox.Show("请连接数据源");
+                MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
-            }               
+            }
             switch (this.subTypeName)
             {
                 case "连接算子":
@@ -410,7 +423,6 @@ namespace Citta_T1.Controls.Move
                 default:
                     break;
             }
-                    
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
