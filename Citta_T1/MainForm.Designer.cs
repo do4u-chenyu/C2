@@ -545,7 +545,6 @@
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.ScreenFactor = 1F;
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
-            this.canvasPanel.StartMove = false;
             this.canvasPanel.TabIndex = 5;
             // 
             // panel3

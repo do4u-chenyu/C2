@@ -175,7 +175,6 @@ namespace Citta_T1.Controls.Move
             else if(cmd == ECommandType.Hold)
             {
                 #region 控件移动
-                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
@@ -241,7 +240,7 @@ namespace Citta_T1.Controls.Move
             
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            (this.Parent as CanvasPanel).StartMove = true;
+
             if (e.Button == MouseButtons.Left)
             {
                 if (rectOut.Contains(e.Location))
@@ -279,7 +278,6 @@ namespace Citta_T1.Controls.Move
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
 
-            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
                 if (cmd == ECommandType.PinDraw)

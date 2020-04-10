@@ -156,7 +156,7 @@ namespace Citta_T1.Controls
             Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
             // 移动当前文档中的所有控件
             LineUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
-            OpUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
+            OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             // 将所有控件都显示出来

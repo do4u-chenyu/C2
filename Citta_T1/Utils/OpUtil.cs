@@ -75,7 +75,8 @@ namespace Citta_T1.Utils
             return dragOffset;
         }
 
-        public static void ChangeLoc(float dx, float dy)
+        // 当前文档在canvas里整体拖动dx, dy
+        public static void CanvasDragLocation(float dx, float dy)
         {
 
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;

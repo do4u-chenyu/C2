@@ -23,7 +23,6 @@ namespace Citta_T1.Controls
 
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
-        private bool startMove = false;
         private DragWrapper dragWrapper;
 
 
@@ -63,7 +62,6 @@ namespace Citta_T1.Controls
         public Control StartC { get => startC; set => startC = value; }
         public Control EndC { get => endC;  set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-        public bool StartMove { get => startMove; set => startMove = value; }
         
 
         public CanvasPanel()
@@ -436,7 +434,6 @@ namespace Citta_T1.Controls
         }
         public void AddNewOperator(int sizeL, string text, Point location)
         {
-            startMove = true;
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
                                 text,
@@ -447,7 +444,6 @@ namespace Citta_T1.Controls
 
         public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.Encoding encoding)
         {
-            startMove = true;
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
@@ -458,7 +454,6 @@ namespace Citta_T1.Controls
         }
         public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
         {
-            startMove = true;
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
                                 text,
