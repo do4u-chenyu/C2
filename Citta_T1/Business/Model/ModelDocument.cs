@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
+using Citta_T1.Controls;
 
 namespace Citta_T1.Business.Model
 {
@@ -25,6 +26,8 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;
         private List<ModelRelation> modelRelations;
+        private Dictionary<int, Bezier> modelLineDict;
+        private int lineCounter= -1;
         private string remarkDescription;
 
         private string savePath;
@@ -61,6 +64,7 @@ namespace Citta_T1.Business.Model
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
+            this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
             this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
 
@@ -204,19 +208,91 @@ namespace Citta_T1.Business.Model
             log.Info("划线更新");
             for (int i = 0;i < this.modelRelations.Count();i++)
             {
-                ModelRelation mr = this.modelRelations[i];
-                // 0 被RemarkControl占用了
-                ModelElement sEle = this.modelElements[mr.StartID - 1];
-                ModelElement eEle = this.modelElements[mr.EndID - 1];
-                // 坐标更新
-                mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
-                mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
-                mr.UpdatePoints();
-                // 控件线绑定
-                (sEle.GetControl as IMoveControl).BindStartLine(0, i);
-                (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
+                try
+                {
+                    ModelRelation mr = this.modelRelations[i];
+                    // 0 被RemarkControl占用了
+
+                    ModelElement sEle = this.modelElements[mr.StartID];
+                    ModelElement eEle = this.modelElements[mr.EndID];
+                    // 坐标更新
+                    mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
+                    mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                    mr.UpdatePoints();
+                    // 控件线绑定
+                    (sEle.GetControl as IMoveControl).BindStartLine(0, i);
+                    (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    log.Error("索引越界");
+                }
+                catch (Exception ex)
+                {
+                    log.Error("ModelDocument UpdateAllLines 出错: " + ex.ToString());
+                }
             }
         }
 
+        private int GetLineIndex()
+        {
+            this.lineCounter += 1;
+            return this.lineCounter;
+        }
+        private void AddLine(Bezier line)
+        {
+            this.lineCounter += 1;
+            try
+            {
+                this.modelLineDict[lineCounter] = line;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("ModelDocument SaveEndLines 出错: " + ex.ToString());
+            }
+        }
+
+        private void AddLine(int lineIndex, Bezier line)
+        {
+            lineCounter += 1;
+            try
+            {
+                this.modelLineDict[lineCounter] = line;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("ModelDocument SaveEndLines 出错: " + ex.ToString());
+            }
+        }
+
+        // 将新的线绑线到控件
+        public void BindLineToControl(Bezier line, Control startC, Control endC)
+        {
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            int index = GetLineIndex();
+            (canvas.StartC as IMoveControl).SaveStartLines(index);
+            (canvas.EndC as IMoveControl).SaveStartLines(index);
+
+        }
+
+        public bool IsDuplicatedRelation(ModelRelation mr)
+        {
+            foreach (ModelRelation _mr in this.modelRelations)
+            {
+                if (_mr.StartID == mr.StartID && _mr.EndID == mr.EndID && _mr.EndPin == mr.EndPin)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

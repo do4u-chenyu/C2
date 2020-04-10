@@ -174,8 +174,6 @@ namespace Citta_T1.Controls.Move
                     if (mr.StartID == this.id)
                     {
                         mr.StartP = this.GetStartPinLoc(0);
-                        log.Info("MoveDtControl.MouseMove x = " + mr.StartP.X + ", y = " + mr.StartP.Y);
-                        log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
                         mr.UpdatePoints();
                     }
                     if (mr.EndID == this.id)
@@ -627,7 +625,18 @@ namespace Citta_T1.Controls.Move
             /*
              * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
              */
-            this.endLineIndexs[revisedPinIndex] = line_index;
+            try
+            {
+                this.endLineIndexs[revisedPinIndex] = line_index;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl SaveEndLines 出错: " + ex.ToString());
+            }
         }
         public PointF RevisePointLoc(PointF p)
         {
@@ -638,6 +647,7 @@ namespace Citta_T1.Controls.Move
              // 鼠标判定矩形大小
             int mouseR = 15;
             int pinR = 6;
+            bool isRevised = false;
             float maxIntersectPerct = 0.0F;
             PointF revisedP = new PointF(p.X, p.Y);
             Rectangle rect = new Rectangle(
@@ -647,12 +657,6 @@ namespace Citta_T1.Controls.Move
             
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                //int pinLeftX = leftP.Location.X + this.Location.X;
-                //int pinTopY = leftP.Location.Y + this.Location.Y;
-                //Rectangle leftPinRect = new Rectangle(
-                //        new Point(pinLeftX, pinTopY),
-                //        new Size(leftP.Width, leftP.Height)
-                //);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(_leftPinRect.Location.X + this.Location.X, _leftPinRect.Location.Y + this.Location.Y),
                     new Size(_leftPinRect.Width, _leftPinRect.Height));
@@ -671,13 +675,17 @@ namespace Citta_T1.Controls.Move
                         revisedP = new PointF(
                             pinLeftX + leftPinRect.Width / 2,
                             pinTopY + leftPinRect.Height / 2);
-                        canvas.SetEndC = this;
+                        // 绑定控件
+                        canvas.EndC = this;
+                        isRevised = true;
                         revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
                         log.Info("revisedPinIndex: " + revisedPinIndex);
                         log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }
+            if (!isRevised)
+                canvas.EndC = null;
             return revisedP;
         }
 
@@ -713,9 +721,19 @@ namespace Citta_T1.Controls.Move
             this.startLineIndexs.Add(relationIndex);
         }
         public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            if (pinIndex < this.endLineIndexs.Count())
+        { 
+            try
+            {
                 this.endLineIndexs[pinIndex] = relationIndex;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl BindEndLine 出错: " + ex.ToString());
+            }
         }
         #endregion
 

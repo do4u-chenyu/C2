@@ -68,7 +68,6 @@ namespace Citta_T1.Controls
                     currentDoc.ScreenToWorldF(mr.B, mapOrigin),
                     currentDoc.ScreenToWorldF(mr.EndP, mapOrigin)
                 );
-                log.Info("CanvasWrapper.MoveWorldImage x = " + currentDoc.ScreenToWorldF(mr.StartP, mapOrigin));
             }
             g.Dispose();
             n.DrawImageUnscaled(StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);

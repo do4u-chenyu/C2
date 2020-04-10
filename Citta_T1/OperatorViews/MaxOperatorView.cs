@@ -20,6 +20,7 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private ElementStatus oldstatus;
         private string[] columnName;
+        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -75,19 +76,27 @@ namespace Citta_T1.OperatorViews
                         this.opControl.rectOut.Location.X + this.opControl.Location.X,
                         this.opControl.rectOut.Location.Y + this.opControl.Location.Y
                         ),
-                    new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y)
+                    new PointF(
+                        mrc.rectIn.Location.X + mrc.Location.X,
+                        mrc.rectIn.Location.Y + mrc.Location.Y)
                 );
-                    
+                // TODO 绑定线和控件
+                log.Info("MaxOperatorView.ConfirmButton_Click : line.x" + line.StartP + "line.y" + line.EndP);
+
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
                 canvas.RepaintObject(line);
-                canvas.lines.Add(line);
 
-                Global.GetModelDocumentDao().AddDocumentRelation(this.opControl.ID, mrc.ID, this.opControl.Location, mrc.Location, 0);
+                Global.GetModelDocumentDao().AddDocumentRelation(
+                    this.opControl.ID, mrc.ID,
+                    new Point(this.opControl.rectOut.Location.X + this.opControl.Location.X, this.opControl.rectOut.Location.Y + this.opControl.Location.Y),
+                    new Point(mrc.rectIn.Location.X + mrc.Location.X,mrc.rectIn.Location.Y + mrc.Location.Y), 
+                    0);
+                Global.GetCurrentDocument().BindLineToControl(line, this.opControl, mrc);
                 string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName,this.columnName);
                 mrc.Path = path;
             }
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName);
+            Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName);
 
         }
 
