@@ -155,7 +155,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
 
@@ -169,97 +169,6 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
-                //#region 线移动部分
-                ///*
-                // * 1. 计算受影响的线, 计算受影响区域 -> 对于OpControl而言，目前左侧至多有{针脚数量}条线，右侧至多有一条线
-                // * 2. 重绘静态图                     -> 对于OpControl而言，两侧都存在无效区域
-                // * 3. 用静态图盖住变化区域           -> canvas提供封装好的方法完成
-                // * 4. 更新坐标                       -> 左右两边的线都要更新坐标
-                // * 5. 绘线                           -> 左右两边的线都要更新
-                // * 6. 更新canvas.lines               -> 左右两边的线都要更新
-                // */
-                //bool endLineIndexsAllNull = true;
-                //foreach (int index in this.endLineIndexs)
-                //{
-                //    if (index == -1)
-                //        continue;
-                //    else
-                //    {
-                //        endLineIndexsAllNull = false;
-                //        break;
-                //    }
-                //}
-
-                //if (endLineIndexsAllNull)
-                //{
-                //    return;
-                //}
-                //Line line;
-                //CanvasPanel canvas = Global.GetCanvasPanel();
-                //canvas.staticImage = new Bitmap(canvas.ClientRectangle.Width, canvas.ClientRectangle.Height);
-                //Rectangle clipRectangle = canvas.ClientRectangle;
-
-                //CanvasWrapper canvasWrp = new CanvasWrapper(canvas, Graphics.FromImage(canvas.staticImage), canvas.ClientRectangle);
-
-                //List<Line> lines = canvas.lines;
-                //PointF startP;
-                //PointF endP;
-                //// 受影响的点
-                //List<float> affectedPointsX = new List<float> { };
-                //List<float> affectedPointsY = new List<float> { };
-                //// 受影响区域数组
-                //List<Rectangle> affectedAreaArr = new List<Rectangle> { };
-                //List<Line> affectedLines = new List<Line> { };
-                //Rectangle affectedArea;
-
-                //log.Info("[MoveDtControl] 满足线移动条件");
-                //foreach (int index in startLineIndexs)
-                //{
-                //    line = lines[index];
-                //    affectedStartLines.Add(line);
-                //    affectedLines.Add(line);
-                //}
-                //foreach (int index in endLineIndexs)
-                //{
-                //    if (index == -1) return;
-                //    line = lines[index];
-                //    affectedEndLines.Add(line);
-                //    affectedLines.Add(line);
-                //}
-                //// 受影响左侧区域
-
-                //foreach (Line l in affectedEndLines)
-                //{
-                //    affectedArea = OpUtil.GetAreaByLine(l);
-                //    affectedAreaArr.Add(affectedArea);
-                //}
-                //foreach (Line l in affectedStartLines)
-                //{
-                //    affectedArea = OpUtil.GetAreaByLine(l);
-                //    affectedAreaArr.Add(affectedArea);
-                //}
-                //// 重绘静态图
-                //canvasWrp.RepaintStatic(clipRectangle, affectedLines);
-                //canvas.staticImage.Save("Dt_static_image_save.png");
-                //foreach (Rectangle rect in affectedAreaArr)
-                //{
-                //    canvasWrp.CoverPanelByRect(rect);
-                //}
-                //// 坐标修正
-                //foreach (int index in startLineIndexs)
-                //{
-                //    line = lines[index];
-                //    // 边界坐标修正
-                //    line.StartP = new PointF(
-                //        Math.Min(Math.Max(line.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                //        Math.Min(Math.Max(line.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height)
-
-                //    );
-                //    // 坐标更新
-                //    line.UpdatePoints();
-                //    canvasWrp.RepaintObject(line);
-                //}
-                //#endregion
             }
 
 
@@ -298,7 +207,7 @@ namespace Citta_T1.Controls.Move
         {
 
             
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
@@ -323,7 +232,7 @@ namespace Citta_T1.Controls.Move
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
             if (e.Clicks == 1)
@@ -335,7 +244,7 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
 
             (this.Parent as CanvasPanel).StartMove = true;
@@ -432,7 +341,7 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             if (!this.OptionToolStripMenuItem.Enabled)
                 return;
@@ -475,7 +384,7 @@ namespace Citta_T1.Controls.Move
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
@@ -488,7 +397,7 @@ namespace Citta_T1.Controls.Move
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             //删除连接的结果控件
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -536,7 +445,7 @@ namespace Citta_T1.Controls.Move
         #region textBox
         public void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             // 按下回车键
             if (e.KeyChar == 13)
@@ -545,7 +454,7 @@ namespace Citta_T1.Controls.Move
 
         public void textBox1_Leave(object sender, EventArgs e)
         {
-            if (((this.Parent as CanvasPanel).Parent as MainForm).flowControl.SelectDrag)
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             FinishTextChange();
         }
