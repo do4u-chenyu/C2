@@ -269,6 +269,15 @@ namespace Citta_T1.Business.Model
             }
             return null;
         }
+        // 统计当前用户有多少元素
+        public int CountAllModelElements()
+        {
+            int count = 0;
+            foreach (ModelDocument md in this.ModelDocuments)
+                count += md.ModelElements.Count;
+
+            return count;
+        }
 
     }
 }

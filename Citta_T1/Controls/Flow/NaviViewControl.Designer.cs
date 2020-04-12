@@ -44,7 +44,6 @@
             this.Size = new System.Drawing.Size(349, 135);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.NaviViewControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NaviViewControl_MouseUp);
             this.ResumeLayout(false);
 
