@@ -65,7 +65,6 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
-            this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
             this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.rightPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
@@ -217,6 +216,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusBox.TabIndex = 9;
             this.statusBox.TabStop = false;
+            this.helpToolTip.SetToolTip(this.statusBox, "配置算子");
             this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StatusBox_MouseDown);
             this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);

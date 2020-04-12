@@ -99,10 +99,8 @@ namespace Citta_T1.Controls.Move
 
         private Bitmap staticImage;
 
-        public MoveOpControl()
-        {
-            InitializeComponent();
-        }
+        // public MoveOpControl() 这个空函数我已经删了好几次了,但每次都又被你们合并进来了
+        // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.status = ElementStatus.Null;
@@ -113,9 +111,9 @@ namespace Citta_T1.Controls.Move
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
+            InitializeHelpToolTip();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
-
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
@@ -163,6 +161,42 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
         }
 
+        private void InitializeHelpToolTip()
+        {
+            switch (subTypeName)
+            {
+                case "连接算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取交集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取并集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取差集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "随机采样":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "过滤算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取最大值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取最小值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取平均值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                default:
+                    break;
+            }
+    
+        }
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -274,13 +308,21 @@ namespace Citta_T1.Controls.Move
         }
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Clicks != 2)
+        {   // 只处理左键点击
+            if (e.Button != MouseButtons.Left)
                 return;
-            // 清空焦点
-            Global.GetMainForm().blankButton.Focus();
-            // 显示配置
-            ShowOptionDialog();
+            // 单击视为移动,按父控件鼠标点击处理
+            if (e.Clicks == 1)
+            {
+                base.OnMouseDown(e);
+            }// 双击,弹出配置窗口
+            else if (e.Clicks == 2)
+            {
+                // 清空焦点
+                Global.GetMainForm().blankButton.Focus();
+                // 显示配置
+                ShowOptionDialog();
+            }
         }
 
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
@@ -520,13 +562,6 @@ namespace Citta_T1.Controls.Move
             }
         }
         #endregion
-
-        public void rightPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            String helpInfo = "温馨提示";
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-         
-        }
 
         #region 针脚事件
         public void PinOpLeaveAndEnter(Point mousePosition)
@@ -790,14 +825,6 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
-
-
-
-            Graphics g = e.Graphics;
-
-            
-
-            
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
             e.Graphics.DrawRectangle(pen, rectIn_up);
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
@@ -849,7 +876,7 @@ namespace Citta_T1.Controls.Move
             //右下角
             g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
             g.Dispose();
-            log.Info("-------------------");
+
             this.BackgroundImage = this.staticImage;
         }
     }
