@@ -119,41 +119,16 @@ namespace Citta_T1.Business.Model
         {
             XmlElement optionNode = xDoc.CreateElement("option");
             modelElementXml.AppendChild(optionNode);
-            switch (type)
+            foreach (KeyValuePair<string, string> kvp in option.OptionDict)
             {
-                case ElementSubType.MaxOperator:
-                    WriteOptionElement(xDoc, optionNode, option, "maxfield");
-                    WriteOptionElement(xDoc, optionNode, option, "outfield");
-                    break;
-                case ElementSubType.MinOperator:
-                    WriteOptionElement(xDoc, optionNode, option, "minfield");
-                    WriteOptionElement(xDoc, optionNode, option, "outfield");
-                    break;
-                case ElementSubType.FilterOperator:
-                    foreach (string name in option.OptionDict.Keys)
-                    { WriteOptionElement(xDoc, optionNode, option, name); }
-                    break;
-                case ElementSubType.RandomOperator:
-                    WriteOptionElement(xDoc, optionNode, option, "randomnum");
-                    WriteOptionElement(xDoc, optionNode, option, "outfield");
-                    break;
-                case ElementSubType.AvgOperator:
-                    WriteOptionElement(xDoc, optionNode, option, "avgfield");
-                    break;
-                default:
-                    break;
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                XmlElement fieldNode = xDoc.CreateElement(kvp.Key);
+                fieldNode.InnerText = kvp.Value;
+                optionNode.AppendChild(fieldNode);
             }
-                
+
         }
-        private void WriteOptionElement(XmlDocument xDoc, XmlElement optionNode, OperatorOption option, string key)
-        {
-            if (option.GetOption(key) != "")
-            {
-                XmlElement outFieldNode = xDoc.CreateElement(key);
-                outFieldNode.InnerText = option.GetOption(key);
-                optionNode.AppendChild(outFieldNode);
-            }
-        }
+
         #endregion
         private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml,List<ModelRelation> modelRelations)
         {
@@ -340,10 +315,10 @@ namespace Citta_T1.Business.Model
             string type = "";
             switch (subType)
             {
-                case "JoinOperator":
+                case "CollideOperator":
                     type = "连接算子";
                     break;
-                case "CollideOperator":
+                case "JoinOperator":
                     type = "取交集";
                     break;
                 case "UnionOperator":

@@ -20,6 +20,8 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private ElementStatus oldstatus;
         private string[] columnName;
+        private string oldOptionDict;
+        private List<string> selectColumn;
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace Citta_T1.OperatorViews
             this.oldMaxfield = this.MaxValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
             this.oldstatus = opControl.Status;
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
 
         }
@@ -57,8 +60,10 @@ namespace Citta_T1.OperatorViews
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldstatus == ElementStatus.Null)
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName);
+            this.selectColumn = this.OutList.GetItemCheckText();
+            
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
 
         }
 
@@ -100,12 +105,12 @@ namespace Citta_T1.OperatorViews
         #region 初始化配置
         private void InitOptionInfo()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetInputDataInfo(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath") && dataInfo.ContainsKey("encoding"))
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
+            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath"]);
-                this.dataPath = dataInfo["dataPath"];
-                SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding"]);
+                this.dataPath = dataInfo["dataPath0"];
+                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);                
+                SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding0"]);
             }
         }
 

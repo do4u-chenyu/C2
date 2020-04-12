@@ -347,20 +347,20 @@ namespace Citta_T1.Controls.Move
                 return;
             if (!this.OptionToolStripMenuItem.Enabled)
             {
-                MessageBox.Show("请连接数据源");
+                MessageBox.Show("请先连接数据，再进行算子设置");
                 return;
             }               
             switch (this.subTypeName)
             {
 
                 case "连接算子":
-                    new CollideOperatorView(this.Option).ShowDialog();
+                    new CollideOperatorView(this).ShowDialog();
                     break;
                 case "取交集":
-                    new CollideOperatorView(this.Option).ShowDialog();
+                    new CollideOperatorView(this).ShowDialog();
                     break;
                 case "取并集":
-                    new UnionOperatorView(this.Option).ShowDialog();
+                    new UnionOperatorView(this).ShowDialog();
                     break;
                 case "取差集":
                     new DifferOperatorView(this).ShowDialog();

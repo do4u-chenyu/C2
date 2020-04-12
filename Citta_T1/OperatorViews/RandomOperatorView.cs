@@ -22,6 +22,9 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string oldRandomNum;
         private List<int> oldOutList;
+        private string oldOptionDict;
+        private string[] columnName;
+        private List<string> selectColumn;
         public RandomOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace Citta_T1.OperatorViews
             LoadOption();
             this.oldRandomNum =this.RandomNumBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
         }
         #region 初始化配置
@@ -68,7 +72,7 @@ namespace Citta_T1.OperatorViews
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            this.columnName = column.Split('\t');
             foreach (string name in columnName)
             {
                 this.OutList.AddItems(name);
@@ -121,6 +125,10 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            this.selectColumn = this.OutList.GetItemCheckText();
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

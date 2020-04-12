@@ -16,23 +16,24 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
         }
-
+        #region 配置初始化
+        #endregion
+        #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
         }
-
+       
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        #endregion
 
-        private void label6_Click(object sender, EventArgs e)
-        {
+        #region 配置信息的保存与加载
 
-        }
-
+        #endregion
         private void groupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -42,5 +43,6 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
+
     }
 }

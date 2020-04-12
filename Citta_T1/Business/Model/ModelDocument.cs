@@ -230,15 +230,17 @@ namespace Citta_T1.Business.Model
             }
             return null;
         }
-        public ModelRelation SearchRelationByID(int ID)
+        public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
         {
-
+            List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID || mr.EndID == ID)
-                    return mr;
+                if (mr.StartID == ID && startID)
+                    relations.Add(mr);
+                else if (mr.EndID == ID && !startID)
+                    relations.Add(mr);
             }
-            return null;
+            return relations;
         }
 
     }

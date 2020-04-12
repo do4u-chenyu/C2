@@ -24,6 +24,7 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         string[] columnName;
         private string oldOptionDict;
+        private List<string> selectColumn;
         public FilterOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -132,6 +133,10 @@ namespace Citta_T1.OperatorViews
             //内容修改，引起文档dirty
             if (this.oldOptionDict!= string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            this.selectColumn = this.OutList.GetItemCheckText();
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
