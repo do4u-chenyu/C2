@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using Citta_T1.Utils;
-
+using System.Reflection;
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
@@ -46,7 +46,17 @@ namespace Citta_T1.Controls.Left
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO [DK] 1. 怎么呈现这个预览？
+            MainForm prt = Global.GetMainForm();
+            prt.PreViewDataByBcpPath(txtButton.Name, this.encoding);
+            Type type = typeof(MainForm);
+            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
+            MethodInfo mInfo = type.GetMethod("MinMaxPictureBox_Click", flags);
 
+
+            if (prt.IsBottomViewPanelMinimum)
+            {
+                mInfo.Invoke(prt, new object[] {sender,e});
+            }
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)

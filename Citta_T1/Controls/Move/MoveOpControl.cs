@@ -398,7 +398,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
             
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToSmall()
         {
@@ -409,7 +409,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
         {  
@@ -420,7 +420,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
 
@@ -634,7 +634,7 @@ namespace Citta_T1.Controls.Move
             
             SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
