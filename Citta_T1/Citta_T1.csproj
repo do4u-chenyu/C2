@@ -692,9 +692,6 @@
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\u721.png" />
-    <None Include="Resources\Move.ico" />
-    <None Include="Resources\Icon1.ico" />
-    <None Include="Resources\cursor.ico" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
