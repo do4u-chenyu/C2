@@ -10,6 +10,8 @@ using Citta_T1.Controls.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using Citta_T1.Business.Model;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 
 namespace Citta_T1.Controls.Move
 {
@@ -28,14 +30,14 @@ namespace Citta_T1.Controls.Move
         public int ID { get => this.id; set => this.id = value; }
 
         //绘制引脚
-        private Point rightPin = new Point(130, 11);
+        private Point rightPin = new Point(126, 11);
         private int pinWidth = 4;
         private int pinHeight = 4;
         private Pen pen = new Pen(Color.DarkGray, 0.0001f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
-
+        private Bitmap staticImage;
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -185,7 +187,7 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
+            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
             if (isLarger)
             {
                 SetControlsBySize(factor, this);
@@ -254,20 +256,7 @@ namespace Citta_T1.Controls.Move
                     log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
                     mr.UpdatePoints();
                 }
-                //if (mr.StartID == this.id)
-                //{
-                //    mr.StartP = new PointF(
-                //        Math.Min(Math.Max(mr.StartP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                //        Math.Min(Math.Max(mr.StartP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
-                //    mr.UpdatePoints();
-                //}
-                //if (mr.EndID == this.id)
-                //{
-                //    mr.EndP = new PointF(
-                //        Math.Min(Math.Max(mr.EndP.X + e.X - mouseOffset.X, this.rightPictureBox.Location.X), canvas.Width),
-                //        Math.Min(Math.Max(mr.EndP.Y + e.Y - mouseOffset.Y, this.rightPictureBox.Location.Y), canvas.Height));
-                //    mr.UpdatePoints();
-                //}
+
                 Bezier newLine = new Bezier(mr.StartP, mr.EndP);  
 
             }
@@ -412,30 +401,33 @@ namespace Citta_T1.Controls.Move
 
         public void ResizeToBig()
         {
-            this.Size = new System.Drawing.Size((int)(194 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(159 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(179 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(153 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(171 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToSmall()
         {
-            this.Size = new System.Drawing.Size((int)(142 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(109 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(130 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(103 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
             this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(122 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToNormal()
         {
-            this.Size = new System.Drawing.Size((int)(184 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(151 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(170 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(144 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
             this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
             this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(162 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         #endregion
 
@@ -508,7 +500,7 @@ namespace Citta_T1.Controls.Move
             control.Left = Convert.ToInt32(control.Left * f);
             control.Top = Convert.ToInt32(control.Top * f);
             control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
-
+            
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
@@ -595,6 +587,44 @@ namespace Citta_T1.Controls.Move
         private void txtButton_Click(object sender, EventArgs e)
         {
             MainForm prt = Global.GetMainForm();
+        }
+        private void DrawRoundedRect(int x, int y, int width, int height, int radius)
+        {
+            if (this.staticImage != null)
+            {   // bitmap是重型资源,需要强制释放
+                this.staticImage.Dispose();
+                this.staticImage = null;
+            }
+            this.staticImage = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(staticImage);
+            g.Clear(Color.White);
+            //去掉圆角的锯齿
+            System.Drawing.Pen p = new System.Drawing.Pen(Color.DarkGray, 1);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+
+            //上
+            g.DrawLine(pen, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            //下
+            g.DrawLine(pen, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            //左
+            g.DrawLine(pen, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            //右
+            g.DrawLine(pen, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+
+            //左上角
+            g.DrawArc(pen, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            //右上角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            //左下角
+            g.DrawArc(pen, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            //右下角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+            g.Dispose();
+
+            this.BackgroundImage = this.staticImage;
         }
     }
 
