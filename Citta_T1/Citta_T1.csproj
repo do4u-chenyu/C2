@@ -739,6 +739,9 @@
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
+    <None Include="res\toolbox\currentModelRunning.gif" />
+    <None Include="res\toolbox\currentModelFin.png" />
+    <None Include="res\toolbox\currentModelRunningBack.png" />
     <Content Include="res\toolbox\difference.png" />
     <None Include="res\toolbox\div.png" />
     <Content Include="res\toolbox\filter.png" />

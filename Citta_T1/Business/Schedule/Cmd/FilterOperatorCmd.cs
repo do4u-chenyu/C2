@@ -13,15 +13,16 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
         }
 
-        public string GenCmd()
+        public List<string> GenCmd()
         {
+            List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();
 
             //以后算子路径功能写完后去掉
             if (inputFilePath == "")
             {
                 Thread.Sleep(5000);
-                return "echo filter";
+                cmds.Add("echo filter");
             }
 
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
@@ -34,8 +35,8 @@ namespace Citta_T1.Business.Schedule.Cmd
                 awkIfCmd = awkIfCmd + " " + TransChoiceToCmd(tmpfactor[0]) + " $" + tmpfactor[1] + TransChoiceToCmd(tmpfactor[2]) + tmpfactor[3];
             }
 
-            string cmd = string.Format("sbin\\awk.exe -F'\\t' '{{if({0}) print {1} }}' >> {2}", awkIfCmd, outfieldLine, this.outputFilePath);
-            return cmd;
+            cmds.Add(string.Format("sbin\\awk.exe -F'\\t' '{{if({0}) print {1} }}' >> {2}", awkIfCmd, outfieldLine, this.outputFilePath));
+            return cmds;
         }
 
     }

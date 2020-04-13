@@ -32,7 +32,7 @@ namespace  Citta_T1
         public string UserName { get => this.userName; set => this.userName = value; }
         
         delegate void AsynUpdateLog(string log);
-        
+        delegate void AsynUpdateGif();
 
         LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
@@ -147,9 +147,9 @@ namespace  Citta_T1
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
             // 重绘所有Relation线
-            this.canvasPanel.Invalidate(false); 
+            this.canvasPanel.Invalidate(false);
             //切换文档时，更新运行按钮图标
-            UpdateRunbuttonInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
+            UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
         }
 
         public void LoadDocument(string modelTitle)
@@ -448,7 +448,7 @@ namespace  Citta_T1
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 Global.GetCurrentDocument().Manager.Stop();
-                UpdateRunbuttonInfo(Global.GetCurrentDocument().Manager.ModelStatus);
+                UpdateRunbuttonImageInfo(Global.GetCurrentDocument().Manager.ModelStatus);
             }
         }
 
@@ -457,24 +457,25 @@ namespace  Citta_T1
             Manager currentManager = Global.GetCurrentDocument().Manager;
 
             //初次运行时，绑定线程与ui交互的委托
-            if(currentManager.ModelStatus == ModelStatus.Null)
+            if (currentManager.ModelStatus == ModelStatus.Null)
             {
                 currentManager.UpdateLogDelegate = UpdataLogStatus;
                 currentManager.TaskCallBack = Accomplish;
+                currentManager.UpdateGifDelegate = UpdataRunningGif;
             }
 
             if (this.runButton.Name == "runButton")
             {
                 if (Global.GetCurrentDocument().Dirty)
                 {
-                    MessageBox.Show("当前模型没有保存，请保存后再运行模型！", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
                 int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
                 if (notReadyNum > 0)
                 {
-                    MessageBox.Show("有" + notReadyNum + "个未配置的算子！", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -489,7 +490,7 @@ namespace  Citta_T1
                 currentManager.Continue();
             }
 
-            UpdateRunbuttonInfo(currentManager.ModelStatus);
+            UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
 
@@ -510,31 +511,91 @@ namespace  Citta_T1
         }
 
 
+        private void UpdataRunningGif(Manager manager)
+        {
+            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            if (doneModel == Global.GetCurrentDocument())
+            {
+                if (manager.ModelStatus == ModelStatus.GifDone)
+                {
+                    if (InvokeRequired)
+                    {
+                        this.Invoke(new AsynUpdateGif(delegate ()
+                        {
+                            this.currentModelRunBackLab.Hide();
+                            this.currentModelRunLab.Hide();
+                            this.currentModelFinLab.Show();
+
+                        }));
+                    }
+                    else
+                    {
+                        this.currentModelRunBackLab.Hide();
+                        this.currentModelRunLab.Hide();
+                        this.currentModelFinLab.Show();
+                    }
+                }
+                else if (manager.ModelStatus == ModelStatus.Done)
+                {
+                    if (InvokeRequired)
+                    {
+                        this.Invoke(new AsynUpdateGif(delegate ()
+                        {
+                            this.currentModelFinLab.Hide();
+                        }));
+                    }
+                    else
+                    {
+                        this.currentModelFinLab.Hide();
+                    }
+                }
+
+            }
+        }
+
+
+
         //完成任务时需要调用
         private void Accomplish(Manager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             doneModel.Save();
-            UpdateRunbuttonInfo(doneModel.Manager.ModelStatus);
+
+            if (doneModel == Global.GetCurrentDocument())
+            {
+                UpdateRunbuttonImageInfo(doneModel.Manager.ModelStatus);
+
+            }
         }
 
 
 
-        private void UpdateRunbuttonInfo(ModelStatus modelStatus)
+        private void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
             switch (modelStatus)
             {
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    this.currentModelRunBackLab.Hide();
+                    this.currentModelRunLab.Hide();
                     break;
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                    this.currentModelRunBackLab.Show();
+                    this.currentModelRunLab.Show();
+                    break;
+                case ModelStatus.GifDone:
+                    this.runButton.Name = "runButton";
+                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                     break;
                 default:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    this.currentModelRunBackLab.Hide();
+                    this.currentModelRunLab.Hide();
+                    this.currentModelFinLab.Hide();
                     break;
             }
         }
