@@ -23,6 +23,7 @@ namespace Citta_T1.Controls
         private List<List<List<int>>> treeGroup;
         private Hashtable ht;
         private List<List<List<int>>> recordSearch;
+        private List<int> ctWidths;
         public QuickformatWrapper(ModelDocument currentModel)
         {
             this.currentModel = currentModel;
@@ -178,8 +179,9 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = (ct.Width + 20) * dx + 40;
+                    ct.Left = dx + 40;
                     ct.Top = (ct.Height + 40) * dy + 70;
+                    ctWidths.Add(ct.Width);
                 }
             }
         }
@@ -187,19 +189,23 @@ namespace Citta_T1.Controls
         {
 
             int screenHeight = Global.GetCanvasPanel().Height;
+            int count = 0;
+            this.ctWidths = new List<int>();
             foreach (ModelElement me in modelElements)
             {
                 if (!nodes.Contains(me.ID))
                 {
                     Control ct = me.GetControl;
-                    ct.Left = ct.Width * dx + 40;
+                    ct.Left = dx + 40;
                     ct.Top = screenHeight - (ct.Height * dy);
-                    dx = dx + 1;
+                    dx = dx + ct.Width;
+                    count += 1;
                 }
 
-                if (dx == 6)
+                if (count == 6)
                 {
                     dy = dy + 1;
+                    count = 0;
                     dx = 0;
                 }
             }
@@ -252,8 +258,8 @@ namespace Citta_T1.Controls
             int countWidth = 0;
             List<int> countWidthList = new List<int>();
             List<int> leavelList = new List<int>();
-            int count = 0;
-
+            int count = 1;
+            this.ctWidths = new List<int>();
             foreach (List<List<int>> tree in ht.Values)
             {
                 log.Info("本轮调整模型层数:" + tree.Count.ToString());
@@ -261,7 +267,12 @@ namespace Citta_T1.Controls
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
-
+                    countDeep = countDeep + 40;
+                    if (this.ctWidths.Count != 0)
+                    {
+                        countDeep = countDeep + this.ctWidths.Max();
+                        this.ctWidths = new List<int>();
+                    }
                     foreach (int id in leavel)
                     {
                         FormatLoc(id, countDeep, countWidth, modelElements);
@@ -269,7 +280,8 @@ namespace Citta_T1.Controls
                         leavelList.Add(id);
                     }
                     countWidthList.Add(countWidth);
-                    countDeep = countDeep + 1; 
+                    
+                    
                 }
                 count = count + countWidthList.Max() + 1;
                 countDeep = 0;
