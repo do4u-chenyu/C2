@@ -252,8 +252,6 @@ namespace Citta_T1.Controls.Move
                 if (mr.StartID == this.id)
                 {
                     mr.StartP = this.GetStartPinLoc(0);
-                    log.Info("MoveDtControl.MouseMove x = " + mr.StartP.X + ", y = " + mr.StartP.Y);
-                    log.Info("MoveDtControl.MouseMove ctr.X = " + this.Location.X + ", ctr.Y = " + this.Location.Y);
                     mr.UpdatePoints();
                 }
 

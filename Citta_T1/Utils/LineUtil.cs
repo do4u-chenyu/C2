@@ -48,6 +48,13 @@ namespace Citta_T1.Utils
             endP = p2;
             UpdatePoints();
         }
+        public Bezier(PointF p1, PointF p2, PointF p3, PointF p4)
+        {
+            startP = p1;
+            this.a = p2;
+            this.b = p3;
+            endP = p4;
+        }
 
         public void Draw(CanvasWrapper canvas, RectangleF rect)
         {
