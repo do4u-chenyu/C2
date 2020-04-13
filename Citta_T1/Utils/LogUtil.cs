@@ -12,7 +12,7 @@ namespace Citta_T1.Utils
 
         public string ModuleName { get => moduleName; set => moduleName = value; }
 
-        public LogUtil()
+        private LogUtil()
         {
             log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         }

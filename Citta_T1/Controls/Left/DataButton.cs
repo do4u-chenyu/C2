@@ -78,7 +78,7 @@ namespace Citta_T1.Controls.Left
             }
             catch (System.ComponentModel.Win32Exception ex) 
             {
-                LogUtil logUtil = new LogUtil();
+                LogUtil logUtil = LogUtil.GetInstance("DataButton");
                 logUtil.Error(ex.Message);
                 //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
                 ReplaceOpenMethod();
