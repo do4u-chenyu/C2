@@ -18,6 +18,7 @@ namespace Citta_T1.Controls.Flow
         private LogUtil log = LogUtil.GetInstance("NaviViewControl");
         private Pen p1;  // 小元素画笔
         private Pen p2;  // 视野画笔
+        private SolidBrush viewFrameBrush; // 视野框画刷
         private int rate;
 
         private int startX;
@@ -31,6 +32,7 @@ namespace Citta_T1.Controls.Flow
             InitializeComponent();
             this.p1 = new Pen(Color.DimGray, 0.0001f);
             this.p2 = new Pen(Color.LightGray, 0.0001f);
+            this.viewFrameBrush = new SolidBrush(Color.DarkGray);
             this.rate = 10;
             elementWorldLocDict = new Dictionary<ModelElement, PointF>(256);
         }
@@ -50,23 +52,35 @@ namespace Citta_T1.Controls.Flow
                 startX = e.X;
                 startY = e.Y;
                 // 界面删除元素时缓存并不及时删除, 采用积累到一定程度后, 定期清空,
-                if (this.elementWorldLocDict.Count > 1024)
-                    this.elementWorldLocDict.Clear();
-
-                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-                float factor = Global.GetCurrentDocument().ScreenFactor;
-                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-                // 鼠标点下时,缓存所有元素世界坐标系
-                foreach (ModelElement me in modelElements)
+                int bufCount = this.elementWorldLocDict.Count;
+                int usrCount = Global.GetModelDocumentDao().CountAllModelElements();
+                // 删除的元素太多,重置缓存
+                if (Math.Abs(bufCount - usrCount) > 64)
                 {
-                    if (elementWorldLocDict.ContainsKey(me))
-                        continue;
-
-                    PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                    PointF ctWorldPosition = Global.GetCurrentDocument().ScreenToWorldF(ctOrgPosition, mapOrigin);
-                    PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
-                    elementWorldLocDict[me] = loc;
+                    this.elementWorldLocDict.Clear();
+                    foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
+                        PushModelDocument(md);
                 }
+                else
+                    PushModelDocument(Global.GetModelDocumentDao().CurrentDocument);
+            }
+        }
+
+        private void PushModelDocument(ModelDocument md)
+        {
+            List<ModelElement> modelElements = md.ModelElements;
+            float factor = md.ScreenFactor;
+            Point mapOrigin = md.MapOrigin;
+            // 鼠标点下时,缓存所有元素世界坐标系
+            foreach (ModelElement me in modelElements)
+            {
+                if (elementWorldLocDict.ContainsKey(me))
+                    continue;
+
+                PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
+                PointF ctWorldPosition = md.ScreenToWorldF(ctOrgPosition, mapOrigin);
+                PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
+                elementWorldLocDict[me] = loc;
             }
         }
 
@@ -87,10 +101,6 @@ namespace Citta_T1.Controls.Flow
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
             
-        }
-
-        private void NaviViewControl_MouseMove(object sender, MouseEventArgs e)
-        {
         }
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
@@ -125,14 +135,14 @@ namespace Citta_T1.Controls.Flow
 
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
             gc.DrawRectangle(p2, rect);
-            SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
-            gc.FillRectangle(trnsRedBrush, rect);
+            gc.FillRectangle(viewFrameBrush, rect);
             UpdateImage(this.Width, this.Height, factor, mapOrigin);
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
 
+
         }
 
-        private void UpdateImage(int width,int height,float factor,Point mapOrigin)
+        private void UpdateImage(int width, int height, float factor, Point mapOrigin)
         {
             if (this.staticImage != null)
             {   // bitmap是重型资源,需要强制释放
@@ -159,7 +169,7 @@ namespace Citta_T1.Controls.Flow
                     // 如果偏移过大,更新缓存的坐标
                         elementWorldLocDict[me] = ctScreenPos;
                 }
-                else {
+                else { // 新增元素,加入缓存
                     elementWorldLocDict[me] = ctScreenPos;
                 }
 
