@@ -45,18 +45,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO [DK] 1. 怎么呈现这个预览？
-            MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(txtButton.Name, this.encoding);
-            Type type = typeof(MainForm);
-            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance;
-            MethodInfo mInfo = type.GetMethod("MinMaxPictureBox_Click", flags);
-
-
-            if (prt.IsBottomViewPanelMinimum)
-            {
-                mInfo.Invoke(prt, new object[] {sender,e});
-            }
+            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
