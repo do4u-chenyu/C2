@@ -692,9 +692,6 @@
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\u721.png" />
-    <None Include="Resources\Move.ico" />
-    <None Include="Resources\Icon1.ico" />
-    <None Include="Resources\cursor.ico" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
@@ -739,6 +736,9 @@
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
+    <None Include="res\toolbox\currentModelRunning.gif" />
+    <None Include="res\toolbox\currentModelFin.png" />
+    <None Include="res\toolbox\currentModelRunningBack.png" />
     <Content Include="res\toolbox\difference.png" />
     <None Include="res\toolbox\div.png" />
     <Content Include="res\toolbox\filter.png" />

@@ -377,17 +377,15 @@ namespace Citta_T1.Controls
                     new PointF(e.X, e.Y),
                     (endC as MoveOpControl).revisedPinIndex
                     );
+
                 isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
                 if (!isDuplicatedRelation)
                 {
+                    cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
                     Global.GetOptionDao().EnableControlOption(mr);
-
-
-                    cd.AddModelRelation(mr);
                     cd.BindLineToControl(line, this.startC, this.endC);
                 }
-
 
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;

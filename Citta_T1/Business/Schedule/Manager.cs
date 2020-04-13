@@ -19,6 +19,7 @@ namespace Citta_T1.Business.Schedule
         Pause,     //模型的调度器暂停
         Stop,      //模型的调度器中止
         Done,      //模型的调度器运行完成
+        GifDone,   //模型的调度器运行完成，运行动图完成
         Null       //模型的调度器未初始化
     }
 
@@ -31,6 +32,9 @@ namespace Citta_T1.Business.Schedule
 
         public delegate void AccomplishTask(Manager manager);//声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
+
+        public delegate void UpdateGif(Manager manager);//声明一个更新运作动图的委托
+        public UpdateGif UpdateGifDelegate;
 
         private TripleListGen tripleList;
         private Thread scheduleThread = null;
@@ -45,7 +49,6 @@ namespace Citta_T1.Business.Schedule
         private List<Task> parallelTasks;
 
         public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
-        public Thread ScheduleThread { get => scheduleThread; set => scheduleThread = value; }
         public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
 
         public Manager()
@@ -115,8 +118,29 @@ namespace Citta_T1.Business.Schedule
             }
         }
 
+        public int CurrentModelTripleReadyNum()
+        {
+            int count = 0;
+            foreach (Triple tmpTri in currentModelTripleList)
+            {
+                if (tmpTri.OperateElement.Status == ElementStatus.Ready)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+
+
+
         public void Start()
         {
+            if (CurrentModelTripleReadyNum() == 0)
+            {
+                UpdateLogDelegate("当前模型的算子均已运算完毕");
+                return;
+            }
             this.modelStatus = ModelStatus.Running;
             this.tokenSource = new CancellationTokenSource();
             this.resetEvent = new ManualResetEvent(true);
@@ -124,7 +148,7 @@ namespace Citta_T1.Business.Schedule
             scheduleThread = new Thread(new ThreadStart(() => StartTask()));
             scheduleThread.IsBackground = true;
             scheduleThread.Start();
-            
+
         }
 
         public void StartTask()
@@ -159,12 +183,16 @@ namespace Citta_T1.Business.Schedule
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
 
-            this.modelStatus = ModelStatus.Done;
+            this.modelStatus = ModelStatus.GifDone;
             TaskCallBack(this);
+            UpdateGifDelegate(this);
+            this.modelStatus = ModelStatus.Done;
+            Thread.Sleep(1000);
+            UpdateGifDelegate(this);
         }
 
 
-        
+
 
 
         bool TaskMethod(Triple triple)
@@ -176,32 +204,28 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
 
+                List<string> cmds = new List<string>();
                 string cmd = "";
                 switch (triple.OperateElement.SubType)
                 {
-                    case ElementSubType.MaxOperator: cmd = (new MaxOperatorCmd(triple)).GenCmd();break;
-                    case ElementSubType.FilterOperator: cmd = (new FilterOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.CollideOperator: cmd = (new CollideOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.UnionOperator: cmd = (new UnionOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.DifferOperator: cmd = (new DifferOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.RandomOperator: cmd = (new RandomOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.MinOperator: cmd = (new MinOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.AvgOperator: cmd = (new AvgOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.SortOperator: cmd = (new SortOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.FreqOperator: cmd = (new FreqOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.JoinOperator: cmd = (new JoinOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.MaxOperator: cmds = (new MaxOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.FilterOperator: cmds = (new FilterOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.CollideOperator: cmds = (new CollideOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.UnionOperator: cmds = (new UnionOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.DifferOperator: cmds = (new DifferOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.RandomOperator: cmds = (new RandomOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.MinOperator: cmds = (new MinOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.AvgOperator: cmds = (new AvgOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.SortOperator: cmds = (new SortOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.FreqOperator: cmds = (new FreqOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.JoinOperator: cmds = (new JoinOperatorCmd(triple)).GenCmd(); break;
                 }
 
-                UpdateLogDelegate("执行命令: " + cmd);
-                RunLinuxCommand(cmd);
-
-
-
-
-
-
-
-                //Thread.Sleep(10000);
+                foreach (string cmd1 in cmds)
+                {
+                    UpdateLogDelegate("执行命令: " + cmd1);
+                    RunLinuxCommand(cmd1);
+                }
 
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑

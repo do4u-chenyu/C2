@@ -18,14 +18,17 @@ namespace Citta_T1.OperatorViews
     public partial class DifferOperatorView : Form
     {
         private MoveOpControl opControl;
+        private string dataPath0;
         private string dataPath1;
-        private string dataPath2;
+        private string[] columnName0;
+        private string[] columnName1;
         public DifferOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             this.opControl = opControl;
-            dataPath1 = "";
-            dataPath2 = "";
+            InitOptionInfo();
+            columnName0 = new string[] { };
+            columnName1 = new string[] { };
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -42,52 +45,38 @@ namespace Citta_T1.OperatorViews
         #region 初始化配置
         private void InitOptionInfo()
         {
-            int startID1 = -1;
-            int startID2 = -1;
-            string encoding1 = "";
-            string encoding2 = "";
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelRelation mr in modelRelations)
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
+            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                //左侧数据源
-                if (mr.EndID == this.opControl.ID && mr.EndPin == 1)
-                    startID1 = mr.StartID;
-                //右侧数据源
-                if (mr.EndID == this.opControl.ID && mr.EndPin == 2)
-                    startID2 = mr.StartID;
+                this.dataPath0 = dataInfo["dataPath0"];
+                this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
             }
-            foreach (ModelElement me in modelElements)
+            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
-                if (me.ID == startID1)
-                {
-                    this.dataPath1 = me.GetPath();
-                    this.DataInfo1.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
-                    encoding1 = me.Encoding.ToString();
-                }
-                if (me.ID == startID2)
-                {
-                    this.dataPath2 = me.GetPath();
-                    this.DataInfo1.Text = Path.GetFileNameWithoutExtension(this.dataPath2);
-                    encoding2 = me.Encoding.ToString();
-                }
+                this.dataPath1 = dataInfo["dataPath1"];
+                this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
+                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
-            if (this.dataPath1 != "")
-                SetOption(this.dataPath1, this.DataInfo1.Text, encoding1);
-            if (this.dataPath2 != "")
-                SetOption(this.dataPath2, this.DataInfo2.Text, encoding2);
-
+            //foreach (string name in this.columnName0)
+            //{
+            //this.d.AddItems(name);
+            //this.MaxValueBox.Items.Add(name);
+            //}
+            //foreach (string name in this.columnName1)
+            //{
+            //this.OutList.AddItems(name);
+            //this.MaxValueBox.Items.Add(name);
+            //}
         }
-        private void SetOption(string path, string dataName, string encoding)
+
+        private string[] SetOption(string path, string dataName, string encoding)
         {
+
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
-            foreach (string name in columnName)
-            {
-                this.OutList.AddItems(name);
-
-            }
+            return columnName;
         }
 
         #endregion

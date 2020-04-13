@@ -20,14 +20,19 @@ namespace Citta_T1.OperatorViews
         private MoveOpControl opControl;
         private string oldAvg;
         private string dataPath = "";
+        private string[] columnName;
+        private List<string> selectName;
+        private string oldOptionDict;
         public AvgOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            selectName = new List<string>();
             this.opControl = opControl;
             InitOptionInfor();
             LoadOption();
            
             this.oldAvg = this.AvgComBox.Text;
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
         }
         #region 初始化配置
         private void InitOptionInfor()
@@ -63,8 +68,8 @@ namespace Citta_T1.OperatorViews
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
-            foreach (string name in columnName)
+            this.columnName = column.Split('\t');
+            foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
 
         }
@@ -85,6 +90,10 @@ namespace Citta_T1.OperatorViews
             //内容修改，引起文档dirty
             if (this.oldAvg != this.AvgComBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectName);
 
         }
 

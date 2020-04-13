@@ -13,10 +13,19 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
         }
 
-        public string GenCmd()
+        public List<string> GenCmd()
         {
+            List<string> cmds = new List<string>();
+            string inputFilePath = inputFilePaths.First();
+            if (inputFilePath == "")
+            {
+                Thread.Sleep(5000);
+                cmds.Add("echo differ");
+            }
             Thread.Sleep(5000);
-            return "echo differ";
+
+
+            return cmds;
         }
 
     }

@@ -385,6 +385,13 @@ namespace UserControlDLL
             }
             return checkIndexs;
         }
+        public List<string> GetItemCheckText()
+        {
+            List<string> checkTexts = new List<string>();
+            foreach (string selectItem in checkListBox.CheckedItems)
+                checkTexts.Add(selectItem);
+            return checkTexts;
+        }
         public void LoadItemCheckIndex(int[] checkIndexs)
         {
             foreach (int index in checkIndexs)
