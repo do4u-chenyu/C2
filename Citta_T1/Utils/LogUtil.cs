@@ -23,6 +23,7 @@ namespace Citta_T1.Utils
                 instance = new LogUtil();
             instance.ModuleName = moduleName;
             return instance;
+
         }
 
         public LogUtil Warn(string content)
