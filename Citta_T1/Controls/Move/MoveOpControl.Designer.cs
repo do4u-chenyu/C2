@@ -58,7 +58,7 @@ namespace Citta_T1.Controls.Move
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(154, 5);
+            this.rightPictureBox.Location = new System.Drawing.Point(154, 8);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,7 +72,7 @@ namespace Citta_T1.Controls.Move
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(15, 1);
+            this.leftPicture.Location = new System.Drawing.Point(15, 2);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(18, 23);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -84,11 +84,10 @@ namespace Citta_T1.Controls.Move
             // 
             // leftPinPictureBox
             // 
-            this.leftPinPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.leftPinPictureBox.Location = new System.Drawing.Point(4, 11);
+            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
             this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(5, 5);
-            this.leftPinPictureBox.TabIndex = 3;
+            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
+            this.leftPinPictureBox.TabIndex = 0;
             this.leftPinPictureBox.TabStop = false;
             // 
             // rightPinPictureBox
@@ -110,7 +109,7 @@ namespace Citta_T1.Controls.Move
             this.异常日志ToolStripMenuItem,
             this.删除ToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
+            this.contextMenuStrip.Size = new System.Drawing.Size(134, 148);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // OptionToolStripMenuItem
@@ -122,7 +121,7 @@ namespace Citta_T1.Controls.Move
             this.OptionToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem";
-            this.OptionToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.OptionToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.OptionToolStripMenuItem.Text = "设置";
             this.OptionToolStripMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
@@ -132,7 +131,7 @@ namespace Citta_T1.Controls.Move
             this.菜单2ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.菜单2ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
-            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.菜单2ToolStripMenuItem.Text = "重命名";
             this.菜单2ToolStripMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
@@ -142,7 +141,7 @@ namespace Citta_T1.Controls.Move
             this.备注ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.备注ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.备注ToolStripMenuItem.Name = "备注ToolStripMenuItem";
-            this.备注ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.备注ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.备注ToolStripMenuItem.Text = "备注";
             this.备注ToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -152,7 +151,7 @@ namespace Citta_T1.Controls.Move
             this.运行到此ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.运行到此ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.运行到此ToolStripMenuItem.Name = "运行到此ToolStripMenuItem";
-            this.运行到此ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.运行到此ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.运行到此ToolStripMenuItem.Text = "运行到此";
             this.运行到此ToolStripMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
@@ -162,7 +161,7 @@ namespace Citta_T1.Controls.Move
             this.异常日志ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.异常日志ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.异常日志ToolStripMenuItem.Name = "异常日志ToolStripMenuItem";
-            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.异常日志ToolStripMenuItem.Text = "异常日志";
             // 
             // 删除ToolStripMenuItem
@@ -171,7 +170,7 @@ namespace Citta_T1.Controls.Move
             this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.删除ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
@@ -212,14 +211,13 @@ namespace Citta_T1.Controls.Move
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(131, 5);
+            this.statusBox.Location = new System.Drawing.Point(131, 8);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusBox.TabIndex = 9;
             this.statusBox.TabStop = false;
-            this.statusBox.Click += new System.EventHandler(this.OptionMenuItem_Click);
-            this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
+            this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StatusBox_MouseDown);
             this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
@@ -229,7 +227,6 @@ namespace Citta_T1.Controls.Move
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.statusBox);

@@ -16,25 +16,23 @@ namespace Citta_T1.Controls.Flow
     public partial class NaviViewControl : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("NaviViewControl");
-        private List<Control> controls;
-        private Pen pen;
-        private Point viewBoxPosition, ctWorldPosition;
+        private Pen p1;  // 小元素画笔
+        private Pen p2;  // 视野画笔
         private int rate;
-        private Pen p1 = new Pen(Color.LightGray, 0.0001f);
+
         private int startX;
         private int startY;
-        private int nowX;
-        private int nowY;
+
         private Bitmap staticImage;
+        private Dictionary<ModelElement, PointF> elementWorldLocDict; //缓存所有元素的世界坐标系
 
         public NaviViewControl()
         {
             InitializeComponent();
-            this.controls = new List<Control>();
-            this.pen = new Pen(Color.DimGray, 0.0001f);
+            this.p1 = new Pen(Color.DimGray, 0.0001f);
+            this.p2 = new Pen(Color.LightGray, 0.0001f);
             this.rate = 10;
-            
-            
+            elementWorldLocDict = new Dictionary<ModelElement, PointF>(256);
         }
 
 
@@ -44,16 +42,6 @@ namespace Citta_T1.Controls.Flow
             this.rate = rate;
             this.Invalidate(true);
         }
-        public void AddControl(Control ct)
-        {
-
-            this.controls.Add(ct);
-
-        }
-        public void RemoveControl(Control ct)
-        {
-            this.controls.Remove(ct);
-        }
 
         private void NaviViewControl_MouseDown(object sender, MouseEventArgs e)
         {
@@ -61,27 +49,39 @@ namespace Citta_T1.Controls.Flow
             {
                 startX = e.X;
                 startY = e.Y;
-                
+                // 界面删除元素时缓存并不及时删除, 采用积累到一定程度后, 定期清空,
+                if (this.elementWorldLocDict.Count > 1024)
+                    this.elementWorldLocDict.Clear();
+
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+                float factor = Global.GetCurrentDocument().ScreenFactor;
+                Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                // 鼠标点下时,缓存所有元素世界坐标系
+                foreach (ModelElement me in modelElements)
+                {
+                    if (elementWorldLocDict.ContainsKey(me))
+                        continue;
+
+                    PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
+                    PointF ctWorldPosition = Global.GetCurrentDocument().ScreenToWorldF(ctOrgPosition, mapOrigin);
+                    PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
+                    elementWorldLocDict[me] = loc;
+                }
             }
         }
 
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
 
-
-            //float factor = (this.Parent as CanvasPanel).ScreenFactor;
             float factor = Global.GetCurrentDocument().ScreenFactor;
-            nowX = e.X;
-            nowY = e.Y;
-            
-            
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            int dx = Convert.ToInt32((startX - nowX ) * rate / factor);
-            int dy = Convert.ToInt32((startY - nowY ) * rate / factor);
-            mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
 
+            int dx = Convert.ToInt32((startX - e.X ) * rate / factor);
+            int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
+            mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            // 更新canvas所有元素的位置
             Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
-            OpUtil.ChangLoc((startX - nowX) * rate - moveOffset.X * factor, (startY - nowY) * rate - moveOffset.Y * factor);
+            OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -101,6 +101,7 @@ namespace Citta_T1.Controls.Flow
             int width = this.Location.X + this.Width;
             int height = this.Location.Y + this.Height;
 
+            Point viewBoxPosition;
 
 
             float factor = (this.Parent as CanvasPanel).ScreenFactor;//
@@ -108,10 +109,12 @@ namespace Citta_T1.Controls.Flow
             {
                 factor = Global.GetCurrentDocument().ScreenFactor;//
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
-                OpUtil.ChangLoc(-moveOffset.X, -moveOffset.Y);
+                OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
                 Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 mapOrigin = Global.GetCurrentDocument().MapOrigin;               
+
                 viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
             }
             catch
@@ -120,21 +123,11 @@ namespace Citta_T1.Controls.Flow
                 viewBoxPosition = new Point(650, 330);
             }
 
-
-            if ((this.Parent as CanvasPanel).StartMove)
-            {
-                UpdateImage(this.Width, this.Height, factor, mapOrigin);
-                (this.Parent as CanvasPanel).StartMove = false;
-            }
-
             Rectangle rect = new Rectangle(viewBoxPosition.X / rate, viewBoxPosition.Y / rate, Convert.ToInt32(width / factor) / rate, Convert.ToInt32(height / factor) / rate);
-            gc.DrawRectangle(p1, rect);
+            gc.DrawRectangle(p2, rect);
             SolidBrush trnsRedBrush = new SolidBrush(Color.DarkGray);
             gc.FillRectangle(trnsRedBrush, rect);
-            if (this.staticImage == null)
-            {
-                UpdateImage(this.Width, this.Height, factor, mapOrigin);
-            }
+            UpdateImage(this.Width, this.Height, factor, mapOrigin);
             gc.DrawImageUnscaled(this.staticImage, 0, 0);
 
         }
@@ -146,17 +139,32 @@ namespace Citta_T1.Controls.Flow
                 this.staticImage.Dispose();
                 this.staticImage = null;
             }
-            this.staticImage = new Bitmap(width,height);
+            this.staticImage = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(staticImage);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-
             foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.GetControl;   
-                Point ctOrgPosition = new Point(Convert.ToInt32(ct.Location.X / factor), Convert.ToInt32(ct.Location.Y / factor));
-                ctWorldPosition = Global.GetCurrentDocument().ScreenToWorld(ctOrgPosition, mapOrigin);
-                Rectangle rect = new Rectangle(Convert.ToInt32(ctWorldPosition.X / rate), Convert.ToInt32(ctWorldPosition.Y / rate), 142 / rate, 25 / rate); 
-                g.DrawRectangle(pen, rect);
+            { 
+                PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
+                PointF ctWorldPosition = Global.GetCurrentDocument().ScreenToWorldF(ctOrgPosition, mapOrigin);
+                PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
+                
+                // 为了解决导航框拖动时,元素漂移的问题
+                if (elementWorldLocDict.ContainsKey(me))
+                {
+                    PointF loc = elementWorldLocDict[me];
+                    // 如果本次该元素的世界坐标和缓存的世界左边很接近,就直接用缓存的世界左边
+                    if (Math.Abs(loc.X - ctScreenPos.X) + Math.Abs(loc.Y - ctScreenPos.Y) <= 1)
+                        ctScreenPos = loc;
+                    else
+                    // 如果偏移过大,更新缓存的坐标
+                        elementWorldLocDict[me] = ctScreenPos;
+                }
+                else {
+                    elementWorldLocDict[me] = ctScreenPos;
+                }
+
+                Rectangle rect = new Rectangle(Convert.ToInt32(ctScreenPos.X), Convert.ToInt32(ctScreenPos.Y), 142 / rate, 25 / rate);
+                g.DrawRectangle(p1, rect);
             }
 
             g.Dispose();

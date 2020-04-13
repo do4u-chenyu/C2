@@ -10,6 +10,9 @@ using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
 using static Citta_T1.Controls.CanvasPanel;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
 
 namespace Citta_T1.Controls.Move
 { 
@@ -22,7 +25,7 @@ namespace Citta_T1.Controls.Move
         private LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
-
+        private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "连接算子 取差集 取交集 取并集";
 
@@ -79,8 +82,11 @@ namespace Citta_T1.Controls.Move
         public ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
-        private Point leftPin = new Point(3, 11);
-        private Point rightPin = new Point(154, 11);
+
+        private Point leftPin = new Point(2, 11);
+        private Point rightPin = new Point(140, 11);
+
+
         private int pinWidth = 4;
         private int pinHeight = 4;
         private Pen pen = new Pen(Color.DarkGray, 0.0001f);
@@ -90,6 +96,9 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
+
+        private Bitmap staticImage;
+
         public MoveOpControl()
         {
             InitializeComponent();
@@ -102,6 +111,7 @@ namespace Citta_T1.Controls.Move
             this.subTypeName = subTypeName;
             Location = loc;
             doublelPinFlag = doublePin.Contains(SubTypeName);
+            this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
@@ -165,11 +175,30 @@ namespace Citta_T1.Controls.Move
             else if(cmd == ECommandType.Hold)
             {
                 #region 控件移动
-                (this.Parent as CanvasPanel).StartMove = true;
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
+                bool isUpdateLine = false;
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+                {
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        mr.UpdatePoints();
+                        isUpdateLine = true;
+                    }
+                    if (mr.EndID == this.id)
+                    {
+                        mr.EndP = this.GetEndPinLoc(mr.EndPin);
+                        mr.UpdatePoints();
+                        isUpdateLine = true;
+                    }
+                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
+                }
+                if (isUpdateLine)
+                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
 
 
@@ -211,10 +240,9 @@ namespace Citta_T1.Controls.Move
             
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            (this.Parent as CanvasPanel).StartMove = true;
+
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (rectOut.Contains(e.Location))
                 {
                     startX = this.Location.X + e.X;
@@ -229,7 +257,8 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            oldcontrolPosition=this.Location;
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            oldcontrolPosition =this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -244,15 +273,23 @@ namespace Citta_T1.Controls.Move
                 RenameMenuItem_Click(this, e);
         }
 
+        private void StatusBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks != 2)
+                return;
+            // 清空焦点
+            Global.GetMainForm().blankButton.Focus();
+            // 显示配置
+            ShowOptionDialog();
+        }
+
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
 
-            (this.Parent as CanvasPanel).StartMove = true;
             if (e.Button == MouseButtons.Left)
             {
-                // TODO [DK] 无用代码 过段时间删除
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
@@ -263,6 +300,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -310,49 +348,55 @@ namespace Citta_T1.Controls.Move
         private void ResizeToBig()
         {      
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(173 * f), (int)(25 * f));//194，25
-            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(5 * f));//159,2
-            this.statusBox.Location = new Point((int)(126 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(167 * f), (int)(27 * f));//194，25
+            this.rightPictureBox.Location = new Point((int)(144 * f), (int)(7 * f));//159,2
+            this.statusBox.Location = new Point((int)(126 * f), (int)(7 * f));//新增
             this.rectOut.Location = new Point((int)(159 * f), (int)(11 * f));
             
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
+            
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToSmall()
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(152 * f), (int)(25 * f));//142，25
-            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(5 * f));//107,2
-            this.statusBox.Location = new Point((int)(104 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(148 * f), (int)(27 * f));//142，25
+            this.rightPictureBox.Location = new Point((int)(124 * f), (int)(7 * f));//107,2
+            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
         {  
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(167 * f), (int)(25 * f));//184，25
-            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(5 * f));//151,2
-            this.statusBox.Location = new Point((int)(120 * f), (int)(5 * f));//新增
+            this.Size = new Size((int)(163 * f), (int)(27 * f));//184，25
+            this.rightPictureBox.Location = new Point((int)(137 * f), (int)(7 * f));//151,2
+            this.statusBox.Location = new Point((int)(120 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
 
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
+            ShowOptionDialog();
+        }
+
+        private void ShowOptionDialog()
+        {
             if (!this.OptionToolStripMenuItem.Enabled)
             {
-                MessageBox.Show("请先连接数据，再进行算子设置");
+                MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
-            }               
+            }
             switch (this.subTypeName)
             {
-
                 case "连接算子":
                     new CollideOperatorView(this).ShowDialog();
                     break;
@@ -383,7 +427,6 @@ namespace Citta_T1.Controls.Move
                 default:
                     break;
             }
-                    
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
@@ -416,7 +459,6 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().RemoveControl(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();
@@ -429,7 +471,6 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().RemoveControl(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     return;
@@ -557,6 +598,8 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             
             SetDouble(this);
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -619,7 +662,6 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region IMoveControl 接口实现方法
-        // TODO [DK] 实现接口
         public void UpdateLineWhenMoving()
         {
 
@@ -634,7 +676,18 @@ namespace Citta_T1.Controls.Move
             /*
              * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
              */
-            this.endLineIndexs[revisedPinIndex] = line_index;
+            try
+            {
+                this.endLineIndexs[revisedPinIndex] = line_index;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl SaveEndLines 出错: " + ex.ToString());
+            }
         }
         public PointF RevisePointLoc(PointF p)
         {
@@ -645,6 +698,7 @@ namespace Citta_T1.Controls.Move
              // 鼠标判定矩形大小
             int mouseR = 15;
             int pinR = 6;
+            bool isRevised = false;
             float maxIntersectPerct = 0.0F;
             PointF revisedP = new PointF(p.X, p.Y);
             Rectangle rect = new Rectangle(
@@ -654,12 +708,6 @@ namespace Citta_T1.Controls.Move
             
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                //int pinLeftX = leftP.Location.X + this.Location.X;
-                //int pinTopY = leftP.Location.Y + this.Location.Y;
-                //Rectangle leftPinRect = new Rectangle(
-                //        new Point(pinLeftX, pinTopY),
-                //        new Size(leftP.Width, leftP.Height)
-                //);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(_leftPinRect.Location.X + this.Location.X, _leftPinRect.Location.Y + this.Location.Y),
                     new Size(_leftPinRect.Width, _leftPinRect.Height));
@@ -678,13 +726,17 @@ namespace Citta_T1.Controls.Move
                         revisedP = new PointF(
                             pinLeftX + leftPinRect.Width / 2,
                             pinTopY + leftPinRect.Height / 2);
-                        canvas.SetEndC = this;
+                        // 绑定控件
+                        canvas.EndC = this;
+                        isRevised = true;
                         revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
                         log.Info("revisedPinIndex: " + revisedPinIndex);
                         log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }
+            if (!isRevised)
+                canvas.EndC = null;
             return revisedP;
         }
 
@@ -720,14 +772,32 @@ namespace Citta_T1.Controls.Move
             this.startLineIndexs.Add(relationIndex);
         }
         public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            if (pinIndex < this.endLineIndexs.Count())
+        { 
+            try
+            {
                 this.endLineIndexs[pinIndex] = relationIndex;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                log.Error("索引越界");
+            }
+            catch (Exception ex)
+            {
+                log.Error("MoveOpControl BindEndLine 出错: " + ex.ToString());
+            }
         }
         #endregion
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
+
+
+
+            Graphics g = e.Graphics;
+
+            
+
+            
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
             e.Graphics.DrawRectangle(pen, rectIn_up);
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
@@ -739,6 +809,48 @@ namespace Citta_T1.Controls.Move
         private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+        private void UpdateBackground()
+        {
+
+        }
+        private void DrawRoundedRect(int x, int y, int width, int height, int radius)
+        {
+            if (this.staticImage != null)
+            {   // bitmap是重型资源,需要强制释放
+                this.staticImage.Dispose();
+                this.staticImage = null;
+            }
+            this.staticImage = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(staticImage);
+            g.Clear(Color.White);
+            //去掉圆角的锯齿
+            System.Drawing.Pen p = new System.Drawing.Pen(Color.DarkGray, 1);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+
+            //上
+            g.DrawLine(pen, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            //下
+            g.DrawLine(pen, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            //左
+            g.DrawLine(pen, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            //右
+            g.DrawLine(pen, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+
+            //左上角
+            g.DrawArc(pen, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            //右上角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            //左下角
+            g.DrawArc(pen, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            //右下角
+            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+            g.Dispose();
+            log.Info("-------------------");
+            this.BackgroundImage = this.staticImage;
         }
     }
 }

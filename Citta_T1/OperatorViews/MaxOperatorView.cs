@@ -22,6 +22,9 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> selectColumn;
+
+        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
+
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();

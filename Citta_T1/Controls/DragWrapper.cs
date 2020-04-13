@@ -23,6 +23,11 @@ namespace Citta_T1.Controls
         public int Height { get => height; set => height = value; }
         public float Factor { get; set; }
         public bool StartDrag { get => startDrag; set => startDrag = value; }
+        public int WorldWidth { get => worldWidth; set => worldWidth = value; }
+        public int WorldHeight { get => worldHeight; set => worldHeight = value; }
+        public Point Start { get => start; set => start = value; }
+        public Point Now { get => now; set => now = value; }
+        public Bitmap StaticImage { get => staticImage; set => staticImage = value; }
 
         public DragWrapper()
         {
@@ -57,14 +62,13 @@ namespace Citta_T1.Controls
             this.MoveWorldImage(n);
             n.Dispose();
         }
-        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public virtual void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.MoveWorldImage(n);
             this.ControlChange(start, now);
-            // TODO [DK] 更新线坐标
             n.Dispose();
             this.startDrag = false;
             this.start = e.Location;
@@ -82,7 +86,7 @@ namespace Citta_T1.Controls
             return false;
         }
         //生成当前模型控件快照
-        public Bitmap CreateWorldImage()
+        public virtual Bitmap CreateWorldImage()
         {
             Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * Factor), Convert.ToInt32(worldHeight * Factor));
             Graphics g = Graphics.FromImage(staticImage);
@@ -122,7 +126,7 @@ namespace Citta_T1.Controls
             return staticImage;
         }
 
-        public void MoveWorldImage(Graphics n)
+        public virtual void MoveWorldImage(Graphics n)
         {
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
@@ -142,7 +146,7 @@ namespace Citta_T1.Controls
             
         }
 
-        private void ControlChange(Point start, Point now)
+        public void ControlChange(Point start, Point now)
         {
 
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
@@ -151,8 +155,8 @@ namespace Citta_T1.Controls
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
             // 移动当前文档中的所有控件
-            LineUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
-            OpUtil.ChangLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
+            LineUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
+            OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             // 将所有控件都显示出来

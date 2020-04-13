@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
+using System.IO;
 
 namespace Citta_T1.Controls.Left
 {
@@ -34,11 +35,12 @@ namespace Citta_T1.Controls.Left
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo = "模型文档的名称";
+            String helpInfo =Global.GetCurrentDocument().UserPath+ this.textButton.Text + "\\" + this.textButton.Text + ".xml";
             this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
         }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+
         {
             Global.GetMainForm().LoadDocument(this.textButton.Text);
             this.OpenToolStripMenuItem.Enabled = false;

@@ -172,7 +172,7 @@ namespace Citta_T1.Controls
 
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
-            Global.GetCanvasPanel().StartMove = true;
+
             foreach (ModelElement me in modelElements)
             {
                 if (me.ID == id)
@@ -185,7 +185,7 @@ namespace Citta_T1.Controls
         }
         private void ForamtSingleNode(List<int> nodes, int dx, int dy, List<ModelElement> modelElements)
         {
-            Global.GetCanvasPanel().StartMove = true;
+
             int screenHeight = Global.GetCanvasPanel().Height;
             foreach (ModelElement me in modelElements)
             {

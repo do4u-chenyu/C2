@@ -46,22 +46,19 @@ namespace Citta_T1.Business.Option
             string tmpName = "Result" + DateTime.Now.ToString("yyyyMMdd") + moveOpControl.ID.ToString();
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x, y));
             /*
-             * TODO [DK] 添加线
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
              */
+
             PointF startPoint = new PointF(
                    moveOpControl.rectOut.Location.X + moveOpControl.Location.X,
                    moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y
                    );
             PointF endPoint = new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y);
-
             Bezier line = new Bezier(startPoint, endPoint);
-
             CanvasPanel canvas = Global.GetCanvasPanel();
             CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
             canvas.RepaintObject(line);
-            canvas.lines.Add(line);
 
             Global.GetModelDocumentDao().AddDocumentRelation(moveOpControl.ID, mrc.ID, startPoint, endPoint, 0);
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
