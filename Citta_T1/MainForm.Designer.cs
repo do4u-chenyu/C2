@@ -530,6 +530,8 @@
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.currentModelFinLab);
+            this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
             this.canvasPanel.Controls.Add(this.panel3);
             this.canvasPanel.Controls.Add(this.blankButton);
             this.canvasPanel.Controls.Add(this.remarkControl);
