@@ -163,16 +163,17 @@ namespace Citta_T1.Controls
                 this.StartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
                 // 初始化静态图
-                if (this.staticImage == null)
-                {
-                    this.staticImage = new Bitmap(this.Width, this.Height);
+                ////if (this.staticImage == null)
+                //{
+                this.staticImage = new Bitmap(this.Width, this.Height);
 
-                    Graphics g = Graphics.FromImage(this.staticImage);
-                    g.Clear(this.BackColor);
-                    g.Dispose();
-                }
+                Graphics g = Graphics.FromImage(this.staticImage);
+                g.Clear(this.BackColor);
+                g.Dispose();
+                //}
                 CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
                 this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
+                this.staticImage.Save("MouseDown.png");
             }
 
             if (e.Button != MouseButtons.Left) return;
@@ -234,13 +235,15 @@ namespace Citta_T1.Controls
                  * 2. 如果在，对该点就行修正
                  * 3. 
                  */
-                log.Info("开始划线");
                 PointF nowP = e.Location;
                 if (lineWhenMoving != null)
                     invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
                 // 遍历所有OpControl的leftPin
+                // TODO [DK] Error 已经修正过的坐标 会后续循环中的LeftPin修改值
+                // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
+                // 只要在循环中被修正一次，就退出
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
@@ -248,6 +251,8 @@ namespace Citta_T1.Controls
                     {
                         // 修正坐标
                         nowP = (con as IMoveControl).RevisePointLoc(nowP);
+                        if (this.endC != null)
+                            break;
                     }
                 }
                 endP = nowP;
@@ -280,9 +285,9 @@ namespace Citta_T1.Controls
 
         public void RepaintObject(Bezier line)
         {
-            Graphics g = this.CreateGraphics();
             if (line == null)
                 return;
+            Graphics g = this.CreateGraphics();
             line.DrawBezier(g);
             g.Dispose();
         }
@@ -355,27 +360,26 @@ namespace Citta_T1.Controls
                  * 
                  *         ----------
                  */
-                Bezier line = new Bezier(startP, new PointF(e.X, e.Y));
-                
+                log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).revisedPinIndex);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
                     startP,
-                    new PointF(e.X, e.Y),
+                    (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).revisedPinIndex),
                     (endC as MoveOpControl).revisedPinIndex
                     );
+                // TODO [DK] 这里用来设置规则
+                // 1. 关系不能重复
+                // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
+                // 3. 
                 isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
                 if (!isDuplicatedRelation)
                 {
                     //endC右键菜单设置Enable
                     Global.GetOptionDao().EnableControlOption(mr);
-
-
                     cd.AddModelRelation(mr);
-                    cd.BindLineToControl(line, this.startC, this.endC);
+                    cd.BindRelationToControl(mr, this.startC, this.endC);
                 }
-
-
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;
             }
@@ -418,12 +422,15 @@ namespace Citta_T1.Controls
 
         private void Draw(CanvasWrapper dcStatic, RectangleF rect)
         {
-            Dictionary<int, Bezier> mld = Global.GetCurrentDocument().ModelLineDict;
-            foreach (int lineIndex in mld.Keys)
+            Graphics g = dcStatic.Graphics;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            foreach (ModelRelation mr in mrs)
             {
-                Bezier line = mld[lineIndex];
-                line.DrawBezier(dcStatic.Graphics, rect);
+                log.Info("mrs.Count = " + mrs.Count);
+                Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
+                line.DrawBezier(g);
             }
+            g.Dispose();
 
         }
         #endregion

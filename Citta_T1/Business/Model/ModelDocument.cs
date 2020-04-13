@@ -298,20 +298,19 @@ namespace Citta_T1.Business.Model
         }
 
         // 将新的线绑线到控件
-        public void BindLineToControl(Bezier line, Control startC, Control endC)
+        public void BindRelationToControl(ModelRelation mr, Control startC, Control endC)
         {
             CanvasPanel canvas = Global.GetCanvasPanel();
             int index = GetLineIndex();
             (canvas.StartC as IMoveControl).SaveStartLines(index);
-            (canvas.EndC as IMoveControl).SaveStartLines(index);
-
+            (canvas.EndC as IMoveControl).SaveEndLines(index);
         }
 
         public bool IsDuplicatedRelation(ModelRelation mr)
         {
             foreach (ModelRelation _mr in this.modelRelations)
             {
-                if (_mr.StartID == mr.StartID && _mr.EndID == mr.EndID && _mr.EndPin == mr.EndPin)
+                if (_mr.EndID == mr.EndID && _mr.EndPin == mr.EndPin)
                 {
                     return true;
                 }

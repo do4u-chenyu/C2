@@ -71,7 +71,7 @@ namespace Citta_T1.Controls.Move
         private int startY;
         private Point oldcontrolPosition;
         Bezier line;
-        private List<Rectangle> leftPinArray = new List<Rectangle> {};
+        public List<Rectangle> leftPinArray = new List<Rectangle> {};
         public int revisedPinIndex;
         // 以该控件为起点的所有点
         private List<int> startLineIndexs = new List<int>() { };
@@ -153,12 +153,14 @@ namespace Citta_T1.Controls.Move
             {
                 dy = 4;
             }
-            rectIn_down = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
-            this.leftPinArray.Add(rectIn_down);
-            this.endLineIndexs.Add(-1);
-            rectIn_up = new Rectangle(this.leftPin.X, this.leftPin.Y + dy, this.pinWidth, this.pinHeight);
+            rectIn_up = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
+
+            rectIn_down = new Rectangle(this.leftPin.X, this.leftPin.Y + dy, this.pinWidth, this.pinHeight);
+            this.leftPinArray.Add(rectIn_down);
+            this.endLineIndexs.Add(-1);
+
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
             SetOpControlName(this.textBox.Text);
         }
@@ -710,16 +712,21 @@ namespace Citta_T1.Controls.Move
                     if (iou > maxIntersectPerct)
                     {
                         maxIntersectPerct = iou;
-                        log.Info("修正鼠标坐标，修正前：" + p.ToString());
+                        //log.Info("修正鼠标坐标，修正前：" + p.ToString());
                         revisedP = new PointF(
                             pinLeftX + leftPinRect.Width / 2,
                             pinTopY + leftPinRect.Height / 2);
                         // 绑定控件
                         canvas.EndC = this;
+                        log.Info("---------------------");
+                        log.Info("绑定控件，canvas.EndC = " + canvas.EndC);
                         isRevised = true;
-                        revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
-                        log.Info("revisedPinIndex: " + revisedPinIndex);
-                        log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
+                        this.revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
+                        log.Info("矫正前的point = " + p);
+                        log.Info("矫正前的point = " + revisedP + "索引 = " + revisedPinIndex);
+                        log.Info("---------------------");
+                        //log.Info("revisedPinIndex: " + revisedPinIndex);
+                        //log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }
