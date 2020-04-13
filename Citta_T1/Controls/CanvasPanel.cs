@@ -362,6 +362,7 @@ namespace Citta_T1.Controls
                 {
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
+                    this.RepaintAllRelations();
                     return;
                 }
                 /* 
@@ -400,7 +401,16 @@ namespace Citta_T1.Controls
 
         }
 
-
+        private void RepaintAllRelations()
+        {
+            Graphics g = this.CreateGraphics();
+            g.Clear(this.BackColor);
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
+            }
+            g.Dispose();
+        }
         public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))

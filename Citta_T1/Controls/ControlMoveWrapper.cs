@@ -34,7 +34,6 @@ namespace Citta_T1.Controls
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
             if (Pw.X < 0 || Pw.Y < 0)
                 return staticImage;
-
             g.Dispose();
             return staticImage;
         }
@@ -74,7 +73,8 @@ namespace Citta_T1.Controls
             this.StaticImage.Dispose();
         }
 
-        public override void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+
+        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.Now = e.Location;
