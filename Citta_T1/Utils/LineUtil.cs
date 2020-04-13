@@ -17,7 +17,7 @@ namespace Citta_T1.Utils
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in modelRelations)
             {
-                mr.ChangLoc(dx, dy);
+                mr.ChangeLoc(dx, dy);
             }
         }
 

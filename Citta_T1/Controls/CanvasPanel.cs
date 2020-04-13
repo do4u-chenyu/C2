@@ -108,10 +108,8 @@ namespace Citta_T1.Controls
             }
             else if (!isLarger && sizeLevel > 0)
             {
-                log.Info("缩小");
                 sizeLevel -= 1;
                 Global.GetCurrentDocument().ScreenFactor /=  factor;
-                log.Info(Global.GetCurrentDocument().ScreenFactor.ToString() + "放大倍数");
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
