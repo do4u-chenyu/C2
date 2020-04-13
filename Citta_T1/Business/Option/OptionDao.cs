@@ -59,8 +59,14 @@ namespace Citta_T1.Business.Option
             CanvasPanel canvas = Global.GetCanvasPanel();
             CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
             canvas.RepaintObject(line);
+            ModelRelation newModelRelation = new ModelRelation(
+                                moveOpControl.ID, mrc.ID,
+                                new Point(moveOpControl.rectOut.Location.X + moveOpControl.Location.X, moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y),
+                                new Point(mrc.rectIn.Location.X + mrc.Location.X, mrc.rectIn.Location.Y + mrc.Location.Y),
+                                0);
+            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
+            Global.GetCurrentDocument().BindRelationToControl(newModelRelation, moveOpControl, mrc);
 
-            Global.GetModelDocumentDao().AddDocumentRelation(moveOpControl.ID, mrc.ID, startPoint, endPoint, 0);
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
             mrc.Path = path;
         }
