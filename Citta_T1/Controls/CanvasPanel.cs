@@ -185,9 +185,13 @@ namespace Citta_T1.Controls
             if (SelectFrame())
             {
                 MouseIsDown = true;
-
                 basepoint = e.Location;
 
+                if (staticImage != null)
+                {
+                    staticImage.Dispose();
+                    staticImage = null;
+                }
                 staticImage = new Bitmap(this.Width, this.Height);
                 this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
@@ -221,9 +225,12 @@ namespace Citta_T1.Controls
 
                 Graphics n = this.CreateGraphics();
                 n.DrawImageUnscaled(i, 0, 0);
-
                 n.Dispose();
+
                 g.Dispose();
+
+                i.Dispose();
+                i = null;
             }
 
             // 控件移动
