@@ -45,8 +45,8 @@ namespace Citta_T1.Controls.Move
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.txtButton = new System.Windows.Forms.Button();
             this.statusBox = new System.Windows.Forms.PictureBox();
+            this.txtButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -73,7 +73,7 @@ namespace Citta_T1.Controls.Move
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
             this.leftPicture.Location = new System.Drawing.Point(15, 2);
             this.leftPicture.Name = "leftPicture";
-            this.leftPicture.Size = new System.Drawing.Size(18, 23);
+            this.leftPicture.Size = new System.Drawing.Size(18, 22);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
@@ -188,6 +188,21 @@ namespace Citta_T1.Controls.Move
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
+            // statusBox
+            // 
+            this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
+            this.statusBox.Location = new System.Drawing.Point(131, 8);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(14, 14);
+            this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.statusBox.TabIndex = 9;
+            this.statusBox.TabStop = false;
+            this.helpToolTip.SetToolTip(this.statusBox, "配置算子");
+            this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StatusBox_MouseDown);
+            this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
+            // 
             // txtButton
             // 
             this.txtButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -205,21 +220,6 @@ namespace Citta_T1.Controls.Move
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-            // 
-            // statusBox
-            // 
-            this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(131, 8);
-            this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(14, 14);
-            this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.statusBox.TabIndex = 9;
-            this.statusBox.TabStop = false;
-            this.helpToolTip.SetToolTip(this.statusBox, "配置算子");
-            this.statusBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StatusBox_MouseDown);
-            this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
-            this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 

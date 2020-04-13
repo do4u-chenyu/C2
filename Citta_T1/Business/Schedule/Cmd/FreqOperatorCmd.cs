@@ -13,10 +13,22 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
         }
 
-        public string GenCmd()
+        public List<string> GenCmd()
         {
+            List<string> cmds = new List<string>();
+            string inputFilePath = inputFilePaths.First();
+
+            //以后算子路径功能写完后去掉
+            if (inputFilePath == "")
+            {
+                Thread.Sleep(5000);
+                cmds.Add("echo freq");
+            }
             Thread.Sleep(5000);
-            return "echo freq";
+
+
+
+            return cmds;
         }
 
     }

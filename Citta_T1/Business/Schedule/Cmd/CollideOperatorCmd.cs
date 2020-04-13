@@ -13,10 +13,30 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
         }
 
-        public string GenCmd()
+        public List<string> GenCmd()
         {
+            List<string> cmds = new List<string>();
+            string inputFilePath1 = inputFilePaths.First();
+            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : "";
+            //以后算子路径功能写完后去掉
+            if (inputFilePath1 == "" || inputFilePath2 == "")
+            {
+                Thread.Sleep(5000);
+                cmds.Add("echo collide");
+            }
             Thread.Sleep(5000);
-            return "echo collide";
+
+            /*
+            string leftfieldLine = TransOutputField(option.GetOption("leftfield").Split(','));
+            string rightfieldLine = TransOutputField(option.GetOption("rightfield").Split(','));
+
+            cmds.Add(string.Format("awk -F'\\t' '{{print {0}}}' {1}> tmp.txt", leftfieldLine, inputFilePath1));
+            cmds.Add(string.Format("awk -F'\\t' '{{print {0}}}' {1}>> tmp.txt", rightfieldLine, inputFilePath2));
+            cmds.Add(string.Format("sort tmp.txt | uniq -d >> {0}", this.outputFilePath));
+            */
+
+
+            return cmds;
         }
 
     }

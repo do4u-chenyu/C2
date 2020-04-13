@@ -90,6 +90,9 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
+            this.currentModelRunLab = new System.Windows.Forms.Label();
+            this.currentModelRunBackLab = new System.Windows.Forms.Label();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
@@ -710,6 +713,35 @@
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
+            // currentModelRunLab
+            // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Image = global::Citta_T1.Properties.Resources.currentModelRunning;
+            this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
+            this.currentModelRunLab.Name = "currentModelRunLab";
+            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
+            this.currentModelRunLab.TabIndex = 28;
+            this.currentModelRunLab.Hide();
+            // 
+            // currentModelRunBackLab
+            // 
+            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
+            this.currentModelRunBackLab.Image = global::Citta_T1.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
+            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelRunBackLab.TabIndex = 29;
+            this.currentModelRunBackLab.Hide();
+            // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::Citta_T1.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 30;
+            this.currentModelFinLab.Hide();
+            // 
             // naviViewControl
             // 
             this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -836,7 +868,9 @@
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
         private Controls.Top.CommonUseControl commonUseControl;
-
+        private System.Windows.Forms.Label currentModelRunLab;
+        private System.Windows.Forms.Label currentModelRunBackLab;
+        private System.Windows.Forms.Label currentModelFinLab;
     }
 }
 

@@ -22,6 +22,13 @@ namespace Citta_T1.Controls.Flow
             SelectFrame = false;
             SelectRemark = false;
         }
+        // 恢复到编辑模式
+        public void ResetStatus()
+        {
+            SelectDrag = false;
+            SelectFrame = false;
+            ChangeCursor();
+        }
         private void ChangeCursor()
         {
             // 拖拽
