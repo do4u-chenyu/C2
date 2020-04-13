@@ -190,7 +190,7 @@ namespace Citta_T1.Business.Model
                 if (me.ID > num)
                     num = me.ID;
             }
-            this.elementCount = num;   
+            this.elementCount = num + 1;   
         }
 
         
