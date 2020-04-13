@@ -70,29 +70,26 @@ namespace Citta_T1.Business.Model
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
-                dt.ID = this.currentDocument.ElementCount;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), this.currentDocument.ElementCount);
+                dt.ID = this.currentDocument.ElementCount++;
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), dt.ID);
                 this.currentDocument.AddModelElement(e);
-                this.currentDocument.ElementCount += 1;
                 return;
             }
 
             if (ct is MoveOpControl)
             {
                 MoveOpControl op = (ct as MoveOpControl);
-                op.ID = this.currentDocument.ElementCount;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), this.currentDocument.ElementCount);
+                op.ID = this.currentDocument.ElementCount++;
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
-                this.currentDocument.ElementCount += 1;
                 return;               
             }
             if (ct is MoveRsControl)
             {
-                MoveRsControl op = (ct as MoveRsControl);
-                op.ID = this.currentDocument.ElementCount;
-                ModelElement e = ModelElement.CreateResultElement(op, op.ReName,this.currentDocument.ElementCount);
+                MoveRsControl rs = (ct as MoveRsControl);
+                rs.ID = this.currentDocument.ElementCount++;
+                ModelElement e = ModelElement.CreateResultElement(rs, rs.ReName, rs.ID);
                 this.currentDocument.AddModelElement(e);
-                this.currentDocument.ElementCount += 1;
                 return;
 
             }
