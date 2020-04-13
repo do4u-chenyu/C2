@@ -55,7 +55,7 @@ namespace Citta_T1.Controls.Flow
                 int bufCount = this.elementWorldLocDict.Count;
                 int usrCount = Global.GetModelDocumentDao().CountAllModelElements();
                 // 删除的元素太多,重置缓存
-                if (Math.Abs(bufCount - usrCount) > 64)
+                if (Math.Abs(bufCount - usrCount) > Math.Max(128, this.elementWorldLocDict.Count / 2))
                 {
                     this.elementWorldLocDict.Clear();
                     foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
