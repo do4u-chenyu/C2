@@ -337,15 +337,17 @@ namespace Citta_T1.Controls.Move
             {
                 if (cmd == ECommandType.PinDraw)
                 {
-                    cmd = ECommandType.Null;
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
+                    cmd = ECommandType.Null;
                 }
-
+                if (cmd == ECommandType.Hold)
+                {
+                    this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    cmd = ECommandType.Null;
+                }
                 cmd = ECommandType.Null;
-
-                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)
