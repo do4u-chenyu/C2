@@ -391,7 +391,6 @@ namespace Citta_T1.Controls
                     cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
                     Global.GetOptionDao().EnableControlOption(mr);
-                    cd.AddModelRelation(mr);
                     cd.BindRelationToControl(mr, this.startC, this.endC);
                 }
                 cmd = ECommandType.Null;

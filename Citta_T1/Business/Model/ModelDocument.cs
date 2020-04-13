@@ -184,13 +184,13 @@ namespace Citta_T1.Business.Model
 
         public void ResetCount()
         {
-            int num = 0;
+            //int num = 0;
             foreach (ModelElement me in this.modelElements)
             {
-                if (me.ID > num)
-                    num = me.ID;
+                if (me.ID > elementCount)
+                    elementCount = me.ID;
             }
-            this.elementCount = num + 1;   
+            elementCount = elementCount > 0 ? elementCount + 1 : 0;
         }
 
         
