@@ -29,88 +29,88 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.movePictureBox = new System.Windows.Forms.PictureBox();
+            this.zoomUpPictureBox = new System.Windows.Forms.PictureBox();
+            this.zoomDownPictureBox = new System.Windows.Forms.PictureBox();
+            this.remarkPictureBox = new System.Windows.Forms.PictureBox();
+            this.framePictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // movePictureBox
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(18, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.PictureBox1_MouseEnter);
-            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
+            this.movePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
+            this.movePictureBox.Location = new System.Drawing.Point(18, 5);
+            this.movePictureBox.Name = "movePictureBox";
+            this.movePictureBox.Size = new System.Drawing.Size(22, 22);
+            this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.movePictureBox.TabIndex = 0;
+            this.movePictureBox.TabStop = false;
+            this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
+            this.movePictureBox.MouseEnter += new System.EventHandler(this.MovePictureBox_MouseEnter);
+            this.movePictureBox.MouseLeave += new System.EventHandler(this.MovePictureBox_MouseLeave);
             // 
-            // pictureBox2
+            // zoomUpPictureBox
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(54, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            this.pictureBox2.MouseEnter += new System.EventHandler(this.PictureBox2_MouseEnter);
-            this.pictureBox2.MouseLeave += new System.EventHandler(this.PictureBox2_MouseLeave);
+            this.zoomUpPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(54, 5);
+            this.zoomUpPictureBox.Name = "zoomUpPictureBox";
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.zoomUpPictureBox.TabIndex = 1;
+            this.zoomUpPictureBox.TabStop = false;
+            this.zoomUpPictureBox.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
+            this.zoomUpPictureBox.MouseEnter += new System.EventHandler(this.ZoomUpPictureBox_MouseEnter);
+            this.zoomUpPictureBox.MouseLeave += new System.EventHandler(this.ZoomUpPictureBox_MouseLeave);
             // 
-            // pictureBox3
+            // zoomDownPictureBox
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(92, 5);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(22, 22);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            this.pictureBox3.MouseEnter += new System.EventHandler(this.PictureBox3_MouseEnter);
-            this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
+            this.zoomDownPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.zoomDownPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(92, 5);
+            this.zoomDownPictureBox.Name = "zoomDownPictureBox";
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
+            this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.zoomDownPictureBox.TabIndex = 2;
+            this.zoomDownPictureBox.TabStop = false;
+            this.zoomDownPictureBox.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
+            this.zoomDownPictureBox.MouseEnter += new System.EventHandler(this.ZoomDownPictureBox_MouseEnter);
+            this.zoomDownPictureBox.MouseLeave += new System.EventHandler(this.ZoomDownPictureBox_MouseLeave);
             // 
-            // pictureBox4
+            // remarkPictureBox
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(129, 4);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(23, 23);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 3;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
-            this.pictureBox4.MouseEnter += new System.EventHandler(this.pictureBox4_MouseEnter);
-            this.pictureBox4.MouseLeave += new System.EventHandler(this.pictureBox4_MouseLeave);
+            this.remarkPictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
+            this.remarkPictureBox.Location = new System.Drawing.Point(129, 4);
+            this.remarkPictureBox.Name = "remarkPictureBox";
+            this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.remarkPictureBox.TabIndex = 3;
+            this.remarkPictureBox.TabStop = false;
+            this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
+            this.remarkPictureBox.MouseEnter += new System.EventHandler(this.RemarkPictureBox_MouseEnter);
+            this.remarkPictureBox.MouseLeave += new System.EventHandler(this.RemarkPictureBox_MouseLeave);
             // 
-            // pictureBox5
+            // framePictureBox
             // 
-            this.pictureBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(167, 4);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(24, 24);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 4;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            this.pictureBox5.MouseEnter += new System.EventHandler(this.pictureBox5_MouseEnter);
-            this.pictureBox5.MouseLeave += new System.EventHandler(this.pictureBox5_MouseLeave);
+            this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
+            this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
+            this.framePictureBox.Location = new System.Drawing.Point(167, 4);
+            this.framePictureBox.Name = "framePictureBox";
+            this.framePictureBox.Size = new System.Drawing.Size(24, 24);
+            this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.framePictureBox.TabIndex = 4;
+            this.framePictureBox.TabStop = false;
+            this.framePictureBox.Click += new System.EventHandler(this.FramePictureBox_Click);
+            this.framePictureBox.MouseEnter += new System.EventHandler(this.FramePictureBox_MouseEnter);
+            this.framePictureBox.MouseLeave += new System.EventHandler(this.FramePictureBox_MouseLeave);
             // 
             // FlowControl
             // 
@@ -119,29 +119,30 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.framePictureBox);
+            this.Controls.Add(this.remarkPictureBox);
+            this.Controls.Add(this.zoomDownPictureBox);
+            this.Controls.Add(this.zoomUpPictureBox);
+            this.Controls.Add(this.movePictureBox);
+            this.Cursor = System.Windows.Forms.Cursors.Help;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
             this.Size = new System.Drawing.Size(209, 51);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.remarkPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.framePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox movePictureBox;
+        private System.Windows.Forms.PictureBox zoomUpPictureBox;
+        private System.Windows.Forms.PictureBox zoomDownPictureBox;
+        private System.Windows.Forms.PictureBox remarkPictureBox;
+        private System.Windows.Forms.PictureBox framePictureBox;
     }
 }

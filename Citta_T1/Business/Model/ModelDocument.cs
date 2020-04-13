@@ -40,6 +40,7 @@ namespace Citta_T1.Business.Model
         private float screenFactor;
 
         private Manager manager;
+        private string userPath;
 
 
         /*
@@ -60,6 +61,7 @@ namespace Citta_T1.Business.Model
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
         public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+        public string UserPath { get => userPath; set => userPath = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -69,7 +71,8 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
-            this.savePath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\" + modelTitle + "\\";
+            this.userPath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\";
+            this.savePath = this.userPath + modelTitle + "\\";
 
             this.manager = new Manager();
             this.sizeL = 0;
@@ -247,15 +250,17 @@ namespace Citta_T1.Business.Model
             }
             return null;
         }
-        public ModelRelation SearchRelationByID(int ID)
+        public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
         {
-
+            List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID || mr.EndID == ID)
-                    return mr;
+                if (mr.StartID == ID && startID)
+                    relations.Add(mr);
+                else if (mr.EndID == ID && !startID)
+                    relations.Add(mr);
             }
-            return null;
+            return relations;
         }
 
         private int GetLineIndex()

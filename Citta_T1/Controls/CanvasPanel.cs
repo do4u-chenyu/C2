@@ -153,9 +153,15 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            // 卡的版本
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             ((MainForm)(this.Parent)).blankButton.Focus();
+            // 点击右键, 清空操作状态,进入到正常编辑状态
+            if (e.Button == MouseButtons.Right)
+            {
+                Global.GetFlowControl().ResetStatus();
+                return;
+            }
+
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
                 this.cmd = ECommandType.PinDraw;
@@ -176,17 +182,21 @@ namespace Citta_T1.Controls
                 this.staticImage.Save("MouseDown.png");
             }
 
-            if (e.Button != MouseButtons.Left) return;
-            if (((MainForm)(this.Parent)).flowControl.SelectFrame)
+            
+            if (SelectFrame())
             {
                 MouseIsDown = true;
-
                 basepoint = e.Location;
 
+                if (staticImage != null)
+                {
+                    staticImage.Dispose();
+                    staticImage = null;
+                }
                 staticImage = new Bitmap(this.Width, this.Height);
                 this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
-            else if ((this.Parent as MainForm).flowControl.SelectDrag)
+            else if (SelectDrag())
             {
                 
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
@@ -198,7 +208,7 @@ namespace Citta_T1.Controls
             
             if (e.Button != MouseButtons.Left) return;
             // 画框
-            if (MouseIsDown && ((MainForm)(this.Parent)).flowControl.SelectFrame)
+            if (MouseIsDown && SelectFrame())
             {
 
                 Bitmap i = new Bitmap(staticImage);
@@ -216,13 +226,16 @@ namespace Citta_T1.Controls
 
                 Graphics n = this.CreateGraphics();
                 n.DrawImageUnscaled(i, 0, 0);
-
                 n.Dispose();
+
                 g.Dispose();
+
+                i.Dispose();
+                i = null;
             }
 
             // 控件移动
-            else if ( ((MainForm)(this.Parent)).flowControl.SelectDrag)
+            else if (SelectDrag())
             {
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
@@ -332,7 +345,7 @@ namespace Citta_T1.Controls
                 MouseIsDown = false;
             }
 
-            else if (((MainForm)(this.Parent)).flowControl.SelectDrag)
+            else if (SelectDrag())
             {
                 
                 dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
@@ -375,6 +388,7 @@ namespace Citta_T1.Controls
                 isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
                 if (!isDuplicatedRelation)
                 {
+                    cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
                     Global.GetOptionDao().EnableControlOption(mr);
                     cd.AddModelRelation(mr);

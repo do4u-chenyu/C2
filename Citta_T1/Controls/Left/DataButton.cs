@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using Citta_T1.Utils;
-
+using System.Reflection;
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
@@ -45,8 +45,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO [DK] 1. 怎么呈现这个预览？
-
+            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,7 +78,7 @@ namespace Citta_T1.Controls.Left
             }
             catch (System.ComponentModel.Win32Exception ex) 
             {
-                LogUtil logUtil = new LogUtil();
+                LogUtil logUtil = LogUtil.GetInstance("DataButton");
                 logUtil.Error(ex.Message);
                 //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
                 ReplaceOpenMethod();

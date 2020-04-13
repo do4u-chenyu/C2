@@ -84,7 +84,7 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
-        public string CreateNewBCPFile(string filename,string[] columnName)
+        public string CreateNewBCPFile(string filename,List<string> columnName)
         {
             string filePath = "";
             string columns = "";

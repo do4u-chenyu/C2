@@ -99,10 +99,8 @@ namespace Citta_T1.Controls.Move
 
         private Bitmap staticImage;
 
-        public MoveOpControl()
-        {
-            InitializeComponent();
-        }
+        // public MoveOpControl() 这个空函数我已经删了好几次了,但每次都又被你们合并进来了
+        // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.status = ElementStatus.Null;
@@ -113,9 +111,9 @@ namespace Citta_T1.Controls.Move
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
+            InitializeHelpToolTip();
             ChangeSize(sizeL);
             log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
-
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
@@ -165,6 +163,42 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
         }
 
+        private void InitializeHelpToolTip()
+        {
+            switch (subTypeName)
+            {
+                case "连接算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
+                    break;
+                case "取交集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
+                    break;
+                case "取并集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
+                    break;
+                case "取差集":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
+                    break;
+                case "随机采样":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
+                    break;
+                case "过滤算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
+                    break;
+                case "取最大值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
+                    break;
+                case "取最小值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    break;
+                case "取平均值":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
+                    break;
+                default:
+                    break;
+            }
+    
+        }
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -275,6 +309,24 @@ namespace Citta_T1.Controls.Move
                 RenameMenuItem_Click(this, e);
         }
 
+        private void StatusBox_MouseDown(object sender, MouseEventArgs e)
+        {   // 只处理左键点击
+            if (e.Button != MouseButtons.Left)
+                return;
+            // 单击视为移动,按父控件鼠标点击处理
+            if (e.Clicks == 1)
+            {
+                base.OnMouseDown(e);
+            }// 双击,弹出配置窗口
+            else if (e.Clicks == 2)
+            {
+                // 清空焦点
+                Global.GetMainForm().blankButton.Focus();
+                // 显示配置
+                ShowOptionDialog();
+            }
+        }
+
         private void MoveOpControl_MouseUp(object sender, MouseEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
@@ -348,7 +400,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
             
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToSmall()
         {
@@ -359,7 +411,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
         {  
@@ -370,30 +422,33 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
             this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
 
         #region 右键菜单
         public void OptionMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
+            ShowOptionDialog();
+        }
+
+        private void ShowOptionDialog()
+        {
             if (!this.OptionToolStripMenuItem.Enabled)
             {
-                MessageBox.Show("请连接数据源");
+                MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
-            }               
+            }
             switch (this.subTypeName)
             {
                 case "连接算子":
-                    new CollideOperatorView(this.Option).ShowDialog();
+                    new CollideOperatorView(this).ShowDialog();
                     break;
                 case "取交集":
-                    new CollideOperatorView(this.Option).ShowDialog();
+                    new CollideOperatorView(this).ShowDialog();
                     break;
                 case "取并集":
-                    new UnionOperatorView(this.Option).ShowDialog();
+                    new UnionOperatorView(this).ShowDialog();
                     break;
                 case "取差集":
                     new DifferOperatorView(this).ShowDialog();
@@ -416,7 +471,6 @@ namespace Citta_T1.Controls.Move
                 default:
                     break;
             }
-                    
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
@@ -511,13 +565,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-        public void rightPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            String helpInfo = "温馨提示";
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-         
-        }
-
         #region 针脚事件
         public void PinOpLeaveAndEnter(Point mousePosition)
         {
@@ -589,7 +636,7 @@ namespace Citta_T1.Controls.Move
             
             SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(10 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -785,14 +832,6 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
-
-
-
-            Graphics g = e.Graphics;
-
-            
-
-            
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_up);
             e.Graphics.DrawRectangle(pen, rectIn_up);
             e.Graphics.FillRectangle(trnsRedBrush, rectIn_down);
@@ -844,7 +883,7 @@ namespace Citta_T1.Controls.Move
             //右下角
             g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
             g.Dispose();
-            log.Info("-------------------");
+
             this.BackgroundImage = this.staticImage;
         }
     }

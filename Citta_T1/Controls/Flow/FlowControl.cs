@@ -20,102 +20,97 @@ namespace Citta_T1.Controls.Flow
             InitializeComponent();
             SelectDrag = false;
             SelectFrame = false;
-            SelectRemark = true;
+            SelectRemark = false;
+        }
+        // 恢复到编辑模式
+        public void ResetStatus()
+        {
+            SelectDrag = false;
+            SelectFrame = false;
+            ChangeCursor();
         }
         private void ChangeCursor()
         {
+            // 拖拽
             if (SelectDrag)
             {
-                Bitmap map = new Bitmap(this.pictureBox1.Image);
-                SetCursor(map, new Point(0, 0));
+                Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
             }
+            // 框选
             else if (SelectFrame)
             {
-                this.Parent.Cursor = Cursors.Default;
+                Global.GetCanvasPanel().Cursor = Cursors.Default;
             }
+            // 编辑
             else
             {
-                this.Parent.Cursor = Cursors.Hand;
+                Global.GetCanvasPanel().Cursor = Cursors.Hand;
             }
+            // FlowControl本身的图标不变
+            this.Cursor = Cursors.Help;
         }
         #region 拖动
-        public void SetCursor(Bitmap cursor, Point hotPoint)
-        {
-            int hotX = hotPoint.X;
-            int hotY = hotPoint.Y;
-            Bitmap myNewCursor = new Bitmap(cursor.Width * 2 - hotX, cursor.Height * 2 - hotY);
-            Graphics g = Graphics.FromImage(myNewCursor);
-            g.Clear(Color.FromArgb(0, 0, 0, 0));
-            g.DrawImage(cursor, cursor.Width - hotX, cursor.Height - hotY, cursor.Width,
-            cursor.Height);
-            this.Parent.Cursor = new Cursor(myNewCursor.GetHicon());
 
-            g.Dispose();
-            myNewCursor.Dispose();
-        }
-
-        private void PictureBox1_MouseEnter(object sender, EventArgs e)
+        private void MovePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.pictureBox1.BackColor = Color.FromArgb(135, 135, 135);
+            this.movePictureBox.BackColor = Color.FromArgb(135, 135, 135);
         }
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void MovePictureBox_Click(object sender, EventArgs e)
         {
             // 1. 点击之后图标变色
             // 2. 鼠标变成手的图标
             // 3. 画布中触发MouseDown MouseMove MouseUp动作
             SelectDrag = !SelectDrag;
-            
             SelectFrame = false;
-            SelectRemark = false;
             ChangeCursor();
         }
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        private void MovePictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox1.BackColor = Color.FromArgb(235, 235, 235);
+            this.movePictureBox.BackColor = Color.FromArgb(235, 235, 235);
         }
         #endregion
 
         #region 放大缩小
-        private void PictureBox2_MouseEnter(object sender, EventArgs e)
+        private void ZoomUpPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.pictureBox2.BackColor = Color.FromArgb(135, 135, 135);
+            this.zoomUpPictureBox.BackColor = Color.FromArgb(135, 135, 135);
         }
 
-        private void PictureBox2_MouseLeave(object sender, EventArgs e)
+        private void ZoomUpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox2.BackColor = Color.FromArgb(235, 235, 235);
+            this.zoomUpPictureBox.BackColor = Color.FromArgb(235, 235, 235);
         }
 
-        private void PictureBox3_MouseEnter(object sender, EventArgs e)
+        private void ZoomDownPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.pictureBox3.BackColor = Color.FromArgb(135, 135, 135);
+            this.zoomDownPictureBox.BackColor = Color.FromArgb(135, 135, 135);
         }
 
-        private void pictureBox3_MouseLeave(object sender, EventArgs e)
+        private void ZoomDownPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox3.BackColor = Color.FromArgb(235, 235, 235);
+            this.zoomDownPictureBox.BackColor = Color.FromArgb(235, 235, 235);
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void ZoomUpPictureBox_Click(object sender, EventArgs e)
         {
-            ((CanvasPanel)this.Parent).ChangSize(true);
+            Global.GetCanvasPanel().ChangSize(true);
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void ZoomDownPictureBox_Click(object sender, EventArgs e)
         {
-            ((CanvasPanel)this.Parent).ChangSize(false);
+            Global.GetCanvasPanel().ChangSize(false);
         }
         #endregion
 
         #region 备注
-        private void pictureBox4_MouseEnter(object sender, EventArgs e)
+        private void RemarkPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.pictureBox4.BackColor = Color.FromArgb(135, 135, 135);
+            this.remarkPictureBox.BackColor = Color.FromArgb(135, 135, 135);
         }
 
-        private void pictureBox4_MouseLeave(object sender, EventArgs e)
+        private void RemarkPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox4.BackColor = Color.FromArgb(235, 235, 235);
+            this.remarkPictureBox.BackColor = Color.FromArgb(235, 235, 235);
         }
 
         private void HideRemarkControl()//单击备注按钮，备注出现和隐藏功能
@@ -128,7 +123,7 @@ namespace Citta_T1.Controls.Flow
             Global.GetRemarkControl().Visible = true;
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
+        private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
             if (SelectRemark)
                 ShowRemarkControl();
@@ -136,30 +131,26 @@ namespace Citta_T1.Controls.Flow
                 HideRemarkControl();
 
             SelectRemark = !SelectRemark;
-            
-            SelectDrag = false;
-            SelectFrame = false;
-            ChangeCursor();
+
         }
         #endregion
 
         #region 框选
-        private void pictureBox5_MouseEnter(object sender, EventArgs e)
+        private void FramePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.pictureBox5.BackColor = Color.FromArgb(0, 0, 0);
+            this.framePictureBox.BackColor = Color.FromArgb(0, 0, 0);
         }
 
-        private void pictureBox5_MouseLeave(object sender, EventArgs e)
+        private void FramePictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.pictureBox5.BackColor = Color.FromArgb(235, 235, 235);
+            this.framePictureBox.BackColor = Color.FromArgb(235, 235, 235);
         }
 
-        private void pictureBox5_Click(object sender, EventArgs e)
+        private void FramePictureBox_Click(object sender, EventArgs e)
         {
             SelectFrame = !SelectFrame;
             
             SelectDrag = false;
-            SelectRemark = false;
             ChangeCursor();
         }
         #endregion

@@ -21,6 +21,9 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string oldMinfield;
         private List<int> oldOutList;
+        private string[] columnName;
+        private string oldOptionDict;
+        private List<string> selectColumn;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -30,6 +33,7 @@ namespace Citta_T1.OperatorViews
             LoadOption();
             this.oldMinfield = this.MinValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -53,6 +57,10 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            this.selectColumn = this.OutList.GetItemCheckText();
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -124,7 +132,7 @@ namespace Citta_T1.OperatorViews
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            this.columnName = column.Split('\t');
             foreach (string name in columnName)
             {
                 this.OutList.AddItems(name);

@@ -98,7 +98,7 @@ namespace Citta_T1.Business.Model
             }
            
         }
-        public void AddDocumentRelation(int startID, int endID, Point startLocation, Point endLocation, int endPin)
+        public void AddDocumentRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
 
             ModelRelation e = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
@@ -110,10 +110,10 @@ namespace Citta_T1.Business.Model
             switch (subType)
             {
                 case "连接算子":
-                    type = "JoinOperator";
+                    type = "CollideOperator";
                     break;
                 case "取交集":
-                    type = "CollideOperator";
+                    type = "JoinOperator";
                     break;
                 case "取并集":
                     type = "UnionOperator";
@@ -268,6 +268,15 @@ namespace Citta_T1.Business.Model
                     return md;
             }
             return null;
+        }
+        // 统计当前用户有多少元素
+        public int CountAllModelElements()
+        {
+            int count = 0;
+            foreach (ModelDocument md in this.ModelDocuments)
+                count += md.ModelElements.Count;
+
+            return count;
         }
 
     }

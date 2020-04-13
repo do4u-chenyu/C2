@@ -324,6 +324,7 @@
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
     <Compile Include="Utils\Global.cs" />
+    <Compile Include="Utils\HelpUtil.cs" />
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Utils\LogUtil.cs" />
@@ -735,6 +736,9 @@
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />
+    <None Include="res\toolbox\currentModelRunning.gif" />
+    <None Include="res\toolbox\currentModelFin.png" />
+    <None Include="res\toolbox\currentModelRunningBack.png" />
     <Content Include="res\toolbox\difference.png" />
     <None Include="res\toolbox\div.png" />
     <Content Include="res\toolbox\filter.png" />

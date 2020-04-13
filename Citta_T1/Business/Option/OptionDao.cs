@@ -16,10 +16,20 @@ namespace Citta_T1.Business.Option
 
         //添加relation
         public void EnableControlOption(ModelRelation mr)
-        { 
+        {
+            ElementSubType[] doubleInputs = new ElementSubType[] {
+                                                ElementSubType.CollideOperator,
+                                                ElementSubType.UnionOperator,
+                                                ElementSubType.DifferOperator };
+            List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
-                if (me.ID == mr.EndID && me.Type == ElementType.Operator)
+                if (me.ID == mr.EndID && !doubleInputs.Contains(me.SubType))
+                {
+                    (me.GetControl as MoveOpControl).EnableOpenOption = true;
+                    break;
+                }
+                else if (me.ID == mr.EndID && relations.Count == 2)
                 {
                     (me.GetControl as MoveOpControl).EnableOpenOption = true;
                     break;
@@ -27,7 +37,7 @@ namespace Citta_T1.Business.Option
             }
 
         }
-        public void CreateResultControl(MoveOpControl moveOpControl, string[] columnName)
+        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName)
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -39,14 +49,13 @@ namespace Citta_T1.Business.Option
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
              */
-            Bezier line = new Bezier(
-                new PointF(
-                    moveOpControl.rectOut.Location.X + moveOpControl.Location.X,
-                    moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y
-                    ),
-                new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y)
-            );
 
+            PointF startPoint = new PointF(
+                   moveOpControl.rectOut.Location.X + moveOpControl.Location.X,
+                   moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y
+                   );
+            PointF endPoint = new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y);
+            Bezier line = new Bezier(startPoint, endPoint);
             CanvasPanel canvas = Global.GetCanvasPanel();
             CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
             canvas.RepaintObject(line);
@@ -69,26 +78,29 @@ namespace Citta_T1.Business.Option
         //修改配置
 
         //配置初始化
-        public Dictionary<string, string> GetInputDataInfo(int ID)
+        public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
         {
-            int startID = -1;
+
             Dictionary<string, string> dataInfo=new Dictionary<string, string>();
+            Dictionary<int, int> startControls = new Dictionary<int,int>();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
-                if (mr.EndID == ID)
+                if (mr.EndID == ID && singelOperation)
                 {
-                    startID = mr.StartID;
+                    startControls[mr.EndPin] = mr.StartID;
                     break;
                 }
+                else if (mr.EndID == ID && !singelOperation)
+                    startControls[mr.EndPin] = mr.StartID;
+
             }
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
+            if(startControls.Count == 0)
+                return dataInfo;
+            foreach (KeyValuePair<int,int> kvp in startControls)
             {
-                if (me.ID == startID)
-                {
-                    dataInfo["dataPath"] = me.GetPath();
-                    dataInfo["encoding"] = me.Encoding.ToString();
-                    break;
-                }
+                ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
+                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetPath();
+                dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
             }
             return dataInfo;
         }
