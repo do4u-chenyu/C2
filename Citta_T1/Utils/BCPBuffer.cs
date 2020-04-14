@@ -13,6 +13,7 @@ namespace Citta_T1.Utils
         private int maxRow = 100;
 
         private static BCPBuffer BcpBufferSingleInstance;
+        private LogUtil log = LogUtil.GetInstance("BCPBuffer");
 
         public string GetCacheBcpPreVewContent(string bcpFullPath, DSUtil.Encoding encoding)
         {
@@ -55,24 +56,29 @@ namespace Citta_T1.Utils
         {
             System.IO.StreamReader sr;
             StringBuilder sb = new StringBuilder(1024 * 16);
-            if (encoding == DSUtil.Encoding.UTF8)
+            try
             {
-                sr = File.OpenText(filePath);
+                if (encoding == DSUtil.Encoding.UTF8)
+                    sr = File.OpenText(filePath);
+                else
+                {
+                    FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                    sr = new StreamReader(fs, System.Text.Encoding.Default);
+                }
+                string firstLine = sr.ReadLine();
+                sb.AppendLine(firstLine);
+
+                for (int row = 1; row < maxRow; row++)
+                    sb.AppendLine(sr.ReadLine());
+
+                dataPreviewDict[filePath] = sb.ToString();
+                columnDict[filePath] = firstLine;
             }
-            else
+            catch(Exception ex) 
             {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs, System.Text.Encoding.Default);
+                log.Error("BCPBuffer 空路径名是非法的: " + ex.ToString());
             }
-
-            string firstLine = sr.ReadLine();
-            sb.AppendLine(firstLine);
-
-            for (int row = 1; row < maxRow; row++)
-                sb.AppendLine(sr.ReadLine());
-
-            dataPreviewDict[filePath] = sb.ToString();
-            columnDict[filePath] = firstLine;
+            
         }
 
         // 数据字典, 全局单例
