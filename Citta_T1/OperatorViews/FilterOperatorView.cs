@@ -199,8 +199,6 @@ namespace Citta_T1.OperatorViews
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
                 control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();
                 Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
-                foreach (string name in this.columnName)
-                    (control2 as ComboBox).Items.Add(name);
                 control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
