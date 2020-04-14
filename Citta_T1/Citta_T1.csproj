@@ -253,6 +253,12 @@
     <Compile Include="OperatorViews\FreqOperatorView.Designer.cs">
       <DependentUpon>FreqOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -434,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\FreqOperatorView.resx">
       <DependentUpon>FreqOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
       <DependentUpon>MaxOperatorView.cs</DependentUpon>
