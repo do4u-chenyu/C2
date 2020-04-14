@@ -442,7 +442,7 @@ namespace Citta_T1.Controls.Move
             switch (this.subTypeName)
             {
                 case "连接算子":
-                    new CollideOperatorView(this).ShowDialog();
+                    new RelateOperatorView(this).ShowDialog();
                     break;
                 case "取交集":
                     new CollideOperatorView(this).ShowDialog();

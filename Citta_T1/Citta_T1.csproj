@@ -271,6 +271,12 @@
     <Compile Include="OperatorViews\RandomOperatorView.Designer.cs">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\RelateOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\RelateOperatorView.Designer.cs">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\SortOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -437,6 +443,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\RandomOperatorView.resx">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\RelateOperatorView.resx">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
@@ -751,6 +760,7 @@
     <Content Include="res\toolbox\newfile.png" />
     <None Include="res\toolbox\pause.png" />
     <Content Include="res\toolbox\RandomButton.png" />
+    <None Include="res\toolbox\relation.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />

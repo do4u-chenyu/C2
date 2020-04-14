@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.OperatorViews
 {
-    partial class CollideOperatorView
+    partial class RelateOperatorView
     {
         /// <summary>
         /// Required designer variable.
@@ -38,15 +38,16 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.DataInfoBox2 = new HZH_Controls.Controls.TextBoxEx();
+            this.label4 = new System.Windows.Forms.Label();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -72,7 +73,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(134, 31);
             this.label2.TabIndex = 0;
-            this.label2.Text = "碰撞条件：";
+            this.label2.Text = "连接条件：";
             // 
             // label1
             // 
@@ -89,7 +90,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(890, 56);
+            this.topPanel.Size = new System.Drawing.Size(889, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -97,9 +98,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 531);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 518);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(890, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(889, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -136,12 +137,13 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 475);
+            this.keyPanel.Size = new System.Drawing.Size(174, 462);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.DataInfoBox2);
+            this.valuePanel.Controls.Add(this.label4);
             this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
@@ -149,14 +151,14 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(716, 475);
+            this.valuePanel.Size = new System.Drawing.Size(715, 462);
             this.valuePanel.TabIndex = 3;
             // 
             // DataInfoBox2
             // 
             this.DataInfoBox2.DecLength = 2;
             this.DataInfoBox2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox2.Location = new System.Drawing.Point(201, 3);
+            this.DataInfoBox2.Location = new System.Drawing.Point(278, 2);
             this.DataInfoBox2.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -176,9 +178,17 @@
             this.DataInfoBox2.ReadOnly = true;
             this.DataInfoBox2.RegexPattern = "";
             this.DataInfoBox2.Size = new System.Drawing.Size(136, 28);
-            this.DataInfoBox2.TabIndex = 9;
+            this.DataInfoBox2.TabIndex = 7;
             this.DataInfoBox2.Text = "test2.bcp";
             this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label4
+            // 
+            this.label4.Image = global::Citta_T1.Properties.Resources.relation;
+            this.label4.Location = new System.Drawing.Point(177, 2);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 34);
+            this.label4.TabIndex = 9;
             // 
             // OutList
             // 
@@ -186,7 +196,7 @@
             this.OutList.Location = new System.Drawing.Point(6, 394);
             this.OutList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(168, 27);
+            this.OutList.Size = new System.Drawing.Size(195, 27);
             this.OutList.TabIndex = 8;
             // 
             // DataInfoBox
@@ -219,18 +229,20 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnCount = 4;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel2.Controls.Add(this.button1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxEx1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(142, 81);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(9, 79);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(327, 48);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(462, 48);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // button1
@@ -243,7 +255,7 @@
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::Citta_T1.Properties.Resources.add;
-            this.button1.Location = new System.Drawing.Point(273, 6);
+            this.button1.Location = new System.Drawing.Point(408, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(51, 36);
             this.button1.TabIndex = 5;
@@ -254,10 +266,41 @@
             // 
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "name",
+            "age",
+            "addr",
+            "sex"});
             this.comboBox1.Location = new System.Drawing.Point(3, 11);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(129, 26);
             this.comboBox1.TabIndex = 2;
+            // 
+            // textBoxEx1
+            // 
+            this.textBoxEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEx1.DecLength = 2;
+            this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
+            this.textBoxEx1.Location = new System.Drawing.Point(273, 10);
+            this.textBoxEx1.MaxValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.textBoxEx1.MinValue = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.textBoxEx1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.textBoxEx1.Name = "textBoxEx1";
+            this.textBoxEx1.OldText = null;
+            this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
+            this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxEx1.PromptText = "";
+            this.textBoxEx1.RegexPattern = "";
+            this.textBoxEx1.Size = new System.Drawing.Size(129, 28);
+            this.textBoxEx1.TabIndex = 4;
             // 
             // comboBox2
             // 
@@ -294,40 +337,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(517, 126);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(519, 128);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // textBoxEx1
-            // 
-            this.textBoxEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEx1.DecLength = 2;
-            this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(273, 10);
-            this.textBoxEx1.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.textBoxEx1.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.textBoxEx1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.OldText = null;
-            this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
-            this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx1.PromptText = "";
-            this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(129, 28);
-            this.textBoxEx1.TabIndex = 4;
-            // 
-            // CollideOperatorView
+            // RelateOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 627);
+            this.ClientSize = new System.Drawing.Size(889, 614);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -335,15 +352,16 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "CollideOperatorView";
+            this.Name = "RelateOperatorView";
             this.ShowIcon = false;
-            this.Text = "碰撞算子设置";
+            this.Text = "关联算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -368,6 +386,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private UserControlDLL.ComCheckBoxList OutList;
         private HZH_Controls.Controls.TextBoxEx DataInfoBox;
+        private System.Windows.Forms.Label label4;
         private HZH_Controls.Controls.TextBoxEx DataInfoBox2;
     }
 }
