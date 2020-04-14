@@ -75,7 +75,7 @@ namespace Citta_T1.OperatorViews
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
             if (this.MinValueBox.Text == "")
-                this.opControl.Option.SetOption("maxfield", "");
+                this.opControl.Option.SetOption("minfield", "");
             else
                 this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);

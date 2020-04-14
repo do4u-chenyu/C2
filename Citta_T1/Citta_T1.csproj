@@ -451,6 +451,7 @@
     </EmbeddedResource>
     <None Include="Doc\citta帮助文档.chm" />
     <None Include="Doc\导航地图设计文档.docx" />
+    <None Include="Doc\模型配置设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
     <None Include="Doc\运算关系保存与加载设计文档.docx" />
     <None Include="Doc\运行模型设计文档v1.docx" />
