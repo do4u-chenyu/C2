@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace Citta_T1.Controls
 		{
 			this.canvas = canvas;
 			this.graphics = graphics;
+			this.graphics.SmoothingMode = SmoothingMode.AntiAlias;
 			this.rect = clientrect;
 		}
 
@@ -105,6 +107,7 @@ namespace Citta_T1.Controls
 			if (line == null)
 				return;
 			Graphics g = this.canvas.CreateGraphics();
+			g.SmoothingMode = SmoothingMode.AntiAlias;
 			line.DrawBezier(g);
 			g.Dispose();
 		}

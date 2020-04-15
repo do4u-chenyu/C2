@@ -16,5 +16,8 @@ namespace Citta_T1.Utils
         public static string DifferOperatorHelpInfo = "取差集";
         public static string RandomOperatorHelpInfo = "随机采样";
         public static string FilterOperatorHelpInfo = "过滤算子";
+        public static string FreqOperatorHelpInfo = "频率算子";
+        public static string SortOperatorHelpInfo = "排序算子"; 
+        public static string GroupOperatorHelpInfo = "分组算子";
     }
 }

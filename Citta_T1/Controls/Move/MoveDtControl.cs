@@ -254,9 +254,6 @@ namespace Citta_T1.Controls.Move
                     mr.StartP = this.GetStartPinLoc(0);
                     mr.UpdatePoints();
                 }
-
-                Bezier newLine = new Bezier(mr.StartP, mr.EndP);  
-
             }
             this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 
@@ -625,6 +622,11 @@ namespace Citta_T1.Controls.Move
             g.Dispose();
 
             this.BackgroundImage = this.staticImage;
+        }
+
+        private void LeftPicture_MouseEnter(object sender, EventArgs e)
+        {
+            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
     }
 

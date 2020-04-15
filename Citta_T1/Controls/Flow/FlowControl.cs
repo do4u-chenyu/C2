@@ -27,6 +27,8 @@ namespace Citta_T1.Controls.Flow
         {
             SelectDrag = false;
             SelectFrame = false;
+            DragChange(SelectDrag);
+            FrameChange(SelectFrame);
             ChangeCursor();
         }
         private void ChangeCursor()
@@ -53,7 +55,7 @@ namespace Citta_T1.Controls.Flow
 
         private void MovePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.movePictureBox.BackColor = Color.FromArgb(135, 135, 135);
+            DragChange(true);
         }
         private void MovePictureBox_Click(object sender, EventArgs e)
         {
@@ -66,29 +68,29 @@ namespace Citta_T1.Controls.Flow
         }
         private void MovePictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.movePictureBox.BackColor = Color.FromArgb(235, 235, 235);
+            DragChange(SelectDrag);
         }
         #endregion
 
         #region 放大缩小
         private void ZoomUpPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.zoomUpPictureBox.BackColor = Color.FromArgb(135, 135, 135);
+            ZoomUpChange(true);
         }
 
         private void ZoomUpPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.zoomUpPictureBox.BackColor = Color.FromArgb(235, 235, 235);
+            ZoomUpChange(false);
         }
 
         private void ZoomDownPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.zoomDownPictureBox.BackColor = Color.FromArgb(135, 135, 135);
+            ZoomDownChange(true);
         }
 
         private void ZoomDownPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.zoomDownPictureBox.BackColor = Color.FromArgb(235, 235, 235);
+            ZoomDownChange(false);
         }
 
         private void ZoomUpPictureBox_Click(object sender, EventArgs e)
@@ -105,12 +107,12 @@ namespace Citta_T1.Controls.Flow
         #region 备注
         private void RemarkPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.remarkPictureBox.BackColor = Color.FromArgb(135, 135, 135);
+            RemarkChange(true);
         }
 
         private void RemarkPictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.remarkPictureBox.BackColor = Color.FromArgb(235, 235, 235);
+            RemarkChange(SelectRemark);
         }
 
         private void HideRemarkControl()//单击备注按钮，备注出现和隐藏功能
@@ -125,12 +127,14 @@ namespace Citta_T1.Controls.Flow
 
         private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
+
+            SelectRemark = !SelectRemark;
             if (SelectRemark)
                 ShowRemarkControl();
             else
                 HideRemarkControl();
-
-            SelectRemark = !SelectRemark;
+           
+            
 
         }
         #endregion
@@ -138,12 +142,12 @@ namespace Citta_T1.Controls.Flow
         #region 框选
         private void FramePictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.framePictureBox.BackColor = Color.FromArgb(0, 0, 0);
+            FrameChange(true);
         }
 
         private void FramePictureBox_MouseLeave(object sender, EventArgs e)
         {
-            this.framePictureBox.BackColor = Color.FromArgb(235, 235, 235);
+            FrameChange(SelectFrame);
         }
 
         private void FramePictureBox_Click(object sender, EventArgs e)
@@ -154,5 +158,71 @@ namespace Citta_T1.Controls.Flow
             ChangeCursor();
         }
         #endregion
+
+        private void DragChange(bool flag)
+        {
+            if (flag)
+            {
+                this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectDrag.Image")));
+                this.movePictureBox.Location = new System.Drawing.Point(13, 3);
+                this.movePictureBox.Size = new System.Drawing.Size(35, 29);
+                return;
+            }
+            this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("movePictureBox.Image")));
+            this.movePictureBox.Location = new System.Drawing.Point(18, 5);
+            this.movePictureBox.Size = new System.Drawing.Size(22, 22);
+        }
+        private void ZoomUpChange(bool flag)
+        {
+            if (flag)
+            {
+                this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomUp.Image")));
+                this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
+                this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
+                return;
+            }
+            this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(54, 5);           
+            this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
+        }
+        private void ZoomDownChange(bool flag)
+        {
+            if (flag)
+            {
+                this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomDown.Image")));
+                this.zoomDownPictureBox.Location = new System.Drawing.Point(87, 3);
+                this.zoomDownPictureBox.Size = new System.Drawing.Size(29, 29);
+                return;
+            }
+            this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomDownPictureBox.Image")));
+            this.zoomDownPictureBox.Location = new System.Drawing.Point(92, 5);
+            this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
+        }
+        private void RemarkChange(bool flag)
+        {
+            if (flag)
+            {
+                this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectRemark.Image")));
+                this.remarkPictureBox.Location = new System.Drawing.Point(124, 2);
+                this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
+                return;
+            }
+            this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("remarkPictureBox.Image")));
+            this.remarkPictureBox.Location = new System.Drawing.Point(129, 4);
+            this.remarkPictureBox.Size = new System.Drawing.Size(23, 23);
+        }
+        private void FrameChange(bool flag)
+        {
+            if (flag)
+            {
+                this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectFrame.Image")));
+                this.framePictureBox.Location = new System.Drawing.Point(162, 2);
+                this.framePictureBox.Size = new System.Drawing.Size(29, 29);
+                return;
+            }
+            this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
+            this.framePictureBox.Location = new System.Drawing.Point(167, 5);
+            this.framePictureBox.Size = new System.Drawing.Size(24, 24);
+        }
     }
 }

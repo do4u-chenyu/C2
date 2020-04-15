@@ -194,6 +194,15 @@ namespace Citta_T1.Controls.Move
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
                     break;
+                case "频率算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
+                    break;
+                case "排序算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
+                    break;
+                case "分组算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
+                    break;
                 default:
                     break;
             }
@@ -885,6 +894,11 @@ namespace Citta_T1.Controls.Move
             g.Dispose();
 
             this.BackgroundImage = this.staticImage;
+        }
+
+        private void LeftPicture_MouseEnter(object sender, EventArgs e)
+        {
+            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
     }
 }

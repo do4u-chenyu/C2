@@ -4,6 +4,7 @@ using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,7 @@ namespace Citta_T1.Controls
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
 
             Graphics g = Graphics.FromImage(StaticImage);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
                 g.DrawBezier(Pens.Green,
@@ -69,6 +71,8 @@ namespace Citta_T1.Controls
                 );
             }
             g.Dispose();
+            //n.DrawImageUnscaled(StaticImage, 0, 0);
+
             n.DrawImageUnscaled(StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             this.StaticImage.Dispose();
         }

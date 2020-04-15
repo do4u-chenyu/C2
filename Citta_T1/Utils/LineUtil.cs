@@ -17,7 +17,7 @@ namespace Citta_T1.Utils
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in modelRelations)
             {
-                mr.ChangLoc(dx, dy);
+                mr.ChangeLoc(dx, dy);
             }
         }
 
@@ -69,6 +69,10 @@ namespace Citta_T1.Utils
         public void DrawBezier(Graphics g)
         {
             g.DrawBezier(Pens.Green, this.startP, this.a, this.b, this.endP);
+        }
+        public void DrawNaviewBezier(Graphics g)
+        {
+            g.DrawBezier(Pens.Gray, this.startP, this.a, this.b, this.endP);
         }
         public RectangleF GetBoundingRect()
         {
