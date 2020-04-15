@@ -73,7 +73,7 @@ namespace Citta_T1.Controls
             g.Dispose();
             //n.DrawImageUnscaled(StaticImage, 0, 0);
 
-            n.DrawImageUnscaled(StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
             this.StaticImage.Dispose();
         }
 

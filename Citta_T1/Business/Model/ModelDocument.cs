@@ -307,8 +307,8 @@ namespace Citta_T1.Business.Model
         {
             CanvasPanel canvas = Global.GetCanvasPanel();
             int index = GetLineIndex();
-            (canvas.StartC as IMoveControl).SaveStartLines(index);
-            (canvas.EndC as IMoveControl).SaveEndLines(index);
+            (startC as IMoveControl).SaveStartLines(index);
+            (endC as IMoveControl).SaveEndLines(index);
         }
 
         public bool IsDuplicatedRelation(ModelRelation mr)
