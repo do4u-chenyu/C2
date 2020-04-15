@@ -39,13 +39,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.NoRepetition = new System.Windows.Forms.RadioButton();
-            this.Repetition = new System.Windows.Forms.RadioButton();
+            this.noRepetition = new System.Windows.Forms.RadioButton();
+            this.repetition = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
             this.outList = new UserControlDLL.ComCheckBoxList();
-            this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
+            this.dataInfo = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -163,7 +163,7 @@
             this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.outList);
-            this.valuePanel.Controls.Add(this.textBoxEx1);
+            this.valuePanel.Controls.Add(this.dataInfo);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -173,8 +173,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.NoRepetition);
-            this.groupBox2.Controls.Add(this.Repetition);
+            this.groupBox2.Controls.Add(this.noRepetition);
+            this.groupBox2.Controls.Add(this.repetition);
             this.groupBox2.Location = new System.Drawing.Point(2, 73);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
@@ -186,25 +186,25 @@
             // 
             // NoRepetition
             // 
-            this.NoRepetition.AutoSize = true;
-            this.NoRepetition.Location = new System.Drawing.Point(85, 10);
-            this.NoRepetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.NoRepetition.Name = "NoRepetition";
-            this.NoRepetition.Size = new System.Drawing.Size(59, 16);
-            this.NoRepetition.TabIndex = 1;
-            this.NoRepetition.Text = "不去重";
-            this.NoRepetition.UseVisualStyleBackColor = true;
+            this.noRepetition.AutoSize = true;
+            this.noRepetition.Location = new System.Drawing.Point(85, 10);
+            this.noRepetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.noRepetition.Name = "NoRepetition";
+            this.noRepetition.Size = new System.Drawing.Size(59, 16);
+            this.noRepetition.TabIndex = 1;
+            this.noRepetition.Text = "不去重";
+            this.noRepetition.UseVisualStyleBackColor = true;
             // 
             // Repetition
             // 
-            this.Repetition.AutoSize = true;
-            this.Repetition.Location = new System.Drawing.Point(5, 10);
-            this.Repetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Repetition.Name = "Repetition";
-            this.Repetition.Size = new System.Drawing.Size(47, 16);
-            this.Repetition.TabIndex = 0;
-            this.Repetition.Text = "去重";
-            this.Repetition.UseVisualStyleBackColor = true;
+            this.repetition.AutoSize = true;
+            this.repetition.Location = new System.Drawing.Point(5, 10);
+            this.repetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.repetition.Name = "Repetition";
+            this.repetition.Size = new System.Drawing.Size(47, 16);
+            this.repetition.TabIndex = 0;
+            this.repetition.Text = "去重";
+            this.repetition.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -252,34 +252,34 @@
             this.outList.Size = new System.Drawing.Size(135, 20);
             this.outList.TabIndex = 1;
             // 
-            // textBoxEx1
+            // dataInfo
             // 
-            this.textBoxEx1.DecLength = 2;
-            this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(0, 0);
-            this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxEx1.MaxValue = new decimal(new int[] {
+            this.dataInfo.DecLength = 2;
+            this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataInfo.InputType = HZH_Controls.TextInputType.NotControl;
+            this.dataInfo.Location = new System.Drawing.Point(0, 0);
+            this.dataInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataInfo.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.textBoxEx1.MinValue = new decimal(new int[] {
+            this.dataInfo.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.textBoxEx1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.OldText = null;
-            this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
-            this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx1.PromptText = "";
-            this.textBoxEx1.ReadOnly = true;
-            this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(136, 25);
-            this.textBoxEx1.TabIndex = 0;
-            this.textBoxEx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataInfo.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dataInfo.Name = "dataInfo";
+            this.dataInfo.OldText = null;
+            this.dataInfo.PromptColor = System.Drawing.Color.Gray;
+            this.dataInfo.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dataInfo.PromptText = "";
+            this.dataInfo.ReadOnly = true;
+            this.dataInfo.RegexPattern = "";
+            this.dataInfo.Size = new System.Drawing.Size(136, 25);
+            this.dataInfo.TabIndex = 0;
+            this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FreqOperatorView
             // 
@@ -324,9 +324,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private UserControlDLL.ComCheckBoxList outList;
-        private HZH_Controls.Controls.TextBoxEx textBoxEx1;
-        private System.Windows.Forms.RadioButton NoRepetition;
-        private System.Windows.Forms.RadioButton Repetition;
+        private HZH_Controls.Controls.TextBoxEx dataInfo;
+        private System.Windows.Forms.RadioButton noRepetition;
+        private System.Windows.Forms.RadioButton repetition;
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
     }

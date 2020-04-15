@@ -119,11 +119,11 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
+                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
+                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 2];
+                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
             }
 
@@ -139,9 +139,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 2];
+                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + (control3 as ComboBox).SelectedIndex.ToString();
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
