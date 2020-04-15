@@ -26,10 +26,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             Thread.Sleep(5000);
 
-            string randomnum = (int.Parse(option.GetOption("randomnum")) + 1).ToString();
+            string randomnum = option.GetOption("randomnum");
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
 
-            cmds.Add(string.Format("sbin\\awk.exe 'BEGIN{{srand()}} {{print rand()\"\\t\"$0}}' {0} | sbin\\sort.exe - nk 1 | sbin\\head.exe - n {1} | sbin\\awk.exe 'sub($1\"\\t\",\"\")' | | sbin\\awk.exe -F'\\t' '{{ print {2}}}' >> {3}", inputFilePath, randomnum, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe 'BEGIN{{srand()}} {{print rand()\"\\t\"$0}}' | sbin\\sort.exe -n -k1 | sbin\\head.exe -n{1} | sbin\\awk.exe 'sub($1\"\\t\",\"\")' | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {2}}}' >> {3}", inputFilePath, randomnum, outfieldLine, this.outputFilePath));
             return cmds;
 
         }
