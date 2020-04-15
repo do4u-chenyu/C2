@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Citta_T1.Utils;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using System.Drawing.Drawing2D;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -154,6 +155,10 @@ namespace Citta_T1.Controls.Flow
             }
             this.staticImage = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(staticImage);
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            
+
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
