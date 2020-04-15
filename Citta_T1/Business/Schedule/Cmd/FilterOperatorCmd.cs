@@ -28,14 +28,14 @@ namespace Citta_T1.Business.Schedule.Cmd
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
 
             string[] factor1 = option.GetOption("factor1").Split(',');
-            string awkIfCmd = "$" + factor1[0] + TransChoiceToCmd(factor1[1]) + factor1[1];
+            string awkIfCmd ="(" + "$" + TransInputLine(factor1[0]) + TransChoiceToCmd(factor1[1]) + TransConditionToCmd(factor1[2]) + ")";
             for (int i = 2; i <= option.OptionDict.Count() - 1; i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
-                awkIfCmd = awkIfCmd + " " + TransChoiceToCmd(tmpfactor[0]) + " $" + tmpfactor[1] + TransChoiceToCmd(tmpfactor[2]) + tmpfactor[3];
+                awkIfCmd = awkIfCmd + " " + TransAndOrToCmd(tmpfactor[0]) + "(" + " $" + TransInputLine(tmpfactor[1]) + TransChoiceToCmd(tmpfactor[2]) + TransConditionToCmd(tmpfactor[3]) + ")";
             }
 
-            cmds.Add(string.Format("sbin\\awk.exe -F'\\t' '{{if({0}) print {1} }}' >> {2}", awkIfCmd, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS='\\t' \"{{if({1}){{print {2} }} }}\" >> {3}", inputFilePath, awkIfCmd, outfieldLine, this.outputFilePath));
             return cmds;
         }
 

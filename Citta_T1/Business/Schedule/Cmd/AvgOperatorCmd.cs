@@ -25,9 +25,9 @@ namespace Citta_T1.Business.Schedule.Cmd
                 cmds.Add("echo avg");
             }
             Thread.Sleep(5000);
-            string avgfieldLine = (int.Parse(option.GetOption("avgfield")) + 1).ToString();
+            string avgfieldLine = TransInputLine(option.GetOption("avgfield"));
 
-            cmds.Add(string.Format("sbin\\awk.exe '{{a+=${0}}}END{{print a/NR}}' {1} >> {2}", avgfieldLine, inputFilePath, this.outputFilePath));
+            cmds.Add(string.Format("sbin\\tail -n +2 {1} | sbin\\awk.exe '{{a+=${0}}}END{{print a/NR}}' >> {2}", avgfieldLine, inputFilePath, this.outputFilePath));
             return cmds;
         }
     }

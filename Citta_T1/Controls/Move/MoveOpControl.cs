@@ -477,6 +477,15 @@ namespace Citta_T1.Controls.Move
                 case "取平均值":
                     new AvgOperatorView(this).ShowDialog();
                     break;
+                case "频率算子":
+                    new FreqOperatorView(this).ShowDialog();
+                    break;
+                case "排序算子":
+                    new SortOperatorView(this).ShowDialog();
+                    break;
+                case "分组算子":
+                    new GroupOperatorView(this).ShowDialog();
+                    break;
                 default:
                     break;
             }

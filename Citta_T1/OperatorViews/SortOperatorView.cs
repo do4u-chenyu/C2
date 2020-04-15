@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Controls.Move;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace Citta_T1.OperatorViews
 {
     public partial class SortOperatorView : Form
     {
-        public SortOperatorView()
+        public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
         }
