@@ -22,19 +22,28 @@ namespace Citta_T1.OperatorViews
         private string dataPath1;
         private string[] columnName0;
         private string[] columnName1;
+        private string oldOptionDict;
+        private List<string> selectColumn;
+        private List<bool> oldCheckedItems = new List<bool>();
         public UnionOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-            this.opControl = opControl;
-            InitOptionInfo();
+            this.opControl = opControl;          
             columnName0 = new string[] { };
             columnName1 = new string[] { };
+            selectColumn = new List<string>();
+            InitOptionInfo();
+            LoadOption();
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
+            this.oldCheckedItems.Add(this.noRepetition.Checked);
+            this.oldCheckedItems.Add(this.repetition.Checked);
+
 
         }
         #region 初始化配置
         private void InitOptionInfo()
         {
-            /*
+            
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
@@ -48,18 +57,13 @@ namespace Citta_T1.OperatorViews
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
-            */
 
-            //foreach (string name in this.columnName0)
-            //{
-            //this.d.AddItems(name);
-            //this.MaxValueBox.Items.Add(name);
-            //}
-            //foreach (string name in this.columnName1)
-            //{
-            //this.OutList.AddItems(name);
-            //this.MaxValueBox.Items.Add(name);
-            //}
+
+            foreach (string name in this.columnName0)
+                this.comboBox1.Items.Add(name);
+
+            foreach (string name in this.columnName1)
+                this.comboBox2.Items.Add(name);
         }
 
         private string[] SetOption(string path, string dataName, string encoding)
@@ -70,7 +74,140 @@ namespace Citta_T1.OperatorViews
             string[] columnName = column.Split('\t');
             return columnName;
         }
+        #endregion
+        #region 配置信息的保存与加载
+        private void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                createLine(line);
+            }
+        }
+        private void SaveOption()
+        {
+            this.opControl.Option.OptionDict.Clear();
+            
+            string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString() + "," + this.textBoxEx1.Text;
+            this.opControl.Option.SetOption("factor1", factor1);
+            this.selectColumn.Add(OutColumnName(this.comboBox1.Text, this.textBoxEx1.Text));
+            if (this.tableLayoutPanel1.RowCount > 0)
+            {
+                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
+                {
+                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 0];
+                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
+                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 2];
+                    Control control4 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 3];
+                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + (control3 as ComboBox).SelectedIndex.ToString() + "," + control4.Text;
+                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                    this.selectColumn.Add(OutColumnName((control2 as ComboBox).Text, control4.Text));
+                }
+            }
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Status = ElementStatus.Ready;
 
+        }
+        private string OutColumnName(string name,string alias)
+        {
+            string columnName = alias == "别名"? name: alias;
+            return columnName;
+        }
+        private void LoadOption()
+        {
+            int count = this.opControl.Option.KeysCount("factor");
+            string factor1 = this.opControl.Option.GetOption("factor1");
+            if (this.opControl.Option.GetOption("noRepetition") != "")
+                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
+            if (this.opControl.Option.GetOption("repetition") != "")
+                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            if (factor1 != "")
+            {
+                string[] factorList = factor1.Split(',');
+                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
+                this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
+                this.textBoxEx1.Text = factorList[2];
+            }
+            if (count > 1)
+                InitNewFactorControl(count - 1);
+            else return;
+            for (int i = 2; i < (count + 1); i++)
+            {
+                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                string[] factorList = factor.Split(',');
+                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
+
+                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
+                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
+                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
+                control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
+                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 2];
+                control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
+                Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
+                control4.Text = factorList[3];
+            }
+
+        }
+
+
+        #endregion
+        #region 添加取消
+        private void confirmButton_Click(object sender, EventArgs e)
+        {
+            bool empty = IsOptionReay();
+            if (empty) return;
+            SaveOption();
+            this.DialogResult = DialogResult.OK;
+            //内容修改，引起文档dirty
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+                Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            Close();
+        }
+        private bool IsOptionReay()
+        {
+            bool empty = false;
+            List<string> types = new List<string>();
+            types.Add(this.comboBox1.GetType().Name);
+            types.Add(this.textBoxEx1.GetType().Name);
+            foreach (Control ctl in this.tableLayoutPanel2.Controls)
+            {
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                {
+                    MessageBox.Show("请填写过滤条件!");
+                    empty = true;
+                    return empty;
+                }
+            }
+            foreach (Control ctl in this.tableLayoutPanel1.Controls)
+            {
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                {
+                    MessageBox.Show("请填写过滤条件!");
+                    empty = true;
+                    return empty;
+                }
+            }
+            if (!this.repetition.Checked && !this.noRepetition.Checked)
+            {
+                MessageBox.Show("请选择数据是否进行去重");
+                empty = true;
+                return empty;
+            }
+            return empty;
+        }
+        #endregion
         private void createLine(int addLine)
         {
             // 添加控件
@@ -83,18 +220,12 @@ namespace Citta_T1.OperatorViews
 
             ComboBox dataBox = new ComboBox();
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            //dataBox.Items.AddRange(this.columnName);
+            dataBox.Items.AddRange(this.columnName0);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
+            filterBox.Items.AddRange(this.columnName1);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
@@ -117,7 +248,10 @@ namespace Citta_T1.OperatorViews
             textBox.PromptText = "";
             textBox.RegexPattern = "";
             textBox.Text = "别名";
+            textBox.ForeColor= SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Enter += textBoxEx1_Enter;
+            textBox.Leave += textBoxEx1_Leave;
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
 
             Button addButton1 = new Button();
@@ -243,21 +377,28 @@ namespace Citta_T1.OperatorViews
             e.Graphics.Clear(this.BackColor);
         }
 
-        #endregion
+       
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-        #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+
+        private void textBoxEx1_Enter(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            HZH_Controls.Controls.TextBoxEx TextBoxEx = sender as HZH_Controls.Controls.TextBoxEx;
+            if (TextBoxEx.Text == "别名")
+            {
+                TextBoxEx.Text = "";
+            }
+            TextBoxEx.ForeColor = Color.Black;
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void textBoxEx1_Leave(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
+            HZH_Controls.Controls.TextBoxEx TextBoxEx = sender as HZH_Controls.Controls.TextBoxEx;
+            if (TextBoxEx.Text == "")
+            {
+                TextBoxEx.Text = "别名";
+                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
+            }           
         }
-        #endregion
-        
     }
 }
