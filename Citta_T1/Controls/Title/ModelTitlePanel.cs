@@ -115,38 +115,44 @@ namespace Citta_T1.Controls.Title
         {
 
             rawModelTitleNum = this.Width / 142;
-            if (0 < models.Count && models.Count <= rawModelTitleNum && removeTag)
+            try
             {
-                for (int i = 0; i < models.Count; i++)
+                if (0 < models.Count && models.Count <= rawModelTitleNum && removeTag)
                 {
-                    models[i].Size = new Size(140, 26);
-                    if (i == 0)
-                        models[i].Location = OriginalLocation;
-                    else
+                    for (int i = 0; i < models.Count; i++)
                     {
-                        ModelTitleControl preMTC = models[i - 1];
-                        models[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
+                        models[i].Size = new Size(140, 26);
+                        if (i == 0)
+                            models[i].Location = OriginalLocation;
+                        else
+                        {
+                            ModelTitleControl preMTC = models[i - 1];
+                            models[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
+                        }
+                    }
+                }
+                if (models.Count > rawModelTitleNum)
+                {
+                    for (int i = 0; i < models.Count; i++)
+                    {
+                        ModelTitleControl mtc = models[i];
+                        mtc.Width = (this.Size.Width - 1) / models.Count - 2;
+                        int origWidth = mtc.Width;
+                        if (i == 0)
+                            mtc.Location = OriginalLocation;
+                        else if (i >= models.Count - 3)
+                        {
+                            mtc.Width = (this.Size.Width - (origWidth + 2) * models.Count) / 3 + origWidth;
+                            mtc.Location = new Point((origWidth + 2) * (models.Count - 3) + (mtc.Width + 2) * (i - models.Count + 3), 6);
+                        }
+                        else
+                            mtc.Location = new Point((mtc.Width + 2) * i, 6);
                     }
                 }
             }
-            if (models.Count > rawModelTitleNum)
-            {
-                for (int i = 0; i < models.Count; i++)
-                {
-                    ModelTitleControl mtc = models[i];
-                    mtc.Width = (this.Size.Width - 1) / models.Count - 2;
-                    int origWidth = mtc.Width;
-                    if (i == 0)
-                        mtc.Location = OriginalLocation;
-                    else if (i >= models.Count - 3)
-                    {
-                        mtc.Width = (this.Size.Width - (origWidth + 2) * models.Count) / 3 + origWidth;
-                        mtc.Location = new Point((origWidth + 2) * (models.Count - 3) + (mtc.Width + 2) * (i - models.Count + 3), 6);
-                    }
-                    else
-                        mtc.Location = new Point((mtc.Width + 2) * i, 6);
-                }
-            }
+            catch (Exception ex)
+            { log.Error("ModelTitlePanel 未将对象引用设置到对象的实例: " + ex.ToString()); }
+           
         }
         public void RemoveModel(ModelTitleControl mtControl)
         {
