@@ -22,8 +22,8 @@ namespace Citta_T1.Business
         }
         public void CreatNewXml()
         {
-            
 
+            Utils.FileUtil.addpathPower(Directory.GetCurrentDirectory().ToString(), "FullControl");
             Directory.CreateDirectory(path);
             // 添加权限
 
