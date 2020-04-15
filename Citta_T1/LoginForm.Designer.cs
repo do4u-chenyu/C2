@@ -48,12 +48,13 @@
             // 
             this.userNameComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.userNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.userNameComboBox.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.userNameComboBox.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.userNameComboBox.FormattingEnabled = true;
             this.userNameComboBox.Location = new System.Drawing.Point(104, 97);
             this.userNameComboBox.Name = "userNameComboBox";
-            this.userNameComboBox.Size = new System.Drawing.Size(191, 23);
+            this.userNameComboBox.Size = new System.Drawing.Size(191, 28);
             this.userNameComboBox.TabIndex = 2;
+            this.userNameComboBox.Text = "新手上路";
             // 
             // loginCheckBox
             // 
