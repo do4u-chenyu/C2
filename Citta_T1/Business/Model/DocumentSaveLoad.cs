@@ -252,6 +252,7 @@ namespace Citta_T1.Business.Model
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.Path = bcpPath;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);

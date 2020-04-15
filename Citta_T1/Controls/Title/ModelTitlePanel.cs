@@ -152,7 +152,7 @@ namespace Citta_T1.Controls.Title
             }
             catch (Exception ex)
             { log.Error("ModelTitlePanel 未将对象引用设置到对象的实例: " + ex.ToString()); }
-           
+            
         }
         public void RemoveModel(ModelTitleControl mtControl)
         {
