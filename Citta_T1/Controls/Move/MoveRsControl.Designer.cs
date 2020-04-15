@@ -77,7 +77,7 @@ namespace Citta_T1.Controls.Move
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseDown);
-            this.leftPicture.MouseEnter += new System.EventHandler(this.leftPicture_MouseEnter);
+            this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseUp);
             // 
