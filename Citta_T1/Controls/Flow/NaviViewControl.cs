@@ -191,10 +191,11 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement startMe = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                 ModelElement endMe   = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
-                if (!elementWorldLocDict.ContainsKey(startMe) | !elementWorldLocDict.ContainsKey(endMe))
+                
+                if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;
-                PointF s = new Point();
-                PointF e = new Point();
+                PointF s = new PointF();
+                PointF e = new PointF();
                 s.X = elementWorldLocDict[startMe].X + Convert.ToInt32(142 / rate);
                 s.Y = elementWorldLocDict[startMe].Y + Convert.ToInt32(25 / (rate * 2));
                 e.X = elementWorldLocDict[endMe].X ;
