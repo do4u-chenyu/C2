@@ -70,6 +70,10 @@ namespace Citta_T1.Utils
         {
             g.DrawBezier(Pens.Green, this.startP, this.a, this.b, this.endP);
         }
+        public void DrawNaviewBezier(Graphics g)
+        {
+            g.DrawBezier(Pens.Gray, this.startP, this.a, this.b, this.endP);
+        }
         public RectangleF GetBoundingRect()
         {
             // TODO [DK] 没有考虑到坐标系放大系数
