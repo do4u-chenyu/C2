@@ -42,7 +42,7 @@ namespace Citta_T1.Business.Model
             UpdatePoints();
         }
 
-        public void ChangLoc(float x, float y)
+        public void ChangeLoc(float x, float y)
         {
             this.startP = new PointF(this.startP.X + x, this.startP.Y + y);
             this.endP = new PointF(this.endP.X + x, this.endP.Y + y);

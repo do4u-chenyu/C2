@@ -254,9 +254,6 @@ namespace Citta_T1.Controls.Move
                     mr.StartP = this.GetStartPinLoc(0);
                     mr.UpdatePoints();
                 }
-
-                Bezier newLine = new Bezier(mr.StartP, mr.EndP);  
-
             }
             this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
 

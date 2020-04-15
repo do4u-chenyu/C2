@@ -27,16 +27,29 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             switch (choice)
             {
-                case "小于等于 ≦": return "<=";
-                case "大于等于 ≥": return ">=";
-                case "大于 &gt": return ">";
-                case "小于 &lt": return "<";
-                case "等于 =": return "=";
-                case "不等于 ≠": return "!=";
-                case "AND": return "&&";
-                case "OR": return "||";
+                case "0": return ">";
+                case "1": return "<";
+                case "2": return "==";
+                case "3": return ">=";
+                case "4": return "<=";
+                case "5": return "!=";
             }
             return "无该选项";
+        }
+
+        public string TransAndOrToCmd(string choice)
+        {
+            switch (choice)
+            {
+                case "0":return "&&";
+                case "1":return "||";
+            }
+            return "and、or无该选项";
+        }
+
+        public string TransInputLine(string optionLine)
+        {
+            return (int.Parse(optionLine) + 1).ToString();
         }
 
         public string TransOutputField(string[] outfield)
@@ -44,9 +57,24 @@ namespace Citta_T1.Business.Schedule.Cmd
             string outfieldLine = " $" + (int.Parse(outfield[0]) + 1).ToString();
             for (int i = 1; i < outfield.Length; i++)
             {
-                outfieldLine = outfieldLine + "\"\\t\"$" + (int.Parse(outfield[i]) + 1).ToString();
+                outfieldLine = outfieldLine + ",$" + (int.Parse(outfield[i]) + 1).ToString();
             }
             return outfieldLine;
+        }
+
+        public string TransConditionToCmd(string condition)
+        {
+            try
+            {
+                int.Parse(condition);
+                return condition;
+            }
+            catch
+            {
+                return "'" + condition + "'";
+            }
+
+
         }
 
     }

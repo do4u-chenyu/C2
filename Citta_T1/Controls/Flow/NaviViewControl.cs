@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Citta_T1.Utils;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using System.Drawing.Drawing2D;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -95,6 +96,9 @@ namespace Citta_T1.Controls.Flow
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             // 更新canvas所有元素的位置
             Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
+            // 修改线的位置，线的位置修改了空间位置修改不一样，需要重绘一下才能生效
+            LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
+            Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
@@ -151,6 +155,10 @@ namespace Citta_T1.Controls.Flow
             }
             this.staticImage = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(staticImage);
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            
+
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
@@ -183,10 +191,11 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement startMe = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                 ModelElement endMe   = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
-                if (!elementWorldLocDict.ContainsKey(startMe) | !elementWorldLocDict.ContainsKey(endMe))
+                
+                if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;
-                PointF s = new Point();
-                PointF e = new Point();
+                PointF s = new PointF();
+                PointF e = new PointF();
                 s.X = elementWorldLocDict[startMe].X + Convert.ToInt32(142 / rate);
                 s.Y = elementWorldLocDict[startMe].Y + Convert.ToInt32(25 / (rate * 2));
                 e.X = elementWorldLocDict[endMe].X ;
