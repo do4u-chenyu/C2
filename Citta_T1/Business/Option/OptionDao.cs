@@ -43,7 +43,7 @@ namespace Citta_T1.Business.Option
                 if (mr.StartID == moveOpControl.ID) return;
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
-            string tmpName = "L" + moveOpControl.ID.ToString() + DateTime.Now.ToString("yyyyMMdd");
+            string tmpName = "L" + moveOpControl.ID.ToString() + "_" + DateTime.Now.ToString("yyyyMMddhhmmss");
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x, y));
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段

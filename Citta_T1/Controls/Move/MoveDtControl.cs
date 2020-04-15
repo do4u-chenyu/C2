@@ -626,6 +626,11 @@ namespace Citta_T1.Controls.Move
 
             this.BackgroundImage = this.staticImage;
         }
+
+        private void leftPicture_MouseEnter(object sender, EventArgs e)
+        {
+            this.idToolTip.SetToolTip(this.leftPicture,this.id.ToString());
+        }
     }
 
 }

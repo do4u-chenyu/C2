@@ -45,6 +45,7 @@ namespace Citta_T1.Controls.Move
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.txtButton = new System.Windows.Forms.Button();
+            this.idToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -76,6 +77,7 @@ namespace Citta_T1.Controls.Move
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;
             this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseDown);
+            this.leftPicture.MouseEnter += new System.EventHandler(this.leftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseUp);
             // 
@@ -232,5 +234,6 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolTip helpToolTip;
         public System.Windows.Forms.Button txtButton;
+        public System.Windows.Forms.ToolTip idToolTip;
     }
 }
