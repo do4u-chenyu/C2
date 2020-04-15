@@ -25,6 +25,7 @@ namespace Citta_T1.Business.DataSource
         public void WriteDataSourceInfo(DataButton db)
         {
             Directory.CreateDirectory(userPath);
+            Utils.FileUtil.addpathPower(userPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             if (!File.Exists(DataSourcePath))
             {              
