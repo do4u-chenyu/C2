@@ -7,6 +7,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Business.Model;
+using System.Drawing.Drawing2D;
 
 namespace Citta_T1.Controls
 {
@@ -299,6 +300,7 @@ namespace Citta_T1.Controls
             if (line == null)
                 return;
             Graphics g = this.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             line.DrawBezier(g);
             g.Dispose();
         }
@@ -401,6 +403,7 @@ namespace Citta_T1.Controls
         private void RepaintAllRelations()
         {
             Graphics g = this.CreateGraphics();
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
@@ -433,6 +436,7 @@ namespace Citta_T1.Controls
             if (doc == null)
                 return;
             // 将当前文档所有的线全部画出来
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in doc.ModelRelations)
             {
                 e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
@@ -444,6 +448,7 @@ namespace Citta_T1.Controls
         private void Draw(CanvasWrapper dcStatic, RectangleF rect)
         {
             Graphics g = dcStatic.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in mrs)
             {

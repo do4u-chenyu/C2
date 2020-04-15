@@ -143,7 +143,6 @@ namespace Citta_T1.Controls
             moveOffset.X = Convert.ToInt32(moveOffset.X * Factor);
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
             n.DrawImageUnscaled(this.staticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-            
         }
 
         public void ControlChange(Point start, Point now)
