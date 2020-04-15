@@ -253,6 +253,12 @@
     <Compile Include="OperatorViews\FreqOperatorView.Designer.cs">
       <DependentUpon>FreqOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\GroupOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +276,12 @@
     </Compile>
     <Compile Include="OperatorViews\RandomOperatorView.Designer.cs">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\RelateOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\RelateOperatorView.Designer.cs">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\SortOperatorView.cs">
       <SubType>Form</SubType>
@@ -429,6 +441,9 @@
     <EmbeddedResource Include="OperatorViews\FreqOperatorView.resx">
       <DependentUpon>FreqOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
+      <DependentUpon>GroupOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
       <DependentUpon>MaxOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -437,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\RandomOperatorView.resx">
       <DependentUpon>RandomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\RelateOperatorView.resx">
+      <DependentUpon>RelateOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
@@ -693,6 +711,8 @@
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\u721.png" />
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\selectDrag.png" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
@@ -723,6 +743,11 @@
     <Content Include="res\flowchart\uparrow.png" />
     <Content Include="res\flow\drop.png" />
     <Content Include="res\flow\flow.png" />
+    <Content Include="res\flow\selectDrag.png" />
+    <Content Include="res\flow\selectFrame.png" />
+    <Content Include="res\flow\selectRemark.png" />
+    <Content Include="res\flow\selectZommUp.png" />
+    <Content Include="res\flow\selectZoomDown.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
     <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />
     <Content Include="res\leftpanelmenu\leftpanel_intersect.png" />
@@ -751,6 +776,7 @@
     <Content Include="res\toolbox\newfile.png" />
     <None Include="res\toolbox\pause.png" />
     <Content Include="res\toolbox\RandomButton.png" />
+    <None Include="res\toolbox\relation.png" />
     <Content Include="res\toolbox\savefile.png" />
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />

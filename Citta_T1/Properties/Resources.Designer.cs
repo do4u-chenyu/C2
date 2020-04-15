@@ -63,6 +63,16 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap blueshadow {
             get {
                 object obj = ResourceManager.GetObject("blueshadow", resourceCulture);
@@ -136,6 +146,16 @@ namespace Citta_T1.Properties {
         internal static System.Drawing.Bitmap diamond {
             get {
                 object obj = ResourceManager.GetObject("diamond", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap div {
+            get {
+                object obj = ResourceManager.GetObject("div", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -236,6 +256,16 @@ namespace Citta_T1.Properties {
         internal static System.Drawing.Bitmap rectange {
             get {
                 object obj = ResourceManager.GetObject("rectange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap relation {
+            get {
+                object obj = ResourceManager.GetObject("relation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

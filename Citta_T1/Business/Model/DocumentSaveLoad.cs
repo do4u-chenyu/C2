@@ -252,6 +252,7 @@ namespace Citta_T1.Business.Model
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.Path = bcpPath;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
@@ -341,6 +342,15 @@ namespace Citta_T1.Business.Model
                     break;
                 case "AvgOperator":
                     type = "取平均值";
+                    break;
+                case "FreqOperator":
+                    type = "频率算子";
+                    break;
+                case "SortOperator":
+                    type = "排序算子";
+                    break;
+                case "GroupOperator":
+                    type = "分组算子";
                     break;
                 default:
                     break;

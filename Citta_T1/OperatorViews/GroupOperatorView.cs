@@ -1,13 +1,9 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
-using Citta_T1.Utils;
+﻿using Citta_T1.Controls.Move;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,61 +11,25 @@ using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class UnionOperatorView : Form
+    public partial class GroupOperatorView : Form
     {
-        private MoveOpControl opControl;
-        private string dataPath0;
-        private string dataPath1;
-        private string[] columnName0;
-        private string[] columnName1;
-        public UnionOperatorView(MoveOpControl opControl)
+        public GroupOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-            this.opControl = opControl;
-            InitOptionInfo();
-            columnName0 = new string[] { };
-            columnName1 = new string[] { };
-
         }
-        #region 初始化配置
-        private void InitOptionInfo()
+
+        private void confirmButton_Click(object sender, EventArgs e)
         {
-            /*
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataPath0 = dataInfo["dataPath0"];
-                this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
-            }
-            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataPath1 = dataInfo["dataPath1"];
-                this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
-            }
-            */
-
-            //foreach (string name in this.columnName0)
-            //{
-            //this.d.AddItems(name);
-            //this.MaxValueBox.Items.Add(name);
-            //}
-            //foreach (string name in this.columnName1)
-            //{
-            //this.OutList.AddItems(name);
-            //this.MaxValueBox.Items.Add(name);
-            //}
+            this.DialogResult = DialogResult.OK;
         }
 
-        private string[] SetOption(string path, string dataName, string encoding)
+        private void cancelButton_Click(object sender, EventArgs e)
         {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
-            return columnName;
+            this.DialogResult = DialogResult.Cancel;
+            Close();
         }
+
+
 
         private void createLine(int addLine)
         {
@@ -86,40 +46,7 @@ namespace Citta_T1.OperatorViews
             //dataBox.Items.AddRange(this.columnName);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            ComboBox filterBox = new ComboBox();
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
-
-            HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
-            textBox.DecLength = 2;
-            textBox.InputType = HZH_Controls.TextInputType.NotControl;
-            textBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            textBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            textBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            textBox.OldText = null;
-            textBox.PromptColor = System.Drawing.Color.Gray;
-            textBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            textBox.PromptText = "";
-            textBox.RegexPattern = "";
-            textBox.Text = "别名";
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
-
+           
             Button addButton1 = new Button();
             addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             addButton1.FlatAppearance.BorderSize = 0;
@@ -133,7 +60,7 @@ namespace Citta_T1.OperatorViews
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 4, addLine);
+            this.tableLayoutPanel1.Controls.Add(addButton1, 2, addLine);
 
             Button delButton1 = new Button();
             delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -148,7 +75,7 @@ namespace Citta_T1.OperatorViews
             delButton1.Click += new System.EventHandler(this.del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 5, addLine);
+            this.tableLayoutPanel1.Controls.Add(delButton1, 3, addLine);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -184,12 +111,6 @@ namespace Citta_T1.OperatorViews
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                     Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
-                    Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
-                    ctlNext4.Name = (k + 1).ToString();
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
-                    Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k);
-                    ctlNext5.Name = (k + 1).ToString();
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
                 }
                 createLine(addLine);
             }
@@ -203,10 +124,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 6) + 5];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * 4) + 3];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 6) + 5; j >= (i * 6); j--)
+                    for (int j = (i * 4) + 3; j >= (i * 4); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }
@@ -225,12 +146,6 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
                 Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
-                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
-                ctlNext4.Name = k.ToString();
-                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
-                Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k + 1);
-                ctlNext5.Name = k.ToString();
-                this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;
@@ -243,21 +158,7 @@ namespace Citta_T1.OperatorViews
             e.Graphics.Clear(this.BackColor);
         }
 
-        #endregion
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-        #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.OK;
-        }
 
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-        #endregion
-        
+
     }
 }
