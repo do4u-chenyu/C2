@@ -32,7 +32,8 @@ namespace Citta_T1.Business.Model
         MinOperator,
         AvgOperator,//平均
         SortOperator,//排序算子
-        FreqOperator,//频率算子
+        FreqOperator,//频率算子 
+        GroupOperator,//分组算子
         Null
     }
     public enum ElementStatus

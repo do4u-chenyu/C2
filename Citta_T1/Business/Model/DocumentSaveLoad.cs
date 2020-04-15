@@ -343,6 +343,15 @@ namespace Citta_T1.Business.Model
                 case "AvgOperator":
                     type = "取平均值";
                     break;
+                case "FreqOperator":
+                    type = "频率算子";
+                    break;
+                case "SortOperator":
+                    type = "排序算子";
+                    break;
+                case "GroupOperator":
+                    type = "分组算子";
+                    break;
                 default:
                     break;
             }
