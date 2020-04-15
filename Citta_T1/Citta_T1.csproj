@@ -711,6 +711,8 @@
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\u72.png" />
     <None Include="Resources\u721.png" />
+    <None Include="Resources\Image1.png" />
+    <None Include="Resources\selectDrag.png" />
     <Content Include="res\displaypanel\blueshadow.png" />
     <Content Include="res\displaypanel\close.png" />
     <Content Include="res\displaypanel\maxunfold.png">
@@ -741,6 +743,11 @@
     <Content Include="res\flowchart\uparrow.png" />
     <Content Include="res\flow\drop.png" />
     <Content Include="res\flow\flow.png" />
+    <Content Include="res\flow\selectDrag.png" />
+    <Content Include="res\flow\selectFrame.png" />
+    <Content Include="res\flow\selectRemark.png" />
+    <Content Include="res\flow\selectZommUp.png" />
+    <Content Include="res\flow\selectZoomDown.png" />
     <Content Include="res\leftpanelmenu\leftpanel_connect.png" />
     <Content Include="res\leftpanelmenu\leftpanel_filterop.png" />
     <Content Include="res\leftpanelmenu\leftpanel_intersect.png" />
