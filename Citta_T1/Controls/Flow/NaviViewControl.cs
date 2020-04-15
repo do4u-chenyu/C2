@@ -156,6 +156,7 @@ namespace Citta_T1.Controls.Flow
             Graphics g = Graphics.FromImage(staticImage);
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+
             foreach (ModelElement me in modelElements)
             { 
                 PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
@@ -180,16 +181,23 @@ namespace Citta_T1.Controls.Flow
                 Rectangle rect = new Rectangle(Convert.ToInt32(ctScreenPos.X), Convert.ToInt32(ctScreenPos.Y), 142 / rate, 25 / rate);
                 g.DrawRectangle(p1, rect);
             }
-            //foreach (ModelRelation mr in modelRelations)
-            //{
-            //    ModelElement startMe = me.
 
-            //    PointF s = Global.GetCurrentDocument().ScreenToWorldF(mr.StartP, mapOrigin);
-            //    PointF a = Global.GetCurrentDocument().ScreenToWorldF(mr.A, mapOrigin);
-            //    PointF b = Global.GetCurrentDocument().ScreenToWorldF(mr.B, mapOrigin);
-            //    PointF e = Global.GetCurrentDocument().ScreenToWorldF(mr.EndP, mapOrigin);
-            //    g.DrawBezier(Pens.Green, s, a, b, e);
-            //}
+            foreach (ModelRelation mr in modelRelations)
+            {
+                ModelElement startMe = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                ModelElement endMe   = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
+                if (!elementWorldLocDict.ContainsKey(startMe) | !elementWorldLocDict.ContainsKey(endMe))
+                    continue;
+                PointF s = new Point();
+                PointF e = new Point();
+                s.X = elementWorldLocDict[startMe].X + Convert.ToInt32(142 / rate);
+                s.Y = elementWorldLocDict[startMe].Y + Convert.ToInt32(25 / (rate * 2));
+                e.X = elementWorldLocDict[endMe].X ;
+                e.Y = elementWorldLocDict[endMe].Y + Convert.ToInt32(25 / (rate * 2));
+
+                Bezier line = new Bezier(s, e);
+                line.DrawNaviewBezier(g);
+            }
 
             g.Dispose();
             
