@@ -63,9 +63,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(43, 100);
+            this.label3.Location = new System.Drawing.Point(32, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 27);
+            this.label3.Size = new System.Drawing.Size(90, 22);
             this.label3.TabIndex = 0;
             this.label3.Text = "排序方式：";
             // 
@@ -73,9 +74,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(43, 50);
+            this.label2.Location = new System.Drawing.Point(32, 40);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 27);
+            this.label2.Size = new System.Drawing.Size(90, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "输出字段：";
             // 
@@ -83,9 +85,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(43, 0);
+            this.label1.Location = new System.Drawing.Point(32, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 27);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "数据信息：";
             // 
@@ -93,9 +96,9 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(595, 46);
+            this.topPanel.Size = new System.Drawing.Size(443, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -103,20 +106,20 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 303);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 239);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(595, 80);
+            this.bottomPanel.Size = new System.Drawing.Size(443, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(435, 24);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cancelButton.Location = new System.Drawing.Point(326, 19);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(84, 34);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -128,10 +131,10 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(315, 24);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.confirmButton.Location = new System.Drawing.Point(236, 19);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(80, 34);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
@@ -145,19 +148,20 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.keyPanel.Location = new System.Drawing.Point(0, 46);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.keyPanel.Location = new System.Drawing.Point(0, 37);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(155, 257);
+            this.keyPanel.Size = new System.Drawing.Size(116, 202);
             this.keyPanel.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(43, 200);
+            this.label5.Location = new System.Drawing.Point(32, 160);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 27);
+            this.label5.Size = new System.Drawing.Size(90, 22);
             this.label5.TabIndex = 0;
             this.label5.Text = "输出条数：";
             // 
@@ -165,9 +169,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(43, 150);
+            this.label4.Location = new System.Drawing.Point(32, 120);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 27);
+            this.label4.Size = new System.Drawing.Size(90, 22);
             this.label4.TabIndex = 0;
             this.label4.Text = "是否去重：";
             // 
@@ -183,17 +188,18 @@
             this.valuePanel.Controls.Add(this.comCheckBoxList1);
             this.valuePanel.Controls.Add(this.textBoxEx1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valuePanel.Location = new System.Drawing.Point(155, 46);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.valuePanel.Location = new System.Drawing.Point(116, 37);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(440, 257);
+            this.valuePanel.Size = new System.Drawing.Size(327, 202);
             this.valuePanel.TabIndex = 3;
             // 
             // textBoxEx3
             // 
             this.textBoxEx3.DecLength = 2;
             this.textBoxEx3.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx3.Location = new System.Drawing.Point(130, 200);
+            this.textBoxEx3.Location = new System.Drawing.Point(98, 160);
+            this.textBoxEx3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxEx3.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -211,15 +217,16 @@
             this.textBoxEx3.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxEx3.PromptText = "";
             this.textBoxEx3.RegexPattern = "";
-            this.textBoxEx3.Size = new System.Drawing.Size(57, 25);
+            this.textBoxEx3.Size = new System.Drawing.Size(44, 21);
             this.textBoxEx3.TabIndex = 11;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(87, 208);
+            this.label8.Location = new System.Drawing.Point(65, 166);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 15);
+            this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 10;
             this.label8.Text = "行到";
             // 
@@ -227,7 +234,8 @@
             // 
             this.textBoxEx2.DecLength = 2;
             this.textBoxEx2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx2.Location = new System.Drawing.Point(31, 200);
+            this.textBoxEx2.Location = new System.Drawing.Point(23, 160);
+            this.textBoxEx2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxEx2.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -245,24 +253,26 @@
             this.textBoxEx2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxEx2.PromptText = "";
             this.textBoxEx2.RegexPattern = "";
-            this.textBoxEx2.Size = new System.Drawing.Size(50, 25);
+            this.textBoxEx2.Size = new System.Drawing.Size(38, 21);
             this.textBoxEx2.TabIndex = 9;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(197, 208);
+            this.label7.Location = new System.Drawing.Point(148, 166);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(187, 15);
+            this.label7.Size = new System.Drawing.Size(149, 12);
             this.label7.TabIndex = 8;
             this.label7.Text = "行（不填默认输出所有行）";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 208);
+            this.label6.Location = new System.Drawing.Point(2, 166);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 15);
+            this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 7;
             this.label6.Text = "第";
             // 
@@ -270,9 +280,11 @@
             // 
             this.groupBox2.Controls.Add(this.radioButton4);
             this.groupBox2.Controls.Add(this.radioButton3);
-            this.groupBox2.Location = new System.Drawing.Point(1, 144);
+            this.groupBox2.Location = new System.Drawing.Point(1, 115);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(207, 37);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(155, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox2_Paint);
@@ -280,9 +292,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(113, 12);
+            this.radioButton4.Location = new System.Drawing.Point(85, 10);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(73, 19);
+            this.radioButton4.Size = new System.Drawing.Size(59, 16);
             this.radioButton4.TabIndex = 1;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "不去重";
@@ -291,9 +304,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 12);
+            this.radioButton3.Location = new System.Drawing.Point(5, 10);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(58, 19);
+            this.radioButton3.Size = new System.Drawing.Size(47, 16);
             this.radioButton3.TabIndex = 0;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "去重";
@@ -303,9 +317,11 @@
             // 
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 91);
+            this.groupBox1.Location = new System.Drawing.Point(0, 73);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 37);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(155, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
@@ -313,9 +329,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(113, 12);
+            this.radioButton2.Location = new System.Drawing.Point(85, 10);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(88, 19);
+            this.radioButton2.Size = new System.Drawing.Size(71, 16);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "从大到小";
@@ -324,9 +341,10 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 12);
+            this.radioButton1.Location = new System.Drawing.Point(5, 10);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(88, 19);
+            this.radioButton1.Size = new System.Drawing.Size(71, 16);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "从小到大";
@@ -335,9 +353,10 @@
             // comCheckBoxList1
             // 
             this.comCheckBoxList1.DataSource = null;
-            this.comCheckBoxList1.Location = new System.Drawing.Point(0, 53);
+            this.comCheckBoxList1.Location = new System.Drawing.Point(0, 42);
+            this.comCheckBoxList1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comCheckBoxList1.Name = "comCheckBoxList1";
-            this.comCheckBoxList1.Size = new System.Drawing.Size(180, 24);
+            this.comCheckBoxList1.Size = new System.Drawing.Size(135, 20);
             this.comCheckBoxList1.TabIndex = 1;
             // 
             // textBoxEx1
@@ -346,6 +365,7 @@
             this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
             this.textBoxEx1.Location = new System.Drawing.Point(0, 0);
+            this.textBoxEx1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxEx1.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -364,16 +384,15 @@
             this.textBoxEx1.PromptText = "";
             this.textBoxEx1.ReadOnly = true;
             this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(180, 30);
+            this.textBoxEx1.Size = new System.Drawing.Size(136, 25);
             this.textBoxEx1.TabIndex = 0;
-            this.textBoxEx1.Text = "test1.bcp";
             this.textBoxEx1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SortOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 383);
+            this.ClientSize = new System.Drawing.Size(443, 303);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -381,7 +400,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SortOperatorView";
             this.ShowIcon = false;
             this.Text = "排序算子设置";
