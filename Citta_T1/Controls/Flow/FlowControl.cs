@@ -127,12 +127,14 @@ namespace Citta_T1.Controls.Flow
 
         private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
+
+            SelectRemark = !SelectRemark;
             if (SelectRemark)
                 ShowRemarkControl();
             else
                 HideRemarkControl();
-
-            SelectRemark = !SelectRemark;
+           
+            
 
         }
         #endregion

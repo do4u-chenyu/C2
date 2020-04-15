@@ -605,7 +605,7 @@
             this.flowControl.Name = "flowControl";
             this.flowControl.SelectDrag = false;
             this.flowControl.SelectFrame = false;
-            this.flowControl.SelectRemark = true;
+            this.flowControl.SelectRemark = false;
             this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
             // 
