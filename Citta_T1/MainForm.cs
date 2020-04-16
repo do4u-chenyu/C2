@@ -157,7 +157,7 @@ namespace  Citta_T1
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.CurrentDocument.Load();
-            this.modelDocumentDao.CurrentDocument.ResetCount();
+            this.modelDocumentDao.CurrentDocument.DocumentElementCount();
             this.modelDocumentDao.CurrentDocument.Show();
             this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);

@@ -90,7 +90,7 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
-        public string CreateNewBCPFile(string filename,List<string> columnName)
+        public string CreateNewBCPFile(string filename, List<string> columnName)
         {
             string filePath = "";
             string columns = "";
@@ -116,6 +116,19 @@ namespace Citta_T1.Utils
                
             return filePath;
 
+        }
+        public void ReWriteBCPFile(string filePath, List<string> columnName)
+        {
+            string columns = "";
+            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
+            fs.Close();
+            StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default);
+            foreach (string name in columnName)
+                columns += name + "\t";
+            sw.WriteLine(columns.Trim('\t'));
+            sw.Flush();
+            sw.Close();
+           
         }
     }
 }

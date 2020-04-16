@@ -119,13 +119,11 @@ namespace Citta_T1.Business.Model
                 if (mr.StartID == ID || mr.EndID == ID)
                     relations.Add(mr);
             }
-            //后续所有算子状态变为null
-            StateChange(ID);
             foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
 
         }
-        private void StateChange(int ID)
+        public void StateChange(int ID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -135,8 +133,7 @@ namespace Citta_T1.Business.Model
                     {
                         if (me.ID == mr.EndID)
                         {
-                            if(me.Type==ElementType.Operator)
-                                me.Status = ElementStatus.Null;
+                            me.Status = ElementStatus.Null;
                             StateChange(mr.EndID);
                         }
                            
@@ -182,7 +179,7 @@ namespace Citta_T1.Business.Model
             }
         }
 
-        public void ResetCount()
+        public void DocumentElementCount()
         {
             if (this.modelElements.Count == 0)
                 return;
@@ -191,7 +188,7 @@ namespace Citta_T1.Business.Model
                 if (me.ID > elementCount)
                     elementCount = me.ID;
             }
-                elementCount += 1;
+             elementCount += 1;
         }
 
         
@@ -263,7 +260,15 @@ namespace Citta_T1.Business.Model
             }
             return relations;
         }
-
+        public ModelElement SearchResultOperator(int ID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == ID && SearchElementByID(mr.EndID).Type == ElementType.Result)
+                    return SearchElementByID(mr.EndID);
+            }
+            return null; 
+        }
         private int GetLineIndex()
         {
             this.lineCounter += 1;

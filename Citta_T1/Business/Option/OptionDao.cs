@@ -75,10 +75,31 @@ namespace Citta_T1.Business.Option
 
         //删除relation
 
-        //修改配置
-        public void ModifyOption(List<string> oldColumns, List<string> currentcolumns)  
+        //修改配置输出
+        public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
-            
+           
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            List<string> columns = new List<string>();
+            foreach (string cn in oldColumns)
+            {
+                //新输出字段中不包含旧字段
+                if (!currentcolumns.Contains(cn))
+                {                               
+                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+                    Global.GetCurrentDocument().StateChange(ID);
+                    return;
+
+                }
+            }
+            //旧字段真包含于新字段
+            foreach (string name in currentcolumns)
+            {
+                if (!oldColumns.Contains(name))
+                    columns.Add(name);
+            }
+            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();
+            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
