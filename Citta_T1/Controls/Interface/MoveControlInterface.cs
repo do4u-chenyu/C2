@@ -30,5 +30,9 @@ namespace Citta_T1.Controls.Interface
         PointF GetEndPinLoc(int pinIndex);
         void BindStartLine(int pinIndex, int relationIndex);
         void BindEndLine(int pinIndex, int relationIndex);
+        void OutPinInit(String status);
+        void rectInAdd(int pinIndex);
+
+
     }
 }
