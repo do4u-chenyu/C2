@@ -80,8 +80,8 @@ namespace Citta_T1.OperatorViews
             string[] columnName = column.Split('\t');
             return columnName;
         }
+        #endregion
 
-       
         #region 配置信息的保存与加载
         private void InitNewFactorControl(int count)
         {
@@ -342,7 +342,7 @@ namespace Citta_T1.OperatorViews
 
 
 
-        #endregion
+      
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }

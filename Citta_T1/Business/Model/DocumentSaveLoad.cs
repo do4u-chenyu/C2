@@ -34,6 +34,7 @@ namespace Citta_T1.Business.Model
         public void WriteXml()
         {
             Directory.CreateDirectory(modelPath);
+            Utils.FileUtil.addpathPower(modelPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);

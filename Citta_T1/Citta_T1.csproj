@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Citta_T1</RootNamespace>
     <AssemblyName>Citta_T1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -45,6 +46,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
@@ -335,6 +345,7 @@
     </Compile>
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
+    <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\Global.cs" />
     <Compile Include="Utils\HelpUtil.cs" />
     <Compile Include="Utils\LineUtil.cs" />
@@ -470,6 +481,7 @@
     <None Include="Doc\citta帮助文档.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Doc\CITTA算子设计文档v4.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
     <None Include="Doc\模型配置设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
@@ -478,6 +490,7 @@
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

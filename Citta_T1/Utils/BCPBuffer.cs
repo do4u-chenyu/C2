@@ -96,7 +96,12 @@ namespace Citta_T1.Utils
             string columns = "";
             filePath = Global.GetCurrentDocument().SavePath;
             if (!Directory.Exists(filePath))
+            {
                 Directory.CreateDirectory(filePath);
+                Utils.FileUtil.addpathPower(filePath, "FullControl");
+            }
+                Directory.CreateDirectory(filePath);
+
             filePath += filename + ".bcp";
             if (!System.IO.File.Exists(filePath))
             {

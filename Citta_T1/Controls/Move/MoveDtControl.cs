@@ -30,6 +30,7 @@ namespace Citta_T1.Controls.Move
         public int ID { get => this.id; set => this.id = value; }
 
         //绘制引脚
+        private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 11);
         private int pinWidth = 4;
         private int pinHeight = 4;
@@ -298,6 +299,10 @@ namespace Citta_T1.Controls.Move
             {
                 if (rectOut.Contains(e.Location))
                 {
+
+                    lineStaus = "linePaint";
+
+
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     cmd = ECommandType.PinDraw;
@@ -455,7 +460,7 @@ namespace Citta_T1.Controls.Move
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectOut.Contains(mousePosition))
+            if (rectOut.Contains(mousePosition) || lineStaus == "linePaint")
             {
                 if (pinStatus == "rectOut") return;
                 rectOut = rectEnter(rectOut);
@@ -628,6 +633,8 @@ namespace Citta_T1.Controls.Move
         {
             this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
+
+
     }
 
 }
