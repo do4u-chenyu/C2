@@ -586,28 +586,30 @@ namespace Citta_T1.Controls.Move
         #region 针脚事件
         public void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectIn_down.Contains(mousePosition))
+            if (rectIn_down.Contains(mousePosition) || revisedPinIndex == 1)
             {
                 if (rectArea.Contains(pinStatus))  return; 
                 rectIn_down = rectEnter(rectIn_down);
                 this.Invalidate();
-                pinStatus = "rectIn_down";
+                pinStatus = "rectIn_down";     
             }
-            else if(rectIn_up.Contains(mousePosition))
+
+            if(rectIn_up.Contains(mousePosition) || revisedPinIndex == 0)
             {
                 if (rectArea.Contains(pinStatus)) return;
                 rectIn_up = rectEnter(rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
             }
-            else if(rectOut.Contains(mousePosition))
+
+            if(rectOut.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)) return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
             }
-            else if (pinStatus != "noEnter")
+            if (pinStatus != "noEnter")
             {             
                 switch (pinStatus)
                 {
