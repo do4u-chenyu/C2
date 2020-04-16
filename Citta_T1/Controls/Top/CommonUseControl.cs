@@ -22,8 +22,8 @@ namespace Citta_T1.Controls.Top
 
         private void InitializeToolTip()
         {
-            this.toolTip1.SetToolTip(this.collideButton, HelpUtil.CollideOperatorHelpInfo);
-            this.toolTip1.SetToolTip(this.relateButton, HelpUtil.RelateOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.collideButton, HelpUtil.RelateOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.relateButton, HelpUtil.CollideOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.unionButton, HelpUtil.UnionOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.differButton, HelpUtil.DifferOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.filterButton, HelpUtil.FilterOperatorHelpInfo);
