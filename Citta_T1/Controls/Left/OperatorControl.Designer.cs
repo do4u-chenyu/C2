@@ -77,7 +77,7 @@
             this.leftpanelOpConect.Name = "leftpanelOpConect";
             this.leftpanelOpConect.Size = new System.Drawing.Size(74, 40);
             this.leftpanelOpConect.TabIndex = 0;
-            this.leftpanelOpConect.Text = "连接算子";
+            this.leftpanelOpConect.Text = "关联算子";
             this.leftpanelOpConect.UseVisualStyleBackColor = true;
             this.leftpanelOpConect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
@@ -163,7 +163,7 @@
             this.leftPanelOpIntersect.Name = "leftPanelOpIntersect";
             this.leftPanelOpIntersect.Size = new System.Drawing.Size(74, 40);
             this.leftPanelOpIntersect.TabIndex = 18;
-            this.leftPanelOpIntersect.Text = "取交集";
+            this.leftPanelOpIntersect.Text = "碰撞算子";
             this.leftPanelOpIntersect.UseVisualStyleBackColor = true;
             this.leftPanelOpIntersect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 

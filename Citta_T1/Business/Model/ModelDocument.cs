@@ -218,8 +218,8 @@ namespace Citta_T1.Business.Model
                     ModelRelation mr = this.modelRelations[i];
                     // 0 被RemarkControl占用了
 
-                    ModelElement sEle = this.modelElements[mr.StartID];
-                    ModelElement eEle = this.modelElements[mr.EndID];
+                    ModelElement sEle = SearchElementByID(mr.StartID);
+                    ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
@@ -227,6 +227,9 @@ namespace Citta_T1.Business.Model
                     // 控件线绑定
                     (sEle.GetControl as IMoveControl).BindStartLine(0, i);
                     (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
+                    //控件和线关联引脚更新
+                    (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
+                    (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -238,6 +241,7 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
+        
         public ModelElement SearchElementByID(int ID)
         {
  

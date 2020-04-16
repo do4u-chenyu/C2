@@ -363,6 +363,7 @@ namespace Citta_T1.Controls
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
                     this.RepaintAllRelations();
+                    this.RepaintStartcPin();
                     return;
                 }
                 /* 
@@ -374,6 +375,7 @@ namespace Citta_T1.Controls
                  * 
                  *         ----------
                  */
+                (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).revisedPinIndex);
                 log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).revisedPinIndex);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
@@ -411,6 +413,9 @@ namespace Citta_T1.Controls
             }
             g.Dispose();
         }
+
+
+
         public void CanvasPanel_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
@@ -512,7 +517,28 @@ namespace Citta_T1.Controls
         {
             return Global.GetFlowControl().SelectFrame;
         }
-
-
+        
+        #region 关于引脚在画线状态的改变
+        private void RepaintStartcPin()
+        {
+            int id = (startC as IMoveControl).GetID();
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.StartID == id)
+                    return;
+            }
+           
+            (startC as IMoveControl).OutPinInit("noLine");
+        }
+        private void ConfimEndPin()
+        {
+            int id = (endC as IMoveControl).GetID();
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.StartID == id)
+                    return;
+            }
+        }
+        #endregion
     }
 }

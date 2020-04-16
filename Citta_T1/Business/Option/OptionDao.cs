@@ -51,22 +51,23 @@ namespace Citta_T1.Business.Option
              */
 
             PointF startPoint = new PointF(
-                   moveOpControl.rectOut.Location.X + moveOpControl.Location.X,
-                   moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y
+                   moveOpControl.RectOut.Location.X + moveOpControl.Location.X,
+                   moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y
                    );
-            PointF endPoint = new PointF(mrc.Location.X + mrc.rectIn.Location.X, mrc.Location.Y + mrc.rectIn.Location.Y);
+            PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
             Bezier line = new Bezier(startPoint, endPoint);
             CanvasPanel canvas = Global.GetCanvasPanel();
             CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
             canvas.RepaintObject(line);
             ModelRelation newModelRelation = new ModelRelation(
                                 moveOpControl.ID, mrc.ID,
-                                new Point(moveOpControl.rectOut.Location.X + moveOpControl.Location.X, moveOpControl.rectOut.Location.Y + moveOpControl.Location.Y),
-                                new Point(mrc.rectIn.Location.X + mrc.Location.X, mrc.rectIn.Location.Y + mrc.Location.Y),
+                                new Point(moveOpControl.RectOut.Location.X + moveOpControl.Location.X, moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y),
+                                new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
                                 0);
             Global.GetCurrentDocument().AddModelRelation(newModelRelation);
             Global.GetCurrentDocument().BindRelationToControl(newModelRelation, moveOpControl, mrc);
-
+            moveOpControl.OutPinInit("lineExit");
+            mrc.rectInAdd(1);
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
             mrc.Path = path;
         }

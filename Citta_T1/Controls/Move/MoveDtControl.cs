@@ -28,14 +28,14 @@ namespace Citta_T1.Controls.Move
         private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
-
+        
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 11);
-        private int pinWidth = 4;
-        private int pinHeight = 4;
-        private Pen pen = new Pen(Color.DarkGray, 0.0001f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
+        private int pinWidth = 6;
+        private int pinHeight = 6;
+        private Pen pen = new Pen(Color.DarkGray, 1f);
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private Bitmap staticImage;
@@ -218,6 +218,7 @@ namespace Citta_T1.Controls.Move
                 startY = this.Location.Y + e.Y;
                 MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                 Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                
                 return;
             }
 
@@ -299,14 +300,12 @@ namespace Citta_T1.Controls.Move
             {
                 if (rectOut.Contains(e.Location))
                 {
-
-                    lineStaus = "linePaint";
-
-
+                    lineStaus = "lineExit";
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
+                    
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -460,7 +459,7 @@ namespace Citta_T1.Controls.Move
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectOut.Contains(mousePosition) || lineStaus == "linePaint")
+            if (rectOut.Contains(mousePosition) || lineStaus == "lineExit")
             {
                 if (pinStatus == "rectOut") return;
                 rectOut = rectEnter(rectOut);
@@ -479,8 +478,8 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
-            Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
+            Point dstLtCorner = new Point(oriCenter.X - 4, oriCenter.Y - 4);
+            Size dstSize = new Size(8, 8);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
@@ -488,9 +487,15 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
-            Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
+            Point dstLtCorner = new Point(oriCenter.X - 3, oriCenter.Y - 3);
+            Size dstSize = new Size(6, 6);
             return new Rectangle(dstLtCorner, dstSize);
+        }
+
+        public void OutPinInit(String status)
+        {
+            this.lineStaus = status;
+            PinOpLeaveAndEnter(new Point(0,0));
         }
         #endregion
 
@@ -579,8 +584,11 @@ namespace Citta_T1.Controls.Move
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(trnsRedBrush, rectOut);
-            e.Graphics.DrawRectangle(pen, rectOut);
+            
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.DrawEllipse(pen, rectOut);
         }
 
         #region 划线动作
@@ -634,7 +642,10 @@ namespace Citta_T1.Controls.Move
             this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
+        public void rectInAdd(int pinIndex)
+        {
 
+        }
     }
 
 }

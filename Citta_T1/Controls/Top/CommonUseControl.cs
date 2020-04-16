@@ -47,19 +47,19 @@ namespace Citta_T1.Controls.Top
             String text = "";
             switch (name)
             {
-                case "connectOpButton":
-                    text = "连接算子";
+                case "RelateButton":
+                    text = "关联算子";
                     break;
-                case "interOpButton":
-                    text = "取交集";
+                case "CollideButton":
+                    text = "碰撞算子";
                     break;
                 case "UnionButton":
                     text = "取并集";
                     break;
-                case "diffButton":
+                case "DifferButton":
                     text = "取差集";
                     break;
-                case "filterButton":
+                case "FilterButton":
                     text = "过滤算子";
                     break;
                 case "RandomButton":
