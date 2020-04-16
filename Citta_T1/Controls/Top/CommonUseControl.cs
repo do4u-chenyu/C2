@@ -17,7 +17,20 @@ namespace Citta_T1.Controls.Top
         public CommonUseControl()
         {
             InitializeComponent();
+            InitializeToolTip();
         }
+
+        private void InitializeToolTip()
+        {
+            this.toolTip1.SetToolTip(this.collideButton, HelpUtil.CollideOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.relateButton, HelpUtil.RelateOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.unionButton, HelpUtil.UnionOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.differButton, HelpUtil.DifferOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.filterButton, HelpUtil.FilterOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.randomButton, HelpUtil.RandomOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
+        }
+
         private void CommonUse_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -26,7 +39,7 @@ namespace Citta_T1.Controls.Top
                 dragDropData.SetData("Type", ElementType.Operator);
                 dragDropData.SetData("Path", "");
                 dragDropData.SetData("Text", NameTranslate((sender as Button).Name));
-                this.connectOpButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                this.collideButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
         private string NameTranslate(string name)

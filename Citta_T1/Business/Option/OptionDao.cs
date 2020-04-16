@@ -76,8 +76,8 @@ namespace Citta_T1.Business.Option
         //删除relation
 
         //修改配置
-        public void ModifyOption(List<int> oldColumns, List<int> currentcolumns)  
-        { 
+        public void ModifyOption(List<string> oldColumns, List<string> currentcolumns)  
+        {
             
         }
         //配置初始化
