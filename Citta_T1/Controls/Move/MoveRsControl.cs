@@ -31,7 +31,7 @@ namespace Citta_T1.Controls.Move
         private DSUtil.Encoding encoding;
 
         // 一些倍率
-        public string ReName { get => textBox.Text; }
+        public string ReName { get => this.textBox.Text; set => this.textBox.Text = value; }
         public string SubTypeName { get => typeName; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
