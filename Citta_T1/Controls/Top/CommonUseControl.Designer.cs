@@ -47,7 +47,7 @@
             // 
             this.collideButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
             this.collideButton.Location = new System.Drawing.Point(40, 0);
-            this.collideButton.Name = "connectOpButton";
+            this.collideButton.Name = "CollideButton";
             this.collideButton.Size = new System.Drawing.Size(61, 32);
             this.collideButton.TabIndex = 2;
             this.collideButton.UseVisualStyleBackColor = true;
@@ -57,7 +57,7 @@
             // 
             this.relateButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
             this.relateButton.Location = new System.Drawing.Point(103, 0);
-            this.relateButton.Name = "interOpButton";
+            this.relateButton.Name = "RelateButton";
             this.relateButton.Size = new System.Drawing.Size(61, 32);
             this.relateButton.TabIndex = 6;
             this.relateButton.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             // 
             this.differButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
             this.differButton.Location = new System.Drawing.Point(231, 0);
-            this.differButton.Name = "diffButton";
+            this.differButton.Name = "DifferButton";
             this.differButton.Size = new System.Drawing.Size(61, 32);
             this.differButton.TabIndex = 8;
             this.differButton.UseVisualStyleBackColor = true;
@@ -87,7 +87,7 @@
             // 
             this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
             this.filterButton.Location = new System.Drawing.Point(295, 0);
-            this.filterButton.Name = "filterButton";
+            this.filterButton.Name = "FilterButton";
             this.filterButton.Size = new System.Drawing.Size(61, 32);
             this.filterButton.TabIndex = 9;
             this.filterButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             // 
             this.histogramButton.Image = ((System.Drawing.Image)(resources.GetObject("histogramButton.Image")));
             this.histogramButton.Location = new System.Drawing.Point(431, 0);
-            this.histogramButton.Name = "histogramButton";
+            this.histogramButton.Name = "HistogramButton";
             this.histogramButton.Size = new System.Drawing.Size(75, 32);
             this.histogramButton.TabIndex = 11;
             this.histogramButton.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             // 
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
             this.formatButton.Location = new System.Drawing.Point(509, 0);
-            this.formatButton.Name = "formatButton";
+            this.formatButton.Name = "FormatButton";
             this.formatButton.Size = new System.Drawing.Size(89, 32);
             this.formatButton.TabIndex = 12;
             this.formatButton.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@
             // 
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
             this.moreButton.Location = new System.Drawing.Point(602, 4);
-            this.moreButton.Name = "moreButton";
+            this.moreButton.Name = "MoreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 13;
             this.moreButton.UseVisualStyleBackColor = true;

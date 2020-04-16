@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "连接算子 取差集 取交集 取并集";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集";
 
         private string opControlName;
         private Point mouseOffset;
@@ -168,10 +168,10 @@ namespace Citta_T1.Controls.Move
         {
             switch (subTypeName)
             {
-                case "连接算子":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
+                case "关联算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
                     break;
-                case "取交集":
+                case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
                     break;
                 case "取并集":
@@ -451,10 +451,10 @@ namespace Citta_T1.Controls.Move
             }
             switch (this.subTypeName)
             {
-                case "连接算子":
+                case "关联算子":
                     new RelateOperatorView(this).ShowDialog();
                     break;
-                case "取交集":
+                case "碰撞算子":
                     new CollideOperatorView(this).ShowDialog();
                     break;
                 case "取并集":

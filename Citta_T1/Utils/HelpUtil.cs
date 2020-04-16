@@ -9,10 +9,9 @@ namespace Citta_T1.Utils
     class HelpUtil
     {
         public static string AvgOperatorHelpInfo = "取平均值:计算选择字段的平均值.";
-        public static string MinOperatorHelpInfo = "取最小值算子:提取选择字段的最大值，查看相关数据信息.";
-        public static string MaxOperatorHelpInfo = "取最大值算子:提取选择字段的最小值，查看相关数据信息.";
+        public static string MinOperatorHelpInfo = "取最小值算子:提取选择字段的最小值，查看相关数据信息.";
+        public static string MaxOperatorHelpInfo = "取最大值算子:提取选择字段的最大值，查看相关数据信息.";
         public static string CollideOperatorHelpInfo = "碰撞算子:对两个数据表的选择字段进行取交集，输出两表都存在的数据.";
-        public static string JoinOperatorHelpInfo = "";
         public static string UnionOperatorHelpInfo = "取并集:对两个数据表的选择字段进行合并.";
         public static string DifferOperatorHelpInfo = "取差集:比较查找左表存在而右表不存在的数据行.";
         public static string RandomOperatorHelpInfo = "随机采样:随机输出n条数据.";

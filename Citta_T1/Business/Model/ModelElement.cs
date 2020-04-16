@@ -22,18 +22,18 @@ namespace Citta_T1.Business.Model
     }
     public enum ElementSubType
     {
-        JoinOperator,//连接算子
-        CollideOperator,//交集
-        UnionOperator,
-        DifferOperator,
-        RandomOperator,
-        FilterOperator,
-        MaxOperator,
-        MinOperator,
-        AvgOperator,//平均
-        SortOperator,//排序算子
-        FreqOperator,//频率算子 
-        GroupOperator,//分组算子
+        RelateOperator, //关联算子
+        CollideOperator,//取交集
+        UnionOperator,  //取并集
+        DifferOperator, //取差集
+        RandomOperator, //随机采样
+        FilterOperator, //过滤算子
+        MaxOperator,    //取最大值
+        MinOperator,    //取最小值
+        AvgOperator,    //平均
+        SortOperator,   //排序算子
+        FreqOperator,   //频率算子 
+        GroupOperator,  //分组算子
         Null
     }
     public enum ElementStatus
