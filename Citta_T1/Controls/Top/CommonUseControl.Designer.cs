@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommonUseControl));
             this.connectOpButton = new System.Windows.Forms.Button();
             this.interOpButton = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@
             this.formatButton = new System.Windows.Forms.Button();
             this.moreButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // connectOpButton
@@ -172,5 +174,6 @@
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
