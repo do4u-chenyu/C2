@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,16 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> inputFilePaths = new List<string>();
         public OperatorOption option;
         public string outputFilePath;
+        public DSUtil.Encoding encoding;
 
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
-            option = (triple.OperateElement.GetControl as MoveOpControl).Option;
-            outputFilePath = triple.ResultElement.GetPath();
+            //triple.DataElements.ForEach(c => encodings.Add(c.Encoding));
+            this.encoding = triple.DataElements.First().Encoding;
+            this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
+            this.outputFilePath = triple.ResultElement.GetPath();  
         }
 
         public string TransChoiceToCmd(string choice)

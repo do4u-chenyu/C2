@@ -48,18 +48,17 @@ namespace Citta_T1.OperatorViews
         private void createLine(int addLine)
         {
             // 添加控件
+            ComboBox regBox = new ComboBox();
+            regBox.Anchor = AnchorStyles.None;
+            regBox.Items.AddRange(new object[] {
+            "AND",
+            "OR"});
+            this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             //dataBox.Items.AddRange(this.columnName);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
-            dataBox.Items.AddRange(new object[] {
-            "name",
-            "age",
-            "addr",
-            "sex"});
-
-
+            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -70,29 +69,15 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
-            this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
+            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
-            HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
-            textBox.DecLength = 2;
-            textBox.InputType = HZH_Controls.TextInputType.NotControl;
-            textBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            textBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            textBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            textBox.OldText = null;
-            textBox.PromptColor = System.Drawing.Color.Gray;
-            textBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            textBox.PromptText = "";
-            textBox.RegexPattern = "";
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
+            ComboBox data2box = new ComboBox();
+            data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            data2box.Items.AddRange(new object[] {
+            "age",
+            "name"});
+            data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
 
             Button addButton1 = new Button();
             addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -107,7 +92,7 @@ namespace Citta_T1.OperatorViews
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 3, addLine);
+            this.tableLayoutPanel1.Controls.Add(addButton1, 4, addLine);
 
             Button delButton1 = new Button();
             delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -122,7 +107,7 @@ namespace Citta_T1.OperatorViews
             delButton1.Click += new System.EventHandler(this.del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
+            this.tableLayoutPanel1.Controls.Add(delButton1, 5, addLine);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -161,6 +146,9 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
+                    Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k);
+                    ctlNext5.Name = (k + 1).ToString();
+                    this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
                 }
                 createLine(addLine);
             }
@@ -174,10 +162,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 5) + 4];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * 6) + 5];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 5) + 4; j >= (i * 5); j--)
+                    for (int j = (i * 6) + 5; j >= (i * 6); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }
@@ -199,6 +187,9 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
                 ctlNext4.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
+                Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k + 1);
+                ctlNext5.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;

@@ -19,5 +19,8 @@ namespace Citta_T1.Utils
         public static string FreqOperatorHelpInfo = "频率算子";
         public static string SortOperatorHelpInfo = "排序算子"; 
         public static string GroupOperatorHelpInfo = "分组算子";
+        public static string RelateOperatorHelpInfo = "关联算子";
+
+        public static string FormatOperatorHelpInfo = "一键排版,智能调整元素版面位置";
     }
 }

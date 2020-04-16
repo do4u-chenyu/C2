@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Citta_T1</RootNamespace>
     <AssemblyName>Citta_T1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -480,6 +481,7 @@
     <None Include="Doc\citta帮助文档.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Doc\CITTA算子设计文档v4.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
     <None Include="Doc\模型配置设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
