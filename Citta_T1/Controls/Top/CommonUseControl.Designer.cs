@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommonUseControl));
-            this.connectOpButton = new System.Windows.Forms.Button();
-            this.interOpButton = new System.Windows.Forms.Button();
-            this.UnionButton = new System.Windows.Forms.Button();
-            this.diffButton = new System.Windows.Forms.Button();
+            this.collideButton = new System.Windows.Forms.Button();
+            this.relateButton = new System.Windows.Forms.Button();
+            this.unionButton = new System.Windows.Forms.Button();
+            this.differButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
-            this.RandomButton = new System.Windows.Forms.Button();
+            this.randomButton = new System.Windows.Forms.Button();
             this.histogramButton = new System.Windows.Forms.Button();
             this.formatButton = new System.Windows.Forms.Button();
             this.moreButton = new System.Windows.Forms.Button();
@@ -45,43 +45,43 @@
             // 
             // connectOpButton
             // 
-            this.connectOpButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
-            this.connectOpButton.Location = new System.Drawing.Point(40, 0);
-            this.connectOpButton.Name = "connectOpButton";
-            this.connectOpButton.Size = new System.Drawing.Size(61, 32);
-            this.connectOpButton.TabIndex = 2;
-            this.connectOpButton.UseVisualStyleBackColor = true;
-            this.connectOpButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            this.collideButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
+            this.collideButton.Location = new System.Drawing.Point(40, 0);
+            this.collideButton.Name = "connectOpButton";
+            this.collideButton.Size = new System.Drawing.Size(61, 32);
+            this.collideButton.TabIndex = 2;
+            this.collideButton.UseVisualStyleBackColor = true;
+            this.collideButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // interOpButton
             // 
-            this.interOpButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
-            this.interOpButton.Location = new System.Drawing.Point(103, 0);
-            this.interOpButton.Name = "interOpButton";
-            this.interOpButton.Size = new System.Drawing.Size(61, 32);
-            this.interOpButton.TabIndex = 6;
-            this.interOpButton.UseVisualStyleBackColor = true;
-            this.interOpButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            this.relateButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
+            this.relateButton.Location = new System.Drawing.Point(103, 0);
+            this.relateButton.Name = "interOpButton";
+            this.relateButton.Size = new System.Drawing.Size(61, 32);
+            this.relateButton.TabIndex = 6;
+            this.relateButton.UseVisualStyleBackColor = true;
+            this.relateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // UnionButton
             // 
-            this.UnionButton.Image = ((System.Drawing.Image)(resources.GetObject("UnionButton.Image")));
-            this.UnionButton.Location = new System.Drawing.Point(167, 0);
-            this.UnionButton.Name = "UnionButton";
-            this.UnionButton.Size = new System.Drawing.Size(61, 32);
-            this.UnionButton.TabIndex = 7;
-            this.UnionButton.UseVisualStyleBackColor = true;
-            this.UnionButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            this.unionButton.Image = ((System.Drawing.Image)(resources.GetObject("UnionButton.Image")));
+            this.unionButton.Location = new System.Drawing.Point(167, 0);
+            this.unionButton.Name = "UnionButton";
+            this.unionButton.Size = new System.Drawing.Size(61, 32);
+            this.unionButton.TabIndex = 7;
+            this.unionButton.UseVisualStyleBackColor = true;
+            this.unionButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // diffButton
             // 
-            this.diffButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
-            this.diffButton.Location = new System.Drawing.Point(231, 0);
-            this.diffButton.Name = "diffButton";
-            this.diffButton.Size = new System.Drawing.Size(61, 32);
-            this.diffButton.TabIndex = 8;
-            this.diffButton.UseVisualStyleBackColor = true;
-            this.diffButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            this.differButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
+            this.differButton.Location = new System.Drawing.Point(231, 0);
+            this.differButton.Name = "diffButton";
+            this.differButton.Size = new System.Drawing.Size(61, 32);
+            this.differButton.TabIndex = 8;
+            this.differButton.UseVisualStyleBackColor = true;
+            this.differButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // filterButton
             // 
@@ -95,13 +95,13 @@
             // 
             // RandomButton
             // 
-            this.RandomButton.Image = ((System.Drawing.Image)(resources.GetObject("RandomButton.Image")));
-            this.RandomButton.Location = new System.Drawing.Point(358, 0);
-            this.RandomButton.Name = "RandomButton";
-            this.RandomButton.Size = new System.Drawing.Size(69, 32);
-            this.RandomButton.TabIndex = 10;
-            this.RandomButton.UseVisualStyleBackColor = true;
-            this.RandomButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            this.randomButton.Image = ((System.Drawing.Image)(resources.GetObject("RandomButton.Image")));
+            this.randomButton.Location = new System.Drawing.Point(358, 0);
+            this.randomButton.Name = "RandomButton";
+            this.randomButton.Size = new System.Drawing.Size(69, 32);
+            this.randomButton.TabIndex = 10;
+            this.randomButton.UseVisualStyleBackColor = true;
+            this.randomButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // histogramButton
             // 
@@ -149,12 +149,12 @@
             this.Controls.Add(this.moreButton);
             this.Controls.Add(this.formatButton);
             this.Controls.Add(this.histogramButton);
-            this.Controls.Add(this.RandomButton);
+            this.Controls.Add(this.randomButton);
             this.Controls.Add(this.filterButton);
-            this.Controls.Add(this.diffButton);
-            this.Controls.Add(this.UnionButton);
-            this.Controls.Add(this.interOpButton);
-            this.Controls.Add(this.connectOpButton);
+            this.Controls.Add(this.differButton);
+            this.Controls.Add(this.unionButton);
+            this.Controls.Add(this.relateButton);
+            this.Controls.Add(this.collideButton);
             this.Name = "CommonUseControl";
             this.Size = new System.Drawing.Size(654, 33);
             this.ResumeLayout(false);
@@ -164,12 +164,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button connectOpButton;
-        private System.Windows.Forms.Button interOpButton;
-        private System.Windows.Forms.Button UnionButton;
-        private System.Windows.Forms.Button diffButton;
+        private System.Windows.Forms.Button collideButton;
+        private System.Windows.Forms.Button relateButton;
+        private System.Windows.Forms.Button unionButton;
+        private System.Windows.Forms.Button differButton;
         private System.Windows.Forms.Button filterButton;
-        private System.Windows.Forms.Button RandomButton;
+        private System.Windows.Forms.Button randomButton;
         private System.Windows.Forms.Button histogramButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button moreButton;
