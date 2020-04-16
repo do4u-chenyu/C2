@@ -217,6 +217,7 @@
             this.LocationChanged += new System.EventHandler(this.MoveDtControl_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveDtControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
+            
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
