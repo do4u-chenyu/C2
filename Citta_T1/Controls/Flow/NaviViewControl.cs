@@ -148,6 +148,10 @@ namespace Citta_T1.Controls.Flow
 
         private void UpdateImage(int width, int height, float factor, Point mapOrigin)
         {
+            ModelDocument currentDocument = Global.GetCurrentDocument();
+            if (currentDocument == null)
+                return;
+
             if (this.staticImage != null)
             {   // bitmap是重型资源,需要强制释放
                 this.staticImage.Dispose();
@@ -157,15 +161,13 @@ namespace Citta_T1.Controls.Flow
             Graphics g = Graphics.FromImage(staticImage);
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            
-
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+            List<ModelElement> modelElements = currentDocument.ModelElements;
+            List<ModelRelation> modelRelations = currentDocument.ModelRelations;
 
             foreach (ModelElement me in modelElements)
             { 
                 PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                PointF ctWorldPosition = Global.GetCurrentDocument().ScreenToWorldF(ctOrgPosition, mapOrigin);
+                PointF ctWorldPosition = currentDocument.ScreenToWorldF(ctOrgPosition, mapOrigin);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 
                 // 为了解决导航框拖动时,元素漂移的问题
@@ -189,8 +191,8 @@ namespace Citta_T1.Controls.Flow
 
             foreach (ModelRelation mr in modelRelations)
             {
-                ModelElement startMe = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                ModelElement endMe   = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
+                ModelElement startMe = currentDocument.SearchElementByID(mr.StartID);
+                ModelElement endMe   = currentDocument.SearchElementByID(mr.EndID);
                 
                 if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;
