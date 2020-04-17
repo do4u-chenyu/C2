@@ -54,7 +54,7 @@ namespace Citta_T1.Controls.Move
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
-        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+        public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
 
@@ -444,7 +444,7 @@ namespace Citta_T1.Controls.Move
 
         private void ShowOptionDialog()
         {
-            if (!this.OptionToolStripMenuItem.Enabled)
+            if (!this.OptionMenuItem.Enabled)
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
