@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
-    class JoinOperatorCmd : OperatorCmd
+    class RelateOperatorCmd : OperatorCmd
     {
-        public JoinOperatorCmd(Triple triple) : base(triple)
+        public RelateOperatorCmd(Triple triple) : base(triple)
         {
         }
 

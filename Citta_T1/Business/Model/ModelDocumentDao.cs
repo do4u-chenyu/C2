@@ -47,7 +47,7 @@ namespace Citta_T1.Business.Model
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
-            md.ResetCount();
+            md.DocumentElementCount();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
@@ -106,11 +106,11 @@ namespace Citta_T1.Business.Model
             string type = "";
             switch (subType)
             {
-                case "连接算子":
-                    type = "CollideOperator";
+                case "关联算子":
+                    type = "RelateOperator";
                     break;
-                case "取交集":
-                    type = "JoinOperator";
+                case "碰撞算子":
+                    type = "CollideOperator";
                     break;
                 case "取并集":
                     type = "UnionOperator";

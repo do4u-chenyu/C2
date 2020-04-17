@@ -22,8 +22,8 @@ namespace Citta_T1.Controls.Top
 
         private void InitializeToolTip()
         {
-            this.toolTip1.SetToolTip(this.collideButton, HelpUtil.CollideOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.relateButton, HelpUtil.RelateOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.collideButton, HelpUtil.CollideOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.unionButton, HelpUtil.UnionOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.differButton, HelpUtil.DifferOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.filterButton, HelpUtil.FilterOperatorHelpInfo);
@@ -39,7 +39,7 @@ namespace Citta_T1.Controls.Top
                 dragDropData.SetData("Type", ElementType.Operator);
                 dragDropData.SetData("Path", "");
                 dragDropData.SetData("Text", NameTranslate((sender as Button).Name));
-                this.collideButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                this.relateButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
         private string NameTranslate(string name)
@@ -47,22 +47,22 @@ namespace Citta_T1.Controls.Top
             String text = "";
             switch (name)
             {
-                case "connectOpButton":
-                    text = "连接算子";
+                case "relateButton":
+                    text = "关联算子";
                     break;
-                case "interOpButton":
-                    text = "取交集";
+                case "collideButton":
+                    text = "碰撞算子";
                     break;
-                case "UnionButton":
+                case "unionButton":
                     text = "取并集";
                     break;
-                case "diffButton":
+                case "differButton":
                     text = "取差集";
                     break;
                 case "filterButton":
                     text = "过滤算子";
                     break;
-                case "RandomButton":
+                case "randomButton":
                     text = "随机采样";
                     break;
             }

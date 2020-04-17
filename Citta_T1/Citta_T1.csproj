@@ -88,7 +88,7 @@
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FreqOperatorCmd.cs" />
-    <Compile Include="Business\Schedule\Cmd\JoinOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\RelateOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MaxOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MinOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\OperatorCmd.cs" />
@@ -774,6 +774,7 @@
     <Content Include="res\menu\head.png" />
     <Content Include="res\menu\help.png" />
     <None Include="res\toolbox\add.png" />
+    <None Include="res\menu\modelstep.png" />
     <Content Include="res\toolbox\background.png" />
     <Content Include="res\toolbox\clicksavebutton.png" />
     <Content Include="res\toolbox\connect.png" />

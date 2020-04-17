@@ -1,7 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 using Citta_T1.Business.Model;
+
 
 namespace Citta_T1.Controls.Left
 {
@@ -11,17 +12,25 @@ namespace Citta_T1.Controls.Left
         public OperatorControl()
         {
             InitializeComponent();
+            InitializeToolTip();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InitializeToolTip()
         {
-          
+            this.toolTip1.SetToolTip(this.leftPanelOpRelate, HelpUtil.RelateOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpCollide, HelpUtil.CollideOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.lefPanelOpUnion, HelpUtil.UnionOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpDiffer, HelpUtil.DifferOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpRandom, HelpUtil.RandomOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpFilter, HelpUtil.FilterOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpMax, HelpUtil.MaxOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpMin, HelpUtil.MinOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpAvg, HelpUtil.AvgOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpFreq, HelpUtil.FreqOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpSort, HelpUtil.SortOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.leftPanelOpGroup, HelpUtil.GroupOperatorHelpInfo);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
         {
@@ -31,7 +40,7 @@ namespace Citta_T1.Controls.Left
                 dragDropData.SetData("Type", ElementType.Operator);
                 dragDropData.SetData("Path", "");
                 dragDropData.SetData("Text", (sender as Button).Text);
-                leftPanelOpIntersect.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                leftPanelOpCollide.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
 
@@ -60,6 +69,10 @@ namespace Citta_T1.Controls.Left
 
             g.Dispose();
             myNewCursor.Dispose();
+            myNewCursor = null;
+            map.Dispose();
+            map = null;
+
         }
     }
 }
