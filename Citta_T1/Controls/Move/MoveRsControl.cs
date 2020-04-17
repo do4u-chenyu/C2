@@ -68,6 +68,7 @@ namespace Citta_T1.Controls.Move
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn rectOut";
         private List<int> linePinArray = new List<int> { };
+        private String lineStatus = "noLine";
         private ControlMoveWrapper controlMoveWrapper;
         private Bitmap staticImage;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
@@ -157,6 +158,7 @@ namespace Citta_T1.Controls.Move
             {
                 if (cmd == ECommandType.PinDraw)
                 {
+                    lineStatus = "lineExit";
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
@@ -289,9 +291,9 @@ namespace Citta_T1.Controls.Move
         {
             log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(188 * f), (int)(25 * f));
+            this.Size = new Size((int)(188 * f), (int)(26 * f));
             this.rightPictureBox.Location = new Point((int)(159 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(179 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(179 * f), (int)(9 * f));
             this.txtButton.Size = new Size((int)(124 * f), (int)(22 * f));
             this.textBox.Size = new Size((int)(124 * f), (int)(23 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
@@ -300,9 +302,9 @@ namespace Citta_T1.Controls.Move
         {
             log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(140 * f), (int)(25 * f));
+            this.Size = new Size((int)(140 * f), (int)(26 * f));
             this.rightPictureBox.Location = new Point((int)(107 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(131 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(131 * f), (int)(9 * f));
             this.txtButton.Size = new Size((int)(72 * f), (int)(22 * f));
             this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
@@ -311,9 +313,9 @@ namespace Citta_T1.Controls.Move
         {
             log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(179 * f), (int)(25 * f));
+            this.Size = new Size((int)(179 * f), (int)(26 * f));
             this.rightPictureBox.Location = new Point((int)(151 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(170 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(170 * f), (int)(9 * f));
             this.txtButton.Size = new Size((int)(114 * f), (int)(22 * f));
             this.textBox.Size = new Size((int)(110 * f), (int)(23 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
@@ -396,14 +398,14 @@ namespace Citta_T1.Controls.Move
         {
             if (rectIn.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus) || linePinArray.Contains(1)) return;
+                if  (pinStatus == "rectIn" || linePinArray.Contains(1))  return;
                 rectIn = rectEnter(rectIn);
                 this.Invalidate();
                 pinStatus = "rectIn";
             }
-            else if (rectOut.Contains(mousePosition) )
+            else if (rectOut.Contains(mousePosition) || lineStatus == "lineExit")
             {
-                if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
+                if (pinStatus == "rectOut") return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
@@ -413,12 +415,10 @@ namespace Citta_T1.Controls.Move
                 switch (pinStatus)
                 {
                     case "rectIn":
-                        if (!linePinArray.Contains(1))
-                            rectIn = rectLeave(rectIn);
+                        rectIn = rectLeave(rectIn);
                         break;
                     case "rectOut":
-                        if (!linePinArray.Contains(-1))
-                            rectOut = rectLeave(rectOut);
+                        rectOut = rectLeave(rectOut);
                         break;
                 }
                 pinStatus = "noEnter";
@@ -445,12 +445,8 @@ namespace Citta_T1.Controls.Move
         }
         public void OutPinInit(String status)
         {
-            linePinArray.Add(-1);
-            if (pinStatus != "rectOut")
-            {
-                rectOut = rectEnter(rectOut);
-                this.Invalidate();
-            }
+            
+            lineStatus = status; 
 
             PinOpLeaveAndEnter(new Point(0, 0));
         }

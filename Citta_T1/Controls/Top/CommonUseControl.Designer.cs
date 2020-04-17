@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommonUseControl));
-            this.collideButton = new System.Windows.Forms.Button();
             this.relateButton = new System.Windows.Forms.Button();
+            this.collideButton = new System.Windows.Forms.Button();
             this.unionButton = new System.Windows.Forms.Button();
             this.differButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
@@ -43,41 +43,41 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
-            // connectOpButton
+            // relateButton
             // 
-            this.collideButton.Image = ((System.Drawing.Image)(resources.GetObject("connectOpButton.Image")));
-            this.collideButton.Location = new System.Drawing.Point(40, 0);
-            this.collideButton.Name = "CollideButton";
-            this.collideButton.Size = new System.Drawing.Size(61, 32);
-            this.collideButton.TabIndex = 2;
-            this.collideButton.UseVisualStyleBackColor = true;
-            this.collideButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
-            // 
-            // interOpButton
-            // 
-            this.relateButton.Image = ((System.Drawing.Image)(resources.GetObject("interOpButton.Image")));
-            this.relateButton.Location = new System.Drawing.Point(103, 0);
-            this.relateButton.Name = "RelateButton";
+            this.relateButton.Image = ((System.Drawing.Image)(resources.GetObject("relateButton.Image")));
+            this.relateButton.Location = new System.Drawing.Point(40, 0);
+            this.relateButton.Name = "relateButton";
             this.relateButton.Size = new System.Drawing.Size(61, 32);
-            this.relateButton.TabIndex = 6;
+            this.relateButton.TabIndex = 2;
             this.relateButton.UseVisualStyleBackColor = true;
             this.relateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
-            // UnionButton
+            // collideButton
             // 
-            this.unionButton.Image = ((System.Drawing.Image)(resources.GetObject("UnionButton.Image")));
+            this.collideButton.Image = ((System.Drawing.Image)(resources.GetObject("collideButton.Image")));
+            this.collideButton.Location = new System.Drawing.Point(103, 0);
+            this.collideButton.Name = "collideButton";
+            this.collideButton.Size = new System.Drawing.Size(61, 32);
+            this.collideButton.TabIndex = 6;
+            this.collideButton.UseVisualStyleBackColor = true;
+            this.collideButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
+            // 
+            // unionButton
+            // 
+            this.unionButton.Image = ((System.Drawing.Image)(resources.GetObject("unionButton.Image")));
             this.unionButton.Location = new System.Drawing.Point(167, 0);
-            this.unionButton.Name = "UnionButton";
+            this.unionButton.Name = "unionButton";
             this.unionButton.Size = new System.Drawing.Size(61, 32);
             this.unionButton.TabIndex = 7;
             this.unionButton.UseVisualStyleBackColor = true;
             this.unionButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
-            // diffButton
+            // differButton
             // 
-            this.differButton.Image = ((System.Drawing.Image)(resources.GetObject("diffButton.Image")));
+            this.differButton.Image = ((System.Drawing.Image)(resources.GetObject("differButton.Image")));
             this.differButton.Location = new System.Drawing.Point(231, 0);
-            this.differButton.Name = "DifferButton";
+            this.differButton.Name = "differButton";
             this.differButton.Size = new System.Drawing.Size(61, 32);
             this.differButton.TabIndex = 8;
             this.differButton.UseVisualStyleBackColor = true;
@@ -87,17 +87,17 @@
             // 
             this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
             this.filterButton.Location = new System.Drawing.Point(295, 0);
-            this.filterButton.Name = "FilterButton";
+            this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(61, 32);
             this.filterButton.TabIndex = 9;
             this.filterButton.UseVisualStyleBackColor = true;
             this.filterButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
-            // RandomButton
+            // randomButton
             // 
-            this.randomButton.Image = ((System.Drawing.Image)(resources.GetObject("RandomButton.Image")));
+            this.randomButton.Image = ((System.Drawing.Image)(resources.GetObject("randomButton.Image")));
             this.randomButton.Location = new System.Drawing.Point(358, 0);
-            this.randomButton.Name = "RandomButton";
+            this.randomButton.Name = "randomButton";
             this.randomButton.Size = new System.Drawing.Size(69, 32);
             this.randomButton.TabIndex = 10;
             this.randomButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@
             // 
             this.histogramButton.Image = ((System.Drawing.Image)(resources.GetObject("histogramButton.Image")));
             this.histogramButton.Location = new System.Drawing.Point(431, 0);
-            this.histogramButton.Name = "HistogramButton";
+            this.histogramButton.Name = "histogramButton";
             this.histogramButton.Size = new System.Drawing.Size(75, 32);
             this.histogramButton.TabIndex = 11;
             this.histogramButton.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             // 
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
             this.formatButton.Location = new System.Drawing.Point(509, 0);
-            this.formatButton.Name = "FormatButton";
+            this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(89, 32);
             this.formatButton.TabIndex = 12;
             this.formatButton.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@
             // 
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
             this.moreButton.Location = new System.Drawing.Point(602, 4);
-            this.moreButton.Name = "MoreButton";
+            this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 13;
             this.moreButton.UseVisualStyleBackColor = true;
@@ -153,8 +153,8 @@
             this.Controls.Add(this.filterButton);
             this.Controls.Add(this.differButton);
             this.Controls.Add(this.unionButton);
-            this.Controls.Add(this.relateButton);
             this.Controls.Add(this.collideButton);
+            this.Controls.Add(this.relateButton);
             this.Name = "CommonUseControl";
             this.Size = new System.Drawing.Size(654, 33);
             this.ResumeLayout(false);
@@ -164,8 +164,8 @@
 
         #endregion
 
-        private System.Windows.Forms.Button collideButton;
         private System.Windows.Forms.Button relateButton;
+        private System.Windows.Forms.Button collideButton;
         private System.Windows.Forms.Button unionButton;
         private System.Windows.Forms.Button differButton;
         private System.Windows.Forms.Button filterButton;

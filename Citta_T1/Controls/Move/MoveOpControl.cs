@@ -55,7 +55,7 @@ namespace Citta_T1.Controls.Move
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
-        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+        public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         public List<string> DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
 
@@ -86,8 +86,8 @@ namespace Citta_T1.Controls.Move
 
         // 绘制引脚
 
-        private Point leftPin = new Point(2, 11);
-        private Point rightPin = new Point(140, 11);
+        private Point leftPin = new Point(2, 10);
+        private Point rightPin = new Point(140, 10);
 
 
         private int pinWidth = 6;
@@ -407,7 +407,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new Size((int)(167 * f), (int)(27 * f));//194，25
             this.rightPictureBox.Location = new Point((int)(144 * f), (int)(7 * f));//159,2
             this.statusBox.Location = new Point((int)(126 * f), (int)(7 * f));//新增
-            this.rectOut.Location = new Point((int)(159 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(159 * f), (int)(10 * f));
             
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
@@ -422,7 +422,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
-            this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(140 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
@@ -433,7 +433,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.Location = new Point((int)(120 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
-            this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(154 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
@@ -446,7 +446,7 @@ namespace Citta_T1.Controls.Move
 
         private void ShowOptionDialog()
         {
-            if (!this.OptionToolStripMenuItem.Enabled)
+            if (!this.OptionMenuItem.Enabled)
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;

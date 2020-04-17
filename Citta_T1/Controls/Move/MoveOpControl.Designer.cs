@@ -36,12 +36,12 @@ namespace Citta_T1.Controls.Move
             this.leftPinPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPinPictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.OptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.菜单2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.备注ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.运行到此ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.异常日志ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemarkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ErrorLogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -103,77 +103,80 @@ namespace Citta_T1.Controls.Move
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OptionToolStripMenuItem,
-            this.菜单2ToolStripMenuItem,
-            this.备注ToolStripMenuItem,
-            this.运行到此ToolStripMenuItem,
-            this.异常日志ToolStripMenuItem,
-            this.删除ToolStripMenuItem});
+            this.OptionMenuItem,
+            this.RenameMenuItem,
+            this.RemarkMenuItem,
+            this.RunMenuItem,
+            this.ErrorLogMenuItem,
+            this.DeleteMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(134, 148);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
-            // OptionToolStripMenuItem
+            // OptionMenuItem
             // 
-            this.OptionToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.OptionToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OptionToolStripMenuItem.BackgroundImage")));
-            this.OptionToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.OptionToolStripMenuItem.Enabled = false;
-            this.OptionToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.OptionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem";
-            this.OptionToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.OptionToolStripMenuItem.Text = "设置";
-            this.OptionToolStripMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
+            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.OptionMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OptionMenuItem.BackgroundImage")));
+            this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OptionMenuItem.Enabled = false;
+            this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.OptionMenuItem.Name = "OptionMenuItem";
+            this.OptionMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.OptionMenuItem.Text = "设置";
+            this.OptionMenuItem.ToolTipText = "配置算子";
+            this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
-            // 菜单2ToolStripMenuItem
+            // RenameMenuItem
             // 
-            this.菜单2ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("菜单2ToolStripMenuItem.BackgroundImage")));
-            this.菜单2ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.菜单2ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.菜单2ToolStripMenuItem.Name = "菜单2ToolStripMenuItem";
-            this.菜单2ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.菜单2ToolStripMenuItem.Text = "重命名";
-            this.菜单2ToolStripMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
+            this.RenameMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RenameMenuItem.BackgroundImage")));
+            this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.RenameMenuItem.Name = "RenameMenuItem";
+            this.RenameMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RenameMenuItem.Text = "重命名";
+            this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
-            // 备注ToolStripMenuItem
+            // RemarkMenuItem
             // 
-            this.备注ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("备注ToolStripMenuItem.BackgroundImage")));
-            this.备注ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.备注ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.备注ToolStripMenuItem.Name = "备注ToolStripMenuItem";
-            this.备注ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.备注ToolStripMenuItem.Text = "备注";
-            this.备注ToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.RemarkMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemarkMenuItem.BackgroundImage")));
+            this.RemarkMenuItem.Enabled = false;
+            this.RemarkMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.RemarkMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.RemarkMenuItem.Name = "RemarkMenuItem";
+            this.RemarkMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RemarkMenuItem.Text = "备注";
+            this.RemarkMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
-            // 运行到此ToolStripMenuItem
+            // RunMenuItem
             // 
-            this.运行到此ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("运行到此ToolStripMenuItem.BackgroundImage")));
-            this.运行到此ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.运行到此ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.运行到此ToolStripMenuItem.Name = "运行到此ToolStripMenuItem";
-            this.运行到此ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.运行到此ToolStripMenuItem.Text = "运行到此";
-            this.运行到此ToolStripMenuItem.ToolTipText = "将执行模型到本阶段为止";
+            this.RunMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RunMenuItem.BackgroundImage")));
+            this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.RunMenuItem.Name = "RunMenuItem";
+            this.RunMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RunMenuItem.Text = "运行到此";
+            this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
-            // 异常日志ToolStripMenuItem
+            // ErrorLogMenuItem
             // 
-            this.异常日志ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("异常日志ToolStripMenuItem.BackgroundImage")));
-            this.异常日志ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.异常日志ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.异常日志ToolStripMenuItem.Name = "异常日志ToolStripMenuItem";
-            this.异常日志ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.异常日志ToolStripMenuItem.Text = "异常日志";
+            this.ErrorLogMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ErrorLogMenuItem.BackgroundImage")));
+            this.ErrorLogMenuItem.Enabled = false;
+            this.ErrorLogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.ErrorLogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.ErrorLogMenuItem.Name = "ErrorLogMenuItem";
+            this.ErrorLogMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ErrorLogMenuItem.Text = "异常日志";
             // 
-            // 删除ToolStripMenuItem
+            // DeleteMenuItem
             // 
-            this.删除ToolStripMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("删除ToolStripMenuItem.BackgroundImage")));
-            this.删除ToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.删除ToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
+            this.DeleteMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DeleteMenuItem.BackgroundImage")));
+            this.DeleteMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.DeleteMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.DeleteMenuItem.Name = "DeleteMenuItem";
+            this.DeleteMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.DeleteMenuItem.Text = "删除";
+            this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
             // textBox
             // 
@@ -262,12 +265,12 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.PictureBox leftPinPictureBox;
         public System.Windows.Forms.PictureBox rightPinPictureBox;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem OptionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 菜单2ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 备注ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 运行到此ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 异常日志ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemarkMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ErrorLogMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;
         public System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolTip helpToolTip;
