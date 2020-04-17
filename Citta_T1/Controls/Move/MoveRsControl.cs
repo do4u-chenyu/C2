@@ -398,14 +398,14 @@ namespace Citta_T1.Controls.Move
         {
             if (rectIn.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus) || linePinArray.Contains(1)) return;
+                if  (pinStatus == "rectIn" || linePinArray.Contains(1))  return;
                 rectIn = rectEnter(rectIn);
                 this.Invalidate();
                 pinStatus = "rectIn";
             }
-            else if (rectOut.Contains(mousePosition))
+            else if (rectOut.Contains(mousePosition) || lineStatus == "lineExit")
             {
-                if (rectArea.Contains(pinStatus)) return;
+                if (pinStatus == "rectOut") return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
@@ -415,21 +415,13 @@ namespace Citta_T1.Controls.Move
                 switch (pinStatus)
                 {
                     case "rectIn":
-                        if (!linePinArray.Contains(1))
-                        {
-                            rectIn = rectLeave(rectIn);
-                            pinStatus = "noEnter";
-                        }   
+                        rectIn = rectLeave(rectIn);
                         break;
                     case "rectOut":
-                        if (lineStatus == "noLine")
-                        {
-                            rectOut = rectLeave(rectOut);
-                            pinStatus = "noEnter";
-                        }
+                        rectOut = rectLeave(rectOut);
                         break;
                 }
-                
+                pinStatus = "noEnter";
                 this.Invalidate();
             }
         }
