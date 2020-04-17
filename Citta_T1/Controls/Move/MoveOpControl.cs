@@ -37,13 +37,14 @@ namespace Citta_T1.Controls.Move
 
         private string subTypeName;
         private string oldTextString;
-        private OperatorOption option=new OperatorOption();
+        private OperatorOption option = new OperatorOption();
         private int id;
+        private List<string> dataSourceColumns;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => subTypeName; }
-        internal OperatorOption Option { get => this.option; set => this.option = value; }
+        public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
         public ElementStatus Status { 
             get => this.status;
@@ -56,6 +57,7 @@ namespace Citta_T1.Controls.Move
         public int ID { get => this.id; set => this.id = value; }
         public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
+        public List<string> DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
 
 
 

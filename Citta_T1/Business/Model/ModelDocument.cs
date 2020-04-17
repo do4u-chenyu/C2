@@ -123,7 +123,7 @@ namespace Citta_T1.Business.Model
                 this.ModelRelations.Remove(mr);
 
         }
-        public void StateChange(int ID)
+        public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -133,7 +133,7 @@ namespace Citta_T1.Business.Model
                     {
                         if (me.ID == mr.EndID)
                         {
-                            me.Status = ElementStatus.Null;
+                            me.Status = status;
                             StateChange(mr.EndID);
                         }
                            
