@@ -33,15 +33,21 @@ namespace Citta_T1.Controls
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor);
             Control ct = this.control;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+            g.Dispose();
+            // TODO [DK] 这里是不是少了点什么东西
             if (Pw.X < 0 || Pw.Y < 0)
                 return staticImage;
-            g.Dispose();
             return staticImage;
         }
 
         public override void MoveWorldImage(Graphics n)
         {
             // 每次Move都需要画一张新图
+            if (this.StaticImage != null)
+            {
+                this.StaticImage.Dispose();
+                this.StaticImage = null;
+            }
             this.StaticImage = this.CreateWorldImage();
             ModelDocument currentDoc = Global.GetCurrentDocument();
             Point mapOrigin = currentDoc.MapOrigin;
@@ -75,6 +81,7 @@ namespace Citta_T1.Controls
 
             n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
             this.StaticImage.Dispose();
+            this.StaticImage = null;
         }
 
 

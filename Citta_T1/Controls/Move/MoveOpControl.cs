@@ -55,8 +55,9 @@ namespace Citta_T1.Controls.Move
         }
         public int ID { get => this.id; set => this.id = value; }
         public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+        public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
 
-        
+
 
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -72,7 +73,7 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
-        public int revisedPinIndex;
+        private int revisedPinIndex;
         // 以该控件为起点的所有点
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
@@ -714,7 +715,7 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
 
         public void SaveEndLines(int line_index)
@@ -724,7 +725,7 @@ namespace Citta_T1.Controls.Move
              */
             try
             {
-                this.endLineIndexs[revisedPinIndex] = line_index;
+                //this.endLineIndexs[revisedPinIndex] = line_index;
             }
             catch (IndexOutOfRangeException)
             {
@@ -817,25 +818,6 @@ namespace Citta_T1.Controls.Move
             return new PointF(
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
-        }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
-        public void BindEndLine(int pinIndex, int relationIndex)
-        { 
-            try
-            {
-                this.endLineIndexs[pinIndex] = relationIndex;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveOpControl BindEndLine 出错: " + ex.ToString());
-            }
         }
         #endregion
 

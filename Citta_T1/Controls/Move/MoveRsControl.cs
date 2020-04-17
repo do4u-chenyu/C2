@@ -530,13 +530,13 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
         public void SaveEndLines(int line_index)
         {
             try
             {
-                this.endLineIndexs[0] = line_index;
+                //this.endLineIndexs[0] = line_index;
             }
             catch (IndexOutOfRangeException)
             {
@@ -570,25 +570,7 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2, 
                 this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
         }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
-        public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            try
-            {
-                this.endLineIndexs[pinIndex] = relationIndex;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveRsControl BindEndLine 出错: " + ex.ToString());
-            }
-        }
+
         #endregion
         private void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {

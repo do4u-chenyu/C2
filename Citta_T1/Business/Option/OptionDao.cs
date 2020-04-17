@@ -65,7 +65,6 @@ namespace Citta_T1.Business.Option
                                 new Point(mrc.rectIn.Location.X + mrc.Location.X, mrc.rectIn.Location.Y + mrc.Location.Y),
                                 0);
             Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-            Global.GetCurrentDocument().BindRelationToControl(newModelRelation, moveOpControl, mrc);
 
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
             mrc.Path = path;
