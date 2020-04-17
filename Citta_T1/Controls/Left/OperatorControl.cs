@@ -69,6 +69,10 @@ namespace Citta_T1.Controls.Left
 
             g.Dispose();
             myNewCursor.Dispose();
+            myNewCursor = null;
+            map.Dispose();
+            map = null;
+
         }
     }
 }
