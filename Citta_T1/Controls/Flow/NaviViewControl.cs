@@ -109,6 +109,9 @@ namespace Citta_T1.Controls.Flow
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
         {
+            ModelDocument currentDocument = Global.GetCurrentDocument();
+            if (currentDocument == null)
+                return;
 
             Graphics gc = e.Graphics;
             Point mapOrigin;
@@ -121,15 +124,15 @@ namespace Citta_T1.Controls.Flow
             float factor = (this.Parent as CanvasPanel).ScreenFactor;//
             try
             {
-                factor = Global.GetCurrentDocument().ScreenFactor;//
-                mapOrigin = Global.GetCurrentDocument().MapOrigin;
+                factor = currentDocument.ScreenFactor;//
+                mapOrigin = currentDocument.MapOrigin;
 
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
-                Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                mapOrigin = Global.GetCurrentDocument().MapOrigin;               
+                currentDocument.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                mapOrigin = currentDocument.MapOrigin;               
 
-                viewBoxPosition = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), mapOrigin);
+                viewBoxPosition = currentDocument.ScreenToWorld(new Point(50, 30), mapOrigin);
             }
             catch
             {
