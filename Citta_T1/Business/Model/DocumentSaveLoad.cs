@@ -27,14 +27,14 @@ namespace Citta_T1.Business.Model
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
-            this.modelFilePath = this.modelPath +  model.ModelTitle + ".xml";
+            this.modelFilePath = Path.Combine(this.modelPath, model.ModelTitle + ".xml");
             this.modelDocument = model;
             this.screenFactor = model.ScreenFactor;
         }
         public void WriteXml()
         {
             Directory.CreateDirectory(modelPath);
-            Utils.FileUtil.addpathPower(modelPath, "FullControl");
+            Utils.FileUtil.AddPathPower(modelPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);

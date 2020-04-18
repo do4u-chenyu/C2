@@ -14,12 +14,13 @@ namespace Citta_T1.Utils
         private static ModelTitlePanel modelTitlePanel;
         private static NaviViewControl naviViewControl;
         private static CanvasPanel canvasPanel;
-        private static ModelDocumentDao modelDocumentDao;
+        private static ModelDocumentDao modelDocumentDao;   // 用户模型工具类
         private static FlowControl flowControl;
         private static MyModelControl myModelControl;
         private static RemarkControl remarkControl;
         private static LogView logView;
-        private static OptionDao optionDao;
+        private static OptionDao optionDao;                 // 模型配置工具类
+
 
         public static MainForm GetMainForm() { return mainForm; }
         public static ModelTitlePanel GetModelTitlePanel() { return modelTitlePanel; }
@@ -48,6 +49,11 @@ namespace Citta_T1.Utils
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
         public static void SetLogView(LogView lv) { logView = lv; }
-        public static void SetOptionDao(OptionDao od) { optionDao = od; }  
+        public static void SetOptionDao(OptionDao od) { optionDao = od; }
+
+
+
+        private static string workspaceDirectory;           // 用户模型工作目录
+        public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
     }
 }

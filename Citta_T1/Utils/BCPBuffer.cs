@@ -90,7 +90,7 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
-        public string CreateNewBCPFile(string filename, List<string> columnName)
+        public string CreateNewBCPFile(string fileName, List<string> columnName)
         {
             string filePath = "";
             string columns = "";
@@ -98,11 +98,11 @@ namespace Citta_T1.Utils
             if (!Directory.Exists(filePath))
             {
                 Directory.CreateDirectory(filePath);
-                Utils.FileUtil.addpathPower(filePath, "FullControl");
+                Utils.FileUtil.AddPathPower(filePath, "FullControl");
             }
-                Directory.CreateDirectory(filePath);
+            //Directory.CreateDirectory(filePath);
 
-            filePath += filename + ".bcp";
+            filePath += fileName + ".bcp";
             if (!System.IO.File.Exists(filePath))
             {
                 System.IO.File.Create(filePath).Close();

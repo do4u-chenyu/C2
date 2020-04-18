@@ -71,8 +71,8 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
-            this.userPath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\";
-            this.savePath = this.userPath + modelTitle + "\\";
+            this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
+            this.savePath = Path.Combine(this.userPath, modelTitle);
 
             this.manager = new Manager();
             this.sizeL = 0;
@@ -143,7 +143,7 @@ namespace Citta_T1.Business.Model
         }
         public void Load()
         {
-            if (File.Exists(savePath + modelTitle +".xml"))
+            if (File.Exists(Path.Combine(savePath, modelTitle +".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
