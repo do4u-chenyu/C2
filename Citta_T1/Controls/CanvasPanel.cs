@@ -253,7 +253,6 @@ namespace Citta_T1.Controls
                 else
                     invalidateRectWhenMoving = new Rectangle();
                 // 遍历所有OpControl的leftPin
-                // TODO [DK] Error 已经修正过的坐标 会后续循环中的LeftPin修改值
                 // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
                 // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
                 // 遍历一遍之后如果没有被校正，则this.endC=null
@@ -358,7 +357,7 @@ namespace Citta_T1.Controls
                 bool isDuplicatedRelation = false;
                 ModelDocument cd = Global.GetCurrentDocument();
                 /* 不是所有位置Up都能形成曲线的
-                 * 如果没有endC，那就不形成线，结束绘线动作
+                 * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
                 if (this.endC == null || !(this.endC is MoveOpControl))
                 {
