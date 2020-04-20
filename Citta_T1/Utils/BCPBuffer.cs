@@ -40,6 +40,7 @@ namespace Citta_T1.Utils
             return ret;
         }
 
+
         public void TryLoadBCP(string bcpFullPath, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
@@ -68,8 +69,12 @@ namespace Citta_T1.Utils
                 string firstLine = sr.ReadLine();
                 sb.AppendLine(firstLine);
 
-                for (int row = 1; row < maxRow; row++)
+                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
+                {
                     sb.AppendLine(sr.ReadLine());
+                }
+                sr.Close();
+                sr.Dispose();
 
                 dataPreviewDict[filePath] = sb.ToString();
                 columnDict[filePath] = firstLine;

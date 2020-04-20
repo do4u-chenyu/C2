@@ -914,10 +914,6 @@ namespace Citta_T1.Controls.Move
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
         private void UpdateBackground()
         {
 

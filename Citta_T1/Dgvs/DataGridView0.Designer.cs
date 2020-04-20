@@ -86,7 +86,7 @@ namespace Citta_T1
             /*
              * 初始化列
              */
-            int numOfCols = headers.ToArray().Length;
+            int numOfCols = headers.Count;
             System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCols];
             for (int i = 0; i < numOfCols; i++)
             {
@@ -104,7 +104,7 @@ namespace Citta_T1
              * 使用样例数据
              */
             string data;
-            for (int i = 0; i < maxNumOfRows; i=this.dataGridView1.Rows.Add())
+            for (int i = 0; i < maxNumOfRows; i = this.dataGridView1.Rows.Add())
             {
                 //this.dataGridView1.Rows.Add();
                 for (int j = 0; j < numOfCols; j++)
@@ -154,18 +154,18 @@ namespace Citta_T1
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
             int numOfRows = rows.Count;
-            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
+            for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)
             {
-                datas.Add(new List<string>(rows[i].Split('\t')));
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split('\t')));
             }
 
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.DataSource = null;
             List<string> headers = datas[0];
-            int numOfCols = headers.ToArray().Length;
+            int numOfCols = headers.Count;
             _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
+            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
         }
     }
 }
