@@ -502,12 +502,12 @@ namespace  Citta_T1
             {
                 this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.logView.LogUpdate(tlog);
+                    this.log.Info(tlog);
                 }), log);
             }
             else
             {
-                this.logView.LogUpdate(log);
+                this.log.Info(log);
             }
         }
 

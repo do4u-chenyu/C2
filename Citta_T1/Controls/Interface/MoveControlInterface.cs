@@ -28,8 +28,7 @@ namespace Citta_T1.Controls.Interface
         int GetID();
         PointF GetStartPinLoc(int pinIndex);
         PointF GetEndPinLoc(int pinIndex);
-        void BindStartLine(int pinIndex, int relationIndex);
-        void BindEndLine(int pinIndex, int relationIndex);
+
         void OutPinInit(String status);
         void rectInAdd(int pinIndex);
 

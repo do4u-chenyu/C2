@@ -238,10 +238,10 @@ namespace Citta_T1.Controls.Move
                 * 5. 绘线
                 * 6. 更新canvas.lines
                 */
-            if (this.startLineIndexs.Count == 0)
-            {
-                return;
-            }
+            //if (this.startLineIndexs.Count == 0)
+            //{
+            //    return;
+            //}
 
             /*
              * 1. 遍历所有关系
@@ -543,7 +543,7 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
 
         public void SaveEndLines(int line_index)
@@ -573,11 +573,6 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
-        public void BindEndLine(int pinIndex, int relationIndex) { }
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {

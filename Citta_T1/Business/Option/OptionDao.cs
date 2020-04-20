@@ -171,7 +171,7 @@ namespace Citta_T1.Business.Option
                                 new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
                                 0);
             Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-            Global.GetCurrentDocument().BindRelationToControl(newModelRelation, moveOpControl, mrc);
+
             moveOpControl.OutPinInit("lineExit");
             mrc.rectInAdd(1);
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
