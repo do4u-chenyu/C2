@@ -37,16 +37,16 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.DataInfoBox2 = new HZH_Controls.Controls.TextBoxEx();
-            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
+            this.dataSource1 = new HZH_Controls.Controls.TextBoxEx();
+            this.dataSource0 = new HZH_Controls.Controls.TextBoxEx();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.repetition = new System.Windows.Forms.RadioButton();
+            this.noRepetition = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.bottomPanel.SuspendLayout();
@@ -92,7 +92,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(886, 56);
+            this.topPanel.Size = new System.Drawing.Size(872, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -100,9 +100,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 517);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 526);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(886, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(872, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -139,77 +139,75 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 461);
+            this.keyPanel.Size = new System.Drawing.Size(174, 470);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.DataInfoBox2);
-            this.valuePanel.Controls.Add(this.DataInfoBox);
+            this.valuePanel.Controls.Add(this.dataSource1);
+            this.valuePanel.Controls.Add(this.dataSource0);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(712, 461);
+            this.valuePanel.Size = new System.Drawing.Size(698, 470);
             this.valuePanel.TabIndex = 3;
             // 
-            // DataInfoBox2
+            // dataSource1
             // 
-            this.DataInfoBox2.DecLength = 2;
-            this.DataInfoBox2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox2.Location = new System.Drawing.Point(215, 3);
-            this.DataInfoBox2.MaxValue = new decimal(new int[] {
+            this.dataSource1.DecLength = 2;
+            this.dataSource1.InputType = HZH_Controls.TextInputType.NotControl;
+            this.dataSource1.Location = new System.Drawing.Point(214, 3);
+            this.dataSource1.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.DataInfoBox2.MinValue = new decimal(new int[] {
+            this.dataSource1.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.DataInfoBox2.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox2.Name = "DataInfoBox2";
-            this.DataInfoBox2.OldText = null;
-            this.DataInfoBox2.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox2.PromptText = "";
-            this.DataInfoBox2.ReadOnly = true;
-            this.DataInfoBox2.RegexPattern = "";
-            this.DataInfoBox2.Size = new System.Drawing.Size(136, 28);
-            this.DataInfoBox2.TabIndex = 7;
-            this.DataInfoBox2.Text = "test2.bcp";
-            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSource1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dataSource1.Name = "dataSource1";
+            this.dataSource1.OldText = null;
+            this.dataSource1.PromptColor = System.Drawing.Color.Gray;
+            this.dataSource1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dataSource1.PromptText = "";
+            this.dataSource1.ReadOnly = true;
+            this.dataSource1.RegexPattern = "";
+            this.dataSource1.Size = new System.Drawing.Size(136, 28);
+            this.dataSource1.TabIndex = 7;
+            this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // DataInfoBox
+            // dataSource0
             // 
-            this.DataInfoBox.DecLength = 2;
-            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox.Location = new System.Drawing.Point(8, 3);
-            this.DataInfoBox.MaxValue = new decimal(new int[] {
+            this.dataSource0.DecLength = 2;
+            this.dataSource0.InputType = HZH_Controls.TextInputType.NotControl;
+            this.dataSource0.Location = new System.Drawing.Point(8, 3);
+            this.dataSource0.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.DataInfoBox.MinValue = new decimal(new int[] {
+            this.dataSource0.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.OldText = null;
-            this.DataInfoBox.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox.PromptText = "";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.RegexPattern = "";
-            this.DataInfoBox.Size = new System.Drawing.Size(136, 28);
-            this.DataInfoBox.TabIndex = 7;
-            this.DataInfoBox.Text = "test1.bcp";
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSource0.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dataSource0.Name = "dataSource0";
+            this.dataSource0.OldText = null;
+            this.dataSource0.PromptColor = System.Drawing.Color.Gray;
+            this.dataSource0.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dataSource0.PromptText = "";
+            this.dataSource0.ReadOnly = true;
+            this.dataSource0.RegexPattern = "";
+            this.dataSource0.Size = new System.Drawing.Size(136, 28);
+            this.dataSource0.TabIndex = 7;
+            this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel2
             // 
@@ -222,7 +220,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBoxEx1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(142, 81);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 79);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -259,8 +257,10 @@
             // 
             this.textBoxEx1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEx1.DecLength = 2;
+            this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBoxEx1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(273, 10);
+            this.textBoxEx1.Location = new System.Drawing.Point(273, 7);
             this.textBoxEx1.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -278,21 +278,16 @@
             this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxEx1.PromptText = "";
             this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(129, 28);
+            this.textBoxEx1.Size = new System.Drawing.Size(129, 34);
             this.textBoxEx1.TabIndex = 4;
             this.textBoxEx1.Text = "别名";
+            this.textBoxEx1.Enter += new System.EventHandler(this.textBoxEx1_Enter);
+            this.textBoxEx1.Leave += new System.EventHandler(this.textBoxEx1_Leave);
             // 
             // comboBox2
             // 
             this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
             this.comboBox2.Location = new System.Drawing.Point(138, 11);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(129, 26);
@@ -300,36 +295,36 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.repetition);
+            this.groupBox1.Controls.Add(this.noRepetition);
             this.groupBox1.Location = new System.Drawing.Point(8, 386);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 37);
+            this.groupBox1.Size = new System.Drawing.Size(207, 38);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
-            // radioButton2
+            // repetition
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(113, 12);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(87, 22);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "不去重";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.repetition.AutoSize = true;
+            this.repetition.Location = new System.Drawing.Point(112, 12);
+            this.repetition.Name = "repetition";
+            this.repetition.Size = new System.Drawing.Size(87, 22);
+            this.repetition.TabIndex = 1;
+            this.repetition.TabStop = true;
+            this.repetition.Text = "不去重";
+            this.repetition.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // noRepetition
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(69, 22);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "去重";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.noRepetition.AutoSize = true;
+            this.noRepetition.Location = new System.Drawing.Point(8, 12);
+            this.noRepetition.Name = "noRepetition";
+            this.noRepetition.Size = new System.Drawing.Size(69, 22);
+            this.noRepetition.TabIndex = 0;
+            this.noRepetition.TabStop = true;
+            this.noRepetition.Text = "去重";
+            this.noRepetition.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -337,13 +332,12 @@
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(6, 130);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(717, 240);
+            this.panel1.Size = new System.Drawing.Size(692, 250);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
@@ -351,14 +345,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(652, 126);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(517, 126);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // UnionOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 613);
+            this.ClientSize = new System.Drawing.Size(872, 622);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -400,10 +394,10 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox2;
+        private HZH_Controls.Controls.TextBoxEx dataSource0;
+        private HZH_Controls.Controls.TextBoxEx dataSource1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton repetition;
+        private System.Windows.Forms.RadioButton noRepetition;
     }
 }

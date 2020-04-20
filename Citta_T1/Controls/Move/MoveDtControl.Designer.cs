@@ -109,24 +109,26 @@
             this.LogMenuItem,
             this.DeleteMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(135, 148);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
             // 
             // PreviewMenuItem
             // 
             this.PreviewMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.PreviewMenuItem.Name = "PreviewMenuItem";
-            this.PreviewMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.PreviewMenuItem.Size = new System.Drawing.Size(180, 24);
             this.PreviewMenuItem.Text = "预览";
+            this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示本数据源的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
             // 
             // OptionMenuItem
             // 
             this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OptionMenuItem.Enabled = false;
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionMenuItem.Name = "OptionMenuItem";
-            this.OptionMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.OptionMenuItem.Size = new System.Drawing.Size(180, 24);
             this.OptionMenuItem.Text = "设置";
             this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
@@ -135,25 +137,27 @@
             this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.RenameMenuItem.Size = new System.Drawing.Size(180, 24);
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
             // RunMenuItem
             // 
+            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
-            this.RunMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.RunMenuItem.Size = new System.Drawing.Size(180, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
             // LogMenuItem
             // 
+            this.LogMenuItem.Enabled = false;
             this.LogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.LogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.LogMenuItem.Name = "LogMenuItem";
-            this.LogMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.LogMenuItem.Size = new System.Drawing.Size(180, 24);
             this.LogMenuItem.Text = "异常日志";
             // 
             // DeleteMenuItem
@@ -161,7 +165,7 @@
             this.DeleteMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.DeleteMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.DeleteMenuItem.Name = "DeleteMenuItem";
-            this.DeleteMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.DeleteMenuItem.Size = new System.Drawing.Size(180, 24);
             this.DeleteMenuItem.Text = "删除";
             this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 

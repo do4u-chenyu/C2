@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 using Citta_T1.Utils;
@@ -13,6 +14,7 @@ namespace Citta_T1
         [STAThread]
         static void Main()
         {
+            Global.WorkspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

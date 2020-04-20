@@ -177,7 +177,7 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("outfield") != "")
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs.Take(checkIndexs.Length - 1).ToArray(), int.Parse));
             }
             if (factor1 != "")
             {
@@ -194,7 +194,7 @@ namespace Citta_T1.OperatorViews
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
                 string[] factorList = factor.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
+                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
                 control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();

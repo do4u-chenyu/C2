@@ -17,14 +17,14 @@ namespace Citta_T1.Business.DataSource
         private LogUtil log = LogUtil.GetInstance("DataSourceInfo");
         public DataSourceInfo(string userName)
         {
-           this.userPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument\\" + userName;
-           this.DataSourcePath = this.userPath + "\\DataSourceInformation.xml";
-        
+            this.userPath = System.IO.Path.Combine(Global.WorkspaceDirectory, userName);
+            this.DataSourcePath = System.IO.Path.Combine(this.userPath, "DataSourceInformation.xml");
          }
        
         public void WriteDataSourceInfo(DataButton db)
         {
             Directory.CreateDirectory(userPath);
+            Utils.FileUtil.AddPathPower(userPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             if (!File.Exists(DataSourcePath))
             {              

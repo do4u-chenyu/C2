@@ -71,8 +71,8 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
-            this.userPath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\";
-            this.savePath = this.userPath + modelTitle + "\\";
+            this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
+            this.savePath = Path.Combine(this.userPath, modelTitle);
 
             this.manager = new Manager();
             this.sizeL = 0;
@@ -131,13 +131,11 @@ namespace Citta_T1.Business.Model
                 if (mr.StartID == ID || mr.EndID == ID)
                     relations.Add(mr);
             }
-            //后续所有算子状态变为null
-            StateChange(ID);
             foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
 
         }
-        private void StateChange(int ID)
+        public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -147,8 +145,7 @@ namespace Citta_T1.Business.Model
                     {
                         if (me.ID == mr.EndID)
                         {
-                            if(me.Type==ElementType.Operator)
-                                me.Status = ElementStatus.Null;
+                            me.Status = status;
                             StateChange(mr.EndID);
                         }
                            
@@ -158,7 +155,7 @@ namespace Citta_T1.Business.Model
         }
         public void Load()
         {
-            if (File.Exists(savePath + modelTitle +".xml"))
+            if (File.Exists(Path.Combine(savePath, modelTitle +".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
@@ -194,15 +191,16 @@ namespace Citta_T1.Business.Model
             }
         }
 
-        public void ResetCount()
+        public void DocumentElementCount()
         {
-            //int num = 0;
+            if (this.modelElements.Count == 0)
+                return;
             foreach (ModelElement me in this.modelElements)
             {
                 if (me.ID > elementCount)
                     elementCount = me.ID;
             }
-            elementCount = elementCount > 0 ? elementCount + 1 : 0;
+             elementCount += 1;
         }
 
         
@@ -231,8 +229,8 @@ namespace Citta_T1.Business.Model
                 {
                     ModelRelation mr = this.modelRelations[i];
 
-                    ModelElement sEle = this.modelElements[mr.StartID];
-                    ModelElement eEle = this.modelElements[mr.EndID];
+                    ModelElement sEle = SearchElementByID(mr.StartID);
+                    ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
@@ -248,6 +246,7 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
+        
         public ModelElement SearchElementByID(int ID)
         {
  
@@ -270,7 +269,15 @@ namespace Citta_T1.Business.Model
             }
             return relations;
         }
-
+        public ModelElement SearchResultOperator(int ID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == ID && SearchElementByID(mr.EndID).Type == ElementType.Result)
+                    return SearchElementByID(mr.EndID);
+            }
+            return null; 
+        }
         private int GetLineIndex()
         {
             this.lineCounter += 1;

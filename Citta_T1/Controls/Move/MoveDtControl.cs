@@ -28,13 +28,14 @@ namespace Citta_T1.Controls.Move
         private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
-
+        
         //绘制引脚
-        private Point rightPin = new Point(126, 11);
-        private int pinWidth = 4;
-        private int pinHeight = 4;
-        private Pen pen = new Pen(Color.DarkGray, 0.0001f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.White);
+        private string lineStaus = "noLine";
+        private Point rightPin = new Point(126, 9);
+        private int pinWidth = 6;
+        private int pinHeight = 6;
+        private Pen pen = new Pen(Color.DarkGray, 1f);
+        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private Bitmap staticImage;
@@ -217,6 +218,7 @@ namespace Citta_T1.Controls.Move
                 startY = this.Location.Y + e.Y;
                 MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                 Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                
                 return;
             }
 
@@ -298,10 +300,12 @@ namespace Citta_T1.Controls.Move
             {
                 if (rectOut.Contains(e.Location))
                 {
+                    lineStaus = "lineExit";
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
+                    
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -400,30 +404,27 @@ namespace Citta_T1.Controls.Move
         {
             this.Size = new System.Drawing.Size((int)(179 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(153 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(179 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
             this.textBox1.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(171 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(171 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToSmall()
         {
             this.Size = new System.Drawing.Size((int)(130 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(103 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(131 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
             this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(122 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(122 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToNormal()
         {
             this.Size = new System.Drawing.Size((int)(170 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
             this.rightPictureBox.Location = new System.Drawing.Point((int)(144 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.rightPinPictureBox.Location = new System.Drawing.Point((int)(170 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
             this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
             this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(162 * Math.Pow(factor, sizeLevel)), (int)(11 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(162 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         #endregion
@@ -455,7 +456,7 @@ namespace Citta_T1.Controls.Move
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectOut.Contains(mousePosition))
+            if (rectOut.Contains(mousePosition) || lineStaus == "lineExit")
             {
                 if (pinStatus == "rectOut") return;
                 rectOut = rectEnter(rectOut);
@@ -474,8 +475,8 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width * multiFactor / 2, oriCenter.Y - oriSize.Height * multiFactor / 2);
-            Size dstSize = new Size(oriSize.Width * multiFactor, oriSize.Height * multiFactor);
+            Point dstLtCorner = new Point(oriCenter.X - 4, oriCenter.Y - 4);
+            Size dstSize = new Size(8, 8);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
@@ -483,9 +484,15 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / multiFactor / 2, oriCenter.Y - oriSize.Height / multiFactor / 2);
-            Size dstSize = new Size(oriSize.Width / multiFactor, oriSize.Height / multiFactor);
+            Point dstLtCorner = new Point(oriCenter.X - 3, oriCenter.Y - 3);
+            Size dstSize = new Size(6, 6);
             return new Rectangle(dstLtCorner, dstSize);
+        }
+
+        public void OutPinInit(String status)
+        {
+            this.lineStaus = status;
+            PinOpLeaveAndEnter(new Point(0,0));
         }
         #endregion
 
@@ -569,8 +576,11 @@ namespace Citta_T1.Controls.Move
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(trnsRedBrush, rectOut);
-            e.Graphics.DrawRectangle(pen, rectOut);
+            
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.DrawEllipse(pen, rectOut);
         }
 
         #region 划线动作
@@ -622,6 +632,11 @@ namespace Citta_T1.Controls.Move
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
             this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+        }
+
+        public void rectInAdd(int pinIndex)
+        {
+
         }
     }
 

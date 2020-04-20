@@ -22,6 +22,7 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> selectColumn;
+        private List<string> oldColumnName;
 
         private LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
@@ -33,10 +34,13 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
             
+            
             this.oldMaxfield = this.MaxValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
+            this.oldColumnName = this.OutList.GetItemCheckText();
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
+            
 
 
         }
@@ -61,7 +65,11 @@ namespace Citta_T1.OperatorViews
             if (this.oldMaxfield != this.MaxValueBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
             else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            {
                 Global.GetMainForm().SetDocumentDirty();
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+            }
+               
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
             
@@ -123,6 +131,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
+            this.opControl.DataSourceColumns = this.columnName.ToList();
             foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);

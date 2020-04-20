@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business
 {
@@ -15,12 +17,17 @@ namespace Citta_T1.Business
         public LoginInfo()
         {
            
-            this.path = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument";
-            this.UserInfoPath = path + "\\UserInformation.xml";
+            this.path = Global.WorkspaceDirectory;
+            this.UserInfoPath = Path.Combine(path, "UserInformation.xml");
         }
         public void CreatNewXml()
         {
+
+            //Utils.FileUtil.AddPathPower(Directory.GetCurrentDirectory(), "FullControl");
             Directory.CreateDirectory(path);
+            // 添加权限
+            Utils.FileUtil.AddPathPower(path, "FullControl");
+
             if (!File.Exists(UserInfoPath))
             {
                 XmlDocument xDoc = new XmlDocument();
@@ -74,5 +81,8 @@ namespace Citta_T1.Business
                     usersList.Add(xn.SelectSingleNode("name").InnerText);
             return usersList;
         }
+
+
+
     }
 }

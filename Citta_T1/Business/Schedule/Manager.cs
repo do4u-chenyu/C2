@@ -218,7 +218,7 @@ namespace Citta_T1.Business.Schedule
                     case ElementSubType.AvgOperator: cmds = (new AvgOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.SortOperator: cmds = (new SortOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.FreqOperator: cmds = (new FreqOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.JoinOperator: cmds = (new JoinOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.RelateOperator: cmds = (new RelateOperatorCmd(triple)).GenCmd(); break;
                 }
 
                 foreach (string cmd1 in cmds)

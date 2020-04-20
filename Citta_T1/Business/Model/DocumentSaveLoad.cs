@@ -27,13 +27,14 @@ namespace Citta_T1.Business.Model
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
-            this.modelFilePath = this.modelPath +  model.ModelTitle + ".xml";
+            this.modelFilePath = Path.Combine(this.modelPath, model.ModelTitle + ".xml");
             this.modelDocument = model;
             this.screenFactor = model.ScreenFactor;
         }
         public void WriteXml()
         {
             Directory.CreateDirectory(modelPath);
+            Utils.FileUtil.AddPathPower(modelPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
@@ -317,10 +318,10 @@ namespace Citta_T1.Business.Model
             switch (subType)
             {
                 case "CollideOperator":
-                    type = "连接算子";
+                    type = "关联算子";
                     break;
-                case "JoinOperator":
-                    type = "取交集";
+                case "RelateOperator":
+                    type = "碰撞算子";
                     break;
                 case "UnionOperator":
                     type = "取并集";

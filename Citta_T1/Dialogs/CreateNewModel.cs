@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 using Citta_T1.Business.Model;
+
 
 namespace Citta_T1.Dialogs
 {
@@ -35,7 +37,7 @@ namespace Citta_T1.Dialogs
             MainForm mainForm = (MainForm)this.Owner;
             try
             {             
-                DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + mainForm.UserName + "\\");
+                DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, mainForm.UserName));
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
                 {

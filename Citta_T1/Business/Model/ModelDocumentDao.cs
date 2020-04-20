@@ -22,7 +22,7 @@ namespace Citta_T1.Business.Model
         
         public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-        string UserInfoPath = Directory.GetCurrentDirectory().ToString() + "\\cittaModelDocument" + "\\UserInformation.xml";
+        string UserInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
             modelDocuments = new List<ModelDocument>();         
@@ -47,7 +47,7 @@ namespace Citta_T1.Business.Model
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
-            md.ResetCount();
+            md.DocumentElementCount();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
@@ -106,11 +106,11 @@ namespace Citta_T1.Business.Model
             string type = "";
             switch (subType)
             {
-                case "连接算子":
-                    type = "CollideOperator";
+                case "关联算子":
+                    type = "RelateOperator";
                     break;
-                case "取交集":
-                    type = "JoinOperator";
+                case "碰撞算子":
+                    type = "CollideOperator";
                     break;
                 case "取并集":
                     type = "UnionOperator";
@@ -182,11 +182,11 @@ namespace Citta_T1.Business.Model
         public bool WithoutDocumentLogin(string userName)
         {
             //新用户登录
-            string userDir = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName;
+            string userDir = Path.Combine(Global.WorkspaceDirectory,  userName);
             if (!Directory.Exists(userDir))
                 return true;
             //非新用户但无模型文档
-            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+            DirectoryInfo di = new DirectoryInfo(userDir);
             DirectoryInfo[] directoryInfos = di.GetDirectories();
             return (directoryInfos.Length == 0); 
         }
@@ -258,7 +258,7 @@ namespace Citta_T1.Business.Model
             string[] modelTitles=new string[0];
             try
             {
-                DirectoryInfo userDir = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName);
+                DirectoryInfo userDir = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, userName));
                 DirectoryInfo[] dir = userDir.GetDirectories();
                 modelTitles = Array.ConvertAll(dir, value => Convert.ToString(value));
             }

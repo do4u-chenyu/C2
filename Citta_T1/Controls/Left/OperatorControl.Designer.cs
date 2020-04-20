@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorControl));
-            this.leftpanelOpConect = new System.Windows.Forms.Button();
+            this.leftPanelOpRelate = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -38,21 +39,22 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.leftPanelOpIntersect = new System.Windows.Forms.Button();
+            this.leftPanelOpCollide = new System.Windows.Forms.Button();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.lefpanelOpUnion = new System.Windows.Forms.Button();
-            this.leftpanelOpDiffer = new System.Windows.Forms.Button();
-            this.leftpanelOpRandom = new System.Windows.Forms.Button();
-            this.leftpanelOpFilter = new System.Windows.Forms.Button();
-            this.leftpanelOpMax = new System.Windows.Forms.Button();
-            this.leftpanelOpMin = new System.Windows.Forms.Button();
-            this.leftpanelOpMean = new System.Windows.Forms.Button();
+            this.lefPanelOpUnion = new System.Windows.Forms.Button();
+            this.leftPanelOpDiffer = new System.Windows.Forms.Button();
+            this.leftPanelOpRandom = new System.Windows.Forms.Button();
+            this.leftPanelOpFilter = new System.Windows.Forms.Button();
+            this.leftPanelOpMax = new System.Windows.Forms.Button();
+            this.leftPanelOpMin = new System.Windows.Forms.Button();
+            this.leftPanelOpAvg = new System.Windows.Forms.Button();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.leftPanelOpFreq = new System.Windows.Forms.Button();
+            this.leftPanelOpSort = new System.Windows.Forms.Button();
+            this.leftPanelOpGroup = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -67,19 +69,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.SuspendLayout();
             // 
-            // leftpanelOpConect
+            // leftPanelOpRelate
             // 
-            this.leftpanelOpConect.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpConect.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpConect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpConect.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpConect.Location = new System.Drawing.Point(70, 13);
-            this.leftpanelOpConect.Name = "leftpanelOpConect";
-            this.leftpanelOpConect.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpConect.TabIndex = 0;
-            this.leftpanelOpConect.Text = "连接算子";
-            this.leftpanelOpConect.UseVisualStyleBackColor = true;
-            this.leftpanelOpConect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpRelate.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpRelate.Location = new System.Drawing.Point(70, 13);
+            this.leftPanelOpRelate.Name = "leftPanelOpRelate";
+            this.leftPanelOpRelate.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpRelate.TabIndex = 0;
+            this.leftPanelOpRelate.Text = "关联算子";
+            this.leftPanelOpRelate.UseVisualStyleBackColor = true;
+            this.leftPanelOpRelate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox1
             // 
@@ -153,19 +155,19 @@
             this.pictureBox8.TabIndex = 10;
             this.pictureBox8.TabStop = false;
             // 
-            // leftPanelOpIntersect
+            // leftPanelOpCollide
             // 
-            this.leftPanelOpIntersect.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpIntersect.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpIntersect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpIntersect.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpIntersect.Location = new System.Drawing.Point(70, 61);
-            this.leftPanelOpIntersect.Name = "leftPanelOpIntersect";
-            this.leftPanelOpIntersect.Size = new System.Drawing.Size(74, 40);
-            this.leftPanelOpIntersect.TabIndex = 18;
-            this.leftPanelOpIntersect.Text = "取交集";
-            this.leftPanelOpIntersect.UseVisualStyleBackColor = true;
-            this.leftPanelOpIntersect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpCollide.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpCollide.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpCollide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpCollide.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpCollide.Location = new System.Drawing.Point(70, 61);
+            this.leftPanelOpCollide.Name = "leftPanelOpCollide";
+            this.leftPanelOpCollide.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpCollide.TabIndex = 18;
+            this.leftPanelOpCollide.Text = "碰撞算子";
+            this.leftPanelOpCollide.UseVisualStyleBackColor = true;
+            this.leftPanelOpCollide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox10
             // 
@@ -176,105 +178,105 @@
             this.pictureBox10.TabIndex = 4;
             this.pictureBox10.TabStop = false;
             // 
-            // lefpanelOpUnion
+            // lefPanelOpUnion
             // 
-            this.lefpanelOpUnion.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.lefpanelOpUnion.FlatAppearance.BorderSize = 0;
-            this.lefpanelOpUnion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lefpanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lefpanelOpUnion.Location = new System.Drawing.Point(70, 109);
-            this.lefpanelOpUnion.Name = "lefpanelOpUnion";
-            this.lefpanelOpUnion.Size = new System.Drawing.Size(74, 40);
-            this.lefpanelOpUnion.TabIndex = 19;
-            this.lefpanelOpUnion.Text = "取并集";
-            this.lefpanelOpUnion.UseVisualStyleBackColor = true;
-            this.lefpanelOpUnion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.lefPanelOpUnion.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.lefPanelOpUnion.FlatAppearance.BorderSize = 0;
+            this.lefPanelOpUnion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lefPanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lefPanelOpUnion.Location = new System.Drawing.Point(70, 109);
+            this.lefPanelOpUnion.Name = "lefPanelOpUnion";
+            this.lefPanelOpUnion.Size = new System.Drawing.Size(74, 40);
+            this.lefPanelOpUnion.TabIndex = 19;
+            this.lefPanelOpUnion.Text = "取并集";
+            this.lefPanelOpUnion.UseVisualStyleBackColor = true;
+            this.lefPanelOpUnion.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpDiffer
+            // leftPanelOpDiffer
             // 
-            this.leftpanelOpDiffer.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpDiffer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.leftpanelOpDiffer.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpDiffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpDiffer.Location = new System.Drawing.Point(70, 157);
-            this.leftpanelOpDiffer.Name = "leftpanelOpDiffer";
-            this.leftpanelOpDiffer.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpDiffer.TabIndex = 20;
-            this.leftpanelOpDiffer.Text = "取差集";
-            this.leftpanelOpDiffer.UseVisualStyleBackColor = true;
-            this.leftpanelOpDiffer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpDiffer.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpDiffer.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.leftPanelOpDiffer.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpDiffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpDiffer.Location = new System.Drawing.Point(70, 157);
+            this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
+            this.leftPanelOpDiffer.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpDiffer.TabIndex = 20;
+            this.leftPanelOpDiffer.Text = "取差集";
+            this.leftPanelOpDiffer.UseVisualStyleBackColor = true;
+            this.leftPanelOpDiffer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpRandom
+            // leftPanelOpRandom
             // 
-            this.leftpanelOpRandom.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpRandom.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpRandom.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpRandom.Location = new System.Drawing.Point(69, 205);
-            this.leftpanelOpRandom.Name = "leftpanelOpRandom";
-            this.leftpanelOpRandom.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpRandom.TabIndex = 21;
-            this.leftpanelOpRandom.Text = "随机采样";
-            this.leftpanelOpRandom.UseVisualStyleBackColor = true;
-            this.leftpanelOpRandom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpRandom.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpRandom.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpRandom.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpRandom.Location = new System.Drawing.Point(69, 205);
+            this.leftPanelOpRandom.Name = "leftPanelOpRandom";
+            this.leftPanelOpRandom.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpRandom.TabIndex = 21;
+            this.leftPanelOpRandom.Text = "随机采样";
+            this.leftPanelOpRandom.UseVisualStyleBackColor = true;
+            this.leftPanelOpRandom.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpFilter
+            // leftPanelOpFilter
             // 
-            this.leftpanelOpFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpFilter.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpFilter.Location = new System.Drawing.Point(69, 253);
-            this.leftpanelOpFilter.Name = "leftpanelOpFilter";
-            this.leftpanelOpFilter.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpFilter.TabIndex = 22;
-            this.leftpanelOpFilter.Text = "过滤算子";
-            this.leftpanelOpFilter.UseVisualStyleBackColor = true;
-            this.leftpanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpFilter.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpFilter.Location = new System.Drawing.Point(69, 253);
+            this.leftPanelOpFilter.Name = "leftPanelOpFilter";
+            this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpFilter.TabIndex = 22;
+            this.leftPanelOpFilter.Text = "过滤算子";
+            this.leftPanelOpFilter.UseVisualStyleBackColor = true;
+            this.leftPanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpMax
+            // leftPanelOpMax
             // 
-            this.leftpanelOpMax.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpMax.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpMax.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpMax.Location = new System.Drawing.Point(69, 301);
-            this.leftpanelOpMax.Name = "leftpanelOpMax";
-            this.leftpanelOpMax.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpMax.TabIndex = 23;
-            this.leftpanelOpMax.Text = "取最大值";
-            this.leftpanelOpMax.UseVisualStyleBackColor = true;
-            this.leftpanelOpMax.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpMax.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpMax.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpMax.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpMax.Location = new System.Drawing.Point(69, 301);
+            this.leftPanelOpMax.Name = "leftPanelOpMax";
+            this.leftPanelOpMax.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpMax.TabIndex = 23;
+            this.leftPanelOpMax.Text = "取最大值";
+            this.leftPanelOpMax.UseVisualStyleBackColor = true;
+            this.leftPanelOpMax.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpMin
+            // leftPanelOpMin
             // 
-            this.leftpanelOpMin.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpMin.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpMin.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpMin.Location = new System.Drawing.Point(69, 349);
-            this.leftpanelOpMin.Name = "leftpanelOpMin";
-            this.leftpanelOpMin.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpMin.TabIndex = 24;
-            this.leftpanelOpMin.Text = "取最小值";
-            this.leftpanelOpMin.UseVisualStyleBackColor = true;
-            this.leftpanelOpMin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpMin.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpMin.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpMin.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpMin.Location = new System.Drawing.Point(69, 349);
+            this.leftPanelOpMin.Name = "leftPanelOpMin";
+            this.leftPanelOpMin.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpMin.TabIndex = 24;
+            this.leftPanelOpMin.Text = "取最小值";
+            this.leftPanelOpMin.UseVisualStyleBackColor = true;
+            this.leftPanelOpMin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // leftpanelOpMean
+            // leftPanelOpAvg
             // 
-            this.leftpanelOpMean.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftpanelOpMean.FlatAppearance.BorderSize = 0;
-            this.leftpanelOpMean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftpanelOpMean.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftpanelOpMean.Location = new System.Drawing.Point(69, 397);
-            this.leftpanelOpMean.Name = "leftpanelOpMean";
-            this.leftpanelOpMean.Size = new System.Drawing.Size(74, 40);
-            this.leftpanelOpMean.TabIndex = 25;
-            this.leftpanelOpMean.Text = "取平均值";
-            this.leftpanelOpMean.UseMnemonic = false;
-            this.leftpanelOpMean.UseVisualStyleBackColor = true;
-            this.leftpanelOpMean.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpAvg.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpAvg.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpAvg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpAvg.Location = new System.Drawing.Point(69, 397);
+            this.leftPanelOpAvg.Name = "leftPanelOpAvg";
+            this.leftPanelOpAvg.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpAvg.TabIndex = 25;
+            this.leftPanelOpAvg.Text = "取平均值";
+            this.leftPanelOpAvg.UseMnemonic = false;
+            this.leftPanelOpAvg.UseVisualStyleBackColor = true;
+            this.leftPanelOpAvg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // pictureBox9
             // 
@@ -303,50 +305,50 @@
             this.pictureBox12.TabIndex = 28;
             this.pictureBox12.TabStop = false;
             // 
-            // button1
+            // leftPanelOpFreq
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button1.Location = new System.Drawing.Point(70, 445);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(74, 40);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "频率算子";
-            this.button1.UseMnemonic = false;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpFreq.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpFreq.Location = new System.Drawing.Point(70, 445);
+            this.leftPanelOpFreq.Name = "leftPanelOpFreq";
+            this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpFreq.TabIndex = 29;
+            this.leftPanelOpFreq.Text = "频率算子";
+            this.leftPanelOpFreq.UseMnemonic = false;
+            this.leftPanelOpFreq.UseVisualStyleBackColor = true;
+            this.leftPanelOpFreq.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // button2
+            // leftPanelOpSort
             // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button2.Location = new System.Drawing.Point(69, 493);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 40);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "排序算子";
-            this.button2.UseMnemonic = false;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpSort.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpSort.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpSort.Location = new System.Drawing.Point(69, 493);
+            this.leftPanelOpSort.Name = "leftPanelOpSort";
+            this.leftPanelOpSort.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpSort.TabIndex = 30;
+            this.leftPanelOpSort.Text = "排序算子";
+            this.leftPanelOpSort.UseMnemonic = false;
+            this.leftPanelOpSort.UseVisualStyleBackColor = true;
+            this.leftPanelOpSort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // button3
+            // leftPanelOpGroup
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button3.Location = new System.Drawing.Point(69, 541);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(74, 40);
-            this.button3.TabIndex = 31;
-            this.button3.Text = "分组算子";
-            this.button3.UseMnemonic = false;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            this.leftPanelOpGroup.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpGroup.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpGroup.Location = new System.Drawing.Point(69, 541);
+            this.leftPanelOpGroup.Name = "leftPanelOpGroup";
+            this.leftPanelOpGroup.Size = new System.Drawing.Size(74, 40);
+            this.leftPanelOpGroup.TabIndex = 31;
+            this.leftPanelOpGroup.Text = "分组算子";
+            this.leftPanelOpGroup.UseMnemonic = false;
+            this.leftPanelOpGroup.UseVisualStyleBackColor = true;
+            this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // OperatorControl
             // 
@@ -355,21 +357,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.leftPanelOpGroup);
+            this.Controls.Add(this.leftPanelOpSort);
+            this.Controls.Add(this.leftPanelOpFreq);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.leftpanelOpConect);
-            this.Controls.Add(this.leftpanelOpMean);
-            this.Controls.Add(this.leftpanelOpMin);
-            this.Controls.Add(this.leftpanelOpMax);
-            this.Controls.Add(this.leftpanelOpFilter);
-            this.Controls.Add(this.leftpanelOpRandom);
-            this.Controls.Add(this.leftpanelOpDiffer);
-            this.Controls.Add(this.lefpanelOpUnion);
-            this.Controls.Add(this.leftPanelOpIntersect);
+            this.Controls.Add(this.leftPanelOpRelate);
+            this.Controls.Add(this.leftPanelOpAvg);
+            this.Controls.Add(this.leftPanelOpMin);
+            this.Controls.Add(this.leftPanelOpMax);
+            this.Controls.Add(this.leftPanelOpFilter);
+            this.Controls.Add(this.leftPanelOpRandom);
+            this.Controls.Add(this.leftPanelOpDiffer);
+            this.Controls.Add(this.lefPanelOpUnion);
+            this.Controls.Add(this.leftPanelOpCollide);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
@@ -399,7 +401,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button leftpanelOpConect;
+        private System.Windows.Forms.Button leftPanelOpRelate;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -408,20 +410,21 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.Button leftPanelOpIntersect;
+        private System.Windows.Forms.Button leftPanelOpCollide;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Button lefpanelOpUnion;
-        private System.Windows.Forms.Button leftpanelOpDiffer;
-        private System.Windows.Forms.Button leftpanelOpRandom;
-        private System.Windows.Forms.Button leftpanelOpFilter;
-        private System.Windows.Forms.Button leftpanelOpMax;
-        private System.Windows.Forms.Button leftpanelOpMin;
-        private System.Windows.Forms.Button leftpanelOpMean;
+        private System.Windows.Forms.Button lefPanelOpUnion;
+        private System.Windows.Forms.Button leftPanelOpDiffer;
+        private System.Windows.Forms.Button leftPanelOpRandom;
+        private System.Windows.Forms.Button leftPanelOpFilter;
+        private System.Windows.Forms.Button leftPanelOpMax;
+        private System.Windows.Forms.Button leftPanelOpMin;
+        private System.Windows.Forms.Button leftPanelOpAvg;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button leftPanelOpFreq;
+        private System.Windows.Forms.Button leftPanelOpSort;
+        private System.Windows.Forms.Button leftPanelOpGroup;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

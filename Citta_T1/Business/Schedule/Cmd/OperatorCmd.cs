@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,18 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> inputFilePaths = new List<string>();
         public OperatorOption option;
         public string outputFilePath;
+        public DSUtil.Encoding encoding;
+        public string operatorId;
 
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
-            option = (triple.OperateElement.GetControl as MoveOpControl).Option;
-            outputFilePath = triple.ResultElement.GetPath();
+            //triple.DataElements.ForEach(c => encodings.Add(c.Encoding));
+            this.encoding = triple.DataElements.First().Encoding;
+            this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
+            this.outputFilePath = triple.ResultElement.GetPath();
+            this.operatorId = triple.OperateElement.ID.ToString();
         }
 
         public string TransChoiceToCmd(string choice)
@@ -62,6 +68,15 @@ namespace Citta_T1.Business.Schedule.Cmd
             return outfieldLine;
         }
 
+        public string TransDifferOutputField(string[] outfield)
+        {
+            string outfieldLine = " $" + (int.Parse(outfield[0]) + 2).ToString();
+            for (int i = 1; i < outfield.Length; i++)
+            {
+                outfieldLine = outfieldLine + ",$" + (int.Parse(outfield[i]) + 2).ToString();
+            }
+            return outfieldLine;
+        }
         public string TransConditionToCmd(string condition)
         {
             try
@@ -71,7 +86,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             catch
             {
-                return "'" + condition + "'";
+                return '"' + condition + '"';
             }
 
 

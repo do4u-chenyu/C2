@@ -36,7 +36,7 @@ namespace Citta_T1.Controls.Move
             this.leftPinPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPinPictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemarkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,58 +103,62 @@ namespace Citta_T1.Controls.Move
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OptionMenuItem,
+            this.PreviewMenuItem,
             this.RenameMenuItem,
             this.RemarkMenuItem,
             this.RunMenuItem,
             this.ErrorLogMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(134, 124);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 146);
             // 
-            // OptionMenuItem
+            // PreviewMenuItem
             // 
-            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.OptionMenuItem.Name = "OptionMenuItem";
-            this.OptionMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.OptionMenuItem.Text = "设置";
-            this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
+            this.PreviewMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.PreviewMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.PreviewMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.PreviewMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.PreviewMenuItem.Name = "PreviewMenuItem";
+            this.PreviewMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.PreviewMenuItem.Text = "预览";
+            this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示运算结果的前100行";
+            this.PreviewMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
             // RenameMenuItem
             // 
             this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.RenameMenuItem.Size = new System.Drawing.Size(180, 24);
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
             // RemarkMenuItem
             // 
+            this.RemarkMenuItem.Enabled = false;
             this.RemarkMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RemarkMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RemarkMenuItem.Name = "RemarkMenuItem";
-            this.RemarkMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.RemarkMenuItem.Size = new System.Drawing.Size(180, 24);
             this.RemarkMenuItem.Text = "备注";
             this.RemarkMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
             // RunMenuItem
             // 
+            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
-            this.RunMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.RunMenuItem.Size = new System.Drawing.Size(180, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
             // ErrorLogMenuItem
             // 
+            this.ErrorLogMenuItem.Enabled = false;
             this.ErrorLogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ErrorLogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.ErrorLogMenuItem.Name = "ErrorLogMenuItem";
-            this.ErrorLogMenuItem.Size = new System.Drawing.Size(133, 24);
+            this.ErrorLogMenuItem.Size = new System.Drawing.Size(180, 24);
             this.ErrorLogMenuItem.Text = "异常日志";
             // 
             // textBox
@@ -225,7 +229,7 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.PictureBox leftPinPictureBox;
         public System.Windows.Forms.PictureBox rightPinPictureBox;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemarkMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
