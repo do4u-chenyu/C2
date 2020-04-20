@@ -102,7 +102,7 @@ namespace Citta_T1.Utils
             }
             //Directory.CreateDirectory(filePath);
 
-            filePath += fileName + ".bcp";
+            filePath = Path.Combine(filePath, fileName);
             if (!System.IO.File.Exists(filePath))
             {
                 System.IO.File.Create(filePath).Close();
