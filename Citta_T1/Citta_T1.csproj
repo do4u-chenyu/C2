@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Citta_T1</RootNamespace>
     <AssemblyName>Citta_T1</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -79,6 +79,7 @@
       <HintPath>..\packages\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -106,6 +107,7 @@
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FreqOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\GroupOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\RelateOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MaxOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MinOperatorCmd.cs" />
@@ -565,7 +567,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="sbin\join.exe">

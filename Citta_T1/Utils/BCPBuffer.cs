@@ -40,6 +40,7 @@ namespace Citta_T1.Utils
             return ret;
         }
 
+
         public void TryLoadBCP(string bcpFullPath, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")

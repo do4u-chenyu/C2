@@ -70,14 +70,14 @@ namespace Citta_T1.Business.Schedule.Cmd
                     inputFiled2 = inputFiled2 + ",$" + TransInputLine(tmpList[tt][1]);
                 }
                 //每个循环处理一关系
-                cmds.Add(string.Format("sbin3\\tail.exe -n +2 {0} | sbin3\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin3\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath1));
-                cmds.Add(string.Format("sbin3\\tail.exe -n +2 {0} | sbin3\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin3\\sort.exe -u > {2}", inputFilePath2, inputFiled2, filterBatPath2));
-                cmds.Add(string.Format("sbin3\\comm.exe -23 {0} {1} > {2}", filterBatPath1, filterBatPath2, filterBatPath3));
-                cmds.Add(string.Format("sbin3\\tail.exe -n +2 {0} | sbin3\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {1}\"\\t\"$0}}' | sbin3\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath4));
-                cmds.Add(string.Format("sbin3\\join.exe {0} {1} | sbin3\\awk.exe -F' ' -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath));
+                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath1));
+                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe -u > {2}", inputFilePath2, inputFiled2, filterBatPath2));
+                cmds.Add(string.Format("sbin\\comm.exe -23 {0} {1} > {2}", filterBatPath1, filterBatPath2, filterBatPath3));
+                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {1}\"\\t\"$0}}' | sbin\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath4));
+                cmds.Add(string.Format("sbin\\join.exe {0} {1} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath));
             }
 
-            cmds.Add(string.Format("sbin3\\rm.exe -f {0} {1} {2} {3}", filterBatPath1, filterBatPath2, filterBatPath3, filterBatPath4));
+            cmds.Add(string.Format("sbin\\rm.exe -f {0} {1} {2} {3}", filterBatPath1, filterBatPath2, filterBatPath3, filterBatPath4));
 
             return cmds;
         }

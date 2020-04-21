@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Configuration;
 using System.Windows.Forms;
 
 using Citta_T1.Utils;
@@ -14,10 +15,25 @@ namespace Citta_T1
         [STAThread]
         static void Main()
         {
-            Global.WorkspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
+            ConfigProgram();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
+        }
+
+        private static void ConfigProgram()
+        {
+            string workspace = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
+            try
+            { 
+                workspace = ConfigurationManager.AppSettings["worksapce"];
+            }
+            catch (ConfigurationErrorsException)
+            {
+                workspace = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
+            }
+
+            Global.WorkspaceDirectory = workspace;
         }
     }
 }

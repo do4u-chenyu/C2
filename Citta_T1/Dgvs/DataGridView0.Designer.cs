@@ -86,7 +86,7 @@ namespace Citta_T1
             /*
              * 初始化列
              */
-            int numOfCols = headers.ToArray().Length;
+            int numOfCols = headers.Count;
             System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCols];
             for (int i = 0; i < numOfCols; i++)
             {
@@ -104,7 +104,7 @@ namespace Citta_T1
              * 使用样例数据
              */
             string data;
-            for (int i = 0; i < maxNumOfRows; i=this.dataGridView1.Rows.Add())
+            for (int i = 0; i < maxNumOfRows; i = this.dataGridView1.Rows.Add())
             {
                 //this.dataGridView1.Rows.Add();
                 for (int j = 0; j < numOfCols; j++)

@@ -163,7 +163,7 @@ namespace Citta_T1.Business.Option
             PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
             Bezier line = new Bezier(startPoint, endPoint);
             CanvasPanel canvas = Global.GetCanvasPanel();
-            CanvasWrapper canvasWrp = new CanvasWrapper(canvas, canvas.CreateGraphics(), new Rectangle());
+
             canvas.RepaintObject(line);
             ModelRelation newModelRelation = new ModelRelation(
                                 moveOpControl.ID, mrc.ID,

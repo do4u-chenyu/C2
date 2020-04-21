@@ -111,7 +111,6 @@ namespace Citta_T1.Controls.Move
             this.DeleteMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
             this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
-            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // OptionMenuItem
             // 
