@@ -24,11 +24,11 @@ namespace Citta_T1.Business.Schedule.Cmd
                 Thread.Sleep(5000);
                 cmds.Add("echo max");
             }
-            Thread.Sleep(5000);
             string inputfieldLine = TransInputLine(option.GetOption("maxfield"));
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
 
-            cmds.Add(string.Format("sbin\\tail.exe -n +2 {1} | sbin\\sort.exe -nr -k {0} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {2}}}'>> {3}", inputfieldLine, inputFilePath, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\sort.exe -S 200M -T {1} -nr -k {2} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {3}}}'>> {4}", inputFilePath, this.tmpSortPath, inputfieldLine, outfieldLine,this.outputFilePath));
+
             return cmds;
         }
     }

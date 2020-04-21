@@ -58,6 +58,7 @@ namespace Citta_T1.Controls.Move
         public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         public List<string> DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
 
 
 
@@ -75,7 +76,7 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
-        public int revisedPinIndex;
+        private int revisedPinIndex;
         // 以该控件为起点的所有点
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
@@ -318,7 +319,11 @@ namespace Citta_T1.Controls.Move
                 MoveOpControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
+            {
                 RenameMenuItem_Click(this, e);
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
         }
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
@@ -505,7 +510,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-             ModelDocumentDirtyEvent?.Invoke();
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -560,7 +565,12 @@ namespace Citta_T1.Controls.Move
                 return;
             // 按下回车键
             if (e.KeyChar == 13)
+            {
                 FinishTextChange();
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
+                
         }
 
         public void textBox1_Leave(object sender, EventArgs e)
@@ -747,7 +757,7 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
 
         public void SaveEndLines(int line_index)
@@ -757,7 +767,7 @@ namespace Citta_T1.Controls.Move
              */
             try
             {
-                this.endLineIndexs[revisedPinIndex] = line_index;
+                //this.endLineIndexs[revisedPinIndex] = line_index;
             }
             catch (IndexOutOfRangeException)
             {
@@ -851,10 +861,7 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
+
         public void BindEndLine(int pinIndex, int relationIndex)
         { 
             try
@@ -914,10 +921,6 @@ namespace Citta_T1.Controls.Move
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
         private void UpdateBackground()
         {
 

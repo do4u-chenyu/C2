@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule.Cmd
         public string outputFilePath;
         public DSUtil.Encoding encoding;
         public string operatorId;
-
+        public string tmpSortPath;
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
@@ -27,6 +27,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
             this.outputFilePath = triple.ResultElement.GetPath();
             this.operatorId = triple.OperateElement.ID.ToString();
+            this.tmpSortPath = Global.WorkspaceDirectory;
         }
 
         public string TransChoiceToCmd(string choice)

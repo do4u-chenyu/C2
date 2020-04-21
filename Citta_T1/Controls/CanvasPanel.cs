@@ -253,9 +253,9 @@ namespace Citta_T1.Controls
                 else
                     invalidateRectWhenMoving = new Rectangle();
                 // 遍历所有OpControl的leftPin
-                // TODO [DK] Error 已经修正过的坐标 会后续循环中的LeftPin修改值
                 // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
-                // 只要在循环中被修正一次，就退出
+                // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
+                // 遍历一遍之后如果没有被校正，则this.endC=null
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
                     Control con = modelEle.GetControl;
@@ -263,13 +263,14 @@ namespace Citta_T1.Controls
                     {
                         // 修正坐标
                         nowP = (con as IMoveControl).RevisePointLoc(nowP);
+                        // 完成一次矫正
                         if (this.endC != null)
                             break;
                     }
                 }
                 endP = nowP;
                 lineWhenMoving = new Bezier(startP, nowP);
-                // TODO 这不不应该挡住其他的线
+                // 不不应该挡住其他的线
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
                 
@@ -356,9 +357,9 @@ namespace Citta_T1.Controls
                 bool isDuplicatedRelation = false;
                 ModelDocument cd = Global.GetCurrentDocument();
                 /* 不是所有位置Up都能形成曲线的
-                 * 如果没有endC，那就不形成线，结束绘线动作
+                 * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
-                if (this.endC == null)
+                if (this.endC == null || !(this.endC is MoveOpControl))
                 {
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
@@ -375,14 +376,14 @@ namespace Citta_T1.Controls
                  * 
                  *         ----------
                  */
-                (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).revisedPinIndex);
-                log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).revisedPinIndex);
+                (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
+                log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).RevisedPinIndex);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
                     startP,
-                    (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).revisedPinIndex),
-                    (endC as MoveOpControl).revisedPinIndex
+                    (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
+                    (endC as MoveOpControl).RevisedPinIndex
                     );
                 // TODO [DK] 这里用来设置规则
                 // 1. 关系不能重复
@@ -394,10 +395,10 @@ namespace Citta_T1.Controls
                     cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
                     Global.GetOptionDao().EnableControlOption(mr);
-                    cd.BindRelationToControl(mr, this.startC, this.endC);
                 }
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;
+                this.Invalidate();
             }
 
         }
