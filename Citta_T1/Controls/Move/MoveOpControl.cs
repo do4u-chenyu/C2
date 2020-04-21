@@ -565,7 +565,12 @@ namespace Citta_T1.Controls.Move
                 return;
             // 按下回车键
             if (e.KeyChar == 13)
+            {
                 FinishTextChange();
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
+                
         }
 
         public void textBox1_Leave(object sender, EventArgs e)
