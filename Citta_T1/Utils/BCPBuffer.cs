@@ -75,9 +75,6 @@ namespace Citta_T1.Utils
                 sr.Close();
                 sr.Dispose();
 
-                sr.Close();
-                sr.Dispose();
-
                 dataPreviewDict[filePath] = sb.ToString();
                 columnDict[filePath] = firstLine;
             }
