@@ -27,6 +27,10 @@ namespace Citta_T1
             try
             { 
                 workspace = ConfigurationManager.AppSettings["worksapce"];
+                string root = Path.GetPathRoot(workspace);
+                // 如果硬盘不存在,用程序所在目录
+                if (!System.IO.Directory.Exists(root))
+                    workspace = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
             }
             catch (ConfigurationErrorsException)
             {
