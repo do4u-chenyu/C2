@@ -70,9 +70,11 @@ namespace Citta_T1.Utils
                 sb.AppendLine(firstLine);
 
                 for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
-                {
                     sb.AppendLine(sr.ReadLine());
-                }
+
+                sr.Close();
+                sr.Dispose();
+
                 sr.Close();
                 sr.Dispose();
 

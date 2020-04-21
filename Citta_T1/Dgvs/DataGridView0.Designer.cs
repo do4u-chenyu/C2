@@ -152,6 +152,10 @@ namespace Citta_T1
         public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding, int maxNumOfFile = 100, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
+            // TODO [DK] 支持多种数据格式
+            //if (fileExt == DSUtil.ExtType.Excel)
+            //    List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
+            //else
             List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
             int numOfRows = rows.Count;
             for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)

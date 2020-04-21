@@ -319,7 +319,11 @@ namespace Citta_T1.Controls.Move
                 MoveOpControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
+            {
                 RenameMenuItem_Click(this, e);
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
         }
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
@@ -506,7 +510,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-             ModelDocumentDirtyEvent?.Invoke();
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
