@@ -219,7 +219,11 @@ namespace Citta_T1.Business.Model
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
+                        {
                             ctl.Option = ReadOption(xn);
+                            ctl.DataSourceColumns = ctl.Option.GetOption("columnname");
+                        }
+                            
 
 
                     }

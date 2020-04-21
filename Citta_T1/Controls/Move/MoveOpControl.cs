@@ -39,7 +39,7 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private OperatorOption option = new OperatorOption();
         private int id;
-        private List<string> dataSourceColumns;
+        private string dataSourceColumns;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -57,7 +57,7 @@ namespace Citta_T1.Controls.Move
         public int ID { get => this.id; set => this.id = value; }
         public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
-        public List<string> DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public string DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
 
 
 

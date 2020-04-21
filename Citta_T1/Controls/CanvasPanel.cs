@@ -160,6 +160,14 @@ namespace Citta_T1.Controls
                 Global.GetFlowControl().ResetStatus();
                 return;
             }
+            //模拟删除单个线的动作
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    int ID = 1;
+            //    Global.GetCurrentDocument().DeleteModelRelation(ID - 1);
+            //    Global.GetOptionDao().DisableControlOption(ID);
+            //    this.Invalidate();
+            //}
 
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
