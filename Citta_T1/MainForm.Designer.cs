@@ -206,6 +206,7 @@
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
+            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西都在这里");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
@@ -217,6 +218,7 @@
             this.dataButton.Size = new System.Drawing.Size(124, 42);
             this.dataButton.TabIndex = 2;
             this.dataButton.Text = "数据";
+            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据都在这里");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
@@ -228,6 +230,7 @@
             this.oprateButton.Size = new System.Drawing.Size(124, 42);
             this.oprateButton.TabIndex = 1;
             this.oprateButton.Text = "算子";
+            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法都在这里");
             this.oprateButton.UseVisualStyleBackColor = true;
             this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
@@ -239,6 +242,7 @@
             this.myModelButton.Size = new System.Drawing.Size(124, 42);
             this.myModelButton.TabIndex = 0;
             this.myModelButton.Text = "我的模型";
+            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型都在这里");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
             // 
