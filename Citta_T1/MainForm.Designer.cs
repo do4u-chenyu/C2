@@ -504,7 +504,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件");
+            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
             this.importButton.UseVisualStyleBackColor = false;
             this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -791,6 +791,7 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(52, 53);
             this.downloadButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
             this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // stopButton
