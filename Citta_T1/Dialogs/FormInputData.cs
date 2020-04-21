@@ -7,6 +7,7 @@ using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using static Citta_T1.Utils.DSUtil;
 
 namespace Citta_T1.Dialogs
 {
@@ -23,12 +24,6 @@ namespace Citta_T1.Dialogs
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
         private ExtType fileExt = ExtType.Unknow;
-        private enum ExtType
-        {
-            Excel,
-            Text,
-            Unknow
-        }
 
         public FormInputData()
         {

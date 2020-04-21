@@ -152,20 +152,24 @@ namespace Citta_T1
         public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding, int maxNumOfFile = 100, char sep = '\t')
         {
             List<List<string>> datas = new List<List<string>> { };
+            // TODO [DK] 支持多种数据格式
+            //if (fileExt == DSUtil.ExtType.Excel)
+            //    List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
+            //else
             List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
             int numOfRows = rows.Count;
-            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
+            for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)
             {
-                datas.Add(new List<string>(rows[i].Split('\t')));
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split('\t')));
             }
 
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
             this.dataGridView1.DataSource = null;
             List<string> headers = datas[0];
-            int numOfCols = headers.ToArray().Length;
+            int numOfCols = headers.Count;
             _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
+            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
         }
     }
 }
