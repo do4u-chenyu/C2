@@ -147,6 +147,14 @@ namespace  Citta_T1
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
+            // 切换文档时, 显示或隐藏备注控件
+            if (Global.GetCurrentDocument().RemarkVisible)
+                this.remarkControl.Show();
+            else
+                this.remarkControl.Hide();
+            // 切换文档时, 浮动框备注框选中状态切换
+            Global.GetFlowControl().SelectRemark = Global.GetCurrentDocument().RemarkVisible;
+            Global.GetFlowControl().RemarkChange(Global.GetFlowControl().SelectRemark);
             // 重绘所有Relation线
             this.canvasPanel.Invalidate(false);
             //切换文档时，更新运行按钮图标
