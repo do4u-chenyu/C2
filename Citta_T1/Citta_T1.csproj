@@ -106,6 +106,7 @@
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FreqOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\GroupOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\RelateOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MaxOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\MinOperatorCmd.cs" />
