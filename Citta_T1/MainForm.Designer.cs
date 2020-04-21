@@ -282,6 +282,7 @@
             // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
+            this.dataSourceControl.AutoScroll = true;
             this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -290,6 +291,7 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
+            this.scrollbarComponent1.SetUserCustomScrollbar(this.dataSourceControl, true);
             // 
             // myModelControl
             // 
