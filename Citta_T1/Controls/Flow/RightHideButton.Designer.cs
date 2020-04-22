@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RightHideButton));
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -45,7 +47,13 @@
             this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
             this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
             // 
-            // FlowControl3
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 250;
+            this.toolTip1.ReshowDelay = 100;
+            // 
+            // RightHideButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -53,8 +61,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.label1);
-            this.Name = "FlowControl3";
+            this.Name = "RightHideButton";
             this.Size = new System.Drawing.Size(55, 55);
+            this.toolTip1.SetToolTip(this, "隐藏浮动工具栏");
             this.Click += new System.EventHandler(this.RightHideButton_Click);
             this.MouseEnter += new System.EventHandler(this.RightHideButton_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.RightHideButton_MouseLeave);
@@ -66,5 +75,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

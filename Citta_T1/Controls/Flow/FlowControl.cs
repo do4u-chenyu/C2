@@ -127,8 +127,8 @@ namespace Citta_T1.Controls.Flow
 
         private void RemarkPictureBox_Click(object sender, EventArgs e)//单击备注按钮，备注出现和隐藏功能
         {
-
-            SelectRemark = !SelectRemark;
+            Global.GetCurrentDocument().RemarkVisible = !Global.GetCurrentDocument().RemarkVisible;
+            SelectRemark = Global.GetCurrentDocument().RemarkVisible;
             if (SelectRemark)
                 ShowRemarkControl();
             else
@@ -198,7 +198,7 @@ namespace Citta_T1.Controls.Flow
             this.zoomDownPictureBox.Location = new System.Drawing.Point(92, 5);
             this.zoomDownPictureBox.Size = new System.Drawing.Size(22, 22);
         }
-        private void RemarkChange(bool flag)
+        public void RemarkChange(bool flag)
         {
             if (flag)
             {

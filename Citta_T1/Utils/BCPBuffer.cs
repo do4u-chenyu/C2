@@ -21,7 +21,7 @@ namespace Citta_T1.Utils
 
             // 数据不存在时 按照路径重新读取
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")           
-                PreLoadFile(bcpFullPath, encoding);
+                PreLoadBcpFile(bcpFullPath, encoding);
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (dataPreviewDict.ContainsKey(bcpFullPath))
                 ret = dataPreviewDict[bcpFullPath];
@@ -33,17 +33,24 @@ namespace Citta_T1.Utils
         {
             string ret = "";
             if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
-                PreLoadFile(bcpFullPath, encoding);
+                PreLoadBcpFile(bcpFullPath, encoding);
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (columnDict.ContainsKey(bcpFullPath))
                 ret = columnDict[bcpFullPath];
             return ret;
         }
 
+
         public void TryLoadBCP(string bcpFullPath, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
-                PreLoadFile(bcpFullPath, encoding);
+                PreLoadBcpFile(bcpFullPath, encoding);  // 按行读取文件 不分割
+        }
+        
+        public void TryLoadExcel(string excelFullPath)
+        {
+            if (!dataPreviewDict.ContainsKey(excelFullPath) || dataPreviewDict[excelFullPath] == "")
+                PreLoadExcelFile(excelFullPath);
         }
 
         public void Remove(string bcpFullPath)
@@ -52,7 +59,15 @@ namespace Citta_T1.Utils
             columnDict.Remove(bcpFullPath);
         }
 
-        private void PreLoadFile(string filePath, DSUtil.Encoding encoding)
+        private void PreLoadExcelFile(string filePath)
+        {
+
+        }
+
+        /*
+         * 按行读取文件，不分割
+         */
+        private void PreLoadBcpFile(string filePath, DSUtil.Encoding encoding)
         {
             System.IO.StreamReader sr;
             StringBuilder sb = new StringBuilder(1024 * 16);
@@ -83,6 +98,7 @@ namespace Citta_T1.Utils
             }
             
         }
+
 
         // 数据字典, 全局单例
         public static BCPBuffer GetInstance()

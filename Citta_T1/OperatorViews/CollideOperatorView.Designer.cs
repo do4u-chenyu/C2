@@ -37,9 +37,9 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.DataInfoBox2 = new HZH_Controls.Controls.TextBoxEx();
+            this.dataSource1 = new HZH_Controls.Controls.TextBoxEx();
             this.OutList = new UserControlDLL.ComCheckBoxList();
-            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
+            this.dataSource0 = new HZH_Controls.Controls.TextBoxEx();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -91,9 +91,9 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(591, 37);
+            this.topPanel.Size = new System.Drawing.Size(587, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -101,10 +101,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 351);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 347);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(591, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(587, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -112,7 +112,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(494, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
@@ -127,7 +127,7 @@
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.confirmButton.Location = new System.Drawing.Point(394, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
@@ -142,53 +142,52 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 314);
+            this.keyPanel.Size = new System.Drawing.Size(116, 310);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.DataInfoBox2);
+            this.valuePanel.Controls.Add(this.dataSource1);
             this.valuePanel.Controls.Add(this.OutList);
-            this.valuePanel.Controls.Add(this.DataInfoBox);
+            this.valuePanel.Controls.Add(this.dataSource0);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(475, 314);
+            this.valuePanel.Size = new System.Drawing.Size(471, 310);
             this.valuePanel.TabIndex = 3;
             // 
-            // DataInfoBox2
+            // dataSource1
             // 
-            this.DataInfoBox2.DecLength = 2;
-            this.DataInfoBox2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox2.Location = new System.Drawing.Point(134, 2);
-            this.DataInfoBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.DataInfoBox2.MaxValue = new decimal(new int[] {
+            this.dataSource1.DecLength = 2;
+            this.dataSource1.InputType = HZH_Controls.TextInputType.NotControl;
+            this.dataSource1.Location = new System.Drawing.Point(134, 2);
+            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSource1.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.DataInfoBox2.MinValue = new decimal(new int[] {
+            this.dataSource1.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.DataInfoBox2.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox2.Name = "DataInfoBox2";
-            this.DataInfoBox2.OldText = null;
-            this.DataInfoBox2.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox2.PromptText = "";
-            this.DataInfoBox2.ReadOnly = true;
-            this.DataInfoBox2.RegexPattern = "";
-            this.DataInfoBox2.Size = new System.Drawing.Size(92, 21);
-            this.DataInfoBox2.TabIndex = 9;
-            this.DataInfoBox2.Text = "test2.bcp";
-            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSource1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dataSource1.Name = "dataSource1";
+            this.dataSource1.OldText = null;
+            this.dataSource1.PromptColor = System.Drawing.Color.Gray;
+            this.dataSource1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dataSource1.PromptText = "";
+            this.dataSource1.ReadOnly = true;
+            this.dataSource1.RegexPattern = "";
+            this.dataSource1.Size = new System.Drawing.Size(92, 21);
+            this.dataSource1.TabIndex = 9;
+            this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OutList
             // 
@@ -199,34 +198,33 @@
             this.OutList.Size = new System.Drawing.Size(112, 20);
             this.OutList.TabIndex = 8;
             // 
-            // DataInfoBox
+            // dataSource0
             // 
-            this.DataInfoBox.DecLength = 2;
-            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox.Location = new System.Drawing.Point(5, 2);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.DataInfoBox.MaxValue = new decimal(new int[] {
+            this.dataSource0.DecLength = 2;
+            this.dataSource0.InputType = HZH_Controls.TextInputType.NotControl;
+            this.dataSource0.Location = new System.Drawing.Point(5, 2);
+            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSource0.MaxValue = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
-            this.DataInfoBox.MinValue = new decimal(new int[] {
+            this.dataSource0.MinValue = new decimal(new int[] {
             1000000,
             0,
             0,
             -2147483648});
-            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.OldText = null;
-            this.DataInfoBox.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox.PromptText = "";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.RegexPattern = "";
-            this.DataInfoBox.Size = new System.Drawing.Size(92, 21);
-            this.DataInfoBox.TabIndex = 7;
-            this.DataInfoBox.Text = "test1.bcp";
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSource0.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dataSource0.Name = "dataSource0";
+            this.dataSource0.OldText = null;
+            this.dataSource0.PromptColor = System.Drawing.Color.Gray;
+            this.dataSource0.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dataSource0.PromptText = "";
+            this.dataSource0.ReadOnly = true;
+            this.dataSource0.RegexPattern = "";
+            this.dataSource0.Size = new System.Drawing.Size(92, 21);
+            this.dataSource0.TabIndex = 7;
+            this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel2
             // 
@@ -238,7 +236,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(95, 54);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -256,7 +254,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::Citta_T1.Properties.Resources.add;
             this.button1.Location = new System.Drawing.Point(182, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
@@ -268,7 +266,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(2, 6);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 20);
             this.comboBox1.TabIndex = 2;
@@ -277,15 +275,8 @@
             // 
             this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
             this.comboBox2.Location = new System.Drawing.Point(92, 6);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(86, 20);
             this.comboBox2.TabIndex = 3;
@@ -295,7 +286,7 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(4, 87);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(478, 160);
             this.panel1.TabIndex = 1;
@@ -309,7 +300,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -344,7 +335,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 415);
+            this.ClientSize = new System.Drawing.Size(587, 411);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -352,7 +343,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CollideOperatorView";
             this.ShowIcon = false;
             this.Text = "碰撞算子设置";
@@ -385,7 +376,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private UserControlDLL.ComCheckBoxList OutList;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox2;
+        private HZH_Controls.Controls.TextBoxEx dataSource0;
+        private HZH_Controls.Controls.TextBoxEx dataSource1;
     }
 }

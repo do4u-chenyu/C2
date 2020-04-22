@@ -196,12 +196,6 @@ namespace Citta_T1.OperatorViews
                     return empty;
                 }
             }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
-            {
-                MessageBox.Show("请选择数据是否进行去重");
-                empty = true;
-                return empty;
-            }
             return empty;
         }
         #endregion

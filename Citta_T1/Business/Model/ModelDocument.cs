@@ -24,11 +24,12 @@ namespace Citta_T1.Business.Model
         private string userName;//用户名
         private string modelTitle;
 
-        private List<ModelElement> modelElements;
+        private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, Bezier> modelLineDict;
+        private Dictionary<int, Bezier> modelLineDict;  // 
         private int lineCounter;
-        private string remarkDescription;
+        private string remarkDescription;  // 备注描述信息
+        private bool remarkVisible;        // 备注控件是否可见
 
         private string savePath;
         private bool dirty;//字段表示模型是否被修改
@@ -62,6 +63,7 @@ namespace Citta_T1.Business.Model
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
         public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
         public string UserPath { get => userPath; set => userPath = value; }
+        public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -71,6 +73,7 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
+            this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
@@ -234,6 +237,9 @@ namespace Citta_T1.Business.Model
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                    // 引脚更新
+                    (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
+                    (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                     mr.UpdatePoints();
                 }
                 catch (IndexOutOfRangeException)
