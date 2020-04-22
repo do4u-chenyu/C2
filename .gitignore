@@ -25,3 +25,5 @@ packages/SharpZipLib.1.2.0/.signature.p7s
 packages/SharpZipLib.1.2.0/SharpZipLib.1.2.0.nupkg
 packages/SharpZipLib.1.2.0/lib/net45/ICSharpCode.SharpZipLib.xml
 packages/SharpZipLib.1.2.0/lib/netstandard2.0/
+UserInstallSet/bin/Debug/
+UserInstallSet/obj/Debug/
