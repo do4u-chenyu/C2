@@ -33,6 +33,8 @@ namespace Citta_T1.OperatorViews
             LoadOption();
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
+            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
+            this.oldCheckedItems.Add(this.descendingOrder.Checked);
 
 
         }
@@ -80,6 +82,10 @@ namespace Citta_T1.OperatorViews
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            if (this.opControl.Option.GetOption("ascendingOrder") != "")
+                this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
+            if (this.opControl.Option.GetOption("descendingOrder") != "")
+                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
             if (factor1 != "")
             {
                 string[] factorList = factor1.Split(',');
@@ -95,10 +101,8 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 4 + 0];
-                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 4 + 1];
-                control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
+                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
+                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
             }
             
         }
@@ -111,14 +115,15 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 4 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 4 + 1];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString();
+                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
+                    string factor = (control1 as ComboBox).SelectedIndex.ToString();
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Status = ElementStatus.Ready;
 
         }
@@ -174,6 +179,12 @@ namespace Citta_T1.OperatorViews
                 empty = true;
                 return empty; 
             }
+            if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
+            {
+                MessageBox.Show("请选择数据排序");
+                empty = true;
+                return empty;
+            }
             return empty;
         }
         #endregion
@@ -181,17 +192,10 @@ namespace Citta_T1.OperatorViews
         private void createLine(int addLine)
         {
             // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-
             ComboBox dataBox = new ComboBox();
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
+            this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
            
             Button addButton1 = new Button();
@@ -207,7 +211,7 @@ namespace Citta_T1.OperatorViews
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 2, addLine);
+            this.tableLayoutPanel1.Controls.Add(addButton1, 1, addLine);
 
             Button delButton1 = new Button();
             delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -222,7 +226,7 @@ namespace Citta_T1.OperatorViews
             delButton1.Click += new System.EventHandler(this.del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 3, addLine);
+            this.tableLayoutPanel1.Controls.Add(delButton1, 2, addLine);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -256,8 +260,6 @@ namespace Citta_T1.OperatorViews
                     this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
-                    Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
                 }
                 createLine(addLine);
             }
@@ -271,10 +273,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 4) + 3];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * 3) + 2];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 4) + 3; j >= (i * 4); j--)
+                    for (int j = (i * 3) + 2; j >= (i * 3); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }
@@ -291,8 +293,6 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
-                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
-                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;
@@ -305,7 +305,9 @@ namespace Citta_T1.OperatorViews
             e.Graphics.Clear(this.BackColor);
         }
 
-
-
+        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
     }
 }

@@ -24,11 +24,12 @@ namespace Citta_T1.Business.Model
         private string userName;//用户名
         private string modelTitle;
 
-        private List<ModelElement> modelElements;
+        private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, Bezier> modelLineDict;
-        private int lineCounter= -1;
-        private string remarkDescription;
+        private Dictionary<int, Bezier> modelLineDict;  // 
+        private int lineCounter;
+        private string remarkDescription;  // 备注描述信息
+        private bool remarkVisible;        // 备注控件是否可见
 
         private string savePath;
         private bool dirty;//字段表示模型是否被修改
@@ -62,6 +63,7 @@ namespace Citta_T1.Business.Model
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
         public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
         public string UserPath { get => userPath; set => userPath = value; }
+        public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -71,12 +73,16 @@ namespace Citta_T1.Business.Model
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, Bezier>();
             this.remarkDescription = "";
-            this.userPath = Directory.GetCurrentDirectory() + "\\cittaModelDocument\\" + userName + "\\";
-            this.savePath = this.userPath + modelTitle + "\\";
+            this.remarkVisible = false;
+            this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
+            this.savePath = Path.Combine(this.userPath, modelTitle);
 
             this.manager = new Manager();
             this.sizeL = 0;
             this.screenFactor = 1;
+
+            // lineCounter应该为`this,modelRelations`的最大值
+            //this.lineCounter = this.modelRelations.Count == 0 ? -1 :   
         }
         /*
          * 保存功能
@@ -87,6 +93,15 @@ namespace Citta_T1.Business.Model
             dSaveLoad.WriteXml();
     
         }
+
+        //private int GetMaxLineID(List<ModelRelation> mrs)
+        //{
+        //    int maxID = -1;
+        //    foreach (ModelRelation mr in mrs)
+        //    {
+        //        maxID = Math.Max(maxID, mr.)
+        //    }
+        //}
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
@@ -143,7 +158,7 @@ namespace Citta_T1.Business.Model
         }
         public void Load()
         {
-            if (File.Exists(savePath + modelTitle +".xml"))
+            if (File.Exists(Path.Combine(savePath, modelTitle +".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
@@ -216,7 +231,6 @@ namespace Citta_T1.Business.Model
                 try
                 {
                     ModelRelation mr = this.modelRelations[i];
-                    // 0 被RemarkControl占用了
 
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
@@ -224,12 +238,6 @@ namespace Citta_T1.Business.Model
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     mr.UpdatePoints();
-                    // 控件线绑定
-                    (sEle.GetControl as IMoveControl).BindStartLine(0, i);
-                    (eEle.GetControl as IMoveControl).BindEndLine(mr.EndPin, i);
-                    //控件和线关联引脚更新
-                    (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
-                    (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -312,14 +320,6 @@ namespace Citta_T1.Business.Model
             }
         }
 
-        // 将新的线绑线到控件
-        public void BindRelationToControl(ModelRelation mr, Control startC, Control endC)
-        {
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            int index = GetLineIndex();
-            (startC as IMoveControl).SaveStartLines(index);
-            (endC as IMoveControl).SaveEndLines(index);
-        }
 
         public bool IsDuplicatedRelation(ModelRelation mr)
         {

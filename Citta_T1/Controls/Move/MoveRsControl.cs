@@ -48,7 +48,7 @@ namespace Citta_T1.Controls.Move
         Bezier line;
         public ECommandType cmd = ECommandType.Null;
 
-        private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
+
 
         private ElementStatus status;
         private int id;
@@ -117,10 +117,6 @@ namespace Citta_T1.Controls.Move
         }
         public void ChangeSize(int sizeL)
         {
-
-            bool originVisible = this.Visible;
-            if (originVisible)
-                this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -137,8 +133,6 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            if (originVisible)
-                this.Show();
         }
 
             /*
@@ -323,13 +317,12 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 右键菜单
-        public void OptionMenuItem_Click(object sender, EventArgs e)
+        public void PreviewMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
+            if (System.IO.File.Exists(this.path))
+            {
+                Global.GetMainForm().PreViewDataByBcpPath(this.path, this.encoding);
+            }
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)
@@ -362,7 +355,11 @@ namespace Citta_T1.Controls.Move
         {
             // 按下回车键
             if (e.KeyChar == 13)
+            {
                 FinishTextChange();
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
         }
 
         public void textBox1_Leave(object sender, EventArgs e)
@@ -388,9 +385,7 @@ namespace Citta_T1.Controls.Move
 
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo = "温馨提示";
-            this.nameToolTip.SetToolTip(this.rightPictureBox, helpInfo);
-
+            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Path);
         }
 
         #region 针脚事件
@@ -544,13 +539,13 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
         public void SaveEndLines(int line_index)
         {
             try
             {
-                this.endLineIndexs[0] = line_index;
+                //this.endLineIndexs[0] = line_index;
             }
             catch (IndexOutOfRangeException)
             {
@@ -584,25 +579,7 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2, 
                 this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
         }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
-        public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            try
-            {
-                this.endLineIndexs[pinIndex] = relationIndex;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveRsControl BindEndLine 出错: " + ex.ToString());
-            }
-        }
+
         #endregion
         private void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {

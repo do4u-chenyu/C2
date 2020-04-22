@@ -75,6 +75,7 @@
             // 
             // LocalFrame
             // 
+            this.LocalFrame.AutoScroll = true;
             this.LocalFrame.BackColor = System.Drawing.Color.White;
             this.LocalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LocalFrame.Location = new System.Drawing.Point(0, 51);
@@ -97,6 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.ExternalFrame);
             this.Controls.Add(this.LocalFrame);
             this.Controls.Add(this.DataSourceFrame);

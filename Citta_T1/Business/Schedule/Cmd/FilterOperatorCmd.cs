@@ -11,7 +11,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 {
     class FilterOperatorCmd : OperatorCmd
     {
-        private StreamWriter streamWriter = null;
+        
 
         public FilterOperatorCmd(Triple triple) : base(triple)
         {
@@ -29,8 +29,10 @@ namespace Citta_T1.Business.Schedule.Cmd
                 Thread.Sleep(5000);
                 cmds.Add("echo filter");
             }
+            StreamWriter streamWriter = null;
 
-            string filterBatPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\filterChoice.bat";
+            
+            string filterBatPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_filterChoice.bat";
             if(this.encoding == DSUtil.Encoding.UTF8)
             {
                 UTF8Encoding utf8 = new UTF8Encoding(false);
@@ -51,7 +53,7 @@ namespace Citta_T1.Business.Schedule.Cmd
                 awkIfCmd = awkIfCmd + " " + TransAndOrToCmd(tmpfactor[0]) + "(" + " $" + TransInputLine(tmpfactor[1]) + TransChoiceToCmd(tmpfactor[2]) + TransConditionToCmd(tmpfactor[3]) + ")";
             }
 
-            string awkExec = string.Format("\"{{if({0}){{print {1} }} }}\"", awkIfCmd, outfieldLine);
+            string awkExec = string.Format("{{if({0}){{print {1} }} }}", awkIfCmd, outfieldLine);
 
             streamWriter.Write(awkExec);
             streamWriter.Close();

@@ -40,6 +40,7 @@ namespace Citta_T1.Utils
             return ret;
         }
 
+
         public void TryLoadBCP(string bcpFullPath, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
@@ -68,8 +69,11 @@ namespace Citta_T1.Utils
                 string firstLine = sr.ReadLine();
                 sb.AppendLine(firstLine);
 
-                for (int row = 1; row < maxRow; row++)
+                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
                     sb.AppendLine(sr.ReadLine());
+
+                sr.Close();
+                sr.Dispose();
 
                 dataPreviewDict[filePath] = sb.ToString();
                 columnDict[filePath] = firstLine;
@@ -90,7 +94,7 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
-        public string CreateNewBCPFile(string filename, List<string> columnName)
+        public string CreateNewBCPFile(string fileName, List<string> columnName)
         {
             string filePath = "";
             string columns = "";
@@ -98,11 +102,11 @@ namespace Citta_T1.Utils
             if (!Directory.Exists(filePath))
             {
                 Directory.CreateDirectory(filePath);
-                Utils.FileUtil.addpathPower(filePath, "FullControl");
+                Utils.FileUtil.AddPathPower(filePath, "FullControl");
             }
-                Directory.CreateDirectory(filePath);
+            //Directory.CreateDirectory(filePath);
 
-            filePath += filename + ".bcp";
+            filePath = Path.Combine(filePath, fileName);
             if (!System.IO.File.Exists(filePath))
             {
                 System.IO.File.Create(filePath).Close();

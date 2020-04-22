@@ -121,7 +121,7 @@ namespace Citta_T1.Controls.Move
             this.PreviewMenuItem.Size = new System.Drawing.Size(180, 24);
             this.PreviewMenuItem.Text = "预览";
             this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示运算结果的前100行";
-            this.PreviewMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
+            this.PreviewMenuItem.Click += new System.EventHandler(this.PreviewMenuItem_Click);
             // 
             // RenameMenuItem
             // 
@@ -144,6 +144,7 @@ namespace Citta_T1.Controls.Move
             // 
             // RunMenuItem
             // 
+            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";

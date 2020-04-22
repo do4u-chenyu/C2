@@ -10,35 +10,35 @@ namespace Citta_T1.Utils
 {
     class FileUtil
     {
-        public static void addpathPower(string pathname, string power)
+        public static void AddPathPower(string pathName, string power)
         {
-            string username = System.Environment.UserName;
-            DirectoryInfo dirinfo = new DirectoryInfo(pathname);
+            string userName = System.Environment.UserName;
+            DirectoryInfo dirInfo = new DirectoryInfo(pathName);
 
-            if ((dirinfo.Attributes & FileAttributes.ReadOnly) != 0)
+            if ((dirInfo.Attributes & FileAttributes.ReadOnly) != 0)
             {
-                dirinfo.Attributes = FileAttributes.Normal;
+                dirInfo.Attributes = FileAttributes.Normal;
             }
 
             //取得访问控制列表   
-            DirectorySecurity dirsecurity = dirinfo.GetAccessControl();
+            DirectorySecurity dirsecurity = dirInfo.GetAccessControl();
 
             switch (power)
             {
                 case "FullControl":
-                    dirsecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.FullControl, InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+                    dirsecurity.AddAccessRule(new FileSystemAccessRule(userName, FileSystemRights.FullControl, InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
                     break;
                 case "ReadOnly":
-                    dirsecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.Read, AccessControlType.Allow));
+                    dirsecurity.AddAccessRule(new FileSystemAccessRule(userName, FileSystemRights.Read, AccessControlType.Allow));
                     break;
                 case "Write":
-                    dirsecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.Write, AccessControlType.Allow));
+                    dirsecurity.AddAccessRule(new FileSystemAccessRule(userName, FileSystemRights.Write, AccessControlType.Allow));
                     break;
                 case "Modify":
-                    dirsecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.Modify, AccessControlType.Allow));
+                    dirsecurity.AddAccessRule(new FileSystemAccessRule(userName, FileSystemRights.Modify, AccessControlType.Allow));
                     break;
             }
-            dirinfo.SetAccessControl(dirsecurity);
+            dirInfo.SetAccessControl(dirsecurity);
         }
     }
 }
