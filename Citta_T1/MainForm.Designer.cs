@@ -383,6 +383,7 @@
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
             this.minMaxPictureBox.TabIndex = 1;
             this.minMaxPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏数据框");
             this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
             // 
             // panel8
@@ -679,6 +680,7 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(52, 53);
             this.downloadButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.downloadButton, "下载此模型");
             this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // stopButton
@@ -695,6 +697,7 @@
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
@@ -712,6 +715,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始运行模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
@@ -875,4 +879,3 @@
         private System.Windows.Forms.Label currentModelFinLab;
     }
 }
-
