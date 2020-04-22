@@ -21,7 +21,8 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string[] columnName;
         private string oldOptionDict;
-        private List<string> selectColumn;
+        private List<string> selectColumn=new List<string>();
+        private List<int> groupColumn=new List<int>();
         private List<bool> oldCheckedItems = new List<bool>();
         public GroupOperatorView(MoveOpControl opControl)
         {
@@ -110,6 +111,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             string factor1 = this.comboBox1.SelectedIndex.ToString();
+            groupColumn.Add(this.comboBox1.SelectedIndex);
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -117,6 +119,7 @@ namespace Citta_T1.OperatorViews
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string factor = (control1 as ComboBox).SelectedIndex.ToString();
+                    groupColumn.Add((control1 as ComboBox).SelectedIndex);
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -139,7 +142,13 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.columnName.ToList();
+            for (int i = 0; i < this.columnName.Count(); i++)
+            {
+                if (!this.groupColumn.Contains(i))
+                    this.groupColumn.Add(i);
+            }
+            foreach (int index in this.groupColumn)
+                this.selectColumn.Add(this.columnName[index]);
             if (this.oldOptionDict == "")
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
         }

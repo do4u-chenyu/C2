@@ -17,18 +17,19 @@ namespace Citta_T1.Business.Schedule.Cmd
         public string outputFilePath;
         public DSUtil.Encoding encoding;
         public string operatorId;
-        public string tmpSortPath;
+        public string sortConfig;
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
-            //triple.DataElements.ForEach(c => encodings.Add(c.Encoding));
             this.encoding = triple.DataElements.First().Encoding;
             this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
             this.outputFilePath = triple.ResultElement.GetPath();
             this.operatorId = triple.OperateElement.ID.ToString();
-            this.tmpSortPath = Global.WorkspaceDirectory;
+            this.sortConfig = " -S 200M -T " + Global.WorkspaceDirectory;
         }
+
+
 
         public string TransChoiceToCmd(string choice)
         {
@@ -89,8 +90,11 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 return '"' + condition + '"';
             }
+        }
 
-
+        public string TransInputfileToCmd(string inputfile)
+        {
+            return System.IO.Path.GetFileName(inputfile).IndexOf(".xls") > 0 ? "sbin\\catXLS.exe": "sbin\\tail.exe -n +2";
         }
 
     }

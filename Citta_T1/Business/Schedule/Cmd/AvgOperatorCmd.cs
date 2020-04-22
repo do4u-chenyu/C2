@@ -16,18 +16,10 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            string inputFilePath = inputFilePaths.First();
+            string inputFilePath = inputFilePaths.First();//输入文件
+            string avgfieldLine = TransInputLine(option.GetOption("avgfield"));//取平均值字段
 
-            //以后算子路径功能写完后去掉
-            if (inputFilePath == "")
-            {
-                Thread.Sleep(5000);
-                cmds.Add("echo avg");
-            }
-            Thread.Sleep(5000);
-            string avgfieldLine = TransInputLine(option.GetOption("avgfield"));
-
-            cmds.Add(string.Format("sbin\\tail -n +2 {1} | sbin\\awk.exe '{{a+=${0}}}END{{print a/NR}}' >> {2}", avgfieldLine, inputFilePath, this.outputFilePath));
+            cmds.Add(string.Format("{0} {1} | sbin\\awk.exe '{{a+=${2}}}END{{print a/NR}}' >> {3}", TransInputfileToCmd(inputFilePath), inputFilePath, avgfieldLine, this.outputFilePath));
             return cmds;
         }
     }

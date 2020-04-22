@@ -16,19 +16,11 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            string inputFilePath = inputFilePaths.First();
+            string inputFilePath = inputFilePaths.First();//输入文件
+            string inputfieldLine = TransInputLine(option.GetOption("minfield")); //最小值字段
+            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
-            //以后算子路径功能写完后去掉
-            if (inputFilePath == "")
-            {
-                Thread.Sleep(5000);
-                cmds.Add("echo min");
-            }
-            Thread.Sleep(5000);
-            string inputfieldLine = TransInputLine(option.GetOption("minfield")); 
-            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
-
-            cmds.Add(string.Format("sbin\\tail.exe -n +2 {1} | sbin\\sort.exe -n -k {0} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {2}}}'>> {3}", inputfieldLine, inputFilePath, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("{0} {1} | sbin\\sort.exe {2} -n -k {3} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {4}}}'>> {5}", TransInputfileToCmd(inputFilePath), inputFilePath, this.sortConfig, inputfieldLine, outfieldLine, this.outputFilePath));
             return cmds;
         }
 
