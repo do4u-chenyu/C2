@@ -16,23 +16,15 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            string inputFilePath = inputFilePaths.First();
+            string inputFilePath = inputFilePaths.First();//输入文件
 
-            //以后算子路径功能写完后去掉
-            if (inputFilePath == "")
-            {
-                Thread.Sleep(5000);
-                cmds.Add("echo freq");
-            }
-            Thread.Sleep(5000);
+            //是否去重(是对整个文件去重)、升降序
+            string repetition = option.GetOption("repetition") == "True" ? string.Format("sbin\\sort.exe {0} -u |",this.sortConfig) : "";
+            string order = option.GetOption("ascendingOrder") == "True" ? string.Format("sbin\\sort.exe {0} -n ",this.sortConfig) : string.Format("sbin\\sort.exe {0} -nr ",this.sortConfig);
 
-            //去重是对整个文件去重
-            string cmd1 = option.GetOption("repetition") == "True" ? "sbin\\sort.exe -u |" : "";
-            string cmd2 = option.GetOption("ascendingOrder") == "True" ? "sbin\\sort.exe -n " : "sbin\\sort.exe -nr ";
-
+            //待统计频率字段合并
             string infieldLine = TransOutputField(option.GetOption("outfield").Split(','));
             int count = option.GetOption("outfield").Split(',').Count()+1;
-
             string outfieldLine = "$2";
             if (count > 2)
             {
@@ -43,7 +35,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             outfieldLine += ",$1";
 
-            cmds.Add(string.Format("sbin\\tail.exe -n +2 {0}| {1} sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {2}}}' | sbin\\sort.exe | sbin\\uniq.exe -c | {3} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{ print {4}}}'>> {5}", inputFilePath,cmd1, infieldLine, cmd2, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("{0} {1}| {2} sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {3}}}' | sbin\\sort.exe {4} | sbin\\uniq.exe -c | {5} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{ print {6}}}'>> {7}", TransInputfileToCmd(inputFilePath), inputFilePath,repetition, infieldLine,this.sortConfig, order, outfieldLine, this.outputFilePath));
 
             return cmds;
         }

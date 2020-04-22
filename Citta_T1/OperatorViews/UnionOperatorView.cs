@@ -145,7 +145,7 @@ namespace Citta_T1.OperatorViews
                 Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
-                control3.Text = factorList[3];
+                control3.Text = factorList[2];
             }
 
         }
