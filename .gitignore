@@ -25,5 +25,11 @@ packages/SharpZipLib.1.2.0/.signature.p7s
 packages/SharpZipLib.1.2.0/SharpZipLib.1.2.0.nupkg
 packages/SharpZipLib.1.2.0/lib/net45/ICSharpCode.SharpZipLib.xml
 packages/SharpZipLib.1.2.0/lib/netstandard2.0/
-UserInstallSet/bin/Debug/
-UserInstallSet/obj/Debug/
+UserInstallSet/bin/Debug
+UserInstallSet/obj/Debug
+IAO解决方案/Debug
+UserInstallSet/bin/Debug/UserInstallSet.dll
+UserInstallSet/bin/Debug/UserInstallSet.pdb
+UserInstallSet/obj/Debug/UserInstallSet.csprojAssemblyReference.cache
+UserInstallSet/obj/Debug/UserInstallSet.dll
+UserInstallSet/obj/Debug/UserInstallSet.pdb
