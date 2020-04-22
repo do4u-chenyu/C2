@@ -17,6 +17,7 @@ namespace Citta_T1.Controls.Left
         {
             InitializeComponent();
             
+            
         }
 
         public void AddModel(string modelName)

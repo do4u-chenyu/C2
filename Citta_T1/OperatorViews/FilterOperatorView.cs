@@ -177,7 +177,7 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("outfield") != "")
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs.Take(checkIndexs.Length - 1).ToArray(), int.Parse));
+                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
             }
             if (factor1 != "")
             {
