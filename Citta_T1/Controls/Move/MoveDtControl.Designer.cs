@@ -117,12 +117,14 @@
             this.PreviewMenuItem.Name = "PreviewMenuItem";
             this.PreviewMenuItem.Size = new System.Drawing.Size(134, 24);
             this.PreviewMenuItem.Text = "预览";
+            this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示本数据源的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
             // 
             // OptionMenuItem
             // 
             this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OptionMenuItem.Enabled = false;
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionMenuItem.Name = "OptionMenuItem";
@@ -141,6 +143,7 @@
             // 
             // RunMenuItem
             // 
+            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
@@ -150,6 +153,7 @@
             // 
             // LogMenuItem
             // 
+            this.LogMenuItem.Enabled = false;
             this.LogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.LogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.LogMenuItem.Name = "LogMenuItem";
@@ -187,7 +191,7 @@
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtButton.Location = new System.Drawing.Point(27, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(0);
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(110, 14);
             this.txtButton.TabIndex = 8;
@@ -217,7 +221,6 @@
             this.LocationChanged += new System.EventHandler(this.MoveDtControl_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveDtControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
-            
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

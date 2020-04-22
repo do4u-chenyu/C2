@@ -91,9 +91,9 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(591, 37);
+            this.topPanel.Size = new System.Drawing.Size(587, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -101,10 +101,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 363);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 359);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(591, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(587, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -112,7 +112,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(494, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
@@ -127,7 +127,7 @@
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.confirmButton.Location = new System.Drawing.Point(394, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
@@ -142,9 +142,9 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 326);
+            this.keyPanel.Size = new System.Drawing.Size(116, 322);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -156,9 +156,9 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(475, 326);
+            this.valuePanel.Size = new System.Drawing.Size(471, 322);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -166,7 +166,7 @@
             this.dataSource1.DecLength = 2;
             this.dataSource1.InputType = HZH_Controls.TextInputType.NotControl;
             this.dataSource1.Location = new System.Drawing.Point(134, 2);
-            this.dataSource1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource1.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -187,7 +187,6 @@
             this.dataSource1.RegexPattern = "";
             this.dataSource1.Size = new System.Drawing.Size(92, 21);
             this.dataSource1.TabIndex = 9;
-            this.dataSource1.Text = "test2.bcp";
             this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OutList
@@ -204,7 +203,7 @@
             this.dataSource0.DecLength = 2;
             this.dataSource0.InputType = HZH_Controls.TextInputType.NotControl;
             this.dataSource0.Location = new System.Drawing.Point(5, 2);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource0.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -225,7 +224,6 @@
             this.dataSource0.RegexPattern = "";
             this.dataSource0.Size = new System.Drawing.Size(92, 21);
             this.dataSource0.TabIndex = 7;
-            this.dataSource0.Text = "test1.bcp";
             this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel2
@@ -238,7 +236,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(95, 54);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -256,7 +254,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::Citta_T1.Properties.Resources.add;
             this.button1.Location = new System.Drawing.Point(182, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
@@ -268,7 +266,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(2, 6);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 20);
             this.comboBox1.TabIndex = 2;
@@ -278,7 +276,7 @@
             this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(92, 6);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(86, 20);
             this.comboBox2.TabIndex = 3;
@@ -288,7 +286,7 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(4, 87);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(478, 160);
             this.panel1.TabIndex = 1;
@@ -302,7 +300,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -337,7 +335,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 427);
+            this.ClientSize = new System.Drawing.Size(587, 423);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -345,7 +343,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DifferOperatorView";
             this.ShowIcon = false;
             this.Text = "取差集算子设置";

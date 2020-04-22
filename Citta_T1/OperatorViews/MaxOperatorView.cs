@@ -34,11 +34,13 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
             
+            
             this.oldMaxfield = this.MaxValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
             this.oldColumnName = this.OutList.GetItemCheckText();
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
+            
 
 
         }
@@ -92,6 +94,7 @@ namespace Citta_T1.OperatorViews
             else
                 this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
             if (this.MaxValueBox.Text != "" && outField != "")
                 this.opControl.Status = ElementStatus.Ready;
 
@@ -129,6 +132,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
+            this.opControl.DataSourceColumns = column;
             foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);

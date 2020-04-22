@@ -90,9 +90,9 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(434, 37);
+            this.topPanel.Size = new System.Drawing.Size(430, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -100,10 +100,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 198);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 194);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(434, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(430, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -111,7 +111,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(326, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
@@ -126,7 +126,7 @@
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.confirmButton.Location = new System.Drawing.Point(236, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
@@ -142,9 +142,9 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 161);
+            this.keyPanel.Size = new System.Drawing.Size(116, 157);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -166,9 +166,9 @@
             this.valuePanel.Controls.Add(this.dataInfo);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(318, 161);
+            this.valuePanel.Size = new System.Drawing.Size(314, 157);
             this.valuePanel.TabIndex = 3;
             // 
             // groupBox2
@@ -176,31 +176,33 @@
             this.groupBox2.Controls.Add(this.noRepetition);
             this.groupBox2.Controls.Add(this.repetition);
             this.groupBox2.Location = new System.Drawing.Point(2, 73);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(155, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox2_Paint);
             // 
-            // NoRepetition
+            // noRepetition
             // 
             this.noRepetition.AutoSize = true;
+            this.noRepetition.Checked = true;
             this.noRepetition.Location = new System.Drawing.Point(85, 10);
-            this.noRepetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.noRepetition.Name = "NoRepetition";
+            this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
+            this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(59, 16);
             this.noRepetition.TabIndex = 1;
+            this.noRepetition.TabStop = true;
             this.noRepetition.Text = "不去重";
             this.noRepetition.UseVisualStyleBackColor = true;
             // 
-            // Repetition
+            // repetition
             // 
             this.repetition.AutoSize = true;
             this.repetition.Location = new System.Drawing.Point(5, 10);
-            this.repetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.repetition.Name = "Repetition";
+            this.repetition.Margin = new System.Windows.Forms.Padding(2);
+            this.repetition.Name = "repetition";
             this.repetition.Size = new System.Drawing.Size(47, 16);
             this.repetition.TabIndex = 0;
             this.repetition.Text = "去重";
@@ -211,9 +213,9 @@
             this.groupBox1.Controls.Add(this.descendingOrder);
             this.groupBox1.Controls.Add(this.ascendingOrder);
             this.groupBox1.Location = new System.Drawing.Point(2, 114);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(155, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -222,8 +224,9 @@
             // descendingOrder
             // 
             this.descendingOrder.AutoSize = true;
+            this.descendingOrder.Checked = true;
             this.descendingOrder.Location = new System.Drawing.Point(85, 10);
-            this.descendingOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
             this.descendingOrder.Size = new System.Drawing.Size(71, 16);
             this.descendingOrder.TabIndex = 1;
@@ -235,11 +238,10 @@
             // 
             this.ascendingOrder.AutoSize = true;
             this.ascendingOrder.Location = new System.Drawing.Point(5, 10);
-            this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
             this.ascendingOrder.Size = new System.Drawing.Size(71, 16);
             this.ascendingOrder.TabIndex = 0;
-            this.ascendingOrder.TabStop = true;
             this.ascendingOrder.Text = "从小到大";
             this.ascendingOrder.UseVisualStyleBackColor = true;
             // 
@@ -258,7 +260,7 @@
             this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataInfo.InputType = HZH_Controls.TextInputType.NotControl;
             this.dataInfo.Location = new System.Drawing.Point(0, 0);
-            this.dataInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dataInfo.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -285,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 262);
+            this.ClientSize = new System.Drawing.Size(430, 258);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -293,7 +295,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FreqOperatorView";
             this.ShowIcon = false;
             this.Text = "频率统计算子设置";

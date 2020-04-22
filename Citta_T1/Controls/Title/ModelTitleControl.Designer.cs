@@ -30,24 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelTitleControl));
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelRight = new System.Windows.Forms.Panel();
             this.closePictureBox = new System.Windows.Forms.PictureBox();
             this.modelTitlelabel = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.dirtyPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel2.SuspendLayout();
+            this.panelLeft = new System.Windows.Forms.Panel();
+            this.panelMiddle = new System.Windows.Forms.Panel();
+            this.panelRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).BeginInit();
+            this.panelLeft.SuspendLayout();
+            this.panelMiddle.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel2
+            // panelRight
             // 
-            this.panel2.Controls.Add(this.closePictureBox);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(113, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(27, 26);
-            this.panel2.TabIndex = 1;
+            this.panelRight.Controls.Add(this.closePictureBox);
+            this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelRight.Location = new System.Drawing.Point(126, 0);
+            this.panelRight.Name = "panelRight";
+            this.panelRight.Size = new System.Drawing.Size(14, 26);
+            this.panelRight.TabIndex = 1;
             // 
             // closePictureBox
             // 
@@ -55,7 +59,7 @@
             this.closePictureBox.Image = global::Citta_T1.Properties.Resources.close;
             this.closePictureBox.Location = new System.Drawing.Point(0, 0);
             this.closePictureBox.Name = "closePictureBox";
-            this.closePictureBox.Size = new System.Drawing.Size(27, 26);
+            this.closePictureBox.Size = new System.Drawing.Size(14, 26);
             this.closePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.closePictureBox.TabIndex = 0;
             this.closePictureBox.TabStop = false;
@@ -69,7 +73,7 @@
             this.modelTitlelabel.Name = "modelTitlelabel";
             this.modelTitlelabel.Size = new System.Drawing.Size(113, 26);
             this.modelTitlelabel.TabIndex = 2;
-            this.modelTitlelabel.Text = "新建模型";
+            this.modelTitlelabel.Text = "我的新模型";
             this.modelTitlelabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.modelTitlelabel.Click += new System.EventHandler(this.MdelTitlelabel_Click);
             // 
@@ -82,35 +86,57 @@
             // dirtyPictureBox
             // 
             this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
-            this.dirtyPictureBox.Location = new System.Drawing.Point(-1, 0);
+            this.dirtyPictureBox.Location = new System.Drawing.Point(0, 0);
             this.dirtyPictureBox.Name = "dirtyPictureBox";
             this.dirtyPictureBox.Size = new System.Drawing.Size(12, 13);
             this.dirtyPictureBox.TabIndex = 3;
             this.dirtyPictureBox.TabStop = false;
+            // 
+            // panelLeft
+            // 
+            this.panelLeft.Controls.Add(this.dirtyPictureBox);
+            this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelLeft.Location = new System.Drawing.Point(0, 0);
+            this.panelLeft.Name = "panelLeft";
+            this.panelLeft.Size = new System.Drawing.Size(13, 26);
+            this.panelLeft.TabIndex = 4;
+            // 
+            // panelMiddle
+            // 
+            this.panelMiddle.Controls.Add(this.modelTitlelabel);
+            this.panelMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMiddle.Location = new System.Drawing.Point(13, 0);
+            this.panelMiddle.Name = "panelMiddle";
+            this.panelMiddle.Size = new System.Drawing.Size(113, 26);
+            this.panelMiddle.TabIndex = 5;
             // 
             // ModelTitleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(216)))), ((int)(((byte)(216)))));
-            this.Controls.Add(this.dirtyPictureBox);
-            this.Controls.Add(this.modelTitlelabel);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelMiddle);
+            this.Controls.Add(this.panelLeft);
+            this.Controls.Add(this.panelRight);
             this.DoubleBuffered = true;
             this.Name = "ModelTitleControl";
             this.Size = new System.Drawing.Size(140, 26);
-            this.panel2.ResumeLayout(false);
+            this.panelRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.closePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyPictureBox)).EndInit();
+            this.panelLeft.ResumeLayout(false);
+            this.panelMiddle.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.PictureBox closePictureBox;
         private System.Windows.Forms.Label modelTitlelabel;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.PictureBox dirtyPictureBox;
+        private System.Windows.Forms.Panel panelLeft;
+        private System.Windows.Forms.Panel panelMiddle;
     }
 }

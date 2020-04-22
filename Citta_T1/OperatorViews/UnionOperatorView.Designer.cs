@@ -96,7 +96,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(588, 37);
+            this.topPanel.Size = new System.Drawing.Size(579, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -104,10 +104,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 342);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 348);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(588, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(579, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -147,7 +147,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 305);
+            this.keyPanel.Size = new System.Drawing.Size(116, 311);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -161,7 +161,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(472, 305);
+            this.valuePanel.Size = new System.Drawing.Size(463, 311);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -231,7 +231,7 @@
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBoxEx1, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(95, 54);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 53);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -325,6 +325,7 @@
             // repetition
             // 
             this.repetition.AutoSize = true;
+            this.repetition.Checked = true;
             this.repetition.Location = new System.Drawing.Point(75, 8);
             this.repetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.repetition.Name = "repetition";
@@ -342,7 +343,6 @@
             this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(47, 16);
             this.noRepetition.TabIndex = 0;
-            this.noRepetition.TabStop = true;
             this.noRepetition.Text = "去重";
             this.noRepetition.UseVisualStyleBackColor = true;
             // 
@@ -353,13 +353,12 @@
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(478, 160);
+            this.panel1.Size = new System.Drawing.Size(461, 167);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
@@ -368,14 +367,14 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(435, 84);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // UnionOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 406);
+            this.ClientSize = new System.Drawing.Size(579, 412);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

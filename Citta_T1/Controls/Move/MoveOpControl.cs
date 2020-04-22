@@ -37,13 +37,14 @@ namespace Citta_T1.Controls.Move
 
         private string subTypeName;
         private string oldTextString;
-        private OperatorOption option=new OperatorOption();
+        private OperatorOption option = new OperatorOption();
         private int id;
+        private string dataSourceColumns;
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
         public string SubTypeName { get => subTypeName; }
-        internal OperatorOption Option { get => this.option; set => this.option = value; }
+        public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
         public ElementStatus Status { 
             get => this.status;
@@ -54,8 +55,11 @@ namespace Citta_T1.Controls.Move
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
-        public bool EnableOpenOption { get => this.OptionToolStripMenuItem.Enabled; set => this.OptionToolStripMenuItem.Enabled = value; }
+        public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
+
+        public string DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
 
 
 
@@ -73,7 +77,7 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
-        public int revisedPinIndex;
+        private int revisedPinIndex;
         // 以该控件为起点的所有点
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
@@ -84,8 +88,8 @@ namespace Citta_T1.Controls.Move
 
         // 绘制引脚
 
-        private Point leftPin = new Point(2, 11);
-        private Point rightPin = new Point(140, 11);
+        private Point leftPin = new Point(2, 10);
+        private Point rightPin = new Point(140, 10);
 
 
         private int pinWidth = 6;
@@ -316,7 +320,11 @@ namespace Citta_T1.Controls.Move
                 MoveOpControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
+            {
                 RenameMenuItem_Click(this, e);
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
         }
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
@@ -405,7 +413,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new Size((int)(167 * f), (int)(27 * f));//194，25
             this.rightPictureBox.Location = new Point((int)(144 * f), (int)(7 * f));//159,2
             this.statusBox.Location = new Point((int)(126 * f), (int)(7 * f));//新增
-            this.rectOut.Location = new Point((int)(159 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(159 * f), (int)(10 * f));
             
             this.txtButton.Size = new Size((int)(89 * f),(int)(23 * f));
             this.textBox.Size = new Size((int)(89 * f), (int)(23 * f));
@@ -420,7 +428,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(67 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(67 * f), (int)(23 * f));
-            this.rectOut.Location = new Point((int)(140 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(140 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
@@ -431,7 +439,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.Location = new Point((int)(120 * f), (int)(7 * f));//新增
             this.txtButton.Size = new Size((int)(83 * f), (int)(23 * f));
             this.textBox.Size = new Size((int)(83 * f), (int)(23 * f));
-            this.rectOut.Location = new Point((int)(154 * f), (int)(11 * f));
+            this.rectOut.Location = new Point((int)(154 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
@@ -444,7 +452,7 @@ namespace Citta_T1.Controls.Move
 
         private void ShowOptionDialog()
         {
-            if (!this.OptionToolStripMenuItem.Enabled)
+            if (!this.OptionMenuItem.Enabled)
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
@@ -503,7 +511,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-             ModelDocumentDirtyEvent?.Invoke();
+            ModelDocumentDirtyEvent?.Invoke();
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -558,7 +566,12 @@ namespace Citta_T1.Controls.Move
                 return;
             // 按下回车键
             if (e.KeyChar == 13)
+            {
                 FinishTextChange();
+                Global.GetCurrentDocument().UpdateAllLines();
+                Global.GetCanvasPanel().Invalidate(false);
+            }
+                
         }
 
         public void textBox1_Leave(object sender, EventArgs e)
@@ -745,7 +758,7 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            this.startLineIndexs.Add(line_index);
+            //this.startLineIndexs.Add(line_index);
         }
 
         public void SaveEndLines(int line_index)
@@ -755,7 +768,7 @@ namespace Citta_T1.Controls.Move
              */
             try
             {
-                this.endLineIndexs[revisedPinIndex] = line_index;
+                //this.endLineIndexs[revisedPinIndex] = line_index;
             }
             catch (IndexOutOfRangeException)
             {
@@ -849,10 +862,7 @@ namespace Citta_T1.Controls.Move
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
-        public void BindStartLine(int pinIndex, int relationIndex)
-        {
-            this.startLineIndexs.Add(relationIndex);
-        }
+
         public void BindEndLine(int pinIndex, int relationIndex)
         { 
             try
@@ -912,10 +922,6 @@ namespace Citta_T1.Controls.Move
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
         private void UpdateBackground()
         {
 

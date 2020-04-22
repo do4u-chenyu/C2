@@ -77,6 +77,9 @@
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
+            this.currentModelFinLab = new System.Windows.Forms.Label();
+            this.currentModelRunBackLab = new System.Windows.Forms.Label();
+            this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.blankButton = new System.Windows.Forms.Button();
@@ -90,9 +93,6 @@
             this.downloadButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
-            this.currentModelRunLab = new System.Windows.Forms.Label();
-            this.currentModelRunBackLab = new System.Windows.Forms.Label();
-            this.currentModelFinLab = new System.Windows.Forms.Label();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
@@ -111,6 +111,7 @@
             this.commonPanel.SuspendLayout();
             this.panel5.SuspendLayout();
             this.canvasPanel.SuspendLayout();
+            this.currentModelRunBackLab.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -205,6 +206,7 @@
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
+            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西都在这里");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
@@ -216,6 +218,7 @@
             this.dataButton.Size = new System.Drawing.Size(124, 42);
             this.dataButton.TabIndex = 2;
             this.dataButton.Text = "数据";
+            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据都在这里");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
@@ -227,6 +230,7 @@
             this.oprateButton.Size = new System.Drawing.Size(124, 42);
             this.oprateButton.TabIndex = 1;
             this.oprateButton.Text = "算子";
+            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法都在这里");
             this.oprateButton.UseVisualStyleBackColor = true;
             this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
@@ -238,6 +242,7 @@
             this.myModelButton.Size = new System.Drawing.Size(124, 42);
             this.myModelButton.TabIndex = 0;
             this.myModelButton.Text = "我的模型";
+            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型都在这里");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
             // 
@@ -281,6 +286,7 @@
             // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
+            this.dataSourceControl.AutoScroll = true;
             this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -289,6 +295,7 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
+            this.scrollbarComponent1.SetUserCustomScrollbar(this.dataSourceControl, true);
             // 
             // myModelControl
             // 
@@ -383,7 +390,7 @@
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
             this.minMaxPictureBox.TabIndex = 1;
             this.minMaxPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏数据框");
+            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏(展开)底层面板");
             this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
             // 
             // panel8
@@ -497,7 +504,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件");
+            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
             this.importButton.UseVisualStyleBackColor = false;
             this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -527,6 +534,76 @@
             this.newModelButton.UseVisualStyleBackColor = false;
             this.newModelButton.Click += new System.EventHandler(this.NewModelButton_Click);
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 23);
+            this.label7.TabIndex = 0;
+            // 
+            // moreButton
+            // 
+            this.moreButton.Location = new System.Drawing.Point(0, 0);
+            this.moreButton.Name = "moreButton";
+            this.moreButton.Size = new System.Drawing.Size(75, 23);
+            this.moreButton.TabIndex = 0;
+            // 
+            // formatButton
+            // 
+            this.formatButton.Location = new System.Drawing.Point(0, 0);
+            this.formatButton.Name = "formatButton";
+            this.formatButton.Size = new System.Drawing.Size(75, 23);
+            this.formatButton.TabIndex = 0;
+            // 
+            // histogramButton
+            // 
+            this.histogramButton.Location = new System.Drawing.Point(0, 0);
+            this.histogramButton.Name = "histogramButton";
+            this.histogramButton.Size = new System.Drawing.Size(75, 23);
+            this.histogramButton.TabIndex = 0;
+            // 
+            // GroupButton
+            // 
+            this.GroupButton.Location = new System.Drawing.Point(0, 0);
+            this.GroupButton.Name = "GroupButton";
+            this.GroupButton.Size = new System.Drawing.Size(75, 23);
+            this.GroupButton.TabIndex = 0;
+            // 
+            // interOpButton
+            // 
+            this.interOpButton.Location = new System.Drawing.Point(0, 0);
+            this.interOpButton.Name = "interOpButton";
+            this.interOpButton.Size = new System.Drawing.Size(75, 23);
+            this.interOpButton.TabIndex = 0;
+            // 
+            // UnionButton
+            // 
+            this.UnionButton.Location = new System.Drawing.Point(0, 0);
+            this.UnionButton.Name = "UnionButton";
+            this.UnionButton.Size = new System.Drawing.Size(75, 23);
+            this.UnionButton.TabIndex = 0;
+            // 
+            // diffButton
+            // 
+            this.diffButton.Location = new System.Drawing.Point(0, 0);
+            this.diffButton.Name = "diffButton";
+            this.diffButton.Size = new System.Drawing.Size(75, 23);
+            this.diffButton.TabIndex = 0;
+            // 
+            // filterButton
+            // 
+            this.filterButton.Location = new System.Drawing.Point(0, 0);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(75, 23);
+            this.filterButton.TabIndex = 0;
+            // 
+            // connectOpButton
+            // 
+            this.connectOpButton.Location = new System.Drawing.Point(0, 0);
+            this.connectOpButton.Name = "connectOpButton";
+            this.connectOpButton.Size = new System.Drawing.Size(75, 23);
+            this.connectOpButton.TabIndex = 0;
+            // 
             // canvasPanel
             // 
             this.canvasPanel.AllowDrop = true;
@@ -545,13 +622,45 @@
             this.canvasPanel.Controls.Add(this.stopButton);
             this.canvasPanel.Controls.Add(this.runButton);
             this.canvasPanel.Controls.Add(this.naviViewControl);
+            this.canvasPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.canvasPanel.EndC = null;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.ScreenFactor = 1F;
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
+            this.canvasPanel.StartC = null;
             this.canvasPanel.TabIndex = 5;
+            // 
+            // currentModelFinLab
+            // 
+            this.currentModelFinLab.Image = global::Citta_T1.Properties.Resources.currentModelFin;
+            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelFinLab.Name = "currentModelFinLab";
+            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelFinLab.TabIndex = 30;
+            this.currentModelFinLab.Visible = false;
+            // 
+            // currentModelRunBackLab
+            // 
+            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
+            this.currentModelRunBackLab.Image = global::Citta_T1.Properties.Resources.currentModelRunningBack;
+            this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
+            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
+            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
+            this.currentModelRunBackLab.TabIndex = 29;
+            this.currentModelRunBackLab.Visible = false;
+            // 
+            // currentModelRunLab
+            // 
+            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.currentModelRunLab.Image = global::Citta_T1.Properties.Resources.currentModelRunning;
+            this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
+            this.currentModelRunLab.Name = "currentModelRunLab";
+            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
+            this.currentModelRunLab.TabIndex = 28;
+            this.currentModelRunLab.Visible = false;
             // 
             // panel3
             // 
@@ -572,6 +681,7 @@
             this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏(展开)左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // blankButton
@@ -601,6 +711,7 @@
             this.flowControl.BackColor = System.Drawing.Color.Transparent;
             this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.flowControl.Cursor = System.Windows.Forms.Cursors.Help;
             this.flowControl.Location = new System.Drawing.Point(694, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";
@@ -680,7 +791,7 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(52, 53);
             this.downloadButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.downloadButton, "下载此模型");
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
             this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // stopButton
@@ -718,35 +829,6 @@
             this.toolTip1.SetToolTip(this.runButton, "开始运行模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
-            // 
-            // currentModelRunLab
-            // 
-            this.currentModelRunLab.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.currentModelRunLab.Image = global::Citta_T1.Properties.Resources.currentModelRunning;
-            this.currentModelRunLab.Location = new System.Drawing.Point(40, 20);
-            this.currentModelRunLab.Name = "currentModelRunLab";
-            this.currentModelRunLab.Size = new System.Drawing.Size(73, 47);
-            this.currentModelRunLab.TabIndex = 28;
-            this.currentModelRunLab.Hide();
-            // 
-            // currentModelRunBackLab
-            // 
-            this.currentModelRunBackLab.Controls.Add(this.currentModelRunLab);
-            this.currentModelRunBackLab.Image = global::Citta_T1.Properties.Resources.currentModelRunningBack;
-            this.currentModelRunBackLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelRunBackLab.Name = "currentModelRunBackLab";
-            this.currentModelRunBackLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelRunBackLab.TabIndex = 29;
-            this.currentModelRunBackLab.Hide();
-            // 
-            // currentModelFinLab
-            // 
-            this.currentModelFinLab.Image = global::Citta_T1.Properties.Resources.currentModelFin;
-            this.currentModelFinLab.Location = new System.Drawing.Point(498, 174);
-            this.currentModelFinLab.Name = "currentModelFinLab";
-            this.currentModelFinLab.Size = new System.Drawing.Size(150, 100);
-            this.currentModelFinLab.TabIndex = 30;
-            this.currentModelFinLab.Hide();
             // 
             // naviViewControl
             // 
@@ -799,6 +881,7 @@
             this.commonPanel.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
+            this.currentModelRunBackLab.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();

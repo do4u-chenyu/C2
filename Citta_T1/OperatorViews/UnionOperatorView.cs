@@ -97,13 +97,12 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 2];
-                    Control control4 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 3];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + (control3 as ComboBox).SelectedIndex.ToString() + "," + control4.Text;
+                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + control3.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectColumn.Add(OutColumnName((control2 as ComboBox).Text, control4.Text));
+                    this.selectColumn.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
                 }
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
@@ -141,14 +140,12 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
+                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
+                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 2];
-                control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
-                Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
-                control4.Text = factorList[3];
+                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
+                control3.Text = factorList[2];
             }
 
         }
@@ -199,34 +196,22 @@ namespace Citta_T1.OperatorViews
                     return empty;
                 }
             }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
-            {
-                MessageBox.Show("请选择数据是否进行去重");
-                empty = true;
-                return empty;
-            }
             return empty;
         }
         #endregion
         private void createLine(int addLine)
         {
             // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
+            this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.columnName1);
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
+            this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
             textBox.DecLength = 2;
@@ -252,7 +237,7 @@ namespace Citta_T1.OperatorViews
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += textBoxEx1_Enter;
             textBox.Leave += textBoxEx1_Leave;
-            this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
+            this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
             Button addButton1 = new Button();
             addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -267,7 +252,7 @@ namespace Citta_T1.OperatorViews
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 4, addLine);
+            this.tableLayoutPanel1.Controls.Add(addButton1, 3, addLine);
 
             Button delButton1 = new Button();
             delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
@@ -282,7 +267,7 @@ namespace Citta_T1.OperatorViews
             delButton1.Click += new System.EventHandler(this.del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 5, addLine);
+            this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -321,9 +306,6 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
-                    Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k);
-                    ctlNext5.Name = (k + 1).ToString();
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
                 }
                 createLine(addLine);
             }
@@ -337,10 +319,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 6) + 5];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * 5) + 4];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 6) + 5; j >= (i * 6); j--)
+                    for (int j = (i * 5) + 4; j >= (i * 5); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }
@@ -362,9 +344,6 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
                 ctlNext4.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
-                Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k + 1);
-                ctlNext5.Name = k.ToString();
-                this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;

@@ -13,5 +13,11 @@ namespace Citta_T1.Utils
             UTF8,
             GBK
         }
+        public enum ExtType
+        {
+            Excel,
+            Text,
+            Unknow
+        }
     }
 }

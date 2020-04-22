@@ -35,7 +35,7 @@ namespace Citta_T1.Controls.Left
 
         private void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            String helpInfo =Global.GetCurrentDocument().UserPath+ this.textButton.Text + "\\" + this.textButton.Text + ".xml";
+            String helpInfo = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
             this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
         }
 

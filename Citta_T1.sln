@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZH_Controls", "HZH_Control
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControlDLL", "UserControlDLL\UserControlDLL.csproj", "{FAC026D0-0C0F-4415-BABA-9713EC1337CB}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案平台", "IAO解决方案平台\IAO解决方案平台.vdproj", "{21F4F815-6F9A-422B-80B5-AACFE0F4AF2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInstallSet", "UserInstallSet\UserInstallSet.csproj", "{8587D0E2-E1F2-442D-B729-897391FB2881}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IAO解决方案", "IAO解决方案\IAO解决方案.vdproj", "{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +31,12 @@ Global
 		{FAC026D0-0C0F-4415-BABA-9713EC1337CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC026D0-0C0F-4415-BABA-9713EC1337CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC026D0-0C0F-4415-BABA-9713EC1337CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{21F4F815-6F9A-422B-80B5-AACFE0F4AF2B}.Debug|Any CPU.ActiveCfg = Debug
-		{21F4F815-6F9A-422B-80B5-AACFE0F4AF2B}.Release|Any CPU.ActiveCfg = Release
+		{8587D0E2-E1F2-442D-B729-897391FB2881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8587D0E2-E1F2-442D-B729-897391FB2881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8587D0E2-E1F2-442D-B729-897391FB2881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8587D0E2-E1F2-442D-B729-897391FB2881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.Debug|Any CPU.ActiveCfg = Debug
+		{4694BAFB-F7DC-41F9-9C25-2291EC76D1FB}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
