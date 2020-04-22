@@ -186,7 +186,7 @@ namespace Citta_T1.Controls
                 //}
                 CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
                 this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
-                this.staticImage.Save("MouseDown.png");
+                
             }
 
             

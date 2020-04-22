@@ -218,7 +218,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Location = new System.Drawing.Point(37, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(93, 25);
+            this.txtButton.Size = new System.Drawing.Size(60, 25);
             this.txtButton.TabIndex = 8;
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = false;
