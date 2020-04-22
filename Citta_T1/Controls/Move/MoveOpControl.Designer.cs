@@ -186,7 +186,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Location = new System.Drawing.Point(37, 1);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(93, 23);
+            this.textBox.Size = new System.Drawing.Size(60, 23);
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
@@ -197,7 +197,7 @@ namespace Citta_T1.Controls.Move
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(131, 8);
+            this.statusBox.Location = new System.Drawing.Point(98, 8);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

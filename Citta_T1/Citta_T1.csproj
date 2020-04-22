@@ -572,6 +572,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="res\Icon\Icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\join.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
