@@ -31,7 +31,7 @@ namespace Citta_T1.Controls.Title
         public ModelTitleControl()
         {
             InitializeComponent();
-            SetOriginalModelTitle("新建模型");
+            SetOriginalModelTitle("我的新模型");
             dirty = false;
             ClearDirtyPictureBox();
 

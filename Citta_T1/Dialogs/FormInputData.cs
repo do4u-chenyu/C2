@@ -141,38 +141,48 @@ namespace Citta_T1.Dialogs
             String[] headers = header.Split(this.separator);
             int numOfCol = header.Split(this.separator).Length;
             DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[numOfCol];
+            this.dataGridView1.DataSource = null;
+            DvgClean(false);
             try
             {
-                // 初始化表头
+                DataTable table = new DataTable();
+                DataColumn column;
+                DataRow row;
+                DataView view;
+                DataColumn[] cols = new DataColumn[numOfCol];
                 for (int i = 0; i < numOfCol; i++)
                 {
-                    ColumnList[i] = new DataGridViewTextBoxColumn();
-                    ColumnList[i].HeaderText = headers[i];
-                    ColumnList[i].Name = "Col " + i.ToString();
+                    cols[i] = new DataColumn();
+                    cols[i].ColumnName = headers[i];
                 }
-                // 预览表格清理
-                DvgClean(false);
-                this.dataGridView1.Columns.AddRange(ColumnList);
-                // 写入数据
-                for (int row = 0; row < m_maxNumOfRow; row++)
+
+                table.Columns.AddRange(cols);
+
+                for (int rowIndex = 0; rowIndex < m_maxNumOfRow; rowIndex++)
                 {
-                    // 读取数据
                     String line = sr.ReadLine();
-                    if(line == null)
+                    if (line == null)
                         continue;
-                    // 插入表格中
+                    row = table.NewRow();
                     String[] eles = line.Split(this.separator);
-                    DataGridViewRow dr = new DataGridViewRow();
-                    this.dataGridView1.Rows.Add(dr);
-                    for (int col = 0; col < numOfCol; col++)
+                    if (eles.Length != numOfCol)
+                        continue;
+                    for (int colIndex = 0; colIndex < numOfCol; colIndex++)
                     {
-                        this.dataGridView1.Rows[row].Cells[col].Value = eles[col];
+                        row[colIndex] = eles[colIndex];
                     }
+                    table.Rows.Add(row);
+                    log.Info("tabel.rowNum = " + table.Rows.Count);
                 }
+
+                view = new DataView(table);
+                this.dataGridView1.DataSource = view;
+
+
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("FromInputData.OverViewFile occurs error! ");
+                Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
             }
         }
 
@@ -264,6 +274,7 @@ namespace Citta_T1.Dialogs
         public void DvgClean(bool isCleanDataName = true)
         {
             if (isCleanDataName) { this.textBox1.Text = null; }
+            this.dataGridView1.DataSource = null;
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
         }

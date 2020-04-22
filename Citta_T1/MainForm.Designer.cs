@@ -206,6 +206,7 @@
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
+            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西都在这里");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
@@ -217,6 +218,7 @@
             this.dataButton.Size = new System.Drawing.Size(124, 42);
             this.dataButton.TabIndex = 2;
             this.dataButton.Text = "数据";
+            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据都在这里");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
@@ -228,6 +230,7 @@
             this.oprateButton.Size = new System.Drawing.Size(124, 42);
             this.oprateButton.TabIndex = 1;
             this.oprateButton.Text = "算子";
+            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法都在这里");
             this.oprateButton.UseVisualStyleBackColor = true;
             this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
@@ -239,6 +242,7 @@
             this.myModelButton.Size = new System.Drawing.Size(124, 42);
             this.myModelButton.TabIndex = 0;
             this.myModelButton.Text = "我的模型";
+            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型都在这里");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
             // 
@@ -282,6 +286,7 @@
             // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
+            this.dataSourceControl.AutoScroll = true;
             this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -290,6 +295,7 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
+            this.scrollbarComponent1.SetUserCustomScrollbar(this.dataSourceControl, true);
             // 
             // myModelControl
             // 
@@ -384,7 +390,7 @@
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
             this.minMaxPictureBox.TabIndex = 1;
             this.minMaxPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.minMaxPictureBox, "显示数据框");
+            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏(展开)底层面板");
             this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
             // 
             // panel8
@@ -498,7 +504,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件");
+            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
             this.importButton.UseVisualStyleBackColor = false;
             this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -675,6 +681,7 @@
             this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏(展开)左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // blankButton
@@ -784,6 +791,7 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(52, 53);
             this.downloadButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
             this.downloadButton.UseVisualStyleBackColor = true;
             // 
             // stopButton
