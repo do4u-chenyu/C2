@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -96,7 +96,7 @@
             this.gbkLable.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbkLable.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gbkLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gbkLable.Location = new System.Drawing.Point(572, 27);
+            this.gbkLable.Location = new System.Drawing.Point(584, 27);
             this.gbkLable.Name = "gbkLable";
             this.gbkLable.Size = new System.Drawing.Size(44, 22);
             this.gbkLable.TabIndex = 7;
@@ -109,7 +109,7 @@
             this.utf8Lable.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.utf8Lable.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.utf8Lable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.utf8Lable.Location = new System.Drawing.Point(615, 27);
+            this.utf8Lable.Location = new System.Drawing.Point(648, 27);
             this.utf8Lable.Name = "utf8Lable";
             this.utf8Lable.Size = new System.Drawing.Size(56, 21);
             this.utf8Lable.TabIndex = 8;
@@ -321,10 +321,10 @@
             this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton1.Location = new System.Drawing.Point(580, 56);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(68, 24);
+            this.radioButton1.Size = new System.Drawing.Size(54, 24);
             this.radioButton1.TabIndex = 20;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "TAB键";
+            this.radioButton1.Text = "TAB";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             this.radioButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton1_MouseDown);
@@ -342,12 +342,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(99, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(590, 150);
