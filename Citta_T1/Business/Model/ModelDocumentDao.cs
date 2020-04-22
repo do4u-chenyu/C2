@@ -255,7 +255,7 @@ namespace Citta_T1.Business.Model
         }
         public string[] LoadAllModelTitle(string userName)
         {
-            string[] modelTitles=new string[0];
+            string[] modelTitles = new string[0];
             try
             {
                 DirectoryInfo userDir = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, userName));

@@ -110,7 +110,7 @@ namespace Citta_T1.Controls.Move
             this.ErrorLogMenuItem,
             this.DeleteMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 170);
+            this.contextMenuStrip.Size = new System.Drawing.Size(134, 148);
             // 
             // OptionMenuItem
             // 
@@ -121,7 +121,7 @@ namespace Citta_T1.Controls.Move
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionMenuItem.Name = "OptionMenuItem";
-            this.OptionMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.OptionMenuItem.Size = new System.Drawing.Size(133, 24);
             this.OptionMenuItem.Text = "设置";
             this.OptionMenuItem.ToolTipText = "配置算子";
             this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
@@ -132,7 +132,7 @@ namespace Citta_T1.Controls.Move
             this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RenameMenuItem.Size = new System.Drawing.Size(133, 24);
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
@@ -143,7 +143,7 @@ namespace Citta_T1.Controls.Move
             this.RemarkMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RemarkMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RemarkMenuItem.Name = "RemarkMenuItem";
-            this.RemarkMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RemarkMenuItem.Size = new System.Drawing.Size(133, 24);
             this.RemarkMenuItem.Text = "备注";
             this.RemarkMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -154,7 +154,7 @@ namespace Citta_T1.Controls.Move
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
-            this.RunMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.RunMenuItem.Size = new System.Drawing.Size(133, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
@@ -165,7 +165,7 @@ namespace Citta_T1.Controls.Move
             this.ErrorLogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ErrorLogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.ErrorLogMenuItem.Name = "ErrorLogMenuItem";
-            this.ErrorLogMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.ErrorLogMenuItem.Size = new System.Drawing.Size(133, 24);
             this.ErrorLogMenuItem.Text = "异常日志";
             // 
             // DeleteMenuItem
@@ -174,7 +174,7 @@ namespace Citta_T1.Controls.Move
             this.DeleteMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.DeleteMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.DeleteMenuItem.Name = "DeleteMenuItem";
-            this.DeleteMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.DeleteMenuItem.Size = new System.Drawing.Size(133, 24);
             this.DeleteMenuItem.Text = "删除";
             this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
@@ -231,7 +231,7 @@ namespace Citta_T1.Controls.Move
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.statusBox);
