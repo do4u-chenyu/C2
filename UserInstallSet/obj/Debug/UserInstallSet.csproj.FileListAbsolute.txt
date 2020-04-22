@@ -1,0 +1,6 @@
+D:\work\Citta\Citta\UserInstallSet\bin\Debug\UserInstallSet.dll
+D:\work\Citta\Citta\UserInstallSet\bin\Debug\UserInstallSet.pdb
+D:\work\Citta\Citta\UserInstallSet\obj\Debug\UserInstallSet.csproj.CoreCompileInputs.cache
+D:\work\Citta\Citta\UserInstallSet\obj\Debug\UserInstallSet.dll
+D:\work\Citta\Citta\UserInstallSet\obj\Debug\UserInstallSet.pdb
+D:\work\Citta\Citta\UserInstallSet\obj\Debug\UserInstallSet.csprojAssemblyReference.cache

@@ -26,7 +26,7 @@ namespace Citta_T1
             string workspace = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
             try
             { 
-                workspace = ConfigurationManager.AppSettings["worksapce"];
+                workspace = ConfigurationManager.AppSettings["workspace"];
             }
             catch (ConfigurationErrorsException)
             {
