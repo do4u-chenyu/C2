@@ -930,7 +930,7 @@
         private System.Windows.Forms.Button importButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
-        private Controls.Left.DataSourceControl dataSourceControl;
+        public Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;

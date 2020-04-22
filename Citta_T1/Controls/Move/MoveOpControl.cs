@@ -321,8 +321,6 @@ namespace Citta_T1.Controls.Move
             if (e.Clicks == 2)
             {
                 RenameMenuItem_Click(this, e);
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
 
@@ -567,8 +565,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
                 
         }
@@ -593,6 +589,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         #endregion
 
@@ -695,7 +693,7 @@ namespace Citta_T1.Controls.Move
                 this.rectOut = SetRectBySize(factor, this.rectOut);
                 this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate();
+                this.Invalidate(); // TODO 干嘛用的？，为什么下面不写一个重绘？
             }
             else
             {

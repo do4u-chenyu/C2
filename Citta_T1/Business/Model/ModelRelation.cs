@@ -10,6 +10,8 @@ namespace Citta_T1.Business.Model
 {
     class ModelRelation
     {
+        private LogUtil log = LogUtil.GetInstance("ModelRelation");
+
         private ElementType type;
         private int startID;
         private int endID;

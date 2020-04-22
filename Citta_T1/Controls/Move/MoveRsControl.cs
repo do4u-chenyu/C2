@@ -357,8 +357,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
 
@@ -380,6 +378,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         #endregion
 

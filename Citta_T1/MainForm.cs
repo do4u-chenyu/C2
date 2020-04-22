@@ -228,10 +228,11 @@ namespace  Citta_T1
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 5 - this.naviViewControl.Height;
             log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
+
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-            
             this.naviViewControl.Invalidate();
+
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
@@ -243,11 +244,15 @@ namespace  Citta_T1
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
             Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
             Point loc_panel3 = new Point(loc.X, loc.Y + this.flowControl.Height + 10);
+
             this.flowControl.Location = loc;
+
             this.rightShowButton.Location = loc_flowcontrol2;
             this.rightHideButton.Location = loc_flowcontrol3;
+
             this.remarkControl.Location = loc_panel3;
-            
+
+            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
@@ -293,7 +298,6 @@ namespace  Citta_T1
         //    this.anewModel.ShowDialog();
         //}
 
-
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
             this.logView.Visible = false;
@@ -328,8 +332,11 @@ namespace  Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
-            InitializeControlsLocation();         
-           
+            if (Global.GetCurrentDocument() != null && Global.GetCurrentDocument().ModelElements != null)
+            {
+                log.Info("Before me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
+            }
+            InitializeControlsLocation();
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)

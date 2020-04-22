@@ -88,6 +88,11 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请选择数据路径！");
             }
+            else if (Global.GetMainForm().dataSourceControl.dataSourceDictI2B.ContainsKey(m_filePath))
+            {
+                String dsName = Global.GetMainForm().dataSourceControl.dataSourceDictI2B[m_filePath].txtButton.Text;
+                MessageBox.Show("该文件已存在，数据名为：" + dsName);
+            }
             else
             {
                 BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.encoding);
@@ -314,8 +319,14 @@ namespace Citta_T1.Dialogs
         {
             if (this.fileExt == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
             {
-                // TODO [DK]
-                this.separator = this.textBoxEx1.Text.ToCharArray()[0];
+                try
+                {
+                    this.separator = this.textBoxEx1.Text.ToCharArray()[0];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                }
                 PreViewBcpFile();
             }
         }

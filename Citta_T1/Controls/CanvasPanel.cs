@@ -427,18 +427,17 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
             // 拖动时的OnPaint处理
-
             if (Global.GetCurrentDocument() == null)
                 return;
 
             if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
                 return;
 
-
             //TODO
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
             ModelDocument doc = Global.GetCurrentDocument();
+            doc.UpdateAllLines();
             if (doc == null)
                 return;
             // 将当前文档所有的线全部画出来

@@ -99,8 +99,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
         public void textBox1_Leave(object sender, EventArgs e)
@@ -123,6 +121,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox1.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
