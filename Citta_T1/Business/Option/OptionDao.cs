@@ -210,7 +210,7 @@ namespace Citta_T1.Business.Option
 
 
         //修改配置输出
-        public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
+        public string IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
             string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
@@ -222,8 +222,7 @@ namespace Citta_T1.Business.Option
                 {                               
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
                     Global.GetCurrentDocument().StateChange(ID);
-                    return;
-
+                    return String.Join("\t", currentcolumns);
                 }
             }
             //旧字段真包含于新字段
@@ -232,8 +231,9 @@ namespace Citta_T1.Business.Option
                 if (!oldColumns.Contains(name))
                     columns.Add(name);
             }
-            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();
+            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();  
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+            return String.Join("\t", outColumns);
         }
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
