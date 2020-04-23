@@ -338,7 +338,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TestGridModel.cs" />
     <Compile Include="Dgvs\LogView.cs">
       <SubType>UserControl</SubType>
     </Compile>
