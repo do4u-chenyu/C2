@@ -286,7 +286,6 @@
             // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
-            this.dataSourceControl.AutoScroll = true;
             this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -295,11 +294,10 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.dataSourceControl, true);
             // 
             // myModelControl
             // 
-            this.myModelControl.AutoScroll = true;
+            this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
@@ -307,7 +305,6 @@
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.myModelControl, true);
             // 
             // bottomViewPanel
             // 
