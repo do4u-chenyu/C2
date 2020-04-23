@@ -29,6 +29,7 @@ namespace Citta_T1.OperatorViews
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            /*
             this.opControl = opControl;
             dataPath = "";
             InitOptionInfo();
@@ -41,7 +42,9 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-    }
+            */
+        }
+        /*
         #region 配置初始化
         private void InitOptionInfo()
         {
@@ -161,6 +164,7 @@ namespace Citta_T1.OperatorViews
             }
         }
         #endregion
+        */
         private void groupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
