@@ -79,13 +79,14 @@ namespace Citta_T1.OperatorViews
         private void confirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
+            if (this.DataInfo.Text == "") return;
             if (this.AvgComBox.Text == "")
             {
                 MessageBox.Show("请选择平均值字段!");
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.DataInfo.Text == "") return;
+           
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldAvg != this.AvgComBox.Text)
@@ -105,12 +106,10 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            if (this.AvgComBox.Text == "")
-                this.opControl.Option.SetOption("avgfield", "");
-            else
-                this.opControl.Option.SetOption("avgfield", this.AvgComBox.SelectedIndex.ToString());
-            if (this.DataInfo.Text != "" && this.AvgComBox.Text != "") 
-                this.opControl.Status = ElementStatus.Ready;
+
+            this.opControl.Option.SetOption("avgfield", this.AvgComBox.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
+            this.opControl.Status = ElementStatus.Ready;
 
         }
 
