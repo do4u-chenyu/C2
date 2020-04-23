@@ -21,12 +21,16 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string[] columnName;
         private string oldOptionDict;
-        private List<string> selectColumn=new List<string>();
-        private List<int> groupColumn=new List<int>();
-        private List<bool> oldCheckedItems = new List<bool>();
+        private List<string> selectColumn;
+        private List<int> groupColumn;
+        private List<bool> oldCheckedItems;
+        private List<int> outList;
         public GroupOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.selectColumn = new List<string>();
+            this.groupColumn = new List<int>();
+            this.oldCheckedItems = new List<bool>();
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             dataPath = "";
@@ -111,7 +115,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             string factor1 = this.comboBox1.SelectedIndex.ToString();
-            groupColumn.Add(this.comboBox1.SelectedIndex);
+            this.groupColumn.Add(this.comboBox1.SelectedIndex);
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -119,7 +123,7 @@ namespace Citta_T1.OperatorViews
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string factor = (control1 as ComboBox).SelectedIndex.ToString();
-                    groupColumn.Add((control1 as ComboBox).SelectedIndex);
+                    this.groupColumn.Add((control1 as ComboBox).SelectedIndex);
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -127,6 +131,14 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.outList = new List<int>(this.groupColumn);
+            int[] columnIndex= Enumerable.Range(0, this.columnName.Length).ToArray();
+            foreach (int index in columnIndex)
+            {
+                if (!this.groupColumn.Contains(index))
+                    this.outList.Add(index);
+            }
+            this.opControl.Option.SetOption("outList", string.Join(",", this.outList));
             this.opControl.Status = ElementStatus.Ready;
 
         }
@@ -181,18 +193,6 @@ namespace Citta_T1.OperatorViews
                     empty = true;
                     return empty;
                 }
-            }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
-            {
-                MessageBox.Show("请选择数据是否进行去重");
-                empty = true;
-                return empty; 
-            }
-            if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
-            {
-                MessageBox.Show("请选择数据排序");
-                empty = true;
-                return empty;
             }
             return empty;
         }
