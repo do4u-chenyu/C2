@@ -23,6 +23,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFilePath = inputFilePaths.First();//输入文件
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
+
             //过滤条件拼接
             string[] factor1 = option.GetOption("factor1").Split(',');
             string awkIfCmd ="(" + "$" + TransInputLine(factor1[0]) + TransChoiceToCmd(factor1[1]) + TransConditionToCmd(factor1[2]) + ")";
@@ -36,7 +37,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //过滤条件写入临时配置文件，需判断输入文件格式。（解决条件为中文时的编码问题）
             StreamWriter streamWriter = null;
             string filterBatPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_filterChoice.bat";
-            if (this.encoding == DSUtil.Encoding.GBK)
+            if (JudgeInputFileEncoding(inputFilePath) == DSUtil.Encoding.GBK)
             {
                 streamWriter = new StreamWriter(filterBatPath, false, Encoding.GetEncoding("gbk"));          
             }
