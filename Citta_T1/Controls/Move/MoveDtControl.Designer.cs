@@ -72,7 +72,7 @@
             this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
             this.leftPicture.Location = new System.Drawing.Point(7, 3);
             this.leftPicture.Name = "leftPicture";
-            this.leftPicture.Size = new System.Drawing.Size(17, 20);
+            this.leftPicture.Size = new System.Drawing.Size(14, 19);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;

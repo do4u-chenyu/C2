@@ -808,6 +808,7 @@
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
@@ -825,6 +826,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始运行模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
@@ -960,4 +962,3 @@
         private System.Windows.Forms.Label currentModelFinLab;
     }
 }
-

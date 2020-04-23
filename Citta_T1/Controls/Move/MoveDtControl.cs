@@ -405,29 +405,29 @@ namespace Citta_T1.Controls.Move
 
         public void ResizeToBig()
         {
-            this.Size = new System.Drawing.Size((int)(179 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(153 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(171 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(135 * Math.Pow(factor, sizeLevel)), (int)(26 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(110 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(84 * Math.Pow(factor, sizeLevel)), (int)(24 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(84 * Math.Pow(factor, sizeLevel)), (int)(24 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(126 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToSmall()
         {
-            this.Size = new System.Drawing.Size((int)(130 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(103 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(122 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(115 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(90 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(62 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(62 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(106 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         public void ResizeToNormal()
         {
-            this.Size = new System.Drawing.Size((int)(170 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(144 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(162 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
+            this.Size = new System.Drawing.Size((int)(125 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
+            this.rightPictureBox.Location = new System.Drawing.Point((int)(100 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
+            this.txtButton.Size = new System.Drawing.Size((int)(74 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
+            this.textBox1.Size = new System.Drawing.Size((int)(70 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
+            this.rectOut.Location = new System.Drawing.Point((int)(116 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
         }
         #endregion

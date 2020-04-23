@@ -180,7 +180,7 @@ namespace Citta_T1.Controls
                 {
                     Control ct = me.GetControl;
                     ct.Left = dx + 40;
-                    ct.Top = (ct.Height + 40) * dy + 70;
+                    ct.Top = (ct.Height + 10) * dy + 70;
                     ctWidths.Add(ct.Width);
                 }
             }
@@ -253,7 +253,8 @@ namespace Citta_T1.Controls
                 }
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
-
+            log.Info("本次世界坐标位置:" + Global.GetCurrentDocument().MapOrigin.ToString());
+            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
             int countDeep = 0;
             int countWidth = 0;
             List<int> countWidthList = new List<int>();
@@ -267,7 +268,7 @@ namespace Citta_T1.Controls
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
-                    countDeep = countDeep + 40;
+                    countDeep = countDeep + 20;
                     if (this.ctWidths.Count != 0)
                     {
                         countDeep = countDeep + this.ctWidths.Max();

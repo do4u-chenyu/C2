@@ -19,14 +19,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             List<List<string[]>> differList = new List<List<string[]>>();
 
-            string inputFilePath1 = inputFilePaths.First();
-            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : "";
-            if (inputFilePath1 == "" || inputFilePath2 == "")
-            {
-                Thread.Sleep(5000);
-                cmds.Add("echo differ");
-            }
-
+            string inputFilePath1 = inputFilePaths.First();//左输入文件
+            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : "";//右输入文件
+            string outfieldLine = TransDifferOutputField(option.GetOption("outfield").Split(','));//输出字段
 
             //目前一个算子固定生成4个临时文件
             string filterBatPath1 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_differ1.tmp";
@@ -34,17 +29,14 @@ namespace Citta_T1.Business.Schedule.Cmd
             string filterBatPath3 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_differ3.tmp";
             string filterBatPath4 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_differ4.tmp";
 
-            string outfieldLine = TransDifferOutputField(option.GetOption("outfield").Split(','));
-
+            //取差条件拼接
             List<string[]> differTmpList = new List<string[]>();
             string[] factor1 = option.GetOption("factor1").Split(',');
             differTmpList.Add(factor1);
-
             for (int i = 2; i <= option.OptionDict.Count() - 1; i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
                 string andor = tmpfactor[0];
-                //string[] differfactor = tmpfactor[1:];
                 if(andor == "0")
                 {
                     //如果是AND，那么添加到当前列表
@@ -60,6 +52,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             differList.Add(differTmpList);
 
+
             foreach (List<string[]> tmpList in differList)
             {
                 string inputFiled1 = "$" + TransInputLine(tmpList[0][0]);
@@ -70,10 +63,10 @@ namespace Citta_T1.Business.Schedule.Cmd
                     inputFiled2 = inputFiled2 + ",$" + TransInputLine(tmpList[tt][1]);
                 }
                 //每个循环处理一关系
-                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath1));
-                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe -u > {2}", inputFilePath2, inputFiled2, filterBatPath2));
+                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {2}}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath1), inputFilePath1, inputFiled1, this.sortConfig, filterBatPath1));
+                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {2}}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath2), inputFilePath2, inputFiled2, this.sortConfig, filterBatPath2));
                 cmds.Add(string.Format("sbin\\comm.exe -23 {0} {1} > {2}", filterBatPath1, filterBatPath2, filterBatPath3));
-                cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {1}\"\\t\"$0}}' | sbin\\sort.exe -u > {2}", inputFilePath1, inputFiled1, filterBatPath4));
+                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {2}\"\\t\"$0}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath1), inputFilePath1, inputFiled1, this.sortConfig, filterBatPath4));
                 cmds.Add(string.Format("sbin\\join.exe {0} {1} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath));
             }
 

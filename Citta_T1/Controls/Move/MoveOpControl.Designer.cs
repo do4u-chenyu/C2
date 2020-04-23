@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(154, 8);
+            this.rightPictureBox.Location = new System.Drawing.Point(117, 8);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,7 +72,7 @@ namespace Citta_T1.Controls.Move
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(15, 2);
+            this.leftPicture.Location = new System.Drawing.Point(11, 2);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(18, 22);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -183,7 +183,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.BackColor = System.Drawing.SystemColors.Control;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(37, 1);
+            this.textBox.Location = new System.Drawing.Point(31, 1);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(60, 23);
@@ -215,7 +215,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(37, 1);
+            this.txtButton.Location = new System.Drawing.Point(30, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(60, 25);
@@ -242,7 +242,7 @@ namespace Citta_T1.Controls.Move
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(190, 25);
+            this.Size = new System.Drawing.Size(169, 25);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
