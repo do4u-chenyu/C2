@@ -3,6 +3,7 @@ using Citta_T1.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,7 +171,22 @@ namespace Citta_T1.Controls
             
 
         }
+        public static Point WorldBoundControl(Point Pm, int width, int height)
+        {
 
+            Point dragOffset = new Point(0, 0);
+            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+            if (Pw.X > 2000 - Convert.ToInt32(width / screenFactor))
+            {
+                dragOffset.X = 2000 - Convert.ToInt32(width / screenFactor) - Pw.X;
+            }
+            if (Pw.Y > 1000 - Convert.ToInt32(height / screenFactor))
+            {
+                dragOffset.Y = 1000 - Convert.ToInt32(height / screenFactor) - Pw.Y;
+            }
+            return dragOffset;
+        }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
 
@@ -180,7 +196,12 @@ namespace Citta_T1.Controls
                 {
                     Control ct = me.GetControl;
                     ct.Left = dx + 40;
+
                     ct.Top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(ct.Location, ct.Width, ct.Height);
+
+                    ct.Left = ct.Left - moveOffset.X;
+                    ct.Top = ct.Top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
                 }
             }
