@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -56,31 +56,17 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "*";
             // 
-            // textBoxEx1
+            // textBox
             // 
-            this.textBoxEx1.DecLength = 2;
-            this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(196, 48);
-            this.textBoxEx1.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.textBoxEx1.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.textBoxEx1.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.textBoxEx1.Name = "textBoxEx1";
-            this.textBoxEx1.OldText = null;
-            this.textBoxEx1.PromptColor = System.Drawing.Color.Gray;
-            this.textBoxEx1.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.textBoxEx1.PromptText = "";
-            this.textBoxEx1.RegexPattern = "";
-            this.textBoxEx1.Size = new System.Drawing.Size(150, 21);
-            this.textBoxEx1.TabIndex = 4;
-            this.textBoxEx1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxEx1_KeyPress);
+            this.textBox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBox.Location = new System.Drawing.Point(196, 43);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(173, 29);
+            this.textBox.TabIndex = 4;
+            this.textBox.Text = "新建模型";
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 
             // AddButton
             // 
@@ -89,7 +75,7 @@
             this.AddButton.FlatAppearance.BorderSize = 0;
             this.AddButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.AddButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.AddButton.Location = new System.Drawing.Point(218, 106);
+            this.AddButton.Location = new System.Drawing.Point(230, 106);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(55, 28);
             this.AddButton.TabIndex = 18;
@@ -101,7 +87,7 @@
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(291, 106);
+            this.cancelButton.Location = new System.Drawing.Point(314, 106);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(55, 28);
             this.cancelButton.TabIndex = 19;
@@ -114,7 +100,7 @@
             this.ClientSize = new System.Drawing.Size(434, 172);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.AddButton);
-            this.Controls.Add(this.textBoxEx1);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -124,6 +110,7 @@
             this.ShowIcon = false;
             this.Text = "新建模型";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateNewModel_FormClosed);
+            this.Load += new System.EventHandler(this.CreateNewModel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,7 +119,7 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private HZH_Controls.Controls.TextBoxEx textBoxEx1;
+        private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button cancelButton;
     }
