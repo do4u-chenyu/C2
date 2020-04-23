@@ -136,7 +136,7 @@ namespace Citta_T1.Business.Model
             }
             foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
-
+            Global.GetCanvasPanel().Invalidate();
         }
         public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
         {
