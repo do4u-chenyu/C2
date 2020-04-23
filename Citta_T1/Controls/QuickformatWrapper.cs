@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using NPOI.SS.Formula.Functions;
 using System;
@@ -197,13 +198,13 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 60;
+                    int left = dx + 40;
 
-                    ct.Top = (ct.Height + 10) * dy + 70;
-                    Point moveOffset = WorldBoundControl(ct.Location, ct.Width, ct.Height);
+                    int top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
                     log.Info(moveOffset.ToString());
-                    ct.Left = ct.Left - moveOffset.X;
-                    ct.Top = ct.Top - moveOffset.Y;
+                    ct.Left = left - moveOffset.X;
+                    ct.Top = top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
                 }
             }
@@ -219,12 +220,12 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 60;
-                    ct.Top = (ct.Height + 10) * dy + 70;
-                    Point moveOffset = WorldBoundControl(ct.Location, ct.Width, ct.Height);
+                    int left = dx + 60;
+                    int top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
 
-                    ct.Left = ct.Left - moveOffset.X;
-                    ct.Top = ct.Top - moveOffset.Y;
+                    ct.Left = left - moveOffset.X;
+                    ct.Top = top - moveOffset.Y;
 
                     dx = dx + ct.Width;
                     count += 1;
@@ -282,7 +283,7 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
-            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(50,30);
+            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
             int countDeep = 0;
             int countWidth = 0;
             List<int> countWidthList = new List<int>();
@@ -318,6 +319,8 @@ namespace Citta_T1.Controls
             //散元素沉底
             ForamtSingleNode(leavelList, 0, count, modelElements);
             this.currentModel.UpdateAllLines();
+            log.Info("relation = " + Global.GetCurrentDocument().ModelRelations[0].StartP);
+            log.Info("rectOut" + (Global.GetCurrentDocument().ModelElements[0].GetControl as Citta_T1.Controls.Interface.IMoveControl).GetStartPinLoc(0));
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }
