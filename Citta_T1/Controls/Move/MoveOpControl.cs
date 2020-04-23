@@ -427,7 +427,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new Size((int)(130 * f), (int)(28 * f));//142，25
             this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));//107,2
             this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(57 * f), (int)(24 * f));
+            this.txtButton.Size = new Size((int)(57 * f), (int)(25 * f));
             this.textBox.Size = new Size((int)(57 * f), (int)(24 * f));
             this.rectOut.Location = new Point((int)(121 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
