@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using HZH_Controls;
-using HZH_Controls.Controls;
-using HZH_Controls.Forms;
+
 
 namespace Citta_T1.Dgvs
 {
