@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -171,19 +172,20 @@ namespace Citta_T1.Controls
             
 
         }
-        public static Point WorldBoundControl(Point Pm, int width, int height)
+        private Point WorldBoundControl(Point Ps, int width, int height)
         {
 
             Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
             float screenFactor = Global.GetCurrentDocument().ScreenFactor;
-            if (Pw.X > 2000 - Convert.ToInt32(width / screenFactor))
+
+
+            if (Ps.X > 2000 * screenFactor)
             {
-                dragOffset.X = 2000 - Convert.ToInt32(width / screenFactor) - Pw.X;
+                dragOffset.X = Ps.X - 2000;
             }
-            if (Pw.Y > 1000 - Convert.ToInt32(height / screenFactor))
+            if (Ps.Y > 900 * screenFactor)
             {
-                dragOffset.Y = 1000 - Convert.ToInt32(height / screenFactor) - Pw.Y;
+                dragOffset.Y = Ps.Y - 900;
             }
             return dragOffset;
         }
@@ -195,11 +197,11 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 40;
+                    ct.Left = dx + 60;
 
                     ct.Top = (ct.Height + 10) * dy + 70;
                     Point moveOffset = WorldBoundControl(ct.Location, ct.Width, ct.Height);
-
+                    log.Info(moveOffset.ToString());
                     ct.Left = ct.Left - moveOffset.X;
                     ct.Top = ct.Top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
@@ -209,7 +211,7 @@ namespace Citta_T1.Controls
         private void ForamtSingleNode(List<int> nodes, int dx, int dy, List<ModelElement> modelElements)
         {
 
-            int screenHeight = Global.GetCanvasPanel().Height;
+            //int screenHeight = Global.GetCanvasPanel().Height;
             int count = 0;
             this.ctWidths = new List<int>();
             foreach (ModelElement me in modelElements)
@@ -217,8 +219,13 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 40;
-                    ct.Top = screenHeight - (ct.Height * dy);
+                    ct.Left = dx + 60;
+                    ct.Top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(ct.Location, ct.Width, ct.Height);
+
+                    ct.Left = ct.Left - moveOffset.X;
+                    ct.Top = ct.Top - moveOffset.Y;
+
                     dx = dx + ct.Width;
                     count += 1;
                 }
@@ -274,8 +281,8 @@ namespace Citta_T1.Controls
                 }
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
-            log.Info("本次世界坐标位置:" + Global.GetCurrentDocument().MapOrigin.ToString());
-            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
+
+            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(50,30);
             int countDeep = 0;
             int countWidth = 0;
             List<int> countWidthList = new List<int>();
@@ -309,7 +316,7 @@ namespace Citta_T1.Controls
                 countDeep = 0;
             }
             //散元素沉底
-            ForamtSingleNode(leavelList, 0, 1, modelElements);
+            ForamtSingleNode(leavelList, 0, count, modelElements);
             this.currentModel.UpdateAllLines();
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
