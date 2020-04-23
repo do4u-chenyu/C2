@@ -21,30 +21,31 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string[] columnName;
         private string oldOptionDict;
-        private List<int> oldOutList;
+        private string oldSort;
         private List<string> selectColumn;
         private List<bool> oldCheckedItems = new List<bool>();
         private string oldFirstRow;
-        private string oldEndRow; 
+        private string oldEndRow;
+        private List<int> outList;
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-            /*
+          
             this.opControl = opControl;
             dataPath = "";
             InitOptionInfo();
             LoadOption();
             this.oldFirstRow = this.firstRow.Text;
             this.oldEndRow = this.endRow.Text;
-            this.oldOutList = this.outList.GetItemCheckIndex();
+            this.oldSort = this.sortField.Text;
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            */
+          
         }
-        /*
+      
         #region 配置初始化
         private void InitOptionInfo()
         {
@@ -56,47 +57,34 @@ namespace Citta_T1.OperatorViews
                 SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
             }
         }
-
         private void SetOption(string path, string dataName, string encoding)
         {
-
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
-            foreach (string name in this.columnName)
-                this.outList.AddItems(name);
+            this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
+            foreach (string name in columnName)
+                this.sortField.Items.Add(name);
+
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
         #endregion
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
-            if (this.outList.GetItemCheckIndex().Count == 0)
+            if (this.dataInfo.Text == "") return;
+            if (this.sortField.Text == "")
             {
-                MessageBox.Show("请选择输出字段!");
-                return;
-            }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
-            {
-                MessageBox.Show("请选择数据是否进行去重");
-                return;
-            }
-            if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
-            {
-                MessageBox.Show("请选择数据排序");
-                return;
-            }
-            if (this.firstRow.Text == "" ^ this.endRow.Text == "")
-            {
-                MessageBox.Show("请选择输出条数");
+                MessageBox.Show("请选择排序字段!");
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.dataInfo.Text == "") return;
+           
             SaveOption();
-            //内容修改，引起文档dirty
-            
+
+            //内容修改，引起文档dirty 
             if (this.oldCheckedItems[0] != this.noRepetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
             else if (this.oldCheckedItems[1] != this.repetition.Checked)
@@ -105,17 +93,16 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
+            else if (!this.oldSort.SequenceEqual(this.sortField.Text))
                 Global.GetMainForm().SetDocumentDirty();
             else if(this.oldFirstRow!=this.firstRow.Text)
                 Global.GetMainForm().SetDocumentDirty();
             else if(this.oldEndRow!=this.endRow.Text)
                 Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.outList.GetItemCheckText();
 
+            //生成结果控件,创建relation,bcp结果文件
             if (this.oldOptionDict == "")
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName.ToList());
         }
        
         private void cancelButton_Click(object sender, EventArgs e)
@@ -128,16 +115,16 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            List<int> checkIndexs = this.outList.GetItemCheckIndex();
-            string outField = string.Join(",", checkIndexs);
 
-            this.opControl.Option.SetOption("outfield", outField);
+            this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
+            this.opControl.Option.SetOption("sortfield", this.sortField.SelectedIndex.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
+            
 
             this.opControl.Status = ElementStatus.Ready;
 
@@ -145,6 +132,12 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+           
+            if (this.opControl.Option.GetOption("sortfield") != "")
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+                this.sortField.Text = this.sortField.Items[index].ToString();
+            }   
             if (this.opControl.Option.GetOption("noRepetition") != "")
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (this.opControl.Option.GetOption("repetition") != "")
@@ -157,14 +150,10 @@ namespace Citta_T1.OperatorViews
                 this.firstRow.Text = this.opControl.Option.GetOption("firstRow");
             if (this.opControl.Option.GetOption("endRow") != "")
                 this.endRow.Text = this.opControl.Option.GetOption("endRow");
-            if (this.opControl.Option.GetOption("outfield") != "")
-            {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.outList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
-            }
+
         }
         #endregion
-        */
+        
         private void groupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -174,5 +163,6 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
+
     }
 }
