@@ -313,8 +313,9 @@ namespace Citta_T1.Controls
                     
                     
                 }
-                count = count + countWidthList.Max() + 1;
+                count = count + countWidthList.Max();
                 countDeep = 0;
+                this.ctWidths = new List<int>(); ;
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, count, modelElements);
