@@ -138,7 +138,7 @@ namespace Citta_T1.OperatorViews
                 if (!this.groupColumn.Contains(index))
                     this.outList.Add(index);
             }
-            this.opControl.Option.SetOption("outList", string.Join(",", this.outList));
+            this.opControl.Option.SetOption("outField", string.Join(",", this.outList));
             this.opControl.Status = ElementStatus.Ready;
 
         }

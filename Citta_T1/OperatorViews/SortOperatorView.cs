@@ -116,6 +116,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
+            this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
             this.opControl.Option.SetOption("sortfield", this.sortField.SelectedIndex.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
@@ -123,6 +124,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
+            
 
             this.opControl.Status = ElementStatus.Ready;
 
