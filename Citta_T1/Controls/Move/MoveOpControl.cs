@@ -13,6 +13,7 @@ using static Citta_T1.Controls.CanvasPanel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Diagnostics;
+using Citta_T1.Business.Schedule;
 
 namespace Citta_T1.Controls.Move
 { 
@@ -513,6 +514,20 @@ namespace Citta_T1.Controls.Move
             this.textBox.Select(this.textBox.TextLength, 0);
             ModelDocumentDirtyEvent?.Invoke();
         }
+
+        public void RunMenuItem_Click(object sender, EventArgs e)
+        {
+            //运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), Global.GetCurrentDocument().SearchElementByID(this.ID));
+            int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
+            if (notReadyNum > 0)
+            {
+                MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
