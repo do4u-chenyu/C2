@@ -49,7 +49,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             streamWriter.Write(awkExec);
             streamWriter.Close();
 
-            cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS='\\t' -E {2} >> {3}", TransInputfileToCmd(inputFilePath), inputFilePath, filterBatPath, this.outputFilePath));
+            cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS='\\t' -E {1} >> {2}", TransInputfileToCmd(inputFilePath), filterBatPath, this.outputFilePath));
             return cmds;
         }
 
