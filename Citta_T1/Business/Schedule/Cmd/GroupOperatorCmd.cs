@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();//输入文件
-            string outfieldLine = TransOutputField(option.GetOption("outField").Split(','));//输出字段
+            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
             //是否去重(是对整个文件去重)、升降序
             string repetition = option.GetOption("noRepetition") == "True" ? string.Format("sbin\\sort.exe {0} -u | ",this.sortConfig) : "";
