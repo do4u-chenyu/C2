@@ -61,10 +61,10 @@ namespace Citta_T1.Business.Schedule.Cmd
                     inputFiled2 = inputFiled2 + ",$" + TransInputLine(tmpList[tt][1]);
                 }
                 //每个循环处理一关系
-                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {2}}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath1), inputFilePath1, inputFiled1, this.sortConfig, filterBatPath1));
-                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {2}}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath2), inputFilePath2, inputFiled2, this.sortConfig, filterBatPath2));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath1));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath2), inputFiled2, this.sortConfig, filterBatPath2));
                 cmds.Add(string.Format("sbin\\comm.exe -12 {0} {1} > {2}", filterBatPath1, filterBatPath2, filterBatPath3));
-                cmds.Add(string.Format("{0} {1} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {2}\"\\t\"$0}}' | sbin\\sort.exe {3} -u > {4}", TransInputfileToCmd(inputFilePath1), inputFilePath1, inputFiled1, this.sortConfig, filterBatPath4));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {1}\"\\t\"$0}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath4));
                 cmds.Add(string.Format("sbin\\join.exe {0} {1} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath));
             }
 

@@ -25,10 +25,12 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
+        private DSUtil.ExtType extType = DSUtil.ExtType.Unknow;
         private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
-        
+        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 9);
@@ -71,18 +73,21 @@ namespace Citta_T1.Controls.Move
         List<Bezier> affectedLines = new List<Bezier>() { };
         public ECommandType cmd = ECommandType.Null;
 
+
         ControlMoveWrapper controlMoveWrapper;
         public string GetBcpPath()
         {
             return this.Name;
         }
 
-        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc)
+        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc, DSUtil.ExtType extType = DSUtil.ExtType.Unknow, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             InitializeComponent();
             this.textBox1.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
+            this.extType = extType;
+            this.encoding = encoding;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
@@ -99,8 +104,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
         public void textBox1_Leave(object sender, EventArgs e)
@@ -123,6 +126,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox1.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -153,7 +158,7 @@ namespace Citta_T1.Controls.Move
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(this.Name, this.encoding);
+            prt.PreViewDataByBcpPath(this.Name, this.extType, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

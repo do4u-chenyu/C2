@@ -20,7 +20,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string randomnum = option.GetOption("randomnum");//随机条数
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
-            cmds.Add(string.Format("{0} {1} | sbin\\awk.exe 'BEGIN{{srand()}} {{print rand()\"\\t\"$0}}' | sbin\\sort.exe {2} -n -k1 | sbin\\head.exe -n {3} | sbin\\awk.exe 'sub($1\"\\t\",\"\")' | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {4}}}' >> {5}" , TransInputfileToCmd(inputFilePath), inputFilePath, this.sortConfig, randomnum, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("{0} | sbin\\awk.exe 'BEGIN{{srand()}} {{print rand()\"\\t\"$0}}' | sbin\\sort.exe {1} -n -k1 | sbin\\head.exe -n {2} | sbin\\awk.exe 'sub($1\"\\t\",\"\")' | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {3}}}' >> {4}" , TransInputfileToCmd(inputFilePath), this.sortConfig, randomnum, outfieldLine, this.outputFilePath));
             return cmds;
 
         }

@@ -35,7 +35,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             outfieldLine += ",$1";
 
-            cmds.Add(string.Format("{0} {1}| {2} sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {3}}}' | sbin\\sort.exe {4} | sbin\\uniq.exe -c | {5} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{ print {6}}}'>> {7}", TransInputfileToCmd(inputFilePath), inputFilePath,repetition, infieldLine,this.sortConfig, order, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("{0} | {1} sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {2}}}' | sbin\\sort.exe {3} | sbin\\uniq.exe -c | {4} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath),repetition, infieldLine,this.sortConfig, order, outfieldLine, this.outputFilePath));
 
             return cmds;
         }

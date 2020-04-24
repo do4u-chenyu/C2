@@ -63,6 +63,13 @@ namespace Citta_T1.Business.Schedule
             this.currentModelTripleList = this.tripleList.CurrentModelTripleList;
         }
 
+        public void GetCurrentModelRunhereTripleList(ModelDocument currentModel, ModelElement stopElement)
+        {
+            this.tripleList = new TripleListGen(currentModel, stopElement);
+            this.tripleList.GenerateList();
+            this.currentModelTripleList = this.tripleList.CurrentModelTripleList;
+        }
+
         public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
             foreach (Triple pauseTri in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
