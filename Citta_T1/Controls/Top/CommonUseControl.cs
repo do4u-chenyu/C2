@@ -74,6 +74,7 @@ namespace Citta_T1.Controls.Top
             ModelDocument currentModel = Global.GetCurrentDocument();
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
+            Global.GetMainForm().SetDocumentDirty();
         }
     }
 }
