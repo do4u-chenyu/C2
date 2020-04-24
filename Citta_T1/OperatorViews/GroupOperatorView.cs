@@ -275,8 +275,10 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
                     Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k);
+                    ctlNext1.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
+                    ctlNext2.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                 }
                 createLine(addLine);
@@ -308,8 +310,10 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
                 Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
+                ctlNext1.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
+                ctlNext2.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
