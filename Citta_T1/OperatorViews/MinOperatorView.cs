@@ -60,8 +60,13 @@ namespace Citta_T1.OperatorViews
             if (this.oldMinfield != this.MinValueBox.Text|| !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                return;
+            }
+               
 
             //输出变化，重写BCP文件
             if (this.oldOptionDict != "" && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
@@ -122,6 +127,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.OutList.Items[index].ToString());
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         #region 初始化配置
@@ -145,6 +151,7 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.MinValueBox.Items.Add(name);
             }
+            this.opControl.DataSourceColumns = column;
         }
 
         #endregion

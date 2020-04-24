@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Citta_T1.Business.Model;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Move;
-using System.Drawing;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
+using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace Citta_T1.Business.Option
 {
