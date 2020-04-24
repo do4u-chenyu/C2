@@ -131,11 +131,13 @@ namespace Citta_T1.Business.Model
             List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID || mr.EndID == ID)
-                    relations.Add(mr);
+                if (mr.StartID == ID || mr.EndID == ID) 
+                {
+                    continue;
+                }
+                relations.Add(mr);
             }
-            foreach (ModelRelation mr in relations) 
-                this.ModelRelations.Remove(mr);
+            this.ModelRelations = relations;
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
