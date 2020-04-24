@@ -43,7 +43,14 @@ namespace Citta_T1.Dialogs
 
         }
 
-
+        public void ReSetParams()
+        {
+            this.separator = '\t';
+            this.encoding = DSUtil.Encoding.GBK;
+            this.extType = DSUtil.ExtType.Text;
+            this.gbkLable.Font = bold_font;
+            this.utf8Lable.Font = font;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             /*
@@ -112,6 +119,7 @@ namespace Citta_T1.Dialogs
         {
             // 关闭按钮
             DvgClean();
+            this.ReSetParams();
             Close();
         }
 
@@ -138,6 +146,8 @@ namespace Citta_T1.Dialogs
              * 4. 清理表格数据
              * 5. 写入数据
              */
+            if (this.m_filePath == null)
+                return;
             System.IO.StreamReader sr;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
@@ -176,9 +186,7 @@ namespace Citta_T1.Dialogs
                         continue;
                     row = table.NewRow();
                     String[] eles = line.Split(this.separator);
-                    if (eles.Length != numOfCol)
-                        continue;
-                    for (int colIndex = 0; colIndex < numOfCol; colIndex++)
+                    for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Length); colIndex++)
                     {
                         row[colIndex] = eles[colIndex];
                     }
