@@ -42,11 +42,11 @@ namespace Citta_T1.Business.DataSource
             dataSourceNode.AppendChild(nameNode);
 
             XmlElement sepNode = xDoc.CreateElement("separator");
-            sepNode.InnerText = db.ExtType.ToString();
+            sepNode.InnerText = "&#" + db.Separator.ToString();                 // TODO 写
             dataSourceNode.AppendChild(sepNode);
 
             XmlElement extTypeNode = xDoc.CreateElement("extType");
-            extTypeNode.InnerText = db.ExtType.ToString();
+            extTypeNode.InnerText = db.ExtType.ToString();           
             dataSourceNode.AppendChild(extTypeNode);
 
             XmlElement codeNode = xDoc.CreateElement("encoding");
@@ -77,7 +77,15 @@ namespace Citta_T1.Business.DataSource
                 {
                     string filePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
-                    char separator = xn.SelectSingleNode("separator").InnerText.ToCharArray()[0];
+                    char separator;
+                    char[] seps = xn.SelectSingleNode("separator").InnerText.ToCharArray();
+                    if (seps.Length >= 3)
+                        separator = seps[2];           // TODO 读
+                    else
+                    {
+                        separator = '\t';
+                        log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+                    } 
                     DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
                     DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
                     DataButton dataButton = new DataButton(filePath, dataName, separator, extType, encoding);

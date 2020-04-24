@@ -63,6 +63,10 @@ namespace Citta_T1.Dialogs
             string ext;
             OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
+            if (this.gbkLable.Font.Bold)
+                this.encoding = DSUtil.Encoding.GBK;
+            else
+                this.encoding = DSUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 m_filePath = fd.FileName;     
@@ -334,7 +338,7 @@ namespace Citta_T1.Dialogs
             {
                 try
                 {
-                    this.separator = this.textBoxEx1.Text.ToCharArray()[0];
+                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
                 }
                 catch (Exception ex)
                 {
@@ -356,14 +360,25 @@ namespace Citta_T1.Dialogs
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.extType == ExtType.Text)
+            if (this.extType != ExtType.Text)
+                return;
+            else
             {
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
                 {
                     MessageBox.Show("未指定分隔符");
                     return;
                 }
+                try
+                {
+                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                }
             }
+
         }
         /// <summary>
         /// 将excel中的数据导入到DataTable中
