@@ -16,6 +16,8 @@ namespace Citta_T1
         public DataGridView0()
         {
             InitializeComponent();
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
             InitializeDgv();
         }
 
@@ -37,9 +39,16 @@ namespace Citta_T1
             int numOfCols = headers.Count;
             for (int i = 0; i < maxNumOfRows; i++)
                 datas.Add(new List<string>() { "", "", "", "", "", "" });
-            _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
+            //_InitializeColumns(headers);
+            //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
+            _InitializeDGV(datas, headers, numOfCols);
 
+        }
+        public void DvgClean(bool isCleanDataName = true)
+        {
+            this.dataGridView.DataSource = null;
+            this.dataGridView.Rows.Clear();
+            this.dataGridView.Columns.Clear();
         }
         private void _InitializeColumns(List<string> headers)
         {
@@ -64,7 +73,7 @@ namespace Citta_T1
              * 使用样例数据
              */
             string data;
-            for (int i = 0; i < maxNumOfRows; i = this.dataGridView.Rows.Add())
+            for (int i = 0; i < Math.Min(maxNumOfRows, datas.Count); i = this.dataGridView.Rows.Add())                   // TODO                  
             {
                 //this.dataGridView1.Rows.Add();
                 for (int j = 0; j < numOfCols; j++)
@@ -81,6 +90,38 @@ namespace Citta_T1
                     this.dataGridView.Rows[i].Cells[j].Value = data;
                 }
             }
+        }
+
+        private void _InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
+        {
+            DataTable table = new DataTable();
+            DataColumn column;
+            DataRow row;
+            DataView view;
+            DataColumn[] cols = new DataColumn[numOfCol];
+
+            for (int i = 0; i < numOfCol; i++)
+            {
+                cols[i] = new DataColumn();
+                cols[i].ColumnName = headers[i];
+            }
+
+            table.Columns.AddRange(cols);
+
+            for (int rowIndex = 1; rowIndex < Math.Min(maxNumOfRows, datas.Count - 1); rowIndex++)
+            {
+                List<String> eles = datas[rowIndex];
+                if (eles == null)
+                    continue;
+                row = table.NewRow();
+                for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Count); colIndex++)
+                {
+                    row[colIndex] = eles[colIndex];
+                }
+                table.Rows.Add(row);
+            }
+            view = new DataView(table);
+            this.dataGridView.DataSource = view;
         }
 
         private List<List<string>> PreViewFileFromPath(string fileNameOrFile = "", int maxNumOfFile = 50, char sep = '\t')
@@ -128,13 +169,12 @@ namespace Citta_T1
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
             }
 
-            this.dataGridView.Rows.Clear();
-            this.dataGridView.Columns.Clear();
-            this.dataGridView.DataSource = null;
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
-            _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
+            DvgClean();
+            _InitializeDGV(datas, headers, numOfCols);
+            //_InitializeColumns(headers);
+            //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
         }
     }
 }
