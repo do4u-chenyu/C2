@@ -90,11 +90,8 @@ namespace Citta_T1.Controls
             int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (isLarger && sizeLevel <= 2)
             {
-                log.Info("放大");
                 sizeLevel += 1;
                 Global.GetCurrentDocument().ScreenFactor *= factor;
-                log.Info(Global.GetCurrentDocument().ScreenFactor .ToString()+ "放大倍数");
-
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -387,7 +384,6 @@ namespace Citta_T1.Controls
                  *         ----------
                  */
                 (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
-                log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).RevisedPinIndex);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
@@ -467,7 +463,6 @@ namespace Citta_T1.Controls
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in mrs)
             {
-                log.Info("mrs.Count = " + mrs.Count);
                 Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
                 line.DrawBezier(g);
             }

@@ -90,7 +90,6 @@ namespace Citta_T1.Controls.Move
             this.encoding = encoding;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
         }
 
