@@ -78,6 +78,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
+            this.opControl.DataSourceColumns = column;
             return columnName;
         }
         #endregion
@@ -126,7 +127,7 @@ namespace Citta_T1.OperatorViews
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
             }
-
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         private void SaveOption()
         {
@@ -163,8 +164,13 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+               
         }
        
         private void cancelButton_Click(object sender, EventArgs e)
@@ -290,6 +296,7 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                     Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
+                    ctlNext3.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
@@ -328,6 +335,7 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
                 Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                ctlNext3.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
                 ctlNext4.Name = k.ToString();

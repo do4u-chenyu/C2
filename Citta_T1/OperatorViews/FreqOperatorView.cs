@@ -61,6 +61,7 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
+            this.opControl.DataSourceColumns = column;
         }
         #endregion
         #region 添加取消
@@ -100,8 +101,13 @@ namespace Citta_T1.OperatorViews
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.outList.GetItemCheckText();
             this.selectColumn.Add("频率统计结果");
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+               
 
         }
 
@@ -142,6 +148,7 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 this.outList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         private void groupBox1_Paint(object sender, PaintEventArgs e)

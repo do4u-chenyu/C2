@@ -70,8 +70,8 @@ namespace Citta_T1.OperatorViews
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
-                this.AvgComBox.Items.Add(name);
-
+                this.AvgComBox.Items.Add(name); 
+            this.opControl.DataSourceColumns = column;
         }
 
         #endregion
@@ -93,8 +93,14 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            { 
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectName);
+                return;
+            }
+               
+               
 
         }
 
@@ -120,6 +126,7 @@ namespace Citta_T1.OperatorViews
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         private DSUtil.Encoding EnType(string type)

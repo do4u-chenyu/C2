@@ -143,27 +143,42 @@ namespace Citta_T1.Business.Model
         }
         public void StateChangeByDelete(int ID)
         {
-            int count = 1;
+
             foreach (ModelRelation mr in this.ModelRelations)
             {
                 if (mr.StartID == ID)
                 {
                     foreach (ModelElement me in this.ModelElements)
                     {
-                        if(me.ID == mr.EndID && count == 1)
-                        { 
+                        if (me.ID == mr.EndID)
+                        {
                             me.Status = ElementStatus.Null;
-                            count += 1;
-                            break;
+                            //存在链路，后续链路中算子状态变化
+                            AllStateChange(me.ID);
                         }
-                        if (me.ID == mr.EndID && count>1)
+                           
+                    }
+                }
+            }
+            
+
+
+        }
+        private void AllStateChange(int operatorID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == operatorID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if (me.ID == mr.EndID)
                         {
                             me.Status = ModifyStatus(me, me.Status);
-                            StateChangeByDelete(mr.EndID);
-                            count += 1;
+                            AllStateChange(mr.EndID);
                         }
-
                     }
+
                 }
             }
         }
@@ -272,7 +287,6 @@ namespace Citta_T1.Business.Model
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
-                    log.Info("mr.StartP = " + mr.StartP);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.GetControl as IMoveControl).OutPinInit("lineExit");

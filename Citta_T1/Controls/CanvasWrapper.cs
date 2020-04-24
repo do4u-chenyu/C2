@@ -61,7 +61,6 @@ namespace Citta_T1.Controls
 			{
 				if (line == null)
 				{
-					log.Info("line == null!");
 					continue;
 				}
 				// 不在该区域内就别重绘了
@@ -70,9 +69,7 @@ namespace Citta_T1.Controls
 				//    log.Info("line 不在区域" + rect.ToString() + "内");
 				//    continue;
 				line.DrawBezier(this.Graphics, rect);
-				log.Info("重绘线，起点坐标：" + line.StartP.ToString() + "终点坐标：" + line.EndP.ToString());
 				cnt += 1;
-				log.Info("已重绘" + cnt + "条曲线");
 			}
 
 		}
