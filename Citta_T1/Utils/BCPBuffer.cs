@@ -35,6 +35,8 @@ namespace Citta_T1.Utils
         public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
         {
             string ret = "";
+            //刷新一下存放表头的字典
+            PreLoadBcpFile(bcpFullPath, encoding);
             if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
                 PreLoadBcpFile(bcpFullPath, encoding);
             // 防止文件读取时发生错误, 重新判断下是否存在
@@ -194,7 +196,7 @@ namespace Citta_T1.Utils
             if (!System.IO.File.Exists(filePath))
             {
                 System.IO.File.Create(filePath).Close();
-                StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default);
+                StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8);
                 foreach (string name in columnName)
                     columns += name + "\t";
                 sw.WriteLine(columns.Trim('\t'));
@@ -210,7 +212,7 @@ namespace Citta_T1.Utils
             string columns = "";
             FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
             fs.Close();
-            StreamWriter sw = new StreamWriter(filePath, false, Encoding.Default);
+            StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8);
             foreach (string name in columnName)
                 columns += name + "\t";
             sw.WriteLine(columns.Trim('\t'));

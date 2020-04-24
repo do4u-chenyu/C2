@@ -1,8 +1,11 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,7 +173,23 @@ namespace Citta_T1.Controls
             
 
         }
+        private Point WorldBoundControl(Point Ps, int width, int height)
+        {
 
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+
+
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
+        }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
 
@@ -179,8 +198,13 @@ namespace Citta_T1.Controls
                 if (me.ID == id)
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 40;
-                    ct.Top = (ct.Height + 40) * dy + 70;
+                    int left = dx + 40;
+
+                    int top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
+                    log.Info(moveOffset.ToString());
+                    ct.Left = left - moveOffset.X;
+                    ct.Top = top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
                 }
             }
@@ -188,7 +212,7 @@ namespace Citta_T1.Controls
         private void ForamtSingleNode(List<int> nodes, int dx, int dy, List<ModelElement> modelElements)
         {
 
-            int screenHeight = Global.GetCanvasPanel().Height;
+            //int screenHeight = Global.GetCanvasPanel().Height;
             int count = 0;
             this.ctWidths = new List<int>();
             foreach (ModelElement me in modelElements)
@@ -196,8 +220,13 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     Control ct = me.GetControl;
-                    ct.Left = dx + 40;
-                    ct.Top = screenHeight - (ct.Height * dy);
+                    int left = dx + 60;
+                    int top = (ct.Height + 10) * dy + 70;
+                    Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
+
+                    ct.Left = left - moveOffset.X;
+                    ct.Top = top - moveOffset.Y;
+
                     dx = dx + ct.Width;
                     count += 1;
                 }
@@ -254,6 +283,7 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
+            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
             int countDeep = 0;
             int countWidth = 0;
             List<int> countWidthList = new List<int>();
@@ -267,7 +297,7 @@ namespace Citta_T1.Controls
                 foreach (List<int> leavel in tree)
                 {
                     countWidth = count;
-                    countDeep = countDeep + 40;
+                    countDeep = countDeep + 20;
                     if (this.ctWidths.Count != 0)
                     {
                         countDeep = countDeep + this.ctWidths.Max();
@@ -283,12 +313,15 @@ namespace Citta_T1.Controls
                     
                     
                 }
-                count = count + countWidthList.Max() + 1;
+                count = count + countWidthList.Max();
                 countDeep = 0;
+                this.ctWidths = new List<int>(); ;
             }
             //散元素沉底
-            ForamtSingleNode(leavelList, 0, 1, modelElements);
+            ForamtSingleNode(leavelList, 0, count, modelElements);
             this.currentModel.UpdateAllLines();
+            log.Info("relation = " + Global.GetCurrentDocument().ModelRelations[0].StartP);
+            log.Info("rectOut" + (Global.GetCurrentDocument().ModelElements[0].GetControl as Citta_T1.Controls.Interface.IMoveControl).GetStartPinLoc(0));
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }

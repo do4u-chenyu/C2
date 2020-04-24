@@ -223,7 +223,11 @@ namespace Citta_T1.Business.Model
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
+                        {
                             ctl.Option = ReadOption(xn);
+                            ctl.DataSourceColumns = ctl.Option.GetOption("columnname");
+                        }
+                            
 
 
                     }
@@ -325,10 +329,10 @@ namespace Citta_T1.Business.Model
             switch (subType)
             {
                 case "CollideOperator":
-                    type = "关联算子";
+                    type = "碰撞算子";
                     break;
                 case "RelateOperator":
-                    type = "碰撞算子";
+                    type = "关联算子";
                     break;
                 case "UnionOperator":
                     type = "取并集";

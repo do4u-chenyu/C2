@@ -337,11 +337,15 @@ namespace  Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
-            if (Global.GetCurrentDocument() != null && Global.GetCurrentDocument().ModelElements != null)
-            {
-                log.Info("Then me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
-            }
             InitializeControlsLocation();
+            if (bottomViewPanel.Height == 280)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏数据框");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "显示数据框");
+            }
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -683,6 +687,14 @@ namespace  Citta_T1
             }
         }
 
+        private void headPanel_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
+
+        private void usernamelabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

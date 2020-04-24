@@ -23,14 +23,18 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private string[] columnName;
         private string oldOptionDict;
-        private List<string> selectColumn;
+        private List<string> oldColumnName;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             dataPath = "";
+            columnName = new string[] { };
+            oldColumnName = new List<string>();
+            oldOutList = new List<int>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
+
             this.oldMinfield = this.MinValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
@@ -53,14 +57,18 @@ namespace Citta_T1.OperatorViews
             if (this.DataInfoBox.Text == "") return;
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldMinfield != this.MinValueBox.Text)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (this.oldMinfield != this.MinValueBox.Text|| !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.OutList.GetItemCheckText();
             if (this.oldOptionDict == "")
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+            {
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                this.opControl.DataSourceColumns = String.Join("\t", this.OutList.GetItemCheckText());
+            }
+            //输出变化，重写BCP文件
+            if (this.oldOptionDict != "" && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                this.opControl.DataSourceColumns = Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -73,6 +81,21 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
+            List<int> outIndexs = new List<int>(this.oldOutList);
+            List<int> removeIndex = new List<int>();
+            foreach (int index in checkIndexs)
+            {
+                if (!outIndexs.Contains(index))
+                    outIndexs.Add(index);
+            }
+            foreach (int index in outIndexs)
+            {
+                if (!checkIndexs.Contains(index))
+                {
+                    outIndexs = new List<int>(checkIndexs);
+                    break;
+                }
+            }
             string outField = string.Join(",", checkIndexs);
             if (this.MinValueBox.Text == "")
                 this.opControl.Option.SetOption("minfield", "");
@@ -93,8 +116,13 @@ namespace Citta_T1.OperatorViews
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
+
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = indexs.ToList();
+                this.OutList.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
             }
         }
         #endregion

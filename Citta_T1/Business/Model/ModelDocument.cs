@@ -136,7 +136,7 @@ namespace Citta_T1.Business.Model
             }
             foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
-
+            Global.GetCanvasPanel().Invalidate();
         }
         public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
         {
@@ -235,7 +235,11 @@ namespace Citta_T1.Business.Model
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
+                    log.Info("mr.StartP = " + mr.StartP);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                    // 引脚更新
+                    (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
+                    (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                     mr.UpdatePoints();
                 }
                 catch (IndexOutOfRangeException)

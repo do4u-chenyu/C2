@@ -53,10 +53,7 @@ namespace Citta_T1.Controls.Flow
             Global.GetFlowControl().SelectRemark = false;
             Global.GetRemarkControl().Visible = false;
 
-            FlowControl flowControl = Global.GetFlowControl();
-            Type type = typeof(FlowControl);
-            MethodInfo mInfo = type.GetMethod("RemarkChange",BindingFlags.NonPublic | BindingFlags.Instance);
-            mInfo.Invoke(flowControl, new object[] { false });
+            Global.GetFlowControl().RemarkChange(false); 
         }
     }
 }

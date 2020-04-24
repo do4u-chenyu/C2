@@ -1,9 +1,13 @@
-﻿using Citta_T1.Controls.Move;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +17,92 @@ namespace Citta_T1.OperatorViews
 {
     public partial class SortOperatorView : Form
     {
+        private MoveOpControl opControl;
+        private string dataPath;
+        private string[] columnName;
+        private string oldOptionDict;
+        private string oldSort;
+        private List<string> selectColumn;
+        private List<bool> oldCheckedItems = new List<bool>();
+        private string oldFirstRow;
+        private string oldEndRow;
+        private List<int> outList;
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+          
+            this.opControl = opControl;
+            dataPath = "";
+            InitOptionInfo();
+            LoadOption();
+            this.oldFirstRow = this.firstRow.Text;
+            this.oldEndRow = this.endRow.Text;
+            this.oldSort = this.sortField.Text;
+            this.oldCheckedItems.Add(this.noRepetition.Checked);
+            this.oldCheckedItems.Add(this.repetition.Checked);
+            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
+            this.oldCheckedItems.Add(this.descendingOrder.Checked);
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
+          
         }
+      
         #region 配置初始化
+        private void InitOptionInfo()
+        {
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
+            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
+            {
+                this.dataPath = dataInfo["dataPath0"];
+                this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
+            }
+        }
+        private void SetOption(string path, string dataName, string encoding)
+        {
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            string column = bcpInfo.columnLine;
+            this.columnName = column.Split('\t');
+            this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
+            foreach (string name in columnName)
+                this.sortField.Items.Add(name);
+
+        }
+        private DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
         #endregion
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
+            if (this.dataInfo.Text == "") return;
+            if (this.sortField.Text == "")
+            {
+                MessageBox.Show("请选择排序字段!");
+                return;
+            }
             this.DialogResult = DialogResult.OK;
+           
+            SaveOption();
+
+            //内容修改，引起文档dirty 
+            if (this.oldCheckedItems[0] != this.noRepetition.Checked)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (this.oldCheckedItems[1] != this.repetition.Checked)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
+                Global.GetMainForm().SetDocumentDirty();
+            else if (!this.oldSort.SequenceEqual(this.sortField.Text))
+                Global.GetMainForm().SetDocumentDirty();
+            else if(this.oldFirstRow!=this.firstRow.Text)
+                Global.GetMainForm().SetDocumentDirty();
+            else if(this.oldEndRow!=this.endRow.Text)
+                Global.GetMainForm().SetDocumentDirty();
+
+            //生成结果控件,创建relation,bcp结果文件
+            if (this.oldOptionDict == "")
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName.ToList());
         }
        
         private void cancelButton_Click(object sender, EventArgs e)
@@ -33,8 +113,47 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 配置信息的保存与加载
+        private void SaveOption()
+        {
 
+            this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
+            this.opControl.Option.SetOption("sortfield", this.sortField.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
+            this.opControl.Option.SetOption("endRow", this.endRow.Text);
+            
+
+            this.opControl.Status = ElementStatus.Ready;
+
+        }
+
+        private void LoadOption()
+        {
+           
+            if (this.opControl.Option.GetOption("sortfield") != "")
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+                this.sortField.Text = this.sortField.Items[index].ToString();
+            }   
+            if (this.opControl.Option.GetOption("noRepetition") != "")
+                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
+            if (this.opControl.Option.GetOption("repetition") != "")
+                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            if (this.opControl.Option.GetOption("ascendingOrder") != "")
+                this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
+            if (this.opControl.Option.GetOption("descendingOrder") != "")
+                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
+            if (this.opControl.Option.GetOption("firstRow") != "")
+                this.firstRow.Text = this.opControl.Option.GetOption("firstRow");
+            if (this.opControl.Option.GetOption("endRow") != "")
+                this.endRow.Text = this.opControl.Option.GetOption("endRow");
+
+        }
         #endregion
+        
         private void groupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);

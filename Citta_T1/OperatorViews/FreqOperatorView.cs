@@ -99,7 +99,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.outList.GetItemCheckText();
-
+            this.selectColumn.Add("频率统计结果");
             if (this.oldOptionDict == "")
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
 

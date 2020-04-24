@@ -286,7 +286,6 @@
             // dataSourceControl
             // 
             this.dataSourceControl.AllowDrop = true;
-            this.dataSourceControl.AutoScroll = true;
             this.dataSourceControl.BackColor = System.Drawing.Color.White;
             this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -295,11 +294,10 @@
             this.dataSourceControl.Name = "dataSourceControl";
             this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
             this.dataSourceControl.TabIndex = 0;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.dataSourceControl, true);
             // 
             // myModelControl
             // 
-            this.myModelControl.AutoScroll = true;
+            this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.myModelControl.Location = new System.Drawing.Point(0, 0);
@@ -307,7 +305,6 @@
             this.myModelControl.Name = "myModelControl";
             this.myModelControl.Size = new System.Drawing.Size(185, 558);
             this.myModelControl.TabIndex = 0;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.myModelControl, true);
             // 
             // bottomViewPanel
             // 
@@ -808,6 +805,7 @@
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
@@ -825,6 +823,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始运行模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
@@ -960,4 +959,3 @@
         private System.Windows.Forms.Label currentModelFinLab;
     }
 }
-

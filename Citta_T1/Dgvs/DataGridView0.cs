@@ -16,7 +16,7 @@ namespace Citta_T1
         public DataGridView0()
         {
             InitializeComponent();
-            InitializeDgv("");
+            InitializeDgv();
         }
 
         private void DataGridView_Load(object sender, EventArgs e)
@@ -29,21 +29,16 @@ namespace Citta_T1
 
         }
 
-        private void InitializeDgv(string fileName = "")
+        private void InitializeDgv()
         {
-            List<List<string>> datas;
-            if (fileName == "")
-            {
-                datas = this.PreViewFileFromResx(Properties.Resources.text_utf8);
-            }
-            else
-            {
-                datas = this.PreViewFileFromPath(fileName);
-            }
+            List<List<string>> datas = new List<List<string>>();
+            datas.Add(new List<string>() { "姓名", "身份证号", "手机号", "年龄", "地址" });
             List<string> headers = datas[0];
-            int numOfCols = headers.ToArray().Length;
+            int numOfCols = headers.Count;
+            for (int i = 0; i < maxNumOfRows; i++)
+                datas.Add(new List<string>() { "", "", "", "", "", "" });
             _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
+            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
 
         }
         private void _InitializeColumns(List<string> headers)

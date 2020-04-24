@@ -17,6 +17,7 @@ namespace Citta_T1.Controls.Left
         {
             InitializeComponent();
             
+            
         }
 
         public void AddModel(string modelName)
@@ -32,6 +33,7 @@ namespace Citta_T1.Controls.Left
             mb.Location = startPoint;
 
             this.Controls.Add(mb);
+            
 
         }
 
