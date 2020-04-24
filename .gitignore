@@ -28,7 +28,10 @@ packages/SharpZipLib.1.2.0/lib/net45/ICSharpCode.SharpZipLib.xml
 packages/SharpZipLib.1.2.0/lib/netstandard2.0/
 UserInstallSet/bin/Debug
 UserInstallSet/obj/Debug
+UserInstallSet/bin
+UserInstallSet/obj
 IAO解决方案/Debug
+IAO解决方案/Release
 UserInstallSet/bin/Debug/UserInstallSet.dll
 UserInstallSet/bin/Debug/UserInstallSet.pdb
 UserInstallSet/obj/Debug/UserInstallSet.csprojAssemblyReference.cache
