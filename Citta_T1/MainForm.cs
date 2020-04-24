@@ -409,6 +409,7 @@ namespace  Citta_T1
         {
             this.formInputData.StartPosition = FormStartPosition.CenterScreen;
             this.formInputData.ShowDialog();
+            this.formInputData.ReSetParams();
         }
 
 

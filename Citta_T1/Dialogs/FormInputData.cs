@@ -45,11 +45,14 @@ namespace Citta_T1.Dialogs
 
         public void ReSetParams()
         {
-            this.separator = '\t';
             this.encoding = DSUtil.Encoding.GBK;
-            this.extType = DSUtil.ExtType.Text;
             this.gbkLable.Font = bold_font;
             this.utf8Lable.Font = font;
+
+            this.radioButton1.Checked = true;
+            this.separator = '\t';
+
+            this.extType = DSUtil.ExtType.Text;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -76,8 +79,8 @@ namespace Citta_T1.Dialogs
                     PreViewBcpFile();
                 }          
             }
-            if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
-                this.textBox1.Text = fileName;
+            //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
+            this.textBox1.Text = fileName;
 
         }
 
