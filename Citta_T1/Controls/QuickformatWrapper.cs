@@ -320,8 +320,6 @@ namespace Citta_T1.Controls
             //散元素沉底
             ForamtSingleNode(leavelList, 0, count, modelElements);
             this.currentModel.UpdateAllLines();
-            log.Info("relation = " + Global.GetCurrentDocument().ModelRelations[0].StartP);
-            log.Info("rectOut" + (Global.GetCurrentDocument().ModelElements[0].GetControl as Citta_T1.Controls.Interface.IMoveControl).GetStartPinLoc(0));
             Global.GetCanvasPanel().Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
         }
