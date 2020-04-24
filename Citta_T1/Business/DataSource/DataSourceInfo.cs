@@ -49,6 +49,10 @@ namespace Citta_T1.Business.DataSource
             pathNode.InnerText = db.FilePath;
             dataSourceNode.AppendChild(pathNode);
 
+            XmlElement extTypeNode = xDoc.CreateElement("extType");
+            extTypeNode.InnerText = db.ExtType.ToString();
+            dataSourceNode.AppendChild(extTypeNode);
+
             XmlElement countNode = xDoc.CreateElement("count");
             countNode.InnerText = "0";//默认为0
             dataSourceNode.AppendChild(countNode);
