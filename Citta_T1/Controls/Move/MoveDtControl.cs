@@ -220,6 +220,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
+            bool isNeedMoveLine = false;
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
@@ -270,11 +271,11 @@ namespace Citta_T1.Controls.Move
                 {
                     mr.StartP = this.GetStartPinLoc(0);
                     mr.UpdatePoints();
+                    isNeedMoveLine = true;
                 }
             }
-            this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-
-
+            if (isNeedMoveLine)
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         public Point WorldBoundControl(Point Pm)
