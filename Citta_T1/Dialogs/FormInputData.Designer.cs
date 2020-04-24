@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.label2.Location = new System.Drawing.Point(282, 26);
+            this.label2.Location = new System.Drawing.Point(264, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 4;
@@ -71,7 +71,7 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.button1.Location = new System.Drawing.Point(363, 23);
+            this.button1.Location = new System.Drawing.Point(345, 23);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 28);
             this.button1.TabIndex = 5;
@@ -84,7 +84,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.label3.Location = new System.Drawing.Point(471, 26);
+            this.label3.Location = new System.Drawing.Point(453, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(103, 20);
             this.label3.TabIndex = 6;
@@ -96,7 +96,7 @@
             this.gbkLable.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbkLable.Font = new System.Drawing.Font("微软雅黑", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gbkLable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gbkLable.Location = new System.Drawing.Point(584, 27);
+            this.gbkLable.Location = new System.Drawing.Point(565, 27);
             this.gbkLable.Name = "gbkLable";
             this.gbkLable.Size = new System.Drawing.Size(44, 22);
             this.gbkLable.TabIndex = 7;
@@ -109,7 +109,7 @@
             this.utf8Lable.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.utf8Lable.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.utf8Lable.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.utf8Lable.Location = new System.Drawing.Point(648, 27);
+            this.utf8Lable.Location = new System.Drawing.Point(630, 27);
             this.utf8Lable.Name = "utf8Lable";
             this.utf8Lable.Size = new System.Drawing.Size(56, 21);
             this.utf8Lable.TabIndex = 8;
@@ -266,7 +266,7 @@
             this.textBoxEx1.DecLength = 2;
             this.textBoxEx1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxEx1.InputType = HZH_Controls.TextInputType.NotControl;
-            this.textBoxEx1.Location = new System.Drawing.Point(770, 54);
+            this.textBoxEx1.Location = new System.Drawing.Point(752, 54);
             this.textBoxEx1.MaxValue = new decimal(new int[] {
             1000000,
             0,
@@ -291,7 +291,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton3.Location = new System.Drawing.Point(717, 56);
+            this.radioButton3.Location = new System.Drawing.Point(699, 56);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(55, 24);
             this.radioButton3.TabIndex = 22;
@@ -304,7 +304,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton2.Location = new System.Drawing.Point(653, 56);
+            this.radioButton2.Location = new System.Drawing.Point(635, 56);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(55, 24);
             this.radioButton2.TabIndex = 21;
@@ -319,7 +319,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
             this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton1.Location = new System.Drawing.Point(580, 56);
+            this.radioButton1.Location = new System.Drawing.Point(562, 56);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(54, 24);
             this.radioButton1.TabIndex = 20;
@@ -334,7 +334,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.label4.Location = new System.Drawing.Point(471, 56);
+            this.label4.Location = new System.Drawing.Point(453, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 20);
             this.label4.TabIndex = 13;
@@ -348,8 +348,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(99, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(590, 150);

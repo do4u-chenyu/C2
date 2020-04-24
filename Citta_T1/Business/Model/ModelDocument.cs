@@ -132,12 +132,13 @@ namespace Citta_T1.Business.Model
             List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID || mr.EndID == ID)
-                    relations.Add(mr);
+                if (mr.StartID == ID || mr.EndID == ID) 
+                {
+                    continue;
+                }
+                relations.Add(mr);
             }
-            foreach (ModelRelation mr in relations) 
-                this.ModelRelations.Remove(mr);
-           
+            this.ModelRelations = relations;
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChangeByDelete(int ID)
@@ -261,7 +262,6 @@ namespace Citta_T1.Business.Model
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public void UpdateAllLines()
         {
-            log.Info("划线更新");
             for (int i = 0;i < this.modelRelations.Count();i++)
             {
                 try
@@ -272,6 +272,7 @@ namespace Citta_T1.Business.Model
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
+                    log.Info("mr.StartP = " + mr.StartP);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.GetControl as IMoveControl).OutPinInit("lineExit");

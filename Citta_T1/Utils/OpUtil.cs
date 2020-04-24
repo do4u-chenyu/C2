@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using NPOI.SS.Formula.Functions;
 
 namespace Citta_T1.Utils
 {
@@ -56,6 +57,7 @@ namespace Citta_T1.Utils
 
             Point dragOffset = new Point(0, 0);
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            
             if (Pw.X < 50)
             {
                 dragOffset.X = 50 - Pw.X;
@@ -70,7 +72,7 @@ namespace Citta_T1.Utils
             }
             if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
             {
-                dragOffset.Y = 1000 - Convert.ToInt32(height / factor) - Pw.Y;
+                dragOffset.Y = 980 - Convert.ToInt32(height / factor) - Pw.Y;
             }
             return dragOffset;
         }

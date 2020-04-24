@@ -49,6 +49,10 @@ namespace Citta_T1.Business.DataSource
             pathNode.InnerText = db.FilePath;
             dataSourceNode.AppendChild(pathNode);
 
+            XmlElement extTypeNode = xDoc.CreateElement("extType");
+            extTypeNode.InnerText = db.ExtType.ToString();
+            dataSourceNode.AppendChild(extTypeNode);
+
             XmlElement countNode = xDoc.CreateElement("count");
             countNode.InnerText = "0";//默认为0
             dataSourceNode.AppendChild(countNode);
@@ -69,8 +73,9 @@ namespace Citta_T1.Business.DataSource
                 {
                     string filePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
+                    DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
                     DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(filePath, dataName, encoding);
+                    DataButton dataButton = new DataButton(filePath, dataName, extType, encoding);
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }
@@ -78,6 +83,8 @@ namespace Citta_T1.Business.DataSource
             }
             return dataSourceList;
         }
+        public DSUtil.ExtType ExtType(string type)
+        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
         public DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }

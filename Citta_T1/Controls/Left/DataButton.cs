@@ -7,9 +7,11 @@ namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
-        public DSUtil.Encoding encoding;
+        private DSUtil.Encoding encoding;
+        private DSUtil.ExtType extType;
         private int count = 0;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
@@ -20,15 +22,18 @@ namespace Citta_T1.Controls.Left
                 EnableDeleteDataSource(this.count);
             }
         }
+
+
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, DSUtil.Encoding encoding)
+        public DataButton(string ffp, string dataName, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = dataName;
+            this.extType = extType;
             this.encoding = encoding;
         }
         private void moveOpControl1_Load(object sender, EventArgs e)
@@ -45,7 +50,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)

@@ -150,7 +150,6 @@ namespace Citta_T1.Controls.Move
             // RunMenuItem
             // 
             this.RunMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RunMenuItem.BackgroundImage")));
-            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
@@ -180,7 +179,7 @@ namespace Citta_T1.Controls.Move
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(31, 1);
