@@ -128,6 +128,7 @@ namespace Citta_T1.Business.Model
         }
         public void DeleteModelRelation(int ID)
         {
+            StateChangeByDelete(ID);
             List<ModelRelation> relations = new List<ModelRelation>();
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -136,9 +137,44 @@ namespace Citta_T1.Business.Model
             }
             foreach (ModelRelation mr in relations) 
                 this.ModelRelations.Remove(mr);
+           
             Global.GetCanvasPanel().Invalidate();
         }
-        public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
+        public void StateChangeByDelete(int ID)
+        {
+            int count = 1;
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == ID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if(me.ID == mr.EndID && count == 1)
+                        { 
+                            me.Status = ElementStatus.Null;
+                            count += 1;
+                            break;
+                        }
+                        if (me.ID == mr.EndID && count>1)
+                        {
+                            me.Status = ModifyStatus(me, me.Status);
+                            StateChangeByDelete(mr.EndID);
+                            count += 1;
+                        }
+
+                    }
+                }
+            }
+        }
+        private ElementStatus ModifyStatus(ModelElement me,ElementStatus status)
+        {
+            if (me.Type == ElementType.Operator && status == ElementStatus.Done || status == ElementStatus.Ready)
+                return ElementStatus.Ready;
+            else 
+                return ElementStatus.Null;
+
+        }
+        public void StateChangeByOut(int ID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -148,8 +184,8 @@ namespace Citta_T1.Business.Model
                     {
                         if (me.ID == mr.EndID)
                         {
-                            me.Status = status;
-                            StateChange(mr.EndID);
+                            me.Status = ElementStatus.Null;
+                            StateChangeByOut(mr.EndID);
                         }
                            
                     }

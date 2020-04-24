@@ -22,6 +22,7 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
+        private bool hasNewDataSource;
 
         private LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
@@ -29,6 +30,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             dataPath = "";
+            this.hasNewDataSource = false;
             columnName = new string[] { };
             oldColumnName = new List<string>();
             oldOutList = new List<int>();
@@ -59,22 +61,31 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-           
+            
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldMaxfield != this.MaxValueBox.Text || !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
             {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
-                this.opControl.DataSourceColumns =String.Join("\t",this.OutList.GetItemCheckText()) ;
+                return;
             }
+              
+            //输入数据源变化，并且输出重写
+            if (hasResutl != null && this.hasNewDataSource)
+            {
+                Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
+                 return;
+            }
+              
             //输出变化，重写BCP文件
-            if (this.oldOptionDict != "" && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-                this.opControl.DataSourceColumns = Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+           
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -131,6 +142,7 @@ namespace Citta_T1.OperatorViews
                 foreach(int index in indexs)
                     this.oldColumnName.Add(this.OutList.Items[index].ToString());
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         #region 初始化配置
@@ -151,11 +163,43 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
-           
             foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);
                 this.MaxValueBox.Items.Add(name);
+            }
+            CompareDataSource();
+            this.opControl.DataSourceColumns = column;
+        }
+        private void CompareDataSource()
+        {
+            int index = -1;
+            string oldColumns = "";
+            List<string> oldName = new List<string>();
+            List<string> newName = new List<string>();
+            int[] outName = new int[] { };
+
+            if (this.opControl.Option.GetOption("maxfield") != "")
+               index=Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+            if (this.opControl.Option.GetOption("columnname") != "")
+                oldColumns =this.opControl.Option.GetOption("columnname");
+            string[] oldColumnList = oldColumns.Split('\t');
+            if (index != -1 && oldColumnList[index] != this.columnName[index])
+                this.opControl.Option.OptionDict.Remove("maxfield");
+            if(this.opControl.Option.GetOption("outfield") != "")
+            {
+                outName = Array.ConvertAll<string, int>((this.opControl.Option.GetOption("outfield").Split(',')), int.Parse);
+                foreach (int i in outName)
+                {
+                    oldName.Add(oldColumnList[i]);
+                    newName.Add(this.columnName[i]);
+                }
+                if (!Enumerable.SequenceEqual(oldName, newName))
+                { 
+                    this.opControl.Option.OptionDict.Remove("outfield");
+                    this.hasNewDataSource = true;
+                }
+                    
             }
         }
 

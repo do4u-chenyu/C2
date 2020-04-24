@@ -341,7 +341,11 @@ namespace Citta_T1.Controls.Move
                 // 清空焦点
                 Global.GetMainForm().blankButton.Focus();
                 // 显示配置
-                ShowOptionDialog();
+                if (this.OptionMenuItem.Enabled)
+                    ShowOptionDialog();
+                else
+                    MessageBox.Show("请连接数据源");
+               
             }
         }
 
@@ -551,7 +555,10 @@ namespace Citta_T1.Controls.Move
         private void OptionDirty()
         {
             if (this.status == ElementStatus.Null)
+            {
                 this.statusBox.Image = Properties.Resources.set;
+                this.OptionMenuItem.Enabled = false;
+            }  
             else if (this.status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (this.status == ElementStatus.Ready)
