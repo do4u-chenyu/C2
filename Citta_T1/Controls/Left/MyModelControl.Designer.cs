@@ -35,11 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.Name = "MyModelControl";
-            this.Size = new System.Drawing.Size(0, 0);
+            this.Size = new System.Drawing.Size(187, 637);
             this.ResumeLayout(false);
 
         }

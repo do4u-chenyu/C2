@@ -98,7 +98,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.Controls.Add(this.ExternalFrame);
             this.Controls.Add(this.LocalFrame);
             this.Controls.Add(this.DataSourceFrame);

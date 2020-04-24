@@ -61,13 +61,11 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             if (this.oldOptionDict == "")
-            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
-                this.opControl.DataSourceColumns = String.Join("\t", this.OutList.GetItemCheckText());
-            }
+
             //输出变化，重写BCP文件
             if (this.oldOptionDict != "" && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-                this.opControl.DataSourceColumns = Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
             this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
 

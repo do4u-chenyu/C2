@@ -323,8 +323,6 @@ namespace Citta_T1.Controls.Move
             if (e.Clicks == 2)
             {
                 RenameMenuItem_Click(this, e);
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
 
@@ -342,7 +340,11 @@ namespace Citta_T1.Controls.Move
                 // 清空焦点
                 Global.GetMainForm().blankButton.Focus();
                 // 显示配置
-                ShowOptionDialog();
+                if (this.OptionMenuItem.Enabled)
+                    ShowOptionDialog();
+                else
+                    MessageBox.Show("请连接数据源");
+               
             }
         }
 
@@ -427,7 +429,7 @@ namespace Citta_T1.Controls.Move
             this.Size = new Size((int)(130 * f), (int)(28 * f));//142，25
             this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));//107,2
             this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(57 * f), (int)(24 * f));
+            this.txtButton.Size = new Size((int)(57 * f), (int)(25 * f));
             this.textBox.Size = new Size((int)(57 * f), (int)(24 * f));
             this.rectOut.Location = new Point((int)(121 * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
@@ -566,7 +568,10 @@ namespace Citta_T1.Controls.Move
         private void OptionDirty()
         {
             if (this.status == ElementStatus.Null)
+            {
                 this.statusBox.Image = Properties.Resources.set;
+                this.OptionMenuItem.Enabled = false;
+            }  
             else if (this.status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (this.status == ElementStatus.Ready)
@@ -583,8 +588,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
                 
         }
@@ -609,6 +612,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         #endregion
 
@@ -711,7 +716,7 @@ namespace Citta_T1.Controls.Move
                 this.rectOut = SetRectBySize(factor, this.rectOut);
                 this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate();
+                this.Invalidate(); // TODO 干嘛用的？，为什么下面不写一个重绘？
             }
             else
             {

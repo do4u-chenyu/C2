@@ -94,6 +94,10 @@ namespace Citta_T1.Business.Model
                     pathNode.InnerText = me.GetPath();
                     modelElementXml.AppendChild(pathNode);
 
+                    XmlElement extTypeNode = xDoc.CreateElement("extType"); // TODO [DK] 写
+                    extTypeNode.InnerText = me.ExtType.ToString();
+                    modelElementXml.AppendChild(extTypeNode);
+
                     XmlElement encodingNode = xDoc.CreateElement("encoding");
                     encodingNode.InnerText = me.Encoding.ToString();
                     modelElementXml.AppendChild(encodingNode);
@@ -236,10 +240,11 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   // TODO 读
                         // 绑定线
                         cotl.ID = id;
-                        cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
+                        cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
+                        cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
@@ -290,7 +295,9 @@ namespace Citta_T1.Business.Model
         { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
-        public DSUtil.Encoding EnType(string type)
+        public DSUtil.ExtType ExtType(string type)
+        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
+        public DSUtil.Encoding EncodingType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private PointF ToPointFType(string point)
         {

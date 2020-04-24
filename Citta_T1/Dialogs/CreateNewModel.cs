@@ -43,7 +43,6 @@ namespace Citta_T1.Dialogs
             if (CheckModelTitelExists(inputTitleModel))
             {
                 MessageBox.Show(inputTitleModel + "，已存在，请重新命名", "确认另存为", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.DialogResult = DialogResult.Cancel;
                 return;
             }
 
@@ -73,12 +72,12 @@ namespace Citta_T1.Dialogs
 
         private void CreateNewModel_Load(object sender, EventArgs e)
         {
-            string titile = String.Format("我的新模型{0}", this.titlePostfix++);
-            List<string> titels = GetModelTitleList();
+            string title = String.Format("我的新模型{0}", this.titlePostfix);
+            List<string> currentTitles = GetModelTitleList();
 
-            while (titels.Contains(titile))
-                titile = String.Format("我的新模型{0}", this.titlePostfix++);
-            this.textBox.Text = titile;
+            while (currentTitles.Contains(title))
+                title = String.Format("我的新模型{0}", ++this.titlePostfix);
+            this.textBox.Text = title;
             this.textBox.ForeColor = System.Drawing.SystemColors.ActiveCaption;
         }
 
@@ -94,20 +93,20 @@ namespace Citta_T1.Dialogs
 
         private List<string> GetModelTitleList()
         {
-            List<string> titels = new List<string>();
+            List<string> titles = new List<string>();
             try
             {
                 DirectoryInfo di = new DirectoryInfo(Path.Combine(Global.WorkspaceDirectory, Global.GetMainForm().UserName));
                 DirectoryInfo[] modelTitleList = di.GetDirectories();
                 foreach (DirectoryInfo modelTitle in modelTitleList)
-                    titels.Add(modelTitle.ToString());
+                    titles.Add(modelTitle.ToString());
             }
             catch
             { }
 
             foreach (ModelDocument md in Global.GetMainForm().DocumentsList())
-                titels.Add(md.ModelTitle);
-            return titels;
+                titles.Add(md.ModelTitle);
+            return titles;
         }
     }
 }

@@ -7,7 +7,7 @@ using Citta_T1.Business.Model;
 
 namespace Citta_T1.Business.Option
 {
-    
+
     public class OperatorOption
     {
         private Dictionary<string, string> optionDict = new Dictionary<string, string>();

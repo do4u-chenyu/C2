@@ -64,7 +64,7 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(173, 29);
             this.textBox.TabIndex = 4;
-            this.textBox.Text = "新建模型";
+            this.textBox.Text = "我的新模型";
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 

@@ -33,6 +33,7 @@ namespace Citta_T1.Controls.Left
             mb.Location = startPoint;
 
             this.Controls.Add(mb);
+            
 
         }
 
