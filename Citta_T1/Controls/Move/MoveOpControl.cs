@@ -542,7 +542,6 @@ namespace Citta_T1.Controls.Move
                     DeleteResultControl(mr.EndID);
                     break;
                 }
-                    
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
@@ -669,9 +668,12 @@ namespace Citta_T1.Controls.Move
         
         public void OutPinInit(String status)
         {
-            linePinArray.Add(-1);
+            if (status == "lineExit")
+                linePinArray.Add(-1);
+
             if (pinStatus != "rectOut")
             {
+               
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
             }
