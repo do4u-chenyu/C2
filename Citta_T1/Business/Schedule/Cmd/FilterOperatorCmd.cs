@@ -27,7 +27,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //过滤条件拼接
             string[] factor1 = option.GetOption("factor1").Split(',');
             string awkIfCmd ="(" + "$" + TransInputLine(factor1[0]) + TransChoiceToCmd(factor1[1]) + TransConditionToCmd(factor1[2]) + ")";
-            for (int i = 2; i <= option.OptionDict.Count() - 1; i++)
+            for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
                 awkIfCmd = awkIfCmd + " " + TransAndOrToCmd(tmpfactor[0]) + "(" + " $" + TransInputLine(tmpfactor[1]) + TransChoiceToCmd(tmpfactor[2]) + TransConditionToCmd(tmpfactor[3]) + ")";

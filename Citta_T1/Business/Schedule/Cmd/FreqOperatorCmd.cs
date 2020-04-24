@@ -19,7 +19,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFilePath = inputFilePaths.First();//输入文件
 
             //是否去重(是对整个文件去重)、升降序
-            string repetition = option.GetOption("repetition") == "True" ? string.Format("sbin\\sort.exe {0} -u |",this.sortConfig) : "";
+            string repetition = option.GetOption("noRepetition") == "True" ? string.Format("sbin\\sort.exe {0} -u |",this.sortConfig) : "";
             string order = option.GetOption("ascendingOrder") == "True" ? string.Format("sbin\\sort.exe {0} -n ",this.sortConfig) : string.Format("sbin\\sort.exe {0} -nr ",this.sortConfig);
 
             //待统计频率字段合并

@@ -101,7 +101,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string filename = System.IO.Path.GetFileName(inputfile);
             if (filename.IndexOf(".xls") > 0)
             {
-                return string.Format("sbin\\catXLS.exe {0}",inputfile);
+                return string.Format("sbin\\catXLS.exe {0} | sbin\\iconv.exe -f gbk -t utf-8", inputfile);
             }
             else
             {
@@ -116,9 +116,23 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
         }
 
+        public int GetOptionFactorCount()
+        {
+            int num = 0;
+            foreach (string key in option.OptionDict.Keys)
+            {
+                if (key.Contains("factor"))
+                {
+                    num++;
+                }
+            }
+            return num; 
+        }
+
         public DSUtil.Encoding JudgeInputFileEncoding(string inputfile)
         {
             return triple.DataElements[inputFilePaths.IndexOf(inputfile)].Encoding;
         }
+
     }
 }

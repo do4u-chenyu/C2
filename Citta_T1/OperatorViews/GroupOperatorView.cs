@@ -25,12 +25,16 @@ namespace Citta_T1.OperatorViews
         private List<int> groupColumn;
         private List<bool> oldCheckedItems;
         private List<int> outList;
+        private int[] oldOutList;
+        private List<string> oldOutName;
         public GroupOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             this.selectColumn = new List<string>();
             this.groupColumn = new List<int>();
             this.oldCheckedItems = new List<bool>();
+            this.oldOutList = new int[] { };
+            this.oldOutName = new List<string>();
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             dataPath = "";
@@ -53,16 +57,21 @@ namespace Citta_T1.OperatorViews
                 this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath); 
                 SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
             }
+  
         }
 
         private void SetOption(string path, string dataName, string encoding)
         {
-
+            
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
+            if (this.opControl.Option.GetOption("outfield") != "")
+                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
+            foreach (int index in this.oldOutList)
+                this.oldOutName.Add(this.columnName[index]);
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
@@ -109,7 +118,7 @@ namespace Citta_T1.OperatorViews
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
             }
-            
+
         }
         private void SaveOption()
         {
@@ -138,7 +147,7 @@ namespace Citta_T1.OperatorViews
                 if (!this.groupColumn.Contains(index))
                     this.outList.Add(index);
             }
-            this.opControl.Option.SetOption("outField", string.Join(",", this.outList));
+            this.opControl.Option.SetOption("outfield", string.Join(",", this.outList));
             this.opControl.Status = ElementStatus.Ready;
 
         }
@@ -146,6 +155,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
+
             bool empty = IsOptionReay();
             if (empty) return;
             SaveOption();
@@ -154,15 +164,14 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            for (int i = 0; i < this.columnName.Count(); i++)
-            {
-                if (!this.groupColumn.Contains(i))
-                    this.groupColumn.Add(i);
-            }
-            foreach (int index in this.groupColumn)
+            foreach (int index in this.outList)
                 this.selectColumn.Add(this.columnName[index]);
             if (this.oldOptionDict == "")
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+            //输出变化，重写BCP文件
+            if (this.oldOptionDict != "")
+                Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

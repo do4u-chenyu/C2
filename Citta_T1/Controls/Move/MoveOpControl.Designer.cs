@@ -150,14 +150,12 @@ namespace Citta_T1.Controls.Move
             // RunMenuItem
             // 
             this.RunMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RunMenuItem.BackgroundImage")));
-            //this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
             this.RunMenuItem.Size = new System.Drawing.Size(133, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
-            //this.RunMenuItem.Click += new System.EventHandler(this.RunMenuItem_Click);
             // 
             // ErrorLogMenuItem
             // 
@@ -181,7 +179,7 @@ namespace Citta_T1.Controls.Move
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.textBox.Location = new System.Drawing.Point(31, 1);
