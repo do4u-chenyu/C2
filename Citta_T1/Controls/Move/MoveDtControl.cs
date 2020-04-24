@@ -25,11 +25,14 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
-        private DSUtil.ExtType extType = DSUtil.ExtType.Unknow;
+        private DSUtil.ExtType extType;
+        private char separator;
         private int id;
+        //TODO 分隔符属性
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public char Separator { get => separator; set => separator = value; }
 
         //绘制引脚
         private string lineStaus = "noLine";
@@ -80,7 +83,11 @@ namespace Citta_T1.Controls.Move
             return this.Name;
         }
 
-        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc, DSUtil.ExtType extType = DSUtil.ExtType.Unknow, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
+        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
+            char separator = '\t',
+            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
+            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8 
+            )
         {
             InitializeComponent();
             this.textBox1.Text = name;
@@ -92,6 +99,7 @@ namespace Citta_T1.Controls.Move
             ChangeSize(sizeL);
             log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.separator = separator;
         }
 
 
@@ -158,7 +166,7 @@ namespace Citta_T1.Controls.Move
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(this.Name, this.extType, this.encoding);
+            prt.PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

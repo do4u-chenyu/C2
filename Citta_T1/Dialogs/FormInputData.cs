@@ -12,7 +12,7 @@ using static Citta_T1.Utils.DSUtil;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding);
+    public delegate void delegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
@@ -99,8 +99,8 @@ namespace Citta_T1.Dialogs
                     this.extType = DSUtil.ExtType.Excel;
                 else
                     this.extType = DSUtil.ExtType.Text;
-                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.extType, this.encoding);
-                InputDataEvent(name, m_filePath, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(m_filePath, this.extType, this.encoding);
+                InputDataEvent(name, m_filePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
@@ -183,7 +183,6 @@ namespace Citta_T1.Dialogs
                         row[colIndex] = eles[colIndex];
                     }
                     table.Rows.Add(row);
-                    log.Info("tabel.rowNum = " + table.Rows.Count);
                 }
 
                 view = new DataView(table);
@@ -267,7 +266,6 @@ namespace Citta_T1.Dialogs
                             if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
                             {
                                 string content = row.GetCell(j).ToString();
-                                log.Info("i: " + i + ", j: " + j + ", content: " + content);
                                 this.dataGridView1.Rows[i].Cells[j].Value = content;
                             }
                         }

@@ -133,6 +133,7 @@ namespace Citta_T1.Controls
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
             ElementType type = ElementType.Null;
+            char separator = '\t';
             string path = "";
             string text = "";
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
@@ -143,10 +144,11 @@ namespace Citta_T1.Controls
             int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (type == ElementType.DataSource)
             {
-                path = e.Data.GetData("Path").ToString();                
+                path = e.Data.GetData("Path").ToString();
+                separator = (char)e.Data.GetData("Separator");
                 encoding = (DSUtil.Encoding)e.Data.GetData("Encoding");
                 extType = (DSUtil.ExtType)e.Data.GetData("ExtType");
-                AddNewDataSource(path, sizeLevel, text, location, extType, encoding);
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
@@ -490,13 +492,14 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
                 text,
                 location,
+                separator,
                 extType,
                 encoding);
             AddNewElement(btn);

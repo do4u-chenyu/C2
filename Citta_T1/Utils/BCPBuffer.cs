@@ -32,6 +32,19 @@ namespace Citta_T1.Utils
 
         }
 
+        public string GetCacheExcelPreVewContent(string bcpFullPath)
+        {
+            string ret = "";
+
+            // 数据不存在时 按照路径重新读取
+            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
+                PreLoadExcelFile(bcpFullPath);
+            // 防止文件读取时发生错误, 重新判断下是否存在
+            if (dataPreviewDict.ContainsKey(bcpFullPath))
+                ret = dataPreviewDict[bcpFullPath];
+            return ret;
+
+        }
         public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
         {
             string ret = "";
@@ -46,7 +59,7 @@ namespace Citta_T1.Utils
         }
 
 
-        public void TryLoadBCP(string bcpFullPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void TryLoadFile(string bcpFullPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
             {
@@ -114,7 +127,18 @@ namespace Citta_T1.Utils
                 {
                     IRow firstRow = sheet.GetRow(0);
                     int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
-                    firstLine = firstRow.ToString();            // 大师说默认第一行就是表头
+                    int colNum = firstRow.Cells.Count;
+                    string[] headers = new string[colNum];
+                    string[] rowContent = new string[colNum];
+                    string content;
+
+                    for (int i = 0; i < colNum; i++)
+                    {
+                        headers[i] = firstRow.Cells[i].ToString();
+                    }
+                    firstLine = string.Join("\t", headers);     // 大师说默认第一行就是表头    
+                    firstLine += "\n";
+                    sb.Append(firstLine);
                     startRow = sheet.FirstRowNum + 1;
                     //最后一列的标号
                     int rowCount = sheet.LastRowNum;
@@ -123,7 +147,16 @@ namespace Citta_T1.Utils
                         IRow row = sheet.GetRow(i + startRow);
                         if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
 
-                        sb.Append(row.ToString());
+                        for (int j = 0; j <colNum; j++)
+                        {
+                            if (row.GetCell(j) == null)
+                                rowContent[j] = "";
+                            else
+                                rowContent[j] = row.GetCell(j).ToString();
+                        }
+                        content = string.Join("\t", rowContent);
+                        content += "\n";
+                        sb.Append(content);
                     }
                     dataPreviewDict[filePath] = sb.ToString();
                     columnDict[filePath] = firstLine;
@@ -155,7 +188,7 @@ namespace Citta_T1.Utils
                 sb.AppendLine(firstLine);
 
                 for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
-                    sb.AppendLine(sr.ReadLine());
+                    sb.AppendLine(sr.ReadLine());                                   // 分隔符
 
                 sr.Close();
                 sr.Dispose();

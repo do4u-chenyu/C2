@@ -430,19 +430,19 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
-            this.dataSourceControl.GenDataButton(name, filePath, extType, encoding);
+            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, extType = extType, encoding = encoding);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

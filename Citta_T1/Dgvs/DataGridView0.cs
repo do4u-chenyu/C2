@@ -54,7 +54,7 @@ namespace Citta_T1
                 ColumnList[i].HeaderText = headers[i];
                 ColumnList[i].Name = "Col_" + i.ToString();
             }
-            this.dataGridView1.Columns.AddRange(ColumnList);
+            this.dataGridView.Columns.AddRange(ColumnList);
         }
 
         private void _InitializeRowse(List<List<string>> datas, int numOfCols)
@@ -64,7 +64,7 @@ namespace Citta_T1
              * 使用样例数据
              */
             string data;
-            for (int i = 0; i < maxNumOfRows; i = this.dataGridView1.Rows.Add())
+            for (int i = 0; i < maxNumOfRows; i = this.dataGridView.Rows.Add())
             {
                 //this.dataGridView1.Rows.Add();
                 for (int j = 0; j < numOfCols; j++)
@@ -78,7 +78,7 @@ namespace Citta_T1
                         data = "";
                         Console.WriteLine("DataGridView0.Designer.cs._InitializeRowse occurs error!");
                     }
-                    this.dataGridView1.Rows[i].Cells[j].Value = data;
+                    this.dataGridView.Rows[i].Cells[j].Value = data;
                 }
             }
         }
@@ -108,24 +108,29 @@ namespace Citta_T1
             }
             return datas;
         }
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.ExtType extType = DSUtil.ExtType.Text, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8, int maxNumOfFile = 100, char sep = '\t')
+        public void PreViewDataByBcpPath(string bcpPath,
+            char separator = '\t',
+            DSUtil.ExtType extType = DSUtil.ExtType.Text, 
+            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8,
+            int maxNumOfFile = 100
+            )
         {
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows;
             // TODO [DK] 支持多种数据格式
             if (extType == DSUtil.ExtType.Excel)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCacheExcelPreVewContent(bcpPath).Split('\n'));
             else
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n')); 
             int numOfRows = rows.Count;
             for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)
             {
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split('\t')));
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
             }
 
-            this.dataGridView1.Rows.Clear();
-            this.dataGridView1.Columns.Clear();
-            this.dataGridView1.DataSource = null;
+            this.dataGridView.Rows.Clear();
+            this.dataGridView.Columns.Clear();
+            this.dataGridView.DataSource = null;
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
             _InitializeColumns(headers);

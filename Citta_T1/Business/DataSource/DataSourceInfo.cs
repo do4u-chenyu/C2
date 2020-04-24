@@ -41,6 +41,14 @@ namespace Citta_T1.Business.DataSource
             nameNode.InnerText = db.DataName;
             dataSourceNode.AppendChild(nameNode);
 
+            XmlElement sepNode = xDoc.CreateElement("separator");
+            sepNode.InnerText = db.ExtType.ToString();
+            dataSourceNode.AppendChild(sepNode);
+
+            XmlElement extTypeNode = xDoc.CreateElement("extType");
+            extTypeNode.InnerText = db.ExtType.ToString();
+            dataSourceNode.AppendChild(extTypeNode);
+
             XmlElement codeNode = xDoc.CreateElement("encoding");
             codeNode.InnerText = db.Encoding.ToString();
             dataSourceNode.AppendChild(codeNode);
@@ -69,9 +77,10 @@ namespace Citta_T1.Business.DataSource
                 {
                     string filePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
+                    char separator = xn.SelectSingleNode("separator").InnerText.ToCharArray()[0];
                     DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
                     DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(filePath, dataName, extType, encoding);
+                    DataButton dataButton = new DataButton(filePath, dataName, separator, extType, encoding);
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }
