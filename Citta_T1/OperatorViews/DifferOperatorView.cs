@@ -296,6 +296,7 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                     Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
+                    ctlNext3.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
@@ -334,6 +335,7 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
                 Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                ctlNext3.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
                 ctlNext4.Name = k.ToString();

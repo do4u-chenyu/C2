@@ -287,7 +287,6 @@ namespace Citta_T1.Business.Model
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
                     mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
-                    log.Info("mr.StartP = " + mr.StartP);
                     mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.GetControl as IMoveControl).OutPinInit("lineExit");

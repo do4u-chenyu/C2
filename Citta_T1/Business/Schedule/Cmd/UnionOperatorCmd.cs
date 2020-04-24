@@ -23,7 +23,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //两个文件的输出字段分别合并
             string inputFiled1 = "";
             string inputFiled2 = "";
-            for (int i = 1; i <= option.OptionDict.Count() - 2; i++)
+            for (int i = 1; i <= GetOptionFactorCount(); i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
                 if (i == 1)

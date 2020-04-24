@@ -33,7 +33,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string[]> differTmpList = new List<string[]>();
             string[] factor1 = option.GetOption("factor1").Split(',');
             differTmpList.Add(factor1);
-            for (int i = 2; i <= option.OptionDict.Count() - 1; i++)
+            for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
                 string andor = tmpfactor[0];

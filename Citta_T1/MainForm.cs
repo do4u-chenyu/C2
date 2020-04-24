@@ -322,10 +322,6 @@ namespace  Citta_T1
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             log.Info("MinMaxPictureBox_Click");
-            if (Global.GetCurrentDocument() != null && Global.GetCurrentDocument().ModelElements != null)
-            {
-                log.Info("Before me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
-            }
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;

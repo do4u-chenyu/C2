@@ -119,7 +119,6 @@ namespace Citta_T1.Controls.Move
             InitializeOpPinPicture();
             InitializeHelpToolTip();
             ChangeSize(sizeL);
-            log.Info("Create a MoveOpControl, sizeLevel = " + sizeLevel);
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
@@ -543,7 +542,6 @@ namespace Citta_T1.Controls.Move
                     DeleteResultControl(mr.EndID);
                     break;
                 }
-                    
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
@@ -670,9 +668,12 @@ namespace Citta_T1.Controls.Move
         
         public void OutPinInit(String status)
         {
-            linePinArray.Add(-1);
+            if (status == "lineExit")
+                linePinArray.Add(-1);
+
             if (pinStatus != "rectOut")
             {
+               
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
             }
@@ -832,21 +833,13 @@ namespace Citta_T1.Controls.Move
                     if (iou > maxIntersectPerct)
                     {
                         maxIntersectPerct = iou;
-                        //log.Info("修正鼠标坐标，修正前：" + p.ToString());
                         revisedP = new PointF(
                             pinLeftX + leftPinRect.Width / 2,
                             pinTopY + leftPinRect.Height / 2);
                         // 绑定控件
                         canvas.EndC = this;
-                        log.Info("---------------------");
-                        log.Info("绑定控件，canvas.EndC = " + canvas.EndC);
                         isRevised = true;
                         this.revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
-                        log.Info("矫正前的point = " + p);
-                        log.Info("矫正前的point = " + revisedP + "索引 = " + revisedPinIndex);
-                        log.Info("---------------------");
-                        //log.Info("revisedPinIndex: " + revisedPinIndex);
-                        //log.Info("修正鼠标坐标，修正后：" + revisedP.ToString());
                     }
                 }
             }
