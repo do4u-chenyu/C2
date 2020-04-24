@@ -12,10 +12,11 @@ using static Citta_T1.Utils.DSUtil;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, DSUtil.Encoding encoding);
+    public delegate void delegateInputData(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
+        private ExtType extType = ExtType.Unknow;
         private string m_filePath;
         private int m_maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
@@ -23,7 +24,6 @@ namespace Citta_T1.Dialogs
         private bool textboxHasText = false;
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
-        private ExtType fileExt = ExtType.Unknow;
 
         public FormInputData()
         {
@@ -60,12 +60,12 @@ namespace Citta_T1.Dialogs
                 ext = Path.GetExtension(m_filePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
-                    this.fileExt = ExtType.Excel;
+                    this.extType = ExtType.Excel;
                     PreViewExcelFile();
                 }
                 else
                 {
-                    this.fileExt = ExtType.Text;
+                    this.extType = ExtType.Text;
                     PreViewBcpFile();
                 }          
             }
@@ -95,11 +95,17 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.encoding);
-                InputDataEvent(name, m_filePath, this.encoding);
+                if (m_filePath.EndsWith(".xls") || m_filePath.EndsWith(".xlsx"))
+                    this.extType = DSUtil.ExtType.Excel;
+                else
+                    this.extType = DSUtil.ExtType.Text;
+                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.extType, this.encoding);
+                InputDataEvent(name, m_filePath, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
+            this.extType = DSUtil.ExtType.Unknow;
+            this.encoding = DSUtil.Encoding.UTF8;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -111,7 +117,7 @@ namespace Citta_T1.Dialogs
 
         private void UTF8Lable_Click(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.gbkLable.Font = font;
                 this.utf8Lable.Font = bold_font;
@@ -163,7 +169,7 @@ namespace Citta_T1.Dialogs
 
                 table.Columns.AddRange(cols);
 
-                for (int rowIndex = 0; rowIndex < m_maxNumOfRow; rowIndex++)
+                for (int rowIndex = 0; rowIndex < m_maxNumOfRow && !sr.EndOfStream; rowIndex++)
                 {
                     String line = sr.ReadLine();
                     if (line == null)
@@ -182,8 +188,6 @@ namespace Citta_T1.Dialogs
 
                 view = new DataView(table);
                 this.dataGridView1.DataSource = view;
-
-
             }
             catch (Exception ex)
             {
@@ -286,7 +290,7 @@ namespace Citta_T1.Dialogs
 
         private void GBKLable_Click(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.gbkLable.Font = bold_font;
                 this.utf8Lable.Font = font;
@@ -298,7 +302,7 @@ namespace Citta_T1.Dialogs
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.separator = '\t';
                 PreViewBcpFile();
@@ -307,7 +311,7 @@ namespace Citta_T1.Dialogs
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.separator = ',';
                 PreViewBcpFile();
@@ -317,7 +321,7 @@ namespace Citta_T1.Dialogs
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
+            if (this.extType == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
             {
                 try
                 {
@@ -332,18 +336,18 @@ namespace Citta_T1.Dialogs
         }
         private void radioButton1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt != ExtType.Text)
+            if (this.extType != ExtType.Text)
                 return;
         }
 
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt != ExtType.Text)
+            if (this.extType != ExtType.Text)
                 return;
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
                 {

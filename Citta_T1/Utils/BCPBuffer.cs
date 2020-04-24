@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System;
 using System.Windows.Forms;
+using NPOI.XSSF.UserModel;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
 
 namespace Citta_T1.Utils
 {
@@ -41,12 +44,19 @@ namespace Citta_T1.Utils
         }
 
 
-        public void TryLoadBCP(string bcpFullPath, DSUtil.Encoding encoding)
+        public void TryLoadBCP(string bcpFullPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
-                PreLoadBcpFile(bcpFullPath, encoding);  // 按行读取文件 不分割
+            {
+                if (extType == DSUtil.ExtType.Text)
+                    PreLoadBcpFile(bcpFullPath, encoding);  // 按行读取文件 不分割
+                else
+                    PreLoadExcelFile(bcpFullPath);
+            }
+                
         }
         
+        // TODO 加载下方预览数据，读取excel数据为string
         public void TryLoadExcel(string excelFullPath)
         {
             if (!dataPreviewDict.ContainsKey(excelFullPath) || dataPreviewDict[excelFullPath] == "")
@@ -62,9 +72,65 @@ namespace Citta_T1.Utils
         /*
          * 按行读取excel文件
          */
-        private void PreLoadExcelFile(string filePath)
+        private void PreLoadExcelFile(string filePath, string sheetName = null, bool isFirstRowColumn = true)
         {
+            ISheet sheet = null;
+            XSSFWorkbook workbook2007;
+            HSSFWorkbook workbook2003;
+            FileStream fs;
+            string firstLine;
+            int startRow;
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            try
+            {
+                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                if (filePath.IndexOf(".xlsx") > 0) // 2007版本
+                {
+                    workbook2007 = new XSSFWorkbook(fs);
+                    if (sheetName != null)
+                    {
+                        sheet = workbook2007.GetSheet(sheetName);
+                    }
+                    else
+                    {
+                        sheet = workbook2007.GetSheetAt(0);
+                    }
+                }
+                else
+                {
+                    workbook2003 = new HSSFWorkbook(fs);   // 2003版本
+                    if (sheetName != null)
+                    {
+                        sheet = workbook2003.GetSheet(sheetName);
+                    }
+                    else
+                    {
+                        sheet = workbook2003.GetSheetAt(0);
+                    }
+                }
+                if (sheet != null)
+                {
+                    IRow firstRow = sheet.GetRow(0);
+                    int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
+                    firstLine = firstRow.ToString();            // 大师说默认第一行就是表头
+                    startRow = sheet.FirstRowNum + 1;
+                    //最后一列的标号
+                    int rowCount = sheet.LastRowNum;
+                    for (int i = 0; i <= Math.Min(maxRow, rowCount); ++i)
+                    {
+                        IRow row = sheet.GetRow(i + startRow);
+                        if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
 
+                        sb.Append(row.ToString());
+                    }
+                    dataPreviewDict[filePath] = sb.ToString();
+                    columnDict[filePath] = firstLine;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("预读Excel: " + filePath + " 失败, error: " + ex);
+            }
         }
 
         /*

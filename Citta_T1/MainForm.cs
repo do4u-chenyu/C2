@@ -321,6 +321,11 @@ namespace  Citta_T1
 
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
+            log.Info("MinMaxPictureBox_Click");
+            if (Global.GetCurrentDocument() != null && Global.GetCurrentDocument().ModelElements != null)
+            {
+                log.Info("Before me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
+            }
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
@@ -334,7 +339,7 @@ namespace  Citta_T1
             }
             if (Global.GetCurrentDocument() != null && Global.GetCurrentDocument().ModelElements != null)
             {
-                log.Info("Before me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
+                log.Info("Then me.Location: " + Global.GetCurrentDocument().ModelElements[0].Location);
             }
             InitializeControlsLocation();
         }
@@ -421,18 +426,19 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            this.dataSourceControl.GenDataButton(name, filePath, encoding);
+            // TODO [DK] 读取Excel
+            this.dataSourceControl.GenDataButton(name, filePath, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, encoding);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, extType = extType, encoding = encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
