@@ -72,6 +72,8 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
+            this.opControl.DataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
             return columnName;
         }
         #endregion
@@ -160,11 +162,16 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
+           
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

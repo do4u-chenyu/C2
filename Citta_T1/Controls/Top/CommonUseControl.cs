@@ -71,6 +71,7 @@ namespace Citta_T1.Controls.Top
 
         private void formatButton_MouseClick(object sender, MouseEventArgs e)
         {
+            Global.GetMainForm().SetDocumentDirty();
             ModelDocument currentModel = Global.GetCurrentDocument();
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();

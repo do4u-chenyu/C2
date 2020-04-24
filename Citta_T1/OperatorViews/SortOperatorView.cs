@@ -66,6 +66,8 @@ namespace Citta_T1.OperatorViews
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
 
+            this.opControl.DataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
@@ -101,8 +103,13 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName.ToList());
+                return;
+            }
+                
         }
        
         private void cancelButton_Click(object sender, EventArgs e)
