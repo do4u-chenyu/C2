@@ -105,12 +105,12 @@ namespace Citta_T1.Business.Model
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
-            dirty = true;
+           
         }
         public void AddModelRelation(ModelRelation modelRelation)
         {
             this.modelRelations.Add(modelRelation);
-            dirty = true;
+            Global.GetMainForm().SetDocumentDirty();
         }
 
         public void DeleteModelElement(Control control)
@@ -129,8 +129,8 @@ namespace Citta_T1.Business.Model
         public void DeleteModelRelation(int ID)
         {
             StateChangeByDelete(ID);
+            this.ModelRelations.RemoveAll( c=> (c.StartID== ID || c.EndID == ID));
 
-            this.ModelRelations.RemoveAll(c => (c.EndID == ID||c.StartID == ID));
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChangeByDelete(int ID)
