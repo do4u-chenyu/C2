@@ -121,35 +121,23 @@ namespace Citta_T1.Business.Model
                 if (!me.GetControl.Equals(control))
                     continue;
                 this.modelElements.Remove(me);
-                //删除与控件连接的关系
-                DeleteModelRelation(me.ID);
                 return;
             }   
         }
-        public void DeleteModelRelation(int ID)
-        {
-            StateChangeByDelete(ID);
-            this.ModelRelations.RemoveAll( c=> (c.StartID== ID || c.EndID == ID));
 
-            Global.GetCanvasPanel().Invalidate();
-        }
         public void StateChangeByDelete(int ID)
         {
 
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID)
+                if (mr.StartID != ID) continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ElementStatus.Null;
-                            //存在链路，后续链路中算子状态变化
-                            AllStateChange(me.ID);
-                        }
-                           
-                    }
+                    if (me.ID != mr.EndID) continue; 
+                    me.Status = ElementStatus.Null;
+                    //存在链路，后续链路中算子状态变化
+                    AllStateChange(me.ID);
+
                 }
             }
             
@@ -160,17 +148,12 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == operatorID)
+                if (mr.StartID != operatorID) continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ModifyStatus(me, me.Status);
-                            AllStateChange(mr.EndID);
-                        }
-                    }
-
+                    if (me.ID != mr.EndID) continue;
+                    me.Status = ModifyStatus(me, me.Status);
+                    AllStateChange(mr.EndID);
                 }
             }
         }
@@ -186,17 +169,13 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID)
+                if (mr.StartID != ID)  continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ElementStatus.Null;
-                            StateChangeByOut(mr.EndID);
-                        }
-                           
-                    }
+                    if (me.ID != mr.EndID) continue;
+                    me.Status = ElementStatus.Null;
+                    StateChangeByOut(mr.EndID);
+
                 }
             }
         }
@@ -225,17 +204,13 @@ namespace Citta_T1.Business.Model
         public void Show()
         {
             foreach (ModelElement el1 in this.modelElements)
-            {
                 el1.Show();
-            }
         }
 
         public void Hide()
         {
             foreach (ModelElement el1 in this.modelElements)
-            {
                 el1.Hide();
-            }
         }
 
         public void DocumentElementCount()

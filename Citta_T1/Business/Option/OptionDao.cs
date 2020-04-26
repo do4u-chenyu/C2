@@ -228,6 +228,9 @@ namespace Citta_T1.Business.Option
         }
         public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
         {
+            int maxIndex = outIndex.Max();
+            if (maxIndex > columnName.Length - 1)
+                return true;
             List<string> oldName = new List<string>();
             List<string> newName = new List<string>();
             foreach (int i in outIndex)
