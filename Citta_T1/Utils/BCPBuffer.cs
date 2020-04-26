@@ -18,6 +18,7 @@ namespace Citta_T1.Utils
         private static BCPBuffer BcpBufferSingleInstance;
         private LogUtil log = LogUtil.GetInstance("BCPBuffer");
 
+
         public string GetCacheBcpPreVewContent(string bcpFullPath, DSUtil.Encoding encoding)
         {
             string ret = "";
@@ -48,7 +49,7 @@ namespace Citta_T1.Utils
         public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
         {
             string ret = "";
-            //刷新一下存放表头的字典
+            // 刷新一下存放表头的字典
             PreLoadBcpFile(bcpFullPath, encoding);
             if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
                 PreLoadBcpFile(bcpFullPath, encoding);

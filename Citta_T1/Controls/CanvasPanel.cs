@@ -449,11 +449,10 @@ namespace Citta_T1.Controls
                 return;
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
             {
                 e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-                //if (mr.StartID == 0)
-                //    log.Info("");
             }
         }
 
