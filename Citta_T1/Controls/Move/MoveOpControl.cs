@@ -107,7 +107,12 @@ namespace Citta_T1.Controls.Move
         private String lineStatus = "";
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
-        // public MoveOpControl() 这个空函数我已经删了好几次了,但每次都又被你们合并进来了
+        
+        private Size bigStatus    = new Size(155,28);
+        private Size normalStatus = new Size(147,28);
+        private Size smallStatus  = new Size(130,28);
+        
+        
         // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
@@ -259,7 +264,7 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-           // float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
+           
              float screenFactor = Global.GetCurrentDocument().ScreenFactor;
              Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             
@@ -397,56 +402,43 @@ namespace Citta_T1.Controls.Move
 
             if (sumCount + sumCountDigit > maxLength)
             {
-                ResizeToBig();
+                int txtWidth = 82;
+                ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
+
+            else if (sumCount + sumCountDigit <= 6)
+            {
+
+                this.txtButton.Text = opControlName;
+                int txtWidth = 57;
+                ResizeControl(txtWidth, smallStatus);
+
+            }
+
             else
             {
-                this.txtButton.Text = name;
-                
-                if (sumCount + sumCountDigit < 6) 
-                    ResizeToSmall();
-                else
-                    ResizeToNormal();
+                this.txtButton.Text = opControlName;
+                int txtWidth = 72;
+                ResizeControl(txtWidth, normalStatus);
             }
             this.nameToolTip.SetToolTip(this.txtButton, name);
         }
 
-        private void ResizeToBig()
+        private void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(155 * f), (int)(30 * f));//194，25
-            this.rightPictureBox.Location = new Point((int)(130 * f), (int)(7 * f));//159,2
-            this.statusBox.Location = new Point((int)(114 * f), (int)(7 * f));//新增
-            this.rectOut.Location = new Point((int)(146 * f), (int)(10 * f));
 
-            this.txtButton.Size = new Size((int)(82 * f), (int)(26 * f));
-            this.textBox.Size = new Size((int)(82 * f), (int)(26 * f));
+            this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
+            this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
+            this.statusBox.Location = new Point((int)((this.Width - 42) * f), (int)(this.statusBox.Top * f));
+            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
 
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void ResizeToSmall()
-        {
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(130 * f), (int)(28 * f));//142，25
-            this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));//107,2
-            this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(57 * f), (int)(25 * f));
-            this.textBox.Size = new Size((int)(57 * f), (int)(24 * f));
-            this.rectOut.Location = new Point((int)(121 * f), (int)(10 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void ResizeToNormal()
-        {
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(147 * f), (int)(29 * f));//184，25
-            this.rightPictureBox.Location = new Point((int)(122 * f), (int)(7 * f));//151,2
-            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.rectOut.Location = new Point((int)(137 * f), (int)(10 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
+
         #endregion
 
         #region 右键菜单
@@ -557,7 +549,12 @@ namespace Citta_T1.Controls.Move
                 if (mr.StartID == this.id)
                 {
                     DeleteResultControl(mr.EndID);
-                    break;
+                    
+                }
+                if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
+                {
+                    ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                    (me.GetControl as IMoveControl).OutPinInit("noLine");
                 }
             }
             //删除自身

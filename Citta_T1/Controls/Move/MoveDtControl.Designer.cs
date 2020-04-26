@@ -56,7 +56,7 @@
             // 
             this.rightPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(151, 4);
+            this.rightPictureBox.Location = new System.Drawing.Point(151, 5);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
