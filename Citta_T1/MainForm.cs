@@ -49,11 +49,6 @@ namespace  Citta_T1
             this.optionDao = new OptionDao();
             InitializeGlobalVariable();
             InitializeControlsLocation();
-
-
-
-
-
         }
 
         private void InitializeMainFormEventHandler()
@@ -333,6 +328,7 @@ namespace  Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
+            // TODO [DK] BUG 这里是因为CanvasPanel设置了Dock属性，在this.bottomViewPanel.Height变化的时候，CanvasPanel的Height也变了，因此控件位置发生了改变，但是线并没有变
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
@@ -409,6 +405,7 @@ namespace  Citta_T1
         {
             this.formInputData.StartPosition = FormStartPosition.CenterScreen;
             this.formInputData.ShowDialog();
+            this.formInputData.ReSetParams();
         }
 
 
@@ -426,19 +423,19 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
-            this.dataSourceControl.GenDataButton(name, filePath, extType, encoding);
+            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, extType = extType, encoding = encoding);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

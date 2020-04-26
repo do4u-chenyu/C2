@@ -77,6 +77,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.OutList.AddItems(name);
             }
+            this.opControl.DataSourceColumns = column;
         }
 
         #endregion
@@ -101,6 +102,7 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         #region 添加取消
@@ -127,8 +129,13 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            { 
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+                
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

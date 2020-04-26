@@ -9,9 +9,11 @@ namespace Citta_T1.Controls.Left
     {
         private DSUtil.Encoding encoding;
         private DSUtil.ExtType extType;
+        private char separator;
         private int count = 0;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public char Separator { get => separator; set => separator = value; }
         public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
@@ -24,15 +26,17 @@ namespace Citta_T1.Controls.Left
         }
 
 
+
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public DataButton(string ffp, string dataName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
             txtButton.Text = dataName;
+            this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
         }
@@ -50,7 +54,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)

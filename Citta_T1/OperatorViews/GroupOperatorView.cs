@@ -72,6 +72,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
             foreach (int index in this.oldOutList)
                 this.oldOutName.Add(this.columnName[index]);
+            this.opControl.DataSourceColumns = column;
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
@@ -118,6 +119,7 @@ namespace Citta_T1.OperatorViews
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
             }
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
 
         }
         private void SaveOption()
@@ -166,8 +168,13 @@ namespace Citta_T1.OperatorViews
             //生成结果控件,创建relation,bcp结果文件
             foreach (int index in this.outList)
                 this.selectColumn.Add(this.columnName[index]);
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            { 
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+                
             //输出变化，重写BCP文件
             if (this.oldOptionDict != "")
                 Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);

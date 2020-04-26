@@ -321,7 +321,7 @@ namespace Citta_T1.Controls.Move
         {
             if (System.IO.File.Exists(this.path))
             {
-                Global.GetMainForm().PreViewDataByBcpPath(this.path, DSUtil.ExtType.Text, this.encoding);
+                Global.GetMainForm().PreViewDataByBcpPath(this.path, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
             }
         }
 

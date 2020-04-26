@@ -109,7 +109,8 @@ namespace Citta_T1.OperatorViews
             {
                 this.OutList.AddItems(name);
                 this.comboBox1.Items.Add(name);
-            }           
+            }
+            this.opControl.DataSourceColumns = column;
         }
         private void InitNewFactorControl(int count)
         {
@@ -135,8 +136,13 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            { 
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+                
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -205,7 +211,7 @@ namespace Citta_T1.OperatorViews
                 Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control4.Text = factorList[3];
             }
-           
+            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
         #endregion
         private void createLine(int addLine)
