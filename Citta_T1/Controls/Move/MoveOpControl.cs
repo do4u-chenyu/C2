@@ -519,14 +519,28 @@ namespace Citta_T1.Controls.Move
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
-            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), Global.GetCurrentDocument().SearchElementByID(this.ID));
-            int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
-            if (notReadyNum > 0)
+            //判断该算子是否配置完成
+            ModelElement currentOp = Global.GetCurrentDocument().SearchElementByID(this.ID);
+            if (currentOp.Status == ElementStatus.Null)
             {
-                MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //判断模型是否保存
+            if (Global.GetCurrentDocument().Dirty)
+            {
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //需要判断模型当前运行状态，正在运行时，无法执行运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            Global.GetMainForm().BindUiManagerFunc();
+
+            currentManager.Start();
+            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
 

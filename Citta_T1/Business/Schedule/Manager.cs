@@ -125,12 +125,12 @@ namespace Citta_T1.Business.Schedule
             }
         }
 
-        public int CurrentModelTripleReadyNum()
+        public int CurrentModelTripleStatusNum(ElementStatus status)
         {
             int count = 0;
             foreach (Triple tmpTri in currentModelTripleList)
             {
-                if (tmpTri.OperateElement.Status == ElementStatus.Ready)
+                if (tmpTri.OperateElement.Status == status)
                 {
                     count++;
                 }
@@ -138,12 +138,9 @@ namespace Citta_T1.Business.Schedule
             return count;
         }
 
-
-
-
         public void Start()
         {
-            if (CurrentModelTripleReadyNum() == 0)
+            if (CurrentModelTripleStatusNum(ElementStatus.Ready) == 0)
             {
                 UpdateLogDelegate("当前模型的算子均已运算完毕");
                 return;
@@ -210,7 +207,7 @@ namespace Citta_T1.Business.Schedule
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
-
+                //Thread.Sleep(10000);
                 List<string> cmds = new List<string>();
                 string cmd = "";
                 switch (triple.OperateElement.SubType)

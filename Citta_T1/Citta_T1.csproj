@@ -578,11 +578,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sbin\catXLS.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sbin\cat_xls.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\iconv.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
