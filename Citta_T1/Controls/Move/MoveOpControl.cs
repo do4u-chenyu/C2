@@ -105,7 +105,12 @@ namespace Citta_T1.Controls.Move
         private String lineStatus = "";
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
-        // public MoveOpControl() 这个空函数我已经删了好几次了,但每次都又被你们合并进来了
+        
+        private Size bigStatusSize    = new Size(155,30);
+        private Size normalStatusSize = new Size(147,30);
+        private Size smallStatusSize  = new Size(130,30);
+        
+        
         // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
@@ -412,36 +417,42 @@ namespace Citta_T1.Controls.Move
         private void ResizeToBig()
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(155 * f), (int)(30 * f));//194，25
-            this.rightPictureBox.Location = new Point((int)(130 * f), (int)(7 * f));//159,2
-            this.statusBox.Location = new Point((int)(114 * f), (int)(7 * f));//新增
-            this.rectOut.Location = new Point((int)(146 * f), (int)(10 * f));
-
-            this.txtButton.Size = new Size((int)(82 * f), (int)(26 * f));
-            this.textBox.Size = new Size((int)(82 * f), (int)(26 * f));
+            
+            
+            int txtWidth  = 82;
+            this.Size = new Size((int)(this.bigStatusSize.Width * f), (int)(this.bigStatusSize.Height * f));
+            this.rightPictureBox.Location = new Point((int)(130 * f), (int)(7 * f));
+            this.statusBox.Location = new Point((int)(114 * f), (int)(7 * f));
+            this.rectOut.Location = new Point((int)((this.Width - 9) * f), (int)(10 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
 
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToSmall()
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(130 * f), (int)(28 * f));//142，25
-            this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));//107,2
-            this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));//新增
+
+            int txtWidth = 57;
+
+            this.Size = new Size((int)(130 * f), (int)(30 * f));
+            this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));
+            this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));
             this.txtButton.Size = new Size((int)(57 * f), (int)(25 * f));
             this.textBox.Size = new Size((int)(57 * f), (int)(24 * f));
-            this.rectOut.Location = new Point((int)(121 * f), (int)(10 * f));
+            this.rectOut.Location = new Point((int)((this.Width -10) * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void ResizeToNormal()
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(147 * f), (int)(29 * f));//184，25
-            this.rightPictureBox.Location = new Point((int)(122 * f), (int)(7 * f));//151,2
-            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.rectOut.Location = new Point((int)(137 * f), (int)(10 * f));
+            int txtWidth = 72;
+            this.Size = new Size((int)(147 * f), (int)(29 * f));
+            this.rightPictureBox.Location = new Point((int)(122 * f), (int)(7 * f));
+            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height-4) * f));
+            this.rectOut.Location = new Point((int)((this.Width -10) * f), (int)(10 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
