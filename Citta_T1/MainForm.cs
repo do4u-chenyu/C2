@@ -124,7 +124,7 @@ namespace  Citta_T1
         public void DeleteDocumentElement(Control ct)
         {
             SetDocumentDirty();
-            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct);
+            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct); //TODO 先删再dirty
         }
 
 

@@ -225,7 +225,7 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            ctl.DataSourceColumns = ctl.Option.GetOption("columnname");
+                            ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
                         }
                             
 

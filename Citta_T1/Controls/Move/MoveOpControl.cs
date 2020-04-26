@@ -41,6 +41,7 @@ namespace Citta_T1.Controls.Move
         private OperatorOption option = new OperatorOption();
         private int id;
         private string dataSourceColumns;
+        private Dictionary<string, List<string>> doubleDataSourceColumns; 
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -59,8 +60,9 @@ namespace Citta_T1.Controls.Move
         public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public string DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
+        public Dictionary<string, List<string>> DoubleDataSourceColumns { get => this.doubleDataSourceColumns; set => this.doubleDataSourceColumns = value; }
 
 
 
@@ -109,6 +111,7 @@ namespace Citta_T1.Controls.Move
         // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
+            this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
             this.status = ElementStatus.Null;
             InitializeComponent();
             textBox.Text = description;
@@ -545,9 +548,9 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetNaviViewControl().UpdateNaviView(); //TODO 放到后面
             Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();
+            Global.GetMainForm().SetDocumentDirty();      //不是很理解
            
         }
         private void DeleteResultControl(int endID)
@@ -557,8 +560,8 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().UpdateNaviView();
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    Global.GetNaviViewControl().UpdateNaviView();   // 放后面
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
                     return;
                 }
             }

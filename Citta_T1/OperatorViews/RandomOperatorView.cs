@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.OutList.AddItems(name);
             }
-            this.opControl.DataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = column;
         }
 
         #endregion
@@ -102,7 +102,7 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         #endregion
         #region 添加取消

@@ -138,7 +138,7 @@ namespace Citta_T1.Business.Model
                 }
                 relations.Add(mr);
             }
-            this.ModelRelations = relations;
+            this.ModelRelations = relations;  // 引用坑
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChangeByDelete(int ID)

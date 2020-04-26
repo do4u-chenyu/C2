@@ -63,6 +63,11 @@ namespace Citta_T1.OperatorViews
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
 
+            this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
+            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+
             foreach (string name in this.columnName0)
             {
                 this.comboBox1.Items.Add(name);
@@ -78,7 +83,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
-            this.opControl.DataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = column;
             return columnName;
         }
         #endregion
@@ -127,7 +132,7 @@ namespace Citta_T1.OperatorViews
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private void SaveOption()
         {
