@@ -111,17 +111,11 @@ namespace  Citta_T1
         }
 
         private void NewDocumentOperator(Control ct)
-        {
-            SetDocumentDirty();
+        {          
             this.modelDocumentDao.AddDocumentOperator(ct);
-
-        }
-        public void DeleteDocumentElement(Control ct)
-        {
             SetDocumentDirty();
-            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct); //TODO 先删再dirty
-        }
 
+        }
 
         public void SaveDocument()
         {

@@ -95,12 +95,7 @@ namespace Citta_T1.Business.Model
             }
            
         }
-        public void AddDocumentRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
-        {
 
-            ModelRelation e = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
-            this.currentDocument.AddModelRelation(e);
-        }
         public static ElementSubType SEType(string subType)
         {
             string type = "";

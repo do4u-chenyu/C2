@@ -562,10 +562,11 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView(); //TODO 放到后面
-            Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();      //不是很理解
-           
+            Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+
+
         }
         private void DeleteResultControl(int endID)
         {
@@ -573,9 +574,9 @@ namespace Citta_T1.Controls.Move
             {
                 if (mrc.ID == endID)
                 {
-                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().UpdateNaviView();   // 放后面
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
+                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);                   
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); 
+                    Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }
             }

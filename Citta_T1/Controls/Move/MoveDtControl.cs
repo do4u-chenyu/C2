@@ -148,7 +148,7 @@ namespace Citta_T1.Controls.Move
                 return;
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().DeleteDocumentElement(this);
+            Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
 
           
