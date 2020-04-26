@@ -29,8 +29,8 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.opControl = opControl;          
-            columnName0 = new string[] { };
-            columnName1 = new string[] { };
+            this.columnName0 = new string[] { };
+            this.columnName1 = new string[] { };
             selectColumn = new List<string>();
             InitOptionInfo();
             LoadOption();
@@ -49,15 +49,19 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
 
+            this.opControl.DoubleDataSourceColumns["0"]= this.columnName0.ToList();
+            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+            this.opControl.Option.SetOption("columnname0", String.Join("\t",this.opControl.DoubleDataSourceColumns["0"]));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
 
             foreach (string name in this.columnName0)
                 this.comboBox1.Items.Add(name);
@@ -72,6 +76,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
+          
             return columnName;
         }
         #endregion
@@ -160,11 +165,16 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
+           
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -302,6 +312,7 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                     Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
+                    ctlNext3.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
@@ -340,6 +351,7 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
                 Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                ctlNext3.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
                 ctlNext4.Name = k.ToString();

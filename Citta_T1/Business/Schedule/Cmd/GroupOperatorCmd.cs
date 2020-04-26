@@ -16,18 +16,22 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            string inputFilePath = inputFilePaths.First();
+            string inputFilePath = inputFilePaths.First();//输入文件
+            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
-            //以后算子路径功能写完后去掉
-            if (inputFilePath == "")
+            //是否去重(是对整个文件去重)、升降序
+            string repetition = option.GetOption("noRepetition") == "True" ? string.Format("sbin\\sort.exe {0} -u | ",this.sortConfig) : "";
+            string order = option.GetOption("ascendingOrder") == "True" ? " -n " : "-nr ";
+
+            //拼接分组字段
+            string sortLineCmd = "-k" + TransInputLine(option.GetOption("factor1"));
+            for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
-                Thread.Sleep(5000);
-                cmds.Add("echo group");
+                string tmpfactor = option.GetOption("factor" + i.ToString());
+                sortLineCmd = sortLineCmd + " -k" + TransInputLine(tmpfactor);
             }
-            string inputfieldLine = TransInputLine(option.GetOption("maxfield"));
-            string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));
 
-            //cmds.Add(string.Format("sbin\\tail.exe -n +2 {0} | sbin\\sort.exe -S 200M -T {1} -nr -k {2} | sbin\\head.exe -n1 | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {3}}}'>> {4}", inputFilePath, this.tmpSortPath, inputfieldLine, outfieldLine, this.outputFilePath));
+            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe {2} {3} {4} | sbin\\tr.exe -d '\\r' | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, order, sortLineCmd, outfieldLine, this.outputFilePath));
 
             return cmds;
         }

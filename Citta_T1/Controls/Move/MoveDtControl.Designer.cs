@@ -56,7 +56,7 @@
             // 
             this.rightPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(151, 4);
+            this.rightPictureBox.Location = new System.Drawing.Point(151, 5);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,7 +72,7 @@
             this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
             this.leftPicture.Location = new System.Drawing.Point(7, 3);
             this.leftPicture.Name = "leftPicture";
-            this.leftPicture.Size = new System.Drawing.Size(17, 20);
+            this.leftPicture.Size = new System.Drawing.Size(14, 19);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPicture.TabIndex = 0;
             this.leftPicture.TabStop = false;

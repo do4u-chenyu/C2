@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(154, 8);
+            this.rightPictureBox.Location = new System.Drawing.Point(117, 5);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,7 +72,7 @@ namespace Citta_T1.Controls.Move
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(15, 2);
+            this.leftPicture.Location = new System.Drawing.Point(11, 2);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(18, 22);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,22 +82,8 @@ namespace Citta_T1.Controls.Move
             this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-            // 
-            // leftPinPictureBox
-            // 
-            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.leftPinPictureBox.TabIndex = 0;
-            this.leftPinPictureBox.TabStop = false;
-            // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.rightPinPictureBox.TabIndex = 0;
-            this.rightPinPictureBox.TabStop = false;
+
+
             // 
             // contextMenuStrip
             // 
@@ -150,13 +136,13 @@ namespace Citta_T1.Controls.Move
             // RunMenuItem
             // 
             this.RunMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RunMenuItem.BackgroundImage")));
-            this.RunMenuItem.Enabled = false;
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
             this.RunMenuItem.Size = new System.Drawing.Size(133, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
+            this.RunMenuItem.Click += new System.EventHandler(this.RunMenuItem_Click);
             // 
             // ErrorLogMenuItem
             // 
@@ -180,10 +166,10 @@ namespace Citta_T1.Controls.Move
             // 
             // textBox
             // 
-            this.textBox.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(37, 1);
+            this.textBox.Location = new System.Drawing.Point(31, 1);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(60, 23);
@@ -197,7 +183,7 @@ namespace Citta_T1.Controls.Move
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(98, 8);
+            this.statusBox.Location = new System.Drawing.Point(98, 5);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -215,7 +201,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(37, 1);
+            this.txtButton.Location = new System.Drawing.Point(30, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
             this.txtButton.Size = new System.Drawing.Size(60, 25);
@@ -242,7 +228,7 @@ namespace Citta_T1.Controls.Move
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveOpControl";
-            this.Size = new System.Drawing.Size(190, 25);
+            this.Size = new System.Drawing.Size(169, 25);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveOpControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);

@@ -39,6 +39,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.sortField = new System.Windows.Forms.ComboBox();
             this.endRow = new HZH_Controls.Controls.TextBoxEx();
             this.label8 = new System.Windows.Forms.Label();
             this.firstRow = new HZH_Controls.Controls.TextBoxEx();
@@ -50,7 +51,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
-            this.outList = new UserControlDLL.ComCheckBoxList();
             this.dataInfo = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -79,7 +79,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 22);
             this.label2.TabIndex = 0;
-            this.label2.Text = "输出字段：";
+            this.label2.Text = "排序字段：";
             // 
             // label1
             // 
@@ -98,7 +98,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(439, 37);
+            this.topPanel.Size = new System.Drawing.Size(425, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -106,10 +106,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 235);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 241);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(439, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(425, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -151,7 +151,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 198);
+            this.keyPanel.Size = new System.Drawing.Size(116, 204);
             this.keyPanel.TabIndex = 2;
             // 
             // label5
@@ -178,6 +178,7 @@
             // 
             // valuePanel
             // 
+            this.valuePanel.Controls.Add(this.sortField);
             this.valuePanel.Controls.Add(this.endRow);
             this.valuePanel.Controls.Add(this.label8);
             this.valuePanel.Controls.Add(this.firstRow);
@@ -185,14 +186,22 @@
             this.valuePanel.Controls.Add(this.label6);
             this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.groupBox1);
-            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Controls.Add(this.dataInfo);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(323, 198);
+            this.valuePanel.Size = new System.Drawing.Size(309, 204);
             this.valuePanel.TabIndex = 3;
+            // 
+            // sortField
+            // 
+            this.sortField.FormattingEnabled = true;
+            this.sortField.Location = new System.Drawing.Point(2, 43);
+            this.sortField.Margin = new System.Windows.Forms.Padding(2);
+            this.sortField.Name = "sortField";
+            this.sortField.Size = new System.Drawing.Size(134, 20);
+            this.sortField.TabIndex = 12;
             // 
             // endRow
             // 
@@ -233,6 +242,8 @@
             // firstRow
             // 
             this.firstRow.DecLength = 2;
+            this.firstRow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.firstRow.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.firstRow.InputType = HZH_Controls.TextInputType.NotControl;
             this.firstRow.Location = new System.Drawing.Point(23, 160);
             this.firstRow.Margin = new System.Windows.Forms.Padding(2);
@@ -253,8 +264,9 @@
             this.firstRow.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.firstRow.PromptText = "";
             this.firstRow.RegexPattern = "";
-            this.firstRow.Size = new System.Drawing.Size(38, 21);
+            this.firstRow.Size = new System.Drawing.Size(38, 23);
             this.firstRow.TabIndex = 9;
+            this.firstRow.Text = "1";
             // 
             // label7
             // 
@@ -350,15 +362,6 @@
             this.ascendingOrder.Text = "从小到大";
             this.ascendingOrder.UseVisualStyleBackColor = true;
             // 
-            // outList
-            // 
-            this.outList.DataSource = null;
-            this.outList.Location = new System.Drawing.Point(0, 42);
-            this.outList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.outList.Name = "outList";
-            this.outList.Size = new System.Drawing.Size(135, 20);
-            this.outList.TabIndex = 1;
-            // 
             // dataInfo
             // 
             this.dataInfo.DecLength = 2;
@@ -392,7 +395,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 299);
+            this.ClientSize = new System.Drawing.Size(425, 305);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -431,7 +434,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private UserControlDLL.ComCheckBoxList outList;
         private HZH_Controls.Controls.TextBoxEx dataInfo;
         private HZH_Controls.Controls.TextBoxEx firstRow;
         private System.Windows.Forms.Label label7;
@@ -442,5 +444,6 @@
         private System.Windows.Forms.RadioButton ascendingOrder;
         private HZH_Controls.Controls.TextBoxEx endRow;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox sortField;
     }
 }

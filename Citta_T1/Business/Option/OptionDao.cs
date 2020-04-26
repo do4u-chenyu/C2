@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Citta_T1.Business.Model;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Move;
-using System.Drawing;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
+using Citta_T1.Controls.Move;
+using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace Citta_T1.Business.Option
 {
@@ -21,6 +19,7 @@ namespace Citta_T1.Business.Option
             ElementSubType[] doubleInputs = new ElementSubType[] {
                                                 ElementSubType.CollideOperator,
                                                 ElementSubType.UnionOperator,
+                                                ElementSubType.RelateOperator,
                                                 ElementSubType.DifferOperator };
             List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
@@ -29,27 +28,27 @@ namespace Citta_T1.Business.Option
                 {
                     MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
                     moveOpControl.EnableOpenOption = true;
-                    //单输入 SingleInputCompare
-                    //SingleInputCompare(mr, (me.GetControl as MoveOpControl).DataSourceColumns);
+                    SingleInputCompare(mr, moveOpControl.SingleDataSourceColumns);
                     break;
                 }
-                else if (me.ID == mr.EndID && relations.Count == 2)
+                else if (me.ID == mr.EndID && doubleInputs.Contains(me.SubType) && relations.Count == 2)
                 {
-                    (me.GetControl as MoveOpControl).EnableOpenOption = true;
-                    //TODO双输入 DoubleInputCompare
+                    MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
+                    moveOpControl.EnableOpenOption = true;
+                    //所有双目算子配置逻辑没写完，现在用会有问题
+                   // DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
                     break;
                 }
             }
         }
         private void SingleInputCompare(ModelRelation modelRelation, string oldColumnName) 
         {
+            if (oldColumnName == null) return;
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
             string dataSourcePath = startElement.GetPath();
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = startElement.ID;
-            if (oldColumnName == null)
-                return;
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
             string column = bcpInfo.columnLine;
@@ -60,23 +59,21 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChange(ID);
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
                     return;
                 }
                    
             }
             //新数据源表头与旧数据源表头顺序是否不一致
-            if (oldName.Count() > columnName.Count())
-                return;
             for (int i = 0; i < oldName.Count(); i++)
             {
                 if (oldName[i] != columnName[i])
                 {
-                    Global.GetCurrentDocument().StateChange(ID);
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
                     return;
                 }                  
             }
-            //恢复控件上次的状态
+            //恢复控件上次的状态,可能会有点问题TODO
             if ((endElement.GetControl as MoveOpControl).Option.OptionDict != null)
                 (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
             else
@@ -85,10 +82,16 @@ namespace Citta_T1.Business.Option
 
 
         }
-        private void DoubleInputCompare(List<ModelRelation> relations, List<string> oldColumnName0, List<string> oldColumnName1,int ID) 
+        private void DoubleInputCompare(List<ModelRelation> relations, Dictionary<string, List<string>> doubleDataSource,int ID) 
         {
+
+            if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
+                return;
+            List<string> oldColumnName0 = doubleDataSource["0"];
+            List<string> oldColumnName1 = doubleDataSource["1"];
             ModelElement modelElement0 = null;
             ModelElement modelElement1 = null;
+
             foreach (ModelRelation me in relations)
             {
                 if(me.EndPin == 0)
@@ -105,8 +108,7 @@ namespace Citta_T1.Business.Option
             DSUtil.Encoding encoding1 = modelElement1.Encoding;
             int ID1 = modelElement1.ID;
 
-            if (oldColumnName0.Count == 0 || oldColumnName1.Count == 0)
-                return;
+            
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Null, encoding0);
             string column0 = bcpInfo0.columnLine;
@@ -119,37 +121,47 @@ namespace Citta_T1.Business.Option
             foreach (string name in oldColumnName0)
             {
                 if (!columnName0.Contains(name))
-                    Global.GetCurrentDocument().StateChange(ID);
+                {
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    return;
+                }
+                   
             }
 
             foreach (string name in oldColumnName1)
             {
                 if (!columnName1.Contains(name))
-                    Global.GetCurrentDocument().StateChange(ID);
+                {
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    return;
+                }
+                   
             }
             //新数据源表头与旧数据源表头顺序是否不一致
-            if (oldColumnName0.Count() > columnName0.Count())
-                return;
+
             for (int i = 0; i < oldColumnName0.Count(); i++)
             {
                 if (oldColumnName0[i] != columnName0[i])
                 {
-                    Global.GetCurrentDocument().StateChange(ID);
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
                     return;
                 }
             }
 
-            if (oldColumnName1.Count() > columnName1.Count())
-                return;
             for (int i = 0; i < oldColumnName1.Count(); i++)
             {
                 if (oldColumnName1[i] != columnName1[i])
                 {
-                    Global.GetCurrentDocument().StateChange(ID);
+                    Global.GetCurrentDocument().StateChangeByOut(ID);
                     return;
                 }
             }
-
+            //恢复控件上次的状态,可能会有点问题TODO
+            ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(ID);
+            if ((modelElement.GetControl as MoveOpControl).Option.OptionDict != null)
+                (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
+            else
+                (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Null;
 
         }
         public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName)
@@ -208,32 +220,66 @@ namespace Citta_T1.Business.Option
             }
         }
 
-
+        //新数据源修改输出
+        public void ModifyOut(List<string> currentcolumns,int ID)
+        {
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            IsNewOut(path, currentcolumns, ID);
+        }
+        public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
+        {
+            List<string> oldName = new List<string>();
+            List<string> newName = new List<string>();
+            foreach (int i in outIndex)
+            {
+                oldName.Add(oldColumnList[i]);
+                newName.Add(columnName[i]);
+            }
+            return (!Enumerable.SequenceEqual(oldName, newName));
+  
+        }
         //修改配置输出
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
             string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
             List<string> columns = new List<string>();
+
+            //新输出字段中不包含旧字段
             foreach (string cn in oldColumns)
             {
-                //新输出字段中不包含旧字段
                 if (!currentcolumns.Contains(cn))
-                {                               
-                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
-                    Global.GetCurrentDocument().StateChange(ID);
+                {
+                    IsNewOut(path, currentcolumns, ID);
                     return;
-
                 }
+                   
             }
+            //输出数目相同，顺序可能不同
+            if (oldColumns.Count >0 && oldColumns.Count == currentcolumns.Count)
+            {
+                if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
+                {
+                    IsNewOut(path, currentcolumns, ID);
+                    return;
+                }
+                   
+            }
+
             //旧字段真包含于新字段
             foreach (string name in currentcolumns)
             {
                 if (!oldColumns.Contains(name))
                     columns.Add(name);
             }
-            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();
+            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();  
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+        }
+
+        private void IsNewOut(String path, List<string> currentcolumns, int ID)
+        {
+            BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+            Global.GetCurrentDocument().StateChangeByOut(ID);
         }
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)

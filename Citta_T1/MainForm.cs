@@ -49,11 +49,6 @@ namespace  Citta_T1
             this.optionDao = new OptionDao();
             InitializeGlobalVariable();
             InitializeControlsLocation();
-
-
-
-
-
         }
 
         private void InitializeMainFormEventHandler()
@@ -116,17 +111,11 @@ namespace  Citta_T1
         }
 
         private void NewDocumentOperator(Control ct)
-        {
-            SetDocumentDirty();
+        {          
             this.modelDocumentDao.AddDocumentOperator(ct);
-
-        }
-        public void DeleteDocumentElement(Control ct)
-        {
             SetDocumentDirty();
-            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct);
-        }
 
+        }
 
         public void SaveDocument()
         {
@@ -228,26 +217,35 @@ namespace  Citta_T1
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 5 - this.naviViewControl.Height;
             log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
+
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
-            
             this.naviViewControl.Invalidate();
+
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.downloadButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
+            //运行状态动图定位
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
             Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
             Point loc_panel3 = new Point(loc.X, loc.Y + this.flowControl.Height + 10);
+
             this.flowControl.Location = loc;
+
             this.rightShowButton.Location = loc_flowcontrol2;
             this.rightHideButton.Location = loc_flowcontrol3;
+
             this.remarkControl.Location = loc_panel3;
-            
+
+            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
@@ -293,7 +291,6 @@ namespace  Citta_T1
         //    this.anewModel.ShowDialog();
         //}
 
-
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
             this.logView.Visible = false;
@@ -317,6 +314,7 @@ namespace  Citta_T1
 
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
+            log.Info("MinMaxPictureBox_Click");
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
@@ -328,6 +326,7 @@ namespace  Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
+            // TODO [DK] BUG 这里是因为CanvasPanel设置了Dock属性，在this.bottomViewPanel.Height变化的时候，CanvasPanel的Height也变了，因此控件位置发生了改变，但是线并没有变
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
@@ -337,7 +336,6 @@ namespace  Citta_T1
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
-
         }
 
         private void MainForm_SizeChanged(object sender, EventArgs e)
@@ -405,6 +403,7 @@ namespace  Citta_T1
         {
             this.formInputData.StartPosition = FormStartPosition.CenterScreen;
             this.formInputData.ShowDialog();
+            this.formInputData.ReSetParams();
         }
 
 
@@ -422,18 +421,19 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            this.dataSourceControl.GenDataButton(name, filePath, encoding);
+            // TODO [DK] 读取Excel
+            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, encoding);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -472,14 +472,7 @@ namespace  Citta_T1
         private void RunButton_Click(object sender, EventArgs e)
         {
             Manager currentManager = Global.GetCurrentDocument().Manager;
-
-            //初次运行时，绑定线程与ui交互的委托
-            if (currentManager.ModelStatus == ModelStatus.Null)
-            {
-                currentManager.UpdateLogDelegate = UpdataLogStatus;
-                currentManager.TaskCallBack = Accomplish;
-                currentManager.UpdateGifDelegate = UpdataRunningGif;
-            }
+            BindUiManagerFunc();
 
             if (this.runButton.Name == "runButton")
             {
@@ -510,6 +503,29 @@ namespace  Citta_T1
             UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
+        public void SetCanvasEnable(bool status)
+        {
+            foreach (Control c in Global.GetCanvasPanel().Controls)
+            {
+                //log.Info("暂停该控件：" + c.Name);
+                if (c.Name == "MoveRsControl" || c.Name == "MoveOpControl")
+                {
+                    c.Enabled = status;
+                }
+            }
+        }
+
+        public void BindUiManagerFunc()
+        {
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            //初次运行时，绑定线程与ui交互的委托
+            if (currentManager.ModelStatus == ModelStatus.Null)
+            {
+                currentManager.UpdateLogDelegate = UpdataLogStatus;
+                currentManager.TaskCallBack = Accomplish;
+                currentManager.UpdateGifDelegate = UpdataRunningGif;
+            }
+        }
 
         //更新log
         private void UpdataLogStatus(string log)
@@ -587,25 +603,30 @@ namespace  Citta_T1
 
 
 
-        private void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
+        public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
             switch (modelStatus)
             {
+                //点击暂停按钮
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
+                //点击运行按钮
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
+                    //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    //SetCanvasEnable(true);
                     break;
                 default:
                     this.runButton.Name = "runButton";
@@ -613,6 +634,7 @@ namespace  Citta_T1
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
             }
         }

@@ -21,12 +21,20 @@ namespace Citta_T1.OperatorViews
         private string dataPath;
         private string[] columnName;
         private string oldOptionDict;
-        private List<string> selectColumn=new List<string>();
-        private List<int> groupColumn=new List<int>();
-        private List<bool> oldCheckedItems = new List<bool>();
+        private List<string> selectColumn;
+        private List<int> groupColumn;
+        private List<bool> oldCheckedItems;
+        private List<int> outList;
+        private int[] oldOutList;
+        private List<string> oldOutName;
         public GroupOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.selectColumn = new List<string>();
+            this.groupColumn = new List<int>();
+            this.oldCheckedItems = new List<bool>();
+            this.oldOutList = new int[] { };
+            this.oldOutName = new List<string>();
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             dataPath = "";
@@ -49,16 +57,22 @@ namespace Citta_T1.OperatorViews
                 this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath); 
                 SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
             }
+  
         }
 
         private void SetOption(string path, string dataName, string encoding)
         {
-
+            
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
+            if (this.opControl.Option.GetOption("outfield") != "")
+                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
+            foreach (int index in this.oldOutList)
+                this.oldOutName.Add(this.columnName[index]);
+            this.opControl.SingleDataSourceColumns = column;
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
@@ -105,13 +119,14 @@ namespace Citta_T1.OperatorViews
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
             }
-            
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+
         }
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
             string factor1 = this.comboBox1.SelectedIndex.ToString();
-            groupColumn.Add(this.comboBox1.SelectedIndex);
+            this.groupColumn.Add(this.comboBox1.SelectedIndex);
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -119,7 +134,7 @@ namespace Citta_T1.OperatorViews
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string factor = (control1 as ComboBox).SelectedIndex.ToString();
-                    groupColumn.Add((control1 as ComboBox).SelectedIndex);
+                    this.groupColumn.Add((control1 as ComboBox).SelectedIndex);
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -127,6 +142,14 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.outList = new List<int>(this.groupColumn);
+            int[] columnIndex= Enumerable.Range(0, this.columnName.Length).ToArray();
+            foreach (int index in columnIndex)
+            {
+                if (!this.groupColumn.Contains(index))
+                    this.outList.Add(index);
+            }
+            this.opControl.Option.SetOption("outfield", string.Join(",", this.outList));
             this.opControl.Status = ElementStatus.Ready;
 
         }
@@ -134,6 +157,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
+
             bool empty = IsOptionReay();
             if (empty) return;
             SaveOption();
@@ -142,15 +166,19 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            for (int i = 0; i < this.columnName.Count(); i++)
-            {
-                if (!this.groupColumn.Contains(i))
-                    this.groupColumn.Add(i);
-            }
-            foreach (int index in this.groupColumn)
+            foreach (int index in this.outList)
                 this.selectColumn.Add(this.columnName[index]);
-            if (this.oldOptionDict == "")
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            { 
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                return;
+            }
+                
+            //输出变化，重写BCP文件
+            if (this.oldOptionDict != "")
+                Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -181,18 +209,6 @@ namespace Citta_T1.OperatorViews
                     empty = true;
                     return empty;
                 }
-            }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
-            {
-                MessageBox.Show("请选择数据是否进行去重");
-                empty = true;
-                return empty; 
-            }
-            if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
-            {
-                MessageBox.Show("请选择数据排序");
-                empty = true;
-                return empty;
             }
             return empty;
         }
@@ -266,8 +282,10 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
                     Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k);
+                    ctlNext1.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
                     Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
+                    ctlNext2.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
                 }
                 createLine(addLine);
@@ -299,8 +317,10 @@ namespace Citta_T1.OperatorViews
                 Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
                 Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
+                ctlNext1.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
+                ctlNext2.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);

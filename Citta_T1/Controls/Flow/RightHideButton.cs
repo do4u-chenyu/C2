@@ -52,7 +52,8 @@ namespace Citta_T1.Controls.Flow
             Global.GetFlowControl().Visible = false;
             Global.GetFlowControl().SelectRemark = false;
             Global.GetRemarkControl().Visible = false;
-            Global.GetFlowControl().RemarkChange(false);
+            Global.GetFlowControl().RemarkChange(false); 
+
         }
     }
 }

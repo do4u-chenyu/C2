@@ -10,6 +10,7 @@ log4net
 static_image_save.bmp
 .idea
 UpgradeLog.htm
+UpgradeLog2.htm
 packages/NPOI.2.5.1/.signature.p7s
 packages/NPOI.2.5.1/LICENSE
 packages/NPOI.2.5.1/NPOI.2.5.1.nupkg
@@ -27,7 +28,10 @@ packages/SharpZipLib.1.2.0/lib/net45/ICSharpCode.SharpZipLib.xml
 packages/SharpZipLib.1.2.0/lib/netstandard2.0/
 UserInstallSet/bin/Debug
 UserInstallSet/obj/Debug
+UserInstallSet/bin
+UserInstallSet/obj
 IAO解决方案/Debug
+IAO解决方案/Release
 UserInstallSet/bin/Debug/UserInstallSet.dll
 UserInstallSet/bin/Debug/UserInstallSet.pdb
 UserInstallSet/obj/Debug/UserInstallSet.csprojAssemblyReference.cache

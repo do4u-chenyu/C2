@@ -12,10 +12,11 @@ using static Citta_T1.Utils.DSUtil;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, DSUtil.Encoding encoding);
+    public delegate void delegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
+        private ExtType extType = ExtType.Unknow;
         private string m_filePath;
         private int m_maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
@@ -23,7 +24,6 @@ namespace Citta_T1.Dialogs
         private bool textboxHasText = false;
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
-        private ExtType fileExt = ExtType.Unknow;
 
         public FormInputData()
         {
@@ -43,7 +43,17 @@ namespace Citta_T1.Dialogs
 
         }
 
+        public void ReSetParams()
+        {
+            this.encoding = DSUtil.Encoding.GBK;
+            this.gbkLable.Font = bold_font;
+            this.utf8Lable.Font = font;
 
+            this.radioButton1.Checked = true;
+            this.separator = '\t';
+
+            this.extType = DSUtil.ExtType.Text;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             /*
@@ -53,6 +63,10 @@ namespace Citta_T1.Dialogs
             string ext;
             OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
+            if (this.gbkLable.Font.Bold)
+                this.encoding = DSUtil.Encoding.GBK;
+            else
+                this.encoding = DSUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 m_filePath = fd.FileName;     
@@ -60,17 +74,17 @@ namespace Citta_T1.Dialogs
                 ext = Path.GetExtension(m_filePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
-                    this.fileExt = ExtType.Excel;
+                    this.extType = ExtType.Excel;
                     PreViewExcelFile();
                 }
                 else
                 {
-                    this.fileExt = ExtType.Text;
+                    this.extType = ExtType.Text;
                     PreViewBcpFile();
                 }          
             }
-            if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
-                this.textBox1.Text = fileName;
+            //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
+            this.textBox1.Text = fileName;
 
         }
 
@@ -88,25 +102,37 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请选择数据路径！");
             }
+            else if (Global.GetMainForm().dataSourceControl.dataSourceDictI2B.ContainsKey(m_filePath))
+            {
+                String dsName = Global.GetMainForm().dataSourceControl.dataSourceDictI2B[m_filePath].txtButton.Text;
+                MessageBox.Show("该文件已存在，数据名为：" + dsName);
+            }
             else
             {
-                BCPBuffer.GetInstance().TryLoadBCP(m_filePath, this.encoding);
-                InputDataEvent(name, m_filePath, this.encoding);
+                if (m_filePath.EndsWith(".xls") || m_filePath.EndsWith(".xlsx"))
+                    this.extType = DSUtil.ExtType.Excel;
+                else
+                    this.extType = DSUtil.ExtType.Text;
+                BCPBuffer.GetInstance().TryLoadFile(m_filePath, this.extType, this.encoding);
+                InputDataEvent(name, m_filePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
+            this.extType = DSUtil.ExtType.Unknow;
+            this.encoding = DSUtil.Encoding.UTF8;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             // 关闭按钮
             DvgClean();
+            this.ReSetParams();
             Close();
         }
 
         private void UTF8Lable_Click(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.gbkLable.Font = font;
                 this.utf8Lable.Font = bold_font;
@@ -127,6 +153,8 @@ namespace Citta_T1.Dialogs
              * 4. 清理表格数据
              * 5. 写入数据
              */
+            if (this.m_filePath == null)
+                return;
             System.IO.StreamReader sr;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
@@ -158,27 +186,22 @@ namespace Citta_T1.Dialogs
 
                 table.Columns.AddRange(cols);
 
-                for (int rowIndex = 0; rowIndex < m_maxNumOfRow; rowIndex++)
+                for (int rowIndex = 0; rowIndex < m_maxNumOfRow && !sr.EndOfStream; rowIndex++)
                 {
                     String line = sr.ReadLine();
                     if (line == null)
                         continue;
                     row = table.NewRow();
                     String[] eles = line.Split(this.separator);
-                    if (eles.Length != numOfCol)
-                        continue;
-                    for (int colIndex = 0; colIndex < numOfCol; colIndex++)
+                    for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Length); colIndex++)
                     {
                         row[colIndex] = eles[colIndex];
                     }
                     table.Rows.Add(row);
-                    log.Info("tabel.rowNum = " + table.Rows.Count);
                 }
 
                 view = new DataView(table);
                 this.dataGridView1.DataSource = view;
-
-
             }
             catch (Exception ex)
             {
@@ -258,7 +281,6 @@ namespace Citta_T1.Dialogs
                             if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
                             {
                                 string content = row.GetCell(j).ToString();
-                                log.Info("i: " + i + ", j: " + j + ", content: " + content);
                                 this.dataGridView1.Rows[i].Cells[j].Value = content;
                             }
                         }
@@ -281,7 +303,7 @@ namespace Citta_T1.Dialogs
 
         private void GBKLable_Click(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.gbkLable.Font = bold_font;
                 this.utf8Lable.Font = font;
@@ -293,7 +315,7 @@ namespace Citta_T1.Dialogs
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.separator = '\t';
                 PreViewBcpFile();
@@ -302,7 +324,7 @@ namespace Citta_T1.Dialogs
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType == ExtType.Text)
             {
                 this.separator = ',';
                 PreViewBcpFile();
@@ -312,34 +334,51 @@ namespace Citta_T1.Dialogs
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.fileExt == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
+            if (this.extType == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
             {
-                // TODO [DK]
-                this.separator = this.textBoxEx1.Text.ToCharArray()[0];
+                try
+                {
+                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                }
                 PreViewBcpFile();
             }
         }
         private void radioButton1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt != ExtType.Text)
+            if (this.extType != ExtType.Text)
                 return;
         }
 
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt != ExtType.Text)
+            if (this.extType != ExtType.Text)
                 return;
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.fileExt == ExtType.Text)
+            if (this.extType != ExtType.Text)
+                return;
+            else
             {
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
                 {
                     MessageBox.Show("未指定分隔符");
                     return;
                 }
+                try
+                {
+                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                }
             }
+
         }
         /// <summary>
         /// 将excel中的数据导入到DataTable中

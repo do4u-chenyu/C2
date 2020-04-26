@@ -105,12 +105,12 @@ namespace Citta_T1.Business.Model
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
-            dirty = true;
+           
         }
         public void AddModelRelation(ModelRelation modelRelation)
         {
             this.modelRelations.Add(modelRelation);
-            dirty = true;
+            Global.GetMainForm().SetDocumentDirty();
         }
 
         public void DeleteModelElement(Control control)
@@ -128,17 +128,61 @@ namespace Citta_T1.Business.Model
         }
         public void DeleteModelRelation(int ID)
         {
-            List<ModelRelation> relations = new List<ModelRelation>();
+            StateChangeByDelete(ID);
+            this.ModelRelations.RemoveAll( c=> (c.StartID== ID || c.EndID == ID));
+
+            Global.GetCanvasPanel().Invalidate();
+        }
+        public void StateChangeByDelete(int ID)
+        {
+
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID || mr.EndID == ID)
-                    relations.Add(mr);
+                if (mr.StartID == ID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if (me.ID == mr.EndID)
+                        {
+                            me.Status = ElementStatus.Null;
+                            //存在链路，后续链路中算子状态变化
+                            AllStateChange(me.ID);
+                        }
+                           
+                    }
+                }
             }
-            foreach (ModelRelation mr in relations) 
-                this.ModelRelations.Remove(mr);
+            
+
 
         }
-        public void StateChange(int ID, ElementStatus status = ElementStatus.Null)
+        private void AllStateChange(int operatorID)
+        {
+            foreach (ModelRelation mr in this.ModelRelations)
+            {
+                if (mr.StartID == operatorID)
+                {
+                    foreach (ModelElement me in this.ModelElements)
+                    {
+                        if (me.ID == mr.EndID)
+                        {
+                            me.Status = ModifyStatus(me, me.Status);
+                            AllStateChange(mr.EndID);
+                        }
+                    }
+
+                }
+            }
+        }
+        private ElementStatus ModifyStatus(ModelElement me,ElementStatus status)
+        {
+            if (me.Type == ElementType.Operator && status == ElementStatus.Done || status == ElementStatus.Ready)
+                return ElementStatus.Ready;
+            else 
+                return ElementStatus.Null;
+
+        }
+        public void StateChangeByOut(int ID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -148,8 +192,8 @@ namespace Citta_T1.Business.Model
                     {
                         if (me.ID == mr.EndID)
                         {
-                            me.Status = status;
-                            StateChange(mr.EndID);
+                            me.Status = ElementStatus.Null;
+                            StateChangeByOut(mr.EndID);
                         }
                            
                     }
@@ -225,7 +269,6 @@ namespace Citta_T1.Business.Model
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public void UpdateAllLines()
         {
-            log.Info("划线更新");
             for (int i = 0;i < this.modelRelations.Count();i++)
             {
                 try

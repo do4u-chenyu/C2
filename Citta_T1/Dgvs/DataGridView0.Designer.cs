@@ -6,7 +6,7 @@ namespace Citta_T1
 {
     partial class DataGridView0
     {
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView;
         private int maxNumOfRows = 20;
 
         /// <summary> 
@@ -35,141 +35,32 @@ namespace Citta_T1
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1011, 137);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.Name = "dataGridView1";
+            this.dataGridView.RowTemplate.Height = 23;
+            this.dataGridView.Size = new System.Drawing.Size(1011, 137);
+            this.dataGridView.TabIndex = 0;
             // 
             // DataGridView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridView);
             this.Name = "DataGridView";
             this.Size = new System.Drawing.Size(1011, 137);
-            this.Load += new System.EventHandler(this.DataGridView_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
-
-        private void InitializeDgv(string fileName = "")
-        {
-            List<List<string>> datas;
-            if (fileName == "")
-            {
-                datas  = this.PreViewFileFromResx(Properties.Resources.text_utf8);
-            }
-            else
-            {
-                datas = this.PreViewFileFromPath(fileName);
-            }
-            List<string> headers = datas[0];
-            int numOfCols = headers.ToArray().Length;
-            _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.ToArray().Length - 1), numOfCols);
-
-        }
-        private void _InitializeColumns(List<string> headers)
-        {
-            /*
-             * 初始化列
-             */
-            int numOfCols = headers.Count;
-            System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCols];
-            for (int i = 0; i < numOfCols; i++)
-            {
-                ColumnList[i] = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                ColumnList[i].HeaderText = headers[i];
-                ColumnList[i].Name = "Col_" + i.ToString();
-            }
-            this.dataGridView1.Columns.AddRange(ColumnList);
-        }
-
-        private void _InitializeRowse(List<List<string>> datas, int numOfCols)
-        {
-            /*
-             * 初始化行
-             * 使用样例数据
-             */
-            string data;
-            for (int i = 0; i < maxNumOfRows; i = this.dataGridView1.Rows.Add())
-            {
-                //this.dataGridView1.Rows.Add();
-                for (int j = 0; j < numOfCols; j++)
-                {
-                    try
-                    {
-                        data = datas[i][j];
-                    }
-                    catch (System.ArgumentOutOfRangeException)
-                    {
-                        data = "";
-                        Console.WriteLine("DataGridView0.Designer.cs._InitializeRowse occurs error!");
-                    }
-                    this.dataGridView1.Rows[i].Cells[j].Value = data;
-                }
-            }
-        }
         #endregion
-
-        private List<List<string>> PreViewFileFromPath(string fileNameOrFile="", int maxNumOfFile = 50, char sep = '\t')
-        {
-            List<List<string>> datas = new List<List<string>> { }; 
-            System.IO.StreamReader file = new System.IO.StreamReader(fileNameOrFile);
-            int rowCounter = 0;
-            string line;
-            while (((line = file.ReadLine()) != null) && (rowCounter < maxNumOfFile))
-            {
-                List<string> eles = new List<string>(line.Split(sep));
-                datas.Add(eles);
-            }
-            return datas;
-        }
-        private List<List<string>> PreViewFileFromResx(string resx = "", int maxNumOfFile = 50, char sep = '\t')
-        {
-            List<List<string>> datas = new List<List<string>> { };
-            string[] contents = resx.Split('\n');
-            int numOfRows = contents.Length;
-            List<string> rows = new List<string>(contents);
-            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
-            {
-                datas.Add(new List<string>(rows[i].Split('\t')));
-            }
-            return datas;
-        }
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.Encoding encoding, int maxNumOfFile = 100, char sep = '\t')
-        {
-            List<List<string>> datas = new List<List<string>> { };
-            // TODO [DK] 支持多种数据格式
-            //if (fileExt == DSUtil.ExtType.Excel)
-            //    List<string> rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
-            //else
-            List<string> rows = new List<string >(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n'));
-            int numOfRows = rows.Count;
-            for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)
-            {
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split('\t')));
-            }
-
-            this.dataGridView1.Rows.Clear();
-            this.dataGridView1.Columns.Clear();
-            this.dataGridView1.DataSource = null;
-            List<string> headers = datas[0];
-            int numOfCols = headers.Count;
-            _InitializeColumns(headers);
-            _InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
-        }
     }
 }

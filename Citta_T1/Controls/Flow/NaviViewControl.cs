@@ -196,7 +196,8 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement startMe = currentDocument.SearchElementByID(mr.StartID);
                 ModelElement endMe   = currentDocument.SearchElementByID(mr.EndID);
-                
+                if (endMe == null || startMe == null)
+                    continue;
                 if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;
                 PointF s = new PointF();

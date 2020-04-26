@@ -21,23 +21,24 @@ namespace Citta_T1.OperatorViews
         private ElementStatus oldstatus;
         private string[] columnName;
         private string oldOptionDict;
-        private List<string> selectColumn;
         private List<string> oldColumnName;
+        private bool hasNewDataSource;
+        private LogUtil log = LogUtil.GetInstance("MaxOperatorView");
 
-        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             dataPath = "";
+            this.hasNewDataSource = false;
+            this.columnName = new string[] { };
+            this.oldColumnName = new List<string>();
+            this.oldOutList = new List<int>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
-            
-            
-            this.oldMaxfield = this.MaxValueBox.Text;
-            this.oldOutList = this.OutList.GetItemCheckIndex();
-            this.oldColumnName = this.OutList.GetItemCheckText();
+                       
+            this.oldMaxfield = this.MaxValueBox.Text;           
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             
@@ -48,6 +49,7 @@ namespace Citta_T1.OperatorViews
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
+            if (this.DataInfoBox.Text == "") return;
             if (this.MaxValueBox.Text == "")
             {
                 MessageBox.Show("请选择最大值字段!");
@@ -59,23 +61,31 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.DataInfoBox.Text == "") return;
+            
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldMaxfield != this.MaxValueBox.Text)
+            if (this.oldMaxfield != this.MaxValueBox.Text || !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-            {
-                Global.GetMainForm().SetDocumentDirty();
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
-            }
-               
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.OutList.GetItemCheckText();
-            
-            if (this.oldOptionDict == "")
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
 
+            //生成结果控件,创建relation,bcp结果文件
+            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            if (hasResutl == null)
+            {
+                Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                return;
+            }
+              
+            //输入数据源变化，并且输出重写
+            //if (hasResutl != null && this.hasNewDataSource)
+            //{
+            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
+            //     return;
+            //}
+              
+            //输出变化，重写BCP文件
+            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+           
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -88,13 +98,28 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
-            string outField = string.Join(",", checkIndexs);
+            List<int> outIndexs =new List<int>(this.oldOutList);
+            List<int> removeIndex = new List<int>();
+            foreach (int index in checkIndexs)
+            {
+                if (!outIndexs.Contains(index))
+                    outIndexs.Add(index);
+            }
+            foreach (int index in outIndexs)
+            {
+                if (!checkIndexs.Contains(index))
+                {
+                    outIndexs = new List<int>(checkIndexs);
+                    break;
+                }                 
+            }
+            string outField = string.Join(",", outIndexs);
             if(this.MaxValueBox.Text == "")
                 this.opControl.Option.SetOption("maxfield", "");
             else
                 this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            
             if (this.MaxValueBox.Text != "" && outField != "")
                 this.opControl.Status = ElementStatus.Ready;
 
@@ -102,16 +127,25 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+            int maxIndex = -1;
+            int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("maxfield") != "")
             {
-                int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.MaxValueBox.Text = this.MaxValueBox.Items[index].ToString();
+                maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                this.MaxValueBox.Text = this.MaxValueBox.Items[maxIndex].ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
+                
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = outIndexs.ToList();
+                this.OutList.LoadItemCheckIndex(outIndexs);
+                foreach(int i in outIndexs)
+                    this.oldColumnName.Add(this.OutList.Items[i].ToString());
             }
+           
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         #endregion
         #region 初始化配置
@@ -132,12 +166,40 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
-            this.opControl.DataSourceColumns = column;
             foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);
                 this.MaxValueBox.Items.Add(name);
             }
+            CompareDataSource();
+            this.opControl.SingleDataSourceColumns = column;
+        }
+        private void CompareDataSource()
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (this.opControl.Option.GetOption("maxfield") != "")
+                {
+                    int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                    if (oldColumnList[index] != this.columnName[index])
+                        this.opControl.Option.OptionDict.Remove("maxfield");
+                }
+                if (this.opControl.Option.GetOption("outfield") != "")
+                {
+
+                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
+                    {
+                        this.opControl.Option.OptionDict.Remove("outfield");
+                        this.hasNewDataSource = true;
+                    }
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
         }
 
         #endregion

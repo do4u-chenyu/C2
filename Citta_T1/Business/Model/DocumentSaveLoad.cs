@@ -94,6 +94,14 @@ namespace Citta_T1.Business.Model
                     pathNode.InnerText = me.GetPath();
                     modelElementXml.AppendChild(pathNode);
 
+                    XmlElement sepTypeNode = xDoc.CreateElement("separator"); // TODO [DK] 写ASCII码
+                    sepTypeNode.InnerText = Convert.ToInt32(me.Separator).ToString(); 
+                    modelElementXml.AppendChild(sepTypeNode);
+
+                    XmlElement extTypeNode = xDoc.CreateElement("extType");
+                    extTypeNode.InnerText = me.ExtType.ToString();
+                    modelElementXml.AppendChild(extTypeNode);
+
                     XmlElement encodingNode = xDoc.CreateElement("encoding");
                     encodingNode.InnerText = me.Encoding.ToString();
                     modelElementXml.AppendChild(encodingNode);
@@ -221,7 +229,7 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            ctl.DataSourceColumns = ctl.Option.GetOption("columnname");
+                            ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
                         }
                             
 
@@ -236,10 +244,25 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);
+                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   
                         // 绑定线
                         cotl.ID = id;
-                        cotl.Encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
+                        #region 读分隔符
+                        char separator;
+                        int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
+                        if (ascii < 0 || ascii > 255)
+                        {
+                            separator = '\t';
+                            log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+                        }
+                        else
+                        {
+                            separator = Convert.ToChar(ascii);
+                        }
+                        #endregion
+                        cotl.Separator = separator;
+                        cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
+                        cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
@@ -274,7 +297,10 @@ namespace Citta_T1.Business.Model
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }
                 }
-                catch(Exception e) { log.Error(e.Message); }
+                catch(Exception e) 
+                { 
+                    log.Error("读取xml文件出错， error: " + e.Message); 
+                }
                
             }
         }
@@ -290,7 +316,9 @@ namespace Citta_T1.Business.Model
         { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
-        public DSUtil.Encoding EnType(string type)
+        public DSUtil.ExtType ExtType(string type)
+        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
+        public DSUtil.Encoding EncodingType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private PointF ToPointFType(string point)
         {

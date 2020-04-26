@@ -25,10 +25,15 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
+        private DSUtil.ExtType extType;
+        private char separator;
         private int id;
+        //TODO 分隔符属性
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
-        
+        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public char Separator { get => separator; set => separator = value; }
+
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 9);
@@ -39,6 +44,11 @@ namespace Citta_T1.Controls.Move
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
         private Bitmap staticImage;
+
+        private Size bigStatus = new Size(135, 28);
+        private Size normalStatus = new Size(125, 28);
+        private Size smallStatus = new Size(115, 28 );
+
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
         private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
@@ -71,22 +81,29 @@ namespace Citta_T1.Controls.Move
         List<Bezier> affectedLines = new List<Bezier>() { };
         public ECommandType cmd = ECommandType.Null;
 
+
         ControlMoveWrapper controlMoveWrapper;
         public string GetBcpPath()
         {
             return this.Name;
         }
 
-        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc)
+        public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
+            char separator = '\t',
+            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
+            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8 
+            )
         {
             InitializeComponent();
             this.textBox1.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
+            this.extType = extType;
+            this.encoding = encoding;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            log.Info("Create a MoveDtControl, sizeLevel = " + sizeLevel);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.separator = separator;
         }
 
 
@@ -99,8 +116,6 @@ namespace Citta_T1.Controls.Move
             if (e.KeyChar == 13)
             {
                 FinishTextChange();
-                Global.GetCurrentDocument().UpdateAllLines();
-                Global.GetCanvasPanel().Invalidate(false);
             }
         }
         public void textBox1_Leave(object sender, EventArgs e)
@@ -123,6 +138,8 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox1.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -134,9 +151,17 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
+
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.StartID == this.ID)
+                {
+
+                }
+            }
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().DeleteDocumentElement(this);
+            Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
 
           
@@ -153,7 +178,7 @@ namespace Citta_T1.Controls.Move
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(this.Name, this.encoding);
+            prt.PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -208,6 +233,7 @@ namespace Citta_T1.Controls.Move
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
+            bool isNeedMoveLine = false;
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
@@ -258,11 +284,11 @@ namespace Citta_T1.Controls.Move
                 {
                     mr.StartP = this.GetStartPinLoc(0);
                     mr.UpdatePoints();
+                    isNeedMoveLine = true;
                 }
             }
-            this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-
-
+            if (isNeedMoveLine)
+                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         public Point WorldBoundControl(Point Pm)
@@ -381,55 +407,46 @@ namespace Citta_T1.Controls.Move
             sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
             sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
 
-            log.Info("算子长度:" + opControlName.Length);
-            log.Info("sumcount:" + sumcount);
-            log.Info("sumcountDigit:" + sumcountDigit);
             if (sumcount + sumcountDigit > maxLength)
             {
-                ResizeToBig();
+                int txtWidth = 84;
+                ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
-                log.Info("sumcountDigit:" + this.txtButton.Text);
+                
             }
+
+            else if (sumcount + sumcountDigit <= 6)
+            {
+
+                this.txtButton.Text = opControlName;
+                int txtWidth = 62;
+                ResizeControl(txtWidth, smallStatus);
+                
+            }
+
             else
             {
-                ResizeToNormal();
-                if (sumcount + sumcountDigit <= 6)
-                {
-                    ResizeToSmall();
-                }
                 this.txtButton.Text = opControlName;
-
+                int txtWidth = 72;
+                ResizeControl(txtWidth, normalStatus);
             }
+
+            
             this.nameToolTip.SetToolTip(this.txtButton, opControlName);
         }
 
-        public void ResizeToBig()
+        private void ResizeControl(int txtWidth, Size controlSize)
         {
-            this.Size = new System.Drawing.Size((int)(179 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(153 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(122 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(171 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
+            double f = Math.Pow(factor, sizeLevel);
+
+            this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
+            this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
+            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(10 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox1.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
-        public void ResizeToSmall()
-        {
-            this.Size = new System.Drawing.Size((int)(130 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(103 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(72 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(122 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-        }
-        public void ResizeToNormal()
-        {
-            this.Size = new System.Drawing.Size((int)(170 * Math.Pow(factor, sizeLevel)), (int)(25 * Math.Pow(factor, sizeLevel)));
-            this.rightPictureBox.Location = new System.Drawing.Point((int)(144 * Math.Pow(factor, sizeLevel)), (int)(5 * Math.Pow(factor, sizeLevel)));
-            this.txtButton.Size = new System.Drawing.Size((int)(114 * Math.Pow(factor, sizeLevel)), (int)(22 * Math.Pow(factor, sizeLevel)));
-            this.textBox1.Size = new System.Drawing.Size((int)(110 * Math.Pow(factor, sizeLevel)), (int)(23 * Math.Pow(factor, sizeLevel)));
-            this.rectOut.Location = new System.Drawing.Point((int)(162 * Math.Pow(factor, sizeLevel)), (int)(9 * Math.Pow(factor, sizeLevel)));
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-        }
+
         #endregion
 
         #region 右键菜单
@@ -494,9 +511,19 @@ namespace Citta_T1.Controls.Move
 
         public void OutPinInit(String status)
         {
+            //this.lineStaus = "noLine";
+            //foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            //{
+            //    if (mr.StartID == this.id)
+            //    {
+            //        this.lineStaus = "LineExit";
+            //        break;
+            //    }
+            //}
             this.lineStaus = status;
             PinOpLeaveAndEnter(new Point(0,0));
         }
+        
         #endregion
 
         #region 托块的放大与缩小

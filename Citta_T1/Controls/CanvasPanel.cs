@@ -90,11 +90,8 @@ namespace Citta_T1.Controls
             int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (isLarger && sizeLevel <= 2)
             {
-                log.Info("放大");
                 sizeLevel += 1;
                 Global.GetCurrentDocument().ScreenFactor *= factor;
-                log.Info(Global.GetCurrentDocument().ScreenFactor .ToString()+ "放大倍数");
-
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -133,18 +130,22 @@ namespace Citta_T1.Controls
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
             ElementType type = ElementType.Null;
+            char separator = '\t';
             string path = "";
             string text = "";
-            DSUtil.Encoding isutf8 = DSUtil.Encoding.UTF8;
+            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
+            DSUtil.ExtType extType;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().SizeL;
             if (type == ElementType.DataSource)
             {
-                path = e.Data.GetData("Path").ToString();                
-                isutf8 = (DSUtil.Encoding)e.Data.GetData("Encoding");
-                AddNewDataSource(path, sizeLevel, text, location, isutf8);
+                path = e.Data.GetData("Path").ToString();
+                separator = (char)e.Data.GetData("Separator");
+                encoding = (DSUtil.Encoding)e.Data.GetData("Encoding");
+                extType = (DSUtil.ExtType)e.Data.GetData("ExtType");
+                AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
@@ -385,7 +386,6 @@ namespace Citta_T1.Controls
                  *         ----------
                  */
                 (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
-                log.Info("endC.revisedPinIndex = " + (endC as MoveOpControl).RevisedPinIndex);
                 ModelRelation mr = new ModelRelation(
                     (startC as IMoveControl).GetID(),
                     (endC as IMoveControl).GetID(),
@@ -435,13 +435,11 @@ namespace Citta_T1.Controls
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
             // 拖动时的OnPaint处理
-
             if (Global.GetCurrentDocument() == null)
                 return;
 
             if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
                 return;
-
 
             //TODO
             //普通状态下算子的OnPaint处理
@@ -451,11 +449,11 @@ namespace Citta_T1.Controls
                 return;
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
             {
                 e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
             }
-
         }
 
 
@@ -466,7 +464,6 @@ namespace Citta_T1.Controls
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             foreach (ModelRelation mr in mrs)
             {
-                log.Info("mrs.Count = " + mrs.Count);
                 Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
                 line.DrawBezier(g);
             }
@@ -489,14 +486,16 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, DSUtil.Encoding encoding)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
                 sizeL,
                 text,
-                location);
-            btn.Encoding = encoding;
+                location,
+                separator,
+                extType,
+                encoding);
             AddNewElement(btn);
         }
         public MoveRsControl AddNewResult(int sizeL, string text, Point location) 

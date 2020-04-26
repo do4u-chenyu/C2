@@ -54,7 +54,9 @@ namespace Citta_T1.Business.Model
         private string dataSourcePath;
         private string description;
         private int id;
+        private char separator;
         private DSUtil.Encoding encoding;
+        private DSUtil.ExtType extType;
 
 
 
@@ -100,10 +102,15 @@ namespace Citta_T1.Business.Model
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public char Separator { get => separator; set => separator = value; }
 
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
+        public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
+            char separator = '\t',
+            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
+            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
-            Init(type, ctl, des, bcpPath, subType, id, encoding);
+            Init(type, ctl, des, bcpPath, subType, id, separator, extType, encoding);
         }
 
         public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementSubType subType, int id)
@@ -117,11 +124,14 @@ namespace Citta_T1.Business.Model
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementSubType.Null, id,ctl.Encoding);
+            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementSubType.Null, id, ctl.Separator, ctl.ExtType, ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath,  ElementSubType subType, int id, DSUtil.Encoding encoding)
+        private void Init(ElementType type, Control ctl, string des, string bcpPath,  ElementSubType subType, int id, 
+            char separator,
+            DSUtil.ExtType extType, 
+            DSUtil.Encoding encoding)
         {
             this.type = type;
             this.subType = subType;
@@ -130,6 +140,8 @@ namespace Citta_T1.Business.Model
             this.SetName(des);
             this.description = des;
             this.id = id;
+            this.separator = separator;
+            this.extType = extType;
             this.encoding = encoding;
             
 
