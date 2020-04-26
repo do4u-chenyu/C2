@@ -94,7 +94,11 @@ namespace Citta_T1.Business.Model
                     pathNode.InnerText = me.GetPath();
                     modelElementXml.AppendChild(pathNode);
 
-                    XmlElement extTypeNode = xDoc.CreateElement("extType"); // TODO [DK] 写
+                    XmlElement sepTypeNode = xDoc.CreateElement("separator"); // TODO [DK] 写ASCII码
+                    sepTypeNode.InnerText = "&#" + me.Separator.ToString(); 
+                    modelElementXml.AppendChild(sepTypeNode);
+
+                    XmlElement extTypeNode = xDoc.CreateElement("extType");
                     extTypeNode.InnerText = me.ExtType.ToString();
                     modelElementXml.AppendChild(extTypeNode);
 
@@ -240,9 +244,17 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   // TODO 读
+                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   
                         // 绑定线
                         cotl.ID = id;
+                        char[] seps = xn.SelectSingleNode("separator").InnerText.ToCharArray();
+                        if (seps.Length >= 3)
+                            cotl.Separator = seps[2];           // TODO 读
+                        else 
+                        {
+                            cotl.Separator = '\t';
+                            log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+                        } 
                         cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
                         cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
@@ -279,7 +291,10 @@ namespace Citta_T1.Business.Model
                         this.modelDocument.ModelRelations.Add(modelRelationElement);
                     }
                 }
-                catch(Exception e) { log.Error(e.Message); }
+                catch(Exception e) 
+                { 
+                    log.Error("读取xml文件出错， error: " + e.Message); 
+                }
                
             }
         }
