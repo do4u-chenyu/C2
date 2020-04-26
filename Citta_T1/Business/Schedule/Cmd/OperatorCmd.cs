@@ -95,23 +95,23 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             /*
              * 判断条件
-             * 1、是否是excel,是:catXLS，否:2
+             * 1、是否是excel,是:cat_xls，否:2
              * 2、bcp是什么格式，判断encoding,是gbk:tail | iconv ,否：tail
              */
             string filename = System.IO.Path.GetFileName(inputfile);
             if (filename.IndexOf(".xls") > 0)
             {
-                return string.Format("sbin\\catXLS.exe {0} | sbin\\iconv.exe -f gbk -t utf-8", inputfile);
+                return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\tr.exe -d '\\r' ", inputfile);
             }
             else
             {
                 if(JudgeInputFileEncoding(inputfile) == DSUtil.Encoding.GBK)
                 {
-                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 ", inputfile);
+                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\tr.exe -d '\\r' ", inputfile);
                 }
                 else
                 {
-                    return string.Format("sbin\\tail.exe -n +2 {0} ", inputfile);
+                    return string.Format("sbin\\tail.exe -n +2 {0} | sbin\\tr.exe -d '\\r' ", inputfile);
                 }
             }
         }

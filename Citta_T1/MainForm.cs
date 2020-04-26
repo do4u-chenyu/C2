@@ -119,7 +119,7 @@ namespace  Citta_T1
         public void DeleteDocumentElement(Control ct)
         {
             SetDocumentDirty();
-            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct);
+            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct); //TODO 先删再dirty
         }
 
 
@@ -233,6 +233,10 @@ namespace  Citta_T1
             this.downloadButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
+
+            //运行状态动图定位
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
@@ -474,14 +478,7 @@ namespace  Citta_T1
         private void RunButton_Click(object sender, EventArgs e)
         {
             Manager currentManager = Global.GetCurrentDocument().Manager;
-
-            //初次运行时，绑定线程与ui交互的委托
-            if (currentManager.ModelStatus == ModelStatus.Null)
-            {
-                currentManager.UpdateLogDelegate = UpdataLogStatus;
-                currentManager.TaskCallBack = Accomplish;
-                currentManager.UpdateGifDelegate = UpdataRunningGif;
-            }
+            BindUiManagerFunc();
 
             if (this.runButton.Name == "runButton")
             {
@@ -512,6 +509,29 @@ namespace  Citta_T1
             UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
+        public void SetCanvasEnable(bool status)
+        {
+            foreach (Control c in Global.GetCanvasPanel().Controls)
+            {
+                //log.Info("暂停该控件：" + c.Name);
+                if (c.Name == "MoveRsControl" || c.Name == "MoveOpControl")
+                {
+                    c.Enabled = status;
+                }
+            }
+        }
+
+        public void BindUiManagerFunc()
+        {
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            //初次运行时，绑定线程与ui交互的委托
+            if (currentManager.ModelStatus == ModelStatus.Null)
+            {
+                currentManager.UpdateLogDelegate = UpdataLogStatus;
+                currentManager.TaskCallBack = Accomplish;
+                currentManager.UpdateGifDelegate = UpdataRunningGif;
+            }
+        }
 
         //更新log
         private void UpdataLogStatus(string log)
@@ -589,25 +609,30 @@ namespace  Citta_T1
 
 
 
-        private void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
+        public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
             switch (modelStatus)
             {
+                //点击暂停按钮
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
+                //点击运行按钮
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
+                    //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    //SetCanvasEnable(true);
                     break;
                 default:
                     this.runButton.Name = "runButton";
@@ -615,6 +640,7 @@ namespace  Citta_T1
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
             }
         }

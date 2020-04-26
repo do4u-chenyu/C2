@@ -24,9 +24,12 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
+        private bool hasNewDataSource;
+        private LogUtil log = LogUtil.GetInstance("MinOperatorView");
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.hasNewDataSource = false;
             dataPath = "";
             columnName = new string[] { };
             oldColumnName = new List<string>();
@@ -66,12 +69,16 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
                 return;
             }
-               
+            //输入数据源变化，并且输出重写
+            //if (hasResutl != null && this.hasNewDataSource)
+            //{
+            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
+            //    return;
+            //}
 
             //输出变化，重写BCP文件
-            if (this.oldOptionDict != "" && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -127,7 +134,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.OutList.Items[index].ToString());
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            
         }
         #endregion
         #region 初始化配置
@@ -151,9 +158,38 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.MinValueBox.Items.Add(name);
             }
-            this.opControl.DataSourceColumns = column;
+            CompareDataSource();
+            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
+        private void CompareDataSource()
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (this.opControl.Option.GetOption("minfield") != "")
+                {
+                    int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
+                    if (oldColumnList[index] != this.columnName[index])
+                        this.opControl.Option.OptionDict.Remove("minfield");
+                }
+                if (this.opControl.Option.GetOption("outfield") != "")
+                {
 
+                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
+                    {
+                        this.opControl.Option.OptionDict.Remove("outfield");
+                        this.hasNewDataSource = true;
+                    }
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
+           
+        }
         #endregion
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); } 

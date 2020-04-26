@@ -20,13 +20,14 @@ namespace Citta_T1.OperatorViews
         private string[] columnName1;
         private string oldOptionDict;
         private List<string> selectColumn;
+        private LogUtil log = LogUtil.GetInstance("CollideOperatorView");
 
         public CollideOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             this.opControl = opControl;
-            columnName0 = new string[] { };
-            columnName1 = new string[] { };
+            this.columnName0 = new string[] { };
+            this.columnName1 = new string[] { };
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();            
             LoadOption();
@@ -39,14 +40,21 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+
+                this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
+                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+
+                this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
             }
+           
 
 
             foreach (string name in this.columnName0)
@@ -65,10 +73,9 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
-            this.opControl.DataSourceColumns = column;
             return columnName;
         }
-
+        
         #endregion
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
@@ -88,8 +95,6 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-               
-
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -136,7 +141,7 @@ namespace Citta_T1.OperatorViews
         private void InitNewFactorControl(int count)
         {
             for (int line = 0; line < count; line++)
-            {
+            { 
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
@@ -152,6 +157,7 @@ namespace Citta_T1.OperatorViews
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                
             }
             if (factor1 != "")
             {
@@ -160,7 +166,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                 this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
             }
-            if (count > 1)
+            if (count -1 >0)
                 InitNewFactorControl(count - 1);
             else return;
             for (int i = 2; i < (count + 1); i++)
@@ -176,8 +182,43 @@ namespace Citta_T1.OperatorViews
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
         }
+        //private void CompareDataSource(string field)
+        //{
+        //    //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+        //    if (this.opControl.Option.GetOption("columnname0") == "") return;
+        //    if (this.opControl.Option.GetOption("columnname1") == "") return;
+        //    string[] oldColumnList0 = this.opControl.Option.GetOption("columnname0").Split('\t');
+        //    string[] oldColumnList1 = this.opControl.Option.GetOption("columnname0").Split('\t');
+           
+        //    try
+        //    {
+        //        if (field.Contains("factor") &&  this.opControl.Option.GetOption("factor1") != "")
+        //        {
+        //            int count = this.opControl.Option.KeysCount("factor");
+        //            if (count < 0) return;
+        //            for (int num = 0; num < count; num++)
+        //            {
+        //                string[] checkIndexs = this.opControl.Option.GetOption("factor" + (num + 1).ToString()).Split(',');
+        //                int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+        //                bool IsEqual0 = oldColumnList0[outIndex[0]] != this.columnName0[outIndex[0]];
+        //                bool IsEqual1 = oldColumnList1[outIndex[1]] != this.columnName1[outIndex[1]];
+        //                if (IsEqual0 || IsEqual1)
+        //                    this.opControl.Option.OptionDict.Remove("factor1");
+        //            }
+        //        }
+                
+        //        if (field.Contains("outfield") && this.opControl.Option.GetOption("outfield") != "")
+        //        {
+
+        //            string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+        //            int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+        //            if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList0, this.columnName0, outIndex))
+        //                this.opControl.Option.OptionDict.Remove("outfield");
+        //        }
+        //    }
+        //    catch (Exception ex) { log.Error(ex.Message); };
+        //}
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();

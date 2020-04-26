@@ -48,6 +48,7 @@ namespace Citta_T1.Utils
         }
         public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
         {
+            //TODO 根据excel的结尾判断文件，是xml的用loadexcel来做
             string ret = "";
             // 刷新一下存放表头的字典
             PreLoadBcpFile(bcpFullPath, encoding);

@@ -129,16 +129,8 @@ namespace Citta_T1.Business.Model
         public void DeleteModelRelation(int ID)
         {
             StateChangeByDelete(ID);
-            List<ModelRelation> relations = new List<ModelRelation>();
-            foreach (ModelRelation mr in this.ModelRelations)
-            {
-                if (mr.StartID == ID || mr.EndID == ID) 
-                {
-                    continue;
-                }
-                relations.Add(mr);
-            }
-            this.ModelRelations = relations;
+
+            this.ModelRelations.RemoveAll(c => (c.EndID == ID||c.StartID == ID));
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChangeByDelete(int ID)

@@ -41,6 +41,7 @@ namespace Citta_T1.Controls.Move
         private OperatorOption option = new OperatorOption();
         private int id;
         private string dataSourceColumns;
+        private Dictionary<string, List<string>> doubleDataSourceColumns; 
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -59,8 +60,9 @@ namespace Citta_T1.Controls.Move
         public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public string DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
+        public Dictionary<string, List<string>> DoubleDataSourceColumns { get => this.doubleDataSourceColumns; set => this.doubleDataSourceColumns = value; }
 
 
 
@@ -105,10 +107,16 @@ namespace Citta_T1.Controls.Move
         private String lineStatus = "";
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
-        // public MoveOpControl() 这个空函数我已经删了好几次了,但每次都又被你们合并进来了
+        
+        private Size bigStatus    = new Size(155,28);
+        private Size normalStatus = new Size(147,28);
+        private Size smallStatus  = new Size(130,28);
+        
+        
         // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
+            this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
             this.status = ElementStatus.Null;
             InitializeComponent();
             textBox.Text = description;
@@ -256,7 +264,7 @@ namespace Citta_T1.Controls.Move
         }
         public Point WorldBoundControl(Point Pm)
         {
-           // float screenFactor = (this.Parent as CanvasPanel).ScreenFactor;
+           
              float screenFactor = Global.GetCurrentDocument().ScreenFactor;
              Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
             
@@ -394,56 +402,43 @@ namespace Citta_T1.Controls.Move
 
             if (sumCount + sumCountDigit > maxLength)
             {
-                ResizeToBig();
+                int txtWidth = 82;
+                ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
+
+            else if (sumCount + sumCountDigit <= 6)
+            {
+
+                this.txtButton.Text = opControlName;
+                int txtWidth = 57;
+                ResizeControl(txtWidth, smallStatus);
+
+            }
+
             else
             {
-                this.txtButton.Text = name;
-                
-                if (sumCount + sumCountDigit < 6) 
-                    ResizeToSmall();
-                else
-                    ResizeToNormal();
+                this.txtButton.Text = opControlName;
+                int txtWidth = 72;
+                ResizeControl(txtWidth, normalStatus);
             }
             this.nameToolTip.SetToolTip(this.txtButton, name);
         }
 
-        private void ResizeToBig()
+        private void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(155 * f), (int)(30 * f));//194，25
-            this.rightPictureBox.Location = new Point((int)(130 * f), (int)(7 * f));//159,2
-            this.statusBox.Location = new Point((int)(114 * f), (int)(7 * f));//新增
-            this.rectOut.Location = new Point((int)(146 * f), (int)(10 * f));
 
-            this.txtButton.Size = new Size((int)(82 * f), (int)(26 * f));
-            this.textBox.Size = new Size((int)(82 * f), (int)(26 * f));
+            this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
+            this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
+            this.statusBox.Location = new Point((int)((this.Width - 42) * f), (int)(this.statusBox.Top * f));
+            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
 
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void ResizeToSmall()
-        {
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(130 * f), (int)(28 * f));//142，25
-            this.rightPictureBox.Location = new Point((int)(105 * f), (int)(7 * f));//107,2
-            this.statusBox.Location = new Point((int)(89 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(57 * f), (int)(25 * f));
-            this.textBox.Size = new Size((int)(57 * f), (int)(24 * f));
-            this.rectOut.Location = new Point((int)(121 * f), (int)(10 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void ResizeToNormal()
-        {
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(147 * f), (int)(29 * f));//184，25
-            this.rightPictureBox.Location = new Point((int)(122 * f), (int)(7 * f));//151,2
-            this.statusBox.Location = new Point((int)(104 * f), (int)(7 * f));//新增
-            this.txtButton.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(25 * f));
-            this.rectOut.Location = new Point((int)(137 * f), (int)(10 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
+
         #endregion
 
         #region 右键菜单
@@ -519,14 +514,28 @@ namespace Citta_T1.Controls.Move
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
-            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), Global.GetCurrentDocument().SearchElementByID(this.ID));
-            int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
-            if (notReadyNum > 0)
+            //判断该算子是否配置完成
+            ModelElement currentOp = Global.GetCurrentDocument().SearchElementByID(this.ID);
+            if (currentOp.Status == ElementStatus.Null)
             {
-                MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //判断模型是否保存
+            if (Global.GetCurrentDocument().Dirty)
+            {
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //需要判断模型当前运行状态，正在运行时，无法执行运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            Global.GetMainForm().BindUiManagerFunc();
+
+            currentManager.Start();
+            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
 
@@ -540,14 +549,19 @@ namespace Citta_T1.Controls.Move
                 if (mr.StartID == this.id)
                 {
                     DeleteResultControl(mr.EndID);
-                    break;
+                    
+                }
+                if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
+                {
+                    ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                    (me.GetControl as IMoveControl).OutPinInit("noLine");
                 }
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetNaviViewControl().UpdateNaviView(); //TODO 放到后面
             Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();
+            Global.GetMainForm().SetDocumentDirty();      //不是很理解
            
         }
         private void DeleteResultControl(int endID)
@@ -557,8 +571,8 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().UpdateNaviView();
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    Global.GetNaviViewControl().UpdateNaviView();   // 放后面
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
                     return;
                 }
             }

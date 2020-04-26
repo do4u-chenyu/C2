@@ -475,7 +475,6 @@ namespace Citta_T1.Controls
         public void DeleteElement(Control ctl)
         {
             this.Controls.Remove(ctl);
-            
         }
         public void AddNewOperator(int sizeL, string text, Point location)
         {

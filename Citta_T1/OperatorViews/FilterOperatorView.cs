@@ -110,7 +110,7 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.comboBox1.Items.Add(name);
             }
-            this.opControl.DataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = column;
         }
         private void InitNewFactorControl(int count)
         {
@@ -211,7 +211,7 @@ namespace Citta_T1.OperatorViews
                 Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control4.Text = factorList[3];
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         #endregion
         private void createLine(int addLine)

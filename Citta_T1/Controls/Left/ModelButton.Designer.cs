@@ -52,7 +52,6 @@
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 0;
             this.rightPictureBox.TabStop = false;
-            this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
             // 
             // lelfPictureBox
             // 
@@ -85,26 +84,26 @@
             this.ReNameToolStripMenuItem,
             this.DeleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(113, 70);
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Enabled = false;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.OpenToolStripMenuItem.Text = "打开";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // ReNameToolStripMenuItem
             // 
             this.ReNameToolStripMenuItem.Name = "ReNameToolStripMenuItem";
-            this.ReNameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReNameToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.ReNameToolStripMenuItem.Text = "重命名";
             // 
             // DeleteToolStripMenuItem
             // 
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.DeleteToolStripMenuItem.Text = "删除";
             // 
             // ModelButton
@@ -118,6 +117,7 @@
             this.Controls.Add(this.rightPictureBox);
             this.Name = "ModelButton";
             this.Size = new System.Drawing.Size(141, 27);
+            this.Load += new System.EventHandler(this.ModelButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
