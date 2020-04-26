@@ -41,6 +41,14 @@ namespace Citta_T1.Business.DataSource
             nameNode.InnerText = db.DataName;
             dataSourceNode.AppendChild(nameNode);
 
+            XmlElement sepNode = xDoc.CreateElement("separator");
+            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString();                 // TODO 写
+            dataSourceNode.AppendChild(sepNode);
+
+            XmlElement extTypeNode = xDoc.CreateElement("extType");
+            extTypeNode.InnerText = db.ExtType.ToString();           
+            dataSourceNode.AppendChild(extTypeNode);
+
             XmlElement codeNode = xDoc.CreateElement("encoding");
             codeNode.InnerText = db.Encoding.ToString();
             dataSourceNode.AppendChild(codeNode);
@@ -48,10 +56,6 @@ namespace Citta_T1.Business.DataSource
             XmlElement pathNode = xDoc.CreateElement("path");
             pathNode.InnerText = db.FilePath;
             dataSourceNode.AppendChild(pathNode);
-
-            XmlElement extTypeNode = xDoc.CreateElement("extType");
-            extTypeNode.InnerText = db.ExtType.ToString();
-            dataSourceNode.AppendChild(extTypeNode);
 
             XmlElement countNode = xDoc.CreateElement("count");
             countNode.InnerText = "0";//默认为0
@@ -73,9 +77,22 @@ namespace Citta_T1.Business.DataSource
                 {
                     string filePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
+                    #region 读分隔符
+                    char separator;
+                    int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
+                    if (ascii < 0 || ascii > 255)
+                    {
+                        separator = '\t';
+                        log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+                    }
+                    else
+                    {
+                        separator = Convert.ToChar(ascii);
+                    }
+                    #endregion
                     DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
                     DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(filePath, dataName, extType, encoding);
+                    DataButton dataButton = new DataButton(filePath, dataName, separator, extType, encoding);
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }

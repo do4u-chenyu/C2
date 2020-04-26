@@ -49,11 +49,6 @@ namespace  Citta_T1
             this.optionDao = new OptionDao();
             InitializeGlobalVariable();
             InitializeControlsLocation();
-
-
-
-
-
         }
 
         private void InitializeMainFormEventHandler()
@@ -333,6 +328,7 @@ namespace  Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
+            // TODO [DK] BUG 这里是因为CanvasPanel设置了Dock属性，在this.bottomViewPanel.Height变化的时候，CanvasPanel的Height也变了，因此控件位置发生了改变，但是线并没有变
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
@@ -409,6 +405,7 @@ namespace  Citta_T1
         {
             this.formInputData.StartPosition = FormStartPosition.CenterScreen;
             this.formInputData.ShowDialog();
+            this.formInputData.ReSetParams();
         }
 
 
@@ -426,19 +423,19 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
-            this.dataSourceControl.GenDataButton(name, filePath, extType, encoding);
+            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, extType = extType, encoding = encoding);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -477,14 +474,7 @@ namespace  Citta_T1
         private void RunButton_Click(object sender, EventArgs e)
         {
             Manager currentManager = Global.GetCurrentDocument().Manager;
-
-            //初次运行时，绑定线程与ui交互的委托
-            if (currentManager.ModelStatus == ModelStatus.Null)
-            {
-                currentManager.UpdateLogDelegate = UpdataLogStatus;
-                currentManager.TaskCallBack = Accomplish;
-                currentManager.UpdateGifDelegate = UpdataRunningGif;
-            }
+            BindUiManagerFunc();
 
             if (this.runButton.Name == "runButton")
             {
@@ -515,6 +505,29 @@ namespace  Citta_T1
             UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
+        public void SetCanvasEnable(bool status)
+        {
+            foreach (Control c in Global.GetCanvasPanel().Controls)
+            {
+                //log.Info("暂停该控件：" + c.Name);
+                if (c.Name == "MoveRsControl" || c.Name == "MoveOpControl")
+                {
+                    c.Enabled = status;
+                }
+            }
+        }
+
+        public void BindUiManagerFunc()
+        {
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            //初次运行时，绑定线程与ui交互的委托
+            if (currentManager.ModelStatus == ModelStatus.Null)
+            {
+                currentManager.UpdateLogDelegate = UpdataLogStatus;
+                currentManager.TaskCallBack = Accomplish;
+                currentManager.UpdateGifDelegate = UpdataRunningGif;
+            }
+        }
 
         //更新log
         private void UpdataLogStatus(string log)
@@ -592,25 +605,30 @@ namespace  Citta_T1
 
 
 
-        private void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
+        public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
             switch (modelStatus)
             {
+                //点击暂停按钮
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
+                //点击运行按钮
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
+                    //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    //SetCanvasEnable(true);
                     break;
                 default:
                     this.runButton.Name = "runButton";
@@ -618,6 +636,7 @@ namespace  Citta_T1
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
+                    //SetCanvasEnable(true);
                     break;
             }
         }

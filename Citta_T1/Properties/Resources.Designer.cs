@@ -351,24 +351,6 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
-        ///   查找类似 num	groupid	user	location	label
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	 
-        /// 	 	 	 	  的本地化字符串。
-        /// </summary>
-        internal static string text_utf8 {
-            get {
-                return ResourceManager.GetString("text_utf8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap u72 {

@@ -29,16 +29,17 @@ namespace Citta_T1.Controls.Left
                 dragDropData.SetData("Type", ElementType.DataSource);
                 dragDropData.SetData("Path", (sender as Button).Name);
                 dragDropData.SetData("Text", (sender as Button).Text);
+                dragDropData.SetData("Separator", ((sender as Button).Parent as DataButton).Separator);
                 dragDropData.SetData("ExtType", ((sender as Button).Parent as DataButton).ExtType);
                 // 需要记录他的编码格式
                 dragDropData.SetData("Encoding", ((sender as Button).Parent as DataButton).Encoding);
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
-        public void GenDataButton(string dataName, string filePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void GenDataButton(string dataName, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
-            DataButton b = new DataButton(filePath, dataName, extType, encoding);
+            DataButton b = new DataButton(filePath, dataName, separator, extType, encoding);
             b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
             b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 判断是否有路径文件
