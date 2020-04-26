@@ -70,6 +70,7 @@
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
+            this.leftPictureBox.MouseEnter += new System.EventHandler(this.leftPictureBox_MouseEnter);
             // 
             // rightPictureBox
             // 

@@ -43,5 +43,10 @@ namespace Citta_T1
             this.Close();
            
         }
+
+        private void userNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

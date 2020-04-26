@@ -51,7 +51,11 @@ namespace Citta_T1.Controls.Left
             helpInfo = txtButton.Text;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format("文件类型:{0},分割符:{1}", this.ExtType, this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}", 
+                encoding.ToString(),
+                this.ExtType,
+                this.Count,
+                this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -120,6 +124,14 @@ namespace Citta_T1.Controls.Left
 
         }
 
-
+        private void leftPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            string helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}",
+                                        encoding.ToString(),
+                                        this.ExtType,
+                                        this.Count,
+                                        this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+        }
     }
 }

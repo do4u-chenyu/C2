@@ -154,7 +154,7 @@ namespace  Citta_T1
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.CurrentDocument.Load();
-            this.modelDocumentDao.CurrentDocument.DocumentElementCount();
+            this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
             this.modelDocumentDao.CurrentDocument.Show();
             this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
@@ -330,11 +330,11 @@ namespace  Citta_T1
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏数据框");
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
             }
             if (bottomViewPanel.Height == 40)
             {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "显示数据框");
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
         }
 
@@ -653,6 +653,14 @@ namespace  Citta_T1
                 this.leftToolBoxPanel.Width = 10;
             }
             InitializeControlsLocation();
+            if (this.leftToolBoxPanel.Width == 187)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            if (this.leftToolBoxPanel.Width == 10)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+            }
         }
 
         public void RenameDataButton(string index, string dstName)
@@ -700,14 +708,45 @@ namespace  Citta_T1
             }
         }
 
-        private void headPanel_Paint(object sender, PaintEventArgs e)
-        {
 
+        private void usernamelabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.usernamelabel, this.userName +"已登录");
         }
 
-        private void usernamelabel_Click(object sender, EventArgs e)
+        private void stopButton_MouseMove(object sender, MouseEventArgs e)
         {
+            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
+        }
 
+        private void runButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.runButton, "开始调试");
+        }
+
+        private void downloadButton_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
+        }
+
+        private void previewLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.previewLabel, "数据预览");
+        }
+
+        private void logLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.logLabel, "运行日志");
+        }
+
+        private void errorLabel_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.errorLabel, "报错信息");
+        }
+
+        private void flowControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.toolTip1.SetToolTip(this.flowControl, "工具栏");
         }
     }
 }

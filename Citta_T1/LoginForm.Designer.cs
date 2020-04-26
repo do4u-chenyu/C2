@@ -39,9 +39,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(166, 54);
+            this.label1.Location = new System.Drawing.Point(221, 72);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 24);
+            this.label1.Size = new System.Drawing.Size(86, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "用户名";
             // 
@@ -51,29 +52,33 @@
             this.userNameComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.userNameComboBox.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.userNameComboBox.FormattingEnabled = true;
-            this.userNameComboBox.Location = new System.Drawing.Point(104, 97);
+            this.userNameComboBox.Location = new System.Drawing.Point(139, 129);
+            this.userNameComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userNameComboBox.Name = "userNameComboBox";
-            this.userNameComboBox.Size = new System.Drawing.Size(191, 28);
+            this.userNameComboBox.Size = new System.Drawing.Size(253, 35);
             this.userNameComboBox.TabIndex = 2;
             this.userNameComboBox.Text = "新手上路";
+            this.userNameComboBox.SelectedIndexChanged += new System.EventHandler(this.userNameComboBox_SelectedIndexChanged);
             // 
             // loginCheckBox
             // 
             this.loginCheckBox.AutoSize = true;
             this.loginCheckBox.Checked = true;
             this.loginCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.loginCheckBox.Location = new System.Drawing.Point(104, 177);
+            this.loginCheckBox.Location = new System.Drawing.Point(139, 236);
+            this.loginCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.loginCheckBox.Name = "loginCheckBox";
-            this.loginCheckBox.Size = new System.Drawing.Size(84, 16);
+            this.loginCheckBox.Size = new System.Drawing.Size(110, 20);
             this.loginCheckBox.TabIndex = 4;
             this.loginCheckBox.Text = "记住用户名";
             this.loginCheckBox.UseVisualStyleBackColor = true;
             // 
             // loginbutton
             // 
-            this.loginbutton.Location = new System.Drawing.Point(104, 138);
+            this.loginbutton.Location = new System.Drawing.Point(139, 184);
+            this.loginbutton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.loginbutton.Name = "loginbutton";
-            this.loginbutton.Size = new System.Drawing.Size(191, 23);
+            this.loginbutton.Size = new System.Drawing.Size(255, 31);
             this.loginbutton.TabIndex = 6;
             this.loginbutton.Text = "登录";
             this.loginbutton.UseVisualStyleBackColor = true;
@@ -81,9 +86,9 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 252);
+            this.ClientSize = new System.Drawing.Size(535, 336);
             this.Controls.Add(this.loginbutton);
             this.Controls.Add(this.loginCheckBox);
             this.Controls.Add(this.userNameComboBox);

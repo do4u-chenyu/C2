@@ -1,18 +1,13 @@
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls;
 
 namespace Citta_T1.Business.Model
 {
@@ -213,16 +208,17 @@ namespace Citta_T1.Business.Model
                 el1.Hide();
         }
 
-        public void DocumentElementCount()
+        public int ReCountDocumentMaxElementID()
         {
             if (this.modelElements.Count == 0)
-                return;
+                return 0;
             foreach (ModelElement me in this.modelElements)
             {
-                if (me.ID > elementCount)
-                    elementCount = me.ID;
+                if (me.ID > ElementCount)
+                    ElementCount = me.ID;
             }
-             elementCount += 1;
+            ElementCount += 1;
+            return ElementCount;
         }
 
         
