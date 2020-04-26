@@ -10,6 +10,7 @@ using static Citta_T1.Controls.CanvasPanel;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using Citta_T1.Business.Schedule;
 
 namespace Citta_T1.Controls.Move
 {
@@ -336,6 +337,51 @@ namespace Citta_T1.Controls.Move
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
             ModelDocumentDirtyEvent?.Invoke();
+        }
+
+        public void RunMenuItem_Click(object sender, EventArgs e)
+        {
+            //运行到此
+            ModelElement currentRs = Global.GetCurrentDocument().SearchElementByID(this.ID);
+
+            //找到对应的op算子
+            ModelElement currentOp = null;
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.EndID == this.ID)
+                {
+                    currentOp = Global.GetCurrentDocument().SearchElementByID(mr.StartID); 
+                }
+            }
+
+            //未找到op算子？？
+            if(currentOp == null)
+            {
+                MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (currentOp.Status == ElementStatus.Null)
+            {
+                MessageBox.Show("该算子对应的操作算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //判断模型是否保存
+            if (Global.GetCurrentDocument().Dirty)
+            {
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //需要判断模型当前运行状态，正在运行时，无法执行运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            Global.GetMainForm().BindUiManagerFunc();
+
+            currentManager.Start();
+            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
