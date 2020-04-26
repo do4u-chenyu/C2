@@ -23,6 +23,8 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private List<string> selectName;
         private string oldOptionDict;
+        private LogUtil log = LogUtil.GetInstance("AvgOperatorView");
+
         public AvgOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -33,7 +35,8 @@ namespace Citta_T1.OperatorViews
            
             this.oldAvg = this.AvgComBox.Text;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-        }
+           
+    }
         #region 初始化配置
         private void InitOptionInfor()
         {
@@ -70,10 +73,30 @@ namespace Citta_T1.OperatorViews
             string column = bcpInfo.columnLine;
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
-                this.AvgComBox.Items.Add(name); 
-            this.opControl.DataSourceColumns = column;
+                this.AvgComBox.Items.Add(name);
+            CompareDataSource();
+            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
+        private void CompareDataSource()
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (this.opControl.Option.GetOption("avgfield") != "")
+                {
+                    int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
+                    if (oldColumnList[index] != this.columnName[index])
+                        this.opControl.Option.OptionDict.Remove("avgfield");
+                        
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
 
+
+        }
         #endregion
 
         private void confirmButton_Click(object sender, EventArgs e)
@@ -99,8 +122,12 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectName);
                 return;
             }
-               
-               
+            //输出变化，重写BCP文件
+            List<string> oldColumn = new List<string>();
+            oldColumn.Add(this.oldAvg);
+            if (hasResutl != null &&  this.oldAvg != this.AvgComBox.Text)
+                Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
+
 
         }
 
@@ -126,7 +153,7 @@ namespace Citta_T1.OperatorViews
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            
         }
         #endregion
         private DSUtil.Encoding EnType(string type)

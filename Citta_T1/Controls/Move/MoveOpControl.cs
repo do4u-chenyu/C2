@@ -41,6 +41,7 @@ namespace Citta_T1.Controls.Move
         private OperatorOption option = new OperatorOption();
         private int id;
         private string dataSourceColumns;
+        private Dictionary<string, List<string>> doubleDataSourceColumns; 
 
         // 一些倍率
         public string ReName { get => textBox.Text; }
@@ -59,8 +60,9 @@ namespace Citta_T1.Controls.Move
         public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public string DataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
+        public Dictionary<string, List<string>> DoubleDataSourceColumns { get => this.doubleDataSourceColumns; set => this.doubleDataSourceColumns = value; }
 
 
 
@@ -114,6 +116,7 @@ namespace Citta_T1.Controls.Move
         // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
+            this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
             this.status = ElementStatus.Null;
             InitializeComponent();
             textBox.Text = description;
@@ -511,14 +514,28 @@ namespace Citta_T1.Controls.Move
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
-            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), Global.GetCurrentDocument().SearchElementByID(this.ID));
-            int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
-            if (notReadyNum > 0)
+            //判断该算子是否配置完成
+            ModelElement currentOp = Global.GetCurrentDocument().SearchElementByID(this.ID);
+            if (currentOp.Status == ElementStatus.Null)
             {
-                MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //判断模型是否保存
+            if (Global.GetCurrentDocument().Dirty)
+            {
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //需要判断模型当前运行状态，正在运行时，无法执行运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            Global.GetMainForm().BindUiManagerFunc();
+
+            currentManager.Start();
+            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
         }
 
 
@@ -542,9 +559,9 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetNaviViewControl().UpdateNaviView(); //TODO 放到后面
             Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();
+            Global.GetMainForm().SetDocumentDirty();      //不是很理解
            
         }
         private void DeleteResultControl(int endID)
@@ -554,8 +571,8 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().UpdateNaviView();
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    Global.GetNaviViewControl().UpdateNaviView();   // 放后面
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
                     return;
                 }
             }

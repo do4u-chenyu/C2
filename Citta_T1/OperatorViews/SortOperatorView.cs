@@ -66,8 +66,8 @@ namespace Citta_T1.OperatorViews
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
 
-            this.opControl.DataSourceColumns = column;
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }

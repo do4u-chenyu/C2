@@ -85,22 +85,21 @@ namespace Citta_T1.Business.Schedule
             //叶子节点列表
             leafNodeIds = new List<int>();
 
+            starNodes = new List<int>();
+            endNodes = new List<int>();
+
+            foreach (ModelRelation mr in modelRelations)
+            {
+                starNodes.Add(mr.StartID);
+                endNodes.Add(mr.EndID);
+            }
+
             if (this.state == "all")
             {
                 //从“运行”按钮进入,找到模型的最后一个元素
-                //TODO
-                //结束元素可能有多个,需要判断每个元素的出度
-
-                starNodes = new List<int>();
-                endNodes = new List<int>();
-
-                foreach (ModelRelation mr in modelRelations)
-                {
-                    starNodes.Add(mr.StartID);
-                    endNodes.Add(mr.EndID);
-                }
+                //DONE
+                //结束元素可能有多个,需要判断每个元素的出度 
                 leafNodeIds = endNodes.Except(starNodes).ToList();
-
             }
             else if (this.state == "mid")
             {

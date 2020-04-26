@@ -29,8 +29,8 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.opControl = opControl;          
-            columnName0 = new string[] { };
-            columnName1 = new string[] { };
+            this.columnName0 = new string[] { };
+            this.columnName1 = new string[] { };
             selectColumn = new List<string>();
             InitOptionInfo();
             LoadOption();
@@ -49,15 +49,19 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
 
+            this.opControl.DoubleDataSourceColumns["0"]= this.columnName0.ToList();
+            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+            this.opControl.Option.SetOption("columnname0", String.Join("\t",this.opControl.DoubleDataSourceColumns["0"]));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
 
             foreach (string name in this.columnName0)
                 this.comboBox1.Items.Add(name);
@@ -72,8 +76,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split('\t');
-            this.opControl.DataSourceColumns = column;
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+          
             return columnName;
         }
         #endregion

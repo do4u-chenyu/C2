@@ -23,17 +23,17 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private bool hasNewDataSource;
+        private LogUtil log = LogUtil.GetInstance("MaxOperatorView");
 
-        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             dataPath = "";
             this.hasNewDataSource = false;
-            columnName = new string[] { };
-            oldColumnName = new List<string>();
-            oldOutList = new List<int>();
+            this.columnName = new string[] { };
+            this.oldColumnName = new List<string>();
+            this.oldOutList = new List<int>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
@@ -76,11 +76,11 @@ namespace Citta_T1.OperatorViews
             }
               
             //输入数据源变化，并且输出重写
-            if (hasResutl != null && this.hasNewDataSource)
-            {
-                Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
-                 return;
-            }
+            //if (hasResutl != null && this.hasNewDataSource)
+            //{
+            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
+            //     return;
+            //}
               
             //输出变化，重写BCP文件
             if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
@@ -127,22 +127,25 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+            int maxIndex = -1;
+            int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("maxfield") != "")
             {
-                int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.MaxValueBox.Text = this.MaxValueBox.Items[index].ToString();
+                maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                this.MaxValueBox.Text = this.MaxValueBox.Items[maxIndex].ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
                 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList = indexs.ToList();
-                this.OutList.LoadItemCheckIndex(indexs);
-                foreach(int index in indexs)
-                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
+                outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = outIndexs.ToList();
+                this.OutList.LoadItemCheckIndex(outIndexs);
+                foreach(int i in outIndexs)
+                    this.oldColumnName.Add(this.OutList.Items[i].ToString());
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.DataSourceColumns);
+           
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         #endregion
         #region 初始化配置
@@ -169,38 +172,34 @@ namespace Citta_T1.OperatorViews
                 this.MaxValueBox.Items.Add(name);
             }
             CompareDataSource();
-            this.opControl.DataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = column;
         }
         private void CompareDataSource()
         {
-            int index = -1;
-            string oldColumns = "";
-            List<string> oldName = new List<string>();
-            List<string> newName = new List<string>();
-            int[] outName = new int[] { };
-
-            if (this.opControl.Option.GetOption("maxfield") != "")
-               index=Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-            if (this.opControl.Option.GetOption("columnname") != "")
-                oldColumns =this.opControl.Option.GetOption("columnname");
-            string[] oldColumnList = oldColumns.Split('\t');
-            if (index != -1 && oldColumnList[index] != this.columnName[index])
-                this.opControl.Option.OptionDict.Remove("maxfield");
-            if(this.opControl.Option.GetOption("outfield") != "")
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
             {
-                outName = Array.ConvertAll<string, int>((this.opControl.Option.GetOption("outfield").Split(',')), int.Parse);
-                foreach (int i in outName)
+                if (this.opControl.Option.GetOption("maxfield") != "")
                 {
-                    oldName.Add(oldColumnList[i]);
-                    newName.Add(this.columnName[i]);
+                    int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                    if (oldColumnList[index] != this.columnName[index])
+                        this.opControl.Option.OptionDict.Remove("maxfield");
                 }
-                if (!Enumerable.SequenceEqual(oldName, newName))
-                { 
-                    this.opControl.Option.OptionDict.Remove("outfield");
-                    this.hasNewDataSource = true;
+                if (this.opControl.Option.GetOption("outfield") != "")
+                {
+
+                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
+                    {
+                        this.opControl.Option.OptionDict.Remove("outfield");
+                        this.hasNewDataSource = true;
+                    }
                 }
-                    
             }
+            catch (Exception ex) { log.Error(ex.Message); };
         }
 
         #endregion

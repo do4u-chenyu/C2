@@ -129,6 +129,7 @@ namespace Citta_T1.Business.Model
         public void DeleteModelRelation(int ID)
         {
             StateChangeByDelete(ID);
+
             this.ModelRelations.RemoveAll(c => (c.EndID == ID||c.StartID == ID));
             Global.GetCanvasPanel().Invalidate();
         }
