@@ -10,6 +10,7 @@ using static Citta_T1.Controls.CanvasPanel;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using Citta_T1.Business.Schedule;
 
 namespace Citta_T1.Controls.Move
 {
@@ -57,7 +58,7 @@ namespace Citta_T1.Controls.Move
         List<int> endLineIndexs = new List<int>() { };
 
         //绘制引脚
-        private Point leftPin = new Point(2, 10);
+        private Point leftPin = new Point(2, 11);
         private Point rightPin = new Point(130, 8);
         private int pinWidth = 6;
         private int pinHeight = 6;
@@ -72,6 +73,11 @@ namespace Citta_T1.Controls.Move
         private ControlMoveWrapper controlMoveWrapper;
         private Bitmap staticImage;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+
+
+        private Size bigStatus = new Size(140, 28);
+        private Size normalStatus = new Size(132, 28);
+        private Size smallStatus = new Size(120, 28);
 
         public ElementStatus Status
         {
@@ -266,54 +272,38 @@ namespace Citta_T1.Controls.Move
 
             if (sumCount + sumCountDigit > maxLength)
             {
-                ResizeToBig();
+                int txtWidth = 82;
+                ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
+            else if (sumCount + sumCountDigit <= 6)
+            {
+                this.txtButton.Text = name;                
+                int txtWidth = 62;
+                ResizeControl(txtWidth,smallStatus);
+            }      
             else
             {
                 this.txtButton.Text = name;
-
-                if (sumCount + sumCountDigit <= 6)
-                    ResizeToSmall();
-                else
-                    ResizeToNormal();
+                int txtWidth = 72;
+                ResizeControl(txtWidth, normalStatus);
             }
             this.nameToolTip.SetToolTip(this.txtButton, name);
         }
 
-        private void ResizeToBig()
+        private void ResizeControl(int txtWidth,Size controlSize)
         {
-            log.Info("[" + Name + "]" + "ResizeToBig: " + sizeLevel);
             double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(140 * f), (int)(28 * f));
-            this.rightPictureBox.Location = new Point((int)(110 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(130 * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(82 * f), (int)(24 * f));
-            this.textBox.Size = new Size((int)(82 * f), (int)(24 * f));
+            
+            this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
+            this.rightPictureBox.Location = new Point((int)((this.Width - 30) * f), (int)(this.rightPictureBox.Top * f));
+            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
-        private void ResizeToSmall()
-        {
-            log.Info("[" + Name + "]" + "ResizeToSmall: " + sizeLevel);
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(120 * f), (int)(26 * f));
-            this.rightPictureBox.Location = new Point((int)(90 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(110 * f), (int)(9 * f));
-            this.txtButton.Size = new Size((int)(62 * f), (int)(22 * f));
-            this.textBox.Size = new Size((int)(62 * f), (int)(23 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void ResizeToNormal()
-        {
-            log.Info("[" + Name + "]" + "ResizeToNormal: " + sizeLevel);
-            double f = Math.Pow(factor, sizeLevel);
-            this.Size = new Size((int)(132 * f), (int)(26 * f));
-            this.rightPictureBox.Location = new Point((int)(101 * f), (int)(2 * f));
-            this.rectOut.Location = new Point((int)(122 * f), (int)(9 * f));
-            this.txtButton.Size = new Size((int)(72 * f), (int)(22 * f));
-            this.textBox.Size = new Size((int)(72 * f), (int)(23 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
+
+
         #endregion
 
         #region 右键菜单
@@ -338,7 +328,54 @@ namespace Citta_T1.Controls.Move
             ModelDocumentDirtyEvent?.Invoke();
         }
 
-      
+
+        public void RunMenuItem_Click(object sender, EventArgs e)
+        {
+            //运行到此
+            ModelElement currentRs = Global.GetCurrentDocument().SearchElementByID(this.ID);
+
+            //找到对应的op算子
+            ModelElement currentOp = null;
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.EndID == this.ID)
+                {
+                    currentOp = Global.GetCurrentDocument().SearchElementByID(mr.StartID); 
+                }
+            }
+
+            //未找到op算子？？
+            if(currentOp == null)
+            {
+                MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (currentOp.Status == ElementStatus.Null)
+            {
+                MessageBox.Show("该算子对应的操作算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //判断模型是否保存
+            if (Global.GetCurrentDocument().Dirty)
+            {
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            //需要判断模型当前运行状态，正在运行时，无法执行运行到此
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            Global.GetMainForm().BindUiManagerFunc();
+
+            currentManager.Start();
+            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+
+        }
+
+
+
         #endregion
 
         #region textBox

@@ -130,6 +130,7 @@ namespace Citta_T1.Business.Model
         {
             StateChangeByDelete(ID);
             this.ModelRelations.RemoveAll( c=> (c.StartID== ID || c.EndID == ID));
+
             Global.GetCanvasPanel().Invalidate();
         }
         public void StateChangeByDelete(int ID)

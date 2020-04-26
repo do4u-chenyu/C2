@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(117, 8);
+            this.rightPictureBox.Location = new System.Drawing.Point(117, 5);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(14, 14);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -82,22 +82,8 @@ namespace Citta_T1.Controls.Move
             this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-            // 
-            // leftPinPictureBox
-            // 
-            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.leftPinPictureBox.TabIndex = 0;
-            this.leftPinPictureBox.TabStop = false;
-            // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.rightPinPictureBox.TabIndex = 0;
-            this.rightPinPictureBox.TabStop = false;
+
+
             // 
             // contextMenuStrip
             // 
@@ -197,7 +183,7 @@ namespace Citta_T1.Controls.Move
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(98, 8);
+            this.statusBox.Location = new System.Drawing.Point(98, 5);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

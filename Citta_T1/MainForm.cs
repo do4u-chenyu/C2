@@ -228,6 +228,10 @@ namespace  Citta_T1
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
+            //运行状态动图定位
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
             Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
