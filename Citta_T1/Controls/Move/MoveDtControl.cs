@@ -138,6 +138,14 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
+
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                if (mr.StartID == this.ID)
+                {
+
+                }
+            }
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().DeleteDocumentElement(this);

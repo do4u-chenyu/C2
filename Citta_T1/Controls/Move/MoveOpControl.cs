@@ -542,11 +542,11 @@ namespace Citta_T1.Controls.Move
                     DeleteResultControl(mr.EndID);
                     
                 }
-                //if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
-                //{
-                //   ModelElement me =  Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                //   (me.GetControl as IMoveControl).OutPinInit("noLine");
-                //}
+                if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
+                {
+                    ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                    (me.GetControl as IMoveControl).OutPinInit("noLine");
+                }
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
