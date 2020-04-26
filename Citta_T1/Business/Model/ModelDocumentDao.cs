@@ -47,7 +47,7 @@ namespace Citta_T1.Business.Model
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
-            md.DocumentElementCount();
+            md.ReCountDocumentMaxElementID();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
