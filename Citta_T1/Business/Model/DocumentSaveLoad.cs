@@ -95,7 +95,7 @@ namespace Citta_T1.Business.Model
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement sepTypeNode = xDoc.CreateElement("separator"); // TODO [DK] 写ASCII码
-                    sepTypeNode.InnerText = "&#" + me.Separator.ToString(); 
+                    sepTypeNode.InnerText = Convert.ToInt32(me.Separator).ToString(); 
                     modelElementXml.AppendChild(sepTypeNode);
 
                     XmlElement extTypeNode = xDoc.CreateElement("extType");
@@ -247,14 +247,20 @@ namespace Citta_T1.Business.Model
                         MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   
                         // 绑定线
                         cotl.ID = id;
-                        char[] seps = xn.SelectSingleNode("separator").InnerText.ToCharArray();
-                        if (seps.Length >= 3)
-                            cotl.Separator = seps[2];           // TODO 读
-                        else 
+                        #region 读分隔符
+                        char separator;
+                        int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
+                        if (ascii < 0 || ascii > 255)
                         {
-                            cotl.Separator = '\t';
+                            separator = '\t';
                             log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
-                        } 
+                        }
+                        else
+                        {
+                            separator = Convert.ToChar(ascii);
+                        }
+                        #endregion
+                        cotl.Separator = separator;
                         cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
                         cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
                         ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
