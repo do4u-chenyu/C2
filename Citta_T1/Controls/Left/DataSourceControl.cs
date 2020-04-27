@@ -61,7 +61,7 @@ namespace Citta_T1.Controls.Left
 
             dataButton.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
             dataButton.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            this.dataSourceDictI2B.Add(dataButton.FilePath, dataButton);
+            this.dataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.LocalFrame.Controls.Add(dataButton);
         }
 

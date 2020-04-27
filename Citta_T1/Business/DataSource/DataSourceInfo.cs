@@ -54,7 +54,7 @@ namespace Citta_T1.Business.DataSource
             dataSourceNode.AppendChild(codeNode);
 
             XmlElement pathNode = xDoc.CreateElement("path");
-            pathNode.InnerText = db.FilePath;
+            pathNode.InnerText = db.FullFilePath;
             dataSourceNode.AppendChild(pathNode);
 
             XmlElement countNode = xDoc.CreateElement("count");

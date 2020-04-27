@@ -14,14 +14,13 @@ namespace Citta_T1.Controls.Left
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
-        public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
         { get => this.count;
             set
             {
                 this.count = value;
-                EnableDeleteDataSource(this.count);
             }
         }
 
@@ -54,7 +53,7 @@ namespace Citta_T1.Controls.Left
             helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}", 
                 encoding.ToString(),
                 this.ExtType,
-                this.Count,
+                Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
                 this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
@@ -74,13 +73,12 @@ namespace Citta_T1.Controls.Left
             ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
         }
 
-        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 1. DataSource中删除控件
-            // 2. Program中删除数据
-            // TODO [DK] 3. 画布中已存在的该如何处理？ 
+            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+
             this.Parent.Controls.Remove(this);
-            BCPBuffer.GetInstance().Remove(this.txtButton.Name);
+            BCPBuffer.GetInstance().Remove(this.FullFilePath);
 
         }
         #endregion
@@ -117,21 +115,23 @@ namespace Citta_T1.Controls.Left
         {
             Clipboard.SetText(txtButton.Name);
         }
-        private void EnableDeleteDataSource(int count)
-        {
-            if(count>0)
-                this.DeleteToolStripMenuItem.Enabled = true;
 
-        }
 
-        private void leftPictureBox_MouseEnter(object sender, EventArgs e)
+        private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
             string helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}",
                                         encoding.ToString(),
                                         this.ExtType,
-                                        this.Count,
+                                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
                                         this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+        }
+
+        private void RemoveToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+            if (count > 0)
+                this.RemoveToolStripMenuItem.ToolTipText = String.Format("引用{0}次,卸载可能导致模型失效,请谨慎操作.", count);
         }
     }
 }
