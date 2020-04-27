@@ -40,17 +40,26 @@ namespace Citta_T1.Controls.Left
             this.extType = extType;
             this.encoding = encoding;
         }
-        private void moveOpControl1_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        private void DataButton_Load(object sender, EventArgs e)
         {
-            //String helpInfo = Program.inputDataDict[txtButton.Name].filePath;
+            // 数据源全路径浮动提示信息
             String helpInfo = txtButton.Name;
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
+
+            // 数据源名称浮动提示信息
+            helpInfo = txtButton.Text;
+            this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
+
+            helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}", 
+                encoding.ToString(),
+                this.ExtType,
+                this.Count,
+                this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
+
+
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -113,6 +122,16 @@ namespace Citta_T1.Controls.Left
             if(count>0)
                 this.DeleteToolStripMenuItem.Enabled = true;
 
+        }
+
+        private void leftPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            string helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}",
+                                        encoding.ToString(),
+                                        this.ExtType,
+                                        this.Count,
+                                        this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
     }
 }

@@ -544,8 +544,10 @@ namespace Citta_T1.Controls.Move
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             //删除连接的结果控件
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
+            foreach (ModelRelation mr in modelRelations)
             {
+                
                 if (mr.StartID == this.id)
                 {
                     DeleteResultControl(mr.EndID);
@@ -556,13 +558,21 @@ namespace Citta_T1.Controls.Move
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                     (me.GetControl as IMoveControl).OutPinInit("noLine");
                 }
+                
+                if (mr.StartID == ID || mr.EndID == this.id)
+                {
+                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCanvasPanel().Invalidate();
+                }
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-           
-            Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();      //不是很理解
-            Global.GetNaviViewControl().UpdateNaviView();// TODO 最后执行！
+
+            Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+
+
 
         }
         private void DeleteResultControl(int endID)
@@ -572,9 +582,10 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                 
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
-                    Global.GetNaviViewControl().UpdateNaviView();// TODO 最后执行！
+
+                    Global.GetCurrentDocument().StateChangeByDelete(endID);
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); 
+                    Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }
             }
@@ -582,10 +593,7 @@ namespace Citta_T1.Controls.Move
         private void OptionDirty()
         {
             if (this.status == ElementStatus.Null)
-            {
-                this.statusBox.Image = Properties.Resources.set;
-                this.OptionMenuItem.Enabled = false;
-            }  
+                this.statusBox.Image = Properties.Resources.set; 
             else if (this.status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (this.status == ElementStatus.Ready)

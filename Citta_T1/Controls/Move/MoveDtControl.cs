@@ -151,20 +151,22 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
+            foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == this.ID)
                 {
-
+                    Global.GetCurrentDocument().StateChangeByDelete(this.ID);
+                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCanvasPanel().Invalidate();
                 }
             }
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().DeleteDocumentElement(this);
+            Global.GetCanvasPanel().DeleteElement(this);           
+            Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
 
-          
+
         }
         #endregion
 

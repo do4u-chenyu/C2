@@ -31,13 +31,6 @@ namespace Citta_T1.Controls.Left
             
         }
         public bool EnableOpenDocument { get => this.OpenToolStripMenuItem.Enabled; set => this.OpenToolStripMenuItem.Enabled=value; }
- 
-
-        private void rightPictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            String helpInfo = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
-            this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
-        }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
 
@@ -45,7 +38,17 @@ namespace Citta_T1.Controls.Left
             Global.GetMainForm().LoadDocument(this.textButton.Text);
             this.OpenToolStripMenuItem.Enabled = false;
         }
-     
+
+        private void ModelButton_Load(object sender, EventArgs e)
+        {
+            // 模型全路径浮动提示信息
+            String helpInfo = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
+            this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
+
+            // 模型名称浮动提示信息
+            helpInfo = GetModelName();
+            this.toolTip1.SetToolTip(this.textButton, helpInfo);
+        }
     }
 
 

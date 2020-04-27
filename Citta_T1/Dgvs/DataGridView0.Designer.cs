@@ -49,7 +49,6 @@ namespace Citta_T1
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.Size = new System.Drawing.Size(1011, 137);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // DataGridView
             // 
@@ -58,7 +57,6 @@ namespace Citta_T1
             this.Controls.Add(this.dataGridView);
             this.Name = "DataGridView";
             this.Size = new System.Drawing.Size(1011, 137);
-            this.Load += new System.EventHandler(this.DataGridView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
