@@ -58,7 +58,7 @@ namespace Citta_T1.Business.DataSource
             XmlElement dataSourceNode = xDoc.CreateElement("DataSource");
             node.AppendChild(dataSourceNode);
             XmlElement nameNode = xDoc.CreateElement("name");
-            nameNode.InnerText = db.DataName;
+            nameNode.InnerText = db.DataSourceName;
             dataSourceNode.AppendChild(nameNode);
 
             XmlElement sepNode = xDoc.CreateElement("separator");
