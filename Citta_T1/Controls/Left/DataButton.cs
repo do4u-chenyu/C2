@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Left
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
-        public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
+        public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
         { get => this.count;
             set
@@ -30,11 +30,11 @@ namespace Citta_T1.Controls.Left
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public DataButton(string ffp, string dataSourceName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            txtButton.Text = dataName;
+            txtButton.Text = dataSourceName;
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
@@ -81,12 +81,12 @@ namespace Citta_T1.Controls.Left
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
                 rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"", 
-                    "卸载 " + this.DataName, 
+                    "卸载 " + this.DataSourceName, 
                     MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Information);
             else // count == 0, 不需要特别的警告信息
                 rs = MessageBox.Show("卸载数据源,请点击 \"确定\"",
-                    "卸载 " + this.DataName,
+                    "卸载 " + this.DataSourceName,
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
 
