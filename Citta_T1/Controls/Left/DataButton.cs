@@ -79,13 +79,13 @@ namespace Citta_T1.Controls.Left
             int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
             DialogResult rs = DialogResult.OK;
 
-            // 数据源引用大于0时,弹出警告窗
+            // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
                 rs = MessageBox.Show(RemoveMessageBoxTemplate, 
                     "卸载 " + this.DataName, 
                     MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Information);
-            else // count == 0
+            else // count == 0, 不需要特别的警告信息
                 rs = MessageBox.Show("卸载数据源,请点击 \"确认\"",
                     "卸载 " + this.DataName,
                     MessageBoxButtons.OKCancel,
