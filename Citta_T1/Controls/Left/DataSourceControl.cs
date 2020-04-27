@@ -42,8 +42,8 @@ namespace Citta_T1.Controls.Left
         {
             // 根据导入数据动态生成一个button
             DataButton b = new DataButton(fullFilePath, dataName, separator, extType, encoding);
-            b.Location = new System.Drawing.Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
-            b.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            b.Location = new Point(30, 50 * (this.dataSourceDictI2B.Count() + 1) - 40); // 递增
+            b.txtButton.MouseDown += new MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 判断是否有路径文件
             if (this.dataSourceDictI2B.ContainsKey(fullFilePath))
             {
@@ -96,14 +96,18 @@ namespace Citta_T1.Controls.Left
              this.ExternalFrame.Visible = false;
          }
 
-        public void ReLayoutLocalFrame()
+        private void ReLayoutLocalFrame()
         {
             //Layout
         }
 
         public void RemoveDataButton(DataButton dataButton)
         {
+            this.dataSourceDictI2B.Remove(dataButton.FullFilePath);
             this.LocalFrame.Controls.Remove(dataButton);
+            // 重新布局
+            ReLayoutLocalFrame();
+            // 保存
         }
     }
 }
