@@ -221,11 +221,7 @@ namespace Citta_T1.Business.Option
         }
 
         //新数据源修改输出
-        public void ModifyOut(List<string> currentcolumns,int ID)
-        {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
-            IsNewOut(path, currentcolumns, ID);
-        }
+
         public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
         {
             int maxIndex = outIndex.Max();
@@ -290,7 +286,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!currentcolumns.Contains(cn))
                 {
-                    IsNewOut(path, currentcolumns, ID);
+                    IsNewOut(currentcolumns, ID);
                     return;
                 }
                    
@@ -300,7 +296,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
                 {
-                    IsNewOut(path, currentcolumns, ID);
+                    IsNewOut(currentcolumns, ID);
                     return;
                 }
                    
@@ -316,8 +312,9 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
-        private void IsNewOut(String path, List<string> currentcolumns, int ID)
+        public void IsNewOut( List<string> currentcolumns, int ID)
         {
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
             BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
