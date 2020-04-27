@@ -47,7 +47,7 @@ namespace Citta_T1.Business.Model
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
-            md.DocumentElementCount();
+            md.ReCountDocumentMaxElementID();
             this.currentDocument = md;
             this.modelDocuments.Add(md);          
             return md;
@@ -277,6 +277,16 @@ namespace Citta_T1.Business.Model
             foreach (ModelDocument md in this.ModelDocuments)
                 count += md.ModelElements.Count;
 
+            return count;
+        }
+        // 特定Datasource在当前所有打开模型中的引用次数
+        public int CountDataSourceUsage(string ffp)
+        {
+            int count = 0;
+            foreach (ModelDocument md in this.ModelDocuments)
+                foreach (ModelElement me in md.ModelElements)
+                    if (me.Type == ElementType.DataSource && me.GetPath() == ffp)
+                        count++;
             return count;
         }
 

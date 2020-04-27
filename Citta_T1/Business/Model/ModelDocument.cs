@@ -1,18 +1,13 @@
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls;
 
 namespace Citta_T1.Business.Model
 {
@@ -121,35 +116,23 @@ namespace Citta_T1.Business.Model
                 if (!me.GetControl.Equals(control))
                     continue;
                 this.modelElements.Remove(me);
-                //删除与控件连接的关系
-                DeleteModelRelation(me.ID);
                 return;
             }   
         }
-        public void DeleteModelRelation(int ID)
-        {
-            StateChangeByDelete(ID);
-            this.ModelRelations.RemoveAll( c=> (c.StartID== ID || c.EndID == ID));
 
-            Global.GetCanvasPanel().Invalidate();
-        }
         public void StateChangeByDelete(int ID)
         {
 
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID)
+                if (mr.StartID != ID) continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ElementStatus.Null;
-                            //存在链路，后续链路中算子状态变化
-                            AllStateChange(me.ID);
-                        }
-                           
-                    }
+                    if (me.ID != mr.EndID) continue; 
+                    me.Status = ElementStatus.Null;
+                    //存在链路，后续链路中算子状态变化
+                    AllStateChange(me.ID);
+
                 }
             }
             
@@ -160,17 +143,12 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == operatorID)
+                if (mr.StartID != operatorID) continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ModifyStatus(me, me.Status);
-                            AllStateChange(mr.EndID);
-                        }
-                    }
-
+                    if (me.ID != mr.EndID) continue;
+                    me.Status = ModifyStatus(me, me.Status);
+                    AllStateChange(mr.EndID);
                 }
             }
         }
@@ -186,17 +164,13 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID)
+                if (mr.StartID != ID)  continue;
+                foreach (ModelElement me in this.ModelElements)
                 {
-                    foreach (ModelElement me in this.ModelElements)
-                    {
-                        if (me.ID == mr.EndID)
-                        {
-                            me.Status = ElementStatus.Null;
-                            StateChangeByOut(mr.EndID);
-                        }
-                           
-                    }
+                    if (me.ID != mr.EndID) continue;
+                    me.Status = ElementStatus.Null;
+                    StateChangeByOut(mr.EndID);
+
                 }
             }
         }
@@ -225,29 +199,26 @@ namespace Citta_T1.Business.Model
         public void Show()
         {
             foreach (ModelElement el1 in this.modelElements)
-            {
                 el1.Show();
-            }
         }
 
         public void Hide()
         {
             foreach (ModelElement el1 in this.modelElements)
-            {
                 el1.Hide();
-            }
         }
 
-        public void DocumentElementCount()
+        public int ReCountDocumentMaxElementID()
         {
             if (this.modelElements.Count == 0)
-                return;
+                return 0;
             foreach (ModelElement me in this.modelElements)
             {
-                if (me.ID > elementCount)
-                    elementCount = me.ID;
+                if (me.ID > ElementCount)
+                    ElementCount = me.ID;
             }
-             elementCount += 1;
+            ElementCount += 1;
+            return ElementCount;
         }
 
         

@@ -20,6 +20,7 @@ namespace Citta_T1.Utils
         private static RemarkControl remarkControl;
         private static LogView logView;
         private static OptionDao optionDao;                 // 模型配置工具类
+        private static DataSourceControl dataSourceControl; // 左侧数据源面板
 
 
         public static MainForm GetMainForm() { return mainForm; }
@@ -39,6 +40,7 @@ namespace Citta_T1.Utils
         public static RemarkControl GetRemarkControl() { return remarkControl; }
         public static LogView GetLogView() { return logView; } 
         public static OptionDao GetOptionDao() { return optionDao; } 
+        public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetModelTitlePanel(ModelTitlePanel mtp) { modelTitlePanel = mtp; }
@@ -50,7 +52,7 @@ namespace Citta_T1.Utils
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
         public static void SetLogView(LogView lv) { logView = lv; }
         public static void SetOptionDao(OptionDao od) { optionDao = od; }
-
+        public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
 
 
         private static string workspaceDirectory;           // 用户模型工作目录

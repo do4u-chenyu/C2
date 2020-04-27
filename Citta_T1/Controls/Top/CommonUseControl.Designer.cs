@@ -120,7 +120,7 @@
             this.formatButton.Size = new System.Drawing.Size(89, 32);
             this.formatButton.TabIndex = 12;
             this.formatButton.UseVisualStyleBackColor = true;
-            this.formatButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.formatButton_MouseClick);
+            this.formatButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormatButton_MouseClick);
             // 
             // moreButton
             // 

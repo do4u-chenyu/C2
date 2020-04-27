@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using System.Reflection;
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
@@ -14,17 +13,18 @@ namespace Citta_T1.Controls.Left
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
-        public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
         { get => this.count;
             set
             {
                 this.count = value;
-                EnableDeleteDataSource(this.count);
             }
         }
 
+        private static string RemoveMessageBoxTemplate = "有模型在使用此数据, 继续卸载请点击 \"确认\"";
+        private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
         public DataButton()
@@ -51,7 +51,11 @@ namespace Citta_T1.Controls.Left
             helpInfo = txtButton.Text;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format("文件类型:{0},分割符:{1}", this.ExtType, this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            helpInfo = String.Format(DataButtonFlowTemplate, 
+                                    encoding.ToString(),
+                                    this.ExtType,
+                                    Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+                                    this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -70,13 +74,24 @@ namespace Citta_T1.Controls.Left
             ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
         }
 
-        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 1. DataSource中删除控件
-            // 2. Program中删除数据
-            // TODO [DK] 3. 画布中已存在的该如何处理？ 
-            this.Parent.Controls.Remove(this);
-            BCPBuffer.GetInstance().Remove(this.txtButton.Name);
+            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+            DialogResult rs = DialogResult.OK;
+
+            // 数据源引用大于0时,弹出警告窗
+            if (count > 0)
+                rs = MessageBox.Show(RemoveMessageBoxTemplate, 
+                    "卸载 " + this.DataName, 
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Information);
+
+            if (rs != DialogResult.OK)
+                return;
+
+            // 卸载数据源
+            Global.GetDataSourceControl().RemoveDataButton(this);
+            BCPBuffer.GetInstance().Remove(this.FullFilePath);
 
         }
         #endregion
@@ -113,11 +128,15 @@ namespace Citta_T1.Controls.Left
         {
             Clipboard.SetText(txtButton.Name);
         }
-        private void EnableDeleteDataSource(int count)
-        {
-            if(count>0)
-                this.DeleteToolStripMenuItem.Enabled = true;
 
+        private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            string helpInfo = String.Format(DataButtonFlowTemplate,
+                                        encoding.ToString(),
+                                        this.ExtType,
+                                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+                                        this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
     }
 }

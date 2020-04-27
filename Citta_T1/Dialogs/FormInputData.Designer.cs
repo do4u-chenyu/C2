@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.previewButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.gbkLable = new System.Windows.Forms.Label();
             this.utf8Lable = new System.Windows.Forms.Label();
@@ -42,8 +42,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxEx1 = new HZH_Controls.Controls.TextBoxEx();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -67,17 +67,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "* 打开文件";
             // 
-            // button1
+            // previewButton
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.button1.Location = new System.Drawing.Point(345, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 28);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "浏览";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.previewButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.previewButton.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.previewButton.Location = new System.Drawing.Point(345, 23);
+            this.previewButton.Name = "previewButton";
+            this.previewButton.Size = new System.Drawing.Size(77, 28);
+            this.previewButton.TabIndex = 5;
+            this.previewButton.Text = "浏览";
+            this.previewButton.UseVisualStyleBackColor = false;
+            this.previewButton.Click += new System.EventHandler(this.PreviewButton_Click);
             // 
             // label3
             // 
@@ -206,32 +206,32 @@
             this.label11.TabIndex = 16;
             this.label11.Text = "bcp模板";
             // 
-            // button2
+            // addButton
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Highlight;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(497, 425);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 35);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "添加";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.addButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.addButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.addButton.FlatAppearance.BorderSize = 0;
+            this.addButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.addButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.addButton.Location = new System.Drawing.Point(497, 425);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 35);
+            this.addButton.TabIndex = 17;
+            this.addButton.Text = "添加";
+            this.addButton.UseVisualStyleBackColor = false;
+            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // button3
+            // cancelButton
             // 
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(614, 425);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 35);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "取消";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cancelButton.Location = new System.Drawing.Point(614, 425);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 35);
+            this.cancelButton.TabIndex = 18;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // panel1
             // 
@@ -243,8 +243,8 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Controls.Add(this.utf8Lable);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.cancelButton);
+            this.panel1.Controls.Add(this.addButton);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label8);
@@ -348,8 +348,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(99, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(590, 150);
@@ -367,7 +367,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.gbkLable);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.previewButton);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormInputData";
@@ -383,7 +383,7 @@
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button previewButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label gbkLable;
         private System.Windows.Forms.Label utf8Lable;
@@ -395,8 +395,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
