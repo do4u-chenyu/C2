@@ -23,7 +23,6 @@ namespace Citta_T1.Controls.Left
             }
         }
 
-        private static string RemoveMessageBoxTemplate = "有模型在使用此数据, 继续卸载请点击 \"确认\"";
         private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
@@ -81,7 +80,7 @@ namespace Citta_T1.Controls.Left
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
-                rs = MessageBox.Show(RemoveMessageBoxTemplate, 
+                rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确认\"", 
                     "卸载 " + this.DataName, 
                     MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Information);
