@@ -99,6 +99,11 @@ namespace Citta_T1.Utils
             columnDict.Remove(bcpFullPath);
         }
 
+        public bool Contains(string bcpFullPath)
+        {
+            return dataPreviewDict.ContainsKey(bcpFullPath);
+        }
+
         /*
          * 按行读取excel文件
          */
