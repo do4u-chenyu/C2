@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
             this.movePictureBox = new System.Windows.Forms.PictureBox();
             this.zoomUpPictureBox = new System.Windows.Forms.PictureBox();
             this.zoomDownPictureBox = new System.Windows.Forms.PictureBox();
             this.remarkPictureBox = new System.Windows.Forms.PictureBox();
             this.framePictureBox = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).BeginInit();
@@ -51,6 +53,7 @@
             this.movePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.movePictureBox.TabIndex = 0;
             this.movePictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.movePictureBox, "拖动当前视野屏幕");
             this.movePictureBox.Click += new System.EventHandler(this.MovePictureBox_Click);
             this.movePictureBox.MouseEnter += new System.EventHandler(this.MovePictureBox_MouseEnter);
             this.movePictureBox.MouseLeave += new System.EventHandler(this.MovePictureBox_MouseLeave);
@@ -65,6 +68,7 @@
             this.zoomUpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.zoomUpPictureBox.TabIndex = 1;
             this.zoomUpPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.zoomUpPictureBox, "放大屏幕中算子并支持三级放大");
             this.zoomUpPictureBox.Click += new System.EventHandler(this.ZoomUpPictureBox_Click);
             this.zoomUpPictureBox.MouseEnter += new System.EventHandler(this.ZoomUpPictureBox_MouseEnter);
             this.zoomUpPictureBox.MouseLeave += new System.EventHandler(this.ZoomUpPictureBox_MouseLeave);
@@ -80,6 +84,7 @@
             this.zoomDownPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.zoomDownPictureBox.TabIndex = 2;
             this.zoomDownPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.zoomDownPictureBox, "缩小当前屏幕中算子");
             this.zoomDownPictureBox.Click += new System.EventHandler(this.ZoomDownPictureBox_Click);
             this.zoomDownPictureBox.MouseEnter += new System.EventHandler(this.ZoomDownPictureBox_MouseEnter);
             this.zoomDownPictureBox.MouseLeave += new System.EventHandler(this.ZoomDownPictureBox_MouseLeave);
@@ -94,6 +99,7 @@
             this.remarkPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.remarkPictureBox.TabIndex = 3;
             this.remarkPictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.remarkPictureBox, "编写备注信息");
             this.remarkPictureBox.Click += new System.EventHandler(this.RemarkPictureBox_Click);
             this.remarkPictureBox.MouseEnter += new System.EventHandler(this.RemarkPictureBox_MouseEnter);
             this.remarkPictureBox.MouseLeave += new System.EventHandler(this.RemarkPictureBox_MouseLeave);
@@ -108,6 +114,7 @@
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.framePictureBox.TabIndex = 4;
             this.framePictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.framePictureBox, "框选屏幕中算子进行整体拖动");
             this.framePictureBox.Click += new System.EventHandler(this.FramePictureBox_Click);
             this.framePictureBox.MouseEnter += new System.EventHandler(this.FramePictureBox_MouseEnter);
             this.framePictureBox.MouseLeave += new System.EventHandler(this.FramePictureBox_MouseLeave);
@@ -144,5 +151,6 @@
         private System.Windows.Forms.PictureBox zoomDownPictureBox;
         private System.Windows.Forms.PictureBox remarkPictureBox;
         private System.Windows.Forms.PictureBox framePictureBox;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

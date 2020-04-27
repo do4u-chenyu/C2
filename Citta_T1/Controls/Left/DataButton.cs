@@ -119,7 +119,5 @@ namespace Citta_T1.Controls.Left
                 this.DeleteToolStripMenuItem.Enabled = true;
 
         }
-
-
     }
 }
