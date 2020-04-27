@@ -133,7 +133,7 @@
             this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
             this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
-            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboard);
+            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFullFilePathToClipboard);
             // 
             // DataButton
             // 
