@@ -69,10 +69,12 @@ namespace Citta_T1.Controls.Top
             return text;
         }
 
-        private void formatButton_MouseClick(object sender, MouseEventArgs e)
+        private void FormatButton_MouseClick(object sender, MouseEventArgs e)
         {
-            Global.GetMainForm().SetDocumentDirty();
             ModelDocument currentModel = Global.GetCurrentDocument();
+            // 文档为空时,返回,不需要触发dirty动作
+            if (currentModel.ModelElements.Count == 0)
+                return;
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();

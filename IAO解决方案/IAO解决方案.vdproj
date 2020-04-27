@@ -33,12 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_18E490C2758F42C887C4BDF4A3FA01AE"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_194BFF2045CB4588B2AB788012CD68FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
-        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "OwnerKey" = "8:_CCFBC3FC125546BABB02DC53D4B89B67"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -292,12 +286,6 @@
         "Entry"
         {
         "MsmKey" = "8:_B4BDC7FD2DC209E3A25569C1896D07DE"
-        "OwnerKey" = "8:_18E490C2758F42C887C4BDF4A3FA01AE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B4BDC7FD2DC209E3A25569C1896D07DE"
         "OwnerKey" = "8:_0AD32FE057FC41DC98132FA40829D570"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -375,6 +363,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E45F247D4CB640AC900E3787955178D0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EDF9DC3C6B8F47EF8E3641EDD5F2D188"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -412,12 +406,6 @@
         "Entry"
         {
         "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_18E490C2758F42C887C4BDF4A3FA01AE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
         "OwnerKey" = "8:_0AD32FE057FC41DC98132FA40829D570"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -442,7 +430,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_18E490C2758F42C887C4BDF4A3FA01AE"
+        "OwnerKey" = "8:_E45F247D4CB640AC900E3787955178D0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -508,13 +496,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
+        "OwnerKey" = "8:_CCFBC3FC125546BABB02DC53D4B89B67"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CCFBC3FC125546BABB02DC53D4B89B67"
+        "OwnerKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -681,37 +669,6 @@
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\msys-gcc_s-seh-1.dll"
             "TargetName" = "8:msys-gcc_s-seh-1.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_18E490C2758F42C887C4BDF4A3FA01AE"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CatXLS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_18E490C2758F42C887C4BDF4A3FA01AE"
-                    {
-                    "Name" = "8:catxls.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\catxls.exe"
-            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
@@ -1651,6 +1608,37 @@
             {
             "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\rm.exe"
             "TargetName" = "8:rm.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E45F247D4CB640AC900E3787955178D0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:cat_xls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_E45F247D4CB640AC900E3787955178D0"
+                    {
+                    "Name" = "8:cat_xls.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\sbin\\cat_xls.exe"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
             "Condition" = "8:"
@@ -2717,7 +2705,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

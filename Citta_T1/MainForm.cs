@@ -70,7 +70,8 @@ namespace  Citta_T1
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
             Global.SetLogView(this.logView);
-            Global.SetOptionDao(this.optionDao); 
+            Global.SetOptionDao(this.optionDao);
+            Global.SetDataSourceControl(this.dataSourceControl);
 
         }
 
@@ -111,17 +112,11 @@ namespace  Citta_T1
         }
 
         private void NewDocumentOperator(Control ct)
-        {
-            SetDocumentDirty();
+        {          
             this.modelDocumentDao.AddDocumentOperator(ct);
-
-        }
-        public void DeleteDocumentElement(Control ct)
-        {
             SetDocumentDirty();
-            this.modelDocumentDao.CurrentDocument.DeleteModelElement(ct); //TODO 先删再dirty
-        }
 
+        }
 
         public void SaveDocument()
         {
@@ -160,7 +155,7 @@ namespace  Citta_T1
         {
             this.modelTitlePanel.AddModel(modelTitle);
             this.modelDocumentDao.CurrentDocument.Load();
-            this.modelDocumentDao.CurrentDocument.DocumentElementCount();
+            this.modelDocumentDao.CurrentDocument.ReCountDocumentMaxElementID();
             this.modelDocumentDao.CurrentDocument.Show();
             this.modelDocumentDao.CurrentDocument.Dirty = false;
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
@@ -336,11 +331,11 @@ namespace  Citta_T1
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏数据框");
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
             }
             if (bottomViewPanel.Height == 40)
             {
-                this.toolTip1.SetToolTip(this.minMaxPictureBox, "显示数据框");
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
         }
 
@@ -427,11 +422,11 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
-            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
+            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
@@ -659,6 +654,14 @@ namespace  Citta_T1
                 this.leftToolBoxPanel.Width = 10;
             }
             InitializeControlsLocation();
+            if (this.leftToolBoxPanel.Width == 187)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            if (this.leftToolBoxPanel.Width == 10)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+            }
         }
 
         public void RenameDataButton(string index, string dstName)
@@ -706,14 +709,9 @@ namespace  Citta_T1
             }
         }
 
-        private void headPanel_Paint(object sender, PaintEventArgs e)
+        private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
-
-        }
-
-        private void usernamelabel_Click(object sender, EventArgs e)
-        {
-
+            this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
     }
 }

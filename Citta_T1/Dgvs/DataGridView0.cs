@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
+using System.Reflection;
 
 namespace Citta_T1
 {
@@ -16,19 +17,12 @@ namespace Citta_T1
         public DataGridView0()
         {
             InitializeComponent();
+            this.dataGridView.DoubleBuffered(true);
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             InitializeDgv();
-        }
-
-        private void DataGridView_Load(object sender, EventArgs e)
-        {
-            //_InitializeRows();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void InitializeDgv()
@@ -50,48 +44,6 @@ namespace Citta_T1
             this.dataGridView.Rows.Clear();
             this.dataGridView.Columns.Clear();
         }
-        private void _InitializeColumns(List<string> headers)
-        {
-            /*
-             * 初始化列
-             */
-            int numOfCols = headers.Count;
-            System.Windows.Forms.DataGridViewTextBoxColumn[] ColumnList = new System.Windows.Forms.DataGridViewTextBoxColumn[numOfCols];
-            for (int i = 0; i < numOfCols; i++)
-            {
-                ColumnList[i] = new System.Windows.Forms.DataGridViewTextBoxColumn();
-                ColumnList[i].HeaderText = headers[i];
-                ColumnList[i].Name = "Col_" + i.ToString();
-            }
-            this.dataGridView.Columns.AddRange(ColumnList);
-        }
-
-        private void _InitializeRowse(List<List<string>> datas, int numOfCols)
-        {
-            /*
-             * 初始化行
-             * 使用样例数据
-             */
-            string data;
-            for (int i = 0; i < Math.Min(maxNumOfRows, datas.Count); i = this.dataGridView.Rows.Add())                   // TODO                  
-            {
-                //this.dataGridView1.Rows.Add();
-                for (int j = 0; j < numOfCols; j++)
-                {
-                    try
-                    {
-                        data = datas[i][j];
-                    }
-                    catch (System.ArgumentOutOfRangeException)
-                    {
-                        data = "";
-                        Console.WriteLine("DataGridView0.Designer.cs._InitializeRowse occurs error!");
-                    }
-                    this.dataGridView.Rows[i].Cells[j].Value = data;
-                }
-            }
-        }
-
         private void _InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
             DataTable table = new DataTable();
@@ -122,33 +74,21 @@ namespace Citta_T1
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
+            this.ResetColumnsWidth();
         }
 
-        private List<List<string>> PreViewFileFromPath(string fileNameOrFile = "", int maxNumOfFile = 50, char sep = '\t')
+        private void ResetColumnsWidth(int minWidth = 50)
         {
-            List<List<string>> datas = new List<List<string>> { };
-            System.IO.StreamReader file = new System.IO.StreamReader(fileNameOrFile);
-            int rowCounter = 0;
-            string line;
-            while (((line = file.ReadLine()) != null) && (rowCounter < maxNumOfFile))
+            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
             {
-                List<string> eles = new List<string>(line.Split(sep));
-                datas.Add(eles);
+                this.dataGridView.Columns[i].MinimumWidth = minWidth;
             }
-            return datas;
-        }
-        private List<List<string>> PreViewFileFromResx(string resx = "", int maxNumOfFile = 50, char sep = '\t')
-        {
-            List<List<string>> datas = new List<List<string>> { };
-            string[] contents = resx.Split('\n');
-            int numOfRows = contents.Length;
-            List<string> rows = new List<string>(contents);
-            for (int i = 0; i < (numOfRows < maxNumOfFile ? numOfRows : maxNumOfRows); i++)
+            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
             {
-                datas.Add(new List<string>(rows[i].Split('\t')));
+                this.dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            return datas;
         }
+
         public void PreViewDataByBcpPath(string bcpPath,
             char separator = '\t',
             DSUtil.ExtType extType = DSUtil.ExtType.Text, 
@@ -173,8 +113,6 @@ namespace Citta_T1
             int numOfCols = headers.Count;
             DvgClean();
             _InitializeDGV(datas, headers, numOfCols);
-            //_InitializeColumns(headers);
-            //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
         }
     }
 }

@@ -173,6 +173,7 @@
             this.usernamelabel.Size = new System.Drawing.Size(58, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
+            this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
             // 
             // label1
             // 
@@ -206,7 +207,7 @@
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
-            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西都在这里");
+            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
@@ -218,7 +219,7 @@
             this.dataButton.Size = new System.Drawing.Size(124, 42);
             this.dataButton.TabIndex = 2;
             this.dataButton.Text = "数据";
-            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据都在这里");
+            this.toolTip1.SetToolTip(this.dataButton, "当前用户已导入的所有数据");
             this.dataButton.UseVisualStyleBackColor = true;
             this.dataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
@@ -230,7 +231,7 @@
             this.oprateButton.Size = new System.Drawing.Size(124, 42);
             this.oprateButton.TabIndex = 1;
             this.oprateButton.Text = "算子";
-            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法都在这里");
+            this.toolTip1.SetToolTip(this.oprateButton, "数据分析建模所需的所有算法");
             this.oprateButton.UseVisualStyleBackColor = true;
             this.oprateButton.Click += new System.EventHandler(this.OprateButton_Click);
             // 
@@ -242,7 +243,7 @@
             this.myModelButton.Size = new System.Drawing.Size(124, 42);
             this.myModelButton.TabIndex = 0;
             this.myModelButton.Text = "我的模型";
-            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型都在这里");
+            this.toolTip1.SetToolTip(this.myModelButton, "当前用户的所有模型");
             this.myModelButton.UseVisualStyleBackColor = true;
             this.myModelButton.Click += new System.EventHandler(this.MyModelButton_Click);
             // 
@@ -387,7 +388,7 @@
             this.minMaxPictureBox.Size = new System.Drawing.Size(25, 24);
             this.minMaxPictureBox.TabIndex = 1;
             this.minMaxPictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏(展开)底层面板");
+            this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
             this.minMaxPictureBox.Click += new System.EventHandler(this.MinMaxPictureBox_Click);
             // 
             // panel8
@@ -410,6 +411,7 @@
             this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
+            this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息");
             this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
             // 
             // errorLabel
@@ -421,6 +423,7 @@
             this.errorLabel.Size = new System.Drawing.Size(92, 27);
             this.errorLabel.TabIndex = 2;
             this.errorLabel.Text = "报错信息";
+            this.toolTip1.SetToolTip(this.errorLabel, "当前模型运行情况的报错信息");
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
             // 
             // previewLabel
@@ -432,6 +435,7 @@
             this.previewLabel.Size = new System.Drawing.Size(92, 27);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
+            this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
             // ucDataGridView1
@@ -678,7 +682,7 @@
             this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.leftFoldButton.TabIndex = 0;
             this.leftFoldButton.TabStop = false;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏(展开)左侧面板");
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
             // blankButton
@@ -805,7 +809,7 @@
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
+            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
@@ -823,7 +827,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.runButton, "开始运行模型");
+            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 

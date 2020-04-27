@@ -172,7 +172,7 @@ namespace Citta_T1.OperatorViews
                 if (this.opControl.Option.GetOption("minfield") != "")
                 {
                     int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                    if (oldColumnList[index] != this.columnName[index])
+                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
                         this.opControl.Option.OptionDict.Remove("minfield");
                 }
                 if (this.opControl.Option.GetOption("outfield") != "")

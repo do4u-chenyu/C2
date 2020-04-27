@@ -184,7 +184,7 @@ namespace Citta_T1.OperatorViews
                 if (this.opControl.Option.GetOption("maxfield") != "")
                 {
                     int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                    if (oldColumnList[index] != this.columnName[index])
+                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
                         this.opControl.Option.OptionDict.Remove("maxfield");
                 }
                 if (this.opControl.Option.GetOption("outfield") != "")

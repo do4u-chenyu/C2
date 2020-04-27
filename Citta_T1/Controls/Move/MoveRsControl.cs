@@ -328,6 +328,7 @@ namespace Citta_T1.Controls.Move
             ModelDocumentDirtyEvent?.Invoke();
         }
 
+
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
@@ -373,16 +374,8 @@ namespace Citta_T1.Controls.Move
 
         }
 
-        public void DeleteMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().DeleteDocumentElement(this);
-            Global.GetMainForm().SetDocumentDirty();
 
-        }
+
         #endregion
 
         #region textBox

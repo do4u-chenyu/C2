@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using System.Text.RegularExpressions;
 
 namespace Citta_T1.Utils
 {
@@ -17,6 +18,7 @@ namespace Citta_T1.Utils
 
         private static BCPBuffer BcpBufferSingleInstance;
         private LogUtil log = LogUtil.GetInstance("BCPBuffer");
+
 
         public string GetCacheBcpPreVewContent(string bcpFullPath, DSUtil.Encoding encoding)
         {
@@ -47,9 +49,21 @@ namespace Citta_T1.Utils
         }
         public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
         {
-            //TODO 根据excel的结尾判断文件，是xml的用loadexcel来做
+
             string ret = "";
-            //刷新一下存放表头的字典
+            //Excel类型
+            Regex regex = new Regex(@"\.xl(s[xmb]|t[xm]|am)$");
+            if (regex.IsMatch(bcpFullPath))
+            {
+                PreLoadExcelFile(bcpFullPath);
+                if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
+                    PreLoadExcelFile(bcpFullPath);
+                // 防止文件读取时发生错误, 重新判断下是否存在
+                if (columnDict.ContainsKey(bcpFullPath))
+                    ret = columnDict[bcpFullPath];
+                return ret;
+            }
+            //BCP类型
             PreLoadBcpFile(bcpFullPath, encoding);
             if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
                 PreLoadBcpFile(bcpFullPath, encoding);
@@ -83,6 +97,11 @@ namespace Citta_T1.Utils
         {
             dataPreviewDict.Remove(bcpFullPath);
             columnDict.Remove(bcpFullPath);
+        }
+
+        public bool Contains(string bcpFullPath)
+        {
+            return dataPreviewDict.ContainsKey(bcpFullPath);
         }
 
         /*
