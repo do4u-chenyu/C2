@@ -115,7 +115,6 @@
             this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RemoveToolStripMenuItem.Text = "卸载";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
-            this.RemoveToolStripMenuItem.MouseEnter += new System.EventHandler(this.RemoveToolStripMenuItem_MouseEnter);
             // 
             // toolStripSeparator1
             // 

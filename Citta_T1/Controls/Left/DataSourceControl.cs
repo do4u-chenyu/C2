@@ -36,6 +36,8 @@ namespace Citta_T1.Controls.Left
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
+
+        // 手工导入时调用
         public void GenDataButton(string dataName, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
@@ -55,6 +57,8 @@ namespace Citta_T1.Controls.Left
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(b);
         }
+
+        // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
         {
             // 供load时调用
@@ -91,20 +95,5 @@ namespace Citta_T1.Controls.Left
              this.LocalFrame.Visible = true;
              this.ExternalFrame.Visible = false;
          }
-        public void AddDataSource(string modelName)
-        {
-            ModelButton mb = new ModelButton();
-            mb.SetModelName(modelName);
-            // 获得当前要添加的model button的初始位置
-            Point startPoint = new Point(15, -12);
-            if (this.Controls.Count > 0)
-                startPoint = this.Controls[this.Controls.Count - 1].Location;
-
-            startPoint.Y += mb.Height + 12;
-            mb.Location = startPoint;
-
-            this.Controls.Add(mb);
-
-        }
     }
 }
