@@ -173,7 +173,7 @@
             this.usernamelabel.Size = new System.Drawing.Size(58, 22);
             this.usernamelabel.TabIndex = 3;
             this.usernamelabel.Text = "李警官";
-            this.usernamelabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.usernamelabel_MouseMove);
+            this.usernamelabel.MouseEnter += new System.EventHandler(this.UsernameLabel_MouseEnter);
             // 
             // label1
             // 
@@ -411,8 +411,8 @@
             this.logLabel.Size = new System.Drawing.Size(92, 27);
             this.logLabel.TabIndex = 3;
             this.logLabel.Text = "运行日志";
+            this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息");
             this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
-            this.logLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.logLabel_MouseMove);
             // 
             // errorLabel
             // 
@@ -423,8 +423,8 @@
             this.errorLabel.Size = new System.Drawing.Size(92, 27);
             this.errorLabel.TabIndex = 2;
             this.errorLabel.Text = "报错信息";
+            this.toolTip1.SetToolTip(this.errorLabel, "当前模型运行情况的报错信息");
             this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
-            this.errorLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.errorLabel_MouseMove);
             // 
             // previewLabel
             // 
@@ -435,8 +435,8 @@
             this.previewLabel.Size = new System.Drawing.Size(92, 27);
             this.previewLabel.TabIndex = 0;
             this.previewLabel.Text = "数据预览";
+            this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
-            this.previewLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.previewLabel_MouseMove);
             // 
             // ucDataGridView1
             // 
@@ -721,7 +721,6 @@
             this.flowControl.SelectRemark = false;
             this.flowControl.Size = new System.Drawing.Size(209, 51);
             this.flowControl.TabIndex = 25;
-            this.flowControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.flowControl_MouseMove);
             // 
             // rightHideButton
             // 
@@ -793,8 +792,8 @@
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(52, 53);
             this.downloadButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
             this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.downloadButton_MouseMove);
             // 
             // stopButton
             // 
@@ -810,9 +809,9 @@
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(52, 53);
             this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
-            this.stopButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.stopButton_MouseMove);
             // 
             // runButton
             // 
@@ -828,9 +827,9 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(52, 53);
             this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.RunButton_Click);
-            this.runButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.runButton_MouseMove);
             // 
             // naviViewControl
             // 
