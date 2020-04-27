@@ -197,6 +197,7 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
+                    oldcontrolPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;

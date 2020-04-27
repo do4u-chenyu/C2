@@ -334,9 +334,9 @@ namespace Citta_T1.Controls.Move
                     lineStaus = "lineExit";
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
+                    oldcontrolPosition = this.Location;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
-                    
                     return;
                 }
                 mouseOffset.X = e.X;
