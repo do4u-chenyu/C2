@@ -211,8 +211,8 @@ namespace Citta_T1.Business.Schedule
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
-                Thread.Sleep(10000);
-                /*
+                //Thread.Sleep(10000);
+
                 List<string> cmds = new List<string>();
                 switch (triple.OperateElement.SubType)
                 {
@@ -229,10 +229,8 @@ namespace Citta_T1.Business.Schedule
                     case ElementSubType.RelateOperator: cmds = (new RelateOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.GroupOperator: cmds = (new GroupOperatorCmd(triple)).GenCmd(); break;
                 }
+                RunLinuxCommand(cmds);
 
-                //RunLinuxCommand(cmds);
-                Thread.Sleep(10000);
-                */
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
