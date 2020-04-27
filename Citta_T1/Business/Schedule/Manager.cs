@@ -10,6 +10,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Business.Option;
 using System.Diagnostics;
 using Citta_T1.Business.Schedule.Cmd;
+using NPOI.HSSF.Record;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -47,6 +48,9 @@ namespace Citta_T1.Business.Schedule
 
         //并行任务集合
         private List<Task> parallelTasks;
+
+        //cmd进程集合
+        private List<Process> cmdProcessList;
 
         public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
         public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
@@ -140,7 +144,7 @@ namespace Citta_T1.Business.Schedule
 
         public void Start()
         {
-            if (CurrentModelTripleStatusNum(ElementStatus.Ready) == 0)
+            if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
             {
                 UpdateLogDelegate("当前模型的算子均已运算完毕");
                 return;
@@ -207,9 +211,9 @@ namespace Citta_T1.Business.Schedule
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
                 UpdateLogDelegate(triple.TripleName + "开始运行");
-                //Thread.Sleep(10000);
+                Thread.Sleep(10000);
+                /*
                 List<string> cmds = new List<string>();
-                string cmd = "";
                 switch (triple.OperateElement.SubType)
                 {
                     case ElementSubType.MaxOperator: cmds = (new MaxOperatorCmd(triple)).GenCmd(); break;
@@ -226,12 +230,9 @@ namespace Citta_T1.Business.Schedule
                     case ElementSubType.GroupOperator: cmds = (new GroupOperatorCmd(triple)).GenCmd(); break;
                 }
 
-                foreach (string cmd1 in cmds)
-                {
-                    UpdateLogDelegate("执行命令: " + cmd1);
-                    RunLinuxCommand(cmd1);
-                }
-
+                //RunLinuxCommand(cmds);
+                Thread.Sleep(10000);
+                */
                 resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
@@ -246,19 +247,27 @@ namespace Citta_T1.Business.Schedule
 
         }
 
-        public void RunLinuxCommand(string cmd)
+        public void RunLinuxCommand(List<string> cmds)
         {
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = "/c " + cmd;
+            //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);
             p.StartInfo.UseShellExecute = false; // 不显示用户界面
-            p.StartInfo.RedirectStandardOutput = true; // 是否重
             p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
 
             try
             {
                 if (p.Start())//开始进程  
                 {
+                    foreach(string cmd in cmds)
+                    {
+                        UpdateLogDelegate("执行命令: " + cmd);
+                        p.StandardInput.WriteLine(cmd);
+                    }
+                    p.StandardInput.WriteLine("exit");//结束执行
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
                 }
             }
