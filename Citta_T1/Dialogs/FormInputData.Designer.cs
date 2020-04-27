@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.previewButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -123,8 +123,8 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(594, 112);
             this.label7.TabIndex = 11;
-            this.label7.Text = "说明：\r\n1. 上传文件支持bcp、txt、csv、excel；\r\n2. 上传的文件必须包括表头；\r\n3. 编码格式默认GBK格式，如文件预览出现乱码，请修改文件" +
-    "编码；\r\n4. 建议使用数据导入模板。";
+            this.label7.Text = "说明：\r\n1. 导入文件格式支持bcp、txt、csv、excel；\r\n2. 导入文件必须包括表头；\r\n3. 导入文件默认GBK编码，如预览出现乱码，请尝试右上角切换文件" +
+    "编码方式；\r\n4. 建议使用数据导入模板。";
             // 
             // textBox1
             // 
@@ -348,8 +348,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(99, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(590, 150);

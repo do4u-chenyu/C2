@@ -92,7 +92,7 @@ namespace Citta_T1.Dialogs
             else if (Global.GetDataSourceControl().dataSourceDictI2B.ContainsKey(bcpFullFilePath))
             {
                 String dsName = Global.GetDataSourceControl().dataSourceDictI2B[bcpFullFilePath].txtButton.Text;
-                MessageBox.Show("该文件已存在，数据名为：" + dsName);
+                MessageBox.Show("该文件已导入，数据源名为：" + dsName);
             }
             else
             {
