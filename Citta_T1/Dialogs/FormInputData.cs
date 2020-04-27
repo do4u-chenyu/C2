@@ -17,8 +17,8 @@ namespace Citta_T1.Dialogs
     {
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private ExtType extType = ExtType.Unknow;
-        private string m_filePath;
-        private int m_maxNumOfRow = 100;
+        private string bcpFullFilePath;
+        private int maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private bool textboxHasText = false;
@@ -28,19 +28,6 @@ namespace Citta_T1.Dialogs
         public FormInputData()
         {
             InitializeComponent();
-            this.textBox1.LostFocus += new EventHandler(this.textBox1_Leave);
-            this.textBox1.GotFocus += new EventHandler(this.textBox1_Enter);
-        }
-
-
-        private void textBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-
         }
 
         public void ReSetParams()
@@ -54,12 +41,12 @@ namespace Citta_T1.Dialogs
 
             this.extType = DSUtil.ExtType.Text;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void PreviewButton_Click(object sender, EventArgs e)
         {
             /*
              * 数据预览
              */
-            string fileName="";
+            string fileName = "";
             string ext;
             OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
@@ -69,9 +56,9 @@ namespace Citta_T1.Dialogs
                 this.encoding = DSUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                m_filePath = fd.FileName;     
-                fileName = Path.GetFileNameWithoutExtension(@m_filePath);
-                ext = Path.GetExtension(m_filePath);
+                bcpFullFilePath = fd.FileName;     
+                fileName = Path.GetFileNameWithoutExtension(bcpFullFilePath);
+                ext = Path.GetExtension(bcpFullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = ExtType.Excel;
@@ -91,30 +78,31 @@ namespace Citta_T1.Dialogs
 
         // 添加按钮
         public event delegateInputData InputDataEvent;
-        private void button2_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
             string name = this.textBox1.Text;
             if (this.textBox1.Text == "请输入数据名称")
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (m_filePath == null)
+            else if (bcpFullFilePath == null)
             {
                 MessageBox.Show("请选择数据路径！");
             }
-            else if (Global.GetMainForm().dataSourceControl.dataSourceDictI2B.ContainsKey(m_filePath))
+            else if (Global.GetDataSourceControl().dataSourceDictI2B.ContainsKey(bcpFullFilePath))
             {
-                String dsName = Global.GetMainForm().dataSourceControl.dataSourceDictI2B[m_filePath].txtButton.Text;
+                String dsName = Global.GetDataSourceControl().dataSourceDictI2B[bcpFullFilePath].txtButton.Text;
                 MessageBox.Show("该文件已存在，数据名为：" + dsName);
             }
             else
             {
-                if (m_filePath.EndsWith(".xls") || m_filePath.EndsWith(".xlsx"))
+                if (bcpFullFilePath.EndsWith(".xls") || bcpFullFilePath.EndsWith(".xlsx"))
                     this.extType = DSUtil.ExtType.Excel;
                 else
                     this.extType = DSUtil.ExtType.Text;
-                BCPBuffer.GetInstance().TryLoadFile(m_filePath, this.extType, this.encoding);
-                InputDataEvent(name, m_filePath, this.separator, this.extType, this.encoding);
+
+                BCPBuffer.GetInstance().TryLoadFile(bcpFullFilePath, this.extType, this.encoding);
+                InputDataEvent(name, bcpFullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
@@ -122,7 +110,7 @@ namespace Citta_T1.Dialogs
             this.encoding = DSUtil.Encoding.UTF8;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             // 关闭按钮
             DvgClean();
@@ -153,16 +141,16 @@ namespace Citta_T1.Dialogs
              * 4. 清理表格数据
              * 5. 写入数据
              */
-            if (this.m_filePath == null)
+            if (this.bcpFullFilePath == null)
                 return;
             System.IO.StreamReader sr;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
-                sr = File.OpenText(m_filePath);
+                sr = File.OpenText(bcpFullFilePath);
             }
             else
             {
-                FileStream fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
             String header = sr.ReadLine();
@@ -174,7 +162,6 @@ namespace Citta_T1.Dialogs
             try
             {
                 DataTable table = new DataTable();
-                DataColumn column;
                 DataRow row;
                 DataView view;
                 DataColumn[] cols = new DataColumn[numOfCol];
@@ -186,7 +173,7 @@ namespace Citta_T1.Dialogs
 
                 table.Columns.AddRange(cols);
 
-                for (int rowIndex = 0; rowIndex < m_maxNumOfRow && !sr.EndOfStream; rowIndex++)
+                for (int rowIndex = 0; rowIndex < maxNumOfRow && !sr.EndOfStream; rowIndex++)
                 {
                     String line = sr.ReadLine();
                     if (line == null)
@@ -220,8 +207,8 @@ namespace Citta_T1.Dialogs
             //
             try
             {
-                fs = new FileStream(m_filePath, FileMode.Open, FileAccess.Read);
-                if (m_filePath.IndexOf(".xlsx") > 0) // 2007版本
+                fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
+                if (bcpFullFilePath.IndexOf(".xlsx") > 0) // 2007版本
                 {
                     workbook2007 = new XSSFWorkbook(fs);
                     if (sheetName != null)
@@ -269,7 +256,7 @@ namespace Citta_T1.Dialogs
                     }
                     //最后一列的标号
                     int rowCount = sheet.LastRowNum;
-                    for (int i = 0; i <= Math.Min(m_maxNumOfRow, rowCount); ++i)
+                    for (int i = 0; i <= Math.Min(maxNumOfRow, rowCount); ++i)
                     {
                         IRow row = sheet.GetRow(i + startRow);
                         if (row == null) continue; //没有数据的行默认是null　　　　　　　

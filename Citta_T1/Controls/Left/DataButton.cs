@@ -24,7 +24,6 @@ namespace Citta_T1.Controls.Left
         }
 
         private static string RemoveMessageBoxTemplate = "有模型在使用此数据, 继续卸载请点击 \"确认\"";
-        private static string RemoveWarningTemplate   = "引用{0}次,卸载可能导致模型失效,请谨慎操作.";
         private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
@@ -91,8 +90,9 @@ namespace Citta_T1.Controls.Left
                 return;
 
             // 卸载数据源
-            this.Parent.Controls.Remove(this);
+            Global.GetDataSourceControl().RemoveDataButton(this);
             BCPBuffer.GetInstance().Remove(this.FullFilePath);
+
         }
         #endregion
 
