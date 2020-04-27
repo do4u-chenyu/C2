@@ -85,6 +85,11 @@ namespace Citta_T1.Controls.Left
                     "卸载 " + this.DataName, 
                     MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Information);
+            else // count == 0
+                rs = MessageBox.Show("卸载数据源,请点击 \"确认\"",
+                    "卸载 " + this.DataName,
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Information);
 
             if (rs != DialogResult.OK)
                 return;
