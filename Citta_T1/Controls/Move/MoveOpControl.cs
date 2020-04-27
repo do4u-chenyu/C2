@@ -559,10 +559,11 @@ namespace Citta_T1.Controls.Move
             }
             //删除自身
             Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetNaviViewControl().UpdateNaviView(); //TODO 放到后面
+           
             Global.GetMainForm().DeleteDocumentElement(this);
             Global.GetMainForm().SetDocumentDirty();      //不是很理解
-           
+            Global.GetNaviViewControl().UpdateNaviView();// TODO 最后执行！
+
         }
         private void DeleteResultControl(int endID)
         {
@@ -571,8 +572,9 @@ namespace Citta_T1.Controls.Move
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetNaviViewControl().UpdateNaviView();   // 放后面
+                 
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); // TODO 彻底晕在这里了
+                    Global.GetNaviViewControl().UpdateNaviView();// TODO 最后执行！
                     return;
                 }
             }
@@ -697,20 +699,22 @@ namespace Citta_T1.Controls.Move
 
         public Rectangle rectEnter(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 4, oriCenter.Y - 4);
-            Size dstSize = new Size(8, 8);
+            Point dstLtCorner = new Point(oriCenter.X - (int)(4 * f), oriCenter.Y - (int)(3 * f));
+            Size dstSize = new Size((int)(8 * f), (int)(8 * f));
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 3, oriCenter.Y - 3);
-            Size dstSize = new Size(6, 6);
+            Point dstLtCorner = new Point(oriCenter.X - (int)(3 * f), oriCenter.Y - (int)(3 * f));
+            Size dstSize = new Size((int)(6 * f), (int)(6 * f));
             return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
