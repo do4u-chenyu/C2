@@ -43,11 +43,11 @@ namespace Citta_T1.Controls.Left
         private void DataButton_Load(object sender, EventArgs e)
         {
             // 数据源全路径浮动提示信息
-            String helpInfo = txtButton.Name;
+            String helpInfo = FullFilePath;
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
             // 数据源名称浮动提示信息
-            helpInfo = txtButton.Text;
+            helpInfo = DataSourceName;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
             helpInfo = String.Format(DataButtonFlowTemplate, 
@@ -62,7 +62,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(FullFilePath, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace Citta_T1.Controls.Left
             {
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = "/e,/select," + txtButton.Name;
+                processStartInfo.Arguments = "/e,/select," + FullFilePath;
                 System.Diagnostics.Process.Start(processStartInfo);
             }
             catch (System.ComponentModel.Win32Exception ex) 
@@ -116,23 +116,23 @@ namespace Citta_T1.Controls.Left
                 LogUtil logUtil = LogUtil.GetInstance("DataButton");
                 logUtil.Error(ex.Message);
                 //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
-                ReplaceOpenMethod();
+                AnotherOpenFilePathMethod();
             }
         }
-        private void ReplaceOpenMethod()
+        private void AnotherOpenFilePathMethod()
         {
             try
             {
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(txtButton.Name);
+                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(FullFilePath);
                 System.Diagnostics.Process.Start(processStartInfo);
             }
             catch { };
         }
-        private void CopyFilePathToClipboard(object sender, EventArgs e)
+        private void CopyFullFilePathToClipboard(object sender, EventArgs e)
         {
-            Clipboard.SetText(txtButton.Name);
+            Clipboard.SetText(FullFilePath);
         }
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
