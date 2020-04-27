@@ -24,11 +24,15 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private List<string> selectColumn;
         private List<bool> oldCheckedItems=new List<bool>();
+        private List<string> oldColumnName;
+        private LogUtil log = LogUtil.GetInstance("FreqOperatorView");
+
         public FreqOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
             this.opControl = opControl;
             dataPath = "";
+            oldColumnName = new List<string>();
             InitOptionInfo();
             LoadOption();
             this.oldOutList = this.outList.GetItemCheckIndex();
@@ -61,7 +65,26 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split('\t');
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
+            CompareDataSource();
             this.opControl.SingleDataSourceColumns = column;
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+        }
+        private void CompareDataSource()
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (this.opControl.Option.GetOption("outfield") != "")
+                {
+                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
+                        this.opControl.Option.OptionDict.Remove("outfield");
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
         }
         #endregion
         #region 添加取消
@@ -107,7 +130,9 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-               
+            //输出变化，重写BCP文件
+            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.outList.GetItemCheckText(), this.opControl.ID);
 
         }
 
@@ -146,9 +171,13 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("outfield") != "")
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.outList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = indexs.ToList();
+                this.outList.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+           
         }
         #endregion
         private void groupBox1_Paint(object sender, PaintEventArgs e)

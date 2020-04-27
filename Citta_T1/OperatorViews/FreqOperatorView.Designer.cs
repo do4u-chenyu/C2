@@ -73,7 +73,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 22);
             this.label2.TabIndex = 0;
-            this.label2.Text = "输出字段：";
+            this.label2.Text = "统计字段：";
             // 
             // label1
             // 
@@ -92,7 +92,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(430, 37);
+            this.topPanel.Size = new System.Drawing.Size(426, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -100,10 +100,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 194);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 190);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(430, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(426, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -144,7 +144,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 157);
+            this.keyPanel.Size = new System.Drawing.Size(116, 153);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -168,7 +168,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(314, 157);
+            this.valuePanel.Size = new System.Drawing.Size(310, 153);
             this.valuePanel.TabIndex = 3;
             // 
             // groupBox2
@@ -287,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 258);
+            this.ClientSize = new System.Drawing.Size(426, 254);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

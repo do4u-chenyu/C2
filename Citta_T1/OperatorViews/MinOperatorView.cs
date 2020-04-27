@@ -67,13 +67,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
                 return;
             }
-            //输入数据源变化，并且输出重写
-            //if (hasResutl != null && this.hasNewDataSource)
-            //{
-            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
-            //    return;
-            //}
-
+          
             //输出变化，重写BCP文件
             if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
@@ -182,8 +176,7 @@ namespace Citta_T1.OperatorViews
                         this.opControl.Option.OptionDict.Remove("outfield");
                 }
             }
-            catch (Exception ex) { log.Error(ex.Message); };
-           
+            catch (Exception ex) { log.Error(ex.Message); };        
         }
         #endregion
         private DSUtil.Encoding EnType(string type)
