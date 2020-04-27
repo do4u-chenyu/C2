@@ -25,18 +25,18 @@ namespace Citta_T1.OperatorViews
         string[] columnName;
         private string oldOptionDict;
         private List<string> selectColumn;
+        private List<string> oldColumnName;
+
         public FilterOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            oldColumnName = new List<string>();
             dataPath = "";
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
             LoadOption();
             this.oldOutList = this.OutList.GetItemCheckIndex();
-
-
-
         }
         private bool IsOptionReay() 
         {
@@ -110,18 +110,11 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.comboBox1.Items.Add(name);
             }
+            
             this.opControl.SingleDataSourceColumns = column;
+           
         }
-        private void InitNewFactorControl(int count)
-        {
-            for (int line = 0; line < count; line++)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
-                createLine(line);
-            }          
-        }
+      
 
         #endregion
         #region 添加取消
@@ -134,6 +127,7 @@ namespace Citta_T1.OperatorViews
             //内容修改，引起文档dirty
             if (this.oldOptionDict!= string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
+
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
@@ -142,7 +136,9 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-                
+            //输出变化，重写BCP文件
+            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -180,27 +176,41 @@ namespace Citta_T1.OperatorViews
         {
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (this.opControl.Option.GetOption("outfield") != "" && Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                this.OutList.LoadItemCheckIndex(Array.ConvertAll<string, int>(checkIndexs, int.Parse));
+                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.OutList.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
             }
-            if (factor1 != "")
+            if (factor1 != "" )
             {
                 string[] factorList = factor1.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
-                this.textBoxEx1.Text = factorList[2];
+                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
+                List<int> fieldColumn = new List<int>(Nums[0]);
+                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl,this.columnName,"factor1", fieldColumn))
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                    this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
+                    this.textBoxEx1.Text = factorList[2];
+                }
+               
             }
-            if (count > 1) 
+            if (count > 1)
                 InitNewFactorControl(count - 1);
-            else return;
+            else
+            {
+                this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns); 
+                return; 
+            } 
             for (int i = 2; i < (count + 1); i++)
             {
-                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                string factor = this.opControl.Option.GetOption("factor" + i.ToString());          
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
+                List<int> fieldColumn = new List<int>(Nums[1]);
+                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(),fieldColumn)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
                 control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();
@@ -212,6 +222,16 @@ namespace Citta_T1.OperatorViews
                 control4.Text = factorList[3];
             }
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+        }
+        private void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                createLine(line);
+            }
         }
         #endregion
         private void createLine(int addLine)
