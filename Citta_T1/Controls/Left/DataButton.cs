@@ -131,7 +131,6 @@ namespace Citta_T1.Controls.Left
             Clipboard.SetText(txtButton.Name);
         }
 
-
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
         {
             string helpInfo = String.Format(DataButtonFlowTemplate,

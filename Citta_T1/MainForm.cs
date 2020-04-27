@@ -709,45 +709,9 @@ namespace  Citta_T1
             }
         }
 
-
-        private void usernamelabel_MouseMove(object sender, MouseEventArgs e)
+        private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
-            this.toolTip1.SetToolTip(this.usernamelabel, this.userName +"已登录");
-        }
-
-        private void stopButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
-        }
-
-        private void runButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.runButton, "开始调试");
-        }
-
-        private void downloadButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
-        }
-
-        private void previewLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.previewLabel, "数据预览");
-        }
-
-        private void logLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.logLabel, "运行日志");
-        }
-
-        private void errorLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.errorLabel, "报错信息");
-        }
-
-        private void flowControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.flowControl, "工具栏");
+            this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
     }
 }

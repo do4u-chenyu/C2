@@ -52,10 +52,9 @@
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(24, 1);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.txtButton.Location = new System.Drawing.Point(40, 1);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(91, 25);
+            this.txtButton.Size = new System.Drawing.Size(121, 33);
             this.txtButton.TabIndex = 9;
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = false;
@@ -63,10 +62,9 @@
             // leftPictureBox
             // 
             this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPictureBox.Location = new System.Drawing.Point(2, 1);
-            this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
+            this.leftPictureBox.Location = new System.Drawing.Point(3, 1);
             this.leftPictureBox.Name = "leftPictureBox";
-            this.leftPictureBox.Size = new System.Drawing.Size(23, 23);
+            this.leftPictureBox.Size = new System.Drawing.Size(31, 31);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
@@ -75,15 +73,17 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(119, 3);
+            this.rightPictureBox.Location = new System.Drawing.Point(159, 4);
+            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
+            this.rightPictureBox.Size = new System.Drawing.Size(25, 28);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(22, 22);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ReviewToolStripMenuItem,
             this.RenameToolStripMenuItem,
@@ -92,12 +92,12 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 140);
             // 
             // ReviewToolStripMenuItem
             // 
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
-            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
             this.ReviewToolStripMenuItem.Text = "预览";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
@@ -105,7 +105,7 @@
             // 
             this.RenameToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
             this.RenameToolStripMenuItem.Text = "重命名";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
@@ -119,7 +119,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
             // 
             // ExplorerToolStripMenuItem
             // 
@@ -137,7 +137,7 @@
             // 
             // DataButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -145,9 +145,8 @@
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPictureBox);
             this.Controls.Add(this.txtButton);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataButton";
-            this.Size = new System.Drawing.Size(141, 27);
+            this.Size = new System.Drawing.Size(188, 36);
             this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
