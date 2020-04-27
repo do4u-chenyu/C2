@@ -120,6 +120,8 @@ namespace Citta_T1.Controls.Left
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
+            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
+            dataSource.SaveDataSourceInfo(dataSourceDictI2B.Values.ToArray());
         }
     }
 }
