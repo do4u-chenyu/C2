@@ -713,5 +713,10 @@ namespace  Citta_T1
         {
             this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
+
+        public void BlankButtonFocus()
+        {
+            this.blankButton.Focus();
+        }
     }
 }

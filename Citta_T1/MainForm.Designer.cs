@@ -612,7 +612,6 @@
             this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
             this.canvasPanel.Controls.Add(this.panel3);
-            this.canvasPanel.Controls.Add(this.blankButton);
             this.canvasPanel.Controls.Add(this.remarkControl);
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.rightHideButton);
@@ -854,6 +853,7 @@
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
             this.Controls.Add(this.headPanel);
+            this.Controls.Add(this.blankButton);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

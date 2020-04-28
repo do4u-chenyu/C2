@@ -350,7 +350,10 @@ namespace Citta_T1.Controls.Move
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
                 else
-                    MessageBox.Show("请连接数据源");
+                    MessageBox.Show("请先画线连接数据源, 然后才能配置算子参数", 
+                        "没有对应的数据源",
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
                
             }
         }

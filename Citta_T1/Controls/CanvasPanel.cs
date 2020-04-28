@@ -154,7 +154,7 @@ namespace Citta_T1.Controls
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
-            ((MainForm)(this.Parent)).blankButton.Focus();
+            Global.GetMainForm().BlankButtonFocus();
             // 点击右键, 清空操作状态,进入到正常编辑状态
             if (e.Button == MouseButtons.Right)
             {
