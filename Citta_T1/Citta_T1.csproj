@@ -213,11 +213,11 @@
     <Compile Include="Controls\Title\ModelTitlePanel.Designer.cs">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Top\CommonUseControl.cs">
+    <Compile Include="Controls\Top\TopToolBarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Top\CommonUseControl.Designer.cs">
-      <DependentUpon>CommonUseControl.cs</DependentUpon>
+    <Compile Include="Controls\Top\TopToolBarControl.Designer.cs">
+      <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </Compile>
     <Compile Include="DataStruct\Data.cs" />
     <Compile Include="DataStruct\DataButtonInfo.cs" />
@@ -423,8 +423,8 @@
     <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Top\CommonUseControl.resx">
-      <DependentUpon>CommonUseControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
+      <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dgvs\DataGridView0.resx">
       <DependentUpon>DataGridView0.cs</DependentUpon>
@@ -701,15 +701,17 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\Common\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

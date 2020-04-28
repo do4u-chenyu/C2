@@ -61,7 +61,7 @@
             this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.commonPanel = new System.Windows.Forms.Panel();
-            this.commonUseControl = new Citta_T1.Controls.Top.CommonUseControl();
+            this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.panel5 = new System.Windows.Forms.Panel();
             this.importButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
@@ -471,7 +471,7 @@
             // 
             // commonPanel
             // 
-            this.commonPanel.Controls.Add(this.commonUseControl);
+            this.commonPanel.Controls.Add(this.topToolBarControl);
             this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.commonPanel.Location = new System.Drawing.Point(272, 0);
             this.commonPanel.Name = "commonPanel";
@@ -480,10 +480,10 @@
             // 
             // commonUseControl
             // 
-            this.commonUseControl.Location = new System.Drawing.Point(6, 8);
-            this.commonUseControl.Name = "commonUseControl";
-            this.commonUseControl.Size = new System.Drawing.Size(637, 34);
-            this.commonUseControl.TabIndex = 23;
+            this.topToolBarControl.Location = new System.Drawing.Point(6, 8);
+            this.topToolBarControl.Name = "topToolBarControl";
+            this.topToolBarControl.Size = new System.Drawing.Size(637, 34);
+            this.topToolBarControl.TabIndex = 23;
             // 
             // panel5
             // 
@@ -957,7 +957,7 @@
         public System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
-        private Controls.Top.CommonUseControl commonUseControl;
+        private Controls.Top.TopToolBarControl topToolBarControl;
         private System.Windows.Forms.Label currentModelRunLab;
         private System.Windows.Forms.Label currentModelRunBackLab;
         private System.Windows.Forms.Label currentModelFinLab;
