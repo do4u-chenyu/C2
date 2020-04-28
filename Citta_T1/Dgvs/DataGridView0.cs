@@ -93,20 +93,29 @@ namespace Citta_T1
             char separator = '\t',
             DSUtil.ExtType extType = DSUtil.ExtType.Text, 
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8,
+            bool isForceRead = false,
             int maxNumOfFile = 100
             )
         {
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows;
+            List<string> blankRow = new List<string> { };
             // TODO [DK] 支持多种数据格式
             if (extType == DSUtil.ExtType.Excel)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheExcelPreVewContent(bcpPath).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCacheExcelPreViewContent(bcpPath, isForceRead = isForceRead).Split('\n'));
             else
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreVewContent(bcpPath, encoding).Split('\n')); 
+                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreViewContent(bcpPath, encoding, isForceRead = isForceRead).Split('\n')); 
             int numOfRows = rows.Count;
-            for (int i = 0; i < Math.Min(numOfRows, maxNumOfFile); i++)
+            for (int i = 0; i < numOfRows; i++)
             {
-                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
+                blankRow.Add(" ");
+            }
+            for (int i = 0; i < Math.Max(numOfRows, maxNumOfFile); i++)
+            {
+                if (i >= numOfRows)
+                    datas.Add(blankRow);
+                else
+                    datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
             }
 
             List<string> headers = datas[0];

@@ -293,6 +293,7 @@ namespace  Citta_T1
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
+            this.ShowDataView();
             this.logView.Visible = false;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = true;
@@ -300,6 +301,7 @@ namespace  Citta_T1
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
+            this.ShowDataView();
             this.logView.Visible = false;
             this.dataGridView2.Visible = true;
             this.dataGridView3.Visible = false;
@@ -307,11 +309,29 @@ namespace  Citta_T1
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
+            this.ShowDataView();
             this.logView.Visible = true;
             this.dataGridView2.Visible = false;
             this.dataGridView3.Visible = false;
         }
-
+        private void ShowDataView()
+        {
+            if (this.isBottomViewPanelMinimum != true)
+            {
+                this.isBottomViewPanelMinimum = false;
+                this.bottomViewPanel.Height = 280;
+                this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\minfold.png");
+            }
+            InitializeControlsLocation();
+            if (bottomViewPanel.Height == 280)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "隐藏底层面板");
+            }
+            if (bottomViewPanel.Height == 40)
+            {
+                this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
+            }
+        }
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             log.Info("MinMaxPictureBox_Click");
@@ -431,9 +451,10 @@ namespace  Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding);
+            this.ShowDataView(); 
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding, isForceRead = isForceRead);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

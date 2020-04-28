@@ -30,6 +30,7 @@ namespace Citta_T1.Dialogs
             InitializeComponent();
             this.textBox1.LostFocus += new EventHandler(this.textBox1_Leave);
             this.textBox1.GotFocus += new EventHandler(this.textBox1_Enter);
+            this.dataGridView1.DoubleBuffered(true);
         }
 
 

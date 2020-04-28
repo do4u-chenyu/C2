@@ -19,13 +19,13 @@ namespace Citta_T1.Utils
         private static BCPBuffer BcpBufferSingleInstance;
         private LogUtil log = LogUtil.GetInstance("BCPBuffer");
 
-
-        public string GetCacheBcpPreVewContent(string bcpFullPath, DSUtil.Encoding encoding)
+        // TODO [DK] 强制重读
+        public string GetCacheBcpPreViewContent(string bcpFullPath, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = "";
 
             // 数据不存在时 按照路径重新读取
-            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")           
+            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "" || isForceRead)           
                 PreLoadBcpFile(bcpFullPath, encoding);
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (dataPreviewDict.ContainsKey(bcpFullPath))
@@ -34,12 +34,12 @@ namespace Citta_T1.Utils
 
         }
 
-        public string GetCacheExcelPreVewContent(string bcpFullPath)
+        public string GetCacheExcelPreViewContent(string bcpFullPath, bool isForceRead = false)
         {
             string ret = "";
 
             // 数据不存在时 按照路径重新读取
-            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
+            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "" || isForceRead)
                 PreLoadExcelFile(bcpFullPath);
             // 防止文件读取时发生错误, 重新判断下是否存在
             if (dataPreviewDict.ContainsKey(bcpFullPath))
