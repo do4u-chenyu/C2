@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorControl));
-            this.leftPanelOpRelate = new System.Windows.Forms.Button();
+            this.leftPanelOpRelate = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -39,21 +39,21 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.leftPanelOpCollide = new System.Windows.Forms.Button();
+            this.leftPanelOpCollide = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.lefPanelOpUnion = new System.Windows.Forms.Button();
-            this.leftPanelOpDiffer = new System.Windows.Forms.Button();
-            this.leftPanelOpRandom = new System.Windows.Forms.Button();
-            this.leftPanelOpFilter = new System.Windows.Forms.Button();
-            this.leftPanelOpMax = new System.Windows.Forms.Button();
-            this.leftPanelOpMin = new System.Windows.Forms.Button();
-            this.leftPanelOpAvg = new System.Windows.Forms.Button();
+            this.lefPanelOpUnion = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpDiffer = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpRandom = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpFilter = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpMax = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpMin = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpAvg = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.leftPanelOpFreq = new System.Windows.Forms.Button();
-            this.leftPanelOpSort = new System.Windows.Forms.Button();
-            this.leftPanelOpGroup = new System.Windows.Forms.Button();
+            this.leftPanelOpFreq = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpSort = new Citta_T1.Controls.Common.NoFocusButton();
+            this.leftPanelOpGroup = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -401,7 +401,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button leftPanelOpRelate;
+        
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -410,21 +410,22 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.Button leftPanelOpCollide;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Button lefPanelOpUnion;
-        private System.Windows.Forms.Button leftPanelOpDiffer;
-        private System.Windows.Forms.Button leftPanelOpRandom;
-        private System.Windows.Forms.Button leftPanelOpFilter;
-        private System.Windows.Forms.Button leftPanelOpMax;
-        private System.Windows.Forms.Button leftPanelOpMin;
-        private System.Windows.Forms.Button leftPanelOpAvg;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpRelate;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpCollide;
+        private Citta_T1.Controls.Common.NoFocusButton lefPanelOpUnion;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpDiffer;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpRandom;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpFilter;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpMax;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpMin;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpAvg;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpFreq;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpSort;
+        private Citta_T1.Controls.Common.NoFocusButton leftPanelOpGroup;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.Button leftPanelOpFreq;
-        private System.Windows.Forms.Button leftPanelOpSort;
-        private System.Windows.Forms.Button leftPanelOpGroup;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }
