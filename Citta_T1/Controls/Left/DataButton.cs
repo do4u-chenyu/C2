@@ -111,7 +111,7 @@ namespace Citta_T1.Controls.Left
 
         private void CopyFullFilePathToClipboard(object sender, EventArgs e)
         {
-            Clipboard.SetText(FullFilePath);
+            FileUtil.TryClipboardSetText(FullFilePath);
         }
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)

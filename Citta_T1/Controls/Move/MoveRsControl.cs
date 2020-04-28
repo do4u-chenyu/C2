@@ -675,7 +675,7 @@ namespace Citta_T1.Controls.Move
 
         private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(FullFilePath);
+            FileUtil.TryClipboardSetText(FullFilePath);
         }
     }
 }

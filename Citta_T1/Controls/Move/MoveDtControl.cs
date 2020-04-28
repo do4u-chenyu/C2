@@ -19,7 +19,6 @@ namespace Citta_T1.Controls.Move
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
     {
         private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string MDCName { get => this.textBox1.Text; }
         private string oldTextString;
@@ -83,10 +82,8 @@ namespace Citta_T1.Controls.Move
 
 
         ControlMoveWrapper controlMoveWrapper;
-        public string GetBcpPath()
-        {
-            return this.Name;
-        }
+
+        public string FullFilePath => this.Name;
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
@@ -144,7 +141,7 @@ namespace Citta_T1.Controls.Move
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
 
-            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Name);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -456,9 +453,6 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
         private void RenameMenuItem_Click(object sender, EventArgs e)
@@ -667,6 +661,16 @@ namespace Citta_T1.Controls.Move
         public void rectInAdd(int pinIndex)
         {
 
+        }
+
+        private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(FullFilePath);
+        }
+
+        private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(FullFilePath);
         }
     }
 
