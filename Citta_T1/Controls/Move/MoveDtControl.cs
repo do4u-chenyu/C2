@@ -180,8 +180,7 @@ namespace Citta_T1.Controls.Move
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

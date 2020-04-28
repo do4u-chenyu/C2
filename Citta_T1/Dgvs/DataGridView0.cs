@@ -111,6 +111,13 @@ namespace Citta_T1
 
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
+            // 不足100行时,补足剩余的空行,这样视觉效果上好一些
+            for (int i = 0; i < maxNumOfFile - numOfRows; i++)
+            {
+                datas.Add(new List<string>(numOfCols));
+            }
+
+
             DvgClean();
             _InitializeDGV(datas, headers, numOfCols);
         }
