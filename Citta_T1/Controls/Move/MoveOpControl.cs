@@ -646,15 +646,17 @@ namespace Citta_T1.Controls.Move
 
             if(rectIn_up.Contains(mousePosition))
             {
+                log.Info("变化前:" + rectIn_up);
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
                 rectIn_up = rectEnter(rectIn_up);
+                log.Info("变化后:" + rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
             }
 
             else if (rectIn_down.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus) || linePinArray.Contains(1)) return;
+                if (rectArea.Contains(pinStatus)|| linePinArray.Contains(1)) return;
                 rectIn_down = rectEnter(rectIn_down);
                 this.Invalidate();
                 pinStatus = "rectIn_down";
@@ -662,7 +664,7 @@ namespace Citta_T1.Controls.Move
             }
             else if(rectOut.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
+                if (rectArea.Contains(pinStatus)) return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
@@ -711,8 +713,8 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - (int)(4 * f), oriCenter.Y - (int)(3 * f));
-            Size dstSize = new Size((int)(8 * f), (int)(8 * f));
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 - 1, oriCenter.Y - oriSize.Height / 2 - 1);
+            Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
@@ -721,8 +723,8 @@ namespace Citta_T1.Controls.Move
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - (int)(3 * f), oriCenter.Y - (int)(3 * f));
-            Size dstSize = new Size((int)(6 * f), (int)(6 * f));
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 + 1, oriCenter.Y - oriSize.Height / 2 + 1);
+            Size dstSize = new Size(oriSize.Width - 2, oriSize.Height - 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
         #endregion
@@ -850,8 +852,7 @@ namespace Citta_T1.Controls.Move
                     new Size(_leftPinRect.Width, _leftPinRect.Height));
                 int pinLeftX = leftPinRect.X;
                 int pinTopY = leftPinRect.Y;
-                Console.WriteLine(leftPinRect);
-                Console.WriteLine(rect);
+
                 if (leftPinRect.IntersectsWith(rect))
                 {
                     // 计算相交面积比
@@ -921,30 +922,18 @@ namespace Citta_T1.Controls.Move
 
         public void rectInAdd(int pinIndex)
         {
-            linePinArray.Add(pinIndex);
-            
-            
-            switch (pinIndex)
+            if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
-                case 1:
-                    if (pinStatus!= "rectIn_down")
-                    {
-                        rectIn_down = rectEnter(rectIn_down);
-                        this.Invalidate();
-                    }
-
-                    break;
-                case 0:
-                    if (pinStatus != "rectIn_up")
-                    {
-                        rectIn_up = rectEnter(rectIn_up);
-                        this.Invalidate();
-                    }
-                    break;
-
+                
+                rectIn_down = rectEnter(rectIn_down);                
             }
-            
-
+            if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
+            {
+                
+                rectIn_up = rectEnter(rectIn_up);
+            }
+            linePinArray.Add(pinIndex);
+            this.Invalidate();
             PinOpLeaveAndEnter(new Point(0, 0));
         }
         #endregion
