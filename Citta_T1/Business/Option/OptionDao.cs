@@ -11,7 +11,7 @@ namespace Citta_T1.Business.Option
 {
     class OptionDao
     {
-
+        private LogUtil log = LogUtil.GetInstance("OptionDao");
         //添加relation
         public void EnableControlOption(ModelRelation mr)
         {
@@ -221,11 +221,7 @@ namespace Citta_T1.Business.Option
         }
 
         //新数据源修改输出
-        public void ModifyOut(List<string> currentcolumns,int ID)
-        {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
-            IsNewOut(path, currentcolumns, ID);
-        }
+
         public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
         {
             int maxIndex = outIndex.Max();
@@ -241,6 +237,43 @@ namespace Citta_T1.Business.Option
             return (!Enumerable.SequenceEqual(oldName, newName));
   
         }
+        public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+
+            if (opControl.Option.GetOption("columnname") == "") return true;
+            string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
+                {
+                    foreach (int fl in fieldList)
+                    {
+                        if (fl > columnName.Length - 1 || oldColumnList[fl] != columnName[fl])
+                        {
+                            opControl.Option.OptionDict.Remove(field);
+                            return false;
+                        }
+                         
+                    }
+                }
+                else if (field.Contains("outfield"))
+                {
+
+                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (IsDataSourceEqual(oldColumnList, columnName, outIndex))
+                    {
+                        opControl.Option.OptionDict.Remove("outfield");
+                        return false;
+                    }
+                       
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); }
+            return true;
+        }
+
         //修改配置输出
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
@@ -253,7 +286,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!currentcolumns.Contains(cn))
                 {
-                    IsNewOut(path, currentcolumns, ID);
+                    IsNewOut(currentcolumns, ID);
                     return;
                 }
                    
@@ -263,7 +296,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
                 {
-                    IsNewOut(path, currentcolumns, ID);
+                    IsNewOut(currentcolumns, ID);
                     return;
                 }
                    
@@ -279,8 +312,9 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
-        private void IsNewOut(String path, List<string> currentcolumns, int ID)
+        public void IsNewOut( List<string> currentcolumns, int ID)
         {
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
             BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }

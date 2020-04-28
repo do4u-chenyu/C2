@@ -24,12 +24,10 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
-        private bool hasNewDataSource;
         private LogUtil log = LogUtil.GetInstance("MinOperatorView");
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-            this.hasNewDataSource = false;
             dataPath = "";
             columnName = new string[] { };
             oldColumnName = new List<string>();
@@ -69,13 +67,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
                 return;
             }
-            //输入数据源变化，并且输出重写
-            //if (hasResutl != null && this.hasNewDataSource)
-            //{
-            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
-            //    return;
-            //}
-
+          
             //输出变化，重写BCP文件
             if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
@@ -181,14 +173,10 @@ namespace Citta_T1.OperatorViews
                     string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                     if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
-                    {
                         this.opControl.Option.OptionDict.Remove("outfield");
-                        this.hasNewDataSource = true;
-                    }
                 }
             }
-            catch (Exception ex) { log.Error(ex.Message); };
-           
+            catch (Exception ex) { log.Error(ex.Message); };        
         }
         #endregion
         private DSUtil.Encoding EnType(string type)

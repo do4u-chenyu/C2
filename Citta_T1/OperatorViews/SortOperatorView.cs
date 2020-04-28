@@ -22,17 +22,19 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private string oldSort;
-        private List<string> selectColumn;
         private List<bool> oldCheckedItems = new List<bool>();
         private string oldFirstRow;
         private string oldEndRow;
         private List<int> outList;
+        private List<string> oldColumnName;
+        private LogUtil log = LogUtil.GetInstance("SortOperatorView");
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
           
             this.opControl = opControl;
             dataPath = "";
+            this.oldColumnName = this.opControl.Option.GetOption("columnname").Split('\t').ToList();
             InitOptionInfo();
             LoadOption();
             this.oldFirstRow = this.firstRow.Text;
@@ -65,9 +67,25 @@ namespace Citta_T1.OperatorViews
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
-
+            CompareDataSource();
             this.opControl.SingleDataSourceColumns = column;
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+        }
+        private void CompareDataSource()
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (this.opControl.Option.GetOption("columnname") == "") return;
+            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
+            try
+            {
+                if (this.opControl.Option.GetOption("sortfield") != "")
+                {
+                    int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
+                        this.opControl.Option.OptionDict.Remove("sortfield");
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
@@ -109,7 +127,10 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName.ToList());
                 return;
             }
-                
+            //输出变化，重写BCP文件
+            if (hasResutl != null && !this.oldColumnName.SequenceEqual(this.columnName))
+                Global.GetOptionDao().IsNewOut(this.columnName.ToList(), this.opControl.ID);
+
         }
        
         private void cancelButton_Click(object sender, EventArgs e)

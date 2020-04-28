@@ -89,9 +89,9 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请选择数据路径！");
             }
-            else if (Global.GetDataSourceControl().dataSourceDictI2B.ContainsKey(bcpFullFilePath))
+            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(bcpFullFilePath))
             {
-                String dsName = Global.GetDataSourceControl().dataSourceDictI2B[bcpFullFilePath].txtButton.Text;
+                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[bcpFullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName);
             }
             else

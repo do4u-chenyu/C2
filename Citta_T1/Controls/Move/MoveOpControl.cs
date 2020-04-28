@@ -550,7 +550,7 @@ namespace Citta_T1.Controls.Move
                 
                 if (mr.StartID == this.id)
                 {
-                    DeleteResultControl(mr.EndID);
+                    DeleteResultControl(mr.EndID, modelRelations);
                     
                 }
                 if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
@@ -558,8 +558,8 @@ namespace Citta_T1.Controls.Move
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                     (me.GetControl as IMoveControl).OutPinInit("noLine");
                 }
-                
-                if (mr.StartID == ID || mr.EndID == this.id)
+
+                if (mr.StartID == this.id || mr.EndID == this.id)
                 {
                     Global.GetCurrentDocument().ModelRelations.Remove(mr);
                     Global.GetCanvasPanel().Invalidate();
@@ -575,20 +575,28 @@ namespace Citta_T1.Controls.Move
 
 
         }
-        private void DeleteResultControl(int endID)
+        private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
+            Global.GetCurrentDocument().StateChangeByDelete(endID);
+            foreach (ModelRelation mr in modelRelations)
+            {
+                if (mr.StartID == endID || mr.EndID == endID)
+                {
+                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCanvasPanel().Invalidate();
+                }
+            }
             foreach (ModelElement mrc in Global.GetCurrentDocument().ModelElements)
             {
                 if (mrc.ID == endID)
                 {
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-
-                    Global.GetCurrentDocument().StateChangeByDelete(endID);
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); 
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }
             }
+            
         }
         private void OptionDirty()
         {
@@ -694,16 +702,12 @@ namespace Citta_T1.Controls.Move
         
         public void OutPinInit(String status)
         {
-            if (status == "lineExit")
-                linePinArray.Add(-1);
-
-            if (pinStatus != "rectOut")
-            {
-               
+            if ((pinStatus != "rectOut") && (status == "lineExit") && (!linePinArray.Contains(-1)))
+            {              
                 rectOut = rectEnter(rectOut);
+                linePinArray.Add(-1);
                 this.Invalidate();
             }
-
             PinOpLeaveAndEnter(new Point(0, 0));
         }
 

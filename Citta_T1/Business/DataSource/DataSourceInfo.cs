@@ -27,26 +27,46 @@ namespace Citta_T1.Business.DataSource
             Utils.FileUtil.AddPathPower(userPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             if (!File.Exists(DataSourcePath))
-            {              
+            {
                 XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
                 xDoc.AppendChild(rootElement);
                 xDoc.Save(DataSourcePath);
             }
             xDoc.Load(DataSourcePath);
-            var node = xDoc.SelectSingleNode("DataSourceDocument");
+            WriteOneDataSource(db, xDoc);
+            xDoc.Save(DataSourcePath);
+        }
 
+        public void SaveDataSourceInfo(DataButton[] dbs)
+        {
+            Directory.CreateDirectory(userPath);
+            XmlDocument xDoc = new XmlDocument();
+            XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
+            xDoc.AppendChild(rootElement);
+
+            foreach (DataButton db in dbs)
+            {
+                WriteOneDataSource(db, xDoc);
+            }
+            // 保存时覆盖原文件
+            xDoc.Save(DataSourcePath);
+        }
+
+        private void WriteOneDataSource(DataButton db, XmlDocument xDoc)
+        {
+            XmlNode node = xDoc.SelectSingleNode("DataSourceDocument");
             XmlElement dataSourceNode = xDoc.CreateElement("DataSource");
             node.AppendChild(dataSourceNode);
             XmlElement nameNode = xDoc.CreateElement("name");
-            nameNode.InnerText = db.DataName;
+            nameNode.InnerText = db.DataSourceName;
             dataSourceNode.AppendChild(nameNode);
 
             XmlElement sepNode = xDoc.CreateElement("separator");
-            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString();                 // TODO 写
+            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString(); 
             dataSourceNode.AppendChild(sepNode);
 
             XmlElement extTypeNode = xDoc.CreateElement("extType");
-            extTypeNode.InnerText = db.ExtType.ToString();           
+            extTypeNode.InnerText = db.ExtType.ToString();
             dataSourceNode.AppendChild(extTypeNode);
 
             XmlElement codeNode = xDoc.CreateElement("encoding");
@@ -60,8 +80,8 @@ namespace Citta_T1.Business.DataSource
             XmlElement countNode = xDoc.CreateElement("count");
             countNode.InnerText = "0";//默认为0
             dataSourceNode.AppendChild(countNode);
-            xDoc.Save(DataSourcePath);
         }
+
         public List<DataButton> LoadDataSourceInfo() 
         {
             XmlDocument xDoc = new XmlDocument();

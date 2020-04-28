@@ -12,9 +12,7 @@ namespace Citta_T1.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        //private Dictionary<string, Button> dataSourceDictI2B = new Dictionary<string, Button>();
-        public Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
-        private System.Windows.Forms.Button tempButton = new System.Windows.Forms.Button();
+        private Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
         public DataSourceControl()
         {
             InitializeComponent();
@@ -23,6 +21,8 @@ namespace Citta_T1.Controls.Left
         private static int ButtonGapHeight = 50;
         private static int ButtonLeftX = 30;
         private static int ButtonBottomOffsetY = 40;
+
+        public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; set => dataSourceDictI2B = value; }
 
         public void LeftPaneOp_MouseDown(object sender, MouseEventArgs e)
         {
@@ -46,16 +46,16 @@ namespace Citta_T1.Controls.Left
         {
             // 根据导入数据动态生成一个button
             DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
-            dataButton.Location = new Point(ButtonLeftX, ButtonGapHeight * (this.dataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
+            dataButton.Location = new Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
             dataButton.txtButton.MouseDown += new MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 判断是否有路径文件
-            if (this.dataSourceDictI2B.ContainsKey(fullFilePath))
+            if (this.DataSourceDictI2B.ContainsKey(fullFilePath))
             {
-                String name = this.dataSourceDictI2B[fullFilePath].txtButton.Text;
+                String name = this.DataSourceDictI2B[fullFilePath].txtButton.Text;
                 MessageBox.Show("该文件已存在，数据名为：" + name);
                 return;
             }
-            this.dataSourceDictI2B.Add(fullFilePath, dataButton);
+            this.DataSourceDictI2B.Add(fullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
             //数据源持久化存储
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
@@ -67,16 +67,16 @@ namespace Citta_T1.Controls.Left
         {
             // 供load时调用
 
-            dataButton.Location = new System.Drawing.Point(ButtonLeftX, ButtonGapHeight * (this.dataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
+            dataButton.Location = new System.Drawing.Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
             dataButton.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
-            this.dataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
+            this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
         }
 
         public void RenameDataButton(string index, string dstName)
         {
             // 根据index重命名button
-            this.dataSourceDictI2B[index].txtButton.Text = dstName;
+            this.DataSourceDictI2B[index].txtButton.Text = dstName;
         }
 
         private void LocalFrame_Paint(object sender, PaintEventArgs e)
@@ -115,11 +115,13 @@ namespace Citta_T1.Controls.Left
 
         public void RemoveDataButton(DataButton dataButton)
         {
-            this.dataSourceDictI2B.Remove(dataButton.FullFilePath);
+            this.DataSourceDictI2B.Remove(dataButton.FullFilePath);
             this.localFrame.Controls.Remove(dataButton);
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
+            DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
+            dataSource.SaveDataSourceInfo(DataSourceDictI2B.Values.ToArray());
         }
     }
 }

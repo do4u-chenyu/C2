@@ -656,10 +656,11 @@ namespace Citta_T1.Controls.Move
         }
         public void rectInAdd(int pinIndex)
         {
-            linePinArray.Add(1);
-            if (pinStatus != "rectIn")
+            
+            if (pinStatus != "rectIn" && !linePinArray.Contains(1))
             {
                 rectIn = rectEnter(rectIn);
+                linePinArray.Add(1);
                 this.Invalidate();
             }
 

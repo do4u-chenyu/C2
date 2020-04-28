@@ -130,6 +130,7 @@ namespace Citta_T1.Business.Model
                 {
                     if (me.ID != mr.EndID) continue; 
                     me.Status = ElementStatus.Null;
+                    (me.GetControl as MoveOpControl).EnableOpenOption = false;
                     //存在链路，后续链路中算子状态变化
                     AllStateChange(me.ID);
 
