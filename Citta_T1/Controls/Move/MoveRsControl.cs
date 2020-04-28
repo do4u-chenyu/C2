@@ -28,7 +28,7 @@ namespace Citta_T1.Controls.Move
 
         private string typeName;
         private string oldTextString;
-        private string path;
+        private string fullFilePath;
         private DSUtil.Encoding encoding;
 
         // 一些倍率
@@ -89,7 +89,7 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-        public string Path { get => this.path; set => this.path = value; }
+        public string FullFilePath { get => this.fullFilePath; set => this.fullFilePath = value; }
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
@@ -309,9 +309,9 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void PreviewMenuItem_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists(this.path))
+            if (System.IO.File.Exists(FullFilePath))
             {
-                Global.GetMainForm().PreViewDataByBcpPath(this.path, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
+                Global.GetMainForm().PreViewDataByBcpPath(FullFilePath, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
             }
         }
 
@@ -413,7 +413,7 @@ namespace Citta_T1.Controls.Move
 
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Path);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, this.FullFilePath);
         }
 
         #region 针脚事件
@@ -652,7 +652,7 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
         public void rectInAdd(int pinIndex)
         {
@@ -666,6 +666,16 @@ namespace Citta_T1.Controls.Move
 
             PinOpLeaveAndEnter(new Point(0, 0));
 
+        }
+
+        private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(FullFilePath);
+        }
+
+        private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(FullFilePath);
         }
     }
 }

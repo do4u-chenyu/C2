@@ -42,9 +42,7 @@
             this.DeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.txtButton = new System.Windows.Forms.Button();
-            this.idToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -197,7 +195,6 @@
             this.txtButton.TabIndex = 8;
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = true;
-            this.txtButton.Click += new System.EventHandler(this.txtButton_Click);
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
@@ -293,9 +290,7 @@
         private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;
         public System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.ToolTip helpToolTip;
         public System.Windows.Forms.Button txtButton;
         private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;
-        public System.Windows.Forms.ToolTip idToolTip;
     }
 }

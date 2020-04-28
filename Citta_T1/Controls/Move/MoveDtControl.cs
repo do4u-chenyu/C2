@@ -620,10 +620,6 @@ namespace Citta_T1.Controls.Move
         #region 划线动作
         #endregion
 
-        private void txtButton_Click(object sender, EventArgs e)
-        {
-            MainForm prt = Global.GetMainForm();
-        }
         private void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
@@ -665,7 +661,7 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void rectInAdd(int pinIndex)

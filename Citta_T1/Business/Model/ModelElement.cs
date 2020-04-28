@@ -192,7 +192,7 @@ namespace Citta_T1.Business.Model
             if (this.type == ElementType.DataSource)
                 path = dataSourcePath;
             else if (this.type == ElementType.Result)
-                path = (ctl as MoveRsControl).Path;
+                path = (ctl as MoveRsControl).FullFilePath;
             return path;
         }
 

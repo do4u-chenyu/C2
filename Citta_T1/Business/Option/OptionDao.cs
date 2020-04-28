@@ -196,7 +196,7 @@ namespace Citta_T1.Business.Option
             moveOpControl.OutPinInit("lineExit");
             mrc.rectInAdd(1);
             string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
-            mrc.Path = path;
+            mrc.FullFilePath = path;
         }
 
 
