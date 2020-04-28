@@ -131,6 +131,9 @@
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
     <Compile Include="Controls\CanvasWrapper.cs" />
+    <Compile Include="Controls\Common\NoFocusButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ControlMoveWrapper.cs" />
     <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
@@ -710,8 +713,6 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

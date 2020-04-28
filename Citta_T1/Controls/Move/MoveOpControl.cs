@@ -9,10 +9,9 @@ using System.Windows.Forms;
 using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
-using static Citta_T1.Controls.CanvasPanel;
+using Citta_T1.Controls;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Diagnostics;
 using Citta_T1.Business.Schedule;
 
 namespace Citta_T1.Controls.Move

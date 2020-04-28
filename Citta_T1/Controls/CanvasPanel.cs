@@ -13,6 +13,12 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
+    public enum ECommandType
+    {
+        Hold,
+        PinDraw,
+        Null,
+    }
     public partial class CanvasPanel : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
@@ -40,12 +46,7 @@ namespace Citta_T1.Controls
         // 绘图
         // 绘图
         public List<Bezier> lines = new List<Bezier>() { };
-        public enum ECommandType
-        {
-            Hold,
-            PinDraw,
-            Null,
-        }
+
         public ECommandType cmd = ECommandType.Null;
         public PointF startP;
         public PointF endP;
