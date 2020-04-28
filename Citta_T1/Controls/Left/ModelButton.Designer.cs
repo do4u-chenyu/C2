@@ -38,6 +38,9 @@
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,29 +85,53 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
             this.ReNameToolStripMenuItem,
-            this.DeleteToolStripMenuItem});
+            this.DeleteToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.ExplorerToolStripMenuItem,
+            this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(113, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Enabled = false;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.OpenToolStripMenuItem.Text = "打开";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // ReNameToolStripMenuItem
             // 
+            this.ReNameToolStripMenuItem.Enabled = false;
             this.ReNameToolStripMenuItem.Name = "ReNameToolStripMenuItem";
-            this.ReNameToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.ReNameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ReNameToolStripMenuItem.Text = "重命名";
             // 
             // DeleteToolStripMenuItem
             // 
+            this.DeleteToolStripMenuItem.Enabled = false;
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
-            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.DeleteToolStripMenuItem.Text = "删除";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            // 
+            // ExplorerToolStripMenuItem
+            // 
+            this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
+            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
+            this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
+            // 
+            // CopyFilePathToClipboardToolStripMenuItem
+            // 
+            this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
+            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
+            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
             // 
             // ModelButton
             // 
@@ -135,5 +162,8 @@
         private System.Windows.Forms.ToolStripMenuItem ReNameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
     }
 }
