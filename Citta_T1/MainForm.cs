@@ -70,7 +70,8 @@ namespace  Citta_T1
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
             Global.SetLogView(this.logView);
-            Global.SetOptionDao(this.optionDao); 
+            Global.SetOptionDao(this.optionDao);
+            Global.SetDataSourceControl(this.dataSourceControl);
 
         }
 
@@ -441,11 +442,11 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
-            this.dataSourceControl.GenDataButton(name, filePath, separator, extType, encoding);
+            this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
@@ -454,7 +455,7 @@ namespace  Citta_T1
         public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowDataView(); 
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType = extType, encoding = encoding, isForceRead = isForceRead);
+            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType, encoding, isForceRead);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -729,45 +730,14 @@ namespace  Citta_T1
             }
         }
 
-
-        private void usernamelabel_MouseMove(object sender, MouseEventArgs e)
+        private void UsernameLabel_MouseEnter(object sender, EventArgs e)
         {
-            this.toolTip1.SetToolTip(this.usernamelabel, this.userName +"已登录");
+            this.toolTip1.SetToolTip(this.usernamelabel, this.userName + "已登录");
         }
 
-        private void stopButton_MouseMove(object sender, MouseEventArgs e)
+        public void BlankButtonFocus()
         {
-            this.toolTip1.SetToolTip(this.stopButton, "终止调试");
-        }
-
-        private void runButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.runButton, "开始调试");
-        }
-
-        private void downloadButton_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
-        }
-
-        private void previewLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.previewLabel, "数据预览");
-        }
-
-        private void logLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.logLabel, "运行日志");
-        }
-
-        private void errorLabel_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.errorLabel, "报错信息");
-        }
-
-        private void flowControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            this.toolTip1.SetToolTip(this.flowControl, "工具栏");
+            this.blankButton.Focus();
         }
     }
 }

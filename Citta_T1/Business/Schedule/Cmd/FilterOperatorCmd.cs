@@ -37,15 +37,11 @@ namespace Citta_T1.Business.Schedule.Cmd
             //过滤条件写入临时配置文件，需判断输入文件格式。（解决条件为中文时的编码问题）
             StreamWriter streamWriter = null;
             string filterBatPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_filterChoice.bat";
-            if (JudgeInputFileEncoding(inputFilePath) == DSUtil.Encoding.GBK)
-            {
-                streamWriter = new StreamWriter(filterBatPath, false, Encoding.GetEncoding("gbk"));          
-            }
-            else
-            {
-                UTF8Encoding utf8 = new UTF8Encoding(false);
-                streamWriter = new StreamWriter(filterBatPath, false, utf8);
-            }
+            
+            //目前输入文件统一转换为utf-8
+            UTF8Encoding utf8 = new UTF8Encoding(false);
+            streamWriter = new StreamWriter(filterBatPath, false, utf8);
+            
             streamWriter.Write(awkExec);
             streamWriter.Close();
 

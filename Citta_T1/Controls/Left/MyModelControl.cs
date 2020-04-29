@@ -22,8 +22,7 @@ namespace Citta_T1.Controls.Left
 
         public void AddModel(string modelName)
         {
-            ModelButton mb = new ModelButton();
-            mb.SetModelName(modelName);
+            ModelButton mb = new ModelButton(modelName);
             // 获得当前要添加的model button的初始位置
             Point startPoint = new Point(15, -12);
             if (this.Controls.Count > 0)
@@ -42,7 +41,7 @@ namespace Citta_T1.Controls.Left
             foreach (Control ct in this.Controls)
             {
                 if (ct is ModelButton)
-                    if ((ct as ModelButton).GetModelName() == modelTitle)
+                    if ((ct as ModelButton).ModelName== modelTitle)
                         return true;
             }
             return false;
@@ -50,7 +49,7 @@ namespace Citta_T1.Controls.Left
         public void EnableOpenDocument(string modelTitle)
         {
             foreach (ModelButton mb in this.Controls)
-                if (mb.GetModelName() == modelTitle)
+                if (mb.ModelName== modelTitle)
                     mb.EnableOpenDocument = true;
 
         }

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using System.Reflection;
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
@@ -14,28 +13,28 @@ namespace Citta_T1.Controls.Left
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
-        public string FilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
-        public string DataName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
+        public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
+        public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
         { get => this.count;
             set
             {
                 this.count = value;
-                EnableDeleteDataSource(this.count);
             }
         }
 
+        private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
         public DataButton()
         {
             InitializeComponent();
         }
-        public DataButton(string ffp, string dataName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public DataButton(string ffp, string dataSourceName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
-            txtButton.Text = dataName;
+            txtButton.Text = dataSourceName;
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
@@ -44,18 +43,18 @@ namespace Citta_T1.Controls.Left
         private void DataButton_Load(object sender, EventArgs e)
         {
             // 数据源全路径浮动提示信息
-            String helpInfo = txtButton.Name;
+            String helpInfo = FullFilePath;
             this.helpToolTip.SetToolTip(this.rightPictureBox, helpInfo);
 
             // 数据源名称浮动提示信息
-            helpInfo = txtButton.Text;
+            helpInfo = DataSourceName;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}", 
-                encoding.ToString(),
-                this.ExtType,
-                this.Count,
-                this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+            helpInfo = String.Format(DataButtonFlowTemplate, 
+                                    encoding.ToString(),
+                                    this.ExtType,
+                                    Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
+                                    this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -63,7 +62,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByBcpPath(txtButton.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(FullFilePath, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -74,62 +73,53 @@ namespace Citta_T1.Controls.Left
             ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
         }
 
-        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 1. DataSource中删除控件
-            // 2. Program中删除数据
-            // TODO [DK] 3. 画布中已存在的该如何处理？ 
-            this.Parent.Controls.Remove(this);
-            BCPBuffer.GetInstance().Remove(this.txtButton.Name);
+            int count = Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath);
+            DialogResult rs = DialogResult.OK;
+
+            // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
+            if (count > 0)
+                rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"", 
+                    "卸载 " + this.DataSourceName, 
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Information);
+            else // count == 0, 不需要特别的警告信息
+                rs = MessageBox.Show("卸载数据源,请点击 \"确定\"",
+                    "卸载 " + this.DataSourceName,
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Information);
+
+            if (rs != DialogResult.OK)
+                return;
+
+            // 卸载数据源
+            Global.GetDataSourceControl().RemoveDataButton(this);
+            // 引用不为0时,有可能还会预览该数据源的数据,此时不用移除buffer
+            if (count == 0)
+                BCPBuffer.GetInstance().Remove(this.FullFilePath);
 
         }
         #endregion
 
         private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = "/e,/select," + txtButton.Name;
-                System.Diagnostics.Process.Start(processStartInfo);
-            }
-            catch (System.ComponentModel.Win32Exception ex) 
-            {
-                LogUtil logUtil = LogUtil.GetInstance("DataButton");
-                logUtil.Error(ex.Message);
-                //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
-                ReplaceOpenMethod();
-            }
-        }
-        private void ReplaceOpenMethod()
-        {
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(txtButton.Name);
-                System.Diagnostics.Process.Start(processStartInfo);
-            }
-            catch { };
-        }
-        private void CopyFilePathToClipboard(object sender, EventArgs e)
-        {
-            Clipboard.SetText(txtButton.Name);
-        }
-        private void EnableDeleteDataSource(int count)
-        {
-            if(count>0)
-                this.DeleteToolStripMenuItem.Enabled = true;
-
+            FileUtil.ExploreDirectory(FullFilePath);
         }
 
-        private void leftPictureBox_MouseEnter(object sender, EventArgs e)
+
+
+        private void CopyFullFilePathToClipboard(object sender, EventArgs e)
         {
-            string helpInfo = String.Format("编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}",
+            FileUtil.TryClipboardSetText(FullFilePath);
+        }
+
+        private void LeftPictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            string helpInfo = String.Format(DataButtonFlowTemplate,
                                         encoding.ToString(),
                                         this.ExtType,
-                                        this.Count,
+                                        Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
                                         this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }

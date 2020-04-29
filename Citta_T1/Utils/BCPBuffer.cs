@@ -60,7 +60,7 @@ namespace Citta_T1.Utils
                     PreLoadExcelFile(bcpFullPath);
                 // 防止文件读取时发生错误, 重新判断下是否存在
                 if (columnDict.ContainsKey(bcpFullPath))
-                    ret = columnDict[bcpFullPath];
+                    ret = columnDict[bcpFullPath].Trim('\n');
                 return ret;
             }
             //BCP类型
@@ -97,6 +97,11 @@ namespace Citta_T1.Utils
         {
             dataPreviewDict.Remove(bcpFullPath);
             columnDict.Remove(bcpFullPath);
+        }
+
+        public bool Contains(string bcpFullPath)
+        {
+            return dataPreviewDict.ContainsKey(bcpFullPath);
         }
 
         /*

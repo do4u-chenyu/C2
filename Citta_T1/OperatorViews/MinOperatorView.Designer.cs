@@ -33,8 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.ConfirmButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.OutList = new UserControlDLL.ComCheckBoxList();
@@ -89,8 +89,8 @@
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.CancelButton);
-            this.bottomPanel.Controls.Add(this.ConfirmButton);
+            this.bottomPanel.Controls.Add(this.cancelButton);
+            this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 213);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
@@ -100,31 +100,31 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.FlatAppearance.BorderSize = 0;
-            this.CancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.CancelButton.Location = new System.Drawing.Point(326, 19);
-            this.CancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(63, 27);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "取消";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.cancelButton.Location = new System.Drawing.Point(326, 19);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelButton.Name = "CancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            this.cancelButton.TabIndex = 1;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // ConfirmButton
             // 
-            this.ConfirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ConfirmButton.FlatAppearance.BorderSize = 0;
-            this.ConfirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.ConfirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ConfirmButton.Location = new System.Drawing.Point(236, 19);
-            this.ConfirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.ConfirmButton.Name = "ConfirmButton";
-            this.ConfirmButton.Size = new System.Drawing.Size(60, 27);
-            this.ConfirmButton.TabIndex = 0;
-            this.ConfirmButton.Text = "确认";
-            this.ConfirmButton.UseVisualStyleBackColor = false;
-            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
+            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.confirmButton.Location = new System.Drawing.Point(236, 19);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
+            this.confirmButton.Name = "ConfirmButton";
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.TabIndex = 0;
+            this.confirmButton.Text = "确认";
+            this.confirmButton.UseVisualStyleBackColor = false;
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -227,8 +227,8 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.Button ConfirmButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

@@ -71,7 +71,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -277,6 +277,16 @@ namespace Citta_T1.Business.Model
             foreach (ModelDocument md in this.ModelDocuments)
                 count += md.ModelElements.Count;
 
+            return count;
+        }
+        // 特定Datasource在当前所有打开模型中的引用次数
+        public int CountDataSourceUsage(string ffp)
+        {
+            int count = 0;
+            foreach (ModelDocument md in this.ModelDocuments)
+                foreach (ModelElement me in md.ModelElements)
+                    if (me.Type == ElementType.DataSource && me.GetPath() == ffp)
+                        count++;
             return count;
         }
 

@@ -28,7 +28,7 @@ namespace Citta_T1.Controls.Move
 
         private string typeName;
         private string oldTextString;
-        private string path;
+        private string fullFilePath;
         private DSUtil.Encoding encoding;
 
         // 一些倍率
@@ -89,7 +89,7 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-        public string Path { get => this.path; set => this.path = value; }
+        public string FullFilePath { get => this.fullFilePath; set => this.fullFilePath = value; }
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
@@ -310,9 +310,9 @@ namespace Citta_T1.Controls.Move
         #region 右键菜单
         public void PreviewMenuItem_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists(this.path))
+            if (System.IO.File.Exists(this.FullFilePath))
             {
-                Global.GetMainForm().PreViewDataByBcpPath(this.path, '\t', DSUtil.ExtType.Text, this.encoding, true);             // 中间结果默认\t分隔
+                Global.GetMainForm().PreViewDataByBcpPath(this.FullFilePath, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
             }
         }
 
@@ -414,7 +414,7 @@ namespace Citta_T1.Controls.Move
 
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Path);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, this.FullFilePath);
         }
 
         #region 针脚事件
@@ -451,20 +451,22 @@ namespace Citta_T1.Controls.Move
         }
         public Rectangle rectEnter(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 4, oriCenter.Y - 4);
-            Size dstSize = new Size(8, 8);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 - 1, oriCenter.Y - oriSize.Height / 2 - 1);
+            Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 3, oriCenter.Y - 3);
-            Size dstSize = new Size(6, 6);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 + 1, oriCenter.Y - oriSize.Height / 2 + 1);
+            Size dstSize = new Size(oriSize.Width - 2, oriSize.Height - 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public void OutPinInit(String status)
@@ -651,19 +653,30 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
         public void rectInAdd(int pinIndex)
         {
-            linePinArray.Add(1);
-            if (pinStatus != "rectIn")
+            
+            if (pinStatus != "rectIn" && !linePinArray.Contains(1))
             {
                 rectIn = rectEnter(rectIn);
+                linePinArray.Add(1);
                 this.Invalidate();
             }
 
             PinOpLeaveAndEnter(new Point(0, 0));
 
+        }
+
+        private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(FullFilePath);
+        }
+
+        private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(FullFilePath);
         }
     }
 }

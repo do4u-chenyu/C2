@@ -13,6 +13,12 @@ namespace Citta_T1.Controls
 {
     public delegate void NewElementEventHandler(Control ct);
 
+    public enum ECommandType
+    {
+        Hold,
+        PinDraw,
+        Null,
+    }
     public partial class CanvasPanel : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
@@ -40,12 +46,7 @@ namespace Citta_T1.Controls
         // 绘图
         // 绘图
         public List<Bezier> lines = new List<Bezier>() { };
-        public enum ECommandType
-        {
-            Hold,
-            PinDraw,
-            Null,
-        }
+
         public ECommandType cmd = ECommandType.Null;
         public PointF startP;
         public PointF endP;
@@ -154,7 +155,7 @@ namespace Citta_T1.Controls
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
-            ((MainForm)(this.Parent)).blankButton.Focus();
+            Global.GetMainForm().BlankButtonFocus();
             // 点击右键, 清空操作状态,进入到正常编辑状态
             if (e.Button == MouseButtons.Right)
             {
