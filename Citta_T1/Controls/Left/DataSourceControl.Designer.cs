@@ -82,7 +82,6 @@
             this.localFrame.Name = "LocalFrame";
             this.localFrame.Size = new System.Drawing.Size(185, 586);
             this.localFrame.TabIndex = 1;
-            this.localFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.LocalFrame_Paint);
             // 
             // ExternalFrame
             // 

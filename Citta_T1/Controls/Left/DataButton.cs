@@ -1,4 +1,5 @@
-﻿using Citta_T1.Utils;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -26,10 +27,6 @@ namespace Citta_T1.Controls.Left
         private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
-        public DataButton()
-        {
-            InitializeComponent();
-        }
         public DataButton(string ffp, string dataSourceName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
@@ -122,6 +119,23 @@ namespace Citta_T1.Controls.Left
                                         Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
                                         this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+        }
+
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                // 使用`DataObject`对象来传参数，更加自由
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.DataSource);  
+                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
+                dragDropData.SetData("Text", DataSourceName);  // 数据源名称
+                dragDropData.SetData("Separator", Separator);  // 分隔符
+                dragDropData.SetData("ExtType", ExtType);      // 扩展名,文件类型
+                // 需要记录他的编码格式
+                dragDropData.SetData("Encoding", Encoding);
+                this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
         }
     }
 }

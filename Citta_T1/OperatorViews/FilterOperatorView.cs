@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetPath();
+                    this.dataPath = me.GetFullFilePath();
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;

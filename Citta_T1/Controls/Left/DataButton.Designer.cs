@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataButton));
-            this.txtButton = new System.Windows.Forms.Button();
+            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -58,6 +58,7 @@
             this.txtButton.TabIndex = 9;
             this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = false;
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 
             // leftPictureBox
             // 
@@ -157,7 +158,7 @@
 
         #endregion
 
-        public System.Windows.Forms.Button txtButton;
+        private Citta_T1.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.ToolTip helpToolTip;

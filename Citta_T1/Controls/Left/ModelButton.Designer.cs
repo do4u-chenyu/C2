@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelButton));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.lelfPictureBox = new System.Windows.Forms.PictureBox();
-            this.textButton = new System.Windows.Forms.Button();
+            this.textButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +156,7 @@
 
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.PictureBox lelfPictureBox;
-        private System.Windows.Forms.Button textButton;
+        private Citta_T1.Controls.Common.NoFocusButton textButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ReNameToolStripMenuItem;

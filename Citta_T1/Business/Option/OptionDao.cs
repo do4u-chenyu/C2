@@ -46,7 +46,7 @@ namespace Citta_T1.Business.Option
             if (oldColumnName == null) return;
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
-            string dataSourcePath = startElement.GetPath();
+            string dataSourcePath = startElement.GetFullFilePath();
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = startElement.ID;
             //获取当前连接的数据源的表头字段
@@ -100,11 +100,11 @@ namespace Citta_T1.Business.Option
                     modelElement1 = Global.GetCurrentDocument().SearchElementByID(me.StartID);
             }
             
-            string dataSourcePath0 = modelElement0.GetPath();
+            string dataSourcePath0 = modelElement0.GetFullFilePath();
             DSUtil.Encoding encoding0 = modelElement0.Encoding;
             int ID0 = modelElement0.ID;
 
-            string dataSourcePath1 = modelElement1.GetPath();
+            string dataSourcePath1 = modelElement1.GetFullFilePath();
             DSUtil.Encoding encoding1 = modelElement1.Encoding;
             int ID1 = modelElement1.ID;
 
@@ -278,7 +278,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
             List<string> columns = new List<string>();
 
             //新输出字段中不包含旧字段
@@ -314,7 +314,7 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentcolumns, int ID)
         {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
@@ -340,7 +340,7 @@ namespace Citta_T1.Business.Option
             foreach (KeyValuePair<int,int> kvp in startControls)
             {
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
-                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetPath();
+                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
             }
             return dataInfo;
