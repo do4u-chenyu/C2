@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.Controls.Top
 {
-    partial class CommonUseControl
+    partial class TopToolBarControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommonUseControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopToolBarControl));
             this.relateButton = new System.Windows.Forms.Button();
             this.collideButton = new System.Windows.Forms.Button();
             this.unionButton = new System.Windows.Forms.Button();

@@ -12,9 +12,9 @@ using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Top
 {
-    public partial class CommonUseControl : UserControl
+    public partial class TopToolBarControl : UserControl
     {
-        public CommonUseControl()
+        public TopToolBarControl()
         {
             InitializeComponent();
             InitializeToolTip();

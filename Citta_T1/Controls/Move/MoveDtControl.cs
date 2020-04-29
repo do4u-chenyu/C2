@@ -19,7 +19,6 @@ namespace Citta_T1.Controls.Move
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
     {
         private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        private System.Windows.Forms.ToolStripMenuItem overViewMenuItem;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string MDCName { get => this.textBox1.Text; }
         private string oldTextString;
@@ -83,10 +82,8 @@ namespace Citta_T1.Controls.Move
 
 
         ControlMoveWrapper controlMoveWrapper;
-        public string GetBcpPath()
-        {
-            return this.Name;
-        }
+
+        public string FullFilePath => this.Name;
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
@@ -144,7 +141,7 @@ namespace Citta_T1.Controls.Move
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
 
-            this.nameToolTip.SetToolTip(this.rightPictureBox, this.Name);
+            this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -180,8 +177,7 @@ namespace Citta_T1.Controls.Move
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            MainForm prt = Global.GetMainForm();
-            prt.PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByBcpPath(this.Name, this.separator, this.extType, this.encoding);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -335,9 +331,9 @@ namespace Citta_T1.Controls.Move
                     lineStaus = "lineExit";
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
+                    oldcontrolPosition = this.Location;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
-                    
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -457,9 +453,6 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            //this.randomOperatorView = new Citta_T1.OperatorViews.FilterOperatorView();
-            //this.randomOperatorView.StartPosition = FormStartPosition.CenterScreen;
-            //DialogResult dialogResult = this.randomOperatorView.ShowDialog();
         }
 
         private void RenameMenuItem_Click(object sender, EventArgs e)
@@ -495,20 +488,22 @@ namespace Citta_T1.Controls.Move
         }
         public Rectangle rectEnter(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 4, oriCenter.Y - 4);
-            Size dstSize = new Size(8, 8);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 - 1, oriCenter.Y - oriSize.Height / 2 - 1);
+            Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
         public Rectangle rectLeave(Rectangle rect)
         {
+            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
-            Point dstLtCorner = new Point(oriCenter.X - 3, oriCenter.Y - 3);
-            Size dstSize = new Size(6, 6);
+            Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 + 1, oriCenter.Y - oriSize.Height / 2 + 1);
+            Size dstSize = new Size(oriSize.Width - 2, oriSize.Height - 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
 
@@ -619,10 +614,6 @@ namespace Citta_T1.Controls.Move
         #region 划线动作
         #endregion
 
-        private void txtButton_Click(object sender, EventArgs e)
-        {
-            MainForm prt = Global.GetMainForm();
-        }
         private void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
@@ -664,12 +655,22 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void rectInAdd(int pinIndex)
         {
 
+        }
+
+        private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.TryClipboardSetText(FullFilePath);
+        }
+
+        private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileUtil.ExploreDirectory(FullFilePath);
         }
     }
 

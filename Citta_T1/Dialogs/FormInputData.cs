@@ -28,7 +28,9 @@ namespace Citta_T1.Dialogs
         public FormInputData()
         {
             InitializeComponent();
+            this.dataGridView1.DoubleBuffered(true);
         }
+
 
         public void ReSetParams()
         {

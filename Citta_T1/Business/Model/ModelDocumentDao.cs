@@ -71,7 +71,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.GetBcpPath(), dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
             }

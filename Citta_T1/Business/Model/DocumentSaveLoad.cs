@@ -282,7 +282,7 @@ namespace Citta_T1.Business.Model
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.ID = id;
                         ctl.Status = EStatus(status);
-                        ctl.Path = bcpPath;
+                        ctl.FullFilePath = bcpPath;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }

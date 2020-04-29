@@ -104,35 +104,14 @@ namespace Citta_T1.Controls.Left
 
         private void OpenFilePathMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = "/e,/select," + FullFilePath;
-                System.Diagnostics.Process.Start(processStartInfo);
-            }
-            catch (System.ComponentModel.Win32Exception ex) 
-            {
-                LogUtil logUtil = LogUtil.GetInstance("DataButton");
-                logUtil.Error(ex.Message);
-                //某些机器直接打开文档目录会报“拒绝访问”错误，此时换一种打开方式
-                AnotherOpenFilePathMethod();
-            }
+            FileUtil.ExploreDirectory(FullFilePath);
         }
-        private void AnotherOpenFilePathMethod()
-        {
-            try
-            {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(FullFilePath);
-                System.Diagnostics.Process.Start(processStartInfo);
-            }
-            catch { };
-        }
+
+
+
         private void CopyFullFilePathToClipboard(object sender, EventArgs e)
         {
-            Clipboard.SetText(FullFilePath);
+            FileUtil.TryClipboardSetText(FullFilePath);
         }
 
         private void LeftPictureBox_MouseEnter(object sender, EventArgs e)

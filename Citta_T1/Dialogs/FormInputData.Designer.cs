@@ -370,6 +370,8 @@
             this.Controls.Add(this.previewButton);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormInputData";
             this.ShowIcon = false;
             this.Text = "导入数据";

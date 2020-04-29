@@ -46,7 +46,7 @@ namespace Citta_T1.Controls.Move
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusBox = new System.Windows.Forms.PictureBox();
-            this.txtButton = new System.Windows.Forms.Button();
+            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.idToolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
@@ -260,7 +260,7 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.ToolTip nameToolTip;
         public System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.ToolTip helpToolTip;
-        public System.Windows.Forms.Button txtButton;
+        private Citta_T1.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.PictureBox statusBox;
         public System.Windows.Forms.ToolTip idToolTip;
     }
