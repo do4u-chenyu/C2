@@ -97,8 +97,18 @@ namespace Citta_T1.Controls.Left
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
+            SaveDataSourceInfo();
+        }
+        public void SaveDataSourceInfo()
+        {
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.SaveDataSourceInfo(DataSourceDictI2B.Values.ToArray());
+        }
+
+        private void DataSourceControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
+            Global.GetMainForm().BlankButtonFocus();
         }
     }
 }

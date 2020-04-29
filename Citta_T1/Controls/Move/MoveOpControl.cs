@@ -618,7 +618,7 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region textBox
-        public void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -630,7 +630,7 @@ namespace Citta_T1.Controls.Move
                 
         }
 
-        public void textBox1_Leave(object sender, EventArgs e)
+        public void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
