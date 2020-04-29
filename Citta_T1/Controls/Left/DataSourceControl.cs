@@ -19,7 +19,7 @@ namespace Citta_T1.Controls.Left
         }
 
         private static int ButtonGapHeight = 50;
-        private static int ButtonLeftX = 30;
+        private static int ButtonLeftX = 17;
         private static int ButtonBottomOffsetY = 40;
 
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; set => dataSourceDictI2B = value; }

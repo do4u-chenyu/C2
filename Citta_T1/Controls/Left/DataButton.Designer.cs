@@ -54,10 +54,10 @@
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(29, 1);
+            this.txtButton.Location = new System.Drawing.Point(25, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(90, 25);
+            this.txtButton.Size = new System.Drawing.Size(112, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
@@ -65,7 +65,7 @@
             // leftPictureBox
             // 
             this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPictureBox.Location = new System.Drawing.Point(1, 1);
+            this.leftPictureBox.Location = new System.Drawing.Point(-1, 1);
             this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";
             this.leftPictureBox.Size = new System.Drawing.Size(23, 23);
@@ -77,7 +77,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(120, 3);
+            this.rightPictureBox.Location = new System.Drawing.Point(139, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -142,10 +142,10 @@
             this.textBox.BackColor = System.Drawing.Color.White;
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox.Location = new System.Drawing.Point(26, 3);
+            this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(90, 23);
+            this.textBox.Size = new System.Drawing.Size(112, 23);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
@@ -164,7 +164,7 @@
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataButton";
-            this.Size = new System.Drawing.Size(141, 27);
+            this.Size = new System.Drawing.Size(159, 27);
             this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
