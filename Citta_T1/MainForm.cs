@@ -317,7 +317,7 @@ namespace  Citta_T1
         }
         private void ShowDataView()
         {
-            if (this.isBottomViewPanelMinimum != true)
+            if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
                 this.bottomViewPanel.Height = 280;
