@@ -48,12 +48,13 @@ namespace Citta_T1.Controls.Move
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
+      
         public ElementStatus Status { 
             get => this.status;
             set
-            {                
+            {
+                OptionDirty(value);
                 this.status = value;
-                OptionDirty();
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
@@ -130,6 +131,7 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+           
         }
         public void ChangeSize(int sizeL)
         {
@@ -294,8 +296,6 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-
-            
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
 
@@ -566,8 +566,9 @@ namespace Citta_T1.Controls.Move
                 }
             }
             //删除自身
-            Global.GetCanvasPanel().DeleteElement(this);
+           
             Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetCanvasPanel().DeleteElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
 
@@ -584,25 +585,30 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
-            foreach (ModelElement mrc in Global.GetCurrentDocument().ModelElements)
+            List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentDocument().ModelElements);
+            foreach (ModelElement mrc in modelElements)
             {
                 if (mrc.ID == endID)
                 {
+                   
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); 
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }
             }
             
         }
-        private void OptionDirty()
+        private void OptionDirty(ElementStatus status)
         {
-            if (this.status == ElementStatus.Null)
+            if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
+                Global.GetCurrentDocument().AllStateChange(this.id);
+
+            if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set; 
-            else if (this.status == ElementStatus.Done)
+            else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
-            else if (this.status == ElementStatus.Ready)
+            else if (status == ElementStatus.Ready)
                 this.statusBox.Image = Properties.Resources.setSuccess;
         }
         #endregion

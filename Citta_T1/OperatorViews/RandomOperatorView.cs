@@ -108,8 +108,11 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("randomnum", this.RandomNumBox.Text);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
-            this.opControl.Option.SetOption("outfield", outField);             
-            if (this.RandomNumBox.Text != "" && outField != "")
+            this.opControl.Option.SetOption("outfield", outField);
+
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
                 this.opControl.Status = ElementStatus.Ready;
 
         }
