@@ -43,7 +43,7 @@ namespace Citta_T1.Controls.Move
         private Dictionary<string, List<string>> doubleDataSourceColumns; 
 
         // 一些倍率
-        public string ReName { get => textBox.Text; }
+        public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;

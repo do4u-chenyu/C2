@@ -20,7 +20,7 @@ namespace Citta_T1.Controls.Move
     {
         private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
-        public string MDCName { get => this.textBox1.Text; }
+        public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
@@ -92,7 +92,7 @@ namespace Citta_T1.Controls.Move
             )
         {
             InitializeComponent();
-            this.textBox1.Text = name;
+            this.textBox.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
             this.extType = extType;
@@ -124,15 +124,15 @@ namespace Citta_T1.Controls.Move
 
         private void FinishTextChange()
         {
-            if (this.textBox1.Text.Length == 0)
+            if (this.textBox.Text.Length == 0)
                 return;
-            this.textBox1.ReadOnly = true;
-            SetOpControlName(this.textBox1.Text);
-            this.textBox1.Visible = false;
+            this.textBox.ReadOnly = true;
+            SetOpControlName(this.textBox.Text);
+            this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox1.Text)
+            if (this.oldTextString != this.textBox.Text)
             {
-                this.oldTextString = this.textBox1.Text;
+                this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
             Global.GetCurrentDocument().UpdateAllLines();
@@ -173,7 +173,7 @@ namespace Citta_T1.Controls.Move
         public void InitializeOpPinPicture()
         {
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            SetOpControlName(this.textBox1.Text);
+            SetOpControlName(this.textBox.Text);
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
@@ -442,7 +442,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox1.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -459,12 +459,12 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            this.textBox1.ReadOnly = false;
-            this.oldTextString = this.textBox1.Text;
+            this.textBox.ReadOnly = false;
+            this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
-            this.textBox1.Visible = true;
-            this.textBox1.Focus();//获取焦点
-            this.textBox1.Select(this.textBox1.TextLength, 0);
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
             ModelDocumentDirtyEvent?.Invoke();
         }
         #endregion
