@@ -7,11 +7,9 @@ using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
-using System.Threading;
 using Citta_T1.Business.Option;
 
 namespace  Citta_T1
@@ -286,11 +284,6 @@ namespace  Citta_T1
 
         }
 
-        //private void NewModelButton_Click(object sender, EventArgs e)
-        //{
-        //    this.anewModel.StartPosition = FormStartPosition.CenterParent;
-        //    this.anewModel.ShowDialog();
-        //}
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
@@ -365,50 +358,6 @@ namespace  Citta_T1
         }
 
 
-        private void ConnectOpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InterOpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UnionButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DiffButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FilterButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GroupButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HistogramButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormatButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MoreButton_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridView1_Load(object sender, EventArgs e)
         {
@@ -427,8 +376,6 @@ namespace  Citta_T1
             this.formInputData.ReSetParams();
         }
 
-
-       // NewOperatorEvent?.Invoke(btn);
           
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -683,11 +630,6 @@ namespace  Citta_T1
             {
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             }
-        }
-
-        public void RenameDataButton(string index, string dstName)
-        {
-            this.dataSourceControl.RenameDataButton(index, dstName);
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)

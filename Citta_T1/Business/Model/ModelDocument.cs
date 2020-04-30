@@ -110,8 +110,8 @@ namespace Citta_T1.Business.Model
 
         public void DeleteModelElement(Control control)
         {
-           
-            foreach (ModelElement me in this.modelElements)
+            List<ModelElement> modelElements = new List<ModelElement>(this.modelElements);
+            foreach (ModelElement me in modelElements)
             {
                 if (!me.GetControl.Equals(control))
                     continue;
@@ -140,7 +140,7 @@ namespace Citta_T1.Business.Model
 
 
         }
-        private void AllStateChange(int operatorID)
+        public void AllStateChange(int operatorID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {

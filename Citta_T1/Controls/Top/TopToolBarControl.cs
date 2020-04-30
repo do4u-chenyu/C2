@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Business.Model;
 using Citta_T1.Utils;
+using Citta_T1.Dialogs;
+using Citta_T1.Business.Model;
+
 
 namespace Citta_T1.Controls.Top
 {
@@ -78,6 +73,12 @@ namespace Citta_T1.Controls.Top
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);
             quickformatWrapper.TreeGroup();
             Global.GetMainForm().SetDocumentDirty();
+        }
+
+        private void MoreButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            ConfigForm config = new ConfigForm();
+            config.ShowDialog();
         }
     }
 }

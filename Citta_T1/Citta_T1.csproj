@@ -236,6 +236,12 @@
     <Compile Include="Dgvs\DataGridView2.Designer.cs">
       <DependentUpon>DataGridView2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ConfigForm.Designer.cs">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\CreateNewModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,10 +254,10 @@
     <Compile Include="Dialogs\FormInputData.Designer.cs">
       <DependentUpon>FormInputData.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Dialogs\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Dialogs\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogModel.cs" />
@@ -442,10 +448,13 @@
       <DependentUpon>FlowControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ConfigForm.resx">
+      <DependentUpon>ConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
       <DependentUpon>CreateNewModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

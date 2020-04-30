@@ -15,15 +15,12 @@ namespace Citta_T1.Business
         private string path;
         private string UserInfoPath;
         public LoginInfo()
-        {
-           
+        { 
             this.path = Global.WorkspaceDirectory;
             this.UserInfoPath = Path.Combine(path, "UserInformation.xml");
         }
         public void CreatNewXml()
         {
-
-            //Utils.FileUtil.AddPathPower(Directory.GetCurrentDirectory(), "FullControl");
             Directory.CreateDirectory(path);
             // 添加权限
             Utils.FileUtil.AddPathPower(path, "FullControl");

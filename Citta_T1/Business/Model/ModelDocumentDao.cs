@@ -71,7 +71,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.FullFilePath, dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.DescriptionName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -80,7 +80,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), op.ID);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
                 return;               
             }
@@ -88,7 +88,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveRsControl rs = (ct as MoveRsControl);
                 rs.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateResultElement(rs, rs.ReName, rs.ID);
+                ModelElement e = ModelElement.CreateResultElement(rs, rs.DescriptionName, rs.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
 
@@ -285,7 +285,7 @@ namespace Citta_T1.Business.Model
             int count = 0;
             foreach (ModelDocument md in this.ModelDocuments)
                 foreach (ModelElement me in md.ModelElements)
-                    if (me.Type == ElementType.DataSource && me.GetPath() == ffp)
+                    if (me.Type == ElementType.DataSource && me.GetFullFilePath() == ffp)
                         count++;
             return count;
         }

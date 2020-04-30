@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataButton));
-            this.txtButton = new System.Windows.Forms.Button();
+            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -41,6 +41,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -49,22 +50,25 @@
             // txtButton
             // 
             this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtButton.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtButton.FlatAppearance.BorderSize = 0;
             this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(40, 1);
+            this.txtButton.Location = new System.Drawing.Point(25, 1);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(121, 33);
+            this.txtButton.Size = new System.Drawing.Size(112, 25);
             this.txtButton.TabIndex = 9;
-            this.txtButton.Text = "button1";
             this.txtButton.UseVisualStyleBackColor = false;
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
             // 
             // leftPictureBox
             // 
             this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPictureBox.Location = new System.Drawing.Point(3, 1);
+            this.leftPictureBox.Location = new System.Drawing.Point(-1, 1);
+            this.leftPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftPictureBox.Name = "leftPictureBox";
-            this.leftPictureBox.Size = new System.Drawing.Size(31, 31);
+            this.leftPictureBox.Size = new System.Drawing.Size(23, 23);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.leftPictureBox.TabIndex = 10;
             this.leftPictureBox.TabStop = false;
@@ -73,10 +77,9 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(159, 4);
-            this.rightPictureBox.Margin = new System.Windows.Forms.Padding(4);
+            this.rightPictureBox.Location = new System.Drawing.Point(139, 3);
             this.rightPictureBox.Name = "rightPictureBox";
-            this.rightPictureBox.Size = new System.Drawing.Size(25, 28);
+            this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rightPictureBox.TabIndex = 11;
             this.rightPictureBox.TabStop = false;
@@ -92,20 +95,19 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 140);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
             // 
             // ReviewToolStripMenuItem
             // 
             this.ReviewToolStripMenuItem.Name = "ReviewToolStripMenuItem";
-            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.ReviewToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ReviewToolStripMenuItem.Text = "预览";
             this.ReviewToolStripMenuItem.Click += new System.EventHandler(this.ReviewToolStripMenuItem_Click);
             // 
             // RenameToolStripMenuItem
             // 
-            this.RenameToolStripMenuItem.Enabled = false;
             this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
-            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RenameToolStripMenuItem.Text = "重命名";
             this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
@@ -119,7 +121,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // ExplorerToolStripMenuItem
             // 
@@ -135,29 +137,46 @@
             this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
             this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFullFilePathToClipboard);
             // 
+            // textBox
+            // 
+            this.textBox.BackColor = System.Drawing.Color.White;
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox.Location = new System.Drawing.Point(25, 3);
+            this.textBox.Name = "textBox";
+            this.textBox.ReadOnly = true;
+            this.textBox.Size = new System.Drawing.Size(112, 23);
+            this.textBox.TabIndex = 12;
+            this.textBox.Visible = false;
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            // 
             // DataButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPictureBox);
             this.Controls.Add(this.txtButton);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataButton";
-            this.Size = new System.Drawing.Size(188, 36);
+            this.Size = new System.Drawing.Size(159, 27);
             this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        public System.Windows.Forms.Button txtButton;
+        private Citta_T1.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.PictureBox leftPictureBox;
         private System.Windows.Forms.PictureBox rightPictureBox;
         private System.Windows.Forms.ToolTip helpToolTip;
@@ -168,5 +187,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox;
     }
 }

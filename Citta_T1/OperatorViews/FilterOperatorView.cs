@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetPath();
+                    this.dataPath = me.GetFullFilePath();
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;
@@ -168,7 +168,10 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 

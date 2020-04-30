@@ -137,7 +137,7 @@ namespace Citta_T1.Business.Model
             this.subType = subType;
             this.ctl = ctl;
             this.dataSourcePath = bcpPath;
-            this.SetName(des);
+            this.SetDescription(des);
             this.description = des;
             this.id = id;
             this.separator = separator;
@@ -153,13 +153,13 @@ namespace Citta_T1.Business.Model
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    des = (ctl as MoveDtControl).textBox1.Text;
+                    des = (ctl as MoveDtControl).DescriptionName;
                     break;
                 case ElementType.Operator:
-                    des = (ctl as MoveOpControl).textBox.Text;
+                    des = (ctl as MoveOpControl).DescriptionName;
                     break;
                 case ElementType.Result:
-                    des = (ctl as MoveRsControl).textBox.Text;
+                    des = (ctl as MoveRsControl).DescriptionName;
                     break;
                 default:
                     break;
@@ -169,24 +169,24 @@ namespace Citta_T1.Business.Model
         }
 
 
-        private void SetName(string name)
+        private void SetDescription(string des)
         {
             switch (this.type)
             {
                 case ElementType.DataSource:
-                    (ctl as MoveDtControl).textBox1.Text = name;
+                    (ctl as MoveDtControl).DescriptionName = des;
                     break;
                 case ElementType.Operator:
-                    (ctl as MoveOpControl).textBox.Text = name;
+                    (ctl as MoveOpControl).DescriptionName = des;
                     break;
                 case ElementType.Result:
-                    (ctl as MoveRsControl).textBox.Text = name;
+                    (ctl as MoveRsControl).DescriptionName = des;
                     break;
                 default:
                     break;
             }
         }
-        public string GetPath()
+        public string GetFullFilePath()
         {
             string path = "";
             if (this.type == ElementType.DataSource)
