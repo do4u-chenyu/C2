@@ -130,6 +130,7 @@
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 13;
             this.moreButton.UseVisualStyleBackColor = true;
+            this.moreButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MoreButton_MouseClick);
             // 
             // label7
             // 
@@ -141,7 +142,7 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "常用";
             // 
-            // CommonUseControl
+            // TopToolBarControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -155,7 +156,7 @@
             this.Controls.Add(this.unionButton);
             this.Controls.Add(this.collideButton);
             this.Controls.Add(this.relateButton);
-            this.Name = "CommonUseControl";
+            this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(654, 33);
             this.ResumeLayout(false);
             this.PerformLayout();
