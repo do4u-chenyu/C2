@@ -610,9 +610,6 @@
     <Content Include="sbin\tr.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="sbin\xargs.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\X.jpg" />
     <None Include="datas\text.txt" />
     <None Include="datas\text_gbk.txt" />
