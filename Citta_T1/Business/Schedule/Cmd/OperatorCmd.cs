@@ -27,8 +27,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
             this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
-            this.outputFilePath = triple.ResultElement.GetPath();
             this.outputFileTitle = this.option.GetOption("columnname");
+            this.outputFilePath = triple.ResultElement.GetPath();
             this.operatorId = triple.OperateElement.ID.ToString();
             this.sortConfig = " -S 200M -T " + Global.WorkspaceDirectory;
             InitSeparator();
