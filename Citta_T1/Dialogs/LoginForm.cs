@@ -25,8 +25,7 @@ namespace Citta_T1.Dialogs
 
         }
         private void LoginButton_Click(object sender, EventArgs e)
-        {
-            
+        {  
             string userName = this.userNameComboBox.Text;
             if (userName == "")
                 return;

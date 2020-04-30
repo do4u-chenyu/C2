@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Citta_T1.Business.Schedule;
+using System.IO;
 
 namespace Citta_T1.Controls.Move
 {
@@ -98,14 +99,14 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
             InitializeOpPinPicture();
         }
-        public MoveRsControl(int sizeL, string text, Point loc)
+        public MoveRsControl(int sizeL, string desciption, Point loc)
         {
 
             InitializeComponent();
-            this.textBox.Text = text;
-            this.typeName = text;
+            DescriptionName = desciption;
+            this.typeName = "运算结果";
             this.Location = loc;
-            SetOpControlName(this.textBox.Text);
+            SetOpControlName(DescriptionName);
             ChangeSize(sizeL);
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper(this);
@@ -117,7 +118,7 @@ namespace Citta_T1.Controls.Move
         {
             rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            SetOpControlName(this.textBox.Text);
+            SetOpControlName(DescriptionName);
 
 
         }
@@ -681,7 +682,24 @@ namespace Citta_T1.Controls.Move
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+       
+            this.saveFileDialog.FileName = DescriptionName + ".bcp";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string srcFilePath = this.FullFilePath;
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
 
+            }
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Citta_T1.Controls.Move
             this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new System.Windows.Forms.Button();
             this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -113,7 +114,7 @@ namespace Citta_T1.Controls.Move
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(218, 200);
+            this.contextMenuStrip.Size = new System.Drawing.Size(218, 178);
             // 
             // PreviewMenuItem
             // 
@@ -216,7 +217,15 @@ namespace Citta_T1.Controls.Move
             this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
             this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
             this.SaveAsToolStripMenuItem.Text = "另存为";
+            this.SaveAsToolStripMenuItem.ToolTipText = "将运算得到的结果文件导出到指定位置";
             this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "bcp";
+            this.saveFileDialog.Filter = "BCP 文件|*.bcp|所有文件|*.*";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "导入结果文件";
             // 
             // MoveRsControl
             // 
@@ -266,5 +275,6 @@ namespace Citta_T1.Controls.Move
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

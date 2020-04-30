@@ -170,8 +170,10 @@ namespace Citta_T1.Business.Option
                 if (mr.StartID == moveOpControl.ID) return;
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
-            string tmpName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x, y));
+            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
+                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
+                new Point(x, y));
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
@@ -195,7 +197,7 @@ namespace Citta_T1.Business.Option
 
             moveOpControl.OutPinInit("lineExit");
             mrc.rectInAdd(1);
-            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
+            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpBcpFileName, columnName);
             mrc.FullFilePath = path;
         }
 
