@@ -55,12 +55,6 @@ namespace Citta_T1.Controls.Left
             this.localFrame.Controls.Add(dataButton);
         }
 
-        public void RenameDataButton(string index, string dstName)
-        {
-            // 根据index重命名button
-            this.DataSourceDictI2B[index].DataSourceName = dstName;
-        }
-
         private void ExternalData_Click(object sender, EventArgs e)
         {
             this.externalDataLabel.Font = new Font("微软雅黑", 12,FontStyle.Bold );

@@ -678,6 +678,11 @@ namespace Citta_T1.Controls.Move
         {
             FileUtil.TryClipboardSetText(FullFilePath);
         }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

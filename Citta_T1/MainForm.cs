@@ -632,11 +632,6 @@ namespace  Citta_T1
             }
         }
 
-        public void RenameDataButton(string index, string dstName)
-        {
-            this.dataSourceControl.RenameDataButton(index, dstName);
-        }
-
         private void HelpPictureBox_Click(object sender, EventArgs e)
         {
             string helpfile = Application.StartupPath; 
