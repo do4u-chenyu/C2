@@ -57,6 +57,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -121,6 +122,7 @@
             // 
             // aboutPage
             // 
+            this.aboutPage.Controls.Add(this.button7);
             this.aboutPage.Controls.Add(this.textBox3);
             this.aboutPage.Controls.Add(this.button5);
             this.aboutPage.Controls.Add(this.button6);
@@ -308,9 +310,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(8, 225);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 17);
+            this.label6.Size = new System.Drawing.Size(102, 17);
             this.label6.TabIndex = 1;
-            this.label6.Text = "注册";
+            this.label6.Text = "注册(填写注册码)";
             // 
             // button5
             // 
@@ -336,6 +338,15 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(463, 23);
             this.textBox3.TabIndex = 6;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(489, 256);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(59, 23);
+            this.button7.TabIndex = 7;
+            this.button7.Text = "提交";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // ConfigForm
             // 
@@ -390,5 +401,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button7;
     }
 }
