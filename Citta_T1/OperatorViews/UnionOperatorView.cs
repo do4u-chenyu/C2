@@ -226,25 +226,7 @@ namespace Citta_T1.OperatorViews
             filterBox.Items.AddRange(this.columnName1);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
-            HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
-            textBox.DecLength = 2;
-            textBox.InputType = HZH_Controls.TextInputType.NotControl;
-            textBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            textBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            textBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            textBox.OldText = null;
-            textBox.PromptColor = System.Drawing.Color.Gray;
-            textBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            textBox.PromptText = "";
-            textBox.RegexPattern = "";
+            TextBox textBox = new TextBox();
             textBox.Text = "别名";
             textBox.ForeColor= SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -377,7 +359,7 @@ namespace Citta_T1.OperatorViews
 
         private void textBoxEx1_Enter(object sender, EventArgs e)
         {
-            HZH_Controls.Controls.TextBoxEx TextBoxEx = sender as HZH_Controls.Controls.TextBoxEx;
+            TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "别名")
             {
                 TextBoxEx.Text = "";
@@ -387,7 +369,7 @@ namespace Citta_T1.OperatorViews
 
         private void textBoxEx1_Leave(object sender, EventArgs e)
         {
-            HZH_Controls.Controls.TextBoxEx TextBoxEx = sender as HZH_Controls.Controls.TextBoxEx;
+            TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "")
             {
                 TextBoxEx.Text = "别名";
