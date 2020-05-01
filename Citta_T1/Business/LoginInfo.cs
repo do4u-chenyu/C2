@@ -33,6 +33,11 @@ namespace Citta_T1.Business
                 XmlDocument xDoc = new XmlDocument();
                 XmlElement rootElement = xDoc.CreateElement("login");
                 xDoc.AppendChild(rootElement);
+                
+
+                XmlElement versionElement = xDoc.CreateElement("Version");
+                versionElement.InnerText = "V1.0";
+                rootElement.AppendChild(versionElement);
                 xDoc.Save(UserInfoPath);
             }
            

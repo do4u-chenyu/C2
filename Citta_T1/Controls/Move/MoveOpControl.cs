@@ -574,6 +574,9 @@ namespace Citta_T1.Controls.Move
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.EndC = null;
+
 
 
 

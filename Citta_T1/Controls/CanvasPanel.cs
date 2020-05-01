@@ -214,7 +214,7 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             if (e.Button != MouseButtons.Left) return;
             // 画框
             if (MouseIsDown && SelectFrame())

@@ -28,8 +28,13 @@ namespace Citta_T1.Business.DataSource
             XmlDocument xDoc = new XmlDocument();
             if (!File.Exists(DataSourcePath))
             {
+
                 XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
                 xDoc.AppendChild(rootElement);
+
+                XmlElement versionElement = xDoc.CreateElement("Version");
+                versionElement.InnerText = "V1.0";
+                rootElement.AppendChild(versionElement);
                 xDoc.Save(DataSourcePath);
             }
             xDoc.Load(DataSourcePath);
