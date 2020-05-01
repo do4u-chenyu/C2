@@ -241,7 +241,7 @@ namespace Citta_T1.Business.Option
         }
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
         {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            //新数据源与旧数据源表头不匹配，对应配置内容是否清空进行判断
 
             if (opControl.Option.GetOption("columnname") == "") return true;
             string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
