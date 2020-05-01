@@ -103,6 +103,17 @@ namespace Citta_T1.Business.Schedule
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
             resetEvent.Dispose();
+
+            foreach(Process p in cmdProcessList)
+            {
+                UpdateLogDelegate("当前process名字：" + p.ProcessName);
+                if (p.ProcessName == "cmd")
+                {
+                    p.Kill();
+                }
+            }
+            
+
             foreach (Task currentTask in parallelTasks)
             {
                 if (currentTask != null)
@@ -152,6 +163,8 @@ namespace Citta_T1.Business.Schedule
             this.modelStatus = ModelStatus.Running;
             this.tokenSource = new CancellationTokenSource();
             this.resetEvent = new ManualResetEvent(true);
+
+            this.cmdProcessList = new List<Process>();
 
             scheduleThread = new Thread(new ThreadStart(() => StartTask()));
             scheduleThread.IsBackground = true;
@@ -240,6 +253,7 @@ namespace Citta_T1.Business.Schedule
             }
             catch (Exception ex)
             {
+                UpdateLogDelegate("异常: " + ex);
             }
             return triple.IsOperated;
 
@@ -255,17 +269,24 @@ namespace Citta_T1.Business.Schedule
             p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
+            
 
             try
             {
                 if (p.Start())//开始进程  
                 {
-                    foreach(string cmd in cmds)
+                    this.cmdProcessList.Add(p);
+                       
+                    foreach (string cmd in cmds)
                     {
                         UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
-                    p.StandardInput.WriteLine("exit");//结束执行
+                    //此处要exit两次?
+                    //退出visual studio 到 cmd.exe
+                    //p.StandardInput.WriteLine("exit");
+                    //退出cmd.exe
+                    p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
                 }
             }
@@ -273,11 +294,14 @@ namespace Citta_T1.Business.Schedule
             {
                 //异常停止的处理方法
                 //TODO
+                this.cmdProcessList.Remove(p);
+                UpdateLogDelegate("异常: " + ex);
             }
             finally
             {
                 if (p != null)
                     p.Close();
+                this.cmdProcessList.Remove(p);
             }
         }
 

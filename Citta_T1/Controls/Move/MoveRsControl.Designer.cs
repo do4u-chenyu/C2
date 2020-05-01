@@ -38,15 +38,16 @@ namespace Citta_T1.Controls.Move
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RemarkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ErrorLogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.txtButton = new System.Windows.Forms.Button();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.txtButton = new System.Windows.Forms.Button();
+            this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -106,14 +107,14 @@ namespace Citta_T1.Controls.Move
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PreviewMenuItem,
             this.RenameMenuItem,
-            this.RemarkMenuItem,
+            this.SaveAsToolStripMenuItem,
             this.RunMenuItem,
             this.ErrorLogMenuItem,
             this.toolStripSeparator1,
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(218, 200);
+            this.contextMenuStrip.Size = new System.Drawing.Size(218, 178);
             // 
             // PreviewMenuItem
             // 
@@ -136,16 +137,6 @@ namespace Citta_T1.Controls.Move
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
-            // RemarkMenuItem
-            // 
-            this.RemarkMenuItem.Enabled = false;
-            this.RemarkMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.RemarkMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.RemarkMenuItem.Name = "RemarkMenuItem";
-            this.RemarkMenuItem.Size = new System.Drawing.Size(217, 24);
-            this.RemarkMenuItem.Text = "备注";
-            this.RemarkMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            // 
             // RunMenuItem
             // 
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
@@ -164,6 +155,29 @@ namespace Citta_T1.Controls.Move
             this.ErrorLogMenuItem.Name = "ErrorLogMenuItem";
             this.ErrorLogMenuItem.Size = new System.Drawing.Size(217, 24);
             this.ErrorLogMenuItem.Text = "异常日志";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
+            // 
+            // ExplorerToolStripMenuItem
+            // 
+            this.ExplorerToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.ExplorerToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
+            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
+            this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
+            this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
+            // 
+            // CopyFilePathToClipboardToolStripMenuItem
+            // 
+            this.CopyFilePathToClipboardToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.CopyFilePathToClipboardToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
+            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
+            this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
+            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
             // 
             // textBox
             // 
@@ -196,28 +210,22 @@ namespace Citta_T1.Controls.Move
             this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseMove);
             this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseUp);
             // 
-            // toolStripSeparator1
+            // SaveAsToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
+            this.SaveAsToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.SaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
+            this.SaveAsToolStripMenuItem.Text = "另存为";
+            this.SaveAsToolStripMenuItem.ToolTipText = "将运算得到的结果文件导出到指定位置";
+            this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
-            // ExplorerToolStripMenuItem
+            // saveFileDialog
             // 
-            this.ExplorerToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.ExplorerToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
-            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
-            this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
-            this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
-            // 
-            // CopyFilePathToClipboardToolStripMenuItem
-            // 
-            this.CopyFilePathToClipboardToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.CopyFilePathToClipboardToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
-            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
-            this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
-            this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
+            this.saveFileDialog.DefaultExt = "bcp";
+            this.saveFileDialog.Filter = "BCP 文件|*.bcp|所有文件|*.*";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "导入结果文件";
             // 
             // MoveRsControl
             // 
@@ -258,7 +266,6 @@ namespace Citta_T1.Controls.Move
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RemarkMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ErrorLogMenuItem;
         public System.Windows.Forms.ToolTip nameToolTip;
@@ -267,5 +274,7 @@ namespace Citta_T1.Controls.Move
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveAsToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }

@@ -59,7 +59,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetPath();
+                    this.dataPath = me.GetFullFilePath();
                     //设置数据信息选项
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();

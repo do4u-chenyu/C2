@@ -93,7 +93,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.DataSource)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetPath();
+                    pathNode.InnerText = me.GetFullFilePath();
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement sepTypeNode = xDoc.CreateElement("separator"); // TODO [DK] 写ASCII码
@@ -117,7 +117,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.Result)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetPath();
+                    pathNode.InnerText = me.GetFullFilePath();
                     modelElementXml.AppendChild(pathNode);
 
                 }

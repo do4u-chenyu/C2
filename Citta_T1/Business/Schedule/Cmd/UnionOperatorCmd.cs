@@ -41,8 +41,11 @@ namespace Citta_T1.Business.Schedule.Cmd
             //并集生成1个临时文件
             string filterBatPath1 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_union1.tmp";
 
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1),inputFiled1,filterBatPath1));
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F'\\t' -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2),inputFiled2,filterBatPath1));
+            //重写表头（覆盖）
+            //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, inputFiled1, this.outputFilePath, this.separators[0]));
+
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1),inputFiled1,filterBatPath1, this.separators[0]));
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2),inputFiled2,filterBatPath1, this.separators[1]));
             
             //是否合并后的文件去重
             if (option.GetOption("noRepetition") == "True")

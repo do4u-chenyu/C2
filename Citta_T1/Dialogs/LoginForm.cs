@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Citta_T1.Business;
 
-namespace Citta_T1
+namespace Citta_T1.Dialogs
 {
     public partial class LoginForm : Form
     {
@@ -25,8 +25,7 @@ namespace Citta_T1
 
         }
         private void LoginButton_Click(object sender, EventArgs e)
-        {
-            
+        {  
             string userName = this.userNameComboBox.Text;
             if (userName == "")
                 return;
@@ -44,9 +43,5 @@ namespace Citta_T1
            
         }
 
-        private void userNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

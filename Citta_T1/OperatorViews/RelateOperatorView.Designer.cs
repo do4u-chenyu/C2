@@ -38,9 +38,7 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.DataInfoBox2 = new HZH_Controls.Controls.TextBoxEx();
             this.OutList = new UserControlDLL.ComCheckBoxList();
-            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -48,6 +46,8 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.DataInfoBox = new System.Windows.Forms.TextBox();
+            this.DataInfoBox2 = new System.Windows.Forms.TextBox();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -90,7 +90,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(895, 56);
+            this.topPanel.Size = new System.Drawing.Size(891, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -98,9 +98,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 516);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 512);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(895, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(891, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,58 +137,30 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 460);
+            this.keyPanel.Size = new System.Drawing.Size(174, 456);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.label4);
             this.valuePanel.Controls.Add(this.DataInfoBox2);
-            this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Controls.Add(this.DataInfoBox);
+            this.valuePanel.Controls.Add(this.label4);
+            this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(721, 460);
+            this.valuePanel.Size = new System.Drawing.Size(717, 456);
             this.valuePanel.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.Image = global::Citta_T1.Properties.Resources.relation;
-            this.label4.Location = new System.Drawing.Point(153, 0);
+            this.label4.Location = new System.Drawing.Point(233, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 41);
             this.label4.TabIndex = 10;
-            // 
-            // DataInfoBox2
-            // 
-            this.DataInfoBox2.DecLength = 2;
-            this.DataInfoBox2.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox2.Location = new System.Drawing.Point(280, 4);
-            this.DataInfoBox2.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.DataInfoBox2.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.DataInfoBox2.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox2.Name = "DataInfoBox2";
-            this.DataInfoBox2.OldText = null;
-            this.DataInfoBox2.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox2.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox2.PromptText = "";
-            this.DataInfoBox2.ReadOnly = true;
-            this.DataInfoBox2.RegexPattern = "";
-            this.DataInfoBox2.Size = new System.Drawing.Size(136, 28);
-            this.DataInfoBox2.TabIndex = 9;
-            this.DataInfoBox2.Text = "test2.bcp";
-            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OutList
             // 
@@ -198,34 +170,6 @@
             this.OutList.Name = "OutList";
             this.OutList.Size = new System.Drawing.Size(168, 27);
             this.OutList.TabIndex = 8;
-            // 
-            // DataInfoBox
-            // 
-            this.DataInfoBox.DecLength = 2;
-            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox.Location = new System.Drawing.Point(8, 3);
-            this.DataInfoBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.DataInfoBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.OldText = null;
-            this.DataInfoBox.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox.PromptText = "";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.RegexPattern = "";
-            this.DataInfoBox.Size = new System.Drawing.Size(136, 28);
-            this.DataInfoBox.TabIndex = 7;
-            this.DataInfoBox.Text = "test1.bcp";
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tableLayoutPanel2
             // 
@@ -319,11 +263,29 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(652, 126);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // DataInfoBox
+            // 
+            this.DataInfoBox.Location = new System.Drawing.Point(6, 3);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox.TabIndex = 11;
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // DataInfoBox2
+            // 
+            this.DataInfoBox2.Location = new System.Drawing.Point(349, 3);
+            this.DataInfoBox2.Name = "DataInfoBox2";
+            this.DataInfoBox2.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox2.TabIndex = 12;
+            this.DataInfoBox2.ReadOnly = true;
+            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // RelateOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 612);
+            this.ClientSize = new System.Drawing.Size(891, 608);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -363,9 +325,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private UserControlDLL.ComCheckBoxList OutList;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
         private System.Windows.Forms.ComboBox comboBox3;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox DataInfoBox2;
+        private System.Windows.Forms.TextBox DataInfoBox;
     }
 }

@@ -499,11 +499,11 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
+        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location) 
         {
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
-                                text,
+                                desciption,
                                 location);
             btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
             AddNewElement(btn);

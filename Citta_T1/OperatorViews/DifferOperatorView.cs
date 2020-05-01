@@ -193,7 +193,6 @@ namespace Citta_T1.OperatorViews
             List<string> types = new List<string>();
             types.Add(this.comboBox1.GetType().Name);
             types.Add(this.OutList.GetType().Name);
-            types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")

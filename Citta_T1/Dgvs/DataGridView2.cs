@@ -7,40 +7,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HZH_Controls;
-using HZH_Controls.Controls;
-using HZH_Controls.Forms;
 
 namespace Citta_T1
 {
     public partial class DataGridView2 : UserControl
     {
+        private int maxLineCount = 10000;
         public DataGridView2()
         {
             InitializeComponent();
         }
 
-        private void ucDataGridView2_Load(object sender, EventArgs e)
+        public void LogUpdate(string log)
         {
-            List<DataGridViewColumnEntity> lstColumns = new List<DataGridViewColumnEntity>();
-            // 表头
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "ID", HeadText = "编号", Width = 70, WidthType = SizeType.Absolute });
-            lstColumns.Add(new DataGridViewColumnEntity() { DataField = "Info", HeadText = "日志", Width = 200, WidthType = SizeType.Percent });
-            this.ucDataGridView2.Columns = lstColumns;
-            //this.ucDataGridView1.IsShowCheckBox = true;
-            List<object> lstSource = new List<object>();
-            for (int i = 0; i < 20; i++)
+            this.textBox1.AppendText(log + System.Environment.NewLine);
+
+
+            if (this.textBox1.Lines.Length > maxLineCount)
             {
-                LogModel model = new LogModel()
-                {
-                    ID = i.ToString(),
-                    Info = "DEBUG: " + i,
-                };
-                lstSource.Add(model);
+                string[] newlines = new string[maxLineCount];
+                Array.Copy(this.textBox1.Lines, this.textBox1.Lines.Length - maxLineCount, newlines, 0, maxLineCount);
+                this.textBox1.Lines = newlines;
             }
 
-            this.ucDataGridView2.DataSource = lstSource;
-            this.ucDataGridView2.First();
+
+
+        }
+
+        private void MenuItemClearAll_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
+        }
+
+        private void MenuItemSelectAll_Click(object sender, EventArgs e)
+        {
+            this.textBox1.SelectAll();
+            string copy = this.textBox1.SelectedText;
+            Clipboard.SetDataObject(copy);
         }
     }
 }

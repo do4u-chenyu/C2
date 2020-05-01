@@ -58,7 +58,6 @@
             this.logLabel = new System.Windows.Forms.Label();
             this.errorLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
-            this.ucDataGridView1 = new HZH_Controls.Controls.UCDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.commonPanel = new System.Windows.Forms.Panel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
@@ -95,7 +94,6 @@
             this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.scrollbarComponent1 = new HZH_Controls.Controls.ScrollbarComponent(this.components);
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -438,26 +436,6 @@
             this.toolTip1.SetToolTip(this.previewLabel, "当前模型对应数据源的部分数据预览");
             this.previewLabel.Click += new System.EventHandler(this.PreviewLabel_Click);
             // 
-            // ucDataGridView1
-            // 
-            this.ucDataGridView1.AutoScroll = true;
-            this.ucDataGridView1.BackColor = System.Drawing.Color.White;
-            this.ucDataGridView1.Columns = null;
-            this.ucDataGridView1.DataSource = null;
-            this.ucDataGridView1.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.ucDataGridView1.HeadHeight = 40;
-            this.ucDataGridView1.HeadPadingLeft = 0;
-            this.ucDataGridView1.HeadTextColor = System.Drawing.Color.Black;
-            this.ucDataGridView1.IsShowCheckBox = false;
-            this.ucDataGridView1.IsShowHead = true;
-            this.ucDataGridView1.Location = new System.Drawing.Point(788, 0);
-            this.ucDataGridView1.Name = "ucDataGridView1";
-            this.ucDataGridView1.RowHeight = 40;
-            this.ucDataGridView1.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
-            this.ucDataGridView1.Size = new System.Drawing.Size(1061, 565);
-            this.ucDataGridView1.TabIndex = 13;
-            this.scrollbarComponent1.SetUserCustomScrollbar(this.ucDataGridView1, true);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
@@ -518,9 +496,9 @@
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(79, 32);
             this.saveModelButton.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
             this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
+            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             // 
             // newModelButton
             // 
@@ -943,7 +921,6 @@
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;
-        private HZH_Controls.Controls.UCDataGridView ucDataGridView1;
         private System.Windows.Forms.Button flowChartButton;
         private Controls.Flow.RightHideButton rightHideButton;
         private Controls.Flow.RightShowButton rightShowButton;
@@ -952,7 +929,6 @@
         private Controls.Flow.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
-        private HZH_Controls.Controls.ScrollbarComponent scrollbarComponent1;
         public System.Windows.Forms.Button blankButton;
         public System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
