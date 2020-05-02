@@ -16,7 +16,6 @@ namespace  Citta_T1
 { 
     public partial class MainForm : Form
     {
-        public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         

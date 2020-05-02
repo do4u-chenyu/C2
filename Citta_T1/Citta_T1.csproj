@@ -222,8 +222,6 @@
     <Compile Include="Controls\Top\TopToolBarControl.Designer.cs">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataStruct\Data.cs" />
-    <Compile Include="DataStruct\DataButtonInfo.cs" />
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -693,10 +691,6 @@
     <Content Include="res\toolbox\union.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HZH_Controls\HZH_Controls\HZH_Controls.csproj">
-      <Project>{af32e163-c577-4cbc-a072-0dc1ce0e1da3}</Project>
-      <Name>HZH_Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserControlDLL\UserControlDLL.csproj">
       <Project>{fac026d0-0c0f-4415-baba-9713ec1337cb}</Project>
       <Name>UserControlDLL</Name>
@@ -712,12 +706,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
