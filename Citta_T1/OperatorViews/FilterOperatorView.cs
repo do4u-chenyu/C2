@@ -151,6 +151,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString() + "," + this.textBoxEx1.Text;

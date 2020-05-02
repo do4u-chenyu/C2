@@ -133,6 +133,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
             string factor1 = this.comboBox1.SelectedIndex.ToString();
             this.groupColumn.Add(this.comboBox1.SelectedIndex);
             this.opControl.Option.SetOption("factor1", factor1);

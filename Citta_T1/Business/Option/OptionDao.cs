@@ -35,8 +35,7 @@ namespace Citta_T1.Business.Option
                 {
                     MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
                     moveOpControl.EnableOpenOption = true;
-                    //所有双目算子配置逻辑没写完，现在用会有问题
-                   // DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
+                    DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
                     break;
                 }
             }
@@ -275,7 +274,40 @@ namespace Citta_T1.Business.Option
             catch (Exception ex) { log.Error(ex.Message); }
             return true;
         }
+        public bool IsDoubleDataSourceChange(MoveOpControl opControl, string[] columnName0, string[] columnName1, string field, List<int> fieldList = null)
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (opControl.Option.GetOption("columnname0") == "" || opControl.Option.GetOption("columnname1") == "") return true;
+            string[] oldColumnList0 = opControl.Option.GetOption("columnname0").Split('\t');
+            string[] oldColumnList1 = opControl.Option.GetOption("columnname1").Split('\t');
 
+            try
+            { 
+                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
+                {
+                    bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
+                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName0[fieldList[1]];
+                    if (IsEqual0 || IsEqual1)
+                    {
+                        opControl.Option.OptionDict.Remove(field);
+                        return false;
+                    }
+                }
+                else if (field.Contains("outfield"))
+                {
+
+                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
+                    {
+                        opControl.Option.OptionDict.Remove("outfield");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
+            return true;
+        }
         //修改配置输出
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
