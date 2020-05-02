@@ -19,14 +19,18 @@ namespace Citta_T1.Controls.Left
 
         public string ModelName => this.textButton.Text;
 
-        public bool EnableOpenDocument { get => this.OpenToolStripMenuItem.Enabled; set => this.OpenToolStripMenuItem.Enabled=value; }
+        public void EnableOpenDocumentMenu() { this.OpenToolStripMenuItem.Enabled = true; }
+        public void EnableRenameDocumentMenu() { this.RenameToolStripMenuItem.Enabled = true; }
+        public void EnableDeleteDocumentMenu() { this.DeleteToolStripMenuItem.Enabled = true; }
         public string FullFilePath { get => fullFilePath; set => fullFilePath = value; }
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
-
         {
+            // 文件打开后,不能重复打开,不能删除,不能重命名
             Global.GetMainForm().LoadDocument(this.textButton.Text);
             this.OpenToolStripMenuItem.Enabled = false;
+            this.RenameToolStripMenuItem.Enabled = false;
+            this.DeleteToolStripMenuItem.Enabled = false;
         }
 
         private void ModelButton_Load(object sender, EventArgs e)

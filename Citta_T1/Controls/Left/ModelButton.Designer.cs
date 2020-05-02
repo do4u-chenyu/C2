@@ -36,7 +36,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +84,7 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
-            this.ReNameToolStripMenuItem,
+            this.RenameToolStripMenuItem,
             this.DeleteToolStripMenuItem,
             this.toolStripSeparator1,
             this.ExplorerToolStripMenuItem,
@@ -102,10 +102,10 @@
             // 
             // ReNameToolStripMenuItem
             // 
-            this.ReNameToolStripMenuItem.Enabled = false;
-            this.ReNameToolStripMenuItem.Name = "ReNameToolStripMenuItem";
-            this.ReNameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.ReNameToolStripMenuItem.Text = "重命名";
+            this.RenameToolStripMenuItem.Enabled = false;
+            this.RenameToolStripMenuItem.Name = "ReNameToolStripMenuItem";
+            this.RenameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.RenameToolStripMenuItem.Text = "重命名";
             // 
             // DeleteToolStripMenuItem
             // 
@@ -159,7 +159,7 @@
         private Citta_T1.Controls.Common.NoFocusButton textButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ReNameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

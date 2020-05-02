@@ -187,7 +187,7 @@ namespace  Citta_T1
             {
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
-                    this.myModelControl.EnableOpenDocument(modelTitle);
+                    this.myModelControl.EnableClosedDocumentMenu(modelTitle);
             }   
             // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();

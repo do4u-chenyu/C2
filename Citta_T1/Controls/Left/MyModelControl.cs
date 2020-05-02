@@ -46,11 +46,16 @@ namespace Citta_T1.Controls.Left
             }
             return false;
         }
-        public void EnableOpenDocument(string modelTitle)
+        // 文档关闭后, 菜单栏可以打开,删除,重命名
+        public void EnableClosedDocumentMenu(string modelTitle)
         {
             foreach (ModelButton mb in this.Controls)
-                if (mb.ModelName== modelTitle)
-                    mb.EnableOpenDocument = true;
+                if (mb.ModelName == modelTitle)
+                {
+                    mb.EnableOpenDocumentMenu();
+                    mb.EnableDeleteDocumentMenu();
+                    mb.EnableRenameDocumentMenu();
+                }
 
         }
     }
