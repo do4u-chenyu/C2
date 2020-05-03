@@ -28,8 +28,6 @@ namespace Citta_T1.Controls.Title
         {
             InitializeComponent();
             this.mouseDown = false;
-            this.bottomViewPanel = null;
-            this.canvasPanel = null;
         }
 
         private void DragLineControl_MouseDown(object sender, MouseEventArgs e)

@@ -41,7 +41,7 @@ namespace Citta_T1.Controls.Left
             foreach (Control ct in this.Controls)
             {
                 if (ct is ModelButton)
-                    if ((ct as ModelButton).ModelName== modelTitle)
+                    if ((ct as ModelButton).ModelTitle== modelTitle)
                         return true;
             }
             return false;
@@ -50,7 +50,7 @@ namespace Citta_T1.Controls.Left
         public void EnableClosedDocumentMenu(string modelTitle)
         {
             foreach (ModelButton mb in this.Controls)
-                if (mb.ModelName == modelTitle)
+                if (mb.ModelTitle == modelTitle)
                 {
                     mb.EnableOpenDocumentMenu();
                     mb.EnableDeleteDocumentMenu();

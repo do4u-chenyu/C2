@@ -100,12 +100,13 @@
             this.OpenToolStripMenuItem.Text = "打开";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
-            // ReNameToolStripMenuItem
+            // RenameToolStripMenuItem
             // 
             this.RenameToolStripMenuItem.Enabled = false;
-            this.RenameToolStripMenuItem.Name = "ReNameToolStripMenuItem";
+            this.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem";
             this.RenameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.RenameToolStripMenuItem.Text = "重命名";
+            this.RenameToolStripMenuItem.Click += new System.EventHandler(this.RenameToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
@@ -113,6 +114,7 @@
             this.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem";
             this.DeleteToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.DeleteToolStripMenuItem.Text = "删除";
+            this.DeleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 

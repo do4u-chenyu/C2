@@ -17,7 +17,7 @@ namespace Citta_T1.Controls.Left
         }
 
 
-        public string ModelName => this.textButton.Text;
+        public string ModelTitle => this.textButton.Text;
 
         public void EnableOpenDocumentMenu() { this.OpenToolStripMenuItem.Enabled = true; }
         public void EnableRenameDocumentMenu() { this.RenameToolStripMenuItem.Enabled = true; }
@@ -40,7 +40,7 @@ namespace Citta_T1.Controls.Left
             this.toolTip1.SetToolTip(this.rightPictureBox, helpInfo);
 
             // 模型名称浮动提示信息
-            helpInfo = ModelName;
+            helpInfo = ModelTitle;
             this.toolTip1.SetToolTip(this.textButton, helpInfo);
         }
 
@@ -52,6 +52,16 @@ namespace Citta_T1.Controls.Left
         private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileUtil.TryClipboardSetText(FullFilePath);
+        }
+
+        private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           // Global.GetModelTitlePanel()
+        }
+
+        private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

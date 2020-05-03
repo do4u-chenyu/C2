@@ -91,12 +91,9 @@ namespace  Citta_T1
                 return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            mtc.SetDirtyPictureBox();
-           
-           
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
         }
-        internal void DeleteCurrentDocument()
+        public void DeleteCurrentDocument()
         {
             
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
@@ -121,11 +118,7 @@ namespace  Citta_T1
             if (!this.myModelControl.ContainModel(modelTitle))
                 this.myModelControl.AddModel(modelTitle);
         }
-        internal List<ModelDocument>  DocumentsList()
-        {            
-            return modelDocumentDao.ModelDocuments;
 
-        } 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
             this.modelDocumentDao.SwitchDocument(modelTitle);
@@ -388,7 +381,7 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
             // TODO [DK] 读取Excel
@@ -646,11 +639,9 @@ namespace  Citta_T1
                     return;
 
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
-            SaveDocument();
-            mtc.ClearDirtyPictureBox();            
-
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
+            SaveDocument();         
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
