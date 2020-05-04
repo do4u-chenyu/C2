@@ -41,6 +41,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -49,7 +50,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(119, 3);
+            this.rightPictureBox.Location = new System.Drawing.Point(123, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(23, 23);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -79,6 +80,7 @@
             this.textButton.TabIndex = 9;
             this.textButton.Text = "模型";
             this.textButton.UseVisualStyleBackColor = false;
+            this.textButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextButton_MouseDown);
             // 
             // contextMenuStrip1
             // 
@@ -90,7 +92,7 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 120);
             // 
             // OpenToolStripMenuItem
             // 
@@ -135,6 +137,21 @@
             this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
             this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
             // 
+            // textBox
+            // 
+            this.textBox.BackColor = System.Drawing.Color.White;
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox.Location = new System.Drawing.Point(29, 2);
+            this.textBox.Name = "textBox";
+            this.textBox.ReadOnly = true;
+            this.textBox.Size = new System.Drawing.Size(91, 23);
+            this.textBox.TabIndex = 12;
+            this.textBox.Visible = false;
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
+            // 
             // ModelButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -144,13 +161,15 @@
             this.Controls.Add(this.textButton);
             this.Controls.Add(this.lelfPictureBox);
             this.Controls.Add(this.rightPictureBox);
+            this.Controls.Add(this.textBox);
             this.Name = "ModelButton";
-            this.Size = new System.Drawing.Size(141, 27);
+            this.Size = new System.Drawing.Size(145, 27);
             this.Load += new System.EventHandler(this.ModelButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lelfPictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -163,9 +182,10 @@
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
-        public System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CopyFilePathToClipboardToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox;
     }
 }

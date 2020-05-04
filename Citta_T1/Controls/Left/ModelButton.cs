@@ -7,12 +7,14 @@ namespace Citta_T1.Controls.Left
 {
     public partial class ModelButton : UserControl
     {
+        private string oldTextString;
         private string fullFilePath;
 
-        public ModelButton(string modelName)
+        public ModelButton(string modelTitle)
         {
             InitializeComponent();
-            this.textButton.Text = modelName;
+            this.textButton.Text = modelTitle;
+            this.oldTextString = modelTitle;
             fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, this.textButton.Text, this.textButton.Text + ".xml");
         }
 
@@ -56,12 +58,75 @@ namespace Citta_T1.Controls.Left
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // Global.GetModelTitlePanel()
+            //  容错处理, 标题栏中文档未关闭时,不能重命名
+            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+                return;
+
+            this.textBox.ReadOnly = false;
+            this.oldTextString = ModelTitle;
+            this.textButton.Visible = false;
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
         }
 
         private void DeleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // 容错处理, 标题栏中文档未关闭时,不能删除
+            if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
+                return;
+            // 删除前用对话框确认
+            DialogResult rs = MessageBox.Show(String.Format("删除模型 {0}, 继续删除请点击 \"确定\"", ModelTitle),
+                    "删除 " + this.ModelTitle,
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Information);
 
+            if (rs != DialogResult.OK)
+                return;
+
+            string modelDic = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
+            FileUtil.DeleteDirectory(modelDic);
+            Global.GetMyModelControl().RemoveModelButton(this);
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 按下回车键
+            if (e.KeyChar == 13)
+            {
+                FinishTextChange();
+            }
+        }
+
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            FinishTextChange();
+        }
+
+        private void TextButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 鼠标左键双击触发
+            if (e.Button != MouseButtons.Left || e.Clicks != 2)
+                return;
+            RenameToolStripMenuItem_Click(sender, e);
+        }
+
+
+        private void FinishTextChange()
+        {
+            if (this.textBox.Text.Length == 0)
+                return;
+
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.textButton.Text = this.textBox.Text;
+            this.textButton.Visible = true;
+            if (this.oldTextString != this.textBox.Text)
+            {
+                this.oldTextString = this.textBox.Text;
+            }
+            // 重命名
+            this.toolTip1.SetToolTip(this.textButton, ModelTitle);
         }
     }
 
