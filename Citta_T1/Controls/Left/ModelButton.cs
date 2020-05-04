@@ -62,6 +62,7 @@ namespace Citta_T1.Controls.Left
             if (Global.GetModelTitlePanel().ContainModel(this.ModelTitle))
                 return;
 
+            this.textBox.Text = ModelTitle;
             this.textBox.ReadOnly = false;
             this.oldTextString = ModelTitle;
             this.textButton.Visible = false;
@@ -121,12 +122,16 @@ namespace Citta_T1.Controls.Left
             this.textBox.Visible = false;
             this.textButton.Text = this.textBox.Text;
             this.textButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
-            {
-                this.oldTextString = this.textBox.Text;
-            }
+            this.oldTextString = ModelTitle;
+
+
+            fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle, ModelTitle + ".xml");
+            // 移动目录
+
             // 重命名
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
+            this.toolTip1.SetToolTip(this.rightPictureBox, FullFilePath);
+
         }
     }
 

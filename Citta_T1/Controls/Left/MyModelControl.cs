@@ -91,5 +91,11 @@ namespace Citta_T1.Controls.Left
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private void MyModelControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            // 强制编辑控件失去焦点,触发重命名控件的Leave事件 
+            Global.GetMainForm().BlankButtonFocus();
+        }
     }
 }
