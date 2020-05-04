@@ -92,6 +92,27 @@ namespace Citta_T1.Utils
             }
         }
 
-        
+        public static bool CreateDirectory(string dicectoryPath)
+        {
+            bool ret = true;
+            try 
+            {
+                Directory.CreateDirectory(dicectoryPath);
+            }
+            catch { ret = false; }
+            return ret;
+        }
+
+        public static bool FileMove(string oldFFP, string newFFP)
+        {
+            bool ret = true;
+            try
+            {
+                File.Move(oldFFP, newFFP);
+            }
+            catch { ret = false; }
+            return ret;
+        }
+
     }
 }

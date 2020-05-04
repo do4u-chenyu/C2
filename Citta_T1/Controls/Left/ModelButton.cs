@@ -115,24 +115,48 @@ namespace Citta_T1.Controls.Left
 
         private void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
+            if (this.textBox.Text.Trim().Length == 0)
                 return;
 
             this.textBox.ReadOnly = true;
             this.textBox.Visible = false;
-            this.textButton.Text = this.textBox.Text;
+            this.textButton.Text = this.textBox.Text.Trim();
             this.textButton.Visible = true;
-            this.oldTextString = ModelTitle;
+
+            // 新旧名称相同, 不需要做目录操作
+            if (ModelTitle == oldTextString)
+                return;
 
 
-            fullFilePath = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle, ModelTitle + ".xml");
-            // 移动目录
+            string newModelDirectory = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
+            string oldModelDirectory = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
+            string newFFP   = Path.Combine(newModelDirectory, ModelTitle + ".xml");
+
+            // 开始移动文件
+            bool ret = FileUtil.CreateDirectory(newModelDirectory);
+            if (!ret) // 失败回滚
+            {
+                this.textButton.Text = oldTextString;
+                return;
+            }
+
+            ret = FileUtil.FileMove(FullFilePath, newFFP);
+            if (!ret) // 失败回滚
+            {
+                FileUtil.DeleteDirectory(newModelDirectory);
+                this.textButton.Text = oldTextString;
+                return;
+            }
 
             // 重命名
+            this.oldTextString = ModelTitle;
+            this.fullFilePath = newFFP;
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.toolTip1.SetToolTip(this.rightPictureBox, FullFilePath);
-
+            FileUtil.DeleteDirectory(oldModelDirectory);
         }
+
+
     }
 
 
