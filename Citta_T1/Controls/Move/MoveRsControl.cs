@@ -47,7 +47,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public ECommandType cmd = ECommandType.Null;
 
 

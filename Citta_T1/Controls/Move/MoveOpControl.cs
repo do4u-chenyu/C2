@@ -78,7 +78,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为起点的所有点
@@ -238,7 +237,7 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
-                bool isUpdateLine = false;
+                bool isNeedMoveLine = false;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
@@ -246,22 +245,19 @@ namespace Citta_T1.Controls.Move
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     if (mr.EndID == this.id)
                     {
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
-                if (isUpdateLine)
+                if (isNeedMoveLine)
                     this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
-
-
-
         }
         public Point WorldBoundControl(Point Pm)
         {
@@ -760,7 +756,7 @@ namespace Citta_T1.Controls.Move
                 this.rectOut = SetRectBySize(factor, this.rectOut);
                 this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate(); // TODO 干嘛用的？，为什么下面不写一个重绘？
+                this.Invalidate(); // TODO [Dk] 干嘛用的？，为什么下面不写一个重绘？
             }
             else
             {
