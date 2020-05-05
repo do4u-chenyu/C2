@@ -8,9 +8,9 @@ namespace Citta_T1.Dialogs
     public partial class ConfigForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("ConfigForm");
-        private static int AliasColumnIndex = 1;
-        private static int CheckBoxColumnIndex = 2;
-        private static Regex PythonAliasRegex = new Regex(@"(python\d{1,3}(\.\d{1,3})?)", RegexOptions.IgnoreCase);
+        private static readonly int AliasColumnIndex = 1;
+        private static readonly int CheckBoxColumnIndex = 2;
+        private static readonly Regex PythonAliasRegex = new Regex(@"(python\d{1,3}(\.\d{1,3})?)", RegexOptions.IgnoreCase);
         public ConfigForm()
         {
             InitializeComponent();
@@ -18,7 +18,7 @@ namespace Citta_T1.Dialogs
 
         private void TabControl_Selected(object sender, TabControlEventArgs e)
         {
-            log.Info(e.TabPageIndex.ToString());
+            //log.Info(e.TabPageIndex.ToString());
         }
 
         private void UserModelOkButton_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace Citta_T1.Dialogs
             DialogResult dr = pythonOpenFileDialog.ShowDialog();
             if (dr != DialogResult.OK)
                 return;
-            string pythonFFP = pythonOpenFileDialog.FileName;
+            string pythonFFP = pythonOpenFileDialog.FileName.Trim();
             if (!CheckPythonInterpreter(pythonFFP))
             {
                 //TODO 弹出对话框
@@ -136,19 +136,31 @@ namespace Citta_T1.Dialogs
 
         private void DataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
+            DataGridViewRow row = dataGridView.Rows[e.RowIndex];
+            row.ErrorText = String.Empty;
+            // 如果是当前选中的行的别名被修改, 更新chosen
+            if (e.ColumnIndex == AliasColumnIndex && (bool)row.Cells[CheckBoxColumnIndex].Value)
+                this.chosenPythonLable.Text = row.Cells[AliasColumnIndex].Value.ToString().Trim();
         }
 
         private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
+            if (e.ColumnIndex != CheckBoxColumnIndex || e.RowIndex == -1) return;
+            // 所有第三列的checkbox只允许互斥单选
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+                if (i != e.RowIndex)
+                    (dataGridView.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
             for (int i = 0; i < dataGridView.Rows.Count; i++)
             {
-                if (i == e.RowIndex)
-                    continue;
-                (dataGridView.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
+                // 全部都没选中时, chosen清空，  选定的当前列, 需要用 EditedFormattedValue,此时Value尚未提交
+                DataGridViewCell cell = dataGridView.Rows[i].Cells[CheckBoxColumnIndex];
+                if (i == e.RowIndex ? (bool)cell.EditedFormattedValue : (bool)cell.Value) 
+                {
+                    this.chosenPythonLable.Text = dataGridView.Rows[i].Cells[AliasColumnIndex].Value.ToString().Trim();
+                    return;
+                }         
             }
-            this.chosenPythonLable.Text = dataGridView.Rows[e.RowIndex].Cells[AliasColumnIndex].Value.ToString();
+            this.chosenPythonLable.Text = String.Empty;         
         }
     }
 }
