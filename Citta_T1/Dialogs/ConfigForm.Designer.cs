@@ -59,6 +59,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chosenPythonLable = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -154,6 +157,8 @@
             // 
             // pythonConfigPage
             // 
+            this.pythonConfigPage.Controls.Add(this.chosenPythonLable);
+            this.pythonConfigPage.Controls.Add(this.label7);
             this.pythonConfigPage.Controls.Add(this.pythonConfigCancelButton);
             this.pythonConfigPage.Controls.Add(this.pythonConfigOkButton);
             this.pythonConfigPage.Controls.Add(this.dataGridView);
@@ -290,6 +295,7 @@
             // 
             // aboutPage
             // 
+            this.aboutPage.Controls.Add(this.label8);
             this.aboutPage.Controls.Add(this.textBox4);
             this.aboutPage.Controls.Add(this.button7);
             this.aboutPage.Controls.Add(this.textBox3);
@@ -319,6 +325,7 @@
             // 
             // button7
             // 
+            this.button7.Enabled = false;
             this.button7.Location = new System.Drawing.Point(489, 256);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(59, 23);
@@ -328,10 +335,14 @@
             // 
             // textBox3
             // 
+            this.textBox3.BackColor = System.Drawing.Color.White;
+            this.textBox3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.textBox3.Location = new System.Drawing.Point(11, 256);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(463, 23);
             this.textBox3.TabIndex = 6;
+            this.textBox3.Text = "AH8F-6H7C-9VMF-4UOP";
             // 
             // aboutCancelButton
             // 
@@ -377,6 +388,34 @@
             this.pythonOpenFileDialog.DefaultExt = "exe";
             this.pythonOpenFileDialog.Filter = "Python解释器 |*.exe";
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 355);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 17);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "默认Python虚拟机 :";
+            // 
+            // chosenPythonLable
+            // 
+            this.chosenPythonLable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.chosenPythonLable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chosenPythonLable.Location = new System.Drawing.Point(131, 352);
+            this.chosenPythonLable.Name = "chosenPythonLable";
+            this.chosenPythonLable.Size = new System.Drawing.Size(200, 20);
+            this.chosenPythonLable.TabIndex = 7;
+            this.chosenPythonLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 295);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(249, 17);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "授权 FiberHome IAO 到期时间 2025.12.31";
             // 
             // ConfigForm
             // 
@@ -434,5 +473,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFFPColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chosenColumn;
+        private System.Windows.Forms.Label chosenPythonLable;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }

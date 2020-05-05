@@ -1,20 +1,16 @@
-﻿using Citta_T1.Utils;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs
 {
     public partial class ConfigForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("ConfigForm");
-        private static int CheckBoxRowIndex = 2;
+        private static int AliasColumnIndex = 1;
+        private static int CheckBoxColumnIndex = 2;
+        private static Regex PythonAliasRegex = new Regex(@"(python\d{1,3}(\.\d{1,3})?)", RegexOptions.IgnoreCase);
         public ConfigForm()
         {
             InitializeComponent();
@@ -72,11 +68,28 @@ namespace Citta_T1.Dialogs
 
         private void AddPythonInterpreter(string pythonFFP)
         {
-            string aliasDefault = System.IO.Path.GetFileNameWithoutExtension(pythonFFP); 
+            // 默认别名采用 python 解释器的可执行文件名,但一般都是python.exe,看不出区别
+            // 用正则表达式从路径中提取带版本号的python解释器名称,失败时采用默认命名
+            string aliasDefault = System.IO.Path.GetFileNameWithoutExtension(pythonFFP);
+            MatchCollection mats = PythonAliasRegex.Matches(pythonFFP);
+            foreach(Match mat in mats)
+            {   // 提取成功
+                if (mat.Success && mat.Groups.Count > 1 && mat.Groups[1].Success)
+                {   // 提取最长的一个匹配
+                    string matchValue = mat.Groups[1].Value;
+                    if (matchValue.Length > aliasDefault.Length)
+                        aliasDefault = matchValue;
+                }       
+            }        
             this.pythonFFPTextBox.Text = pythonFFP;
-
-            this.dataGridView.Rows.Add(new Object[] { pythonFFP, aliasDefault, false });
-
+            // 第一行 默认选中
+            if (this.dataGridView.Rows.Count == 0)
+            {
+                this.dataGridView.Rows.Add(new Object[] { pythonFFP, aliasDefault, true });
+                this.chosenPythonLable.Text = aliasDefault;
+            }
+            else
+                this.dataGridView.Rows.Add(new Object[] { pythonFFP, aliasDefault, false });
         }
 
         private void SavePythonConfig()
@@ -133,8 +146,9 @@ namespace Citta_T1.Dialogs
             {
                 if (i == e.RowIndex)
                     continue;
-                (dataGridView.Rows[i].Cells[CheckBoxRowIndex] as DataGridViewCheckBoxCell).Value = false;
+                (dataGridView.Rows[i].Cells[CheckBoxColumnIndex] as DataGridViewCheckBoxCell).Value = false;
             }
+            this.chosenPythonLable.Text = dataGridView.Rows[e.RowIndex].Cells[AliasColumnIndex].Value.ToString();
         }
     }
 }
