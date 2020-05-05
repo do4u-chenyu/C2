@@ -35,30 +35,30 @@
             this.userModelConfigPage = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.userModelCancelButton = new System.Windows.Forms.Button();
+            this.userModelOkButton = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pythonConfigPage = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pythonConfigCancelButton = new System.Windows.Forms.Button();
+            this.pythonConfigOkButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.interpreterFullPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.browseButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.socialNetworkConfigPage = new System.Windows.Forms.TabPage();
             this.aboutPage = new System.Windows.Forms.TabPage();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.aboutCancelButton = new System.Windows.Forms.Button();
+            this.aboutOkButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -79,13 +79,14 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(642, 410);
             this.tabControl.TabIndex = 0;
+            this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl_Selected);
             // 
             // userModelConfigPage
             // 
             this.userModelConfigPage.Controls.Add(this.label4);
             this.userModelConfigPage.Controls.Add(this.label3);
-            this.userModelConfigPage.Controls.Add(this.button4);
-            this.userModelConfigPage.Controls.Add(this.button3);
+            this.userModelConfigPage.Controls.Add(this.userModelCancelButton);
+            this.userModelConfigPage.Controls.Add(this.userModelOkButton);
             this.userModelConfigPage.Controls.Add(this.textBox2);
             this.userModelConfigPage.Controls.Add(this.label2);
             this.userModelConfigPage.Location = new System.Drawing.Point(4, 26);
@@ -114,23 +115,25 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "用户模型目录存储了当前所有用户的模型,配置信息和运算临时文件。";
             // 
-            // button4
+            // userModelCancelButton
             // 
-            this.button4.Location = new System.Drawing.Point(551, 349);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "取消";
-            this.button4.UseVisualStyleBackColor = true;
+            this.userModelCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.userModelCancelButton.Name = "userModelCancelButton";
+            this.userModelCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.userModelCancelButton.TabIndex = 3;
+            this.userModelCancelButton.Text = "取消";
+            this.userModelCancelButton.UseVisualStyleBackColor = true;
+            this.userModelCancelButton.Click += new System.EventHandler(this.UserModelCancelButton_Click);
             // 
-            // button3
+            // userModelOkButton
             // 
-            this.button3.Location = new System.Drawing.Point(458, 349);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "确认";
-            this.button3.UseVisualStyleBackColor = true;
+            this.userModelOkButton.Location = new System.Drawing.Point(458, 349);
+            this.userModelOkButton.Name = "userModelOkButton";
+            this.userModelOkButton.Size = new System.Drawing.Size(75, 23);
+            this.userModelOkButton.TabIndex = 2;
+            this.userModelOkButton.Text = "确认";
+            this.userModelOkButton.UseVisualStyleBackColor = true;
+            this.userModelOkButton.Click += new System.EventHandler(this.UserModelOkButton_Click);
             // 
             // textBox2
             // 
@@ -148,15 +151,14 @@
             this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "用户模型存储路径:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // pythonConfigPage
             // 
-            this.pythonConfigPage.Controls.Add(this.button2);
-            this.pythonConfigPage.Controls.Add(this.button1);
+            this.pythonConfigPage.Controls.Add(this.pythonConfigCancelButton);
+            this.pythonConfigPage.Controls.Add(this.pythonConfigOkButton);
             this.pythonConfigPage.Controls.Add(this.dataGridView);
             this.pythonConfigPage.Controls.Add(this.browseButton);
-            this.pythonConfigPage.Controls.Add(this.textBox1);
+            this.pythonConfigPage.Controls.Add(this.pythonFFPTextBox);
             this.pythonConfigPage.Controls.Add(this.label1);
             this.pythonConfigPage.Location = new System.Drawing.Point(4, 26);
             this.pythonConfigPage.Name = "pythonConfigPage";
@@ -166,23 +168,25 @@
             this.pythonConfigPage.Text = "Python引擎";
             this.pythonConfigPage.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // pythonConfigCancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(551, 349);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
+            this.pythonConfigCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.pythonConfigCancelButton.Name = "pythonConfigCancelButton";
+            this.pythonConfigCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.pythonConfigCancelButton.TabIndex = 5;
+            this.pythonConfigCancelButton.Text = "取消";
+            this.pythonConfigCancelButton.UseVisualStyleBackColor = true;
+            this.pythonConfigCancelButton.Click += new System.EventHandler(this.PythonConfigCancelButton_Click);
             // 
-            // button1
+            // pythonConfigOkButton
             // 
-            this.button1.Location = new System.Drawing.Point(458, 349);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "确认";
-            this.button1.UseVisualStyleBackColor = true;
+            this.pythonConfigOkButton.Location = new System.Drawing.Point(458, 349);
+            this.pythonConfigOkButton.Name = "pythonConfigOkButton";
+            this.pythonConfigOkButton.Size = new System.Drawing.Size(75, 23);
+            this.pythonConfigOkButton.TabIndex = 4;
+            this.pythonConfigOkButton.Text = "确认";
+            this.pythonConfigOkButton.UseVisualStyleBackColor = true;
+            this.pythonConfigOkButton.Click += new System.EventHandler(this.PythonConfigOkButton_Click);
             // 
             // dataGridView
             // 
@@ -212,7 +216,6 @@
             this.dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView.Size = new System.Drawing.Size(620, 250);
             this.dataGridView.TabIndex = 3;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // interpreterFullPath
             // 
@@ -251,13 +254,16 @@
             this.browseButton.Text = "浏览+";
             this.browseButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Click += new System.EventHandler(this.PythonBrowseButton_Click);
             // 
-            // textBox1
+            // pythonFFPTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(5, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(572, 23);
-            this.textBox1.TabIndex = 1;
+            this.pythonFFPTextBox.BackColor = System.Drawing.Color.White;
+            this.pythonFFPTextBox.Location = new System.Drawing.Point(5, 49);
+            this.pythonFFPTextBox.Name = "pythonFFPTextBox";
+            this.pythonFFPTextBox.ReadOnly = true;
+            this.pythonFFPTextBox.Size = new System.Drawing.Size(572, 23);
+            this.pythonFFPTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -282,8 +288,8 @@
             this.aboutPage.Controls.Add(this.textBox4);
             this.aboutPage.Controls.Add(this.button7);
             this.aboutPage.Controls.Add(this.textBox3);
-            this.aboutPage.Controls.Add(this.button5);
-            this.aboutPage.Controls.Add(this.button6);
+            this.aboutPage.Controls.Add(this.aboutCancelButton);
+            this.aboutPage.Controls.Add(this.aboutOkButton);
             this.aboutPage.Controls.Add(this.label6);
             this.aboutPage.Controls.Add(this.label5);
             this.aboutPage.Location = new System.Drawing.Point(4, 26);
@@ -293,6 +299,18 @@
             this.aboutPage.TabIndex = 3;
             this.aboutPage.Text = "关于和注册";
             this.aboutPage.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.textBox4.Location = new System.Drawing.Point(11, 50);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(537, 172);
+            this.textBox4.TabIndex = 8;
+            this.textBox4.Text = "IAO可视化数据分析平台，支持BCP,XLS,CVS,TXT等多种数据格式，支持多模型文档，算子并行运算，同时支持基于Python的自定义算子，具有灵活的分析能力" +
+    "和友善的交互界面,学习成本低，功能丰富，是IAO自主研发的新一代可视化数据分析平台。";
             // 
             // button7
             // 
@@ -310,23 +328,25 @@
             this.textBox3.Size = new System.Drawing.Size(463, 23);
             this.textBox3.TabIndex = 6;
             // 
-            // button5
+            // aboutCancelButton
             // 
-            this.button5.Location = new System.Drawing.Point(551, 349);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "取消";
-            this.button5.UseVisualStyleBackColor = true;
+            this.aboutCancelButton.Location = new System.Drawing.Point(551, 349);
+            this.aboutCancelButton.Name = "aboutCancelButton";
+            this.aboutCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.aboutCancelButton.TabIndex = 5;
+            this.aboutCancelButton.Text = "取消";
+            this.aboutCancelButton.UseVisualStyleBackColor = true;
+            this.aboutCancelButton.Click += new System.EventHandler(this.AboutCancelButton_Click);
             // 
-            // button6
+            // aboutOkButton
             // 
-            this.button6.Location = new System.Drawing.Point(458, 349);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "确认";
-            this.button6.UseVisualStyleBackColor = true;
+            this.aboutOkButton.Location = new System.Drawing.Point(458, 349);
+            this.aboutOkButton.Name = "aboutOkButton";
+            this.aboutOkButton.Size = new System.Drawing.Size(75, 23);
+            this.aboutOkButton.TabIndex = 4;
+            this.aboutOkButton.Text = "确认";
+            this.aboutOkButton.UseVisualStyleBackColor = true;
+            this.aboutOkButton.Click += new System.EventHandler(this.AboutOkButton_Click);
             // 
             // label6
             // 
@@ -347,21 +367,11 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "关于";
             // 
-            // openFileDialog1
+            // pythonOpenFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.textBox4.Location = new System.Drawing.Point(11, 50);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(537, 172);
-            this.textBox4.TabIndex = 8;
-            this.textBox4.Text = "IAO可视化数据分析平台，支持BCP,XLS,CVS,TXT等多种数据格式，支持多模型文档，算子并行运算，同时支持基于Python的自定义算子，具有灵活的分析能力" +
-    "和友善的交互界面,学习成本低，功能丰富，是IAO自主研发的新一代可视化数据分析平台。";
+            this.pythonOpenFileDialog.DefaultExt = "exe";
+            this.pythonOpenFileDialog.Filter = "Python解释器 |*.exe";
+            this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
             // ConfigForm
             // 
@@ -397,11 +407,11 @@
         private System.Windows.Forms.TabPage aboutPage;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button browseButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox pythonFFPTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog pythonOpenFileDialog;
+        private System.Windows.Forms.Button pythonConfigCancelButton;
+        private System.Windows.Forms.Button pythonConfigOkButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFullPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
@@ -409,11 +419,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button userModelCancelButton;
+        private System.Windows.Forms.Button userModelOkButton;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button aboutCancelButton;
+        private System.Windows.Forms.Button aboutOkButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button7;

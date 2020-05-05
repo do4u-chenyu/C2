@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +13,68 @@ namespace Citta_T1.Dialogs
 {
     public partial class ConfigForm : Form
     {
+        private static LogUtil log = LogUtil.GetInstance("ConfigForm");
         public ConfigForm()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void TabControl_Selected(object sender, TabControlEventArgs e)
         {
-
+            log.Info(e.TabPageIndex.ToString());
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void UserModelOkButton_Click(object sender, EventArgs e)
         {
+            Close();
+        }
 
+        private void UserModelCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AboutOkButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AboutCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void PythonBrowseButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = pythonOpenFileDialog.ShowDialog();
+            if (dr != DialogResult.OK)
+                return;
+            string pythonFFP = pythonOpenFileDialog.FileName;
+            if (!CheckPythonInterpreter(pythonFFP))
+            {
+                //TODO 弹出对话框
+                MessageBox.Show(String.Format("Python解释器导入错误: {0}", pythonFFP), 
+                    "Python解释器导入错误", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Information);
+                return;
+            }
+            this.pythonFFPTextBox.Text = pythonFFP;
+        }
+
+        private void PythonConfigCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private bool CheckPythonInterpreter(string pythonFFP)
+        {
+            return true;
+        }
+
+        private void PythonConfigOkButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

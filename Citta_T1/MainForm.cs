@@ -20,7 +20,7 @@ namespace  Citta_T1
         private bool isLeftViewPanelMinimum;
         
         private string userName;
-        public Citta_T1.Dialogs.FormInputData formInputData;
+        private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
@@ -29,10 +29,10 @@ namespace  Citta_T1
         public string UserName { get => this.userName; set => this.userName = value; }
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         
-        delegate void AsynUpdateLog(string log);
+        delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
 
-        LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
+        private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -489,18 +489,18 @@ namespace  Citta_T1
         }
 
         //更新log
-        private void UpdataLogStatus(string log)
+        private void UpdataLogStatus(string logContent)
         {
             if (InvokeRequired)
             {
                 this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.log.Info(tlog);
-                }), log);
+                    log.Info(tlog);
+                }), logContent);
             }
             else
             {
-                this.log.Info(log);
+                log.Info(logContent);
             }
         }
 
