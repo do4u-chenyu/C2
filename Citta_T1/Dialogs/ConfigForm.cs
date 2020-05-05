@@ -76,5 +76,21 @@ namespace Citta_T1.Dialogs
         {
             Close();
         }
+
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+            UserModelTabPage_Load();
+            PythonConfigTabPage_Load();
+        }
+
+        private void UserModelTabPage_Load()
+        {
+            this.userModelTextBox.Text = Global.WorkspaceDirectory;
+        }
+
+        private void PythonConfigTabPage_Load()
+        { 
+        
+        }
     }
 }

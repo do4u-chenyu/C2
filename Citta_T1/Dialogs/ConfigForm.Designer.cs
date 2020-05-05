@@ -37,7 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.userModelCancelButton = new System.Windows.Forms.Button();
             this.userModelOkButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.userModelTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pythonConfigPage = new System.Windows.Forms.TabPage();
             this.pythonConfigCancelButton = new System.Windows.Forms.Button();
@@ -87,7 +87,7 @@
             this.userModelConfigPage.Controls.Add(this.label3);
             this.userModelConfigPage.Controls.Add(this.userModelCancelButton);
             this.userModelConfigPage.Controls.Add(this.userModelOkButton);
-            this.userModelConfigPage.Controls.Add(this.textBox2);
+            this.userModelConfigPage.Controls.Add(this.userModelTextBox);
             this.userModelConfigPage.Controls.Add(this.label2);
             this.userModelConfigPage.Location = new System.Drawing.Point(4, 26);
             this.userModelConfigPage.Name = "userModelConfigPage";
@@ -135,13 +135,13 @@
             this.userModelOkButton.UseVisualStyleBackColor = true;
             this.userModelOkButton.Click += new System.EventHandler(this.UserModelOkButton_Click);
             // 
-            // textBox2
+            // userModelTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 77);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(620, 23);
-            this.textBox2.TabIndex = 1;
+            this.userModelTextBox.Location = new System.Drawing.Point(6, 77);
+            this.userModelTextBox.Name = "userModelTextBox";
+            this.userModelTextBox.ReadOnly = true;
+            this.userModelTextBox.Size = new System.Drawing.Size(620, 23);
+            this.userModelTextBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -386,6 +386,7 @@
             this.Name = "ConfigForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "首选项";
+            this.Load += new System.EventHandler(this.ConfigForm_Load);
             this.tabControl.ResumeLayout(false);
             this.userModelConfigPage.ResumeLayout(false);
             this.userModelConfigPage.PerformLayout();
@@ -415,7 +416,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFullPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox userModelTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
