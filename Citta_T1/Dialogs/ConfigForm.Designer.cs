@@ -43,9 +43,9 @@
             this.pythonConfigCancelButton = new System.Windows.Forms.Button();
             this.pythonConfigOkButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.interpreterFullPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.interpreterFFPColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aliasColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chosenColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.browseButton = new System.Windows.Forms.Button();
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -198,9 +198,9 @@
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.interpreterFullPath,
-            this.Column2,
-            this.Column3});
+            this.interpreterFFPColumn,
+            this.aliasColumn,
+            this.chosenColumn});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -209,41 +209,46 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.dataGridView.Location = new System.Drawing.Point(6, 93);
+            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView.Size = new System.Drawing.Size(620, 250);
             this.dataGridView.TabIndex = 3;
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellEndEdit);
+            this.dataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView_CellValidating);
             // 
-            // interpreterFullPath
+            // interpreterFFPColumn
             // 
-            this.interpreterFullPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.interpreterFFPColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.interpreterFullPath.DefaultCellStyle = dataGridViewCellStyle1;
-            this.interpreterFullPath.FillWeight = 320F;
-            this.interpreterFullPath.HeaderText = "虚拟机路径";
-            this.interpreterFullPath.Name = "interpreterFullPath";
-            this.interpreterFullPath.ReadOnly = true;
-            this.interpreterFullPath.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.interpreterFullPath.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.interpreterFullPath.Width = 422;
+            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.interpreterFFPColumn.FillWeight = 320F;
+            this.interpreterFFPColumn.HeaderText = "虚拟机路径";
+            this.interpreterFFPColumn.Name = "interpreterFFPColumn";
+            this.interpreterFFPColumn.ReadOnly = true;
+            this.interpreterFFPColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.interpreterFFPColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.interpreterFFPColumn.Width = 422;
             // 
-            // Column2
+            // aliasColumn
             // 
-            this.Column2.FillWeight = 80F;
-            this.Column2.HeaderText = "别名";
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.aliasColumn.FillWeight = 80F;
+            this.aliasColumn.HeaderText = "别名";
+            this.aliasColumn.Name = "aliasColumn";
+            this.aliasColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.aliasColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.aliasColumn.ToolTipText = "自定义的别名，用来区分不同版本的Python解释器";
             // 
-            // Column3
+            // chosenColumn
             // 
-            this.Column3.FillWeight = 30F;
-            this.Column3.HeaderText = "选中";
-            this.Column3.Name = "Column3";
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.chosenColumn.FillWeight = 30F;
+            this.chosenColumn.HeaderText = "选中";
+            this.chosenColumn.Name = "chosenColumn";
+            this.chosenColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // browseButton
             // 
@@ -413,9 +418,6 @@
         private System.Windows.Forms.OpenFileDialog pythonOpenFileDialog;
         private System.Windows.Forms.Button pythonConfigCancelButton;
         private System.Windows.Forms.Button pythonConfigOkButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFullPath;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.TextBox userModelTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
@@ -429,5 +431,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFFPColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chosenColumn;
     }
 }

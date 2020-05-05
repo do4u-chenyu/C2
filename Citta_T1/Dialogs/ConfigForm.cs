@@ -14,6 +14,7 @@ namespace Citta_T1.Dialogs
     public partial class ConfigForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("ConfigForm");
+        private static int CheckBoxRowIndex = 2;
         public ConfigForm()
         {
             InitializeComponent();
@@ -59,12 +60,27 @@ namespace Citta_T1.Dialogs
                     MessageBoxIcon.Information);
                 return;
             }
-            this.pythonFFPTextBox.Text = pythonFFP;
+
+            AddPythonInterpreter(pythonFFP);
+
         }
 
         private void PythonConfigCancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void AddPythonInterpreter(string pythonFFP)
+        {
+            string aliasDefault = System.IO.Path.GetFileNameWithoutExtension(pythonFFP); 
+            this.pythonFFPTextBox.Text = pythonFFP;
+
+            this.dataGridView.Rows.Add(new Object[] { pythonFFP, aliasDefault, false });
+
+        }
+
+        private void SavePythonConfig()
+        { 
         }
 
         private bool CheckPythonInterpreter(string pythonFFP)
@@ -74,6 +90,7 @@ namespace Citta_T1.Dialogs
 
         private void PythonConfigOkButton_Click(object sender, EventArgs e)
         {
+            SavePythonConfig();
             Close();
         }
 
@@ -91,6 +108,33 @@ namespace Citta_T1.Dialogs
         private void PythonConfigTabPage_Load()
         { 
         
+        }
+
+
+        private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // 别名不能为空
+            if (e.ColumnIndex == 1 && String.IsNullOrEmpty(e.FormattedValue.ToString().Trim()))
+            {
+                dataGridView.Rows[e.RowIndex].ErrorText = "别名不能为空";
+                e.Cancel = true;
+            }
+        }
+
+        private void DataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridView.Rows[e.RowIndex].ErrorText = String.Empty;
+        }
+
+        private void DataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == -1 || e.RowIndex == -1) return;
+            for (int i = 0; i < dataGridView.Rows.Count; i++)
+            {
+                if (i == e.RowIndex)
+                    continue;
+                (dataGridView.Rows[i].Cells[CheckBoxRowIndex] as DataGridViewCheckBoxCell).Value = false;
+            }
         }
     }
 }
