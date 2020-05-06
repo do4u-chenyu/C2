@@ -20,7 +20,8 @@ namespace Citta_T1.Utils
         public static string SortOperatorHelpInfo = "排序算子:根据选择字段进行排序,支持数据去重"; 
         public static string GroupOperatorHelpInfo = "分组算子:根据选择字段对文本进行分组展示";
         public static string RelateOperatorHelpInfo = "关联算子:根据选择的关联条件将两个数据表进行连接，默认左连接.";
-
+        public static string CustomOperatorHelpInfo = "自定义算子:灵活配置算子,用于各种模型探索和展示.";
+        public static string PythonOperatorHelpInfo = "Python算子:调用自定义Python脚本完成运算.";
         public static string FormatOperatorHelpInfo = "一键排版,智能调整元素版面位置.";
     }
 }

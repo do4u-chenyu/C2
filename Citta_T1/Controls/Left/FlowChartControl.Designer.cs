@@ -28,30 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowChartControl));
-            this.leftPanelOpRelate = new Citta_T1.Controls.Common.NoFocusButton();
+            this.networkOPButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.leftPanelOpCollide = new Citta_T1.Controls.Common.NoFocusButton();
+            this.customOPButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.noFocusButton1 = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pythonOPButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
-            // leftPanelOpRelate
+            // networkOPButton
             // 
-            this.leftPanelOpRelate.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpRelate.Location = new System.Drawing.Point(66, 18);
-            this.leftPanelOpRelate.Name = "leftPanelOpRelate";
-            this.leftPanelOpRelate.Size = new System.Drawing.Size(104, 40);
-            this.leftPanelOpRelate.TabIndex = 2;
-            this.leftPanelOpRelate.Text = "社交网络分析";
-            this.leftPanelOpRelate.UseVisualStyleBackColor = true;
+            this.networkOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.networkOPButton.FlatAppearance.BorderSize = 0;
+            this.networkOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.networkOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.networkOPButton.Location = new System.Drawing.Point(66, 18);
+            this.networkOPButton.Name = "networkOPButton";
+            this.networkOPButton.Size = new System.Drawing.Size(104, 40);
+            this.networkOPButton.TabIndex = 2;
+            this.networkOPButton.Text = "社交网络分析";
+            this.networkOPButton.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -62,18 +64,19 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // leftPanelOpCollide
+            // customOPButton
             // 
-            this.leftPanelOpCollide.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.leftPanelOpCollide.FlatAppearance.BorderSize = 0;
-            this.leftPanelOpCollide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.leftPanelOpCollide.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpCollide.Location = new System.Drawing.Point(66, 64);
-            this.leftPanelOpCollide.Name = "leftPanelOpCollide";
-            this.leftPanelOpCollide.Size = new System.Drawing.Size(104, 40);
-            this.leftPanelOpCollide.TabIndex = 20;
-            this.leftPanelOpCollide.Text = "自定义算子";
-            this.leftPanelOpCollide.UseVisualStyleBackColor = true;
+            this.customOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.customOPButton.FlatAppearance.BorderSize = 0;
+            this.customOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.customOPButton.Location = new System.Drawing.Point(66, 64);
+            this.customOPButton.Name = "customOPButton";
+            this.customOPButton.Size = new System.Drawing.Size(104, 40);
+            this.customOPButton.TabIndex = 20;
+            this.customOPButton.Text = "自定义算子";
+            this.customOPButton.UseVisualStyleBackColor = true;
+            this.customOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             // 
             // pictureBox2
             // 
@@ -93,32 +96,34 @@
             this.pictureBox3.TabIndex = 21;
             this.pictureBox3.TabStop = false;
             // 
-            // noFocusButton1
+            // pythonOPButton
             // 
-            this.noFocusButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.noFocusButton1.FlatAppearance.BorderSize = 0;
-            this.noFocusButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.noFocusButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.noFocusButton1.Location = new System.Drawing.Point(66, 110);
-            this.noFocusButton1.Name = "noFocusButton1";
-            this.noFocusButton1.Size = new System.Drawing.Size(104, 40);
-            this.noFocusButton1.TabIndex = 22;
-            this.noFocusButton1.Text = "Python算子";
-            this.noFocusButton1.UseVisualStyleBackColor = true;
+            this.pythonOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.pythonOPButton.FlatAppearance.BorderSize = 0;
+            this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pythonOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.pythonOPButton.Location = new System.Drawing.Point(66, 110);
+            this.pythonOPButton.Name = "pythonOPButton";
+            this.pythonOPButton.Size = new System.Drawing.Size(104, 40);
+            this.pythonOPButton.TabIndex = 22;
+            this.pythonOPButton.Text = "Python算子";
+            this.pythonOPButton.UseVisualStyleBackColor = true;
+            this.pythonOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             // 
             // FlowChartControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.noFocusButton1);
+            this.Controls.Add(this.pythonOPButton);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.leftPanelOpCollide);
+            this.Controls.Add(this.customOPButton);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.leftPanelOpRelate);
+            this.Controls.Add(this.networkOPButton);
             this.Controls.Add(this.pictureBox1);
             this.Name = "FlowChartControl";
             this.Size = new System.Drawing.Size(187, 637);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -128,11 +133,12 @@
 
         #endregion
 
-        private Common.NoFocusButton leftPanelOpRelate;
+        private Common.NoFocusButton networkOPButton;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Common.NoFocusButton leftPanelOpCollide;
+        private Common.NoFocusButton customOPButton;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private Common.NoFocusButton noFocusButton1;
+        private Common.NoFocusButton pythonOPButton;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

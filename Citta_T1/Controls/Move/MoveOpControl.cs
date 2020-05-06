@@ -103,7 +103,6 @@ namespace Citta_T1.Controls.Move
         private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
-        private String lineStatus = "";
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
         
@@ -112,7 +111,6 @@ namespace Citta_T1.Controls.Move
         private Size smallStatus  = new Size(130,28);
         
         
-        // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
@@ -216,11 +214,18 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
                     break;
+                case "自定义算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperatorHelpInfo);
+                    break;
+                case "Python算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
+                    break;
                 default:
                     break;
             }
     
         }
+
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -421,7 +426,7 @@ namespace Citta_T1.Controls.Move
                 int txtWidth = 72;
                 ResizeControl(txtWidth, normalStatus);
             }
-            this.nameToolTip.SetToolTip(this.txtButton, name);
+            this.helpToolTip.SetToolTip(this.txtButton, name);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -1006,7 +1011,7 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.helpToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
     }
 }

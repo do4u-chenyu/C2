@@ -137,6 +137,12 @@ namespace Citta_T1.Business.Model
                 case "分组算子":
                     type = "GroupOperator";
                     break;
+                case "自定义算子":
+                    type = "CustomOperator";
+                    break;
+                case "Python算子":
+                    type = "PythonOperator";
+                    break;
                 default:
                     break;
             }

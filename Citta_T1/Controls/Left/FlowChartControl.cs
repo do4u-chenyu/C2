@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using Citta_T1.Business.Model;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
@@ -15,6 +9,20 @@ namespace Citta_T1.Controls.Left
         public FlowChartControl()
         {
             InitializeComponent();
+            this.toolTip1.SetToolTip(this.customOPButton, HelpUtil.CustomOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
+        }
+
+        private void FlowChartControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.Operator);
+                dragDropData.SetData("Path", "");
+                dragDropData.SetData("Text", (sender as Button).Text);
+                (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
         }
     }
 }

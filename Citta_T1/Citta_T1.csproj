@@ -270,6 +270,7 @@
     <Compile Include="IAOLab\CustomOP\CustomOperatorView.Designer.cs">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonInterpreterInfo.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
       <SubType>Form</SubType>
