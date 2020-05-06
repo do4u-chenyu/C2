@@ -89,5 +89,125 @@ namespace Citta_T1.Utils
                     (ct as IDragable).ChangeLoc(dx, dy);
             }
         }
+
+
+        public static ElementSubType SEType(string subType)
+        {
+            string type = "";
+            switch (subType)
+            {
+                case "关联算子":
+                    type = "RelateOperator";
+                    break;
+                case "碰撞算子":
+                    type = "CollideOperator";
+                    break;
+                case "取并集":
+                    type = "UnionOperator";
+                    break;
+                case "取差集":
+                    type = "DifferOperator";
+                    break;
+                case "随机采样":
+                    type = "RandomOperator";
+                    break;
+                case "过滤算子":
+                    type = "FilterOperator";
+                    break;
+                case "取最大值":
+                    type = "MaxOperator";
+                    break;
+                case "取最小值":
+                    type = "MinOperator";
+                    break;
+                case "取平均值":
+                    type = "AvgOperator";
+                    break;
+                case "频率算子":
+                    type = "FreqOperator";
+                    break;
+                case "排序算子":
+                    type = "SortOperator";
+                    break;
+                case "分组算子":
+                    type = "GroupOperator";
+                    break;
+                case "自定义算子1":
+                    type = "CustomOperator1";
+                    break;
+                case "Python算子1":
+                    type = "PythonOperator1";
+                    break;
+                case "自定义算子2":
+                    type = "CustomOperator2";
+                    break;
+                case "Python算子2":
+                    type = "PythonOperator2";
+                    break;
+                default:
+                    break;
+            }
+            return (ElementSubType)Enum.Parse(typeof(ElementSubType), type);
+        }
+
+        public static string SubTypeName(string subType)
+        {
+            string type = "";
+            switch (subType)
+            {
+                case "CollideOperator":
+                    type = "碰撞算子";
+                    break;
+                case "RelateOperator":
+                    type = "关联算子";
+                    break;
+                case "UnionOperator":
+                    type = "取并集";
+                    break;
+                case "DifferOperator":
+                    type = "取差集";
+                    break;
+                case "RandomOperator":
+                    type = "随机采样";
+                    break;
+                case "FilterOperator":
+                    type = "过滤算子";
+                    break;
+                case "MaxOperator":
+                    type = "取最大值";
+                    break;
+                case "MinOperator":
+                    type = "取最小值";
+                    break;
+                case "AvgOperator":
+                    type = "取平均值";
+                    break;
+                case "FreqOperator":
+                    type = "频率算子";
+                    break;
+                case "SortOperator":
+                    type = "排序算子";
+                    break;
+                case "GroupOperator":
+                    type = "分组算子";
+                    break;
+                case "CustomOperator1":
+                    type = "自定义算子1";
+                    break;
+                case "CustomOperator2":
+                    type = "自定义算子2";
+                    break;
+                case "PythonOperator1":
+                    type = "Python算子1";
+                    break;
+                case "PythonOperator2":
+                    type = "Python算子2";
+                    break;
+                default:
+                    break;
+            }
+            return type;
+        }
+
     }
 }
