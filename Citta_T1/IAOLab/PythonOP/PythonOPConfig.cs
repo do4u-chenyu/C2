@@ -10,9 +10,15 @@ namespace Citta_T1.IAOLab.PythonOP
     {
         private PythonInterpreterInfo defaultPythonInterpreterInfo;
         private PythonInterpreterInfo[] others;
-        public PythonOPConfig()
-        { 
-        
+
+        public PythonInterpreterInfo DefaultPythonInterpreterInfo { get => defaultPythonInterpreterInfo; set => defaultPythonInterpreterInfo = value; }
+        public PythonInterpreterInfo[] Others { get => others; set => others = value; }
+
+        public PythonOPConfig(string pythonConfigString)
+        {
+            // 样例
+            // <add key="python" value="C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;" />
+
         }
 
 
