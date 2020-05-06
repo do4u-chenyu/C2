@@ -106,9 +106,9 @@ namespace Citta_T1.Controls.Move
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
         
-        private Size bigStatus    = new Size(155,28);
-        private Size normalStatus = new Size(147,28);
-        private Size smallStatus  = new Size(130,28);
+        private Size bigStatus    = new Size(155, 28);
+        private Size normalStatus = new Size(147, 28);
+        private Size smallStatus  = new Size(130, 28);
         
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
@@ -214,11 +214,17 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
                     break;
-                case "自定义算子":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperatorHelpInfo);
+                case "自定义算子1":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
                     break;
-                case "Python算子":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
+                case "Python算子1":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator1HelpInfo);
+                    break;
+                case "自定义算子2":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
+                    break;
+                case "Python算子2":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator2HelpInfo);
                     break;
                 default:
                     break;
@@ -577,10 +583,6 @@ namespace Citta_T1.Controls.Move
             Global.GetNaviViewControl().UpdateNaviView();
             CanvasPanel canvas = Global.GetCanvasPanel();
             canvas.EndC = null;
-
-
-
-
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
@@ -598,7 +600,6 @@ namespace Citta_T1.Controls.Move
             {
                 if (mrc.ID == endID)
                 {
-                   
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();  

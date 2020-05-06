@@ -9,8 +9,11 @@ namespace Citta_T1.Controls.Left
         public FlowChartControl()
         {
             InitializeComponent();
-            this.toolTip1.SetToolTip(this.customOPButton, HelpUtil.CustomOperatorHelpInfo);
-            this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.customOPButton1, HelpUtil.CustomOperator1HelpInfo);
+            this.toolTip1.SetToolTip(this.pythonOPButton1, HelpUtil.PythonOperator1HelpInfo);
+
+            this.toolTip1.SetToolTip(this.customOPButton2, HelpUtil.CustomOperator2HelpInfo);
+            this.toolTip1.SetToolTip(this.pythonOPButton2, HelpUtil.PythonOperator2HelpInfo);
         }
 
         private void FlowChartControl_MouseDown(object sender, MouseEventArgs e)

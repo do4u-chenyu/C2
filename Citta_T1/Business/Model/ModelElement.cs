@@ -34,8 +34,10 @@ namespace Citta_T1.Business.Model
         SortOperator,   //排序算子
         FreqOperator,   //频率算子 
         GroupOperator,  //分组算子
-        CustomOperator, //自定义算子
-        PythonOperator, //Python算子
+        CustomOperator1, //自定义算子, 一元算子
+        PythonOperator1, //Python算子, 一元算子
+        CustomOperator2, //自定义算子, 二元算子
+        PythonOperator2, //Python算子, 二元算子
         Null
     }
     public enum ElementStatus

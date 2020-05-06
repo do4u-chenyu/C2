@@ -123,6 +123,7 @@ namespace Citta_T1.Dialogs
 
         private bool CheckPythonInterpreter(string pythonFFP)
         {
+            //TODO 运行python --version, 检查环境是否有问题
             return true;
         }
 
