@@ -198,7 +198,8 @@ namespace Citta_T1.Controls
                     staticImage = null;
                 }
                 staticImage = new Bitmap(this.Width, this.Height);
-                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                // 鼠标按下的时候存图
+                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
             else if (SelectDrag())
             {
@@ -222,7 +223,8 @@ namespace Citta_T1.Controls
             foreach(ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
-                // 测试用代码
+
+                //测试用代码
                 //Graphics g = this.CreateGraphics();
                 //PointF s;
                 //PointF e;
@@ -232,8 +234,10 @@ namespace Citta_T1.Controls
                 //    e = line.CutPointFs[i + 1];
                 //    g.DrawLine(Pens.Red, s.X, s.Y, e.X, e.Y);
                 //    g.FillEllipse(Brushes.Black, s.X, s.Y, 1, 1);
+
                 //}
                 //g.Dispose();
+
                 dist = line.PointToLine(p);
                 if (Math.Abs(dist - distNotOnLine) > 0.0001 && dist < minDist)
                 {
@@ -422,7 +426,6 @@ namespace Citta_T1.Controls
                     (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
                     (endC as MoveOpControl).RevisedPinIndex
                     );
-                // TODO [DK] 这里用来设置规则
                 // 1. 关系不能重复
                 // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
                 // 3. 
@@ -443,11 +446,20 @@ namespace Citta_T1.Controls
         private void RepaintAllRelations()
         {
             Graphics g = this.CreateGraphics();
+            Pen p;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
+                if (mr.Selected)
+                {
+                    p = new Pen(Color.Green, 3);
+                    g.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
+                    p.Dispose();
+                }
+                else
+                    g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
             }
             g.Dispose();
         }
@@ -502,7 +514,7 @@ namespace Citta_T1.Controls
             foreach (ModelRelation mr in mrs)
             {
                 Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
-                line.DrawBezier(g);
+                line.DrawBezier(g, mr.Selected);
             }
             g.Dispose();
 

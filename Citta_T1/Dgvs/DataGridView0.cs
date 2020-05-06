@@ -100,7 +100,6 @@ namespace Citta_T1
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows;
             List<string> blankRow = new List<string> { };
-            // TODO [DK] 支持多种数据格式
             if (extType == DSUtil.ExtType.Excel)
                 rows = new List<string>(BCPBuffer.GetInstance().GetCacheExcelPreViewContent(bcpPath, isForceRead = isForceRead).Split('\n'));
             else

@@ -241,7 +241,9 @@ namespace  Citta_T1
 
         private void MyModelButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.myModelControl.Visible = true;
+
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
@@ -250,6 +252,8 @@ namespace  Citta_T1
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
+
             this.operatorControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
@@ -259,6 +263,7 @@ namespace  Citta_T1
 
         private void DataButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
 
             this.operatorControl.Visible = false;
@@ -268,6 +273,7 @@ namespace  Citta_T1
 
         private void FlowChartButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.flowChartControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
@@ -288,8 +294,8 @@ namespace  Citta_T1
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
             this.ShowDataView();
-            this.logView.Visible = false;
             this.dataGridView2.Visible = true;
+            this.logView.Visible = false;
             this.dataGridView3.Visible = false;
         }
 
@@ -383,8 +389,6 @@ namespace  Citta_T1
 
         private void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            // TODO [DK] 读取Excel
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
@@ -599,7 +603,24 @@ namespace  Citta_T1
                     break;
             }
         }
+        private void ShowLeftFold()
+        {
+            if (this.isLeftViewPanelMinimum == true)
+            {
+                this.isLeftViewPanelMinimum = false;
+                this.leftToolBoxPanel.Width = 187;
 
+            }
+            InitializeControlsLocation();
+            if (this.leftToolBoxPanel.Width == 187)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            if (this.leftToolBoxPanel.Width == 10)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+            }
+        }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)

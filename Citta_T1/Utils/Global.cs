@@ -57,5 +57,7 @@ namespace Citta_T1.Utils
 
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
+
+
     }
 }

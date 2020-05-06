@@ -123,8 +123,8 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(594, 112);
             this.label7.TabIndex = 11;
-            this.label7.Text = "说明：\r\n1. 导入文件格式支持bcp、txt、csv、excel；\r\n2. 导入文件必须包括表头；\r\n3. 导入文件默认GBK编码，如预览出现乱码，请尝试右上角切换文件" +
-    "编码方式；\r\n4. 建议使用数据导入模板。";
+            this.label7.Text = "说明：\r\n1. 导入文件格式支持bcp、txt、csv、excel；\r\n2. 导入文件必须包括表头；\r\n3. 导入文件默认GBK编码，如预览出现乱码，请尝试右上角" +
+    "切换文件编码方式；\r\n4. 建议使用数据导入模板。";
             // 
             // textBox1
             // 
@@ -268,6 +268,7 @@
             this.textBoxEx1.Name = "textBoxEx1";
             this.textBoxEx1.Size = new System.Drawing.Size(29, 26);
             this.textBoxEx1.TabIndex = 23;
+            this.textBoxEx1.TextChanged += new System.EventHandler(this.textBoxEx1_TextChanged);
             // 
             // radioButton3
             // 
