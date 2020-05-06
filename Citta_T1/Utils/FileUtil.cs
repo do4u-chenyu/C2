@@ -114,5 +114,18 @@ namespace Citta_T1.Utils
             return ret;
         }
 
+        public static string TryGetPathRoot(string path)
+        {
+            string root;
+            try
+            {
+                root = Path.GetPathRoot(path);
+            }
+            catch (ArgumentException)
+            {
+                root = String.Empty;
+            }
+            return root;
+        }
     }
 }
