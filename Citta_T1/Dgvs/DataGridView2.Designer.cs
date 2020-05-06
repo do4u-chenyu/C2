@@ -28,43 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucDataGridView2 = new HZH_Controls.Controls.UCDataGridView();
+            this.components = new System.ComponentModel.Container();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ucDataGridView1
+            // textBox1
             // 
-            this.ucDataGridView2.AutoScroll = true;
-            this.ucDataGridView2.BackColor = System.Drawing.Color.White;
-            this.ucDataGridView2.Columns = null;
-            this.ucDataGridView2.DataSource = null;
-            this.ucDataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDataGridView2.HeadFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.ucDataGridView2.HeadHeight = 40;
-            this.ucDataGridView2.HeadPadingLeft = 0;
-            this.ucDataGridView2.HeadTextColor = System.Drawing.Color.Black;
-            this.ucDataGridView2.IsShowCheckBox = false;
-            this.ucDataGridView2.IsShowHead = true;
-            this.ucDataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.ucDataGridView2.Name = "ucDataGridView1";
-            this.ucDataGridView2.RowHeight = 40;
-            this.ucDataGridView2.RowType = typeof(HZH_Controls.Controls.UCDataGridViewRow);
-            this.ucDataGridView2.Size = new System.Drawing.Size(1011, 137);
-            this.ucDataGridView2.TabIndex = 0;
-            this.ucDataGridView2.Load += new System.EventHandler(this.ucDataGridView2_Load);
+            this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(1011, 137);
+            this.textBox1.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemSelectAll,
+            this.MenuItemClearAll});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // MenuItemSelectAll
+            // 
+            this.MenuItemSelectAll.Name = "MenuItemSelectAll";
+            this.MenuItemSelectAll.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemSelectAll.Text = "全选复制";
+            this.MenuItemSelectAll.Click += new System.EventHandler(this.MenuItemSelectAll_Click);
+            // 
+            // MenuItemClearAll
+            // 
+            this.MenuItemClearAll.Name = "MenuItemClearAll";
+            this.MenuItemClearAll.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemClearAll.Text = "全部清除";
+            this.MenuItemClearAll.Click += new System.EventHandler(this.MenuItemClearAll_Click);
             // 
             // DataGridView2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ucDataGridView2);
+            this.Controls.Add(this.textBox1);
             this.Name = "DataGridView2";
             this.Size = new System.Drawing.Size(1011, 137);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private HZH_Controls.Controls.UCDataGridView ucDataGridView2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemClearAll;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemSelectAll;
     }
 }

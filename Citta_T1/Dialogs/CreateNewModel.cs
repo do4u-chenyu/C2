@@ -104,7 +104,7 @@ namespace Citta_T1.Dialogs
             catch
             { }
 
-            foreach (ModelDocument md in Global.GetMainForm().DocumentsList())
+            foreach (ModelDocument md in Global.GetModelDocumentDao().ModelDocuments)
                 titles.Add(md.ModelTitle);
             return titles;
         }

@@ -203,5 +203,38 @@ namespace Citta_T1.Controls.Title
         {
             ModelDocumentSwitch?.Invoke(modelTitle);
         }
+
+        public bool ContainModel(string modelTitle)
+        {
+            bool ret = false;
+            foreach (Control ct in this.Controls)
+            {
+                if (ct is ModelTitleControl && (ct as ModelTitleControl).ModelTitle == modelTitle)
+                {
+                    ret = true;
+                    break;
+                }
+            }
+
+            return ret;
+        }
+
+        public bool ResetDirtyPictureBox(string modelTitle, bool dirty)
+        {
+            bool ret = false;
+            foreach (Control ct in this.Controls)
+            {
+                if (ct is ModelTitleControl && (ct as ModelTitleControl).ModelTitle == modelTitle)
+                {
+                    if (dirty)
+                        (ct as ModelTitleControl).SetDirtyPictureBox();
+                    else
+                        (ct as ModelTitleControl).ClearDirtyPictureBox();
+
+                    ret = true;
+                }
+            }
+            return ret;
+        }
     }
 }

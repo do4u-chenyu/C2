@@ -162,33 +162,28 @@ namespace Citta_T1.Controls
                 Global.GetFlowControl().ResetStatus();
                 return;
             }
-            //模拟删除单个线的动作
-            //if (e.Button == MouseButtons.Left)
-            //{
-            //    int ID = 1;
-            //    Global.GetCurrentDocument().DeleteModelRelation(ID - 1);
-            //    Global.GetOptionDao().DisableControlOption(ID);
-            //    this.Invalidate();
-            //}
-
+            #region 点线
+            // TODO [DK] 点线出什么呢？待讨论
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+            if (mrIndex != -1)
+            {
+                ModelRelation mr =  Global.GetCurrentDocument().ModelRelations[mrIndex];
+                mr.Selected = !mr.Selected;
+                this.Invalidate(false);
+            }
+            #endregion
+            // TODO [Dk] 后两个算子就不该有PinDraw这个动作
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
                 this.cmd = ECommandType.PinDraw;
-                // 不能乱写
                 this.StartC = sender as Control;
                 this.SetStartP(new PointF(e.X, e.Y));
-                // 初始化静态图
-                ////if (this.staticImage == null)
-                //{
                 this.staticImage = new Bitmap(this.Width, this.Height);
-
                 Graphics g = Graphics.FromImage(this.staticImage);
                 g.Clear(this.BackColor);
                 g.Dispose();
-                //}
                 CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
                 this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
-                
             }
 
             
@@ -207,14 +202,54 @@ namespace Citta_T1.Controls
             }
             else if (SelectDrag())
             {
-                
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
 
         }
+        /// <summary>
+        /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        private int PointToLine(PointF p)
+        {
+            float minDist = 100;
+            float dist;
+            float threshold = LineUtil.THRESHOLD;
+            float distNotOnLine = LineUtil.DISTNOTONLINE;
+            int mrIndex = 0;
+            int index = 0;
+            foreach(ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                Bezier line = new Bezier(mr.StartP, mr.EndP);
+                // 测试用代码
+                //Graphics g = this.CreateGraphics();
+                //PointF s;
+                //PointF e;
+                //for (int i = 0; i < line.CutPointFs.Length - 1; i++)
+                //{
+                //    s = line.CutPointFs[i];
+                //    e = line.CutPointFs[i + 1];
+                //    g.DrawLine(Pens.Red, s.X, s.Y, e.X, e.Y);
+                //    g.FillEllipse(Brushes.Black, s.X, s.Y, 1, 1);
+                //}
+                //g.Dispose();
+                dist = line.PointToLine(p);
+                if (Math.Abs(dist - distNotOnLine) > 0.0001 && dist < minDist)
+                {
+                    minDist = dist;
+                    index = mrIndex;
+                }
+                mrIndex += 1;
+            }
+            if (minDist < threshold)
+                return index;
+            else
+                return -1;
+        }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             if (e.Button != MouseButtons.Left) return;
             // 画框
             if (MouseIsDown && SelectFrame())
@@ -280,13 +315,12 @@ namespace Citta_T1.Controls
                 }
                 endP = nowP;
                 lineWhenMoving = new Bezier(startP, nowP);
-                // 不不应该挡住其他的线
+                // 不应该挡住其他的线
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
                 
                 // 重绘曲线
                 RepaintObject(lineWhenMoving);
-
             }
         }
         /*
@@ -299,20 +333,14 @@ namespace Citta_T1.Controls
             // 将`需要重绘`IDrawable对象重绘在静态图上
             Draw(canvasWrp, r);
         }
-        public void RepaintObject(Bezier line, Graphics g)
-        {
-            if (line == null)
-                return;
-            line.DrawBezier(g);
-        }
 
-        public void RepaintObject(Bezier line)
+        public void RepaintObject(Bezier line, bool isBold = false)
         {
             if (line == null)
                 return;
             Graphics g = this.CreateGraphics();
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            line.DrawBezier(g);
+            line.DrawBezier(g, isBold);
             g.Dispose();
         }
 
@@ -450,9 +478,17 @@ namespace Citta_T1.Controls
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Global.GetCurrentDocument().UpdateAllLines();
+            Pen p;
             foreach (ModelRelation mr in doc.ModelRelations)
             {
-                e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
+                if (mr.Selected)
+                {
+                    p = new Pen(Color.Green, 3);
+                    e.Graphics.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
+                    p.Dispose();
+                }
+                else
+                    e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
             }
         }
 
@@ -498,11 +534,11 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string text, Point location) 
+        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location) 
         {
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
-                                text,
+                                desciption,
                                 location);
             btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
             AddNewElement(btn);

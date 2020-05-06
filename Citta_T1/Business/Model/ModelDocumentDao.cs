@@ -22,7 +22,7 @@ namespace Citta_T1.Business.Model
         
         public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-        string UserInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
+        private string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
             modelDocuments = new List<ModelDocument>();         
@@ -71,7 +71,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.MDCName, dt.FullFilePath, dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.DescriptionName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
             }
@@ -80,7 +80,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.ReName, SEType(op.SubTypeName), op.ID);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
                 return;               
             }
@@ -88,7 +88,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveRsControl rs = (ct as MoveRsControl);
                 rs.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateResultElement(rs, rs.ReName, rs.ID);
+                ModelElement e = ModelElement.CreateResultElement(rs, rs.DescriptionName, rs.ID);
                 this.currentDocument.AddModelElement(e);
                 return;
 
@@ -189,7 +189,7 @@ namespace Citta_T1.Business.Model
         {
            
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(UserInfoPath);
+            xDoc.Load(userInfoPath);
             var node = xDoc.SelectSingleNode("login");
             XmlNodeList bodyNodes = xDoc.GetElementsByTagName("user");
             foreach (XmlNode xn in bodyNodes)
@@ -217,7 +217,7 @@ namespace Citta_T1.Business.Model
                         childElement.InnerText = saveTitle[0];
                         xn.AppendChild(childElement);
                     }
-                    xDoc.Save(UserInfoPath);
+                    xDoc.Save(userInfoPath);
                     return;
                 }
             }
@@ -226,27 +226,27 @@ namespace Citta_T1.Business.Model
         }
         public string[] LoadSaveModelTitle(string userName)
         {
-            string[] modelTitles;
             List<string> modelTitleList = new List<string>();
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(UserInfoPath);
+            xDoc.Load(userInfoPath);
+           
             XmlNodeList userNode = xDoc.GetElementsByTagName("user");
             foreach (XmlNode xn in userNode)
             {
                 if (xn.SelectSingleNode("name") != null && xn.SelectSingleNode("name").InnerText == userName)
                 { 
                     XmlNodeList childNodes = xn.SelectNodes("modeltitle");
-                    if (childNodes.Count > 0)
+                    foreach (XmlNode xn2 in childNodes)
                     {
-                        foreach (XmlNode xn2 in childNodes)
-                            modelTitleList.Add(xn2.InnerText);
-                        modelTitles = modelTitleList.ToArray();
-                        return modelTitles;
-                    }                   
+                        string modelTitle = xn2.InnerText;
+                        if (Directory.Exists(System.IO.Path.Combine(Global.WorkspaceDirectory, userName, modelTitle)))
+                            modelTitleList.Add(modelTitle);
+                    }
+                    if (modelTitleList.Count > 0)
+                        return modelTitleList.Distinct().ToArray();
                 }                   
             }                       
-            modelTitles = LoadAllModelTitle(userName);
-            return modelTitles;
+            return LoadAllModelTitle(userName);
         }
         public string[] LoadAllModelTitle(string userName)
         {
@@ -285,7 +285,7 @@ namespace Citta_T1.Business.Model
             int count = 0;
             foreach (ModelDocument md in this.ModelDocuments)
                 foreach (ModelElement me in md.ModelElements)
-                    if (me.Type == ElementType.DataSource && me.GetPath() == ffp)
+                    if (me.Type == ElementType.DataSource && me.GetFullFilePath() == ffp)
                         count++;
             return count;
         }

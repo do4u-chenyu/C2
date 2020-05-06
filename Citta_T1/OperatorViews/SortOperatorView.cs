@@ -152,9 +152,12 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
-            
 
-            this.opControl.Status = ElementStatus.Ready;
+
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 

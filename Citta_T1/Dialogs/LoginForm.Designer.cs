@@ -1,4 +1,4 @@
-﻿namespace Citta_T1
+﻿namespace Citta_T1.Dialogs
 {
     partial class LoginForm
     {
@@ -58,7 +58,6 @@
             this.userNameComboBox.Size = new System.Drawing.Size(253, 35);
             this.userNameComboBox.TabIndex = 2;
             this.userNameComboBox.Text = "新手上路";
-            this.userNameComboBox.SelectedIndexChanged += new System.EventHandler(this.userNameComboBox_SelectedIndexChanged);
             // 
             // loginCheckBox
             // 

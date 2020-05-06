@@ -38,8 +38,10 @@ namespace Citta_T1.Business.Model
             XmlDocument xDoc = new XmlDocument();
             XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
             xDoc.AppendChild(modelDocumentXml);
-            //放大系数
-           
+            //写入版本号
+            XmlElement versionElement = xDoc.CreateElement("Version");
+            versionElement.InnerText = "V1.0";
+            modelDocumentXml.AppendChild(versionElement);
             // 写坐标原点
             XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
             mapOriginNode.InnerText = this.modelDocument.MapOrigin.ToString();
@@ -91,7 +93,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.DataSource)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetPath();
+                    pathNode.InnerText = me.GetFullFilePath();
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement sepTypeNode = xDoc.CreateElement("separator"); 
@@ -115,7 +117,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.Result)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetPath();
+                    pathNode.InnerText = me.GetFullFilePath();
                     modelElementXml.AppendChild(pathNode);
 
                 }

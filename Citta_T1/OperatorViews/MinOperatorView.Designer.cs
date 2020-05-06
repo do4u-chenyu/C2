@@ -37,9 +37,9 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.DataInfoBox = new System.Windows.Forms.TextBox();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.MinValueBox = new System.Windows.Forms.ComboBox();
-            this.DataInfoBox = new HZH_Controls.Controls.TextBoxEx();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -49,10 +49,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(32, 128);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(48, 192);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 22);
+            this.label3.Size = new System.Drawing.Size(134, 31);
             this.label3.TabIndex = 0;
             this.label3.Text = "输出字段：";
             // 
@@ -60,10 +59,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 64);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(48, 96);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.Size = new System.Drawing.Size(134, 31);
             this.label2.TabIndex = 0;
             this.label2.Text = "取最小值：";
             // 
@@ -71,10 +69,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(48, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 22);
+            this.label1.Size = new System.Drawing.Size(134, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "数据信息：";
             // 
@@ -82,9 +79,8 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(422, 37);
+            this.topPanel.Size = new System.Drawing.Size(628, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -92,35 +88,32 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 213);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 322);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(422, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(628, 96);
             this.bottomPanel.TabIndex = 1;
             // 
-            // CancelButton
+            // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(326, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "CancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            this.cancelButton.Location = new System.Drawing.Point(489, 28);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(94, 40);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // ConfirmButton
+            // confirmButton
             // 
             this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(236, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "ConfirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.Location = new System.Drawing.Point(354, 28);
+            this.confirmButton.Name = "confirmButton";
+            this.confirmButton.Size = new System.Drawing.Size(90, 40);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
@@ -132,76 +125,53 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 176);
+            this.keyPanel.Size = new System.Drawing.Size(174, 266);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
+            this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Controls.Add(this.MinValueBox);
-            this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(306, 176);
+            this.valuePanel.Size = new System.Drawing.Size(454, 266);
             this.valuePanel.TabIndex = 3;
+            // 
+            // DataInfoBox
+            // 
+            this.DataInfoBox.Location = new System.Drawing.Point(0, 4);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.Size = new System.Drawing.Size(202, 28);
+            this.DataInfoBox.TabIndex = 3;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OutList
             // 
             this.OutList.DataSource = null;
-            this.OutList.Location = new System.Drawing.Point(0, 128);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OutList.Location = new System.Drawing.Point(0, 192);
+            this.OutList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(135, 20);
+            this.OutList.Size = new System.Drawing.Size(202, 27);
             this.OutList.TabIndex = 2;
             // 
             // MinValueBox
             // 
             this.MinValueBox.FormattingEnabled = true;
-            this.MinValueBox.Location = new System.Drawing.Point(0, 64);
-            this.MinValueBox.Margin = new System.Windows.Forms.Padding(2);
+            this.MinValueBox.Location = new System.Drawing.Point(0, 96);
             this.MinValueBox.Name = "MinValueBox";
-            this.MinValueBox.Size = new System.Drawing.Size(136, 20);
+            this.MinValueBox.Size = new System.Drawing.Size(202, 26);
             this.MinValueBox.TabIndex = 1;
-            // 
-            // DataInfoBox
-            // 
-            this.DataInfoBox.DecLength = 2;
-            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.InputType = HZH_Controls.TextInputType.NotControl;
-            this.DataInfoBox.Location = new System.Drawing.Point(0, 0);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfoBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.DataInfoBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.DataInfoBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.OldText = null;
-            this.DataInfoBox.PromptColor = System.Drawing.Color.Gray;
-            this.DataInfoBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.DataInfoBox.PromptText = "";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.RegexPattern = "";
-            this.DataInfoBox.Size = new System.Drawing.Size(136, 25);
-            this.DataInfoBox.TabIndex = 0;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MinOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 277);
+            this.ClientSize = new System.Drawing.Size(628, 418);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -209,7 +179,6 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MinOperatorView";
             this.ShowIcon = false;
             this.Text = "取最小值算子设置";
@@ -234,6 +203,6 @@
         private System.Windows.Forms.Label label2;
         private UserControlDLL.ComCheckBoxList OutList;
         private System.Windows.Forms.ComboBox MinValueBox;
-        private HZH_Controls.Controls.TextBoxEx DataInfoBox;
+        private System.Windows.Forms.TextBox DataInfoBox;
     }
 }

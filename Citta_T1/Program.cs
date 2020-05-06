@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Windows.Forms;
 
 using Citta_T1.Utils;
+using Citta_T1.Dialogs;
 
 namespace Citta_T1
 {

@@ -81,6 +81,38 @@ namespace Citta_T1.Utils
             catch { }; // 非核心功能, Double异常就不用管了
         }
 
+        public static void DeleteDirectory(string directoryPath)
+        {
+            try
+            {
+                System.IO.Directory.Delete(directoryPath, true);
+            } catch
+            { 
+                // 如果无法回滚的话,这个地方只能直接忽略了
+            }
+        }
+
+        public static bool CreateDirectory(string dicectoryPath)
+        {
+            bool ret = true;
+            try 
+            {
+                Directory.CreateDirectory(dicectoryPath);
+            }
+            catch { ret = false; }
+            return ret;
+        }
+
+        public static bool FileMove(string oldFFP, string newFFP)
+        {
+            bool ret = true;
+            try
+            {
+                File.Move(oldFFP, newFFP);
+            }
+            catch { ret = false; }
+            return ret;
+        }
 
     }
 }

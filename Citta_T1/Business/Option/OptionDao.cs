@@ -35,8 +35,7 @@ namespace Citta_T1.Business.Option
                 {
                     MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
                     moveOpControl.EnableOpenOption = true;
-                    //所有双目算子配置逻辑没写完，现在用会有问题
-                   // DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
+                    DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
                     break;
                 }
             }
@@ -46,7 +45,7 @@ namespace Citta_T1.Business.Option
             if (oldColumnName == null) return;
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
-            string dataSourcePath = startElement.GetPath();
+            string dataSourcePath = startElement.GetFullFilePath();
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = startElement.ID;
             //获取当前连接的数据源的表头字段
@@ -100,11 +99,11 @@ namespace Citta_T1.Business.Option
                     modelElement1 = Global.GetCurrentDocument().SearchElementByID(me.StartID);
             }
             
-            string dataSourcePath0 = modelElement0.GetPath();
+            string dataSourcePath0 = modelElement0.GetFullFilePath();
             DSUtil.Encoding encoding0 = modelElement0.Encoding;
             int ID0 = modelElement0.ID;
 
-            string dataSourcePath1 = modelElement1.GetPath();
+            string dataSourcePath1 = modelElement1.GetFullFilePath();
             DSUtil.Encoding encoding1 = modelElement1.Encoding;
             int ID1 = modelElement1.ID;
 
@@ -170,8 +169,10 @@ namespace Citta_T1.Business.Option
                 if (mr.StartID == moveOpControl.ID) return;
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
-            string tmpName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, tmpName, new Point(x, y));
+            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
+                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
+                new Point(x, y));
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
@@ -195,7 +196,7 @@ namespace Citta_T1.Business.Option
 
             moveOpControl.OutPinInit("lineExit");
             mrc.rectInAdd(1);
-            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpName, columnName);
+            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpBcpFileName, columnName);
             mrc.FullFilePath = path;
         }
 
@@ -239,7 +240,7 @@ namespace Citta_T1.Business.Option
         }
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
         {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            //新数据源与旧数据源表头不匹配，对应配置内容是否清空进行判断
 
             if (opControl.Option.GetOption("columnname") == "") return true;
             string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
@@ -273,12 +274,45 @@ namespace Citta_T1.Business.Option
             catch (Exception ex) { log.Error(ex.Message); }
             return true;
         }
+        public bool IsDoubleDataSourceChange(MoveOpControl opControl, string[] columnName0, string[] columnName1, string field, List<int> fieldList = null)
+        {
+            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
+            if (opControl.Option.GetOption("columnname0") == "" || opControl.Option.GetOption("columnname1") == "") return true;
+            string[] oldColumnList0 = opControl.Option.GetOption("columnname0").Split('\t');
+            string[] oldColumnList1 = opControl.Option.GetOption("columnname1").Split('\t');
 
+            try
+            { 
+                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
+                {
+                    bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
+                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName0[fieldList[1]];
+                    if (IsEqual0 || IsEqual1)
+                    {
+                        opControl.Option.OptionDict.Remove(field);
+                        return false;
+                    }
+                }
+                else if (field.Contains("outfield"))
+                {
+
+                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
+                    {
+                        opControl.Option.OptionDict.Remove("outfield");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex) { log.Error(ex.Message); };
+            return true;
+        }
         //修改配置输出
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
             List<string> columns = new List<string>();
 
             //新输出字段中不包含旧字段
@@ -314,7 +348,7 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentcolumns, int ID)
         {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetPath();
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
@@ -340,7 +374,7 @@ namespace Citta_T1.Business.Option
             foreach (KeyValuePair<int,int> kvp in startControls)
             {
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
-                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetPath();
+                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
             }
             return dataInfo;

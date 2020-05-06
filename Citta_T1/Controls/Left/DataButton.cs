@@ -1,7 +1,10 @@
-﻿using Citta_T1.Utils;
+﻿
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
+
+using Citta_T1.Business.Model;
+using Citta_T1.Utils;
+
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
@@ -10,26 +13,19 @@ namespace Citta_T1.Controls.Left
         private DSUtil.ExtType extType;
         private char separator;
         private int count = 0;
+        private string oldTextString;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
         public int Count
-        { get => this.count;
-            set
-            {
-                this.count = value;
-            }
-        }
+        { get => this.count; set => this.count = value; }
+
 
         private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
-        public DataButton()
-        {
-            InitializeComponent();
-        }
         public DataButton(string ffp, string dataSourceName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             InitializeComponent();
@@ -38,6 +34,7 @@ namespace Citta_T1.Controls.Left
             this.separator = separator;
             this.extType = extType;
             this.encoding = encoding;
+            this.oldTextString = txtButton.Text;
         }
 
         private void DataButton_Load(object sender, EventArgs e)
@@ -67,10 +64,13 @@ namespace Citta_T1.Controls.Left
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 1. DataSource中重命名
-            // 2. Program中重命名
-            // TODO [DK] 3. 画布中已存在的该如何处理？ 
-            ((DataButton)(this.Parent.Controls.Find(this.Name, false)[0])).txtButton.Text = "重命名";
+            this.textBox.ReadOnly = false;
+            this.oldTextString = DataSourceName;
+            this.textBox.Text = DataSourceName;
+            this.txtButton.Visible = false;
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
         }
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,6 +122,61 @@ namespace Citta_T1.Controls.Left
                                         Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
                                         this.Separator == '\t' ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
+        }
+
+        private void TxtButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            if (e.Clicks == 1) // 单击拖拽
+            {
+                // 使用`DataObject`对象来传参数，更加自由
+                DataObject dragDropData = new DataObject();
+                dragDropData.SetData("Type", ElementType.DataSource);
+                dragDropData.SetData("Path", FullFilePath);    // 数据源文件全路径
+                dragDropData.SetData("Text", DataSourceName);  // 数据源名称
+                dragDropData.SetData("Separator", Separator);  // 分隔符
+                dragDropData.SetData("ExtType", ExtType);      // 扩展名,文件类型
+                // 需要记录他的编码格式
+                dragDropData.SetData("Encoding", Encoding);
+                this.txtButton.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+            }
+            else if (e.Clicks == 2)
+            {   // 双击改名 
+                RenameToolStripMenuItem_Click(sender, e);
+            }
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 按下回车键
+            if (e.KeyChar == 13)
+            {
+                FinishTextChange();
+            }
+        }
+
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            FinishTextChange();
+        }
+
+        private void FinishTextChange()
+        {
+            if (this.textBox.Text.Length == 0)
+                return;
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.txtButton.Text = this.textBox.Text;
+            this.txtButton.Visible = true;  
+            if (this.oldTextString != this.textBox.Text)
+            {
+                this.oldTextString = this.textBox.Text;
+            }
+            // 保存
+            Global.GetDataSourceControl().SaveDataSourceInfo();
+            this.helpToolTip.SetToolTip(this.txtButton, DataSourceName);
         }
     }
 }

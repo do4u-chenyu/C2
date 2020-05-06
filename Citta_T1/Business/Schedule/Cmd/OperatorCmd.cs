@@ -1,8 +1,10 @@
-﻿using Citta_T1.Business.Option;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,17 +20,48 @@ namespace Citta_T1.Business.Schedule.Cmd
         public string outputFilePath;
         public string operatorId;
         public string sortConfig;
+        public string outputFileTitle;
+        public List<string> separators;
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
-            triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetPath()));
+            triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetFullFilePath()));
             this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
-            this.outputFilePath = triple.ResultElement.GetPath();
+            this.outputFileTitle = this.option.GetOption("columnname");
+            this.outputFilePath = triple.ResultElement.GetFullFilePath();
             this.operatorId = triple.OperateElement.ID.ToString();
             this.sortConfig = " -S 200M -T " + Global.WorkspaceDirectory;
+            InitSeparator();
         }
 
+        public void InitSeparator()
+        {
+            this.separators = new List<string>();
+            foreach (ModelElement me in triple.DataElements)
+            {
+                if (me.Type == ElementType.DataSource)
+                {
+                    separators.Add((me.GetControl as MoveDtControl).Separator.ToString());
+                }
+                else
+                {
+                    separators.Add("\t");
+                }
+            }
+        }
 
+        public string TransOFSToCmd(string separator)
+        {
+            if(separator == "|")
+            {
+                return "\t";
+            }
+            else
+            {
+                return "|";
+            }
+            
+        }
 
         public string TransChoiceToCmd(string choice)
         {
@@ -90,6 +123,9 @@ namespace Citta_T1.Business.Schedule.Cmd
                 return '"' + condition + '"';
             }
         }
+
+
+
 
         public string TransInputfileToCmd(string inputfile)
         {

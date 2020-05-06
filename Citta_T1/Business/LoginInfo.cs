@@ -15,15 +15,12 @@ namespace Citta_T1.Business
         private string path;
         private string UserInfoPath;
         public LoginInfo()
-        {
-           
+        { 
             this.path = Global.WorkspaceDirectory;
             this.UserInfoPath = Path.Combine(path, "UserInformation.xml");
         }
         public void CreatNewXml()
         {
-
-            //Utils.FileUtil.AddPathPower(Directory.GetCurrentDirectory(), "FullControl");
             Directory.CreateDirectory(path);
             // 添加权限
             Utils.FileUtil.AddPathPower(path, "FullControl");
@@ -33,6 +30,11 @@ namespace Citta_T1.Business
                 XmlDocument xDoc = new XmlDocument();
                 XmlElement rootElement = xDoc.CreateElement("login");
                 xDoc.AppendChild(rootElement);
+                
+
+                XmlElement versionElement = xDoc.CreateElement("Version");
+                versionElement.InnerText = "V1.0";
+                rootElement.AppendChild(versionElement);
                 xDoc.Save(UserInfoPath);
             }
            

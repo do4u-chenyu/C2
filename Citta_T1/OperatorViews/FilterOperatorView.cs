@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetPath();
+                    this.dataPath = me.GetFullFilePath();
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
                     break;
@@ -151,6 +151,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString() + "," + this.textBoxEx1.Text;
@@ -168,7 +169,10 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 
@@ -260,25 +264,7 @@ namespace Citta_T1.OperatorViews
             "不等于 ≠"});
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
-            HZH_Controls.Controls.TextBoxEx textBox = new HZH_Controls.Controls.TextBoxEx();
-            textBox.DecLength = 2;
-            textBox.InputType = HZH_Controls.TextInputType.NotControl;
-            textBox.MaxValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            textBox.MinValue = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            textBox.MyRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
-            textBox.OldText = null;
-            textBox.PromptColor = System.Drawing.Color.Gray;
-            textBox.PromptFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            textBox.PromptText = "";
-            textBox.RegexPattern = "";
+            TextBox textBox = new TextBox();
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
 
@@ -289,7 +275,7 @@ namespace Citta_T1.OperatorViews
             addButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             addButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             addButton1.BackColor = System.Drawing.SystemColors.Control;
-            addButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("addLine.Image")));
+            addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
             addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             addButton1.Click += new System.EventHandler(this.add_Click);
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -305,7 +291,7 @@ namespace Citta_T1.OperatorViews
             delButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             delButton1.BackColor = System.Drawing.SystemColors.Control;
             delButton1.UseVisualStyleBackColor = true;
-            delButton1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("delLine.Image")));
+            delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             delButton1.Click += new System.EventHandler(this.del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;

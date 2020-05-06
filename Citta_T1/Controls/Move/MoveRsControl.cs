@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Citta_T1.Business.Schedule;
+using System.IO;
 
 namespace Citta_T1.Controls.Move
 {
@@ -32,7 +33,7 @@ namespace Citta_T1.Controls.Move
         private DSUtil.Encoding encoding;
 
         // 一些倍率
-        public string ReName { get => this.textBox.Text; set => this.textBox.Text = value; }
+        public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         public string SubTypeName { get => typeName; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
@@ -46,7 +47,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -98,14 +98,14 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
             InitializeOpPinPicture();
         }
-        public MoveRsControl(int sizeL, string text, Point loc)
+        public MoveRsControl(int sizeL, string desciption, Point loc)
         {
 
             InitializeComponent();
-            this.textBox.Text = text;
-            this.typeName = text;
+            DescriptionName = desciption;
+            this.typeName = "运算结果";
             this.Location = loc;
-            SetOpControlName(this.textBox.Text);
+            SetOpControlName(DescriptionName);
             ChangeSize(sizeL);
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper(this);
@@ -117,7 +117,7 @@ namespace Citta_T1.Controls.Move
         {
             rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            SetOpControlName(this.textBox.Text);
+            SetOpControlName(DescriptionName);
 
 
         }
@@ -677,6 +677,28 @@ namespace Citta_T1.Controls.Move
         private void CopyFilePathToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileUtil.TryClipboardSetText(FullFilePath);
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+       
+            this.saveFileDialog.FileName = DescriptionName + ".bcp";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                string srcFilePath = this.FullFilePath;
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+
+            }
         }
     }
 }

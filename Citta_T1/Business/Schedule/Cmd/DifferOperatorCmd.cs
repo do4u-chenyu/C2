@@ -52,6 +52,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             differList.Add(differTmpList);
 
+            //重写表头（覆盖）
+            //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
+
 
             foreach (List<string[]> tmpList in differList)
             {
@@ -63,11 +66,11 @@ namespace Citta_T1.Business.Schedule.Cmd
                     inputFiled2 = inputFiled2 + ",$" + TransInputLine(tmpList[tt][1]);
                 }
                 //每个循环处理一关系
-                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath1));
-                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath2), inputFiled2, this.sortConfig, filterBatPath2));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{4}\" -v OFS=\"{5}\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath1, this.separators[0], TransOFSToCmd(this.separators[0])));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{4}\" -v OFS=\"{5}\" '{{print {1}}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath2), inputFiled2, this.sortConfig, filterBatPath2, this.separators[1], TransOFSToCmd(this.separators[1])));
                 cmds.Add(string.Format("sbin\\comm.exe -23 {0} {1} > {2}", filterBatPath1, filterBatPath2, filterBatPath3));
-                cmds.Add(string.Format("{0} | sbin\\awk.exe -F'\\t' -v OFS=\"|\"  '{{print {1}\"\\t\"$0}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath4));
-                cmds.Add(string.Format("sbin\\join.exe {0} {1} | sbin\\awk.exe -F' ' -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath));
+                cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{4}\" -v OFS=\"{5}\"  '{{print {1}\"{4}\"$0}}' | sbin\\sort.exe {2} -u > {3}", TransInputfileToCmd(inputFilePath1), inputFiled1, this.sortConfig, filterBatPath4, this.separators[0], TransOFSToCmd(this.separators[0])));
+                cmds.Add(string.Format("sbin\\join.exe -t\"{4}\" {0} {1} | sbin\\awk.exe -F\"{4}\" -v OFS='\\t' '{{print {2}}}' >> {3}", filterBatPath3, filterBatPath4, outfieldLine, this.outputFilePath, this.separators[0]));
             }
 
             cmds.Add(string.Format("sbin\\rm.exe -f {0} {1} {2} {3}", filterBatPath1, filterBatPath2, filterBatPath3, filterBatPath4));

@@ -56,7 +56,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetPath();
+                    this.dataPath = me.GetFullFilePath();
                     //设置数据信息选项
                     this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     encoding = me.Encoding.ToString();
@@ -142,7 +142,10 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.Option.SetOption("avgfield", this.AvgComBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
-            this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
 

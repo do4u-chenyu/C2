@@ -137,6 +137,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             string outField = string.Join(",", checkIndexs);
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString();
@@ -153,7 +154,10 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
         #endregion
@@ -190,7 +194,6 @@ namespace Citta_T1.OperatorViews
             List<string> types = new List<string>();
             types.Add(this.comboBox1.GetType().Name);
             types.Add(this.OutList.GetType().Name);
-            types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")

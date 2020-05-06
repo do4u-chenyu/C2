@@ -43,16 +43,17 @@ namespace Citta_T1.Controls.Move
         private Dictionary<string, List<string>> doubleDataSourceColumns; 
 
         // 一些倍率
-        public string ReName { get => textBox.Text; }
+        public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
+      
         public ElementStatus Status { 
             get => this.status;
             set
-            {                
+            {
+                OptionDirty(value);
                 this.status = value;
-                OptionDirty();
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
@@ -77,7 +78,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为起点的所有点
@@ -129,6 +129,7 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+           
         }
         public void ChangeSize(int sizeL)
         {
@@ -236,7 +237,7 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
-                bool isUpdateLine = false;
+                bool isNeedMoveLine = false;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
@@ -244,22 +245,19 @@ namespace Citta_T1.Controls.Move
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     if (mr.EndID == this.id)
                     {
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
-                if (isUpdateLine)
+                if (isNeedMoveLine)
                     this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
-
-
-
         }
         public Point WorldBoundControl(Point Pm)
         {
@@ -293,8 +291,6 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_MouseDown(object sender, MouseEventArgs e)
         {
-
-            
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
 
@@ -569,11 +565,14 @@ namespace Citta_T1.Controls.Move
                 }
             }
             //删除自身
-            Global.GetCanvasPanel().DeleteElement(this);
 
             Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetCanvasPanel().DeleteElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
+            CanvasPanel canvas = Global.GetCanvasPanel();
+            canvas.EndC = null;
+
 
 
 
@@ -589,31 +588,36 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
-            foreach (ModelElement mrc in Global.GetCurrentDocument().ModelElements)
+            List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentDocument().ModelElements);
+            foreach (ModelElement mrc in modelElements)
             {
                 if (mrc.ID == endID)
                 {
+                   
+                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl); 
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }
             }
             
         }
-        private void OptionDirty()
+        private void OptionDirty(ElementStatus status)
         {
-            if (this.status == ElementStatus.Null)
+            if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
+                Global.GetCurrentDocument().AllStateChange(this.id);
+
+            if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set; 
-            else if (this.status == ElementStatus.Done)
+            else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
-            else if (this.status == ElementStatus.Ready)
+            else if (status == ElementStatus.Ready)
                 this.statusBox.Image = Properties.Resources.setSuccess;
         }
         #endregion
 
         #region textBox
-        public void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -625,7 +629,7 @@ namespace Citta_T1.Controls.Move
                 
         }
 
-        public void textBox1_Leave(object sender, EventArgs e)
+        public void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -752,7 +756,7 @@ namespace Citta_T1.Controls.Move
                 this.rectOut = SetRectBySize(factor, this.rectOut);
                 this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate(); // TODO 干嘛用的？，为什么下面不写一个重绘？
+                this.Invalidate(); // TODO [Dk] 干嘛用的？，为什么下面不写一个重绘？
             }
             else
             {

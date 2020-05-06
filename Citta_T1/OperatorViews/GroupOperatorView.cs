@@ -105,16 +105,24 @@ namespace Citta_T1.OperatorViews
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                List<int> fieldColumn = new List<int>(Nums[0]);
+                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
             }
             if (count > 1)
                 InitNewFactorControl(count - 1);
-            else return;
+            else
+            {
+                this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+                return;
+            }
             for (int i = 2; i < (count + 1); i++)
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
+                List<int> fieldColumn = new List<int>(Nums[0]);
+                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(), fieldColumn)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
@@ -125,6 +133,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
             string factor1 = this.comboBox1.SelectedIndex.ToString();
             this.groupColumn.Add(this.comboBox1.SelectedIndex);
             this.opControl.Option.SetOption("factor1", factor1);
@@ -150,7 +159,10 @@ namespace Citta_T1.OperatorViews
                     this.outList.Add(index);
             }
             this.opControl.Option.SetOption("outfield", string.Join(",", this.outList));
-            this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+                return;
+            else
+                this.opControl.Status = ElementStatus.Ready;
 
         }
         #endregion
@@ -174,11 +186,11 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-                
+
+
             //输出变化，重写BCP文件
-            if (this.oldOptionDict != "")
+            if (hasResutl != null && !this.oldOutName.SequenceEqual(this.selectColumn))
                 Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -191,7 +203,6 @@ namespace Citta_T1.OperatorViews
             bool empty = false;
             List<string> types = new List<string>();
             types.Add(this.comboBox1.GetType().Name);
-            types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")

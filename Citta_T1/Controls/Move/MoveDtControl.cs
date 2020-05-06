@@ -20,7 +20,7 @@ namespace Citta_T1.Controls.Move
     {
         private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
-        public string MDCName { get => this.textBox1.Text; }
+        public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         private string oldTextString;
         private Point oldcontrolPosition;
         private DSUtil.Encoding encoding;
@@ -54,7 +54,6 @@ namespace Citta_T1.Controls.Move
         //public event DeleteOperatorEventHandler DeleteOperatorEvent;
 
         public bool isClicked = false;
-        Bezier line;
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -64,7 +63,6 @@ namespace Citta_T1.Controls.Move
         float factor = 1.3F;
         // 缩放等级
         public int sizeLevel = 0;
-        private string sizeL;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         // 绘制贝塞尔曲线的起点
@@ -91,7 +89,7 @@ namespace Citta_T1.Controls.Move
             )
         {
             InitializeComponent();
-            this.textBox1.Text = name;
+            this.textBox.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
             this.extType = extType;
@@ -123,15 +121,15 @@ namespace Citta_T1.Controls.Move
 
         private void FinishTextChange()
         {
-            if (this.textBox1.Text.Length == 0)
+            if (this.textBox.Text.Length == 0)
                 return;
-            this.textBox1.ReadOnly = true;
-            SetOpControlName(this.textBox1.Text);
-            this.textBox1.Visible = false;
+            this.textBox.ReadOnly = true;
+            SetOpControlName(this.textBox.Text);
+            this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox1.Text)
+            if (this.oldTextString != this.textBox.Text)
             {
-                this.oldTextString = this.textBox1.Text;
+                this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
             Global.GetCurrentDocument().UpdateAllLines();
@@ -172,7 +170,7 @@ namespace Citta_T1.Controls.Move
         public void InitializeOpPinPicture()
         {
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            SetOpControlName(this.textBox1.Text);
+            SetOpControlName(this.textBox.Text);
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
@@ -239,7 +237,7 @@ namespace Citta_T1.Controls.Move
                 return;
 
             // 开始划线
-            if (cmd == ECommandType.PinDraw)
+            else if (cmd == ECommandType.PinDraw)
             {
                 startX = this.Location.X + e.X;
                 startY = this.Location.Y + e.Y;
@@ -248,45 +246,32 @@ namespace Citta_T1.Controls.Move
                 
                 return;
             }
-
-
-            #region 控件移动部分
-            int left = this.Left + e.X - mouseOffset.X;
-            int top = this.Top + e.Y - mouseOffset.Y;
-            this.Location = WorldBoundControl(new Point(left, top));
-
-            #endregion
-
-            /*
-                * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
-                * 2. 重绘静态图
-                * 3. 用静态图盖住变化区域
-                * 4. 更新坐标
-                * 5. 绘线
-                * 6. 更新canvas.lines
-                */
-            //if (this.startLineIndexs.Count == 0)
-            //{
-            //    return;
-            //}
-
-            /*
-             * 1. 遍历所有关系
-             * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
-             * 3. 重绘线
-             */
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            else
             {
-                if (mr.StartID == this.id)
+                #region 控件移动部分
+                int left = this.Left + e.X - mouseOffset.X;
+                int top = this.Top + e.Y - mouseOffset.Y;
+                this.Location = WorldBoundControl(new Point(left, top));
+
+                #endregion
+                /*
+                 * 1. 遍历所有关系
+                 * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
+                 * 3. 重绘线
+                 */
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
-                    mr.StartP = this.GetStartPinLoc(0);
-                    mr.UpdatePoints();
-                    isNeedMoveLine = true;
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        mr.UpdatePoints();
+                        isNeedMoveLine = true;
+                    }
                 }
+                if (isNeedMoveLine)
+                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
-            if (isNeedMoveLine)
-                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         public Point WorldBoundControl(Point Pm)
@@ -441,7 +426,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox1.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -458,12 +443,12 @@ namespace Citta_T1.Controls.Move
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-            this.textBox1.ReadOnly = false;
-            this.oldTextString = this.textBox1.Text;
+            this.textBox.ReadOnly = false;
+            this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
-            this.textBox1.Visible = true;
-            this.textBox1.Focus();//获取焦点
-            this.textBox1.Select(this.textBox1.TextLength, 0);
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
             ModelDocumentDirtyEvent?.Invoke();
         }
         #endregion

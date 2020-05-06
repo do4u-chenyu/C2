@@ -7,23 +7,20 @@ using Citta_T1.Utils;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
-using System.Threading;
 using Citta_T1.Business.Option;
 
 namespace  Citta_T1
 { 
     public partial class MainForm : Form
     {
-        public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         
         private string userName;
-        public Citta_T1.Dialogs.FormInputData formInputData;
+        private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
@@ -32,10 +29,10 @@ namespace  Citta_T1
         public string UserName { get => this.userName; set => this.userName = value; }
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         
-        delegate void AsynUpdateLog(string log);
+        delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
 
-        LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
+        private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -94,12 +91,9 @@ namespace  Citta_T1
                 return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            mtc.SetDirtyPictureBox();
-           
-           
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
         }
-        internal void DeleteCurrentDocument()
+        public void DeleteCurrentDocument()
         {
             
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
@@ -124,11 +118,7 @@ namespace  Citta_T1
             if (!this.myModelControl.ContainModel(modelTitle))
                 this.myModelControl.AddModel(modelTitle);
         }
-        internal List<ModelDocument>  DocumentsList()
-        {            
-            return modelDocumentDao.ModelDocuments;
 
-        } 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
             this.modelDocumentDao.SwitchDocument(modelTitle);
@@ -190,7 +180,7 @@ namespace  Citta_T1
             {
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
-                    this.myModelControl.EnableOpenDocument(modelTitle);
+                    this.myModelControl.EnableClosedDocumentMenu(modelTitle);
             }   
             // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
@@ -292,11 +282,6 @@ namespace  Citta_T1
 
         }
 
-        //private void NewModelButton_Click(object sender, EventArgs e)
-        //{
-        //    this.anewModel.StartPosition = FormStartPosition.CenterParent;
-        //    this.anewModel.ShowDialog();
-        //}
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
@@ -371,50 +356,6 @@ namespace  Citta_T1
         }
 
 
-        private void ConnectOpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InterOpButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void UnionButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DiffButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FilterButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GroupButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HistogramButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormatButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MoreButton_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridView1_Load(object sender, EventArgs e)
         {
@@ -433,8 +374,6 @@ namespace  Citta_T1
             this.formInputData.ReSetParams();
         }
 
-
-       // NewOperatorEvent?.Invoke(btn);
           
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -448,7 +387,7 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
@@ -554,18 +493,18 @@ namespace  Citta_T1
         }
 
         //更新log
-        private void UpdataLogStatus(string log)
+        private void UpdataLogStatus(string logContent)
         {
             if (InvokeRequired)
             {
                 this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.log.Info(tlog);
-                }), log);
+                    log.Info(tlog);
+                }), logContent);
             }
             else
             {
-                this.log.Info(log);
+                log.Info(logContent);
             }
         }
 
@@ -706,11 +645,6 @@ namespace  Citta_T1
             }
         }
 
-        public void RenameDataButton(string index, string dstName)
-        {
-            this.dataSourceControl.RenameDataButton(index, dstName);
-        }
-
         private void HelpPictureBox_Click(object sender, EventArgs e)
         {
             string helpfile = Application.StartupPath; 
@@ -726,11 +660,9 @@ namespace  Citta_T1
                     return;
 
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
-            SaveDocument();
-            mtc.ClearDirtyPictureBox();            
-
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
+            SaveDocument();         
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -44,8 +44,8 @@
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtButton = new System.Windows.Forms.Button();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -196,18 +196,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.textBox1.Location = new System.Drawing.Point(27, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(111, 23);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "连接算子";
-            this.textBox1.Visible = false;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.textBox.Location = new System.Drawing.Point(27, 0);
+            this.textBox.Name = "textBox1";
+            this.textBox.ReadOnly = true;
+            this.textBox.Size = new System.Drawing.Size(111, 23);
+            this.textBox.TabIndex = 5;
+            this.textBox.Text = "连接算子";
+            this.textBox.Visible = false;
+            this.textBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // txtButton
             // 
@@ -235,7 +235,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.txtButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
             this.Controls.Add(this.leftPicture);
             this.DoubleBuffered = true;
@@ -315,9 +315,9 @@
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;
-        public System.Windows.Forms.ToolTip nameToolTip;
-        public System.Windows.Forms.TextBox textBox1;
-        public System.Windows.Forms.Button txtButton;
+        private System.Windows.Forms.ToolTip nameToolTip;
+        private System.Windows.Forms.TextBox textBox;
+        private Citta_T1.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ExplorerToolStripMenuItem;
