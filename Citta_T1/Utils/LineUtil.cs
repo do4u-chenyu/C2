@@ -14,7 +14,7 @@ namespace Citta_T1.Utils
     {
         public static float THRESHOLD = 5;
         public static float DISTNOTONLINE = -1;
-        public static int CUTPOINTNUM = 5;
+        public static int CUTPOINTNUM = 10;
         public enum LineStatus
         {
             Null,
@@ -208,7 +208,7 @@ namespace Citta_T1.Utils
                 return distNotOnLine;
             // 将线切割成 cutPointNum - 1 段，其实只要存cutPointNum个点就行了
             // 可能和若干个线都靠得很近
-            for (int i = 0; i < cutPointNum - 1; i++)
+            for (int i = 0; i < cutPointFs.Length - 1; i++)
             {
                 lineStartP = cutPointFs[i];
                 lineEndP = cutPointFs[i + 1];
@@ -246,10 +246,21 @@ namespace Citta_T1.Utils
         private PointF[] GetPoints()
         {
             PointF[] pointList = new PointF[] { new PointF(this.StartP.X, this.StartP.Y), a, b, new PointF(this.EndP.X, this.EndP.Y) };
-            return this.draw_bezier_curves(pointList, pointList.Length, 0.001F);
+            return this.draw_bezier_curves(pointList, pointList.Length, 0.1F);
         }
         private PointF[] GetCutPointFs()
         {
+            // TODO [DK] 为了避免划线的时候误触线，可以缩小线的判断点范围
+            //PointF[] pts = new PointF[cutPointNum - 2];
+            //int index;
+            //for (int i = 1; i < cutPointNum - 1; i++)
+            //{
+            //    index = (int)Math.Floor((double)(i * 1.0 / (cutPointNum - 1) * this.points.Length));
+            //    if (index == this.points.Length)
+            //        index -= 1;
+            //    pts[i - 1] = points[index];
+            //}
+            //return pts;
             PointF[] pts = new PointF[cutPointNum];
             int index;
             for (int i = 0; i < cutPointNum; i++)
@@ -259,6 +270,9 @@ namespace Citta_T1.Utils
                     index -= 1;
                 pts[i] = points[index];
             }
+            // 第一个点和最后一个点向中间靠拢，解决点Pin的时候误触的问题
+            pts[0].X += 10;
+            pts[cutPointNum - 1].X -= 10; 
             return pts;
         }
         /// <summary>
