@@ -264,6 +264,19 @@
     <Compile Include="Controls\Flow\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.Designer.cs">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.Designer.cs">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -454,6 +467,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\PythonOP\PythonOperatorView.resx">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
