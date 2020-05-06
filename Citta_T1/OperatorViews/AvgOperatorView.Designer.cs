@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
@@ -36,8 +37,9 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.AvgComBox = new System.Windows.Forms.ComboBox();
             this.DataInfo = new System.Windows.Forms.TextBox();
+            this.AvgComBox = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -68,7 +70,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(624, 56);
+            this.topPanel.Size = new System.Drawing.Size(620, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -76,9 +78,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 231);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 227);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(624, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(620, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -114,7 +116,7 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 175);
+            this.keyPanel.Size = new System.Drawing.Size(174, 171);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -124,8 +126,19 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(450, 175);
+            this.valuePanel.Size = new System.Drawing.Size(446, 171);
             this.valuePanel.TabIndex = 3;
+            // 
+            // DataInfo
+            // 
+            this.DataInfo.Location = new System.Drawing.Point(0, 0);
+            this.DataInfo.Name = "DataInfo";
+            this.DataInfo.ReadOnly = true;
+            this.DataInfo.Size = new System.Drawing.Size(202, 28);
+            this.DataInfo.TabIndex = 2;
+            this.DataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
+            this.DataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
             // 
             // AvgComBox
             // 
@@ -135,20 +148,11 @@
             this.AvgComBox.Size = new System.Drawing.Size(202, 26);
             this.AvgComBox.TabIndex = 1;
             // 
-            // DataInfo
-            // 
-            this.DataInfo.Location = new System.Drawing.Point(0, 0);
-            this.DataInfo.Name = "DataInfo";
-            this.DataInfo.Size = new System.Drawing.Size(202, 28);
-            this.DataInfo.TabIndex = 2;
-            this.DataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfo.ReadOnly = true;
-            // 
             // AvgOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 327);
+            this.ClientSize = new System.Drawing.Size(620, 323);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -179,5 +183,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox AvgComBox;
         private System.Windows.Forms.TextBox DataInfo;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
