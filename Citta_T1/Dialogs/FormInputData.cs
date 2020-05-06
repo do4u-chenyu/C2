@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
@@ -23,11 +24,14 @@ namespace Citta_T1.Dialogs
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+        private string invalidChars = "!<";
+        private string invalidCharsPattern;
 
         public FormInputData()
         {
             InitializeComponent();
             this.dataGridView1.DoubleBuffered(true);
+            this.InitInvalidCharPattern();
         }
 
 
@@ -76,7 +80,6 @@ namespace Citta_T1.Dialogs
 
         }
 
-
         // 添加按钮
         public event delegateInputData InputDataEvent;
         private void AddButton_Click(object sender, EventArgs e)
@@ -95,6 +98,11 @@ namespace Citta_T1.Dialogs
                 String dsName = Global.GetDataSourceControl().DataSourceDictI2B[bcpFullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName);
             }
+            // 非法字符不得成为文件名
+            else if (IsContainsInvalidChars(this.textBox1.Text))
+            {
+                MessageBox.Show("文件名中不得出现" + invalidChars + "等非法字符");
+            }
             else
             {
                 if (bcpFullFilePath.EndsWith(".xls") || bcpFullFilePath.EndsWith(".xlsx"))
@@ -110,7 +118,23 @@ namespace Citta_T1.Dialogs
             this.extType = DSUtil.ExtType.Unknow;
             this.encoding = DSUtil.Encoding.UTF8;
         }
-
+        private void InitInvalidCharPattern()
+        {
+            string[] s = new string[this.invalidChars.Length];
+            for(int i = 0; i < this.invalidChars.Length; i++)
+            {
+                s[i] = this.invalidChars[i].ToString();
+            }
+            this.invalidCharsPattern = string.Join("|", s);
+        }
+        private bool IsContainsInvalidChars(string text)
+        {
+            int matchNum = Regex.Matches(text, this.invalidCharsPattern).Count;
+            if (matchNum > 0)
+                return true;
+            else
+                return false;
+        }
         private void CancelButton_Click(object sender, EventArgs e)
         {
             // 关闭按钮

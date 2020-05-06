@@ -250,17 +250,6 @@ namespace Citta_T1.Utils
         }
         private PointF[] GetCutPointFs()
         {
-            // TODO [DK] 为了避免划线的时候误触线，可以缩小线的判断点范围
-            //PointF[] pts = new PointF[cutPointNum - 2];
-            //int index;
-            //for (int i = 1; i < cutPointNum - 1; i++)
-            //{
-            //    index = (int)Math.Floor((double)(i * 1.0 / (cutPointNum - 1) * this.points.Length));
-            //    if (index == this.points.Length)
-            //        index -= 1;
-            //    pts[i - 1] = points[index];
-            //}
-            //return pts;
             PointF[] pts = new PointF[cutPointNum];
             int index;
             for (int i = 0; i < cutPointNum; i++)

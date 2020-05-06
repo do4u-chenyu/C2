@@ -54,6 +54,9 @@ namespace Citta_T1.Controls
         private Control endC;
         Rectangle invalidateRectWhenMoving;
         Bezier lineWhenMoving;
+        private List<int> selectLineIndexs = new List<int> { };
+
+
 
         public void SetStartP(PointF p)
         {
@@ -154,24 +157,31 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
+            #region 点线
+            // TODO [DK] 点线出什么呢？待讨论
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+            selectLineIndexs.Add(mrIndex);
+            #endregion
             // 点击右键, 清空操作状态,进入到正常编辑状态
             if (e.Button == MouseButtons.Right)
             {
                 Global.GetFlowControl().ResetStatus();
+                if (mrIndex != -1)
+                    this.ShowDelectOption(e.Location);        // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
+                else
+                    this.ResetAllLineStatus(true); // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
                 return;
             }
-            #region 点线
-            // TODO [DK] 点线出什么呢？待讨论
-            int mrIndex = PointToLine(new PointF(e.X, e.Y));
             if (mrIndex != -1)
             {
-                ModelRelation mr =  Global.GetCurrentDocument().ModelRelations[mrIndex];
+                this.ResetAllLineStatus();
+                ModelRelation mr = Global.GetCurrentDocument().ModelRelations[mrIndex];
                 mr.Selected = !mr.Selected;
                 this.Invalidate(false);
             }
-            #endregion
             // TODO [Dk] 后两个算子就不该有PinDraw这个动作
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
@@ -205,7 +215,33 @@ namespace Citta_T1.Controls
             {
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
+        }
 
+        private void ShowDelectOption(Point p)
+        {
+            this.contextMenuStrip1.Show(this, p);
+        }
+
+        private void ResetAllLineStatus(bool isInvalidate = false)
+        {
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            {
+                mr.Selected = false;
+            }
+            if (isInvalidate)
+                this.Invalidate(false);
+        }
+
+        private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            ModelRelation mr;
+            foreach (int i in selectLineIndexs)
+            {
+                mr = mrs[i];
+                mrs.Remove(mr);
+            }
+            this.Invalidate(false);
         }
         /// <summary>
         /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1
