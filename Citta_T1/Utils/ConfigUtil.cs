@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 
 namespace Citta_T1.Utils
@@ -54,7 +51,25 @@ namespace Citta_T1.Utils
             {
                 value = defaultValue;
             }
-            return value;
+            return value ?? String.Empty;  // 微软这都弄的啥破新语法糖啊
+        }
+
+        // 变量环境变量Path和PYTHONHOME, 找到第一个可能的Python解释器的路径
+        public static string GetDefaultPythonOpenFileDirectory()
+        {
+            string possiblePythonPath = String.Empty;
+            StringBuilder sb = new StringBuilder(TryGetEnvironmentVariable("path").TrimEnd(';'));
+            sb.Append(";").Append(TryGetEnvironmentVariable("PYTHONHOME"));
+            string[] possiblePaths = sb.ToString().Split(';');
+            foreach (string path in possiblePaths)
+            {
+                if (path.ToLower().Contains("python"))
+                {
+                    possiblePythonPath = path;
+                    break;
+                }
+            }
+            return possiblePythonPath;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Citta_T1.Dialogs
                     MessageBoxIcon.Information);
                 return;
             }
-
+            pythonOpenFileDialog.InitialDirectory = String.Empty;
             AddPythonInterpreter(pythonFFP);
 
         }
@@ -146,7 +146,9 @@ namespace Citta_T1.Dialogs
 
         private void PythonConfigTabPage_Load()
         {
+            // 配置文件样例
             // <add key="python" value="C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;" />
+            // 加载已有的配置文件
             string value = ConfigUtil.TryGetAppSettingsByKey("python");
             foreach (string pItem in value.Split(';'))
             {
@@ -158,7 +160,15 @@ namespace Citta_T1.Dialogs
                 string alias = oneConfig[1].Trim();
                 bool ifCheck = StringTryParseBool(oneConfig[2]);
                 AddPythonInterpreter(pythonFFP, alias, ifCheck);
-            }    
+            }
+
+
+            if (!String.IsNullOrEmpty(pythonOpenFileDialog.InitialDirectory))
+                return;
+            // 寻找可能的Python路径,
+            string possibleInitialDirectory = ConfigUtil.GetDefaultPythonOpenFileDirectory();
+            if (!String.IsNullOrEmpty(possibleInitialDirectory))
+                pythonOpenFileDialog.InitialDirectory = possibleInitialDirectory;  
         }
 
         private bool StringTryParseBool(string value)
