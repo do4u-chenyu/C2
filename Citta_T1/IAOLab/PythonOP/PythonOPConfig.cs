@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.IAOLab.Python
 {
-    class PythonConfig
+    class PythonOPConfig
     {
     }
 }
