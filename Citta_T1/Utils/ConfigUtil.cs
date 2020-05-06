@@ -43,6 +43,18 @@ namespace Citta_T1.Utils
             return true;
         }
 
-        
+        public static string TryGetEnvironmentVariable(string key, string defaultValue = "")
+        {
+            string value = defaultValue;
+            try
+            {
+                value = Environment.GetEnvironmentVariable(key);
+            }
+            catch
+            {
+                value = defaultValue;
+            }
+            return value;
+        }
     }
 }
