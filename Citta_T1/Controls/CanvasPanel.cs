@@ -394,7 +394,6 @@ namespace Citta_T1.Controls
                     (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
                     (endC as MoveOpControl).RevisedPinIndex
                     );
-                // TODO [DK] 这里用来设置规则
                 // 1. 关系不能重复
                 // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
                 // 3. 

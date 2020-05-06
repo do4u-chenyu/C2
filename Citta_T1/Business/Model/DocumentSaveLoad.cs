@@ -94,7 +94,7 @@ namespace Citta_T1.Business.Model
                     pathNode.InnerText = me.GetPath();
                     modelElementXml.AppendChild(pathNode);
 
-                    XmlElement sepTypeNode = xDoc.CreateElement("separator"); // TODO [DK] 写ASCII码
+                    XmlElement sepTypeNode = xDoc.CreateElement("separator"); 
                     sepTypeNode.InnerText = Convert.ToInt32(me.Separator).ToString(); 
                     modelElementXml.AppendChild(sepTypeNode);
 

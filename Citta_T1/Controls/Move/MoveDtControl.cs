@@ -27,7 +27,6 @@ namespace Citta_T1.Controls.Move
         private DSUtil.ExtType extType;
         private char separator;
         private int id;
-        //TODO 分隔符属性
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }

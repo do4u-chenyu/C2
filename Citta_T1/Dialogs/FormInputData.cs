@@ -452,5 +452,10 @@ namespace Citta_T1.Dialogs
                 return null;
             }
         }
+
+        private void textBoxEx1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
