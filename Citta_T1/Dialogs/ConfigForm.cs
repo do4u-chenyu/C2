@@ -94,6 +94,7 @@ namespace Citta_T1.Dialogs
 
         private void SavePythonConfig()
         { 
+
         }
 
         private bool CheckPythonInterpreter(string pythonFFP)
