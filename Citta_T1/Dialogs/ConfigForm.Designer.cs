@@ -427,6 +427,7 @@
             // 
             this.pythonOpenFileDialog.DefaultExt = "exe";
             this.pythonOpenFileDialog.Filter = "Python解释器 |*.exe";
+            this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
             // 
             // ConfigForm
