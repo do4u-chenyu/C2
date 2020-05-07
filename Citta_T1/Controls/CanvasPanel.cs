@@ -234,6 +234,11 @@ namespace Citta_T1.Controls
 
         private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.DeleteSelectedLines();
+        }
+
+        private void DeleteSelectedLines()
+        {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             ModelRelation mr;
             foreach (int i in selectLineIndexs)
