@@ -241,6 +241,8 @@ namespace Citta_T1.Business.Schedule
                     case ElementSubType.FreqOperator: cmds = (new FreqOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.RelateOperator: cmds = (new RelateOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.GroupOperator: cmds = (new GroupOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.CustomOperator1: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
+                    case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
                 }
                 RunLinuxCommand(cmds);
 
@@ -261,6 +263,10 @@ namespace Citta_T1.Business.Schedule
 
         public void RunLinuxCommand(List<string> cmds)
         {
+            // 补充条件检查, cmds 不能为空
+            if (cmds == null || !cmds.Any())
+                return;
+
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);

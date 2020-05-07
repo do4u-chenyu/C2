@@ -205,7 +205,7 @@ namespace Citta_T1.Controls
                 }
                 staticImage = new Bitmap(this.Width, this.Height);
                 // 鼠标按下的时候存图
-                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
             else if (SelectDrag())
             {
@@ -312,9 +312,8 @@ namespace Citta_T1.Controls
             {
 
                 Bitmap i = new Bitmap(staticImage);
-
+                
                 g = Graphics.FromImage(i);
-
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
                     g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else if (e.X > basepoint.X && e.Y < basepoint.Y)
@@ -649,5 +648,11 @@ namespace Citta_T1.Controls
             }
         }
         #endregion
+
+        private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+        }
     }
 }

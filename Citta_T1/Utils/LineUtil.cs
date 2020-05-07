@@ -260,8 +260,8 @@ namespace Citta_T1.Utils
                 pts[i] = points[index];
             }
             // 第一个点和最后一个点向中间靠拢，解决点Pin的时候误触的问题
-            pts[0].X += 5;
-            pts[cutPointNum - 1].X -= 5; 
+            pts[0].X += 8;
+            pts[cutPointNum - 1].X -= 8; 
             return pts;
         }
         /// <summary>

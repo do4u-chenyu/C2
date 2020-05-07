@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Configuration;
 
@@ -82,8 +83,8 @@ namespace Citta_T1.Utils
         {
             string possiblePythonPath = String.Empty;
             foreach (string path in possiblePaths)
-            {
-                if (path.ToLower().Contains("python") && System.IO.Directory.Exists(path))
+            {   // 目录存在;目录里有python.exe
+                if (Directory.Exists(path) && File.Exists(Path.Combine(path, "python.exe")))
                 {
                     possiblePythonPath = path;
                     break;
