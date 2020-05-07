@@ -199,7 +199,7 @@ namespace Citta_T1.Controls
                 }
                 staticImage = new Bitmap(this.Width, this.Height);
                 // 鼠标按下的时候存图
-                //this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
             }
             else if (SelectDrag())
             {
