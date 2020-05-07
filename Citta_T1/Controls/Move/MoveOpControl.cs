@@ -685,7 +685,7 @@ namespace Citta_T1.Controls.Move
             }
             else if(rectOut.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus)) return;
+                if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
