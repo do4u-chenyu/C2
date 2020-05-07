@@ -32,9 +32,6 @@ namespace Citta_T1.Controls
         private float screenFactor = 1;
         private DragWrapper dragWrapper;
 
-
-
-
         bool MouseIsDown = false;
         Point basepoint;
 
