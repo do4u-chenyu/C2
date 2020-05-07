@@ -19,7 +19,6 @@ namespace Citta_T1.Utils
         private static BCPBuffer BcpBufferSingleInstance;
         private LogUtil log = LogUtil.GetInstance("BCPBuffer");
 
-        // TODO [DK] 强制重读
         public string GetCacheBcpPreViewContent(string bcpFullPath, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = "";
@@ -86,12 +85,6 @@ namespace Citta_T1.Utils
                 
         }
         
-        // TODO 加载下方预览数据，读取excel数据为string
-        public void TryLoadExcel(string excelFullPath)
-        {
-            if (!dataPreviewDict.ContainsKey(excelFullPath) || dataPreviewDict[excelFullPath] == "")
-                PreLoadExcelFile(excelFullPath);
-        }
 
         public void Remove(string bcpFullPath)
         {
@@ -99,10 +92,6 @@ namespace Citta_T1.Utils
             columnDict.Remove(bcpFullPath);
         }
 
-        public bool Contains(string bcpFullPath)
-        {
-            return dataPreviewDict.ContainsKey(bcpFullPath);
-        }
 
         /*
          * 按行读取excel文件

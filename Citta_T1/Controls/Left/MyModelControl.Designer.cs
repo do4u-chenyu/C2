@@ -39,6 +39,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Name = "MyModelControl";
             this.Size = new System.Drawing.Size(187, 637);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MyModelControl_MouseDown);
             this.ResumeLayout(false);
 
         }

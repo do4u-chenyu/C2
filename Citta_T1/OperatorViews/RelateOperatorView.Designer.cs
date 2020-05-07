@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,17 +38,20 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.comCheckBoxList1 = new UserControlDLL.ComCheckBoxList();
+            this.DataInfoBox2 = new System.Windows.Forms.TextBox();
+            this.DataInfoBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.DataInfoBox2 = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -90,7 +94,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(891, 56);
+            this.topPanel.Size = new System.Drawing.Size(880, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -98,9 +102,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 512);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 526);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(891, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(880, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,11 +141,12 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 456);
+            this.keyPanel.Size = new System.Drawing.Size(174, 470);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
+            this.valuePanel.Controls.Add(this.comCheckBoxList1);
             this.valuePanel.Controls.Add(this.DataInfoBox2);
             this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Controls.Add(this.label4);
@@ -151,8 +156,39 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(717, 456);
+            this.valuePanel.Size = new System.Drawing.Size(706, 470);
             this.valuePanel.TabIndex = 3;
+            // 
+            // comCheckBoxList1
+            // 
+            this.comCheckBoxList1.DataSource = null;
+            this.comCheckBoxList1.Location = new System.Drawing.Point(349, 392);
+            this.comCheckBoxList1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comCheckBoxList1.Name = "comCheckBoxList1";
+            this.comCheckBoxList1.Size = new System.Drawing.Size(214, 27);
+            this.comCheckBoxList1.TabIndex = 13;
+            // 
+            // DataInfoBox2
+            // 
+            this.DataInfoBox2.Location = new System.Drawing.Point(349, 3);
+            this.DataInfoBox2.Name = "DataInfoBox2";
+            this.DataInfoBox2.ReadOnly = true;
+            this.DataInfoBox2.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox2.TabIndex = 12;
+            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox2_MouseClick);
+            this.DataInfoBox2.LostFocus += new System.EventHandler(this.DataInfoBox2_LostFocus);
+            // 
+            // DataInfoBox
+            // 
+            this.DataInfoBox.Location = new System.Drawing.Point(6, 3);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox.TabIndex = 11;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
             // label4
             // 
@@ -168,7 +204,7 @@
             this.OutList.Location = new System.Drawing.Point(6, 394);
             this.OutList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(168, 27);
+            this.OutList.Size = new System.Drawing.Size(214, 27);
             this.OutList.TabIndex = 8;
             // 
             // tableLayoutPanel2
@@ -180,8 +216,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox2, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox3, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(142, 81);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -215,22 +251,6 @@
             this.comboBox1.Size = new System.Drawing.Size(129, 26);
             this.comboBox1.TabIndex = 2;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
-            this.comboBox2.Location = new System.Drawing.Point(138, 11);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(129, 26);
-            this.comboBox2.TabIndex = 3;
-            // 
             // comboBox3
             // 
             this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -240,13 +260,24 @@
             this.comboBox3.Size = new System.Drawing.Size(129, 26);
             this.comboBox3.TabIndex = 6;
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(138, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(129, 18);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "等于=";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(6, 130);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(717, 240);
+            this.panel1.Size = new System.Drawing.Size(700, 240);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -263,29 +294,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(652, 126);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // DataInfoBox
-            // 
-            this.DataInfoBox.Location = new System.Drawing.Point(6, 3);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.Size = new System.Drawing.Size(214, 28);
-            this.DataInfoBox.TabIndex = 11;
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DataInfoBox2
-            // 
-            this.DataInfoBox2.Location = new System.Drawing.Point(349, 3);
-            this.DataInfoBox2.Name = "DataInfoBox2";
-            this.DataInfoBox2.Size = new System.Drawing.Size(214, 28);
-            this.DataInfoBox2.TabIndex = 12;
-            this.DataInfoBox2.ReadOnly = true;
-            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // RelateOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 608);
+            this.ClientSize = new System.Drawing.Size(880, 622);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -302,6 +315,7 @@
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -319,8 +333,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -329,5 +341,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox DataInfoBox2;
         private System.Windows.Forms.TextBox DataInfoBox;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.Label label5;
+        private UserControlDLL.ComCheckBoxList comCheckBoxList1;
     }
 }

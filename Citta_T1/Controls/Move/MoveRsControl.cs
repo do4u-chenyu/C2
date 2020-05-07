@@ -1,6 +1,6 @@
 
-﻿using Citta_T1.Controls.Interface;
-﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
+using Citta_T1.Business.Model;
 using Citta_T1.Utils;
 using System;
 using System.Drawing;
@@ -47,7 +47,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -86,7 +85,7 @@ namespace Citta_T1.Controls.Move
             set
             {
                 this.status = value;
-                StatusDirty(); 
+                StatusDirty();
             }
         }
 
@@ -142,12 +141,12 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-            /*
-            System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
-            leftPicture1.Location = new System.Drawing.Point(16, 24);
-            this.Controls.Add(leftPicture1);
-            */
-      
+        /*
+        System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
+        leftPicture1.Location = new System.Drawing.Point(16, 24);
+        this.Controls.Add(leftPicture1);
+        */
+
 
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
@@ -280,10 +279,10 @@ namespace Citta_T1.Controls.Move
             }
             else if (sumCount + sumCountDigit <= 6)
             {
-                this.txtButton.Text = name;                
+                this.txtButton.Text = name;
                 int txtWidth = 62;
-                ResizeControl(txtWidth,smallStatus);
-            }      
+                ResizeControl(txtWidth, smallStatus);
+            }
             else
             {
                 this.txtButton.Text = name;
@@ -293,10 +292,10 @@ namespace Citta_T1.Controls.Move
             this.nameToolTip.SetToolTip(this.txtButton, name);
         }
 
-        private void ResizeControl(int txtWidth,Size controlSize)
+        private void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
-            
+
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
             this.rightPictureBox.Location = new Point((int)((this.Width - 30) * f), (int)(this.rightPictureBox.Top * f));
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
@@ -342,12 +341,12 @@ namespace Citta_T1.Controls.Move
             {
                 if (mr.EndID == this.ID)
                 {
-                    currentOp = Global.GetCurrentDocument().SearchElementByID(mr.StartID); 
+                    currentOp = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                 }
             }
 
             //未找到op算子？？
-            if(currentOp == null)
+            if (currentOp == null)
             {
                 MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -423,7 +422,7 @@ namespace Citta_T1.Controls.Move
         {
             if (rectIn.Contains(mousePosition))
             {
-                if  (pinStatus == "rectIn" || linePinArray.Contains(1))  return;
+                if (pinStatus == "rectIn" || linePinArray.Contains(1)) return;
                 rectIn = rectEnter(rectIn);
                 this.Invalidate();
                 pinStatus = "rectIn";
@@ -472,8 +471,8 @@ namespace Citta_T1.Controls.Move
         }
         public void OutPinInit(String status)
         {
-            
-            lineStatus = status; 
+
+            lineStatus = status;
 
             PinOpLeaveAndEnter(new Point(0, 0));
         }
@@ -491,16 +490,16 @@ namespace Citta_T1.Controls.Move
             {
                 SetControlsBySize(factor, this);
                 this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn  = SetRectBySize(factor, this.rectIn);
+                this.rectIn = SetRectBySize(factor, this.rectIn);
             }
 
             else
             {
                 SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(1/factor, this.rectOut);
-                this.rectIn  = SetRectBySize(1/factor, this.rectIn);
+                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
+                this.rectIn = SetRectBySize(1 / factor, this.rectIn);
             }
-                
+
 
         }
 
@@ -602,13 +601,13 @@ namespace Citta_T1.Controls.Move
         public PointF GetStartPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
         public PointF GetEndPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2, 
+                this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2,
                 this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
         }
 
@@ -658,7 +657,7 @@ namespace Citta_T1.Controls.Move
         }
         public void rectInAdd(int pinIndex)
         {
-            
+
             if (pinStatus != "rectIn" && !linePinArray.Contains(1))
             {
                 rectIn = rectEnter(rectIn);
@@ -682,7 +681,7 @@ namespace Citta_T1.Controls.Move
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-       
+
             this.saveFileDialog.FileName = DescriptionName + ".bcp";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)

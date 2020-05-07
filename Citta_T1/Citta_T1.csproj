@@ -222,8 +222,6 @@
     <Compile Include="Controls\Top\TopToolBarControl.Designer.cs">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataStruct\Data.cs" />
-    <Compile Include="DataStruct\DataButtonInfo.cs" />
     <Compile Include="Dgvs\DataGridView0.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -265,6 +263,20 @@
     </Compile>
     <Compile Include="Controls\Flow\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.Designer.cs">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonInterpreterInfo.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.Designer.cs">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
@@ -375,6 +387,7 @@
     <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\DoubleBuffer.cs" />
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
@@ -455,6 +468,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\PythonOP\PythonOperatorView.resx">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -693,10 +712,6 @@
     <Content Include="res\toolbox\union.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HZH_Controls\HZH_Controls\HZH_Controls.csproj">
-      <Project>{af32e163-c577-4cbc-a072-0dc1ce0e1da3}</Project>
-      <Name>HZH_Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UserControlDLL\UserControlDLL.csproj">
       <Project>{fac026d0-0c0f-4415-baba-9713ec1337cb}</Project>
       <Name>UserControlDLL</Name>
@@ -712,12 +727,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

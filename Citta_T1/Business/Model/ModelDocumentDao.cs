@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Flow;
 using System.Xml;
-using System.Drawing;
 using Citta_T1.Utils;
 using Citta_T1.Business.Schedule;
 
@@ -22,7 +19,7 @@ namespace Citta_T1.Business.Model
         
         public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
         public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-        string UserInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
+        private string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
             modelDocuments = new List<ModelDocument>();         
@@ -80,7 +77,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, SEType(op.SubTypeName), op.ID);
+                ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, OpUtil.SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
                 return;               
             }
@@ -96,52 +93,9 @@ namespace Citta_T1.Business.Model
            
         }
 
-        public static ElementSubType SEType(string subType)
-        {
-            string type = "";
-            switch (subType)
-            {
-                case "关联算子":
-                    type = "RelateOperator";
-                    break;
-                case "碰撞算子":
-                    type = "CollideOperator";
-                    break;
-                case "取并集":
-                    type = "UnionOperator";
-                    break;
-                case "取差集":
-                    type = "DifferOperator";
-                    break;
-                case "随机采样":
-                    type = "RandomOperator";
-                    break;
-                case "过滤算子":
-                    type = "FilterOperator";
-                    break;
-                case "取最大值":
-                    type = "MaxOperator";
-                    break;
-                case "取最小值":
-                    type = "MinOperator";
-                    break;
-                case "取平均值":
-                    type = "AvgOperator";
-                    break;
-                case "频率算子":
-                    type = "FreqOperator";
-                    break;
-                case "排序算子":
-                    type = "SortOperator";
-                    break;
-                case "分组算子":
-                    type = "GroupOperator";
-                    break;
-                default:
-                    break;
-            }
-            return (ElementSubType)Enum.Parse(typeof(ElementSubType), type); 
-        }
+
+
+
         private ModelDocument FindModelDocument(string modelTitle)
         {
             foreach (ModelDocument md in this.modelDocuments)
@@ -189,7 +143,7 @@ namespace Citta_T1.Business.Model
         {
            
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(UserInfoPath);
+            xDoc.Load(userInfoPath);
             var node = xDoc.SelectSingleNode("login");
             XmlNodeList bodyNodes = xDoc.GetElementsByTagName("user");
             foreach (XmlNode xn in bodyNodes)
@@ -217,7 +171,7 @@ namespace Citta_T1.Business.Model
                         childElement.InnerText = saveTitle[0];
                         xn.AppendChild(childElement);
                     }
-                    xDoc.Save(UserInfoPath);
+                    xDoc.Save(userInfoPath);
                     return;
                 }
             }
@@ -226,27 +180,27 @@ namespace Citta_T1.Business.Model
         }
         public string[] LoadSaveModelTitle(string userName)
         {
-            string[] modelTitles;
             List<string> modelTitleList = new List<string>();
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(UserInfoPath);
+            xDoc.Load(userInfoPath);
+           
             XmlNodeList userNode = xDoc.GetElementsByTagName("user");
             foreach (XmlNode xn in userNode)
             {
                 if (xn.SelectSingleNode("name") != null && xn.SelectSingleNode("name").InnerText == userName)
                 { 
                     XmlNodeList childNodes = xn.SelectNodes("modeltitle");
-                    if (childNodes.Count > 0)
+                    foreach (XmlNode xn2 in childNodes)
                     {
-                        foreach (XmlNode xn2 in childNodes)
-                            modelTitleList.Add(xn2.InnerText);
-                        modelTitles = modelTitleList.ToArray();
-                        return modelTitles;
-                    }                   
+                        string modelTitle = xn2.InnerText;
+                        if (Directory.Exists(System.IO.Path.Combine(Global.WorkspaceDirectory, userName, modelTitle)))
+                            modelTitleList.Add(modelTitle);
+                    }
+                    if (modelTitleList.Count > 0)
+                        return modelTitleList.Distinct().ToArray();
                 }                   
             }                       
-            modelTitles = LoadAllModelTitle(userName);
-            return modelTitles;
+            return LoadAllModelTitle(userName);
         }
         public string[] LoadAllModelTitle(string userName)
         {

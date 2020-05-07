@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,6 +41,7 @@
             this.DataInfoBox = new System.Windows.Forms.TextBox();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.MinValueBox = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -80,7 +82,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(628, 56);
+            this.topPanel.Size = new System.Drawing.Size(624, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -88,9 +90,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 322);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 318);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(628, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(624, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -127,7 +129,7 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 266);
+            this.keyPanel.Size = new System.Drawing.Size(174, 262);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -138,7 +140,7 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(454, 266);
+            this.valuePanel.Size = new System.Drawing.Size(450, 262);
             this.valuePanel.TabIndex = 3;
             // 
             // DataInfoBox
@@ -149,6 +151,8 @@
             this.DataInfoBox.Size = new System.Drawing.Size(202, 28);
             this.DataInfoBox.TabIndex = 3;
             this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
             // OutList
             // 
@@ -171,7 +175,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 418);
+            this.ClientSize = new System.Drawing.Size(624, 414);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -204,5 +208,6 @@
         private UserControlDLL.ComCheckBoxList OutList;
         private System.Windows.Forms.ComboBox MinValueBox;
         private System.Windows.Forms.TextBox DataInfoBox;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

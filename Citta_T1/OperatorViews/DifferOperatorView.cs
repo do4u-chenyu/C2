@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,7 +36,11 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
             LoadOption();
+
             this.oldOutList = this.OutList.GetItemCheckIndex();
+            SetTextBoxName(this.dataSource0);
+            SetTextBoxName(this.dataSource1);
+
         }
 
         #region 初始化配置
@@ -47,12 +52,14 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+                this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
+                this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
             }
 
@@ -78,6 +85,30 @@ namespace Citta_T1.OperatorViews
             string[] columnName = column.Split('\t');
             this.opControl.SingleDataSourceColumns = column;
             return columnName;
+        }
+
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
         }
         #endregion
 
@@ -374,5 +405,25 @@ namespace Citta_T1.OperatorViews
       
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
+        private void dataSource1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataSource1.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
+        }
+
+        private void dataSource1_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataSource1);
+        }
+
+        private void dataSource0_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+        }
+
+        private void dataSource0_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataSource0);
+        }
     }
 }

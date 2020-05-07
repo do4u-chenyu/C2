@@ -40,7 +40,7 @@ namespace Citta_T1.Controls.Left
                 dragDropData.SetData("Type", ElementType.Operator);
                 dragDropData.SetData("Path", "");
                 dragDropData.SetData("Text", (sender as Button).Text);
-                leftPanelOpCollide.DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
+                (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }
         }
 

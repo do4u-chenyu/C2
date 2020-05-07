@@ -22,6 +22,7 @@ namespace Citta_T1.Business.Model
 
         private PointF a;
         private PointF b;
+        private bool selected = false;
 
         public ElementType Type { get => type;}
         public int EndPin { get => this.endPin; set => this.endPin = value; }
@@ -31,6 +32,7 @@ namespace Citta_T1.Business.Model
         public PointF EndP { get => endP; set => endP = value; }
         public PointF A { get => a;}
         public PointF B { get => b; }
+        public bool Selected { get => selected; set => selected = value; }
 
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
@@ -99,10 +101,5 @@ namespace Citta_T1.Business.Model
             float h = Math.Abs(startP.Y - endP.Y);
             return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(w), Convert.ToInt32(h));
         }
-
-        //public Bezier GetLine()
-        //{
-        //    return new B
-        //}
     }
 }

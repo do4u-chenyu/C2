@@ -21,7 +21,6 @@ namespace Citta_T1.Dialogs
         private int maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
-        private bool textboxHasText = false;
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
 
@@ -451,6 +450,11 @@ namespace Citta_T1.Dialogs
                 Console.WriteLine("Exception: " + ex.Message);
                 return null;
             }
+        }
+
+        private void textBoxEx1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

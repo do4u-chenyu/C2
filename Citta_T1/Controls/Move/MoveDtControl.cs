@@ -27,7 +27,6 @@ namespace Citta_T1.Controls.Move
         private DSUtil.ExtType extType;
         private char separator;
         private int id;
-        //TODO 分隔符属性
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
@@ -55,7 +54,6 @@ namespace Citta_T1.Controls.Move
         //public event DeleteOperatorEventHandler DeleteOperatorEvent;
 
         public bool isClicked = false;
-        Bezier line;
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -65,7 +63,6 @@ namespace Citta_T1.Controls.Move
         float factor = 1.3F;
         // 缩放等级
         public int sizeLevel = 0;
-        private string sizeL;
 
         private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         // 绘制贝塞尔曲线的起点
@@ -240,7 +237,7 @@ namespace Citta_T1.Controls.Move
                 return;
 
             // 开始划线
-            if (cmd == ECommandType.PinDraw)
+            else if (cmd == ECommandType.PinDraw)
             {
                 startX = this.Location.X + e.X;
                 startY = this.Location.Y + e.Y;
@@ -249,45 +246,32 @@ namespace Citta_T1.Controls.Move
                 
                 return;
             }
-
-
-            #region 控件移动部分
-            int left = this.Left + e.X - mouseOffset.X;
-            int top = this.Top + e.Y - mouseOffset.Y;
-            this.Location = WorldBoundControl(new Point(left, top));
-
-            #endregion
-
-            /*
-                * 1. 计算受影响的线, 计算受影响区域，将受影响的线直接remove
-                * 2. 重绘静态图
-                * 3. 用静态图盖住变化区域
-                * 4. 更新坐标
-                * 5. 绘线
-                * 6. 更新canvas.lines
-                */
-            //if (this.startLineIndexs.Count == 0)
-            //{
-            //    return;
-            //}
-
-            /*
-             * 1. 遍历所有关系
-             * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
-             * 3. 重绘线
-             */
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            else
             {
-                if (mr.StartID == this.id)
+                #region 控件移动部分
+                int left = this.Left + e.X - mouseOffset.X;
+                int top = this.Top + e.Y - mouseOffset.Y;
+                this.Location = WorldBoundControl(new Point(left, top));
+
+                #endregion
+                /*
+                 * 1. 遍历所有关系
+                 * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
+                 * 3. 重绘线
+                 */
+                CanvasPanel canvas = Global.GetCanvasPanel();
+                foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
-                    mr.StartP = this.GetStartPinLoc(0);
-                    mr.UpdatePoints();
-                    isNeedMoveLine = true;
+                    if (mr.StartID == this.id)
+                    {
+                        mr.StartP = this.GetStartPinLoc(0);
+                        mr.UpdatePoints();
+                        isNeedMoveLine = true;
+                    }
                 }
+                if (isNeedMoveLine)
+                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
-            if (isNeedMoveLine)
-                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         public Point WorldBoundControl(Point Pm)

@@ -285,7 +285,7 @@ namespace Citta_T1.Business.Option
                 if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
                 {
                     bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
-                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName0[fieldList[1]];
+                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName1[fieldList[1]];
                     if (IsEqual0 || IsEqual1)
                     {
                         opControl.Option.OptionDict[field] = "";

@@ -16,12 +16,11 @@ namespace  Citta_T1
 { 
     public partial class MainForm : Form
     {
-        public Dictionary<string, Citta_T1.Data> contents = new Dictionary<string, Citta_T1.Data>();
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
         
         private string userName;
-        public Citta_T1.Dialogs.FormInputData formInputData;
+        private Citta_T1.Dialogs.FormInputData formInputData;
         private Citta_T1.Dialogs.CreateNewModel createNewModel;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
@@ -30,10 +29,10 @@ namespace  Citta_T1
         public string UserName { get => this.userName; set => this.userName = value; }
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         
-        delegate void AsynUpdateLog(string log);
+        delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
 
-        LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
+        private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
@@ -92,12 +91,9 @@ namespace  Citta_T1
                 return;
             this.modelDocumentDao.CurrentDocument.Dirty = true;
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
-            mtc.SetDirtyPictureBox();
-           
-           
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, true);
         }
-        internal void DeleteCurrentDocument()
+        public void DeleteCurrentDocument()
         {
             
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
@@ -122,11 +118,7 @@ namespace  Citta_T1
             if (!this.myModelControl.ContainModel(modelTitle))
                 this.myModelControl.AddModel(modelTitle);
         }
-        internal List<ModelDocument>  DocumentsList()
-        {            
-            return modelDocumentDao.ModelDocuments;
 
-        } 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
         {
             this.modelDocumentDao.SwitchDocument(modelTitle);
@@ -188,7 +180,7 @@ namespace  Citta_T1
             {
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
-                    this.myModelControl.EnableOpenDocument(modelTitle);
+                    this.myModelControl.EnableClosedDocumentMenu(modelTitle);
             }   
             // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
@@ -249,7 +241,9 @@ namespace  Citta_T1
 
         private void MyModelButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.myModelControl.Visible = true;
+
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
@@ -258,6 +252,8 @@ namespace  Citta_T1
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
+
             this.operatorControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
@@ -267,6 +263,7 @@ namespace  Citta_T1
 
         private void DataButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
 
             this.operatorControl.Visible = false;
@@ -276,6 +273,7 @@ namespace  Citta_T1
 
         private void FlowChartButton_Click(object sender, EventArgs e)
         {
+            this.ShowLeftFold();
             this.flowChartControl.Visible = true;
 
             this.dataSourceControl.Visible = false;
@@ -296,8 +294,8 @@ namespace  Citta_T1
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
             this.ShowDataView();
-            this.logView.Visible = false;
             this.dataGridView2.Visible = true;
+            this.logView.Visible = false;
             this.dataGridView3.Visible = false;
         }
 
@@ -389,10 +387,8 @@ namespace  Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
         }
 
-        void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            // `FormInputData`中的数据添加处理方式，同一个数据不可多次导入
-            // TODO [DK] 读取Excel
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
             this.operatorControl.Visible = false;
@@ -497,18 +493,18 @@ namespace  Citta_T1
         }
 
         //更新log
-        private void UpdataLogStatus(string log)
+        private void UpdataLogStatus(string logContent)
         {
             if (InvokeRequired)
             {
                 this.Invoke(new AsynUpdateLog(delegate (string tlog)
                 {
-                    this.log.Info(tlog);
-                }), log);
+                    log.Info(tlog);
+                }), logContent);
             }
             else
             {
-                this.log.Info(log);
+                log.Info(logContent);
             }
         }
 
@@ -607,7 +603,24 @@ namespace  Citta_T1
                     break;
             }
         }
+        private void ShowLeftFold()
+        {
+            if (this.isLeftViewPanelMinimum == true)
+            {
+                this.isLeftViewPanelMinimum = false;
+                this.leftToolBoxPanel.Width = 187;
 
+            }
+            InitializeControlsLocation();
+            if (this.leftToolBoxPanel.Width == 187)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            }
+            if (this.leftToolBoxPanel.Width == 10)
+            {
+                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
+            }
+        }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
             if (this.isLeftViewPanelMinimum == true)
@@ -647,11 +660,9 @@ namespace  Citta_T1
                     return;
 
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
-            ModelTitleControl mtc = Utils.ControlUtil.FindMTCByName(currentModelTitle, this.modelTitlePanel);
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
-            SaveDocument();
-            mtc.ClearDirtyPictureBox();            
-
+            this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
+            SaveDocument();         
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

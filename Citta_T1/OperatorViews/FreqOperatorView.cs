@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,7 +43,7 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
-
+            SetTextBoxName(this.dataInfo);
 
         }
         #region 初始化配置
@@ -53,6 +54,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath = dataInfo["dataPath0"];
                 this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                this.toolTip1.SetToolTip(this.dataInfo, this.dataInfo.Text);
                 SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
             }
         }
@@ -85,6 +87,30 @@ namespace Citta_T1.OperatorViews
                 }
             }
             catch (Exception ex) { log.Error(ex.Message); };
+        }
+
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
         }
         #endregion
         #region 添加取消
@@ -194,5 +220,15 @@ namespace Citta_T1.OperatorViews
         }
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
+        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+        }
+
+        private void dataInfo_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataInfo);
+        }
     }
 }

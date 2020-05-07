@@ -92,45 +92,42 @@ namespace Citta_T1.Controls.Title
             //文档没有被选中返回
             if (this.BorderStyle != BorderStyle.FixedSingle)
                 return;
-            ModelTitlePanel parentPanel = (ModelTitlePanel)this.Parent;
-            MainForm mainForm = (MainForm)this.ParentForm;
+            ModelTitlePanel parentPanel = Global.GetModelTitlePanel();
+            MainForm mainForm = Global.GetMainForm();
             if (!Global.GetCurrentDocument().Dirty)
             {    
                 if (parentPanel.Controls.Count != 2)
                 {
-                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
+                    Global.GetMyModelControl().EnableClosedDocumentMenu(this.modelTitle);
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                 }
-                Global.GetCurrentDocument().Manager.CloseThread();
+                Global.GetCurrentDocument().Manager.CloseThread(); // 此处可能是个bug,需要讨论
                 return;
             }                       
-            DialogResult result= MessageBox.Show("保存文件"+"\""+modelTitle + "\"" + "?","保存",MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult result= MessageBox.Show(String.Format("保存文件\"{0}\"?", modelTitle),
+                                                 "保存",
+                                                  MessageBoxButtons.YesNoCancel, 
+                                                  MessageBoxIcon.Question);
+            // 取消操作
+            if (result == DialogResult.Cancel)
+                return;
+
+            // 保存文件
             if (result == DialogResult.Yes)
             {                
                 mainForm.SaveDocument();
                 ClearDirtyPictureBox();
-                if (parentPanel.Controls.Count != 2)
-                {
-                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
-                    mainForm.DeleteCurrentDocument();
-                    parentPanel.RemoveModel(this);                    
-                }
-                Global.GetCurrentDocument().Manager.CloseThread();
             }
-            else if (result == DialogResult.No)
-            {
-                if (parentPanel.Controls.Count != 2)
-                {
-                    Global.GetMyModelControl().EnableOpenDocument(this.modelTitle);
-                    mainForm.DeleteCurrentDocument();
-                    parentPanel.RemoveModel(this);                  
-                }
-                Global.GetCurrentDocument().Manager.CloseThread();
-            }
-            else
-                return;
 
+            // 关闭文件
+            if (parentPanel.Controls.Count != 2) // 要问下这个地方为啥是!=2
+            {
+                Global.GetMyModelControl().EnableClosedDocumentMenu(this.modelTitle);
+                mainForm.DeleteCurrentDocument();
+                parentPanel.RemoveModel(this);                  
+            }
+            Global.GetCurrentDocument().Manager.CloseThread();
         }
 
         public void ShowSelectedBorder()

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,7 +30,8 @@ namespace Citta_T1.OperatorViews
             //InitOptionInfo();
             //LoadOption();
             //this.oldOutList = this.OutList.GetItemCheckIndex();
-
+            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.DataInfoBox2);
         }
 
 
@@ -43,7 +45,29 @@ namespace Citta_T1.OperatorViews
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
 
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
+        }
 
         private void createLine(int addLine)
         {
@@ -60,16 +84,11 @@ namespace Citta_T1.OperatorViews
             //dataBox.Items.AddRange(this.columnName);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            ComboBox filterBox = new ComboBox();
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
+            Label label = new Label();
+            label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            label.Text = "等于=";
+            label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
 
             ComboBox data2box = new ComboBox();
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -198,6 +217,24 @@ namespace Citta_T1.OperatorViews
 
         }
 
+        private void DataInfoBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            //this.DataInfoBox2.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
+        }
 
+        private void DataInfoBox2_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.DataInfoBox2);
+        }
+
+        private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            //this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+        }
+
+        private void DataInfoBox_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.DataInfoBox);
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 自定义算子2 Python算子2";
 
         private string opControlName;
         private Point mouseOffset;
@@ -78,7 +78,6 @@ namespace Citta_T1.Controls.Move
         private int startX;
         private int startY;
         private Point oldcontrolPosition;
-        Bezier line;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为起点的所有点
@@ -104,16 +103,14 @@ namespace Citta_T1.Controls.Move
         private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
-        private String lineStatus = "";
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
         
-        private Size bigStatus    = new Size(155,28);
-        private Size normalStatus = new Size(147,28);
-        private Size smallStatus  = new Size(130,28);
+        private Size bigStatus    = new Size(155, 28);
+        private Size normalStatus = new Size(147, 28);
+        private Size smallStatus  = new Size(130, 28);
         
         
-        // 下次谁再给合并进来,我就开始一一排查了, 卢琪 2020.04.12
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
@@ -217,11 +214,24 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
                     break;
+                case "自定义算子1":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
+                    break;
+                case "Python算子1":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator1HelpInfo);
+                    break;
+                case "自定义算子2":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
+                    break;
+                case "Python算子2":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator2HelpInfo);
+                    break;
                 default:
                     break;
             }
     
         }
+
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -238,7 +248,7 @@ namespace Citta_T1.Controls.Move
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
-                bool isUpdateLine = false;
+                bool isNeedMoveLine = false;
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
@@ -246,22 +256,19 @@ namespace Citta_T1.Controls.Move
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     if (mr.EndID == this.id)
                     {
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
-                        isUpdateLine = true;
+                        isNeedMoveLine = true;
                     }
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
-                if (isUpdateLine)
+                if (isNeedMoveLine)
                     this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
-
-
-
         }
         public Point WorldBoundControl(Point Pm)
         {
@@ -425,7 +432,7 @@ namespace Citta_T1.Controls.Move
                 int txtWidth = 72;
                 ResizeControl(txtWidth, normalStatus);
             }
-            this.nameToolTip.SetToolTip(this.txtButton, name);
+            this.helpToolTip.SetToolTip(this.txtButton, name);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -576,10 +583,6 @@ namespace Citta_T1.Controls.Move
             Global.GetNaviViewControl().UpdateNaviView();
             CanvasPanel canvas = Global.GetCanvasPanel();
             canvas.EndC = null;
-
-
-
-
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
@@ -597,7 +600,6 @@ namespace Citta_T1.Controls.Move
             {
                 if (mrc.ID == endID)
                 {
-                   
                     Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();  
@@ -683,7 +685,7 @@ namespace Citta_T1.Controls.Move
             }
             else if(rectOut.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus)) return;
+                if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
                 rectOut = rectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
@@ -760,7 +762,7 @@ namespace Citta_T1.Controls.Move
                 this.rectOut = SetRectBySize(factor, this.rectOut);
                 this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate(); // TODO 干嘛用的？，为什么下面不写一个重绘？
+                this.Invalidate(); // TODO [Dk] 干嘛用的？，为什么下面不写一个重绘？
             }
             else
             {
@@ -1010,7 +1012,7 @@ namespace Citta_T1.Controls.Move
 
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.idToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.helpToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
     }
 }
