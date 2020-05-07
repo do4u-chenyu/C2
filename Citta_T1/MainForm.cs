@@ -692,5 +692,17 @@ namespace  Citta_T1
         {
             this.blankButton.Focus();
         }
+        protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData) //激活回车键
+        {
+            int WM_KEYDOWN = 256;
+            int WM_SYSKEYDOWN = 260;
+
+            if (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN)
+            {
+                if (keyData == Keys.Delete)
+                    this.canvasPanel.DeleteSelectedLines();
+            }
+            return false;
+        }
     }
 }

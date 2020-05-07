@@ -237,7 +237,7 @@ namespace Citta_T1.Controls
             this.DeleteSelectedLines();
         }
 
-        private void DeleteSelectedLines()
+        public void DeleteSelectedLines()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             ModelRelation mr;
