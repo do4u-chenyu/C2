@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.IAOLab.CustomOP
+namespace Citta_T1.OperatorViews
 {
     public partial class CustomOperatorView : Form
     {
