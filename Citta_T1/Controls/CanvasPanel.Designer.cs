@@ -32,23 +32,25 @@ namespace Citta_T1.Controls
         {
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.批量删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem});
+
+            this.批量删除ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
             // 
-            // 删除ToolStripMenuItem
+            // 批量删除ToolStripMenuItem
             // 
-            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.删除ToolStripMenuItem.Text = "删除";
-            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteLineToolStripMenuItem_Click);
+            this.批量删除ToolStripMenuItem.Name = "批量删除ToolStripMenuItem";
+            this.批量删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.批量删除ToolStripMenuItem.Text = "批量删除";
+
             // 
             // CanvasPanel
             // 
@@ -58,6 +60,7 @@ namespace Citta_T1.Controls
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
@@ -69,6 +72,8 @@ namespace Citta_T1.Controls
         #endregion
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+
+        private System.Windows.Forms.ToolStripMenuItem 批量删除ToolStripMenuItem;
+
     }
 }

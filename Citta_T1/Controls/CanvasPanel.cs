@@ -315,9 +315,9 @@ namespace Citta_T1.Controls
             {
 
                 Bitmap i = new Bitmap(staticImage);
-
+                
                 g = Graphics.FromImage(i);
-
+                g.Clear(this.BackColor);
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
                     g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else if (e.X > basepoint.X && e.Y < basepoint.Y)
@@ -438,6 +438,7 @@ namespace Citta_T1.Controls
                 Bitmap i = new Bitmap(this.staticImage);
                 Graphics n = this.CreateGraphics();
                 n.DrawImageUnscaled(i, 0, 0);
+                n.Clear(this.BackColor);
                 n.Dispose();
                 // 标志位置低
                 MouseIsDown = false;
@@ -652,5 +653,11 @@ namespace Citta_T1.Controls
             }
         }
         #endregion
+
+        private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+        }
     }
 }
