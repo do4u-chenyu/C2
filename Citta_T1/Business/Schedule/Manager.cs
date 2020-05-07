@@ -263,6 +263,10 @@ namespace Citta_T1.Business.Schedule
 
         public void RunLinuxCommand(List<string> cmds)
         {
+            // 补充条件检查, cmds 不能为空
+            if (cmds == null || !cmds.Any())
+                return;
+
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             //p.StartInfo.Arguments = "/c " + string.Join(";",cmds);

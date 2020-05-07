@@ -109,6 +109,7 @@
     <Compile Include="Business\Option\OptionDao.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
+    <Compile Include="IAOLab\CustomOP\CustomOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FreqOperatorCmd.cs" />
