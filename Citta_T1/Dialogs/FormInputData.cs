@@ -18,7 +18,7 @@ namespace Citta_T1.Dialogs
     {
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private ExtType extType = ExtType.Unknow;
-        private string bcpFullFilePath;
+        private string fullFilePath;
         private int maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
@@ -61,9 +61,9 @@ namespace Citta_T1.Dialogs
                 this.encoding = DSUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                bcpFullFilePath = fd.FileName;     
-                fileName = Path.GetFileNameWithoutExtension(bcpFullFilePath);
-                ext = Path.GetExtension(bcpFullFilePath);
+                fullFilePath = fd.FileName;     
+                fileName = Path.GetFileNameWithoutExtension(fullFilePath);
+                ext = Path.GetExtension(fullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = ExtType.Excel;
@@ -89,13 +89,13 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (bcpFullFilePath == null)
+            else if (fullFilePath == null)
             {
                 MessageBox.Show("请选择数据路径！");
             }
-            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(bcpFullFilePath))
+            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(fullFilePath))
             {
-                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[bcpFullFilePath].DataSourceName;
+                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[fullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName);
             }
             // 非法字符不得成为文件名
@@ -105,13 +105,13 @@ namespace Citta_T1.Dialogs
             }
             else
             {
-                if (bcpFullFilePath.EndsWith(".xls") || bcpFullFilePath.EndsWith(".xlsx"))
+                if (fullFilePath.EndsWith(".xls") || fullFilePath.EndsWith(".xlsx"))
                     this.extType = DSUtil.ExtType.Excel;
                 else
                     this.extType = DSUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(bcpFullFilePath, this.extType, this.encoding);
-                InputDataEvent(name, bcpFullFilePath, this.separator, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(fullFilePath, this.extType, this.encoding);
+                InputDataEvent(name, fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
@@ -166,16 +166,16 @@ namespace Citta_T1.Dialogs
              * 4. 清理表格数据
              * 5. 写入数据
              */
-            if (this.bcpFullFilePath == null)
+            if (this.fullFilePath == null)
                 return;
             System.IO.StreamReader sr;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
-                sr = File.OpenText(bcpFullFilePath);
+                sr = File.OpenText(fullFilePath);
             }
             else
             {
-                FileStream fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
             String header = sr.ReadLine();
@@ -232,8 +232,8 @@ namespace Citta_T1.Dialogs
             //
             try
             {
-                fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
-                if (bcpFullFilePath.IndexOf(".xlsx") > 0) // 2007版本
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                if (fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
                 {
                     workbook2007 = new XSSFWorkbook(fs);
                     if (sheetName != null)

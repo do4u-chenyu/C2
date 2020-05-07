@@ -398,7 +398,7 @@ namespace  Citta_T1
         public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowDataView(); 
-            this.dataGridView3.PreViewDataByBcpPath(bcpPath, separator, extType, encoding, isForceRead);
+            this.dataGridView3.PreViewDataByFullFilePath(bcpPath, separator, extType, encoding, isForceRead);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
