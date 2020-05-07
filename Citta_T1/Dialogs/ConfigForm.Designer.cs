@@ -47,6 +47,9 @@
             this.pythonConfigCancelButton = new System.Windows.Forms.Button();
             this.pythonConfigOkButton = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.interpreterFFPColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aliasColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chosenColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.browseButton = new System.Windows.Forms.Button();
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,9 +65,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.interpreterFFPColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aliasColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chosenColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -221,7 +221,6 @@
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeColumns = false;
             this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -252,6 +251,39 @@
             this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellContentClick);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellEndEdit);
             this.dataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DataGridView_CellValidating);
+            this.dataGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DataGridView_RowsRemoved);
+            // 
+            // interpreterFFPColumn
+            // 
+            this.interpreterFFPColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.interpreterFFPColumn.FillWeight = 320F;
+            this.interpreterFFPColumn.HeaderText = "虚拟机路径";
+            this.interpreterFFPColumn.Name = "interpreterFFPColumn";
+            this.interpreterFFPColumn.ReadOnly = true;
+            this.interpreterFFPColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.interpreterFFPColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.interpreterFFPColumn.Width = 422;
+            // 
+            // aliasColumn
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.aliasColumn.FillWeight = 75F;
+            this.aliasColumn.HeaderText = "别名";
+            this.aliasColumn.Name = "aliasColumn";
+            this.aliasColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.aliasColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.aliasColumn.ToolTipText = "自定义的别名，用来区分不同版本的Python解释器";
+            // 
+            // chosenColumn
+            // 
+            this.chosenColumn.FillWeight = 30F;
+            this.chosenColumn.HeaderText = "选中";
+            this.chosenColumn.Name = "chosenColumn";
+            this.chosenColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.chosenColumn.ToolTipText = "选中一个作为默认的Python虚拟机";
             // 
             // browseButton
             // 
@@ -395,39 +427,8 @@
             // 
             this.pythonOpenFileDialog.DefaultExt = "exe";
             this.pythonOpenFileDialog.Filter = "Python解释器 |*.exe";
+            this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
-            // 
-            // interpreterFFPColumn
-            // 
-            this.interpreterFFPColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.interpreterFFPColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.interpreterFFPColumn.FillWeight = 320F;
-            this.interpreterFFPColumn.HeaderText = "虚拟机路径";
-            this.interpreterFFPColumn.Name = "interpreterFFPColumn";
-            this.interpreterFFPColumn.ReadOnly = true;
-            this.interpreterFFPColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.interpreterFFPColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.interpreterFFPColumn.Width = 422;
-            // 
-            // aliasColumn
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.aliasColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.aliasColumn.FillWeight = 75F;
-            this.aliasColumn.HeaderText = "别名";
-            this.aliasColumn.Name = "aliasColumn";
-            this.aliasColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.aliasColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.aliasColumn.ToolTipText = "自定义的别名，用来区分不同版本的Python解释器";
-            // 
-            // chosenColumn
-            // 
-            this.chosenColumn.FillWeight = 30F;
-            this.chosenColumn.HeaderText = "选中";
-            this.chosenColumn.Name = "chosenColumn";
-            this.chosenColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.chosenColumn.ToolTipText = "选中一个作为默认的Python虚拟机";
             // 
             // ConfigForm
             // 

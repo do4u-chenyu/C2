@@ -54,6 +54,9 @@ namespace Citta_T1.Controls
         private Control endC;
         Rectangle invalidateRectWhenMoving;
         Bezier lineWhenMoving;
+        private List<int> selectLineIndexs = new List<int> { };
+
+
 
         public void SetStartP(PointF p)
         {
@@ -154,24 +157,30 @@ namespace Citta_T1.Controls
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
+            selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
+            #region 点线
+            // TODO [DK] 点线出什么呢？待讨论
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+            selectLineIndexs.Add(mrIndex);
+            #endregion
             // 点击右键, 清空操作状态,进入到正常编辑状态
             if (e.Button == MouseButtons.Right)
             {
                 Global.GetFlowControl().ResetStatus();
+                if (mrIndex != -1)
+                    this.ShowDelectOption(e.Location);        // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
+                else
+                    this.ResetAllLineStatus(null, true); // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
                 return;
             }
-            #region 点线
-            // TODO [DK] 点线出什么呢？待讨论
-            int mrIndex = PointToLine(new PointF(e.X, e.Y));
             if (mrIndex != -1)
             {
-                ModelRelation mr =  Global.GetCurrentDocument().ModelRelations[mrIndex];
-                mr.Selected = !mr.Selected;
+                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
+                this.ResetAllLineStatus(selectLineIndexs, false);
                 this.Invalidate(false);
             }
-            #endregion
             // TODO [Dk] 后两个算子就不该有PinDraw这个动作
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
@@ -205,7 +214,53 @@ namespace Citta_T1.Controls
             {
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
+        }
 
+        private void ShowDelectOption(Point p)
+        {
+            this.contextMenuStrip1.Show(this, p);
+        }
+
+        private void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
+        {
+            ModelRelation mr;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            for (int i = 0; i < mrs.Count; i++)
+            {
+                mr = mrs[i];
+                if (exceptLineIndex != null && exceptLineIndex.Contains(i))
+                    mr.Selected = !mr.Selected;
+                else
+                    mr.Selected = false;
+            }
+            if (isInvalidate)
+                this.Invalidate(false);
+        }
+
+        private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.DeleteSelectedLines();
+        }
+
+        public void DeleteSelectedLines()
+        {
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            ModelRelation mr;
+            foreach (int i in selectLineIndexs)
+            {
+                try
+                {
+                    mr = mrs[i];
+                    mrs.Remove(mr);
+                }
+                catch (Exception e)
+                {
+                    log.Error("CanvasPanel删除线时发生错误");
+                }
+
+            }
+            selectLineIndexs.Clear();
+            this.Invalidate(false);
         }
         /// <summary>
         /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1
@@ -224,7 +279,7 @@ namespace Citta_T1.Controls
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
 
-                //测试用代码
+                ////测试用代码
                 //Graphics g = this.CreateGraphics();
                 //PointF s;
                 //PointF e;
@@ -260,9 +315,9 @@ namespace Citta_T1.Controls
             {
 
                 Bitmap i = new Bitmap(staticImage);
-
+                
                 g = Graphics.FromImage(i);
-
+                g.Clear(this.BackColor);
                 if (e.X < basepoint.X && e.Y < basepoint.Y)
                     g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
                 else if (e.X > basepoint.X && e.Y < basepoint.Y)
@@ -383,6 +438,7 @@ namespace Citta_T1.Controls
                 Bitmap i = new Bitmap(this.staticImage);
                 Graphics n = this.CreateGraphics();
                 n.DrawImageUnscaled(i, 0, 0);
+                n.Clear(this.BackColor);
                 n.Dispose();
                 // 标志位置低
                 MouseIsDown = false;
@@ -597,5 +653,11 @@ namespace Citta_T1.Controls
             }
         }
         #endregion
+
+        private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+        }
     }
 }

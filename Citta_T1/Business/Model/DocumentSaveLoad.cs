@@ -220,7 +220,7 @@ namespace Citta_T1.Business.Model
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, SubTypeName(subType), loc);
+                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc);
 
                         // 绑定线
 
@@ -346,51 +346,6 @@ namespace Citta_T1.Business.Model
             catch (Exception e) { log.Error(e.Message); }
             return location;
         }
-        public string SubTypeName(string subType)
-        {
-            string type = "";
-            switch (subType)
-            {
-                case "CollideOperator":
-                    type = "碰撞算子";
-                    break;
-                case "RelateOperator":
-                    type = "关联算子";
-                    break;
-                case "UnionOperator":
-                    type = "取并集";
-                    break;
-                case "DifferOperator":
-                    type = "取差集";
-                    break;
-                case "RandomOperator":
-                    type = "随机采样";
-                    break;
-                case "FilterOperator":
-                    type = "过滤算子";
-                    break;
-                case "MaxOperator":
-                    type = "取最大值";
-                    break;
-                case "MinOperator":
-                    type = "取最小值";
-                    break;
-                case "AvgOperator":
-                    type = "取平均值";
-                    break;
-                case "FreqOperator":
-                    type = "频率算子";
-                    break;
-                case "SortOperator":
-                    type = "排序算子";
-                    break;
-                case "GroupOperator":
-                    type = "分组算子";
-                    break;
-                default:
-                    break;
-            }
-            return type;
-        }
+       
     }
 }

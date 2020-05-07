@@ -14,11 +14,11 @@ namespace Citta_T1.Business.Option
 
         public Dictionary<string, string> OptionDict { get => optionDict; }
 
-        public string GetOption(string OpKey)
+        public string GetOption(string OpKey, string defaultValue = "")
         {
-            if (OptionDict.ContainsKey(OpKey))
-                return OptionDict[OpKey];
-            return "";
+            if (!OptionDict.ContainsKey(OpKey) || String.IsNullOrEmpty(OptionDict[OpKey]))
+                return defaultValue;
+            return OptionDict[OpKey];
         }
         public void SetOption(string OpKey, string OpVaule)
         {

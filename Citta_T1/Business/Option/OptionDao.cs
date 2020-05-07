@@ -252,10 +252,9 @@ namespace Citta_T1.Business.Option
                     {
                         if (fl > columnName.Length - 1 || oldColumnList[fl] != columnName[fl])
                         {
-                            opControl.Option.OptionDict.Remove(field);
+                            opControl.Option.OptionDict[field] = "";
                             return false;
-                        }
-                         
+                        }    
                     }
                 }
                 else if (field.Contains("outfield"))
@@ -265,7 +264,7 @@ namespace Citta_T1.Business.Option
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                     if (IsDataSourceEqual(oldColumnList, columnName, outIndex))
                     {
-                        opControl.Option.OptionDict.Remove("outfield");
+                        opControl.Option.OptionDict["outfield"] = "";
                         return false;
                     }
                        
@@ -286,10 +285,10 @@ namespace Citta_T1.Business.Option
                 if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
                 {
                     bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
-                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName0[fieldList[1]];
+                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName1[fieldList[1]];
                     if (IsEqual0 || IsEqual1)
                     {
-                        opControl.Option.OptionDict.Remove(field);
+                        opControl.Option.OptionDict[field] = "";
                         return false;
                     }
                 }
@@ -300,7 +299,7 @@ namespace Citta_T1.Business.Option
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                     if (IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
                     {
-                        opControl.Option.OptionDict.Remove("outfield");
+                        opControl.Option.OptionDict["outfield"] = "";
                         return false;
                     }
                 }

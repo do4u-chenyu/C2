@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,9 +26,11 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> selectColumn;
         private List<bool> oldCheckedItems = new List<bool>();
+        private List<string> oldColumnName;
         public UnionOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            oldColumnName = new List<string>();
             this.opControl = opControl;          
             this.columnName0 = new string[] { };
             this.columnName1 = new string[] { };
@@ -37,8 +40,10 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
+    
 
-
+            SetTextBoxName(this.dataSource0);
+            SetTextBoxName(this.dataSource1);
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -49,19 +54,23 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+                this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
+                this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
             }
-
-            this.opControl.DoubleDataSourceColumns["0"]= this.columnName0.ToList();
-            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t",this.opControl.DoubleDataSourceColumns["0"]));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+           if(this.opControl.Option.GetOption("outname") != "")
+           {
+                this.oldColumnName = this.opControl.Option.GetOption("outname").Split('\t').ToList();
+            }
+           
 
             foreach (string name in this.columnName0)
                 this.comboBox1.Items.Add(name);
@@ -79,6 +88,30 @@ namespace Citta_T1.OperatorViews
           
             return columnName;
         }
+
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
+        }
         #endregion
         #region 配置信息的保存与加载
         private void InitNewFactorControl(int count)
@@ -94,7 +127,8 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString() + "," + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectColumn.Add(OutColumnName(this.comboBox1.Text, this.textBoxEx1.Text));
@@ -110,6 +144,7 @@ namespace Citta_T1.OperatorViews
                     this.selectColumn.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
                 }
             }
+            this.opControl.Option.SetOption("outname", String.Join("\t", this.selectColumn));
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
@@ -135,18 +170,30 @@ namespace Citta_T1.OperatorViews
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
-                this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
-                this.textBoxEx1.Text = factorList[2];
+                List<int> fieldColumn = new List<int>(Nums);
+                if (Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor1", fieldColumn))
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                    this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
+                    this.textBoxEx1.Text = factorList[2];
+                }
             }
             if (count > 1)
                 InitNewFactorControl(count - 1);
-            else return;
+            else
+            {
+                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
+                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+                return;
+            }
             for (int i = 2; i < (count + 1); i++)
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                if (factor == "") continue;
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
+                List<int> fieldColumn = new List<int>(Nums);
+                if (!Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor" + i.ToString(), fieldColumn)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
@@ -155,7 +202,8 @@ namespace Citta_T1.OperatorViews
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = factorList[2];
             }
-
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
         }
 
 
@@ -178,6 +226,9 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
+            //输出变化，重写BCP文件
+            if (hasResutl != null && !this.oldColumnName.SequenceEqual(this.selectColumn))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.selectColumn, this.opControl.ID);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -375,6 +426,26 @@ namespace Citta_T1.OperatorViews
                 TextBoxEx.Text = "别名";
                 TextBoxEx.ForeColor = SystemColors.ActiveCaption;
             }           
+        }
+
+        private void dataSource1_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataSource1.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
+        }
+
+        private void dataSource1_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataSource1);
+        }
+
+        private void dataSource0_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
+        }
+
+        private void dataSource0_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataSource0);
         }
     }
 }

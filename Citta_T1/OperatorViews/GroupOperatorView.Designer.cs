@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,6 +52,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -95,7 +97,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(874, 56);
+            this.topPanel.Size = new System.Drawing.Size(870, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -103,9 +105,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 597);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 593);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(874, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(870, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -143,7 +145,7 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 541);
+            this.keyPanel.Size = new System.Drawing.Size(174, 537);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -166,17 +168,19 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(700, 541);
+            this.valuePanel.Size = new System.Drawing.Size(696, 537);
             this.valuePanel.TabIndex = 3;
             // 
-            // datainfo
+            // dataInfo
             // 
             this.dataInfo.Location = new System.Drawing.Point(10, 3);
-            this.dataInfo.Name = "datainfo";
+            this.dataInfo.Name = "dataInfo";
             this.dataInfo.ReadOnly = true;
             this.dataInfo.Size = new System.Drawing.Size(205, 28);
             this.dataInfo.TabIndex = 9;
             this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataInfo_MouseClick);
+            this.dataInfo.LostFocus += new System.EventHandler(this.dataInfo_LostFocus);
             // 
             // groupBox2
             // 
@@ -324,7 +328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 693);
+            this.ClientSize = new System.Drawing.Size(870, 689);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -374,5 +378,6 @@
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.TextBox dataInfo;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -109,6 +109,7 @@
     <Compile Include="Business\Option\OptionDao.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
+    <Compile Include="IAOLab\CustomOP\CustomOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FreqOperatorCmd.cs" />
@@ -264,6 +265,20 @@
     <Compile Include="Controls\Flow\NaviViewControl.Designer.cs">
       <DependentUpon>NaviViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\CustomOP\CustomOperatorView.Designer.cs">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonInterpreterInfo.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonOperatorView.Designer.cs">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\AvgOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +388,7 @@
     <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\DoubleBuffer.cs" />
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
@@ -453,6 +469,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
+      <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\PythonOP\PythonOperatorView.resx">
+      <DependentUpon>PythonOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

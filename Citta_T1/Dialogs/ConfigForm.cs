@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Citta_T1.Utils;
@@ -8,9 +9,11 @@ namespace Citta_T1.Dialogs
     public partial class ConfigForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("ConfigForm");
+        private static readonly int PythonFFPColumnIndex = 0;
         private static readonly int AliasColumnIndex = 1;
         private static readonly int CheckBoxColumnIndex = 2;
         private static readonly Regex PythonAliasRegex = new Regex(@"(python\d{1,3}(\.\d{1,3})?)", RegexOptions.IgnoreCase);
+        private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
         public ConfigForm()
         {
             InitializeComponent();
@@ -56,7 +59,7 @@ namespace Citta_T1.Dialogs
                     MessageBoxIcon.Information);
                 return;
             }
-
+            pythonOpenFileDialog.InitialDirectory = String.Empty;
             AddPythonInterpreter(pythonFFP);
 
         }
@@ -92,12 +95,35 @@ namespace Citta_T1.Dialogs
                 this.dataGridView.Rows.Add(new Object[] { pythonFFP, aliasDefault, false });
         }
 
+        private void AddPythonInterpreter(string pythonFFP, string alias, bool ifCheck)
+        {
+            this.dataGridView.Rows.Add(new Object[] { pythonFFP, alias, ifCheck });
+            if (ifCheck)
+            {
+                this.pythonFFPTextBox.Text = pythonFFP;
+                this.chosenPythonLable.Text = alias;
+            }       
+        }
+
         private void SavePythonConfig()
-        { 
+        {
+            // <add key="python" value="C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;" />
+            StringBuilder sb = new StringBuilder();
+            foreach (DataGridViewRow row in this.dataGridView.Rows)
+            {
+                string pythonFFP = row.Cells[PythonFFPColumnIndex].Value.ToString().Trim();
+                string alias = row.Cells[AliasColumnIndex].Value.ToString().Trim();
+                bool ifCheck = (bool)row.Cells[CheckBoxColumnIndex].Value;
+                sb.Append(pythonFFP).Append('|')
+                  .Append(alias).Append('|')
+                  .Append(ifCheck).Append(';');
+            }
+            ConfigUtil.TrySetAppSettingsByKey("python", sb.ToString());
         }
 
         private bool CheckPythonInterpreter(string pythonFFP)
         {
+            //TODO 运行python --version, 检查环境是否有问题
             return true;
         }
 
@@ -119,18 +145,64 @@ namespace Citta_T1.Dialogs
         }
 
         private void PythonConfigTabPage_Load()
-        { 
-        
+        {
+            // 配置文件样例
+            // <add key="python" value="C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;" />
+            // 加载已有的配置文件
+            string value = ConfigUtil.TryGetAppSettingsByKey("python");
+            foreach (string pItem in value.Split(';'))
+            {
+                string[] oneConfig = pItem.Split('|');
+                // 格式不对, 忽略
+                if (oneConfig.Length != 3)
+                    continue;
+                string pythonFFP = oneConfig[0].Trim();
+                string alias = oneConfig[1].Trim();
+                bool ifCheck = StringTryParseBool(oneConfig[2]);
+                AddPythonInterpreter(pythonFFP, alias, ifCheck);
+            }
+
+
+            if (!String.IsNullOrEmpty(pythonOpenFileDialog.InitialDirectory))
+                return;
+            // 寻找可能的Python路径,
+            string possibleInitialDirectory = ConfigUtil.GetDefaultPythonOpenFileDirectory();
+            if (!String.IsNullOrEmpty(possibleInitialDirectory))
+                pythonOpenFileDialog.InitialDirectory = possibleInitialDirectory;  
+        }
+
+        private bool StringTryParseBool(string value)
+        {
+            try 
+            {
+                return bool.Parse(value);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
         private void DataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            if (e.ColumnIndex != 1)
+                return;
+
+            string value = e.FormattedValue.ToString().Trim();
             // 别名不能为空
-            if (e.ColumnIndex == 1 && String.IsNullOrEmpty(e.FormattedValue.ToString().Trim()))
+            if (String.IsNullOrEmpty(value))
             {
                 dataGridView.Rows[e.RowIndex].ErrorText = "别名不能为空";
                 e.Cancel = true;
+                return;
+            }
+            // 特殊字符判断
+            if (value.IndexOfAny(IllegalCharacter) != -1)
+            {  
+                dataGridView.Rows[e.RowIndex].ErrorText = "别名不能含有特殊字符 " + String.Join(" ", IllegalCharacter);
+                e.Cancel = true;
+                return;
             }
         }
 
@@ -161,6 +233,21 @@ namespace Citta_T1.Dialogs
                 }         
             }
             this.chosenPythonLable.Text = String.Empty;         
+        }
+
+        private void DataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                // 全部都没选中时, chosen清空，  选定的当前列, 需要用 EditedFormattedValue,此时Value尚未提交
+                DataGridViewCell cell = row.Cells[CheckBoxColumnIndex];
+                if ((bool)cell.Value)
+                {
+                    this.chosenPythonLable.Text = row.Cells[AliasColumnIndex].Value.ToString().Trim();
+                    return;
+                }
+            }
+            this.chosenPythonLable.Text = String.Empty;
         }
     }
 }

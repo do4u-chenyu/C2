@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,7 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-          
+
+            SetTextBoxName(this.dataInfo);
         }
       
         #region 配置初始化
@@ -56,6 +58,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath = dataInfo["dataPath0"];
                 this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                this.toolTip1.SetToolTip(this.dataInfo, this.dataInfo.Text);
                 SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
             }
         }
@@ -90,6 +93,29 @@ namespace Citta_T1.OperatorViews
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
+        }
         #endregion
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
@@ -194,6 +220,58 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
+        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+        }
 
+        private void dataInfo_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.dataInfo);
+        }
+
+        private void NonNumeric_FirstRow()
+        {
+            if (this.firstRow.Text == "") return;
+            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
+            if (!rg.IsMatch(this.firstRow.Text))
+            {
+                this.firstRow.Text = "";
+                MessageBox.Show("请输入数字");
+            }
+        }
+        private void NonNumeric_EndRow()
+        {
+            if (this.endRow.Text == "") return;
+            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
+            if (!rg.IsMatch(this.endRow.Text))
+            {
+                this.endRow.Text = "";
+                MessageBox.Show("请输入数字");
+            }
+        }
+        #region 输入非数字，警告
+        private void firstRow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                NonNumeric_FirstRow();
+        }
+
+        private void firstRow_Leave(object sender, EventArgs e)
+        {
+            NonNumeric_FirstRow();
+        }
+
+        private void endRow_Leave(object sender, EventArgs e)
+        {
+            NonNumeric_EndRow();
+        }
+
+        private void endRow_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                NonNumeric_EndRow();
+        }
+        #endregion
     }
 }
