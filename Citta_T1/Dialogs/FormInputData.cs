@@ -24,7 +24,7 @@ namespace Citta_T1.Dialogs
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
-        private string invalidChars = "!<";
+        private string invalidChars = "&\"' ";
         private string invalidCharsPattern;
 
         public FormInputData()
