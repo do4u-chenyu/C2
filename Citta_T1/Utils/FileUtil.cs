@@ -127,5 +127,17 @@ namespace Citta_T1.Utils
             }
             return root;
         }
+
+        public static string[] TryListDirectory(string path)
+        {
+            try
+            {
+                return System.IO.Directory.GetDirectories(path);
+            }
+            catch
+            {
+                return new string[0];
+            }
+        }
     }
 }
