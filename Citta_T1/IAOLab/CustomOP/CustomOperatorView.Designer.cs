@@ -28,14 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.confirmButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.confirmButton.Location = new System.Drawing.Point(321, 283);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
+            this.confirmButton.Name = "confirmButton";
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.TabIndex = 1;
+            this.confirmButton.Text = "确认";
+            this.confirmButton.UseVisualStyleBackColor = false;
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.cancelButton.Location = new System.Drawing.Point(407, 283);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // CustomOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 325);
+            this.ClientSize = new System.Drawing.Size(477, 317);
             this.ControlBox = false;
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.confirmButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -47,5 +79,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button confirmButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

@@ -502,6 +502,18 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     new GroupOperatorView(this).ShowDialog();
                     break;
+                case "自定义算子1":
+                    new CustomOperatorView(this).ShowDialog();
+                    break;
+                case "自定义算子2":
+                    new CustomOperatorView(this).ShowDialog();
+                    break;
+                case "Python算子1":
+                    new PythonOperatorView(this).ShowDialog();
+                    break;
+                case "Python算子2":
+                    new PythonOperatorView(this).ShowDialog();
+                    break;
                 default:
                     break;
             }
