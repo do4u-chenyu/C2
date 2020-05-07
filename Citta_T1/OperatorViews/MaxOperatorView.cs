@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -41,9 +42,9 @@ namespace Citta_T1.OperatorViews
             this.oldMaxfield = this.MaxValueBox.Text;           
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
+
+            SetTextBoxName(this.DataInfoBox);
             
-
-
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -158,7 +159,8 @@ namespace Citta_T1.OperatorViews
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataPath = dataInfo["dataPath0"];
-                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);                
+                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
                 SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding0"]);
             }
         }
@@ -205,11 +207,45 @@ namespace Citta_T1.OperatorViews
             catch (Exception ex) { log.Error(ex.Message); };
         }
 
+
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach(Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
+        }
+
         #endregion
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
+        private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+        }
 
+        private void DataInfoBox_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.DataInfoBox);
+        }
+        
     }
 
 }

@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,6 +38,8 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
             this.oldOutList = this.OutList.GetItemCheckIndex();
+
+            SetTextBoxName(this.DataInfoBox);
         }
         private bool IsOptionReay() 
         {
@@ -92,6 +95,7 @@ namespace Citta_T1.OperatorViews
                 {
                     this.dataPath = me.GetFullFilePath();
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                    this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
@@ -114,8 +118,30 @@ namespace Citta_T1.OperatorViews
             this.opControl.SingleDataSourceColumns = column;
            
         }
-      
 
+        public void SetTextBoxName(TextBox textBox)
+        {
+            string dataName = textBox.Text;
+            int maxLength = 18;
+            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
+            int sumcount = chs.Count * 2;
+            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
+
+            //防止截取字符串时中文乱码
+            foreach (Match mc in chs)
+            {
+                if (dataName.IndexOf(mc.ToString()) == maxLength)
+                {
+                    maxLength -= 1;
+                    break;
+                }
+            }
+
+            if (sumcount + sumcountDigit > maxLength)
+            {
+                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+            }
+        }
         #endregion
         #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
@@ -389,5 +415,14 @@ namespace Citta_T1.OperatorViews
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
+        private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+        }
+
+        private void DataInfoBox_LostFocus(object sender, EventArgs e)
+        {
+            SetTextBoxName(this.DataInfoBox);
+        }
     }
 }

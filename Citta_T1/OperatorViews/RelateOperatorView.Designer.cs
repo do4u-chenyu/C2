@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.DataInfoBox2 = new System.Windows.Forms.TextBox();
+            this.DataInfoBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.OutList = new UserControlDLL.ComCheckBoxList();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -46,8 +49,8 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.DataInfoBox2 = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -90,7 +93,7 @@
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(891, 56);
+            this.topPanel.Size = new System.Drawing.Size(887, 56);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -98,9 +101,9 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 512);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 508);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(891, 96);
+            this.bottomPanel.Size = new System.Drawing.Size(887, 96);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,7 +140,7 @@
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 56);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(174, 456);
+            this.keyPanel.Size = new System.Drawing.Size(174, 452);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -151,8 +154,32 @@
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(174, 56);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(717, 456);
+            this.valuePanel.Size = new System.Drawing.Size(713, 452);
             this.valuePanel.TabIndex = 3;
+            // 
+            // DataInfoBox2
+            // 
+            this.DataInfoBox2.Location = new System.Drawing.Point(349, 3);
+            this.DataInfoBox2.Name = "DataInfoBox2";
+            this.DataInfoBox2.ReadOnly = true;
+            this.DataInfoBox2.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox2.TabIndex = 12;
+            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox2_MouseClick);
+            this.DataInfoBox2.LostFocus += new System.EventHandler(this.DataInfoBox2_LostFocus);
+
+            // 
+            // DataInfoBox
+            // 
+            this.DataInfoBox.Location = new System.Drawing.Point(6, 3);
+            this.DataInfoBox.Name = "DataInfoBox";
+            this.DataInfoBox.ReadOnly = true;
+            this.DataInfoBox.Size = new System.Drawing.Size(214, 28);
+            this.DataInfoBox.TabIndex = 11;
+            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+
             // 
             // label4
             // 
@@ -263,29 +290,11 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(652, 126);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // DataInfoBox
-            // 
-            this.DataInfoBox.Location = new System.Drawing.Point(6, 3);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.Size = new System.Drawing.Size(214, 28);
-            this.DataInfoBox.TabIndex = 11;
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // DataInfoBox2
-            // 
-            this.DataInfoBox2.Location = new System.Drawing.Point(349, 3);
-            this.DataInfoBox2.Name = "DataInfoBox2";
-            this.DataInfoBox2.Size = new System.Drawing.Size(214, 28);
-            this.DataInfoBox2.TabIndex = 12;
-            this.DataInfoBox2.ReadOnly = true;
-            this.DataInfoBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // RelateOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 608);
+            this.ClientSize = new System.Drawing.Size(887, 604);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -329,5 +338,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox DataInfoBox2;
         private System.Windows.Forms.TextBox DataInfoBox;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }
