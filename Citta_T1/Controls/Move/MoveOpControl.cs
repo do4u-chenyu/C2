@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 自定义算子2 Python算子2";
 
         private string opControlName;
         private Point mouseOffset;

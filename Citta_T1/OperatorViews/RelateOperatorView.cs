@@ -84,16 +84,11 @@ namespace Citta_T1.OperatorViews
             //dataBox.Items.AddRange(this.columnName);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            ComboBox filterBox = new ComboBox();
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
+            Label label = new Label();
+            label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            label.Text = "等于=";
+            label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
 
             ComboBox data2box = new ComboBox();
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;

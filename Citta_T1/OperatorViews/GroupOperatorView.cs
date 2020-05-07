@@ -145,6 +145,7 @@ namespace Citta_T1.OperatorViews
             for (int i = 2; i < (count + 1); i++)
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                if (factor == "") continue;
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
                 List<int> fieldColumn = new List<int>(Nums[0]);
