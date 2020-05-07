@@ -172,14 +172,13 @@ namespace Citta_T1.Controls
                 if (mrIndex != -1)
                     this.ShowDelectOption(e.Location);        // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
                 else
-                    this.ResetAllLineStatus(true); // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
+                    this.ResetAllLineStatus(null, true); // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
                 return;
             }
             if (mrIndex != -1)
             {
-                this.ResetAllLineStatus();
-                ModelRelation mr = Global.GetCurrentDocument().ModelRelations[mrIndex];
-                mr.Selected = !mr.Selected;
+                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
+                this.ResetAllLineStatus(selectLineIndexs, false);
                 this.Invalidate(false);
             }
             // TODO [Dk] 后两个算子就不该有PinDraw这个动作
@@ -222,11 +221,17 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1.Show(this, p);
         }
 
-        private void ResetAllLineStatus(bool isInvalidate = false)
+        private void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            ModelRelation mr;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            for (int i = 0; i < mrs.Count; i++)
             {
-                mr.Selected = false;
+                mr = mrs[i];
+                if (exceptLineIndex != null && exceptLineIndex.Contains(i))
+                    mr.Selected = !mr.Selected;
+                else
+                    mr.Selected = false;
             }
             if (isInvalidate)
                 this.Invalidate(false);
@@ -243,9 +248,18 @@ namespace Citta_T1.Controls
             ModelRelation mr;
             foreach (int i in selectLineIndexs)
             {
-                mr = mrs[i];
-                mrs.Remove(mr);
+                try
+                {
+                    mr = mrs[i];
+                    mrs.Remove(mr);
+                }
+                catch (Exception e)
+                {
+                    log.Error("CanvasPanel删除线时发生错误");
+                }
+
             }
+            selectLineIndexs.Clear();
             this.Invalidate(false);
         }
         /// <summary>
@@ -265,7 +279,7 @@ namespace Citta_T1.Controls
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
 
-                //测试用代码
+                ////测试用代码
                 //Graphics g = this.CreateGraphics();
                 //PointF s;
                 //PointF e;

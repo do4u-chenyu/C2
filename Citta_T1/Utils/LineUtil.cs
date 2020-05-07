@@ -162,7 +162,7 @@ namespace Citta_T1.Utils
             // TODO [DK] 没有考虑到坐标系放大系数
             return GetRect(startP, endP);
         }
-        private  RectangleF GetRect(PointF p1, PointF p2, float width = 0)
+        private  RectangleF GetRect(PointF p1, PointF p2, float width = 5)
         {
             float x = Math.Min(p1.X, p2.X);
             float y = Math.Min(p1.Y, p2.Y);
@@ -204,7 +204,7 @@ namespace Citta_T1.Utils
             PointF lineEndP;
             float pToLine;
             float distNotOnLine = LineUtil.DISTNOTONLINE;
-            if (!rect.Contains(p))
+            if (!this.rect.Contains(p))
                 return distNotOnLine;
             // 将线切割成 cutPointNum - 1 段，其实只要存cutPointNum个点就行了
             // 可能和若干个线都靠得很近
@@ -246,7 +246,7 @@ namespace Citta_T1.Utils
         private PointF[] GetPoints()
         {
             PointF[] pointList = new PointF[] { new PointF(this.StartP.X, this.StartP.Y), a, b, new PointF(this.EndP.X, this.EndP.Y) };
-            return this.draw_bezier_curves(pointList, pointList.Length, 0.1F);
+            return this.draw_bezier_curves(pointList, pointList.Length, 0.01F);
         }
         private PointF[] GetCutPointFs()
         {
@@ -260,8 +260,8 @@ namespace Citta_T1.Utils
                 pts[i] = points[index];
             }
             // 第一个点和最后一个点向中间靠拢，解决点Pin的时候误触的问题
-            pts[0].X += 10;
-            pts[cutPointNum - 1].X -= 10; 
+            pts[0].X += 5;
+            pts[cutPointNum - 1].X -= 5; 
             return pts;
         }
         /// <summary>
