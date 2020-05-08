@@ -83,7 +83,6 @@ namespace Citta_T1
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.blankButton = new System.Windows.Forms.Button();
             this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
             this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
@@ -95,6 +94,7 @@ namespace Citta_T1
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
+            this.blankButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -298,6 +298,7 @@ namespace Citta_T1
             // 
             // myModelControl
             // 
+            this.myModelControl.AutoScroll = true;
             this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -458,7 +459,7 @@ namespace Citta_T1
             this.commonPanel.Size = new System.Drawing.Size(634, 48);
             this.commonPanel.TabIndex = 5;
             // 
-            // commonUseControl
+            // topToolBarControl
             // 
             this.topToolBarControl.Location = new System.Drawing.Point(6, 8);
             this.topToolBarControl.Name = "topToolBarControl";
@@ -481,7 +482,7 @@ namespace Citta_T1
             this.importButton.BackColor = System.Drawing.Color.White;
             this.importButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.importButton.Image = ((System.Drawing.Image)(resources.GetObject("importButton.Image")));
-            this.importButton.Location = new System.Drawing.Point(102, 8);
+            this.importButton.Location = new System.Drawing.Point(101, 8);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
@@ -494,20 +495,20 @@ namespace Citta_T1
             this.saveModelButton.BackColor = System.Drawing.Color.White;
             this.saveModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.saveModelButton.Image = ((System.Drawing.Image)(resources.GetObject("saveModelButton.Image")));
-            this.saveModelButton.Location = new System.Drawing.Point(189, 8);
+            this.saveModelButton.Location = new System.Drawing.Point(188, 8);
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(79, 32);
             this.saveModelButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
             this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
-            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             // 
             // newModelButton
             // 
             this.newModelButton.BackColor = System.Drawing.Color.White;
             this.newModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.newModelButton.Image = ((System.Drawing.Image)(resources.GetObject("newModelButton.Image")));
-            this.newModelButton.Location = new System.Drawing.Point(15, 8);
+            this.newModelButton.Location = new System.Drawing.Point(14, 8);
             this.newModelButton.Name = "newModelButton";
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
@@ -664,16 +665,6 @@ namespace Citta_T1
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
-            // blankButton
-            // 
-            this.blankButton.Location = new System.Drawing.Point(461, 40);
-            this.blankButton.Margin = new System.Windows.Forms.Padding(2);
-            this.blankButton.Name = "blankButton";
-            this.blankButton.Size = new System.Drawing.Size(0, 0);
-            this.blankButton.TabIndex = 6;
-            this.blankButton.Text = "button1";
-            this.blankButton.UseVisualStyleBackColor = true;
-            // 
             // remarkControl
             // 
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
@@ -821,6 +812,16 @@ namespace Citta_T1
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
+            // 
+            // blankButton
+            // 
+            this.blankButton.Location = new System.Drawing.Point(461, 40);
+            this.blankButton.Margin = new System.Windows.Forms.Padding(2);
+            this.blankButton.Name = "blankButton";
+            this.blankButton.Size = new System.Drawing.Size(0, 0);
+            this.blankButton.TabIndex = 6;
+            this.blankButton.Text = "button1";
+            this.blankButton.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

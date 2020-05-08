@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Citta_T1.Business.DataSource;
-using Citta_T1.Business.Model;
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
@@ -12,16 +11,18 @@ namespace Citta_T1.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        private Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
+       
         public DataSourceControl()
         {
-            InitializeComponent();
+            dataSourceDictI2B = new Dictionary<string, DataButton>();
+            InitializeComponent(); 
         }
 
         private static int ButtonGapHeight = 50;
         private static int ButtonLeftX = 17;
         private static int ButtonBottomOffsetY = 40;
 
+        private Dictionary<string, DataButton> dataSourceDictI2B;
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; set => dataSourceDictI2B = value; }
 
         // 手工导入时调用

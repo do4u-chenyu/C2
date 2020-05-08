@@ -35,10 +35,10 @@ namespace  Citta_T1
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
         {
+            InitializeComponent();
             this.formInputData = new Citta_T1.Dialogs.FormInputData();
             this.formInputData.InputDataEvent += frm_InputDataEvent;
             this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
-            InitializeComponent();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
 
