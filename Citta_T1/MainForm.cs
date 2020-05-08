@@ -288,7 +288,7 @@ namespace  Citta_T1
             this.ShowDataView();
             this.logView.Visible = false;
             this.dataGridView2.Visible = false;
-            this.dataGridView3.Visible = true;
+            this.dataGridView0.Visible = true;
         }
 
         private void ErrorLabel_Click(object sender, EventArgs e)
@@ -296,7 +296,7 @@ namespace  Citta_T1
             this.ShowDataView();
             this.dataGridView2.Visible = true;
             this.logView.Visible = false;
-            this.dataGridView3.Visible = false;
+            this.dataGridView0.Visible = false;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
@@ -304,7 +304,7 @@ namespace  Citta_T1
             this.ShowDataView();
             this.logView.Visible = true;
             this.dataGridView2.Visible = false;
-            this.dataGridView3.Visible = false;
+            this.dataGridView0.Visible = false;
         }
         private void ShowDataView()
         {
@@ -395,10 +395,10 @@ namespace  Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByBcpPath(string bcpPath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
+        public void PreViewDataByFullFilePath(string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowDataView(); 
-            this.dataGridView3.PreViewDataByFullFilePath(bcpPath, separator, extType, encoding, isForceRead);
+            this.dataGridView0.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

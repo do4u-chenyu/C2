@@ -88,7 +88,7 @@ namespace Citta_T1
             this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
-            this.dataGridView3 = new Citta_T1.DataGridView0();
+            this.dataGridView0 = new Citta_T1.DataGridView0();
             this.logView = new Citta_T1.Dgvs.LogView();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
@@ -262,7 +262,7 @@ namespace Citta_T1
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView3);
+            this.bottomViewPanel.Controls.Add(this.dataGridView0);
             this.bottomViewPanel.Controls.Add(this.logView);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
@@ -387,7 +387,7 @@ namespace Citta_T1
             this.importButton.BackColor = System.Drawing.Color.White;
             this.importButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.importButton.Image = ((System.Drawing.Image)(resources.GetObject("importButton.Image")));
-            this.importButton.Location = new System.Drawing.Point(100, 8);
+            this.importButton.Location = new System.Drawing.Point(94, 8);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
@@ -400,7 +400,7 @@ namespace Citta_T1
             this.saveModelButton.BackColor = System.Drawing.Color.White;
             this.saveModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.saveModelButton.Image = ((System.Drawing.Image)(resources.GetObject("saveModelButton.Image")));
-            this.saveModelButton.Location = new System.Drawing.Point(187, 8);
+            this.saveModelButton.Location = new System.Drawing.Point(181, 8);
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(79, 32);
             this.saveModelButton.TabIndex = 1;
@@ -413,7 +413,7 @@ namespace Citta_T1
             this.newModelButton.BackColor = System.Drawing.Color.White;
             this.newModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.newModelButton.Image = ((System.Drawing.Image)(resources.GetObject("newModelButton.Image")));
-            this.newModelButton.Location = new System.Drawing.Point(13, 8);
+            this.newModelButton.Location = new System.Drawing.Point(7, 8);
             this.newModelButton.Name = "newModelButton";
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
@@ -737,12 +737,12 @@ namespace Citta_T1
             // 
             // dataGridView3
             // 
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView3.TabIndex = 27;
+            this.dataGridView0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView0.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView0.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView0.Name = "dataGridView3";
+            this.dataGridView0.Size = new System.Drawing.Size(906, 241);
+            this.dataGridView0.TabIndex = 27;
             // 
             // logView
             // 
@@ -930,7 +930,7 @@ namespace Citta_T1
         private Controls.Flow.FlowControl flowControl;
         private Controls.Title.DragLineControl dragLineControl;
         private Controls.Flow.RemarkControl remarkControl;
-        private DataGridView0 dataGridView3;
+        private DataGridView0 dataGridView0;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private System.Windows.Forms.Panel panel3;
