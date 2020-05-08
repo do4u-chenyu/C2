@@ -153,6 +153,12 @@ namespace Citta_T1.Dialogs
                 PreViewBcpFile();
             }
         }
+        private void Clean()
+        {
+            this.fullFilePath = null;
+            this.textBox1.Text = null;
+            this.DvgClean();
+        }
 
         private void PreViewBcpFile()
         {
@@ -182,6 +188,7 @@ namespace Citta_T1.Dialogs
             if (header == null)
             {
                 MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
+                this.Clean();
                 return;
             }
             String[] headers = header.Split(this.separator);
