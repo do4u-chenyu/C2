@@ -173,7 +173,11 @@ namespace Citta_T1.Utils
                 for (int i = 0; i < Math.Min(maxRow, sheet.LastRowNum + 1); i++)
                 {
                     IRow row = sheet.GetRow(i + sheet.FirstRowNum + 1);
-                    if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
+                    if (row == null)
+                    {
+                        sb.AppendLine(String.Empty);
+                        continue;
+                    }             // 没有数据的行默认是null　　　　　　　
 
                     for (int j = 0; j < colNum; j++)
                         rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
