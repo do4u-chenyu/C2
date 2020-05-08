@@ -38,6 +38,7 @@ namespace Citta_T1.Utils
         public string PreviewFileContent { get => previewFileContent; set => previewFileContent = value; }
         public string HeadColumnLine { get => headColumnLine; set => headColumnLine = value; }
         public bool Dirty { get => dirty; set => dirty = value; }
+        public bool NotDirty { get => !Dirty; }
     }
     class BCPBuffer
     {
@@ -60,7 +61,7 @@ namespace Citta_T1.Utils
         private string GetCachePreViewFileContent(string fullFilePath, DSUtil.ExtType type, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
-            // 数据不存在时 按照路径重新读取
+            // 数据不存在 或 需要强制读取时 按照路径重新读取
             if (!HitCache(fullFilePath) || isForceRead)
                 switch (type)
                 {
@@ -122,9 +123,10 @@ namespace Citta_T1.Utils
 
         private bool HitCache(string fullFilePath)
         {
-            return dataPreviewDict.ContainsKey(fullFilePath) 
-                && dataPreviewDict[fullFilePath] != null 
-                && dataPreviewDict[fullFilePath].IsNotEmpty();
+            return dataPreviewDict.ContainsKey(fullFilePath)   // 哈希表里有这个记录
+                && dataPreviewDict[fullFilePath] != null       // 对应的Value不为Null,返回null的话特别容易出bug,源头杜绝
+                && dataPreviewDict[fullFilePath].IsNotEmpty()  // 没内容认为是没命中, 空文件每次读也无所谓
+                && dataPreviewDict[fullFilePath].NotDirty;     // 外部置脏数据了,得重读
         }
         
 
@@ -158,24 +160,24 @@ namespace Citta_T1.Utils
                 }
                     
                 IRow firstRow = sheet.GetRow(0);            // 此处会不会为空?
-                int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
                 int colNum = firstRow.Cells.Count;
                 string[] headers = new string[colNum];
                 string[] rowContent = new string[colNum];
-
                 for (int i = 0; i < colNum; i++)
                     headers[i] = firstRow.Cells[i].ToString();
 
                 string firstLine = String.Join("\t", headers);     // 大师说默认第一行就是表头   
                 StringBuilder sb = new StringBuilder(1024 * 16);
                 sb.AppendLine(firstLine);
-                int startRow = sheet.FirstRowNum + 1;
-                //最后一列的标号
-                int rowCount = sheet.LastRowNum;
-                for (int i = 0; i <= Math.Min(maxRow, rowCount); i++)
+                //下标从0开始,且第一列是表头
+                for (int i = 0; i < Math.Min(maxRow, sheet.LastRowNum + 1); i++)
                 {
-                    IRow row = sheet.GetRow(i + startRow);
-                    if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
+                    IRow row = sheet.GetRow(i + sheet.FirstRowNum + 1);
+                    if (row == null)
+                    {
+                        sb.AppendLine(String.Empty);
+                        continue;
+                    }             // 没有数据的行默认是null　　　　　　　
 
                     for (int j = 0; j < colNum; j++)
                         rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
@@ -207,7 +209,6 @@ namespace Citta_T1.Utils
         private void PreLoadBcpFile(string fullFilePath, DSUtil.Encoding encoding)
         {
             StreamReader sr = null;
-           ;
             try
             {
                 if (encoding == DSUtil.Encoding.UTF8)
@@ -226,7 +227,6 @@ namespace Citta_T1.Utils
 
                 sr.Close();
                 sr.Dispose();
-
                 dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
             }
             catch(Exception ex) 
@@ -236,10 +236,8 @@ namespace Citta_T1.Utils
                     sr.Close();
                     sr.Dispose();
                 }
-                    
                 log.Error("BCPBuffer 空路径名是非法的: " + ex.ToString());
-            }
-            
+            }  
         }
 
 
@@ -252,9 +250,16 @@ namespace Citta_T1.Utils
             }
             return BcpBufferSingleInstance;
         }
+        
+        public void SetDirty(string fullFilePath)
+        {  
+            // 如果未命中缓存,肯定是每次重新加载,不需要设置Dirty
+            if (!HitCache(fullFilePath))
+                return;
+            dataPreviewDict[fullFilePath].Dirty = true;
+        }
         public string CreateNewBCPFile(string fileName, List<string> columnName)
-        {
-            
+        {    
             if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
             {
                 Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
@@ -262,24 +267,17 @@ namespace Citta_T1.Utils
             }
   
             string fullFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, fileName);
-            if (!File.Exists(fullFilePath))
-            {
-                File.Create(fullFilePath).Close();
-                StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8);
-                string columns = String.Join("\t", columnName);
-                sw.WriteLine(columns.Trim('\t'));
-                sw.Flush();
-                sw.Close();
-            }     
+            ReWriteBCPFile(fullFilePath, columnName);
             return fullFilePath;
         }
         public void ReWriteBCPFile(string fullFilePath, List<string> columnName)
         {
-            StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8);
-            string columns = String.Join("\t", columnName); ;
-            sw.WriteLine(columns.Trim('\t'));
-            sw.Flush();
-            sw.Close();  
+            using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+            {
+                string columns = String.Join("\t", columnName); ;
+                sw.WriteLine(columns.Trim('\t'));
+                sw.Flush();
+            }
         }
     }
 }

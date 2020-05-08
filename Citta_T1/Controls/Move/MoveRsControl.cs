@@ -84,6 +84,7 @@ namespace Citta_T1.Controls.Move
             get => this.status;
             set
             {
+                if (this.status != value) StatusChanged(); // 状态改变
                 this.status = value;
                 StatusDirty();
             }
@@ -312,7 +313,7 @@ namespace Citta_T1.Controls.Move
         {
             if (System.IO.File.Exists(this.FullFilePath))
             {
-                Global.GetMainForm().PreViewDataByBcpPath(this.FullFilePath, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
+                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
             }
         }
 
@@ -550,6 +551,15 @@ namespace Citta_T1.Controls.Move
                 this.leftPicture.Image = Properties.Resources.resultNull;
             else if (this.status == ElementStatus.Done)
                 this.leftPicture.Image = Properties.Resources.resultDone;
+        }
+
+        // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
+        private void StatusChanged()
+        {
+            if (!System.IO.File.Exists(this.FullFilePath))
+                return;
+
+            BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
 
         }
         #endregion

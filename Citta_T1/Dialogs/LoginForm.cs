@@ -7,10 +7,12 @@ namespace Citta_T1.Dialogs
 {
     public partial class LoginForm : Form
     {
-        List<string> users;
+        private List<string> users;
+        private MainForm mainForm;
         public LoginForm()
         {
             InitializeComponent();
+            
         }
         private void LoginForm_Load(object sender, EventArgs e)
         {
@@ -22,7 +24,7 @@ namespace Citta_T1.Dialogs
             List<string> lastLogin = lgInfo.LoadUserInfo("lastlogin");
             foreach (string item in lastLogin)
                 userNameComboBox.Text = item;
-
+            mainForm = new MainForm();
         }
         private void LoginButton_Click(object sender, EventArgs e)
         {  
@@ -35,7 +37,7 @@ namespace Citta_T1.Dialogs
                 lgInfo.WriteUserInfo(userName);
             lgInfo.WriteLastLogin(userName);            
             this.Hide();
-            MainForm mainForm = new MainForm();
+            
             mainForm.UserName = userName;
             mainForm.ShowDialog();
 
