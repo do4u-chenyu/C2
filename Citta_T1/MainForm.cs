@@ -112,11 +112,23 @@ namespace  Citta_T1
 
         }
 
-        public void SaveDocument()
+        public void SaveCurrentDocument()
         {
-            string modelTitle = this.modelDocumentDao.SaveDocument();
+            string modelTitle = this.modelDocumentDao.SaveCurrentDocument();
             if (!this.myModelControl.ContainModel(modelTitle))
                 this.myModelControl.AddModel(modelTitle);
+        }
+
+        private void SaveAllDocuments()
+        {
+            string[] modelTitles = this.modelDocumentDao.SaveAllDocuments();
+            foreach (string modelTitle in modelTitles)
+            {   // 加入左侧我的模型面板
+                if (!this.myModelControl.ContainModel(modelTitle))
+                    this.myModelControl.AddModel(modelTitle);
+                // 清空Dirty标志
+                this.modelTitlePanel.ResetDirtyPictureBox(modelTitle, false);
+            }
         }
 
         private void ModelTitlePanel_DocumentSwitch(string modelTitle)
@@ -660,7 +672,7 @@ namespace  Citta_T1
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
             this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
-            SaveDocument();         
+            SaveCurrentDocument();         
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -701,6 +713,11 @@ namespace  Citta_T1
                     this.canvasPanel.DeleteSelectedLines();
             }
             return false;
+        }
+
+        private void SaveAllButton_Click(object sender, EventArgs e)
+        {
+            SaveAllDocuments();
         }
     }
 }
