@@ -411,7 +411,7 @@ namespace Citta_T1.Controls
         {
             if (e.Button != MouseButtons.Left) return; 
 
-            if (((MainForm)(this.Parent)).flowControl.SelectFrame)
+            if (Global.GetFlowControl().SelectFrame)
             {
                 Bitmap i = new Bitmap(this.staticImage);
                 Graphics n = this.CreateGraphics();

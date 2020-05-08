@@ -10,190 +10,215 @@ using System.Text.RegularExpressions;
 
 namespace Citta_T1.Utils
 {
+    class FileCache
+    {
+        private string previewFileContent;     // 文件内容
+        private string headColumnLine;         // 表头
+        private bool dirty;
+
+        public FileCache(string content, string headLine)
+        {
+            previewFileContent = content;
+            headColumnLine = headLine;
+            dirty = false;
+        }
+
+        public bool IsEmpty()
+        {
+            // 必须有表头,如果连表头都没有,就认定为空
+            return String.IsNullOrEmpty(headColumnLine);
+        }
+
+        public bool IsNotEmpty()
+        {
+            // 必须有表头,如果连表头都没有,就认定为空
+            return !IsEmpty();
+        }
+
+        public string PreviewFileContent { get => previewFileContent; set => previewFileContent = value; }
+        public string HeadColumnLine { get => headColumnLine; set => headColumnLine = value; }
+        public bool Dirty { get => dirty; set => dirty = value; }
+    }
     class BCPBuffer
     {
-        private Dictionary<string, string> dataPreviewDict = new Dictionary<string, string>();
-        private Dictionary<string, string> columnDict = new Dictionary<string, string>();
-        private int maxRow = 100;
+        private Dictionary<string, FileCache> dataPreviewDict = new Dictionary<string, FileCache>(128);
 
         private static BCPBuffer BcpBufferSingleInstance;
-        private LogUtil log = LogUtil.GetInstance("BCPBuffer");
-
-        public string GetCacheBcpPreViewContent(string bcpFullPath, DSUtil.Encoding encoding, bool isForceRead = false)
+        private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
+        private static readonly Regex regexXls = new Regex(@"\.xl(s[xmb]|t[xm]|am)$");
+        private static readonly int maxRow = 100;
+        public string GetCachePreViewBcpContent(string fullFilePath, DSUtil.Encoding encoding, bool isForceRead = false)
         {
-            string ret = "";
-
-            // 数据不存在时 按照路径重新读取
-            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "" || isForceRead)           
-                PreLoadBcpFile(bcpFullPath, encoding);
-            // 防止文件读取时发生错误, 重新判断下是否存在
-            if (dataPreviewDict.ContainsKey(bcpFullPath))
-                ret = dataPreviewDict[bcpFullPath];
-            return ret;
-
+            return GetCachePreViewFileContent(fullFilePath, DSUtil.ExtType.Text, encoding, isForceRead);
         }
 
-        public string GetCacheExcelPreViewContent(string bcpFullPath, bool isForceRead = false)
+        public string GetCachePreViewExcelContent(string fullFilePath, bool isForceRead = false)
         {
-            string ret = "";
-
-            // 数据不存在时 按照路径重新读取
-            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "" || isForceRead)
-                PreLoadExcelFile(bcpFullPath);
-            // 防止文件读取时发生错误, 重新判断下是否存在
-            if (dataPreviewDict.ContainsKey(bcpFullPath))
-                ret = dataPreviewDict[bcpFullPath];
-            return ret;
-
+            return GetCachePreViewFileContent(fullFilePath, DSUtil.ExtType.Excel, DSUtil.Encoding.NoNeed, isForceRead);
         }
-        public string GetCacheColumnLine(string bcpFullPath, DSUtil.Encoding encoding)
+
+        private string GetCachePreViewFileContent(string fullFilePath, DSUtil.ExtType type, DSUtil.Encoding encoding, bool isForceRead = false)
+        {
+            string ret = String.Empty;
+            // 数据不存在时 按照路径重新读取
+            if (!HitCache(fullFilePath) || isForceRead)
+                switch (type)
+                {
+                    case DSUtil.ExtType.Excel:
+                        PreLoadExcelFile(fullFilePath);
+                        break;
+                    case DSUtil.ExtType.Text:
+                        PreLoadBcpFile(fullFilePath, encoding);
+                        break;
+                    default:
+                        break;
+                }
+            // 防止文件读取时发生错误, 重新判断下是否存在
+            if (HitCache(fullFilePath))
+                ret = dataPreviewDict[fullFilePath].PreviewFileContent;
+            return ret;
+        }
+        public string GetCacheColumnLine(string fullFilePath, DSUtil.Encoding encoding)
         {
 
-            string ret = "";
+            string ret = String.Empty;
             //Excel类型
-            Regex regex = new Regex(@"\.xl(s[xmb]|t[xm]|am)$");
-            if (regex.IsMatch(bcpFullPath))
+            if (regexXls.IsMatch(fullFilePath))
             {
-                PreLoadExcelFile(bcpFullPath);
-                if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
-                    PreLoadExcelFile(bcpFullPath);
+                PreLoadExcelFile(fullFilePath);
                 // 防止文件读取时发生错误, 重新判断下是否存在
-                if (columnDict.ContainsKey(bcpFullPath))
-                    ret = columnDict[bcpFullPath].Trim('\n');
+                if (HitCache(fullFilePath))
+                    ret = dataPreviewDict[fullFilePath].HeadColumnLine;
                 return ret;
             }
             //BCP类型
-            PreLoadBcpFile(bcpFullPath, encoding);
-            if (!columnDict.ContainsKey(bcpFullPath) || columnDict[bcpFullPath] == "")
-                PreLoadBcpFile(bcpFullPath, encoding);
+            PreLoadBcpFile(fullFilePath, encoding);
             // 防止文件读取时发生错误, 重新判断下是否存在
-            if (columnDict.ContainsKey(bcpFullPath))
-                ret = columnDict[bcpFullPath];
+            if (HitCache(fullFilePath))
+                ret = dataPreviewDict[fullFilePath].HeadColumnLine;
             return ret;
         }
 
 
-        public void TryLoadFile(string bcpFullPath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void TryLoadFile(string fullFilePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
-            if (!dataPreviewDict.ContainsKey(bcpFullPath) || dataPreviewDict[bcpFullPath] == "")
+            // 命中缓存,直接返回,不再加载文件
+            if (HitCache(fullFilePath))
+                return;
+
+            switch(extType)
             {
-                if (extType == DSUtil.ExtType.Text)
-                    PreLoadBcpFile(bcpFullPath, encoding);  // 按行读取文件 不分割
-                else
-                    PreLoadExcelFile(bcpFullPath);
-            }
-                
+                case DSUtil.ExtType.Excel:
+                    PreLoadExcelFile(fullFilePath);
+                    break;
+                case DSUtil.ExtType.Text:
+                    PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
+                    break;
+                case DSUtil.ExtType.Unknow:
+                default:
+                    break;
+            }                
+        }
+
+        private bool HitCache(string fullFilePath)
+        {
+            return dataPreviewDict.ContainsKey(fullFilePath) 
+                && dataPreviewDict[fullFilePath] != null 
+                && dataPreviewDict[fullFilePath].IsNotEmpty();
         }
         
 
         public void Remove(string bcpFullPath)
         {
             dataPreviewDict.Remove(bcpFullPath);
-            columnDict.Remove(bcpFullPath);
         }
 
 
         /*
          * 按行读取excel文件
          */
-        private void PreLoadExcelFile(string filePath, string sheetName = null, bool isFirstRowColumn = true)
+        private void PreLoadExcelFile(string fullFilePath, string sheetName = "", bool isFirstRowColumn = true)
         {
-            ISheet sheet = null;
-            XSSFWorkbook workbook2007;
-            HSSFWorkbook workbook2003;
-            FileStream fs;
-            string firstLine;
-            int startRow;
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            IWorkbook workbook = null;
+            FileStream fs = null;
             try
             {
-                fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                if (filePath.IndexOf(".xlsx") > 0) // 2007版本
-                {
-                    workbook2007 = new XSSFWorkbook(fs);
-                    if (sheetName != null)
-                    {
-                        sheet = workbook2007.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook2007.GetSheetAt(0);
-                    }
-                }
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+
+                if (fullFilePath.EndsWith(".xlsx")) // 2007版本
+                    workbook = new XSSFWorkbook(fs);       
                 else
+                    workbook = new HSSFWorkbook(fs);   // 2003版本
+                // 不指定sheetName的话, 用第一个sheet
+                ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
+                if (sheet == null)
                 {
-                    workbook2003 = new HSSFWorkbook(fs);   // 2003版本
-                    if (sheetName != null)
-                    {
-                        sheet = workbook2003.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook2003.GetSheetAt(0);
-                    }
+                    fs.Close();
+                    return;
                 }
-                if (sheet != null)
+                    
+                IRow firstRow = sheet.GetRow(0);            // 此处会不会为空?
+                int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
+                int colNum = firstRow.Cells.Count;
+                string[] headers = new string[colNum];
+                string[] rowContent = new string[colNum];
+
+                for (int i = 0; i < colNum; i++)
+                    headers[i] = firstRow.Cells[i].ToString();
+
+                string firstLine = String.Join("\t", headers);     // 大师说默认第一行就是表头   
+                StringBuilder sb = new StringBuilder(1024 * 16);
+                sb.AppendLine(firstLine);
+                int startRow = sheet.FirstRowNum + 1;
+                //最后一列的标号
+                int rowCount = sheet.LastRowNum;
+                for (int i = 0; i <= Math.Min(maxRow, rowCount); i++)
                 {
-                    IRow firstRow = sheet.GetRow(0);
-                    int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
-                    int colNum = firstRow.Cells.Count;
-                    string[] headers = new string[colNum];
-                    string[] rowContent = new string[colNum];
-                    string content;
+                    IRow row = sheet.GetRow(i + startRow);
+                    if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
 
-                    for (int i = 0; i < colNum; i++)
-                    {
-                        headers[i] = firstRow.Cells[i].ToString();
-                    }
-                    firstLine = string.Join("\t", headers);     // 大师说默认第一行就是表头    
-                    firstLine += "\n";
-                    sb.Append(firstLine);
-                    startRow = sheet.FirstRowNum + 1;
-                    //最后一列的标号
-                    int rowCount = sheet.LastRowNum;
-                    for (int i = 0; i <= Math.Min(maxRow, rowCount); ++i)
-                    {
-                        IRow row = sheet.GetRow(i + startRow);
-                        if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
-
-                        for (int j = 0; j <colNum; j++)
-                        {
-                            if (row.GetCell(j) == null)
-                                rowContent[j] = "";
-                            else
-                                rowContent[j] = row.GetCell(j).ToString();
-                        }
-                        content = string.Join("\t", rowContent);
-                        content += "\n";
-                        sb.Append(content);
-                    }
-                    dataPreviewDict[filePath] = sb.ToString();
-                    columnDict[filePath] = firstLine;
+                    for (int j = 0; j < colNum; j++)
+                        rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
+          
+                    sb.AppendLine(String.Join("\t", rowContent));
                 }
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim()) ;
+                workbook.Close();
+                fs.Close();
             }
             catch (Exception ex)
             {
-                log.Error("预读Excel: " + filePath + " 失败, error: " + ex);
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                if (workbook != null)
+                {
+                    workbook.Close();
+                }
+                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
             }
         }
 
         /*
          * 按行读取文件，不分割
          */
-        private void PreLoadBcpFile(string filePath, DSUtil.Encoding encoding)
+        private void PreLoadBcpFile(string fullFilePath, DSUtil.Encoding encoding)
         {
-            System.IO.StreamReader sr;
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            StreamReader sr = null;
+           ;
             try
             {
                 if (encoding == DSUtil.Encoding.UTF8)
-                    sr = File.OpenText(filePath);
+                    sr = File.OpenText(fullFilePath);
                 else
                 {
-                    FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                    sr = new StreamReader(fs, System.Text.Encoding.Default);
+                    FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                    sr = new StreamReader(fs, Encoding.Default);
                 }
                 string firstLine = sr.ReadLine();
+                StringBuilder sb = new StringBuilder(1024 * 16);
                 sb.AppendLine(firstLine);
 
                 for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
@@ -202,11 +227,16 @@ namespace Citta_T1.Utils
                 sr.Close();
                 sr.Dispose();
 
-                dataPreviewDict[filePath] = sb.ToString();
-                columnDict[filePath] = firstLine;
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
             }
             catch(Exception ex) 
             {
+                if (sr != null)
+                {
+                    sr.Close();
+                    sr.Dispose();
+                }
+                    
                 log.Error("BCPBuffer 空路径名是非法的: " + ex.ToString());
             }
             
@@ -224,43 +254,32 @@ namespace Citta_T1.Utils
         }
         public string CreateNewBCPFile(string fileName, List<string> columnName)
         {
-            string filePath = "";
-            string columns = "";
-            filePath = Global.GetCurrentDocument().SavePath;
-            if (!Directory.Exists(filePath))
+            
+            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
             {
-                Directory.CreateDirectory(filePath);
-                Utils.FileUtil.AddPathPower(filePath, "FullControl");
+                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
             }
-            //Directory.CreateDirectory(filePath);
-
-            filePath = Path.Combine(filePath, fileName);
-            if (!System.IO.File.Exists(filePath))
+  
+            string fullFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, fileName);
+            if (!File.Exists(fullFilePath))
             {
-                System.IO.File.Create(filePath).Close();
-                StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8);
-                foreach (string name in columnName)
-                    columns += name + "\t";
+                File.Create(fullFilePath).Close();
+                StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8);
+                string columns = String.Join("\t", columnName);
                 sw.WriteLine(columns.Trim('\t'));
                 sw.Flush();
                 sw.Close();
-            }
-               
-            return filePath;
-
+            }     
+            return fullFilePath;
         }
-        public void ReWriteBCPFile(string filePath, List<string> columnName)
+        public void ReWriteBCPFile(string fullFilePath, List<string> columnName)
         {
-            string columns = "";
-            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate);
-            fs.Close();
-            StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8);
-            foreach (string name in columnName)
-                columns += name + "\t";
+            StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8);
+            string columns = String.Join("\t", columnName); ;
             sw.WriteLine(columns.Trim('\t'));
             sw.Flush();
-            sw.Close();
-           
+            sw.Close();  
         }
     }
 }

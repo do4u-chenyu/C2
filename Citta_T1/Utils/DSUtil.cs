@@ -11,7 +11,8 @@ namespace Citta_T1.Utils
         public enum Encoding
         {
             UTF8,
-            GBK
+            GBK,
+            NoNeed
         }
         public enum ExtType
         {

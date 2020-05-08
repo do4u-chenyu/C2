@@ -352,7 +352,7 @@ namespace Citta_T1.Controls.Move
             else if (e.Clicks == 2)
             {
                 // 清空焦点
-                Global.GetMainForm().blankButton.Focus();
+                Global.GetMainForm().BlankButtonFocus();
                 // 显示配置
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();

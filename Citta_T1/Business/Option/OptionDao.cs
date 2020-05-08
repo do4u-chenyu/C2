@@ -50,8 +50,8 @@ namespace Citta_T1.Business.Option
             int ID = startElement.ID;
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            string columnLine = bcpInfo.columnLine;
+            string[] columnName = columnLine.Split('\t');
             string[] oldName = oldColumnName.Split('\t');
             //新数据源表头不包含旧数据源
             foreach (string name in oldName)
@@ -345,10 +345,10 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
-        public void IsNewOut( List<string> currentcolumns, int ID)
+        public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+            string fullFilePath = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
         //配置初始化
