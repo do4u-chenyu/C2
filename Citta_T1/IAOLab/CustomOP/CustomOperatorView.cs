@@ -19,5 +19,6 @@ namespace Citta_T1.OperatorViews
         {
             Close();
         }
+
     }
 }
