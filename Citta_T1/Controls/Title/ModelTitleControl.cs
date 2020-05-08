@@ -116,7 +116,7 @@ namespace Citta_T1.Controls.Title
             // 保存文件
             if (result == DialogResult.Yes)
             {                
-                mainForm.SaveDocument();
+                mainForm.SaveCurrentDocument();
                 ClearDirtyPictureBox();
             }
 

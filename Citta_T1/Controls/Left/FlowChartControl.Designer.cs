@@ -54,7 +54,7 @@
             this.networkOPButton.FlatAppearance.BorderSize = 0;
             this.networkOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.networkOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.networkOPButton.Location = new System.Drawing.Point(66, 18);
+            this.networkOPButton.Location = new System.Drawing.Point(66, 17);
             this.networkOPButton.Name = "networkOPButton";
             this.networkOPButton.Size = new System.Drawing.Size(104, 40);
             this.networkOPButton.TabIndex = 2;
@@ -76,7 +76,7 @@
             this.customOPButton1.FlatAppearance.BorderSize = 0;
             this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton1.Location = new System.Drawing.Point(66, 64);
+            this.customOPButton1.Location = new System.Drawing.Point(66, 63);
             this.customOPButton1.Name = "customOPButton1";
             this.customOPButton1.Size = new System.Drawing.Size(104, 40);
             this.customOPButton1.TabIndex = 20;
@@ -108,7 +108,7 @@
             this.pythonOPButton1.FlatAppearance.BorderSize = 0;
             this.pythonOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pythonOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton1.Location = new System.Drawing.Point(66, 156);
+            this.pythonOPButton1.Location = new System.Drawing.Point(66, 153);
             this.pythonOPButton1.Name = "pythonOPButton1";
             this.pythonOPButton1.Size = new System.Drawing.Size(104, 40);
             this.pythonOPButton1.TabIndex = 22;
@@ -122,7 +122,7 @@
             this.customOPButton2.FlatAppearance.BorderSize = 0;
             this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton2.Location = new System.Drawing.Point(66, 110);
+            this.customOPButton2.Location = new System.Drawing.Point(66, 108);
             this.customOPButton2.Name = "customOPButton2";
             this.customOPButton2.Size = new System.Drawing.Size(104, 40);
             this.customOPButton2.TabIndex = 24;
@@ -145,7 +145,7 @@
             this.pythonOPButton2.FlatAppearance.BorderSize = 0;
             this.pythonOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pythonOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton2.Location = new System.Drawing.Point(66, 202);
+            this.pythonOPButton2.Location = new System.Drawing.Point(66, 198);
             this.pythonOPButton2.Name = "pythonOPButton2";
             this.pythonOPButton2.Size = new System.Drawing.Size(104, 40);
             this.pythonOPButton2.TabIndex = 26;

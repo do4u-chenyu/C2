@@ -158,7 +158,7 @@
             this.Controls.Add(this.collideButton);
             this.Controls.Add(this.relateButton);
             this.Name = "TopToolBarControl";
-            this.Size = new System.Drawing.Size(654, 33);
+            this.Size = new System.Drawing.Size(630, 33);
             this.ResumeLayout(false);
             this.PerformLayout();
 
