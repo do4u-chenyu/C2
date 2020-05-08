@@ -160,23 +160,19 @@ namespace Citta_T1.Utils
                 }
                     
                 IRow firstRow = sheet.GetRow(0);            // 此处会不会为空?
-                int cellCount = firstRow.LastCellNum;       // 一行最后一个cell的编号 即总的列数
                 int colNum = firstRow.Cells.Count;
                 string[] headers = new string[colNum];
                 string[] rowContent = new string[colNum];
-
                 for (int i = 0; i < colNum; i++)
                     headers[i] = firstRow.Cells[i].ToString();
 
                 string firstLine = String.Join("\t", headers);     // 大师说默认第一行就是表头   
                 StringBuilder sb = new StringBuilder(1024 * 16);
                 sb.AppendLine(firstLine);
-                int startRow = sheet.FirstRowNum + 1;
-                //最后一列的标号
-                int rowCount = sheet.LastRowNum;
-                for (int i = 0; i <= Math.Min(maxRow, rowCount); i++)
+                //下标从0开始,且第一列是表头
+                for (int i = 0; i < Math.Min(maxRow, sheet.LastRowNum + 1); i++)
                 {
-                    IRow row = sheet.GetRow(i + startRow);
+                    IRow row = sheet.GetRow(i + sheet.FirstRowNum + 1);
                     if (row == null) continue;              // 没有数据的行默认是null　　　　　　　
 
                     for (int j = 0; j < colNum; j++)
@@ -236,10 +232,8 @@ namespace Citta_T1.Utils
                     sr.Close();
                     sr.Dispose();
                 }
-                    
                 log.Error("BCPBuffer 空路径名是非法的: " + ex.ToString());
-            }
-            
+            }  
         }
 
 
