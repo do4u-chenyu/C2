@@ -160,27 +160,6 @@ namespace Citta_T1.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
-            #region 点线
-            // TODO [DK] 点线出什么呢？待讨论
-            int mrIndex = PointToLine(new PointF(e.X, e.Y));
-            selectLineIndexs.Add(mrIndex);
-            #endregion
-            // 点击右键, 清空操作状态,进入到正常编辑状态
-            if (e.Button == MouseButtons.Right)
-            {
-                Global.GetFlowControl().ResetStatus();
-                if (mrIndex != -1)
-                    this.ShowDelectOption(e.Location);        // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
-                else
-                    this.ResetAllLineStatus(null, true); // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
-                return;
-            }
-            if (mrIndex != -1)
-            {
-                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
-                this.ResetAllLineStatus(selectLineIndexs, false);
-                this.Invalidate(false);
-            }
             // TODO [Dk] 后两个算子就不该有PinDraw这个动作
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
@@ -654,8 +633,28 @@ namespace Citta_T1.Controls
 
         private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
         {
+            #region 点线
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+            selectLineIndexs.Add(mrIndex);
+            #endregion
+            // 点击右键, 清空操作状态,进入到正常编辑状态
             if (e.Button == MouseButtons.Right)
-                contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+            {
+                Global.GetFlowControl().ResetStatus();
+                if (mrIndex != -1)
+                    this.ShowDelectOption(e.Location);          // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
+                else
+                    this.ResetAllLineStatus(null, true);        // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
+                return;
+            }
+            if (mrIndex != -1)
+            {
+                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
+                this.ResetAllLineStatus(selectLineIndexs, false);
+                this.Invalidate(false);
+            }
+            //if (e.Button == MouseButtons.Right)
+            //    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
         }
     }
 }

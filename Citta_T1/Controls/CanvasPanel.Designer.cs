@@ -33,24 +33,22 @@ namespace Citta_T1.Controls
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.批量删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-
             this.批量删除ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
             // 
             // 批量删除ToolStripMenuItem
             // 
             this.批量删除ToolStripMenuItem.Name = "批量删除ToolStripMenuItem";
             this.批量删除ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.批量删除ToolStripMenuItem.Text = "批量删除";
-
+            this.批量删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteLineToolStripMenuItem_Click);
             // 
             // CanvasPanel
             // 
