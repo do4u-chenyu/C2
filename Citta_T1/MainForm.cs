@@ -285,7 +285,12 @@ namespace  Citta_T1
 
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
-            this.ShowDataView();
+            this.ShowBottomPanel();
+            this.ShowPreview();
+        }
+
+        private void ShowPreview()
+        {
             this.logView.Visible = false;
             this.dataGridView2.Visible = false;
             this.dataGridView0.Visible = true;
@@ -293,7 +298,12 @@ namespace  Citta_T1
 
         private void ErrorLabel_Click(object sender, EventArgs e)
         {
-            this.ShowDataView();
+            this.ShowBottomPanel();
+            this.ShowErrorView();
+        }
+
+        private void ShowErrorView()
+        {
             this.dataGridView2.Visible = true;
             this.logView.Visible = false;
             this.dataGridView0.Visible = false;
@@ -301,12 +311,18 @@ namespace  Citta_T1
 
         private void LogLabel_Click(object sender, EventArgs e)
         {
-            this.ShowDataView();
+            this.ShowBottomPanel();
+            this.ShowLogView();
+        }
+
+        private void ShowLogView()
+        {
             this.logView.Visible = true;
             this.dataGridView2.Visible = false;
             this.dataGridView0.Visible = false;
         }
-        private void ShowDataView()
+
+        private void ShowBottomPanel()
         {
             if (this.isBottomViewPanelMinimum == true)
             {
@@ -323,6 +339,11 @@ namespace  Citta_T1
             {
                 this.toolTip1.SetToolTip(this.minMaxPictureBox, "展开底层面板");
             }
+        }
+
+        private void ShowBottomPreviewPanel()
+        {
+
         }
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
@@ -397,8 +418,9 @@ namespace  Citta_T1
 
         public void PreViewDataByFullFilePath(string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
-            this.ShowDataView(); 
+            this.ShowBottomPanel(); 
             this.dataGridView0.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
+            this.ShowPreview();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -512,43 +534,19 @@ namespace  Citta_T1
         private void UpdataRunningGif(Manager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if (doneModel == Global.GetCurrentDocument())
-            {
-                if (manager.ModelStatus == ModelStatus.GifDone)
-                {
-                    if (InvokeRequired)
-                    {
-                        this.Invoke(new AsynUpdateGif(delegate ()
-                        {
-                            this.currentModelRunBackLab.Hide();
-                            this.currentModelRunLab.Hide();
-                            this.currentModelFinLab.Show();
+            if (doneModel != Global.GetCurrentDocument())
+                return;
 
-                        }));
-                    }
-                    else
-                    {
+            if (manager.ModelStatus == ModelStatus.GifDone)
+                this.Invoke(new AsynUpdateGif(delegate () {
                         this.currentModelRunBackLab.Hide();
                         this.currentModelRunLab.Hide();
                         this.currentModelFinLab.Show();
-                    }
-                }
-                else if (manager.ModelStatus == ModelStatus.Done)
-                {
-                    if (InvokeRequired)
-                    {
-                        this.Invoke(new AsynUpdateGif(delegate ()
-                        {
-                            this.currentModelFinLab.Hide();
-                        }));
-                    }
-                    else
-                    {
-                        this.currentModelFinLab.Hide();
-                    }
-                }
+                    }));
+            else if (manager.ModelStatus == ModelStatus.Done)
+                this.Invoke(new AsynUpdateGif(delegate () {
+                    this.currentModelFinLab.Hide(); }));
 
-            }
         }
 
 
