@@ -16,6 +16,8 @@ namespace Citta_T1.Dialogs
     public delegate void delegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
+        private static LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private ExtType extType = ExtType.Unknow;
         private string fullFilePath;
@@ -23,7 +25,7 @@ namespace Citta_T1.Dialogs
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
-        private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+        
         private string invalidChars = "&\"' ";
         private string invalidCharsPattern;
         private string[] invalidStringArr;
@@ -91,7 +93,7 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (this.fullFilePath == null)
+            else if (String.IsNullOrEmpty(this.fullFilePath))
             {
                 MessageBox.Show("请选择数据路径！");
             }
@@ -102,13 +104,13 @@ namespace Citta_T1.Dialogs
             }
             else if (IsContainsInvalidChars(this.fullFilePath))
             {
-                MessageBox.Show("路径中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符，当前选择路径为: " + this.fullFilePath);
+                MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
             }
             // 非法字符不得成为文件名
-            else if (IsContainsInvalidChars(this.textBox1.Text))
-            {
-                MessageBox.Show("文件名中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符, 当前选择文件名为: " + this.textBox1.Text);
-            }
+            //else if (IsContainsInvalidChars(this.textBox1.Text))
+            //{
+            //    MessageBox.Show(String.Format("数据源命名不能有、&、\"等特殊字符, 当前数据源名为: {0}", this.textBox1.Text));
+            //}
             else
             {
                 if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
@@ -127,7 +129,7 @@ namespace Citta_T1.Dialogs
         private void InitInvalidCharPattern()
         {
             this.invalidStringArr = new string[this.invalidChars.Length];
-            for(int i = 0; i < this.invalidChars.Length; i++)
+            for (int i = 0; i < this.invalidChars.Length; i++)
             {
                 invalidStringArr[i] = this.invalidChars[i].ToString();
             }
@@ -135,11 +137,7 @@ namespace Citta_T1.Dialogs
         }
         private bool IsContainsInvalidChars(string text)
         {
-            int matchNum = Regex.Matches(text, this.invalidCharsPattern).Count;
-            if (matchNum > 0)
-                return true;
-            else
-                return false;
+            return Regex.Matches(text, this.invalidCharsPattern).Count > 0;
         }
         private void CancelButton_Click(object sender, EventArgs e)
         {
