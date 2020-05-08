@@ -80,6 +80,7 @@ namespace Citta_T1.Dialogs
             this.textBox1.Text = fileName;
 
         }
+        
 
         // 添加按钮
         public event delegateInputData InputDataEvent;
@@ -90,29 +91,33 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (fullFilePath == null)
+            else if (this.fullFilePath == null)
             {
                 MessageBox.Show("请选择数据路径！");
             }
-            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(fullFilePath))
+            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
-                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[fullFilePath].DataSourceName;
+                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName);
+            }
+            else if (IsContainsInvalidChars(this.fullFilePath))
+            {
+                MessageBox.Show("路径中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符，当前选择路径为: " + this.fullFilePath);
             }
             // 非法字符不得成为文件名
             else if (IsContainsInvalidChars(this.textBox1.Text))
             {
-                MessageBox.Show("文件名中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符");
+                MessageBox.Show("文件名中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符, 当前选择文件名为: " + this.textBox1.Text);
             }
             else
             {
-                if (fullFilePath.EndsWith(".xls") || fullFilePath.EndsWith(".xlsx"))
+                if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
                     this.extType = DSUtil.ExtType.Excel;
                 else
                     this.extType = DSUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(fullFilePath, this.extType, this.encoding);
-                InputDataEvent(name, fullFilePath, this.separator, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding);
+                InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
