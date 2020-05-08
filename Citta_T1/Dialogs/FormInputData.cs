@@ -26,6 +26,7 @@ namespace Citta_T1.Dialogs
         private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
         private string invalidChars = "&\"' ";
         private string invalidCharsPattern;
+        private string[] invalidStringArr;
 
         public FormInputData()
         {
@@ -101,7 +102,7 @@ namespace Citta_T1.Dialogs
             // 非法字符不得成为文件名
             else if (IsContainsInvalidChars(this.textBox1.Text))
             {
-                MessageBox.Show("文件名中不得出现" + invalidChars + "等非法字符");
+                MessageBox.Show("文件名中不得出现“" + string.Join("”,“", invalidStringArr) + "”等非法字符");
             }
             else
             {
@@ -120,12 +121,12 @@ namespace Citta_T1.Dialogs
         }
         private void InitInvalidCharPattern()
         {
-            string[] s = new string[this.invalidChars.Length];
+            this.invalidStringArr = new string[this.invalidChars.Length];
             for(int i = 0; i < this.invalidChars.Length; i++)
             {
-                s[i] = this.invalidChars[i].ToString();
+                invalidStringArr[i] = this.invalidChars[i].ToString();
             }
-            this.invalidCharsPattern = string.Join("|", s);
+            this.invalidCharsPattern = string.Join("|", invalidStringArr);
         }
         private bool IsContainsInvalidChars(string text)
         {
