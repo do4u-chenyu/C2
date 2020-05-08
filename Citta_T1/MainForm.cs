@@ -27,8 +27,8 @@ namespace  Citta_T1
         private ModelDocumentDao modelDocumentDao;
         private OptionDao optionDao;
         public string UserName { get => this.userName; set => this.userName = value; }
+
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
-        
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
 

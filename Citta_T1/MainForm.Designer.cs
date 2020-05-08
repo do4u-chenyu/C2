@@ -1,4 +1,6 @@
-﻿namespace Citta_T1
+﻿using System.Windows.Forms;
+
+namespace Citta_T1
 {
     partial class MainForm
     {
@@ -895,7 +897,7 @@
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
-        public Controls.Flow.NaviViewControl naviViewControl;
+        private Controls.Flow.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button histogramButton;
@@ -911,7 +913,7 @@
         private System.Windows.Forms.Button importButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
-        public Controls.Left.DataSourceControl dataSourceControl;
+        private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
@@ -924,13 +926,13 @@
         private System.Windows.Forms.Button flowChartButton;
         private Controls.Flow.RightHideButton rightHideButton;
         private Controls.Flow.RightShowButton rightShowButton;
-        public Controls.Flow.FlowControl flowControl;
+        private Controls.Flow.FlowControl flowControl;
         private Controls.Title.DragLineControl dragLineControl;
         private Controls.Flow.RemarkControl remarkControl;
         private DataGridView0 dataGridView3;
         private System.Windows.Forms.ToolTip toolTip1;
-        public System.Windows.Forms.Button blankButton;
-        public System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button blankButton;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
         private Controls.Top.TopToolBarControl topToolBarControl;
