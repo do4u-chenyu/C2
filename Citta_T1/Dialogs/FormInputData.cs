@@ -179,6 +179,11 @@ namespace Citta_T1.Dialogs
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
             String header = sr.ReadLine();
+            if (header == null)
+            {
+                MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
+                return;
+            }
             String[] headers = header.Split(this.separator);
             int numOfCol = header.Split(this.separator).Length;
             DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[numOfCol];
