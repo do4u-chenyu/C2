@@ -455,16 +455,16 @@ namespace Citta_T1
             // 
             this.commonPanel.Controls.Add(this.topToolBarControl);
             this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.commonPanel.Location = new System.Drawing.Point(274, 0);
+            this.commonPanel.Location = new System.Drawing.Point(351, 0);
             this.commonPanel.Name = "commonPanel";
-            this.commonPanel.Size = new System.Drawing.Size(632, 48);
+            this.commonPanel.Size = new System.Drawing.Size(555, 48);
             this.commonPanel.TabIndex = 5;
             // 
             // topToolBarControl
             // 
-            this.topToolBarControl.Location = new System.Drawing.Point(2, 8);
+            this.topToolBarControl.Location = new System.Drawing.Point(4, 8);
             this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(628, 33);
+            this.topToolBarControl.Size = new System.Drawing.Size(548, 33);
             this.topToolBarControl.TabIndex = 24;
             // 
             // panel5

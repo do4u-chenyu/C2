@@ -153,7 +153,7 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-        private ElementStatus ModifyStatus(ModelElement me,ElementStatus status)
+        private ElementStatus ModifyStatus(ModelElement me, ElementStatus status)
         {
             if (me.Type == ElementType.Operator && status == ElementStatus.Done || status == ElementStatus.Ready)
                 return ElementStatus.Ready;
