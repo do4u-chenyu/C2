@@ -32,9 +32,6 @@ namespace Citta_T1.Controls
         private float screenFactor = 1;
         private DragWrapper dragWrapper;
 
-
-
-
         bool MouseIsDown = false;
         Point basepoint;
 
@@ -230,7 +227,12 @@ namespace Citta_T1.Controls
                 try
                 {
                     mr = mrs[i];
+                    //删除线配置逻辑
+                    Global.GetCurrentDocument().StateChangeByDelete(mr.StartID);
                     mrs.Remove(mr);
+                    //删除线文档dirty
+                    Global.GetMainForm().SetDocumentDirty();
+                   
                 }
                 catch (Exception e)
                 {

@@ -13,6 +13,7 @@ namespace Citta_T1.Business.Option
         private List<ColumnInfo> columnInfos;
         private DSUtil.Encoding encoding;     //BCP文件对应的编码
         public string columnLine;
+        public string separator;
 
         public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
         {
