@@ -76,14 +76,14 @@ namespace Citta_T1.OperatorViews
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
             else
             {
@@ -104,12 +104,12 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private string[] SetOption(string path, string dataName, string encoding)
+        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            string[] columnName = column.Split(separator);
             this.opControl.SingleDataSourceColumns = column;
             return columnName;
         }
@@ -242,7 +242,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void ConfirmButton_Click(object sender, System.EventArgs e)
         {
-            bool empty = IsOptionReay();
+            bool empty = IsOptionReady();
             if (empty) return;
 
             this.DialogResult = DialogResult.OK;
@@ -273,7 +273,7 @@ namespace Citta_T1.OperatorViews
         }
 
 
-        private bool IsOptionReay()
+        private bool IsOptionReady()
         {
             bool empty = false;
             List<string> types = new List<string>();
@@ -302,6 +302,15 @@ namespace Citta_T1.OperatorViews
                 empty = true;
                 return empty;
             }
+
+            //有任一框中非数字
+            if( !isValidNum(this.fixSecondTextBox.Text) || !isValidNum(this.randomBeginTextBox.Text) || !isValidNum(this.randomEndTextBox.Text))
+            {
+                MessageBox.Show("输入时间非纯数字，请重新输入");
+                empty = true;
+                return empty;
+            }
+
             return empty;
         }
         #endregion
@@ -315,6 +324,16 @@ namespace Citta_T1.OperatorViews
             {
                 this.rsFullFilePathTextBox.Text = fd.FileName;
             }
+        }
+
+        private bool isValidNum(string content)
+        {
+            Regex rg = new Regex("^[0-9]*$");
+            if (!rg.IsMatch(content))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

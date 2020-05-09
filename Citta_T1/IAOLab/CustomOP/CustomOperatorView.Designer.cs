@@ -274,7 +274,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 448);
+            this.ClientSize = new System.Drawing.Size(737, 486);
             this.ControlBox = false;
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.rsFullFilePathTextBox);
