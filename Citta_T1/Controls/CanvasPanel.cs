@@ -190,12 +190,10 @@ namespace Citta_T1.Controls
             
             if (SelectFrame())
             {
-                this.ResetAllLineStatus();
                 frameWrapper.FrameDown(e);
             }
             else if (SelectDrag())
             {
-                this.ResetAllLineStatus();
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
         }
@@ -205,7 +203,7 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1.Show(this, p);
         }
 
-        private void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
+        public void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
             ModelRelation mr;
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
