@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
 using Citta_T1.Properties;
 using Citta_T1.Utils;
 
@@ -156,6 +159,9 @@ namespace Citta_T1.Controls.Flow
             
             SelectDrag = false;
             ChangeCursor();
+
+
+
         }
         #endregion
 
@@ -223,6 +229,13 @@ namespace Citta_T1.Controls.Flow
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
             this.framePictureBox.Location = new System.Drawing.Point(167, 5);
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;
+                (ct as IMoveControl).ControlNoSelect();
+            }
         }
     }
 }

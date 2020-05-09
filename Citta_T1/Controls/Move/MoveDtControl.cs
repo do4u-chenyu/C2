@@ -637,6 +637,28 @@ namespace Citta_T1.Controls.Move
             this.BackgroundImage = this.staticImage;
         }
 
+        private void UpdateRounde(int x, int y, int width, int height, int radius)
+        {
+            Pen p1 = new Pen(Color.Green, 1f);
+            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            Graphics g = Graphics.FromImage(staticImage);
+
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+
+            g.Dispose();
+            this.BackgroundImage = this.staticImage;
+        }
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
             this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
@@ -655,6 +677,18 @@ namespace Citta_T1.Controls.Move
         private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileUtil.ExploreDirectory(FullFilePath);
+        }
+
+        public void ControlSelect()
+        {
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+        public void ControlNoSelect()
+        {
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 
