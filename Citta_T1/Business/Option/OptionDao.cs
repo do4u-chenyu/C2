@@ -43,6 +43,7 @@ namespace Citta_T1.Business.Option
         private void SingleInputCompare(ModelRelation modelRelation, string oldColumnName) 
         {
             if (oldColumnName == null) return;
+            char separator = '\t';
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
             string dataSourcePath = startElement.GetFullFilePath();
@@ -51,7 +52,9 @@ namespace Citta_T1.Business.Option
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            if (startElement.GetControl is MoveDtControl)
+                separator = (startElement.GetControl as MoveDtControl).Separator;
+            string[] columnName = column.Split(separator);
             string[] oldName = oldColumnName.Split('\t');
             //新数据源表头不包含旧数据源
             foreach (string name in oldName)
@@ -86,6 +89,8 @@ namespace Citta_T1.Business.Option
 
             if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
                 return;
+            char separator0 = '\t';
+            char separator1 = '\t';
             List<string> oldColumnName0 = doubleDataSource["0"];
             List<string> oldColumnName1 = doubleDataSource["1"];
             ModelElement modelElement0 = null;
@@ -111,11 +116,15 @@ namespace Citta_T1.Business.Option
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Null, encoding0);
             string column0 = bcpInfo0.columnLine;
-            string[] columnName0 = column0.Split('\t');
+            if (modelElement0.GetControl is MoveDtControl)
+                separator0 = (modelElement0.GetControl as MoveDtControl).Separator;
+            string[] columnName0 = column0.Split(separator0);
 
             BcpInfo bcpInfo1 = new BcpInfo(dataSourcePath1, "", ElementType.Null, encoding1);
             string column1 = bcpInfo1.columnLine;
-            string[] columnName1 = column1.Split('\t');
+            if (modelElement1.GetControl is MoveDtControl)
+                separator1 = (modelElement1.GetControl as MoveDtControl).Separator;
+            string[] columnName1 = column1.Split(separator1);
             //新数据源表头不包含旧数据源
             foreach (string name in oldColumnName0)
             {
@@ -354,7 +363,7 @@ namespace Citta_T1.Business.Option
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
         {
-
+            char separator = '\t';
             Dictionary<string, string> dataInfo=new Dictionary<string, string>();
             Dictionary<int, int> startControls = new Dictionary<int,int>();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -375,6 +384,9 @@ namespace Citta_T1.Business.Option
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
                 dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
+                if (me.GetControl is MoveDtControl)
+                    separator = (me.GetControl as MoveDtControl).Separator;
+                dataInfo["separator" + kvp.Key.ToString()] = separator.ToString();
             }
             return dataInfo;
         }
