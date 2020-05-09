@@ -28,7 +28,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             int sleepSecond = DefaultSleepSecond;
             try
             {
-                sleepSecond = Convert.ToInt32(option.GetOption("sleepSec", DefaultSleepSecond.ToString()));
+                sleepSecond = Convert.ToInt32(option.GetOption("fix", DefaultSleepSecond.ToString()));
             }
             catch
             {
