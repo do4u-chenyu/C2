@@ -50,6 +50,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,12 +86,12 @@
             // 
             this.pythonChosenComboBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.pythonChosenComboBox.FormattingEnabled = true;
-            this.pythonChosenComboBox.Items.AddRange(new object[] {
-            "未配置Python虚拟机"});
-            this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 52);
+            this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 49);
             this.pythonChosenComboBox.Name = "pythonChosenComboBox";
             this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 25);
             this.pythonChosenComboBox.TabIndex = 3;
+            this.pythonChosenComboBox.Text = "未配置Python虚拟机";
+            this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             // 
             // dataSource0
             // 
@@ -112,54 +113,58 @@
             this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 11;
             this.label1.Text = "数据信息：";
+            this.toolTip1.SetToolTip(this.label1, "数据源名称");
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 53);
+            this.label2.Location = new System.Drawing.Point(3, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 22);
             this.label2.TabIndex = 13;
             this.label2.Text = "Python虚拟机：";
+            this.toolTip1.SetToolTip(this.label2, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(13, 128);
+            this.label4.Location = new System.Drawing.Point(9, 269);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 22);
             this.label4.TabIndex = 16;
             this.label4.Text = "脚本传入参数：";
+            this.toolTip1.SetToolTip(this.label4, "脚本需要传入的其他参数");
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(136, 128);
+            this.textBox2.Location = new System.Drawing.Point(132, 269);
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(375, 21);
             this.textBox2.TabIndex = 17;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.browseButton);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(4, 166);
+            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(8, 122);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(504, 129);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "结果文件设置";
+            this.groupBox1.Text = "结果文件设置：";
+            this.toolTip1.SetToolTip(this.groupBox1, "指定第三方脚本返回给平台结果文件的方式");
             // 
             // radioButton3
             // 
@@ -191,10 +196,10 @@
             this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.radioButton1.Location = new System.Drawing.Point(12, 33);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(171, 21);
+            this.radioButton1.Size = new System.Drawing.Size(195, 21);
             this.radioButton1.TabIndex = 27;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "将stdout重定向到结果文件";
+            this.radioButton1.Text = "将脚本stdout重定向到结果文件";
             this.toolTip1.SetToolTip(this.radioButton1, "Python脚本的标准输出流(stdout)作为运算结果重定向到结果文件");
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -226,25 +231,27 @@
             this.textBox3.Location = new System.Drawing.Point(174, 62);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(320, 23);
+            this.textBox3.Size = new System.Drawing.Size(23, 23);
             this.textBox3.TabIndex = 24;
+            this.textBox3.Text = "-f";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.textBox3, "参数标识");
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(19, 92);
+            this.label6.Location = new System.Drawing.Point(19, 86);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(116, 22);
             this.label6.TabIndex = 24;
             this.label6.Text = "Python脚本：";
+            this.toolTip1.SetToolTip(this.label6, "自定义的第三方Python脚本");
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(136, 91);
+            this.textBox5.Location = new System.Drawing.Point(137, 87);
             this.textBox5.Margin = new System.Windows.Forms.Padding(2);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
@@ -255,17 +262,30 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(463, 90);
+            this.button1.Location = new System.Drawing.Point(464, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(49, 23);
             this.button1.TabIndex = 30;
             this.button1.Text = "浏览+";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(201, 62);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(293, 23);
+            this.textBox1.TabIndex = 30;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.textBox1, "自动指定的结果文件路径");
             // 
             // PythonOperatorView
             // 
@@ -321,5 +341,6 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

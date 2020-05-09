@@ -19,5 +19,10 @@ namespace Citta_T1.OperatorViews
         {
             Close();
         }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
