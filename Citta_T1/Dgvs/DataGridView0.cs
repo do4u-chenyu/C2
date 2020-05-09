@@ -89,7 +89,7 @@ namespace Citta_T1
             }
         }
 
-        public void PreViewDataByBcpPath(string bcpPath,
+        public void PreViewDataByFullFilePath(string fullFilePath,
             char separator = '\t',
             DSUtil.ExtType extType = DSUtil.ExtType.Text, 
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8,
@@ -100,10 +100,14 @@ namespace Citta_T1
             List<List<string>> datas = new List<List<string>> { };
             List<string> rows;
             List<string> blankRow = new List<string> { };
+            // 将来有可能新增文件类型,这里不能只用二元逻辑
             if (extType == DSUtil.ExtType.Excel)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheExcelPreViewContent(bcpPath, isForceRead = isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
+            else if (extType == DSUtil.ExtType.Text)
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else
-                rows = new List<string>(BCPBuffer.GetInstance().GetCacheBcpPreViewContent(bcpPath, encoding, isForceRead = isForceRead).Split('\n')); 
+                rows = new List<string>();
+
             int numOfRows = rows.Count;
             for (int i = 0; i < numOfRows; i++)
             {

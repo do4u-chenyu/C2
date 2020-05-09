@@ -32,12 +32,28 @@ namespace Citta_T1.Business.Model
             this.modelDocuments.Add(modelDocument);
             this.currentDocument = modelDocument;    
         }
-        public string SaveDocument()
+        public string SaveCurrentDocument()
         {
 
             this.currentDocument.Save();
             this.currentDocument.Dirty = false;
             return this.currentDocument.ModelTitle;
+        }
+
+        public string[] SaveAllDocuments()
+        {
+            List<string> titles = new List<string>();
+            foreach (ModelDocument md in ModelDocuments)
+            {
+                // 不Dirty的大文档, 不重复保存,减少硬盘写
+                if (!md.Dirty && md.ModelElements.Count > 10)
+                    continue;
+
+                md.Save();
+                md.Dirty = false;
+                titles.Add(md.ModelTitle);
+            }
+            return titles.ToArray();
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {

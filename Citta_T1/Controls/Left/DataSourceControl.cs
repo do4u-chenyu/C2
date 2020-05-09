@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Citta_T1.Business.DataSource;
-using Citta_T1.Business.Model;
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
@@ -12,17 +12,26 @@ namespace Citta_T1.Controls.Left
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-        private Dictionary<string, DataButton> dataSourceDictI2B = new Dictionary<string, DataButton>();
+       
         public DataSourceControl()
         {
-            InitializeComponent();
+            dataSourceDictI2B = new Dictionary<string, DataButton>();
+            InitializeComponent(); 
         }
 
         private static int ButtonGapHeight = 50;
         private static int ButtonLeftX = 17;
         private static int ButtonBottomOffsetY = 40;
 
-        public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; set => dataSourceDictI2B = value; }
+        private Dictionary<string, DataButton> dataSourceDictI2B;
+
+        // 这个控件属性不需要在属性面板显示和序列化,不加这个标签,在引用这个控件的Designer中,会序列化它
+        // 然后就是各种奇葩问题
+        // DesignerSerializationVisibility.Hidden  设计器不为这个属性生成代码
+        // Browsable(false) 这个属性不出现在设计器的属性窗口中
+        // MergableProperty(false) 不知道是干嘛的, 看网上帖子就加进去了
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false), MergableProperty(false)]
+        public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
 
         // 手工导入时调用
         public void GenDataButton(string dataName, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)

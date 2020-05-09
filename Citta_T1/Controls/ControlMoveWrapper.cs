@@ -84,14 +84,14 @@ namespace Citta_T1.Controls
                         currentDoc.ScreenToWorldF(mr.A, mapOrigin),
                         currentDoc.ScreenToWorldF(mr.B, mapOrigin),
                         currentDoc.ScreenToWorldF(mr.EndP, mapOrigin)
-);
+                );
             }
             g.Dispose();
             p1.Dispose();
             p2.Dispose();
-            //n.DrawImageUnscaled(StaticImage, 0, 0);
 
             n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
+            this.StaticImage.Save("staticImage.png");
             this.StaticImage.Dispose();
             this.StaticImage = null;
         }
@@ -103,6 +103,7 @@ namespace Citta_T1.Controls
             this.Now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.MoveWorldImage(n);
+            Global.GetCanvasPanel().Invalidate();
             n.Dispose();
             this.StartDrag = false;
             this.Start = e.Location;

@@ -354,10 +354,10 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
-        public void IsNewOut( List<string> currentcolumns, int ID)
+        public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+            string fullFilePath = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
         //配置初始化

@@ -129,6 +129,12 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
            
         }
+
+        // 算子维度, 目前就2元和1元算子两种
+        public int OperatorDimension()
+        {
+            return doublelPinFlag ? 2 : 1;
+        }
         public void ChangeSize(int sizeL)
         {
             bool originVisible = this.Visible;
@@ -352,7 +358,7 @@ namespace Citta_T1.Controls.Move
             else if (e.Clicks == 2)
             {
                 // 清空焦点
-                Global.GetMainForm().blankButton.Focus();
+                Global.GetMainForm().BlankButtonFocus();
                 // 显示配置
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
@@ -382,7 +388,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
-                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                //this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }

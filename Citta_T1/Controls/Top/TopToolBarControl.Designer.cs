@@ -129,6 +129,7 @@
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.moreButton, "首选项配置,配置程序的各项参数");
             this.moreButton.UseVisualStyleBackColor = true;
             this.moreButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MoreButton_MouseClick);
             // 
@@ -157,7 +158,7 @@
             this.Controls.Add(this.collideButton);
             this.Controls.Add(this.relateButton);
             this.Name = "TopToolBarControl";
-            this.Size = new System.Drawing.Size(654, 33);
+            this.Size = new System.Drawing.Size(630, 33);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,6 @@
-﻿namespace Citta_T1
+﻿using System.Windows.Forms;
+
+namespace Citta_T1
 {
     partial class MainForm
     {
@@ -47,7 +49,7 @@
             this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
             this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.dataGridView3 = new Citta_T1.DataGridView0();
+            this.dataGridView0 = new Citta_T1.DataGridView0();
             this.logView = new Citta_T1.Dgvs.LogView();
             this.dataGridView2 = new Citta_T1.DataGridView2();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -62,6 +64,7 @@
             this.commonPanel = new System.Windows.Forms.Panel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.saveAllButton = new System.Windows.Forms.Button();
             this.importButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
@@ -75,25 +78,25 @@
             this.diffButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
+            this.blankButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.leftFoldButton = new System.Windows.Forms.PictureBox();
+            this.downloadButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.blankButton = new System.Windows.Forms.Button();
             this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
             this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.downloadButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -108,13 +111,13 @@
             this.panel1.SuspendLayout();
             this.commonPanel.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.modelTitlePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.modelTitlePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -296,6 +299,7 @@
             // 
             // myModelControl
             // 
+            this.myModelControl.AutoScroll = true;
             this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.myModelControl.BackColor = System.Drawing.Color.White;
             this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -307,7 +311,7 @@
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView3);
+            this.bottomViewPanel.Controls.Add(this.dataGridView0);
             this.bottomViewPanel.Controls.Add(this.logView);
             this.bottomViewPanel.Controls.Add(this.dataGridView2);
             this.bottomViewPanel.Controls.Add(this.panel4);
@@ -317,14 +321,14 @@
             this.bottomViewPanel.Size = new System.Drawing.Size(906, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
-            // dataGridView3
+            // dataGridView0
             // 
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView3.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView3.TabIndex = 27;
+            this.dataGridView0.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView0.Location = new System.Drawing.Point(0, 39);
+            this.dataGridView0.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView0.Name = "dataGridView0";
+            this.dataGridView0.Size = new System.Drawing.Size(906, 241);
+            this.dataGridView0.TabIndex = 27;
             // 
             // logView
             // 
@@ -451,35 +455,49 @@
             // 
             this.commonPanel.Controls.Add(this.topToolBarControl);
             this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.commonPanel.Location = new System.Drawing.Point(272, 0);
+            this.commonPanel.Location = new System.Drawing.Point(274, 0);
             this.commonPanel.Name = "commonPanel";
-            this.commonPanel.Size = new System.Drawing.Size(634, 48);
+            this.commonPanel.Size = new System.Drawing.Size(632, 48);
             this.commonPanel.TabIndex = 5;
             // 
-            // commonUseControl
+            // topToolBarControl
             // 
-            this.topToolBarControl.Location = new System.Drawing.Point(6, 8);
+            this.topToolBarControl.Location = new System.Drawing.Point(2, 8);
             this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(637, 34);
-            this.topToolBarControl.TabIndex = 23;
+            this.topToolBarControl.Size = new System.Drawing.Size(628, 33);
+            this.topToolBarControl.TabIndex = 24;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.saveAllButton);
             this.panel5.Controls.Add(this.importButton);
             this.panel5.Controls.Add(this.saveModelButton);
             this.panel5.Controls.Add(this.newModelButton);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(272, 48);
+            this.panel5.Size = new System.Drawing.Size(373, 48);
             this.panel5.TabIndex = 5;
+            // 
+            // saveAllButton
+            // 
+            this.saveAllButton.BackColor = System.Drawing.Color.White;
+            this.saveAllButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.saveAllButton.Image = global::Citta_T1.Properties.Resources.saveall;
+            this.saveAllButton.Location = new System.Drawing.Point(258, 8);
+            this.saveAllButton.Name = "saveAllButton";
+            this.saveAllButton.Size = new System.Drawing.Size(105, 32);
+            this.saveAllButton.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.saveAllButton, "保存当前打开的所有模型");
+            this.saveAllButton.UseVisualStyleBackColor = false;
+            this.saveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
             // 
             // importButton
             // 
             this.importButton.BackColor = System.Drawing.Color.White;
             this.importButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.importButton.Image = ((System.Drawing.Image)(resources.GetObject("importButton.Image")));
-            this.importButton.Location = new System.Drawing.Point(102, 8);
+            this.importButton.Location = new System.Drawing.Point(88, 8);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(79, 32);
             this.importButton.TabIndex = 2;
@@ -492,20 +510,20 @@
             this.saveModelButton.BackColor = System.Drawing.Color.White;
             this.saveModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.saveModelButton.Image = ((System.Drawing.Image)(resources.GetObject("saveModelButton.Image")));
-            this.saveModelButton.Location = new System.Drawing.Point(189, 8);
+            this.saveModelButton.Location = new System.Drawing.Point(173, 8);
             this.saveModelButton.Name = "saveModelButton";
             this.saveModelButton.Size = new System.Drawing.Size(79, 32);
             this.saveModelButton.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             this.saveModelButton.UseVisualStyleBackColor = false;
             this.saveModelButton.Click += new System.EventHandler(this.SaveModelButton_Click);
-            this.toolTip1.SetToolTip(this.saveModelButton, "保存模型");
             // 
             // newModelButton
             // 
             this.newModelButton.BackColor = System.Drawing.Color.White;
             this.newModelButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.newModelButton.Image = ((System.Drawing.Image)(resources.GetObject("newModelButton.Image")));
-            this.newModelButton.Location = new System.Drawing.Point(15, 8);
+            this.newModelButton.Location = new System.Drawing.Point(3, 8);
             this.newModelButton.Name = "newModelButton";
             this.newModelButton.Size = new System.Drawing.Size(79, 32);
             this.newModelButton.TabIndex = 0;
@@ -583,6 +601,105 @@
             this.connectOpButton.Size = new System.Drawing.Size(75, 23);
             this.connectOpButton.TabIndex = 0;
             // 
+            // blankButton
+            // 
+            this.blankButton.Location = new System.Drawing.Point(461, 40);
+            this.blankButton.Margin = new System.Windows.Forms.Padding(2);
+            this.blankButton.Name = "blankButton";
+            this.blankButton.Size = new System.Drawing.Size(0, 0);
+            this.blankButton.TabIndex = 6;
+            this.blankButton.Text = "button1";
+            this.blankButton.UseVisualStyleBackColor = true;
+            // 
+            // modelTitlePanel
+            // 
+            this.modelTitlePanel.Controls.Add(this.pictureBox2);
+            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
+            this.modelTitlePanel.Name = "modelTitlePanel";
+            this.modelTitlePanel.Size = new System.Drawing.Size(906, 36);
+            this.modelTitlePanel.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(906, 3);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // leftFoldButton
+            // 
+            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
+            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
+            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
+            this.leftFoldButton.Name = "leftFoldButton";
+            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
+            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.leftFoldButton.TabIndex = 0;
+            this.leftFoldButton.TabStop = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
+            // 
+            // downloadButton
+            // 
+            this.downloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.downloadButton.FlatAppearance.BorderSize = 0;
+            this.downloadButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.downloadButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.downloadButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
+            this.downloadButton.Location = new System.Drawing.Point(507, 354);
+            this.downloadButton.Name = "downloadButton";
+            this.downloadButton.Size = new System.Drawing.Size(52, 53);
+            this.downloadButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
+            this.downloadButton.UseVisualStyleBackColor = true;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
+            this.stopButton.Location = new System.Drawing.Point(450, 354);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(52, 53);
+            this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
+            // runButton
+            // 
+            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.BorderSize = 0;
+            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+            this.runButton.Location = new System.Drawing.Point(398, 354);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(52, 53);
+            this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
+            this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
+            // 
             // canvasPanel
             // 
             this.canvasPanel.AllowDrop = true;
@@ -649,29 +766,6 @@
             this.panel3.Size = new System.Drawing.Size(8, 101);
             this.panel3.TabIndex = 1;
             // 
-            // leftFoldButton
-            // 
-            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
-            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
-            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldButton";
-            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.leftFoldButton.TabIndex = 0;
-            this.leftFoldButton.TabStop = false;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
-            // 
-            // blankButton
-            // 
-            this.blankButton.Location = new System.Drawing.Point(461, 40);
-            this.blankButton.Margin = new System.Windows.Forms.Padding(2);
-            this.blankButton.Name = "blankButton";
-            this.blankButton.Size = new System.Drawing.Size(0, 0);
-            this.blankButton.TabIndex = 6;
-            this.blankButton.Text = "button1";
-            this.blankButton.UseVisualStyleBackColor = true;
-            // 
             // remarkControl
             // 
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
@@ -732,82 +826,6 @@
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
-            // modelTitlePanel
-            // 
-            this.modelTitlePanel.Controls.Add(this.pictureBox2);
-            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(906, 36);
-            this.modelTitlePanel.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(906, 3);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // downloadButton
-            // 
-            this.downloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.downloadButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.downloadButton.FlatAppearance.BorderSize = 0;
-            this.downloadButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.downloadButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.downloadButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
-            this.downloadButton.Location = new System.Drawing.Point(507, 354);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(52, 53);
-            this.downloadButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
-            this.downloadButton.UseVisualStyleBackColor = true;
-            // 
-            // stopButton
-            // 
-            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.BorderSize = 0;
-            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(450, 354);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(52, 53);
-            this.stopButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
-            // 
-            // runButton
-            // 
-            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.BorderSize = 0;
-            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
-            this.runButton.Location = new System.Drawing.Point(398, 354);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(52, 53);
-            this.runButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
-            this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
-            // 
             // naviViewControl
             // 
             this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -859,14 +877,14 @@
             this.panel1.ResumeLayout(false);
             this.commonPanel.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.modelTitlePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             this.canvasPanel.ResumeLayout(false);
             this.currentModelRunBackLab.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.modelTitlePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -895,7 +913,7 @@
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
-        public Controls.Flow.NaviViewControl naviViewControl;
+        private Controls.Flow.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button histogramButton;
@@ -911,7 +929,7 @@
         private System.Windows.Forms.Button importButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
-        public Controls.Left.DataSourceControl dataSourceControl;
+        private Controls.Left.DataSourceControl dataSourceControl;
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
@@ -924,18 +942,19 @@
         private System.Windows.Forms.Button flowChartButton;
         private Controls.Flow.RightHideButton rightHideButton;
         private Controls.Flow.RightShowButton rightShowButton;
-        public Controls.Flow.FlowControl flowControl;
+        private Controls.Flow.FlowControl flowControl;
         private Controls.Title.DragLineControl dragLineControl;
         private Controls.Flow.RemarkControl remarkControl;
-        private DataGridView0 dataGridView3;
+        private DataGridView0 dataGridView0;
         private System.Windows.Forms.ToolTip toolTip1;
-        public System.Windows.Forms.Button blankButton;
-        public System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button blankButton;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox leftFoldButton;
         private Controls.CanvasPanel canvasPanel;
-        private Controls.Top.TopToolBarControl topToolBarControl;
         private System.Windows.Forms.Label currentModelRunLab;
         private System.Windows.Forms.Label currentModelRunBackLab;
         private System.Windows.Forms.Label currentModelFinLab;
+        private Button saveAllButton;
+        private Controls.Top.TopToolBarControl topToolBarControl;
     }
 }

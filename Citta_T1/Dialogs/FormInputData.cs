@@ -16,16 +16,19 @@ namespace Citta_T1.Dialogs
     public delegate void delegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class FormInputData : Form
     {
+        private static LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private ExtType extType = ExtType.Unknow;
-        private string bcpFullFilePath;
+        private string fullFilePath;
         private int maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
-        private LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+        
         private string invalidChars = "&\"' ";
         private string invalidCharsPattern;
+        private string[] invalidStringArr;
 
         public FormInputData()
         {
@@ -61,9 +64,9 @@ namespace Citta_T1.Dialogs
                 this.encoding = DSUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                bcpFullFilePath = fd.FileName;     
-                fileName = Path.GetFileNameWithoutExtension(bcpFullFilePath);
-                ext = Path.GetExtension(bcpFullFilePath);
+                fullFilePath = fd.FileName;     
+                fileName = Path.GetFileNameWithoutExtension(fullFilePath);
+                ext = Path.GetExtension(fullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = ExtType.Excel;
@@ -79,6 +82,7 @@ namespace Citta_T1.Dialogs
             this.textBox1.Text = fileName;
 
         }
+        
 
         // 添加按钮
         public event delegateInputData InputDataEvent;
@@ -89,29 +93,33 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show("请输入数据名称！");
             }
-            else if (bcpFullFilePath == null)
+            else if (String.IsNullOrEmpty(this.fullFilePath))
             {
                 MessageBox.Show("请选择数据路径！");
             }
-            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(bcpFullFilePath))
+            else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
-                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[bcpFullFilePath].DataSourceName;
+                String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName);
             }
-            // 非法字符不得成为文件名
-            else if (IsContainsInvalidChars(this.textBox1.Text))
+            else if (IsContainsInvalidChars(this.fullFilePath))
             {
-                MessageBox.Show("文件名中不得出现" + invalidChars + "等非法字符");
+                MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
             }
+            // 非法字符不得成为文件名
+            //else if (IsContainsInvalidChars(this.textBox1.Text))
+            //{
+            //    MessageBox.Show(String.Format("数据源命名不能有、&、\"等特殊字符, 当前数据源名为: {0}", this.textBox1.Text));
+            //}
             else
             {
-                if (bcpFullFilePath.EndsWith(".xls") || bcpFullFilePath.EndsWith(".xlsx"))
+                if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
                     this.extType = DSUtil.ExtType.Excel;
                 else
                     this.extType = DSUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(bcpFullFilePath, this.extType, this.encoding);
-                InputDataEvent(name, bcpFullFilePath, this.separator, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding);
+                InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
@@ -120,20 +128,16 @@ namespace Citta_T1.Dialogs
         }
         private void InitInvalidCharPattern()
         {
-            string[] s = new string[this.invalidChars.Length];
-            for(int i = 0; i < this.invalidChars.Length; i++)
+            this.invalidStringArr = new string[this.invalidChars.Length];
+            for (int i = 0; i < this.invalidChars.Length; i++)
             {
-                s[i] = this.invalidChars[i].ToString();
+                invalidStringArr[i] = this.invalidChars[i].ToString();
             }
-            this.invalidCharsPattern = string.Join("|", s);
+            this.invalidCharsPattern = string.Join("|", invalidStringArr);
         }
         private bool IsContainsInvalidChars(string text)
         {
-            int matchNum = Regex.Matches(text, this.invalidCharsPattern).Count;
-            if (matchNum > 0)
-                return true;
-            else
-                return false;
+            return Regex.Matches(text, this.invalidCharsPattern).Count > 0;
         }
         private void CancelButton_Click(object sender, EventArgs e)
         {
@@ -153,6 +157,12 @@ namespace Citta_T1.Dialogs
                 PreViewBcpFile();
             }
         }
+        private void Clean()
+        {
+            this.fullFilePath = null;
+            this.textBox1.Text = null;
+            this.DvgClean();
+        }
 
         private void PreViewBcpFile()
         {
@@ -166,19 +176,25 @@ namespace Citta_T1.Dialogs
              * 4. 清理表格数据
              * 5. 写入数据
              */
-            if (this.bcpFullFilePath == null)
+            if (this.fullFilePath == null)
                 return;
             System.IO.StreamReader sr;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
-                sr = File.OpenText(bcpFullFilePath);
+                sr = File.OpenText(fullFilePath);
             }
             else
             {
-                FileStream fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
             String header = sr.ReadLine();
+            if (header == null)
+            {
+                MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
+                this.Clean();
+                return;
+            }
             String[] headers = header.Split(this.separator);
             int numOfCol = header.Split(this.separator).Length;
             DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[numOfCol];
@@ -232,8 +248,8 @@ namespace Citta_T1.Dialogs
             //
             try
             {
-                fs = new FileStream(bcpFullFilePath, FileMode.Open, FileAccess.Read);
-                if (bcpFullFilePath.IndexOf(".xlsx") > 0) // 2007版本
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                if (fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
                 {
                     workbook2007 = new XSSFWorkbook(fs);
                     if (sheetName != null)
