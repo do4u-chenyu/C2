@@ -34,9 +34,6 @@ namespace Citta_T1.Controls
             Control ct = this.control;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
             g.Dispose();
-            // TODO [DK] 这里是不是少了点什么东西
-            if (Pw.X < 0 || Pw.Y < 0)
-                return staticImage;
             return staticImage;
         }
 
@@ -91,9 +88,9 @@ namespace Citta_T1.Controls
             p2.Dispose();
 
             n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
-            this.StaticImage.Save("staticImage.png");
             this.StaticImage.Dispose();
             this.StaticImage = null;
+            this.RepaintCtrs();
         }
 
 
@@ -107,6 +104,26 @@ namespace Citta_T1.Controls
             n.Dispose();
             this.StartDrag = false;
             this.Start = e.Location;
+        }
+        
+        /// <summary>
+        ///  重绘碰到的控件
+        /// </summary>
+        private void RepaintCtrs()
+        {
+            CanvasPanel cp = Global.GetCanvasPanel();
+            List<ModelElement> md = Global.GetCurrentDocument().ModelElements;
+
+            Rectangle thisRect = new Rectangle(this.control.Location, new Size(this.control.Width, this.control.Height));
+            foreach (ModelElement me in md)
+            {
+                Control ctr = me.GetControl;
+                //if (ctr == this.control)
+                //    continue;
+                Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));
+                cp.Invalidate(ctrRect);
+                cp.Update();
+            }
         }
     }
 }
