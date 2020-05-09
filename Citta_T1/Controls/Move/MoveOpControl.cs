@@ -268,12 +268,11 @@ namespace Citta_T1.Controls.Move
                 }
                 if (isNeedMoveLine)
                 {
-                    Global.GetCanvasPanel().Invalidate(false);
-                    Global.GetCanvasPanel().Invalidate(this.ClientRectangle);
-                    //this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 }
             }
         }
+
         public Point WorldBoundControl(Point Pm)
         {
            
@@ -326,7 +325,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            //this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             oldcontrolPosition =this.Location;
          }
 
@@ -386,7 +385,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
-                //this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
