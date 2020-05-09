@@ -267,7 +267,11 @@ namespace Citta_T1.Controls.Move
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 if (isNeedMoveLine)
-                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                {
+                    Global.GetCanvasPanel().Invalidate(false);
+                    Global.GetCanvasPanel().Invalidate(this.ClientRectangle);
+                    //this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                }
             }
         }
         public Point WorldBoundControl(Point Pm)
@@ -322,7 +326,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            //this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             oldcontrolPosition =this.Location;
          }
 
