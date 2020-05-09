@@ -55,6 +55,7 @@ namespace UserControlDLL
             //全选
             this.lbSelectAll = new Label();
             lbSelectAll.BackColor = Color.Transparent;
+            lbSelectAll.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             lbSelectAll.Text = "全选";
             lbSelectAll.Size = new Size(40, 20);
             lbSelectAll.ForeColor = Color.Blue;
@@ -64,6 +65,7 @@ namespace UserControlDLL
 
             //取消
             lbSelectNo = new Label();
+            lbSelectNo.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             lbSelectNo.BackColor = Color.Transparent;
             lbSelectNo.Text = "取消";
             lbSelectNo.Size = new Size(40, 20);
@@ -74,6 +76,7 @@ namespace UserControlDLL
 
             //生成checkboxlist
             this.checkListBox = new CheckedListBox();
+            checkListBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             checkListBox.BorderStyle = BorderStyle.None;
             checkListBox.Location = new Point(0, 25);
             checkListBox.CheckOnClick = true;
@@ -83,6 +86,7 @@ namespace UserControlDLL
 
             //生成checkListBoxTmp
             this.checkListBoxTmp = new CheckedListBox();
+            checkListBoxTmp.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             checkListBoxTmp.BorderStyle = BorderStyle.None;
             checkListBoxTmp.Location = new Point(0, 25);
             checkListBoxTmp.CheckOnClick = true;

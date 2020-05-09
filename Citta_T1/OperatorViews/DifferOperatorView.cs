@@ -269,6 +269,7 @@ namespace Citta_T1.OperatorViews
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
+            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             regBox.Anchor = AnchorStyles.None;
             regBox.Items.AddRange(new object[] {
             "AND",
@@ -276,11 +277,13 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
+            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
+            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.columnName1);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
