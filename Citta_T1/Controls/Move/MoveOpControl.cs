@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 自定义算子2 Python算子2";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 自定义算子2 ";
 
         private string opControlName;
         private Point mouseOffset;
@@ -223,14 +223,11 @@ namespace Citta_T1.Controls.Move
                 case "自定义算子1":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
                     break;
-                case "Python算子1":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator1HelpInfo);
+                case "Python算子":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
                     break;
                 case "自定义算子2":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
-                    break;
-                case "Python算子2":
-                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperator2HelpInfo);
                     break;
                 default:
                     break;
@@ -470,7 +467,7 @@ namespace Citta_T1.Controls.Move
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
             }
-            switch (this.subTypeName)
+            switch (subTypeName)
             {
                 case "关联算子":
                     new RelateOperatorView(this).ShowDialog();
@@ -514,10 +511,7 @@ namespace Citta_T1.Controls.Move
                 case "自定义算子2":
                     new CustomOperatorView(this).ShowDialog();
                     break;
-                case "Python算子1":
-                    new PythonOperatorView(this).ShowDialog();
-                    break;
-                case "Python算子2":
+                case "Python算子":
                     new PythonOperatorView(this).ShowDialog();
                     break;
                 default:

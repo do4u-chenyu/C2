@@ -35,17 +35,14 @@
             this.customOPButton1 = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pythonOPButton1 = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pythonOPButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.customOPButton2 = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pythonOPButton2 = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // networkOPButton
@@ -102,19 +99,19 @@
             this.pictureBox3.TabIndex = 21;
             this.pictureBox3.TabStop = false;
             // 
-            // pythonOPButton1
+            // pythonOPButton
             // 
-            this.pythonOPButton1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.pythonOPButton1.FlatAppearance.BorderSize = 0;
-            this.pythonOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pythonOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton1.Location = new System.Drawing.Point(66, 153);
-            this.pythonOPButton1.Name = "pythonOPButton1";
-            this.pythonOPButton1.Size = new System.Drawing.Size(104, 40);
-            this.pythonOPButton1.TabIndex = 22;
-            this.pythonOPButton1.Text = "Python算子1";
-            this.pythonOPButton1.UseVisualStyleBackColor = true;
-            this.pythonOPButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
+            this.pythonOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.pythonOPButton.FlatAppearance.BorderSize = 0;
+            this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.pythonOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.pythonOPButton.Location = new System.Drawing.Point(66, 153);
+            this.pythonOPButton.Name = "pythonOPButton";
+            this.pythonOPButton.Size = new System.Drawing.Size(104, 40);
+            this.pythonOPButton.TabIndex = 22;
+            this.pythonOPButton.Text = "Python算子";
+            this.pythonOPButton.UseVisualStyleBackColor = true;
+            this.pythonOPButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             // 
             // customOPButton2
             // 
@@ -139,39 +136,14 @@
             this.pictureBox4.TabIndex = 23;
             this.pictureBox4.TabStop = false;
             // 
-            // pythonOPButton2
-            // 
-            this.pythonOPButton2.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.pythonOPButton2.FlatAppearance.BorderSize = 0;
-            this.pythonOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.pythonOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton2.Location = new System.Drawing.Point(66, 198);
-            this.pythonOPButton2.Name = "pythonOPButton2";
-            this.pythonOPButton2.Size = new System.Drawing.Size(104, 40);
-            this.pythonOPButton2.TabIndex = 26;
-            this.pythonOPButton2.Text = "Python算子2";
-            this.pythonOPButton2.UseVisualStyleBackColor = true;
-            this.pythonOPButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(32, 208);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox5.TabIndex = 25;
-            this.pictureBox5.TabStop = false;
-            // 
             // FlowChartControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.pythonOPButton2);
-            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.customOPButton2);
             this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pythonOPButton1);
+            this.Controls.Add(this.pythonOPButton);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.customOPButton1);
             this.Controls.Add(this.pictureBox2);
@@ -184,7 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -196,11 +167,9 @@
         private Common.NoFocusButton customOPButton1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private Common.NoFocusButton pythonOPButton1;
+        private Common.NoFocusButton pythonOPButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private Common.NoFocusButton customOPButton2;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private Common.NoFocusButton pythonOPButton2;
-        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }
