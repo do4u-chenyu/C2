@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Citta_T1.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
     class CustomOperatorCmd : OperatorCmd
     {
-        private static int DefaultSleepSecond = 30;
+        private static int DefaultSleepSecond = 1;
 
         public CustomOperatorCmd(Triple triple) : base(triple)
         {
@@ -26,15 +27,21 @@ namespace Citta_T1.Business.Schedule.Cmd
         private void DoSleepCommand()
         {
             int sleepSecond = DefaultSleepSecond;
-            try
+
+            if(option.GetOption("fix").ToLower() == "true")
             {
-                sleepSecond = Convert.ToInt32(option.GetOption("sleepSec", DefaultSleepSecond.ToString()));
+                string tmpSec = option.GetOption("fixSecond");
+                sleepSecond = tmpSec == "" || int.Parse(tmpSec) <= 0 ? DefaultSleepSecond : int.Parse(tmpSec);
             }
-            catch
+            else
             {
-                sleepSecond = DefaultSleepSecond;
+                string randomBegin = option.GetOption("randomBegin");
+                string randomEnd = option.GetOption("randomEnd");
+                Random rand = new Random();
+                sleepSecond = randomBegin == "" || randomEnd == "" || int.Parse(randomBegin) <= 0 || int.Parse(randomEnd) <= 0 || int.Parse(randomEnd)-int.Parse(randomBegin)<0 ? DefaultSleepSecond : rand.Next(int.Parse(randomBegin), int.Parse(randomEnd));
             }
-            System.Threading.Thread.Sleep(sleepSecond * 1000);
+
+            Thread.Sleep(sleepSecond * 1000);
         }
     }
 }

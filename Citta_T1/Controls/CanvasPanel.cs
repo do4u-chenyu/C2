@@ -31,14 +31,10 @@ namespace Citta_T1.Controls
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
         private DragWrapper dragWrapper;
-
-        bool MouseIsDown = false;
-        Point basepoint;
-
+        private FrameWrapper frameWrapper;
 
         Graphics g;
 
-        private Pen p1 = new Pen(Color.Gray, 0.0001f);
 
         // 绘图
         // 绘图
@@ -69,12 +65,12 @@ namespace Citta_T1.Controls
         public CanvasPanel()
         {
             InitializeComponent();
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-            dragWrapper = new DragWrapper();
+            dragWrapper  = new DragWrapper();
+            frameWrapper = new FrameWrapper();
         }
 
 
@@ -174,17 +170,7 @@ namespace Citta_T1.Controls
             
             if (SelectFrame())
             {
-                MouseIsDown = true;
-                basepoint = e.Location;
-
-                if (staticImage != null)
-                {
-                    staticImage.Dispose();
-                    staticImage = null;
-                }
-                staticImage = new Bitmap(this.Width, this.Height);
-                // 鼠标按下的时候存图
-                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                frameWrapper.FrameDown(e);
             }
             else if (SelectDrag())
             {
@@ -292,29 +278,9 @@ namespace Citta_T1.Controls
 
             if (e.Button != MouseButtons.Left) return;
             // 画框
-            if (MouseIsDown && SelectFrame())
+            if (SelectFrame())
             {
-
-                Bitmap i = new Bitmap(staticImage);
-                
-                g = Graphics.FromImage(i);
-                if (e.X < basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else if (e.X > basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else if (e.X < basepoint.X && e.Y > basepoint.Y)
-                    g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else
-                    g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-
-                Graphics n = this.CreateGraphics();
-                n.DrawImageUnscaled(i, 0, 0);
-                n.Dispose();
-
-                g.Dispose();
-
-                i.Dispose();
-                i = null;
+                frameWrapper.FrameMove(e);
             }
 
             // 控件移动
@@ -415,12 +381,7 @@ namespace Citta_T1.Controls
 
             if (Global.GetFlowControl().SelectFrame)
             {
-                Bitmap i = new Bitmap(this.staticImage);
-                Graphics n = this.CreateGraphics();
-                n.DrawImageUnscaled(i, 0, 0);
-                n.Dispose();
-                // 标志位置低
-                MouseIsDown = false;
+                frameWrapper.FrameUp();
             }
 
             else if (SelectDrag())
