@@ -496,7 +496,7 @@ namespace Citta_T1.Controls
                     p.Dispose();
                 }
                 else
-                    e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
+                    e.Graphics.DrawBezier(Pens.Gray, mr.StartP, mr.A, mr.B, mr.EndP);
             }
         }
 
