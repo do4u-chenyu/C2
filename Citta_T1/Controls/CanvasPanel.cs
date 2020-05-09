@@ -22,7 +22,6 @@ namespace Citta_T1.Controls
     public partial class CanvasPanel : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
-        //public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         public Bitmap staticImage2;
@@ -381,7 +380,7 @@ namespace Citta_T1.Controls
 
             if (Global.GetFlowControl().SelectFrame)
             {
-                frameWrapper.FrameUp();
+                frameWrapper.FrameUp(e);
             }
 
             else if (SelectDrag())

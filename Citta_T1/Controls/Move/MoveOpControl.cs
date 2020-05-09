@@ -41,13 +41,13 @@ namespace Citta_T1.Controls.Move
         private int id;
         private string dataSourceColumns;
         private Dictionary<string, List<string>> doubleDataSourceColumns; 
-
+        
         // 一些倍率
         public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
-      
+        private Pen p1 = new Pen(Color.Green, 1f);
         public ElementStatus Status { 
             get => this.status;
             set
@@ -115,6 +115,7 @@ namespace Citta_T1.Controls.Move
         {
             this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
             this.status = ElementStatus.Null;
+            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             InitializeComponent();
             textBox.Text = description;
             this.subTypeName = subTypeName;
@@ -451,6 +452,7 @@ namespace Citta_T1.Controls.Move
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
             this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -985,11 +987,7 @@ namespace Citta_T1.Controls.Move
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void UpdateBackground()
-        {
-
-        }
-        private void DrawRoundedRect(int x, int y, int width, int height, int radius)
+        public void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
             {   // bitmap是重型资源,需要强制释放
@@ -999,38 +997,65 @@ namespace Citta_T1.Controls.Move
             this.staticImage = new Bitmap(this.Width, this.Height);
             Graphics g = Graphics.FromImage(staticImage);
             g.Clear(Color.White);
-            //去掉圆角的锯齿
-            System.Drawing.Pen p = new System.Drawing.Pen(Color.DarkGray, 1);
 
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
-            //上
+            //边框上下左右
             g.DrawLine(pen, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            //下
             g.DrawLine(pen, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            //左
             g.DrawLine(pen, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            //右
             g.DrawLine(pen, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
 
-            //左上角
+            //算子边角上下左右
             g.DrawArc(pen, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            //右上角
             g.DrawArc(pen, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            //左下角
             g.DrawArc(pen, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            //右下角
             g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+            
             g.Dispose();
-
             this.BackgroundImage = this.staticImage;
         }
 
+        private void UpdateRounde(int x, int y, int width, int height, int radius)
+        {
+            Graphics g = Graphics.FromImage(staticImage);
+            
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+
+            g.Dispose();
+            this.BackgroundImage = this.staticImage;
+        }
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
             this.helpToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
         }
+
+        public void ControlSelect()
+        {
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+        public void ControlNoSelect()
+        {
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+
+
+
     }
 }
