@@ -109,9 +109,13 @@ namespace Citta_T1.Business.Model
                     modelElementXml.AppendChild(encodingNode);
                 }
                 if (me.Type == ElementType.Operator)
-                { 
+                {
+                    
+                    XmlElement enableoptionNode = xDoc.CreateElement("enableoption");
+                    enableoptionNode.InnerText = (me.GetControl as MoveOpControl).EnableOpenOption.ToString();
+                    modelElementXml.AppendChild(enableoptionNode);
                     //有配置信息才保存到xml中
-                    if((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
+                    if ((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
                         WriteModelOption(me.SubType, (me.GetControl as MoveOpControl).Option, xDoc, modelElementXml);
                 }
                 if (me.Type == ElementType.Result)
@@ -220,12 +224,14 @@ namespace Citta_T1.Business.Model
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        bool enableOption =Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc);
 
                         // 绑定线
 
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
+                        ctl.EnableOpenOption = enableOption;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
