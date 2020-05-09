@@ -269,16 +269,19 @@ namespace Citta_T1.OperatorViews
 
             ComboBox dataBox = new ComboBox();
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.columnName0);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            filterBox.Font= new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.columnName1);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = new TextBox();
             textBox.Text = "别名";
+            textBox.Font =new Font("微软雅黑",9f,FontStyle.Regular);
             textBox.ForeColor= SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += textBoxEx1_Enter;
