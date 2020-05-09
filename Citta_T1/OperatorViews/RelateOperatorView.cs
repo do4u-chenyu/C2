@@ -33,8 +33,11 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.DataInfoBox);
             SetTextBoxName(this.DataInfoBox2);
         }
-
-
+        #region 配置初始化
+        #endregion
+        #region 保存加载
+        #endregion
+        #region 添加取消
         private void confirmButton_Click(object sender, EventArgs e)
         {
 
@@ -45,6 +48,7 @@ namespace Citta_T1.OperatorViews
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        #endregion
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;

@@ -55,16 +55,16 @@ namespace Citta_T1.OperatorViews
                 this.dataPath = dataInfo["dataPath0"];
                 this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                 this.toolTip1.SetToolTip(this.dataInfo, this.dataInfo.Text);
-                SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"]);
+                SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
         }
 
-        private void SetOption(string path, string dataName, string encoding)
+        private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            this.columnName = column.Split('\t');
+            this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
             CompareDataSource();

@@ -55,7 +55,7 @@ namespace Citta_T1.OperatorViews
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
-                this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"]);
+                this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
                 this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
@@ -63,7 +63,7 @@ namespace Citta_T1.OperatorViews
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
-                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"]);
+                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
                 this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
             }
            if(this.opControl.Option.GetOption("outname") != "")
@@ -79,12 +79,12 @@ namespace Citta_T1.OperatorViews
                 this.comboBox2.Items.Add(name);
         }
 
-        private string[] SetOption(string path, string dataName, string encoding)
+        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            string[] columnName = column.Split('\t');
+            string[] columnName = column.Split(separator);
           
             return columnName;
         }

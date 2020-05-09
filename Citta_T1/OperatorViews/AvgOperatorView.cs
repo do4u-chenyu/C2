@@ -44,6 +44,7 @@ namespace Citta_T1.OperatorViews
         {
             int startID = -1;
             string encoding = "";
+            char separator = '\t';
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
@@ -59,6 +60,8 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     this.dataPath = me.GetFullFilePath();
+                    if (me.GetControl is MoveDtControl)
+                        separator = (me.GetControl as MoveDtControl).Separator;
                     //设置数据信息选项
                     this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.DataInfo, this.DataInfo.Text);
@@ -67,14 +70,14 @@ namespace Citta_T1.OperatorViews
                 }
             }
             if (this.dataPath != "")
-                SetOption(this.dataPath, this.DataInfo.Text, encoding);
+                SetOption(this.dataPath, this.DataInfo.Text, encoding, separator);
 
         }
-        private void SetOption(string path, string dataName, string encoding)
+        private void SetOption(string path, string dataName, string encoding,char separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
             string column = bcpInfo.columnLine;
-            this.columnName = column.Split('\t');
+            this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
             CompareDataSource();
