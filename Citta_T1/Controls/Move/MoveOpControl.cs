@@ -47,7 +47,7 @@ namespace Citta_T1.Controls.Move
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
-        private Pen p1 = new Pen(Color.Green, 1f);
+        private Pen p1 = new Pen(Color.Green, 2f);
         public ElementStatus Status { 
             get => this.status;
             set
@@ -423,16 +423,12 @@ namespace Citta_T1.Controls.Move
                 ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
-
             else if (sumCount + sumCountDigit <= 6)
             {
-
                 this.txtButton.Text = opControlName;
                 int txtWidth = 57;
                 ResizeControl(txtWidth, smallStatus);
-
             }
-
             else
             {
                 this.txtButton.Text = opControlName;
@@ -1043,11 +1039,13 @@ namespace Citta_T1.Controls.Move
         public void ControlSelect()
         {
             double f = Math.Pow(factor, sizeLevel);
+            pen = new Pen(Color.DarkGray, 1.5f);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
+            pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }

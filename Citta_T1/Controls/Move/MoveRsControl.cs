@@ -663,7 +663,7 @@ namespace Citta_T1.Controls.Move
 
         private void UpdateRounde(int x, int y, int width, int height, int radius)
         {
-            Pen p1 = new Pen(Color.Green, 1f);
+            Pen p1 = new Pen(Color.Green, 2f);
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             Graphics g = Graphics.FromImage(staticImage);
 
@@ -734,12 +734,14 @@ namespace Citta_T1.Controls.Move
         }
         public void ControlSelect()
         {
+            pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
+            pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
