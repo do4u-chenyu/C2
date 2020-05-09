@@ -166,7 +166,7 @@ namespace Citta_T1.Controls
                     this.ResetAllLineStatus(null, true);        // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
                 return;
             }
-            if (mrIndex != -1)
+            if (mrIndex != -1 && !this.SelectDrag() && !this.SelectFrame())
             {
                 // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
                 this.ResetAllLineStatus(selectLineIndexs, false);
