@@ -147,9 +147,9 @@ namespace Citta_T1.Utils
         {
             Pen p;
             if (isBold)
-                p = new Pen(Color.Green, 3);
+                p = new Pen(Color.Gray, 3);
             else
-                p = new Pen(Color.Green, 1);
+                p = new Pen(Color.Gray, 1);
             g.DrawBezier(p, this.startP, this.a, this.b, this.endP);
             p.Dispose();
         }

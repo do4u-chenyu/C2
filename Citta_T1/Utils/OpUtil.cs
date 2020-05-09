@@ -135,16 +135,14 @@ namespace Citta_T1.Utils
                 case "自定义算子1":
                     type = "CustomOperator1";
                     break;
-                case "Python算子1":
-                    type = "PythonOperator1";
+                case "Python算子":
+                    type = "PythonOperator";
                     break;
                 case "自定义算子2":
                     type = "CustomOperator2";
                     break;
-                case "Python算子2":
-                    type = "PythonOperator2";
-                    break;
                 default:
+                    type = "Null";
                     break;
             }
             return (ElementSubType)Enum.Parse(typeof(ElementSubType), type);
@@ -197,13 +195,11 @@ namespace Citta_T1.Utils
                 case "CustomOperator2":
                     type = "自定义算子2";
                     break;
-                case "PythonOperator1":
-                    type = "Python算子1";
-                    break;
-                case "PythonOperator2":
-                    type = "Python算子2";
+                case "PythonOperator":
+                    type = "Python算子";
                     break;
                 default:
+                    type = "Null";
                     break;
             }
             return type;
