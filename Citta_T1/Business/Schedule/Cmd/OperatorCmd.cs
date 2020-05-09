@@ -34,6 +34,27 @@ namespace Citta_T1.Business.Schedule.Cmd
             InitSeparator();
         }
 
+
+        public void ReWriteBCPFile(string className = "null")
+        {
+            using (StreamWriter sw = new StreamWriter(this.outputFilePath, false, Encoding.UTF8))
+            {
+                string[] titleList = this.outputFileTitle.Split(this.separators[0][0]);
+                List<string> outTitleList = new List<string>();
+                foreach (string ind in option.GetOption("outfield").Split(','))
+                {
+                    outTitleList.Add(titleList[int.Parse(ind)]);
+                }
+                if(className == "freq")
+                {
+                    outTitleList.Add("频率统计结果");
+                }
+                string columns = String.Join("\t", outTitleList); ;
+                sw.WriteLine(columns.Trim('\t'));
+                sw.Flush();
+            }
+        }
+
         public void InitSeparator()
         {
             this.separators = new List<string>();
