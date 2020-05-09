@@ -1462,7 +1462,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{04411813-B12A-4340-B5DB-277AF48B46AF}"
+        "PackageCode" = "8:{2873A5DA-4FDA-478E-9F16-D655CB82FFEB}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1599,7 +1599,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D4C308D4FE3D49FF8C9B7C5D5D0E62BD"
             {
             "Name" = "8:卸载IAO解决方案"
-            "Arguments" = "8:/x {E837FD09-3EC9-423F-9603-01232B382778}"
+            "Arguments" = "8:/x [ProductCode]"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
