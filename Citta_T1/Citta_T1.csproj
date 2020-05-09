@@ -132,7 +132,6 @@
       <DependentUpon>CanvasPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Business\LoginInfo.cs" />
-    <Compile Include="Controls\CanvasWrapper.cs" />
     <Compile Include="Controls\Common\NoFocusButton.cs">
       <SubType>Component</SubType>
     </Compile>
