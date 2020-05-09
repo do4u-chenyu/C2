@@ -115,7 +115,7 @@ namespace Citta_T1.Controls
                 PointF a = Global.GetCurrentDocument().ScreenToWorldF(mr.A, mapOrigin);
                 PointF b = Global.GetCurrentDocument().ScreenToWorldF(mr.B, mapOrigin);
                 PointF e = Global.GetCurrentDocument().ScreenToWorldF(mr.EndP, mapOrigin);
-                g.DrawBezier(Pens.Green, s, a, b, e);
+                LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             // 反向遍历,解决Move时旧控件压在新控件上
             for (int i = 0; i < modelElements.Count; i++)

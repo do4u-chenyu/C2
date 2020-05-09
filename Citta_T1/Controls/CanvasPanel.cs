@@ -190,10 +190,12 @@ namespace Citta_T1.Controls
             
             if (SelectFrame())
             {
+                this.ResetAllLineStatus();
                 frameWrapper.FrameDown(e);
             }
             else if (SelectDrag())
             {
+                this.ResetAllLineStatus();
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
         }
