@@ -132,14 +132,14 @@ namespace Citta_T1.Utils
                 case "分组算子":
                     type = "GroupOperator";
                     break;
-                case "自定义算子1":
+                case "AI实践":
                     type = "CustomOperator1";
+                    break;
+                case "多源算子":
+                    type = "CustomOperator2";
                     break;
                 case "Python算子":
                     type = "PythonOperator";
-                    break;
-                case "自定义算子2":
-                    type = "CustomOperator2";
                     break;
                 default:
                     type = "Null";
@@ -190,10 +190,10 @@ namespace Citta_T1.Utils
                     type = "分组算子";
                     break;
                 case "CustomOperator1":
-                    type = "自定义算子1";
+                    type = "AI实践";
                     break;
                 case "CustomOperator2":
-                    type = "自定义算子2";
+                    type = "多源算子";
                     break;
                 case "PythonOperator":
                     type = "Python算子";

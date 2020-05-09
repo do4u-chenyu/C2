@@ -41,7 +41,11 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSource1.Visible = true;
                 this.outList1.Visible = true;
+                this.Text = "多源算子设置";
             }
+            else
+                this.Text = "AI实践算子设置";
+
             this.opControl = opControl;
 
             //旧状态记录
