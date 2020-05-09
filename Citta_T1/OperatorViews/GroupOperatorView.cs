@@ -256,6 +256,7 @@ namespace Citta_T1.OperatorViews
         {
             // 添加控件
             ComboBox dataBox = new ComboBox();
+            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);

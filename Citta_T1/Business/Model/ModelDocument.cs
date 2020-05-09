@@ -182,20 +182,8 @@ namespace Citta_T1.Business.Model
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
             }
-            foreach (ModelRelation mr in this.ModelRelations)
-                HasRelation(mr.EndID);
         }
-        private void HasRelation(int ID)
-        {
-            foreach (ModelElement me in this.ModelElements)
-            {
-                if (ID == me.ID && me.Type == ElementType.Operator)
-                {
-                    (me.GetControl as MoveOpControl).EnableOpenOption = true;
-                    break;
-                }
-            }
-        }
+
 
         public void Show()
         {
@@ -299,46 +287,7 @@ namespace Citta_T1.Business.Model
             }
             return null; 
         }
-        private int GetLineIndex()
-        {
-            this.lineCounter += 1;
-            return this.lineCounter;
-        }
-        private void AddLine(Bezier line)
-        {
-            this.lineCounter += 1;
-            try
-            {
-                this.modelLineDict[lineCounter] = line;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("ModelDocument SaveEndLines 出错: " + ex.ToString());
-            }
-        }
-
-        private void AddLine(int lineIndex, Bezier line)
-        {
-            lineCounter += 1;
-            try
-            {
-                this.modelLineDict[lineCounter] = line;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("ModelDocument SaveEndLines 出错: " + ex.ToString());
-            }
-        }
-
-
+      
         public bool IsDuplicatedRelation(ModelRelation mr)
         {
             foreach (ModelRelation _mr in this.modelRelations)

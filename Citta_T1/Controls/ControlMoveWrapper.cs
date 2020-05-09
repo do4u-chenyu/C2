@@ -34,9 +34,6 @@ namespace Citta_T1.Controls
             Control ct = this.control;
             Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
             g.Dispose();
-            // TODO [DK] 这里是不是少了点什么东西
-            if (Pw.X < 0 || Pw.Y < 0)
-                return staticImage;
             return staticImage;
         }
 
@@ -66,34 +63,21 @@ namespace Citta_T1.Controls
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
 
             Graphics g = Graphics.FromImage(StaticImage);
-            Pen p1 = new Pen(Color.Green, 3);
-            Pen p2 = new Pen(Color.Green, 1);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
-                if (mr.Selected)
-                    g.DrawBezier(p1,
-                        currentDoc.ScreenToWorldF(mr.StartP, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.A, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.B, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.EndP, mapOrigin)
-                );
-                else
-                    g.DrawBezier(p2,
-                        currentDoc.ScreenToWorldF(mr.StartP, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.A, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.B, mapOrigin),
-                        currentDoc.ScreenToWorldF(mr.EndP, mapOrigin)
-                );
+                PointF s = currentDoc.ScreenToWorldF(mr.StartP, mapOrigin);
+                PointF a = currentDoc.ScreenToWorldF(mr.A, mapOrigin);
+                PointF b = currentDoc.ScreenToWorldF(mr.B, mapOrigin);
+                PointF e = currentDoc.ScreenToWorldF(mr.EndP, mapOrigin);
+                LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             g.Dispose();
-            p1.Dispose();
-            p2.Dispose();
 
             n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
-            this.StaticImage.Save("staticImage.png");
             this.StaticImage.Dispose();
             this.StaticImage = null;
+            this.RepaintCtrs();
         }
 
 
@@ -107,6 +91,26 @@ namespace Citta_T1.Controls
             n.Dispose();
             this.StartDrag = false;
             this.Start = e.Location;
+        }
+        
+        /// <summary>
+        ///  重绘碰到的控件
+        /// </summary>
+        private void RepaintCtrs()
+        {
+            CanvasPanel cp = Global.GetCanvasPanel();
+            List<ModelElement> md = Global.GetCurrentDocument().ModelElements;
+
+            Rectangle thisRect = new Rectangle(this.control.Location, new Size(this.control.Width, this.control.Height));
+            foreach (ModelElement me in md)
+            {
+                Control ctr = me.GetControl;
+                //if (ctr == this.control)
+                //    continue;
+                Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));
+                cp.Invalidate(ctrRect);
+                cp.Update();
+            }
         }
     }
 }

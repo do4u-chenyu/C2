@@ -27,6 +27,7 @@ namespace Citta_T1.Controls
         private Hashtable ht;
         private List<List<List<int>>> recordSearch;
         private List<int> ctWidths;
+        private int ctHeight;
         public QuickformatWrapper(ModelDocument currentModel)
         {
             this.currentModel = currentModel;
@@ -37,7 +38,6 @@ namespace Citta_T1.Controls
             List<int> beforeNodeId = new List<int>();
             foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.EndID == id))
             {
-                log.Info("递归查找：" + id.ToString() + "---" + beforeNode.StartID.ToString());
                 beforeNodeId.Add(beforeNode.StartID);
             }
             return beforeNodeId;
@@ -116,14 +116,6 @@ namespace Citta_T1.Controls
         }
         private void TreeComplete(List<List<int>> treeA, List<List<int>> treeB)
         {
-            //测试多层列表的取交集
-            //元素一样取交集结果不一
-
-            /*
-             * TODO
-                List<List<int>> commonList = treeA.Intersect(treeB).ToList();
-                无效 原因未知。
-            */
             List<List<List<int>>> key = new List<List<List<int>>>();
             if (!this.recordSearch.Contains(treeA))
             {
@@ -200,28 +192,27 @@ namespace Citta_T1.Controls
                     Control ct = me.GetControl;
                     int left = dx + 40;
 
-                    int top = (ct.Height + 10) * dy + 70;
+                    int top  = dy + 75;
                     Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
                     log.Info(moveOffset.ToString());
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
+                    ctHeight = ctHeight + ct.Height + 10;
                 }
             }
         }
         private void ForamtSingleNode(List<int> nodes, int dx, int dy, List<ModelElement> modelElements)
         {
-
-            //int screenHeight = Global.GetCanvasPanel().Height;
             int count = 0;
             this.ctWidths = new List<int>();
             foreach (ModelElement me in modelElements)
             {
+                Control ct = me.GetControl;
                 if (!nodes.Contains(me.ID))
                 {
-                    Control ct = me.GetControl;
                     int left = dx + 60;
-                    int top = (ct.Height + 10) * dy + 70;
+                    int top =  dy + 75;
                     Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
 
                     ct.Left = left - moveOffset.X;
@@ -233,7 +224,7 @@ namespace Citta_T1.Controls
 
                 if (count == 6)
                 {
-                    dy = dy + 1;
+                    dy = dy + ct.Height;
                     count = 0;
                     dx = 0;
                 }
@@ -285,18 +276,18 @@ namespace Citta_T1.Controls
 
             Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
             int countDeep = 0;
-            int countWidth = 0;
+            ctHeight = 0;
             List<int> countWidthList = new List<int>();
             List<int> leavelList = new List<int>();
-            int count = 1;
+            int count = 0;
             this.ctWidths = new List<int>();
             foreach (List<List<int>> tree in ht.Values)
             {
-                log.Info("本轮调整模型层数:" + tree.Count.ToString());
+
                 tree.Reverse();
                 foreach (List<int> leavel in tree)
                 {
-                    countWidth = count;
+                    ctHeight = count;
                     countDeep = countDeep + 20;
                     if (this.ctWidths.Count != 0)
                     {
@@ -305,15 +296,12 @@ namespace Citta_T1.Controls
                     }
                     foreach (int id in leavel)
                     {
-                        FormatLoc(id, countDeep, countWidth, modelElements);
-                        countWidth = countWidth + 1;
+                        FormatLoc(id, countDeep, ctHeight, modelElements);
                         leavelList.Add(id);
                     }
-                    countWidthList.Add(countWidth);
-                    
-                    
+                    countWidthList.Add(ctHeight);       
                 }
-                count = count + countWidthList.Max();
+                count = countWidthList.Max();
                 countDeep = 0;
                 this.ctWidths = new List<int>(); 
             }

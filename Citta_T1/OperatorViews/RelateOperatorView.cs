@@ -77,6 +77,7 @@ namespace Citta_T1.OperatorViews
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
+            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             regBox.Anchor = AnchorStyles.None;
             regBox.Items.AddRange(new object[] {
             "AND",
@@ -89,12 +90,14 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             Label label = new Label();
+            label.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             label.Text = "等于=";
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
 
             ComboBox data2box = new ComboBox();
+            data2box.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Items.AddRange(new object[] {
             "age",

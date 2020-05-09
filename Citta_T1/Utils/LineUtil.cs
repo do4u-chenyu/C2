@@ -10,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Utils    
 {
+    public static class MyPens
+    {
+        public static Pen Gray = new Pen(Color.Gray, 1);
+        public static Pen GrayBold = new Pen(Color.Green, 2);
+    }
     public static class LineUtil
     {
         public static float THRESHOLD = 5;
         public static float DISTNOTONLINE = -1;
         public static int CUTPOINTNUM = 10;
+        
         public enum LineStatus
         {
             Null,
@@ -27,6 +33,14 @@ namespace Citta_T1.Utils
             {
                 mr.ChangeLoc(dx, dy);
             }
+        }
+
+        public static void DrawBezier(Graphics g, PointF s, PointF a, PointF b, PointF e, bool isBold)
+        {
+            if (isBold)
+                g.DrawBezier(MyPens.GrayBold, s, a, b, e);
+            else
+                g.DrawBezier(MyPens.Gray, s, a, b, e);
         }
 
         public static Rectangle ConvertRect(RectangleF r)
@@ -117,9 +131,11 @@ namespace Citta_T1.Utils
         public PointF EndP { get => endP; set => endP = value; }
         public PointF[] Points { get => points; set => points = value; }
         public PointF[] CutPointFs { get => cutPointFs; set => cutPointFs = value; }
+        public PointF A { get => a; set => a = value; }
+        public PointF B { get => b; set => b = value; }
 
-        //Pen pen;
-        public Bezier(PointF p1, PointF p2)
+    //Pen pen;
+    public Bezier(PointF p1, PointF p2)
         {
             startP = p1;
             endP = p2;
@@ -133,29 +149,19 @@ namespace Citta_T1.Utils
             endP = p4;
         }
 
-        public void Draw(CanvasWrapper canvas, RectangleF rect)
-        {
-            DrawBezier(canvas.Graphics);
-        }
-
-        public void DrawBezier(Graphics g, RectangleF rect)
-        {
-            DrawBezier(g);
-        }
-
         public void DrawBezier(Graphics g, bool isBold = false)
         {
             Pen p;
             if (isBold)
-                p = new Pen(Color.Green, 3);
+                p = MyPens.GrayBold;
             else
-                p = new Pen(Color.Green, 1);
+                p = MyPens.Gray;
             g.DrawBezier(p, this.startP, this.a, this.b, this.endP);
             p.Dispose();
         }
         public void DrawNaviewBezier(Graphics g)
         {
-            g.DrawBezier(Pens.Gray, this.startP, this.a, this.b, this.endP);
+            g.DrawBezier(MyPens.Gray, this.startP, this.a, this.b, this.endP);
         }
         public RectangleF GetBoundingRect()
         {

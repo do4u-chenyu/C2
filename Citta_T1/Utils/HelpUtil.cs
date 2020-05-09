@@ -21,10 +21,10 @@ namespace Citta_T1.Utils
         public static string GroupOperatorHelpInfo = "分组算子:根据选择字段对文本进行分组展示";
         public static string RelateOperatorHelpInfo = "关联算子:根据选择的关联条件将两个数据表进行连接，默认左连接.";
         public static string CustomOperator1HelpInfo = "自定义算子:灵活配置算子,用于各种模型探索和展示.一元算子,支持一个输入数据源.";
-        public static string PythonOperator1HelpInfo = "Python算子:调用自定义Python脚本完成运算.一元算子,支持一个输入数据源.";
+        public static string PythonOperatorHelpInfo = "Python算子:调用自定义的第三方Python脚本完成运算.";
 
         public static string CustomOperator2HelpInfo = "自定义算子:灵活配置算子,用于各种模型探索和展示.二元算子,支持二个输入数据源.";
-        public static string PythonOperator2HelpInfo = "Python算子:调用自定义Python脚本完成运算.二元算子,支持二个输入数据源.";
+    
 
 
         public static string FormatOperatorHelpInfo = "一键排版,智能调整元素版面位置.";

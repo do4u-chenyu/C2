@@ -22,7 +22,6 @@ namespace Citta_T1.Controls
     public partial class CanvasPanel : UserControl
     {
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
-        //public int sizeLevel = 0;
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         public Bitmap staticImage2;
@@ -31,14 +30,10 @@ namespace Citta_T1.Controls
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
         private DragWrapper dragWrapper;
-
-        bool MouseIsDown = false;
-        Point basepoint;
-
+        private FrameWrapper frameWrapper;
 
         Graphics g;
 
-        private Pen p1 = new Pen(Color.Gray, 0.0001f);
 
         // 绘图
         // 绘图
@@ -69,12 +64,12 @@ namespace Citta_T1.Controls
         public CanvasPanel()
         {
             InitializeComponent();
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-            dragWrapper = new DragWrapper();
+            dragWrapper  = new DragWrapper();
+            frameWrapper = new FrameWrapper();
         }
 
 
@@ -166,25 +161,14 @@ namespace Citta_T1.Controls
                 this.staticImage = new Bitmap(this.Width, this.Height);
                 Graphics g = Graphics.FromImage(this.staticImage);
                 g.Clear(this.BackColor);
+                this.RepaintStatic(g);
                 g.Dispose();
-                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
-                this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
             }
 
             
             if (SelectFrame())
             {
-                MouseIsDown = true;
-                basepoint = e.Location;
-
-                if (staticImage != null)
-                {
-                    staticImage.Dispose();
-                    staticImage = null;
-                }
-                staticImage = new Bitmap(this.Width, this.Height);
-                // 鼠标按下的时候存图
-                this.DrawToBitmap(staticImage, new Rectangle(0, 0, this.Width, this.Height));
+                frameWrapper.FrameDown(e);
             }
             else if (SelectDrag())
             {
@@ -292,29 +276,9 @@ namespace Citta_T1.Controls
 
             if (e.Button != MouseButtons.Left) return;
             // 画框
-            if (MouseIsDown && SelectFrame())
+            if (SelectFrame())
             {
-
-                Bitmap i = new Bitmap(staticImage);
-                
-                g = Graphics.FromImage(i);
-                if (e.X < basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else if (e.X > basepoint.X && e.Y < basepoint.Y)
-                    g.DrawRectangle(p1, basepoint.X, e.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else if (e.X < basepoint.X && e.Y > basepoint.Y)
-                    g.DrawRectangle(p1, e.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-                else
-                    g.DrawRectangle(p1, basepoint.X, basepoint.Y, System.Math.Abs(e.X - basepoint.X), System.Math.Abs(e.Y - basepoint.Y));
-
-                Graphics n = this.CreateGraphics();
-                n.DrawImageUnscaled(i, 0, 0);
-                n.Dispose();
-
-                g.Dispose();
-
-                i.Dispose();
-                i = null;
+                frameWrapper.FrameMove(e);
             }
 
             // 控件移动
@@ -365,12 +329,16 @@ namespace Citta_T1.Controls
         /*
          * 根据lines来重绘保存好的静态图
          */
-        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r)
+        public void RepaintStatic(Graphics g)
         {
             // 给staticImage上色
-            //canvasWrp.DrawBackgroud(r);
+            // canvasWrp.DrawBackgroud(r);
             // 将`需要重绘`IDrawable对象重绘在静态图上
-            Draw(canvasWrp, r);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            foreach (ModelRelation mr in mrs)
+                LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+            g.Dispose();
         }
 
         public void RepaintObject(Bezier line, bool isBold = false)
@@ -379,7 +347,7 @@ namespace Citta_T1.Controls
                 return;
             Graphics g = this.CreateGraphics();
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            line.DrawBezier(g, isBold);
+            LineUtil.DrawBezier(g, line.StartP, line.A, line.B, line.EndP, isBold);
             g.Dispose();
         }
 
@@ -415,12 +383,7 @@ namespace Citta_T1.Controls
 
             if (Global.GetFlowControl().SelectFrame)
             {
-                Bitmap i = new Bitmap(this.staticImage);
-                Graphics n = this.CreateGraphics();
-                n.DrawImageUnscaled(i, 0, 0);
-                n.Dispose();
-                // 标志位置低
-                MouseIsDown = false;
+                frameWrapper.FrameUp(e);
             }
 
             else if (SelectDrag())
@@ -485,17 +448,7 @@ namespace Citta_T1.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-            {
-                g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-                if (mr.Selected)
-                {
-                    p = new Pen(Color.Green, 3);
-                    g.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
-                    p.Dispose();
-                }
-                else
-                    g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-            }
+                LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
             g.Dispose();
         }
 
@@ -528,31 +481,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             Pen p;
             foreach (ModelRelation mr in doc.ModelRelations)
-            {
-                if (mr.Selected)
-                {
-                    p = new Pen(Color.Green, 3);
-                    e.Graphics.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
-                    p.Dispose();
-                }
-                else
-                    e.Graphics.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-            }
-        }
-
-
-        private void Draw(CanvasWrapper dcStatic, RectangleF rect)
-        {
-            Graphics g = dcStatic.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            foreach (ModelRelation mr in mrs)
-            {
-                Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
-                line.DrawBezier(g, mr.Selected);
-            }
-            g.Dispose();
-
+                LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
         #endregion
 
