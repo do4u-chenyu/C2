@@ -234,7 +234,7 @@ namespace Citta_T1.Controls
                 {
                     mr = mrs[i];
                     //删除线配置逻辑
-                    Global.GetCurrentDocument().StateChangeByDelete(mr.StartID);
+                    Global.GetCurrentDocument().StateChangeByDeletLine(mr.EndID);
                     mrs.Remove(mr);
                     //删除线文档dirty
                     Global.GetMainForm().SetDocumentDirty();

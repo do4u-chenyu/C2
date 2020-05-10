@@ -120,7 +120,7 @@ namespace Citta_T1.Business.Model
             }   
         }
 
-        public void StateChangeByDelete(int ID)
+        public void StateChangeByDeleteControl(int ID)
         {
 
             foreach (ModelRelation mr in this.ModelRelations)
@@ -136,9 +136,18 @@ namespace Citta_T1.Business.Model
 
                 }
             }
-            
+        }
+        public void StateChangeByDeletLine(int ID)
+        {
 
-
+            foreach (ModelElement me in this.ModelElements)
+            {
+                if (me.ID != ID) continue;
+                me.Status = ElementStatus.Null;
+                (me.GetControl as MoveOpControl).EnableOpenOption = false;
+                //存在链路，后续链路中算子状态变化
+                AllStateChange(me.ID);
+            }
         }
         public void AllStateChange(int operatorID)
         {

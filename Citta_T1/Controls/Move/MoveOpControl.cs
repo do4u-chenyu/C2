@@ -599,7 +599,7 @@ namespace Citta_T1.Controls.Move
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
-            Global.GetCurrentDocument().StateChangeByDelete(endID);
+            Global.GetCurrentDocument().StateChangeByDeleteControl(endID);
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == endID || mr.EndID == endID)

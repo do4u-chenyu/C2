@@ -24,8 +24,6 @@ namespace Citta_T1.OperatorViews
         private string[] columnName0;
         private string[] columnName1;
         private List<int> oldOutList;
-        private List<int> oldOutList1;
-        string[] columnName;
         private string oldOptionDict;
         private List<string> selectColumn;
         private List<string> oldColumnName0;
@@ -63,7 +61,7 @@ namespace Citta_T1.OperatorViews
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
+                this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 
             this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();

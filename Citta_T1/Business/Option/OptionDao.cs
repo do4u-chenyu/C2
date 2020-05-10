@@ -353,7 +353,7 @@ namespace Citta_T1.Business.Option
                         opControl.Option.OptionDict[field] = "";
                         return false;
                     }
-                    if (IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
+                    if (field != "outfield1" && IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
                     {
                         opControl.Option.OptionDict[field] = "";
                         return false;
