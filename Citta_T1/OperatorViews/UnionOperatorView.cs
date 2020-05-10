@@ -121,7 +121,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
-                createLine(line);
+                CreateLine(line);
             }
         }
         private void SaveOption()
@@ -209,7 +209,7 @@ namespace Citta_T1.OperatorViews
 
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             bool empty = IsOptionReay();
             if (empty) return;
@@ -231,7 +231,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.selectColumn, this.opControl.ID);
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -263,7 +263,7 @@ namespace Citta_T1.OperatorViews
             return empty;
         }
         #endregion
-        private void createLine(int addLine)
+        private void CreateLine(int addLine)
         {
             // 添加控件
 
@@ -284,8 +284,8 @@ namespace Citta_T1.OperatorViews
             textBox.Font =new Font("微软雅黑",9f,FontStyle.Regular);
             textBox.ForeColor= SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Enter += textBoxEx1_Enter;
-            textBox.Leave += textBoxEx1_Leave;
+            textBox.Enter += TextBoxEx1_Enter;
+            textBox.Leave += TextBoxEx1_Leave;
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
             Button addButton1 = new Button();
@@ -297,7 +297,7 @@ namespace Citta_T1.OperatorViews
             addButton1.BackColor = System.Drawing.SystemColors.Control;
             addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
             addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.add_Click);
+            addButton1.Click += new System.EventHandler(this.AddButton1_Click);
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
@@ -313,13 +313,13 @@ namespace Citta_T1.OperatorViews
             delButton1.UseVisualStyleBackColor = true;
             delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.del_Click);
+            delButton1.Click += new System.EventHandler(this.DelButton1_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
             this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private void AddButton1_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int addLine;
@@ -329,7 +329,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
                 addLine = 0;
-                createLine(addLine);
+                CreateLine(addLine);
             }
             else
             {
@@ -357,12 +357,12 @@ namespace Citta_T1.OperatorViews
                     ctlNext4.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
                 }
-                createLine(addLine);
+                CreateLine(addLine);
             }
 
         }
 
-        private void del_Click(object sender, EventArgs e)
+        private void DelButton1_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);
@@ -402,7 +402,7 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
@@ -411,7 +411,7 @@ namespace Citta_T1.OperatorViews
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
-        private void textBoxEx1_Enter(object sender, EventArgs e)
+        private void TextBoxEx1_Enter(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "别名")
@@ -421,7 +421,7 @@ namespace Citta_T1.OperatorViews
             TextBoxEx.ForeColor = Color.Black;
         }
 
-        private void textBoxEx1_Leave(object sender, EventArgs e)
+        private void TextBoxEx1_Leave(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "")
@@ -431,22 +431,22 @@ namespace Citta_T1.OperatorViews
             }           
         }
 
-        private void dataSource1_MouseClick(object sender, MouseEventArgs e)
+        private void DataSource1_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataSource1.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
         }
 
-        private void dataSource1_LostFocus(object sender, EventArgs e)
+        private void DataSource1_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataSource1);
         }
 
-        private void dataSource0_MouseClick(object sender, MouseEventArgs e)
+        private void DataSource0_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
         }
 
-        private void dataSource0_LostFocus(object sender, EventArgs e)
+        private void DataSource0_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataSource0);
         }
