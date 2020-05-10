@@ -53,7 +53,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(371, 37);
+            this.topPanel.Size = new System.Drawing.Size(344, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -61,17 +61,17 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 201);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 159);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(371, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(344, 52);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(293, 19);
+            this.cancelButton.Location = new System.Drawing.Point(266, 14);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
@@ -86,7 +86,7 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(208, 19);
+            this.confirmButton.Location = new System.Drawing.Point(184, 14);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
@@ -101,17 +101,17 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.keyPanel.Location = new System.Drawing.Point(0, 37);
+            this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 164);
+            this.keyPanel.Size = new System.Drawing.Size(116, 138);
             this.keyPanel.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(32, 128);
+            this.label3.Location = new System.Drawing.Point(23, 106);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 22);
@@ -122,7 +122,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 64);
+            this.label2.Location = new System.Drawing.Point(23, 53);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 22);
@@ -133,7 +133,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(32, 0);
+            this.label1.Location = new System.Drawing.Point(23, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 22);
@@ -146,29 +146,29 @@
             this.valuePanel.Controls.Add(this.DataInfoBox);
             this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valuePanel.Location = new System.Drawing.Point(116, 37);
+            this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(255, 164);
+            this.valuePanel.Size = new System.Drawing.Size(228, 138);
             this.valuePanel.TabIndex = 3;
             // 
             // RandomNumBox
             // 
             this.RandomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RandomNumBox.Location = new System.Drawing.Point(0, 64);
+            this.RandomNumBox.Location = new System.Drawing.Point(0, 54);
             this.RandomNumBox.Margin = new System.Windows.Forms.Padding(2);
             this.RandomNumBox.Name = "RandomNumBox";
-            this.RandomNumBox.Size = new System.Drawing.Size(136, 23);
+            this.RandomNumBox.Size = new System.Drawing.Size(150, 23);
             this.RandomNumBox.TabIndex = 4;
             // 
             // DataInfoBox
             // 
             this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.Location = new System.Drawing.Point(0, 0);
+            this.DataInfoBox.Location = new System.Drawing.Point(0, 1);
             this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
             this.DataInfoBox.Name = "DataInfoBox";
             this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.Size = new System.Drawing.Size(136, 23);
+            this.DataInfoBox.Size = new System.Drawing.Size(150, 23);
             this.DataInfoBox.TabIndex = 3;
             this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
@@ -177,18 +177,18 @@
             // OutList
             // 
             this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(0, 128);
+            this.OutList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.OutList.Location = new System.Drawing.Point(0, 106);
             this.OutList.Margin = new System.Windows.Forms.Padding(0);
             this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(135, 21);
+            this.OutList.Size = new System.Drawing.Size(164, 24);
             this.OutList.TabIndex = 2;
             // 
             // RandomOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 265);
+            this.ClientSize = new System.Drawing.Size(344, 211);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
