@@ -15,13 +15,17 @@ namespace Citta_T1.IAOLab.PythonOP
         
         public PythonInterpreterInfo[] Others { get { return pythonInterpreterInfos.FindAll(c => !c.ChosenDefault).ToArray(); } }
 
-        public PythonInterpreterInfo[] All { get { return pythonInterpreterInfos.ToArray(); } }
+        public PythonInterpreterInfo[] AllPII { get { return pythonInterpreterInfos.ToArray(); } }
 
-        public bool Empty() { return !pythonInterpreterInfos.Any(); }
+        public bool Empty() { return pythonInterpreterInfos.Count == 0; }
 
         public PythonOPConfig(string pythonConfigString)
         {
             pythonInterpreterInfos = new List<PythonInterpreterInfo>(16);
+
+            if (String.IsNullOrEmpty(pythonConfigString))
+                return;
+
             // 样例
             // C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;
             foreach (string pItem in pythonConfigString.Split(';'))

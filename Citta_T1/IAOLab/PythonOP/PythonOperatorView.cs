@@ -63,20 +63,48 @@ namespace Citta_T1.OperatorViews
 
         private void PythonOperatorView_Load(object sender, System.EventArgs e)
         {
+            // ComboBox 根据App.config加载Python虚拟机配置信息
             PythonInterpreterInfoLoad();
         }
 
-        private void PythonInterpreterInfoLoad()
+        private bool PythonInterpreterInfoLoad()
+        {
+            // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
+            // 则从App.Config中加载
+            return LoadFromModelDocumentXml() || LoadFromAppConfig();
+        }
+
+        private bool LoadFromModelDocumentXml()
+        {
+            //先清空,再加载
+            this.pythonChosenComboBox.Text = "选择Python虚拟机";
+            this.pythonChosenComboBox.Items.Clear();
+            // TODO 从ModelDocument中加载配置信息
+            return false;
+        }
+        private bool LoadFromAppConfig()
         {
             string pythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
-            if (String.IsNullOrEmpty(pythonConfigString))
+            PythonOPConfig config = new PythonOPConfig(pythonConfigString);
+            if (config.Empty())
             {
                 this.pythonChosenComboBox.Text = "未配置Python虚拟机";
-                return;
+                this.pythonChosenComboBox.Items.Clear();
+                return false;
             }
-            PythonOPConfig config = new PythonOPConfig(pythonConfigString);
-            //if (config.)
-                
+
+            this.pythonChosenComboBox.Text = "选择Python虚拟机";
+
+            foreach (PythonInterpreterInfo pii in config.AllPII)
+            {
+                this.pythonChosenComboBox.Items.Add(pii.PythonAlias);
+                if (pii.ChosenDefault)
+                {
+                    this.pythonChosenComboBox.Text = pii.PythonAlias;
+                    this.pythonChosenComboBox.SelectedItem = pii.PythonAlias;
+                }
+            }
+            return true;
         }
     }
 }

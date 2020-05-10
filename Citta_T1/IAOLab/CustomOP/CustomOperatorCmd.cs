@@ -9,7 +9,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 {
     class CustomOperatorCmd : OperatorCmd
     {
-        private static int DefaultSleepSecond = 1;
+        private static readonly int DefaultSleepSecond = 10; // 默认一个算子跑10秒,原来1秒似乎太短了
 
         public CustomOperatorCmd(Triple triple) : base(triple)
         {
