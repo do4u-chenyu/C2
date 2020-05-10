@@ -17,6 +17,8 @@ namespace Citta_T1.IAOLab.PythonOP
 
         public PythonInterpreterInfo[] All { get { return pythonInterpreterInfos.ToArray(); } }
 
+        public bool Empty() { return !pythonInterpreterInfos.Any(); }
+
         public PythonOPConfig(string pythonConfigString)
         {
             pythonInterpreterInfos = new List<PythonInterpreterInfo>(16);

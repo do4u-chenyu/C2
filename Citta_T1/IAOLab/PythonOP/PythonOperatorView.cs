@@ -1,5 +1,9 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+using Citta_T1.Utils;
 using Citta_T1.Controls.Move;
+using Citta_T1.IAOLab.PythonOP;
+
 
 namespace Citta_T1.OperatorViews
 {
@@ -55,6 +59,24 @@ namespace Citta_T1.OperatorViews
         {
             // 此时需要 rsChosenButton
             this.rsChosenButton.Enabled = true;
+        }
+
+        private void PythonOperatorView_Load(object sender, System.EventArgs e)
+        {
+            PythonInterpreterInfoLoad();
+        }
+
+        private void PythonInterpreterInfoLoad()
+        {
+            string pythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
+            if (String.IsNullOrEmpty(pythonConfigString))
+            {
+                this.pythonChosenComboBox.Text = "未配置Python虚拟机";
+                return;
+            }
+            PythonOPConfig config = new PythonOPConfig(pythonConfigString);
+            //if (config.)
+                
         }
     }
 }
