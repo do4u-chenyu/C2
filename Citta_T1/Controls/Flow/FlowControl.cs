@@ -65,6 +65,7 @@ namespace Citta_T1.Controls.Flow
             // 1. 点击之后图标变色
             // 2. 鼠标变成手的图标
             // 3. 画布中触发MouseDown MouseMove MouseUp动作
+            Global.GetCanvasPanel().ResetAllLineStatus(null, true);
             SelectDrag = !SelectDrag;
             SelectFrame = false;
             ChangeCursor();
@@ -155,6 +156,7 @@ namespace Citta_T1.Controls.Flow
 
         private void FramePictureBox_Click(object sender, EventArgs e)
         {
+            Global.GetCanvasPanel().ResetAllLineStatus(null, true);
             SelectFrame = !SelectFrame;
             
             SelectDrag = false;

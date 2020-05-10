@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 自定义算子2 ";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 ";
 
         private string opControlName;
         private Point mouseOffset;
@@ -47,7 +47,7 @@ namespace Citta_T1.Controls.Move
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
-        private Pen p1 = new Pen(Color.Green, 1f);
+        private Pen p1 = new Pen(Color.Green, 2f);
         public ElementStatus Status { 
             get => this.status;
             set
@@ -221,13 +221,13 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
                     break;
-                case "自定义算子1":
+                case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
                     break;
                 case "Python算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.PythonOperatorHelpInfo);
                     break;
-                case "自定义算子2":
+                case "多源算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
                     break;
                 default:
@@ -271,9 +271,12 @@ namespace Citta_T1.Controls.Move
                     Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 if (isNeedMoveLine)
+                {
                     this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                }
             }
         }
+
         public Point WorldBoundControl(Point Pm)
         {
            
@@ -386,7 +389,7 @@ namespace Citta_T1.Controls.Move
                     canvas.CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
-                //this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -420,16 +423,12 @@ namespace Citta_T1.Controls.Move
                 ResizeControl(txtWidth, bigStatus);
                 this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
             }
-
             else if (sumCount + sumCountDigit <= 6)
             {
-
                 this.txtButton.Text = opControlName;
                 int txtWidth = 57;
                 ResizeControl(txtWidth, smallStatus);
-
             }
-
             else
             {
                 this.txtButton.Text = opControlName;
@@ -507,10 +506,10 @@ namespace Citta_T1.Controls.Move
                 case "分组算子":
                     new GroupOperatorView(this).ShowDialog();
                     break;
-                case "自定义算子1":
+                case "AI实践":
                     new CustomOperatorView(this).ShowDialog();
                     break;
-                case "自定义算子2":
+                case "多源算子":
                     new CustomOperatorView(this).ShowDialog();
                     break;
                 case "Python算子":
@@ -1040,11 +1039,13 @@ namespace Citta_T1.Controls.Move
         public void ControlSelect()
         {
             double f = Math.Pow(factor, sizeLevel);
+            pen = new Pen(Color.DarkGray, 1.5f);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
+            pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }

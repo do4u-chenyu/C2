@@ -39,7 +39,7 @@ namespace Citta_T1.Controls.Top
         }
         private string NameTranslate(string name)
         {
-            String text = "";
+            String text = String.Empty;
             switch (name)
             {
                 case "relateButton":

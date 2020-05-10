@@ -152,6 +152,28 @@ namespace Citta_T1.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件 
             Global.GetMainForm().BlankButtonFocus();
+            #region 点线
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+            selectLineIndexs.Add(mrIndex);
+            #endregion
+            // 点击右键, 清空操作状态,进入到正常编辑状态
+            if (e.Button == MouseButtons.Right)
+            {
+                Global.GetFlowControl().ResetStatus();
+                if (mrIndex != -1)
+                    this.ShowDelectOption(e.Location);          // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
+                else
+                    this.ResetAllLineStatus(null, true);        // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
+                return;
+            }
+            if (mrIndex != -1 && !this.SelectDrag() && !this.SelectFrame())
+            {
+                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
+                this.ResetAllLineStatus(selectLineIndexs, false);
+                this.Invalidate(false);
+            }
+            //if (e.Button == MouseButtons.Right)
+            //    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
             // TODO [Dk] 后两个算子就不该有PinDraw这个动作
             if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
             {
@@ -161,9 +183,8 @@ namespace Citta_T1.Controls
                 this.staticImage = new Bitmap(this.Width, this.Height);
                 Graphics g = Graphics.FromImage(this.staticImage);
                 g.Clear(this.BackColor);
+                this.RepaintStatic(g);
                 g.Dispose();
-                CanvasWrapper dcStatic = new CanvasWrapper(this, Graphics.FromImage(this.staticImage), this.ClientRectangle);
-                this.RepaintStatic(dcStatic, new Rectangle(this.Location, new Size(this.Width, this.Height)));
             }
 
             
@@ -182,7 +203,7 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1.Show(this, p);
         }
 
-        private void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
+        public void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
             ModelRelation mr;
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
@@ -330,12 +351,16 @@ namespace Citta_T1.Controls
         /*
          * 根据lines来重绘保存好的静态图
          */
-        public void RepaintStatic(CanvasWrapper canvasWrp, Rectangle r)
+        public void RepaintStatic(Graphics g)
         {
             // 给staticImage上色
-            //canvasWrp.DrawBackgroud(r);
+            // canvasWrp.DrawBackgroud(r);
             // 将`需要重绘`IDrawable对象重绘在静态图上
-            Draw(canvasWrp, r);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            foreach (ModelRelation mr in mrs)
+                LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+            g.Dispose();
         }
 
         public void RepaintObject(Bezier line, bool isBold = false)
@@ -344,7 +369,7 @@ namespace Citta_T1.Controls
                 return;
             Graphics g = this.CreateGraphics();
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            line.DrawBezier(g, isBold);
+            LineUtil.DrawBezier(g, line.StartP, line.A, line.B, line.EndP, isBold);
             g.Dispose();
         }
 
@@ -445,17 +470,7 @@ namespace Citta_T1.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-            {
-                g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-                if (mr.Selected)
-                {
-                    p = new Pen(Color.Green, 3);
-                    g.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
-                    p.Dispose();
-                }
-                else
-                    g.DrawBezier(Pens.Green, mr.StartP, mr.A, mr.B, mr.EndP);
-            }
+                LineUtil.DrawBezier(g, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
             g.Dispose();
         }
 
@@ -488,31 +503,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             Pen p;
             foreach (ModelRelation mr in doc.ModelRelations)
-            {
-                if (mr.Selected)
-                {
-                    p = new Pen(Color.Green, 3);
-                    e.Graphics.DrawBezier(p, mr.StartP, mr.A, mr.B, mr.EndP);
-                    p.Dispose();
-                }
-                else
-                    e.Graphics.DrawBezier(Pens.Gray, mr.StartP, mr.A, mr.B, mr.EndP);
-            }
-        }
-
-
-        private void Draw(CanvasWrapper dcStatic, RectangleF rect)
-        {
-            Graphics g = dcStatic.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            foreach (ModelRelation mr in mrs)
-            {
-                Bezier line = new Bezier(mr.StartP, mr.A, mr.B, mr.EndP);
-                line.DrawBezier(g, mr.Selected);
-            }
-            g.Dispose();
-
+                LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
         #endregion
 
@@ -595,28 +586,6 @@ namespace Citta_T1.Controls
 
         private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            #region 点线
-            int mrIndex = PointToLine(new PointF(e.X, e.Y));
-            selectLineIndexs.Add(mrIndex);
-            #endregion
-            // 点击右键, 清空操作状态,进入到正常编辑状态
-            if (e.Button == MouseButtons.Right)
-            {
-                Global.GetFlowControl().ResetStatus();
-                if (mrIndex != -1)
-                    this.ShowDelectOption(e.Location);          // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
-                else
-                    this.ResetAllLineStatus(null, true);        // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
-                return;
-            }
-            if (mrIndex != -1)
-            {
-                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
-                this.ResetAllLineStatus(selectLineIndexs, false);
-                this.Invalidate(false);
-            }
-            //if (e.Button == MouseButtons.Right)
-            //    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
         }
     }
 }

@@ -84,7 +84,6 @@ namespace Citta_T1.Controls.Move
             get => this.status;
             set
             {
-                if (this.status != value) StatusChanged(); // 状态改变
                 this.status = value;
                 StatusDirty();
             }
@@ -551,17 +550,14 @@ namespace Citta_T1.Controls.Move
                 this.leftPicture.Image = Properties.Resources.resultNull;
             else if (this.status == ElementStatus.Done)
                 this.leftPicture.Image = Properties.Resources.resultDone;
-        }
-
-        // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
-        private void StatusChanged()
-        {
+            // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (!System.IO.File.Exists(this.FullFilePath))
                 return;
 
             BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
-
         }
+
+    
         #endregion
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
@@ -663,7 +659,7 @@ namespace Citta_T1.Controls.Move
 
         private void UpdateRounde(int x, int y, int width, int height, int radius)
         {
-            Pen p1 = new Pen(Color.Green, 1f);
+            Pen p1 = new Pen(Color.Green, 2f);
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             Graphics g = Graphics.FromImage(staticImage);
 
@@ -734,12 +730,14 @@ namespace Citta_T1.Controls.Move
         }
         public void ControlSelect()
         {
+            pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
+            pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }

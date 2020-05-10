@@ -54,7 +54,7 @@ namespace Citta_T1.Business.Model
         private ElementType type;
         private ElementSubType subType;
         private Control ctl;
-        private string dataSourcePath;
+        private string dataSourceFullFilePath;
         private string description;
         private int id;
         private char separator;
@@ -125,13 +125,13 @@ namespace Citta_T1.Business.Model
             return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id);
         }
 
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string bcpPath, int id)
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string fullFilePath, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, bcpPath, ElementSubType.Null, id, ctl.Separator, ctl.ExtType, ctl.Encoding);
+            return new ModelElement(ElementType.DataSource, ctl, des, fullFilePath, ElementSubType.Null, id, ctl.Separator, ctl.ExtType, ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string bcpPath,  ElementSubType subType, int id, 
+        private void Init(ElementType type, Control ctl, string des, string fullFilePath,  ElementSubType subType, int id, 
             char separator,
             DSUtil.ExtType extType, 
             DSUtil.Encoding encoding)
@@ -139,7 +139,7 @@ namespace Citta_T1.Business.Model
             this.type = type;
             this.subType = subType;
             this.ctl = ctl;
-            this.dataSourcePath = bcpPath;
+            this.dataSourceFullFilePath = fullFilePath;
             this.SetDescription(des);
             this.description = des;
             this.id = id;
@@ -193,7 +193,7 @@ namespace Citta_T1.Business.Model
         {
             string path = "";
             if (this.type == ElementType.DataSource)
-                path = dataSourcePath;
+                path = dataSourceFullFilePath;
             else if (this.type == ElementType.Result)
                 path = (ctl as MoveRsControl).FullFilePath;
             return path;
