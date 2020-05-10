@@ -29,7 +29,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,15 +37,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -241,17 +243,17 @@
     <Compile Include="Dialogs\ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\CreateNewModel.cs">
+    <Compile Include="Dialogs\CreateNewModelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\CreateNewModel.Designer.cs">
-      <DependentUpon>CreateNewModel.cs</DependentUpon>
+    <Compile Include="Dialogs\CreateNewModelForm.Designer.cs">
+      <DependentUpon>CreateNewModelForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\FormInputData.cs">
+    <Compile Include="Dialogs\InputDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\FormInputData.Designer.cs">
-      <DependentUpon>FormInputData.cs</DependentUpon>
+    <Compile Include="Dialogs\InputDataForm.Designer.cs">
+      <DependentUpon>InputDataForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\LoginForm.cs">
       <SubType>Form</SubType>
@@ -273,6 +275,7 @@
     </Compile>
     <Compile Include="IAOLab\PythonOP\PythonInterpreterInfo.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOperatorCmd.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -389,6 +392,7 @@
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
+    <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Utils\DoubleBuffer.cs" />
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />
@@ -464,8 +468,8 @@
     <EmbeddedResource Include="Dialogs\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\CreateNewModel.resx">
-      <DependentUpon>CreateNewModel.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\CreateNewModelForm.resx">
+      <DependentUpon>CreateNewModelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -483,8 +487,8 @@
     <EmbeddedResource Include="Controls\Move\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\FormInputData.resx">
-      <DependentUpon>FormInputData.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\InputDataForm.resx">
+      <DependentUpon>InputDataForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\NaviViewControl.resx">
       <DependentUpon>NaviViewControl.cs</DependentUpon>

@@ -60,8 +60,8 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(295, 261);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Location = new System.Drawing.Point(305, 236);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
@@ -73,8 +73,8 @@
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(391, 261);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Location = new System.Drawing.Point(401, 236);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
@@ -96,7 +96,7 @@
             // dataSource0
             // 
             this.dataSource0.Location = new System.Drawing.Point(96, 41);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource0.Name = "dataSource0";
             this.dataSource0.ReadOnly = true;
             this.dataSource0.Size = new System.Drawing.Size(150, 21);
@@ -106,7 +106,7 @@
             // dataSource1
             // 
             this.dataSource1.Location = new System.Drawing.Point(302, 41);
-            this.dataSource1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource1.Name = "dataSource1";
             this.dataSource1.ReadOnly = true;
             this.dataSource1.Size = new System.Drawing.Size(150, 21);
@@ -130,7 +130,7 @@
             this.fixRadioButton.AutoSize = true;
             this.fixRadioButton.Checked = true;
             this.fixRadioButton.Location = new System.Drawing.Point(96, 93);
-            this.fixRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fixRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.fixRadioButton.Name = "fixRadioButton";
             this.fixRadioButton.Size = new System.Drawing.Size(47, 16);
             this.fixRadioButton.TabIndex = 13;
@@ -143,7 +143,7 @@
             this.fixSecondTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.fixSecondTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.fixSecondTextBox.Location = new System.Drawing.Point(142, 89);
-            this.fixSecondTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fixSecondTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fixSecondTextBox.Name = "fixSecondTextBox";
             this.fixSecondTextBox.Size = new System.Drawing.Size(31, 22);
             this.fixSecondTextBox.TabIndex = 15;
@@ -163,7 +163,7 @@
             // 
             this.randomRadioButton.AutoSize = true;
             this.randomRadioButton.Location = new System.Drawing.Point(291, 93);
-            this.randomRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.randomRadioButton.Name = "randomRadioButton";
             this.randomRadioButton.Size = new System.Drawing.Size(47, 16);
             this.randomRadioButton.TabIndex = 17;
@@ -175,7 +175,7 @@
             this.randomBeginTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.randomBeginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.randomBeginTextBox.Location = new System.Drawing.Point(342, 89);
-            this.randomBeginTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomBeginTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomBeginTextBox.Name = "randomBeginTextBox";
             this.randomBeginTextBox.Size = new System.Drawing.Size(31, 22);
             this.randomBeginTextBox.TabIndex = 18;
@@ -186,7 +186,7 @@
             this.randomEndTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.randomEndTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.randomEndTextBox.Location = new System.Drawing.Point(412, 89);
-            this.randomEndTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomEndTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomEndTextBox.Name = "randomEndTextBox";
             this.randomEndTextBox.Size = new System.Drawing.Size(31, 22);
             this.randomEndTextBox.TabIndex = 19;
@@ -259,7 +259,7 @@
             // 
             this.rsFullFilePathTextBox.BackColor = System.Drawing.Color.White;
             this.rsFullFilePathTextBox.Location = new System.Drawing.Point(96, 187);
-            this.rsFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rsFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rsFullFilePathTextBox.Name = "rsFullFilePathTextBox";
             this.rsFullFilePathTextBox.ReadOnly = true;
             this.rsFullFilePathTextBox.Size = new System.Drawing.Size(320, 21);
@@ -284,7 +284,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 321);
+            this.ClientSize = new System.Drawing.Size(485, 272);
             this.ControlBox = false;
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.rsFullFilePathTextBox);

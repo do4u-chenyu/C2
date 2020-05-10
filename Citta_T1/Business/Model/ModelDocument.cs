@@ -31,7 +31,7 @@ namespace Citta_T1.Business.Model
 
         private int elementCount = 0;
         
-        private Point mapOrigin = new Point(-600,-300);
+        private Point mapOrigin = new Point(-600, -300);
         private int sizeL;
         private float screenFactor;
 

@@ -9,13 +9,13 @@ using Citta_T1.Business.Model;
 namespace Citta_T1.Dialogs
 {
 
-    public partial class CreateNewModel : Form
+    public partial class CreateNewModelForm : Form
     {
         private int titlePostfix;  // 模型建议命名的数字后缀
         private string modelTitle;
         public string ModelTitle { get => modelTitle; }
 
-        public CreateNewModel()
+        public CreateNewModelForm()
         {
             InitializeComponent();
             modelTitle = "";

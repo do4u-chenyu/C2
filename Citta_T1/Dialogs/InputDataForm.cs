@@ -13,8 +13,8 @@ using static Citta_T1.Utils.DSUtil;
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void delegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
-    public partial class FormInputData : Form
+    public delegate void DelegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
+    public partial class InputDataForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
 
@@ -30,7 +30,7 @@ namespace Citta_T1.Dialogs
         private string invalidCharsPattern;
         private string[] invalidStringArr;
 
-        public FormInputData()
+        public InputDataForm()
         {
             InitializeComponent();
             this.dataGridView1.DoubleBuffered(true);
@@ -85,7 +85,7 @@ namespace Citta_T1.Dialogs
         
 
         // 添加按钮
-        public event delegateInputData InputDataEvent;
+        public event DelegateInputData InputDataEvent;
         private void AddButton_Click(object sender, EventArgs e)
         {
             string name = this.textBox1.Text;

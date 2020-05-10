@@ -20,8 +20,8 @@ namespace  Citta_T1
         private bool isLeftViewPanelMinimum;
         
         private string userName;
-        private Citta_T1.Dialogs.FormInputData formInputData;
-        private Citta_T1.Dialogs.CreateNewModel createNewModel;
+        private Citta_T1.Dialogs.InputDataForm inputDataForm;
+        private Citta_T1.Dialogs.CreateNewModelForm createNewModelForm;
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 
         private ModelDocumentDao modelDocumentDao;
@@ -36,9 +36,9 @@ namespace  Citta_T1
         public MainForm()
         {
             InitializeComponent();
-            this.formInputData = new Citta_T1.Dialogs.FormInputData();
-            this.formInputData.InputDataEvent += frm_InputDataEvent;
-            this.createNewModel = new Citta_T1.Dialogs.CreateNewModel();
+            this.inputDataForm = new Citta_T1.Dialogs.InputDataForm();
+            this.inputDataForm.InputDataEvent += InputDataFormEvent;
+            this.createNewModelForm = new Citta_T1.Dialogs.CreateNewModelForm();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
 
@@ -402,25 +402,25 @@ namespace  Citta_T1
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
-            this.formInputData.StartPosition = FormStartPosition.CenterScreen;
-            this.formInputData.ShowDialog();
-            this.formInputData.ReSetParams();
+            this.inputDataForm.StartPosition = FormStartPosition.CenterScreen;
+            this.inputDataForm.ShowDialog();
+            this.inputDataForm.ReSetParams();
         }
 
           
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
-            this.createNewModel.StartPosition = FormStartPosition.CenterScreen;
-            this.createNewModel.Owner = this;
-            DialogResult dialogResult = this.createNewModel.ShowDialog();
+            this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
+            this.createNewModelForm.Owner = this;
+            DialogResult dialogResult = this.createNewModelForm.ShowDialog();
             
             // 模型标题栏添加新标题
             if (dialogResult == DialogResult.OK)
-                this.modelTitlePanel.AddModel(this.createNewModel.ModelTitle);
+                this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
         }
 
-        private void frm_InputDataEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
