@@ -54,6 +54,7 @@
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.socialNetworkConfigPage = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.aboutPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -65,7 +66,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pythonOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label9 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
@@ -327,6 +327,16 @@
             this.socialNetworkConfigPage.Text = "社交关系分析";
             this.socialNetworkConfigPage.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(251, 170);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 26);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "施 工 中 ...";
+            // 
             // aboutPage
             // 
             this.aboutPage.Controls.Add(this.label8);
@@ -429,19 +439,9 @@
             // pythonOpenFileDialog
             // 
             this.pythonOpenFileDialog.DefaultExt = "exe";
-            this.pythonOpenFileDialog.Filter = "Python解释器 |*.exe";
+            this.pythonOpenFileDialog.Filter = "Python解释器 |python.exe|可执行文件|*.exe";
             this.pythonOpenFileDialog.RestoreDirectory = true;
             this.pythonOpenFileDialog.Title = "选择系统中已安装的Python解释器";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(251, 170);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 26);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "施 工 中 ...";
             // 
             // ConfigForm
             // 
