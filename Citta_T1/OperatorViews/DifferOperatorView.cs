@@ -65,8 +65,7 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
             this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+           
 
             foreach (string name in this.columnName0)
             {

@@ -37,8 +37,8 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
             this.oldOutList = this.outList.GetItemCheckIndex();
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
+            this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
@@ -122,7 +122,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请选择输出字段!");
                 return;
             }
-            if (!this.repetition.Checked && !this.noRepetition.Checked)
+            if (!this.noRepetition.Checked && !this.repetition.Checked)
             {
                 MessageBox.Show("请选择数据是否进行去重");
                 return;
@@ -137,9 +137,9 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             //内容修改，引起文档dirty
 
-            if (this.oldCheckedItems[0] != this.noRepetition.Checked)
+            if (this.oldCheckedItems[0] != this.repetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldCheckedItems[1] != this.repetition.Checked)
+            else if(this.oldCheckedItems[1] != this.noRepetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
             else if(this.oldCheckedItems[2] != this.ascendingOrder.Checked)
                 Global.GetMainForm().SetDocumentDirty();
@@ -175,8 +175,8 @@ namespace Citta_T1.OperatorViews
             string outField = string.Join(",", checkIndexs);
 
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
 
@@ -190,9 +190,9 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             if (this.opControl.Option.GetOption("noRepetition") != "")
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            if (this.opControl.Option.GetOption("repetition") != "")
+                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (this.opControl.Option.GetOption("ascendingOrder") != "")
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")

@@ -41,8 +41,8 @@ namespace Citta_T1.OperatorViews
             this.oldFirstRow = this.firstRow.Text;
             this.oldEndRow = this.endRow.Text;
             this.oldSort = this.sortField.Text;
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
+            this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
@@ -131,9 +131,9 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldCheckedItems[0] != this.noRepetition.Checked)
+            if (this.oldCheckedItems[0] != this.repetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[1] != this.repetition.Checked)
+            else if (this.oldCheckedItems[1] != this.noRepetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
             else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
                 Global.GetMainForm().SetDocumentDirty();
@@ -172,8 +172,8 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
             this.opControl.Option.SetOption("sortfield", this.sortField.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
@@ -195,10 +195,10 @@ namespace Citta_T1.OperatorViews
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
             }   
-            if (this.opControl.Option.GetOption("noRepetition") != "")
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            if (this.opControl.Option.GetOption("noRepetition") != "")
+                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (this.opControl.Option.GetOption("ascendingOrder") != "")
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")

@@ -48,8 +48,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.noRepetition = new System.Windows.Forms.RadioButton();
             this.repetition = new System.Windows.Forms.RadioButton();
+            this.noRepetition = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
@@ -278,8 +278,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.noRepetition);
             this.groupBox2.Controls.Add(this.repetition);
+            this.groupBox2.Controls.Add(this.noRepetition);
             this.groupBox2.Location = new System.Drawing.Point(1, 115);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
@@ -291,29 +291,29 @@
             // 
             // noRepetition
             // 
-            this.noRepetition.AutoSize = true;
-            this.noRepetition.Checked = true;
-            this.noRepetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noRepetition.Location = new System.Drawing.Point(85, 10);
-            this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
-            this.noRepetition.Name = "noRepetition";
-            this.noRepetition.Size = new System.Drawing.Size(62, 21);
-            this.noRepetition.TabIndex = 1;
-            this.noRepetition.TabStop = true;
-            this.noRepetition.Text = "不去重";
-            this.noRepetition.UseVisualStyleBackColor = true;
+            this.repetition.AutoSize = true;
+            this.repetition.Checked = true;
+            this.repetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.repetition.Location = new System.Drawing.Point(85, 10);
+            this.repetition.Margin = new System.Windows.Forms.Padding(2);
+            this.repetition.Name = "repetition";
+            this.repetition.Size = new System.Drawing.Size(62, 21);
+            this.repetition.TabIndex = 1;
+            this.repetition.TabStop = true;
+            this.repetition.Text = "不去重";
+            this.repetition.UseVisualStyleBackColor = true;
             // 
             // repetition
             // 
-            this.repetition.AutoSize = true;
-            this.repetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.repetition.Location = new System.Drawing.Point(5, 10);
-            this.repetition.Margin = new System.Windows.Forms.Padding(2);
-            this.repetition.Name = "repetition";
-            this.repetition.Size = new System.Drawing.Size(50, 21);
-            this.repetition.TabIndex = 0;
-            this.repetition.Text = "去重";
-            this.repetition.UseVisualStyleBackColor = true;
+            this.noRepetition.AutoSize = true;
+            this.noRepetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.noRepetition.Location = new System.Drawing.Point(5, 10);
+            this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
+            this.noRepetition.Name = "noRepetition";
+            this.noRepetition.Size = new System.Drawing.Size(50, 21);
+            this.noRepetition.TabIndex = 0;
+            this.noRepetition.Text = "去重";
+            this.noRepetition.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -399,8 +399,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RadioButton noRepetition;
         private System.Windows.Forms.RadioButton repetition;
+        private System.Windows.Forms.RadioButton noRepetition;
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.Label label8;
