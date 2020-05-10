@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.Dialogs
 {
-    partial class FormInputData
+    partial class InputDataForm
     {
         /// <summary>
         /// Required designer variable.
