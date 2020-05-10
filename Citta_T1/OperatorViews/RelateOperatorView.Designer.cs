@@ -98,7 +98,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(572, 37);
+            this.topPanel.Size = new System.Drawing.Size(568, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -106,10 +106,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 336);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 332);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(572, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(568, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -149,7 +149,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 299);
+            this.keyPanel.Size = new System.Drawing.Size(116, 295);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -165,7 +165,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(456, 299);
+            this.valuePanel.Size = new System.Drawing.Size(452, 295);
             this.valuePanel.TabIndex = 3;
             // 
             // OutList1
@@ -324,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 400);
+            this.ClientSize = new System.Drawing.Size(568, 396);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -335,6 +335,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RelateOperatorView";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "关联算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

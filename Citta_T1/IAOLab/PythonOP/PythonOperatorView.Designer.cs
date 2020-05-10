@@ -326,6 +326,7 @@
             this.MinimizeBox = false;
             this.Name = "PythonOperatorView";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Python算子设置";
             this.Load += new System.EventHandler(this.PythonOperatorView_Load);
             this.groupBox1.ResumeLayout(false);
