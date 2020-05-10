@@ -346,11 +346,16 @@ namespace Citta_T1.Business.Option
                 else if (field.Contains("outfield"))
                 {
 
-                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                    string[] checkIndexs = opControl.Option.GetOption(field).Split(',');
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                    if (field == "outfield1" && IsDataSourceEqual(oldColumnList1, columnName0, outIndex))
+                    {
+                        opControl.Option.OptionDict[field] = "";
+                        return false;
+                    }
                     if (IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
                     {
-                        opControl.Option.OptionDict["outfield"] = "";
+                        opControl.Option.OptionDict[field] = "";
                         return false;
                     }
                 }
@@ -405,7 +410,7 @@ namespace Citta_T1.Business.Option
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
         {
-            char separator = '\t';
+           
             Dictionary<string, string> dataInfo=new Dictionary<string, string>();
             Dictionary<int, int> startControls = new Dictionary<int,int>();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -423,6 +428,7 @@ namespace Citta_T1.Business.Option
                 return dataInfo;
             foreach (KeyValuePair<int,int> kvp in startControls)
             {
+                char separator = '\t';
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
                 dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();

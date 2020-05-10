@@ -141,7 +141,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName0.Add(this.OutList0.Items[index].ToString());
             }
-            if (this.opControl.Option.GetOption("outfield1") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, null, "outfield1"))
+            if (this.opControl.Option.GetOption("outfield1") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName1, null, "outfield1"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
