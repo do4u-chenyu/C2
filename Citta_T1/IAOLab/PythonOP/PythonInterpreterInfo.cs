@@ -36,22 +36,35 @@ namespace Citta_T1.IAOLab.PythonOP
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
 
-            if (!p.Start())
-                return defaultExitCode;
+            try
+            {
+                if (!p.Start())
+                    return defaultExitCode;
 
-            string version = p.StandardOutput.ReadToEnd();
+                string version = p.StandardOutput.ReadToEnd();
 
-            p.WaitForExit(10 * 1000);
+                p.WaitForExit(10 * 1000);
 
-            if (p.ExitCode != 0)
+                if (p.ExitCode != 0)
+                    return p.ExitCode;
+
+                // 能匹配中就OK
+                Match mat = PythonVersionRegex.Match(version);
+                if (mat.Success)
+                    this.pythonVersion = mat.Groups[1].Value;
+
                 return p.ExitCode;
-
-            // 能匹配中就OK
-            Match mat = PythonVersionRegex.Match(version);
-            if (mat.Success)
-                this.pythonVersion = mat.Groups[1].Value;
-
-            return p.ExitCode;
+            }
+            catch
+            {
+                this.pythonVersion = String.Empty;
+                return defaultExitCode;
+            }
+            finally
+            {
+                if (p != null)
+                    p.Close();
+            }
         }
     }
 }
