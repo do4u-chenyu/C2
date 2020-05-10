@@ -389,6 +389,7 @@
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
+    <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Utils\DoubleBuffer.cs" />
     <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Utils\BCPBuffer.cs" />

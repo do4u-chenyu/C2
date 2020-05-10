@@ -36,21 +36,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.pyParamTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.browseButton = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.rsFullFileNameTextBox = new System.Windows.Forms.TextBox();
+            this.browseChosenRadioButton = new System.Windows.Forms.RadioButton();
+            this.paramRadioButton = new System.Windows.Forms.RadioButton();
+            this.stdoutRadioButton = new System.Windows.Forms.RadioButton();
+            this.rsChosenButton = new System.Windows.Forms.Button();
+            this.browseChosenTextBox = new System.Windows.Forms.TextBox();
+            this.paramPrefixTagTextBox = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pyBrowseButton = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.pyFullFilePathTextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,24 +139,24 @@
             this.label4.Text = "脚本传入参数：";
             this.toolTip1.SetToolTip(this.label4, "脚本需要传入的其他参数");
             // 
-            // textBox2
+            // pyParamTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(132, 269);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(375, 21);
-            this.textBox2.TabIndex = 17;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pyParamTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pyParamTextBox.Location = new System.Drawing.Point(132, 269);
+            this.pyParamTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.pyParamTextBox.Name = "pyParamTextBox";
+            this.pyParamTextBox.Size = new System.Drawing.Size(375, 23);
+            this.pyParamTextBox.TabIndex = 17;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.browseButton);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.rsFullFileNameTextBox);
+            this.groupBox1.Controls.Add(this.browseChosenRadioButton);
+            this.groupBox1.Controls.Add(this.paramRadioButton);
+            this.groupBox1.Controls.Add(this.stdoutRadioButton);
+            this.groupBox1.Controls.Add(this.rsChosenButton);
+            this.groupBox1.Controls.Add(this.browseChosenTextBox);
+            this.groupBox1.Controls.Add(this.paramPrefixTagTextBox);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(8, 122);
             this.groupBox1.Name = "groupBox1";
@@ -166,76 +166,93 @@
             this.groupBox1.Text = "结果文件设置：";
             this.toolTip1.SetToolTip(this.groupBox1, "指定第三方脚本返回给平台结果文件的方式");
             // 
-            // radioButton3
+            // rsFullFileNameTextBox
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton3.Location = new System.Drawing.Point(13, 97);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(122, 21);
-            this.radioButton3.TabIndex = 29;
-            this.radioButton3.Text = "浏览指定结果文件";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rsFullFileNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rsFullFileNameTextBox.Location = new System.Drawing.Point(165, 62);
+            this.rsFullFileNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.rsFullFileNameTextBox.Name = "rsFullFileNameTextBox";
+            this.rsFullFileNameTextBox.ReadOnly = true;
+            this.rsFullFileNameTextBox.Size = new System.Drawing.Size(329, 23);
+            this.rsFullFileNameTextBox.TabIndex = 30;
+            this.rsFullFileNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.rsFullFileNameTextBox, "自动指定的结果文件路径");
             // 
-            // radioButton2
+            // browseChosenRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton2.Location = new System.Drawing.Point(13, 65);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(158, 21);
-            this.radioButton2.TabIndex = 28;
-            this.radioButton2.Text = "以传入参数指定结果文件";
-            this.toolTip1.SetToolTip(this.radioButton2, "结果文件路径以参数的形式传入自定义脚本中");
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.browseChosenRadioButton.AutoSize = true;
+            this.browseChosenRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.browseChosenRadioButton.Location = new System.Drawing.Point(6, 97);
+            this.browseChosenRadioButton.Name = "browseChosenRadioButton";
+            this.browseChosenRadioButton.Size = new System.Drawing.Size(122, 21);
+            this.browseChosenRadioButton.TabIndex = 29;
+            this.browseChosenRadioButton.Text = "浏览指定结果文件";
+            this.browseChosenRadioButton.UseVisualStyleBackColor = true;
+            this.browseChosenRadioButton.CheckedChanged += new System.EventHandler(this.BrowseChosenRadioButton_CheckedChanged);
             // 
-            // radioButton1
+            // paramRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.radioButton1.Location = new System.Drawing.Point(12, 33);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(195, 21);
-            this.radioButton1.TabIndex = 27;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "将脚本stdout重定向到结果文件";
-            this.toolTip1.SetToolTip(this.radioButton1, "Python脚本的标准输出流(stdout)作为运算结果重定向到结果文件");
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.paramRadioButton.AutoSize = true;
+            this.paramRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.paramRadioButton.Location = new System.Drawing.Point(6, 65);
+            this.paramRadioButton.Name = "paramRadioButton";
+            this.paramRadioButton.Size = new System.Drawing.Size(122, 21);
+            this.paramRadioButton.TabIndex = 28;
+            this.paramRadioButton.Text = "传参指定结果文件";
+            this.toolTip1.SetToolTip(this.paramRadioButton, "结果文件路径以参数的形式传入自定义脚本中");
+            this.paramRadioButton.UseVisualStyleBackColor = true;
+            this.paramRadioButton.CheckedChanged += new System.EventHandler(this.ParamRadioButton_CheckedChanged);
             // 
-            // browseButton
+            // stdoutRadioButton
             // 
-            this.browseButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browseButton.Location = new System.Drawing.Point(445, 96);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(49, 23);
-            this.browseButton.TabIndex = 26;
-            this.browseButton.Text = "浏览+";
-            this.browseButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.browseButton.UseVisualStyleBackColor = true;
+            this.stdoutRadioButton.AutoSize = true;
+            this.stdoutRadioButton.Checked = true;
+            this.stdoutRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stdoutRadioButton.Location = new System.Drawing.Point(5, 33);
+            this.stdoutRadioButton.Name = "stdoutRadioButton";
+            this.stdoutRadioButton.Size = new System.Drawing.Size(195, 21);
+            this.stdoutRadioButton.TabIndex = 27;
+            this.stdoutRadioButton.TabStop = true;
+            this.stdoutRadioButton.Text = "将脚本stdout重定向到结果文件";
+            this.toolTip1.SetToolTip(this.stdoutRadioButton, "Python脚本的标准输出流(stdout)作为运算结果重定向到结果文件");
+            this.stdoutRadioButton.UseVisualStyleBackColor = true;
+            this.stdoutRadioButton.CheckedChanged += new System.EventHandler(this.StdoutRadioButton_CheckedChanged);
             // 
-            // textBox4
+            // rsChosenButton
             // 
-            this.textBox4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(174, 96);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(266, 23);
-            this.textBox4.TabIndex = 25;
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rsChosenButton.Enabled = false;
+            this.rsChosenButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rsChosenButton.Location = new System.Drawing.Point(445, 96);
+            this.rsChosenButton.Name = "rsChosenButton";
+            this.rsChosenButton.Size = new System.Drawing.Size(49, 23);
+            this.rsChosenButton.TabIndex = 26;
+            this.rsChosenButton.Text = "浏览+";
+            this.rsChosenButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.rsChosenButton, "选择你的Python脚本生成结果文件的全路径");
+            this.rsChosenButton.UseVisualStyleBackColor = true;
+            this.rsChosenButton.Click += new System.EventHandler(this.RsChosenButton_Click);
             // 
-            // textBox3
+            // browseChosenTextBox
             // 
-            this.textBox3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(174, 62);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(23, 23);
-            this.textBox3.TabIndex = 24;
-            this.textBox3.Text = "-f";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.textBox3, "参数标识");
+            this.browseChosenTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.browseChosenTextBox.Location = new System.Drawing.Point(129, 96);
+            this.browseChosenTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.browseChosenTextBox.Name = "browseChosenTextBox";
+            this.browseChosenTextBox.ReadOnly = true;
+            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 23);
+            this.browseChosenTextBox.TabIndex = 25;
+            // 
+            // paramPrefixTagTextBox
+            // 
+            this.paramPrefixTagTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.paramPrefixTagTextBox.Location = new System.Drawing.Point(129, 62);
+            this.paramPrefixTagTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.paramPrefixTagTextBox.Name = "paramPrefixTagTextBox";
+            this.paramPrefixTagTextBox.Size = new System.Drawing.Size(32, 23);
+            this.paramPrefixTagTextBox.TabIndex = 24;
+            this.paramPrefixTagTextBox.Text = "-f";
+            this.paramPrefixTagTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.paramPrefixTagTextBox, "参数标识");
             // 
             // label6
             // 
@@ -249,55 +266,54 @@
             this.label6.Text = "Python脚本：";
             this.toolTip1.SetToolTip(this.label6, "自定义的第三方Python脚本");
             // 
-            // textBox5
+            // pyBrowseButton
             // 
-            this.textBox5.Location = new System.Drawing.Point(137, 87);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(322, 21);
-            this.textBox5.TabIndex = 25;
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pyBrowseButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pyBrowseButton.Location = new System.Drawing.Point(464, 87);
+            this.pyBrowseButton.Name = "pyBrowseButton";
+            this.pyBrowseButton.Size = new System.Drawing.Size(49, 23);
+            this.pyBrowseButton.TabIndex = 30;
+            this.pyBrowseButton.Text = "浏览+";
+            this.pyBrowseButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.pyBrowseButton, "选择你要运行的外部Python脚本");
+            this.pyBrowseButton.UseVisualStyleBackColor = true;
+            this.pyBrowseButton.Click += new System.EventHandler(this.PyBrowseButton_Click);
             // 
-            // button1
+            // saveFileDialog1
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(464, 85);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "浏览+";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.saveFileDialog1.DefaultExt = "*.bcp";
+            this.saveFileDialog1.Filter = "Bcp文件|*.bcp|Txt文件|*.txt";
+            this.saveFileDialog1.Title = "选择外部Python脚本计划生成的结果文件名,系统将该文件作为结果展示";
+            // 
+            // pyFullFilePathTextBox
+            // 
+            this.pyFullFilePathTextBox.BackColor = System.Drawing.Color.White;
+            this.pyFullFilePathTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pyFullFilePathTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pyFullFilePathTextBox.Location = new System.Drawing.Point(137, 87);
+            this.pyFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.pyFullFilePathTextBox.Name = "pyFullFilePathTextBox";
+            this.pyFullFilePathTextBox.ReadOnly = true;
+            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(322, 23);
+            this.pyFullFilePathTextBox.TabIndex = 25;
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(201, 62);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(293, 23);
-            this.textBox1.TabIndex = 30;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.textBox1, "自动指定的结果文件路径");
+            this.openFileDialog1.DefaultExt = "*.py";
+            this.openFileDialog1.Filter = "Py脚本|*.py";
+            this.openFileDialog1.Title = "选择要运行的外部自定义Python脚本";
             // 
             // PythonOperatorView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(518, 336);
+            this.ClientSize = new System.Drawing.Size(518, 339);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.pyBrowseButton);
+            this.Controls.Add(this.pyFullFilePathTextBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.pyParamTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataSource0);
@@ -327,20 +343,20 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox pyParamTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.TextBox paramPrefixTagTextBox;
+        private System.Windows.Forms.TextBox browseChosenTextBox;
+        private System.Windows.Forms.Button rsChosenButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton browseChosenRadioButton;
+        private System.Windows.Forms.RadioButton paramRadioButton;
+        private System.Windows.Forms.RadioButton stdoutRadioButton;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox pyFullFilePathTextBox;
+        private System.Windows.Forms.Button pyBrowseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox rsFullFileNameTextBox;
     }
 }

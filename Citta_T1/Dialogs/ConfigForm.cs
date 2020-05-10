@@ -113,11 +113,13 @@ namespace Citta_T1.Dialogs
             ConfigUtil.TrySetAppSettingsByKey("python", sb.ToString());
         }
 
+        // 运行python --version, 检查环境是否有问题
         private int CheckPythonInterpreter(string pythonFFP, ref string pythonVersion)
         {
+            
             int defaultExitCode = 1;
             Process p = new Process();
-            p.StartInfo.FileName = String.Format("{0}", pythonFFP);
+            p.StartInfo.FileName = pythonFFP;
             p.StartInfo.Arguments = "--version";
             p.StartInfo.UseShellExecute = false; // 不显示用户界面
             p.StartInfo.CreateNoWindow = true;
@@ -129,7 +131,7 @@ namespace Citta_T1.Dialogs
             {
                 if (!p.Start())
                     return defaultExitCode;
-
+                // windows下 python.exe --version 命令输出, 有的版本是stderr,有的版本是stdout
                 string version = p.StandardOutput.ReadToEnd();
                 if (String.IsNullOrEmpty(version))
                     version = p.StandardError.ReadToEnd();
@@ -154,8 +156,6 @@ namespace Citta_T1.Dialogs
                 if (p != null)
                     p.Close();
             }
-            
-            //TODO 运行python --version, 检查环境是否有问题
             return defaultExitCode;
         }
 
@@ -190,7 +190,7 @@ namespace Citta_T1.Dialogs
                     continue;
                 string pythonFFP = oneConfig[0].Trim();
                 string alias = oneConfig[1].Trim();
-                bool ifCheck = StringTryParseBool(oneConfig[2]);
+                bool ifCheck = ConvertUtil.TryParseBool(oneConfig[2]);
                 AddPythonInterpreter(pythonFFP, alias, ifCheck);
             }
 
@@ -201,18 +201,6 @@ namespace Citta_T1.Dialogs
             string possibleInitialDirectory = ConfigUtil.GetDefaultPythonOpenFileDirectory();
             if (!String.IsNullOrEmpty(possibleInitialDirectory))
                 pythonOpenFileDialog.InitialDirectory = possibleInitialDirectory;  
-        }
-
-        private bool StringTryParseBool(string value)
-        {
-            try 
-            {
-                return bool.Parse(value);
-            }
-            catch
-            {
-                return false;
-            }
         }
 
 
