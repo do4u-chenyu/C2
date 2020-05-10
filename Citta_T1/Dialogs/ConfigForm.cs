@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace Citta_T1.Dialogs
         private static readonly int PythonFFPColumnIndex = 0;
         private static readonly int AliasColumnIndex = 1;
         private static readonly int CheckBoxColumnIndex = 2;
-        private static readonly Regex PythonAliasRegex = new Regex(@"(python\d{1,3}(\.\d{1,3})?)", RegexOptions.IgnoreCase);
+        private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+\.\d+)\s*$", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
         public ConfigForm()
         {
@@ -50,17 +51,18 @@ namespace Citta_T1.Dialogs
             if (dr != DialogResult.OK)
                 return;
             string pythonFFP = pythonOpenFileDialog.FileName.Trim();
-            if (!CheckPythonInterpreter(pythonFFP))
+            string pythonVersion = String.Empty;
+            if (CheckPythonInterpreter(pythonFFP, ref pythonVersion) != 0)
             {
                 //TODO 弹出对话框
-                MessageBox.Show(String.Format("Python解释器导入错误: {0}", pythonFFP), 
+                MessageBox.Show(String.Format("Python解释器似乎无法正常使用: {0}", pythonFFP), 
                     "Python解释器导入错误", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Information);
                 return;
             }
             pythonOpenFileDialog.InitialDirectory = String.Empty;
-            AddPythonInterpreter(pythonFFP);
+            AddPythonInterpreter(pythonFFP, pythonVersion);
 
         }
 
@@ -69,21 +71,11 @@ namespace Citta_T1.Dialogs
             Close();
         }
 
-        private void AddPythonInterpreter(string pythonFFP)
+        private void AddPythonInterpreter(string pythonFFP, string pythonVersion)
         {
             // 默认别名采用 python 解释器的可执行文件名,但一般都是python.exe,看不出区别
             // 用正则表达式从路径中提取带版本号的python解释器名称,失败时采用默认命名
-            string aliasDefault = System.IO.Path.GetFileNameWithoutExtension(pythonFFP);
-            MatchCollection mats = PythonAliasRegex.Matches(pythonFFP);
-            foreach(Match mat in mats)
-            {   // 提取成功
-                if (mat.Success && mat.Groups.Count > 1 && mat.Groups[1].Success)
-                {   // 提取最长的一个匹配
-                    string matchValue = mat.Groups[1].Value;
-                    if (matchValue.Length > aliasDefault.Length)
-                        aliasDefault = matchValue;
-                }       
-            }        
+            string aliasDefault = "Python" + pythonVersion;      
             this.pythonFFPTextBox.Text = pythonFFP;
             // 第一行 默认选中
             if (this.dataGridView.Rows.Count == 0)
@@ -121,10 +113,50 @@ namespace Citta_T1.Dialogs
             ConfigUtil.TrySetAppSettingsByKey("python", sb.ToString());
         }
 
-        private bool CheckPythonInterpreter(string pythonFFP)
+        private int CheckPythonInterpreter(string pythonFFP, ref string pythonVersion)
         {
+            int defaultExitCode = 1;
+            Process p = new Process();
+            p.StartInfo.FileName = String.Format("{0}", pythonFFP);
+            p.StartInfo.Arguments = "--version";
+            p.StartInfo.UseShellExecute = false; // 不显示用户界面
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+
+            try
+            {
+                if (!p.Start())
+                    return defaultExitCode;
+
+                string version = p.StandardOutput.ReadToEnd();
+                if (String.IsNullOrEmpty(version))
+                    version = p.StandardError.ReadToEnd();
+
+                p.WaitForExit(30 * 1000);
+
+                if (p.ExitCode != 0)
+                    return p.ExitCode;
+                defaultExitCode = p.ExitCode;
+                // 能匹配中就OK
+                Match mat = PythonVersionRegex.Match(version);
+                if (mat.Success)
+                    pythonVersion = mat.Groups[1].Value.Trim();
+            }
+            catch
+            {
+                pythonVersion = String.Empty;
+                defaultExitCode = 1;
+            }
+            finally
+            {
+                if (p != null)
+                    p.Close();
+            }
+            
             //TODO 运行python --version, 检查环境是否有问题
-            return true;
+            return defaultExitCode;
         }
 
         private void PythonConfigOkButton_Click(object sender, EventArgs e)
