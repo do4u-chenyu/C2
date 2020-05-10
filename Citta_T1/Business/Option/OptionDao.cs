@@ -76,10 +76,14 @@ namespace Citta_T1.Business.Option
                 }                  
             }
             //恢复控件上次的状态,可能会有点问题TODO
-            if ((endElement.GetControl as MoveOpControl).Option.OptionDict != null)
-                (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
-            else
-                (endElement.GetControl as MoveOpControl).Status = ElementStatus.Null;
+            Dictionary<string, string> optionDict = (endElement.GetControl as MoveOpControl).Option.OptionDict;
+            if (optionDict == null)  return;
+            foreach (KeyValuePair<string, string> kvp in optionDict)
+            {
+                if (optionDict[kvp.Key] == "") return;
+            }
+            (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
+
 
 
 
@@ -166,10 +170,14 @@ namespace Citta_T1.Business.Option
             }
             //恢复控件上次的状态,可能会有点问题TODO
             ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(ID);
-            if ((modelElement.GetControl as MoveOpControl).Option.OptionDict != null)
-                (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
-            else
-                (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Null;
+            
+            Dictionary<string, string> optionDict = (modelElement.GetControl as MoveOpControl).Option.OptionDict;
+            if (optionDict == null) return;
+            foreach (KeyValuePair<string, string> kvp in optionDict)
+            {
+                if (optionDict[kvp.Key] == "") return;
+            }
+            (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
         public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName)
