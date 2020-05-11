@@ -71,10 +71,9 @@ namespace Citta_T1
             this.label7 = new System.Windows.Forms.Label();
             this.moreButton = new System.Windows.Forms.Button();
             this.formatButton = new System.Windows.Forms.Button();
-            this.histogramButton = new System.Windows.Forms.Button();
-            this.GroupButton = new System.Windows.Forms.Button();
+            this.groupButton = new System.Windows.Forms.Button();
             this.interOpButton = new System.Windows.Forms.Button();
-            this.UnionButton = new System.Windows.Forms.Button();
+            this.unionButton = new System.Windows.Forms.Button();
             this.diffButton = new System.Windows.Forms.Button();
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
@@ -552,19 +551,12 @@ namespace Citta_T1
             this.formatButton.Size = new System.Drawing.Size(75, 23);
             this.formatButton.TabIndex = 0;
             // 
-            // histogramButton
-            // 
-            this.histogramButton.Location = new System.Drawing.Point(0, 0);
-            this.histogramButton.Name = "histogramButton";
-            this.histogramButton.Size = new System.Drawing.Size(75, 23);
-            this.histogramButton.TabIndex = 0;
-            // 
             // GroupButton
             // 
-            this.GroupButton.Location = new System.Drawing.Point(0, 0);
-            this.GroupButton.Name = "GroupButton";
-            this.GroupButton.Size = new System.Drawing.Size(75, 23);
-            this.GroupButton.TabIndex = 0;
+            this.groupButton.Location = new System.Drawing.Point(0, 0);
+            this.groupButton.Name = "groupButton";
+            this.groupButton.Size = new System.Drawing.Size(75, 23);
+            this.groupButton.TabIndex = 0;
             // 
             // interOpButton
             // 
@@ -575,10 +567,10 @@ namespace Citta_T1
             // 
             // UnionButton
             // 
-            this.UnionButton.Location = new System.Drawing.Point(0, 0);
-            this.UnionButton.Name = "UnionButton";
-            this.UnionButton.Size = new System.Drawing.Size(75, 23);
-            this.UnionButton.TabIndex = 0;
+            this.unionButton.Location = new System.Drawing.Point(0, 0);
+            this.unionButton.Name = "unionButton";
+            this.unionButton.Size = new System.Drawing.Size(75, 23);
+            this.unionButton.TabIndex = 0;
             // 
             // diffButton
             // 
@@ -661,7 +653,7 @@ namespace Citta_T1
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
             this.resetButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.resetButton, "导出当前模型运算结果");
+            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
@@ -917,10 +909,9 @@ namespace Citta_T1
         private Controls.Flow.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
-        private System.Windows.Forms.Button histogramButton;
-        private System.Windows.Forms.Button GroupButton;
+        private System.Windows.Forms.Button groupButton;
         private System.Windows.Forms.Button interOpButton;
-        private System.Windows.Forms.Button UnionButton;
+        private System.Windows.Forms.Button unionButton;
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
