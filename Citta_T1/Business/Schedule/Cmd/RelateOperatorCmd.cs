@@ -19,8 +19,8 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             string inputFilePath1 = inputFilePaths.First();//左输入文件
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : "";//右输入文件
-            string outfieldLine1 = TransDifferOutputField(option.GetOption("outfield1").Split(','));//输出字段?
-            string outfieldLine2 = TransDifferOutputField(option.GetOption("outfield2").Split(','));//输出字段?
+            string outfieldLine1 = TransDifferOutputField(option.GetOption("outfield0").Split(','));//输出字段?
+            string outfieldLine2 = TransDifferOutputField(option.GetOption("outfield1").Split(','));//输出字段?
             string inputFileSeparator1 = this.separators[0];
             string inputFileSeparator2 = this.separators[1];
             string inputFileEncoding1 = JudgeInputFileEncoding(inputFilePath1).ToString();
