@@ -19,5 +19,17 @@ namespace Citta_T1.Utils
                 return defaultValue;
             }
         }
+
+        public static int TryParseInt(string value, int defaultValue = 0)
+        {
+            try
+            {
+                return int.Parse(value);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
     }
 }

@@ -553,7 +553,7 @@ namespace Citta_T1.Controls.Move
             // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (!System.IO.File.Exists(this.FullFilePath))
                 return;
-
+            // 手工
             BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
         }
 

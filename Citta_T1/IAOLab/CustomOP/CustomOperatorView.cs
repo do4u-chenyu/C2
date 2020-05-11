@@ -75,6 +75,8 @@ namespace Citta_T1.OperatorViews
         {
             //获取两个数据源表头字段
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
+
+
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataPath0 = dataInfo["dataPath0"];
@@ -86,13 +88,13 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
+                this.toolTip1.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
             else
             {
-                this.dataPath1 = "";
-                columnName1 = new string[] { ""};
+                this.dataPath1 = String.Empty;
+                columnName1 = new string[] { "" };
             }
 
             this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
@@ -293,6 +295,7 @@ namespace Citta_T1.OperatorViews
                 empty = true;
                 return empty;
             }
+
             if (opControl.OperatorDimension() == 2 && this.outList1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
@@ -308,7 +311,7 @@ namespace Citta_T1.OperatorViews
             }
 
             //有任一框中非数字
-            if( !isValidNum(this.fixSecondTextBox.Text) || !isValidNum(this.randomBeginTextBox.Text) || !isValidNum(this.randomEndTextBox.Text))
+            if( !IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
                 empty = true;
@@ -319,7 +322,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-        private void browseButton_Click(object sender, EventArgs e)
+        private void BrowseButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
             fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
@@ -330,7 +333,7 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private bool isValidNum(string content)
+        private bool IsValidNum(string content)
         {
             Regex rg = new Regex("^[0-9]*$");
             if (!rg.IsMatch(content))

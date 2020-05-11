@@ -24,7 +24,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
             ReWriteBCPFile();
 
-            cmds.Add(string.Format("{0} | sbin\\awk.exe '{{a+=${1}}}END{{print a/NR}}' >> {2}", TransInputfileToCmd(inputFilePath), avgfieldLine, this.outputFilePath));
+            //满足数字、小数的才算，结果保留3位小数
+            cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' \"BEGIN{{count=0;}}{{if( ${1}~/^[0-9]+\\.?[0-9]*$/) {{count+=1;a+=${1} }} }}END{{printf(\\\"%.3f\\\",a/count)}}\" >> {2}", TransInputfileToCmd(inputFilePath), avgfieldLine, this.outputFilePath, this.separators[0]));
             return cmds;
         }
     }

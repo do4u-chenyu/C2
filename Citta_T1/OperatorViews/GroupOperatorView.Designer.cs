@@ -66,7 +66,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(32, 261);
+            this.label3.Location = new System.Drawing.Point(32, 264);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 22);
@@ -77,7 +77,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 64);
+            this.label2.Location = new System.Drawing.Point(32, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 22);
@@ -101,7 +101,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(569, 37);
+            this.topPanel.Size = new System.Drawing.Size(554, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -109,17 +109,17 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 385);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 357);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(569, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(554, 49);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(494, 19);
+            this.cancelButton.Location = new System.Drawing.Point(484, 11);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
@@ -134,7 +134,7 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(394, 19);
+            this.confirmButton.Location = new System.Drawing.Point(384, 11);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
@@ -150,10 +150,10 @@
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.keyPanel.Location = new System.Drawing.Point(0, 37);
+            this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 348);
+            this.keyPanel.Size = new System.Drawing.Size(116, 336);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -175,20 +175,20 @@
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valuePanel.Location = new System.Drawing.Point(116, 37);
+            this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(453, 348);
+            this.valuePanel.Size = new System.Drawing.Size(438, 336);
             this.valuePanel.TabIndex = 3;
             // 
             // dataInfo
             // 
             this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataInfo.Location = new System.Drawing.Point(7, 2);
+            this.dataInfo.Location = new System.Drawing.Point(6, 2);
             this.dataInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dataInfo.Name = "dataInfo";
             this.dataInfo.ReadOnly = true;
-            this.dataInfo.Size = new System.Drawing.Size(138, 23);
+            this.dataInfo.Size = new System.Drawing.Size(150, 23);
             this.dataInfo.TabIndex = 9;
             this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataInfo_MouseClick);
@@ -212,7 +212,7 @@
             this.ascendingOrder.AutoSize = true;
             this.ascendingOrder.Checked = true;
             this.ascendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ascendingOrder.Location = new System.Drawing.Point(75, 8);
+            this.ascendingOrder.Location = new System.Drawing.Point(76, 8);
             this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
             this.ascendingOrder.Size = new System.Drawing.Size(74, 21);
@@ -225,7 +225,7 @@
             // 
             this.descendingOrder.AutoSize = true;
             this.descendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.descendingOrder.Location = new System.Drawing.Point(5, 8);
+            this.descendingOrder.Location = new System.Drawing.Point(4, 8);
             this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
             this.descendingOrder.Size = new System.Drawing.Size(74, 21);
@@ -269,19 +269,19 @@
             // comboBox1
             // 
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(2, 4);
+            this.comboBox1.Location = new System.Drawing.Point(2, 3);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(134, 24);
+            this.comboBox1.Size = new System.Drawing.Size(134, 25);
             this.comboBox1.TabIndex = 2;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.repetition);
             this.groupBox1.Controls.Add(this.noRepetition);
-            this.groupBox1.Location = new System.Drawing.Point(5, 257);
+            this.groupBox1.Location = new System.Drawing.Point(7, 257);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -295,7 +295,7 @@
             this.repetition.AutoSize = true;
             this.repetition.Checked = true;
             this.repetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.repetition.Location = new System.Drawing.Point(75, 8);
+            this.repetition.Location = new System.Drawing.Point(76, 8);
             this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
             this.repetition.Size = new System.Drawing.Size(62, 21);
@@ -308,7 +308,7 @@
             // 
             this.noRepetition.AutoSize = true;
             this.noRepetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noRepetition.Location = new System.Drawing.Point(5, 8);
+            this.noRepetition.Location = new System.Drawing.Point(4, 8);
             this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(50, 21);
@@ -358,7 +358,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 449);
+            this.ClientSize = new System.Drawing.Size(554, 406);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

@@ -40,15 +40,15 @@ namespace Citta_T1.Business.Schedule.Cmd
             
             //目前输入文件统一转换为utf-8
             UTF8Encoding utf8 = new UTF8Encoding(false);
-            streamWriter = new StreamWriter(filterBatPath, false, utf8);
-            
+            streamWriter = new StreamWriter(filterBatPath, false, utf8);   
             streamWriter.Write(awkExec);
             streamWriter.Close();
 
             //重写表头（覆盖）
-            cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
+            ReWriteBCPFile();
 
             cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' -E {1} >> {2}", TransInputfileToCmd(inputFilePath), filterBatPath, this.outputFilePath, this.separators[0]));
+            cmds.Add(string.Format("sbin\\rm.exe -f {0}", filterBatPath));
             return cmds;
         }
 
