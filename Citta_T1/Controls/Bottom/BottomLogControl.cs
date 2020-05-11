@@ -2,12 +2,12 @@
 using System.Windows.Forms;
 
 
-namespace Citta_T1.Dgvs
+namespace Citta_T1.Controls.Bottom
 {
-    public partial class LogView : UserControl
+    public partial class BottomLogControl : UserControl
     {
         private int maxLineCount = 10000;
-        public LogView()
+        public BottomLogControl()
         {
             InitializeComponent();
         }

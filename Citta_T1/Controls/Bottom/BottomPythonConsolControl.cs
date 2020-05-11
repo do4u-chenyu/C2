@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1
+namespace Citta_T1.Controls.Bottom
 {
-    public partial class DataGridView2 : UserControl
+    public partial class BottomPythonConsolControl : UserControl
     {
         private int maxLineCount = 10000;
-        public DataGridView2()
+        public BottomPythonConsolControl()
         {
             InitializeComponent();
         }

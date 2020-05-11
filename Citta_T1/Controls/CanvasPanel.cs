@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls.Move;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Business.Model;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
+
+using Citta_T1.Utils;
+using Citta_T1.Controls.Move;
+using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
+
+
 
 namespace Citta_T1.Controls
 {

@@ -236,17 +236,17 @@
     <Compile Include="Controls\Top\TopToolBarControl.Designer.cs">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\DataGridView0.cs">
+    <Compile Include="Controls\Bottom\BottomPreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\DataGridView0.Designer.cs">
-      <DependentUpon>DataGridView0.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomPreviewControl.Designer.cs">
+      <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\DataGridView2.cs">
+    <Compile Include="Controls\Bottom\BottomPythonConsolControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\DataGridView2.Designer.cs">
-      <DependentUpon>DataGridView2.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomPythonConsolControl.Designer.cs">
+      <DependentUpon>BottomPythonConsolControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ConfigForm.cs">
       <SubType>Form</SubType>
@@ -370,11 +370,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\LogView.cs">
+    <Compile Include="Controls\Bottom\BottomLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\LogView.Designer.cs">
-      <DependentUpon>LogView.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomLogControl.Designer.cs">
+      <DependentUpon>BottomLogControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flow\FlowControl.cs">
       <SubType>UserControl</SubType>
@@ -463,14 +463,14 @@
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\DataGridView0.resx">
-      <DependentUpon>DataGridView0.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomPreviewControl.resx">
+      <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\LogView.resx">
-      <DependentUpon>LogView.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomLogControl.resx">
+      <DependentUpon>BottomLogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\DataGridView2.resx">
-      <DependentUpon>DataGridView2.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomPythonConsolControl.resx">
+      <DependentUpon>BottomPythonConsolControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
@@ -744,12 +744,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

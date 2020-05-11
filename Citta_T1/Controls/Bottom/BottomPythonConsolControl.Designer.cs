@@ -1,6 +1,6 @@
-﻿namespace Citta_T1.Dgvs
+﻿namespace Citta_T1.Controls.Bottom
 {
-    partial class LogView
+    partial class BottomPythonConsolControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -72,12 +72,12 @@
             this.MenuItemClearAll.Text = "全部清除";
             this.MenuItemClearAll.Click += new System.EventHandler(this.MenuItemClearAll_Click);
             // 
-            // LogView
+            // DataGridView2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox1);
-            this.Name = "LogView";
+            this.Name = "DataGridView2";
             this.Size = new System.Drawing.Size(1011, 137);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

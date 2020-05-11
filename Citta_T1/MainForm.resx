@@ -391,7 +391,7 @@
         orVm9AVFHxJNCjqYaG/Q+0RjFF0TWqrot9iMiT5VIFGjVmVB6gAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="downloadButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="resetButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACEAAAAzCAIAAACWmPaoAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAi5JREFUWEftljGKAjEUQOdOC4IXsBMERbAQBMFaELyAIFjYK9h6AcFCewtBEAQ7

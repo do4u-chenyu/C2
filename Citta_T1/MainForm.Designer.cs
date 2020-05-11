@@ -49,16 +49,16 @@ namespace Citta_T1
             this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
             this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
-            this.dataGridView0 = new Citta_T1.DataGridView0();
-            this.logView = new Citta_T1.Dgvs.LogView();
-            this.dataGridView2 = new Citta_T1.DataGridView2();
+            this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
+            this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
+            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomPythonConsolControl();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.logLabel = new System.Windows.Forms.Label();
-            this.errorLabel = new System.Windows.Forms.Label();
+            this.pyControlLabel = new System.Windows.Forms.Label();
             this.previewLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.commonPanel = new System.Windows.Forms.Panel();
@@ -311,9 +311,9 @@ namespace Citta_T1
             // 
             // bottomViewPanel
             // 
-            this.bottomViewPanel.Controls.Add(this.dataGridView0);
-            this.bottomViewPanel.Controls.Add(this.logView);
-            this.bottomViewPanel.Controls.Add(this.dataGridView2);
+            this.bottomViewPanel.Controls.Add(this.bottomPreview);
+            this.bottomViewPanel.Controls.Add(this.bottomLogControl);
+            this.bottomViewPanel.Controls.Add(this.bottomPyConsole);
             this.bottomViewPanel.Controls.Add(this.panel4);
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(323, 326);
@@ -323,32 +323,32 @@ namespace Citta_T1
             // 
             // dataGridView0
             // 
-            this.dataGridView0.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView0.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView0.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView0.Name = "dataGridView0";
-            this.dataGridView0.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView0.TabIndex = 27;
+            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomPreview.Location = new System.Drawing.Point(0, 39);
+            this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomPreview.Name = "dataGridView0";
+            this.bottomPreview.Size = new System.Drawing.Size(906, 241);
+            this.bottomPreview.TabIndex = 27;
             // 
             // logView
             // 
-            this.logView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.logView.Location = new System.Drawing.Point(0, 39);
-            this.logView.Margin = new System.Windows.Forms.Padding(4);
-            this.logView.Name = "logView";
-            this.logView.Size = new System.Drawing.Size(906, 241);
-            this.logView.TabIndex = 1;
-            this.logView.Load += new System.EventHandler(this.dataGridView1_Load);
+            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
+            this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomLogControl.Name = "logView";
+            this.bottomLogControl.Size = new System.Drawing.Size(906, 241);
+            this.bottomLogControl.TabIndex = 1;
+            this.bottomLogControl.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
             // dataGridView2
             // 
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 39);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(906, 241);
-            this.dataGridView2.TabIndex = 2;
-            this.dataGridView2.Load += new System.EventHandler(this.dataGridView2_Load);
+            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
+            this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomPyConsole.Name = "dataGridView2";
+            this.bottomPyConsole.Size = new System.Drawing.Size(906, 241);
+            this.bottomPyConsole.TabIndex = 2;
+            this.bottomPyConsole.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // panel4
             // 
@@ -396,7 +396,7 @@ namespace Citta_T1
             // panel8
             // 
             this.panel8.Controls.Add(this.logLabel);
-            this.panel8.Controls.Add(this.errorLabel);
+            this.panel8.Controls.Add(this.pyControlLabel);
             this.panel8.Controls.Add(this.previewLabel);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
@@ -416,17 +416,17 @@ namespace Citta_T1
             this.toolTip1.SetToolTip(this.logLabel, "当前模型运行情况的日志信息");
             this.logLabel.Click += new System.EventHandler(this.LogLabel_Click);
             // 
-            // errorLabel
+            // pyControlLabel
             // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.errorLabel.Location = new System.Drawing.Point(226, 4);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(92, 27);
-            this.errorLabel.TabIndex = 2;
-            this.errorLabel.Text = "报错信息";
-            this.toolTip1.SetToolTip(this.errorLabel, "当前模型运行情况的报错信息");
-            this.errorLabel.Click += new System.EventHandler(this.ErrorLabel_Click);
+            this.pyControlLabel.AutoSize = true;
+            this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
+            this.pyControlLabel.Name = "pyControlLabel";
+            this.pyControlLabel.Size = new System.Drawing.Size(140, 27);
+            this.pyControlLabel.TabIndex = 2;
+            this.pyControlLabel.Text = "python控制台";
+            this.toolTip1.SetToolTip(this.pyControlLabel, "当前模型运行情况的报错信息");
+            this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
             // 
             // previewLabel
             // 
@@ -647,7 +647,7 @@ namespace Citta_T1
             this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
             // 
-            // downloadButton
+            // resetButton
             // 
             this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -656,9 +656,9 @@ namespace Citta_T1
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
+            this.resetButton.Image = ((System.Drawing.Image)(resources.GetObject("resetButton.Image")));
             this.resetButton.Location = new System.Drawing.Point(507, 354);
-            this.resetButton.Name = "downloadButton";
+            this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
             this.resetButton.TabIndex = 21;
             this.toolTip1.SetToolTip(this.resetButton, "导出当前模型运算结果");
@@ -910,7 +910,7 @@ namespace Citta_T1
         private System.Windows.Forms.Panel commonPanel;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label previewLabel;
-        private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Label pyControlLabel;
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
@@ -934,8 +934,8 @@ namespace Citta_T1
         private Controls.Left.MyModelControl myModelControl;
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
-        private Citta_T1.Dgvs.LogView logView;
-        private DataGridView2 dataGridView2;
+        private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
+        private Citta_T1.Controls.Bottom.BottomPythonConsolControl bottomPyConsole;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
@@ -946,7 +946,7 @@ namespace Citta_T1
         private Controls.Flow.FlowControl flowControl;
         private Controls.Title.DragLineControl dragLineControl;
         private Controls.Flow.RemarkControl remarkControl;
-        private DataGridView0 dataGridView0;
+        private Citta_T1.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
         private System.Windows.Forms.Panel panel3;
