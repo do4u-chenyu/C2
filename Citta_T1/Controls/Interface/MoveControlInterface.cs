@@ -31,8 +31,9 @@ namespace Citta_T1.Controls.Interface
 
         void OutPinInit(String status);
         void rectInAdd(int pinIndex);
+        void InPinInit(int pinIndex);
         void ControlSelect();
         void ControlNoSelect();
-
+        
     }
 }

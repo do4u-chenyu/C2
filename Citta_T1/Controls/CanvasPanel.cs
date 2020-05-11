@@ -235,8 +235,16 @@ namespace Citta_T1.Controls
                     mr = mrs[i];
                     //删除线配置逻辑
                     Global.GetCurrentDocument().StateChangeByDeletLine(mr.EndID);
+
                     mrs.Remove(mr);
+                    //关联算子引脚自适应改变
+                    Control lineStartC = Global.GetCurrentDocument().SearchElementByID(mr.StartID).GetControl;
+                    this.RepaintStartcPin(lineStartC, mr.StartID);
+                    Control lineEndC = Global.GetCurrentDocument().SearchElementByID(mr.EndID).GetControl;
+                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     //删除线文档dirty
+
+
                     Global.GetMainForm().SetDocumentDirty();
                    
                 }
@@ -426,7 +434,7 @@ namespace Citta_T1.Controls
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
                     this.RepaintAllRelations();
-                    this.RepaintStartcPin();
+                    this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
                     return;
                 }
                 /* 
@@ -562,9 +570,10 @@ namespace Citta_T1.Controls
         }
         
         #region 关于引脚在画线状态的改变
-        private void RepaintStartcPin()
+        
+        private void RepaintStartcPin(Control startC,int id)
         {
-            int id = (startC as IMoveControl).GetID();
+            //int id = (startC as IMoveControl).GetID();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 if (mr.StartID == id)
@@ -572,15 +581,6 @@ namespace Citta_T1.Controls
             }
            
             (startC as IMoveControl).OutPinInit("noLine");
-        }
-        private void ConfimEndPin()
-        {
-            int id = (endC as IMoveControl).GetID();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-            {
-                if (mr.StartID == id)
-                    return;
-            }
         }
         #endregion
 
