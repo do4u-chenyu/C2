@@ -58,7 +58,7 @@ namespace Citta_T1.Controls.Move
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(149, 2);
+            this.rightPictureBox.Location = new System.Drawing.Point(149, 4);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,7 +72,7 @@ namespace Citta_T1.Controls.Move
             // leftPicture
             // 
             this.leftPicture.Image = ((System.Drawing.Image)(resources.GetObject("leftPicture.Image")));
-            this.leftPicture.Location = new System.Drawing.Point(11, 2);
+            this.leftPicture.Location = new System.Drawing.Point(11, 3);
             this.leftPicture.Name = "leftPicture";
             this.leftPicture.Size = new System.Drawing.Size(15, 21);
             this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

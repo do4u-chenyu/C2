@@ -291,8 +291,15 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID == ID && SearchElementByID(mr.EndID).Type == ElementType.Result)
-                    return SearchElementByID(mr.EndID);
+                if (mr.StartID != ID) continue;
+                ModelElement modelElement = SearchElementByID(mr.EndID);
+                if (modelElement != null && modelElement.Type == ElementType.Result)
+                {
+                    modelElement.Status = modelElement.Status;
+                    return modelElement;
+                   
+                }
+                   
             }
             return null; 
         }

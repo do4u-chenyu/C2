@@ -43,9 +43,8 @@ namespace Citta_T1.Controls.Move
         private String pinStatus = "noEnter";
         private Bitmap staticImage;
 
-        private Size bigStatus = new Size(135, 28);
-        private Size normalStatus = new Size(125, 28);
-        private Size smallStatus = new Size(115, 28 );
+        private Size changeStatus = new Size(0, 28);
+        private Size normalStatus = new Size(53, 28);
 
         #region 继承属性
         public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
@@ -378,46 +377,35 @@ namespace Citta_T1.Controls.Move
         private string SubstringByte(string text, int startIndex, int length)
         {
             byte[] bytes = _encoding.GetBytes(text);
-            log.Info("bytes:" + bytes);
+            if (bytes.Length < length)
+                length = bytes.Length;
             return _encoding.GetString(bytes, startIndex, length);
         }
-        public void SetOpControlName(string opControlName)
+        private int ConutTxtWidth(int chineseRatio, int otherRatio)
         {
-            this.opControlName = opControlName;
-            int maxLength = 8;
-
-            int sumcount = 0;
-            int sumcountDigit = 0;
-
-            sumcount = Regex.Matches(opControlName, "[\u4E00-\u9FA5]").Count * 2;
-            sumcountDigit = Regex.Matches(opControlName, "[a-zA-Z0-9]").Count;
-
-            if (sumcount + sumcountDigit > maxLength)
+            int padding = 3;
+            int addValue = 10;
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+                addValue -= 10;
+            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
+        }
+        public void SetOpControlName(string name)
+        {
+            this.opControlName = name;
+            int maxLength = 24;
+            name = SubstringByte(name, 0, maxLength);
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
+            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
+            int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
+            this.txtButton.Text = this.opControlName;
+            if (_encoding.GetBytes(this.opControlName).Length > maxLength)
             {
-                int txtWidth = 84;
-                ResizeControl(txtWidth, bigStatus);
-                this.txtButton.Text = SubstringByte(opControlName, 0, maxLength) + "...";
-                
+                txtWidth += 10;
+                this.txtButton.Text = name + "...";
             }
-
-            else if (sumcount + sumcountDigit <= 6)
-            {
-
-                this.txtButton.Text = opControlName;
-                int txtWidth = 62;
-                ResizeControl(txtWidth, smallStatus);
-                
-            }
-
-            else
-            {
-                this.txtButton.Text = opControlName;
-                int txtWidth = 72;
-                ResizeControl(txtWidth, normalStatus);
-            }
-
-            
-            this.nameToolTip.SetToolTip(this.txtButton, opControlName);
+            changeStatus.Width = normalStatus.Width + txtWidth;
+            ResizeControl(txtWidth, changeStatus);
+            this.nameToolTip.SetToolTip(this.txtButton, this.opControlName);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -428,7 +416,7 @@ namespace Citta_T1.Controls.Move
             this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)((txtWidth -1 ) * f), (int)((this.Height - 4) * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
