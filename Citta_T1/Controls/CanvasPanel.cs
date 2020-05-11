@@ -150,32 +150,13 @@ namespace Citta_T1.Controls
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             selectLineIndexs.Clear();
-            // 强制编辑控件失去焦点,触发算子控件的Leave事件 
-            Global.GetMainForm().BlankButtonFocus();
-            #region 点线
-            int mrIndex = PointToLine(new PointF(e.X, e.Y));
-            selectLineIndexs.Add(mrIndex);
-            #endregion
-            // 点击右键, 清空操作状态,进入到正常编辑状态
-            if (e.Button == MouseButtons.Right)
+            Global.GetMainForm().BlankButtonFocus();                    // 强制编辑控件失去焦点,触发算子控件的Leave事件
+            this.ClickOnLine(e);
+            if (e.Button == MouseButtons.Right) 
             {
-                Global.GetFlowControl().ResetStatus();
-                if (mrIndex != -1)
-                    this.ShowDelectOption(e.Location);          // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
-                else
-                    this.ResetAllLineStatus(null, true);        // 鼠标右键点击，点击的点在离当前选择的线很远的地方，取消选择，恢复到普通编辑状态; 
-                return;
+                Global.GetFlowControl().ResetStatus();                  // 点击右键, 清空操作状态,进入到正常编辑状态
             }
-            if (mrIndex != -1 && !this.SelectDrag() && !this.SelectFrame())
-            {
-                // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
-                this.ResetAllLineStatus(selectLineIndexs, false);
-                this.Invalidate(false);
-            }
-            //if (e.Button == MouseButtons.Right)
-            //    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-            // TODO [Dk] 后两个算子就不该有PinDraw这个动作
-            if (sender is MoveDtControl || sender is MoveOpControl || sender is MoveRsControl)
+            if (sender is MoveDtControl)
             {
                 this.cmd = ECommandType.PinDraw;
                 this.StartC = sender as Control;
@@ -197,13 +178,58 @@ namespace Citta_T1.Controls
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
         }
+        private bool IsDtToOpLine(ModelRelation mr)
+        {
+            ModelDocument md = Global.GetCurrentDocument();
+            List<ModelRelation> mrs = md.ModelRelations;
+            List<ModelElement> mes = md.ModelElements;
+
+            ModelElement sMe = md.SearchElementByID(mr.StartID);
+            ModelElement eMe = md.SearchElementByID(mr.EndID);
+
+            return (sMe.Type == ElementType.DataSource && eMe.Type == ElementType.Operator);
+        }
+        private void ClickOnLine(MouseEventArgs e)
+        {
+            /*
+             * 点击规则见0511
+             */
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            int mrIndex = PointToLine(new PointF(e.X, e.Y));
+
+            if (mrIndex == -1)
+            {
+                if (e.Button == MouseButtons.Right)
+                    this.SetAllLineStatus(null, true);
+            }
+            else
+            {
+                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsDtToOpLine(mrs[mrIndex]))
+                    selectLineIndexs.Add(mrIndex);
+                else
+                    return;
+                if (e.Button == MouseButtons.Left)
+                {
+                    if (!this.SelectDrag() && !this.SelectFrame())
+                    {
+                        this.SetAllLineStatus(this.selectLineIndexs, false);       // 如果此时已有线被选中，点击另一根线时，将该线置为选中状态，其他被选中的线置为未选中状态
+                        this.Invalidate(false);
+                    }
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    if (mrIndex < mrs.Count && mrs[mrIndex].Selected)
+                        this.ShowDelectOption(e.Location);                          // 鼠标右键点击在当前选择的线上，弹出菜单，就一个删除选项，选中删除。
+                }
+            }
+        }
 
         private void ShowDelectOption(Point p)
         {
             this.contextMenuStrip1.Show(this, p);
         }
 
-        public void ResetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
+        public void SetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
             ModelRelation mr;
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
@@ -309,7 +335,7 @@ namespace Citta_T1.Controls
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
             // 绘制
-            else if (cmd == ECommandType.PinDraw)
+            else if (cmd == ECommandType.PinDraw && (sender is MoveDtControl))
             {
                 // 吸附效果实现
                 /*
@@ -421,7 +447,7 @@ namespace Citta_T1.Controls
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
-                if (this.endC == null || !(this.endC is MoveOpControl))
+                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl))
                 {
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
