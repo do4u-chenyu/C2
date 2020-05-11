@@ -553,7 +553,7 @@ namespace Citta_T1.Controls.Move
             // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (!System.IO.File.Exists(this.FullFilePath))
                 return;
-
+            // 手工
             BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
         }
 
@@ -696,7 +696,9 @@ namespace Citta_T1.Controls.Move
             PinOpLeaveAndEnter(new Point(0, 0));
 
         }
-
+        public void InPinInit(int endLineIndex)
+        {
+        }
         private void ExplorerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileUtil.ExploreDirectory(FullFilePath);
@@ -735,6 +737,8 @@ namespace Citta_T1.Controls.Move
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
+
+
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);

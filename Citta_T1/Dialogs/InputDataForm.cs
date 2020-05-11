@@ -48,6 +48,8 @@ namespace Citta_T1.Dialogs
             this.separator = '\t';
 
             this.extType = DSUtil.ExtType.Text;
+
+            this.Clean();
         }
         private void PreviewButton_Click(object sender, EventArgs e)
         {
@@ -161,6 +163,7 @@ namespace Citta_T1.Dialogs
         {
             this.fullFilePath = null;
             this.textBox1.Text = null;
+            this.textBoxEx1.Text = null;
             this.DvgClean();
         }
 
@@ -392,11 +395,10 @@ namespace Citta_T1.Dialogs
                 return;
             else
             {
+                this.radioButton3.Checked = true;
+                this.textBoxEx1.Focus();
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
-                {
-                    MessageBox.Show("未指定分隔符");
                     return;
-                }
                 try
                 {
                     this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
@@ -494,7 +496,22 @@ namespace Citta_T1.Dialogs
 
         private void textBoxEx1_TextChanged(object sender, EventArgs e)
         {
-
+            if (this.extType == ExtType.Text)
+            {
+                this.radioButton3.Checked = true;
+                if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
+                    this.separator = '\0';
+                else
+                    try
+                    {
+                        this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                    }
+                PreViewBcpFile();
+            }
         }
     }
 }

@@ -39,19 +39,19 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
                        
-            this.oldMaxfield = this.MaxValueBox.Text;           
+            this.oldMaxfield = this.maxValueBox.Text;           
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
             
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.DataInfoBox.Text == "") return;
-            if (this.MaxValueBox.Text == "")
+            if (this.dataInfoBox.Text == "") return;
+            if (this.maxValueBox.Text == "")
             {
                 MessageBox.Show("请选择最大值字段!");
                 return;
@@ -65,7 +65,7 @@ namespace Citta_T1.OperatorViews
             
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldMaxfield != this.MaxValueBox.Text || !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (this.oldMaxfield != this.maxValueBox.Text || !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
@@ -115,10 +115,10 @@ namespace Citta_T1.OperatorViews
                 }                 
             }
             string outField = string.Join(",", outIndexs);
-            if(this.MaxValueBox.Text == "")
+            if(this.maxValueBox.Text == "")
                 this.opControl.Option.SetOption("maxfield", "");
             else
-                this.opControl.Option.SetOption("maxfield", this.MaxValueBox.SelectedIndex.ToString());
+                this.opControl.Option.SetOption("maxfield", this.maxValueBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("outfield", outField);
 
 
@@ -136,7 +136,7 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("maxfield") != "")
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.MaxValueBox.Text = this.MaxValueBox.Items[maxIndex].ToString();
+                this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
@@ -159,9 +159,9 @@ namespace Citta_T1.OperatorViews
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataPath = dataInfo["dataPath0"];
-                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
-                SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                this.toolTip1.SetToolTip(this.dataInfoBox, this.dataInfoBox.Text);
+                SetOption(this.dataPath, this.dataInfoBox.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
         }
 
@@ -174,7 +174,7 @@ namespace Citta_T1.OperatorViews
             foreach (string name in this.columnName)
             {
                 this.OutList.AddItems(name);
-                this.MaxValueBox.Items.Add(name);
+                this.maxValueBox.Items.Add(name);
             }
             CompareDataSource();
             this.opControl.SingleDataSourceColumns = column;
@@ -238,12 +238,12 @@ namespace Citta_T1.OperatorViews
 
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {
-            this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+            this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
         private void DataInfoBox_LostFocus(object sender, EventArgs e)
         {
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
         }
         
     }

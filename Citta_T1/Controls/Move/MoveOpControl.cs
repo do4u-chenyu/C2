@@ -680,10 +680,8 @@ namespace Citta_T1.Controls.Move
 
             if(rectIn_up.Contains(mousePosition))
             {
-                log.Info("变化前:" + rectIn_up);
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
                 rectIn_up = rectEnter(rectIn_up);
-                log.Info("变化后:" + rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
             }
@@ -735,6 +733,20 @@ namespace Citta_T1.Controls.Move
                 this.Invalidate();
             }
             PinOpLeaveAndEnter(new Point(0, 0));
+        }
+
+        public void InPinInit(int pinIndex)
+        {
+            linePinArray.Remove(pinIndex);
+            if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
+            {
+                rectIn_down = rectLeave(rectIn_down);               
+            }
+            if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
+            {
+                rectIn_up = rectLeave(rectIn_up);               
+            }
+            this.Invalidate();
         }
 
         public Rectangle rectEnter(Rectangle rect)
@@ -955,14 +967,15 @@ namespace Citta_T1.Controls.Move
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
                 
-                rectIn_down = rectEnter(rectIn_down);                
+                rectIn_down = rectEnter(rectIn_down);
+                linePinArray.Add(pinIndex);
             }
             if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
             {
                 
                 rectIn_up = rectEnter(rectIn_up);
+                linePinArray.Add(pinIndex);
             }
-            linePinArray.Add(pinIndex);
             this.Invalidate();
             PinOpLeaveAndEnter(new Point(0, 0));
         }

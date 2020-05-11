@@ -1,15 +1,15 @@
-﻿using Citta_T1.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
+using System.Collections.Generic;
+
+using Citta_T1.Utils;
+
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
     class CustomOperatorCmd : OperatorCmd
     {
-        private static readonly int DefaultSleepSecond = 10; // 默认一个算子跑10秒,原来1秒似乎太短了
+        private static readonly int DefaultSleepSecond = 30; // 默认一个算子跑30秒
 
         public CustomOperatorCmd(Triple triple) : base(triple)
         {
@@ -30,18 +30,18 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             if(option.GetOption("fix").ToLower() == "true")
             {
-                string tmpSec = option.GetOption("fixSecond");
-                sleepSecond = tmpSec == "" || int.Parse(tmpSec) <= 0 ? DefaultSleepSecond : int.Parse(tmpSec);
+                int tmpSec = ConvertUtil.TryParseInt(option.GetOption("fixSecond"));
+                sleepSecond = tmpSec  <= 0 ? DefaultSleepSecond : tmpSec;
             }
             else
             {
-                string randomBegin = option.GetOption("randomBegin");
-                string randomEnd = option.GetOption("randomEnd");
+                int randomBegin = ConvertUtil.TryParseInt(option.GetOption("randomBegin"));
+                int randomEnd = ConvertUtil.TryParseInt(option.GetOption("randomEnd"));
                 Random rand = new Random();
-                sleepSecond = randomBegin == "" || randomEnd == "" || int.Parse(randomBegin) <= 0 || int.Parse(randomEnd) <= 0 || int.Parse(randomEnd)-int.Parse(randomBegin)<0 ? DefaultSleepSecond : rand.Next(int.Parse(randomBegin), int.Parse(randomEnd));
+                sleepSecond = randomBegin <= 0 || randomEnd <= 0 || randomEnd - randomBegin < 0 ? DefaultSleepSecond : rand.Next(randomBegin, randomEnd);
             }
-
             Thread.Sleep(sleepSecond * 1000);
+
         }
     }
 }

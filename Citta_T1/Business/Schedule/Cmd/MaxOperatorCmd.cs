@@ -21,9 +21,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             string outfieldLine = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
 
             //重写表头（覆盖）
-            cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle,outfieldLine,this.outputFilePath,this.separators[0]));
-            
-            cmds.Add(string.Format("{0}| sbin\\sort.exe {1} -nr -k {2} | sbin\\head.exe -n1 | sbin\\awk.exe -F\"{5}\" -v OFS='\\t' '{{ print {3}}}'>> {4}", TransInputfileToCmd(inputFilePath), this.sortConfig, inputfieldLine, outfieldLine,this.outputFilePath, this.separators[0]));
+            //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle,outfieldLine,this.outputFilePath,this.separators[0]));
+            ReWriteBCPFile();
+
+            cmds.Add(string.Format("{0}| sbin\\sort.exe {1} -t\"{5}\" -nr -k {2} | sbin\\head.exe -n1 | sbin\\awk.exe -F\"{5}\" -v OFS='\\t' '{{ print {3}}}'>> {4}", TransInputfileToCmd(inputFilePath), this.sortConfig, inputfieldLine, outfieldLine,this.outputFilePath, this.separators[0]));
 
             return cmds;
         }
