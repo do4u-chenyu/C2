@@ -217,5 +217,16 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.DataInfoBox);
         }
+
+        private void RandomNumBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                Global.GetOptionDao().NonNumeric_ControlText(this.RandomNumBox);
+        }
+
+        private void RandomNumBox_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().NonNumeric_ControlText(this.RandomNumBox);
+        }
     }
 }

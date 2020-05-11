@@ -268,12 +268,16 @@ namespace Citta_T1.OperatorViews
             // 添加控件
 
             ComboBox dataBox = new ComboBox();
+            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.columnName0);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
+            filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Font= new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.columnName1);

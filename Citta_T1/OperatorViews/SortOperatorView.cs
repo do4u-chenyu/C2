@@ -229,48 +229,27 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.dataInfo);
         }
-
-        private void NonNumeric_FirstRow()
-        {
-            if (this.firstRow.Text == "") return;
-            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
-            if (!rg.IsMatch(this.firstRow.Text))
-            {
-                this.firstRow.Text = "";
-                MessageBox.Show("请输入数字");
-            }
-        }
-        private void NonNumeric_EndRow()
-        {
-            if (this.endRow.Text == "") return;
-            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
-            if (!rg.IsMatch(this.endRow.Text))
-            {
-                this.endRow.Text = "";
-                MessageBox.Show("请输入数字");
-            }
-        }
         #region 输入非数字，警告
         private void firstRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                NonNumeric_FirstRow();
+                Global.GetOptionDao().NonNumeric_ControlText(this.firstRow);
         }
 
         private void firstRow_Leave(object sender, EventArgs e)
         {
-            NonNumeric_FirstRow();
+            Global.GetOptionDao().NonNumeric_ControlText(this.firstRow);
         }
 
         private void endRow_Leave(object sender, EventArgs e)
         {
-            NonNumeric_EndRow();
+            Global.GetOptionDao().NonNumeric_ControlText(this.endRow);
         }
 
         private void endRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                NonNumeric_EndRow();
+                Global.GetOptionDao().NonNumeric_ControlText(this.endRow);
         }
         #endregion
     }

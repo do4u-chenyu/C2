@@ -288,6 +288,8 @@ namespace Citta_T1.OperatorViews
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
+            regBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            regBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             regBox.Anchor = AnchorStyles.None;
             regBox.Items.AddRange(new object[] {
@@ -296,6 +298,8 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
+            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
@@ -309,6 +313,8 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
 
             ComboBox data2box = new ComboBox();
+            data2box.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            data2box.AutoCompleteSource = AutoCompleteSource.ListItems;
             data2box.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Items.AddRange(this.columnName1);

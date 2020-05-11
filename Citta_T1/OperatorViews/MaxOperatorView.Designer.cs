@@ -86,7 +86,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(340, 18);
+            this.topPanel.Size = new System.Drawing.Size(336, 18);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -94,10 +94,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 164);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 160);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(340, 43);
+            this.bottomPanel.Size = new System.Drawing.Size(336, 43);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,7 +137,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 18);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 146);
+            this.keyPanel.Size = new System.Drawing.Size(116, 142);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -149,7 +149,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 18);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(224, 146);
+            this.valuePanel.Size = new System.Drawing.Size(220, 142);
             this.valuePanel.TabIndex = 3;
             // 
             // dataInfoBox
@@ -178,6 +178,8 @@
             // 
             // maxValueBox
             // 
+            this.maxValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.maxValueBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.maxValueBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.maxValueBox.FormattingEnabled = true;
             this.maxValueBox.Location = new System.Drawing.Point(0, 54);
@@ -190,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 207);
+            this.ClientSize = new System.Drawing.Size(336, 203);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Citta_T1.Controls;
+using System.Windows.Forms;
 
 namespace Citta_T1.Business.Option
 {
@@ -438,6 +441,18 @@ namespace Citta_T1.Business.Option
             }
             return dataInfo;
         }
-       
+        #region 配置窗口不合法字符判断
+        public void NonNumeric_ControlText(Control control) 
+        {
+            if (control.Text == "") return;
+            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
+            if (!rg.IsMatch(control.Text))
+            {
+                control.Text = "";
+                MessageBox.Show("请输入数字");
+            }
+        }
+        #endregion
+
     }
 }

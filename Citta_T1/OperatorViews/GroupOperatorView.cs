@@ -1,4 +1,4 @@
-﻿using Citta_T1.Business.Model;
+﻿ using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
@@ -256,6 +256,8 @@ namespace Citta_T1.OperatorViews
         {
             // 添加控件
             ComboBox dataBox = new ComboBox();
+            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
