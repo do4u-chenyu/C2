@@ -302,7 +302,7 @@ namespace Citta_T1.Business.Schedule
                 //异常停止的处理方法
                 //TODO
                 this.cmdProcessList.Remove(p);
-                UpdateLogDelegate("异常: " + ex);
+                UpdateLogDelegate("异常: " + ex.Message);
             }
             finally
             {

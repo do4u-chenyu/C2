@@ -141,7 +141,11 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             catch
             {
-                return '"' + condition + '"';
+                if (condition.IndexOf('\\') >= 0)
+                    condition = condition.Replace("\\", "\\\\");
+                if ( condition.IndexOf('\"') >= 0)
+                    condition = condition.Replace("\"", "\\\"");
+                return "\"" + condition + "\"";
             }
         }
 
