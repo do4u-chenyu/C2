@@ -83,7 +83,7 @@ namespace Citta_T1
             this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.downloadButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
@@ -649,20 +649,21 @@ namespace Citta_T1
             // 
             // downloadButton
             // 
-            this.downloadButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.downloadButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.downloadButton.FlatAppearance.BorderSize = 0;
-            this.downloadButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.downloadButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.downloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.downloadButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.downloadButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
-            this.downloadButton.Location = new System.Drawing.Point(507, 354);
-            this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(52, 53);
-            this.downloadButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.downloadButton, "导出当前模型运算结果");
-            this.downloadButton.UseVisualStyleBackColor = true;
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.BorderSize = 0;
+            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.resetButton.Image = ((System.Drawing.Image)(resources.GetObject("downloadButton.Image")));
+            this.resetButton.Location = new System.Drawing.Point(507, 354);
+            this.resetButton.Name = "downloadButton";
+            this.resetButton.Size = new System.Drawing.Size(52, 53);
+            this.resetButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.resetButton, "导出当前模型运算结果");
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // stopButton
             // 
@@ -713,7 +714,7 @@ namespace Citta_T1
             this.canvasPanel.Controls.Add(this.rightShowButton);
             this.canvasPanel.Controls.Add(this.pictureBox3);
             this.canvasPanel.Controls.Add(this.modelTitlePanel);
-            this.canvasPanel.Controls.Add(this.downloadButton);
+            this.canvasPanel.Controls.Add(this.resetButton);
             this.canvasPanel.Controls.Add(this.stopButton);
             this.canvasPanel.Controls.Add(this.runButton);
             this.canvasPanel.Controls.Add(this.naviViewControl);
@@ -935,7 +936,7 @@ namespace Citta_T1
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private Citta_T1.Dgvs.LogView logView;
         private DataGridView2 dataGridView2;
-        private System.Windows.Forms.Button downloadButton;
+        private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;

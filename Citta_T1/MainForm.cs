@@ -227,7 +227,7 @@ namespace  Citta_T1
 
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.downloadButton.Location = new Point(x + 100, y + 50);
+            this.resetButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
@@ -458,6 +458,21 @@ namespace  Citta_T1
                 this.dataSourceControl.GenDataButton(dataButton);
         }
 
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            Manager currentManager = Global.GetCurrentDocument().Manager;
+            currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
+            //在模型运行完成，及终止的情况下，可以重置
+            Console.WriteLine(currentManager.ModelStatus.ToString());
+            if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
+            {
+                currentManager.Reset();
+                //SetDocumentDirty();//需不需要dirty
+                MessageBox.Show("当前模型的算子状态已重置", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+
         private void StopButton_Click(object sender, EventArgs e)
         {
             
@@ -488,6 +503,11 @@ namespace  Citta_T1
                     return;
                 }
 
+                if (currentManager.IsAllOperatorDone())
+                {
+                    MessageBox.Show("当前模型的算子均已运算完毕", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 currentManager.Start();
             }
             else if (this.runButton.Name == "pauseButton")

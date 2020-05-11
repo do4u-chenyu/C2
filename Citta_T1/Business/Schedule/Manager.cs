@@ -11,6 +11,7 @@ using Citta_T1.Business.Option;
 using System.Diagnostics;
 using Citta_T1.Business.Schedule.Cmd;
 using NPOI.HSSF.Record;
+using System.Windows.Forms;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -76,10 +77,18 @@ namespace Citta_T1.Business.Schedule
 
         public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
-            foreach (Triple pauseTri in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
+            foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
             {
-                pauseTri.OperateElement.Status = newStatus;
-                UpdateLogDelegate(pauseTri.TripleName + "的状态由" + oldStatus.ToString() + "变更为" + newStatus.ToString());
+                triple.OperateElement.Status = newStatus;
+                UpdateLogDelegate(triple.TripleName + "的状态由" + oldStatus.ToString() + "变更为" + newStatus.ToString());
+            }
+        }
+
+        public void Reset()
+        {
+            foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done))
+            {
+                triple.OperateElement.Status = ElementStatus.Ready;
             }
         }
 
@@ -153,13 +162,19 @@ namespace Citta_T1.Business.Schedule
             return count;
         }
 
-        public void Start()
+        public bool IsAllOperatorDone()
         {
             if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
             {
                 UpdateLogDelegate("当前模型的算子均已运算完毕");
-                return;
+                return true;
             }
+            return false;
+        }
+
+
+        public void Start()
+        {
             this.modelStatus = ModelStatus.Running;
             this.tokenSource = new CancellationTokenSource();
             this.resetEvent = new ManualResetEvent(true);
