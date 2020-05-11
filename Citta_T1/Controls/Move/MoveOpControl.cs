@@ -673,10 +673,9 @@ namespace Citta_T1.Controls.Move
 
             if(rectIn_up.Contains(mousePosition))
             {
-                log.Info("变化前:" + rectIn_up);
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
                 rectIn_up = RectEnter(rectIn_up);
-                log.Info("变化后:" + rectIn_up);
+
                 this.Invalidate();
                 pinStatus = "rectIn_up";
             }
