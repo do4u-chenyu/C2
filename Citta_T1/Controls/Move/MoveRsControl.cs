@@ -75,10 +75,12 @@ namespace Citta_T1.Controls.Move
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
 
-        private Size bigStatus = new Size(140, 28);
-        private Size normalStatus = new Size(132, 28);
-        private Size smallStatus = new Size(120, 28);
+        //private Size bigStatus = new Size(140, 28);
+        //private Size normalStatus = new Size(132, 28);
+        //private Size smallStatus = new Size(120, 28);
 
+        private Size changeStatus = new Size(0, 28);
+        private Size normalStatus = new Size(58, 28);
         public ElementStatus Status
         {
             get => this.status;
@@ -258,38 +260,39 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 控件名称长短改变时改变控件大小
+
         private string SubstringByte(string text, int startIndex, int length)
         {
             byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            if (bytes.Length < length)
+                length = bytes.Length;
             return EncodingOfGB2312.GetString(bytes, startIndex, length);
+        }
+        private int ConutTxtWidth(int chineseRatio, int otherRatio)
+        {
+            int padding = 3;
+            int addValue = 10;
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+                addValue -= 10;
+            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
         }
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 8;
-
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
+            int maxLength = 24;
+            name = SubstringByte(name, 0, maxLength);
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-
-            if (sumCount + sumCountDigit > maxLength)
+            int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
+            this.txtButton.Text = name;
+            if (EncodingOfGB2312.GetBytes(this.opControlName).Length > maxLength)
             {
-                int txtWidth = 82;
-                ResizeControl(txtWidth, bigStatus);
-                this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
+                txtWidth += 10;
+                this.txtButton.Text = name + "...";
             }
-            else if (sumCount + sumCountDigit <= 6)
-            {
-                this.txtButton.Text = name;
-                int txtWidth = 62;
-                ResizeControl(txtWidth, smallStatus);
-            }
-            else
-            {
-                this.txtButton.Text = name;
-                int txtWidth = 72;
-                ResizeControl(txtWidth, normalStatus);
-            }
-            this.nameToolTip.SetToolTip(this.txtButton, name);
+            changeStatus.Width = normalStatus.Width + txtWidth;
+            ResizeControl(txtWidth, changeStatus);
+            this.nameToolTip.SetToolTip(this.txtButton, this.opControlName);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)

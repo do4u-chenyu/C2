@@ -33,7 +33,6 @@ namespace Citta_T1.Controls.Move
         private Point mouseOffset;
 
         private bool doublelPinFlag = false;
-        private PictureBox leftPinPictureBox1 = new PictureBox();
 
         private string subTypeName;
         private string oldTextString;
@@ -67,8 +66,6 @@ namespace Citta_T1.Controls.Move
 
 
         // 一些倍率
-        // 鼠标放在Pin上，Size的缩放倍率
-        int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = 1.3F;
         // 缩放等级
@@ -80,12 +77,9 @@ namespace Citta_T1.Controls.Move
         private Point oldcontrolPosition;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
-        // 以该控件为起点的所有点
-        private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
-        List<Bezier> affectedStartLines = new List<Bezier>() { };
-        List<Bezier> affectedEndLines = new List<Bezier>() { };
+
         public ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
@@ -106,10 +100,10 @@ namespace Citta_T1.Controls.Move
         private Bitmap staticImage;
         private List<int> linePinArray = new List<int> { };
         
-        private Size bigStatus    = new Size(155, 28);
-        private Size normalStatus = new Size(147, 28);
-        private Size smallStatus  = new Size(130, 28);
-        
+
+        private Size changeStatus = new Size(0, 28);
+        private Size normalStatus = new Size(72, 28);
+
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
@@ -253,7 +247,6 @@ namespace Citta_T1.Controls.Move
                 this.Location = WorldBoundControl(new Point(left, top));
                 #endregion
                 bool isNeedMoveLine = false;
-                CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.id)
@@ -407,35 +400,35 @@ namespace Citta_T1.Controls.Move
         private string SubstringByte(string text, int startIndex, int length)
         {
             byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            if (bytes.Length < length)
+                length = bytes.Length;
             return EncodingOfGB2312.GetString(bytes, startIndex, length);
+        }
+        private int ConutTxtWidth(int chineseRatio, int otherRatio)
+        {
+            int padding = 3;
+            int addValue = 10;
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+                addValue -= 10;
+            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
         }
         public void SetOpControlName(string name)
         {
             this.opControlName = name;
-            int maxLength = 8;
-
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count * 2;
+            int maxLength = 24;
+            name = SubstringByte(name, 0, maxLength);
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-
-            if (sumCount + sumCountDigit > maxLength)
+            int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
+            this.txtButton.Text = name;
+            if (EncodingOfGB2312.GetBytes(this.opControlName).Length > maxLength)
             {
-                int txtWidth = 82;
-                ResizeControl(txtWidth, bigStatus);
-                this.txtButton.Text = SubstringByte(name, 0, maxLength) + "...";
+                txtWidth += 10;
+                this.txtButton.Text = name + "...";
             }
-            else if (sumCount + sumCountDigit <= 6)
-            {
-                this.txtButton.Text = opControlName;
-                int txtWidth = 57;
-                ResizeControl(txtWidth, smallStatus);
-            }
-            else
-            {
-                this.txtButton.Text = opControlName;
-                int txtWidth = 72;
-                ResizeControl(txtWidth, normalStatus);
-            }
-            this.helpToolTip.SetToolTip(this.txtButton, name);
+            changeStatus.Width = normalStatus.Width + txtWidth;
+            ResizeControl(txtWidth, changeStatus);
+            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -447,7 +440,7 @@ namespace Citta_T1.Controls.Move
             this.statusBox.Location = new Point((int)((this.Width - 42) * f), (int)(this.statusBox.Top * f));
             this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.textBox.Size = new Size((int)((txtWidth - 1) * f), (int)((this.Height - 4) * f));
             
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
@@ -682,7 +675,7 @@ namespace Citta_T1.Controls.Move
             {
                 log.Info("变化前:" + rectIn_up);
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
-                rectIn_up = rectEnter(rectIn_up);
+                rectIn_up = RectEnter(rectIn_up);
                 log.Info("变化后:" + rectIn_up);
                 this.Invalidate();
                 pinStatus = "rectIn_up";
@@ -691,7 +684,7 @@ namespace Citta_T1.Controls.Move
             else if (rectIn_down.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus)|| linePinArray.Contains(1)) return;
-                rectIn_down = rectEnter(rectIn_down);
+                rectIn_down = RectEnter(rectIn_down);
                 this.Invalidate();
                 pinStatus = "rectIn_down";
 
@@ -699,7 +692,7 @@ namespace Citta_T1.Controls.Move
             else if(rectOut.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
-                rectOut = rectEnter(rectOut);
+                rectOut = RectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
             }
@@ -710,15 +703,15 @@ namespace Citta_T1.Controls.Move
                 {
                     case "rectIn_down":
                         if(!linePinArray.Contains(1))
-                            rectIn_down = rectLeave(rectIn_down);
+                            rectIn_down = RectLeave(rectIn_down);
                         break;
                     case "rectIn_up":
                         if (!linePinArray.Contains(0))
-                            rectIn_up = rectLeave(rectIn_up);
+                            rectIn_up = RectLeave(rectIn_up);
                         break;
                     case "rectOut":
                         if (!linePinArray.Contains(-1))
-                            rectOut = rectLeave(rectOut);
+                            rectOut = RectLeave(rectOut);
                         break;
                 }
                 pinStatus = "noEnter";
@@ -730,7 +723,7 @@ namespace Citta_T1.Controls.Move
         {
             if ((pinStatus != "rectOut") && (status == "lineExit") && (!linePinArray.Contains(-1)))
             {              
-                rectOut = rectEnter(rectOut);
+                rectOut = RectEnter(rectOut);
                 linePinArray.Add(-1);
                 this.Invalidate();
             }
@@ -742,18 +735,17 @@ namespace Citta_T1.Controls.Move
             linePinArray.Remove(pinIndex);
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
-                rectIn_down = rectLeave(rectIn_down);               
+                rectIn_down = RectLeave(rectIn_down);               
             }
             if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
             {
-                rectIn_up = rectLeave(rectIn_up);               
+                rectIn_up = RectLeave(rectIn_up);               
             }
             this.Invalidate();
         }
 
-        public Rectangle rectEnter(Rectangle rect)
+        public Rectangle RectEnter(Rectangle rect)
         {
-            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
@@ -761,9 +753,8 @@ namespace Citta_T1.Controls.Move
             Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
-        public Rectangle rectLeave(Rectangle rect)
+        public Rectangle RectLeave(Rectangle rect)
         {
-            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
@@ -851,7 +842,7 @@ namespace Citta_T1.Controls.Move
         }
         public void SaveStartLines(int line_index)
         {
-            //this.startLineIndexs.Add(line_index);
+            
         }
 
         public void SaveEndLines(int line_index)
@@ -880,7 +871,6 @@ namespace Citta_T1.Controls.Move
              */
              // 鼠标判定矩形大小
             int mouseR = 15;
-            int pinR = 6;
             bool isRevised = false;
             float maxIntersectPerct = 0.0F;
             PointF revisedP = new PointF(p.X, p.Y);
@@ -969,13 +959,13 @@ namespace Citta_T1.Controls.Move
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
                 
-                rectIn_down = rectEnter(rectIn_down);
+                rectIn_down = RectEnter(rectIn_down);
                 linePinArray.Add(pinIndex);
             }
             if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
             {
                 
-                rectIn_up = rectEnter(rectIn_up);
+                rectIn_up = RectEnter(rectIn_up);
                 linePinArray.Add(pinIndex);
             }
             this.Invalidate();
@@ -1064,8 +1054,5 @@ namespace Citta_T1.Controls.Move
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
-
-
-
     }
 }
