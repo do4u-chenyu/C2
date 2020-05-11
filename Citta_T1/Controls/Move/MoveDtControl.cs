@@ -153,6 +153,8 @@ namespace Citta_T1.Controls.Move
                 {
                    
                     Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Control lineEndC = Global.GetCurrentDocument().SearchElementByID(mr.EndID).GetControl;
+                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
@@ -493,19 +495,13 @@ namespace Citta_T1.Controls.Move
 
         public void OutPinInit(String status)
         {
-            //this.lineStaus = "noLine";
-            //foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-            //{
-            //    if (mr.StartID == this.id)
-            //    {
-            //        this.lineStaus = "LineExit";
-            //        break;
-            //    }
-            //}
             this.lineStaus = status;
             PinOpLeaveAndEnter(new Point(0,0));
         }
-        
+
+        public void InPinInit(int endLineIndex)
+        {
+        }
         #endregion
 
         #region 托块的放大与缩小
