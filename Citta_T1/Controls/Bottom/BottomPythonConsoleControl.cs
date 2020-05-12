@@ -20,6 +20,7 @@ namespace Citta_T1.Controls.Bottom
         {
             InitializeComponent();
             piis = new List<PythonInterpreterInfo>();
+            this.consoleControl1.InternalRichTextBox.BackColor = Color.White;
         }
 
         private void MenuItemClearAll_Click(object sender, EventArgs e)
@@ -64,6 +65,26 @@ namespace Citta_T1.Controls.Bottom
         private void BottomPythonConsoleControl_Load(object sender, EventArgs e)
         {
             LoadPythonInterpreter();
+        }
+
+        private void StartProcessButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ResetProcessButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClearScreenButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CopyContentButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
