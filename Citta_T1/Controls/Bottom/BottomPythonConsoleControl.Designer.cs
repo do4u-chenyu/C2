@@ -45,6 +45,7 @@
             this.copyContentButton = new System.Windows.Forms.Button();
             this.consoleControl1 = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -108,6 +109,7 @@
             this.flowLayoutPanel1.Controls.Add(this.splitter1);
             this.flowLayoutPanel1.Controls.Add(this.clearScreenButton);
             this.flowLayoutPanel1.Controls.Add(this.copyContentButton);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -223,6 +225,15 @@
             this.consoleControl1.Size = new System.Drawing.Size(1005, 97);
             this.consoleControl1.TabIndex = 2;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(551, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(362, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "此部分正在施工中,部分功能还不完善,暂时经不起测试";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // BottomPythonConsoleControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -256,5 +267,6 @@
         private System.Windows.Forms.Button copyContentButton;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button button2;
     }
 }
