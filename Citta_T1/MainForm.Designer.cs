@@ -51,7 +51,7 @@ namespace Citta_T1
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
             this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomPythonConsolControl();
+            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomPythonConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -648,7 +648,7 @@ namespace Citta_T1
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = ((System.Drawing.Image)(resources.GetObject("resetButton.Image")));
+            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
             this.resetButton.Location = new System.Drawing.Point(507, 354);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);
@@ -926,7 +926,7 @@ namespace Citta_T1
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
-        private Citta_T1.Controls.Bottom.BottomPythonConsolControl bottomPyConsole;
+        private Citta_T1.Controls.Bottom.BottomPythonConsoleControl bottomPyConsole;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;

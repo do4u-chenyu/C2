@@ -70,6 +70,7 @@ namespace  Citta_T1
             Global.SetLogView(this.bottomLogControl);
             Global.SetOptionDao(this.optionDao);
             Global.SetDataSourceControl(this.dataSourceControl);
+            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
 
         }
 
@@ -506,7 +507,7 @@ namespace  Citta_T1
 
                 if (currentManager.IsAllOperatorDone())
                 {
-                    MessageBox.Show("当前模型的算子均已运算完毕", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算请点击重置按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.Start();

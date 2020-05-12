@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0150C6E60C1C4BE5BA8CFC6526DB111B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0A201EB19F334BC18C1317A06C23F5A3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -57,20 +63,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2FBDBCD396178B45E8C340BE22168E3A"
-        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2FBDBCD396178B45E8C340BE22168E3A"
-        "OwnerKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
         "OwnerKey" = "8:_CCFBC3FC125546BABB02DC53D4B89B67"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_39563DB0876144BAA18EA3A76F66DEAA"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +106,7 @@
         "Entry"
         {
         "MsmKey" = "8:_45C6D757D26119BC87C671A363AA7F84"
-        "OwnerKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -147,6 +147,54 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_568FB08F37CF4CAC818FFF917A2CEE83"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
+        "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_595716FAE12047F5AFDBDADC77BA356B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_59980B2637564CC5B12079BB3031E11F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_600DB62E2D244632A00E5A877A56C445"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_62C0EA6271324A09BAD74279D3EA3BB2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6752A2B97378422D8E65A8B7FFD445A8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -159,7 +207,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_694A6F39A58740298A0400B1ECE3D54B"
+        "MsmKey" = "8:_67B1831753F341E78F496723F1DF63A7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -171,14 +219,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6B9F76D46BD1BEFE5BA06834DA1F3F72"
+        "MsmKey" = "8:_6BB9528D2973584386883E5A8A3D0C09"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6B9F76D46BD1BEFE5BA06834DA1F3F72"
-        "OwnerKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+        "MsmKey" = "8:_6BB9528D2973584386883E5A8A3D0C09"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -249,6 +297,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_A92DF9E18DA7402AA65FF626F704E4CE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AA77A07D871E420C9BBF0498DDE9209D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -274,7 +328,7 @@
         "Entry"
         {
         "MsmKey" = "8:_C2734C1B7D91959194E5D4DF689CA963"
-        "OwnerKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -315,12 +369,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_DF0725576B194E3CBC811EA35FD6A453"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -340,7 +388,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -352,7 +400,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2FBDBCD396178B45E8C340BE22168E3A"
+        "OwnerKey" = "8:_6BB9528D2973584386883E5A8A3D0C09"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -394,7 +442,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6B9F76D46BD1BEFE5BA06834DA1F3F72"
+        "OwnerKey" = "8:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -518,6 +566,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0150C6E60C1C4BE5BA8CFC6526DB111B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\rightfold.png"
+            "TargetName" = "8:rightfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A201EB19F334BC18C1317A06C23F5A3"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\head.exe"
@@ -640,37 +708,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2FBDBCD396178B45E8C340BE22168E3A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:UserControlDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_2FBDBCD396178B45E8C340BE22168E3A"
-                    {
-                    "Name" = "8:UserControlDLL.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:UserControlDLL.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_36742AF14A10B8BD5370DEAF1C5BE0E6"
             {
             "AssemblyRegister" = "3:1"
@@ -700,6 +737,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39563DB0876144BAA18EA3A76F66DEAA"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\minfold.png"
+            "TargetName" = "8:minfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B38DABAF9C14422B18ADB19D1022E80"
@@ -904,6 +961,168 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_53791E3427E6419DB30CF8043D1FF94F"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Citta_T1, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64"
+                "ScatterAssemblies"
+                {
+                    "_53791E3427E6419DB30CF8043D1FF94F"
+                    {
+                    "Name" = "8:Citta_T1.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Citta_T1\\bin\\Release\\Citta_T1.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_568FB08F37CF4CAC818FFF917A2CEE83"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\close.png"
+            "TargetName" = "8:close.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_58B7C9F21B2EC37CD20C2CB8C0AF110D"
+                    {
+                    "Name" = "8:log4net.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:log4net.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_595716FAE12047F5AFDBDADC77BA356B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\maxunfold.png"
+            "TargetName" = "8:maxunfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59980B2637564CC5B12079BB3031E11F"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\leftfold.png"
+            "TargetName" = "8:leftfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_600DB62E2D244632A00E5A877A56C445"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\remark.png"
+            "TargetName" = "8:remark.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62C0EA6271324A09BAD74279D3EA3BB2"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\log4net.config"
+            "TargetName" = "8:log4net.config"
+            "Tag" = "8:"
+            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6752A2B97378422D8E65A8B7FFD445A8"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-ncursesw6.dll"
@@ -944,12 +1163,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_694A6F39A58740298A0400B1ECE3D54B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_67B1831753F341E78F496723F1DF63A7"
             {
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Debug\\log4net.config"
-            "TargetName" = "8:log4net.config"
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\shadow.png"
+            "TargetName" = "8:shadow.png"
             "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -984,20 +1203,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6B9F76D46BD1BEFE5BA06834DA1F3F72"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6BB9528D2973584386883E5A8A3D0C09"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:UserControlDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6B9F76D46BD1BEFE5BA06834DA1F3F72"
+                    "_6BB9528D2973584386883E5A8A3D0C09"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:UserControlDLL.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:UserControlDLL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -1157,6 +1376,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A92DF9E18DA7402AA65FF626F704E4CE"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\blueshadow.png"
+            "TargetName" = "8:blueshadow.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA77A07D871E420C9BBF0498DDE9209D"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\sort.exe"
@@ -1288,37 +1527,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CE508B7FC14C48B78C51E448C07F7BEF"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Citta_T1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_CE508B7FC14C48B78C51E448C07F7BEF"
-                    {
-                    "Name" = "8:Citta_T1.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Citta_T1\\bin\\Debug\\Citta_T1.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DF0725576B194E3CBC811EA35FD6A453"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-mpfr-6.dll"
@@ -1382,6 +1590,17 @@
                             "Condition" = "8:"
                             "Transitive" = "11:FALSE"
                             "Property" = "8:_F35180F4FAF94EA892EBADF5F05D4AE2"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_FBCAB254E41B4394B75E5E71274B9FFA"
+                            {
+                            "Name" = "8:displaypanel"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_DAC86DCA23A04F35B0B54E1465EAAD76"
                                 "Folders"
                                 {
                                 }
@@ -1462,7 +1681,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{2873A5DA-4FDA-478E-9F16-D655CB82FFEB}"
+        "PackageCode" = "8:{218E144C-994B-4CC2-A0C9-AD208B2FBD64}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1582,7 +1801,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A81876B411EE4ECB8418EC258F4DBE1C"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5E6687397D77400B83029899A1CA74C5"
             {
             "Name" = "8:IAO解决方案"
             "Arguments" = "8:"
@@ -1590,7 +1809,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+            "Target" = "8:_53791E3427E6419DB30CF8043D1FF94F"
             "Folder" = "8:_5C964F8FC9FA4C3EB02497E87114E179"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Icon" = "8:_CAE05490DC924763941530F191F601F1"
@@ -1610,7 +1829,7 @@
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E8B0139126DD4B7795C9D3C814CA5DDF"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E28B4A157FC24DFBAEF9D8F576878578"
             {
             "Name" = "8:IAO解决方案"
             "Arguments" = "8:"
@@ -1618,7 +1837,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_CE508B7FC14C48B78C51E448C07F7BEF"
+            "Target" = "8:_53791E3427E6419DB30CF8043D1FF94F"
             "Folder" = "8:_818FD6E8713C45D99CF6673836F38C69"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
             "Icon" = "8:_CAE05490DC924763941530F191F601F1"
@@ -2281,7 +2500,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_CCFBC3FC125546BABB02DC53D4B89B67"
             {
-            "SourcePath" = "8:..\\UserInstallSet\\obj\\Debug\\UserInstallSet.dll"
+            "SourcePath" = "8:..\\UserInstallSet\\obj\\Release\\UserInstallSet.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
@@ -2309,7 +2528,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\Debug\\Citta_T1.exe"
+            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\Citta_T1.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"

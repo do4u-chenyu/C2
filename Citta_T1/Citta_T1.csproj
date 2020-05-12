@@ -242,11 +242,11 @@
     <Compile Include="Controls\Bottom\BottomPreviewControl.Designer.cs">
       <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Bottom\BottomPythonConsolControl.cs">
+    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Bottom\BottomPythonConsolControl.Designer.cs">
-      <DependentUpon>BottomPythonConsolControl.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.Designer.cs">
+      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ConfigForm.cs">
       <SubType>Form</SubType>
@@ -469,8 +469,8 @@
     <EmbeddedResource Include="Controls\Bottom\BottomLogControl.resx">
       <DependentUpon>BottomLogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Bottom\BottomPythonConsolControl.resx">
-      <DependentUpon>BottomPythonConsolControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomPythonConsoleControl.resx">
+      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
@@ -627,6 +627,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="res\toolbox\saveall.png" />
+    <None Include="res\toolbox\reset.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -640,6 +641,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\msys-mpfr-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sbin\relate.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\tr.exe">

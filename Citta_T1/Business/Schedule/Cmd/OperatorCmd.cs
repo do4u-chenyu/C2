@@ -41,15 +41,33 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 string[] titleList = this.outputFileTitle.Split(this.separators[0][0]);
                 List<string> outTitleList = new List<string>();
-                foreach (string ind in option.GetOption("outfield").Split(','))
+                if(className == "relate")
                 {
-                    outTitleList.Add(titleList[int.Parse(ind)]);
+                    string[] col0 = this.option.GetOption("columnname0").Split('\t');
+                    string[] col1 = this.option.GetOption("columnname1").Split('\t');
+
+                    foreach (string ind in option.GetOption("outfield0").Split(','))
+                    {
+                        outTitleList.Add(col0[int.Parse(ind)]);
+                    }
+                    foreach (string ind in option.GetOption("outfield1").Split(','))
+                    {
+                        outTitleList.Add(col1[int.Parse(ind)]);
+                    }
                 }
-                if(className == "freq")
+                else
                 {
-                    outTitleList.Add("频率统计结果");
+                    foreach (string ind in option.GetOption("outfield").Split(','))
+                    {
+                        outTitleList.Add(titleList[int.Parse(ind)]);
+                    }
+                    if (className == "freq")
+                    {
+                        outTitleList.Add("频率统计结果");
+                    }
                 }
-                string columns = String.Join("\t", outTitleList); ;
+
+                string columns = String.Join("\t", outTitleList); 
                 sw.WriteLine(columns.Trim('\t'));
                 sw.Flush();
             }

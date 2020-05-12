@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,12 +14,15 @@ namespace Citta_T1.Controls
 {
     class FrameWrapper
     {
-        private Bitmap staticImage;
+        private Bitmap staticImage,moveImage;
         private CanvasPanel canvas;
         private Point startP, endP;
         private bool  mouseIsDown = false;
         private Pen p1 = new Pen(Color.Gray, 0.0001f);
-        private Rectangle frameRec = new Rectangle();
+        private Pen p  = new Pen(Color.Green, 1f);
+        private Rectangle frameRec = new Rectangle(0,0,0,0);
+        private Rectangle minBoding = new Rectangle(0,0,0,0);
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public FrameWrapper()
         {
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
@@ -27,8 +31,28 @@ namespace Citta_T1.Controls
         public void FrameDown(MouseEventArgs e)
         {
             startP = e.Location;
-            mouseIsDown = true;
             CreateImg();
+            if (frameRec.IsEmpty)
+            {
+                mouseIsDown = true;
+            }
+            else if(!frameRec.Contains(e.Location))
+            {
+                frameRec = new Rectangle(0,0,0,0);
+                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+                for (int i = 0; i < modelElements.Count; i++)
+                {
+                    ModelElement me = modelElements[modelElements.Count - i - 1];
+                    Control ct = me.GetControl;
+                    (ct as IMoveControl).ControlNoSelect();
+                }
+
+            }
+            else if (frameRec.Contains(e.Location))
+            {
+                log.Info("选中....");
+                mouseIsDown = false;
+            }
         }
 
 
@@ -36,33 +60,51 @@ namespace Citta_T1.Controls
         {
             if (!mouseIsDown)
                 return;
+            DrawFrame_move(e);
+        }
+        public void FrameUp(MouseEventArgs e)
+        {
+            if (!mouseIsDown)
+                return;
+            DrawFrame_Up(e);
+
+        }
+        #region 绘制虚线框
+
+        private void DrawFrame_move(MouseEventArgs e)
+        {
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
+            Rectangle changeRec;
             if (e.X < startP.X && e.Y < startP.Y)
-                g.DrawRectangle(p1, e.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(e.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else if (e.X > startP.X && e.Y < startP.Y)
-                g.DrawRectangle(p1, startP.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(startP.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else if (e.X < startP.X && e.Y > startP.Y)
-                g.DrawRectangle(p1, e.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(e.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else
-                g.DrawRectangle(p1, startP.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(startP.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
 
+            g.DrawRectangle(p1, changeRec);
             Graphics n = canvas.CreateGraphics();
-            n.DrawImageUnscaled(i, 0, 0);   
+
+            n.DrawImageUnscaled(i, 0, 0);
             g.Dispose();
             i.Dispose();
             i = null;
         }
-        public void FrameUp(MouseEventArgs e)
+        private void DrawFrame_Up(MouseEventArgs e)
         {
             endP = e.Location;
+            CreateRect();
+            FindControl();
             Bitmap i = new Bitmap(this.staticImage);
+            Graphics g = Graphics.FromImage(i);
+            g.DrawRectangle(p, minBoding);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             n.DrawImageUnscaled(i, 0, 0);
             n.Dispose();
             mouseIsDown = false;
-            CreateRect();
-            FindControl();
         }
         private void CreateImg()
         {
@@ -74,9 +116,11 @@ namespace Citta_T1.Controls
                 staticImage = null;
             }
             staticImage = new Bitmap(canvas.Width, canvas.Height);
-            canvas.DrawToBitmap(staticImage, new Rectangle(0, 0, canvas.Width, canvas.Height));
-            
+            canvas.DrawToBitmap(staticImage, new Rectangle(0, 0, canvas.Width, canvas.Height));         
         }
+
+
+
         private void CreateRect()
         { 
             if (endP.X < startP.X && endP.Y < startP.Y)
@@ -91,13 +135,43 @@ namespace Citta_T1.Controls
         private void FindControl()
         {
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            List<int> minX = new List<int>();
+            List<int> minY = new List<int>();
+            List<int> maxX = new List<int>();
+            List<int> maxY = new List<int>();
             for (int i = 0; i < modelElements.Count; i++)
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
                 if (frameRec.Contains(ct.Location))
+                {
                     (ct as IMoveControl).ControlSelect();
+                    minX.Add(ct.Left);
+                    minY.Add(ct.Top);
+                    maxX.Add(ct.Left + ct.Width);
+                    maxY.Add(ct.Top + ct.Height);
+                }
             }
+            if (minX.Count == 0)
+            {
+                minBoding = new Rectangle(0, 0, 0, 0);
+                return;
+            }
+
+            UpDateMinBoding(minX, minY, maxX, maxY);
+
         }
+        private void UpDateMinBoding(List<int> minX, List<int> minY, List<int> maxX, List<int> maxY)
+        {
+            int x = minX.Min() - 1;
+            int y = minY.Min() - 2;
+            int width  = maxX.Max() - x + 1;
+            int height = maxY.Max() - y + 1;
+            minBoding = new Rectangle(x, y, width, height);
+        }
+        #endregion
+
+         
     }
+
 }
