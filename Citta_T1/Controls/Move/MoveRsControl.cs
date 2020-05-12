@@ -74,11 +74,6 @@ namespace Citta_T1.Controls.Move
         private Bitmap staticImage;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
 
-
-        //private Size bigStatus = new Size(140, 28);
-        //private Size normalStatus = new Size(132, 28);
-        //private Size smallStatus = new Size(120, 28);
-
         private Size changeStatus = new Size(0, 28);
         private Size normalStatus = new Size(58, 28);
         public ElementStatus Status
@@ -298,12 +293,14 @@ namespace Citta_T1.Controls.Move
         private void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
-
+            int pading = 4;
+            if (f != 1)
+                pading += 1;
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
-            this.rightPictureBox.Location = new Point((int)((this.Width - 30) * f), (int)(this.rightPictureBox.Top * f));
-            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(11 * f));
-            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
+            this.rightPictureBox.Location = new Point(this.Width - (int)(30 * f), (int)(4 * f));
+            this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
