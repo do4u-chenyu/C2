@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -182,13 +183,14 @@ namespace Citta_T1.Dialogs
             if (this.fullFilePath == null)
                 return;
             System.IO.StreamReader sr;
+            FileStream fs = null;
             if (this.encoding == DSUtil.Encoding.UTF8)
             {
                 sr = File.OpenText(fullFilePath);
             }
             else
             {
-                FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs, System.Text.Encoding.Default);
             }
             String header = sr.ReadLine();
@@ -209,10 +211,25 @@ namespace Citta_T1.Dialogs
                 DataRow row;
                 DataView view;
                 DataColumn[] cols = new DataColumn[numOfCol];
+                Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
+                string headerText;
+                int count;
+                char[] seperator = new char[] { '_' };
+
+                // 可能有同名列，这里需要重命名一下
                 for (int i = 0; i < numOfCol; i++)
                 {
                     cols[i] = new DataColumn();
-                    cols[i].ColumnName = headers[i];
+                    headerText = headers[i];
+                    if (!induplicatedName.ContainsKey(headerText))
+                        induplicatedName.Add(headerText, 0);
+                    else
+                    {
+                        induplicatedName[headerText] += 1;
+                        induplicatedName[headerText] = induplicatedName[headerText]; 
+                    }
+                    headerText = induplicatedName[headerText] + "_" + headerText;
+                    cols[i].ColumnName = headerText;
                 }
 
                 table.Columns.AddRange(cols);
@@ -233,10 +250,31 @@ namespace Citta_T1.Dialogs
 
                 view = new DataView(table);
                 this.dataGridView1.DataSource = view;
+
+
+                // 取消重命名
+                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                {
+                    try
+                    {
+                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name.Split(seperator, 2)[1];
+                    }
+                    catch
+                    {
+                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name;
+                        log.Error("读取文件时，去重命名过程出错");
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+                sr.Close();
             }
         }
 

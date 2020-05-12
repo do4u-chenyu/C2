@@ -51,11 +51,25 @@ namespace Citta_T1.Controls.Bottom
             DataRow row;
             DataView view;
             DataColumn[] cols = new DataColumn[numOfCol];
+            Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
+            string headerText;
+            int count;
+            char[] seperator = new char[] { '_' };
 
+            // 可能有同名列，这里需要重命名一下
             for (int i = 0; i < numOfCol; i++)
             {
                 cols[i] = new DataColumn();
-                cols[i].ColumnName = headers[i];
+                headerText = headers[i];
+                if (!induplicatedName.ContainsKey(headerText))
+                    induplicatedName.Add(headerText, 0);
+                else
+                {
+                    induplicatedName[headerText] += 1;
+                    induplicatedName[headerText] = induplicatedName[headerText];
+                }
+                headerText = induplicatedName[headerText] + "_" + headerText;
+                cols[i].ColumnName = headerText;
             }
 
             table.Columns.AddRange(cols);
@@ -75,6 +89,19 @@ namespace Citta_T1.Controls.Bottom
             view = new DataView(table);
             this.dataGridView.DataSource = view;
             this.ResetColumnsWidth();
+
+            // 取消重命名
+            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
+            {
+                try
+                {
+                    this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name.Split(seperator, 2)[1];
+                }
+                catch
+                {
+                    this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name;
+                }
+            }
         }
 
         private void ResetColumnsWidth(int minWidth = 50)
