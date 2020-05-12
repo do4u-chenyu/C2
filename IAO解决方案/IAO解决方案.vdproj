@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0150C6E60C1C4BE5BA8CFC6526DB111B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0A201EB19F334BC18C1317A06C23F5A3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -59,6 +65,12 @@
         {
         "MsmKey" = "8:_36742AF14A10B8BD5370DEAF1C5BE0E6"
         "OwnerKey" = "8:_CCFBC3FC125546BABB02DC53D4B89B67"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_39563DB0876144BAA18EA3A76F66DEAA"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -141,6 +153,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_568FB08F37CF4CAC818FFF917A2CEE83"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -149,6 +167,24 @@
         {
         "MsmKey" = "8:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
         "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_595716FAE12047F5AFDBDADC77BA356B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_59980B2637564CC5B12079BB3031E11F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_600DB62E2D244632A00E5A877A56C445"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -171,6 +207,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_67B1831753F341E78F496723F1DF63A7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6B8EB064D597479BAA002746CC27EA9A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -179,6 +221,12 @@
         {
         "MsmKey" = "8:_6BB9528D2973584386883E5A8A3D0C09"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6BB9528D2973584386883E5A8A3D0C09"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -225,12 +273,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2B5B06DADCAC4986239DC3C06BF0F5E"
-        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A56AB8C0632F493AB93B7781EC23DF4E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -251,6 +293,12 @@
         {
         "MsmKey" = "8:_A5DC67D5245E6EC6953EE5C360B8EC67"
         "OwnerKey" = "8:_45C6D757D26119BC87C671A363AA7F84"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A92DF9E18DA7402AA65FF626F704E4CE"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -341,12 +389,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A2B5B06DADCAC4986239DC3C06BF0F5E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -524,6 +566,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0150C6E60C1C4BE5BA8CFC6526DB111B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\rightfold.png"
+            "TargetName" = "8:rightfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A201EB19F334BC18C1317A06C23F5A3"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\head.exe"
@@ -675,6 +737,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_39563DB0876144BAA18EA3A76F66DEAA"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\minfold.png"
+            "TargetName" = "8:minfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3B38DABAF9C14422B18ADB19D1022E80"
@@ -910,6 +992,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_568FB08F37CF4CAC818FFF917A2CEE83"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\close.png"
+            "TargetName" = "8:close.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_58B7C9F21B2EC37CD20C2CB8C0AF110D"
             {
             "AssemblyRegister" = "3:1"
@@ -939,6 +1041,66 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_595716FAE12047F5AFDBDADC77BA356B"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\maxunfold.png"
+            "TargetName" = "8:maxunfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_59980B2637564CC5B12079BB3031E11F"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\leftfold.png"
+            "TargetName" = "8:leftfold.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_600DB62E2D244632A00E5A877A56C445"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\remark.png"
+            "TargetName" = "8:remark.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62C0EA6271324A09BAD74279D3EA3BB2"
@@ -987,6 +1149,26 @@
             "TargetName" = "8:awk.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_67B1831753F341E78F496723F1DF63A7"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\shadow.png"
+            "TargetName" = "8:shadow.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1143,37 +1325,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A2B5B06DADCAC4986239DC3C06BF0F5E"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:UserControlDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_A2B5B06DADCAC4986239DC3C06BF0F5E"
-                    {
-                    "Name" = "8:UserControlDLL.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:UserControlDLL.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A56AB8C0632F493AB93B7781EC23DF4E"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\tr.exe"
@@ -1223,6 +1374,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A92DF9E18DA7402AA65FF626F704E4CE"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\res\\displaypanel\\blueshadow.png"
+            "TargetName" = "8:blueshadow.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FBCAB254E41B4394B75E5E71274B9FFA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA77A07D871E420C9BBF0498DDE9209D"
@@ -1423,6 +1594,17 @@
                                 {
                                 }
                             }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_FBCAB254E41B4394B75E5E71274B9FFA"
+                            {
+                            "Name" = "8:displaypanel"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_DAC86DCA23A04F35B0B54E1465EAAD76"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_47D478B73B7841EFA5C2FD0B864BC849"
@@ -1499,7 +1681,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{2873A5DA-4FDA-478E-9F16-D655CB82FFEB}"
+        "PackageCode" = "8:{218E144C-994B-4CC2-A0C9-AD208B2FBD64}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1630,7 +1812,7 @@
             "Target" = "8:_53791E3427E6419DB30CF8043D1FF94F"
             "Folder" = "8:_5C964F8FC9FA4C3EB02497E87114E179"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Icon" = "8:"
+            "Icon" = "8:_CAE05490DC924763941530F191F601F1"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D4C308D4FE3D49FF8C9B7C5D5D0E62BD"
@@ -1658,7 +1840,7 @@
             "Target" = "8:_53791E3427E6419DB30CF8043D1FF94F"
             "Folder" = "8:_818FD6E8713C45D99CF6673836F38C69"
             "WorkingFolder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
-            "Icon" = "8:"
+            "Icon" = "8:_CAE05490DC924763941530F191F601F1"
             "Feature" = "8:"
             }
         }

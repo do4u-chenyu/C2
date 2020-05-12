@@ -70,6 +70,7 @@ namespace  Citta_T1
             Global.SetLogView(this.bottomLogControl);
             Global.SetOptionDao(this.optionDao);
             Global.SetDataSourceControl(this.dataSourceControl);
+            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
 
         }
 
