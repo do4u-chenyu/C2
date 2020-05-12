@@ -101,7 +101,6 @@ namespace Citta_T1.Controls
             Bitmap i = new Bitmap(this.staticImage);
             Graphics g = Graphics.FromImage(i);
             g.DrawRectangle(p, minBoding);
-
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             n.DrawImageUnscaled(i, 0, 0);
             n.Dispose();
