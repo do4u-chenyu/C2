@@ -66,5 +66,25 @@ namespace Citta_T1.Controls.Bottom
         {
             LoadPythonInterpreter();
         }
+
+        private void StartProcessButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ResetProcessButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ClearScreenButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CopyContentButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
