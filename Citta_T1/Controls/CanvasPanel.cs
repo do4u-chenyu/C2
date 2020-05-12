@@ -124,7 +124,26 @@ namespace Citta_T1.Controls
         }
 
         #endregion
+        private Point WorldBoundControl(Point Ps)
+        {
 
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+
+            if (Ps.Y < 70 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 70;
+            }
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
+        }
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
@@ -135,6 +154,9 @@ namespace Citta_T1.Controls
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
             DSUtil.ExtType extType;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
+            Point moveOffset = WorldBoundControl(location);
+            location.X -=  moveOffset.X;
+            location.Y -=  moveOffset.Y;
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().SizeL;
@@ -280,7 +302,7 @@ namespace Citta_T1.Controls
                 }
                 catch (Exception e)
                 {
-                    log.Error("CanvasPanel删除线时发生错误");
+                    log.Error("CanvasPanel删除线时发生错误:" + e);
                 }
 
             }
@@ -504,7 +526,7 @@ namespace Citta_T1.Controls
         private void RepaintAllRelations()
         {
             Graphics g = this.CreateGraphics();
-            Pen p;
+            
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -539,7 +561,6 @@ namespace Citta_T1.Controls
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Global.GetCurrentDocument().UpdateAllLines();
-            Pen p;
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
