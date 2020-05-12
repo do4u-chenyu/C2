@@ -20,6 +20,7 @@ namespace Citta_T1.Controls.Bottom
         {
             InitializeComponent();
             piis = new List<PythonInterpreterInfo>();
+            this.consoleControl1.InternalRichTextBox.BackColor = Color.White;
         }
 
         private void MenuItemClearAll_Click(object sender, EventArgs e)
