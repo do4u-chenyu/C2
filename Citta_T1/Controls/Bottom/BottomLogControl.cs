@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1
+
+namespace Citta_T1.Controls.Bottom
 {
-    public partial class DataGridView2 : UserControl
+    public partial class BottomLogControl : UserControl
     {
         private int maxLineCount = 10000;
-        public DataGridView2()
+        public BottomLogControl()
         {
             InitializeComponent();
         }
@@ -31,7 +25,7 @@ namespace Citta_T1
             }
 
 
-
+            
         }
 
         private void MenuItemClearAll_Click(object sender, EventArgs e)

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Citta_T1.Utils;
+
 namespace Citta_T1.Controls.Title
 {
     public partial class DragLineControl : UserControl
@@ -16,7 +18,7 @@ namespace Citta_T1.Controls.Title
         private Control bottomViewPanel;
         private Control canvasPanel;
         private Control naviViewControl;
-        private Control downloadButton;
+        private Control resetButton;
         private Control stopButton;
         private Control runButton;
         private Control flowControl;
@@ -33,16 +35,17 @@ namespace Citta_T1.Controls.Title
         private void DragLineControl_MouseDown(object sender, MouseEventArgs e)
         {
             mouseDown = true;
-            this.bottomViewPanel = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "bottomViewPanel");
-            this.canvasPanel = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "canvasPanel");
-            this.naviViewControl = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "naviViewControl");
-            this.downloadButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "downloadButton");
+            this.canvasPanel = Global.GetCanvasPanel();
+            this.flowControl = Global.GetFlowControl();
+            this.naviViewControl = Global.GetNaviViewControl();
+            this.remarkControl = Global.GetRemarkControl();
+            this.resetButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "resetButton");
             this.stopButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "stopButton");
             this.runButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "runButton");
-            this.flowControl = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "flowControl");
             this.rightShowButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "rightShowButton");
             this.rightHideButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "rightHideButton");
-            this.remarkControl = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "remarkControl");
+            this.bottomViewPanel = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "bottomViewPanel");
+
 
         }
 
@@ -66,7 +69,7 @@ namespace Citta_T1.Controls.Title
 
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
-            this.downloadButton.Location = new Point(x + 100, y + 50);
+            this.resetButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location = new Point(x, y + 50);
 

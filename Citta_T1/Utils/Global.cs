@@ -1,10 +1,10 @@
-﻿using Citta_T1.Dgvs;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Title;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Left;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
+using Citta_T1.Controls;
+using Citta_T1.Controls.Bottom;
+using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Left;
+using Citta_T1.Controls.Title;
 
 namespace Citta_T1.Utils
 {
@@ -18,9 +18,10 @@ namespace Citta_T1.Utils
         private static FlowControl flowControl;
         private static MyModelControl myModelControl;
         private static RemarkControl remarkControl;
-        private static LogView logView;
+        private static BottomLogControl logView;
         private static OptionDao optionDao;                 // 模型配置工具类
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
+        private static BottomPythonConsoleControl bottomPythonConsoleControl; //底层控制台面板
 
 
         public static MainForm GetMainForm() { return mainForm; }
@@ -38,9 +39,11 @@ namespace Citta_T1.Utils
         public static FlowControl GetFlowControl() { return flowControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl() { return remarkControl; }
-        public static LogView GetLogView() { return logView; } 
+        public static BottomLogControl GetLogView() { return logView; } 
         public static OptionDao GetOptionDao() { return optionDao; } 
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
+        public static BottomPythonConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
+
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
         public static void SetModelTitlePanel(ModelTitlePanel mtp) { modelTitlePanel = mtp; }
@@ -50,10 +53,10 @@ namespace Citta_T1.Utils
         public static void SetFlowControl(FlowControl fc) { flowControl = fc; }
         public static void SetMyModelControl(MyModelControl mmc) { myModelControl = mmc; }
         public static void SetRemarkControl(RemarkControl rc) { remarkControl = rc; }
-        public static void SetLogView(LogView lv) { logView = lv; }
+        public static void SetLogView(BottomLogControl lv) { logView = lv; }
         public static void SetOptionDao(OptionDao od) { optionDao = od; }
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
-
+        public static void SetBottomPythonConsoleControl(BottomPythonConsoleControl bpcc) { bottomPythonConsoleControl = bpcc; }
 
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }

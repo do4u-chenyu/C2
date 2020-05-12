@@ -11,6 +11,7 @@ using Citta_T1.Controls.Left;
 using Citta_T1.Business.DataSource;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Business.Option;
+using Citta_T1.Controls.Bottom;
 
 namespace  Citta_T1
 { 
@@ -66,9 +67,10 @@ namespace  Citta_T1
             Global.SetMyModelControl(this.myModelControl);
             Global.SetNaviViewControl(this.naviViewControl);
             Global.SetRemarkControl(this.remarkControl);
-            Global.SetLogView(this.logView);
+            Global.SetLogView(this.bottomLogControl);
             Global.SetOptionDao(this.optionDao);
             Global.SetDataSourceControl(this.dataSourceControl);
+            Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
 
         }
 
@@ -298,27 +300,27 @@ namespace  Citta_T1
         private void PreviewLabel_Click(object sender, EventArgs e)
         {
             this.ShowBottomPanel();
-            this.ShowPreview();
+            this.ShowBottomPreview();
         }
 
-        private void ShowPreview()
+        private void ShowBottomPreview()
         {
-            this.logView.Visible = false;
-            this.dataGridView2.Visible = false;
-            this.dataGridView0.Visible = true;
+            this.bottomLogControl.Visible = false;
+            this.bottomPyConsole.Visible = false;
+            this.bottomPreview.Visible = true;
         }
 
-        private void ErrorLabel_Click(object sender, EventArgs e)
+        private void PyControlLabel_Click(object sender, EventArgs e)
         {
             this.ShowBottomPanel();
-            this.ShowErrorView();
+            this.ShowPyConsole();
         }
 
-        private void ShowErrorView()
+        private void ShowPyConsole()
         {
-            this.dataGridView2.Visible = true;
-            this.logView.Visible = false;
-            this.dataGridView0.Visible = false;
+            this.bottomPyConsole.Visible = true;
+            this.bottomLogControl.Visible = false;
+            this.bottomPreview.Visible = false;
         }
 
         private void LogLabel_Click(object sender, EventArgs e)
@@ -329,9 +331,9 @@ namespace  Citta_T1
 
         private void ShowLogView()
         {
-            this.logView.Visible = true;
-            this.dataGridView2.Visible = false;
-            this.dataGridView0.Visible = false;
+            this.bottomLogControl.Visible = true;
+            this.bottomPyConsole.Visible = false;
+            this.bottomPreview.Visible = false;
         }
 
         private void ShowBottomPanel()
@@ -431,8 +433,8 @@ namespace  Citta_T1
         public void PreViewDataByFullFilePath(string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowBottomPanel(); 
-            this.dataGridView0.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
-            this.ShowPreview();
+            this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
+            this.ShowBottomPreview();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -505,7 +507,7 @@ namespace  Citta_T1
 
                 if (currentManager.IsAllOperatorDone())
                 {
-                    MessageBox.Show("当前模型的算子均已运算完毕", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算请点击重置按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.Start();

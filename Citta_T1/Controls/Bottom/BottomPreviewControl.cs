@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using Citta_T1.Utils;
 using System.Reflection;
 
-namespace Citta_T1
+namespace Citta_T1.Controls.Bottom
 {
-    public partial class DataGridView0 : UserControl
+    public partial class BottomPreviewControl : UserControl
     {
-        public DataGridView0()
+        public BottomPreviewControl()
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);

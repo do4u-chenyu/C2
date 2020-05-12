@@ -74,6 +74,12 @@
       <HintPath>..\ThirdPartyLibrary\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="ConsoleControl">
+      <HintPath>..\ThirdPartyLibrary\ConsoleControl.1.2.1\lib\net40-client\ConsoleControl.dll</HintPath>
+    </Reference>
+    <Reference Include="ConsoleControlAPI">
+      <HintPath>..\ThirdPartyLibrary\ConsoleControlAPI.1.2.1\lib\net40\ConsoleControlAPI.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdPartyLibrary\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -236,17 +242,17 @@
     <Compile Include="Controls\Top\TopToolBarControl.Designer.cs">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\DataGridView0.cs">
+    <Compile Include="Controls\Bottom\BottomPreviewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\DataGridView0.Designer.cs">
-      <DependentUpon>DataGridView0.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomPreviewControl.Designer.cs">
+      <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\DataGridView2.cs">
+    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\DataGridView2.Designer.cs">
-      <DependentUpon>DataGridView2.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.Designer.cs">
+      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ConfigForm.cs">
       <SubType>Form</SubType>
@@ -370,11 +376,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Dgvs\LogView.cs">
+    <Compile Include="Controls\Bottom\BottomLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Dgvs\LogView.Designer.cs">
-      <DependentUpon>LogView.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomLogControl.Designer.cs">
+      <DependentUpon>BottomLogControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Flow\FlowControl.cs">
       <SubType>UserControl</SubType>
@@ -463,14 +469,14 @@
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\DataGridView0.resx">
-      <DependentUpon>DataGridView0.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomPreviewControl.resx">
+      <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\LogView.resx">
-      <DependentUpon>LogView.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomLogControl.resx">
+      <DependentUpon>BottomLogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dgvs\DataGridView2.resx">
-      <DependentUpon>DataGridView2.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomPythonConsoleControl.resx">
+      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>
@@ -627,6 +633,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="res\toolbox\saveall.png" />
+    <None Include="res\toolbox\reset.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -640,6 +647,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\msys-mpfr-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sbin\relate.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\tr.exe">
@@ -744,12 +754,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

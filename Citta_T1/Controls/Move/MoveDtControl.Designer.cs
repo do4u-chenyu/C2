@@ -81,22 +81,8 @@
             this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
-            // 
-            // leftPinPictureBox
-            // 
-            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.leftPinPictureBox.TabIndex = 0;
-            this.leftPinPictureBox.TabStop = false;
-            // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.rightPinPictureBox.TabIndex = 0;
-            this.rightPinPictureBox.TabStop = false;
+
+
             // 
             // contextMenuStrip
             // 

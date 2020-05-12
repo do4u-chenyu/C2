@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
-using Citta_T1.Controls.Move;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Business.Model;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
+
+using Citta_T1.Utils;
+using Citta_T1.Controls.Move;
+using Citta_T1.Business.Model;
+using Citta_T1.Controls.Interface;
+
+
 
 namespace Citta_T1.Controls
 {
@@ -121,7 +124,26 @@ namespace Citta_T1.Controls
         }
 
         #endregion
+        private Point WorldBoundControl(Point Ps)
+        {
 
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+
+            if (Ps.Y < 70 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 70;
+            }
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
+        }
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
@@ -132,6 +154,9 @@ namespace Citta_T1.Controls
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
             DSUtil.ExtType extType;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
+            Point moveOffset = WorldBoundControl(location);
+            location.X -=  moveOffset.X;
+            location.Y -=  moveOffset.Y;
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().SizeL;
@@ -156,7 +181,7 @@ namespace Citta_T1.Controls
             {
                 Global.GetFlowControl().ResetStatus();                  // 点击右键, 清空操作状态,进入到正常编辑状态
             }
-            if (sender is MoveDtControl)
+            if (sender is MoveDtControl || sender is MoveRsControl)
             {
                 this.cmd = ECommandType.PinDraw;
                 this.StartC = sender as Control;
@@ -178,8 +203,9 @@ namespace Citta_T1.Controls
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
         }
-        private bool IsDtToOpLine(ModelRelation mr)
+        private bool IsValidLine(ModelRelation mr)
         {
+            // 合法的线有 Dt-Op Rs-Op
             ModelDocument md = Global.GetCurrentDocument();
             List<ModelRelation> mrs = md.ModelRelations;
             List<ModelElement> mes = md.ModelElements;
@@ -187,7 +213,7 @@ namespace Citta_T1.Controls
             ModelElement sMe = md.SearchElementByID(mr.StartID);
             ModelElement eMe = md.SearchElementByID(mr.EndID);
 
-            return (sMe.Type == ElementType.DataSource && eMe.Type == ElementType.Operator);
+            return ((sMe.Type == ElementType.DataSource || sMe.Type == ElementType.Result) && eMe.Type == ElementType.Operator);
         }
         private void ClickOnLine(MouseEventArgs e)
         {
@@ -204,7 +230,7 @@ namespace Citta_T1.Controls
             }
             else
             {
-                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsDtToOpLine(mrs[mrIndex]))
+                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsValidLine(mrs[mrIndex]))
                     selectLineIndexs.Add(mrIndex);
                 else
                     return;
@@ -276,7 +302,7 @@ namespace Citta_T1.Controls
                 }
                 catch (Exception e)
                 {
-                    log.Error("CanvasPanel删除线时发生错误");
+                    log.Error("CanvasPanel删除线时发生错误:" + e);
                 }
 
             }
@@ -343,7 +369,7 @@ namespace Citta_T1.Controls
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
             // 绘制
-            else if (cmd == ECommandType.PinDraw && (sender is MoveDtControl))
+            else if (cmd == ECommandType.PinDraw)
             {
                 // 吸附效果实现
                 /*
@@ -455,7 +481,7 @@ namespace Citta_T1.Controls
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
-                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl))
+                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl))
                 {
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
@@ -500,7 +526,7 @@ namespace Citta_T1.Controls
         private void RepaintAllRelations()
         {
             Graphics g = this.CreateGraphics();
-            Pen p;
+            
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(this.BackColor);
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -535,7 +561,6 @@ namespace Citta_T1.Controls
             // 将当前文档所有的线全部画出来
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             Global.GetCurrentDocument().UpdateAllLines();
-            Pen p;
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }

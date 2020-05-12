@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Citta_T1.Utils;
 
-namespace Citta_T1
+namespace Citta_T1.Controls.Bottom
 {
-    partial class DataGridView0
+    partial class BottomPreviewControl
     {
         private System.Windows.Forms.DataGridView dataGridView;
         private int maxNumOfRows = 20;

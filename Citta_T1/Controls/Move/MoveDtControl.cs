@@ -411,12 +411,14 @@ namespace Citta_T1.Controls.Move
         private void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
-
+            int pading = 4;
+            if (f != 1)
+                pading += 1;
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
-            this.rightPictureBox.Location = new Point((int)((this.Width - 25) * f), (int)(this.rightPictureBox.Top * f));
-            this.rectOut.Location = new Point((int)((this.Width - 10) * f), (int)(10 * f));
-            this.txtButton.Size = new Size((int)(txtWidth * f), (int)((this.Height - 4) * f));
-            this.textBox.Size = new Size((int)((txtWidth -1 ) * f), (int)((this.Height - 4) * f));
+            this.rightPictureBox.Location = new Point(this.Width - (int)(25 * f), (int)(5 * f));
+            this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(10 * f));
+            this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
+            this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -449,18 +451,18 @@ namespace Citta_T1.Controls.Move
             if (rectOut.Contains(mousePosition) || lineStaus == "lineExit")
             {
                 if (pinStatus == "rectOut") return;
-                rectOut = rectEnter(rectOut);
+                rectOut = RectEnter(rectOut);
                 this.Invalidate();
                 pinStatus = "rectOut";
             }
             else if (pinStatus != "noEnter")
             {
-                rectOut = rectLeave(rectOut);
+                rectOut = RectLeave(rectOut);
                 pinStatus = "noEnter";
                 this.Invalidate();
             }
         }
-        public Rectangle rectEnter(Rectangle rect)
+        public Rectangle RectEnter(Rectangle rect)
         {
             double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
@@ -470,7 +472,7 @@ namespace Citta_T1.Controls.Move
             Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
             return new Rectangle(dstLtCorner, dstSize);
         }
-        public Rectangle rectLeave(Rectangle rect)
+        public Rectangle RectLeave(Rectangle rect)
         {
             double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
