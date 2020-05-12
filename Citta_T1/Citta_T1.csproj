@@ -643,6 +643,9 @@
     <Content Include="sbin\msys-mpfr-6.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="sbin\relate.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\tr.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
