@@ -648,7 +648,7 @@ namespace Citta_T1
             this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = ((System.Drawing.Image)(resources.GetObject("resetButton.Image")));
+            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
             this.resetButton.Location = new System.Drawing.Point(507, 354);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(52, 53);

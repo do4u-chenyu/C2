@@ -269,9 +269,9 @@
         J+I5odLii/R/zBw1f4cAWnwAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="minMaxPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABoAAAAPCAYAAAD6Ud/mAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -389,21 +389,6 @@
         zQXruuavmwvGcUz7vvP05oK2wzDw9OaBRVHw9OaBtuu68nzHgV3X8XzHgVmW8XzHgbbzPDPywKZpGHlg
         kiR0HIcf2o7jiGFVVRjabtuGYd/3GOZ5jqFtgKYBmgZoGqBpgKYBmv49FO+neHnhzS7LEl976AmiYYhu
         orVm9AVFHxJNCjqYaG/Q+0RjFF0TWqrot9iMiT5VIFGjVmVB6gAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="resetButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACEAAAAzCAIAAACWmPaoAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAi5JREFUWEftljGKAjEUQOdOC4IXsBMERbAQBMFaELyAIFjYK9h6AcFCewtBEAQ7
-        LyBYCXbC7Fv/J2TcMZPsTrOLr1jmJz95Sf5snCj24H6/d7vdjyStVut6vWqGEy/Hfr/XiZMsl0vNcOLl
-        2O12OmuSxWKhGU7eDng7vvM3HafTqdFo6DQhVCoV/lt1FosUx2w200HhDIdDncUixcEt1G63dVAI1Wr1
-        crnoLBbp9bjdbqGaVwJ4WfMgjUMALx3gqXELwOWATE2mADIc4ND4CCDbAakaTwF4OeBJ4y+A6Hg8uk98
-        PB5LqtHU63UjoFfSUmk2m9vtNnILBKMB1sQnhDy7BQIXTKSPWYxGIzO14CMQfB3ARclFyx28Wq06nY62
-        ehDg+DH5OObz+eFwKJVKEk6nU8pGJSTMwVEoFOSDsdfrScv5fCYcDAYS5rMPysMvBzIJeWV5R4rFooTR
-        z37y/OEAo81mUy6XtSFvEPAS+t4lv+Ht8OefOfr9vr5uTkiTfFiv17VaTYM4ppcPTFrsHCF9H4xnjAZJ
-        mOihSyA+ukiYTCa2G4Idhqd9GMd3gh2ep2rrXQ7y7NQnSLAXjptRGiRxOZhCVm0Plq4nSAMqQQJ/eZZk
-        IfuspMj2huiVkHazFaYGSbb3B771kJXKM11PkM+8iMnBJGmG4JrbkGMvmTC1fr91CHJQ8kC7OUwh2CFd
-        BtkHR2RXSJSP9C9yOKtHpbRUhF/m5BmmO/Llfzji+BOvAOtxZNUmwQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="stopButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -680,9 +665,10 @@
         tG8LHn79eMN1N+3Pg/n9cmja66y7/wPqUPCaHzNm7AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
     <value>39</value>
-  </metadata>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAgIAAAAEAIAAoCAEAFgAAACgAAACAAAAAAAEAAAEAIAAAAAAAAAABAMMOAADDDgAAAAAAAAAA
