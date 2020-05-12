@@ -97,8 +97,9 @@ namespace Citta_T1.Dialogs
             }       
         }
 
-        private void SavePythonConfig()
+        private bool SavePythonConfig()
         {
+            bool changed = false;
             // <add key="python" value="C:\PythonFake\Python37\python.exe|Python37|true;C:\PythonFake\Python37\python.exe|Python37|false;" />
             StringBuilder sb = new StringBuilder();
             foreach (DataGridViewRow row in this.dataGridView.Rows)
@@ -110,7 +111,14 @@ namespace Citta_T1.Dialogs
                   .Append(alias).Append('|')
                   .Append(ifCheck).Append(';');
             }
-            ConfigUtil.TrySetAppSettingsByKey("python", sb.ToString());
+            string newPythonConfigString = sb.ToString();
+            string oldPythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
+            if (newPythonConfigString != oldPythonConfigString)
+            {
+                ConfigUtil.TrySetAppSettingsByKey("python", sb.ToString());
+                changed = true;
+            }
+            return changed;
         }
 
         // 运行python --version, 检查环境是否有问题
@@ -161,7 +169,10 @@ namespace Citta_T1.Dialogs
 
         private void PythonConfigOkButton_Click(object sender, EventArgs e)
         {
-            SavePythonConfig();
+            bool changed = SavePythonConfig();
+            // 配置改变
+            if (changed)
+                Global.GetBottomPythonConsoleControl().LoadPythonInterpreter();
             Close();
         }
 
