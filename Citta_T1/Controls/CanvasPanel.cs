@@ -159,7 +159,7 @@ namespace Citta_T1.Controls
             {
                 Global.GetFlowControl().ResetStatus();                  // 点击右键, 清空操作状态,进入到正常编辑状态
             }
-            if (sender is MoveDtControl)
+            if (sender is MoveDtControl || sender is MoveRsControl)
             {
                 this.cmd = ECommandType.PinDraw;
                 this.StartC = sender as Control;
@@ -181,8 +181,9 @@ namespace Citta_T1.Controls
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
         }
-        private bool IsDtToOpLine(ModelRelation mr)
+        private bool IsValidLine(ModelRelation mr)
         {
+            // 合法的线有 Dt-Op Rs-Op
             ModelDocument md = Global.GetCurrentDocument();
             List<ModelRelation> mrs = md.ModelRelations;
             List<ModelElement> mes = md.ModelElements;
@@ -190,7 +191,7 @@ namespace Citta_T1.Controls
             ModelElement sMe = md.SearchElementByID(mr.StartID);
             ModelElement eMe = md.SearchElementByID(mr.EndID);
 
-            return (sMe.Type == ElementType.DataSource && eMe.Type == ElementType.Operator);
+            return ((sMe.Type == ElementType.DataSource || sMe.Type == ElementType.Result) && eMe.Type == ElementType.Operator);
         }
         private void ClickOnLine(MouseEventArgs e)
         {
@@ -207,7 +208,7 @@ namespace Citta_T1.Controls
             }
             else
             {
-                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsDtToOpLine(mrs[mrIndex]))
+                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsValidLine(mrs[mrIndex]))
                     selectLineIndexs.Add(mrIndex);
                 else
                     return;
@@ -346,7 +347,7 @@ namespace Citta_T1.Controls
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
             // 绘制
-            else if (cmd == ECommandType.PinDraw && (sender is MoveDtControl))
+            else if (cmd == ECommandType.PinDraw)
             {
                 // 吸附效果实现
                 /*
@@ -458,7 +459,7 @@ namespace Citta_T1.Controls
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
-                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl))
+                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl))
                 {
                     cmd = ECommandType.Null;
                     lineWhenMoving = null;
