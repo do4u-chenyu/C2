@@ -452,6 +452,34 @@ namespace Citta_T1.Business.Option
                 MessageBox.Show("请输入数字");
             }
         }
+        public void IsIllegalInputName(Control control,String[] columnName,String name) 
+        {
+            if (columnName.Count() == 0 || name == "") return;
+            if (!columnName.Contains(name))
+            {
+                control.Text = "";
+                MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
+            }
+        }
+        public void Control_Leave(object sender, EventArgs e)
+        {
+            List<string> columnName = new List<string>();
+            foreach ( var item in (sender as ComboBox).Items)
+            {
+                columnName.Add(item.ToString());
+            }
+            IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
+        }
+        public void Control_KeyUp(object sender, KeyEventArgs e)
+        {
+            List<string> columnName = new List<string>();
+            foreach (var item in (sender as ComboBox).Items)
+            {
+                columnName.Add(item.ToString());
+            }
+            if (e.KeyCode == Keys.Enter)
+               IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
+        }
         #endregion
 
     }

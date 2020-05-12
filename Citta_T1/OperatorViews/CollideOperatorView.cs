@@ -9,6 +9,7 @@ using Citta_T1.Business.Model;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 namespace Citta_T1.OperatorViews
 {
@@ -26,6 +27,7 @@ namespace Citta_T1.OperatorViews
         private List<string> oldColumnName;
         private LogUtil log = LogUtil.GetInstance("CollideOperatorView");
 
+
         public CollideOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -40,6 +42,7 @@ namespace Citta_T1.OperatorViews
 
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
+           
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -276,7 +279,10 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
+            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp); 
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
+
 
             ComboBox dataBox = new ComboBox();
             dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -284,6 +290,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -292,6 +300,8 @@ namespace Citta_T1.OperatorViews
             filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.columnName1);
+            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             Button addButton1 = new Button();
@@ -432,5 +442,28 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.dataSource0);
         }
+
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Global.GetOptionDao().IsIllegalInputName(this.comboBox1, this.columnName0, this.comboBox1.Text);
+        }
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().IsIllegalInputName(this.comboBox1, this.columnName0, this.comboBox1.Text);
+        }
+
+        private void comboBox2_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
+        }
+        
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
+        }
+       
     }
 }
