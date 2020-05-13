@@ -41,7 +41,7 @@
             this.clearScreenButton = new System.Windows.Forms.Button();
             this.copyContentButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.consoleControl1 = new ConsoleControl.ConsoleControl();
+            this.cmdConsoleControl = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.consoleControl1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cmdConsoleControl, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -196,17 +196,17 @@
             this.button2.Text = "此部分正在施工中,部分功能还不完善,暂时经不起测试";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // consoleControl1
+            // cmdConsoleControl
             // 
-            this.consoleControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.consoleControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.consoleControl1.IsInputEnabled = true;
-            this.consoleControl1.Location = new System.Drawing.Point(3, 37);
-            this.consoleControl1.Name = "consoleControl1";
-            this.consoleControl1.SendKeyboardCommandsToProcess = false;
-            this.consoleControl1.ShowDiagnostics = false;
-            this.consoleControl1.Size = new System.Drawing.Size(1005, 97);
-            this.consoleControl1.TabIndex = 2;
+            this.cmdConsoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cmdConsoleControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdConsoleControl.IsInputEnabled = true;
+            this.cmdConsoleControl.Location = new System.Drawing.Point(3, 37);
+            this.cmdConsoleControl.Name = "cmdConsoleControl";
+            this.cmdConsoleControl.SendKeyboardCommandsToProcess = false;
+            this.cmdConsoleControl.ShowDiagnostics = false;
+            this.cmdConsoleControl.Size = new System.Drawing.Size(1005, 97);
+            this.cmdConsoleControl.TabIndex = 2;
             // 
             // BottomPythonConsoleControl
             // 
@@ -230,7 +230,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button startProcessButton;
-        private ConsoleControl.ConsoleControl consoleControl1;
+        private ConsoleControl.ConsoleControl cmdConsoleControl;
         private System.Windows.Forms.Button resetProcessButton;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button clearScreenButton;
