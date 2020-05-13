@@ -34,10 +34,10 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.DellSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DelSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.批量删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
-            this.DellSelectControl.SuspendLayout();
+            this.DelSelectControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -57,11 +57,11 @@ namespace Citta_T1.Controls
             // 
             // DellSelectControl
             // 
-            this.DellSelectControl.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.DellSelectControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DelSelectControl.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.DelSelectControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.批量删除ToolStripMenuItem});
-            this.DellSelectControl.Name = "contextMenuStrip2";
-            this.DellSelectControl.Size = new System.Drawing.Size(301, 86);
+            this.DelSelectControl.Name = "contextMenuStrip2";
+            this.DelSelectControl.Size = new System.Drawing.Size(301, 86);
             // 
             // 批量删除ToolStripMenuItem
             // 
@@ -81,7 +81,7 @@ namespace Citta_T1.Controls
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.DellSelectControl.ResumeLayout(false);
+            this.DelSelectControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -92,7 +92,7 @@ namespace Citta_T1.Controls
 
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ContextMenuStrip DellSelectControl;
+        private System.Windows.Forms.ContextMenuStrip DelSelectControl;
         private System.Windows.Forms.ToolStripMenuItem 批量删除ToolStripMenuItem;
     }
 }

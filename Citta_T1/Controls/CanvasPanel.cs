@@ -177,7 +177,7 @@ namespace Citta_T1.Controls
             selectLineIndexs.Clear();
             Global.GetMainForm().BlankButtonFocus();                    // 强制编辑控件失去焦点,触发算子控件的Leave事件
             this.ClickOnLine(e);
-            if (e.Button == MouseButtons.Right & !frameWrapper.FrameDel(e)) 
+            if (e.Button == MouseButtons.Right) 
             {
                 Global.GetFlowControl().ResetStatus();
                 frameWrapper.MinBoding = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态

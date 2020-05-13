@@ -42,8 +42,6 @@ namespace Citta_T1.Controls
         {
             
             startP = e.Location;
-            
-                
             if (minBoding.IsEmpty)
             {
                 startSelect = true;
@@ -53,13 +51,14 @@ namespace Citta_T1.Controls
             else if (!minBoding.Contains(e.Location))
             {
                 InitFrame();
+                CreateImg();
             }
             else if (minBoding.Contains(e.Location))
-            {                
+            {
                 startSelect = false;
                 stratDrag = true;
                 CreateMoveImg();
-                SelectControl_Show();
+                SelectControl_Hide();
             }
         }
 
@@ -89,10 +88,8 @@ namespace Citta_T1.Controls
                 Global.GetCanvasPanel().Cursor = Cursors.Default;
 
         }
-        public bool FrameDel(MouseEventArgs e)
-        {
-            return minBoding.Contains(e.Location);
-        }
+
+        
         #endregion 
         #region 绘制虚线框
 
@@ -373,7 +370,7 @@ namespace Citta_T1.Controls
             startSelect = true;
             stratDrag = false;
         }
-        private void SelectControl_Show()
+        private void SelectControl_Hide()
         {
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             for (int i = 0; i < modelElements.Count; i++)
