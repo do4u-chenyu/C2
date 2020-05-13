@@ -43,30 +43,20 @@ namespace Citta_T1.Controls
             {
                 startSelect = true;
                 stratDrag = false;
+                
 
             }
             else if (!frameRec.Contains(e.Location))
             {
-                frameRec = new Rectangle(0, 0, 0, 0);
-                List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-                for (int i = 0; i < modelElements.Count; i++)
-                {
-                    ModelElement me = modelElements[modelElements.Count - i - 1];
-                    Control ct = me.GetControl;
-                    (ct as IMoveControl).ControlNoSelect();
-                }
-                startSelect = true;
-                stratDrag = false;
+                InitFrame();
             }
             else if (frameRec.Contains(e.Location))
-            {
-                log.Info("选中....");
+            {                
                 startSelect = false;
                 stratDrag = true;
                 CreateMoveImg();
             }
         }
-
 
         public void FrameMove(MouseEventArgs e)
         {
@@ -74,14 +64,21 @@ namespace Citta_T1.Controls
                 DrawFrame_move(e);
             if (stratDrag)
                 dragFrame_Move(e);
+
         }
         public void FrameUp(MouseEventArgs e)
-        {
+        {                
+            if (stratDrag)
+            {
+                dragFrame_Up(e);
+            }
             if (startSelect)
                 DrawFrame_Up(e);
-            if (stratDrag)
-                Global.GetCurrentDocument().Show();
+        }
 
+        public void FrameEnter(EventArgs e)
+        {
+            
         }
         #region 绘制虚线框
 
@@ -118,14 +115,32 @@ namespace Citta_T1.Controls
         private void CreateImg()
         {
             canvas = Global.GetCanvasPanel();
-
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             if (staticImage != null)
             {
                 staticImage.Dispose();
                 staticImage = null;
             }
             staticImage = new Bitmap(canvas.Width, canvas.Height);
-            canvas.DrawToBitmap(staticImage, new Rectangle(0, 0, canvas.Width, canvas.Height));
+            Graphics g = Graphics.FromImage(staticImage);
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+            g.Clear(Color.White);
+            foreach (ModelRelation mr in modelRelations)
+            {
+                LineUtil.DrawBezier(g,mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+            }
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;                
+                if (ct.Location.X < 0 || ct.Location.Y < 0)
+                    continue;
+                ct.DrawToBitmap(staticImage, new Rectangle(ct.Location, ct.Size));     
+            }
+            g.Dispose();
         }
 
 
@@ -166,16 +181,15 @@ namespace Citta_T1.Controls
                 minBoding = new Rectangle(0, 0, 0, 0);
                 return;
             }
-
             UpDateMinBoding(minX, minY, maxX, maxY);
 
         }
         private void UpDateMinBoding(List<int> minX, List<int> minY, List<int> maxX, List<int> maxY)
         {
-            int x = minX.Min() - 1;
-            int y = minY.Min() - 4;
-            int width = maxX.Max() - x + 1;
-            int height = maxY.Max() - y + 4;
+            int x = minX.Min() ;
+            int y = minY.Min() ;
+            int width = maxX.Max() - x;
+            int height = maxY.Max() - y;
             minBoding = new Rectangle(x, y, width, height);
         }
 
@@ -257,7 +271,10 @@ namespace Citta_T1.Controls
         #endregion
         private void CreateMoveImg()
         {
+            if (minBoding.Width == 0 || minBoding.Y == 0)
+                return;
             moveImage = new Bitmap(minBoding.Width, minBoding.Height);
+
             //创建作图区域
             Graphics graphic = Graphics.FromImage(moveImage);
 
@@ -268,12 +285,18 @@ namespace Citta_T1.Controls
                 for (int j = 0; j < moveImage.Width; j++)
                 {
                     if (moveImage.GetPixel(j, i) == color)
-                        moveImage.SetPixel(j, i, Color.LightCyan);
+                    {
+                        moveImage.SetPixel(j, i, Color.FromArgb(200, 225, 255, 255));
 
+                    }
+                    else
+                    {
+                        Color c = moveImage.GetPixel(j, i);
+                        moveImage.SetPixel(j, i, Color.FromArgb(200, c.R, c.G, c.B));
+                    }
                 }
-
             }
-            Global.GetCurrentDocument().Hide();
+            
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap backGroung = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(backGroung);
@@ -281,6 +304,7 @@ namespace Citta_T1.Controls
             g.DrawImage(this.moveImage, minBoding.X , minBoding.Y);
             backGroung.Save("cs.png");
             n.DrawImageUnscaled(backGroung, 0, 0);
+            Global.GetCurrentDocument().Hide();
         }
         private void dragFrame_Move(MouseEventArgs e)
         {
@@ -295,6 +319,39 @@ namespace Citta_T1.Controls
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
 
             n.DrawImageUnscaled(i, 0, 0);
+        }
+        private void dragFrame_Up(MouseEventArgs e)
+        {
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            foreach (ModelElement me in modelElements)
+            {
+                Control ct = me.GetControl;
+                if (frameRec.Contains(ct.Location))
+                {
+                    ct.Left = ct.Left + e.Location.X - startP.X;
+                    ct.Top = ct.Top + e.Location.Y - startP.Y;
+                }
+                
+            }
+            InitFrame();
+            Global.GetCurrentDocument().UpdateAllLines();
+            CreateImg();
+            DrawRoundedRect(2);
+            Global.GetCurrentDocument().Show();
+            
+        }
+        private void InitFrame()
+        {
+            frameRec = new Rectangle(0, 0, 0, 0);
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;
+                (ct as IMoveControl).ControlNoSelect();
+            }
+            startSelect = true;
+            stratDrag = false;
         }
     }
 }

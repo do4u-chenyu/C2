@@ -73,8 +73,7 @@ namespace Citta_T1.Controls
             this.ControlChange(start, now);
             n.Dispose();
             this.startDrag = false;
-            this.start = e.Location;
-            
+            this.start = e.Location;           
 
         }
         public bool DragPaint(Size canvasSize, float canvasFactor, PaintEventArgs e)
