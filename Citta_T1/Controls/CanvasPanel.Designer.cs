@@ -34,7 +34,10 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.DellSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.批量删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
+            this.DellSelectControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -52,21 +55,33 @@ namespace Citta_T1.Controls
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteLineToolStripMenuItem_Click);
             // 
+            // DellSelectControl
+            // 
+            this.DellSelectControl.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.DellSelectControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.批量删除ToolStripMenuItem});
+            this.DellSelectControl.Name = "contextMenuStrip2";
+            this.DellSelectControl.Size = new System.Drawing.Size(301, 86);
+            // 
+            // 批量删除ToolStripMenuItem
+            // 
+            this.批量删除ToolStripMenuItem.Name = "批量删除ToolStripMenuItem";
+            this.批量删除ToolStripMenuItem.Size = new System.Drawing.Size(300, 38);
+            this.批量删除ToolStripMenuItem.Text = "批量删除";
+            // 
             // CanvasPanel
             // 
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "CanvasPanel";
-            this.Load += new System.EventHandler(this.CanvasPanel_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.CanvasPanel_DragEnter);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CanvasPanel_Paint);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseDown);
-            this.MouseEnter += new System.EventHandler(this.CanvasPanel_MouseEnter);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.DellSelectControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -77,5 +92,7 @@ namespace Citta_T1.Controls
 
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ContextMenuStrip DellSelectControl;
+        private System.Windows.Forms.ToolStripMenuItem 批量删除ToolStripMenuItem;
     }
 }

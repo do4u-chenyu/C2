@@ -8,6 +8,7 @@ using Citta_T1.Controls.Flow;
 using System.Xml;
 using Citta_T1.Utils;
 using Citta_T1.Business.Schedule;
+using System.Drawing;
 
 namespace Citta_T1.Business.Model
 {
@@ -69,6 +70,7 @@ namespace Citta_T1.Business.Model
         public void SwitchDocument(string modelTitle)
         {
             this.currentDocument = FindModelDocument(modelTitle);
+            Global.GetCanvasPanel().FrameWrapper.MinBoding = new Rectangle(0,0,0,0);
             foreach (ModelDocument md in this.modelDocuments)
             {
                 if (md.ModelTitle == modelTitle)

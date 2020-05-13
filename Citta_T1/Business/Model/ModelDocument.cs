@@ -199,7 +199,7 @@ namespace Citta_T1.Business.Model
         {
             foreach (ModelElement el1 in this.modelElements)
             {
-                el1.Show();               
+                el1.Show();
                 (el1.GetControl as IMoveControl).ControlNoSelect();
             }
                 
