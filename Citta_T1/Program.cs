@@ -49,7 +49,7 @@ namespace Citta_T1
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
                 // 如果硬盘不存在,用程序所在目录
             if (!System.IO.Directory.Exists(root))
-                workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "cittaModelDocument");
+                workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
         }

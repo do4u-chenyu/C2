@@ -320,31 +320,31 @@ namespace Citta_T1
             this.bottomViewPanel.Size = new System.Drawing.Size(906, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
-            // dataGridView0
+            // bottomPreview
             // 
             this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPreview.Location = new System.Drawing.Point(0, 39);
             this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPreview.Name = "dataGridView0";
+            this.bottomPreview.Name = "bottomPreview";
             this.bottomPreview.Size = new System.Drawing.Size(906, 241);
             this.bottomPreview.TabIndex = 27;
             // 
-            // logView
+            // bottomLogControl
             // 
             this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
             this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomLogControl.Name = "logView";
+            this.bottomLogControl.Name = "bottomLogControl";
             this.bottomLogControl.Size = new System.Drawing.Size(906, 241);
             this.bottomLogControl.TabIndex = 1;
             this.bottomLogControl.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
-            // dataGridView2
+            // bottomPyConsole
             // 
             this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
             this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPyConsole.Name = "dataGridView2";
+            this.bottomPyConsole.Name = "bottomPyConsole";
             this.bottomPyConsole.Size = new System.Drawing.Size(906, 241);
             this.bottomPyConsole.TabIndex = 2;
             this.bottomPyConsole.Load += new System.EventHandler(this.dataGridView2_Load);
@@ -421,10 +421,10 @@ namespace Citta_T1
             this.pyControlLabel.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.pyControlLabel.Location = new System.Drawing.Point(226, 4);
             this.pyControlLabel.Name = "pyControlLabel";
-            this.pyControlLabel.Size = new System.Drawing.Size(140, 27);
+            this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
             this.pyControlLabel.TabIndex = 2;
-            this.pyControlLabel.Text = "python控制台";
-            this.toolTip1.SetToolTip(this.pyControlLabel, "当前模型运行情况的报错信息");
+            this.pyControlLabel.Text = "控制台";
+            this.toolTip1.SetToolTip(this.pyControlLabel, "Python和Cmd控制台,用来调试第三方脚本");
             this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
             // 
             // previewLabel
@@ -551,7 +551,7 @@ namespace Citta_T1
             this.formatButton.Size = new System.Drawing.Size(75, 23);
             this.formatButton.TabIndex = 0;
             // 
-            // GroupButton
+            // groupButton
             // 
             this.groupButton.Location = new System.Drawing.Point(0, 0);
             this.groupButton.Name = "groupButton";
@@ -565,7 +565,7 @@ namespace Citta_T1
             this.interOpButton.Size = new System.Drawing.Size(75, 23);
             this.interOpButton.TabIndex = 0;
             // 
-            // UnionButton
+            // unionButton
             // 
             this.unionButton.Location = new System.Drawing.Point(0, 0);
             this.unionButton.Name = "unionButton";

@@ -40,6 +40,10 @@ namespace Citta_T1.OperatorViews
             this.oldOutList = this.OutList.GetItemCheckIndex();
 
             SetTextBoxName(this.DataInfoBox);
+            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
         }
         private bool IsOptionReay() 
         {
@@ -118,7 +122,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox1.Items.Add(name);
             }
             
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
            
         }
 
@@ -279,6 +283,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
+            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
@@ -287,6 +293,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -301,6 +309,8 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
+            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             TextBox textBox = new TextBox();

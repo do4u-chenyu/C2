@@ -62,7 +62,7 @@ namespace Citta_T1.Controls
         public Control StartC { get => startC; set => startC = value; }
         public Control EndC { get => endC;  set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-        
+        internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
 
         public CanvasPanel()
         {
@@ -179,7 +179,8 @@ namespace Citta_T1.Controls
             this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right) 
             {
-                Global.GetFlowControl().ResetStatus();                  // 点击右键, 清空操作状态,进入到正常编辑状态
+                Global.GetFlowControl().ResetStatus();
+                frameWrapper.MinBoding = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
             }
             if (sender is MoveDtControl || sender is MoveRsControl)
             {
@@ -355,14 +356,14 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-
-            if (e.Button != MouseButtons.Left) return;
+            
+            
             // 画框
             if (SelectFrame())
             {
                 frameWrapper.FrameMove(e);
             }
-
+            if (e.Button != MouseButtons.Left) return;
             // 控件移动
             else if (SelectDrag())
             {
@@ -592,13 +593,14 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location) 
+        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location, char separator) 
         {
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
                                 desciption,
                                 location);
             btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
+            btn.Separator = separator;
             AddNewElement(btn);
             return btn;
         }
@@ -634,9 +636,5 @@ namespace Citta_T1.Controls
             (startC as IMoveControl).OutPinInit("noLine");
         }
         #endregion
-
-        private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
     }
 }

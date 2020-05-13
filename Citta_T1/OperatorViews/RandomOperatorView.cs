@@ -87,7 +87,7 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
             }
             CompareDataSource();
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private void CompareDataSource()

@@ -7,7 +7,7 @@ namespace Citta_T1.Utils
 {
     class ConfigUtil
     {
-        public static string DefaultWorkspaceDirectory = @"C:\cittaModelDocument";
+        public static string DefaultWorkspaceDirectory = @"C:\FiberHomeIAOModelDocument";
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
             string value;
