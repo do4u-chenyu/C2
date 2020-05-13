@@ -43,9 +43,9 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.clearScreenButton = new System.Windows.Forms.Button();
             this.copyContentButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.consoleControl1 = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button2 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -141,6 +141,7 @@
             this.comboBox1.Size = new System.Drawing.Size(215, 24);
             this.comboBox1.TabIndex = 0;
             this.toolTip1.SetToolTip(this.comboBox1, "当前配置好的Cmd控制台和Python虚拟机");
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // splitter2
             // 
@@ -213,6 +214,15 @@
             this.copyContentButton.UseVisualStyleBackColor = true;
             this.copyContentButton.Click += new System.EventHandler(this.CopyContentButton_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(551, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(362, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "此部分正在施工中,部分功能还不完善,暂时经不起测试";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // consoleControl1
             // 
             this.consoleControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -224,15 +234,6 @@
             this.consoleControl1.ShowDiagnostics = false;
             this.consoleControl1.Size = new System.Drawing.Size(1005, 97);
             this.consoleControl1.TabIndex = 2;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(551, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(362, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "此部分正在施工中,部分功能还不完善,暂时经不起测试";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // BottomPythonConsoleControl
             // 
