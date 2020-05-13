@@ -43,6 +43,10 @@ namespace Citta_T1.OperatorViews
             this.oldOutList = this.OutList0.GetItemCheckIndex().Concat(this.OutList0.GetItemCheckIndex()).ToList();
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
+            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
         }
         #region 配置初始化
         private void InitOptionInfo()
@@ -295,6 +299,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
+            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
@@ -303,6 +309,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             Label label = new Label();
@@ -319,6 +327,8 @@ namespace Citta_T1.OperatorViews
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Items.AddRange(this.columnName1);
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            data2box.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            data2box.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
 
             Button addButton1 = new Button();

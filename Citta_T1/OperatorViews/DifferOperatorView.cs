@@ -275,6 +275,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
+            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
@@ -283,6 +285,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -291,6 +295,8 @@ namespace Citta_T1.OperatorViews
             filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.columnName1);
+            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             Button addButton1 = new Button();
@@ -432,6 +438,28 @@ namespace Citta_T1.OperatorViews
         private void dataSource0_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataSource0);
+        }
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
+        }
+
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
+        }
+
+        private void comboBox2_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
+        }
+
+        private void comboBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
         }
     }
 }

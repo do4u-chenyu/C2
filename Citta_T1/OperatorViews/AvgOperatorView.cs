@@ -201,5 +201,15 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.DataInfo);
         }
 
+        private void AvgComBox_Leave(object sender, EventArgs e)
+        {
+            Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+        }
+
+        private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+        }
     }
 }

@@ -44,6 +44,10 @@ namespace Citta_T1.OperatorViews
 
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
+            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -273,6 +277,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.columnName0);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -281,6 +287,8 @@ namespace Citta_T1.OperatorViews
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Font= new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.columnName1);
+            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = new TextBox();

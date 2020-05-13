@@ -46,7 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-
+            this.sortField.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.dataInfo);
         }
       

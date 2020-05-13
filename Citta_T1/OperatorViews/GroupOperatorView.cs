@@ -45,7 +45,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
-
+            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.dataInfo);
         }
         #region 初始化配置
@@ -261,6 +262,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
+            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
            
