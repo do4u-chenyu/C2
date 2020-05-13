@@ -369,6 +369,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F45D6D3D85F3C2F3363DA3F32886E9B5"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
         "MsmSig" = "8:_UNDEFINED"
@@ -734,7 +740,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -1773,7 +1779,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{218E144C-994B-4CC2-A0C9-AD208B2FBD64}"
+        "PackageCode" = "8:{DF57B5DC-55A1-493A-A159-B1EB12C7106A}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -2620,7 +2626,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F14E60EEF1B54203A7EBDCD6B14A89EE"
             {
-            "SourcePath" = "8:..\\Citta_T1\\obj\\开发调试\\Citta_T1.exe"
+            "SourcePath" = "8:..\\Citta_T1\\obj\\Release\\Citta_T1.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5FEDC32E0A454ED298B5CBB1038D604A"
