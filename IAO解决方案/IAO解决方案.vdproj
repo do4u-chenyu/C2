@@ -243,6 +243,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_983565CBD7FF4923BE8D06EDB73C2458"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A09D7DF40E9110AE7BFE4E8AD924CA1E"
         "OwnerKey" = "8:_F45D6D3D85F3C2F3363DA3F32886E9B5"
         "MsmSig" = "8:_UNDEFINED"
@@ -407,6 +413,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F14E60EEF1B54203A7EBDCD6B14A89EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_983565CBD7FF4923BE8D06EDB73C2458"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1299,6 +1311,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_983565CBD7FF4923BE8D06EDB73C2458"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:relate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_983565CBD7FF4923BE8D06EDB73C2458"
+                    {
+                    "Name" = "8:relate.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Citta_T1\\sbin\\relate.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A09D7DF40E9110AE7BFE4E8AD924CA1E"
             {
             "AssemblyRegister" = "3:1"
@@ -1779,7 +1822,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{DF57B5DC-55A1-493A-A159-B1EB12C7106A}"
+        "PackageCode" = "8:{658D118C-6C54-4DFA-BC48-5FD2D64682EB}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
