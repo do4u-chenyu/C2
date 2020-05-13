@@ -57,7 +57,7 @@ namespace Citta_T1.Controls
             {
                 startSelect = false;
                 stratDrag = true;
-                CreateMoveImg();
+                
                 SelectControl_Hide();
             }
         }
@@ -121,6 +121,7 @@ namespace Citta_T1.Controls
             CreateRect();
             FindControl();
             DrawRoundedRect(2);
+            CreateMoveImg();
             startSelect = false;
         }
         private void CreateImg()
