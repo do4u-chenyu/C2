@@ -178,7 +178,7 @@ namespace Citta_T1.OperatorViews
                 this.maxValueBox.Items.Add(name);
             }
             CompareDataSource();
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
         }
         private void CompareDataSource()
         {

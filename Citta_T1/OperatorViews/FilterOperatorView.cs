@@ -122,7 +122,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox1.Items.Add(name);
             }
             
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
            
         }
 

@@ -83,29 +83,30 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
+                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
+                foreach (string name in this.columnName0)
+                    this.outList0.AddItems(name);
+
             }
-            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
+            if (this.Text != "AI实践算子设置" && dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataPath1 = dataInfo["dataPath1"];
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip1.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
+                this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+                foreach (string name in this.columnName1)
+                    this.outList1.AddItems(name);
             }
-            else
-            {
-                this.dataPath1 = String.Empty;
-                columnName1 = new string[] { "" };
-            }
+            //else
+            //{
+            //    this.dataPath1 = String.Empty;
+            //    columnName1 = new string[] { "" };
+            //}
 
-            this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
-            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
-
-            foreach (string name in this.columnName0)
-                this.outList0.AddItems(name);
-            foreach (string name in this.columnName1)
-                this.outList1.AddItems(name);
+         
 
 
         }
@@ -152,8 +153,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            this.opControl.Option.SetOption("outfield0", String.Join(",", this.outList0));
-            this.opControl.Option.SetOption("outfield1", String.Join(",", this.outList1));
+       
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -179,23 +179,28 @@ namespace Citta_T1.OperatorViews
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield0", outField);
 
-            List<int> checkIndexs1 = this.outList1.GetItemCheckIndex();
-            List<int> outIndexs1 = new List<int>(this.oldOutList1);
-            foreach (int index in checkIndexs1)
+
+            if (this.Text != "AI实践算子设置")
             {
-                if (!outIndexs1.Contains(index))
-                    outIndexs1.Add(index);
-            }
-            foreach (int index in outIndexs1)
-            {
-                if (!checkIndexs1.Contains(index))
+                List<int> checkIndexs1 = this.outList1.GetItemCheckIndex();
+                List<int> outIndexs1 = new List<int>(this.oldOutList1);
+                foreach (int index in checkIndexs1)
                 {
-                    outIndexs1 = new List<int>(checkIndexs1);
-                    break;
+                    if (!outIndexs1.Contains(index))
+                        outIndexs1.Add(index);
                 }
+                foreach (int index in outIndexs1)
+                {
+                    if (!checkIndexs1.Contains(index))
+                    {
+                        outIndexs1 = new List<int>(checkIndexs1);
+                        break;
+                    }
+                }
+                string outField1 = string.Join(",", outIndexs1);
+                this.opControl.Option.SetOption("outfield1", outField1);
             }
-            string outField1 = string.Join(",", outIndexs1);
-            this.opControl.Option.SetOption("outfield1", outField1);
+           
 
 
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)

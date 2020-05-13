@@ -158,7 +158,7 @@ namespace Citta_T1.OperatorViews
                 this.MinValueBox.Items.Add(name);
             }
             CompareDataSource();
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private void CompareDataSource()
