@@ -37,7 +37,7 @@ namespace Citta_T1.Controls
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
-
+        #region 对应画布鼠标事件
         public void FrameDown(MouseEventArgs e)
         {
             
@@ -59,7 +59,7 @@ namespace Citta_T1.Controls
                 startSelect = false;
                 stratDrag = true;
                 CreateMoveImg();
-                Global.GetCurrentDocument().Hide();
+                SelectControl_Show();
             }
         }
 
@@ -93,6 +93,7 @@ namespace Citta_T1.Controls
         {
             return minBoding.Contains(e.Location);
         }
+        #endregion 
         #region 绘制虚线框
 
         private void DrawFrame_move(MouseEventArgs e)
@@ -285,6 +286,7 @@ namespace Citta_T1.Controls
             
         }
         #endregion
+        #region 实现框选控件批量移动
         private void CreateMoveImg()
         {
             if (minBoding.Width == 0 || minBoding.Y == 0)
@@ -356,6 +358,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().Show();
             
         }
+        #endregion
         private void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
@@ -368,6 +371,17 @@ namespace Citta_T1.Controls
             }
             startSelect = true;
             stratDrag = false;
+        }
+        private void SelectControl_Show()
+        {
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;
+                if (frameRec.Contains(ct.Location))
+                    ct.Visible = false;
+            }
         }
     }
 }
