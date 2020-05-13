@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Citta_T1.Utils;
 using Citta_T1.IAOLab.PythonOP;
@@ -21,20 +15,9 @@ namespace Citta_T1.Controls.Bottom
 
         public BottomPythonConsoleControl()
         {
-            InitializeComponent();
             piis = new List<PythonInterpreterInfo>();
-     
-            //this.consoleControl1.InternalRichTextBox.BackColor = Color.White;
-        }
-
-        private void MenuItemClearAll_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuItemSelectAll_Click(object sender, EventArgs e)
-        {
-            
+            InitializeComponent();
+            this.consoleControl1.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
         }
 
         public void LoadPythonInterpreter()
@@ -62,14 +45,15 @@ namespace Citta_T1.Controls.Bottom
         {
             piis.Clear();
             this.comboBox1.Items.Clear();
-            this.comboBox1.Items.Add("Cmd控制台");
+            this.comboBox1.Items.Add(CmdConsoleString);
             this.comboBox1.SelectedIndex = 0;
         }
 
         private void BottomPythonConsoleControl_Load(object sender, EventArgs e)
         {
             LoadPythonInterpreter();
-            //StartCmdProcess();
+            if (CmdConsoleSeleted())
+                StartCmdProcess();
         }
 
         private void StartProcessButton_Click(object sender, EventArgs e)
@@ -77,20 +61,16 @@ namespace Citta_T1.Controls.Bottom
             int selectedIndex = Math.Max(this.comboBox1.SelectedIndex, 0);
 
             // 默认第一个选项是cmd控制台;这里的||逻辑还要再斟酌
-            if (selectedIndex == 0 || this.comboBox1.SelectedItem.ToString() == CmdConsoleString)
+            if (CmdConsoleSeleted())
             {
                 StartCmdProcess();
                 return;
             }
             // 越界时用cmd代替python虚拟机
             if (selectedIndex - 1> piis.Count)
-            {
-                StartCmdProcess();
                 return;
-            }
 
-            StartPythonProcess(this.piis[selectedIndex - 1].PythonFFP, PythonInitParams);
-                
+            StartPythonProcess(this.piis[selectedIndex - 1].PythonFFP, PythonInitParams);     
         }
 
         private void ResetProcessButton_Click(object sender, EventArgs e)
@@ -111,31 +91,25 @@ namespace Citta_T1.Controls.Bottom
             FileUtil.TryClipboardSetText(this.consoleControl1.InternalRichTextBox.Text);
         }
 
-        private void StartCmdProcess(string param = "")
+        private void StartCmdProcess()
         {
-            if (!CmdConsoleSeleted())
-                return;
-
             if (this.consoleControl1.IsProcessRunning)
                 return;
-                
-            try
-            {
-                this.consoleControl1.StartProcess("cmd.exe", String.Empty);
-                this.startProcessButton.Enabled = false;
-            }
-            catch
-            {
-                log.Error(String.Format("Cmd Console Start Error..."));
-            }
-            
+            // 直接指定参数来改变初始目录的方式,清空屏幕会有问题
+            // 改用更改工作目录的方式,cmd启动完,要把工作目录切回来
+            string currentDirectory = Environment.CurrentDirectory;
+            Environment.CurrentDirectory = System.IO.Path.Combine(currentDirectory, "sbin");
+            TryStartProcess(consoleControl1, "cmd.exe", String.Empty);
+            Environment.CurrentDirectory = currentDirectory;
+            this.startProcessButton.Enabled = false;
         }
 
         private void StartPythonProcess(string pythonFFP, string param = "")
         {
             if (!System.IO.File.Exists(pythonFFP))
                 return;
-            this.consoleControl1.StartProcess(pythonFFP, param);
+
+            TryStartProcess(consoleControl1, pythonFFP, param);
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,12 +122,27 @@ namespace Citta_T1.Controls.Bottom
                 else
                     this.startProcessButton.Enabled = true;
             }
-            this.startProcessButton.Enabled = true;
+            else
+                this.startProcessButton.Enabled = true;
         }
 
         private bool CmdConsoleSeleted()
         {
             return this.comboBox1.SelectedIndex == 0 && this.comboBox1.SelectedItem.ToString() == CmdConsoleString;
+        }
+
+        private bool TryStartProcess(ConsoleControl.ConsoleControl console, string cmd, string param = "")
+        {
+            try
+            {
+                this.consoleControl1.StartProcess(cmd, param);
+            }
+            catch
+            {
+                log.Error(String.Format("[{0} {1}] start error.", cmd, param));
+                return false;
+            }
+            return true;
         }
     }
 }
