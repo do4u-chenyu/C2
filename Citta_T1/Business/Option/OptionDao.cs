@@ -23,7 +23,8 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.CollideOperator,
                                                 ElementSubType.UnionOperator,
                                                 ElementSubType.RelateOperator,
-                                                ElementSubType.DifferOperator };
+                                                ElementSubType.DifferOperator,
+                                                ElementSubType.CustomOperator2};
             List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
