@@ -67,18 +67,20 @@ namespace Citta_T1.Controls
 
         }
         public void FrameUp(MouseEventArgs e)
-        {                
+        {
             if (stratDrag)
-            {
                 dragFrame_Up(e);
-            }
             if (startSelect)
                 DrawFrame_Up(e);
-        }
 
-        public void FrameEnter(EventArgs e)
+        }
+        public void FrameEnter(MouseEventArgs e)
         {
-            
+            if (frameRec.Contains(e.Location))
+                Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
+            if (!frameRec.Contains(e.Location))
+                Global.GetCanvasPanel().Cursor = Cursors.Default;
+
         }
         #region 绘制虚线框
 
@@ -142,9 +144,6 @@ namespace Citta_T1.Controls
             }
             g.Dispose();
         }
-
-
-
         private void CreateRect()
         {
             if (endP.X < startP.X && endP.Y < startP.Y)
@@ -221,8 +220,6 @@ namespace Citta_T1.Controls
                 g.Dispose();
                 return;
             }
-
-
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
@@ -286,7 +283,7 @@ namespace Citta_T1.Controls
                 {
                     if (moveImage.GetPixel(j, i) == color)
                     {
-                        moveImage.SetPixel(j, i, Color.FromArgb(200, 225, 255, 255));
+                        moveImage.SetPixel(j, i, Color.FromArgb(200, 211, 211, 211));
 
                     }
                     else
@@ -295,8 +292,7 @@ namespace Citta_T1.Controls
                         moveImage.SetPixel(j, i, Color.FromArgb(200, c.R, c.G, c.B));
                     }
                 }
-            }
-            
+            }           
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap backGroung = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(backGroung);
@@ -311,13 +307,10 @@ namespace Citta_T1.Controls
             int dx = e.Location.X - startP.X;
             int dy = e.Location.Y - startP.Y;
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-
-
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
 
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
-
             n.DrawImageUnscaled(i, 0, 0);
         }
         private void dragFrame_Up(MouseEventArgs e)
@@ -326,14 +319,17 @@ namespace Citta_T1.Controls
             foreach (ModelElement me in modelElements)
             {
                 Control ct = me.GetControl;
+                
                 if (frameRec.Contains(ct.Location))
                 {
+                    (ct as IMoveControl).ControlNoSelect();
                     ct.Left = ct.Left + e.Location.X - startP.X;
                     ct.Top = ct.Top + e.Location.Y - startP.Y;
                 }
                 
             }
-            InitFrame();
+            frameRec = new Rectangle(0, 0, 0, 0);
+            minBoding = new Rectangle(0, 0, 0, 0);
             Global.GetCurrentDocument().UpdateAllLines();
             CreateImg();
             DrawRoundedRect(2);

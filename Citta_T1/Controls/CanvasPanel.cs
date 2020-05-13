@@ -355,7 +355,7 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
-
+            frameWrapper.FrameEnter(e);
             if (e.Button != MouseButtons.Left) return;
             // 画框
             if (SelectFrame())
@@ -646,7 +646,8 @@ namespace Citta_T1.Controls
 
         private void CanvasPanel_MouseEnter(object sender, EventArgs e)
         {
-            frameWrapper.FrameEnter(e);
+            log.Info("------------");
+            
         }
     }
 }
