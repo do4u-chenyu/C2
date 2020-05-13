@@ -434,7 +434,7 @@ namespace Citta_T1.Controls.Move
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;

@@ -654,7 +654,7 @@ namespace Citta_T1.Controls.Move
         private void FinishTextChange()
         {
             if (this.textBox.Text.Length == 0)
-                return;
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
             SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
