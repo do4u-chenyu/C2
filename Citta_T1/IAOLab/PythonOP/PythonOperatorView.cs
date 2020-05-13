@@ -99,12 +99,17 @@ namespace Citta_T1.OperatorViews
             {
                 this.pythonChosenComboBox.Items.Add(pii.PythonAlias);
                 if (pii.ChosenDefault)
-                {
+                {   
                     this.pythonChosenComboBox.Text = pii.PythonAlias;
                     this.pythonChosenComboBox.SelectedItem = pii.PythonAlias;
                 }
             }
             return true;
+        }
+
+        private void pyParamTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
