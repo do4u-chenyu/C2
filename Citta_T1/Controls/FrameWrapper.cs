@@ -353,6 +353,7 @@ namespace Citta_T1.Controls
             frameRec = new Rectangle(0, 0, 0, 0);
             minBoding = new Rectangle(0, 0, 0, 0);
             Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetNaviViewControl().UpdateNaviView();
             CreateImg();
             DrawRoundedRect(2);
             Global.GetCurrentDocument().Show();
