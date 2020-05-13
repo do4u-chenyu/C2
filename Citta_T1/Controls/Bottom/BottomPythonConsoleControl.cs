@@ -20,7 +20,8 @@ namespace Citta_T1.Controls.Bottom
             consoles = new Dictionary<string, ConsoleControl.ConsoleControl>();
             InitializeComponent();
             this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
-            consoles.Add(CmdConsoleString, this.cmdConsoleControl);
+            this.cmdConsoleControl.Name = CmdConsoleString;
+            consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
         }
 
         public void LoadPythonInterpreter()
@@ -67,6 +68,7 @@ namespace Citta_T1.Controls.Bottom
         private void ReleaseConsoleControl(ConsoleControl.ConsoleControl consoleControl)
         {
             this.tableLayoutPanel1.Controls.Remove(consoleControl);
+            consoles.Remove(consoleControl.Name);
             if (consoleControl.IsProcessRunning)
             {
                 TryRleaseProcess(consoleControl);     
@@ -74,6 +76,7 @@ namespace Citta_T1.Controls.Bottom
             else if (consoleControl != null)
             {
                 consoleControl.Dispose();
+                consoleControl = null;
             }
         }
 
@@ -106,16 +109,42 @@ namespace Citta_T1.Controls.Bottom
             if (selectedIndex - 1> piis.Count)
                 return;
 
-            StartPythonProcess(this.piis[selectedIndex - 1].PythonFFP, PythonInitParams);     
+            string owner = this.piis[selectedIndex - 1].PythonFFP;
+            if (piis.FindIndex(c => c.PythonFFP == owner) < 0)
+                return;
+            ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, true);
+            consoles.Add(console.Name, console);
+            StartPythonProcess(console, console.Name, PythonInitParams);
         }
 
         private void ResetProcessButton_Click(object sender, EventArgs e)
         {
-            
-            ReleaseConsoleControl(cmdConsoleControl);
+            // 清理当前console
+            string owner = CurrentConsoleOwnerString();
+            if (String.IsNullOrEmpty(owner))
+                return;
+            ConsoleControl.ConsoleControl console = CurrentConsoleControl();
+            if (console != null)
+                ReleaseConsoleControl(console);
+
+            // 创建cmd console
+            if (owner == CmdConsoleString)
+            {
+                this.cmdConsoleControl = CreateNewConsoleControl(CmdConsoleString, true);
+                consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
+                StartCmdProcess();
+            }
+            // 存在当前python解释器
+            else if (piis.FindIndex(c => c.PythonFFP == owner) >= 0)
+            {
+                console = CreateNewConsoleControl(owner, true);
+                consoles.Add(console.Name, console);
+                StartPythonProcess(console, console.Name, PythonInitParams);
+            }
+
         }
 
-        private string CurrentConsoleOwner()
+        private string CurrentConsoleOwnerString()
         {
             int selectedIndex = this.comboBox1.SelectedIndex;
             // 啥也没选
@@ -130,19 +159,33 @@ namespace Citta_T1.Controls.Bottom
 
             return this.piis[selectedIndex - 1].PythonFFP;
         }
+
+        private ConsoleControl.ConsoleControl CurrentConsoleControl()
+        {
+            string owner = CurrentConsoleOwnerString();
+            if (String.IsNullOrEmpty(owner))
+                return this.cmdConsoleControl;
+            if (this.consoles.ContainsKey(owner))
+                return consoles[owner];
+            return CreateNewConsoleControl(owner);
+        }
         private void ClearScreenButton_Click(object sender, EventArgs e)
         {
-            this.cmdConsoleControl.ClearOutput();
+            ConsoleControl.ConsoleControl console = CurrentConsoleControl();
+            if (console != null)
+                console.ClearOutput();
         }
 
         private void CopyContentButton_Click(object sender, EventArgs e)
         {
-            FileUtil.TryClipboardSetText(this.cmdConsoleControl.InternalRichTextBox.Text);
+            ConsoleControl.ConsoleControl console = CurrentConsoleControl();
+            if (console != null)
+                FileUtil.TryClipboardSetText(console.InternalRichTextBox.Text);
         }
 
         private void StartCmdProcess()
         {
-            if (this.cmdConsoleControl.IsProcessRunning)
+            if (this.cmdConsoleControl == null || this.cmdConsoleControl.IsProcessRunning)
                 return;
             // 直接指定参数来改变初始目录的方式,清空屏幕会有问题
             // 改用更改工作目录的方式,cmd启动完,要把工作目录切回来
@@ -151,28 +194,58 @@ namespace Citta_T1.Controls.Bottom
             TryStartProcess(cmdConsoleControl, "cmd.exe", String.Empty);
             Environment.CurrentDirectory = currentDirectory;
             this.startProcessButton.Enabled = false;
+            // 隐藏其他console
+            ConsoleControlReLayout(cmdConsoleControl);
         }
 
-        private void StartPythonProcess(string pythonFFP, string param = "")
+        private void HideAllConsoleExceptOne(string exceptOne)
+        {
+            foreach (string key in consoles.Keys)
+            {
+                if (key == exceptOne)
+                    continue;
+                if (consoles[key] != null)
+                    consoles[key].Hide();
+            }
+        }
+
+        private void StartPythonProcess(ConsoleControl.ConsoleControl console, string pythonFFP, string param = "")
         {
             if (!System.IO.File.Exists(pythonFFP))
                 return;
 
-            TryStartProcess(cmdConsoleControl, pythonFFP, param);
+            TryStartProcess(console, pythonFFP, param);
+            this.startProcessButton.Enabled = false;
+            ConsoleControlReLayout(console);
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // cmd被选中
-            if (CmdConsoleSeleted())
+            string owner = CurrentConsoleOwnerString();
+            if (string.IsNullOrEmpty(owner) || !consoles.ContainsKey(owner) || consoles[owner] == null)
             {
-                if (this.cmdConsoleControl.IsProcessRunning)
-                    this.startProcessButton.Enabled = false;
-                else
-                    this.startProcessButton.Enabled = true;
+                this.startProcessButton.Enabled = true;
+                return;
+            }
+               
+
+            ConsoleControl.ConsoleControl console = consoles[owner];
+            if (console.IsProcessRunning)
+            {
+                this.startProcessButton.Enabled = false;
+                ConsoleControlReLayout(console);
             }
             else
                 this.startProcessButton.Enabled = true;
+
+        }
+
+        private void ConsoleControlReLayout(ConsoleControl.ConsoleControl console)
+        {
+            this.SuspendLayout();
+            console.Show();
+            HideAllConsoleExceptOne(console.Name);
+            this.ResumeLayout(false);
         }
 
         private bool CmdConsoleSeleted()
