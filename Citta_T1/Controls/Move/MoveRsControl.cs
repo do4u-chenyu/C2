@@ -747,6 +747,10 @@ namespace Citta_T1.Controls.Move
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
+        public void DeleteMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
