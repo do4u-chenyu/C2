@@ -4,6 +4,7 @@ using Citta_T1.Controls.Move;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -197,7 +198,11 @@ namespace Citta_T1.Business.Model
         public void Show()
         {
             foreach (ModelElement el1 in this.modelElements)
-                el1.Show();
+            {
+                el1.Show();               
+                (el1.GetControl as IMoveControl).ControlNoSelect();
+            }
+                
         }
 
         public void Hide()

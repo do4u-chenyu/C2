@@ -639,5 +639,15 @@ namespace Citta_T1.Controls
         private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
         {
         }
+
+        private void CanvasPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CanvasPanel_MouseEnter(object sender, EventArgs e)
+        {
+            frameWrapper.FrameEnter(e);
+        }
     }
 }

@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItemSelectAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -46,34 +43,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.consoleControl1 = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemSelectAll,
-            this.MenuItemClearAll});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
-            // 
-            // MenuItemSelectAll
-            // 
-            this.MenuItemSelectAll.Name = "MenuItemSelectAll";
-            this.MenuItemSelectAll.Size = new System.Drawing.Size(124, 22);
-            this.MenuItemSelectAll.Text = "全选复制";
-            this.MenuItemSelectAll.Click += new System.EventHandler(this.MenuItemSelectAll_Click);
-            // 
-            // MenuItemClearAll
-            // 
-            this.MenuItemClearAll.Name = "MenuItemClearAll";
-            this.MenuItemClearAll.Size = new System.Drawing.Size(124, 22);
-            this.MenuItemClearAll.Text = "全部清除";
-            this.MenuItemClearAll.Click += new System.EventHandler(this.MenuItemClearAll_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -243,7 +216,6 @@
             this.Name = "BottomPythonConsoleControl";
             this.Size = new System.Drawing.Size(1011, 137);
             this.Load += new System.EventHandler(this.BottomPythonConsoleControl_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -252,9 +224,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemClearAll;
-        private System.Windows.Forms.ToolStripMenuItem MenuItemSelectAll;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel1;
