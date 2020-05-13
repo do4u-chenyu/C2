@@ -31,10 +31,12 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private string fullFilePath;
         private DSUtil.Encoding encoding;
+        private char separator;
 
         // 一些倍率
         public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         public string SubTypeName { get => typeName; }
+        public char Separator { get => this.separator; set => this.separator = value; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
