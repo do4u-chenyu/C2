@@ -81,8 +81,9 @@ namespace Citta_T1.Controls.Bottom
             //    console.Dispose();
             //    console = null;
             //}
-            this.cmdConsoleControl.StopProcess();
-            this.cmdConsoleControl.StartProcess("cmd.exe", "");
+            //this.cmdConsoleControl.StopProcess();
+            //this
+            //this.cmdConsoleControl.StartProcess("cmd.exe", "");
 
         }
 
