@@ -331,7 +331,7 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(backGroung);
 
             g.DrawImage(this.moveImage, minBoding.X , minBoding.Y);
-            backGroung.Save("cs.png");
+            //backGroung.Save("cs.png");
             n.DrawImageUnscaled(backGroung, 0, 0);
             n.Dispose();
             g.Dispose();

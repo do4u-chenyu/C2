@@ -91,7 +91,7 @@ namespace Citta_T1.Controls.Bottom
         private void BottomPythonConsoleControl_Load(object sender, EventArgs e)
         {
             LoadPythonInterpreter();
-            if (CmdConsoleSeleted())
+            if (CmdConsoleSeleted() && !ConfigUtil.IsDesignMode())
                 StartCmdProcess();
         }
 
@@ -185,12 +185,20 @@ namespace Citta_T1.Controls.Bottom
 
         private void StartCmdProcess()
         {
-            if (this.cmdConsoleControl == null || this.cmdConsoleControl.IsProcessRunning)
+            if (cmdConsoleControl == null || cmdConsoleControl.IsProcessRunning)
                 return;
             // 直接指定参数来改变初始目录的方式,清空屏幕会有问题
             // 改用更改工作目录的方式,cmd启动完,要把工作目录切回来
+           
             string currentDirectory = Environment.CurrentDirectory;
-            Environment.CurrentDirectory = System.IO.Path.Combine(currentDirectory, "sbin");
+            string targetDirectory = System.IO.Path.Combine(currentDirectory, "sbin");
+            if (!System.IO.Directory.Exists(targetDirectory))
+            {
+                TryStartProcess(cmdConsoleControl, "cmd.exe", String.Empty);
+                return;
+            }
+
+            Environment.CurrentDirectory = targetDirectory;
             TryStartProcess(cmdConsoleControl, "cmd.exe", String.Empty);
             Environment.CurrentDirectory = currentDirectory;
             this.startProcessButton.Enabled = false;
