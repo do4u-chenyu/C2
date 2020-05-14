@@ -145,7 +145,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.fullOutputFilePath = this.browseChosenTextBox.Text;
             }
-            if(outputOption == "paramRadioButton".ToLower())
+            if(outputOption == "paramRadioButton".ToLower() || outputOption == "stdoutRadioButton".ToLower())
             {
                 this.fullOutputFilePath = this.noChangedOutputFilePath;
             }
@@ -197,6 +197,7 @@ namespace Citta_T1.OperatorViews
             if (hasResutl == null)
             {
                 Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
+                CreateNewBlankBCPFile(this.fullOutputFilePath);
                 return;
             }
 
@@ -205,13 +206,7 @@ namespace Citta_T1.OperatorViews
             if (hasResutl != null && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
                 (hasResutl.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
-                if (!File.Exists(fullOutputFilePath))
-                {
-                    using (StreamWriter sw = new StreamWriter(this.fullOutputFilePath, false, Encoding.UTF8))
-                    {
-                        sw.Write("");
-                    }
-                }
+                CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
                 
                 
@@ -340,7 +335,22 @@ namespace Citta_T1.OperatorViews
         }
 
 
+        public void CreateNewBlankBCPFile(string fullFilePath)
+        {
+            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
+            {
+                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
+            }
 
+            if (!File.Exists(fullFilePath))
+            {
+                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+                {
+                    sw.Write("");
+                }
+            }
+        }
 
 
 
@@ -413,7 +423,7 @@ namespace Citta_T1.OperatorViews
             this.rsChosenButton.Enabled = false;
             if (this.stdoutRadioButton.Checked)
             {
-                this.previewTextList[4] = " > " + this.fullOutputFilePath;
+                this.previewTextList[4] = " > " + this.noChangedOutputFilePath;
                 UpdatePreviewText();
             }
         }
