@@ -51,7 +51,7 @@ namespace Citta_T1
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
             this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomPythonConsoleControl();
+            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -926,7 +926,7 @@ namespace Citta_T1
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
-        private Citta_T1.Controls.Bottom.BottomPythonConsoleControl bottomPyConsole;
+        private Citta_T1.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;
