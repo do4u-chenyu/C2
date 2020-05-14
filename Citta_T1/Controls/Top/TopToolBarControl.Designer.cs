@@ -125,7 +125,6 @@
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(-2, 5);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
@@ -150,7 +149,6 @@
             this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(554, 33);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

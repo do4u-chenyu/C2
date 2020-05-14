@@ -13,12 +13,22 @@ namespace Citta_T1
 {
     static class Program
     {
+        //全局类  
+        public class DesignerModelClass
+        {
+            //私有构造器，防止实例化  
+            private DesignerModelClass() { }
+            //用于标识运行时/设计时的bool型静态成员，初始值设为false  
+            public static bool IsDesignerMode = true;
+        }
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
         static void Main()
         {
+            DesignerModelClass.IsDesignerMode = false;
+
             ConfigProgram();
             Application.EnableVisualStyles();
             Process instance = RunningInstance();

@@ -67,13 +67,14 @@ namespace Citta_T1.Controls
 
         public CanvasPanel()
         {
+            dragWrapper = new DragWrapper();
+            frameWrapper = new FrameWrapper();
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-            dragWrapper  = new DragWrapper();
-            frameWrapper = new FrameWrapper();
+
         }
 
 
