@@ -95,8 +95,9 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // CreateNewModel
+            // CreateNewModelForm
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(434, 172);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.AddButton);
@@ -106,7 +107,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CreateNewModel";
+            this.Name = "CreateNewModelForm";
             this.ShowIcon = false;
             this.Text = "新建模型";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateNewModel_FormClosed);

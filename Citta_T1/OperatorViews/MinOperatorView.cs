@@ -40,7 +40,8 @@ namespace Citta_T1.OperatorViews
             this.oldMinfield = this.MinValueBox.Text;
             this.oldOutList = this.OutList.GetItemCheckIndex();
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-
+            this.MinValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.DataInfoBox);
         }
         #region 添加取消
@@ -157,7 +158,7 @@ namespace Citta_T1.OperatorViews
                 this.MinValueBox.Items.Add(name);
             }
             CompareDataSource();
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private void CompareDataSource()

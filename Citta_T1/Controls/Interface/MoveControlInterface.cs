@@ -34,6 +34,6 @@ namespace Citta_T1.Controls.Interface
         void InPinInit(int pinIndex);
         void ControlSelect();
         void ControlNoSelect();
-        
+        void DeleteMenuItem_Click(object sender, EventArgs e);
     }
 }

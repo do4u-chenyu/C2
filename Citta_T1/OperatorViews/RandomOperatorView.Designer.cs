@@ -53,7 +53,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(340, 21);
+            this.topPanel.Size = new System.Drawing.Size(332, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -61,10 +61,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 155);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 147);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(340, 52);
+            this.bottomPanel.Size = new System.Drawing.Size(332, 52);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -104,7 +104,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 134);
+            this.keyPanel.Size = new System.Drawing.Size(116, 126);
             this.keyPanel.TabIndex = 2;
             // 
             // label3
@@ -149,7 +149,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(224, 134);
+            this.valuePanel.Size = new System.Drawing.Size(216, 126);
             this.valuePanel.TabIndex = 3;
             // 
             // RandomNumBox
@@ -183,14 +183,13 @@
             this.OutList.Location = new System.Drawing.Point(0, 106);
             this.OutList.Margin = new System.Windows.Forms.Padding(0);
             this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(164, 24);
+            this.OutList.Size = new System.Drawing.Size(150, 24);
             this.OutList.TabIndex = 2;
             // 
             // RandomOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 207);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(332, 199);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

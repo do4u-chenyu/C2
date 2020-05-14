@@ -94,7 +94,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(421, 37);
+            this.topPanel.Size = new System.Drawing.Size(417, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -102,10 +102,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 203);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 199);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(421, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(417, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -146,7 +146,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 166);
+            this.keyPanel.Size = new System.Drawing.Size(116, 162);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -170,7 +170,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(305, 166);
+            this.valuePanel.Size = new System.Drawing.Size(301, 162);
             this.valuePanel.TabIndex = 3;
             // 
             // dataInfo
@@ -276,9 +276,8 @@
             // 
             // FreqOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 267);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(417, 263);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

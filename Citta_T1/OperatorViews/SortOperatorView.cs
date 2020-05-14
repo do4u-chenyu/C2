@@ -46,7 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-
+            this.sortField.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
+            this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.dataInfo);
         }
       
@@ -71,7 +72,7 @@ namespace Citta_T1.OperatorViews
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
             CompareDataSource();
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
         private void CompareDataSource()

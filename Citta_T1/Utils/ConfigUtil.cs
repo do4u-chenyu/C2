@@ -2,12 +2,14 @@
 using System.IO;
 using System.Text;
 using System.Configuration;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Citta_T1.Utils
 {
     class ConfigUtil
     {
-        public static string DefaultWorkspaceDirectory = @"C:\cittaModelDocument";
+        public static string DefaultWorkspaceDirectory = @"C:\FiberHomeIAOModelDocument";
         public static string TryGetAppSettingsByKey(string key, string defaultValue = "")
         {
             string value;
@@ -91,6 +93,24 @@ namespace Citta_T1.Utils
                 }
             }
             return possiblePythonPath;
+        }
+
+        public static bool IsDesignMode()
+        {
+            bool returnFlag = false;
+
+#if DEBUG
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+            {
+                returnFlag = true;
+            }
+            else if (Process.GetCurrentProcess().ProcessName == "devenv")
+            {
+                returnFlag = true;
+            }
+#endif
+
+            return returnFlag;
         }
     }
 }

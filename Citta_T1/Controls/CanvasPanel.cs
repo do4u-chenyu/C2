@@ -51,7 +51,7 @@ namespace Citta_T1.Controls
         Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
 
-
+        private bool delEnable = false;
 
         public void SetStartP(PointF p)
         {
@@ -62,7 +62,8 @@ namespace Citta_T1.Controls
         public Control StartC { get => startC; set => startC = value; }
         public Control EndC { get => endC;  set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
-        
+        internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
+        public bool DelEnable { get => delEnable; set => delEnable = value; }
 
         public CanvasPanel()
         {
@@ -179,7 +180,15 @@ namespace Citta_T1.Controls
             this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right) 
             {
-                Global.GetFlowControl().ResetStatus();                  // 点击右键, 清空操作状态,进入到正常编辑状态
+                if (frameWrapper.MinBoding.Contains(e.Location))
+                {
+                    this.DelSelectControl.Show(this,e.Location);
+                    return;
+                }
+                    
+                Global.GetFlowControl().ResetStatus();
+                frameWrapper.MinBoding = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
+                
             }
             if (sender is MoveDtControl || sender is MoveRsControl)
             {
@@ -192,13 +201,11 @@ namespace Citta_T1.Controls
                 this.RepaintStatic(g);
                 g.Dispose();
             }
-
-            
             if (SelectFrame())
             {
                 frameWrapper.FrameDown(e);
             }
-            else if (SelectDrag())
+            if (SelectDrag())
             {
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
             }
@@ -325,21 +332,6 @@ namespace Citta_T1.Controls
             foreach(ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
-
-                ////测试用代码
-                //Graphics g = this.CreateGraphics();
-                //PointF s;
-                //PointF e;
-                //for (int i = 0; i < line.CutPointFs.Length - 1; i++)
-                //{
-                //    s = line.CutPointFs[i];
-                //    e = line.CutPointFs[i + 1];
-                //    g.DrawLine(Pens.Red, s.X, s.Y, e.X, e.Y);
-                //    g.FillEllipse(Brushes.Black, s.X, s.Y, 1, 1);
-
-                //}
-                //g.Dispose();
-
                 dist = line.PointToLine(p);
                 if (Math.Abs(dist - distNotOnLine) > 0.0001 && dist < minDist)
                 {
@@ -354,15 +346,15 @@ namespace Citta_T1.Controls
                 return -1;
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-
-            if (e.Button != MouseButtons.Left) return;
+        { 
+            
             // 画框
             if (SelectFrame())
             {
                 frameWrapper.FrameMove(e);
+               
             }
-
+            if (e.Button != MouseButtons.Left) return;
             // 控件移动
             else if (SelectDrag())
             {
@@ -461,11 +453,13 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return; 
 
+            if (e.Button != MouseButtons.Left) 
+                return;
             if (Global.GetFlowControl().SelectFrame)
             {
                 frameWrapper.FrameUp(e);
+                
             }
 
             else if (SelectDrag())
@@ -592,13 +586,14 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location) 
+        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location, char separator) 
         {
             MoveRsControl btn = new MoveRsControl(
                                 sizeL,
                                 desciption,
                                 location);
             btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
+            btn.Separator = separator;
             AddNewElement(btn);
             return btn;
         }
@@ -635,8 +630,10 @@ namespace Citta_T1.Controls
         }
         #endregion
 
-        private void CanvasPanel_MouseClick(object sender, MouseEventArgs e)
+        private void DelControls_Click(object sender, EventArgs e)
         {
+            delEnable = true;
+            frameWrapper.FrameDel(sender, e);
         }
     }
 }

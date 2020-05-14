@@ -57,6 +57,8 @@ namespace Citta_T1.Controls
         }
         public void DragMove(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+                return;
             this.now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
@@ -66,6 +68,8 @@ namespace Citta_T1.Controls
         }
         public virtual void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+                return;
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
@@ -73,8 +77,7 @@ namespace Citta_T1.Controls
             this.ControlChange(start, now);
             n.Dispose();
             this.startDrag = false;
-            this.start = e.Location;
-            
+            this.start = e.Location;           
 
         }
         public bool DragPaint(Size canvasSize, float canvasFactor, PaintEventArgs e)

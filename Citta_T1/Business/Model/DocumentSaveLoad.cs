@@ -124,6 +124,10 @@ namespace Citta_T1.Business.Model
                     pathNode.InnerText = me.GetFullFilePath();
                     modelElementXml.AppendChild(pathNode);
 
+                    XmlElement separatorNode = xDoc.CreateElement("separator");
+                    separatorNode.InnerText = Convert.ToInt32((me.GetControl as MoveRsControl).Separator).ToString();
+                    modelElementXml.AppendChild(separatorNode);
+
                 }
 
 
@@ -237,7 +241,14 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
+                            if (ctl.Option.GetOption("columnname") != "")
+                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
+                            else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
+                            {
+                                ctl.DoubleDataSourceColumns["0"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                            }
+
                         }
                             
 
@@ -256,17 +267,8 @@ namespace Citta_T1.Business.Model
                         // 绑定线
                         cotl.ID = id;
                         #region 读分隔符
-                        char separator;
                         int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
-                        if (ascii < 0 || ascii > 255)
-                        {
-                            separator = '\t';
-                            log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
-                        }
-                        else
-                        {
-                            separator = Convert.ToChar(ascii);
-                        }
+                        char separator = GetSeparator(ascii);
                         #endregion
                         cotl.Separator = separator;
                         cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
@@ -287,10 +289,14 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
+                        int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
+                        char separator = GetSeparator(ascii);
+
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.FullFilePath = bcpPath;
+                        ctl.Separator = separator;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -312,7 +318,20 @@ namespace Citta_T1.Business.Model
                
             }
         }
-
+        #region 读分隔符
+        private char GetSeparator(int ascii)
+        {
+            if (ascii < 0 || ascii > 255)
+            {
+                return '\t';
+                log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+            }
+            else
+            {
+              return Convert.ToChar(ascii);
+            }
+        }
+        #endregion
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();

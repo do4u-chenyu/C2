@@ -31,10 +31,12 @@ namespace Citta_T1.Controls.Move
         private string oldTextString;
         private string fullFilePath;
         private DSUtil.Encoding encoding;
+        private char separator;
 
         // 一些倍率
         public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         public string SubTypeName { get => typeName; }
+        public char Separator { get => this.separator; set => this.separator = value; }
         // 一些倍率
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
@@ -319,7 +321,7 @@ namespace Citta_T1.Controls.Move
         public void RenameMenuItem_Click(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;
@@ -744,6 +746,10 @@ namespace Citta_T1.Controls.Move
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+        public void DeleteMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

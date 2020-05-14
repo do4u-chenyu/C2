@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Citta_T1.Controls;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Citta_T1.Business.Option
 {
@@ -23,7 +24,8 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.CollideOperator,
                                                 ElementSubType.UnionOperator,
                                                 ElementSubType.RelateOperator,
-                                                ElementSubType.DifferOperator };
+                                                ElementSubType.DifferOperator,
+                                                ElementSubType.CustomOperator2};
             List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
@@ -183,7 +185,7 @@ namespace Citta_T1.Business.Option
             (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
-        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName)
+        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t')
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -192,7 +194,8 @@ namespace Citta_T1.Business.Option
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
                 System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
-                new Point(x, y));
+                new Point(x, y), seperator);
+          
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
@@ -220,16 +223,16 @@ namespace Citta_T1.Business.Option
             mrc.FullFilePath = path;
         }
 
-        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path)
+        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t')
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
-            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName),
-                new Point(x, y));
+                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
+                new Point(x, y), separator);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
@@ -451,6 +454,34 @@ namespace Citta_T1.Business.Option
                 control.Text = "";
                 MessageBox.Show("请输入数字");
             }
+        }
+        public void IsIllegalInputName(Control control,String[] columnName,String name) 
+        {
+            if (columnName.Count() == 0 || name == "") return;
+            if (!columnName.Contains(name))
+            {
+                control.Text = "";
+                MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
+            }
+        }
+        public void Control_Leave(object sender, EventArgs e)
+        {
+            List<string> columnName = new List<string>();
+            foreach ( var item in (sender as ComboBox).Items)
+            {
+                columnName.Add(item.ToString());
+            }
+            IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
+        }
+        public void Control_KeyUp(object sender, KeyEventArgs e)
+        {
+            List<string> columnName = new List<string>();
+            foreach (var item in (sender as ComboBox).Items)
+            {
+                columnName.Add(item.ToString());
+            }
+            if (e.KeyCode == Keys.Enter)
+               IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
         }
         #endregion
 
