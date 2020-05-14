@@ -96,8 +96,7 @@
             // 
             // DataSourceControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.externalFrame);
             this.Controls.Add(this.localFrame);
             this.Controls.Add(this.dataSourceFrame);
