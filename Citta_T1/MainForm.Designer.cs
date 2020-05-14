@@ -711,6 +711,7 @@ namespace Citta_T1
             this.canvasPanel.Controls.Add(this.runButton);
             this.canvasPanel.Controls.Add(this.naviViewControl);
             this.canvasPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.canvasPanel.DelEnable = false;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.EndC = null;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
@@ -833,8 +834,7 @@ namespace Citta_T1
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1229, 606);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);

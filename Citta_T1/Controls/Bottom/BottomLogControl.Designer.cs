@@ -56,28 +56,27 @@
             this.MenuItemSelectAll,
             this.MenuItemClearAll});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 48);
             // 
             // MenuItemSelectAll
             // 
             this.MenuItemSelectAll.Name = "MenuItemSelectAll";
-            this.MenuItemSelectAll.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemSelectAll.Size = new System.Drawing.Size(124, 22);
             this.MenuItemSelectAll.Text = "全选复制";
             this.MenuItemSelectAll.Click += new System.EventHandler(this.MenuItemSelectAll_Click);
             // 
             // MenuItemClearAll
             // 
             this.MenuItemClearAll.Name = "MenuItemClearAll";
-            this.MenuItemClearAll.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemClearAll.Size = new System.Drawing.Size(124, 22);
             this.MenuItemClearAll.Text = "全部清除";
             this.MenuItemClearAll.Click += new System.EventHandler(this.MenuItemClearAll_Click);
             // 
-            // LogView
+            // BottomLogControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.textBox1);
-            this.Name = "LogView";
+            this.Name = "BottomLogControl";
             this.Size = new System.Drawing.Size(1011, 137);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

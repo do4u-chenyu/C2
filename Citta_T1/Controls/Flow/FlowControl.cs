@@ -236,7 +236,9 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
+
                 (ct as IMoveControl).ControlNoSelect();
+                ct.Visible = true;
             }
         }
     }

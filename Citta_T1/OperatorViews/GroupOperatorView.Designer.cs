@@ -99,9 +99,9 @@
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(543, 21);
+            this.topPanel.Size = new System.Drawing.Size(539, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -109,10 +109,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 373);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 369);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(543, 49);
+            this.bottomPanel.Size = new System.Drawing.Size(539, 49);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -120,7 +120,7 @@
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(459, 11);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
@@ -135,7 +135,7 @@
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.confirmButton.Location = new System.Drawing.Point(358, 11);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
@@ -151,9 +151,9 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 352);
+            this.keyPanel.Size = new System.Drawing.Size(116, 348);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -176,16 +176,16 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(427, 352);
+            this.valuePanel.Size = new System.Drawing.Size(423, 348);
             this.valuePanel.TabIndex = 3;
             // 
             // dataInfo
             // 
             this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataInfo.Location = new System.Drawing.Point(6, 2);
-            this.dataInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dataInfo.Name = "dataInfo";
             this.dataInfo.ReadOnly = true;
             this.dataInfo.Size = new System.Drawing.Size(150, 23);
@@ -199,9 +199,9 @@
             this.groupBox2.Controls.Add(this.ascendingOrder);
             this.groupBox2.Controls.Add(this.descendingOrder);
             this.groupBox2.Location = new System.Drawing.Point(7, 303);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(147, 25);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -213,7 +213,7 @@
             this.ascendingOrder.Checked = true;
             this.ascendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ascendingOrder.Location = new System.Drawing.Point(76, 8);
-            this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ascendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.ascendingOrder.Name = "ascendingOrder";
             this.ascendingOrder.Size = new System.Drawing.Size(74, 21);
             this.ascendingOrder.TabIndex = 1;
@@ -226,7 +226,7 @@
             this.descendingOrder.AutoSize = true;
             this.descendingOrder.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.descendingOrder.Location = new System.Drawing.Point(4, 8);
-            this.descendingOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.descendingOrder.Margin = new System.Windows.Forms.Padding(2);
             this.descendingOrder.Name = "descendingOrder";
             this.descendingOrder.Size = new System.Drawing.Size(74, 21);
             this.descendingOrder.TabIndex = 0;
@@ -241,7 +241,7 @@
             this.tableLayoutPanel2.Controls.Add(this.button1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 54);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -259,7 +259,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::Citta_T1.Properties.Resources.add;
             this.button1.Location = new System.Drawing.Point(140, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
@@ -274,7 +274,7 @@
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(2, 3);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(134, 25);
             this.comboBox1.TabIndex = 2;
@@ -284,9 +284,9 @@
             this.groupBox1.Controls.Add(this.repetition);
             this.groupBox1.Controls.Add(this.noRepetition);
             this.groupBox1.Location = new System.Drawing.Point(7, 257);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(138, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -298,7 +298,7 @@
             this.repetition.Checked = true;
             this.repetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.repetition.Location = new System.Drawing.Point(76, 8);
-            this.repetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.repetition.Margin = new System.Windows.Forms.Padding(2);
             this.repetition.Name = "repetition";
             this.repetition.Size = new System.Drawing.Size(62, 21);
             this.repetition.TabIndex = 1;
@@ -311,7 +311,7 @@
             this.noRepetition.AutoSize = true;
             this.noRepetition.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.noRepetition.Location = new System.Drawing.Point(4, 8);
-            this.noRepetition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.noRepetition.Margin = new System.Windows.Forms.Padding(2);
             this.noRepetition.Name = "noRepetition";
             this.noRepetition.Size = new System.Drawing.Size(50, 21);
             this.noRepetition.TabIndex = 0;
@@ -323,7 +323,7 @@
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(4, 87);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(413, 160);
             this.panel1.TabIndex = 1;
@@ -335,7 +335,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 85);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -358,9 +358,8 @@
             // 
             // GroupOperatorView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 422);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(539, 418);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -368,7 +367,7 @@
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GroupOperatorView";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
