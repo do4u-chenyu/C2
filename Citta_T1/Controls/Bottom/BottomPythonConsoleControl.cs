@@ -112,7 +112,7 @@ namespace Citta_T1.Controls.Bottom
             string owner = this.piis[selectedIndex - 1].PythonFFP;
             if (piis.FindIndex(c => c.PythonFFP == owner) < 0)
                 return;
-            ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, true);
+            ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, false);
             consoles.Add(console.Name, console);
             StartPythonProcess(console, console.Name, PythonInitParams);
         }
@@ -130,14 +130,14 @@ namespace Citta_T1.Controls.Bottom
             // 创建cmd console
             if (owner == CmdConsoleString)
             {
-                this.cmdConsoleControl = CreateNewConsoleControl(CmdConsoleString, true);
+                this.cmdConsoleControl = CreateNewConsoleControl(CmdConsoleString, false);
                 consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
                 StartCmdProcess();
             }
             // 存在当前python解释器
             else if (piis.FindIndex(c => c.PythonFFP == owner) >= 0)
             {
-                console = CreateNewConsoleControl(owner, true);
+                console = CreateNewConsoleControl(owner, false);
                 consoles.Add(console.Name, console);
                 StartPythonProcess(console, console.Name, PythonInitParams);
             }
