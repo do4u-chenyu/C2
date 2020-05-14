@@ -137,8 +137,7 @@
             // 
             // TopToolBarControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.label7);
             this.Controls.Add(this.moreButton);
             this.Controls.Add(this.formatButton);
