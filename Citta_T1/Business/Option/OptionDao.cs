@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Citta_T1.Controls;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Citta_T1.Business.Option
 {
@@ -228,9 +229,9 @@ namespace Citta_T1.Business.Option
                 if (mr.StartID == moveOpControl.ID) return;
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
-            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName),
+                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
                 new Point(x, y), separator);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
