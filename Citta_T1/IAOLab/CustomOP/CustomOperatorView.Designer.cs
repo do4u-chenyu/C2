@@ -51,6 +51,16 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.outputFileEncodeSettingGroup = new System.Windows.Forms.GroupBox();
+            this.gbkRadio = new System.Windows.Forms.RadioButton();
+            this.utfRadio = new System.Windows.Forms.RadioButton();
+            this.outputFileSeparatorSettingGroup = new System.Windows.Forms.GroupBox();
+            this.otherSeparatorText = new System.Windows.Forms.TextBox();
+            this.otherSeparatorRadio = new System.Windows.Forms.RadioButton();
+            this.commaRadio = new System.Windows.Forms.RadioButton();
+            this.tabRadio = new System.Windows.Forms.RadioButton();
+            this.outputFileEncodeSettingGroup.SuspendLayout();
+            this.outputFileSeparatorSettingGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // confirmButton
@@ -59,8 +69,8 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(305, 236);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.confirmButton.Location = new System.Drawing.Point(305, 286);
+            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
@@ -72,8 +82,8 @@
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(401, 236);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelButton.Location = new System.Drawing.Point(401, 286);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
@@ -95,7 +105,7 @@
             // dataSource0
             // 
             this.dataSource0.Location = new System.Drawing.Point(96, 41);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource0.Name = "dataSource0";
             this.dataSource0.ReadOnly = true;
             this.dataSource0.Size = new System.Drawing.Size(150, 21);
@@ -105,7 +115,7 @@
             // dataSource1
             // 
             this.dataSource1.Location = new System.Drawing.Point(302, 41);
-            this.dataSource1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSource1.Name = "dataSource1";
             this.dataSource1.ReadOnly = true;
             this.dataSource1.Size = new System.Drawing.Size(150, 21);
@@ -129,7 +139,7 @@
             this.fixRadioButton.AutoSize = true;
             this.fixRadioButton.Checked = true;
             this.fixRadioButton.Location = new System.Drawing.Point(96, 93);
-            this.fixRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fixRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.fixRadioButton.Name = "fixRadioButton";
             this.fixRadioButton.Size = new System.Drawing.Size(47, 16);
             this.fixRadioButton.TabIndex = 13;
@@ -142,7 +152,7 @@
             this.fixSecondTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.fixSecondTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.fixSecondTextBox.Location = new System.Drawing.Point(142, 89);
-            this.fixSecondTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.fixSecondTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.fixSecondTextBox.Name = "fixSecondTextBox";
             this.fixSecondTextBox.Size = new System.Drawing.Size(31, 22);
             this.fixSecondTextBox.TabIndex = 15;
@@ -162,7 +172,7 @@
             // 
             this.randomRadioButton.AutoSize = true;
             this.randomRadioButton.Location = new System.Drawing.Point(291, 93);
-            this.randomRadioButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.randomRadioButton.Name = "randomRadioButton";
             this.randomRadioButton.Size = new System.Drawing.Size(47, 16);
             this.randomRadioButton.TabIndex = 17;
@@ -174,7 +184,7 @@
             this.randomBeginTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.randomBeginTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.randomBeginTextBox.Location = new System.Drawing.Point(342, 89);
-            this.randomBeginTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomBeginTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomBeginTextBox.Name = "randomBeginTextBox";
             this.randomBeginTextBox.Size = new System.Drawing.Size(31, 22);
             this.randomBeginTextBox.TabIndex = 18;
@@ -185,7 +195,7 @@
             this.randomEndTextBox.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.randomEndTextBox.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.randomEndTextBox.Location = new System.Drawing.Point(412, 89);
-            this.randomEndTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.randomEndTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.randomEndTextBox.Name = "randomEndTextBox";
             this.randomEndTextBox.Size = new System.Drawing.Size(31, 22);
             this.randomEndTextBox.TabIndex = 19;
@@ -258,7 +268,7 @@
             // 
             this.rsFullFilePathTextBox.BackColor = System.Drawing.Color.White;
             this.rsFullFilePathTextBox.Location = new System.Drawing.Point(96, 187);
-            this.rsFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rsFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rsFullFilePathTextBox.Name = "rsFullFilePathTextBox";
             this.rsFullFilePathTextBox.ReadOnly = true;
             this.rsFullFilePathTextBox.Size = new System.Drawing.Size(320, 21);
@@ -279,11 +289,105 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // outputFileEncodeSettingGroup
+            // 
+            this.outputFileEncodeSettingGroup.Controls.Add(this.gbkRadio);
+            this.outputFileEncodeSettingGroup.Controls.Add(this.utfRadio);
+            this.outputFileEncodeSettingGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outputFileEncodeSettingGroup.Location = new System.Drawing.Point(12, 228);
+            this.outputFileEncodeSettingGroup.Name = "outputFileEncodeSettingGroup";
+            this.outputFileEncodeSettingGroup.Size = new System.Drawing.Size(168, 53);
+            this.outputFileEncodeSettingGroup.TabIndex = 28;
+            this.outputFileEncodeSettingGroup.TabStop = false;
+            this.outputFileEncodeSettingGroup.Text = "结果文件编码";
+            // 
+            // gbkRadio
+            // 
+            this.gbkRadio.AutoSize = true;
+            this.gbkRadio.Location = new System.Drawing.Point(96, 22);
+            this.gbkRadio.Name = "gbkRadio";
+            this.gbkRadio.Size = new System.Drawing.Size(51, 21);
+            this.gbkRadio.TabIndex = 1;
+            this.gbkRadio.TabStop = true;
+            this.gbkRadio.Text = "GBK";
+            this.gbkRadio.UseVisualStyleBackColor = true;
+            // 
+            // utfRadio
+            // 
+            this.utfRadio.AutoSize = true;
+            this.utfRadio.Checked = true;
+            this.utfRadio.Location = new System.Drawing.Point(9, 22);
+            this.utfRadio.Name = "utfRadio";
+            this.utfRadio.Size = new System.Drawing.Size(60, 21);
+            this.utfRadio.TabIndex = 0;
+            this.utfRadio.TabStop = true;
+            this.utfRadio.Text = "UTF-8";
+            this.utfRadio.UseVisualStyleBackColor = true;
+            // 
+            // outputFileSeparatorSettingGroup
+            // 
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.otherSeparatorText);
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.otherSeparatorRadio);
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.commaRadio);
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.tabRadio);
+            this.outputFileSeparatorSettingGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outputFileSeparatorSettingGroup.Location = new System.Drawing.Point(186, 228);
+            this.outputFileSeparatorSettingGroup.Name = "outputFileSeparatorSettingGroup";
+            this.outputFileSeparatorSettingGroup.Size = new System.Drawing.Size(278, 53);
+            this.outputFileSeparatorSettingGroup.TabIndex = 29;
+            this.outputFileSeparatorSettingGroup.TabStop = false;
+            this.outputFileSeparatorSettingGroup.Text = "结果文件分隔符";
+            // 
+            // otherSeparatorText
+            // 
+            this.otherSeparatorText.Location = new System.Drawing.Point(205, 20);
+            this.otherSeparatorText.MaxLength = 1;
+            this.otherSeparatorText.Name = "otherSeparatorText";
+            this.otherSeparatorText.Size = new System.Drawing.Size(54, 23);
+            this.otherSeparatorText.TabIndex = 3;
+            this.otherSeparatorText.TextChanged += new System.EventHandler(this.otherSeparatorText_TextChanged);
+            // 
+            // otherSeparatorRadio
+            // 
+            this.otherSeparatorRadio.AutoSize = true;
+            this.otherSeparatorRadio.Location = new System.Drawing.Point(157, 22);
+            this.otherSeparatorRadio.Name = "otherSeparatorRadio";
+            this.otherSeparatorRadio.Size = new System.Drawing.Size(50, 21);
+            this.otherSeparatorRadio.TabIndex = 2;
+            this.otherSeparatorRadio.TabStop = true;
+            this.otherSeparatorRadio.Text = "其他";
+            this.otherSeparatorRadio.UseVisualStyleBackColor = true;
+            // 
+            // commaRadio
+            // 
+            this.commaRadio.AutoSize = true;
+            this.commaRadio.Location = new System.Drawing.Point(83, 22);
+            this.commaRadio.Name = "commaRadio";
+            this.commaRadio.Size = new System.Drawing.Size(50, 21);
+            this.commaRadio.TabIndex = 1;
+            this.commaRadio.TabStop = true;
+            this.commaRadio.Text = "逗号";
+            this.commaRadio.UseVisualStyleBackColor = true;
+            // 
+            // tabRadio
+            // 
+            this.tabRadio.AutoSize = true;
+            this.tabRadio.Checked = true;
+            this.tabRadio.Location = new System.Drawing.Point(11, 22);
+            this.tabRadio.Name = "tabRadio";
+            this.tabRadio.Size = new System.Drawing.Size(49, 21);
+            this.tabRadio.TabIndex = 0;
+            this.tabRadio.TabStop = true;
+            this.tabRadio.Text = "TAB";
+            this.tabRadio.UseVisualStyleBackColor = true;
+            // 
             // CustomOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(482, 295);
+            this.ClientSize = new System.Drawing.Size(474, 320);
             this.ControlBox = false;
+            this.Controls.Add(this.outputFileSeparatorSettingGroup);
+            this.Controls.Add(this.outputFileEncodeSettingGroup);
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.rsFullFilePathTextBox);
             this.Controls.Add(this.label7);
@@ -311,6 +415,10 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AI实践算子设置";
+            this.outputFileEncodeSettingGroup.ResumeLayout(false);
+            this.outputFileEncodeSettingGroup.PerformLayout();
+            this.outputFileSeparatorSettingGroup.ResumeLayout(false);
+            this.outputFileSeparatorSettingGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,5 +448,13 @@
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox outputFileEncodeSettingGroup;
+        private System.Windows.Forms.GroupBox outputFileSeparatorSettingGroup;
+        private System.Windows.Forms.RadioButton utfRadio;
+        private System.Windows.Forms.RadioButton gbkRadio;
+        private System.Windows.Forms.RadioButton tabRadio;
+        private System.Windows.Forms.RadioButton commaRadio;
+        private System.Windows.Forms.RadioButton otherSeparatorRadio;
+        private System.Windows.Forms.TextBox otherSeparatorText;
     }
 }

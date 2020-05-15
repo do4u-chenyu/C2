@@ -25,11 +25,6 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList1;
         private List<string> oldColumnName;
 
-        private List<bool> oldCheckedItems = new List<bool>();
-        private string oldFixSecond;
-        private string oldRandomBegin;
-        private string oldRandomEnd;
-
         private string oldPath;
 
         public CustomOperatorView(MoveOpControl opControl)
@@ -49,11 +44,6 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
 
             //旧状态记录
-            this.oldCheckedItems.Add(this.fixRadioButton.Checked);
-            this.oldCheckedItems.Add(this.randomRadioButton.Checked);
-            this.oldFixSecond = this.fixSecondTextBox.Text;
-            this.oldRandomBegin = this.randomBeginTextBox.Text;
-            this.oldRandomEnd = this.randomEndTextBox.Text;
             this.oldPath = this.rsFullFilePathTextBox.Text;
             this.oldOutList0 = this.outList0.GetItemCheckIndex();
             this.oldOutList1 = this.outList1.GetItemCheckIndex();
@@ -100,15 +90,6 @@ namespace Citta_T1.OperatorViews
                 foreach (string name in this.columnName1)
                     this.outList1.AddItems(name);
             }
-            //else
-            //{
-            //    this.dataPath1 = String.Empty;
-            //    columnName1 = new string[] { "" };
-            //}
-
-         
-
-
         }
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
@@ -200,7 +181,12 @@ namespace Citta_T1.OperatorViews
                 string outField1 = string.Join(",", outIndexs1);
                 this.opControl.Option.SetOption("outfield1", outField1);
             }
-           
+
+            string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
+            string outputSeparator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
+            this.opControl.Option.SetOption("outputEncode", outputEncode);
+            this.opControl.Option.SetOption("outputSeparator", outputSeparator);
+            this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
 
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
@@ -247,6 +233,11 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnName.Add(this.outList1.Items[i].ToString());
             }
 
+
+            SetControlRadioCheck(this.outputFileEncodeSettingGroup, this.opControl.Option.GetOption("outputEncode"), this.utfRadio);
+            SetControlRadioCheck(this.outputFileSeparatorSettingGroup, this.opControl.Option.GetOption("outputSeparator"), this.tabRadio);
+            this.otherSeparatorText.Text = this.opControl.Option.GetOption("otherSeparator");
+
         }
         #endregion
 
@@ -269,12 +260,29 @@ namespace Citta_T1.OperatorViews
             if (hasResutl == null)
             {
                 Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
-                return;
             }
 
             //输出变化，修改结果算子路径
             if (hasResutl != null && !this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
                 (hasResutl.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
+
+
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            //修改结果算子内容
+            (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
+            (hasResultNew.GetControl as MoveRsControl).FinishTextChange();
+            (hasResultNew.GetControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
+            (hasResultNew.GetControl as MoveRsControl).Separator = '\t';
+            string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
+            if (separator == "commaradio")
+            {
+                (hasResultNew.GetControl as MoveRsControl).Separator = ',';
+            }
+            else if (separator == "otherseparatorradio")
+            {
+                (hasResultNew.GetControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0];
+            }
+            BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }
 
         private void CancelButton_Click(object sender, System.EventArgs e)
@@ -322,6 +330,13 @@ namespace Citta_T1.OperatorViews
                 empty = true;
                 return empty;
             }
+            //分隔符-其他，是否有值
+            if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
+            {
+                MessageBox.Show("未输入其他类型分隔符内容");
+                empty = true;
+                return empty;
+            }
 
             return empty;
         }
@@ -346,6 +361,63 @@ namespace Citta_T1.OperatorViews
                 return false;
             }
             return true;
+        }
+
+        private string GetControlRadioName(Control group)
+        {
+            foreach (Control ct in group.Controls)
+            {
+                if (!(ct is RadioButton))
+                    continue;
+                RadioButton rb = ct as RadioButton;
+                if (rb.Checked)
+                {
+                    return rb.Name;
+                }
+            }
+            //TODO默认返回一个
+            return "";
+        }
+
+        private void SetControlRadioCheck(Control group, string radioName, RadioButton defaulRb)
+        {
+            if (!IsControlRadioCheck(group, radioName))
+                defaulRb.Checked = true;
+        }
+
+        private bool IsControlRadioCheck(Control group, string radioName)
+        {
+            foreach (Control ct in group.Controls)
+            {
+                if (!(ct is RadioButton))
+                    continue;
+                RadioButton rb = ct as RadioButton;
+                if (rb.Name.ToLower() == radioName)
+                {
+                    rb.Checked = true;
+                    return true;
+                }
+                else
+                {
+                    rb.Checked = false;
+                }
+            }
+            return false;
+        }
+
+        private void otherSeparatorText_TextChanged(object sender, EventArgs e)
+        {
+            this.otherSeparatorRadio.Checked = true;
+            if (String.IsNullOrEmpty(this.otherSeparatorText.Text))
+                return;
+            try
+            {
+                char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.otherSeparatorText.Text);
+            }
         }
     }
 }
