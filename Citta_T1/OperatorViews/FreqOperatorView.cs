@@ -31,12 +31,13 @@ namespace Citta_T1.OperatorViews
         public FreqOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.oldOutList = new List<int>();
             this.opControl = opControl;
             dataPath = "";
             oldColumnName = new List<string>();
             InitOptionInfo();
             LoadOption();
-            this.oldOutList = this.outList.GetItemCheckIndex();
+            
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
@@ -148,17 +149,20 @@ namespace Citta_T1.OperatorViews
             else if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.outList.GetItemCheckText();
-            this.selectColumn.Add("频率统计结果");
+           
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             {
+                this.selectColumn = this.outList.GetItemCheckText();
+                this.selectColumn.Add("频率统计结果");
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-            //输出变化，重写BCP文件
-            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.outList.GetItemCheckText(), this.opControl.ID);
+            List<string> newData = new List<string>(this.outList.GetItemCheckText());
+            newData.Add("频率统计结果");
+            //输出变化，重写BCP文件,它只要输出列名变化，表头就会改变
+            if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
+                Global.GetOptionDao().IsNewOut(newData, this.opControl.ID);
 
         }
 
@@ -172,9 +176,8 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
-            string outField = string.Join(",", checkIndexs);
+            this.opControl.Option.SetOption("outfield", string.Join(",", checkIndexs));
 
-            this.opControl.Option.SetOption("outfield", outField);
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
@@ -205,6 +208,7 @@ namespace Citta_T1.OperatorViews
                 this.outList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
+
             }
            
         }

@@ -31,13 +31,14 @@ namespace Citta_T1.OperatorViews
         {
            
             InitializeComponent();
+            this.oldOutList = new List<int>();
             oldColumnName = new List<string>();
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
             LoadOption();
 
-            this.oldOutList = this.OutList.GetItemCheckIndex();
+         
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
 
@@ -131,6 +132,7 @@ namespace Citta_T1.OperatorViews
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = indexs.ToList();
                 this.OutList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.OutList.Items[index].ToString());
@@ -180,7 +182,11 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
-            string outField = string.Join(",", checkIndexs);
+            List<int> outIndexs = new List<int>(this.oldOutList);
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
+            string outField = string.Join(",", outIndexs);
+
+            this.opControl.Option.SetOption("outfield", outField);
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -194,7 +200,7 @@ namespace Citta_T1.OperatorViews
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
-            this.opControl.Option.SetOption("outfield", outField);
+            
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
             else

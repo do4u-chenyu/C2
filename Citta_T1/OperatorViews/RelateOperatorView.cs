@@ -23,15 +23,22 @@ namespace Citta_T1.OperatorViews
         private string dataPath1;
         private string[] columnName0;
         private string[] columnName1;
-        private List<int> oldOutList;
+        private List<int> oldOutList0;
+        private List<int> oldOutList1;
         private string oldOptionDict;
         private List<string> selectColumn;
         private List<string> oldColumnName0;
         private List<string> oldColumnName1;
+        private List<string> outColumnName0;
+        private List<string> outColumnName1;
 
         public RelateOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.outColumnName0 = new List<string>();
+            this.outColumnName1= new List<string>();
+            this.oldOutList0 = new List<int>();
+            this.oldOutList1 = new List<int>();
             oldColumnName0 = new List<string>();
             oldColumnName1 = new List<string>();
             dataPath0 = "";
@@ -40,7 +47,7 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
             LoadOption();
-            this.oldOutList = this.OutList0.GetItemCheckIndex().Concat(this.OutList0.GetItemCheckIndex()).ToList();
+           
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
             this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
@@ -139,6 +146,7 @@ namespace Citta_T1.OperatorViews
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList0 = indexs.ToList();
                 this.OutList0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnName0.Add(this.OutList0.Items[index].ToString());
@@ -147,7 +155,8 @@ namespace Citta_T1.OperatorViews
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.OutList1.LoadItemCheckIndex(indexs);
+                this.oldOutList1 = indexs.ToList();
+                this.OutList1.LoadItemCheckIndex(indexs);              
                 foreach (int index in indexs)
                     this.oldColumnName1.Add(this.OutList1.Items[index].ToString());
             }
@@ -197,10 +206,20 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
 
             List<int> checkIndexs0 = this.OutList0.GetItemCheckIndex();
-            string outField0 = string.Join(",", checkIndexs0);
+            List<int> outIndexs0 = new List<int>(this.oldOutList0);
+          
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs0, outIndexs0);
+            foreach (int index in outIndexs0)
+                this.outColumnName0.Add(this.OutList0.Items[index].ToString());
+            string outField0 = string.Join(",", outIndexs0);
             this.opControl.Option.SetOption("outfield0", outField0);
+
             List<int> checkIndexs1 = this.OutList1.GetItemCheckIndex();
-            string outField1 = string.Join(",", checkIndexs1);
+            List<int> outIndexs1 = new List<int>(this.oldOutList1);
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs1, outIndexs1);
+            foreach (int index in outIndexs1)
+                this.outColumnName1.Add(this.OutList1.Items[index].ToString());
+            string outField1 = string.Join(",", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
             string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString();
@@ -235,17 +254,19 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.OutList0.GetItemCheckText().Concat(this.OutList1.GetItemCheckText()).ToList();
+           
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             {
+                this.selectColumn = this.OutList0.GetItemCheckText().Concat(this.OutList1.GetItemCheckText()).ToList();
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             //输出变化，重写BCP文件
             List<string> oldName = this.oldColumnName0.Concat(this.oldColumnName1).ToList();
-            if (hasResutl != null && !oldName.SequenceEqual(this.selectColumn))
-                Global.GetOptionDao().IsModifyOut(oldName, this.selectColumn, this.opControl.ID);
+            if (hasResutl != null && !oldName.SequenceEqual(this.outColumnName0.Concat(this.outColumnName1)))
+                Global.GetOptionDao().IsModifyDoubleOut(this.oldColumnName0,this.outColumnName0,this.oldColumnName1,this.outColumnName1, this.opControl.ID);
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
