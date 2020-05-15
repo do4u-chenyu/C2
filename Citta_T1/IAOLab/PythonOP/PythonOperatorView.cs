@@ -34,6 +34,7 @@ namespace Citta_T1.OperatorViews
 
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             InitPreViewText();
         }
@@ -145,7 +146,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.fullOutputFilePath = this.browseChosenTextBox.Text;
             }
-            if(outputOption == "paramRadioButton".ToLower() || outputOption == "stdoutRadioButton".ToLower())
+            else
             {
                 this.fullOutputFilePath = this.noChangedOutputFilePath;
             }
@@ -154,6 +155,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
+            this.opControl.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
             
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
@@ -177,6 +179,7 @@ namespace Citta_T1.OperatorViews
             this.noChangedOutputFilePath = this.opControl.Option.GetOption("outputParamPath");
             this.browseChosenTextBox.Text = this.opControl.Option.GetOption("browseChosen");
             this.otherSeparatorText.Text = this.opControl.Option.GetOption("otherSeparator");
+            this.previewCmdText.Text = this.opControl.Option.GetOption("cmd");
         }
         #endregion
 
