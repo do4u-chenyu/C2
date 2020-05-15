@@ -22,6 +22,12 @@ namespace Citta_T1.Controls.Bottom
             this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
             this.cmdConsoleControl.Name = CmdConsoleString;
             consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
+            this.Disposed += new EventHandler(BottomConsoleControl_Disposed);
+        }
+
+        private void BottomConsoleControl_Disposed(object sender, EventArgs e)
+        {
+            ReleaseConsoleControl(cmdConsoleControl);
         }
 
         public void LoadPythonInterpreter()
@@ -49,7 +55,6 @@ namespace Citta_T1.Controls.Bottom
         private ConsoleControl.ConsoleControl CreateNewConsoleControl(string controlName, bool visible = false)
         {
             ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
-            consoleControl.SuspendLayout();
             consoleControl.BorderStyle = BorderStyle.FixedSingle;
             consoleControl.Dock = DockStyle.Fill;
             consoleControl.IsInputEnabled = true;
@@ -60,20 +65,12 @@ namespace Citta_T1.Controls.Bottom
             consoleControl.Size = new System.Drawing.Size(1005, 97);
             consoleControl.Visible = visible;
             consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
-            this.panel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
-            this.panel2.Controls.Add(consoleControl);
-            consoleControl.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
             return consoleControl;
         }
 
         private void ReleaseConsoleControl(ConsoleControl.ConsoleControl consoleControl)
         {
-            if (consoleControl.IsProcessRunning)
+            if (consoleControl != null && consoleControl.IsProcessRunning)
             {
                 TryRleaseProcess(consoleControl);
             }
@@ -129,31 +126,40 @@ namespace Citta_T1.Controls.Bottom
             if (String.IsNullOrEmpty(owner))
                 return;
             ConsoleControl.ConsoleControl oldConsoleControl = CurrentConsoleControl();
-
-            if (oldConsoleControl != null)
-                this.panel2.Controls.Remove(oldConsoleControl);
-            
-               
-
             // 创建cmd console
             if (owner == CmdConsoleString)
             {
-                cmdConsoleControl = CreateNewConsoleControl(CmdConsoleString, false);
-                if (consoles.ContainsKey(cmdConsoleControl.Name))
-                    consoles.Remove(cmdConsoleControl.Name);
-                consoles.Add(cmdConsoleControl.Name, this.cmdConsoleControl);
+                ConsoleControl.ConsoleControl console = CreateNewConsoleControl(CmdConsoleString, false);
+
+                this.panel2.SuspendLayout();
+                this.panel2.Controls.Add(console);
+                if (oldConsoleControl != null)
+                    this.panel2.Controls.Remove(oldConsoleControl);
+                this.panel2.ResumeLayout(false);
+
+                if (consoles.ContainsKey(console.Name))
+                    consoles.Remove(console.Name);
+                consoles.Add(console.Name, console);
+
+                cmdConsoleControl = console;
                 StartCmdProcess();
             }
             // 存在当前python解释器
             else if (piis.FindIndex(c => c.PythonFFP == owner) >= 0)
             {
                 ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, false);
-                this.panel2.ResumeLayout(false);
+
+                this.panel2.Controls.Add(console);
+                if (oldConsoleControl != null)
+                    this.panel2.Controls.Remove(oldConsoleControl);
+
                 if (consoles.ContainsKey(console.Name))
                     consoles.Remove(console.Name);
                 consoles.Add(console.Name, console);
+
                 StartPythonProcess(console, console.Name, PythonInitParams);
             }
+
             if (oldConsoleControl != null)
                 ReleaseConsoleControl(oldConsoleControl);
         }
@@ -304,7 +310,11 @@ namespace Citta_T1.Controls.Bottom
             {
                 return false;
             }
+           
             return true;
         }
+
+ 
+          
     }
 }
