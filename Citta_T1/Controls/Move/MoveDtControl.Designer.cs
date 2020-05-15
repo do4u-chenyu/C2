@@ -81,8 +81,22 @@
             this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
-
-
+            // 
+            // leftPinPictureBox
+            // 
+            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.leftPinPictureBox.Name = "leftPinPictureBox";
+            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
+            this.leftPinPictureBox.TabIndex = 0;
+            this.leftPinPictureBox.TabStop = false;
+            // 
+            // rightPinPictureBox
+            // 
+            this.rightPinPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.rightPinPictureBox.Name = "rightPinPictureBox";
+            this.rightPinPictureBox.Size = new System.Drawing.Size(100, 50);
+            this.rightPinPictureBox.TabIndex = 0;
+            this.rightPinPictureBox.TabStop = false;
             // 
             // contextMenuStrip
             // 
@@ -99,13 +113,13 @@
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(251, 234);
+            this.contextMenuStrip.Size = new System.Drawing.Size(219, 202);
             // 
             // PreviewMenuItem
             // 
             this.PreviewMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.PreviewMenuItem.Name = "PreviewMenuItem";
-            this.PreviewMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.PreviewMenuItem.Size = new System.Drawing.Size(218, 24);
             this.PreviewMenuItem.Text = "预览";
             this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示本数据源的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreViewMenuItem_Click);
@@ -118,7 +132,7 @@
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.OptionMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.OptionMenuItem.Name = "OptionMenuItem";
-            this.OptionMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.OptionMenuItem.Size = new System.Drawing.Size(218, 24);
             this.OptionMenuItem.Text = "设置";
             this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
@@ -127,7 +141,7 @@
             this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.RenameMenuItem.Size = new System.Drawing.Size(218, 24);
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
@@ -137,7 +151,7 @@
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
-            this.RunMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.RunMenuItem.Size = new System.Drawing.Size(218, 24);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             // 
@@ -147,7 +161,7 @@
             this.LogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.LogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.LogMenuItem.Name = "LogMenuItem";
-            this.LogMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.LogMenuItem.Size = new System.Drawing.Size(218, 24);
             this.LogMenuItem.Text = "异常日志";
             // 
             // DeleteMenuItem
@@ -155,20 +169,20 @@
             this.DeleteMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.DeleteMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.DeleteMenuItem.Name = "DeleteMenuItem";
-            this.DeleteMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.DeleteMenuItem.Size = new System.Drawing.Size(218, 24);
             this.DeleteMenuItem.Text = "删除";
             this.DeleteMenuItem.Click += new System.EventHandler(this.DeleteMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(247, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(215, 6);
             // 
             // ExplorerToolStripMenuItem
             // 
             this.ExplorerToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
-            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
             this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
             // 
@@ -176,7 +190,7 @@
             // 
             this.CopyFilePathToClipboardToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
-            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(250, 28);
+            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
             this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
             this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
             // 
@@ -187,7 +201,7 @@
             this.textBox.Location = new System.Drawing.Point(27, 0);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(111, 27);
+            this.textBox.Size = new System.Drawing.Size(111, 23);
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
@@ -215,7 +229,7 @@
             // MoveDtControl
             // 
             this.AllowDrop = true;
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;

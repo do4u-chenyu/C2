@@ -114,7 +114,7 @@ namespace Citta_T1.Controls.Move
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(250, 206);
+            this.contextMenuStrip.Size = new System.Drawing.Size(360, 304);
             // 
             // PreviewMenuItem
             // 
@@ -123,7 +123,7 @@ namespace Citta_T1.Controls.Move
             this.PreviewMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.PreviewMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.PreviewMenuItem.Name = "PreviewMenuItem";
-            this.PreviewMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.PreviewMenuItem.Size = new System.Drawing.Size(359, 42);
             this.PreviewMenuItem.Text = "预览";
             this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示运算结果的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreviewMenuItem_Click);
@@ -133,7 +133,7 @@ namespace Citta_T1.Controls.Move
             this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.RenameMenuItem.Size = new System.Drawing.Size(359, 42);
             this.RenameMenuItem.Text = "重命名";
             this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
             // 
@@ -142,7 +142,7 @@ namespace Citta_T1.Controls.Move
             this.SaveAsToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.SaveAsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
-            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(359, 42);
             this.SaveAsToolStripMenuItem.Text = "另存为";
             this.SaveAsToolStripMenuItem.ToolTipText = "将运算得到的结果文件导出到指定位置";
             this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
@@ -152,7 +152,7 @@ namespace Citta_T1.Controls.Move
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
-            this.RunMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.RunMenuItem.Size = new System.Drawing.Size(359, 42);
             this.RunMenuItem.Text = "运行到此";
             this.RunMenuItem.ToolTipText = "将执行模型到本阶段为止";
             this.RunMenuItem.Click += new System.EventHandler(this.RunMenuItem_Click);
@@ -163,20 +163,20 @@ namespace Citta_T1.Controls.Move
             this.ErrorLogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ErrorLogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.ErrorLogMenuItem.Name = "ErrorLogMenuItem";
-            this.ErrorLogMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.ErrorLogMenuItem.Size = new System.Drawing.Size(359, 42);
             this.ErrorLogMenuItem.Text = "异常日志";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(246, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(356, 6);
             // 
             // ExplorerToolStripMenuItem
             // 
             this.ExplorerToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ExplorerToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.ExplorerToolStripMenuItem.Name = "ExplorerToolStripMenuItem";
-            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.ExplorerToolStripMenuItem.Size = new System.Drawing.Size(359, 42);
             this.ExplorerToolStripMenuItem.Text = "打开所在文件夹";
             this.ExplorerToolStripMenuItem.Click += new System.EventHandler(this.ExplorerToolStripMenuItem_Click);
             // 
@@ -185,9 +185,12 @@ namespace Citta_T1.Controls.Move
             this.CopyFilePathToClipboardToolStripMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.CopyFilePathToClipboardToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.CopyFilePathToClipboardToolStripMenuItem.Name = "CopyFilePathToClipboardToolStripMenuItem";
-            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(249, 28);
+            this.CopyFilePathToClipboardToolStripMenuItem.Size = new System.Drawing.Size(359, 42);
             this.CopyFilePathToClipboardToolStripMenuItem.Text = "复制文件路径到剪切板";
             this.CopyFilePathToClipboardToolStripMenuItem.Click += new System.EventHandler(this.CopyFilePathToClipboardToolStripMenuItem_Click);
+            // 
+            // nameToolTip
+            //
             // 
             // textBox
             // 
@@ -196,7 +199,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Location = new System.Drawing.Point(28, 1);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(111, 27);
+            this.textBox.Size = new System.Drawing.Size(111, 39);
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;

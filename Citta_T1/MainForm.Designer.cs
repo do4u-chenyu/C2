@@ -51,7 +51,7 @@ namespace Citta_T1
             this.bottomViewPanel = new System.Windows.Forms.Panel();
             this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
             this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomPythonConsoleControl();
+            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -711,6 +711,7 @@ namespace Citta_T1
             this.canvasPanel.Controls.Add(this.runButton);
             this.canvasPanel.Controls.Add(this.naviViewControl);
             this.canvasPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.canvasPanel.DelEnable = false;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.EndC = null;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
@@ -833,8 +834,7 @@ namespace Citta_T1
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1229, 606);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);
@@ -926,7 +926,7 @@ namespace Citta_T1
         private System.Windows.Forms.PictureBox helpPictureBox;
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
-        private Citta_T1.Controls.Bottom.BottomPythonConsoleControl bottomPyConsole;
+        private Citta_T1.Controls.Bottom.BottomConsoleControl bottomPyConsole;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button runButton;

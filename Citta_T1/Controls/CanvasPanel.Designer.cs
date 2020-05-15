@@ -34,10 +34,10 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.DellSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.批量删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DelSelectControl = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DelControls = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
-            this.DellSelectControl.SuspendLayout();
+            this.DelSelectControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -46,31 +46,33 @@ namespace Citta_T1.Controls
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.删除ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 42);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(136, 38);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.DeleteLineToolStripMenuItem_Click);
             // 
-            // DellSelectControl
+            // DelSelectControl
             // 
-            this.DellSelectControl.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.DellSelectControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.批量删除ToolStripMenuItem});
-            this.DellSelectControl.Name = "contextMenuStrip2";
-            this.DellSelectControl.Size = new System.Drawing.Size(301, 86);
+            this.DelSelectControl.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.DelSelectControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DelControls});
+            this.DelSelectControl.Name = "contextMenuStrip2";
+            this.DelSelectControl.Size = new System.Drawing.Size(125, 26);
             // 
-            // 批量删除ToolStripMenuItem
+            // DelControls
             // 
-            this.批量删除ToolStripMenuItem.Name = "批量删除ToolStripMenuItem";
-            this.批量删除ToolStripMenuItem.Size = new System.Drawing.Size(300, 38);
-            this.批量删除ToolStripMenuItem.Text = "批量删除";
+            this.DelControls.Name = "DelControls";
+            this.DelControls.Size = new System.Drawing.Size(124, 22);
+            this.DelControls.Text = "批量删除";
+            this.DelControls.Click += new System.EventHandler(this.DelControls_Click);
             // 
             // CanvasPanel
             // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "CanvasPanel";
@@ -81,7 +83,7 @@ namespace Citta_T1.Controls
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CanvasPanel_MouseUp);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.DellSelectControl.ResumeLayout(false);
+            this.DelSelectControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -92,7 +94,7 @@ namespace Citta_T1.Controls
 
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ContextMenuStrip DellSelectControl;
-        private System.Windows.Forms.ToolStripMenuItem 批量删除ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip DelSelectControl;
+        private System.Windows.Forms.ToolStripMenuItem DelControls;
     }
 }

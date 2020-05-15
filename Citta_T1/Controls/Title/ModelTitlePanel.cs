@@ -21,8 +21,8 @@ namespace Citta_T1.Controls.Title
  
         public ModelTitlePanel()
         {
-            InitializeComponent();
             models = new List<ModelTitleControl>();
+            InitializeComponent();
         }
 
 

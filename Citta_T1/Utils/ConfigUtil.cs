@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 using System.Configuration;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Citta_T1.Utils
 {

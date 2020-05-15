@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.Controls.Bottom
 {
-    partial class BottomPythonConsoleControl
+    partial class BottomConsoleControl
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -40,20 +40,22 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.clearScreenButton = new System.Windows.Forms.Button();
             this.copyContentButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.consoleControl1 = new ConsoleControl.ConsoleControl();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cmdConsoleControl = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.consoleControl1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -74,6 +76,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.comboBox1);
             this.flowLayoutPanel1.Controls.Add(this.splitter2);
@@ -82,9 +85,9 @@
             this.flowLayoutPanel1.Controls.Add(this.splitter1);
             this.flowLayoutPanel1.Controls.Add(this.clearScreenButton);
             this.flowLayoutPanel1.Controls.Add(this.copyContentButton);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1005, 28);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -113,8 +116,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(215, 24);
             this.comboBox1.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.comboBox1, "当前配置好的Cmd控制台和Python虚拟机");
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.toolTip1.SetToolTip(this.comboBox1, "当前配置好的Cmd控制台");
             // 
             // splitter2
             // 
@@ -135,7 +137,7 @@
             this.startProcessButton.Size = new System.Drawing.Size(46, 25);
             this.startProcessButton.TabIndex = 2;
             this.startProcessButton.Text = "启动";
-            this.toolTip1.SetToolTip(this.startProcessButton, "启动当前选择的控制台或Python虚拟机");
+            this.toolTip1.SetToolTip(this.startProcessButton, "启动当前选择的控制台");
             this.startProcessButton.UseVisualStyleBackColor = true;
             this.startProcessButton.Click += new System.EventHandler(this.StartProcessButton_Click);
             // 
@@ -147,7 +149,7 @@
             this.resetProcessButton.Size = new System.Drawing.Size(46, 25);
             this.resetProcessButton.TabIndex = 3;
             this.resetProcessButton.Text = "重置";
-            this.toolTip1.SetToolTip(this.resetProcessButton, "重启当前选择的控制台或Python虚拟机");
+            this.toolTip1.SetToolTip(this.resetProcessButton, "重启当前选择的控制台");
             this.resetProcessButton.UseVisualStyleBackColor = true;
             this.resetProcessButton.Click += new System.EventHandler(this.ResetProcessButton_Click);
             // 
@@ -187,38 +189,41 @@
             this.copyContentButton.UseVisualStyleBackColor = true;
             this.copyContentButton.Click += new System.EventHandler(this.CopyContentButton_Click);
             // 
-            // button2
+            // panel2
             // 
-            this.button2.Location = new System.Drawing.Point(551, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(362, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "此部分正在施工中,部分功能还不完善,暂时经不起测试";
-            this.button2.UseVisualStyleBackColor = true;
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Controls.Add(this.cmdConsoleControl);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 37);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1005, 97);
+            this.panel2.TabIndex = 100;
             // 
-            // consoleControl1
+            // cmdConsoleControl
             // 
-            this.consoleControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.consoleControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.consoleControl1.IsInputEnabled = true;
-            this.consoleControl1.Location = new System.Drawing.Point(3, 37);
-            this.consoleControl1.Name = "consoleControl1";
-            this.consoleControl1.SendKeyboardCommandsToProcess = false;
-            this.consoleControl1.ShowDiagnostics = false;
-            this.consoleControl1.Size = new System.Drawing.Size(1005, 97);
-            this.consoleControl1.TabIndex = 2;
+            this.cmdConsoleControl.BackColor = System.Drawing.Color.Black;
+            this.cmdConsoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cmdConsoleControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdConsoleControl.IsInputEnabled = true;
+            this.cmdConsoleControl.Location = new System.Drawing.Point(0, 0);
+            this.cmdConsoleControl.Name = "cmdConsoleControl";
+            this.cmdConsoleControl.SendKeyboardCommandsToProcess = false;
+            this.cmdConsoleControl.ShowDiagnostics = false;
+            this.cmdConsoleControl.Size = new System.Drawing.Size(1005, 97);
+            this.cmdConsoleControl.TabIndex = 2;
             // 
-            // BottomPythonConsoleControl
+            // BottomConsoleControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "BottomPythonConsoleControl";
+            this.DoubleBuffered = true;
+            this.Name = "BottomConsoleControl";
             this.Size = new System.Drawing.Size(1011, 137);
             this.Load += new System.EventHandler(this.BottomPythonConsoleControl_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -227,16 +232,16 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button startProcessButton;
-        private ConsoleControl.ConsoleControl consoleControl1;
         private System.Windows.Forms.Button resetProcessButton;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button clearScreenButton;
         private System.Windows.Forms.Button copyContentButton;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button2;
+        private ConsoleControl.ConsoleControl cmdConsoleControl;
     }
 }

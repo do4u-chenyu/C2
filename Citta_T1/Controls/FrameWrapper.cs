@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -42,8 +43,8 @@ namespace Citta_T1.Controls
         {
             
             startP = e.Location;
-            
-                
+            if (e.Button == MouseButtons.Right)
+                return;
             if (minBoding.IsEmpty)
             {
                 startSelect = true;
@@ -53,13 +54,14 @@ namespace Citta_T1.Controls
             else if (!minBoding.Contains(e.Location))
             {
                 InitFrame();
+                CreateImg();
             }
             else if (minBoding.Contains(e.Location))
-            {                
+            {
                 startSelect = false;
                 stratDrag = true;
-                CreateMoveImg();
-                SelectControl_Show();
+                
+                SelectControl_Hide();
             }
         }
 
@@ -75,7 +77,9 @@ namespace Citta_T1.Controls
         }
         public void FrameUp(MouseEventArgs e)
         {
-            if (stratDrag)
+            if (e.Button == MouseButtons.Right)
+                return;
+            if (stratDrag )
                 dragFrame_Up(e);
             if (startSelect)
                 DrawFrame_Up(e);
@@ -89,10 +93,22 @@ namespace Citta_T1.Controls
                 Global.GetCanvasPanel().Cursor = Cursors.Default;
 
         }
-        public bool FrameDel(MouseEventArgs e)
+        public void FrameDel(object sender, EventArgs e)
         {
-            return minBoding.Contains(e.Location);
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements.ToList();
+            foreach(ModelElement me in modelElements)
+            {
+                Control ct = me.GetControl;
+                if (minBoding.Contains(ct.Location))
+                {
+                    (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
+                    (ct as IMoveControl).ControlNoSelect();
+                }
+                    
+            }
+            minBoding = new Rectangle(0,0,0,0);
         }
+        
         #endregion 
         #region 绘制虚线框
 
@@ -124,6 +140,7 @@ namespace Citta_T1.Controls
             CreateRect();
             FindControl();
             DrawRoundedRect(2);
+            CreateMoveImg();
             startSelect = false;
         }
         private void CreateImg()
@@ -314,7 +331,7 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(backGroung);
 
             g.DrawImage(this.moveImage, minBoding.X , minBoding.Y);
-            backGroung.Save("cs.png");
+            //backGroung.Save("cs.png");
             n.DrawImageUnscaled(backGroung, 0, 0);
             n.Dispose();
             g.Dispose();
@@ -324,10 +341,20 @@ namespace Citta_T1.Controls
         }
         private void dragFrame_Move(MouseEventArgs e)
         {
-            if (this.moveImage == null)
+            if (this.moveImage == null )
                 return;
             int dx = e.Location.X - startP.X;
             int dy = e.Location.Y - startP.Y;
+            MoveImage_Display(dx, dy);
+        }
+        private void MoveImage_Display(int dx,int dy)
+        {
+            if (staticImage == null || minBoding.IsEmpty)
+            {
+                log.Info("------");
+                return;
+            }
+
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
@@ -373,14 +400,14 @@ namespace Citta_T1.Controls
             startSelect = true;
             stratDrag = false;
         }
-        private void SelectControl_Show()
+        private void SelectControl_Hide()
         {
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             for (int i = 0; i < modelElements.Count; i++)
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
-                if (frameRec.Contains(ct.Location))
+                if (minBoding.Contains(ct.Location))
                     ct.Visible = false;
             }
         }

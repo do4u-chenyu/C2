@@ -17,7 +17,7 @@ namespace Citta_T1.Controls.Left
 
         private void FlowChartControl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && sender is Button)
             {
                 DataObject dragDropData = new DataObject();
                 dragDropData.SetData("Type", ElementType.Operator);

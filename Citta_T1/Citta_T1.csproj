@@ -248,11 +248,11 @@
     <Compile Include="Controls\Bottom\BottomPreviewControl.Designer.cs">
       <DependentUpon>BottomPreviewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.cs">
+    <Compile Include="Controls\Bottom\BottomConsoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Bottom\BottomPythonConsoleControl.Designer.cs">
-      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
+    <Compile Include="Controls\Bottom\BottomConsoleControl.Designer.cs">
+      <DependentUpon>BottomConsoleControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\ConfigForm.cs">
       <SubType>Form</SubType>
@@ -475,8 +475,8 @@
     <EmbeddedResource Include="Controls\Bottom\BottomLogControl.resx">
       <DependentUpon>BottomLogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Bottom\BottomPythonConsoleControl.resx">
-      <DependentUpon>BottomPythonConsoleControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Bottom\BottomConsoleControl.resx">
+      <DependentUpon>BottomConsoleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Flow\FlowControl.resx">
       <DependentUpon>FlowControl.cs</DependentUpon>

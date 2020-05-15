@@ -138,8 +138,7 @@
             // 
             // FlowChartControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.customOPButton2);
             this.Controls.Add(this.pictureBox4);
@@ -151,7 +150,6 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "FlowChartControl";
             this.Size = new System.Drawing.Size(187, 637);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FlowChartControl_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

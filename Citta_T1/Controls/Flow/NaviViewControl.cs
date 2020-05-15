@@ -30,12 +30,12 @@ namespace Citta_T1.Controls.Flow
 
         public NaviViewControl()
         {
-            InitializeComponent();
             this.p1 = new Pen(Color.DimGray, 0.0001f);
             this.p2 = new Pen(Color.LightGray, 0.0001f);
             this.viewFrameBrush = new SolidBrush(Color.DarkGray);
             this.rate = 10;
             elementWorldLocDict = new Dictionary<ModelElement, PointF>(256);
+            InitializeComponent();
         }
 
 
