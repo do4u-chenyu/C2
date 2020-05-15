@@ -40,19 +40,22 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.clearScreenButton = new System.Windows.Forms.Button();
             this.copyContentButton = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.cmdConsoleControl = new ConsoleControl.ConsoleControl();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.cmdConsoleControl, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -73,6 +76,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.comboBox1);
             this.flowLayoutPanel1.Controls.Add(this.splitter2);
@@ -185,12 +189,23 @@
             this.copyContentButton.UseVisualStyleBackColor = true;
             this.copyContentButton.Click += new System.EventHandler(this.CopyContentButton_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Controls.Add(this.cmdConsoleControl);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 37);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1005, 97);
+            this.panel2.TabIndex = 100;
+            // 
             // cmdConsoleControl
             // 
+            this.cmdConsoleControl.BackColor = System.Drawing.Color.Black;
             this.cmdConsoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cmdConsoleControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmdConsoleControl.IsInputEnabled = true;
-            this.cmdConsoleControl.Location = new System.Drawing.Point(3, 37);
+            this.cmdConsoleControl.Location = new System.Drawing.Point(0, 0);
             this.cmdConsoleControl.Name = "cmdConsoleControl";
             this.cmdConsoleControl.SendKeyboardCommandsToProcess = false;
             this.cmdConsoleControl.ShowDiagnostics = false;
@@ -208,6 +223,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -216,15 +232,16 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button startProcessButton;
-        private ConsoleControl.ConsoleControl cmdConsoleControl;
         private System.Windows.Forms.Button resetProcessButton;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Button clearScreenButton;
         private System.Windows.Forms.Button copyContentButton;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private ConsoleControl.ConsoleControl cmdConsoleControl;
     }
 }
