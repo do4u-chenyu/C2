@@ -61,9 +61,32 @@ namespace Citta_T1.Dialogs
                     MessageBoxIcon.Information);
                 return;
             }
+            if (PythonInterpreterUsed(pythonFFP))
+            {
+                MessageBox.Show(String.Format("该Python解释器已经导入过了: {0}", pythonFFP),
+                    "Python解释器重复导入",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             pythonOpenFileDialog.InitialDirectory = String.Empty;
             AddPythonInterpreter(pythonFFP, pythonVersion);
 
+        }
+
+        private bool PythonInterpreterUsed(string pythonFFP)
+        {
+            foreach (DataGridViewRow row in this.dataGridView.Rows)
+            {
+                if (row.Cells.Count > 0 && row.Cells[0].Value is string)
+                {
+                    if (row.Cells[0].Value.ToString() == pythonFFP)
+                        return true;
+                }
+               
+            }
+            return false;
         }
 
         private void PythonConfigCancelButton_Click(object sender, EventArgs e)
@@ -169,10 +192,7 @@ namespace Citta_T1.Dialogs
 
         private void PythonConfigOkButton_Click(object sender, EventArgs e)
         {
-            bool changed = SavePythonConfig();
-            // 配置改变
-            if (changed)
-                Global.GetBottomPythonConsoleControl().LoadPythonInterpreter();
+            SavePythonConfig();
             Close();
         }
 

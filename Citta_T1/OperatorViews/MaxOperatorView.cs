@@ -77,15 +77,9 @@ namespace Citta_T1.OperatorViews
                 return;
             }
               
-            //输入数据源变化，并且输出重写
-            //if (hasResutl != null && this.hasNewDataSource)
-            //{
-            //    Global.GetOptionDao().ModifyOut(this.OutList.GetItemCheckText(), this.opControl.ID);
-            //     return;
-            //}
-              
+          
             //输出变化，重写BCP文件
-            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
            
         }
@@ -101,28 +95,14 @@ namespace Citta_T1.OperatorViews
         {
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             List<int> outIndexs =new List<int>(this.oldOutList);
-            List<int> removeIndex = new List<int>();
-            foreach (int index in checkIndexs)
-            {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
-                {
-                    outIndexs = new List<int>(checkIndexs);
-                    break;
-                }                 
-            }
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
-            if(this.maxValueBox.Text == "")
+            this.opControl.Option.SetOption("outfield", outField);
+            if (this.maxValueBox.Text == "")
                 this.opControl.Option.SetOption("maxfield", "");
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("outfield", outField);
-
-
+            
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
             else
@@ -133,7 +113,6 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             int maxIndex = -1;
-            int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("maxfield") != "")
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
@@ -143,7 +122,7 @@ namespace Citta_T1.OperatorViews
             {
                 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = outIndexs.ToList();
                 this.OutList.LoadItemCheckIndex(outIndexs);
                 foreach(int i in outIndexs)

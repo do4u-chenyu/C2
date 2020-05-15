@@ -32,12 +32,12 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.dataPath = "";
+            this.oldOutList = new List<int>();
             oldColumnName = new List<string>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
-            this.oldRandomNum =this.RandomNumBox.Text;
-            this.oldOutList = this.OutList.GetItemCheckIndex();
+            this.oldRandomNum =this.RandomNumBox.Text;         
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             SetTextBoxName(this.DataInfoBox);
@@ -137,7 +137,9 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.SetOption("randomnum", this.RandomNumBox.Text);
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
-            string outField = string.Join(",", checkIndexs);
+            List<int> outIndexs = new List<int>(this.oldOutList);
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
+            string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
 
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
@@ -155,6 +157,7 @@ namespace Citta_T1.OperatorViews
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+                this.oldOutList = indexs.ToList();
                 this.OutList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.OutList.Items[index].ToString());

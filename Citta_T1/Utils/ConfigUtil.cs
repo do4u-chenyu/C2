@@ -94,23 +94,5 @@ namespace Citta_T1.Utils
             }
             return possiblePythonPath;
         }
-
-        public static bool IsDesignMode()
-        {
-            bool returnFlag = false;
-
-#if DEBUG
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-            {
-                returnFlag = true;
-            }
-            else if (Process.GetCurrentProcess().ProcessName == "devenv")
-            {
-                returnFlag = true;
-            }
-#endif
-
-            return returnFlag;
-        }
     }
 }

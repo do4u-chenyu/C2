@@ -34,6 +34,7 @@ namespace Citta_T1.OperatorViews
 
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
+            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             InitPreViewText();
         }
@@ -145,7 +146,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.fullOutputFilePath = this.browseChosenTextBox.Text;
             }
-            if(outputOption == "paramRadioButton".ToLower())
+            else
             {
                 this.fullOutputFilePath = this.noChangedOutputFilePath;
             }
@@ -154,6 +155,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
+            this.opControl.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
             
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
@@ -177,6 +179,7 @@ namespace Citta_T1.OperatorViews
             this.noChangedOutputFilePath = this.opControl.Option.GetOption("outputParamPath");
             this.browseChosenTextBox.Text = this.opControl.Option.GetOption("browseChosen");
             this.otherSeparatorText.Text = this.opControl.Option.GetOption("otherSeparator");
+            this.previewCmdText.Text = this.opControl.Option.GetOption("cmd");
         }
         #endregion
 
@@ -197,6 +200,7 @@ namespace Citta_T1.OperatorViews
             if (hasResutl == null)
             {
                 Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
+                CreateNewBlankBCPFile(this.fullOutputFilePath);
                 return;
             }
 
@@ -205,13 +209,7 @@ namespace Citta_T1.OperatorViews
             if (hasResutl != null && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
                 (hasResutl.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
-                if (!File.Exists(fullOutputFilePath))
-                {
-                    using (StreamWriter sw = new StreamWriter(this.fullOutputFilePath, false, Encoding.UTF8))
-                    {
-                        sw.Write("");
-                    }
-                }
+                CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
                 
                 
@@ -340,7 +338,22 @@ namespace Citta_T1.OperatorViews
         }
 
 
+        public void CreateNewBlankBCPFile(string fullFilePath)
+        {
+            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
+            {
+                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
+            }
 
+            if (!File.Exists(fullFilePath))
+            {
+                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+                {
+                    sw.Write("");
+                }
+            }
+        }
 
 
 
@@ -413,7 +426,7 @@ namespace Citta_T1.OperatorViews
             this.rsChosenButton.Enabled = false;
             if (this.stdoutRadioButton.Checked)
             {
-                this.previewTextList[4] = " > " + this.fullOutputFilePath;
+                this.previewTextList[4] = " > " + this.noChangedOutputFilePath;
                 UpdatePreviewText();
             }
         }

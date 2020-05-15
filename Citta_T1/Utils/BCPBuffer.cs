@@ -274,7 +274,7 @@ namespace Citta_T1.Utils
         {
             using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
             {
-                string columns = String.Join("\t", columnName); ;
+                string columns = String.Join("\t", columnName); 
                 sw.WriteLine(columns.Trim('\t'));
                 sw.Flush();
             }

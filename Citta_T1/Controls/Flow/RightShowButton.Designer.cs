@@ -60,6 +60,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
             this.Name = "RightShowButton";
             this.Size = new System.Drawing.Size(55, 55);
             this.toolTip1.SetToolTip(this, "显示浮动工具栏");

@@ -30,15 +30,14 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             dataPath = "";
-            columnName = new string[] { };
-            oldColumnName = new List<string>();
-            oldOutList = new List<int>();
+            this.columnName = new string[] { };
+            this.oldColumnName = new List<string>();
+            this.oldOutList = new List<int>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
 
             this.oldMinfield = this.MinValueBox.Text;
-            this.oldOutList = this.OutList.GetItemCheckIndex();
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             this.MinValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
@@ -73,7 +72,7 @@ namespace Citta_T1.OperatorViews
             }
           
             //输出变化，重写BCP文件
-            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
         }
 
@@ -89,25 +88,15 @@ namespace Citta_T1.OperatorViews
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             List<int> removeIndex = new List<int>();
-            foreach (int index in checkIndexs)
-            {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
-                {
-                    outIndexs = new List<int>(checkIndexs);
-                    break;
-                }
-            }
-            string outField = string.Join(",", checkIndexs);
+            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
+            string outField = string.Join(",", outIndexs);
+            this.opControl.Option.SetOption("outfield", outField);
+
             if (this.MinValueBox.Text == "")
                 this.opControl.Option.SetOption("minfield", "");
             else
                 this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("outfield", outField);
+            
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
             else

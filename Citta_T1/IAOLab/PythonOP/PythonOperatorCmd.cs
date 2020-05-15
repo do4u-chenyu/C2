@@ -17,7 +17,9 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
+            string cmdPython = option.GetOption("cmd");
 
+            cmds.Add(cmdPython);
             return cmds;
         }
     }

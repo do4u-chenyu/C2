@@ -67,13 +67,14 @@ namespace Citta_T1.Controls
 
         public CanvasPanel()
         {
+            dragWrapper = new DragWrapper();
+            frameWrapper = new FrameWrapper();
             InitializeComponent();
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             SetStyle(ControlStyles.ResizeRedraw, true);
-            dragWrapper  = new DragWrapper();
-            frameWrapper = new FrameWrapper();
+
         }
 
 
@@ -594,6 +595,12 @@ namespace Citta_T1.Controls
                                 location);
             btn.Encoding = DSUtil.Encoding.UTF8;//不清楚后面怎么编码
             btn.Separator = separator;
+
+
+
+
+
+
             AddNewElement(btn);
             return btn;
         }

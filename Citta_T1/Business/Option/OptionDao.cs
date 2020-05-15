@@ -259,25 +259,6 @@ namespace Citta_T1.Business.Option
             mrc.FullFilePath = path;
         }
 
-        //删除数据源和算子之间的线
-        public void DisableControlOption(int ID)
-        {        
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
-            {
-                if (me.ID == ID && me.Type == ElementType.Operator)
-                {
-                    (me.GetControl as MoveOpControl).EnableOpenOption = false;
-                    (me.GetControl as MoveOpControl).Status = ElementStatus.Null;
-                    break;
-                }
-                if (me.ID == ID && me.Type == ElementType.Result)
-                {
-                    (me.GetControl as MoveRsControl).Status = ElementStatus.Null;
-                    break;
-                }
-            }
-        }
-
         //新数据源修改输出
 
         public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
@@ -383,20 +364,17 @@ namespace Citta_T1.Business.Option
                 {
                     IsNewOut(currentcolumns, ID);
                     return;
-                }
-                   
+                }    
             }
-            //输出数目相同，顺序可能不同
-            if (oldColumns.Count >0 && oldColumns.Count == currentcolumns.Count)
+            //判断输出顺序是否一致，如排序算子
+            if (oldColumns.Count > 0 && oldColumns.Count == currentcolumns.Count)
             {
                 if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
                 {
                     IsNewOut(currentcolumns, ID);
                     return;
                 }
-                   
             }
-
             //旧字段真包含于新字段
             foreach (string name in currentcolumns)
             {
@@ -406,6 +384,34 @@ namespace Citta_T1.Business.Option
             List<string> outColumns = oldColumns.Concat(columns).ToList<string>();  
             BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
+        public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
+        {
+            List<string> columns = new List<string>();
+            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            //左侧数据源判断
+            if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
+            {
+                IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
+                return;
+            }
+            //右侧数据源判断,新输出字段中不包含旧字段
+            foreach (string cn in oldColumns1)
+            {
+                if (!currentcolumns1.Contains(cn))
+                {
+                    IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
+                    return;
+                }
+            }
+            //旧字段真包含于新字段
+            foreach (string name in currentcolumns1)
+            {
+                if (!oldColumns1.Contains(name))
+                    columns.Add(name);
+            }
+            List<string> outColumns = currentcolumns0.Concat(currentcolumns1).Concat(columns).ToList<string>();
+            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+        }
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
@@ -413,6 +419,26 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }
+        //更新输出列表选定项的索引
+        public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)
+        {
+            foreach (int index in checkIndexs)
+            {
+                if (!outIndexs.Contains(index))
+                    outIndexs.Add(index);
+            }
+            foreach (int index in outIndexs)
+            {
+                if (!checkIndexs.Contains(index))
+                {
+                    outIndexs.Clear();
+                    outIndexs.AddRange(checkIndexs);
+                    break;
+                }
+            }
+ 
+        }
+
         //配置初始化
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
         {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Citta_T1.Utils;
@@ -6,7 +6,7 @@ using Citta_T1.IAOLab.PythonOP;
 
 namespace Citta_T1.Controls.Bottom
 {
-    public partial class BottomPythonConsoleControl : UserControl
+    public partial class BottomConsoleControl : UserControl
     {
         private static LogUtil log = LogUtil.GetInstance("BottomPythonConsoleControl");
         private static string PythonInitParams = "-i -u";  // 控制台字符输出不缓冲
@@ -14,7 +14,7 @@ namespace Citta_T1.Controls.Bottom
         private List<PythonInterpreterInfo> piis; // 当前已配置的所有Python解释器, 元素顺序与combox保持一致
         private Dictionary<string, ConsoleControl.ConsoleControl> consoles;
 
-        public BottomPythonConsoleControl()
+        public BottomConsoleControl()
         {
             piis = new List<PythonInterpreterInfo>();
             consoles = new Dictionary<string, ConsoleControl.ConsoleControl>();
@@ -22,6 +22,12 @@ namespace Citta_T1.Controls.Bottom
             this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
             this.cmdConsoleControl.Name = CmdConsoleString;
             consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
+            this.Disposed += new EventHandler(BottomConsoleControl_Disposed);
+        }
+
+        private void BottomConsoleControl_Disposed(object sender, EventArgs e)
+        {
+            ReleaseConsoleControl(cmdConsoleControl);
         }
 
         public void LoadPythonInterpreter()
@@ -36,7 +42,7 @@ namespace Citta_T1.Controls.Bottom
                 return;
 
 
-            
+
             foreach (PythonInterpreterInfo pii in config.AllPII)
             {
                 piis.Add(pii);
@@ -45,11 +51,10 @@ namespace Citta_T1.Controls.Bottom
 
         }
 
-        
+
         private ConsoleControl.ConsoleControl CreateNewConsoleControl(string controlName, bool visible = false)
         {
             ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
-
             consoleControl.BorderStyle = BorderStyle.FixedSingle;
             consoleControl.Dock = DockStyle.Fill;
             consoleControl.IsInputEnabled = true;
@@ -60,23 +65,14 @@ namespace Citta_T1.Controls.Bottom
             consoleControl.Size = new System.Drawing.Size(1005, 97);
             consoleControl.Visible = visible;
             consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
-            this.tableLayoutPanel1.Controls.Add(consoleControl, 0, 1);
-
             return consoleControl;
         }
 
         private void ReleaseConsoleControl(ConsoleControl.ConsoleControl consoleControl)
         {
-            this.tableLayoutPanel1.Controls.Remove(consoleControl);
-            consoles.Remove(consoleControl.Name);
-            if (consoleControl.IsProcessRunning)
+            if (consoleControl != null && consoleControl.IsProcessRunning)
             {
-                TryRleaseProcess(consoleControl);     
-            }
-            else if (consoleControl != null)
-            {
-                consoleControl.Dispose();
-                consoleControl = null;
+                TryRleaseProcess(consoleControl);
             }
         }
 
@@ -90,8 +86,12 @@ namespace Citta_T1.Controls.Bottom
 
         private void BottomPythonConsoleControl_Load(object sender, EventArgs e)
         {
-            LoadPythonInterpreter();
-            if (CmdConsoleSeleted() && !ConfigUtil.IsDesignMode())
+            if (DesignerModelClass.IsDesignerMode)
+                return;
+
+            //LoadPythonInterpreter(); 加载py控制台的暂时不用,bug太多
+            this.comboBox1.SelectedIndex = 0;
+            if (CmdConsoleSeleted())
                 StartCmdProcess();
         }
 
@@ -106,14 +106,16 @@ namespace Citta_T1.Controls.Bottom
                 return;
             }
             // 越界时用cmd代替python虚拟机
-            if (selectedIndex - 1> piis.Count)
+            if (selectedIndex - 1 > piis.Count)
                 return;
 
             string owner = this.piis[selectedIndex - 1].PythonFFP;
             if (piis.FindIndex(c => c.PythonFFP == owner) < 0)
                 return;
             ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, false);
-            consoles.Add(console.Name, console);
+            if (consoles.ContainsKey(console.Name))
+                consoles.Remove(console.Name);
+            consoles.Add(console.Name, console) ;
             StartPythonProcess(console, console.Name, PythonInitParams);
         }
 
@@ -123,25 +125,43 @@ namespace Citta_T1.Controls.Bottom
             string owner = CurrentConsoleOwnerString();
             if (String.IsNullOrEmpty(owner))
                 return;
-            ConsoleControl.ConsoleControl console = CurrentConsoleControl();
-            if (console != null)
-                ReleaseConsoleControl(console);
-
+            ConsoleControl.ConsoleControl oldConsoleControl = CurrentConsoleControl();
             // 创建cmd console
             if (owner == CmdConsoleString)
             {
-                this.cmdConsoleControl = CreateNewConsoleControl(CmdConsoleString, false);
-                consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
+                ConsoleControl.ConsoleControl console = CreateNewConsoleControl(CmdConsoleString, false);
+
+                this.panel2.SuspendLayout();
+                this.panel2.Controls.Add(console);
+                if (oldConsoleControl != null)
+                    this.panel2.Controls.Remove(oldConsoleControl);
+                this.panel2.ResumeLayout(false);
+
+                if (consoles.ContainsKey(console.Name))
+                    consoles.Remove(console.Name);
+                consoles.Add(console.Name, console);
+
+                cmdConsoleControl = console;
                 StartCmdProcess();
             }
             // 存在当前python解释器
             else if (piis.FindIndex(c => c.PythonFFP == owner) >= 0)
             {
-                console = CreateNewConsoleControl(owner, false);
+                ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, false);
+
+                this.panel2.Controls.Add(console);
+                if (oldConsoleControl != null)
+                    this.panel2.Controls.Remove(oldConsoleControl);
+
+                if (consoles.ContainsKey(console.Name))
+                    consoles.Remove(console.Name);
                 consoles.Add(console.Name, console);
+
                 StartPythonProcess(console, console.Name, PythonInitParams);
             }
 
+            if (oldConsoleControl != null)
+                ReleaseConsoleControl(oldConsoleControl);
         }
 
         private string CurrentConsoleOwnerString()
@@ -189,7 +209,7 @@ namespace Citta_T1.Controls.Bottom
                 return;
             // 直接指定参数来改变初始目录的方式,清空屏幕会有问题
             // 改用更改工作目录的方式,cmd启动完,要把工作目录切回来
-           
+
             string currentDirectory = Environment.CurrentDirectory;
             string targetDirectory = System.IO.Path.Combine(currentDirectory, "sbin");
             if (!System.IO.Directory.Exists(targetDirectory))
@@ -235,7 +255,7 @@ namespace Citta_T1.Controls.Bottom
                 this.startProcessButton.Enabled = true;
                 return;
             }
-               
+
 
             ConsoleControl.ConsoleControl console = consoles[owner];
             if (console.IsProcessRunning)
@@ -250,10 +270,8 @@ namespace Citta_T1.Controls.Bottom
 
         private void ConsoleControlReLayout(ConsoleControl.ConsoleControl console)
         {
-            this.SuspendLayout();
             console.Show();
             HideAllConsoleExceptOne(console.Name);
-            this.ResumeLayout(false);
         }
 
         private bool CmdConsoleSeleted()
@@ -283,16 +301,20 @@ namespace Citta_T1.Controls.Bottom
             {
                 console.StopProcess();
                 // 纯粹为了保险
-                if (console.ProcessInterface.Process != null && console.ProcessInterface.Process.HasExited)
+                if (console.ProcessInterface.Process != null && !console.ProcessInterface.Process.HasExited)
                     console.ProcessInterface.Process.Kill();
-                console.Dispose();
-                console = null;
+                //console.Dispose();
+                //console = null;
             }
             catch
             {
                 return false;
             }
+           
             return true;
         }
+
+ 
+          
     }
 }
