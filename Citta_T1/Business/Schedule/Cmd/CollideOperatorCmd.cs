@@ -45,13 +45,14 @@ namespace Citta_T1.Business.Schedule.Cmd
                 {
                     //如果是or，开启一个新列表
                     collideList.Add(collideTmpList);
-                    collideTmpList.Clear();
+                    collideTmpList = new List<string[]>();
                     collideTmpList.Add(tmpfactor.Skip(1).Take(2).ToArray());
                 }
             }
             collideList.Add(collideTmpList);
 
             //重写表头（覆盖）
+            ReWriteBCPFile("collide");
             //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
 
             foreach (List<string[]> tmpList in collideList)
