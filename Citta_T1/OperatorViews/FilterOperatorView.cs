@@ -171,8 +171,11 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             //输出变化，重写BCP文件
+            List<string> outName = new List<string>();
+            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
+            { outName.Add(this.columnName[Convert.ToInt32(index)]); }
             if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

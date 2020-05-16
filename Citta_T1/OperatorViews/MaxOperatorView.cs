@@ -76,11 +76,13 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
                 return;
             }
-              
-          
+
             //输出变化，重写BCP文件
+            List<string> outName =new List<string>();
+            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
+            { outName.Add(this.columnName[Convert.ToInt32(index)]); }
             if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
            
         }
 

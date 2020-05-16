@@ -369,22 +369,25 @@ namespace Citta_T1.Business.Option
                 }    
             }
             //判断输出顺序是否一致，如排序算子
-            if (oldColumns.Count > 0 && oldColumns.Count == currentcolumns.Count)
+
+            if (oldColumns.Count > 0)
             {
-                if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
+                for (int i = 0; i < oldColumns.Count(); i++)
                 {
-                    IsNewOut(currentcolumns, ID);
-                    return;
+                    if (oldColumns[i] != currentcolumns[i])
+                    {
+                        IsNewOut(currentcolumns, ID);
+                        return;
+                    }      
                 }
+               if( currentcolumns.Skip(oldColumns.Count()).Count() != 0);
+                { 
+                    List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
+                    BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+                }
+
             }
-            //旧字段真包含于新字段
-            foreach (string name in currentcolumns)
-            {
-                if (!oldColumns.Contains(name))
-                    columns.Add(name);
-            }
-            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();  
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+                   
         }
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
@@ -405,14 +408,26 @@ namespace Citta_T1.Business.Option
                     return;
                 }
             }
-            //旧字段真包含于新字段
-            foreach (string name in currentcolumns1)
+
+            //判断输出顺序是否一致，如排序算子
+
+            if (oldColumns1.Count > 0)
             {
-                if (!oldColumns1.Contains(name))
-                    columns.Add(name);
+                for (int i = 0; i < oldColumns1.Count(); i++)
+                {
+                    if (oldColumns1[i] != currentcolumns1[i])
+                    {
+                        IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
+                        return;
+                    }
+                }
+                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0) ;
+                {
+                    List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
+                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
+                }
+
             }
-            List<string> outColumns = currentcolumns0.Concat(currentcolumns1).Concat(columns).ToList<string>();
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
         public void IsNewOut( List<string> currentColumns, int ID)
