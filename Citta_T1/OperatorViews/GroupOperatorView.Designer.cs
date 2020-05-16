@@ -101,7 +101,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(539, 21);
+            this.topPanel.Size = new System.Drawing.Size(535, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -109,10 +109,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 369);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 365);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(539, 49);
+            this.bottomPanel.Size = new System.Drawing.Size(535, 49);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -153,7 +153,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 348);
+            this.keyPanel.Size = new System.Drawing.Size(116, 344);
             this.keyPanel.TabIndex = 2;
             // 
             // label4
@@ -178,7 +178,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(423, 348);
+            this.valuePanel.Size = new System.Drawing.Size(419, 344);
             this.valuePanel.TabIndex = 3;
             // 
             // dataInfo
@@ -273,7 +273,7 @@
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(2, 3);
+            this.comboBox1.Location = new System.Drawing.Point(2, 4);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(134, 25);
@@ -359,7 +359,7 @@
             // GroupOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(539, 418);
+            this.ClientSize = new System.Drawing.Size(535, 414);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

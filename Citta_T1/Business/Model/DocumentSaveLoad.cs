@@ -125,9 +125,12 @@ namespace Citta_T1.Business.Model
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement separatorNode = xDoc.CreateElement("separator");
-                    separatorNode.InnerText = Convert.ToInt32((me.GetControl as MoveRsControl).Separator).ToString();
+                    separatorNode.InnerText = me.Separator.ToString();
                     modelElementXml.AppendChild(separatorNode);
 
+                    XmlElement encodingNode = xDoc.CreateElement("encoding");
+                    encodingNode.InnerText = me.Encoding.ToString();
+                    modelElementXml.AppendChild(encodingNode);
                 }
 
 
@@ -291,12 +294,15 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
                         char separator = GetSeparator(ascii);
+                       
+                        DSUtil.Encoding encoding=xn.SelectSingleNode("encoding") == null?  DSUtil.Encoding.UTF8: EncodingType(xn.SelectSingleNode("encoding").InnerText);
 
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.FullFilePath = bcpPath;
                         ctl.Separator = separator;
+                        ctl.Encoding = encoding;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -332,6 +338,7 @@ namespace Citta_T1.Business.Model
             }
         }
         #endregion
+      
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();

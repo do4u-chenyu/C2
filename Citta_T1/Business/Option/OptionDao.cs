@@ -187,7 +187,7 @@ namespace Citta_T1.Business.Option
             (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
-        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t')
+        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -196,7 +196,7 @@ namespace Citta_T1.Business.Option
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
                 System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
-                new Point(x, y), seperator);
+                new Point(x, y), seperator, encoding);
           
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
@@ -225,7 +225,7 @@ namespace Citta_T1.Business.Option
             mrc.FullFilePath = path;
         }
 
-        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t')
+        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -234,7 +234,7 @@ namespace Citta_T1.Business.Option
             //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
                 System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
-                new Point(x, y), separator);
+                new Point(x, y), separator, encoding);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线

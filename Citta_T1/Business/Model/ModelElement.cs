@@ -122,7 +122,7 @@ namespace Citta_T1.Business.Model
         }
         public static ModelElement CreateResultElement(MoveRsControl ctl, string des, int id)
         {
-            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id);
+            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id,ctl.Separator, DSUtil.ExtType.Unknow,ctl.Encoding);
         }
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string fullFilePath, int id)
