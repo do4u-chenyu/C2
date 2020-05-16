@@ -125,7 +125,7 @@ namespace Citta_T1.Business.Model
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement separatorNode = xDoc.CreateElement("separator");
-                    separatorNode.InnerText = me.Separator.ToString();
+                    separatorNode.InnerText = Convert.ToInt32(me.Separator).ToString();
                     modelElementXml.AppendChild(separatorNode);
 
                     XmlElement encodingNode = xDoc.CreateElement("encoding");
