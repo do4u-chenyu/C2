@@ -106,7 +106,36 @@ namespace Citta_T1.Business.Model
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
-        public char Separator { get => separator; set => separator = value; }
+        public char Separator {
+            get {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        this.separator = (ctl as MoveDtControl).Separator;
+                        break;
+                    case ElementType.Result:
+                        this.separator = (ctl as MoveRsControl).Separator;
+                        break;
+                    default:
+                        break;
+                }
+                return this.separator;
+            }
+            set 
+            {
+                switch (this.type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveDtControl).Separator = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Separator = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
             char separator = '\t',

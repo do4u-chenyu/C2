@@ -45,6 +45,8 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.textBoxEx1.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
         }
         private bool IsOptionReay() 
         {
@@ -279,6 +281,9 @@ namespace Citta_T1.OperatorViews
             }
         }
         #endregion
+        #region 用户输入非法字符判断
+
+        #endregion
         private void createLine(int addLine)
         {
             // 添加控件
@@ -323,6 +328,8 @@ namespace Citta_T1.OperatorViews
             TextBox textBox = new TextBox();
             textBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
 
             Button addButton1 = new Button();

@@ -526,6 +526,15 @@ namespace Citta_T1.Business.Option
             if (e.KeyCode == Keys.Enter)
                IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
         }
+        public void IsIllegalCharacter(object sender, EventArgs e)
+        {
+
+            if ((sender as TextBox).Text.Contains(",") || (sender as TextBox).Text.Contains("，"))
+            {
+                (sender as TextBox).Text = "";
+                MessageBox.Show("输入非法字','，请重新输入过滤条件");
+            }
+        }
         #endregion
 
     }
