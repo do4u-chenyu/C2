@@ -111,10 +111,16 @@ namespace Citta_T1.Business.Schedule
         public List<int> FindBeforeNodeIds(int id)
         {
             List<int> beforeNodeId = new List<int>();
+            Dictionary<int, int> nodeIdPinDict = new Dictionary<int, int>();
+
             foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.EndID == id))
             {
-                beforeNodeId.Add(beforeNode.StartID);
+                nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
             }
+
+            for(int i = 0;i<nodeIdPinDict.Count;i++)
+                beforeNodeId.Add(nodeIdPinDict[i]);
+
             return beforeNodeId;
         }
 

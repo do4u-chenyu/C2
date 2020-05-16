@@ -55,6 +55,22 @@ namespace Citta_T1.Business.Schedule.Cmd
                         outTitleList.Add(col1[int.Parse(ind)]);
                     }
                 }
+                else if(className == "union")
+                {
+                    string[] col0 = this.option.GetOption("outname").Split('\t');
+                    foreach (string ind in col0)
+                    {
+                        outTitleList.Add(ind);
+                    }
+                }
+                else if(className == "differ" || className == "collide")
+                {
+                    string[] col0 = this.option.GetOption("columnname0").Split('\t');
+                    foreach (string ind in option.GetOption("outfield").Split(','))
+                    {
+                        outTitleList.Add(col0[int.Parse(ind)]);
+                    }
+                }
                 else
                 {
                     foreach (string ind in option.GetOption("outfield").Split(','))
