@@ -39,7 +39,7 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             using (StreamWriter sw = new StreamWriter(this.outputFilePath, false, Encoding.UTF8))
             {
-                string[] titleList = this.outputFileTitle.Split(this.separators[0][0]);
+                string[] titleList = this.outputFileTitle.Split('\t');
                 List<string> outTitleList = new List<string>();
                 if(className == "relate")
                 {

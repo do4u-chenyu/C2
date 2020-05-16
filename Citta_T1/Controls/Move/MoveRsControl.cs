@@ -314,7 +314,7 @@ namespace Citta_T1.Controls.Move
         {
             if (System.IO.File.Exists(this.FullFilePath))
             {
-                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, '\t', DSUtil.ExtType.Text, this.encoding);             // 中间结果默认\t分隔
+                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.separator, DSUtil.ExtType.Text, this.encoding);
             }
         }
 
@@ -396,7 +396,7 @@ namespace Citta_T1.Controls.Move
             FinishTextChange();
         }
 
-        private void FinishTextChange()
+        public void FinishTextChange()
         {
             if (this.textBox.Text.Length == 0)
                 return;
