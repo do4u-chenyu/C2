@@ -85,6 +85,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null)  return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
+                if (kvp.Key == "otherSeparator" || kvp.Key == "pyParam" || kvp.Key == "browseChosen") continue;//python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
             (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
@@ -180,6 +181,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null) return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
+                if (kvp.Key == "otherSeparator") continue;//python算子、IA多源算子中的其他分隔符字段允许为空，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
             (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;

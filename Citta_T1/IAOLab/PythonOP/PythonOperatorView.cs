@@ -17,6 +17,7 @@ namespace Citta_T1.OperatorViews
 
         private MoveOpControl opControl;
         private string dataPath0;
+        private string[] columnName0;
         private string oldPath;
         private string fullOutputFilePath;
         private string noChangedOutputFilePath;
@@ -49,6 +50,9 @@ namespace Citta_T1.OperatorViews
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
+                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName0);
+                this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
             }
             //初始化输入输出路径
             ModelElement hasResult = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
@@ -79,7 +83,18 @@ namespace Citta_T1.OperatorViews
             this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(" ", this.previewTextList);
         }
+        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
+        {
 
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            string column = bcpInfo.columnLine;
+            string[] columnName = column.Split(separator);
+            this.opControl.SingleDataSourceColumns = column;
+            return columnName;
+        }
+
+        private DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         #endregion
 
         #region 配置信息的保存与加载
