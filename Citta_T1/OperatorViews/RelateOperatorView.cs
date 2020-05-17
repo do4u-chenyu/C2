@@ -226,7 +226,9 @@ namespace Citta_T1.OperatorViews
             string outField1 = string.Join(",", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
-            string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString();
+            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
+            string factor1 = index01 + "," + index02;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {

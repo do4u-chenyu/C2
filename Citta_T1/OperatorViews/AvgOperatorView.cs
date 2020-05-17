@@ -143,7 +143,7 @@ namespace Citta_T1.OperatorViews
            
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldAvg != this.AvgComBox.Text)
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());

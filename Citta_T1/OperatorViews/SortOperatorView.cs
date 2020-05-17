@@ -35,6 +35,7 @@ namespace Citta_T1.OperatorViews
           
             this.opControl = opControl;
             dataPath = "";
+           
             this.oldColumnName = this.opControl.Option.GetOption("columnname").Split('\t').ToList();
             InitOptionInfo();
             LoadOption();
@@ -134,19 +135,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldCheckedItems[0] != this.repetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[1] != this.noRepetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldSort.SequenceEqual(this.sortField.Text))
-                Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldFirstRow!=this.firstRow.Text)
-                Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldEndRow!=this.endRow.Text)
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
