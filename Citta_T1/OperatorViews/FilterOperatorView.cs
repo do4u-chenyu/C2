@@ -201,7 +201,7 @@ namespace Citta_T1.OperatorViews
             string outField = string.Join(",", outIndexs);
             string index00 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string index11 = comboBox2.Tag == null ? comboBox2.SelectedIndex.ToString() : comboBox2.Tag.ToString();
-            string factor1 = index00 + "," + index11;
+            string factor1 = index00 + "," + index11 + "," + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
