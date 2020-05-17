@@ -160,6 +160,7 @@ namespace Citta_T1.Controls.Bottom
 
             DvgClean();
             _InitializeDGV(datas, headers, numOfCols);
+            ControlUtil.DisableOrder(this.dataGridView);
         }
     }
 }
