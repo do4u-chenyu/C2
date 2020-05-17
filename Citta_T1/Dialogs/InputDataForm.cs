@@ -551,5 +551,10 @@ namespace Citta_T1.Dialogs
                 PreViewBcpFile();
             }
         }
+
+        private void textBoxEx1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.radioButton3.Checked = true;
+        }
     }
 }
