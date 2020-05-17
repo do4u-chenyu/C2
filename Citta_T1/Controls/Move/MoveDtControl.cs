@@ -189,6 +189,9 @@ namespace Citta_T1.Controls.Move
 
         public void ChangeSize(int sizeL)
         {
+            bool originVisible = this.Visible;
+            if (originVisible)
+                this.Hide(); 
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -205,21 +208,31 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
+            if (originVisible)
+                this.Show();
+        }
+        public static void SetDouble(Control cc)
+        {
+
+            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
+                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-
-        public void ChangeSize(bool isLarger, float factor = 1.3F)
+        public void ChangeSize(bool zoomUp, float factor = 1.3F)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+
+            SetDouble(this);
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-            if (isLarger)
+            if (zoomUp)
             {
                 SetControlsBySize(factor, this);
                 this.rectOut = SetRectBySize(factor, this.rectOut);
+                this.Invalidate();
             }
-            else if (!isLarger)
+            else
             {
                 SetControlsBySize(1 / factor, this);
                 this.rectOut = SetRectBySize(1 / factor, this.rectOut);

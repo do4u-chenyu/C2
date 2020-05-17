@@ -244,7 +244,12 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            if (ctl.Option.GetOption("columnname") != "")
+                            
+                            if(ctl.SubTypeName == "AI实践" && ctl.Option.GetOption("columnname0") != "")
+                            {
+                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname0");
+                            }
+                            else if (ctl.Option.GetOption("columnname") != "")
                                 ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
                             else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
                             {

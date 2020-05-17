@@ -83,7 +83,7 @@ namespace Citta_T1.Dialogs
             }
             //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
             this.textBox1.Text = fileName;
-
+            ControlUtil.DisableOrder(this.dataGridView1);
         }
         
 
@@ -550,6 +550,11 @@ namespace Citta_T1.Dialogs
                     }
                 PreViewBcpFile();
             }
+        }
+
+        private void textBoxEx1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.radioButton3.Checked = true;
         }
     }
 }

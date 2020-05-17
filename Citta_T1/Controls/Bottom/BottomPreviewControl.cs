@@ -22,6 +22,7 @@ namespace Citta_T1.Controls.Bottom
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridView.ReadOnly = true;
             InitializeDgv();
         }
 
@@ -159,6 +160,7 @@ namespace Citta_T1.Controls.Bottom
 
             DvgClean();
             _InitializeDGV(datas, headers, numOfCols);
+            ControlUtil.DisableOrder(this.dataGridView);
         }
     }
 }
