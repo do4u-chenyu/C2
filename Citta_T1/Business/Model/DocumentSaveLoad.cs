@@ -249,7 +249,7 @@ namespace Citta_T1.Business.Model
                             else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
                             {
                                 ctl.DoubleDataSourceColumns["0"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
-                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname1").Split('\t').ToList();
                             }
 
                         }
