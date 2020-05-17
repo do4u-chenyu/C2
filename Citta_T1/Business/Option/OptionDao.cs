@@ -531,11 +531,16 @@ namespace Citta_T1.Business.Option
 
             if ((sender as TextBox).Text.Contains(",") || (sender as TextBox).Text.Contains("，"))
             {
-                (sender as TextBox).Text = "";
+                (sender as TextBox).Text = ""; 
                 MessageBox.Show("输入非法字','，请重新输入过滤条件");
             }
         }
         #endregion
-
+        #region 配置窗口获取用户某些选定数据事件
+        public void GetSelectedItemIndex(object sender, EventArgs e)
+        {
+            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+        }
+        #endregion
     }
 }

@@ -86,7 +86,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(332, 16);
+            this.topPanel.Size = new System.Drawing.Size(328, 16);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -94,10 +94,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 157);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 153);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(332, 42);
+            this.bottomPanel.Size = new System.Drawing.Size(328, 42);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -137,7 +137,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 16);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 141);
+            this.keyPanel.Size = new System.Drawing.Size(116, 137);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -149,7 +149,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 16);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(216, 141);
+            this.valuePanel.Size = new System.Drawing.Size(212, 137);
             this.valuePanel.TabIndex = 3;
             // 
             // DataInfoBox
@@ -177,7 +177,7 @@
             // 
             // MinValueBox
             // 
-            this.MinValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MinValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.MinValueBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.MinValueBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.MinValueBox.FormattingEnabled = true;
@@ -186,11 +186,12 @@
             this.MinValueBox.Name = "MinValueBox";
             this.MinValueBox.Size = new System.Drawing.Size(150, 25);
             this.MinValueBox.TabIndex = 1;
+            this.MinValueBox.SelectionChangeCommitted += new System.EventHandler(this.MinValueBox_SelectionChangeCommitted);
             // 
             // MinOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(332, 199);
+            this.ClientSize = new System.Drawing.Size(328, 195);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

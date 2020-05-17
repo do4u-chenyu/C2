@@ -25,6 +25,7 @@ namespace Citta_T1.OperatorViews
         private List<string> selectName;
         private string oldOptionDict;
         private LogUtil log = LogUtil.GetInstance("AvgOperatorView");
+        private string selectedIndex;
 
         public AvgOperatorView(MoveOpControl opControl)
         {
@@ -170,7 +171,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            this.opControl.Option.SetOption("avgfield", this.AvgComBox.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
             this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
@@ -210,6 +211,11 @@ namespace Citta_T1.OperatorViews
         {
             if (e.KeyCode == Keys.Enter)
                 Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+        }
+
+        private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.selectedIndex = this.AvgComBox.SelectedIndex.ToString();
         }
     }
 }

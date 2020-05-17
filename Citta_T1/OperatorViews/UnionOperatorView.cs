@@ -50,6 +50,10 @@ namespace Citta_T1.OperatorViews
             this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.textBoxEx1.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -145,7 +149,10 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
                     Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + control3.Text;
+                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
+                   
+                    string factor = index1 + "," + index2 + "," + control3.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                     this.selectColumn.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
                 }
@@ -281,6 +288,7 @@ namespace Citta_T1.OperatorViews
             dataBox.Items.AddRange(this.columnName0);
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -291,6 +299,7 @@ namespace Citta_T1.OperatorViews
             filterBox.Items.AddRange(this.columnName1);
             filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = new TextBox();

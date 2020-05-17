@@ -48,6 +48,8 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.dataInfo);
+            //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -162,16 +164,17 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
-            string factor1 = this.comboBox1.SelectedIndex.ToString();
-            this.groupColumn.Add(this.comboBox1.SelectedIndex);
+            string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
+            this.groupColumn.Add(this.comboBox1.SelectedIndex);
+            
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString();
-                    this.groupColumn.Add((control1 as ComboBox).SelectedIndex);
+                    string factor = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    this.groupColumn.Add(Convert.ToInt32(factor));
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -264,6 +267,7 @@ namespace Citta_T1.OperatorViews
             dataBox.Items.AddRange(this.columnName);
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
            
