@@ -80,14 +80,17 @@ namespace Citta_T1.Utils
         // 当前文档在canvas里整体拖动dx, dy
         public static void CanvasDragLocation(float dx, float dy)
         {
-
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            ModelDocument md = Global.GetCurrentDocument();
+            List <ModelElement> modelElements = md.ModelElements;
+            List<ModelRelation> modelRelations = md.ModelRelations;
             foreach (ModelElement me in modelElements)
             {
                 Control ct = me.GetControl;
                 if (ct is IDragable)
                     (ct as IDragable).ChangeLoc(dx, dy);
             }
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
         }
 
 
