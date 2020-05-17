@@ -26,6 +26,7 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private LogUtil log = LogUtil.GetInstance("MinOperatorView");
+        private string selectedIndex;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -93,12 +94,9 @@ namespace Citta_T1.OperatorViews
             List<int> removeIndex = new List<int>();
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
-            this.opControl.Option.SetOption("outfield", outField);
-
-            if (this.MinValueBox.Text == "")
-                this.opControl.Option.SetOption("minfield", "");
-            else
-                this.opControl.Option.SetOption("minfield", this.MinValueBox.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("outfield", outField);       
+            this.opControl.Option.SetOption("minfield", this.selectedIndex == null? this.MinValueBox.SelectedIndex.ToString():this.selectedIndex);
+               
             
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
@@ -214,6 +212,11 @@ namespace Citta_T1.OperatorViews
         private void DataInfoBox_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.DataInfoBox);
+        }
+
+        private void MinValueBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            this.selectedIndex = this.MinValueBox.SelectedIndex.ToString();
         }
     }
 }

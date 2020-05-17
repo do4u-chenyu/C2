@@ -46,6 +46,7 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.dataInfoBox);
             this.maxValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.maxValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.maxValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -103,7 +104,7 @@ namespace Citta_T1.OperatorViews
             if (this.maxValueBox.Text == "")
                 this.opControl.Option.SetOption("maxfield", "");
             else
-                this.opControl.Option.SetOption("maxfield", this.maxValueBox.SelectedIndex.ToString());
+                this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
             
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
