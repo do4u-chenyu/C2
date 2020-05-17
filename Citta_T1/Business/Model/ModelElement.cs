@@ -104,7 +104,38 @@ namespace Citta_T1.Business.Model
         public Control GetControl { get => ctl; }
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
-        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public DSUtil.Encoding Encoding
+        {
+            get
+            {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        this.encoding = (ctl as MoveDtControl).Encoding;
+                        break;
+                    case ElementType.Result:
+                        this.encoding = (ctl as MoveRsControl).Encoding;
+                        break;
+                    default:
+                        break;
+                }
+                return this.encoding;
+            }
+            set
+            {
+                switch (this.type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveDtControl).Encoding = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Encoding = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator {
             get {
