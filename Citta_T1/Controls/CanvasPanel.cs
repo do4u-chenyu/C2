@@ -509,6 +509,7 @@ namespace Citta_T1.Controls
                 {
                     cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
+                  //  System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
                     Global.GetOptionDao().EnableControlOption(mr);
                 }
                 cmd = ECommandType.Null;

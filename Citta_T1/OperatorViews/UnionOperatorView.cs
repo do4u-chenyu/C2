@@ -50,7 +50,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.textBoxEx1.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
-            this.comboBox1.SelectedIndexChanged +=new System.EventHandler(IsDuplicateSelect);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -231,6 +230,15 @@ namespace Citta_T1.OperatorViews
             bool empty = IsOptionReay();
             if (empty) return;
             SaveOption();
+            //判断取并条件是否有完全重复的
+
+            var duplicateValues = this.opControl.Option.OptionDict.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
+            foreach (var item in duplicateValues)
+            {
+                MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
+                return;
+            }
+
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
            
@@ -293,7 +301,6 @@ namespace Citta_T1.OperatorViews
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            dataBox.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -480,37 +487,7 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.dataSource0);
         }
-        #region 分组字段重复选择判断
-        private void IsDuplicateSelect(object sender, EventArgs e)
-        {
-            if ((sender as ComboBox).Text == null || (sender as ComboBox).Text == "") return;
-            List<string> selectedIndex = new List<string>();
-            if (this.tableLayoutPanel1.RowCount > 0)
-            {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    if (control1.Equals((sender as ComboBox))) continue;
-                    string index0 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    selectedIndex.Add(index0);
-                }
-            }
-            if (!this.comboBox1.Equals((sender as ComboBox)))
-            {
-                string index0 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-                selectedIndex.Add(index0);
-            }
-            string index1 = (sender as ComboBox).Tag == null ? (sender as ComboBox).SelectedIndex.ToString() : (sender as ComboBox).Tag.ToString();
-            if (selectedIndex.Contains(index1))
-            {
-                (sender as ComboBox).Tag = null;
-                (sender as ComboBox).Text = null;
-                (sender as ComboBox).SelectedItem = null;
-                MessageBox.Show("该字段已选择，请选择其他字段");
-            }
-
-        }
-        #endregion
+      
 
     }
 }
