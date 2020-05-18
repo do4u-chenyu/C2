@@ -41,8 +41,8 @@ namespace Citta_T1.Controls
         #region 对应画布鼠标事件
         public void FrameDown(MouseEventArgs e)
         {
-            
             startP = e.Location;
+            log.Info("框选范围：" + minBoding);
             if (e.Button == MouseButtons.Right)
                 return;
             if (minBoding.IsEmpty)
@@ -60,20 +60,22 @@ namespace Citta_T1.Controls
             {
                 startSelect = false;
                 stratDrag = true;
+                MoveImage_Display(0,0);
                 
-                SelectControl_Hide();
             }
         }
 
         public void FrameMove(MouseEventArgs e)
         {
             FrameEnter(e);
+            
             if (e.Button != MouseButtons.Left)
                 return;
             if (startSelect)
                 DrawFrame_move(e);
             if (stratDrag)
                 dragFrame_Move(e);
+            
         }
         public void FrameUp(MouseEventArgs e)
         {
@@ -205,7 +207,6 @@ namespace Citta_T1.Controls
                 Control ct = me.GetControl;
                 if (frameRec.Contains(ct.Location))
                 {
-                    (ct as IMoveControl).ControlSelect();
                     minX.Add(ct.Left - (int)(ct.Height * 0.4));
                     minY.Add(ct.Top - (int)(ct.Height * 0.4));
                     maxX.Add(ct.Left + ct.Width + (int)(ct.Height * 0.4));
@@ -335,7 +336,7 @@ namespace Citta_T1.Controls
             n.DrawImageUnscaled(backGroung, 0, 0);
             n.Dispose();
             g.Dispose();
-            backGroung = null;
+            //backGroung = null;
 
 
         }
@@ -390,13 +391,6 @@ namespace Citta_T1.Controls
         private void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            for (int i = 0; i < modelElements.Count; i++)
-            {
-                ModelElement me = modelElements[modelElements.Count - i - 1];
-                Control ct = me.GetControl;
-                (ct as IMoveControl).ControlNoSelect();
-            }
             startSelect = true;
             stratDrag = false;
         }
