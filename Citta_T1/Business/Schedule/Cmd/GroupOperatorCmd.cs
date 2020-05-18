@@ -36,7 +36,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //cmds.Add(string.Format("sbin\\echo.exe {0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
             ReWriteBCPFile();
 
-            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe -t\"{7}\" {2} {3} {4} | sbin\\awk.exe -F\"{7}\" -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, order, sortLineCmd, outfieldLine, this.outputFilePath, this.separators[0]));
+            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe -t\"{7}\" -n {2} {3} {4} | sbin\\awk.exe -F\"{7}\" -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, order, sortLineCmd, outfieldLine, this.outputFilePath, this.separators[0]));
 
             return cmds;
         }
