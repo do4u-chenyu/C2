@@ -352,6 +352,7 @@ namespace Citta_T1.Controls
             g.Dispose();
             
         }
+
         #endregion
         #region 实现框选控件批量移动
         private void CreateMoveImg()
@@ -365,7 +366,6 @@ namespace Citta_T1.Controls
             //创建作图区域
             Graphics graphic = Graphics.FromImage(moveImage);
             graphic.DrawImage(staticImage, 0, 0, realRect, GraphicsUnit.Pixel);
-            Color color = moveImage.GetPixel(0, 0);
             for (int i = 0; i < moveImage.Height; i++)
             {
                 for (int j = 0; j < moveImage.Width; j++)
@@ -385,8 +385,6 @@ namespace Citta_T1.Controls
             n.Dispose();
             g.Dispose();
             backGroung = null;
-
-
         }
         private void dragFrame_Move(MouseEventArgs e)
         {
@@ -409,6 +407,7 @@ namespace Citta_T1.Controls
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
             n.DrawImageUnscaled(i, 0, 0);
         }
+
         private void dragFrame_Up(MouseEventArgs e)
         {
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
@@ -426,10 +425,6 @@ namespace Citta_T1.Controls
             minBoding = new Rectangle(0, 0, 0, 0);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
-            CreateImg();
-            DrawRoundedRect(2);
-            Global.GetCurrentDocument().Show();
-            
         }
         #endregion
         private void InitFrame()
