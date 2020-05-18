@@ -238,7 +238,7 @@ namespace Citta_T1.Business.Schedule
                 tokenSource.Token.ThrowIfCancellationRequested();
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
-                resetEvent.WaitOne();
+                
 
                 UpdateLogDelegate(triple.TripleName + "开始运行");
                 //Thread.Sleep(10000);
@@ -264,7 +264,7 @@ namespace Citta_T1.Business.Schedule
                 }
                 RunLinuxCommand(cmds);
 
-                
+                resetEvent.WaitOne();
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
