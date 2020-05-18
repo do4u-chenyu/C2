@@ -46,13 +46,14 @@ namespace Citta_T1.Business.Schedule.Cmd
                 {
                     //如果是or，开启一个新列表
                     differList.Add(differTmpList);
-                    differTmpList.Clear();
+                    differTmpList = new List<string[]>();
                     differTmpList.Add(tmpfactor.Skip(1).Take(2).ToArray());
                 }
             }
             differList.Add(differTmpList);
 
             //重写表头（覆盖）
+            ReWriteBCPFile("differ");
             //cmds.Add(string.Format("sbin\\echo.exe \"{0}\" | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{ print {1} }}' > {2}", this.outputFileTitle, outfieldLine, this.outputFilePath, this.separators[0]));
 
 

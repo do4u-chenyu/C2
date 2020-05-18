@@ -175,7 +175,8 @@ namespace Citta_T1.Controls
             {
                 me.Show();
             }
-
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
             Global.GetNaviViewControl().UpdateNaviView();
         }
     }

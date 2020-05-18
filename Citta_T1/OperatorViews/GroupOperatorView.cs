@@ -47,7 +47,10 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
             SetTextBoxName(this.dataInfo);
+            //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -162,16 +165,17 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
-            string factor1 = this.comboBox1.SelectedIndex.ToString();
-            this.groupColumn.Add(this.comboBox1.SelectedIndex);
+            string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
+            this.groupColumn.Add(this.comboBox1.SelectedIndex);
+            
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString();
-                    this.groupColumn.Add((control1 as ComboBox).SelectedIndex);
+                    string factor = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    this.groupColumn.Add(Convert.ToInt32(factor));
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -180,7 +184,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.outList = new List<int>(this.groupColumn);
-            int[] columnIndex= Enumerable.Range(0, this.columnName.Length).ToArray();
+            int[] columnIndex = Enumerable.Range(0, this.columnName.Length).ToArray();
             foreach (int index in columnIndex)
             {
                 if (!this.groupColumn.Contains(index))
@@ -264,6 +268,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Items.AddRange(this.columnName);
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
            
@@ -392,5 +398,38 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.dataInfo);
         }
+        #region 分组字段重复选择判断
+        private void IsDuplicateSelect(object sender, EventArgs e)
+        {
+            if ((sender as ComboBox).Text == null || (sender as ComboBox).Text == "") return;
+            List<string> selectedIndex = new List<string>();
+            if (this.tableLayoutPanel1.RowCount > 0)
+            {
+                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
+                {
+                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
+                    if (control1.Equals((sender as ComboBox))) continue;
+                    string index0 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    selectedIndex.Add(index0);
+                }
+            }
+            if (!this.comboBox1.Equals((sender as ComboBox)))
+            {
+                string index0 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+                selectedIndex.Add(index0);
+            }
+            string index1 = (sender as ComboBox).Tag == null ? (sender as ComboBox).SelectedIndex.ToString() : (sender as ComboBox).Tag.ToString();
+            if (selectedIndex.Contains(index1))
+            {
+                (sender as ComboBox).Tag = null;
+                (sender as ComboBox).Text = null;
+                (sender as ComboBox).SelectedItem = null;               
+                MessageBox.Show("该字段已选择，请选择其他字段");
+            }
+
+
+
+        }
+        #endregion
     }
 }

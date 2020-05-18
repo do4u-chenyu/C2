@@ -17,6 +17,7 @@ namespace Citta_T1.OperatorViews
 
         private MoveOpControl opControl;
         private string dataPath0;
+        private string[] columnName0;
         private string oldPath;
         private string fullOutputFilePath;
         private string noChangedOutputFilePath;
@@ -49,6 +50,9 @@ namespace Citta_T1.OperatorViews
                 this.dataPath0 = dataInfo["dataPath0"];
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
+                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName0);
+                this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
             }
             //初始化输入输出路径
             ModelElement hasResult = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
@@ -79,50 +83,19 @@ namespace Citta_T1.OperatorViews
             this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(" ", this.previewTextList);
         }
+        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
+        {
 
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            string column = bcpInfo.columnLine;
+            string[] columnName = column.Split(separator);
+            this.opControl.SingleDataSourceColumns = column;
+            return columnName;
+        }
+
+        private DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         #endregion
-
-        private string GetControlRadioName(Control group)
-        {
-            foreach(Control ct in group.Controls)
-            {
-                if (!(ct is RadioButton))
-                    continue;
-                RadioButton rb = ct as RadioButton;
-                if (rb.Checked)
-                {
-                    return rb.Name;
-                }
-            }
-            //TODO默认返回一个
-            return "";
-        }
-
-        private void SetControlRadioCheck(Control group,string radioName,RadioButton defaulRb)
-        {
-            if(!IsControlRadioCheck(group, radioName))
-                defaulRb.Checked = true;
-        }
-
-        private bool IsControlRadioCheck(Control group, string radioName)
-        {
-            foreach (Control ct in group.Controls)
-            {
-                if (!(ct is RadioButton))
-                    continue;
-                RadioButton rb = ct as RadioButton;
-                if (rb.Name.ToLower() == radioName)
-                {
-                    rb.Checked = true;
-                    return true;
-                }
-                else
-                {
-                    rb.Checked = false;
-                }
-            }
-            return false;
-        }
 
         #region 配置信息的保存与加载
         private void SaveOption()
@@ -160,7 +133,10 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
             else
+            {
                 this.opControl.Status = ElementStatus.Ready;
+            }
+                
         }
 
         private void LoadOption()
@@ -183,7 +159,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-
+        #region 添加取消
         private void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (!IsOptionReady()) return;
@@ -201,22 +177,37 @@ namespace Citta_T1.OperatorViews
             {
                 Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
-                return;
             }
 
-            //TODO
             //输出变化，修改结果算子路径
             if (hasResutl != null && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
                 (hasResutl.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
-                
-                
+
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            //修改结果算子内容
+            (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
+            (hasResultNew.GetControl as MoveRsControl).FinishTextChange();
+            (hasResultNew.GetControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
+            (hasResultNew.GetControl as MoveRsControl).Separator = '\t';
+            string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
+            if(separator == "commaradio")
+            {
+                (hasResultNew.GetControl as MoveRsControl).Separator = ',';
+            }
+            else if(separator == "otherseparatorradio")
+            {
+                (hasResultNew.GetControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
+            }
+            BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
+
         }
 
         private void CancelButton_Click(object sender, System.EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -264,12 +255,9 @@ namespace Citta_T1.OperatorViews
 
             return true;
         }
+        #endregion
 
-
-
-       
-
-
+        #region 虚拟机配置
         private bool PythonInterpreterInfoLoad()
         {
             // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
@@ -336,27 +324,9 @@ namespace Citta_T1.OperatorViews
             }
             return "";
         }
+        #endregion
 
-
-        public void CreateNewBlankBCPFile(string fullFilePath)
-        {
-            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
-            {
-                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
-                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
-            }
-
-            if (!File.Exists(fullFilePath))
-            {
-                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
-                {
-                    sw.Write("");
-                }
-            }
-        }
-
-
-
+        #region 预览框
         private void pythonChosenComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //动态改变preview内容
@@ -483,7 +453,80 @@ namespace Citta_T1.OperatorViews
         {
             this.previewCmdText.Text = String.Join(" ", this.previewTextList);
         }
+        #endregion
 
+        private string GetControlRadioName(Control group)
+        {
+            foreach (Control ct in group.Controls)
+            {
+                if (!(ct is RadioButton))
+                    continue;
+                RadioButton rb = ct as RadioButton;
+                if (rb.Checked)
+                {
+                    return rb.Name;
+                }
+            }
+            //TODO默认返回一个
+            return "";
+        }
 
+        private void SetControlRadioCheck(Control group, string radioName, RadioButton defaulRb)
+        {
+            if (!IsControlRadioCheck(group, radioName))
+                defaulRb.Checked = true;
+        }
+
+        private bool IsControlRadioCheck(Control group, string radioName)
+        {
+            foreach (Control ct in group.Controls)
+            {
+                if (!(ct is RadioButton))
+                    continue;
+                RadioButton rb = ct as RadioButton;
+                if (rb.Name.ToLower() == radioName)
+                {
+                    rb.Checked = true;
+                    return true;
+                }
+                else
+                {
+                    rb.Checked = false;
+                }
+            }
+            return false;
+        }
+
+        public void CreateNewBlankBCPFile(string fullFilePath)
+        {
+            if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
+            {
+                Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
+                FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
+            }
+
+            if (!File.Exists(fullFilePath))
+            {
+                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+                {
+                    sw.Write("");
+                }
+            }
+        }
+
+        private void otherSeparatorText_TextChanged(object sender, EventArgs e)
+        {
+            this.otherSeparatorRadio.Checked = true;
+            if (String.IsNullOrEmpty(this.otherSeparatorText.Text))
+                return;
+            try
+            {
+                char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.otherSeparatorText.Text);
+            }
+        }
     }
 }

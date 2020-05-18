@@ -146,7 +146,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             else if(this.oldCheckedItems[3] != this.descendingOrder .Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
+            else if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
            

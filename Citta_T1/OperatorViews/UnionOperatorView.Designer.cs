@@ -99,7 +99,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(557, 37);
+            this.topPanel.Size = new System.Drawing.Size(553, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -107,10 +107,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 338);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 334);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(557, 44);
+            this.bottomPanel.Size = new System.Drawing.Size(553, 44);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -150,7 +150,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 301);
+            this.keyPanel.Size = new System.Drawing.Size(116, 297);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -164,7 +164,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(441, 301);
+            this.valuePanel.Size = new System.Drawing.Size(437, 297);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -336,7 +336,7 @@
             // UnionOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(557, 382);
+            this.ClientSize = new System.Drawing.Size(553, 378);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

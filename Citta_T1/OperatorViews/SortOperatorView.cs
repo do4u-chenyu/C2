@@ -35,6 +35,7 @@ namespace Citta_T1.OperatorViews
           
             this.opControl = opControl;
             dataPath = "";
+           
             this.oldColumnName = this.opControl.Option.GetOption("columnname").Split('\t').ToList();
             InitOptionInfo();
             LoadOption();
@@ -49,6 +50,8 @@ namespace Citta_T1.OperatorViews
             this.sortField.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             SetTextBoxName(this.dataInfo);
+            //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.sortField.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
       
         #region 配置初始化
@@ -132,19 +135,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldCheckedItems[0] != this.repetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[1] != this.noRepetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldSort.SequenceEqual(this.sortField.Text))
-                Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldFirstRow!=this.firstRow.Text)
-                Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldEndRow!=this.endRow.Text)
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
@@ -172,7 +163,7 @@ namespace Citta_T1.OperatorViews
         {
 
             this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
-            this.opControl.Option.SetOption("sortfield", this.sortField.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("sortfield", this.sortField.Tag == null ? this.sortField.SelectedIndex.ToString() : this.sortField.Tag.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());

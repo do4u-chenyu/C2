@@ -185,7 +185,7 @@ namespace Citta_T1.OperatorViews
             //内容修改，引起文档dirty
             if (this.oldRandomNum!= this.RandomNumBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
-            else if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            else if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
@@ -196,8 +196,11 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             //输出变化，重写BCP文件
-            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.OutList.GetItemCheckText(), this.opControl.ID);
+            List<string> outName = new List<string>();
+            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
+            { outName.Add(this.columnName[Convert.ToInt32(index)]); }
+            if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
+                Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

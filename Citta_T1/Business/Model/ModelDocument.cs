@@ -173,11 +173,13 @@ namespace Citta_T1.Business.Model
         }
         public void StateChangeByOut(int ID)
         {
+           
             foreach (ModelRelation mr in this.ModelRelations)
-            {
+            {              
                 if (mr.StartID != ID)  continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
+
                     if (me.ID != mr.EndID) continue;
                     me.Status = ElementStatus.Null;
                     StateChangeByOut(mr.EndID);
@@ -185,6 +187,8 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
+       
+
         public void Load()
         {
             if (File.Exists(Path.Combine(savePath, modelTitle +".xml")))

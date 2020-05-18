@@ -125,9 +125,12 @@ namespace Citta_T1.Business.Model
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement separatorNode = xDoc.CreateElement("separator");
-                    separatorNode.InnerText = Convert.ToInt32((me.GetControl as MoveRsControl).Separator).ToString();
+                    separatorNode.InnerText = Convert.ToInt32(me.Separator).ToString();
                     modelElementXml.AppendChild(separatorNode);
 
+                    XmlElement encodingNode = xDoc.CreateElement("encoding");
+                    encodingNode.InnerText = me.Encoding.ToString();
+                    modelElementXml.AppendChild(encodingNode);
                 }
 
 
@@ -241,12 +244,17 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            if (ctl.Option.GetOption("columnname") != "")
+                            
+                            if(ctl.SubTypeName == "AI实践" && ctl.Option.GetOption("columnname0") != "")
+                            {
+                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname0");
+                            }
+                            else if (ctl.Option.GetOption("columnname") != "")
                                 ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
                             else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
                             {
                                 ctl.DoubleDataSourceColumns["0"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
-                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname1").Split('\t').ToList();
                             }
 
                         }
@@ -291,12 +299,15 @@ namespace Citta_T1.Business.Model
                         string bcpPath = xn.SelectSingleNode("path").InnerText;
                         int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
                         char separator = GetSeparator(ascii);
+                       
+                        DSUtil.Encoding encoding=xn.SelectSingleNode("encoding") == null?  DSUtil.Encoding.UTF8: EncodingType(xn.SelectSingleNode("encoding").InnerText);
 
                         MoveRsControl ctl = new MoveRsControl(0, name, loc);
                         ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.FullFilePath = bcpPath;
                         ctl.Separator = separator;
+                        ctl.Encoding = encoding;
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -332,6 +343,7 @@ namespace Citta_T1.Business.Model
             }
         }
         #endregion
+      
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();

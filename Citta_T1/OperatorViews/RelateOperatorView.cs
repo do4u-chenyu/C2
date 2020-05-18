@@ -54,6 +54,10 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+
         }
         #region 配置初始化
         private void InitOptionInfo()
@@ -222,7 +226,9 @@ namespace Citta_T1.OperatorViews
             string outField1 = string.Join(",", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
-            string factor1 = this.comboBox1.SelectedIndex.ToString() + "," + this.comboBox2.SelectedIndex.ToString();
+            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
+            string factor1 = index01 + "," + index02;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -231,7 +237,11 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 0];
                     Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 3];
-                    string factor = (control1 as ComboBox).SelectedIndex.ToString() + "," + (control2 as ComboBox).SelectedIndex.ToString() + "," + (control3 as ComboBox).SelectedIndex.ToString();
+                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
+                    string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
+                    string factor = index1 + "," + index2 + "," + index3;
+              
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -322,6 +332,7 @@ namespace Citta_T1.OperatorViews
             "OR"});
             regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
@@ -332,6 +343,7 @@ namespace Citta_T1.OperatorViews
             dataBox.Items.AddRange(this.columnName0);
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             Label label = new Label();
@@ -350,6 +362,7 @@ namespace Citta_T1.OperatorViews
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             data2box.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            data2box.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
 
             Button addButton1 = new Button();

@@ -104,9 +104,69 @@ namespace Citta_T1.Business.Model
         public Control GetControl { get => ctl; }
         public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
-        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public DSUtil.Encoding Encoding
+        {
+            get
+            {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        this.encoding = (ctl as MoveDtControl).Encoding;
+                        break;
+                    case ElementType.Result:
+                        this.encoding = (ctl as MoveRsControl).Encoding;
+                        break;
+                    default:
+                        break;
+                }
+                return this.encoding;
+            }
+            set
+            {
+                switch (this.type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveDtControl).Encoding = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Encoding = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
-        public char Separator { get => separator; set => separator = value; }
+        public char Separator {
+            get {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        this.separator = (ctl as MoveDtControl).Separator;
+                        break;
+                    case ElementType.Result:
+                        this.separator = (ctl as MoveRsControl).Separator;
+                        break;
+                    default:
+                        break;
+                }
+                return this.separator;
+            }
+            set 
+            {
+                switch (this.type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveDtControl).Separator = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Separator = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
             char separator = '\t',
@@ -122,7 +182,7 @@ namespace Citta_T1.Business.Model
         }
         public static ModelElement CreateResultElement(MoveRsControl ctl, string des, int id)
         {
-            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id);
+            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id,ctl.Separator, DSUtil.ExtType.Unknow,ctl.Encoding);
         }
 
         public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string fullFilePath, int id)

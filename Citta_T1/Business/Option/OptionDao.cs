@@ -85,6 +85,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null)  return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
+                if (kvp.Key == "otherSeparator" || kvp.Key == "pyParam" || kvp.Key == "browseChosen" || kvp.Key == "endRow") continue;//python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，sort的结束行数也能为空。。。，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
             (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
@@ -180,12 +181,13 @@ namespace Citta_T1.Business.Option
             if (optionDict == null) return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
+                if (kvp.Key == "otherSeparator") continue;//python算子、IA多源算子中的其他分隔符字段允许为空，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
             (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
-        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t')
+        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -194,7 +196,7 @@ namespace Citta_T1.Business.Option
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
                 System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
-                new Point(x, y), seperator);
+                new Point(x, y), seperator, encoding);
           
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
@@ -223,7 +225,7 @@ namespace Citta_T1.Business.Option
             mrc.FullFilePath = path;
         }
 
-        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t')
+        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 if (mr.StartID == moveOpControl.ID) return;
@@ -232,7 +234,7 @@ namespace Citta_T1.Business.Option
             //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
                 System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
-                new Point(x, y), separator);
+                new Point(x, y), separator, encoding);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
              * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
@@ -367,22 +369,25 @@ namespace Citta_T1.Business.Option
                 }    
             }
             //判断输出顺序是否一致，如排序算子
-            if (oldColumns.Count > 0 && oldColumns.Count == currentcolumns.Count)
+
+            if (oldColumns.Count > 0)
             {
-                if (!Enumerable.SequenceEqual(oldColumns, currentcolumns))
+                for (int i = 0; i < oldColumns.Count(); i++)
                 {
-                    IsNewOut(currentcolumns, ID);
-                    return;
+                    if (oldColumns[i] != currentcolumns[i])
+                    {
+                        IsNewOut(currentcolumns, ID);
+                        return;
+                    }      
                 }
+               if( currentcolumns.Skip(oldColumns.Count()).Count() != 0);
+                { 
+                    List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
+                    BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+                }
+
             }
-            //旧字段真包含于新字段
-            foreach (string name in currentcolumns)
-            {
-                if (!oldColumns.Contains(name))
-                    columns.Add(name);
-            }
-            List<string> outColumns = oldColumns.Concat(columns).ToList<string>();  
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
+                   
         }
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
@@ -403,14 +408,26 @@ namespace Citta_T1.Business.Option
                     return;
                 }
             }
-            //旧字段真包含于新字段
-            foreach (string name in currentcolumns1)
+
+            //判断输出顺序是否一致，如排序算子
+
+            if (oldColumns1.Count > 0)
             {
-                if (!oldColumns1.Contains(name))
-                    columns.Add(name);
+                for (int i = 0; i < oldColumns1.Count(); i++)
+                {
+                    if (oldColumns1[i] != currentcolumns1[i])
+                    {
+                        IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
+                        return;
+                    }
+                }
+                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0) ;
+                {
+                    List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
+                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
+                }
+
             }
-            List<string> outColumns = currentcolumns0.Concat(currentcolumns1).Concat(columns).ToList<string>();
-            BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
         }
 
         public void IsNewOut( List<string> currentColumns, int ID)
@@ -509,7 +526,21 @@ namespace Citta_T1.Business.Option
             if (e.KeyCode == Keys.Enter)
                IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
         }
-        #endregion
+        public void IsIllegalCharacter(object sender, EventArgs e)
+        {
 
+            if ((sender as TextBox).Text.Contains(",") || (sender as TextBox).Text.Contains("，"))
+            {
+                (sender as TextBox).Text = ""; 
+                MessageBox.Show("输入非法字','，请重新输入过滤条件");
+            }
+        }
+        #endregion
+        #region 配置窗口获取用户某些选定数据事件
+        public void GetSelectedItemIndex(object sender, EventArgs e)
+        {
+            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+        }
+        #endregion
     }
 }
