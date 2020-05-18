@@ -192,7 +192,7 @@ namespace Citta_T1.Controls
                     Control ct = me.GetControl;
                     int left = dx + 40;
 
-                    int top  = dy + 75;
+                    int top  = dy + 100;
                     Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
                     log.Info(moveOffset.ToString());
                     ct.Left = left - moveOffset.X;
@@ -212,7 +212,7 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     int left = dx + 60;
-                    int top =  dy + 75;
+                    int top =  dy + 100;
                     Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
 
                     ct.Left = left - moveOffset.X;

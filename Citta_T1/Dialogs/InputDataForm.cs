@@ -31,6 +31,8 @@ namespace Citta_T1.Dialogs
         private string invalidCharsPattern;
         private string[] invalidStringArr;
 
+        private char emptySep = '\0';
+
         public InputDataForm()
         {
             InitializeComponent();
@@ -103,7 +105,7 @@ namespace Citta_T1.Dialogs
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
                 String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
-                MessageBox.Show("该文件已导入，数据源名为：" + dsName);
+                MessageBox.Show("该文件已导入，数据源名为：" + dsName + ", 如需重新导入请先卸载该数据");
             }
             else if (IsContainsInvalidChars(this.fullFilePath))
             {
@@ -365,7 +367,7 @@ namespace Citta_T1.Dialogs
         public void DvgClean(bool isCleanDataName = true)
         {
             if (isCleanDataName) { this.textBox1.Text = null; }
-            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.Columns.Clear();
         }
@@ -436,7 +438,10 @@ namespace Citta_T1.Dialogs
                 this.radioButton3.Checked = true;
                 this.textBoxEx1.Focus();
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
+                {
+                    this.separator = this.emptySep;
                     return;
+                }
                 try
                 {
                     this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
@@ -538,7 +543,7 @@ namespace Citta_T1.Dialogs
             {
                 this.radioButton3.Checked = true;
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
-                    this.separator = '\0';
+                    this.separator = this.emptySep;
                 else
                     try
                     {

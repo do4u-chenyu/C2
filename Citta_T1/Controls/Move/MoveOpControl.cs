@@ -977,7 +977,6 @@ namespace Citta_T1.Controls.Move
 
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
-            log.Info("ID: " + ID + ", status: " + status);
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             e.Graphics.FillEllipse(trnsRedBrush, rectIn_down);

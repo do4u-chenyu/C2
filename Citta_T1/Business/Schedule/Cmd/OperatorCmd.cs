@@ -196,13 +196,13 @@ namespace Citta_T1.Business.Schedule.Cmd
             string filename = System.IO.Path.GetFileName(inputfile);
             if (filename.IndexOf(".xls") > 0)
             {
-                return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\tr.exe -d '\\r' ", inputfile);
+                return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputfile);
             }
             else
             {
                 if(JudgeInputFileEncoding(inputfile) == DSUtil.Encoding.GBK)
                 {
-                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 | sbin\\tr.exe -d '\\r' ", inputfile);
+                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputfile);
                 }
                 else
                 {
