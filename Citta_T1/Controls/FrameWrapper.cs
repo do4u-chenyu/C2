@@ -31,6 +31,7 @@ namespace Citta_T1.Controls
         private Rectangle minBoding = new Rectangle(0, 0, 0, 0);
         private LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private int worldWidth, worldHeight;
+        private Point mapOrigin;
 
         public Rectangle MinBoding { get => minBoding; set => minBoding = value; }
 
@@ -52,12 +53,14 @@ namespace Citta_T1.Controls
             {
                 startSelect = true;
                 stratDrag = false;
-                CreateImg();
+                //CreateImg();
+                CreateWorldImage();
             }
             else if (!minBoding.Contains(e.Location))
             {
                 InitFrame();
-                CreateImg();
+                //CreateImg();
+                CreateWorldImage();
             }
             else if (minBoding.Contains(e.Location))
             {
@@ -122,18 +125,19 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(i);
             Rectangle changeRec;
             if (e.X < startP.X && e.Y < startP.Y)
-                changeRec = new Rectangle(e.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(e.X - mapOrigin.X, e.Y - mapOrigin.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else if (e.X > startP.X && e.Y < startP.Y)
-                changeRec = new Rectangle(startP.X, e.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(startP.X - mapOrigin.X, e.Y - mapOrigin.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else if (e.X < startP.X && e.Y > startP.Y)
-                changeRec = new Rectangle(e.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(e.X - mapOrigin.X, startP.Y - mapOrigin.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
             else
-                changeRec = new Rectangle(startP.X, startP.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
+                changeRec = new Rectangle(startP.X - mapOrigin.X, startP.Y - mapOrigin.Y, System.Math.Abs(e.X - startP.X), System.Math.Abs(e.Y - startP.Y));
 
             g.DrawRectangle(p1, changeRec);
-            Graphics n = canvas.CreateGraphics();
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
 
-            n.DrawImageUnscaled(i, 0, 0);
+            n.DrawImageUnscaled(i, mapOrigin.X, mapOrigin.Y);
+
             g.Dispose();
             i.Dispose();
             i = null;
@@ -144,6 +148,7 @@ namespace Citta_T1.Controls
             CreateRect();
             FindControl();
             DrawRoundedRect(2);
+            
             CreateMoveImg();
             startSelect = false;
         }
@@ -190,8 +195,8 @@ namespace Citta_T1.Controls
         public void  CreateWorldImage()
         {
             float screenFactor = Global.GetCanvasPanel().ScreenFactor;
-            Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
-            Graphics g = Graphics.FromImage(staticImage2);
+            staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
+            Graphics g = Graphics.FromImage(staticImage);
 
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
@@ -201,7 +206,8 @@ namespace Citta_T1.Controls
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * screenFactor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * screenFactor);
             // 先画线，避免线盖住控件
@@ -285,24 +291,24 @@ namespace Citta_T1.Controls
             
             Graphics g = Graphics.FromImage(this.staticImage);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            Rectangle shadowDown = new Rectangle(this.minBoding.X + 2,
-                                                 this.minBoding.Y + this.minBoding.Height,
+            Rectangle shadowDown = new Rectangle(this.minBoding.X + 2 - mapOrigin.X,
+                                                 this.minBoding.Y + this.minBoding.Height - mapOrigin.Y,
                                                  this.minBoding.Width, 3
                                                  );
 
-            Rectangle shadowRight = new Rectangle(this.minBoding.X + this.minBoding.Width,
-                                                  this.minBoding.Y + 2,
+            Rectangle shadowRight = new Rectangle(this.minBoding.X + this.minBoding.Width - mapOrigin.X,
+                                                  this.minBoding.Y + 2 - mapOrigin.Y,
                                                   3, this.minBoding.Height
                                                  );
 
-            int x = this.minBoding.X;
-            int y = this.minBoding.Y;
+            int x = this.minBoding.X - mapOrigin.X;
+            int y = this.minBoding.Y - mapOrigin.Y;
             int width = this.minBoding.Width;
             int height = this.minBoding.Height;
             if (width == 0 || height == 0)
             {
 
-                n.DrawImageUnscaled(this.staticImage, 0, 0);
+                n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
                 n.Dispose();
                 g.Dispose();
                 return;
@@ -347,7 +353,7 @@ namespace Citta_T1.Controls
             g.FillPie(brush1, arcRight, 270, 90);
 
 
-            n.DrawImageUnscaled(this.staticImage, 0, 0);
+            n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
             n.Dispose();
             g.Dispose();
             
@@ -406,6 +412,7 @@ namespace Citta_T1.Controls
 
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
             n.DrawImageUnscaled(i, 0, 0);
+            
         }
 
         private void dragFrame_Up(MouseEventArgs e)
