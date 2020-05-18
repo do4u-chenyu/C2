@@ -61,7 +61,6 @@ namespace Citta_T1.Controls
                 startSelect = false;
                 stratDrag = true;
                 MoveImage_Display(0,0);
-                
             }
         }
 
@@ -331,12 +330,11 @@ namespace Citta_T1.Controls
             Bitmap backGroung = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(backGroung);
 
-            g.DrawImage(this.moveImage, minBoding.X , minBoding.Y);
-            //backGroung.Save("cs.png");
+            g.DrawImage(this.moveImage, minBoding.X , minBoding.Y);           
             n.DrawImageUnscaled(backGroung, 0, 0);
             n.Dispose();
             g.Dispose();
-            //backGroung = null;
+            backGroung = null;
 
 
         }
@@ -352,10 +350,8 @@ namespace Citta_T1.Controls
         {
             if (staticImage == null || minBoding.IsEmpty)
             {
-                log.Info("------");
                 return;
             }
-
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
@@ -368,11 +364,9 @@ namespace Citta_T1.Controls
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelElement me in modelElements)
             {
-                Control ct = me.GetControl;
-                
+                Control ct = me.GetControl;               
                 if (frameRec.Contains(ct.Location))
-                {
-                    (ct as IMoveControl).ControlNoSelect();
+                {                
                     ct.Left = ct.Left + e.Location.X - startP.X;
                     ct.Top = ct.Top + e.Location.Y - startP.Y;
                 }
