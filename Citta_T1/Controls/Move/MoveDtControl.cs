@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move
         // 鼠标放在Pin上，Size的缩放倍率
         int multiFactor = 2;
         // 画布上的缩放倍率
-        float factor = 1.3F;
+        float factor = Global.Factor;
         // 缩放等级
         public int sizeLevel = 0;
 
@@ -218,7 +218,7 @@ namespace Citta_T1.Controls.Move
                          System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
-        public void ChangeSize(bool zoomUp, float factor = 1.3F)
+        public void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.

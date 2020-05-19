@@ -53,14 +53,14 @@ namespace Citta_T1.Business.Model
             UpdatePoints();
         }
         // MoveOpControl.ChangeSize
-        public void ZoomOut(float zoomFactor = 1.3F)
+        public void ZoomOut(float zoomFactor = Global.Factor)
         {
             this.startP = new PointF(this.startP.X / zoomFactor, this.startP.Y / zoomFactor);
             this.endP = new PointF(this.endP.X / zoomFactor, this.endP.Y / zoomFactor);
             UpdatePoints();
         }
 
-        public void ZoomIn(float zoomFactor = 1.3F)
+        public void ZoomIn(float zoomFactor = Global.Factor)
         {
             this.startP = new PointF(this.startP.X * zoomFactor, this.startP.Y * zoomFactor);
             this.endP = new PointF(this.endP.X * zoomFactor, this.endP.Y * zoomFactor);

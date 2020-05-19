@@ -82,7 +82,7 @@ namespace Citta_T1.Controls
 
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
-        public void ChangSize(bool isLarger, float factor = 1.3F)
+        public void ChangSize(bool isLarger, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
@@ -509,7 +509,12 @@ namespace Citta_T1.Controls
                 {
                     cd.AddModelRelation(mr);
                     //endC右键菜单设置Enable
+                    System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
+                    watch.Start();  //开始监视代码运行时间
                     Global.GetOptionDao().EnableControlOption(mr);
+                    watch.Stop();  //停止监视
+                    TimeSpan timespan = watch.Elapsed;  //获取当前实例测量得出的总时间
+                    log.Info("打开窗口代码执行时间：{0}(毫秒)"+ timespan.TotalMilliseconds);  //总毫秒数
                 }
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;
