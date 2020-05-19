@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 文本过滤";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
         private string opControlName;
         private Point mouseOffset;
@@ -194,7 +194,7 @@ namespace Citta_T1.Controls.Move
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
                     break;
-                case "过滤算子":
+                case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
                     break;
                 case "取最大值":
@@ -223,6 +223,12 @@ namespace Citta_T1.Controls.Move
                     break;
                 case "多源算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
+                    break;
+                case "关键词过滤":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
+                    break;
+                case "数据标准化":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
                     break;
                 default:
                     break;
