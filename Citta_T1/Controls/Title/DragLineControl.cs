@@ -25,7 +25,12 @@ namespace Citta_T1.Controls.Title
         private Control rightShowButton;
         private Control rightHideButton;
         private Control remarkControl;
+        private Control currentModelRunBackLab;
+        private Control currentModelFinLab;
+        private Control progressBar1;
+        private Control progressBarLabel;
 
+        private static LogUtil log = LogUtil.GetInstance("DragLineControl"); // 获取日志模块
         public DragLineControl()
         {
             InitializeComponent();
@@ -41,12 +46,24 @@ namespace Citta_T1.Controls.Title
             this.remarkControl = Global.GetRemarkControl();
             this.resetButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "resetButton");
             this.stopButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "stopButton");
-            this.runButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "runButton");
             this.rightShowButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "rightShowButton");
             this.rightHideButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "rightHideButton");
             this.bottomViewPanel = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "bottomViewPanel");
+            this.currentModelRunBackLab = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "currentModelRunBackLab");
+            this.currentModelFinLab = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "currentModelFinLab");
+            this.progressBar1 = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "progressBar1");
+            this.progressBarLabel = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), "progressBarLabel");
 
-
+            //运行按钮在不同状态名字不同  runButton pauseButton  continueButton
+            string[] runButtonNameList = { "runButton", "pauseButton", "continueButton" };
+            foreach(string buttonName in runButtonNameList)
+            {
+                if (Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), buttonName) != null)
+                {
+                    this.runButton = Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), buttonName);
+                    break;
+                }
+            }
         }
 
         private void DragLineControl_MouseMove(object sender, MouseEventArgs e)
@@ -64,14 +81,25 @@ namespace Citta_T1.Controls.Title
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 10 - this.naviViewControl.Height;
 
+            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
+            log.Info("x：" + x.ToString() + ",y:" + y.ToString());
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
+
 
             // 底层工具按钮定位
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.resetButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location = new Point(x, y + 50);
+
+
+            //运行状态动图、进度条定位
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
+
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);

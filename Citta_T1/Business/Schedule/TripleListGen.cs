@@ -46,20 +46,18 @@ namespace Citta_T1.Business.Schedule
             this.currentModelTripleList = new List<Triple>();
         }
 
-        public int AllOperatorNotReadyNum()
+        public int CountOpStatus(ElementStatus es)
         {
             int count = 0;
             foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
             {
-                if (op.Status == ElementStatus.Null)
+                if (op.Status == es)
                 {
                     count++;
                 }
             }
             return count;
-
         }
-
 
         public void GenerateList()
         {

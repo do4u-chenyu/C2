@@ -32,6 +32,7 @@ namespace  Citta_T1
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
+        delegate void AsynUpdataProgressBar();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm()
@@ -151,7 +152,7 @@ namespace  Citta_T1
             Global.GetFlowControl().RemarkChange(Global.GetFlowControl().SelectRemark);
             // 重绘所有Relation线
             this.canvasPanel.Invalidate(false);
-            //切换文档时，更新运行按钮图标
+            //切换文档时，更新运行按钮图标及进度条
             UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
         }
 
@@ -222,6 +223,7 @@ namespace  Citta_T1
             int x = org.X - 10 - this.naviViewControl.Width;
             int y = org2.Y - 5 - this.naviViewControl.Height;
             log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
+            log.Info("x：" + x.ToString() + ",y:" + y.ToString());
 
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
@@ -233,9 +235,12 @@ namespace  Citta_T1
             this.stopButton.Location = new Point(x + 50, y + 50);
             this.runButton.Location      = new Point(x, y + 50);
 
-            //运行状态动图定位
+            //运行状态动图、进度条定位
             this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
             this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+            this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
+            this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
+
 
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
             Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
@@ -498,7 +503,7 @@ namespace  Citta_T1
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
-                int notReadyNum = currentManager.TripleList.AllOperatorNotReadyNum();
+                int notReadyNum = currentManager.TripleList.CountOpStatus(ElementStatus.Null);
                 if (notReadyNum > 0)
                 {
                     MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -511,6 +516,12 @@ namespace  Citta_T1
                     return;
                 }
                 currentManager.Start();
+                int taskNum = currentManager.TripleList.CountOpStatus(ElementStatus.Ready);
+                this.progressBar1.Step = taskNum > 0 ? 100/taskNum : 100;
+
+                this.progressBar1.Value = 0;
+                this.progressBarLabel.Text = "0%";
+
             }
             else if (this.runButton.Name == "pauseButton")
             {
@@ -545,8 +556,25 @@ namespace  Citta_T1
                 currentManager.UpdateLogDelegate = UpdataLogStatus;
                 currentManager.TaskCallBack = Accomplish;
                 currentManager.UpdateGifDelegate = UpdataRunningGif;
+                currentManager.UpdateBarDelegate = UpdataProgressBar;
             }
         }
+
+        //更新进度条
+        private void UpdataProgressBar(Manager manager)
+        {
+            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            if (doneModel != Global.GetCurrentDocument())
+                return;
+
+
+            if (manager.ModelStatus == ModelStatus.Running)
+                this.Invoke(new AsynUpdataProgressBar(delegate () {
+                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done)*100/manager.TripleList.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%"; 
+                }));
+        }
+
 
         //更新log
         private void UpdataLogStatus(string logContent)
@@ -579,11 +607,11 @@ namespace  Citta_T1
                     }));
             else if (manager.ModelStatus == ModelStatus.Done)
                 this.Invoke(new AsynUpdateGif(delegate () {
+                    this.progressBar1.Hide();
+                    this.progressBarLabel.Hide();
                     this.currentModelFinLab.Hide(); }));
 
         }
-
-
 
         //完成任务时需要调用
         private void Accomplish(Manager manager)
@@ -602,14 +630,18 @@ namespace  Citta_T1
 
         public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
-            switch (modelStatus)
-            {
-                //点击暂停按钮
+            Manager manager = Global.GetCurrentDocument().Manager;
+            ModelStatus modelStatus1 = manager.ModelStatus;
+            switch (modelStatus1)
+            { 
+                //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
+                    this.progressBar1.Hide();
+                    this.progressBarLabel.Hide();
                     //SetCanvasEnable(true);
                     break;
                 //点击运行按钮
@@ -618,6 +650,10 @@ namespace  Citta_T1
                     this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
+                    this.progressBar1.Show();
+                    this.progressBarLabel.Show();
+                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
                     //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
@@ -631,6 +667,8 @@ namespace  Citta_T1
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
+                    this.progressBar1.Hide();
+                    this.progressBarLabel.Hide();
                     //SetCanvasEnable(true);
                     break;
             }
