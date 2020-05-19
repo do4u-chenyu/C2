@@ -50,7 +50,7 @@ namespace Citta_T1.Controls
 
             if (e.Button == MouseButtons.Right)
                 return;
-            if (minBoding.IsEmpty)
+            else if (minBoding.IsEmpty)
             {
                 startSelect = true;
                 stratDrag = false;
@@ -58,13 +58,13 @@ namespace Citta_T1.Controls
             }
             else if (!minBoding.Contains(startP))
             {
-                InitFrame();               
+                InitFrame();
                 CreateWorldImage();
             }
             else if (minBoding.Contains(startP))
             {
                 startSelect = false;
-                stratDrag = true;                
+                stratDrag = true;
             }
         }
 
@@ -91,7 +91,6 @@ namespace Citta_T1.Controls
                 dragFrame_Up(e);
             if (startSelect)
                 DrawFrame_Up(e);
-
         }
         public void FrameEnter(Point pw)
         {
@@ -107,14 +106,13 @@ namespace Citta_T1.Controls
             foreach(ModelElement me in modelElements)
             {
                 Control ct = me.GetControl;
-                if (minBoding.Contains(ct.Location))
+                Point ctW = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                if (minBoding.Contains(ctW))
                 {
                     (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
-                    (ct as IMoveControl).ControlNoSelect();
-                }
-                    
+                }       
             }
-            minBoding = new Rectangle(0,0,0,0);
+            InitFrame();
         }
         public bool FramePaint(PaintEventArgs e)
         {
@@ -324,7 +322,7 @@ namespace Citta_T1.Controls
             if (minBoding.Width == 0 || minBoding.Y == 0)
                 return;
             if (moveImage != null)
-                return;
+                moveImage = null;
             moveImage = new Bitmap(minBoding.Width + 2, minBoding.Height + 3);
             Rectangle realRect = new Rectangle(minBoding.Location,new Size(minBoding.Width + 2, minBoding.Height + 3));
             //创建作图区域
@@ -334,14 +332,11 @@ namespace Citta_T1.Controls
             {
                 for (int j = 0; j < moveImage.Width; j++)
                 {
-
                     Color c = moveImage.GetPixel(j, i);
-                    moveImage.SetPixel(j, i, Color.FromArgb(200, c.R, c.G, c.B));
-                    
+                    moveImage.SetPixel(j, i, Color.FromArgb(200, c.R, c.G, c.B));      
                 }
             }
             g.Dispose();
-            moveImage.Save("save.png");
         }
         private void dragFrame_Move()
         {
@@ -360,7 +355,6 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
             n.DrawImageUnscaled(i, mapOrigin.X, mapOrigin.Y);
             n.Dispose();
@@ -373,26 +367,34 @@ namespace Citta_T1.Controls
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelElement me in modelElements)
             {
-                Control ct = me.GetControl;               
-                if (frameRec.Contains(ct.Location))
+                Control ct = me.GetControl;
+                Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                if (minBoding.Contains(pw))
                 {                
-                    ct.Left = ct.Left + e.Location.X - startP.X;
-                    ct.Top = ct.Top + e.Location.Y - startP.Y;
+                    ct.Left = ct.Left + endP.X - startP.X;
+                    ct.Top = ct.Top + endP.Y - startP.Y;
                 }
                 
             }
-            frameRec = new Rectangle(0, 0, 0, 0);
-            minBoding = new Rectangle(0, 0, 0, 0);
+            Global.GetCurrentDocument().Show();
+            
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
+            CreateWorldImage();
+            minBoding.X = minBoding.X + endP.X - startP.X;
+            minBoding.Y = minBoding.Y + endP.Y - startP.Y;
+            DrawRoundedRect(2);
         }
         #endregion
         public void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
+            minBoding = new Rectangle(0, 0, 0, 0);
             startSelect = true;
             stratDrag = false;
             this.staticImage = null;
+            this.moveImage = null;
+            
         }
         
     }
