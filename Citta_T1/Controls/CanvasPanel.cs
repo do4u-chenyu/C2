@@ -551,7 +551,8 @@ namespace Citta_T1.Controls
 
             if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
                 return;
-
+            if (frameWrapper.FramePaint(e))
+                return;
             //TODO
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
