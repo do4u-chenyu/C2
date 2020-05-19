@@ -22,7 +22,7 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, Bezier> modelLineDict;  // 
+        private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
         private int lineCounter;
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
@@ -57,7 +57,6 @@ namespace Citta_T1.Business.Model
         public Manager Manager { get => manager; set => manager = value; }
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
-        public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
 
@@ -67,7 +66,7 @@ namespace Citta_T1.Business.Model
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
-            this.modelLineDict = new Dictionary<int, Bezier>();
+            this.modelLineDict = new Dictionary<int, List<int>>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);

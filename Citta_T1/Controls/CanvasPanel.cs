@@ -82,7 +82,7 @@ namespace Citta_T1.Controls
 
         #region 右上角功能实现部分
         //画布右上角的放大与缩小功能实现
-        public void ChangSize(bool isLarger, float factor = 1.3F)
+        public void ChangSize(bool isLarger, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.

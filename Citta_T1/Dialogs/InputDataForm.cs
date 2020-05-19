@@ -283,37 +283,36 @@ namespace Citta_T1.Dialogs
         private void PreViewExcelFile(string sheetName = null, bool isFirstRowColumn = true)
         {
             ISheet sheet = null;
-            XSSFWorkbook workbook2007;
-            HSSFWorkbook workbook2003;
-            FileStream fs;
+            IWorkbook workbook = null;
+            FileStream fs = null;
             DataTable data = new DataTable();
             int startRow = 0;
             //
             try
             {
-                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-                if (fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
+                fs = new FileStream(this.fullFilePath, FileMode.Open, FileAccess.Read);
+                if (this.fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
                 {
-                    workbook2007 = new XSSFWorkbook(fs);
+                    workbook = new XSSFWorkbook(fs);
                     if (sheetName != null)
                     {
-                        sheet = workbook2007.GetSheet(sheetName);
+                        sheet = workbook.GetSheet(sheetName);
                     }
                     else
                     {
-                        sheet = workbook2007.GetSheetAt(0);
+                        sheet = workbook.GetSheetAt(0);
                     }
                 }
                 else
                 {
-                    workbook2003 = new HSSFWorkbook(fs);   // 2003版本
+                    workbook = new HSSFWorkbook(fs);   // 2003版本
                     if (sheetName != null)
                     {
-                        sheet = workbook2003.GetSheet(sheetName);
+                        sheet = workbook.GetSheet(sheetName);
                     }
                     else
                     {
-                        sheet = workbook2003.GetSheetAt(0);
+                        sheet = workbook.GetSheetAt(0);
                     }
                 }
 
@@ -358,9 +357,26 @@ namespace Citta_T1.Dialogs
                     }
                 }
             }
+            catch (System.IO.IOException ex)
+            {
+                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", this.fullFilePath));
+                log.Error("预读Excel: " + this.fullFilePath + " 失败, error: " + ex.Message);
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                log.Error("预读Excel: " + this.fullFilePath + " 失败, error: " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
+                if (workbook != null)
+                {
+                    workbook.Close();
+                }
             }
         }
 
