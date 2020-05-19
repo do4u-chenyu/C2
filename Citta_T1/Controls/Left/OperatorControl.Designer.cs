@@ -55,6 +55,10 @@
             this.leftPanelOpSort = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpGroup = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.leftPanelOpWordFilter = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.leftPanelOpDataStandar = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -67,6 +71,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
             // leftPanelOpRelate
@@ -231,7 +237,7 @@
             this.leftPanelOpFilter.Name = "leftPanelOpFilter";
             this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 40);
             this.leftPanelOpFilter.TabIndex = 22;
-            this.leftPanelOpFilter.Text = "过滤算子";
+            this.leftPanelOpFilter.Text = "条件筛选";
             this.leftPanelOpFilter.UseVisualStyleBackColor = true;
             this.leftPanelOpFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
@@ -350,6 +356,54 @@
             this.leftPanelOpGroup.UseVisualStyleBackColor = true;
             this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
+            // leftPanelOpWordFilter
+            // 
+            this.leftPanelOpWordFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpWordFilter.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpWordFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(58, 587);
+            this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
+            this.leftPanelOpWordFilter.Size = new System.Drawing.Size(93, 40);
+            this.leftPanelOpWordFilter.TabIndex = 32;
+            this.leftPanelOpWordFilter.Text = "关键词过滤";
+            this.leftPanelOpWordFilter.UseMnemonic = false;
+            this.leftPanelOpWordFilter.UseVisualStyleBackColor = true;
+            this.leftPanelOpWordFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
+            this.pictureBox13.Location = new System.Drawing.Point(36, 597);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(20, 21);
+            this.pictureBox13.TabIndex = 33;
+            this.pictureBox13.TabStop = false;
+            // 
+            // leftPanelOpDataStandar
+            // 
+            this.leftPanelOpDataStandar.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
+            this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(56, 633);
+            this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
+            this.leftPanelOpDataStandar.Size = new System.Drawing.Size(100, 40);
+            this.leftPanelOpDataStandar.TabIndex = 34;
+            this.leftPanelOpDataStandar.Text = "数据标准化";
+            this.leftPanelOpDataStandar.UseMnemonic = false;
+            this.leftPanelOpDataStandar.UseVisualStyleBackColor = true;
+            this.leftPanelOpDataStandar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // pictureBox14
+            // 
+            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
+            this.pictureBox14.Location = new System.Drawing.Point(36, 642);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(20, 21);
+            this.pictureBox14.TabIndex = 35;
+            this.pictureBox14.TabStop = false;
+            // 
             // OperatorControl
             // 
             this.AllowDrop = true;
@@ -357,6 +411,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.pictureBox14);
+            this.Controls.Add(this.leftPanelOpDataStandar);
+            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.leftPanelOpWordFilter);
             this.Controls.Add(this.leftPanelOpGroup);
             this.Controls.Add(this.leftPanelOpSort);
             this.Controls.Add(this.leftPanelOpFreq);
@@ -382,7 +440,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Name = "OperatorControl";
-            this.Size = new System.Drawing.Size(187, 637);
+            this.Size = new System.Drawing.Size(187, 675);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -395,6 +453,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -427,5 +487,9 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Common.NoFocusButton leftPanelOpWordFilter;
+        private System.Windows.Forms.PictureBox pictureBox13;
+        private Common.NoFocusButton leftPanelOpDataStandar;
+        private System.Windows.Forms.PictureBox pictureBox14;
     }
 }

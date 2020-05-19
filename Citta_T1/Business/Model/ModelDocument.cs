@@ -22,7 +22,8 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, Bezier> modelLineDict;  // 
+        private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
+        private HashSet<int> vertices;
         private int lineCounter;
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
@@ -57,9 +58,9 @@ namespace Citta_T1.Business.Model
         public Manager Manager { get => manager; set => manager = value; }
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
-        public Dictionary<int, Bezier> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
+        public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -67,7 +68,8 @@ namespace Citta_T1.Business.Model
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
-            this.modelLineDict = new Dictionary<int, Bezier>();
+            this.modelLineDict = new Dictionary<int, List<int>>();
+            this.vertices = new HashSet<int>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
@@ -103,12 +105,30 @@ namespace Citta_T1.Business.Model
             this.modelElements.Add(modelElement);
            
         }
-        public void AddModelRelation(ModelRelation modelRelation)
+        public void AddModelRelation(ModelRelation mr, bool setDirty = true)
         {
-            this.modelRelations.Add(modelRelation);
-            Global.GetMainForm().SetDocumentDirty();
+            this.modelRelations.Add(mr);
+            this.AddEdge(mr);
+            if (setDirty)
+                Global.GetMainForm().SetDocumentDirty();
         }
-
+        public void RemoveModelRelation(ModelRelation mr)
+        {
+            this.modelRelations.Remove(mr);
+            this.RemoveEdge(mr);
+        }
+        private void AddEdge(ModelRelation mr)
+        {
+            if (!this.modelLineDict.ContainsKey(mr.StartID))
+                this.modelLineDict[mr.StartID] = new List<int>() { mr.EndID };
+            else
+                this.modelLineDict[mr.StartID].Add(mr.EndID);
+        }
+        private void RemoveEdge(ModelRelation mr)
+        {
+            if (this.modelLineDict.ContainsKey(mr.StartID))
+                this.modelLineDict[mr.StartID].Remove(mr.EndID);
+        }
         public void DeleteModelElement(Control control)
         {
             List<ModelElement> modelElements = new List<ModelElement>(this.modelElements);
