@@ -27,7 +27,7 @@ namespace Citta_T1.Controls.Move
 
         private ControlMoveWrapper controlMoveWrapper;
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 文本过滤";
+        private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
         private string opControlName;
         private Point mouseOffset;
@@ -67,7 +67,7 @@ namespace Citta_T1.Controls.Move
 
         // 一些倍率
         // 画布上的缩放倍率
-        float factor = 1.3F;
+        float factor = Global.Factor;
         // 缩放等级
         private int sizeLevel = 0;
 
@@ -194,7 +194,7 @@ namespace Citta_T1.Controls.Move
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
                     break;
-                case "过滤算子":
+                case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
                     break;
                 case "取最大值":
@@ -223,6 +223,12 @@ namespace Citta_T1.Controls.Move
                     break;
                 case "多源算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator2HelpInfo);
+                    break;
+                case "关键词过滤":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
+                    break;
+                case "数据标准化":
+                    this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
                     break;
                 default:
                     break;
@@ -580,7 +586,7 @@ namespace Citta_T1.Controls.Move
 
                 if (mr.StartID == this.id || mr.EndID == this.id)
                 {
-                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCurrentDocument().RemoveModelRelation(mr);
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
@@ -600,7 +606,7 @@ namespace Citta_T1.Controls.Move
             {
                 if (mr.StartID == endID || mr.EndID == endID)
                 {
-                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCurrentDocument().RemoveModelRelation(mr);
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
@@ -767,7 +773,7 @@ namespace Citta_T1.Controls.Move
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = 1.3F)
+        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -880,12 +886,24 @@ namespace Citta_T1.Controls.Move
                    new Point((int)p.X - mouseR / 2, (int)p.Y - mouseR / 2),
                    new Size(mouseR, mouseR));
             CanvasPanel canvas = Global.GetCanvasPanel();
-            
+
+            Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
+                int sizeLevel = Global.GetCurrentDocument().SizeL;
+                double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
-                    new Point(_leftPinRect.Location.X + this.Location.X, _leftPinRect.Location.Y + this.Location.Y),
-                    new Size(_leftPinRect.Width, _leftPinRect.Height));
+                    new Point(
+                        this.Location.X + (int)((_leftPinRect.Location.X) * multiper),
+                        this.Location.Y + (int)((_leftPinRect.Location.Y) * multiper)
+                        ),
+                    new Size(
+                        (int)((_leftPinRect.Width) * multiper),
+                        (int)((_leftPinRect.Height) * multiper)
+                        )
+                    );
+
+                e.DrawRectangle(Pens.Black, leftPinRect.Location.X, leftPinRect.Location.Y, leftPinRect.Width, leftPinRect.Height);
                 int pinLeftX = leftPinRect.X;
                 int pinTopY = leftPinRect.Y;
 
@@ -906,6 +924,7 @@ namespace Citta_T1.Controls.Move
                     }
                 }
             }
+            e.Dispose();
             if (!isRevised)
                 canvas.EndC = null;
             return revisedP;

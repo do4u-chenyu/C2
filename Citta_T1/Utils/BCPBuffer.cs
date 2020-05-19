@@ -187,7 +187,16 @@ namespace Citta_T1.Utils
                 workbook.Close();
                 fs.Close();
             }
+            catch (System.IO.IOException ex)
+            {
+                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath));
+                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
+            }
             catch (Exception ex)
+            {
+                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
+            }
+            finally
             {
                 if (fs != null)
                 {
@@ -198,7 +207,6 @@ namespace Citta_T1.Utils
                 {
                     workbook.Close();
                 }
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
             }
         }
 
