@@ -86,6 +86,8 @@ namespace Citta_T1
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
+            this.progressBarLabel = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
@@ -697,6 +699,8 @@ namespace Citta_T1
             // 
             this.canvasPanel.AllowDrop = true;
             this.canvasPanel.BackColor = System.Drawing.Color.White;
+            this.canvasPanel.Controls.Add(this.progressBarLabel);
+            this.canvasPanel.Controls.Add(this.progressBar1);
             this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
             this.canvasPanel.Controls.Add(this.panel3);
@@ -721,6 +725,30 @@ namespace Citta_T1
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
             this.canvasPanel.StartC = null;
             this.canvasPanel.TabIndex = 5;
+            // 
+            // progressBarLabel
+            // 
+            this.progressBarLabel.AutoSize = true;
+            this.progressBarLabel.BackColor = System.Drawing.Color.Transparent;
+            this.progressBarLabel.Font = new System.Drawing.Font("微软雅黑", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.progressBarLabel.ForeColor = System.Drawing.Color.Black;
+            this.progressBarLabel.Location = new System.Drawing.Point(953, 245);
+            this.progressBarLabel.Name = "progressBarLabel";
+            this.progressBarLabel.Size = new System.Drawing.Size(24, 16);
+            this.progressBarLabel.TabIndex = 32;
+            this.progressBarLabel.Text = "0%";
+            this.progressBarLabel.Visible = false;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.progressBar1.ForeColor = System.Drawing.Color.Transparent;
+            this.progressBar1.Location = new System.Drawing.Point(823, 245);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(125, 10);
+            this.progressBar1.Step = 30;
+            this.progressBar1.TabIndex = 31;
+            this.progressBar1.Visible = false;
             // 
             // currentModelFinLab
             // 
@@ -948,5 +976,7 @@ namespace Citta_T1
         private System.Windows.Forms.Label currentModelFinLab;
         private Button saveAllButton;
         private Controls.Top.TopToolBarControl topToolBarControl;
+        private ProgressBar progressBar1;
+        private Label progressBarLabel;
     }
 }

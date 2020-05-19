@@ -318,8 +318,8 @@ namespace Citta_T1.Business.Model
                         PointF startLocation = ToPointFType(xn.SelectSingleNode("startlocation").InnerText);
                         PointF endLocation = ToPointFType(xn.SelectSingleNode("endlocation").InnerText);
                         int endPin = Convert.ToInt32(xn.SelectSingleNode("endpin").InnerText);
-                        ModelRelation modelRelationElement = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
-                        this.modelDocument.ModelRelations.Add(modelRelationElement);
+                        ModelRelation mr = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
+                        this.modelDocument.AddModelRelation(mr, false);
                     }
                 }
                 catch(Exception e) 

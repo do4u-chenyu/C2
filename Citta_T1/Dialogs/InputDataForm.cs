@@ -62,7 +62,7 @@ namespace Citta_T1.Dialogs
             string fileName = "";
             string ext;
             OpenFileDialog fd = new OpenFileDialog();           
-            fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
+            fd.Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx";
             if (this.gbkLable.Font.Bold)
                 this.encoding = DSUtil.Encoding.GBK;
             else

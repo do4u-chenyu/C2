@@ -38,6 +38,9 @@ namespace Citta_T1.Business.Schedule
         public delegate void UpdateGif(Manager manager);//声明一个更新运作动图的委托
         public UpdateGif UpdateGifDelegate;
 
+        public delegate void UpdateBar(Manager manager);//声明一个更新进度条的委托
+        public UpdateGif UpdateBarDelegate;
+
         private TripleListGen tripleList;
         private Thread scheduleThread = null;
         private ModelStatus modelStatus;
@@ -269,6 +272,7 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
+                UpdateBarDelegate(this);
                 UpdateLogDelegate(triple.TripleName + "结束运行");
             }
             catch (Exception ex)

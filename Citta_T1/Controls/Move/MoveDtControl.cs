@@ -150,9 +150,9 @@ namespace Citta_T1.Controls.Move
             {
                 if (mr.StartID == this.ID)
                 {
-                   
-                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
-                    Control lineEndC = Global.GetCurrentDocument().SearchElementByID(mr.EndID).GetControl;
+                    ModelDocument doc = Global.GetCurrentDocument();
+                    doc.RemoveModelRelation(mr);
+                    Control lineEndC = doc.SearchElementByID(mr.EndID).GetControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     Global.GetCanvasPanel().Invalidate();
                 }
