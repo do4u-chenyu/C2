@@ -601,12 +601,6 @@ namespace Citta_T1.Controls
                                 location);
             btn.Separator = separator;
             btn.Encoding = encoding;
-
-
-
-
-
-
             AddNewElement(btn);
             return btn;
         }

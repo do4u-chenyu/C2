@@ -231,15 +231,8 @@ namespace Citta_T1.Controls.Flow
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
             this.framePictureBox.Location = new System.Drawing.Point(167, 5);
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            for (int i = 0; i < modelElements.Count; i++)
-            {
-                ModelElement me = modelElements[modelElements.Count - i - 1];
-                Control ct = me.GetControl;
-
-                (ct as IMoveControl).ControlNoSelect();
-                ct.Visible = true;
-            }
+            Global.GetCurrentDocument().Show();
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
     }
 }
