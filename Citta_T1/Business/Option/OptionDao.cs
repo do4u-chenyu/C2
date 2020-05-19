@@ -47,13 +47,13 @@ namespace Citta_T1.Business.Option
         }
         private void SingleInputCompare(ModelRelation modelRelation, string oldColumnName) 
         {
-            if (oldColumnName == null) return;
+           if (oldColumnName == null) return;
             char separator = '\t';
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
             string dataSourcePath = startElement.GetFullFilePath();
             DSUtil.Encoding encoding = startElement.Encoding;
-            int ID = startElement.ID;
+            int ID = endElement.ID;
             //获取当前连接的数据源的表头字段
             BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
             string column = bcpInfo.columnLine;
@@ -358,7 +358,7 @@ namespace Citta_T1.Business.Option
            
             string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
             List<string> columns = new List<string>();
-
+           
             //新输出字段中不包含旧字段
             foreach (string cn in oldColumns)
             {
@@ -378,15 +378,17 @@ namespace Citta_T1.Business.Option
                     {
                         IsNewOut(currentcolumns, ID);
                         return;
-                    }      
+                    }
                 }
-               if( currentcolumns.Skip(oldColumns.Count()).Count() != 0);
-                { 
+                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0) ;
+                {
                     List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
                 }
 
             }
+            else if (oldColumns.Count == 0)
+            { IsNewOut(currentcolumns, ID); }
                    
         }
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
@@ -426,8 +428,9 @@ namespace Citta_T1.Business.Option
                     List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
                 }
-
             }
+            else if(oldColumns1.Count == 0)
+            { IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID); }
         }
 
         public void IsNewOut( List<string> currentColumns, int ID)

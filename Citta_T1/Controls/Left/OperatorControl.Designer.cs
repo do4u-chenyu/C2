@@ -55,6 +55,8 @@
             this.leftPanelOpSort = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpGroup = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.LeftPanelOpTextFilter = new Citta_T1.Controls.Common.NoFocusButton();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -67,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.SuspendLayout();
             // 
             // leftPanelOpRelate
@@ -350,6 +353,30 @@
             this.leftPanelOpGroup.UseVisualStyleBackColor = true;
             this.leftPanelOpGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
+            // LeftPanelOpTextFilter
+            // 
+            this.LeftPanelOpTextFilter.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.LeftPanelOpTextFilter.FlatAppearance.BorderSize = 0;
+            this.LeftPanelOpTextFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LeftPanelOpTextFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.LeftPanelOpTextFilter.Location = new System.Drawing.Point(70, 587);
+            this.LeftPanelOpTextFilter.Name = "LeftPanelOpTextFilter";
+            this.LeftPanelOpTextFilter.Size = new System.Drawing.Size(74, 40);
+            this.LeftPanelOpTextFilter.TabIndex = 32;
+            this.LeftPanelOpTextFilter.Text = "文本过滤";
+            this.LeftPanelOpTextFilter.UseMnemonic = false;
+            this.LeftPanelOpTextFilter.UseVisualStyleBackColor = true;
+            this.LeftPanelOpTextFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
+            this.pictureBox13.Location = new System.Drawing.Point(36, 597);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(20, 21);
+            this.pictureBox13.TabIndex = 33;
+            this.pictureBox13.TabStop = false;
+            // 
             // OperatorControl
             // 
             this.AllowDrop = true;
@@ -357,6 +384,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.LeftPanelOpTextFilter);
             this.Controls.Add(this.leftPanelOpGroup);
             this.Controls.Add(this.leftPanelOpSort);
             this.Controls.Add(this.leftPanelOpFreq);
@@ -395,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -427,5 +457,7 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox12;
         private System.Windows.Forms.ToolTip toolTip1;
+        private Common.NoFocusButton LeftPanelOpTextFilter;
+        private System.Windows.Forms.PictureBox pictureBox13;
     }
 }

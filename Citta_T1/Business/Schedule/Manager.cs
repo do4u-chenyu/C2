@@ -238,6 +238,8 @@ namespace Citta_T1.Business.Schedule
                 tokenSource.Token.ThrowIfCancellationRequested();
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
+                
+
                 UpdateLogDelegate(triple.TripleName + "开始运行");
                 //Thread.Sleep(10000);
 
@@ -271,7 +273,7 @@ namespace Citta_T1.Business.Schedule
             }
             catch (Exception ex)
             {
-                UpdateLogDelegate("异常: " + ex);
+                UpdateLogDelegate(ex.Message);
             }
             return triple.IsOperated;
 
