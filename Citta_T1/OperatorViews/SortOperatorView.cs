@@ -46,6 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
+            this.oldCheckedItems.Add(this.sortByString.Checked);
+            this.oldCheckedItems.Add(this.sortByNum.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             this.sortField.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
@@ -168,6 +170,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked.ToString());
+            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked.ToString());
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
 
@@ -195,6 +199,10 @@ namespace Citta_T1.OperatorViews
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
+            if (this.opControl.Option.GetOption("sortByNum") != "")
+                this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
+            if (this.opControl.Option.GetOption("sortByString") != "")
+                this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
             if (this.opControl.Option.GetOption("firstRow") != "")
                 this.firstRow.Text = this.opControl.Option.GetOption("firstRow");
             if (this.opControl.Option.GetOption("endRow") != "")
@@ -244,5 +252,10 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().NonNumeric_ControlText(this.endRow);
         }
         #endregion
+
+        private void groupBox3_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
     }
 }
