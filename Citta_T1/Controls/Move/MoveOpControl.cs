@@ -580,7 +580,7 @@ namespace Citta_T1.Controls.Move
 
                 if (mr.StartID == this.id || mr.EndID == this.id)
                 {
-                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCurrentDocument().RemoveModelRelation(mr);
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
@@ -600,7 +600,7 @@ namespace Citta_T1.Controls.Move
             {
                 if (mr.StartID == endID || mr.EndID == endID)
                 {
-                    Global.GetCurrentDocument().ModelRelations.Remove(mr);
+                    Global.GetCurrentDocument().RemoveModelRelation(mr);
                     Global.GetCanvasPanel().Invalidate();
                 }
             }

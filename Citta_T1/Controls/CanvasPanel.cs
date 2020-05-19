@@ -294,13 +294,14 @@ namespace Citta_T1.Controls
                 {
                     mr = mrs[i];
                     //删除线配置逻辑
-                    Global.GetCurrentDocument().StateChangeByDeletLine(mr.EndID);
+                    ModelDocument doc =  Global.GetCurrentDocument();
+                    doc.StateChangeByDeletLine(mr.EndID);
 
-                    mrs.Remove(mr);
+                    doc.RemoveModelRelation(mr);
                     //关联算子引脚自适应改变
-                    Control lineStartC = Global.GetCurrentDocument().SearchElementByID(mr.StartID).GetControl;
+                    Control lineStartC = doc.SearchElementByID(mr.StartID).GetControl;
                     this.RepaintStartcPin(lineStartC, mr.StartID);
-                    Control lineEndC = Global.GetCurrentDocument().SearchElementByID(mr.EndID).GetControl;
+                    Control lineEndC = doc.SearchElementByID(mr.EndID).GetControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     //删除线文档dirty
 
@@ -503,18 +504,24 @@ namespace Citta_T1.Controls
                     );
                 // 1. 关系不能重复
                 // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
-                // 3. 
+                // 3. 成环不能添加
                 isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
                 if (!isDuplicatedRelation)
                 {
                     cd.AddModelRelation(mr);
-                    //endC右键菜单设置Enable
-                    System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
-                    watch.Start();  //开始监视代码运行时间
-                    Global.GetOptionDao().EnableControlOption(mr);
-                    watch.Stop();  //停止监视
-                    TimeSpan timespan = watch.Elapsed;  //获取当前实例测量得出的总时间
-                    log.Info("打开窗口代码执行时间：{0}(毫秒)"+ timespan.TotalMilliseconds);  //总毫秒数
+                    CyclicDetector cdt = new CyclicDetector(Global.GetCurrentDocument());
+                    if (cdt.IsCyclic())
+                        cd.RemoveModelRelation(mr);
+                    else
+                    {
+                        //endC右键菜单设置Enable
+                        System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
+                        watch.Start();  //开始监视代码运行时间
+                        Global.GetOptionDao().EnableControlOption(mr);
+                        watch.Stop();  //停止监视
+                        TimeSpan timespan = watch.Elapsed;  //获取当前实例测量得出的总时间
+                        log.Info("打开窗口代码执行时间：{0}(毫秒)" + timespan.TotalMilliseconds);  //总毫秒数
+                    }
                 }
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;
