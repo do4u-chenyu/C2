@@ -79,22 +79,21 @@ namespace Citta_T1.Utils
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
             return ret;
         }
-        public string GetCacheColumnLine(string fullFilePath, DSUtil.Encoding encoding)
+        public string GetCacheColumnLine(string fullFilePath, DSUtil.Encoding encoding, bool isForceRead = false)
         {
 
             string ret = String.Empty;
-            //Excel类型
-            if (regexXls.IsMatch(fullFilePath))
+            //现在支持excel和bcp，以后增加格式这边可能要改
+            if (!HitCache(fullFilePath) || isForceRead)
             {
-                PreLoadExcelFile(fullFilePath);
-                // 防止文件读取时发生错误, 重新判断下是否存在
-                if (HitCache(fullFilePath))
-                    ret = dataPreviewDict[fullFilePath].HeadColumnLine;
-                return ret;
+                if (regexXls.IsMatch(fullFilePath))
+                { 
+                    PreLoadExcelFile(fullFilePath);
+                }
+                else
+                    PreLoadBcpFile(fullFilePath, encoding);
+
             }
-            //BCP类型
-            PreLoadBcpFile(fullFilePath, encoding);
-            // 防止文件读取时发生错误, 重新判断下是否存在
             if (HitCache(fullFilePath))
                 ret = dataPreviewDict[fullFilePath].HeadColumnLine;
             return ret;
