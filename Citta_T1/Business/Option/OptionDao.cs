@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using Citta_T1.Controls;
 using System.Windows.Forms;
 using System.IO;
+using Citta_T1.Core;
 
 namespace Citta_T1.Business.Option
 {
@@ -367,6 +368,12 @@ namespace Citta_T1.Business.Option
                     IsNewOut(currentcolumns, ID);
                     return;
                 }    
+            }
+            //新输出字段包含就字段，但是新输出字段数目少于旧字段数目，如并集的重复选择
+            if (oldColumns.Count > currentcolumns.Count)
+            {
+                IsNewOut(currentcolumns, ID);
+                return;
             }
             //判断输出顺序是否一致，如排序算子
 

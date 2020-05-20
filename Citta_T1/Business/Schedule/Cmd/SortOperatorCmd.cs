@@ -35,11 +35,12 @@ namespace Citta_T1.Business.Schedule.Cmd
             //是否去重(是对整个文件去重)、升降序
             string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u |", this.sortConfig) : "";
             string order = option.GetOption("ascendingOrder").ToLower() == "true" ? "" : "-r";
+            string type = option.GetOption("sortByNum").ToLower() == "true" ? "-n" : ""; 
 
             //重写表头（覆盖）
             ReWriteBCPFile();
 
-            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe {2} -t\"{9}\" -k{3} {4} {5} | sbin\\tail.exe -n +{6} | sbin\\awk.exe -F\"{9}\" -v OFS='\\t' '{{ print {7}}}'>> {8}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, sortLine, order, endRowCmd, firstRow, outfieldLine, this.outputFilePath, this.separators[0]));
+            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe {2} -t\"{9}\" {10} -k{3} {4} {5} | sbin\\tail.exe -n +{6} | sbin\\awk.exe -F\"{9}\" -v OFS='\\t' '{{ print {7}}}'>> {8}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, sortLine, order, endRowCmd, firstRow, outfieldLine, this.outputFilePath, this.separators[0],type));
             return cmds;
         }
 

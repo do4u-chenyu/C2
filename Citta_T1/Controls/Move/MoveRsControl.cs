@@ -12,6 +12,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Citta_T1.Business.Schedule;
 using System.IO;
+using Citta_T1.Core;
 
 namespace Citta_T1.Controls.Move
 {

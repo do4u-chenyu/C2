@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Citta_T1.Core.UndoRedo
+{
+    class UndoRedoEvent
+    {
+        // Undo堆栈不空=>为空时发生,用来通知界面更新UI状态
+        public delegate void UndoStackEmptyEventHandler();
+        // Undo堆栈空=>不为空时发生,用来通知界面更新UI状态
+        public delegate void UndoStackNotEmptyEventHandler();
+
+        // redo堆栈不空=>为空时发生,用来通知界面更新UI状态
+        public delegate void RedoStackEmptyEventHandler();
+        // redo堆栈空=>不为空时发生,用来通知界面更新UI状态
+        public delegate void RedoStackNotEmptyEventHandler();
+    }
+}

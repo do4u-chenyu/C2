@@ -1,6 +1,7 @@
 ﻿ using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
+            this.oldCheckedItems.Add(this.sortByString.Checked);
+            this.oldCheckedItems.Add(this.sortByNum.Checked);
             this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
@@ -131,7 +134,13 @@ namespace Citta_T1.OperatorViews
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("descendingOrder")))
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
+
+            if (this.opControl.Option.GetOption("sortByNum") != "")
+                this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
+            if (this.opControl.Option.GetOption("sortByString") != "")
+                this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
             if (!String.IsNullOrEmpty(factor1))
+
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
@@ -183,6 +192,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked.ToString());
+            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked.ToString());
             this.outList = new List<int>(this.groupColumn);
             int[] columnIndex = Enumerable.Range(0, this.columnName.Length).ToArray();
             foreach (int index in columnIndex)
@@ -431,5 +442,10 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
+
+        private void groupBox3_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
     }
 }

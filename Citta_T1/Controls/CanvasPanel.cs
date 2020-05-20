@@ -9,8 +9,7 @@ using Citta_T1.Utils;
 using Citta_T1.Controls.Move;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
-
-
+using Citta_T1.Core;
 
 namespace Citta_T1.Controls
 {
@@ -181,7 +180,9 @@ namespace Citta_T1.Controls
             this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right) 
             {
-                if (frameWrapper.MinBoding.Contains(e.Location))
+                
+                Point pw = Global.GetCurrentDocument().ScreenToWorld(e.Location, Global.GetCurrentDocument().MapOrigin);
+                if (frameWrapper.MinBoding.Contains(pw))
                 {
                     this.DelSelectControl.Show(this,e.Location);
                     return;
@@ -238,8 +239,14 @@ namespace Citta_T1.Controls
             }
             else
             {
-                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsValidLine(mrs[mrIndex]))
-                    selectLineIndexs.Add(mrIndex);
+                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame())
+                    if (IsValidLine(mrs[mrIndex]))
+                        selectLineIndexs.Add(mrIndex);
+                    else
+                    {
+                        MessageBox.Show("该线不应被选中。只支持选中数据源与算子之间的线。");
+                        return;
+                    }
                 else
                     return;
                 if (e.Button == MouseButtons.Left)
@@ -608,12 +615,6 @@ namespace Citta_T1.Controls
                                 location);
             btn.Separator = separator;
             btn.Encoding = encoding;
-
-
-
-
-
-
             AddNewElement(btn);
             return btn;
         }

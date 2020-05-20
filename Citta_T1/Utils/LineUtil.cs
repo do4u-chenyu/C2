@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -292,67 +293,54 @@ namespace Citta_T1.Dialogs
             {
                 fs = new FileStream(this.fullFilePath, FileMode.Open, FileAccess.Read);
                 if (this.fullFilePath.IndexOf(".xlsx") > 0) // 2007版本
-                {
                     workbook = new XSSFWorkbook(fs);
-                    if (sheetName != null)
+                else
+                    workbook = new HSSFWorkbook(fs);   // 2003版本
+                if (sheetName != null)
+                    sheet = workbook.GetSheet(sheetName);
+                else
+                    sheet = workbook.GetSheetAt(0);
+
+                if (sheet == null)
+                {
+                    fs.Close();
+                    return;
+                }
+                
+                IRow firstRow = sheet.GetRow(0);
+                int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
+                DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
+                DvgClean(false);
+                if (isFirstRowColumn)
+                {
+                    for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
                     {
-                        sheet = workbook.GetSheet(sheetName);
+                        ColumnList[i] = new DataGridViewTextBoxColumn();
+                        ColumnList[i].HeaderText = firstRow.GetCell(i).StringCellValue;
+                        ColumnList[i].Name = "Col " + i.ToString();
                     }
-                    else
-                    {
-                        sheet = workbook.GetSheetAt(0);
-                    }
+                    this.dataGridView1.Columns.AddRange(ColumnList);
+                    startRow = sheet.FirstRowNum + 1;
                 }
                 else
                 {
-                    workbook = new HSSFWorkbook(fs);   // 2003版本
-                    if (sheetName != null)
-                    {
-                        sheet = workbook.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook.GetSheetAt(0);
-                    }
+                    startRow = sheet.FirstRowNum;
                 }
-
-                if (sheet != null)
+                //最后一列的标号
+                int rowCount = sheet.LastRowNum;
+                for (int i = 0; i <= Math.Min(maxNumOfRow, rowCount); ++i)
                 {
-                    IRow firstRow = sheet.GetRow(0);
-                    int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
-                    DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
-                    DvgClean(false);
-                    if (isFirstRowColumn)
-                    {
-                        for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
-                        {
-                            ColumnList[i] = new DataGridViewTextBoxColumn();
-                            ColumnList[i].HeaderText = firstRow.GetCell(i).StringCellValue;
-                            ColumnList[i].Name = "Col " + i.ToString();
-                        }
-                        this.dataGridView1.Columns.AddRange(ColumnList);
-                        startRow = sheet.FirstRowNum + 1;
-                    }
-                    else
-                    {
-                        startRow = sheet.FirstRowNum;
-                    }
-                    //最后一列的标号
-                    int rowCount = sheet.LastRowNum;
-                    for (int i = 0; i <= Math.Min(maxNumOfRow, rowCount); ++i)
-                    {
-                        IRow row = sheet.GetRow(i + startRow);
-                        if (row == null) continue; //没有数据的行默认是null　　　　　　　
+                    IRow row = sheet.GetRow(i + startRow);
+                    if (row == null) continue; //没有数据的行默认是null　　　　　　　
 
-                        DataGridViewRow dr = new DataGridViewRow();
-                        this.dataGridView1.Rows.Add(dr);
-                        for (int j = row.FirstCellNum; j < cellCount; ++j)
+                    DataGridViewRow dr = new DataGridViewRow();
+                    this.dataGridView1.Rows.Add(dr);
+                    for (int j = row.FirstCellNum; j < cellCount; ++j)
+                    {
+                        if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
                         {
-                            if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
-                            {
-                                string content = row.GetCell(j).ToString();
-                                this.dataGridView1.Rows[i].Cells[j].Value = content;
-                            }
+                            string content = row.GetCell(j).ToString();
+                            this.dataGridView1.Rows[i].Cells[j].Value = content;
                         }
                     }
                 }
@@ -374,9 +362,7 @@ namespace Citta_T1.Dialogs
                     fs.Dispose();
                 }
                 if (workbook != null)
-                {
                     workbook.Close();
-                }
             }
         }
 
@@ -400,157 +386,43 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text)
-            {
-                this.separator = '\t';
-                PreViewBcpFile();
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text)
-            {
-                this.separator = ',';
-                PreViewBcpFile();
-            }
-
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
-            {
-                try
-                {
-                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
-                }
-                PreViewBcpFile();
-            }
-        }
         private void radioButton1_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
+            this.separator = '\t';
+            PreViewBcpFile();
         }
 
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
+            this.separator = ',';
+            PreViewBcpFile();
+
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
-            else
+            this.radioButton3.Checked = true;
+            this.textBoxEx1.Focus();
+            if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
             {
-                this.radioButton3.Checked = true;
-                this.textBoxEx1.Focus();
-                if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
-                {
-                    this.separator = this.emptySep;
-                    return;
-                }
-                try
-                {
-                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
-                }
+                this.separator = this.emptySep;
+                return;
             }
-
-        }
-        /// <summary>
-        /// 将excel中的数据导入到DataTable中
-        /// </summary>
-        /// <param name="sheetName">excel工作薄sheet的名称</param>
-        /// <param name="isFirstRowColumn">第一行是否是DataTable的列名</param>
-        /// <returns>返回的DataTable</returns>
-        public DataTable ExcelToDataTable(string fileName, string sheetName, bool isFirstRowColumn)
-        {
-            ISheet sheet = null;
-            XSSFWorkbook workbook2007;
-            HSSFWorkbook workbook2003;
-            FileStream fs;
-            DataTable data = new DataTable();
-            int startRow = 0;
             try
             {
-                fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                if (fileName.IndexOf(".xlsx") > 0) // 2007版本
-                {
-                    workbook2007 = new XSSFWorkbook(fs);
-                    if (sheetName != null)
-                    {
-                        sheet = workbook2007.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook2007.GetSheetAt(0);
-                    }
-                }
-                else
-                {
-                    workbook2003 = new HSSFWorkbook(fs);   // 2003版本
-                    if (sheetName != null)
-                    {
-                        sheet = workbook2003.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook2003.GetSheetAt(0);
-                    }
-                }
-
-                if (sheet != null)
-                {
-                    IRow firstRow = sheet.GetRow(0);
-                    int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
-                    if (isFirstRowColumn)
-                    {
-                        for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
-                        {
-                            DataColumn column = new DataColumn(firstRow.GetCell(i).StringCellValue);
-                            data.Columns.Add(column);
-                        }
-                        startRow = sheet.FirstRowNum + 1;
-                    }
-                    else
-                    {
-                        startRow = sheet.FirstRowNum;
-                    }
-                    //最后一列的标号
-                    int rowCount = sheet.LastRowNum;
-                    for (int i = startRow; i <= rowCount; ++i)
-                    {
-                        IRow row = sheet.GetRow(i);
-                        if (row == null) continue; //没有数据的行默认是null　　　　　　　
-
-                        DataRow dataRow = data.NewRow();
-                        for (int j = row.FirstCellNum; j < cellCount; ++j)
-                        {
-                            if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null
-                                dataRow[j] = row.GetCell(j).ToString();
-                        }
-                        data.Rows.Add(dataRow);
-                    }
-                }
-                return data;
+                this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                PreViewBcpFile();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
-                return null;
+                MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
             }
+
         }
 
         private void textBoxEx1_TextChanged(object sender, EventArgs e)
@@ -567,6 +439,7 @@ namespace Citta_T1.Dialogs
                     }
                     catch (Exception ex)
                     {
+                        log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
                     }
                 PreViewBcpFile();
@@ -576,6 +449,90 @@ namespace Citta_T1.Dialogs
         private void textBoxEx1_MouseDown(object sender, MouseEventArgs e)
         {
             this.radioButton3.Checked = true;
+        }
+        
+        private void label10_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_excel.xlsx";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_excel.xlsx";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_csv.csv";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_csv.csv";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_txt.txt";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_txt.txt";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_bcp.bcp";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_bcp.bcp";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
         }
     }
 }
