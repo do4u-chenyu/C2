@@ -71,6 +71,7 @@ namespace Citta_T1.Controls.Flow
             SelectDrag = !SelectDrag;
             SelectFrame = false;
             ChangeCursor();
+            FrameChange(SelectFrame);
         }
         private void MovePictureBox_MouseLeave(object sender, EventArgs e)
         {
@@ -163,7 +164,7 @@ namespace Citta_T1.Controls.Flow
             
             SelectDrag = false;
             ChangeCursor();
-
+            DragChange(SelectDrag);
 
 
         }

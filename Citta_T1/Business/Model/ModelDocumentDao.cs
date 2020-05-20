@@ -28,6 +28,7 @@ namespace Citta_T1.Business.Model
         }
         public void AddBlankDocument(string modelTitle,  string userName)
         {
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
             foreach (ModelDocument md in this.modelDocuments)
                 md.Hide();
@@ -59,6 +60,7 @@ namespace Citta_T1.Business.Model
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
@@ -71,7 +73,7 @@ namespace Citta_T1.Business.Model
         public void SwitchDocument(string modelTitle)
         {
             this.currentDocument = FindModelDocument(modelTitle);
-            Global.GetCanvasPanel().FrameWrapper.MinBoding = new Rectangle(0,0,0,0);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             foreach (ModelDocument md in this.modelDocuments)
             {
                 if (md.ModelTitle == modelTitle)
