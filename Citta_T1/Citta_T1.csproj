@@ -131,6 +131,8 @@
     <Compile Include="Controls\FrameWrapper.cs" />
     <Compile Include="Core\UndoRedo\FixedCommandStack.cs" />
     <Compile Include="Core\UndoRedo\ICommand.cs" />
+    <Compile Include="Core\UndoRedo\UndoRedoEvent.cs" />
+    <Compile Include="Core\UndoRedo\UndoRedoManager.cs" />
     <Compile Include="IAOLab\CustomOP\CustomOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />

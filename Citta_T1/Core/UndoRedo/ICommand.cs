@@ -10,6 +10,6 @@ namespace Citta_T1.Core.UndoRedo
     interface ICommand
     {
         bool Do();
-        bool Redo();
+        bool Rollback();
     }
 }

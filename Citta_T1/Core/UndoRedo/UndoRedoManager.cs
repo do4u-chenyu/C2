@@ -81,10 +81,6 @@ namespace Citta_T1.Core.UndoRedo
 
             // 重新执行命令
             cmd.Do();
-
         }
-
-
-
     }
 }
