@@ -639,6 +639,8 @@
     </Content>
     <None Include="res\toolbox\saveall.png" />
     <None Include="res\toolbox\reset.png" />
+    <None Include="res\toolbox\redo.png" />
+    <None Include="res\toolbox\undo.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

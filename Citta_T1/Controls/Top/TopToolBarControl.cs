@@ -4,6 +4,7 @@ using Citta_T1.Utils;
 using Citta_T1.Dialogs;
 using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
 
 namespace Citta_T1.Controls.Top
 {
@@ -13,6 +14,35 @@ namespace Citta_T1.Controls.Top
         {
             InitializeComponent();
             InitializeToolTip();
+            InitializeUndoRedoManger();
+        }
+
+        private void InitializeUndoRedoManger()
+        {
+            UndoRedoManager.GetInstance().RedoStackEmpty += TopToolBarControl_RedoStackEmpty;
+            UndoRedoManager.GetInstance().RedoStackNotEmpty += TopToolBarControl_RedoStackNotEmpty;
+            UndoRedoManager.GetInstance().UndoStackEmpty += TopToolBarControl_UndoStackEmpty;
+            UndoRedoManager.GetInstance().UndoStackNotEmpty += TopToolBarControl_UndoStackNotEmpty;
+        }
+
+        private void TopToolBarControl_UndoStackNotEmpty()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TopToolBarControl_UndoStackEmpty()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TopToolBarControl_RedoStackNotEmpty()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TopToolBarControl_RedoStackEmpty()
+        {
+            throw new NotImplementedException();
         }
 
         private void InitializeToolTip()

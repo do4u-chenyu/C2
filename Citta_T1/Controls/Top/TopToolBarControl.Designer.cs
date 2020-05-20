@@ -40,32 +40,38 @@
             this.moreButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.undoButton = new System.Windows.Forms.Button();
+            this.redoButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // relateButton
             // 
+            this.relateButton.Enabled = false;
             this.relateButton.Image = ((System.Drawing.Image)(resources.GetObject("relateButton.Image")));
             this.relateButton.Location = new System.Drawing.Point(44, 0);
             this.relateButton.Name = "relateButton";
             this.relateButton.Size = new System.Drawing.Size(61, 32);
             this.relateButton.TabIndex = 2;
             this.relateButton.UseVisualStyleBackColor = true;
+            this.relateButton.Visible = false;
             this.relateButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // collideButton
             // 
+            this.collideButton.Enabled = false;
             this.collideButton.Image = ((System.Drawing.Image)(resources.GetObject("collideButton.Image")));
             this.collideButton.Location = new System.Drawing.Point(107, 0);
             this.collideButton.Name = "collideButton";
             this.collideButton.Size = new System.Drawing.Size(61, 32);
             this.collideButton.TabIndex = 6;
             this.collideButton.UseVisualStyleBackColor = true;
+            this.collideButton.Visible = false;
             this.collideButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
             // unionButton
             // 
             this.unionButton.Image = ((System.Drawing.Image)(resources.GetObject("unionButton.Image")));
-            this.unionButton.Location = new System.Drawing.Point(170, 0);
+            this.unionButton.Location = new System.Drawing.Point(210, 0);
             this.unionButton.Name = "unionButton";
             this.unionButton.Size = new System.Drawing.Size(61, 32);
             this.unionButton.TabIndex = 7;
@@ -75,7 +81,7 @@
             // differButton
             // 
             this.differButton.Image = ((System.Drawing.Image)(resources.GetObject("differButton.Image")));
-            this.differButton.Location = new System.Drawing.Point(233, 0);
+            this.differButton.Location = new System.Drawing.Point(275, 0);
             this.differButton.Name = "differButton";
             this.differButton.Size = new System.Drawing.Size(61, 32);
             this.differButton.TabIndex = 8;
@@ -85,7 +91,7 @@
             // filterButton
             // 
             this.filterButton.Image = ((System.Drawing.Image)(resources.GetObject("filterButton.Image")));
-            this.filterButton.Location = new System.Drawing.Point(296, 0);
+            this.filterButton.Location = new System.Drawing.Point(340, 0);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(61, 32);
             this.filterButton.TabIndex = 9;
@@ -95,7 +101,7 @@
             // randomButton
             // 
             this.randomButton.Image = ((System.Drawing.Image)(resources.GetObject("randomButton.Image")));
-            this.randomButton.Location = new System.Drawing.Point(359, 0);
+            this.randomButton.Location = new System.Drawing.Point(405, 0);
             this.randomButton.Name = "randomButton";
             this.randomButton.Size = new System.Drawing.Size(69, 32);
             this.randomButton.TabIndex = 10;
@@ -105,7 +111,7 @@
             // formatButton
             // 
             this.formatButton.Image = ((System.Drawing.Image)(resources.GetObject("formatButton.Image")));
-            this.formatButton.Location = new System.Drawing.Point(430, 0);
+            this.formatButton.Location = new System.Drawing.Point(478, 0);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(89, 32);
             this.formatButton.TabIndex = 12;
@@ -115,7 +121,7 @@
             // moreButton
             // 
             this.moreButton.Image = ((System.Drawing.Image)(resources.GetObject("moreButton.Image")));
-            this.moreButton.Location = new System.Drawing.Point(523, 4);
+            this.moreButton.Location = new System.Drawing.Point(571, 4);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
             this.moreButton.TabIndex = 13;
@@ -134,9 +140,29 @@
             this.label7.Text = "常用";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // undoButton
+            // 
+            this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
+            this.undoButton.Location = new System.Drawing.Point(44, 0);
+            this.undoButton.Name = "undoButton";
+            this.undoButton.Size = new System.Drawing.Size(79, 32);
+            this.undoButton.TabIndex = 24;
+            this.undoButton.UseVisualStyleBackColor = true;
+            // 
+            // redoButton
+            // 
+            this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
+            this.redoButton.Location = new System.Drawing.Point(127, 0);
+            this.redoButton.Name = "redoButton";
+            this.redoButton.Size = new System.Drawing.Size(79, 32);
+            this.redoButton.TabIndex = 25;
+            this.redoButton.UseVisualStyleBackColor = true;
+            // 
             // TopToolBarControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.redoButton);
+            this.Controls.Add(this.undoButton);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.moreButton);
             this.Controls.Add(this.formatButton);
@@ -147,7 +173,7 @@
             this.Controls.Add(this.collideButton);
             this.Controls.Add(this.relateButton);
             this.Name = "TopToolBarControl";
-            this.Size = new System.Drawing.Size(554, 33);
+            this.Size = new System.Drawing.Size(605, 33);
             this.ResumeLayout(false);
 
         }
@@ -164,5 +190,7 @@
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button undoButton;
+        private System.Windows.Forms.Button redoButton;
     }
 }

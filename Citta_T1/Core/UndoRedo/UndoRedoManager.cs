@@ -27,7 +27,7 @@ namespace Citta_T1.Core.UndoRedo
             redoStack = new FixedCommandStack(capacity);
         }
 
-        public UndoRedoManager GetInstance()
+        public static UndoRedoManager GetInstance()
         {
             if (Manager == null)
                 Manager = new UndoRedoManager(UndoRedoManagerCapacity);
