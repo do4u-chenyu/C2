@@ -23,7 +23,7 @@ namespace Citta_T1.Controls
         private CanvasPanel canvas;
         private Point startP, endP, nowP;
         private bool startSelect = false;
-        private bool stratDrag = false;
+        private bool startDrag = false;
         private Pen p2 = new Pen(Color.Gray, 0.0001f);
         private Pen p1 = new Pen(Color.Gray, 0.0001f);
         private Pen p = new Pen(Color.Gray, 1f);
@@ -53,18 +53,20 @@ namespace Citta_T1.Controls
             else if (minBoding.IsEmpty)
             {
                 startSelect = true;
-                stratDrag = false;
+                startDrag = false;
                 CreateWorldImage();
             }
             else if (!minBoding.Contains(startP))
             {
                 InitFrame();
+                startSelect = true;
+                startDrag = false;
                 CreateWorldImage();
             }
             else if (minBoding.Contains(startP))
             {
                 startSelect = false;
-                stratDrag = true;
+                startDrag = true;
             }
         }
 
@@ -78,7 +80,7 @@ namespace Citta_T1.Controls
             if (startSelect)
                 DrawFrame_move();
 
-            if (stratDrag)
+            if (startDrag)
                 dragFrame_Move();
 
         }
@@ -87,7 +89,7 @@ namespace Citta_T1.Controls
             endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
             if (e.Button == MouseButtons.Right)
                 return;
-            if (stratDrag)
+            if (startDrag)
                 dragFrame_Up(e);
             if (startSelect)
                 DrawFrame_Up(e);
@@ -111,8 +113,13 @@ namespace Citta_T1.Controls
                 {
                     (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
                 }       
-            }
-            InitFrame();
+            }            
+            Global.GetCurrentDocument().Show();            
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetNaviViewControl().UpdateNaviView();
+            this.minBoding = new Rectangle(0,0,0,0);
+            CreateWorldImage();
+            
         }
         public bool FramePaint(PaintEventArgs e)
         {
@@ -373,28 +380,27 @@ namespace Citta_T1.Controls
                 {                
                     ct.Left = ct.Left + endP.X - startP.X;
                     ct.Top = ct.Top + endP.Y - startP.Y;
-                }
-                
+                }               
             }
             Global.GetCurrentDocument().Show();
-            
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             CreateWorldImage();
             minBoding.X = minBoding.X + endP.X - startP.X;
             minBoding.Y = minBoding.Y + endP.Y - startP.Y;
             DrawRoundedRect(2);
+            startDrag = false;
         }
         #endregion
+
         public void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
             minBoding = new Rectangle(0, 0, 0, 0);
             startSelect = true;
-            stratDrag = false;
+            startDrag = false;
             this.staticImage = null;
-            this.moveImage = null;
-            
+            this.moveImage = null;           
         }
         
     }

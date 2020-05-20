@@ -19,12 +19,12 @@ namespace Citta_T1.Controls.Flow
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
         public FlowControl()
-        {
+        { 
             InitializeComponent();
             SelectDrag = false;
             SelectFrame = false;
             SelectRemark = false;
-            this.Cursor = Cursors.Default;
+            
         }
         // 恢复到编辑模式
         public void ResetStatus()
