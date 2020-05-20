@@ -450,5 +450,89 @@ namespace Citta_T1.Dialogs
         {
             this.radioButton3.Checked = true;
         }
+        
+        private void label10_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_excel.xlsx";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_excel.xlsx";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_csv.csv";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_csv.csv";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_txt.txt";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_txt.txt";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+            this.saveFileDialog.FileName = "demo_bcp.bcp";
+            DialogResult dr = this.saveFileDialog.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                //string srcFilePath = Application.StartupPath;
+                string srcFilePath = @"..\..\Demo\demo_bcp.bcp";
+                string dstFilePath = this.saveFileDialog.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(srcFilePath);
+                    file.CopyTo(dstFilePath, true);
+                }
+                catch (Exception ex)
+                {
+                    log.Error("导出文件出错:" + ex.Message);
+                }
+            }
+        }
     }
 }
