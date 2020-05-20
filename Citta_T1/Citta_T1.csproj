@@ -129,6 +129,12 @@
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
     <Compile Include="Controls\FrameWrapper.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementAddCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementDeleteCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementMoveCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementRenameCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\RelationAddCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\RelationDeleteCommand.cs" />
     <Compile Include="Core\UndoRedo\FixedCommandStack.cs" />
     <Compile Include="Core\UndoRedo\ICommand.cs" />
     <Compile Include="Core\UndoRedo\UndoRedoEvent.cs" />
@@ -618,7 +624,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Doc\CITTA算子设计文档v4.docx" />
+    <None Include="Doc\undo_redo功能设计文档.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
+    <None Include="Doc\框选功能设计文档.docx" />
     <None Include="Doc\模型配置设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
     <None Include="Doc\运算关系保存与加载设计文档.docx" />
@@ -646,6 +654,7 @@
     <Content Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
