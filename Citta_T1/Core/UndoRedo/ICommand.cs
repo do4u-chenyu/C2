@@ -9,7 +9,7 @@ namespace Citta_T1.Core.UndoRedo
     // 正在施工中
     interface ICommand
     {
-        bool Undo();
+        bool Do();
         bool Redo();
     }
 }

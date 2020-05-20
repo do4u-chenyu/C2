@@ -12,6 +12,7 @@ namespace Citta_T1.Core.UndoRedo
     {
         private int capacity;
         private LinkedList<ICommand> fixedStack;
+
         public FixedCommandStack(int capacity = 100)
         {
             this.capacity = capacity;
@@ -20,7 +21,7 @@ namespace Citta_T1.Core.UndoRedo
 
         public int Push(ICommand cmd)
         {
-            if (fixedStack.Count == capacity)
+            if (fixedStack.Count >= capacity)
                 fixedStack.RemoveLast();
            
             fixedStack.AddFirst(cmd);
@@ -32,9 +33,9 @@ namespace Citta_T1.Core.UndoRedo
             return fixedStack.First();
         }
 
-        public bool Empty()
+        public bool IsEmpty()
         {
-            return fixedStack.Count == 0;
+            return fixedStack.Count <= 0;
         }
 
         public ICommand Pop()
@@ -42,6 +43,11 @@ namespace Citta_T1.Core.UndoRedo
             ICommand cmd = Top();
             fixedStack.RemoveFirst();
             return cmd;
+        }
+
+        public void Clear()
+        {
+            this.fixedStack.Clear();
         }
     }
 }
