@@ -400,72 +400,41 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text)
-            {
-                this.separator = '\t';
-                PreViewBcpFile();
-            }
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text)
-            {
-                this.separator = ',';
-                PreViewBcpFile();
-            }
-
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.extType == ExtType.Text && this.textBoxEx1.Text != null && this.textBoxEx1.Text != "")
-            {
-                try
-                {
-                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
-                }
-                PreViewBcpFile();
-            }
-        }
         private void radioButton1_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
+            this.separator = '\t';
+            PreViewBcpFile();
         }
 
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
+            this.separator = ',';
+            PreViewBcpFile();
+
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)
                 return;
-            else
+            this.radioButton3.Checked = true;
+            this.textBoxEx1.Focus();
+            if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
             {
-                this.radioButton3.Checked = true;
-                this.textBoxEx1.Focus();
-                if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
-                {
-                    this.separator = this.emptySep;
-                    return;
-                }
-                try
-                {
-                    this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
-                }
+                this.separator = this.emptySep;
+                return;
+            }
+            try
+            {
+                this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                PreViewBcpFile();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
             }
 
         }
@@ -567,6 +536,7 @@ namespace Citta_T1.Dialogs
                     }
                     catch (Exception ex)
                     {
+                        log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
                     }
                 PreViewBcpFile();

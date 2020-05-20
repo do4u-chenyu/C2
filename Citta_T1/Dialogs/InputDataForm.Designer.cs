@@ -283,7 +283,6 @@
             this.radioButton3.TabIndex = 22;
             this.radioButton3.Text = "其他";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             this.radioButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton3_MouseDown);
             // 
             // radioButton2
@@ -297,7 +296,6 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "逗号";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             this.radioButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton2_MouseDown);
             // 
             // radioButton1
@@ -312,7 +310,6 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "TAB";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             this.radioButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton1_MouseDown);
             // 
             // label4
