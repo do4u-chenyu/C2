@@ -14,7 +14,7 @@ namespace Citta_T1.Dialogs
         private static readonly int PythonFFPColumnIndex = 0;
         private static readonly int AliasColumnIndex = 1;
         private static readonly int CheckBoxColumnIndex = 2;
-        private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+\.\d+)\b", RegexOptions.IgnoreCase);
+        private static readonly Regex PythonVersionRegex = new Regex(@"^Python\s*(\d+\.\d+(\.\d+)?)\b", RegexOptions.IgnoreCase);
         private static readonly char[] IllegalCharacter = { ';', '?', '<', '>', '/', '|', '#', '!' };
         public ConfigForm()
         {
