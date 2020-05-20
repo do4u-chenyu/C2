@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs

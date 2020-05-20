@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using Citta_T1.Controls;
 using System.Windows.Forms;
 using System.IO;
+using Citta_T1.Core;
 
 namespace Citta_T1.Business.Option
 {

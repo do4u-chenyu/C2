@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Core;
 using Citta_T1.Properties;
 using Citta_T1.Utils;
 
