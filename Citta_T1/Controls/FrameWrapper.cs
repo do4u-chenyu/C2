@@ -385,6 +385,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
             CreateWorldImage();
             minBoding.X = minBoding.X + endP.X - startP.X;
             minBoding.Y = minBoding.Y + endP.Y - startP.Y;
