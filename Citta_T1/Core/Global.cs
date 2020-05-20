@@ -6,7 +6,7 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
 using Citta_T1.Controls.Title;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     class Global
     {

@@ -805,7 +805,7 @@ namespace Citta_T1
             this.flowControl.BackColor = System.Drawing.Color.Transparent;
             this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Cursor = System.Windows.Forms.Cursors.Help;
+            this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowControl.Location = new System.Drawing.Point(694, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";

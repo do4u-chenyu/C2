@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     public static class ExtensionMethods
 

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Core;
 using Citta_T1.Properties;
 using Citta_T1.Utils;
 
@@ -19,12 +20,12 @@ namespace Citta_T1.Controls.Flow
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
         public FlowControl()
-        {
+        { 
             InitializeComponent();
             SelectDrag = false;
             SelectFrame = false;
             SelectRemark = false;
-            this.Cursor = Cursors.Default;
+            
         }
         // 恢复到编辑模式
         public void ResetStatus()
@@ -70,6 +71,7 @@ namespace Citta_T1.Controls.Flow
             SelectDrag = !SelectDrag;
             SelectFrame = false;
             ChangeCursor();
+            FrameChange(SelectFrame);
         }
         private void MovePictureBox_MouseLeave(object sender, EventArgs e)
         {
@@ -162,7 +164,7 @@ namespace Citta_T1.Controls.Flow
             
             SelectDrag = false;
             ChangeCursor();
-
+            DragChange(SelectDrag);
 
 
         }

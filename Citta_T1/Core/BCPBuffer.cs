@@ -7,8 +7,9 @@ using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Text.RegularExpressions;
+using Citta_T1.Utils;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     class FileCache
     {
