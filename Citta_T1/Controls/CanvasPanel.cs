@@ -240,8 +240,14 @@ namespace Citta_T1.Controls
             }
             else
             {
-                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame() && IsValidLine(mrs[mrIndex]))
-                    selectLineIndexs.Add(mrIndex);
+                if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame())
+                    if (IsValidLine(mrs[mrIndex]))
+                        selectLineIndexs.Add(mrIndex);
+                    else
+                    {
+                        MessageBox.Show("该线不应被选中。只支持选中数据源与算子之间的线。");
+                        return;
+                    }
                 else
                     return;
                 if (e.Button == MouseButtons.Left)
