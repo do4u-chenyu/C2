@@ -451,14 +451,13 @@ namespace Citta_T1.Dialogs
             this.radioButton3.Checked = true;
         }
         
-        private void label10_Click(object sender, EventArgs e)
+        private void Demodownload_excel_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.FileName = "demo_excel.xlsx";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                //string srcFilePath = Application.StartupPath;
-                string srcFilePath = @"..\..\Demo\demo_excel.xlsx";
+                string srcFilePath = Application.StartupPath + @"\Demo\demo_excel.xlsx";
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
@@ -472,14 +471,13 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void Demodownload_csv_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.FileName = "demo_csv.csv";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                //string srcFilePath = Application.StartupPath;
-                string srcFilePath = @"..\..\Demo\demo_csv.csv";
+                string srcFilePath = Application.StartupPath + @"\Demo\demo_csv.csv";
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
@@ -493,14 +491,13 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        private void label8_Click(object sender, EventArgs e)
+        private void Demodownload_txt_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.FileName = "demo_txt.txt";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                //string srcFilePath = Application.StartupPath;
-                string srcFilePath = @"..\..\Demo\demo_txt.txt";
+                string srcFilePath = Application.StartupPath + @"\Demo\demo_txt.txt";
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
@@ -514,14 +511,13 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        private void label11_Click(object sender, EventArgs e)
+        private void Demodownload_bcp_Click(object sender, EventArgs e)
         {
             this.saveFileDialog.FileName = "demo_bcp.bcp";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                //string srcFilePath = Application.StartupPath;
-                string srcFilePath = @"..\..\Demo\demo_bcp.bcp";
+                string srcFilePath = Application.StartupPath + @"\Demo\demo_bcp.bcp";
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
