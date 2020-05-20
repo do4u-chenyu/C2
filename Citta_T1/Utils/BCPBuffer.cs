@@ -204,9 +204,7 @@ namespace Citta_T1.Utils
                     fs.Dispose();
                 }
                 if (workbook != null)
-                {
                     workbook.Close();
-                }
             }
         }
 
