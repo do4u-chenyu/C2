@@ -27,22 +27,22 @@ namespace Citta_T1.Controls.Top
 
         private void TopToolBarControl_UndoStackNotEmpty()
         {
-            throw new NotImplementedException();
+            this.undoButton.Enabled = true;
         }
 
         private void TopToolBarControl_UndoStackEmpty()
         {
-            throw new NotImplementedException();
+            this.undoButton.Enabled = false;
         }
 
         private void TopToolBarControl_RedoStackNotEmpty()
         {
-            throw new NotImplementedException();
+            this.redoButton.Enabled = true;
         }
 
         private void TopToolBarControl_RedoStackEmpty()
         {
-            throw new NotImplementedException();
+            this.redoButton.Enabled = false;
         }
 
         private void InitializeToolTip()
