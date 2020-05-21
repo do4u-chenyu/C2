@@ -5,6 +5,7 @@ using Citta_T1.Dialogs;
 using Citta_T1.Business.Model;
 using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 
 namespace Citta_T1.Controls.Top
 {
@@ -54,6 +55,8 @@ namespace Citta_T1.Controls.Top
             this.toolTip1.SetToolTip(this.filterButton, HelpUtil.FilterOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.randomButton, HelpUtil.RandomOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
+            this.toolTip1.SetToolTip(this.redoButton, HelpUtil.RedoButtonHelpInfo);
         }
 
         private void CommonUse_MouseDown(object sender, MouseEventArgs e)
@@ -109,6 +112,24 @@ namespace Citta_T1.Controls.Top
         {
             ConfigForm config = new ConfigForm();
             config.ShowDialog();
+        }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            UndoRedoManager.GetInstance().Undo();
+        }
+
+        private void RedoButton_Click(object sender, EventArgs e)
+        {
+            UndoRedoManager.GetInstance().Redo();
+        }
+
+        private void TopToolBarControl_Load(object sender, EventArgs e)
+        {
+            // 测试用
+            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
+            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
+            //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
         }
     }
 }

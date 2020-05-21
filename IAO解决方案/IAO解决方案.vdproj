@@ -860,11 +860,6 @@
             "AssemblyAsmDisplayName" = "8:UserControlDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3C2BDE69F83C1D0B11CDD2FE583A6874"
-                    {
-                    "Name" = "8:UserControlDLL.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:UserControlDLL.dll"
             "TargetName" = "8:"
@@ -880,7 +875,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:FALSE"
+            "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -1950,7 +1945,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IAO解决方案"
         "ProductCode" = "8:{E837FD09-3EC9-423F-9603-01232B382778}"
-        "PackageCode" = "8:{37657198-F054-4834-B967-04FBE678CA06}"
+        "PackageCode" = "8:{624ABF31-D859-4BA7-8B5B-B46B8EE3B578}"
         "UpgradeCode" = "8:{D81B8DF7-058D-4702-B5B6-104B00965679}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"

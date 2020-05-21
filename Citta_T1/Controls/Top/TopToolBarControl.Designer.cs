@@ -74,7 +74,8 @@
             this.unionButton.Location = new System.Drawing.Point(210, 0);
             this.unionButton.Name = "unionButton";
             this.unionButton.Size = new System.Drawing.Size(61, 32);
-            this.unionButton.TabIndex = 7;
+            this.unionButton.TabIndex = 0;
+            this.unionButton.TabStop = false;
             this.unionButton.UseVisualStyleBackColor = true;
             this.unionButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
@@ -84,7 +85,8 @@
             this.differButton.Location = new System.Drawing.Point(275, 0);
             this.differButton.Name = "differButton";
             this.differButton.Size = new System.Drawing.Size(61, 32);
-            this.differButton.TabIndex = 8;
+            this.differButton.TabIndex = 0;
+            this.differButton.TabStop = false;
             this.differButton.UseVisualStyleBackColor = true;
             this.differButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
@@ -94,7 +96,8 @@
             this.filterButton.Location = new System.Drawing.Point(340, 0);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(61, 32);
-            this.filterButton.TabIndex = 9;
+            this.filterButton.TabIndex = 0;
+            this.filterButton.TabStop = false;
             this.filterButton.UseVisualStyleBackColor = true;
             this.filterButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
@@ -104,7 +107,8 @@
             this.randomButton.Location = new System.Drawing.Point(405, 0);
             this.randomButton.Name = "randomButton";
             this.randomButton.Size = new System.Drawing.Size(69, 32);
-            this.randomButton.TabIndex = 10;
+            this.randomButton.TabIndex = 0;
+            this.randomButton.TabStop = false;
             this.randomButton.UseVisualStyleBackColor = true;
             this.randomButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CommonUse_MouseDown);
             // 
@@ -114,7 +118,8 @@
             this.formatButton.Location = new System.Drawing.Point(478, 0);
             this.formatButton.Name = "formatButton";
             this.formatButton.Size = new System.Drawing.Size(89, 32);
-            this.formatButton.TabIndex = 12;
+            this.formatButton.TabIndex = 0;
+            this.formatButton.TabStop = false;
             this.formatButton.UseVisualStyleBackColor = true;
             this.formatButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormatButton_MouseClick);
             // 
@@ -124,7 +129,8 @@
             this.moreButton.Location = new System.Drawing.Point(571, 4);
             this.moreButton.Name = "moreButton";
             this.moreButton.Size = new System.Drawing.Size(25, 24);
-            this.moreButton.TabIndex = 13;
+            this.moreButton.TabIndex = 0;
+            this.moreButton.TabStop = false;
             this.toolTip1.SetToolTip(this.moreButton, "首选项配置,配置程序的各项参数");
             this.moreButton.UseVisualStyleBackColor = true;
             this.moreButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MoreButton_MouseClick);
@@ -142,21 +148,27 @@
             // 
             // undoButton
             // 
+            this.undoButton.Enabled = false;
             this.undoButton.Image = ((System.Drawing.Image)(resources.GetObject("undoButton.Image")));
             this.undoButton.Location = new System.Drawing.Point(44, 0);
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(79, 32);
-            this.undoButton.TabIndex = 24;
+            this.undoButton.TabIndex = 0;
+            this.undoButton.TabStop = false;
             this.undoButton.UseVisualStyleBackColor = true;
+            this.undoButton.Click += new System.EventHandler(this.UndoButton_Click);
             // 
             // redoButton
             // 
+            this.redoButton.Enabled = false;
             this.redoButton.Image = ((System.Drawing.Image)(resources.GetObject("redoButton.Image")));
             this.redoButton.Location = new System.Drawing.Point(127, 0);
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(79, 32);
-            this.redoButton.TabIndex = 25;
+            this.redoButton.TabIndex = 0;
+            this.redoButton.TabStop = false;
             this.redoButton.UseVisualStyleBackColor = true;
+            this.redoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
             // TopToolBarControl
             // 
@@ -174,6 +186,7 @@
             this.Controls.Add(this.relateButton);
             this.Name = "TopToolBarControl";
             this.Size = new System.Drawing.Size(605, 33);
+            this.Load += new System.EventHandler(this.TopToolBarControl_Load);
             this.ResumeLayout(false);
 
         }

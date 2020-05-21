@@ -46,7 +46,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
-            this.outList = new UserControlDLL.ComCheckBoxList();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -316,7 +316,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private UserControlDLL.ComCheckBoxList outList;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
         private System.Windows.Forms.RadioButton repetition;
         private System.Windows.Forms.RadioButton noRepetition;
         private System.Windows.Forms.RadioButton descendingOrder;

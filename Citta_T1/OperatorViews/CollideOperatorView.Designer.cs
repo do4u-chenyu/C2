@@ -48,7 +48,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.OutList = new UserControlDLL.ComCheckBoxList();
+            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -331,7 +331,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private UserControlDLL.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
         private System.Windows.Forms.TextBox dataSource1;
         private System.Windows.Forms.TextBox dataSource0;
         private System.Windows.Forms.ToolTip toolTip1;

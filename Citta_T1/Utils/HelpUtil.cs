@@ -25,9 +25,10 @@ namespace Citta_T1.Utils
         public static string KeyWordOperatorHelpInfo = "关键词过滤：根据输入的关键词，对数据进行基础的关键词命中或去噪处理";
         public static string DataFormatOperatorHelpInfo = "数据标准化：对数据进行输出列选择，顺序调整，列项重命名处理";
         public static string CustomOperator2HelpInfo = "多源算子:灵活配置算子,用于各种模型探索和展示.二元算子,支持二个输入数据源.";
-    
 
 
+        public static string UndoButtonHelpInfo = "撤销按钮:撤销当前操作，目前支持单元素添加,删除,重命名,移动,关系添加,关系删除6种操作的撤销.";
+        public static string RedoButtonHelpInfo = "恢复按钮:恢复上一步的撤销操作，目前支持单元素添加,删除,重命名,移动,关系添加,关系删除6种操作的恢复.";
         public static string FormatOperatorHelpInfo = "一键排版,智能调整元素版面位置.";
     }
 }
