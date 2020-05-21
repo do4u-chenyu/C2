@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
@@ -345,5 +346,24 @@ namespace Citta_T1.Business.Model
             }
             return false;
         }
-    }
+        //修改xml内容
+        public void ModifyInnerText(string xmlPath,string nodeName,string newValue,int id)
+         {
+             string ID = id.ToString();
+             XmlDocument xmlDoc = new XmlDocument();
+             xmlDoc.Load(xmlPath);
+             XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
+             foreach (XmlNode childNode in nodes)
+             {
+                bool condition0 = childNode.SelectSingleNode("id") != null && childNode.SelectSingleNode("id").InnerText == ID ? true : false;
+                bool condition1 = childNode.SelectSingleNode(nodeName) != null? true : false;
+                if (condition0  && condition1)
+                {
+                    childNode.SelectSingleNode(nodeName).InnerText = newValue;
+                    break;
+                }
+             }
+             xmlDoc.Save(xmlPath);
+         }
+}
 }

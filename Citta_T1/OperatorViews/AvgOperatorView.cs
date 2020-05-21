@@ -159,7 +159,7 @@ namespace Citta_T1.OperatorViews
             oldColumn.Add(this.oldAvg);
             if (hasResutl != null &&  this.oldAvg != this.AvgComBox.Text)
                 Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
-
+           
 
         }
 
