@@ -19,7 +19,7 @@ namespace Citta_T1.Controls
         private List<ModelRelation> modelRelations;
         private ModelDocument currentModel;
         private List<ModelElement> modelElements;
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("QuickformatWrapper");
         private List<int> leafNodeIds;
         private List<int> starNodes;
         private List<int> endNodes;
