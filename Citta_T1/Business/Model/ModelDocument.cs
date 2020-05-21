@@ -368,6 +368,11 @@ namespace Citta_T1.Business.Model
 
         public static bool ModifyRSPath(string modelTitle, string oldPathPrefix, string newPathPrefix)
         {
+            //oldPathPrefix = D:\FiberHomeIAOModelDocument\新手上路\我的新模型1;
+            //newPathPrefix = D:\FiberHomeIAOModelDocument\新手上路\重命名;
+            string path = @"D:\FiberHomeIAOModelDocument\新手上路\我的新模型1\L4_20200518_112435.bcp";
+            if (path.StartsWith(oldPathPrefix))
+                path = path.Replace(oldPathPrefix, newPathPrefix);
             return false;
         }
 }
