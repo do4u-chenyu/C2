@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
@@ -19,11 +20,35 @@ namespace Citta_T1.Core.UndoRedo.Command
         }
         public bool Do()
         {
+            switch (element.Type)
+            {
+                case ElementType.DataSource:
+                    oldName = (element.GetControl as MoveDtControl).ChangeTextName(oldName);
+                    break;
+                case ElementType.Operator:
+                    break;
+                case ElementType.Relation:
+                    break;
+                default:
+                    break;
+            }
             return true;
         }
 
         public bool Rollback()
         {
+            switch (element.Type)
+            {
+                case ElementType.DataSource:
+                    oldName = (element.GetControl as MoveDtControl).ChangeTextName(oldName);
+                    break;
+                case ElementType.Operator:
+                    break;
+                case ElementType.Relation:
+                    break;
+                default:
+                    break;
+            }
             return true;
         }
     }

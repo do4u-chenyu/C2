@@ -122,11 +122,12 @@ namespace Citta_T1.Controls.Move
             if (this.textBox.Text.Length == 0)
                 return;
             this.textBox.ReadOnly = true;
-            SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
             if (this.oldTextString == this.textBox.Text)
                 return;
+
+            SetOpControlName(this.textBox.Text);
 
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
@@ -141,10 +142,19 @@ namespace Citta_T1.Controls.Move
             Global.GetMainForm().SetDocumentDirty(); 
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-
-
-
         }
+
+        public string ChangeTextName(string des)
+        {
+            string ret = this.opControlName;
+            this.oldTextString = this.textBox.Text;
+            this.textBox.Text = des;
+            SetOpControlName(des);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return ret;
+        }
+
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
 
