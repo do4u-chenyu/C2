@@ -44,8 +44,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.outList0 = new UserControlDLL.ComCheckBoxList();
-            this.outList1 = new UserControlDLL.ComCheckBoxList();
+            this.outList0 = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.outList1 = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.label7 = new System.Windows.Forms.Label();
             this.rsFullFilePathTextBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
@@ -441,8 +441,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private UserControlDLL.ComCheckBoxList outList0;
-        private UserControlDLL.ComCheckBoxList outList1;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList0;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox rsFullFilePathTextBox;
         private System.Windows.Forms.Button browseButton;

@@ -1,4 +1,4 @@
-﻿namespace UserControlDLL
+﻿namespace Citta_T1.Controls.Common
 {
     partial class ComCheckBoxList
     {
