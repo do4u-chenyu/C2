@@ -206,8 +206,8 @@
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
             this.textBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

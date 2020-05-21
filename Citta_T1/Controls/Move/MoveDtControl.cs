@@ -1,17 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Core;
-using Citta_T1.Controls.Flow;
-using System.Text.RegularExpressions;
-using static Citta_T1.Controls.CanvasPanel;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Citta_T1.Business.Model;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Citta_T1.Core.UndoRedo.Command;
 
 namespace Citta_T1.Controls.Move
 {
@@ -101,7 +100,7 @@ namespace Citta_T1.Controls.Move
 
 
         #region 重写方法
-        public void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -111,7 +110,7 @@ namespace Citta_T1.Controls.Move
                 FinishTextChange();
             }
         }
-        public void textBox1_Leave(object sender, EventArgs e)
+        public void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -131,8 +130,10 @@ namespace Citta_T1.Controls.Move
                 this.oldTextString = this.textBox.Text;
                 Global.GetMainForm().SetDocumentDirty();
             }
+            //ICommand renameCommand = new ElementRenameCommand(Global.get);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {

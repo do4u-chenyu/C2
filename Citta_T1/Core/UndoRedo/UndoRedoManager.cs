@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Business.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,26 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo
 {
-    class UndoRedoManager
+    class UndoRedoStack
     {
-     
         private FixedCommandStack undoStack;
         private FixedCommandStack redoStack;
 
+        public FixedCommandStack UndoStack { get => undoStack; }
+        public FixedCommandStack RedoStack { get => redoStack; }
+
+        public UndoRedoStack(int capacity = 100)
+        {
+            undoStack = new FixedCommandStack(capacity);
+            redoStack = new FixedCommandStack(capacity);
+        }
+    }
+    class UndoRedoManager
+    {
+        // 每个文档对应一个撤回/重做栈
+        private Dictionary<ModelDocument, UndoRedoStack> undoRedoDict;
+
         private static UndoRedoManager Manager = null;
-        private static int UndoRedoManagerCapacity = 100;
 
         public event UndoRedoEvent.UndoStackEmptyEventHandler UndoStackEmpty;
         public event UndoRedoEvent.UndoStackNotEmptyEventHandler UndoStackNotEmpty;
@@ -21,70 +34,93 @@ namespace Citta_T1.Core.UndoRedo
         public event UndoRedoEvent.RedoStackEmptyEventHandler RedoStackEmpty;
         public event UndoRedoEvent.RedoStackNotEmptyEventHandler RedoStackNotEmpty;
 
-        private UndoRedoManager(int capacity = 100)
+        private UndoRedoManager()
         {
-            undoStack = new FixedCommandStack(capacity);
-            redoStack = new FixedCommandStack(capacity);
+            undoRedoDict = new Dictionary<ModelDocument, UndoRedoStack>();
         }
 
         public static UndoRedoManager GetInstance()
         {
             if (Manager == null)
-                Manager = new UndoRedoManager(UndoRedoManagerCapacity);
+                Manager = new UndoRedoManager();
             return Manager;
         }
 
+        // 后面文档切换时,更新 TopToolBarControl用
+        public bool IsUndoStackEmpty(ModelDocument md)
+        {
+            return undoRedoDict.ContainsKey(md) && undoRedoDict[md].UndoStack.IsEmpty();
+        }
+        public bool IsRedoStackEmpty(ModelDocument md)
+        {
+            return undoRedoDict.ContainsKey(md) && undoRedoDict[md].RedoStack.IsEmpty();
+        }
+
         // 普通执行命令
-        public void DoCommand(ICommand cmd)
+        public void DoCommand(ModelDocument md, ICommand cmd)
         {
             if (cmd == null)
                 return;
 
             cmd.Do();
 
-            if (undoStack.IsEmpty())
+            if (!undoRedoDict.ContainsKey(md))
+                undoRedoDict[md] = new UndoRedoStack();
+
+            if (undoRedoDict[md].UndoStack.IsEmpty())
                 UndoStackNotEmpty?.Invoke();
-            undoStack.Push(cmd);
+            undoRedoDict[md].UndoStack.Push(cmd);
             // 一旦有了新命令,redo栈就可以清空了
-            redoStack.Clear();
+            undoRedoDict[md].RedoStack.Clear();
             RedoStackEmpty?.Invoke();
         }
 
-        public void Undo()
+        public void Undo(ModelDocument md)
         {
             // 防止cmd为空
-            if (undoStack.IsEmpty())
+            if (!undoRedoDict.ContainsKey(md) || undoRedoDict[md].UndoStack.IsEmpty())
                 return;
 
             // 回滚操作
-            ICommand cmd = undoStack.Pop();
+            ICommand cmd = undoRedoDict[md].UndoStack.Pop();
             cmd.Rollback();
 
-            if (undoStack.IsEmpty())
+            if (undoRedoDict[md].UndoStack.IsEmpty())
                 UndoStackEmpty?.Invoke();
 
-            if (redoStack.IsEmpty())
+            if (undoRedoDict[md].RedoStack.IsEmpty())
                 RedoStackNotEmpty?.Invoke();
-            redoStack.Push(cmd);
+            undoRedoDict[md].RedoStack.Push(cmd);
         }
 
-        public void Redo()
+        public void Redo(ModelDocument md)
         {
-            if (redoStack.IsEmpty())
+            if (!undoRedoDict.ContainsKey(md) || undoRedoDict[md].RedoStack.IsEmpty())
                 return;
 
-            ICommand cmd = redoStack.Pop();
+            ICommand cmd = undoRedoDict[md].RedoStack.Pop();
 
             // 重新执行命令
             cmd.Do();
 
-            if (redoStack.IsEmpty())
+            if (undoRedoDict[md].RedoStack.IsEmpty())
                 RedoStackEmpty?.Invoke();
 
-            if (undoStack.IsEmpty())
+            if (undoRedoDict[md].UndoStack.IsEmpty())
                 UndoStackNotEmpty?.Invoke();
-            undoStack.Push(cmd);
+            undoRedoDict[md].UndoStack.Push(cmd);
 
+
+        }
+
+        public void Remove(ModelDocument md)
+        {
+            if (!undoRedoDict.ContainsKey(md))
+                return;
+
+            undoRedoDict[md].RedoStack.Clear();
+            undoRedoDict[md].UndoStack.Clear();
+            undoRedoDict.Remove(md);    
         }
     }
 }

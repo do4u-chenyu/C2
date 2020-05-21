@@ -13,6 +13,7 @@ using Citta_T1.Business.Schedule;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Bottom;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
 
 namespace  Citta_T1
 { 
@@ -73,6 +74,7 @@ namespace  Citta_T1
             Global.SetOptionDao(this.optionDao);
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
+            Global.SetTopToolBarControl(this.topToolBarControl);
 
         }
 
@@ -155,6 +157,14 @@ namespace  Citta_T1
             this.canvasPanel.Invalidate(false);
             //切换文档时，更新运行按钮图标及进度条
             UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
+            //切换文档时,更新撤回/重做按钮状态
+            UpdateUndoRedoButton();
+        }
+
+        private void UpdateUndoRedoButton()
+        {
+            topToolBarControl.SetUndoButtonEnable(UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
+            topToolBarControl.SetRedoButtonEnable(UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
         }
 
         public void LoadDocument(string modelTitle)

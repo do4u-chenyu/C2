@@ -5,7 +5,6 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -42,6 +41,7 @@ namespace Citta_T1.Business.Model
         private string userPath;
 
 
+
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -50,8 +50,8 @@ namespace Citta_T1.Business.Model
 
         public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
         public string SavePath { get => savePath; set => savePath = value; }
-        internal List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
-        internal List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
+        public List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
+        public List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
 
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
@@ -62,6 +62,7 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
         public ModelDocument(string modelTitle, string userName)
@@ -80,6 +81,7 @@ namespace Citta_T1.Business.Model
             this.manager = new Manager();
             this.sizeL = 0;
             this.screenFactor = 1;
+
 
             // lineCounter应该为`this,modelRelations`的最大值
             //this.lineCounter = this.modelRelations.Count == 0 ? -1 :   

@@ -116,12 +116,12 @@ namespace Citta_T1.Controls.Top
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-            UndoRedoManager.GetInstance().Undo();
+            UndoRedoManager.GetInstance().Undo(Global.GetCurrentDocument());
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
-            UndoRedoManager.GetInstance().Redo();
+            UndoRedoManager.GetInstance().Redo(Global.GetCurrentDocument());
         }
 
         private void TopToolBarControl_Load(object sender, EventArgs e)
@@ -130,6 +130,16 @@ namespace Citta_T1.Controls.Top
             //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
             //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
             //UndoRedoManager.GetInstance().DoCommand(new TestCommand());
+        }
+
+        public void SetUndoButtonEnable(bool value)
+        {
+            this.undoButton.Enabled = value;
+        }
+
+        public void SetRedoButtonEnable(bool value)
+        {
+            this.redoButton.Enabled = value;
         }
     }
 }
