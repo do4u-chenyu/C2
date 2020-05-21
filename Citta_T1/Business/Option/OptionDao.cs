@@ -1,16 +1,15 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Citta_T1.Controls;
 using System.Windows.Forms;
-using System.IO;
-using Citta_T1.Core;
 
 namespace Citta_T1.Business.Option
 {
