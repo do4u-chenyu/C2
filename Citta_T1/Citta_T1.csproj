@@ -141,6 +141,7 @@
     <Compile Include="Core\UndoRedo\Command\ElementRenameCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\RelationAddCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\RelationDeleteCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\TestCommand.cs" />
     <Compile Include="Core\UndoRedo\FixedCommandStack.cs" />
     <Compile Include="Core\UndoRedo\ICommand.cs" />
     <Compile Include="Core\UndoRedo\UndoRedoEvent.cs" />

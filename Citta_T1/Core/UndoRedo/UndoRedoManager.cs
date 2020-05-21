@@ -37,6 +37,9 @@ namespace Citta_T1.Core.UndoRedo
         // 普通执行命令
         public void DoCommand(ICommand cmd)
         {
+            if (cmd == null)
+                return;
+
             cmd.Do();
 
             if (undoStack.IsEmpty())
@@ -52,17 +55,17 @@ namespace Citta_T1.Core.UndoRedo
             // 防止cmd为空
             if (undoStack.IsEmpty())
                 return;
-               
+
+            // 回滚操作
             ICommand cmd = undoStack.Pop();
+            cmd.Rollback();
+
             if (undoStack.IsEmpty())
                 UndoStackEmpty?.Invoke();
 
             if (redoStack.IsEmpty())
                 RedoStackNotEmpty?.Invoke();
             redoStack.Push(cmd);
-
-            // 回滚操作
-            cmd.Rollback();
         }
 
         public void Redo()
@@ -72,6 +75,9 @@ namespace Citta_T1.Core.UndoRedo
 
             ICommand cmd = redoStack.Pop();
 
+            // 重新执行命令
+            cmd.Do();
+
             if (redoStack.IsEmpty())
                 RedoStackEmpty?.Invoke();
 
@@ -79,8 +85,6 @@ namespace Citta_T1.Core.UndoRedo
                 UndoStackNotEmpty?.Invoke();
             undoStack.Push(cmd);
 
-            // 重新执行命令
-            cmd.Do();
         }
     }
 }
