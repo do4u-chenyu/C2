@@ -40,7 +40,7 @@
             this.valuePanel = new System.Windows.Forms.Panel();
             this.dataSource1 = new System.Windows.Forms.TextBox();
             this.dataSource0 = new System.Windows.Forms.TextBox();
-            this.OutList = new UserControlDLL.ComCheckBoxList();
+            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -331,7 +331,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private UserControlDLL.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
         private System.Windows.Forms.TextBox dataSource1;
         private System.Windows.Forms.TextBox dataSource0;
         private System.Windows.Forms.ToolTip toolTip1;

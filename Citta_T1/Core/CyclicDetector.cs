@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     class CyclicDetector
     {

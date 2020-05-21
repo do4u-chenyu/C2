@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 
 using Citta_T1.Business.Model;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left

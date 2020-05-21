@@ -7,8 +7,9 @@ using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Text.RegularExpressions;
+using Citta_T1.Utils;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     class FileCache
     {
@@ -46,7 +47,7 @@ namespace Citta_T1.Utils
 
         private static BCPBuffer BcpBufferSingleInstance;
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
-        private static readonly Regex regexXls = new Regex(@"\.xl(s[xmb]|t[xm]|am)$");
+        private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
         public string GetCachePreViewBcpContent(string fullFilePath, DSUtil.Encoding encoding, bool isForceRead = false)
         {
@@ -204,9 +205,7 @@ namespace Citta_T1.Utils
                     fs.Dispose();
                 }
                 if (workbook != null)
-                {
                     workbook.Close();
-                }
             }
         }
 

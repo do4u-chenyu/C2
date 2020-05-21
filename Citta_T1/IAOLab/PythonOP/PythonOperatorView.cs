@@ -9,6 +9,7 @@ using Citta_T1.Business.Option;
 using Citta_T1.Business.Model;
 using System.Linq;
 using System.Text;
+using Citta_T1.Core;
 
 namespace Citta_T1.OperatorViews
 {

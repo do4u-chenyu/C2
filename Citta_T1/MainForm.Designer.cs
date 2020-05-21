@@ -463,9 +463,9 @@ namespace Citta_T1
             // 
             // topToolBarControl
             // 
-            this.topToolBarControl.Location = new System.Drawing.Point(4, 8);
+            this.topToolBarControl.Location = new System.Drawing.Point(-42, 8);
             this.topToolBarControl.Name = "topToolBarControl";
-            this.topToolBarControl.Size = new System.Drawing.Size(548, 33);
+            this.topToolBarControl.Size = new System.Drawing.Size(594, 33);
             this.topToolBarControl.TabIndex = 24;
             // 
             // panel5
@@ -805,7 +805,7 @@ namespace Citta_T1
             this.flowControl.BackColor = System.Drawing.Color.Transparent;
             this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.flowControl.Cursor = System.Windows.Forms.Cursors.Help;
+            this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.flowControl.Location = new System.Drawing.Point(694, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";
@@ -902,6 +902,7 @@ namespace Citta_T1
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             this.canvasPanel.ResumeLayout(false);
+            this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -1,24 +1,23 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-
-using Citta_T1.Controls.Flow;
-using System.Text.RegularExpressions;
-using static Citta_T1.Controls.CanvasPanel;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Citta_T1.Business.Model;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using Citta_T1.Core.UndoRedo.Command;
 
 namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
     {
-        private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+        private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         private string oldTextString;
@@ -101,7 +100,7 @@ namespace Citta_T1.Controls.Move
 
 
         #region 重写方法
-        public void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -111,7 +110,7 @@ namespace Citta_T1.Controls.Move
                 FinishTextChange();
             }
         }
-        public void textBox1_Leave(object sender, EventArgs e)
+        public void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -126,13 +125,25 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != null)
             {
-                this.oldTextString = this.textBox.Text;
-                Global.GetMainForm().SetDocumentDirty();
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
+            
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty(); 
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+
+
+
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -447,7 +458,7 @@ namespace Citta_T1.Controls.Move
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                this.textBox.Text = this.oldTextString;
+                return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;

@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using Citta_T1.Utils;
 using System.IO;
+using Citta_T1.Core;
+using Citta_T1.Business.Model;
 
 namespace Citta_T1.Controls.Left
 {
@@ -127,33 +129,27 @@ namespace Citta_T1.Controls.Left
             if (ModelTitle == oldTextString)
                 return;
 
-
-            string newModelDirectory = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
-            string oldModelDirectory = System.IO.Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
-            string newFFP   = Path.Combine(newModelDirectory, ModelTitle + ".xml");
-
+            string newModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
+            string oldModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
+            string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml"); 
+            string newFFP = Path.Combine(newModelDirectory, ModelTitle + ".xml");
+    
             // 开始移动文件
-            bool ret = FileUtil.CreateDirectory(newModelDirectory);
+            bool ret = FileUtil.DirecotryMove(oldModelDirectory, newModelDirectory);
             if (!ret) // 失败回滚
             {
                 this.textButton.Text = oldTextString;
                 return;
             }
-
-            ret = FileUtil.FileMove(FullFilePath, newFFP);
-            if (!ret) // 失败回滚
-            {
-                FileUtil.DeleteDirectory(newModelDirectory);
-                this.textButton.Text = oldTextString;
-                return;
-            }
+            // 目前的机制，到这两步，一旦失败就无法回滚了
+            ret = ModelDocument.ModifyRSPath(tmpFFP, oldModelDirectory, newModelDirectory);
+            ret = FileUtil.FileMove(tmpFFP, newFFP);
 
             // 重命名
             this.oldTextString = ModelTitle;
-            this.fullFilePath = newFFP;
+            FullFilePath = newFFP;
             this.toolTip1.SetToolTip(this.textButton, ModelTitle);
             this.toolTip1.SetToolTip(this.rightPictureBox, FullFilePath);
-            FileUtil.DeleteDirectory(oldModelDirectory);
         }
 
 

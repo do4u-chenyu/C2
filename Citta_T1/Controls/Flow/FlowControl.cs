@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Core;
 using Citta_T1.Properties;
 using Citta_T1.Utils;
 
@@ -19,11 +20,12 @@ namespace Citta_T1.Controls.Flow
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
         public FlowControl()
-        {
+        { 
             InitializeComponent();
             SelectDrag = false;
             SelectFrame = false;
             SelectRemark = false;
+            
         }
         // 恢复到编辑模式
         public void ResetStatus()
@@ -52,7 +54,7 @@ namespace Citta_T1.Controls.Flow
                 Global.GetCanvasPanel().Cursor = Cursors.Hand;
             }
             // FlowControl本身的图标不变
-            this.Cursor = Cursors.Help;
+            this.Cursor = Cursors.Default;
         }
         #region 拖动
 
@@ -69,6 +71,7 @@ namespace Citta_T1.Controls.Flow
             SelectDrag = !SelectDrag;
             SelectFrame = false;
             ChangeCursor();
+            FrameChange(SelectFrame);
         }
         private void MovePictureBox_MouseLeave(object sender, EventArgs e)
         {
@@ -161,7 +164,7 @@ namespace Citta_T1.Controls.Flow
             
             SelectDrag = false;
             ChangeCursor();
-
+            DragChange(SelectDrag);
 
 
         }
@@ -171,7 +174,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectDrag.Image")));
+                this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectDrag.png")));
                 this.movePictureBox.Location = new System.Drawing.Point(13, 3);
                 this.movePictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -184,7 +187,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomUp.Image")));
+                this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZommUp.png")));
                 this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
                 this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -197,7 +200,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomDown.Image")));
+                this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomDown.png")));
                 this.zoomDownPictureBox.Location = new System.Drawing.Point(87, 3);
                 this.zoomDownPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -210,7 +213,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectRemark.Image")));
+                this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectRemark.png")));
                 this.remarkPictureBox.Location = new System.Drawing.Point(124, 2);
                 this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -223,7 +226,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectFrame.Image")));
+                this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectFrame.png")));
                 this.framePictureBox.Location = new System.Drawing.Point(162, 2);
                 this.framePictureBox.Size = new System.Drawing.Size(29, 29);
                 return;

@@ -1,28 +1,27 @@
-﻿using Citta_T1.Controls.Interface;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Business.Schedule;
+using Citta_T1.Controls.Interface;
+using Citta_T1.Core;
 using Citta_T1.OperatorViews;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using Citta_T1.Business.Option;
-using Citta_T1.Business.Model;
-using System.Linq;
-using Citta_T1.Controls;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using Citta_T1.Business.Schedule;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move
-{ 
+{
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
   
 
     public partial class MoveOpControl : UserControl, IScalable, IDragable, IMoveControl
     {
-        private LogUtil log = LogUtil.GetInstance("MoveOpControl");
+        private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
         private ControlMoveWrapper controlMoveWrapper;

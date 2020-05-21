@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -141,7 +142,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
             string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-            string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
             string factor1 = index01 + "," + index02 + "," + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectColumn.Add(OutColumnName(this.comboBox1.Text, this.textBoxEx1.Text));
@@ -233,7 +234,7 @@ namespace Citta_T1.OperatorViews
             //判断取并条件是否有完全重复的
 
             var duplicateValues = this.opControl.Option.OptionDict.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
-            foreach (var item in duplicateValues)
+            foreach (var  item in duplicateValues)
             {
                 MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
                 return;

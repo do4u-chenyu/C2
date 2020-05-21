@@ -114,6 +114,17 @@ namespace Citta_T1.Utils
             return ret;
         }
 
+        public static bool DirecotryMove(string oldDirectory, string newDirectory)
+        {
+            bool ret = true;
+            try
+            {
+                Directory.Move(oldDirectory, newDirectory);
+            }
+            catch { ret = false; }
+            return ret;
+        }
+
         public static string TryGetPathRoot(string path)
         {
             string root;

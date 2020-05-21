@@ -1,14 +1,15 @@
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
@@ -23,8 +24,6 @@ namespace Citta_T1.Business.Model
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
         private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
-        private HashSet<int> vertices;
-        private int lineCounter;
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -41,6 +40,7 @@ namespace Citta_T1.Business.Model
         private string userPath;
 
 
+
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -49,8 +49,8 @@ namespace Citta_T1.Business.Model
 
         public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
         public string SavePath { get => savePath; set => savePath = value; }
-        internal List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
-        internal List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
+        public List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
+        public List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
 
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
@@ -62,6 +62,8 @@ namespace Citta_T1.Business.Model
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
 
+        private static LogUtil log = LogUtil.GetInstance("ModelDocument");
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
@@ -69,7 +71,6 @@ namespace Citta_T1.Business.Model
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, List<int>>();
-            this.vertices = new HashSet<int>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
@@ -78,6 +79,7 @@ namespace Citta_T1.Business.Model
             this.manager = new Manager();
             this.sizeL = 0;
             this.screenFactor = 1;
+
 
             // lineCounter应该为`this,modelRelations`的最大值
             //this.lineCounter = this.modelRelations.Count == 0 ? -1 :   
@@ -264,7 +266,7 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+       
         public void UpdateAllLines()
         {
             for (int i = 0;i < this.modelRelations.Count();i++)
@@ -344,5 +346,33 @@ namespace Citta_T1.Business.Model
             }
             return false;
         }
-    }
+        //修改xml内容
+
+        public static bool ModifyRSPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
+        {
+            bool ret = false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                
+                xmlDoc.Load(xmlPath);
+                XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
+                foreach (XmlNode childNode in nodes)
+                {
+                    XmlNode pathNode = childNode.SelectSingleNode("path");
+                    if (pathNode != null && !String.IsNullOrEmpty(pathNode.InnerText) && pathNode.InnerText.StartsWith(oldPathPrefix))
+                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
+
+                }
+                xmlDoc.Save(xmlPath);
+                ret = true;
+            }
+            catch (Exception e) 
+            {
+                log.Info("ModelDocument ModifyRSPath 出错: " + e.ToString());
+                ret = false;
+            }
+            return ret;
+        }
+}
 }

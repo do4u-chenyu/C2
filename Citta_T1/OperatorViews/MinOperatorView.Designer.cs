@@ -39,7 +39,7 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.OutList = new UserControlDLL.ComCheckBoxList();
+            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.MinValueBox = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
@@ -223,7 +223,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private UserControlDLL.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
         private System.Windows.Forms.ComboBox MinValueBox;
         private System.Windows.Forms.TextBox DataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;

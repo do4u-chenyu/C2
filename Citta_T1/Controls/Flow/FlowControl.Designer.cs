@@ -130,7 +130,7 @@
             this.Controls.Add(this.zoomDownPictureBox);
             this.Controls.Add(this.zoomUpPictureBox);
             this.Controls.Add(this.movePictureBox);
-            this.Cursor = System.Windows.Forms.Cursors.Help;
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
             this.Size = new System.Drawing.Size(209, 51);

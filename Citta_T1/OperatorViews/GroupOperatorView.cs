@@ -1,6 +1,7 @@
 ﻿ using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -125,23 +126,25 @@ namespace Citta_T1.OperatorViews
         {
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("noRepetition") != "")
+            if (!String.IsNullOrEmpty( this.opControl.Option.GetOption("noRepetition")))
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("repetition") != "")
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("repetition")))
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (this.opControl.Option.GetOption("ascendingOrder") != "")
+            if (!String.IsNullOrEmpty( this.opControl.Option.GetOption("ascendingOrder")))
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (this.opControl.Option.GetOption("descendingOrder") != "")
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("descendingOrder")))
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
+
             if (this.opControl.Option.GetOption("sortByNum") != "")
                 this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
             if (this.opControl.Option.GetOption("sortByString") != "")
                 this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
-            if (factor1 != "")
+            if (!String.IsNullOrEmpty(factor1))
+
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums[0]);
+                List<int> fieldColumn = new List<int>() { Nums[0] };
                 if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
             }
@@ -158,8 +161,8 @@ namespace Citta_T1.OperatorViews
                 if (factor == "") continue;
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums[0]);
-                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(), fieldColumn)) continue;
+                List<int> fieldColumn1 = new List<int>() { Nums[0] };
+                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(), fieldColumn1)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;

@@ -1,15 +1,15 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Citta_T1.Controls;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Citta_T1.Business.Option
 {
@@ -368,6 +368,12 @@ namespace Citta_T1.Business.Option
                     return;
                 }    
             }
+            //新输出字段包含就字段，但是新输出字段数目少于旧字段数目，如并集的重复选择
+            if (oldColumns.Count > currentcolumns.Count)
+            {
+                IsNewOut(currentcolumns, ID);
+                return;
+            }
             //判断输出顺序是否一致，如排序算子
 
             if (oldColumns.Count > 0)
@@ -380,7 +386,7 @@ namespace Citta_T1.Business.Option
                         return;
                     }
                 }
-                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0) ;
+                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0)
                 {
                     List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);

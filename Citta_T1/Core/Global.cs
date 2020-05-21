@@ -5,8 +5,9 @@ using Citta_T1.Controls.Bottom;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
 using Citta_T1.Controls.Title;
+using Citta_T1.Controls.Top;
 
-namespace Citta_T1.Utils
+namespace Citta_T1.Core
 {
     class Global
     {
@@ -22,6 +23,7 @@ namespace Citta_T1.Utils
         private static OptionDao optionDao;                 // 模型配置工具类
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
         private static BottomConsoleControl bottomPythonConsoleControl; //底层控制台面板
+        private static TopToolBarControl topToolBarControl; // 顶层右侧工具栏
 
 
         public static MainForm GetMainForm() { return mainForm; }
@@ -43,6 +45,7 @@ namespace Citta_T1.Utils
         public static OptionDao GetOptionDao() { return optionDao; } 
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
+        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; }
 
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
@@ -57,6 +60,7 @@ namespace Citta_T1.Utils
         public static void SetOptionDao(OptionDao od) { optionDao = od; }
         public static void SetDataSourceControl(DataSourceControl dsc) { dataSourceControl = dsc; }
         public static void SetBottomPythonConsoleControl(BottomConsoleControl bpcc) { bottomPythonConsoleControl = bpcc; }
+        public static void SetTopToolBarControl(TopToolBarControl ttbc) { topToolBarControl = ttbc; }
 
         private static string workspaceDirectory;           // 用户模型工作目录
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }

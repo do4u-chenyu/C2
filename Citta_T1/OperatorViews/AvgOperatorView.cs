@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -158,7 +159,6 @@ namespace Citta_T1.OperatorViews
             oldColumn.Add(this.oldAvg);
             if (hasResutl != null &&  this.oldAvg != this.AvgComBox.Text)
                 Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
-
 
         }
 

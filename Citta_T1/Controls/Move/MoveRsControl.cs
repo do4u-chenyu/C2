@@ -1,17 +1,17 @@
 
-using Citta_T1.Controls.Interface;
 using Citta_T1.Business.Model;
+using Citta_T1.Business.Schedule;
+using Citta_T1.Controls.Interface;
+using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
-using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using static Citta_T1.Controls.CanvasPanel;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using Citta_T1.Business.Schedule;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move
 {
@@ -25,7 +25,7 @@ namespace Citta_T1.Controls.Move
         private bool isMouseDown = false;
         private Point mouseOffset;
 
-        private LogUtil log = LogUtil.GetInstance("MoveRsControl");
+        private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         private string typeName;
         private string oldTextString;

@@ -128,7 +128,24 @@
     <Compile Include="Business\Option\OptionDao.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
+    <Compile Include="Controls\Common\ComCheckBoxList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Common\ComCheckBoxList.Designer.cs">
+      <DependentUpon>ComCheckBoxList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FrameWrapper.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementAddCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementDeleteCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementMoveCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\ElementRenameCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\RelationAddCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\RelationDeleteCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\TestCommand.cs" />
+    <Compile Include="Core\UndoRedo\FixedCommandStack.cs" />
+    <Compile Include="Core\UndoRedo\ICommand.cs" />
+    <Compile Include="Core\UndoRedo\UndoRedoEvent.cs" />
+    <Compile Include="Core\UndoRedo\UndoRedoManager.cs" />
     <Compile Include="IAOLab\CustomOP\CustomOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DifferOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\FilterOperatorCmd.cs" />
@@ -410,12 +427,12 @@
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
-    <Compile Include="Utils\CyclicDetector.cs" />
-    <Compile Include="Utils\DoubleBuffer.cs" />
+    <Compile Include="Core\CyclicDetector.cs" />
+    <Compile Include="Core\DoubleBuffer.cs" />
     <Compile Include="Utils\DSUtil.cs" />
-    <Compile Include="Utils\BCPBuffer.cs" />
+    <Compile Include="Core\BCPBuffer.cs" />
     <Compile Include="Utils\FileUtil.cs" />
-    <Compile Include="Utils\Global.cs" />
+    <Compile Include="Core\Global.cs" />
     <Compile Include="Utils\HelpUtil.cs" />
     <Compile Include="Utils\LineUtil.cs" />
     <Compile Include="Utils\ControlUtil.cs" />
@@ -423,6 +440,9 @@
     <Compile Include="Utils\OpUtil.cs" />
     <EmbeddedResource Include="Controls\CanvasPanel.resx">
       <DependentUpon>CanvasPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Common\ComCheckBoxList.resx">
+      <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\DataButton.resx">
       <DependentUpon>DataButton.cs</DependentUpon>
@@ -601,11 +621,22 @@
     <EmbeddedResource Include="sbin\uniq.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Demo\demo_bcp.bcp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Demo\demo_csv.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Demo\demo_excel.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Doc\citta帮助文档.chm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Doc\CITTA算子设计文档v4.docx" />
+    <None Include="Doc\undo_redo功能设计文档.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
+    <None Include="Doc\框选功能设计文档.docx" />
     <None Include="Doc\模型配置设计文档.docx" />
     <None Include="Doc\用户数据保存设计文档.docx" />
     <None Include="Doc\运算关系保存与加载设计文档.docx" />
@@ -630,11 +661,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Demo\demo_txt.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="res\toolbox\saveall.png" />
     <None Include="res\toolbox\reset.png" />
+    <None Include="res\toolbox\redo.png" />
+    <None Include="res\toolbox\undo.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -738,12 +775,6 @@
     <Content Include="res\toolbox\typesetting.png" />
     <Content Include="res\toolbox\more.png" />
     <Content Include="res\toolbox\union.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UserControlDLL\UserControlDLL.csproj">
-      <Project>{fac026d0-0c0f-4415-baba-9713ec1337cb}</Project>
-      <Name>UserControlDLL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
