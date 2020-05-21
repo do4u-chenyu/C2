@@ -63,6 +63,8 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log1 = LogUtil.GetInstance("CanvasPanel");
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -266,7 +268,7 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+       
         public void UpdateAllLines()
         {
             for (int i = 0;i < this.modelRelations.Count();i++)
@@ -347,33 +349,30 @@ namespace Citta_T1.Business.Model
             return false;
         }
         //修改xml内容
-        public void ModifyInnerText(string xmlPath,string nodeName,string newValue,int id)
-        {
-             string ID = id.ToString();
-             XmlDocument xmlDoc = new XmlDocument();
-             xmlDoc.Load(xmlPath);
-             XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
-             foreach (XmlNode childNode in nodes)
-             {
-                bool condition0 = childNode.SelectSingleNode("id") != null && childNode.SelectSingleNode("id").InnerText == ID ? true : false;
-                bool condition1 = childNode.SelectSingleNode(nodeName) != null? true : false;
-                if (condition0  && condition1)
-                {
-                    childNode.SelectSingleNode(nodeName).InnerText = newValue;
-                    break;
-                }
-             }
-             xmlDoc.Save(xmlPath);
-        }
 
-        public static bool ModifyRSPath(string modelTitle, string oldPathPrefix, string newPathPrefix)
+        public static bool ModifyRSPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
         {
-            //oldPathPrefix = D:\FiberHomeIAOModelDocument\新手上路\我的新模型1;
-            //newPathPrefix = D:\FiberHomeIAOModelDocument\新手上路\重命名;
-            string path = @"D:\FiberHomeIAOModelDocument\新手上路\我的新模型1\L4_20200518_112435.bcp";
-            if (path.StartsWith(oldPathPrefix))
-                path = path.Replace(oldPathPrefix, newPathPrefix);
-            return false;
+            XmlDocument xmlDoc = new XmlDocument();
+            try
+            {
+                
+                xmlDoc.Load(xmlPath);
+                XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
+                foreach (XmlNode childNode in nodes)
+                {
+                    if (childNode.SelectSingleNode("path") != null && childNode.SelectSingleNode("path").InnerText.StartsWith(oldPathPrefix))
+                        childNode.SelectSingleNode("path").InnerText = childNode.SelectSingleNode("path").InnerText.Replace(oldPathPrefix, newPathPrefix);
+
+                }
+                xmlDoc.Save(xmlPath);
+                return true;
+            }
+            catch (Exception w) 
+            {
+                log1.Info("ModelDocument UpdateAllLines 出错: " + w.ToString());
+                return false;
+            }
+          
         }
 }
 }
