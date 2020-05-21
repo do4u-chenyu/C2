@@ -23,7 +23,7 @@ namespace Citta_T1.Business.Model
         private ModelDocument modelDocument;
         private float screenFactor;
 
-        private LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
@@ -334,8 +334,8 @@ namespace Citta_T1.Business.Model
         {
             if (ascii < 0 || ascii > 255)
             {
-                return '\t';
                 log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
+                return '\t';
             }
             else
             {

@@ -386,7 +386,7 @@ namespace Citta_T1.Business.Option
                         return;
                     }
                 }
-                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0) ;
+                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0)
                 {
                     List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
