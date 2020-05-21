@@ -26,7 +26,6 @@ namespace Citta_T1.Business.Model
         private List<ModelRelation> modelRelations;
         private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
         private HashSet<int> vertices;
-        private int lineCounter;
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -63,8 +62,7 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
-        private static LogUtil log1 = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -352,6 +350,7 @@ namespace Citta_T1.Business.Model
 
         public static bool ModifyRSPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
         {
+            bool ret = false;
             XmlDocument xmlDoc = new XmlDocument();
             try
             {
@@ -360,19 +359,20 @@ namespace Citta_T1.Business.Model
                 XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
                 foreach (XmlNode childNode in nodes)
                 {
-                    if (childNode.SelectSingleNode("path") != null && childNode.SelectSingleNode("path").InnerText.StartsWith(oldPathPrefix))
-                        childNode.SelectSingleNode("path").InnerText = childNode.SelectSingleNode("path").InnerText.Replace(oldPathPrefix, newPathPrefix);
+                    XmlNode pathNode = childNode.SelectSingleNode("path");
+                    if (pathNode != null && !String.IsNullOrEmpty(pathNode.InnerText) && pathNode.InnerText.StartsWith(oldPathPrefix))
+                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
 
                 }
                 xmlDoc.Save(xmlPath);
-                return true;
+                ret = true;
             }
-            catch (Exception w) 
+            catch (Exception e) 
             {
-                log1.Info("ModelDocument UpdateAllLines 出错: " + w.ToString());
-                return false;
+                log.Info("ModelDocument ModifyRSPath 出错: " + e.ToString());
+                ret = false;
             }
-          
+            return ret;
         }
 }
 }
