@@ -348,7 +348,7 @@ namespace Citta_T1.Business.Model
         }
         //修改xml内容
         public void ModifyInnerText(string xmlPath,string nodeName,string newValue,int id)
-         {
+        {
              string ID = id.ToString();
              XmlDocument xmlDoc = new XmlDocument();
              xmlDoc.Load(xmlPath);
@@ -364,6 +364,11 @@ namespace Citta_T1.Business.Model
                 }
              }
              xmlDoc.Save(xmlPath);
-         }
+        }
+
+        public static bool ModifyRSPath(string modelTitle, string oldPathPrefix, string newPathPrefix)
+        {
+            return false;
+        }
 }
 }
