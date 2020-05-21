@@ -18,7 +18,7 @@ namespace Citta_T1.Controls.Move
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
     {
-        private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+        private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
         private string oldTextString;
