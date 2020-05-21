@@ -18,7 +18,7 @@ namespace Citta_T1.Dialogs
     public delegate void DelegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
     public partial class InputDataForm : Form
     {
-        private static LogUtil log = LogUtil.GetInstance("FormInputData"); // 获取日志模块
+        private static LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
 
         private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
         private ExtType extType = ExtType.Unknow;

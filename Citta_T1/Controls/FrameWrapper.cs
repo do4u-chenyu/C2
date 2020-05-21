@@ -30,10 +30,9 @@ namespace Citta_T1.Controls
         private Pen p = new Pen(Color.Gray, 1f);
         private Rectangle frameRec = new Rectangle(0, 0, 0, 0);
         private Rectangle minBoding = new Rectangle(0, 0, 0, 0);
-        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private int worldWidth, worldHeight;
         private Point mapOrigin;
-        private int ddd = 0;
         public Rectangle MinBoding { get => minBoding; set => minBoding = value; }
 
         public FrameWrapper()

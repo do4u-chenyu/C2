@@ -25,7 +25,7 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private bool hasNewDataSource;
-        private LogUtil log = LogUtil.GetInstance("MaxOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("MaxOperatorView");
 
 
         public MaxOperatorView(MoveOpControl opControl)

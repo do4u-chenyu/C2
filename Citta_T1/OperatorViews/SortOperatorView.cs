@@ -29,7 +29,7 @@ namespace Citta_T1.OperatorViews
         private string oldEndRow;
         private List<int> outList;
         private List<string> oldColumnName;
-        private LogUtil log = LogUtil.GetInstance("SortOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("SortOperatorView");
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();

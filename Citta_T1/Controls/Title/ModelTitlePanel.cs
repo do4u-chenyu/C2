@@ -11,7 +11,7 @@ namespace Citta_T1.Controls.Title
     public delegate void DocumentSwitchHandler(string modelTitle);
     public partial class ModelTitlePanel : UserControl
     {
-        private LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
+        private static LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
 
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
         private List<ModelTitleControl> models;

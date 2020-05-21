@@ -16,7 +16,7 @@ namespace Citta_T1.Controls
     class ControlMoveWrapper : DragWrapper
     {
         private Control control;
-        private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+        private static LogUtil log = LogUtil.GetInstance("ControlMoveWrapper");
 
         public ControlMoveWrapper(Control ctr)
         {

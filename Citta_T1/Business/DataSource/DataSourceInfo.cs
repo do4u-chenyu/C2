@@ -15,7 +15,7 @@ namespace Citta_T1.Business.DataSource
     {
         private string userPath;
         private string DataSourcePath;
-        private LogUtil log = LogUtil.GetInstance("DataSourceInfo");
+        private static LogUtil log = LogUtil.GetInstance("DataSourceInfo");
         public DataSourceInfo(string userName)
         {
             this.userPath = System.IO.Path.Combine(Global.WorkspaceDirectory, userName);
