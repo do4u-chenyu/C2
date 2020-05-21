@@ -125,14 +125,24 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != null)
             {
-                this.oldTextString = this.textBox.Text;
-                Global.GetMainForm().SetDocumentDirty();
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
-            //ICommand renameCommand = new ElementRenameCommand(Global.get);
+            
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty(); 
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+
+
 
         }
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -448,7 +458,7 @@ namespace Citta_T1.Controls.Move
         private void RenameMenuItem_Click(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                this.textBox.Text = this.oldTextString;
+                return;
             this.textBox.ReadOnly = false;
             this.oldTextString = this.textBox.Text;
             this.txtButton.Visible = false;

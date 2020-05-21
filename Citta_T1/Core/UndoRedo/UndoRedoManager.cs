@@ -57,12 +57,10 @@ namespace Citta_T1.Core.UndoRedo
         }
 
         // 普通执行命令
-        public void DoCommand(ModelDocument md, ICommand cmd)
+        public void PushCommand(ModelDocument md, ICommand cmd)
         {
             if (cmd == null)
                 return;
-
-            cmd.Do();
 
             if (!undoRedoDict.ContainsKey(md))
                 undoRedoDict[md] = new UndoRedoStack();

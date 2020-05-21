@@ -10,18 +10,21 @@ namespace Citta_T1.Core.UndoRedo.Command
 {
     class ElementRenameCommand : ICommand
     {
-        public ElementRenameCommand(ModelElement me)
+        private string oldName;
+        private ModelElement element;
+        public ElementRenameCommand(ModelElement me, string oldName)
         {
-
+            this.oldName = oldName;
+            this.element = me;
         }
         public bool Do()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public bool Rollback()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

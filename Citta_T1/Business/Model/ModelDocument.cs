@@ -24,7 +24,6 @@ namespace Citta_T1.Business.Model
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
         private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
-        private HashSet<int> vertices;
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -72,7 +71,6 @@ namespace Citta_T1.Business.Model
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
             this.modelLineDict = new Dictionary<int, List<int>>();
-            this.vertices = new HashSet<int>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
