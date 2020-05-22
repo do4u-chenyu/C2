@@ -40,7 +40,7 @@ namespace Citta_T1.Controls
         // 绘图
         // 绘图
         public List<Bezier> lines = new List<Bezier>() { };
-
+        
         public ECommandType cmd = ECommandType.Null;
         public PointF startP;
         public PointF endP;
@@ -50,8 +50,11 @@ namespace Citta_T1.Controls
         Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
 
-        private bool delEnable = false;
 
+
+
+        private bool delEnable = false;
+        private bool startCopy = false;
         public void SetStartP(PointF p)
         {
             startP = p;
@@ -63,6 +66,10 @@ namespace Citta_T1.Controls
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
+
+
+
+
 
         public CanvasPanel()
         {
@@ -655,6 +662,17 @@ namespace Citta_T1.Controls
         {
             delEnable = true;
             frameWrapper.FrameDel(sender, e);
+        }
+        public void ControlSelect_Copy()
+        {
+            startCopy = true;
+        }
+        public void ControlSelect_paste()
+        {
+            if (!startCopy)
+                return;
+            log.Info("sss");
+            frameWrapper.FramePaste();
         }
     }
 }
