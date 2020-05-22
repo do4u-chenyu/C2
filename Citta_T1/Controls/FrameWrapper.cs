@@ -33,6 +33,7 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private int worldWidth, worldHeight;
         private Point mapOrigin;
+        private List<Control> controls = new List<Control>();
         public Rectangle MinBoding { get => minBoding; set => minBoding = value; }
 
         public FrameWrapper()
@@ -230,6 +231,7 @@ namespace Citta_T1.Controls
                     minY.Add(ctW.Y - (int)(ct.Height * 0.4));
                     maxX.Add(ctW.X + ct.Width + (int)(ct.Height * 0.4));
                     maxY.Add(ctW.Y + (int)(ct.Height * 1.4));
+                    controls.Add(ct);
                 }
             }
             if (minX.Count == 0)
@@ -238,6 +240,7 @@ namespace Citta_T1.Controls
                 return;
             }
             UpDateMinBoding(minX, minY, maxX, maxY);
+            
 
         }
         private void UpDateMinBoding(List<int> minX, List<int> minY, List<int> maxX, List<int> maxY)
@@ -371,16 +374,15 @@ namespace Citta_T1.Controls
 
         private void dragFrame_Up(MouseEventArgs e)
         {
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelElement me in modelElements)
+
+            foreach(Control ct in controls)
             {
-                Control ct = me.GetControl;
                 Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                 if (minBoding.Contains(pw))
-                {                
+                {
                     ct.Left = ct.Left + endP.X - startP.X;
                     ct.Top = ct.Top + endP.Y - startP.Y;
-                }               
+                }
             }
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
