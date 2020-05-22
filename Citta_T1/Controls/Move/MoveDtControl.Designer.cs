@@ -64,7 +64,7 @@
             this.rightPictureBox.TabIndex = 1;
             this.rightPictureBox.TabStop = false;
             this.rightPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
-            this.rightPictureBox.MouseEnter += new System.EventHandler(this.rightPictureBox_MouseEnter);
+            this.rightPictureBox.MouseEnter += new System.EventHandler(this.RightPictureBox_MouseEnter);
             this.rightPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.rightPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
             // 

@@ -151,7 +151,7 @@ namespace Citta_T1.Controls.Move
             return ret;
         }
 
-        public void rightPictureBox_MouseEnter(object sender, EventArgs e)
+        public void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
 
             this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
@@ -395,7 +395,7 @@ namespace Citta_T1.Controls.Move
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)
-                    Global.GetMainForm().SetDocumentDirty();
+                    Global.GetMainForm().SetDocumentDirty();//TODO ElementMove点
 
                 affectedLines.Clear();
             }
