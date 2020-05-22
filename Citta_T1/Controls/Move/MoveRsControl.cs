@@ -3,6 +3,8 @@ using Citta_T1.Business.Model;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -398,19 +400,39 @@ namespace Citta_T1.Controls.Move
 
         public void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
-                return;
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
-            SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            SetOpControlName(this.textBox.Text);
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != null)
             {
-                this.oldTextString = this.textBox.Text;
-                Global.GetMainForm().SetDocumentDirty();
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+        }
+
+
+        public string ChangeTextName(string des)
+        {
+            string ret = this.opControlName;
+            this.oldTextString = this.textBox.Text;
+            this.textBox.Text = des;
+            SetOpControlName(des);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return ret;
         }
         #endregion
 

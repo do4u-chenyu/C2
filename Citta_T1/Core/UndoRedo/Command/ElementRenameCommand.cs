@@ -26,8 +26,10 @@ namespace Citta_T1.Core.UndoRedo.Command
                     oldName = (element.GetControl as MoveDtControl).ChangeTextName(oldName);
                     break;
                 case ElementType.Operator:
+                    oldName = (element.GetControl as MoveOpControl).ChangeTextName(oldName);
                     break;
-                case ElementType.Relation:
+                case ElementType.Result:
+                    oldName = (element.GetControl as MoveRsControl).ChangeTextName(oldName);
                     break;
                 default:
                     break;
@@ -43,8 +45,10 @@ namespace Citta_T1.Core.UndoRedo.Command
                     oldName = (element.GetControl as MoveDtControl).ChangeTextName(oldName);
                     break;
                 case ElementType.Operator:
+                    oldName = (element.GetControl as MoveOpControl).ChangeTextName(oldName);
                     break;
-                case ElementType.Relation:
+                case ElementType.Result:
+                    oldName = (element.GetControl as MoveRsControl).ChangeTextName(oldName);
                     break;
                 default:
                     break;

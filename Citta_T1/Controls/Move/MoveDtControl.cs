@@ -119,8 +119,8 @@ namespace Citta_T1.Controls.Move
 
         private void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
-                return;
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
