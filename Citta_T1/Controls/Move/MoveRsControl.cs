@@ -251,7 +251,10 @@ namespace Citta_T1.Controls.Move
 
         }
 
-
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            return new Point();
+        }
 
         #endregion
 
@@ -421,7 +424,7 @@ namespace Citta_T1.Controls.Move
         }
 
 
-        public string ChangeTextName(string des)
+        public string UndoRedoChangeTextName(string des)
         {
             string ret = this.opControlName;
             this.oldTextString = this.textBox.Text;

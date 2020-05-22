@@ -330,7 +330,7 @@ namespace Citta_T1.Controls.Move
                 cmd = ECommandType.Hold;
             }
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-            oldcontrolPosition =this.Location;
+            oldcontrolPosition = this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -394,12 +394,15 @@ namespace Citta_T1.Controls.Move
 
             }
             if (oldcontrolPosition != this.Location)
-                Global.GetMainForm().SetDocumentDirty();
+                Global.GetMainForm().SetDocumentDirty(); //TODO Move事件点
 
 
         }
 
- 
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            return new Point();
+        }
 
         #endregion
 
@@ -685,7 +688,7 @@ namespace Citta_T1.Controls.Move
             Global.GetCanvasPanel().Invalidate(false);
         }
 
-        public string ChangeTextName(string des)
+        public string UndoRedoChangeTextName(string des)
         {
             string ret = this.opControlName;
             this.oldTextString = this.textBox.Text;
