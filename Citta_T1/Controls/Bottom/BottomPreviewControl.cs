@@ -49,13 +49,11 @@ namespace Citta_T1.Controls.Bottom
         private void _InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
             DataTable table = new DataTable();
-            DataColumn column;
             DataRow row;
             DataView view;
             DataColumn[] cols = new DataColumn[numOfCol];
             Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
             string headerText;
-            int count;
             char[] seperator = new char[] { '_' };
 
             // 可能有同名列，这里需要重命名一下

@@ -416,7 +416,7 @@ namespace Citta_T1.OperatorViews
             {
                 char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.otherSeparatorText.Text);
             }

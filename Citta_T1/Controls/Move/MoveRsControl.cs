@@ -40,8 +40,6 @@ namespace Citta_T1.Controls.Move
         public string SubTypeName { get => typeName; }
         public char Separator { get => this.separator; set => this.separator = value; }
         // 一些倍率
-        // 鼠标放在Pin上，Size的缩放倍率
-        int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
@@ -71,7 +69,6 @@ namespace Citta_T1.Controls.Move
         private Rectangle rectIn;
         private Rectangle rectOut;
         private String pinStatus = "noEnter";
-        private String rectArea = "rectIn rectOut";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
         private ControlMoveWrapper controlMoveWrapper;

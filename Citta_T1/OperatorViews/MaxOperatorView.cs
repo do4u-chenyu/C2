@@ -24,7 +24,6 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
-        private bool hasNewDataSource;
         private static LogUtil log = LogUtil.GetInstance("MaxOperatorView");
 
 
@@ -32,7 +31,6 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             dataPath = "";
-            this.hasNewDataSource = false;
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
@@ -185,7 +183,6 @@ namespace Citta_T1.OperatorViews
                     if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
                     {
                         this.opControl.Option.OptionDict.Remove("outfield");
-                        this.hasNewDataSource = true;
                     }
                 }
             }

@@ -55,14 +55,10 @@ namespace Citta_T1.Controls.Move
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
-        // 鼠标放在Pin上，Size的缩放倍率
-        int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
         public int sizeLevel = 0;
-
-        private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;

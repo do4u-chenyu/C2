@@ -594,7 +594,7 @@ namespace Citta_T1.Controls
         {
             this.Controls.Remove(ctl);
         }
-        public void AddNewOperator(int sizeL, string text, Point location)
+        private void AddNewOperator(int sizeL, string text, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
@@ -604,7 +604,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,

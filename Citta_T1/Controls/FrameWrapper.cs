@@ -21,8 +21,7 @@ namespace Citta_T1.Controls
     class FrameWrapper
     {
         private Bitmap staticImage, staticImage2, moveImage;
-        private CanvasPanel canvas;
-        private Point startP, endP, nowP;
+        private Point startP, endP;
         private bool startSelect = false;
         private bool startDrag = false;
         private Pen p2 = new Pen(Color.Gray, 0.0001f);
