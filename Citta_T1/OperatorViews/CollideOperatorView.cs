@@ -27,7 +27,7 @@ namespace Citta_T1.OperatorViews
         private List<int> oldOutList;
         private List<string> selectColumn;
         private List<string> oldColumnName;
-        private LogUtil log = LogUtil.GetInstance("CollideOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("CollideOperatorView");
 
 
         public CollideOperatorView(MoveOpControl opControl)

@@ -23,7 +23,7 @@ namespace Citta_T1.Controls
     }
     public partial class CanvasPanel : UserControl
     {
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         public Bitmap staticImage2;

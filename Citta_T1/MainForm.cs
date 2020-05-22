@@ -101,7 +101,7 @@ namespace  Citta_T1
         }
         public void DeleteCurrentDocument()
         {
-            
+            UndoRedoManager.GetInstance().Remove(modelDocumentDao.CurrentDocument);
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
             foreach (ModelElement me in modelElements)
             {
@@ -163,8 +163,8 @@ namespace  Citta_T1
 
         private void UpdateUndoRedoButton()
         {
-            topToolBarControl.SetUndoButtonEnable(UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
-            topToolBarControl.SetRedoButtonEnable(UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
+            topToolBarControl.SetUndoButtonEnable(!UndoRedoManager.GetInstance().IsUndoStackEmpty(modelDocumentDao.CurrentDocument));
+            topToolBarControl.SetRedoButtonEnable(!UndoRedoManager.GetInstance().IsRedoStackEmpty(modelDocumentDao.CurrentDocument));
         }
 
         public void LoadDocument(string modelTitle)

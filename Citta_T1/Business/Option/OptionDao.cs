@@ -15,7 +15,7 @@ namespace Citta_T1.Business.Option
 {
     class OptionDao
     {
-        private LogUtil log = LogUtil.GetInstance("OptionDao");
+        private static LogUtil log = LogUtil.GetInstance("OptionDao");
         //添加relation
         public void EnableControlOption(ModelRelation mr)
         {

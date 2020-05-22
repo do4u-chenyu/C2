@@ -49,17 +49,17 @@ namespace Citta_T1.Core.UndoRedo
         // 后面文档切换时,更新 TopToolBarControl用
         public bool IsUndoStackEmpty(ModelDocument md)
         {
-            return undoRedoDict.ContainsKey(md) && undoRedoDict[md].UndoStack.IsEmpty();
+            return !undoRedoDict.ContainsKey(md) || undoRedoDict[md].UndoStack.IsEmpty();
         }
         public bool IsRedoStackEmpty(ModelDocument md)
         {
-            return undoRedoDict.ContainsKey(md) && undoRedoDict[md].RedoStack.IsEmpty();
+            return !undoRedoDict.ContainsKey(md) || undoRedoDict[md].RedoStack.IsEmpty();
         }
 
         // 普通执行命令
         public void PushCommand(ModelDocument md, ICommand cmd)
         {
-            if (cmd == null)
+            if (md == null || cmd == null)
                 return;
 
             if (!undoRedoDict.ContainsKey(md))
@@ -76,7 +76,7 @@ namespace Citta_T1.Core.UndoRedo
         public void Undo(ModelDocument md)
         {
             // 防止cmd为空
-            if (!undoRedoDict.ContainsKey(md) || undoRedoDict[md].UndoStack.IsEmpty())
+            if (md == null || !undoRedoDict.ContainsKey(md) || undoRedoDict[md].UndoStack.IsEmpty())
                 return;
 
             // 回滚操作

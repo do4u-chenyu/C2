@@ -26,7 +26,7 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
-        private LogUtil log = LogUtil.GetInstance("MinOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("MinOperatorView");
         private string selectedIndex;
         public MinOperatorView(MoveOpControl opControl)
         {
