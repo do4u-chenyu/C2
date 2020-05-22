@@ -160,7 +160,10 @@ namespace Citta_T1.Controls
         {
             CreateRect();
             FindControl();
-            DrawRoundedRect(2);
+            DrawRoundedRect(this.staticImage,2);
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+            n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
+            n.Dispose();
             CreateMoveImg();
             startSelect = false;
         }
@@ -259,12 +262,12 @@ namespace Citta_T1.Controls
             int height = maxY.Max() - y;
             minBoding = new Rectangle(x, y, width, height);
         }
-
-        public void DrawRoundedRect(int radius)
+        #region 框选特效
+        public void DrawRoundedRect(Bitmap bitmap,int radius)
         {
             
-            Graphics g = Graphics.FromImage(this.staticImage);
-            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+            Graphics g = Graphics.FromImage(bitmap);
+           
             Rectangle shadowDown = new Rectangle(this.minBoding.X + 2 ,
                                                  this.minBoding.Y + this.minBoding.Height ,
                                                  this.minBoding.Width, 3
@@ -281,10 +284,6 @@ namespace Citta_T1.Controls
             int height = this.minBoding.Height;
             if (width == 0 || height == 0)
             {
-
-                n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
-                n.Dispose();
-                g.Dispose();
                 return;
             }
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
@@ -326,13 +325,11 @@ namespace Citta_T1.Controls
             g.FillPie(brush, arcDown, 90, 90);
             g.FillPie(brush1, arcRight, 270, 90);
 
-
-            n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
-            n.Dispose();
             g.Dispose();
             
         }
 
+        #endregion
         #endregion
         #region 实现框选控件批量移动
         private void CreateMoveImg()
@@ -386,7 +383,7 @@ namespace Citta_T1.Controls
             g.Dispose();
 
 
-
+            DrawRoundedRect(this.staticImage2, 2);
 
 
 
@@ -444,7 +441,7 @@ namespace Citta_T1.Controls
             CreateWorldImage();
             minBoding.X = minBoding.X + endP.X - startP.X;
             minBoding.Y = minBoding.Y + endP.Y - startP.Y;
-            DrawRoundedRect(2);
+            DrawRoundedRect(this.staticImage,2);
             startDrag = false;
         }
         #endregion
