@@ -234,7 +234,7 @@ namespace Citta_T1.Controls
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
                 Point ctW = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (frameRec.Contains(ctW))
+                if (frameRec.Contains(ctW) && frameRec.Contains(new Point(ctW.X + ct.Width,ctW.Y + ct.Height)))
                 {
                     minX.Add(ctW.X - (int)(ct.Height * 0.4));
                     minY.Add(ctW.Y - (int)(ct.Height * 0.4));
@@ -345,8 +345,54 @@ namespace Citta_T1.Controls
             moveImage = new Bitmap(minBoding.Width + 2, minBoding.Height + 3);
             Rectangle realRect = new Rectangle(minBoding.Location,new Size(minBoding.Width + 2, minBoding.Height + 3));
             //创建作图区域
-            Graphics g = Graphics.FromImage(moveImage);
-            g.DrawImage(staticImage, 0, 0, realRect, GraphicsUnit.Pixel);
+            float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            staticImage2 = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
+            Graphics g = Graphics.FromImage(staticImage2);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+
+            g.Clear(Color.White);
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
+            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
+
+            mapOrigin.X = Convert.ToInt32(mapOrigin.X * screenFactor);
+            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * screenFactor);
+            // 先画线，避免线盖住控件
+            foreach (ModelRelation mr in modelRelations)
+            {
+                Point Pw = Global.GetCurrentDocument().ScreenToWorld(mr.GetBoundingRect().Location, mapOrigin);
+                if (Pw.X < 0 || Pw.Y < 0)
+                    continue;
+
+                PointF s = Global.GetCurrentDocument().ScreenToWorldF(mr.StartP, mapOrigin);
+                PointF a = Global.GetCurrentDocument().ScreenToWorldF(mr.A, mapOrigin);
+                PointF b = Global.GetCurrentDocument().ScreenToWorldF(mr.B, mapOrigin);
+                PointF e = Global.GetCurrentDocument().ScreenToWorldF(mr.EndP, mapOrigin);
+                
+                LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
+            }
+            // 反向遍历,解决Move时旧控件压在新控件上
+            for (int i = 0; i < modelElements.Count; i++)
+            {
+                ModelElement me = modelElements[modelElements.Count - i - 1];
+                Control ct = me.GetControl;
+                Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                if (Pw.X < 0 || Pw.Y < 0 || !minBoding.Contains(Pw) || !minBoding.Contains(new Point(Pw.X + ct.Width,Pw.Y + ct.Height)))
+                    continue;
+                ct.DrawToBitmap(staticImage2, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
+                me.Hide();
+            }
+            g.Dispose();
+
+
+
+
+
+
+            Graphics g1 = Graphics.FromImage(moveImage);
+            g1.DrawImage(staticImage2, 0, 0, realRect, GraphicsUnit.Pixel);
             for (int i = 0; i < moveImage.Height; i++)
             {
                 for (int j = 0; j < moveImage.Width; j++)
@@ -356,6 +402,8 @@ namespace Citta_T1.Controls
                 }
             }
             g.Dispose();
+            g1.Dispose();
+            staticImage2 = null;
         }
         private void dragFrame_Move()
         {
@@ -414,6 +462,7 @@ namespace Citta_T1.Controls
             startSelect = true;
             startDrag = false;
             this.staticImage = null;
+            this.staticImage2 = null;
             this.moveImage = null;
             controls = new List<Control>();
         }
