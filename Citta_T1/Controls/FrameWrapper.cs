@@ -132,6 +132,15 @@ namespace Citta_T1.Controls
             }
             return false;
         }
+        public void FramePaste()
+        {
+            if (controls.Count != 1)
+                return;
+            foreach(Control ct in controls)
+            {
+                
+            }
+        }
         #endregion 
         #region 绘制虚线框
 
@@ -378,11 +387,8 @@ namespace Citta_T1.Controls
             foreach(Control ct in controls)
             {
                 Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (minBoding.Contains(pw))
-                {
-                    ct.Left = ct.Left + endP.X - startP.X;
-                    ct.Top = ct.Top + endP.Y - startP.Y;
-                }
+                ct.Left = ct.Left + endP.X - startP.X;
+                ct.Top = ct.Top + endP.Y - startP.Y;
             }
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
@@ -395,7 +401,12 @@ namespace Citta_T1.Controls
             startDrag = false;
         }
         #endregion
-
+        #region
+        private void controlCopy(Control ct)
+        {
+            
+        }
+        #endregion
         public void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
@@ -403,7 +414,8 @@ namespace Citta_T1.Controls
             startSelect = true;
             startDrag = false;
             this.staticImage = null;
-            this.moveImage = null;           
+            this.moveImage = null;
+            controls = new List<Control>();
         }
         
     }

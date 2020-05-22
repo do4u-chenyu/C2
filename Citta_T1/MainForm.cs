@@ -782,6 +782,10 @@ namespace  Citta_T1
             {
                 if (keyData == Keys.Delete)
                     this.canvasPanel.DeleteSelectedLines();
+                if (keyData == (Keys.C | Keys.Control))
+                    this.canvasPanel.ControlSelect_Copy();
+                if (keyData == (Keys.V | Keys.Control))
+                    this.canvasPanel.ControlSelect_paste();
             }
             return false;
         }
