@@ -67,8 +67,7 @@ namespace Citta_T1.Controls.Move
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
         #endregion
-        // 受影响的线
-        List<Bezier> affectedLines = new List<Bezier>() { };
+
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -395,17 +394,30 @@ namespace Citta_T1.Controls.Move
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)
-                    Global.GetMainForm().SetDocumentDirty();//TODO ElementMove点
+                {
+                    // 构造移动命令类,压入undo栈
+                    ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                    if (element != null)
+                    {
+                        ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                        UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    }
 
-                affectedLines.Clear();
+                    Global.GetMainForm().SetDocumentDirty();//TODO ElementMove点
+                }
             }
 
         }
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            return new Point();
+            this.oldcontrolPosition = this.Location;
+            this.Location = location;
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return oldcontrolPosition;
         }
+
         #endregion
 
         #region 控件名称长短改变时改变控件大小

@@ -394,14 +394,27 @@ namespace Citta_T1.Controls.Move
 
             }
             if (oldcontrolPosition != this.Location)
-                Global.GetMainForm().SetDocumentDirty(); //TODO Move事件点
+            {
+                // 构造移动命令类,压入undo栈
+                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                if (element != null)
+                {
+                    ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                }
+                Global.GetMainForm().SetDocumentDirty();
+            }
 
 
         }
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            return new Point();
+            this.oldcontrolPosition = this.Location;
+            this.Location = location;
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return oldcontrolPosition;
         }
 
         #endregion
