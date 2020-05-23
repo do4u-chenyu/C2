@@ -3,6 +3,8 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using ICSharpCode.SharpZipLib.Zip;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,9 +52,9 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.sortByNum.Checked);
             this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
             SetTextBoxName(this.dataInfo);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
+            
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
@@ -95,7 +97,7 @@ namespace Citta_T1.OperatorViews
             int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
 
             //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
+            foreach (System.Text.RegularExpressions.Match mc in chs)
             {
                 if (dataName.IndexOf(mc.ToString()) == maxLength)
                 {
@@ -215,6 +217,8 @@ namespace Citta_T1.OperatorViews
 
             bool empty = IsOptionReay();
             if (empty) return;
+            //判断分组字段是否重复选择
+            if( IsDuplicateSelect()) return;
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
@@ -229,8 +233,6 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
-
-
             //输出变化，重写BCP文件
             if (hasResutl != null && !this.oldOutName.SequenceEqual(this.selectColumn))
                 Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
@@ -278,8 +280,7 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
             dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            dataBox.SelectedIndexChanged += new System.EventHandler(IsDuplicateSelect);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);        
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
@@ -410,36 +411,36 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.dataInfo);
         }
         #region 分组字段重复选择判断
-        private void IsDuplicateSelect(object sender, EventArgs e)
+        private bool IsDuplicateSelect()
         {
-            if ((sender as ComboBox).Text == null || (sender as ComboBox).Text == "") return;
-            List<string> selectedIndex = new List<string>();
+            bool ret = false;
+            Dictionary<int,string> selectedIndex = new Dictionary<int, string>();
+    
+            string index0 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            selectedIndex[0] = index0;
+      
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    if (control1.Equals((sender as ComboBox))) continue;
-                    string index0 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    selectedIndex.Add(index0);
+                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    selectedIndex[i+1] = index1;
                 }
             }
-            if (!this.comboBox1.Equals((sender as ComboBox)))
+            var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
+            List<int> indexs = new List<int>();
+            foreach (var item in duplicateValues)
+                indexs.Add(Convert.ToInt32(item.Key));
+            if (indexs != null&& indexs.Count()>0)
             {
-                string index0 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-                selectedIndex.Add(index0);
+                string name = "";
+                foreach (int num in indexs)
+                    name += this.columnName[num];
+                MessageBox.Show("分组字段" +  name + "重复选择，请保持每个字段只被选择一次");
+                ret = true;
             }
-            string index1 = (sender as ComboBox).Tag == null ? (sender as ComboBox).SelectedIndex.ToString() : (sender as ComboBox).Tag.ToString();
-            if (selectedIndex.Contains(index1))
-            {
-                (sender as ComboBox).Tag = null;
-                (sender as ComboBox).Text = null;
-                (sender as ComboBox).SelectedItem = null;               
-                MessageBox.Show("该字段已选择，请选择其他字段");
-            }
-
-
-
+            return ret;
         }
         #endregion
 
