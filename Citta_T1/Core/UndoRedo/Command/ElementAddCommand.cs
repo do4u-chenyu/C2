@@ -6,7 +6,7 @@ namespace Citta_T1.Core.UndoRedo.Command
     class ElementAddCommand : ICommand
     {
         //private ModelDocument document;
-        private ModelElement element;
+        private readonly ModelElement element;
         public ElementAddCommand(ModelElement element)
         {
             this.element = element;        
