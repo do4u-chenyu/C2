@@ -79,12 +79,10 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
-            if (this.opControl.Option.GetOption("outfield") != "")
-                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
-            foreach (int index in this.oldOutList)
-                this.oldOutName.Add(this.columnName[index]);
+               
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
         }
+       
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
@@ -141,6 +139,13 @@ namespace Citta_T1.OperatorViews
                 this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
             if (this.opControl.Option.GetOption("sortByString") != "")
                 this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
+
+            if (this.opControl.Option.GetOption("outfield") != "" && Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield"))
+            {
+                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
+                foreach (int index in this.oldOutList)
+                    this.oldOutName.Add(this.columnName[index]);
+            }
             if (!String.IsNullOrEmpty(factor1))
 
             {
@@ -161,6 +166,8 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
                 return;
             }
+
+
             for (int i = 2; i < (count + 1); i++)
             {
                 string factor = this.opControl.Option.GetOption("factor" + i.ToString());
