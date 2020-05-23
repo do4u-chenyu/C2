@@ -168,6 +168,11 @@ namespace Citta_T1.Business.Model
             }
         }
 
+        private ModelElement()
+        { 
+        }
+
+        public readonly static ModelElement Empty = new ModelElement(); 
         public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
             char separator = '\t',
             DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 

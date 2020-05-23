@@ -14,6 +14,8 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Bottom;
 using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
+using Citta_T1.Controls.Move;
+using Citta_T1.Core.UndoRedo.Command;
 
 namespace  Citta_T1
 { 
@@ -113,9 +115,15 @@ namespace  Citta_T1
 
         private void NewDocumentOperator(Control ct)
         {          
-            this.modelDocumentDao.AddDocumentOperator(ct);
+            ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
-
+            if (me == ModelElement.Empty)
+                return;
+            //TODO ElementAddCommand插入点
+            ICommand cmd = new ElementAddCommand(me);
+            if (ct is MoveDtControl || ct is MoveOpControl)
+                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
+            
         }
 
         public void SaveCurrentDocument()

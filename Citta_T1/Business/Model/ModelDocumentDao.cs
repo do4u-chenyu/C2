@@ -82,16 +82,16 @@ namespace Citta_T1.Business.Model
                     md.Hide();
             }           
         }
-        public void AddDocumentOperator(Control ct)
+        public ModelElement AddDocumentOperator(Control ct)
         {
-            
+         
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.DescriptionName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
-                return;
+                return e;
             }
 
             if (ct is MoveOpControl)
@@ -100,7 +100,7 @@ namespace Citta_T1.Business.Model
                 op.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, OpUtil.SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
-                return;               
+                return e;               
             }
             if (ct is MoveRsControl)
             {
@@ -108,10 +108,10 @@ namespace Citta_T1.Business.Model
                 rs.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateResultElement(rs, rs.DescriptionName, rs.ID);
                 this.currentDocument.AddModelElement(e);
-                return;
-
+                return e;
             }
-           
+
+            return ModelElement.Empty;
         }
 
 

@@ -616,6 +616,16 @@ namespace Citta_T1.Controls.Move
             CanvasPanel canvas = Global.GetCanvasPanel();
             canvas.EndC = null;
         }
+
+        public void UndoRedoDelete()
+        {
+
+        }
+
+        public void UndoRedoAdd()
+        {
+
+        }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
             Global.GetCurrentDocument().StateChangeByDeleteControl(endID);
@@ -816,8 +826,8 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-            
-            SetDouble(this);
+
+            ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
@@ -836,14 +846,6 @@ namespace Citta_T1.Controls.Move
                 this.rectIn_up = SetRectBySize(1 / factor, this.rectIn_up);
             }
 
-
-        }
-
-        public static void SetDouble(Control cc)
-        {
-
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
-                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
         public void SetControlsBySize(float f, Control control)

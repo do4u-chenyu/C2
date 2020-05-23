@@ -522,8 +522,9 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+            ExtensionMethods.SetDouble(this);
             DrawRoundedRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-            SetDouble(this);
+            
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -538,14 +539,6 @@ namespace Citta_T1.Controls.Move
                 this.rectIn = SetRectBySize(1 / factor, this.rectIn);
             }
 
-
-        }
-
-        public static void SetDouble(Control cc)
-        {
-
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
-                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
         public void SetControlsBySize(float f, Control control)
