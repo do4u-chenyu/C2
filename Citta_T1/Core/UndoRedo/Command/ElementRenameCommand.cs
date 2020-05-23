@@ -12,7 +12,7 @@ namespace Citta_T1.Core.UndoRedo.Command
     class ElementRenameCommand : ICommand
     {
         private string oldName;
-        private ModelElement element;
+        private readonly ModelElement element;
         public ElementRenameCommand(ModelElement me, string oldName)
         {
             this.oldName = oldName;

@@ -105,7 +105,10 @@ namespace Citta_T1.Business.Model
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
-           
+        }
+        public void RemoveModelElement(ModelElement modelElement)
+        {
+            this.modelElements.Remove(modelElement);
         }
         public void AddModelRelation(ModelRelation mr, bool setDirty = true)
         {

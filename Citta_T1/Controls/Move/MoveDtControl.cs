@@ -177,8 +177,16 @@ namespace Citta_T1.Controls.Move
             Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
+        }
 
+        public void UndoRedoDelete()
+        { 
+            //TODO
+        }
 
+        public void UndoRedoAdd()
+        {
+            //TODO
         }
         #endregion
 
@@ -227,20 +235,14 @@ namespace Citta_T1.Controls.Move
             if (originVisible)
                 this.Show();
         }
-        public static void SetDouble(Control cc)
-        {
 
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
-                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
-
-        }
         public void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            SetDouble(this);
+            ExtensionMethods.SetDouble(this);
             DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
             if (zoomUp)
             {

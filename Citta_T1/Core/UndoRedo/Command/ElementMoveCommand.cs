@@ -9,7 +9,7 @@ namespace Citta_T1.Core.UndoRedo.Command
     class ElementMoveCommand : ICommand
     {
         Point oldLocation;
-        private ModelElement element;
+        private readonly ModelElement element;
         public ElementMoveCommand(ModelElement me, Point oldLocation)
         {
             element = me;
