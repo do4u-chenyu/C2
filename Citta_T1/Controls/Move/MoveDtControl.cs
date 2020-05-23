@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Citta_T1.Core.UndoRedo.Command;
 
+
 namespace Citta_T1.Controls.Move
 {
     public delegate void DtDocumentDirtyEventHandler();
@@ -46,12 +47,8 @@ namespace Citta_T1.Controls.Move
         private Size normalStatus = new Size(53, 28);
 
         #region 继承属性
-        public event DtDocumentDirtyEventHandler DtDocumentDirtyEvent;
-        private static System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding("GB2312");
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-        //public event DeleteOperatorEventHandler DeleteOperatorEvent;
+        private static readonly  System.Text.Encoding GBKEncoding = System.Text.Encoding.GetEncoding("GB2312");
 
-        public bool isClicked = false;
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -152,7 +149,6 @@ namespace Citta_T1.Controls.Move
 
         public void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-
             this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
         }
 
@@ -202,14 +198,6 @@ namespace Citta_T1.Controls.Move
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.extType, this.encoding);
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            DtDocumentDirtyEvent?.Invoke();
-        }
-        private void MoveDtControl_LocationChanged(object sender, EventArgs e)
-        {
-            // ModelDocumentDirtyEvent?.Invoke();
-        }
         #endregion
 
         public void ChangeSize(int sizeL)
@@ -232,7 +220,7 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-        public void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -304,7 +292,6 @@ namespace Citta_T1.Controls.Move
 
         public Point WorldBoundControl(Point Pm)
         {
-            // float screenFactor = Global.GetCanvasPanel().ScreenFactor;
             float screenFactor = Global.GetCurrentDocument().ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
@@ -421,10 +408,10 @@ namespace Citta_T1.Controls.Move
         #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = _encoding.GetBytes(text);
+            byte[] bytes = GBKEncoding.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return _encoding.GetString(bytes, startIndex, length);
+            return GBKEncoding.GetString(bytes, startIndex, length);
         }
         private int ConutTxtWidth(int chineseRatio, int otherRatio)
         {
@@ -434,7 +421,7 @@ namespace Citta_T1.Controls.Move
                 addValue -= 10;
             return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
         }
-        public void SetOpControlName(string name)
+        private void SetOpControlName(string name)
         {
             this.opControlName = name;
             int maxLength = 24;
@@ -443,7 +430,7 @@ namespace Citta_T1.Controls.Move
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
             this.txtButton.Text = this.opControlName;
-            if (_encoding.GetBytes(this.opControlName).Length > maxLength)
+            if (GBKEncoding.GetBytes(this.opControlName).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
@@ -486,7 +473,6 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
         }
         #endregion
 
@@ -497,8 +483,9 @@ namespace Citta_T1.Controls.Move
             {
                 if (pinStatus == "rectOut") return;
                 rectOut = RectEnter(rectOut);
-                this.Invalidate();
                 pinStatus = "rectOut";
+                this.Invalidate();
+               
             }
             else if (pinStatus != "noEnter")
             {
@@ -509,7 +496,6 @@ namespace Citta_T1.Controls.Move
         }
         public Rectangle RectEnter(Rectangle rect)
         {
-            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
@@ -519,7 +505,6 @@ namespace Citta_T1.Controls.Move
         }
         public Rectangle RectLeave(Rectangle rect)
         {
-            double f = Math.Pow(factor, sizeLevel);
             Point oriLtCorner = rect.Location;
             Size oriSize = rect.Size;
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
@@ -572,10 +557,6 @@ namespace Citta_T1.Controls.Move
         }
         #endregion
 
-
-        #region 文档修改事件
-
-        #endregion
         #region 接口实现
         /*
          * 当空间移动的时候，更新该控件连接线的坐标
@@ -671,7 +652,7 @@ namespace Citta_T1.Controls.Move
         private void UpdateRounde(int x, int y, int width, int height, int radius)
         {
             Pen p1 = new Pen(Color.Green, 2f);
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            p1.DashStyle = DashStyle.Dash;
             Graphics g = Graphics.FromImage(staticImage);
 
 
