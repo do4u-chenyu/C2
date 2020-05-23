@@ -26,10 +26,10 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (element.Type)
             {
                 case ElementType.DataSource:
-                    (element.GetControl as MoveDtControl).UndoRedoDelete();
+                    (element.GetControl as MoveDtControl).UndoRedoDeleteElement();
                     break;
                 case ElementType.Operator:
-                    (element.GetControl as MoveOpControl).UndoRedoDelete();
+                    (element.GetControl as MoveOpControl).UndoRedoDeleteElement();
                     break;
                 case ElementType.Result:
                 default:
@@ -42,10 +42,10 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (element.Type)
             {
                 case ElementType.DataSource:
-                    (element.GetControl as MoveDtControl).UndoRedoAdd();
+                    (element.GetControl as MoveDtControl).UndoRedoAddElement();
                     break;
                 case ElementType.Operator:
-                    (element.GetControl as MoveOpControl).UndoRedoAdd();
+                    (element.GetControl as MoveOpControl).UndoRedoAddElement();
                     break;
                 case ElementType.Result:
                 default:
