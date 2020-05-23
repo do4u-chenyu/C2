@@ -19,5 +19,9 @@ namespace Citta_T1.Business.Option
         private int columnIndex;
         private string columnName;
         private ColumnType columnType;
+
+        public int ColumnIndex { get => columnIndex; set => columnIndex = value; }
+        public string ColumnName { get => columnName; set => columnName = value; }
+        public ColumnType ColumnType { get => columnType; set => columnType = value; }
     }
 }

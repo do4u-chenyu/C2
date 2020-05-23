@@ -16,7 +16,7 @@ namespace Citta_T1.Controls
     class ControlMoveWrapper : DragWrapper
     {
         private Control control;
-        private LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+        private static LogUtil log = LogUtil.GetInstance("ControlMoveWrapper");
 
         public ControlMoveWrapper(Control ctr)
         {
@@ -82,7 +82,7 @@ namespace Citta_T1.Controls
         }
 
 
-        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public override void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.Now = e.Location;

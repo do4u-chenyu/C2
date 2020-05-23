@@ -25,7 +25,7 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private List<string> selectName;
         private string oldOptionDict;
-        private LogUtil log = LogUtil.GetInstance("AvgOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("AvgOperatorView");
         private string selectedIndex;
 
         public AvgOperatorView(MoveOpControl opControl)

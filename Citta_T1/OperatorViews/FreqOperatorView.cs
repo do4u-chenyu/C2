@@ -27,7 +27,7 @@ namespace Citta_T1.OperatorViews
         private List<string> selectColumn;
         private List<bool> oldCheckedItems=new List<bool>();
         private List<string> oldColumnName;
-        private LogUtil log = LogUtil.GetInstance("FreqOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("FreqOperatorView");
 
         public FreqOperatorView(MoveOpControl opControl)
         {

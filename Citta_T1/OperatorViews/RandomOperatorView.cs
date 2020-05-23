@@ -28,7 +28,7 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private List<string> selectColumn;
         private List<string> oldColumnName;
-        private LogUtil log = LogUtil.GetInstance("RandomOperatorView");
+        private static LogUtil log = LogUtil.GetInstance("RandomOperatorView");
         public RandomOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();

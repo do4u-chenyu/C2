@@ -3,6 +3,8 @@ using Citta_T1.Business.Option;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.OperatorViews;
 using Citta_T1.Utils;
 using System;
@@ -328,7 +330,7 @@ namespace Citta_T1.Controls.Move
                 cmd = ECommandType.Hold;
             }
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-            oldcontrolPosition =this.Location;
+            oldcontrolPosition = this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -392,12 +394,28 @@ namespace Citta_T1.Controls.Move
 
             }
             if (oldcontrolPosition != this.Location)
+            {
+                // 构造移动命令类,压入undo栈
+                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                if (element != null)
+                {
+                    ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                }
                 Global.GetMainForm().SetDocumentDirty();
+            }
 
 
         }
 
- 
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            this.oldcontrolPosition = this.Location;
+            this.Location = location;
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return oldcontrolPosition;
+        }
 
         #endregion
 
@@ -658,19 +676,40 @@ namespace Citta_T1.Controls.Move
 
         private void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
+            if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
+    
             this.textBox.ReadOnly = true;
-            SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            SetOpControlName(this.textBox.Text);
+
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != null)
             {
-                this.oldTextString = this.textBox.Text;
-                Global.GetMainForm().SetDocumentDirty();
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
+    
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+        }
+
+        public string UndoRedoChangeTextName(string des)
+        {
+            string ret = this.opControlName;
+            this.oldTextString = this.textBox.Text;
+            this.textBox.Text = des;
+            SetOpControlName(des);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return ret;
         }
         #endregion
 

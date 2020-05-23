@@ -23,7 +23,7 @@ namespace Citta_T1.Controls
     }
     public partial class CanvasPanel : UserControl
     {
-        private LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
         public Bitmap staticImage2;
@@ -40,7 +40,7 @@ namespace Citta_T1.Controls
         // 绘图
         // 绘图
         public List<Bezier> lines = new List<Bezier>() { };
-
+        
         public ECommandType cmd = ECommandType.Null;
         public PointF startP;
         public PointF endP;
@@ -50,8 +50,11 @@ namespace Citta_T1.Controls
         Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
 
-        private bool delEnable = false;
 
+
+
+        private bool delEnable = false;
+        private bool startCopy = false;
         public void SetStartP(PointF p)
         {
             startP = p;
@@ -63,6 +66,10 @@ namespace Citta_T1.Controls
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
+
+
+
+
 
         public CanvasPanel()
         {
@@ -171,6 +178,8 @@ namespace Citta_T1.Controls
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
+
+
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
@@ -580,7 +589,7 @@ namespace Citta_T1.Controls
         {
             this.Controls.Remove(ctl);
         }
-        public void AddNewOperator(int sizeL, string text, Point location)
+        private void AddNewOperator(int sizeL, string text, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
@@ -590,7 +599,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
@@ -650,6 +659,17 @@ namespace Citta_T1.Controls
         {
             delEnable = true;
             frameWrapper.FrameDel(sender, e);
+        }
+        public void ControlSelect_Copy()
+        {
+            startCopy = true;
+        }
+        public void ControlSelect_paste()
+        {
+            if (!startCopy)
+                return;
+            log.Info("sss");
+            frameWrapper.FramePaste();
         }
     }
 }

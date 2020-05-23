@@ -11,10 +11,8 @@ namespace Citta_T1.Business.Option
         private string fileName;     //BCP文件名
         private string name;         //对应的数据源名称
         private ElementType type;    //对应的类型:数据源 或 Result
-        private List<ColumnInfo> columnInfos;
         private DSUtil.Encoding encoding;     //BCP文件对应的编码
         public string columnLine;
-        public string separator;
 
         public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
         {

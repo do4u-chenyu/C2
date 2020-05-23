@@ -110,18 +110,20 @@ namespace Citta_T1.Controls.Top
 
         private void MoreButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ConfigForm config = new ConfigForm();
+            ConfigForm config = new ConfigForm(); 
             config.ShowDialog();
         }
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentDocument());
+            Global.GetMainForm().SetDocumentDirty();
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentDocument());
+            Global.GetMainForm().SetDocumentDirty();
         }
 
         private void TopToolBarControl_Load(object sender, EventArgs e)

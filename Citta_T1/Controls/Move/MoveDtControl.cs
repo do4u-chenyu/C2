@@ -55,14 +55,10 @@ namespace Citta_T1.Controls.Move
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
-        // 鼠标放在Pin上，Size的缩放倍率
-        int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
         public int sizeLevel = 0;
-
-        private Citta_T1.OperatorViews.FilterOperatorView randomOperatorView;
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
@@ -71,8 +67,7 @@ namespace Citta_T1.Controls.Move
         private List<int> startLineIndexs = new List<int>() { };
         // 以该控件为终点的所有点
         #endregion
-        // 受影响的线
-        List<Bezier> affectedLines = new List<Bezier>() { };
+
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -119,14 +114,15 @@ namespace Citta_T1.Controls.Move
 
         private void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
-                return;
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
-            SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
             if (this.oldTextString == this.textBox.Text)
                 return;
+
+            SetOpControlName(this.textBox.Text);
 
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
@@ -141,11 +137,20 @@ namespace Citta_T1.Controls.Move
             Global.GetMainForm().SetDocumentDirty(); 
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-
-
-
         }
-        public void rightPictureBox_MouseEnter(object sender, EventArgs e)
+
+        public string UndoRedoChangeTextName(string des)
+        {
+            string ret = this.opControlName;
+            this.oldTextString = this.textBox.Text;
+            this.textBox.Text = des;
+            SetOpControlName(des);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return ret;
+        }
+
+        public void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
 
             this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
@@ -389,12 +394,30 @@ namespace Citta_T1.Controls.Move
 
                 Global.GetNaviViewControl().UpdateNaviView();
                 if (oldcontrolPosition != this.Location)
-                    Global.GetMainForm().SetDocumentDirty();
+                {
+                    // 构造移动命令类,压入undo栈
+                    ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                    if (element != null)
+                    {
+                        ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                        UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    }
 
-                affectedLines.Clear();
+                    Global.GetMainForm().SetDocumentDirty();//TODO ElementMove点
+                }
             }
 
         }
+
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            this.oldcontrolPosition = this.Location;
+            this.Location = location;
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return oldcontrolPosition;
+        }
+
         #endregion
 
         #region 控件名称长短改变时改变控件大小
