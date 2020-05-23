@@ -148,7 +148,11 @@ namespace Citta_T1.OperatorViews
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
                 List<int> fieldColumn = new List<int>() { Nums[0] };
                 if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
+                {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
+                    this.comboBox1.Tag = Nums[0].ToString();
+                }
+                   
             }
             if (count > 1)
                 InitNewFactorControl(count - 1);
@@ -167,7 +171,8 @@ namespace Citta_T1.OperatorViews
                 if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(), fieldColumn1)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
-                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();;
+                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
+                control1.Tag = Nums[0].ToString();
             }
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
 
