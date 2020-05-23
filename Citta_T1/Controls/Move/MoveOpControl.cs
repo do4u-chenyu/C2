@@ -133,9 +133,6 @@ namespace Citta_T1.Controls.Move
         }
         public void ChangeSize(int sizeL)
         {
-            bool originVisible = this.Visible;
-            if (originVisible)
-                this.Hide();  // 解决控件放大缩小闪烁的问题，非当前文档的元素，不需要hide,show
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -152,8 +149,6 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            if (originVisible)
-                this.Show();
         }
 
         private void InitializeOpPinPicture()
@@ -608,7 +603,7 @@ namespace Citta_T1.Controls.Move
                 }
             }
             //删除自身
-
+            //TODO 元素删除Command插入点
             Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetMainForm().SetDocumentDirty();
@@ -617,12 +612,12 @@ namespace Citta_T1.Controls.Move
             canvas.EndC = null;
         }
 
-        public void UndoRedoDelete()
+        public void UndoRedoDeleteElement()
         {
 
         }
 
-        public void UndoRedoAdd()
+        public void UndoRedoAddElement()
         {
 
         }

@@ -42,9 +42,9 @@ namespace  Citta_T1
         public MainForm()
         {
             InitializeComponent();
-            this.inputDataForm = new Citta_T1.Dialogs.InputDataForm();
+            this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            this.createNewModelForm = new Citta_T1.Dialogs.CreateNewModelForm();
+            this.createNewModelForm = new Dialogs.CreateNewModelForm();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
 

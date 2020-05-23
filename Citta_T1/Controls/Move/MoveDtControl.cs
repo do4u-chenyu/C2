@@ -173,18 +173,19 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
+            //TODO 元素删除Command插入点
             Global.GetCanvasPanel().DeleteElement(this);           
             Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
-        public void UndoRedoDelete()
+        public void UndoRedoDeleteElement()
         { 
             //TODO
         }
 
-        public void UndoRedoAdd()
+        public void UndoRedoAddElement()
         {
             //TODO
         }
@@ -213,9 +214,6 @@ namespace Citta_T1.Controls.Move
 
         public void ChangeSize(int sizeL)
         {
-            bool originVisible = this.Visible;
-            if (originVisible)
-                this.Hide(); 
             if (sizeL > sizeLevel)
             {
                 while (sizeL > sizeLevel)
@@ -232,8 +230,6 @@ namespace Citta_T1.Controls.Move
                     sizeLevel -= 1;
                 }
             }
-            if (originVisible)
-                this.Show();
         }
 
         public void ChangeSize(bool zoomUp, float factor = Global.Factor)
