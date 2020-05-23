@@ -521,13 +521,8 @@ namespace Citta_T1.Controls
                         cd.RemoveModelRelation(mr);
                     else
                     {
-                        //endC右键菜单设置Enable
-                        System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
-                        watch.Start();  //开始监视代码运行时间
+                        //endC右键菜单设置Enable                     
                         Global.GetOptionDao().EnableControlOption(mr);
-                        watch.Stop();  //停止监视
-                        TimeSpan timespan = watch.Elapsed;  //获取当前实例测量得出的总时间
-                        log.Info("打开窗口代码执行时间：{0}(毫秒)" + timespan.TotalMilliseconds);  //总毫秒数
                     }
                 }
                 cmd = ECommandType.Null;
