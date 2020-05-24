@@ -571,7 +571,6 @@ namespace Citta_T1.Controls
                 return;
             if (frameWrapper.FramePaint(e))
                 return;
-            //TODO
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
             ModelDocument doc = Global.GetCurrentDocument();

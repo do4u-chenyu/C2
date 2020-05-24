@@ -197,7 +197,7 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement startMe = currentDocument.SearchElementByID(mr.StartID);
                 ModelElement endMe   = currentDocument.SearchElementByID(mr.EndID);
-                if (endMe == null || startMe == null)
+                if (endMe == ModelElement.Empty || startMe == ModelElement.Empty)
                     continue;
                 if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;

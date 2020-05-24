@@ -272,7 +272,6 @@ namespace Citta_T1.OperatorViews
             //先清空,再加载
             this.pythonChosenComboBox.Text = "选择Python虚拟机";
             this.pythonChosenComboBox.Items.Clear();
-            // TODO 从ModelDocument中加载配置信息
             //判断xml里是否有值，有值，判断是否在config里有？没有return false，有return true
             string xmlVirtualMachineName = this.opControl.Option.GetOption("virtualMachine");
             if (String.IsNullOrEmpty(xmlVirtualMachineName)) return false;

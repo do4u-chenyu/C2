@@ -393,7 +393,7 @@ namespace Citta_T1.Controls.Move.Op
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                if (element != null)
+                if (element != ModelElement.Empty)
                 {
                     Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
@@ -604,12 +604,20 @@ namespace Citta_T1.Controls.Move.Op
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
+         
+            ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
             //删除自身
-            //TODO 元素删除Command插入点
-            UndoRedoDeleteElement();
+            DeleteMyself();
         }
 
         public void UndoRedoDeleteElement()
+        {
+            //TODO undo,redo时关系处理
+            DeleteMyself();
+        }
+
+        private void DeleteMyself()
         {
             Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetCanvasPanel().DeleteElement(this);
@@ -620,6 +628,7 @@ namespace Citta_T1.Controls.Move.Op
 
         public void UndoRedoAddElement(ModelElement me)
         {
+            //TODO undo,redo时关系处理
             Global.GetCanvasPanel().AddElement(this);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
@@ -698,7 +707,7 @@ namespace Citta_T1.Controls.Move.Op
 
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != null)
+            if (element != ModelElement.Empty)
             {
                 ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);

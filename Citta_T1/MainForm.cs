@@ -118,7 +118,6 @@ namespace Citta_T1
             SetDocumentDirty();
             if (me == ModelElement.Empty)
                 return;
-            //TODO ElementAddCommand插入点
             ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);

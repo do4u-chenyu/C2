@@ -55,7 +55,6 @@ namespace Citta_T1.Dialogs
             string pythonVersion = String.Empty;
             if (CheckPythonInterpreter(pythonFFP, ref pythonVersion) != 0)
             {
-                //TODO 弹出对话框
                 MessageBox.Show(String.Format("Python解释器似乎无法正常使用: {0}", pythonFFP), 
                     "Python解释器导入错误", 
                     MessageBoxButtons.OK, 

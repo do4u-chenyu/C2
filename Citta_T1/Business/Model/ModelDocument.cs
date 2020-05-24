@@ -336,7 +336,7 @@ namespace Citta_T1.Business.Model
                 if (me.ID == ID)
                     return me;
             }
-            return null;
+            return ModelElement.Empty;
         }
         public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
         {
@@ -356,7 +356,7 @@ namespace Citta_T1.Business.Model
             {
                 if (mr.StartID != ID) continue;
                 ModelElement modelElement = SearchElementByID(mr.EndID);
-                if (modelElement != null && modelElement.Type == ElementType.Result)
+                if (modelElement != ModelElement.Empty && modelElement.Type == ElementType.Result)
                 {
                     modelElement.Status = modelElement.Status;
                     return modelElement;

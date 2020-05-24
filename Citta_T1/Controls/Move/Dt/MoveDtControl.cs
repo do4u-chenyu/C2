@@ -123,7 +123,7 @@ namespace Citta_T1.Controls.Move.Dt
 
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != null)
+            if (element != ModelElement.Empty)
             {
                 ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
@@ -169,11 +169,18 @@ namespace Citta_T1.Controls.Move.Dt
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
-            //TODO 元素删除Command插入点
-            UndoRedoDeleteElement();
+            ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            DeleteMyself();
         }
 
         public void UndoRedoDeleteElement()
+        {
+            //TODO undo,redo元素时关系的处理
+            DeleteMyself();
+        }
+
+        private void DeleteMyself()
         {
             Global.GetCanvasPanel().DeleteElement(this);
             Global.GetCurrentDocument().DeleteModelElement(this);
@@ -183,6 +190,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         public void UndoRedoAddElement(ModelElement me)
         {
+            //TODO undo,redo元素时关系的处理
             Global.GetCanvasPanel().AddElement(this);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
@@ -385,7 +393,7 @@ namespace Citta_T1.Controls.Move.Dt
                 {
                     // 构造移动命令类,压入undo栈
                     ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                    if (element != null)
+                    if (element != ModelElement.Empty)
                     {
                         Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
                         ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
@@ -579,7 +587,6 @@ namespace Citta_T1.Controls.Move.Dt
             
         }
 
-        // TODO
         public PointF RevisePointLoc(PointF p)
         {
             // 不存在连DtControl 的 LeftPin的情况

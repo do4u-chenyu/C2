@@ -247,7 +247,7 @@ namespace Citta_T1.Controls.Move.Rs
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                if (element != null)
+                if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
                     Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
@@ -349,8 +349,6 @@ namespace Citta_T1.Controls.Move.Rs
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            ModelElement currentRs = Global.GetCurrentDocument().SearchElementByID(this.ID);
-
             //找到对应的op算子
             ModelElement currentOp = null;
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -362,7 +360,7 @@ namespace Citta_T1.Controls.Move.Rs
             }
 
             //未找到op算子？？
-            if (currentOp == null)
+            if (currentOp == ModelElement.Empty)
             {
                 MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -423,7 +421,7 @@ namespace Citta_T1.Controls.Move.Rs
             SetOpControlName(this.textBox.Text);
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != null)
+            if (element != ModelElement.Empty)
             {
                 ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
