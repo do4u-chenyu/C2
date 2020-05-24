@@ -15,7 +15,7 @@ using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Op
 {
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();

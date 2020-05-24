@@ -15,12 +15,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
 
         private string opControlName;
@@ -344,7 +342,6 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
         }
 
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using Citta_T1.Core.UndoRedo.Command;
 
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Dt
 {
     public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl

@@ -198,10 +198,10 @@
     <Compile Include="Controls\Left\ModelButton.Designer.cs">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Move\MoveDtControl.cs">
+    <Compile Include="Controls\Move\Dt\MoveDtControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Move\MoveDtControl.Designer.cs">
+    <Compile Include="Controls\Move\Dt\MoveDtControl.Designer.cs">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Left\MyModelControl.cs">
@@ -228,10 +228,10 @@
     <Compile Include="Controls\Flow\RightHideButton.Designer.cs">
       <DependentUpon>RightHideButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Move\MoveRsControl.cs">
+    <Compile Include="Controls\Move\Rs\MoveRsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Move\MoveRsControl.Designer.cs">
+    <Compile Include="Controls\Move\Rs\MoveRsControl.Designer.cs">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\QuickformatWrapper.cs" />
@@ -419,10 +419,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\Move\MoveOpControl.cs">
+    <Compile Include="Controls\Move\Op\MoveOpControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Move\MoveOpControl.Designer.cs">
+    <Compile Include="Controls\Move\Op\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
@@ -457,7 +457,7 @@
     <EmbeddedResource Include="Controls\Left\ModelButton.resx">
       <DependentUpon>ModelButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Move\MoveDtControl.resx">
+    <EmbeddedResource Include="Controls\Move\Dt\MoveDtControl.resx">
       <DependentUpon>MoveDtControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Left\MyModelControl.resx">
@@ -475,7 +475,7 @@
       <DependentUpon>RightHideButton.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Move\MoveRsControl.resx">
+    <EmbeddedResource Include="Controls\Move\Rs\MoveRsControl.resx">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\ModelTitleControl.resx">
@@ -522,7 +522,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Move\MoveOpControl.resx">
+    <EmbeddedResource Include="Controls\Move\Op\MoveOpControl.resx">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\InputDataForm.resx">
