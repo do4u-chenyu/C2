@@ -270,6 +270,29 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
+
+
+        //  Pw = Ps / Factor - Pm
+        public Point ScreenToWorld(Point Ps)
+        {
+            Point Pw = new Point    
+            {
+                X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
+                Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
+            };
+            return Pw;
+        }
+
+        // Ps = (Pw + Pm) * Factor
+        public Point WorldToScreen(Point Pw)
+        {
+            Point Ps = new Point
+            {
+                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
+                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
+            };
+            return Ps;
+        }
        
         public void UpdateAllLines()
         {

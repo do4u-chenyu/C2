@@ -14,7 +14,7 @@ namespace Citta_T1.Core.UndoRedo.Command
         public ElementMoveCommand(ModelElement me, Point oldLocation)
         {
             element = me;
-            this.oldLocation = oldLocation;//有bug,放大缩小时移动会有问题，这地方应该存储世界坐标系坐标
+            this.oldLocation = oldLocation;
         }
 
         public bool Redo()

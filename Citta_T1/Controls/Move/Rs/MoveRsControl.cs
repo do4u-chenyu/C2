@@ -46,7 +46,7 @@ namespace Citta_T1.Controls.Move.Rs
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        private Point oldcontrolPosition;
+        private Point oldControlPosition;
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -193,7 +193,7 @@ namespace Citta_T1.Controls.Move.Rs
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    oldcontrolPosition = this.Location;
+                    oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;
@@ -205,7 +205,7 @@ namespace Citta_T1.Controls.Move.Rs
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-            oldcontrolPosition = this.Location;
+            oldControlPosition = this.Location;
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
@@ -243,13 +243,14 @@ namespace Citta_T1.Controls.Move.Rs
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
-            if (oldcontrolPosition != this.Location)
+            if (oldControlPosition != this.Location)
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != null)
-                {
-                    ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
@@ -261,11 +262,11 @@ namespace Citta_T1.Controls.Move.Rs
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldcontrolPosition = this.Location;
-            this.Location = location;
+            this.oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return oldcontrolPosition;
+            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
         }
 
         #endregion
