@@ -77,26 +77,15 @@ namespace Citta_T1.OperatorViews
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
-            CompareDataSource();
+
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
+            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "sortfield");
+
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("sortfield") != "")
-                {
-                    int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
-                        this.opControl.Option.OptionDict.Remove("sortfield");
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-        }
+       
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 

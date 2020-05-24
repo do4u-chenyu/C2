@@ -268,14 +268,7 @@ namespace Citta_T1.Business.Option
             int maxIndex = outIndex.Max();
             if (maxIndex > columnName.Length - 1)
                 return true;
-            List<string> oldName = new List<string>();
-            List<string> newName = new List<string>();
-            foreach (int i in outIndex)
-            {
-                oldName.Add(oldColumnList[i]);
-                newName.Add(columnName[i]);
-            }
-            return (!Enumerable.SequenceEqual(oldName, newName));
+            return (!Enumerable.SequenceEqual(oldColumnList, columnName));
   
         }
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
@@ -294,10 +287,10 @@ namespace Citta_T1.Business.Option
                         {
                             opControl.Option.OptionDict[field] = "";
                             return false;
-                        }    
+                        }
                     }
                 }
-                else if (field.Contains("outfield"))
+                else if (field.Contains("outfield") && opControl.Option.GetOption(field) != "")
                 {
 
                     string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
@@ -307,7 +300,14 @@ namespace Citta_T1.Business.Option
                         opControl.Option.OptionDict["outfield"] = "";
                         return false;
                     }
-                       
+
+                }
+                else if(opControl.Option.GetOption(field) != "")
+                {
+                    //单选框配置的判断
+                    int index = Convert.ToInt32(opControl.Option.GetOption(field));
+                    if (index > columnName.Length - 1 || oldColumnList[index] != columnName[index])
+                        opControl.Option.OptionDict[field] = "";
                 }
             }
             catch (Exception ex) { log.Error(ex.Message); }

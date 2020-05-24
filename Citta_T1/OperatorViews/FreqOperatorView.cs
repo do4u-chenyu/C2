@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls.Common;
 
 namespace Citta_T1.OperatorViews
 {
@@ -69,28 +70,15 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
-            CompareDataSource();
+
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);         
+            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
+
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("outfield") != "")
-                {
-                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
-                        this.opControl.Option.OptionDict.Remove("outfield");
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-        }
-
+      
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
