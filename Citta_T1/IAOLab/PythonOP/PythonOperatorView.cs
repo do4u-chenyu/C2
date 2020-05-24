@@ -220,13 +220,13 @@ namespace Citta_T1.OperatorViews
             //虚拟机是否勾选
             if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
             {
-                MessageBox.Show("请选择python虚拟机，若无选项请前往首选项-python引擎中配置。");
+                MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
                 return false;
             }
             //脚本是否导入
             if (this.pyFullFilePathTextBox.Text == "")
             {
-                MessageBox.Show("python脚本未导入，请点击浏览按钮导入脚本。");
+                MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
                 return false;
             }
             //输入文件设置，选2时是否写了参数
