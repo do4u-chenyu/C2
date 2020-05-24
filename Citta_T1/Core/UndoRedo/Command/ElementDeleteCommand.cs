@@ -11,12 +11,12 @@ namespace Citta_T1.Core.UndoRedo.Command
         {
             this.element = element;
         }
-        public bool Do()
+        public bool Redo()
         {
             return DoDelete();
         }
 
-        public bool Rollback()
+        public bool Undo()
         {
             // 正好和ElementAddComman操作相反
             return DoAdd();

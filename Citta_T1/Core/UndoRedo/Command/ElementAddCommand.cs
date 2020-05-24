@@ -12,12 +12,12 @@ namespace Citta_T1.Core.UndoRedo.Command
         {
             this.element = element;        
         }
-        public bool Do()
+        public bool Redo()
         {
             return DoAdd();
         }
 
-        public bool Rollback()
+        public bool Undo()
         {
             return DoDelete();
         }

@@ -15,13 +15,13 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.oldName = oldName;
             this.element = me;
         }
-        public bool Do()
+        public bool Redo()
         {
             return DoCommand();
         }
 
 
-        public bool Rollback()
+        public bool Undo()
         {
             return DoCommand();
         }
