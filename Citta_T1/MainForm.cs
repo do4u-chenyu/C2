@@ -494,7 +494,7 @@ namespace  Citta_T1
             {
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
-                MessageBox.Show("当前模型的运算结果已重置，可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
