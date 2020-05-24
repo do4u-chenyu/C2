@@ -170,20 +170,23 @@ namespace Citta_T1.Controls.Move.Dt
                 }
             }
             //TODO 元素删除Command插入点
-            Global.GetCanvasPanel().DeleteElement(this);           
+            UndoRedoDeleteElement();
+        }
+
+        public void UndoRedoDeleteElement()
+        {
+            Global.GetCanvasPanel().DeleteElement(this);
             Global.GetCurrentDocument().DeleteModelElement(this);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
-        public void UndoRedoDeleteElement()
-        { 
-            //TODO
-        }
-
-        public void UndoRedoAddElement()
+        public void UndoRedoAddElement(ModelElement me)
         {
-            //TODO
+            Global.GetCanvasPanel().AddElement(this);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         #endregion
 

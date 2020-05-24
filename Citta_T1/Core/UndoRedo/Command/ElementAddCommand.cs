@@ -6,11 +6,10 @@ namespace Citta_T1.Core.UndoRedo.Command
 {
     class ElementAddCommand : ICommand
     {
-        //private ModelDocument document;
-        private readonly ModelElement element;
+        private readonly ModelElement me;
         public ElementAddCommand(ModelElement element)
         {
-            this.element = element;        
+            this.me = element;        
         }
         public bool Redo()
         {
@@ -24,13 +23,13 @@ namespace Citta_T1.Core.UndoRedo.Command
 
         private bool DoDelete()
         {
-            switch (element.Type)
+            switch (me.Type)
             {
                 case ElementType.DataSource:
-                    (element.GetControl as MoveDtControl).UndoRedoDeleteElement();
+                    (me.GetControl as MoveDtControl).UndoRedoDeleteElement();
                     break;
                 case ElementType.Operator:
-                    (element.GetControl as MoveOpControl).UndoRedoDeleteElement();
+                    (me.GetControl as MoveOpControl).UndoRedoDeleteElement();
                     break;
                 case ElementType.Result:
                 default:
@@ -40,13 +39,13 @@ namespace Citta_T1.Core.UndoRedo.Command
         }
         private bool DoAdd()
         {
-            switch (element.Type)
+            switch (me.Type)
             {
                 case ElementType.DataSource:
-                    (element.GetControl as MoveDtControl).UndoRedoAddElement();
+                    (me.GetControl as MoveDtControl).UndoRedoAddElement(me);
                     break;
                 case ElementType.Operator:
-                    (element.GetControl as MoveOpControl).UndoRedoAddElement();
+                    (me.GetControl as MoveOpControl).UndoRedoAddElement(me);
                     break;
                 case ElementType.Result:
                 default:

@@ -589,6 +589,11 @@ namespace Citta_T1.Controls
         {
             this.Controls.Remove(ctl);
         }
+
+        public void AddElement(Control ctl)
+        {
+            this.Controls.Add(ctl);
+        }
         private void AddNewOperator(int sizeL, string text, Point location)
         {
             MoveOpControl btn = new MoveOpControl(

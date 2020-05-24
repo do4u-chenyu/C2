@@ -147,6 +147,11 @@ namespace Citta_T1.Business.Model
             }   
         }
 
+        public void DeleteModelElement(ModelElement me)
+        {
+            this.modelElements.Remove(me);
+        }
+
         public void StateChangeByDeleteControl(int ID)
         {
 

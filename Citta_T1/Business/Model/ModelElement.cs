@@ -44,7 +44,7 @@ namespace Citta_T1.Business.Model
         Ready,   //已经完成算子配置,随时可以开始运算
         Null,    //初始状态
     }
-    class ModelElement
+    public class ModelElement
     {
         private ElementStatus status;
         private ElementType type;

@@ -606,22 +606,24 @@ namespace Citta_T1.Controls.Move.Op
             }
             //删除自身
             //TODO 元素删除Command插入点
-            Global.GetCurrentDocument().DeleteModelElement(this);
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            canvas.EndC = null;
+            UndoRedoDeleteElement();
         }
 
         public void UndoRedoDeleteElement()
         {
-
+            Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetCanvasPanel().DeleteElement(this);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetCanvasPanel().EndC = null;
         }
 
-        public void UndoRedoAddElement()
+        public void UndoRedoAddElement(ModelElement me)
         {
-
+            Global.GetCanvasPanel().AddElement(this);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
@@ -639,7 +641,7 @@ namespace Citta_T1.Controls.Move.Op
             {
                 if (mrc.ID == endID)
                 {
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    Global.GetCurrentDocument().DeleteModelElement(mrc);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
