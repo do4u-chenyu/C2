@@ -205,7 +205,6 @@
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
-            this.textBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
@@ -242,7 +241,6 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveDtControl";
             this.Size = new System.Drawing.Size(185, 25);
-            this.LocationChanged += new System.EventHandler(this.MoveDtControl_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MoveDtControl_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);

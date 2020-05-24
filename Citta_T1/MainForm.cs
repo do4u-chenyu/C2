@@ -494,7 +494,7 @@ namespace  Citta_T1
             {
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
-                MessageBox.Show("当前模型的算子状态已重置", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -531,7 +531,7 @@ namespace  Citta_T1
 
                 if (currentManager.IsAllOperatorDone())
                 {
-                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算请点击重置按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.Start();
