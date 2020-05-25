@@ -1,18 +1,13 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -77,26 +72,15 @@ namespace Citta_T1.OperatorViews
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
-            CompareDataSource();
+
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
+            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "sortfield");
+
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("sortfield") != "")
-                {
-                    int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
-                        this.opControl.Option.OptionDict.Remove("sortfield");
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-        }
+       
         private DSUtil.Encoding EnType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
@@ -191,6 +175,7 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
+                this.sortField.Tag = index.ToString();
             }   
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));

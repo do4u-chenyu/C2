@@ -1,22 +1,23 @@
-﻿using System;
+﻿using Citta_T1.Business.DataSource;
+using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Business.Schedule;
+using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Left;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Title;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Left;
-using Citta_T1.Business.DataSource;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Bottom;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
 
-namespace  Citta_T1
-{ 
+namespace Citta_T1
+{
     public partial class MainForm : Form
     {
         private bool isBottomViewPanelMinimum;
@@ -40,9 +41,9 @@ namespace  Citta_T1
         public MainForm()
         {
             InitializeComponent();
-            this.inputDataForm = new Citta_T1.Dialogs.InputDataForm();
+            this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
-            this.createNewModelForm = new Citta_T1.Dialogs.CreateNewModelForm();
+            this.createNewModelForm = new Dialogs.CreateNewModelForm();
             this.isBottomViewPanelMinimum = false;
             this.isLeftViewPanelMinimum = false;
 
@@ -113,9 +114,14 @@ namespace  Citta_T1
 
         private void NewDocumentOperator(Control ct)
         {          
-            this.modelDocumentDao.AddDocumentOperator(ct);
+            ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
-
+            if (me == ModelElement.Empty)
+                return;
+            ICommand cmd = new ElementAddCommand(me);
+            if (ct is MoveDtControl || ct is MoveOpControl)
+                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
+            
         }
 
         public void SaveCurrentDocument()
@@ -486,7 +492,7 @@ namespace  Citta_T1
             {
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
-                MessageBox.Show("当前模型的算子状态已重置", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -523,7 +529,7 @@ namespace  Citta_T1
 
                 if (currentManager.IsAllOperatorDone())
                 {
-                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算请点击重置按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("当前模型的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 currentManager.Start();

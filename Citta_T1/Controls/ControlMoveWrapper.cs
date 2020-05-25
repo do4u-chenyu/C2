@@ -82,7 +82,7 @@ namespace Citta_T1.Controls
         }
 
 
-        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public override void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.Now = e.Location;

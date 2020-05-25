@@ -91,7 +91,7 @@ namespace Citta_T1.Controls.Flow
 
             float factor = Global.GetCurrentDocument().ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-
+            
             int dx = Convert.ToInt32((startX - e.X ) * rate / factor);
             int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
@@ -105,7 +105,8 @@ namespace Citta_T1.Controls.Flow
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
-            
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetFlowControl().ResetStatus();
         }
 
         private void NaviViewControl_Paint(object sender, PaintEventArgs e)
@@ -197,7 +198,7 @@ namespace Citta_T1.Controls.Flow
             {
                 ModelElement startMe = currentDocument.SearchElementByID(mr.StartID);
                 ModelElement endMe   = currentDocument.SearchElementByID(mr.EndID);
-                if (endMe == null || startMe == null)
+                if (endMe == ModelElement.Empty || startMe == ModelElement.Empty)
                     continue;
                 if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
                     continue;

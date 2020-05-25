@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Citta_T1.Business.Schedule;
+using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
+using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Flow;
 using System.Xml;
-using Citta_T1.Utils;
-using Citta_T1.Business.Schedule;
-using System.Drawing;
-using Citta_T1.Core;
 
 namespace Citta_T1.Business.Model
 {
@@ -82,16 +83,16 @@ namespace Citta_T1.Business.Model
                     md.Hide();
             }           
         }
-        public void AddDocumentOperator(Control ct)
+        public ModelElement AddDocumentOperator(Control ct)
         {
-            
+         
             if (ct is MoveDtControl)
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.DescriptionName, dt.FullFilePath, dt.ID);
                 this.currentDocument.AddModelElement(e);
-                return;
+                return e;
             }
 
             if (ct is MoveOpControl)
@@ -100,7 +101,7 @@ namespace Citta_T1.Business.Model
                 op.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, OpUtil.SEType(op.SubTypeName), op.ID);
                 this.currentDocument.AddModelElement(e);
-                return;               
+                return e;               
             }
             if (ct is MoveRsControl)
             {
@@ -108,10 +109,10 @@ namespace Citta_T1.Business.Model
                 rs.ID = this.currentDocument.ElementCount++;
                 ModelElement e = ModelElement.CreateResultElement(rs, rs.DescriptionName, rs.ID);
                 this.currentDocument.AddModelElement(e);
-                return;
-
+                return e;
             }
-           
+
+            return ModelElement.Empty;
         }
 
 

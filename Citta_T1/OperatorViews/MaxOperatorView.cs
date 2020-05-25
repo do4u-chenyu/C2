@@ -1,12 +1,10 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -24,7 +22,6 @@ namespace Citta_T1.OperatorViews
         private string[] columnName;
         private string oldOptionDict;
         private List<string> oldColumnName;
-        private bool hasNewDataSource;
         private static LogUtil log = LogUtil.GetInstance("MaxOperatorView");
 
 
@@ -32,7 +29,6 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             dataPath = "";
-            this.hasNewDataSource = false;
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
@@ -122,6 +118,7 @@ namespace Citta_T1.OperatorViews
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
+                this.maxValueBox.Tag = maxIndex.ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
@@ -161,36 +158,16 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.maxValueBox.Items.Add(name);
             }
-            CompareDataSource();
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
+            foreach (string field in keys)
+            {
+                if (!field.Contains("columnname"))
+                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
+            }
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("maxfield") != "")
-                {
-                    int index = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
-                        this.opControl.Option.OptionDict.Remove("maxfield");
-                }
-                if (this.opControl.Option.GetOption("outfield") != "")
-                {
-
-                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
-                    {
-                        this.opControl.Option.OptionDict.Remove("outfield");
-                        this.hasNewDataSource = true;
-                    }
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-        }
+      
 
 
         public void SetTextBoxName(TextBox textBox)

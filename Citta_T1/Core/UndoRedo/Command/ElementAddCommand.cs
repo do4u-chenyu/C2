@@ -1,21 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
     class ElementAddCommand : ICommand
     {
-        public bool Do()
+        private readonly ModelElement me;
+        public ElementAddCommand(ModelElement element)
         {
-            throw new NotImplementedException();
+            this.me = element;        
+        }
+        public bool Redo()
+        {
+            return DoAdd();
         }
 
-        public bool Rollback()
+        public bool Undo()
         {
-            throw new NotImplementedException();
+            return DoDelete();
+        }
+
+        private bool DoDelete()
+        {
+            switch (me.Type)
+            {
+                case ElementType.DataSource:
+                    (me.GetControl as MoveDtControl).UndoRedoDeleteElement();
+                    break;
+                case ElementType.Operator:
+                    (me.GetControl as MoveOpControl).UndoRedoDeleteElement();
+                    break;
+                case ElementType.Result:
+                default:
+                    break;
+            }
+            return true;
+        }
+        private bool DoAdd()
+        {
+            switch (me.Type)
+            {
+                case ElementType.DataSource:
+                    (me.GetControl as MoveDtControl).UndoRedoAddElement(me);
+                    break;
+                case ElementType.Operator:
+                    (me.GetControl as MoveOpControl).UndoRedoAddElement(me);
+                    break;
+                case ElementType.Result:
+                default:
+                    break;
+            }
+            return true;
         }
     }
 }

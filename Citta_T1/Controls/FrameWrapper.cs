@@ -20,13 +20,11 @@ namespace Citta_T1.Controls
 {
     class FrameWrapper
     {
-        private Bitmap staticImage, staticImage2, moveImage;
-        private CanvasPanel canvas;
-        private Point startP, endP, nowP;
+        private const bool noSelect = false;
+        private Bitmap staticImage, staticImageFrame, moveImage;
+        private Point startP, endP;
         private bool startSelect = false;
         private bool startDrag = false;
-        private Pen p2 = new Pen(Color.Gray, 0.0001f);
-        private Pen p1 = new Pen(Color.Gray, 0.0001f);
         private Pen p = new Pen(Color.Gray, 1f);
         private Rectangle frameRec = new Rectangle(0, 0, 0, 0);
         private Rectangle minBoding = new Rectangle(0, 0, 0, 0);
@@ -38,7 +36,6 @@ namespace Citta_T1.Controls
 
         public FrameWrapper()
         {
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             worldWidth = 2000;
             worldHeight = 1000;
@@ -73,61 +70,65 @@ namespace Citta_T1.Controls
 
         public void FrameMove(MouseEventArgs e)
         {
-            
             endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
             FrameEnter(endP);
             if (e.Button != MouseButtons.Left)
+            {
                 return;
+            }
             if (startSelect)
+            {
                 DrawFrame_move();
+            }
 
             if (startDrag)
-                dragFrame_Move();
-
+            {
+                DragFrame_Move();
+            }
         }
         public void FrameUp(MouseEventArgs e)
         {
             endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
-            if (e.Button == MouseButtons.Right)
+            if (e.Button != MouseButtons.Left)
                 return;
             if (startDrag)
-                dragFrame_Up(e);
+            {
+                DragFrame_Up();
+            }
+
             if (startSelect)
-                DrawFrame_Up(e);
+            {
+                DrawFrame_Up();
+            }
         }
         public void FrameEnter(Point pw)
-        {
+        {           
             if (minBoding.Contains(pw))
+            {
                 Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
-            if (!minBoding.Contains(pw))
-                Global.GetCanvasPanel().Cursor = Cursors.Default;
-
+                return;
+            }   
+            Global.GetCanvasPanel().Cursor = Cursors.Default;
         }
         public void FrameDel(object sender, EventArgs e)
         {
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements.ToList();
-            foreach(ModelElement me in modelElements)
-            {
-                Control ct = me.GetControl;
-                Point ctW = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
-                if (minBoding.Contains(ctW))
-                {
-                    (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
-                }       
-            }            
-            Global.GetCurrentDocument().Show();            
+            foreach (Control ct in controls)
+                (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
+            Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
-            this.minBoding = new Rectangle(0,0,0,0);
+            minBoding = new Rectangle(0, 0, 0, 0);
             CreateWorldImage();
             
         }
         public bool FramePaint(PaintEventArgs e)
         {
-            if (Global.GetFlowControl().SelectFrame & this.staticImage != null)
+            if (Global.GetFlowControl().SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
                 e.Graphics.DrawImageUnscaled(i, mapOrigin.X, mapOrigin.Y);
+                i.Dispose();
+                i = null;
                 return true;
             }
             return false;
@@ -146,28 +147,33 @@ namespace Citta_T1.Controls
 
         private void DrawFrame_move()
         {
+            CreateRect();
+
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            CreateRect();
-            g.DrawRectangle(p1, frameRec);
-
+            g.DrawRectangle(p, frameRec);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             n.DrawImageUnscaled(i, mapOrigin.X, mapOrigin.Y);
+
+            n.Dispose();
             g.Dispose();
             i.Dispose();
             i = null;
         }
-        private void DrawFrame_Up(MouseEventArgs e)
+        private void DrawFrame_Up()
         {
             CreateRect();
             FindControl();
-            DrawRoundedRect(2);
+            DrawRoundedRect(staticImage, 2);
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+            n.DrawImageUnscaled(staticImage, mapOrigin.X, mapOrigin.Y);
+            n.Dispose();
             CreateMoveImg();
-            startSelect = false;
+            startSelect = noSelect;
         }
 
         //生成当前模型控件快照
-        public void  CreateWorldImage()
+        public void CreateWorldImage()
         {
             float screenFactor = Global.GetCanvasPanel().ScreenFactor;
             staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
@@ -249,8 +255,6 @@ namespace Citta_T1.Controls
                 return;
             }
             UpDateMinBoding(minX, minY, maxX, maxY);
-            
-
         }
         private void UpDateMinBoding(List<int> minX, List<int> minY, List<int> maxX, List<int> maxY)
         {
@@ -261,31 +265,18 @@ namespace Citta_T1.Controls
             minBoding = new Rectangle(x, y, width, height);
         }
 
-        public void DrawRoundedRect(int radius)
+        #endregion
+        #region 框选特效
+        public void DrawRoundedRect(Bitmap bitmap, int radius)
         {
-            
-            Graphics g = Graphics.FromImage(this.staticImage);
-            Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            Rectangle shadowDown = new Rectangle(this.minBoding.X + 2 ,
-                                                 this.minBoding.Y + this.minBoding.Height ,
-                                                 this.minBoding.Width, 3
-                                                 );
 
-            Rectangle shadowRight = new Rectangle(this.minBoding.X + this.minBoding.Width,
-                                                  this.minBoding.Y + 2 ,
-                                                  3, this.minBoding.Height
-                                                 );
-
-            int x = this.minBoding.X ;
-            int y = this.minBoding.Y ;
+            Graphics g = Graphics.FromImage(bitmap);
+            int x = this.minBoding.X;
+            int y = this.minBoding.Y;
             int width = this.minBoding.Width;
             int height = this.minBoding.Height;
             if (width == 0 || height == 0)
             {
-
-                n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
-                n.Dispose();
-                g.Dispose();
                 return;
             }
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
@@ -293,48 +284,58 @@ namespace Citta_T1.Controls
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
 
-            //边框上下左右
+            //绘制虚线框
             g.DrawLine(p, new PointF(x + radius, y), new PointF(x + width - radius, y));
             g.DrawLine(p, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
             g.DrawLine(p, new PointF(x, y + radius), new PointF(x, y + height - radius));
             g.DrawLine(p, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
 
-            //圆角
+            //圆角绘制
             g.DrawArc(p, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
             g.DrawArc(p, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
             g.DrawArc(p, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
             g.DrawArc(p, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
 
-            // 阴影
+           
+            DrawShadow(g, x, y, width, height, radius);
+            g.Dispose();
+
+        }
+        private void DrawShadow(Graphics g, int x, int y, int width, int height, int radius)
+        {
+            Rectangle shadowDown = new Rectangle(this.minBoding.X + 2,
+                                     this.minBoding.Y + this.minBoding.Height,
+                                     this.minBoding.Width, 3
+                                     );
+
+            Rectangle shadowRight = new Rectangle(this.minBoding.X + this.minBoding.Width,
+                                                  this.minBoding.Y + 2,
+                                                  3, this.minBoding.Height
+                                                 );
             LinearGradientBrush brush = new LinearGradientBrush(shadowDown,
-                                                                Color.DarkGray,
-                                                                Color.LightGray,
-                                                                LinearGradientMode.Horizontal
-                                                                );
+                                                    Color.DarkGray,
+                                                    Color.LightGray,
+                                                    LinearGradientMode.Horizontal
+                                                    );
             LinearGradientBrush brush1 = new LinearGradientBrush(shadowRight,
                                                     Color.DarkGray,
                                                     Color.LightGray,
                                                     LinearGradientMode.Vertical
                                                     );
-            g.FillRectangle(brush, shadowDown);
-            g.FillRectangle(brush1, shadowRight);
+
             Rectangle arcDown = new Rectangle(x, y + height + 2 - radius * 2, radius * 2, radius * 2);
             Rectangle arcRight = new Rectangle(x + width + 2 - radius * 2, y, radius * 2, radius * 2);
-
-            g.DrawArc(p, arcDown, 90, 90);
-            g.DrawArc(p, arcRight, 270, 90);
-
-            g.FillPie(brush, arcDown, 90, 90);
-            g.FillPie(brush1, arcRight, 270, 90);
-
-
-            n.DrawImageUnscaled(this.staticImage, mapOrigin.X, mapOrigin.Y);
-            n.Dispose();
-            g.Dispose();
-            
+            FillShadow(brush, g, shadowDown, arcDown, 90);
+            FillShadow(brush1, g, shadowRight, arcRight, 270);
         }
-
+        private void FillShadow(LinearGradientBrush brush,Graphics g,Rectangle rec, Rectangle arc,float angle)
+        {
+            g.FillRectangle(brush, rec);
+            g.DrawArc(p, arc, angle, 90);
+            g.FillPie(brush, arc, angle, 90);
+        }
         #endregion
+        
         #region 实现框选控件批量移动
         private void CreateMoveImg()
         {
@@ -346,8 +347,8 @@ namespace Citta_T1.Controls
             Rectangle realRect = new Rectangle(minBoding.Location,new Size(minBoding.Width + 2, minBoding.Height + 3));
             //创建作图区域
             float screenFactor = Global.GetCanvasPanel().ScreenFactor;
-            staticImage2 = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
-            Graphics g = Graphics.FromImage(staticImage2);
+            staticImageFrame = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
+            Graphics g = Graphics.FromImage(staticImageFrame);
 
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
@@ -381,18 +382,15 @@ namespace Citta_T1.Controls
                 Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                 if (Pw.X < 0 || Pw.Y < 0 || !minBoding.Contains(Pw) || !minBoding.Contains(new Point(Pw.X + ct.Width,Pw.Y + ct.Height)))
                     continue;
-                ct.DrawToBitmap(staticImage2, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
+                ct.DrawToBitmap(staticImageFrame, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                 me.Hide();
             }
             g.Dispose();
 
 
-
-
-
-
-            Graphics g1 = Graphics.FromImage(moveImage);
-            g1.DrawImage(staticImage2, 0, 0, realRect, GraphicsUnit.Pixel);
+            DrawRoundedRect(staticImageFrame, 2);
+            Graphics gM = Graphics.FromImage(moveImage);
+            gM.DrawImage(staticImageFrame, 0, 0, realRect, GraphicsUnit.Pixel);
             for (int i = 0; i < moveImage.Height; i++)
             {
                 for (int j = 0; j < moveImage.Width; j++)
@@ -402,10 +400,10 @@ namespace Citta_T1.Controls
                 }
             }
             g.Dispose();
-            g1.Dispose();
-            staticImage2 = null;
+            gM.Dispose();
+            staticImageFrame = null;
         }
-        private void dragFrame_Move()
+        private void DragFrame_Move()
         {
             if (this.moveImage == null )
                 return;
@@ -429,12 +427,12 @@ namespace Citta_T1.Controls
             i = null;
         }
 
-        private void dragFrame_Up(MouseEventArgs e)
+        private void DragFrame_Up()
         {
 
             foreach(Control ct in controls)
             {
-                Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+                //Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
                 ct.Left = ct.Left + endP.X - startP.X;
                 ct.Top = ct.Top + endP.Y - startP.Y;
             }
@@ -445,16 +443,11 @@ namespace Citta_T1.Controls
             CreateWorldImage();
             minBoding.X = minBoding.X + endP.X - startP.X;
             minBoding.Y = minBoding.Y + endP.Y - startP.Y;
-            DrawRoundedRect(2);
+            DrawRoundedRect(this.staticImage,2);
             startDrag = false;
         }
         #endregion
-        #region
-        private void controlCopy(Control ct)
-        {
-            
-        }
-        #endregion
+
         public void InitFrame()
         {
             frameRec = new Rectangle(0, 0, 0, 0);
@@ -462,7 +455,7 @@ namespace Citta_T1.Controls
             startSelect = true;
             startDrag = false;
             this.staticImage = null;
-            this.staticImage2 = null;
+            this.staticImageFrame = null;
             this.moveImage = null;
             controls = new List<Control>();
         }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Move;
+﻿using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model
 {
@@ -48,7 +44,7 @@ namespace Citta_T1.Business.Model
         Ready,   //已经完成算子配置,随时可以开始运算
         Null,    //初始状态
     }
-    class ModelElement
+    public class ModelElement
     {
         private ElementStatus status;
         private ElementType type;
@@ -168,6 +164,11 @@ namespace Citta_T1.Business.Model
             }
         }
 
+        private ModelElement()
+        { 
+        }
+
+        public readonly static ModelElement Empty = new ModelElement(); 
         public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
             char separator = '\t',
             DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 

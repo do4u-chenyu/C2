@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using System.Collections.Generic;
-
-using Citta_T1.Utils;
-using Citta_T1.Controls.Move;
-using Citta_T1.Business.Model;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
@@ -178,6 +178,8 @@ namespace Citta_T1.Controls
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
+
+
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
@@ -251,7 +253,7 @@ namespace Citta_T1.Controls
                         selectLineIndexs.Add(mrIndex);
                     else
                     {
-                        MessageBox.Show("该线不应被选中。只支持选中数据源与算子之间的线。");
+                        MessageBox.Show("算子与结果之间的连线是系统自动维护的，不能被人为选中、添加或删除。");
                         return;
                     }
                 else
@@ -528,13 +530,8 @@ namespace Citta_T1.Controls
                         cd.RemoveModelRelation(mr);
                     else
                     {
-                        //endC右键菜单设置Enable
-                        System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();  //开始监视代码运行时间
-                        watch.Start();  //开始监视代码运行时间
+                        //endC右键菜单设置Enable                     
                         Global.GetOptionDao().EnableControlOption(mr);
-                        watch.Stop();  //停止监视
-                        TimeSpan timespan = watch.Elapsed;  //获取当前实例测量得出的总时间
-                        log.Info("打开窗口代码执行时间：{0}(毫秒)" + timespan.TotalMilliseconds);  //总毫秒数
                     }
                 }
                 cmd = ECommandType.Null;
@@ -574,7 +571,6 @@ namespace Citta_T1.Controls
                 return;
             if (frameWrapper.FramePaint(e))
                 return;
-            //TODO
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
             ModelDocument doc = Global.GetCurrentDocument();
@@ -592,7 +588,12 @@ namespace Citta_T1.Controls
         {
             this.Controls.Remove(ctl);
         }
-        public void AddNewOperator(int sizeL, string text, Point location)
+
+        public void AddElement(Control ctl)
+        {
+            this.Controls.Add(ctl);
+        }
+        private void AddNewOperator(int sizeL, string text, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
@@ -602,7 +603,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
@@ -614,10 +615,9 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location, char separator, DSUtil.Encoding encoding) 
+        public MoveRsControl AddNewResult(string desciption, int sizeL, Point location, char separator, DSUtil.Encoding encoding) 
         {
-            MoveRsControl btn = new MoveRsControl(
-                                sizeL,
+            MoveRsControl btn = new MoveRsControl(sizeL,
                                 desciption,
                                 location);
             btn.Separator = separator;

@@ -216,7 +216,6 @@ namespace Citta_T1.Dialogs
                 DataColumn[] cols = new DataColumn[numOfCol];
                 Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
                 string headerText;
-                int count;
                 char[] seperator = new char[] { '_' };
 
                 // 可能有同名列，这里需要重命名一下
@@ -418,7 +417,7 @@ namespace Citta_T1.Dialogs
                 this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
                 PreViewBcpFile();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
             }

@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -82,29 +83,20 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
-            CompareDataSource();
+
+
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
+            foreach (string field in keys)
+            {
+                if (!field.Contains("columnname"))
+                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
+            }
+
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("avgfield") != "")
-                {
-                    int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
-                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
-                        this.opControl.Option.OptionDict.Remove("avgfield");
-                        
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-
-
-        }
+      
 
         public void SetTextBoxName(TextBox textBox)
         {
@@ -186,6 +178,7 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
+                this.selectedIndex = index.ToString();
             }
             
         }

@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
+using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
-using Citta_T1.Core;
-using Citta_T1.Utils;
 
 namespace Citta_T1.OperatorViews
 {
@@ -416,7 +417,7 @@ namespace Citta_T1.OperatorViews
             {
                 char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.otherSeparatorText.Text);
             }

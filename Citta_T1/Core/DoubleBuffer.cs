@@ -28,6 +28,13 @@ namespace Citta_T1.Core
             pi.SetValue(dgv, setting, null);
 
         }
+        public static void SetDouble(Control c)
+        {
+
+            c.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
+                         System.Reflection.BindingFlags.NonPublic).SetValue(c, true, null);
+
+        }
 
     }
 }

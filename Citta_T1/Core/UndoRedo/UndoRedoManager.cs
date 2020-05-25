@@ -81,7 +81,7 @@ namespace Citta_T1.Core.UndoRedo
 
             // 回滚操作
             ICommand cmd = undoRedoDict[md].UndoStack.Pop();
-            cmd.Rollback();
+            cmd.Undo();
 
             if (undoRedoDict[md].UndoStack.IsEmpty())
                 UndoStackEmpty?.Invoke();
@@ -99,7 +99,7 @@ namespace Citta_T1.Core.UndoRedo
             ICommand cmd = undoRedoDict[md].RedoStack.Pop();
 
             // 重新执行命令
-            cmd.Do();
+            cmd.Redo();
 
             if (undoRedoDict[md].RedoStack.IsEmpty())
                 RedoStackEmpty?.Invoke();

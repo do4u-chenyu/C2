@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Move;
-using Citta_T1.Utils;
-using Citta_T1.Business.Option;
-using System.Globalization;
 using System.Threading;
+using System.Xml;
 
 namespace Citta_T1.Business.Model
 {

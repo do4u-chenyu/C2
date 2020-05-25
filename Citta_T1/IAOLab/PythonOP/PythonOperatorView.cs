@@ -1,15 +1,16 @@
-﻿using System;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Move;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
+using Citta_T1.Core;
 using Citta_T1.IAOLab.PythonOP;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Citta_T1.Business.Option;
-using Citta_T1.Business.Model;
 using System.Linq;
 using System.Text;
-using Citta_T1.Core;
+using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
@@ -220,13 +221,13 @@ namespace Citta_T1.OperatorViews
             //虚拟机是否勾选
             if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
             {
-                MessageBox.Show("请选择python虚拟机，若无选项请前往首选项-python引擎中配置。");
+                MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
                 return false;
             }
             //脚本是否导入
             if (this.pyFullFilePathTextBox.Text == "")
             {
-                MessageBox.Show("python脚本未导入，请点击浏览按钮导入脚本。");
+                MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
                 return false;
             }
             //输入文件设置，选2时是否写了参数
@@ -271,7 +272,6 @@ namespace Citta_T1.OperatorViews
             //先清空,再加载
             this.pythonChosenComboBox.Text = "选择Python虚拟机";
             this.pythonChosenComboBox.Items.Clear();
-            // TODO 从ModelDocument中加载配置信息
             //判断xml里是否有值，有值，判断是否在config里有？没有return false，有return true
             string xmlVirtualMachineName = this.opControl.Option.GetOption("virtualMachine");
             if (String.IsNullOrEmpty(xmlVirtualMachineName)) return false;
@@ -524,7 +524,7 @@ namespace Citta_T1.OperatorViews
             {
                 char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.otherSeparatorText.Text);
             }

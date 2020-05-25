@@ -3,6 +3,8 @@ using Citta_T1.Business.Model;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
 
         private string opControlName;
@@ -38,8 +38,6 @@ namespace Citta_T1.Controls.Move
         public string SubTypeName { get => typeName; }
         public char Separator { get => this.separator; set => this.separator = value; }
         // 一些倍率
-        // 鼠标放在Pin上，Size的缩放倍率
-        int multiFactor = 2;
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
@@ -48,7 +46,7 @@ namespace Citta_T1.Controls.Move
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        private Point oldcontrolPosition;
+        private Point oldControlPosition;
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -69,7 +67,6 @@ namespace Citta_T1.Controls.Move
         private Rectangle rectIn;
         private Rectangle rectOut;
         private String pinStatus = "noEnter";
-        private String rectArea = "rectIn rectOut";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
         private ControlMoveWrapper controlMoveWrapper;
@@ -97,19 +94,20 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
             InitializeOpPinPicture();
         }
-        public MoveRsControl(int sizeL, string desciption, Point loc)
+        public MoveRsControl(int size,string desciption, Point loc)
         {
-
             InitializeComponent();
             DescriptionName = desciption;
             this.typeName = "运算结果";
             this.Location = loc;
             SetOpControlName(DescriptionName);
-            ChangeSize(sizeL);
+            ChangeSize(size);
+            
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
+            
         }
 
         private void InitializeOpPinPicture()
@@ -196,7 +194,7 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    oldcontrolPosition = this.Location;
+                    oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;
@@ -208,7 +206,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-            oldcontrolPosition = this.Location;
+            oldControlPosition = this.Location;
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
@@ -246,13 +244,31 @@ namespace Citta_T1.Controls.Move
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
-            if (oldcontrolPosition != this.Location)
+            if (oldControlPosition != this.Location)
+            {
+                // 构造移动命令类,压入undo栈
+                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                if (element != ModelElement.Empty)
+                {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                }
                 Global.GetMainForm().SetDocumentDirty();
+            }
+                
 
 
         }
 
-
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            this.oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+        }
 
         #endregion
 
@@ -328,15 +344,12 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
         }
 
 
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            ModelElement currentRs = Global.GetCurrentDocument().SearchElementByID(this.ID);
-
             //找到对应的op算子
             ModelElement currentOp = null;
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -348,7 +361,7 @@ namespace Citta_T1.Controls.Move
             }
 
             //未找到op算子？？
-            if (currentOp == null)
+            if (currentOp == ModelElement.Empty)
             {
                 MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -398,19 +411,39 @@ namespace Citta_T1.Controls.Move
 
         public void FinishTextChange()
         {
-            if (this.textBox.Text.Length == 0)
-                return;
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
-            SetOpControlName(this.textBox.Text);
             this.textBox.Visible = false;
             this.txtButton.Visible = true;
-            if (this.oldTextString != this.textBox.Text)
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            SetOpControlName(this.textBox.Text);
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != ModelElement.Empty)
             {
-                this.oldTextString = this.textBox.Text;
-                Global.GetMainForm().SetDocumentDirty();
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
+        }
+
+
+        public string UndoRedoChangeTextName(string des)
+        {
+            string ret = this.opControlName;
+            this.oldTextString = this.textBox.Text;
+            this.textBox.Text = des;
+            SetOpControlName(des);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return ret;
         }
         #endregion
 
@@ -486,8 +519,9 @@ namespace Citta_T1.Controls.Move
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
+            ExtensionMethods.SetDouble(this);
             DrawRoundedRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-            SetDouble(this);
+            
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -502,14 +536,6 @@ namespace Citta_T1.Controls.Move
                 this.rectIn = SetRectBySize(1 / factor, this.rectIn);
             }
 
-
-        }
-
-        public static void SetDouble(Control cc)
-        {
-
-            cc.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance |
-                         System.Reflection.BindingFlags.NonPublic).SetValue(cc, true, null);
 
         }
         public void SetControlsBySize(float f, Control control)

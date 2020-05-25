@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo
 {
-    // 正在施工中
+    
     interface ICommand
     {
-        bool Do();
-        bool Rollback();
+        // 对应redo操作
+        bool Redo();
+        // 对应undo操作
+        bool Undo();
     }
 }

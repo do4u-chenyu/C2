@@ -1,6 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Citta_T1.Controls.Common;
 
 namespace Citta_T1.OperatorViews
 {
@@ -27,7 +28,6 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("MinOperatorView");
-        private string selectedIndex;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
@@ -43,6 +43,7 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             this.MinValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
             this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.MinValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             SetTextBoxName(this.DataInfoBox);
         }
         #region 添加取消
@@ -96,9 +97,11 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);       
-            this.opControl.Option.SetOption("minfield", this.selectedIndex == null? this.MinValueBox.SelectedIndex.ToString():this.selectedIndex);
-               
-            
+            this.opControl.Option.SetOption("minfield", this.MinValueBox.Tag == null ? this.MinValueBox.SelectedIndex.ToString() : this.MinValueBox.Tag.ToString());
+          
+
+
+
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
                 return;
             else
@@ -112,6 +115,7 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
                 this.MinValueBox.Text = this.MinValueBox.Items[index].ToString();
+                this.MinValueBox.Tag = index.ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
@@ -148,34 +152,18 @@ namespace Citta_T1.OperatorViews
                 this.OutList.AddItems(name);
                 this.MinValueBox.Items.Add(name);
             }
-            CompareDataSource();
+
+            //新旧数据源比较，是否清空窗口配置
+            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
+            foreach (string field in keys)
+            {
+                if (!field.Contains("columnname"))
+                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
+            }
             this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }
-        private void CompareDataSource()
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (this.opControl.Option.GetOption("columnname") == "") return;
-            string[] oldColumnList = this.opControl.Option.GetOption("columnname").Split('\t');
-            try
-            {
-                if (this.opControl.Option.GetOption("minfield") != "")
-                {
-                    int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                    if (index > this.columnName.Length - 1 || oldColumnList[index] != this.columnName[index])
-                        this.opControl.Option.OptionDict.Remove("minfield");
-                }
-                if (this.opControl.Option.GetOption("outfield") != "")
-                {
-
-                    string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (Global.GetOptionDao().IsDataSourceEqual(oldColumnList, this.columnName, outIndex))
-                        this.opControl.Option.OptionDict.Remove("outfield");
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };        
-        }
+       
 
         public void SetTextBoxName(TextBox textBox)
         {
@@ -215,9 +203,6 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.DataInfoBox);
         }
 
-        private void MinValueBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            this.selectedIndex = this.MinValueBox.SelectedIndex.ToString();
-        }
+  
     }
 }

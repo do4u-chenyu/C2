@@ -1,6 +1,8 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -194,9 +196,9 @@ namespace Citta_T1.Business.Option
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
-                new Point(x, y), seperator, encoding);
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
+                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), Global.GetCurrentDocument().SizeL,
+            new Point(x, y), seperator, encoding);;
           
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
@@ -232,8 +234,8 @@ namespace Citta_T1.Business.Option
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
             //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
-                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
+                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)), Global.GetCurrentDocument().SizeL,
                 new Point(x, y), separator, encoding);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
@@ -268,14 +270,7 @@ namespace Citta_T1.Business.Option
             int maxIndex = outIndex.Max();
             if (maxIndex > columnName.Length - 1)
                 return true;
-            List<string> oldName = new List<string>();
-            List<string> newName = new List<string>();
-            foreach (int i in outIndex)
-            {
-                oldName.Add(oldColumnList[i]);
-                newName.Add(columnName[i]);
-            }
-            return (!Enumerable.SequenceEqual(oldName, newName));
+            return (!Enumerable.SequenceEqual(oldColumnList, columnName));
   
         }
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
@@ -294,10 +289,10 @@ namespace Citta_T1.Business.Option
                         {
                             opControl.Option.OptionDict[field] = "";
                             return false;
-                        }    
+                        }
                     }
                 }
-                else if (field.Contains("outfield"))
+                else if (field.Contains("outfield") && opControl.Option.GetOption(field) != "")
                 {
 
                     string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
@@ -307,7 +302,14 @@ namespace Citta_T1.Business.Option
                         opControl.Option.OptionDict["outfield"] = "";
                         return false;
                     }
-                       
+
+                }
+                else if(opControl.Option.GetOption(field) != "")
+                {
+                    //单选框配置的判断
+                    int index = Convert.ToInt32(opControl.Option.GetOption(field));
+                    if (index > columnName.Length - 1 || oldColumnList[index] != columnName[index])
+                        opControl.Option.OptionDict[field] = "";
                 }
             }
             catch (Exception ex) { log.Error(ex.Message); }
@@ -429,7 +431,7 @@ namespace Citta_T1.Business.Option
                         return;
                     }
                 }
-                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0) ;
+                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0)
                 {
                     List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
                     BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
