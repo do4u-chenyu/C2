@@ -488,8 +488,7 @@ namespace Citta_T1.Controls
 
             else if (cmd == ECommandType.PinDraw)
             {
-                bool isDuplicatedRelation = false;
-                ModelDocument cd = Global.GetCurrentDocument();
+                
                 /* 不是所有位置Up都能形成曲线的
                  * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
                  */
@@ -521,18 +520,15 @@ namespace Citta_T1.Controls
                 // 1. 关系不能重复
                 // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
                 // 3. 成环不能添加
-                isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
-                if (!isDuplicatedRelation)
+                ModelDocument cd = Global.GetCurrentDocument();
+                CyclicDetector cdt = new CyclicDetector(cd, mr);
+                bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+                bool isCyclic = cdt.IsCyclic();
+                if (!isDuplicatedRelation && !isCyclic)
                 {
                     cd.AddModelRelation(mr);
-                    CyclicDetector cdt = new CyclicDetector(Global.GetCurrentDocument());
-                    if (cdt.IsCyclic())
-                        cd.RemoveModelRelation(mr);
-                    else
-                    {
-                        //endC右键菜单设置Enable                     
-                        Global.GetOptionDao().EnableControlOption(mr);
-                    }
+                    //endC右键菜单设置Enable                     
+                    Global.GetOptionDao().EnableControlOption(mr);
                 }
                 cmd = ECommandType.Null;
                 lineWhenMoving = null;

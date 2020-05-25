@@ -15,11 +15,11 @@ namespace Citta_T1.Core
         private Dictionary<int, List<int>> graph;
 
 
-        public CyclicDetector(ModelDocument doc)
+        public CyclicDetector(ModelDocument doc, ModelRelation mr)
         {
-            InitParams(doc);
+            InitParams(doc, mr);
         }
-        private void InitParams(ModelDocument doc)
+        private void InitParams(ModelDocument doc, ModelRelation mr)
         {
             this.vertices = new List<int>();
             this.visited = new Dictionary<int, bool>();
@@ -31,65 +31,38 @@ namespace Citta_T1.Core
                 visited[ID] = false;
                 recStack[ID] = false;
             }
-            this.graph = doc.ModelLineDict;
+            this.graph = new Dictionary<int, List<int>>(doc.ModelLineDict);
+            if (!this.graph.ContainsKey(mr.StartID))
+                this.graph[mr.StartID] = new List<int>() { mr.EndID };
+            else
+                this.graph[mr.StartID].Add(mr.EndID);
         }
         public bool IsCyclic()
         {
             foreach (int vertex in this.vertices)
             {
-                if (!this.visited[vertex] && _IsCyclic(vertex, this.visited, this.recStack))
+                if (!this.visited[vertex] && IsCyclic(vertex, this.visited, this.recStack))
                     return true;
             }
             return false;
         }
-        private bool _IsCyclic(int v, Dictionary<int, bool> vst, Dictionary<int, bool> rs)
+        private bool IsCyclic(int v, Dictionary<int, bool> vst, Dictionary<int, bool> rs)
         {
-            this.visited[v] = true;
-            this.recStack[v] = true;
+            vst[v] = true;
+            rs[v] = true;
             if (this.graph.ContainsKey(v))
             {
                 foreach (int neighbour in this.graph[v])
                 {
-                    if ((!this.visited[neighbour] && _IsCyclic(neighbour, this.visited, this.recStack)) || recStack[neighbour])
+                    if ((!vst[neighbour] && IsCyclic(neighbour, vst, rs)) || rs[neighbour])
                         return true;
                 }
             }
-            this.recStack[v] = false;
+            rs[v] = false;
             return false;
         }
 
     }       
 
 }
-//int public bool isCyclic(ModelRelation mr)
-//{
-//    int relationNum = this.modelRelations.Count;
-//    Dictionary<int, bool> visited = new Dictionary<int, bool> { };
-//    Dictionary<int, bool> recStack = new Dictionary<int, bool> { };
-//    List<int> vertices = new List<int> { };
-//    foreach (ModelRelation _mr in this.modelRelations)
-//    {
-//        int startVertex = _mr.StartID;
-//        int endVertex = _mr.EndID;
-//        visited[startVertex] = false;
-//        recStack[startVertex] = false;
-//        visited[endVertex] = false;
-//        recStack[endVertex] = false;
-//        if (!vertices.Contains(startVertex))
-//            vertices.Add(startVertex);
-//        if (!vertices.Contains(endVertex))
-//            vertices.Add(endVertex);
-//    }
-//    foreach (int vertex in vertices)
-//    {
-//        if (!visited[vertex] && _isCyclic(vertex, visited, recStack))
-//            return true;
-//    }
-//    return false;
-//}
-//private bool _isCyclic(int vertex, Dictionary<int, bool> visited, Dictionary<int, bool> recStack)
-//{
-//    visited[vertex] = true;
-//    recStack[vertex] = true;
-//    foreach ()
-//        }
+
