@@ -52,10 +52,10 @@ namespace Citta_T1.Business.Schedule
 
         //并行任务集合
         private List<Task> parallelTasks;
-        
+
         //cmd进程集合
-        private List<int> cmdProcessIdList;
-        private Queue<Triple> AsyncQueues { get; set; }
+        private List<Process> cmdProcessList;
+
         public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
         public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
 
@@ -109,8 +109,6 @@ namespace Citta_T1.Business.Schedule
             resetEvent.Set();
         }
 
-        //锁
-        private readonly object _objLock = new object();
         public void Stop()
         {
             this.modelStatus = ModelStatus.Stop;
@@ -118,51 +116,30 @@ namespace Citta_T1.Business.Schedule
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
             resetEvent.Dispose();
 
-            lock (_objLock)
+            foreach (Process p in cmdProcessList)
             {
-                foreach (int id in cmdProcessIdList)
+                UpdateLogDelegate("当前process名字：" + p.ProcessName);
+                if (p.ProcessName == "cmd")
                 {
-                    Process p = Process.GetProcessById(id);
-                    UpdateLogDelegate("当前process名字：" + p.ProcessName);
-                    if (p.ProcessName == "cmd")
-                    {
-                        p.Kill();
-                    }
+                    p.Kill();
                 }
+            }
 
 
-                foreach (Task currentTask in parallelTasks)
+            foreach (Task currentTask in parallelTasks)
+            {
+                if (currentTask != null)
                 {
-                    if (currentTask != null)
+                    if (currentTask.Status == TaskStatus.Running) { }
                     {
-                        if (currentTask.Status == TaskStatus.Running) { }
-                        {
-                            //终止task线程
-                            tokenSource.Cancel();
-                        }
+                        //终止task线程
+                        tokenSource.Cancel();
                     }
                 }
             }
-            
             CloseThread();
-        }
 
-        public void AddProcessIdList(int id)
-        {
-            lock (_objLock)
-            {
-                this.cmdProcessIdList.Add(id);
-            }
         }
-
-        public void DelProcessIdList(int id)
-        {
-            lock (_objLock)
-            {
-                this.cmdProcessIdList.Remove(id);
-            }
-        }
-
 
         public void CloseThread()
         {
@@ -205,7 +182,7 @@ namespace Citta_T1.Business.Schedule
             this.tokenSource = new CancellationTokenSource();
             this.resetEvent = new ManualResetEvent(true);
 
-            this.cmdProcessIdList = new List<int>();
+            this.cmdProcessList = new List<Process>();
 
             scheduleThread = new Thread(new ThreadStart(() => StartTask()));
             scheduleThread.IsBackground = true;
@@ -216,14 +193,44 @@ namespace Citta_T1.Business.Schedule
         public void StartTask()
         {
             parallelTasks = new List<Task>();
-            AsyncQueues = new Queue<Triple>();
+            foreach (Triple tmpTri in currentModelTripleList)
+            {
+                if (tmpTri.OperateElement.Status == ElementStatus.Done)
+                {
+                    continue;
+                }
+                else
+                {
+                    //判断数据节点是否算完
+                    foreach (ModelElement tmpDE in tmpTri.DataElements)
+                    {
+                        if (tmpDE.Type == ElementType.Result)
+                        {
+                            while (tmpDE.Status != ElementStatus.Done)
+                            {
+                                Thread.Sleep(1000);
+                            }
+                        }
+                    }
+                    //该三元组未算过，且数据节点都已经算完，开一个子任务去算
+                    Task t = new Task(() => 
+                    {
+                        try
+                        {
+                            TaskMethod(tmpTri);
+                        }
+                        catch(Exception ex)
+                        {
+                            UpdateLogDelegate("task异常了:" + ex.Message);
+                            Thread.Sleep(10000);
 
-            //初始化异步队列
-            InitAsyncQueue(currentModelTripleList);
+                        }
+                    }, tokenSource.Token);
+                    t.Start();
+                    parallelTasks.Add(t);
 
-            //开始执行队列任务
-            HandlingTask();
-
+                }
+            }
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });
 
@@ -236,86 +243,11 @@ namespace Citta_T1.Business.Schedule
         }
 
 
-        //初始化异步队列
-        private void InitAsyncQueue(List<Triple> triples)
-        {
-            foreach (Triple tmpTri in triples)
-            {
-                if (tmpTri.OperateElement.Status == ElementStatus.Done) continue;
-                AsyncQueues.Enqueue(tmpTri);
-            }
-        }
 
-        //开始执行队列任务
-        private void HandlingTask()
-        {
-            lock (_objLock)
-            {
-                if (AsyncQueues.Count <= 0) return;
-
-                var loopCount = AsyncQueues.Count;
-                //并发处理队列
-                for (int i = 0; i < loopCount; i++)
-                {
-                    HandlingQueue();
-                }
-            }
-        }
-
-        //获取队列锁
-        private readonly object _queueLock = new object();
-
-        //处理队列
-        private void HandlingQueue()
-        {
-            CancellationToken token = tokenSource.Token;
-            lock (_queueLock)
-            {
-                if (AsyncQueues.Count > 0)
-                {
-                    Triple asyncQueue = AsyncQueues.Dequeue();
-
-                    if (asyncQueue == null) return;
-                    var task = Task.Factory.StartNew(() =>
-                    {
-                        if (token.IsCancellationRequested)
-                        {
-                            return;
-                        }
-                        //阻止当前线程
-                        resetEvent.WaitOne();
-
-                        //判断数据节点是否算完
-                        foreach (ModelElement tmpDE in asyncQueue.DataElements)
-                        {
-                            if (tmpDE.Type == ElementType.Result)
-                            {
-                                while (tmpDE.Status != ElementStatus.Done)
-                                {
-                                    Thread.Sleep(1000);
-                                }
-                            }
-                        }
-                        //执行任务
-                        if (!TaskMethod(asyncQueue))
-                        {
-                            AsyncQueues.Enqueue(asyncQueue);
-                        };
-
-                    }, token).ContinueWith(t =>
-                    {
-                        HandlingTask();
-                    }, TaskContinuationOptions.OnlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
-                    parallelTasks.Add(task);
-                }
-            }
-        }
 
 
         bool TaskMethod(Triple triple)
         {
-            try
-            {
                 if (resetEvent.SafeWaitHandle.IsClosed)
                 {
                     UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
@@ -329,7 +261,7 @@ namespace Citta_T1.Business.Schedule
                 triple.OperateElement.Status = ElementStatus.Runnnig;
 
 
-                
+                UpdateLogDelegate(triple.TripleName + "开始运行");
                 //Thread.Sleep(10000);
 
                 List<string> cmds = new List<string>();
@@ -351,7 +283,6 @@ namespace Citta_T1.Business.Schedule
                     case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
                     case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
                 }
-                UpdateLogDelegate(triple.TripleName + "开始运行");
                 RunLinuxCommand(cmds);
 
                 if (resetEvent.SafeWaitHandle.IsClosed)
@@ -359,19 +290,17 @@ namespace Citta_T1.Business.Schedule
                     UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
                     return true;
                 }
+                //阻止当前线程
                 resetEvent.WaitOne();
+
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
-                //triple.IsOperated = true;
+                triple.IsOperated = true;
                 UpdateBarDelegate(this);
                 UpdateLogDelegate(triple.TripleName + "结束运行");
-            }
-            catch (Exception ex)
-            {
-                //UpdateLogDelegate(ex.Message);
-                return false;
-            }
+
+
             return true;
 
         }
@@ -391,17 +320,16 @@ namespace Citta_T1.Business.Schedule
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
 
+
             try
             {
                 if (p.Start())//开始进程  
                 {
-                    UpdateLogDelegate(String.Format("==============进程{0}执行命令==============", p.Id));
-                    AddProcessIdList(p.Id);
-                    UpdateLogDelegate("cmdProcessList加入" + p.Id);
+                    this.cmdProcessList.Add(p);
 
                     foreach (string cmd in cmds)
                     {
-                        //UpdateLogDelegate("执行命令: " + cmd);
+                        UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
                     //此处要exit两次?
@@ -409,28 +337,24 @@ namespace Citta_T1.Business.Schedule
                     //p.StandardInput.WriteLine("exit");
                     //退出cmd.exe
                     p.StandardInput.WriteLine("exit");
-                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
-                    UpdateLogDelegate(String.Format("==============进程{0}命令结束==============", p.Id));
+                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
                 }
             }
             catch (Exception ex)
             {
                 //异常停止的处理方法
                 //TODO
-                DelProcessIdList(p.Id);
-                UpdateLogDelegate("cmdProcessList待删除" + p.Id);
+                this.cmdProcessList.Remove(p);
                 UpdateLogDelegate("异常: " + ex.Message);
+
             }
             finally
             {
                 if (p != null)
-                {
-                    DelProcessIdList(p.Id);
-                    UpdateLogDelegate("cmdProcessList待删除" + p.Id);
                     p.Close();
-
-                }
+                this.cmdProcessList.Remove(p);
             }
         }
+
     }
 }

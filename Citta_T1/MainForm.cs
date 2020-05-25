@@ -628,7 +628,11 @@ namespace  Citta_T1
         private void Accomplish(Manager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            doneModel.Save();
+            if(doneModel.Manager.ModelStatus == ModelStatus.Done)
+            {
+                doneModel.Save();
+            }
+
 
             if (doneModel == Global.GetCurrentDocument())
             {

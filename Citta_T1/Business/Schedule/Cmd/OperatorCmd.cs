@@ -38,8 +38,13 @@ namespace Citta_T1.Business.Schedule.Cmd
 
         public void ReWriteBCPFile(string className = "null")
         {
-            string columns = String.Join("\t", GenOutTitleList(className)) + "\n";
-            File.WriteAllText(this.outputFilePath, columns);
+            using (StreamWriter sw = new StreamWriter(this.outputFilePath, false, Encoding.UTF8))
+            {
+                string columns = String.Join("\t", GenOutTitleList(className));
+                sw.WriteLine(columns);
+                sw.Flush();
+            }
+            //File.WriteAllText(this.outputFilePath, columns);
 
         }
 
