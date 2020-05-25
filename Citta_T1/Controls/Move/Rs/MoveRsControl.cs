@@ -15,12 +15,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
-
         private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
 
         private string opControlName;
@@ -48,7 +46,7 @@ namespace Citta_T1.Controls.Move
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        private Point oldcontrolPosition;
+        private Point oldControlPosition;
         public ECommandType cmd = ECommandType.Null;
 
 
@@ -96,19 +94,20 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
             InitializeOpPinPicture();
         }
-        public MoveRsControl(int sizeL, string desciption, Point loc)
+        public MoveRsControl(string desciption, Point loc)
         {
-
             InitializeComponent();
             DescriptionName = desciption;
             this.typeName = "运算结果";
             this.Location = loc;
             SetOpControlName(DescriptionName);
-            ChangeSize(sizeL);
+            ChangeSize(Global.GetCurrentDocument().SizeL);
+            
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
+            
         }
 
         private void InitializeOpPinPicture()
@@ -195,7 +194,7 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    oldcontrolPosition = this.Location;
+                    oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;
@@ -207,7 +206,7 @@ namespace Citta_T1.Controls.Move
                 mouseOffset.Y = e.Y;
                 isMouseDown = true;
             }
-            oldcontrolPosition = this.Location;
+            oldControlPosition = this.Location;
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
@@ -245,13 +244,14 @@ namespace Citta_T1.Controls.Move
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
-            if (oldcontrolPosition != this.Location)
+            if (oldControlPosition != this.Location)
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                if (element != null)
-                {
-                    ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                if (element != ModelElement.Empty)
+                {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
@@ -263,11 +263,11 @@ namespace Citta_T1.Controls.Move
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldcontrolPosition = this.Location;
-            this.Location = location;
+            this.oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return oldcontrolPosition;
+            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
         }
 
         #endregion
@@ -344,15 +344,12 @@ namespace Citta_T1.Controls.Move
             this.textBox.Visible = true;
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
         }
 
 
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此
-            ModelElement currentRs = Global.GetCurrentDocument().SearchElementByID(this.ID);
-
             //找到对应的op算子
             ModelElement currentOp = null;
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
@@ -364,7 +361,7 @@ namespace Citta_T1.Controls.Move
             }
 
             //未找到op算子？？
-            if (currentOp == null)
+            if (currentOp == ModelElement.Empty)
             {
                 MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -425,7 +422,7 @@ namespace Citta_T1.Controls.Move
             SetOpControlName(this.textBox.Text);
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != null)
+            if (element != ModelElement.Empty)
             {
                 ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);

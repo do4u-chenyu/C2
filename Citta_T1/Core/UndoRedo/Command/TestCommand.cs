@@ -9,13 +9,13 @@ namespace Citta_T1.Core.UndoRedo.Command
     // 测试Command,仅作测试UndoRedoManager功能使用
     class TestCommand : ICommand
     {
-        public bool Do()
+        public bool Redo()
         {
             System.Console.WriteLine("TestCommand: Do");
             return true;
         }
 
-        public bool Rollback()
+        public bool Undo()
         {
             System.Console.WriteLine("TestCommand: Rollback");
             return true;

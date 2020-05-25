@@ -1,20 +1,19 @@
-﻿using Citta_T1.Business.Option;
-using System;
-using System.Windows.Forms;
-using Citta_T1.Controls.Move;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Core;
 using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using Citta_T1.Business.Model;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-using Citta_T1.Core;
+using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-   
+
     public partial class CollideOperatorView : Form
     {
         

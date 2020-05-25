@@ -77,14 +77,10 @@ namespace Citta_T1.Controls.Title
 
         public void AddModel(string modelTitle)
         {
-            //TODO
             ModelTitleControl mtControl = new ModelTitleControl();
             mtControl.ModelDocumentSwitch += DocumentSwitch;
             models.Add(mtControl);
             mtControl.SetOriginalModelTitle(modelTitle);
-
-            //TODO 创建事件
-
             NewModelDocument?.Invoke(modelTitle);
 
 

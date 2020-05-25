@@ -321,7 +321,6 @@ namespace Citta_T1.Business.Schedule
             catch (Exception ex)
             {
                 //异常停止的处理方法
-                //TODO
                 this.cmdProcessList.Remove(p);
                 UpdateLogDelegate("异常: " + ex.Message);
             }

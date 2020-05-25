@@ -15,7 +15,7 @@ using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace Citta_T1.Controls.Move
+namespace Citta_T1.Controls.Move.Op
 {
     public delegate void DeleteOperatorEventHandler(Control control); 
     public delegate void ModelDocumentDirtyEventHandler();
@@ -75,7 +75,7 @@ namespace Citta_T1.Controls.Move
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-        private Point oldcontrolPosition;
+        private Point oldControlPosition;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为终点的所有点
@@ -313,7 +313,7 @@ namespace Citta_T1.Controls.Move
                 {
                     startX = this.Location.X + e.X;
                     startY = this.Location.Y + e.Y;
-                    oldcontrolPosition = this.Location;
+                    oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     cmd = ECommandType.PinDraw;
                     CanvasPanel canvas = (this.Parent as CanvasPanel);
@@ -325,7 +325,7 @@ namespace Citta_T1.Controls.Move
                 cmd = ECommandType.Hold;
             }
             this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-            oldcontrolPosition = this.Location;
+            oldControlPosition = this.Location;
          }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -388,13 +388,15 @@ namespace Citta_T1.Controls.Move
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
-            if (oldcontrolPosition != this.Location)
+
+            if (oldControlPosition != this.Location)
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                if (element != null)
+                if (element != ModelElement.Empty)
                 {
-                    ICommand moveCommand = new ElementMoveCommand(element, oldcontrolPosition);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
@@ -405,11 +407,11 @@ namespace Citta_T1.Controls.Move
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldcontrolPosition = this.Location;
-            this.Location = location;
+            this.oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return oldcontrolPosition;
+            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
         }
 
         #endregion
@@ -602,24 +604,35 @@ namespace Citta_T1.Controls.Move
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
+         
+            ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
             //删除自身
-            //TODO 元素删除Command插入点
-            Global.GetCurrentDocument().DeleteModelElement(this);
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
-            CanvasPanel canvas = Global.GetCanvasPanel();
-            canvas.EndC = null;
+            DeleteMyself();
         }
 
         public void UndoRedoDeleteElement()
         {
-
+            //TODO undo,redo时关系处理
+            DeleteMyself();
         }
 
-        public void UndoRedoAddElement()
+        private void DeleteMyself()
         {
+            Global.GetCurrentDocument().DeleteModelElement(this);
+            Global.GetCanvasPanel().DeleteElement(this);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetCanvasPanel().EndC = null;
+        }
 
+        public void UndoRedoAddElement(ModelElement me)
+        {
+            //TODO undo,redo时关系处理
+            Global.GetCanvasPanel().AddElement(this);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
@@ -637,7 +650,7 @@ namespace Citta_T1.Controls.Move
             {
                 if (mrc.ID == endID)
                 {
-                    Global.GetCurrentDocument().DeleteModelElement(mrc.GetControl);
+                    Global.GetCurrentDocument().DeleteModelElement(mrc);
                     Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
@@ -694,7 +707,7 @@ namespace Citta_T1.Controls.Move
 
             // 构造重命名命令类,压入undo栈
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != null)
+            if (element != ModelElement.Empty)
             {
                 ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);

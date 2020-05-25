@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using System.Collections.Generic;
-
-using Citta_T1.Utils;
-using Citta_T1.Controls.Move;
-using Citta_T1.Business.Model;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
@@ -571,7 +571,6 @@ namespace Citta_T1.Controls
                 return;
             if (frameWrapper.FramePaint(e))
                 return;
-            //TODO
             //普通状态下算子的OnPaint处理
             //遍历当前文档所有line,然后画出来
             ModelDocument doc = Global.GetCurrentDocument();
@@ -588,6 +587,11 @@ namespace Citta_T1.Controls
         public void DeleteElement(Control ctl)
         {
             this.Controls.Remove(ctl);
+        }
+
+        public void AddElement(Control ctl)
+        {
+            this.Controls.Add(ctl);
         }
         private void AddNewOperator(int sizeL, string text, Point location)
         {
@@ -611,10 +615,9 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location, char separator, DSUtil.Encoding encoding) 
+        public MoveRsControl AddNewResult(string desciption, Point location, char separator, DSUtil.Encoding encoding) 
         {
             MoveRsControl btn = new MoveRsControl(
-                                sizeL,
                                 desciption,
                                 location);
             btn.Separator = separator;

@@ -1,6 +1,8 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -194,7 +196,7 @@ namespace Citta_T1.Business.Option
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0, 
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
                 System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
                 new Point(x, y), seperator, encoding);
           
@@ -232,7 +234,7 @@ namespace Citta_T1.Business.Option
             int x = moveOpControl.Location.X + moveOpControl.Width + 15;
             int y = moveOpControl.Location.Y;
             //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(0,
+            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
                 System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
                 new Point(x, y), separator, encoding);
             /*

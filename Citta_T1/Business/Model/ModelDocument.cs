@@ -1,6 +1,8 @@
+using Citta_T1.Business.Model.World;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -39,8 +41,6 @@ namespace Citta_T1.Business.Model
         private Manager manager;
         private string userPath;
 
-
-
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -61,9 +61,11 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+        
 
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
+        internal WorldMap WorldMap { get; set; }
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
@@ -77,6 +79,7 @@ namespace Citta_T1.Business.Model
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
             this.manager = new Manager();
+            this.WorldMap = new WorldMap();
             this.sizeL = 0;
             this.screenFactor = 1;
 
@@ -144,6 +147,11 @@ namespace Citta_T1.Business.Model
                 this.modelElements.Remove(me);
                 return;
             }   
+        }
+
+        public void DeleteModelElement(ModelElement me)
+        {
+            this.modelElements.Remove(me);
         }
 
         public void StateChangeByDeleteControl(int ID)
@@ -269,6 +277,29 @@ namespace Citta_T1.Business.Model
             Pw.Y = Ps.Y - Pm.Y;
             return Pw;
         }
+
+
+        //  Pw = Ps / Factor - Pm
+        public Point ScreenToWorld(Point Ps)
+        {
+            Point Pw = new Point    
+            {
+                X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
+                Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
+            };
+            return Pw;
+        }
+
+        // Ps = (Pw + Pm) * Factor
+        public Point WorldToScreen(Point Pw)
+        {
+            Point Ps = new Point
+            {
+                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
+                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
+            };
+            return Ps;
+        }
        
         public void UpdateAllLines()
         {
@@ -307,7 +338,7 @@ namespace Citta_T1.Business.Model
                 if (me.ID == ID)
                     return me;
             }
-            return null;
+            return ModelElement.Empty;
         }
         public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
         {
@@ -327,7 +358,7 @@ namespace Citta_T1.Business.Model
             {
                 if (mr.StartID != ID) continue;
                 ModelElement modelElement = SearchElementByID(mr.EndID);
-                if (modelElement != null && modelElement.Type == ElementType.Result)
+                if (modelElement != ModelElement.Empty && modelElement.Type == ElementType.Result)
                 {
                     modelElement.Status = modelElement.Status;
                     return modelElement;

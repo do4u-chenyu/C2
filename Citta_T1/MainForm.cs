@@ -1,24 +1,23 @@
-﻿using System;
+﻿using Citta_T1.Business.DataSource;
+using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Business.Schedule;
+using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Left;
+using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Controls.Title;
-using Citta_T1.Controls.Flow;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Left;
-using Citta_T1.Business.DataSource;
-using Citta_T1.Business.Schedule;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Bottom;
-using Citta_T1.Core;
-using Citta_T1.Core.UndoRedo;
-using Citta_T1.Controls.Move;
-using Citta_T1.Core.UndoRedo.Command;
 
-namespace  Citta_T1
-{ 
+namespace Citta_T1
+{
     public partial class MainForm : Form
     {
         private bool isBottomViewPanelMinimum;
@@ -119,7 +118,6 @@ namespace  Citta_T1
             SetDocumentDirty();
             if (me == ModelElement.Empty)
                 return;
-            //TODO ElementAddCommand插入点
             ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
