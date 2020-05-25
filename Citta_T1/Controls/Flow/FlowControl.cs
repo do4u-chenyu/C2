@@ -61,6 +61,7 @@ namespace Citta_T1.Controls.Flow
         private void MovePictureBox_MouseEnter(object sender, EventArgs e)
         {
             DragChange(true);
+            
         }
         private void MovePictureBox_Click(object sender, EventArgs e)
         {
@@ -102,11 +103,19 @@ namespace Citta_T1.Controls.Flow
 
         private void ZoomUpPictureBox_Click(object sender, EventArgs e)
         {
+            SelectFrame = false; 
+            ChangeCursor();
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(true);
         }
 
         private void ZoomDownPictureBox_Click(object sender, EventArgs e)
         {
+            SelectFrame = false;
+            ChangeCursor();
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             Global.GetCanvasPanel().ChangSize(false);
         }
         #endregion
@@ -140,9 +149,6 @@ namespace Citta_T1.Controls.Flow
                 ShowRemarkControl();
             else
                 HideRemarkControl();
-           
-            
-
         }
         #endregion
 
@@ -160,13 +166,10 @@ namespace Citta_T1.Controls.Flow
         private void FramePictureBox_Click(object sender, EventArgs e)
         {
             Global.GetCanvasPanel().SetAllLineStatus(null, true);
-            SelectFrame = !SelectFrame;
-            
+            SelectFrame = !SelectFrame;         
             SelectDrag = false;
             ChangeCursor();
             DragChange(SelectDrag);
-
-
         }
         #endregion
 
