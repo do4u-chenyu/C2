@@ -118,6 +118,7 @@ namespace Citta_T1.OperatorViews
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
+                this.maxValueBox.Tag = maxIndex.ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {

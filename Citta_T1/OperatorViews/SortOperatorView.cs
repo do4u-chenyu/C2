@@ -175,6 +175,7 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
+                this.sortField.Tag = index.ToString();
             }   
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
