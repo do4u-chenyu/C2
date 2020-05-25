@@ -88,7 +88,7 @@ namespace Citta_T1.Controls.Top
                     text = "取差集";
                     break;
                 case "filterButton":
-                    text = "过滤算子";
+                    text = "条件筛选";
                     break;
                 case "randomButton":
                     text = "随机采样";

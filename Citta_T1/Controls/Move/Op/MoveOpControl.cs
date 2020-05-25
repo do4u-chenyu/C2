@@ -501,7 +501,7 @@ namespace Citta_T1.Controls.Move.Op
                 case "随机采样":
                     new RandomOperatorView(this).ShowDialog();
                     break;
-                case "过滤算子":
+                case "条件筛选":
                     new FilterOperatorView(this).ShowDialog();
                     break;
                 case "取最大值":
