@@ -31,11 +31,22 @@ namespace Citta_T1.Core
                 visited[ID] = false;
                 recStack[ID] = false;
             }
-            this.graph = new Dictionary<int, List<int>>(doc.ModelLineDict);
+            //this.graph = new Dictionary<int, List<int>>(doc.ModelLineDict);
+            this.graph = InitGraph(doc.ModelLineDict);
             if (!this.graph.ContainsKey(mr.StartID))
                 this.graph[mr.StartID] = new List<int>() { mr.EndID };
             else
                 this.graph[mr.StartID].Add(mr.EndID);
+        }
+
+        private Dictionary<int, List<int>> InitGraph(Dictionary<int, List<int>> dict)
+        {
+            Dictionary<int, List<int>> result = new Dictionary<int, List<int>>();
+            foreach (int k in dict.Keys)
+            {
+                result[k] = new List<int>(dict[k]);
+            }
+            return result;
         }
         public bool IsCyclic()
         {
