@@ -115,7 +115,7 @@ namespace Citta_T1.Utils
                 case "随机采样":
                     type = "RandomOperator";
                     break;
-                case "过滤算子":
+                case "条件筛选":
                     type = "FilterOperator";
                     break;
                 case "取最大值":
@@ -173,7 +173,7 @@ namespace Citta_T1.Utils
                     type = "随机采样";
                     break;
                 case "FilterOperator":
-                    type = "过滤算子";
+                    type = "条件筛选";
                     break;
                 case "MaxOperator":
                     type = "取最大值";
