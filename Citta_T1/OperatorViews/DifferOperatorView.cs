@@ -151,6 +151,8 @@ namespace Citta_T1.OperatorViews
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
+                    this.comboBox1.Tag = Nums[0].ToString();
+                    this.comboBox2.Tag = Nums[1].ToString();
                 }
                     
             }
@@ -177,6 +179,9 @@ namespace Citta_T1.OperatorViews
                 control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
+                control1.Tag = Nums[0].ToString();
+                control2.Tag = Nums[1].ToString();
+                control3.Tag = Nums[2].ToString();
             }
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));

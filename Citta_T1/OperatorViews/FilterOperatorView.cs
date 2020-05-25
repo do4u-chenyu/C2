@@ -251,6 +251,8 @@ namespace Citta_T1.OperatorViews
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
                     this.textBoxEx1.Text = factorList[2];
+                    this.comboBox1.Tag = Nums[0].ToString();
+                    this.comboBox2.Tag = Nums[1].ToString();
                 }
                
             }
@@ -278,6 +280,9 @@ namespace Citta_T1.OperatorViews
                 control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
                 Control control4 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control4.Text = factorList[3];
+                control1.Tag = Nums[0].ToString();
+                control2.Tag = Nums[1].ToString();
+                control3.Tag = Nums[2].ToString();
             }
             this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
         }

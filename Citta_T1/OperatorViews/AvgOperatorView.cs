@@ -177,6 +177,7 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
+                this.selectedIndex = index.ToString();
             }
             
         }
