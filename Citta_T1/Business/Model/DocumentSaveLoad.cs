@@ -301,7 +301,7 @@ namespace Citta_T1.Business.Model
                        
                         DSUtil.Encoding encoding=xn.SelectSingleNode("encoding") == null?  DSUtil.Encoding.UTF8: EncodingType(xn.SelectSingleNode("encoding").InnerText);
 
-                        MoveRsControl ctl = new MoveRsControl(0, name, loc);
+                        MoveRsControl ctl = new MoveRsControl(name, loc);
                         ctl.ID = id;
                         ctl.Status = EStatus(status);
                         ctl.FullFilePath = bcpPath;

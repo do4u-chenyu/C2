@@ -615,10 +615,9 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(int sizeL, string desciption, Point location, char separator, DSUtil.Encoding encoding) 
+        public MoveRsControl AddNewResult(string desciption, Point location, char separator, DSUtil.Encoding encoding) 
         {
             MoveRsControl btn = new MoveRsControl(
-                                sizeL,
                                 desciption,
                                 location);
             btn.Separator = separator;
