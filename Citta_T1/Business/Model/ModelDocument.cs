@@ -1,3 +1,4 @@
+using Citta_T1.Business.Model.World;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
@@ -40,8 +41,6 @@ namespace Citta_T1.Business.Model
         private Manager manager;
         private string userPath;
 
-
-
         /*
          * 传入参数为模型文档名称，当前用户名
          */
@@ -62,9 +61,11 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+        
 
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
+        internal WorldMap WorldMap { get; set; }
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
@@ -78,6 +79,7 @@ namespace Citta_T1.Business.Model
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
             this.manager = new Manager();
+            this.WorldMap = new WorldMap();
             this.sizeL = 0;
             this.screenFactor = 1;
 
