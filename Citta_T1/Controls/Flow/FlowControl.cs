@@ -61,6 +61,7 @@ namespace Citta_T1.Controls.Flow
         private void MovePictureBox_MouseEnter(object sender, EventArgs e)
         {
             DragChange(true);
+            FrameChange(false);
         }
         private void MovePictureBox_Click(object sender, EventArgs e)
         {
