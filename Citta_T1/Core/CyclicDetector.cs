@@ -11,7 +11,7 @@ namespace Citta_T1.Core
     {
         private List<int> vertices;
         private Dictionary<int, bool> visited;
-        private Dictionary<int, bool> recStack;
+        //private Dictionary<int, bool> recStack;
         private Dictionary<int, List<int>> graph;
 
 
@@ -23,13 +23,13 @@ namespace Citta_T1.Core
         {
             this.vertices = new List<int>();
             this.visited = new Dictionary<int, bool>();
-            this.recStack = new Dictionary<int, bool>();
+            //this.recStack = new Dictionary<int, bool>();
             foreach (ModelElement me in doc.ModelElements)
             {
                 int ID = me.ID;
                 vertices.Add(ID);
-                visited[ID] = false;
-                recStack[ID] = false;
+                //visited[ID] = false;
+                //recStack[ID] = false;
             }
             //this.graph = new Dictionary<int, List<int>>(doc.ModelLineDict);
             this.graph = InitGraph(doc.ModelLineDict);
@@ -48,28 +48,62 @@ namespace Citta_T1.Core
             }
             return result;
         }
+        //public bool IsCyclic()
+        //{
+        //    foreach (int vertex in this.vertices)
+        //    {
+        //        if (!this.visited[vertex] && IsCyclic(vertex, this.visited, this.recStack))
+        //            return true;
+        //    }
+        //    return false;
+        //}
+        //private bool IsCyclic(int v, Dictionary<int, bool> vst, Dictionary<int, bool> rs)
+        //{
+        //    vst[v] = true;
+        //    rs[v] = true;
+        //    if (this.graph.ContainsKey(v))
+        //    {
+        //        foreach (int neighbour in this.graph[v])
+        //        {
+        //            if ((!vst[neighbour] && IsCyclic(neighbour, vst, rs)) || rs[neighbour])
+        //                return true;
+        //        }
+        //    }
+        //    rs[v] = false;
+        //    return false;
+        //}
+
         public bool IsCyclic()
-        {
-            foreach (int vertex in this.vertices)
+        {   // 针对图中每一个定点做一次环检测
+            foreach (int vertex in vertices)
             {
-                if (!this.visited[vertex] && IsCyclic(vertex, this.visited, this.recStack))
-                    return true;
+                if (IsCyclic(vertex))
+                    return true; 
             }
             return false;
         }
-        private bool IsCyclic(int v, Dictionary<int, bool> vst, Dictionary<int, bool> rs)
+
+        private bool IsCyclic(int vertex)
         {
-            vst[v] = true;
-            rs[v] = true;
-            if (this.graph.ContainsKey(v))
+            // 访问过该节点， 成环
+            if (visited.ContainsKey(vertex) && visited[vertex])
+                return true;
+            // 标记访问
+            visited[vertex] = true;
+            // 访问到一个叶子节点，没有子节点，直接返回
+            if (!this.graph.ContainsKey(vertex))
             {
-                foreach (int neighbour in this.graph[v])
-                {
-                    if ((!vst[neighbour] && IsCyclic(neighbour, vst, rs)) || rs[neighbour])
-                        return true;
-                }
+                // 每个DSF过程到叶子节点后，清理visited列表
+                visited.Clear();
+                return false;
             }
-            rs[v] = false;
+               
+            // 访问每一个子节点
+            foreach (int child in this.graph[vertex])
+            {
+                if (IsCyclic(child))
+                    return true;
+            }
             return false;
         }
 
