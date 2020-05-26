@@ -94,14 +94,14 @@ namespace Citta_T1.Controls.Move.Rs
             InitializeComponent();
             InitializeOpPinPicture();
         }
-        public MoveRsControl(string desciption, Point loc)
+        public MoveRsControl(int size,string desciption, Point loc)
         {
             InitializeComponent();
             DescriptionName = desciption;
             this.typeName = "运算结果";
             this.Location = loc;
             SetOpControlName(DescriptionName);
-            ChangeSize(Global.GetCurrentDocument().SizeL);
+            ChangeSize(size);
             
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper(this);

@@ -354,6 +354,12 @@
     <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\KeyWordOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\KeyWordOperatorView.Designer.cs">
+      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +389,12 @@
     </Compile>
     <Compile Include="OperatorViews\SortOperatorView.Designer.cs">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\DataFormatOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\DataFormatOperatorView.Designer.cs">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\UnionOperatorView.cs">
       <SubType>Form</SubType>
@@ -491,6 +503,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Bottom\BottomPreviewControl.resx">
       <DependentUpon>BottomPreviewControl.cs</DependentUpon>
@@ -555,6 +568,9 @@
     <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\KeyWordOperatorView.resx">
+      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
       <DependentUpon>MaxOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -569,6 +585,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\SortOperatorView.resx">
       <DependentUpon>SortOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\DataFormatOperatorView.resx">
+      <DependentUpon>DataFormatOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\UnionOperatorView.resx">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>

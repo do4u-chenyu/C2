@@ -531,6 +531,12 @@ namespace Citta_T1.Controls.Move.Op
                 case "Python算子":
                     new PythonOperatorView(this).ShowDialog();
                     break;
+                case "关键词过滤":
+                    new KeyWordOperatorView(this).ShowDialog();
+                    break;
+                case "数据标准化":
+                    new DataFormatOperatorView(this).ShowDialog();
+                    break;
                 default:
                     break;
             }

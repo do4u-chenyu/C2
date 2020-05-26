@@ -116,7 +116,7 @@ namespace Citta_T1.Business.Schedule
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
             resetEvent.Dispose();
 
-            foreach(Process p in cmdProcessList)
+            foreach (Process p in cmdProcessList)
             {
                 UpdateLogDelegate("当前process名字：" + p.ProcessName);
                 if (p.ProcessName == "cmd")
@@ -124,13 +124,13 @@ namespace Citta_T1.Business.Schedule
                     p.Kill();
                 }
             }
-            
+
 
             foreach (Task currentTask in parallelTasks)
             {
                 if (currentTask != null)
                 {
-                    if (currentTask.Status == TaskStatus.Running) { }
+                    if (currentTask.Status == TaskStatus.Running)
                     {
                         //终止task线程
                         tokenSource.Cancel();
@@ -213,7 +213,19 @@ namespace Citta_T1.Business.Schedule
                         }
                     }
                     //该三元组未算过，且数据节点都已经算完，开一个子任务去算
-                    Task<bool> t = new Task<bool>(() => TaskMethod(tmpTri), tokenSource.Token);
+                    Task t = new Task(() => 
+                    {
+                        try
+                        {
+                            TaskMethod(tmpTri);
+                        }
+                        catch(Exception ex)
+                        {
+                            UpdateLogDelegate("task异常了:" + ex.Message);
+                            Thread.Sleep(10000);
+
+                        }
+                    }, tokenSource.Token);
                     t.Start();
                     parallelTasks.Add(t);
 
@@ -236,12 +248,18 @@ namespace Citta_T1.Business.Schedule
 
         bool TaskMethod(Triple triple)
         {
-            try
-            {
+                if (resetEvent.SafeWaitHandle.IsClosed)
+                {
+                    UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                    return true;
+                }
+                //阻止当前线程
+                resetEvent.WaitOne();
+
                 tokenSource.Token.ThrowIfCancellationRequested();
 
                 triple.OperateElement.Status = ElementStatus.Runnnig;
-                
+
 
                 UpdateLogDelegate(triple.TripleName + "开始运行");
                 //Thread.Sleep(10000);
@@ -267,19 +285,23 @@ namespace Citta_T1.Business.Schedule
                 }
                 RunLinuxCommand(cmds);
 
+                if (resetEvent.SafeWaitHandle.IsClosed)
+                {
+                    UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                    return true;
+                }
+                //阻止当前线程
                 resetEvent.WaitOne();
+
                 //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
                 triple.OperateElement.Status = ElementStatus.Done;
                 triple.ResultElement.Status = ElementStatus.Done;
                 triple.IsOperated = true;
                 UpdateBarDelegate(this);
                 UpdateLogDelegate(triple.TripleName + "结束运行");
-            }
-            catch (Exception ex)
-            {
-                UpdateLogDelegate(ex.Message);
-            }
-            return triple.IsOperated;
+
+
+            return true;
 
         }
 
@@ -297,14 +319,14 @@ namespace Citta_T1.Business.Schedule
             p.StartInfo.RedirectStandardInput = true;//可以重定向输入  
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
-            
+
 
             try
             {
                 if (p.Start())//开始进程  
                 {
                     this.cmdProcessList.Add(p);
-                       
+
                     foreach (string cmd in cmds)
                     {
                         UpdateLogDelegate("执行命令: " + cmd);
@@ -323,6 +345,7 @@ namespace Citta_T1.Business.Schedule
                 //异常停止的处理方法
                 this.cmdProcessList.Remove(p);
                 UpdateLogDelegate("异常: " + ex.Message);
+
             }
             finally
             {

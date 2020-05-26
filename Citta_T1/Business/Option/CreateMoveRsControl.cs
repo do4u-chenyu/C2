@@ -21,8 +21,8 @@ namespace Citta_T1.Business.Option
             int y = moveOpControl.Location.Y;
             string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName),
-                new Point(x, y), seperator, encoding);
+                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), Global.GetCurrentDocument().SizeL,
+            new Point(x, y), seperator, encoding); ;
 
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
@@ -58,7 +58,7 @@ namespace Citta_T1.Business.Option
             int y = moveOpControl.Location.Y;
             //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
+                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)), Global.GetCurrentDocument().SizeL,
                 new Point(x, y), separator, encoding);
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段

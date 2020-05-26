@@ -38,54 +38,61 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             using (StreamWriter sw = new StreamWriter(this.outputFilePath, false, Encoding.UTF8))
             {
-                string[] titleList = this.outputFileTitle.Split('\t');
-                List<string> outTitleList = new List<string>();
-                if(className == "relate")
-                {
-                    string[] col0 = this.option.GetOption("columnname0").Split('\t');
-                    string[] col1 = this.option.GetOption("columnname1").Split('\t');
-
-                    foreach (string ind in option.GetOption("outfield0").Split(','))
-                    {
-                        outTitleList.Add(col0[int.Parse(ind)]);
-                    }
-                    foreach (string ind in option.GetOption("outfield1").Split(','))
-                    {
-                        outTitleList.Add(col1[int.Parse(ind)]);
-                    }
-                }
-                else if(className == "union")
-                {
-                    string[] col0 = this.option.GetOption("outname").Split('\t');
-                    foreach (string ind in col0)
-                    {
-                        outTitleList.Add(ind);
-                    }
-                }
-                else if(className == "differ" || className == "collide")
-                {
-                    string[] col0 = this.option.GetOption("columnname0").Split('\t');
-                    foreach (string ind in option.GetOption("outfield").Split(','))
-                    {
-                        outTitleList.Add(col0[int.Parse(ind)]);
-                    }
-                }
-                else
-                {
-                    foreach (string ind in option.GetOption("outfield").Split(','))
-                    {
-                        outTitleList.Add(titleList[int.Parse(ind)]);
-                    }
-                    if (className == "freq")
-                    {
-                        outTitleList.Add("频率统计结果");
-                    }
-                }
-
-                string columns = String.Join("\t", outTitleList); 
-                sw.WriteLine(columns.Trim('\t'));
+                string columns = String.Join("\t", GenOutTitleList(className));
+                sw.WriteLine(columns);
                 sw.Flush();
             }
+            //File.WriteAllText(this.outputFilePath, columns);
+
+        }
+
+        public List<string> GenOutTitleList(string className)
+        {
+            string[] titleList = this.outputFileTitle.Split('\t');
+            List<string> outTitleList = new List<string>();
+            if (className == "relate")
+            {
+                string[] col0 = this.option.GetOption("columnname0").Split('\t');
+                string[] col1 = this.option.GetOption("columnname1").Split('\t');
+
+                foreach (string ind in option.GetOption("outfield0").Split(','))
+                {
+                    outTitleList.Add(col0[int.Parse(ind)]);
+                }
+                foreach (string ind in option.GetOption("outfield1").Split(','))
+                {
+                    outTitleList.Add(col1[int.Parse(ind)]);
+                }
+            }
+            else if (className == "union")
+            {
+                string[] col0 = this.option.GetOption("outname").Split('\t');
+                foreach (string ind in col0)
+                {
+                    outTitleList.Add(ind);
+                }
+            }
+            else if (className == "differ" || className == "collide")
+            {
+                string[] col0 = this.option.GetOption("columnname0").Split('\t');
+                foreach (string ind in option.GetOption("outfield").Split(','))
+                {
+                    outTitleList.Add(col0[int.Parse(ind)]);
+                }
+            }
+            else
+            {
+                foreach (string ind in option.GetOption("outfield").Split(','))
+                {
+                    outTitleList.Add(titleList[int.Parse(ind)]);
+                }
+                if (className == "freq")
+                {
+                    outTitleList.Add("频率统计结果");
+                }
+            }
+            return outTitleList;
+
         }
 
         public void InitSeparator()

@@ -35,6 +35,9 @@ namespace Citta_T1.Controls.Common
         public delegate void CheckBoxListItemClick(object sender, ItemCheckEventArgs e);
         public event CheckBoxListItemClick ItemClick;
 
+        //原checkboxlist和临时checkboxlist的索引对应关系，解决字段同名问题
+        private Dictionary<int,int> checkDict;
+
         public ComCheckBoxList()
         {
             InitializeComponent();
@@ -181,23 +184,34 @@ namespace Citta_T1.Controls.Common
                 return;
             }
 
-
-
             //获取选中的数量
-            int nCount = this.checkListBox.CheckedItems.Count;
-
-            //找到改变状态的checkbox
-            for (int i = 0; i < checkListBox.Items.Count; i++)
+            int nCount = 0;
+            List<int> checkedList = new List<int>();
+            for (int i = 0; i < this.checkListBox.Items.Count; i++)
             {
-                if (GetItemText(checkListBox.Items[i]) == GetItemText(this.checkListBoxTmp.Items[e.Index]))
+                if (checkListBox.GetItemChecked(i))
                 {
-                    checkListBox.SetItemChecked(i, e.NewValue == CheckState.Checked ? true : false);
+                    nCount++;
+                    checkedList.Add(i);
                 }
             }
 
-            if (this.checkListBoxTmp.CheckedItems.Contains(this.checkListBoxTmp.Items[e.Index]))
-            {
+            //找到改变状态的checkbox
+            //for (int i = 0; i < checkListBox.Items.Count; i++)
+            //{
+            //    if (GetItemText(checkListBox.Items[i]) == GetItemText(this.checkListBoxTmp.Items[e.Index]))
+            //    {
+            //        checkListBox.SetItemChecked(i, e.NewValue == CheckState.Checked ? true : false);
+            //    }
+            //}
 
+            
+
+
+            //获取选中的数量//old
+            //int nCount = this.checkListBox.CheckedItems.Count;
+            if (checkedList.Contains(this.checkDict[e.Index]))
+            {
                 if (e.NewValue != CheckState.Checked)
                 {
                     nCount--;
@@ -210,7 +224,7 @@ namespace Citta_T1.Controls.Common
                     nCount++;
                 }
             }
-
+            checkListBox.SetItemChecked(this.checkDict[e.Index], e.NewValue == CheckState.Checked ? true : false);
             tbSelectedValue.Text = "已选择" + nCount.ToString() + "项";
         }
 
@@ -222,10 +236,12 @@ namespace Citta_T1.Controls.Common
                 checkListBox.Show();
                 return;
             }
+            //每次搜索文本改变，就是对字典重新赋值
+            this.checkDict = new Dictionary<int, int>();
+            int count = 0;//记录临时box的索引
 
             checkListBox.Hide();
             checkListBoxTmp.Show();
-            int count = 0;
             this.checkListBoxTmp.Items.Clear();
             checkListBoxTmp.ItemCheck -= checkListBoxTmp_ItemCheck;
 
@@ -234,6 +250,7 @@ namespace Citta_T1.Controls.Common
                 if (GetItemText(checkListBox.Items[i]).Contains(this.textBox1.Text))
                 {
                     checkListBoxTmp.Items.Add(GetItemText(checkListBox.Items[i]), checkListBox.GetItemChecked(i) ? CheckState.Checked : CheckState.Unchecked);
+                    this.checkDict.Add(count,i);//key:tmp索引，value:原始索引
                     count++;
                 }
             }
@@ -358,9 +375,23 @@ namespace Citta_T1.Controls.Common
             {
                 ItemClick(sender, e);
             }
-            //获取选中的数量
-            int nCount = this.checkListBox.CheckedItems.Count;
-            if (this.checkListBox.CheckedItems.Contains(this.checkListBox.Items[e.Index]))
+
+            //new
+            int nCount = 0;
+            List<int> checkedList = new List<int>();
+            for (int i = 0; i < this.checkListBox.Items.Count; i++)
+            {
+                if (checkListBox.GetItemChecked(i))
+                {
+                    nCount++;
+                    checkedList.Add(i);
+                }
+            }
+
+
+            //获取选中的数量//old
+            //int nCount = this.checkListBox.CheckedItems.Count;
+            if (checkedList.Contains(e.Index))
             {
 
                 if (e.NewValue != CheckState.Checked)

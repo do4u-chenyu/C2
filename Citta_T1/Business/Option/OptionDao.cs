@@ -27,6 +27,7 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.UnionOperator,
                                                 ElementSubType.RelateOperator,
                                                 ElementSubType.DifferOperator,
+                                                ElementSubType.KeyWordOperator,
                                                 ElementSubType.CustomOperator2};
             return doubleInputs.Contains(me.SubType);
         }
@@ -201,9 +202,6 @@ namespace Citta_T1.Business.Option
             (modelElement2.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
-       
-
-        
 
         //新数据源修改输出
 
