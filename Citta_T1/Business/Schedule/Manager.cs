@@ -130,7 +130,7 @@ namespace Citta_T1.Business.Schedule
             {
                 if (currentTask != null)
                 {
-                    if (currentTask.Status == TaskStatus.Running) { }
+                    if (currentTask.Status == TaskStatus.Running)
                     {
                         //终止task线程
                         tokenSource.Cancel();

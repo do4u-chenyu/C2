@@ -27,6 +27,7 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.UnionOperator,
                                                 ElementSubType.RelateOperator,
                                                 ElementSubType.DifferOperator,
+                                                ElementSubType.KeyWordOperator,
                                                 ElementSubType.CustomOperator2};
             List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
