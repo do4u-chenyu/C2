@@ -177,7 +177,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             {
-                Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
+                Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 

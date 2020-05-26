@@ -129,7 +129,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             {
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.columnName.ToList());
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.columnName.ToList());
                 return;
             }
             //输出变化，重写BCP文件

@@ -531,7 +531,7 @@ namespace Citta_T1.Controls
                     else
                     {
                         //endC右键菜单设置Enable                     
-                        Global.GetOptionDao().EnableControlOption(mr);
+                        Global.GetOptionDao().EnableOpOptionView(mr);
                     }
                 }
                 cmd = ECommandType.Null;

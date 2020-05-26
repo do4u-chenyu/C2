@@ -125,6 +125,7 @@
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
+    <Compile Include="Business\Option\CreateMoveRsControl.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Option\OptionDao.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />

@@ -57,7 +57,7 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
-        public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
+        public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }

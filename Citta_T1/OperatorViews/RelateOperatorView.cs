@@ -271,7 +271,7 @@ namespace Citta_T1.OperatorViews
             if (hasResutl == null)
             {
                 this.selectColumn = this.OutList0.GetItemCheckText().Concat(this.OutList1.GetItemCheckText()).ToList();
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             //输出变化，重写BCP文件

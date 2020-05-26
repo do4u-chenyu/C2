@@ -138,7 +138,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.selectColumn = this.outList.GetItemCheckText();
                 this.selectColumn.Add("频率统计结果");
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             List<string> newData = new List<string>(this.outList.GetItemCheckText());

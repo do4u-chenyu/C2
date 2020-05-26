@@ -164,7 +164,7 @@ namespace Citta_T1.Business.Model
                 {
                     if (me.ID != mr.EndID) continue; 
                     me.Status = ElementStatus.Null;
-                    (me.GetControl as MoveOpControl).EnableOpenOption = false;
+                    (me.GetControl as MoveOpControl).EnableOption = false;
                     //存在链路，后续链路中算子状态变化
                     AllStateChange(me.ID);
 
@@ -178,7 +178,7 @@ namespace Citta_T1.Business.Model
             {
                 if (me.ID != ID) continue;
                 me.Status = ElementStatus.Null;
-                (me.GetControl as MoveOpControl).EnableOpenOption = false;
+                (me.GetControl as MoveOpControl).EnableOption = false;
                 //存在链路，后续链路中算子状态变化
                 AllStateChange(me.ID);
             }
@@ -332,24 +332,12 @@ namespace Citta_T1.Business.Model
         
         public ModelElement SearchElementByID(int ID)
         {
- 
-            foreach (ModelElement me in this.ModelElements)
-            {
-                if (me.ID == ID)
-                    return me;
-            }
-            return ModelElement.Empty;
+            return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
-        public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
+        public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
             List<ModelRelation> relations = new List<ModelRelation>();
-            foreach (ModelRelation mr in this.ModelRelations)
-            {
-                if (mr.StartID == ID && startID)
-                    relations.Add(mr);
-                else if (mr.EndID == ID && !startID)
-                    relations.Add(mr);
-            }
+            relations=this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
             return relations;
         }
         public ModelElement SearchResultOperator(int ID)

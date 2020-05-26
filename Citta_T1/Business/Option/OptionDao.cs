@@ -5,6 +5,7 @@ using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,37 +20,49 @@ namespace Citta_T1.Business.Option
     {
         private static LogUtil log = LogUtil.GetInstance("OptionDao");
         //添加relation
-        public void EnableControlOption(ModelRelation mr)
+        private static bool IsBinaryElement(ModelElement me)
         {
-            ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
             ElementSubType[] doubleInputs = new ElementSubType[] {
                                                 ElementSubType.CollideOperator,
                                                 ElementSubType.UnionOperator,
                                                 ElementSubType.RelateOperator,
                                                 ElementSubType.DifferOperator,
                                                 ElementSubType.CustomOperator2};
-            List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
+            return doubleInputs.Contains(me.SubType);
+        }
+
+        private static bool IsNotRelationWith(ModelElement me, ModelRelation mr)
+        {
+            return me.ID != mr.EndID;
+        }
+        public void EnableOpOptionView(ModelRelation mr)
+        {
+          
+            List<ModelRelation> brother = Global.GetCurrentDocument().SearchBrotherRelations(mr);
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
-                if (me.ID == mr.EndID && !doubleInputs.Contains(me.SubType))
-                {
-                    MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
-                    moveOpControl.EnableOpenOption = true;
-                    SingleInputCompare(mr, moveOpControl.SingleDataSourceColumns);
-                    break;
+                if (IsNotRelationWith(me, mr)) continue;
+                MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
+                
+                if (IsBinaryElement(me)) 
+                { 
+                    if (brother.Count != 2)  return;
+                    moveOpControl.EnableOption = true;
+                    DoubleInputCompare(brother, me);                  
+                    return;
                 }
-                else if (me.ID == mr.EndID && doubleInputs.Contains(me.SubType) && relations.Count == 2)
+                else 
                 {
-                    MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
-                    moveOpControl.EnableOpenOption = true;
-                    DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
-                    break;
-                }
-            }
+                    moveOpControl.EnableOption = true;
+                    SingleInputCompare(mr, me);
+                    return;
+                }             
+             }
         }
-        private void SingleInputCompare(ModelRelation modelRelation, string oldColumnName) 
+        private void SingleInputCompare(ModelRelation modelRelation, ModelElement modelElement) 
         {
-           if (oldColumnName == null) return;
+            string oldColumnName= (modelElement.GetControl as MoveOpControl).SingleDataSourceColumns;
+            if (oldColumnName == null) return;
             char separator = '\t';
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
@@ -92,13 +105,12 @@ namespace Citta_T1.Business.Option
             }
             (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
-
-
-
         }
-        private void DoubleInputCompare(List<ModelRelation> relations, Dictionary<string, List<string>> doubleDataSource,int ID) 
+        private void DoubleInputCompare(List<ModelRelation> relations, ModelElement modelElement) 
         {
-
+            MoveOpControl moveOpControl = modelElement.GetControl as MoveOpControl;
+            Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
+            int ID = moveOpControl.ID;
             if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
                 return;
             char separator0 = '\t';
@@ -177,91 +189,21 @@ namespace Citta_T1.Business.Option
                 }
             }
             //恢复控件上次的状态,可能会有点问题TODO
-            ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(ID);
+            ModelElement modelElement2 = Global.GetCurrentDocument().SearchElementByID(ID);
             
-            Dictionary<string, string> optionDict = (modelElement.GetControl as MoveOpControl).Option.OptionDict;
+            Dictionary<string, string> optionDict = (modelElement2.GetControl as MoveOpControl).Option.OptionDict;
             if (optionDict == null) return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
                 if (kvp.Key == "otherSeparator") continue;//python算子、IA多源算子中的其他分隔符字段允许为空，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
-            (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
+            (modelElement2.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
         }
-        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
-        {
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                if (mr.StartID == moveOpControl.ID) return;
-            int x = moveOpControl.Location.X + moveOpControl.Width + 15;
-            int y = moveOpControl.Location.Y;
-            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), 
-                new Point(x, y), seperator, encoding);
-          
-            /*
-             * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
-             * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
-             */
+       
 
-            PointF startPoint = new PointF(
-                   moveOpControl.RectOut.Location.X + moveOpControl.Location.X,
-                   moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y
-                   );
-            PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
-            Bezier line = new Bezier(startPoint, endPoint);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-
-            canvas.RepaintObject(line);
-            ModelRelation newModelRelation = new ModelRelation(
-                                moveOpControl.ID, mrc.ID,
-                                new Point(moveOpControl.RectOut.Location.X + moveOpControl.Location.X, moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y),
-                                new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
-                                0);
-            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-
-            moveOpControl.OutPinInit("lineExit");
-            mrc.rectInAdd(1);
-            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpBcpFileName, columnName);
-            mrc.FullFilePath = path;
-        }
-
-        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
-        {
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                if (mr.StartID == moveOpControl.ID) return;
-            int x = moveOpControl.Location.X + moveOpControl.Width + 15;
-            int y = moveOpControl.Location.Y;
-            //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
-                new Point(x, y), separator, encoding);
-            /*
-             * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
-             * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
-             */
-
-            PointF startPoint = new PointF(
-                   moveOpControl.RectOut.Location.X + moveOpControl.Location.X,
-                   moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y
-                   );
-            PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
-            Bezier line = new Bezier(startPoint, endPoint);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-
-            canvas.RepaintObject(line);
-            ModelRelation newModelRelation = new ModelRelation(
-                                moveOpControl.ID, mrc.ID,
-                                new Point(moveOpControl.RectOut.Location.X + moveOpControl.Location.X, moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y),
-                                new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
-                                0);
-            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-
-            moveOpControl.OutPinInit("lineExit");
-            mrc.rectInAdd(1);
-            mrc.FullFilePath = path;
-        }
+        
 
         //新数据源修改输出
 

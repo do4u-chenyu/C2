@@ -111,7 +111,7 @@ namespace Citta_T1.Business.Model
                 {
                     
                     XmlElement enableoptionNode = xDoc.CreateElement("enableoption");
-                    enableoptionNode.InnerText = (me.GetControl as MoveOpControl).EnableOpenOption.ToString();
+                    enableoptionNode.InnerText = (me.GetControl as MoveOpControl).EnableOption.ToString();
                     modelElementXml.AppendChild(enableoptionNode);
                     //有配置信息才保存到xml中
                     if ((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
@@ -237,7 +237,7 @@ namespace Citta_T1.Business.Model
 
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
-                        ctl.EnableOpenOption = enableOption;
+                        ctl.EnableOption = enableOption;
                         ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
