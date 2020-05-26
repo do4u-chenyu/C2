@@ -76,10 +76,8 @@ namespace Citta_T1.Core
         public bool IsCyclic()
         {   // 针对图中每一个定点做一次环检测
             foreach (int vertex in vertices)
-            {
                 if (IsCyclic(vertex))
                     return true; 
-            }
             return false;
         }
 
@@ -92,22 +90,15 @@ namespace Citta_T1.Core
             visited[vertex] = true;
             // 访问到一个叶子节点，没有子节点，直接返回
             if (!this.graph.ContainsKey(vertex))
-            {
-                // 每个DSF过程到叶子节点后，清理visited列表
-                visited.Clear();
-                return false;
-            }
-               
+                return visited[vertex] = false;  // 每个DSF过程到叶子节点后，vistited对应退栈置false
+           
             // 访问每一个子节点
             foreach (int child in this.graph[vertex])
-            {
                 if (IsCyclic(child))
                     return true;
-            }
-            return false;
+            //所有节点访问完毕，退栈
+            return visited[vertex] = false;
         }
-
     }       
-
 }
 
