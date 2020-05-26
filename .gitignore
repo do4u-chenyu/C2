@@ -39,3 +39,5 @@ UserInstallSet/bin/Debug/UserInstallSet.pdb
 UserInstallSet/obj/Debug/UserInstallSet.csprojAssemblyReference.cache
 UserInstallSet/obj/Debug/UserInstallSet.dll
 UserInstallSet/obj/Debug/UserInstallSet.pdb
+/UserControlDLL/bin/Debug
+/UserControlDLL/obj/Debug
