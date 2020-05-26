@@ -28,9 +28,11 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("MinOperatorView");
+        private OptionInfoCheck optionInfoCheck;
         public MinOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             dataPath = "";
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
@@ -41,8 +43,8 @@ namespace Citta_T1.OperatorViews
 
             this.oldMinfield = this.MinValueBox.Text;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            this.MinValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.MinValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.MinValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             SetTextBoxName(this.DataInfoBox);
         }

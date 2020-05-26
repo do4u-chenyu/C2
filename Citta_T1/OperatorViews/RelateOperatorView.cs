@@ -28,10 +28,12 @@ namespace Citta_T1.OperatorViews
         private List<string> oldColumnName1;
         private List<string> outColumnName0;
         private List<string> outColumnName1;
+        private OptionInfoCheck optionInfoCheck;
 
         public RelateOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.outColumnName0 = new List<string>();
             this.outColumnName1= new List<string>();
             this.oldOutList0 = new List<int>();
@@ -47,10 +49,10 @@ namespace Citta_T1.OperatorViews
            
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
-            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -332,8 +334,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
-            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            regBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
@@ -343,8 +345,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
-            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
@@ -362,8 +364,8 @@ namespace Citta_T1.OperatorViews
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Items.AddRange(this.columnName1);
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            data2box.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            data2box.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            data2box.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            data2box.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             data2box.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
 

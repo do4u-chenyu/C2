@@ -23,11 +23,13 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("MaxOperatorView");
+        private OptionInfoCheck optionInfoCheck;
 
 
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             dataPath = "";
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
@@ -42,8 +44,8 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             SetTextBoxName(this.dataInfoBox);
-            this.maxValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.maxValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.maxValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.maxValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.maxValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消

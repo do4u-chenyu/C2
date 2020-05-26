@@ -29,9 +29,11 @@ namespace Citta_T1.OperatorViews
         private List<string> selectColumn;
         private List<bool> oldCheckedItems = new List<bool>();
         private List<string> oldColumnName;
+        private OptionInfoCheck optionInfoCheck;
         public UnionOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             oldColumnName = new List<string>();
             this.opControl = opControl;          
             this.columnName0 = new string[] { };
@@ -46,12 +48,12 @@ namespace Citta_T1.OperatorViews
 
             SetTextBoxName(this.dataSource0);
             SetTextBoxName(this.dataSource1);
-            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.textBoxEx1.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
-            this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.textBoxEx1.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -304,8 +306,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.columnName0);
-            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
@@ -315,8 +317,8 @@ namespace Citta_T1.OperatorViews
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Font= new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.columnName1);
-            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
@@ -327,8 +329,8 @@ namespace Citta_T1.OperatorViews
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += TextBoxEx1_Enter;
             textBox.Leave += TextBoxEx1_Leave;
-            textBox.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            textBox.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
+            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
             Button addButton1 = new Button();

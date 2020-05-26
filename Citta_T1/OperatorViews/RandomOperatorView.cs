@@ -25,9 +25,11 @@ namespace Citta_T1.OperatorViews
         private List<string> selectColumn;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("RandomOperatorView");
+        private OptionInfoCheck optionInfoCheck;
         public RandomOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.dataPath = "";
             this.oldOutList = new List<int>();
             oldColumnName = new List<string>();
@@ -212,12 +214,12 @@ namespace Citta_T1.OperatorViews
         private void RandomNumBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                Global.GetOptionDao().NonNumeric_ControlText(this.RandomNumBox);
+                optionInfoCheck.NonNumeric_ControlText(this.RandomNumBox);
         }
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().NonNumeric_ControlText(this.RandomNumBox);
+            optionInfoCheck.NonNumeric_ControlText(this.RandomNumBox);
         }
     }
 }

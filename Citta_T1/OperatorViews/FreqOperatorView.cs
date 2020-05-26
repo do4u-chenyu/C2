@@ -23,10 +23,12 @@ namespace Citta_T1.OperatorViews
         private List<bool> oldCheckedItems=new List<bool>();
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("FreqOperatorView");
+        private OptionInfoCheck optionInfoCheck;
 
         public FreqOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
             dataPath = "";

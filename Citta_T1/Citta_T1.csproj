@@ -128,6 +128,7 @@
     <Compile Include="Business\Option\CreateMoveRsControl.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Option\OptionDao.cs" />
+    <Compile Include="Business\Option\OptionInfoCheck.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
     <Compile Include="Controls\Common\ComCheckBoxList.cs">

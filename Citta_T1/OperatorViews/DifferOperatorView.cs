@@ -24,10 +24,13 @@ namespace Citta_T1.OperatorViews
         private List<string> selectColumn;
         private List<int> oldOutList;
         private List<string> oldColumnName;
+        private OptionInfoCheck optionInfoCheck;
+
         public DifferOperatorView(MoveOpControl opControl)
         {
            
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             oldColumnName = new List<string>();
             this.opControl = opControl;
@@ -295,8 +298,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
-            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            regBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
@@ -306,8 +309,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName0);
-            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
@@ -317,8 +320,8 @@ namespace Citta_T1.OperatorViews
             filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.columnName1);
-            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
@@ -465,24 +468,24 @@ namespace Citta_T1.OperatorViews
 
         private void comboBox1_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
+            optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
         }
 
         private void comboBox1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
+                optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.columnName0, (sender as ComboBox).Text);
         }
 
         private void comboBox2_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
+            optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
         }
 
         private void comboBox2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                Global.GetOptionDao().IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
+                optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.columnName1, (sender as ComboBox).Text);
         }
     }
 }

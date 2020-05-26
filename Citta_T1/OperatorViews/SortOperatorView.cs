@@ -25,10 +25,11 @@ namespace Citta_T1.OperatorViews
         private List<int> outList;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("SortOperatorView");
+        private OptionInfoCheck optionInfoCheck;
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-          
+            this.optionInfoCheck = new OptionInfoCheck();
             this.opControl = opControl;
             dataPath = "";
            
@@ -45,8 +46,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.sortByString.Checked);
             this.oldCheckedItems.Add(this.sortByNum.Checked);
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            this.sortField.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.sortField.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             SetTextBoxName(this.dataInfo);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.sortField.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -219,23 +220,23 @@ namespace Citta_T1.OperatorViews
         private void firstRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                Global.GetOptionDao().NonNumeric_ControlText(this.firstRow);
+                optionInfoCheck.NonNumeric_ControlText(this.firstRow);
         }
 
         private void firstRow_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().NonNumeric_ControlText(this.firstRow);
+            optionInfoCheck.NonNumeric_ControlText(this.firstRow);
         }
 
         private void endRow_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().NonNumeric_ControlText(this.endRow);
+            optionInfoCheck.NonNumeric_ControlText(this.endRow);
         }
 
         private void endRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                Global.GetOptionDao().NonNumeric_ControlText(this.endRow);
+                optionInfoCheck.NonNumeric_ControlText(this.endRow);
         }
         #endregion
 
