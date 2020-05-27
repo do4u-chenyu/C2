@@ -127,7 +127,7 @@ namespace Citta_T1.Controls
             if (Global.GetFlowControl().SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
-                e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
+                e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
                 i.Dispose();
                 i = null;
                 return true;
@@ -154,7 +154,7 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(i);
             g.DrawRectangle(p, frameRec);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
+            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
 
             n.Dispose();
             g.Dispose();
@@ -167,7 +167,7 @@ namespace Citta_T1.Controls
             FindControl();
             DrawRoundedRect(staticImage, 2);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            n.DrawImageUnscaled(staticImage, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
+            n.DrawImageUnscaled(staticImage, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
             CreateMoveImg();
             startSelect = noSelect;
@@ -358,8 +358,6 @@ namespace Citta_T1.Controls
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
-            mapOrigin.X = Convert.ToInt32(mapOrigin.X * screenFactor);
-            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * screenFactor);
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
@@ -421,7 +419,7 @@ namespace Citta_T1.Controls
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
-            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
+            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
             g.Dispose();
             i = null;
