@@ -136,7 +136,6 @@ namespace Citta_T1.Business.Model
 
         public void StatusChangeWhenDeleteControl(int ID)
         {
-
             foreach (ModelRelation mr in this.ModelRelations)
             {
                 if (mr.StartID != ID) continue;
@@ -171,18 +170,30 @@ namespace Citta_T1.Business.Model
                 foreach (ModelElement me in this.ModelElements)
                 {
                     if (me.ID != mr.EndID) continue;
-                    me.Status = ModifyStatus(me, me.Status);
+                    DegradeStatus(me);  // 算子状态降级
                     AllStatusChange(mr.EndID);
                 }
             }
         }
-        private ElementStatus ModifyStatus(ModelElement me, ElementStatus status)
+        // 算子状态降级规则:
+        // Op算子  : Done状态降为Ready; Ready状态保持不变
+        // 其他算子: 全部降为Null状态
+        private void DegradeStatus(ModelElement me)
         {
-            if (me.Type == ElementType.Operator && status == ElementStatus.Done || status == ElementStatus.Ready)
-                return ElementStatus.Ready;
-            else 
-                return ElementStatus.Null;
-
+            switch (me.Status)
+            {
+                case ElementStatus.Done:
+                case ElementStatus.Ready:
+                    me.Status = me.Type == ElementType.Operator ? ElementStatus.Ready : ElementStatus.Null;
+                    break;
+                case ElementStatus.Null:
+                case ElementStatus.Runnnig:
+                case ElementStatus.Stop:
+                case ElementStatus.Suspend:
+                default:
+                    me.Status = ElementStatus.Null;
+                    break;        
+            }
         }
         public void StateChangeByOut(int ID)
         {
