@@ -259,7 +259,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp 结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
@@ -270,7 +270,7 @@ namespace Citta_T1.OperatorViews
                 (resultElement.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
 
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
             (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
             (hasResultNew.GetControl as MoveRsControl).FinishTextChange();

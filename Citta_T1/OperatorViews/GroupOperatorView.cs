@@ -236,7 +236,7 @@ namespace Citta_T1.OperatorViews
             //生成结果控件,创建relation,bcp结果文件
             foreach (int index in this.outList)
                 this.selectColumn.Add(this.columnName[index]);
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             { 
                 Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);

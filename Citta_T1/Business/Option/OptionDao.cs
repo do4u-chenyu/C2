@@ -298,7 +298,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             List<string> columns = new List<string>();
            
             //新输出字段中不包含旧字段
@@ -342,7 +342,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
             List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             //左侧数据源判断
             if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
             {
@@ -383,7 +383,7 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
+            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }

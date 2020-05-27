@@ -135,7 +135,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
            
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 this.selectColumn = this.outList.GetItemCheckText();

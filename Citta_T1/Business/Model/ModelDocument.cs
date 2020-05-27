@@ -151,11 +151,11 @@ namespace Citta_T1.Business.Model
             (me.GetControl as MoveOpControl).EnableOption = false;
             DegradeChildrenStatus(me.ID);
         }
-        public void DegradeChildrenStatus(int operatorID)
+        public void DegradeChildrenStatus(int opID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID != operatorID) continue;
+                if (mr.StartID != opID) continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
                     if (me.ID != mr.EndID) continue;
@@ -192,7 +192,6 @@ namespace Citta_T1.Business.Model
                 if (mr.StartID != ID)  continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
-
                     if (me.ID != mr.EndID) continue;
                     me.Status = ElementStatus.Null;
                     SetChildrenStatusNull(mr.EndID);
@@ -275,7 +274,7 @@ namespace Citta_T1.Business.Model
         {
             return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
         }
-        public ModelElement SearchResultElement(int OpID)
+        public ModelElement SearchResultElementByOpID(int OpID)
         {
             // 找到OpID开头的Relation
             ModelRelation mr = this.ModelRelations.Find(c => c.StartID == OpID);
@@ -300,7 +299,10 @@ namespace Citta_T1.Business.Model
                 foreach (XmlNode childNode in nodes)
                 {
                     XmlNode pathNode = childNode.SelectSingleNode("path");
-                    if (pathNode != null && !String.IsNullOrEmpty(pathNode.InnerText) && pathNode.InnerText.StartsWith(oldPathPrefix))
+                    if (pathNode == null || String.IsNullOrEmpty(pathNode.InnerText))
+                        continue;
+
+                    if (pathNode.InnerText.StartsWith(oldPathPrefix))
                         pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
 
                 }

@@ -57,7 +57,7 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
             }
             //初始化输入输出路径
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)
             {
                 this.fullOutputFilePath = resultElement.GetFullFilePath();
@@ -174,7 +174,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
                 Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
@@ -189,7 +189,7 @@ namespace Citta_T1.OperatorViews
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
             (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
             (hasResultNew.GetControl as MoveRsControl).FinishTextChange();
