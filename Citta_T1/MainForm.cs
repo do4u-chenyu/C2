@@ -39,8 +39,10 @@ namespace Citta_T1
         delegate void AsynUpdataProgressBar();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
-        public MainForm()
+        public MainForm(string userName)
         {
+            this.UserName = userName;
+
             InitializeComponent();
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
@@ -51,7 +53,7 @@ namespace Citta_T1
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
             this.createMoveRsControl = new CreateMoveRsControl();
-
+            
             InitializeGlobalVariable();
             InitializeControlsLocation();
         }
@@ -276,6 +278,15 @@ namespace Citta_T1
 
             this.remarkControl.Location = loc_panel3;
 
+            // 右上用户名，头像
+            int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
+            int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
+            this.usernamelabel.Text = this.userName;
+            Point userNameLocation = new Point(185, 10);
+            this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
+            this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
+            this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
+
             log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
         }
 
@@ -465,13 +476,6 @@ namespace Citta_T1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
-            int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
-            this.usernamelabel.Text = this.userName;
-            Point userNameLocation = new Point(185,10);
-            this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
-            this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
-            this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
             //加载文件及数据源
             LoadDocuments(this.userName);
             LoadDataSource(this.userName);
