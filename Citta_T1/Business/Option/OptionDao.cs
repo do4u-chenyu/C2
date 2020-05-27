@@ -20,7 +20,7 @@ namespace Citta_T1.Business.Option
     {
         private static LogUtil log = LogUtil.GetInstance("OptionDao");
         //添加relation
-        private static bool IsBinaryElement(ModelElement me)
+        private static bool IsSingleElement(ModelElement me)
         {
             ElementSubType[] doubleInputs = new ElementSubType[] {
                                                 ElementSubType.CollideOperator,
@@ -29,36 +29,36 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.DifferOperator,
                                                 ElementSubType.KeyWordOperator,
                                                 ElementSubType.CustomOperator2};
-            return doubleInputs.Contains(me.SubType);
+            return !doubleInputs.Contains(me.SubType);
         }
 
-        private static bool IsNotRelationWith(ModelElement me, ModelRelation mr)
-        {
-            return me.ID != mr.EndID;
-        }
+        //情况1   startElement.ID ----  StartID.mr.EndID      ---- endOpElement.ID
+        //情况2                         StartID.brother.EndID -----|
+        //
         public void EnableOpOptionView(ModelRelation mr)
         {
           
             List<ModelRelation> brother = Global.GetCurrentDocument().SearchBrotherRelations(mr);
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
-            {
-                if (IsNotRelationWith(me, mr)) continue;
-                MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
+            ModelElement endOpElement = Global.GetCurrentDocument().ModelElements.Find(c => c.ID == mr.EndID);
+            if (endOpElement == ModelElement.Empty)
+                return;
+
+            MoveOpControl moveOpControl = endOpElement.GetControl as MoveOpControl;
                 
-                if (IsBinaryElement(me)) 
-                { 
-                    if (brother.Count != 2)  return;
-                    moveOpControl.EnableOption = true;
-                    DoubleInputCompare(brother, me);                  
-                    return;
-                }
-                else 
-                {
-                    moveOpControl.EnableOption = true;
-                    SingleInputCompare(mr, me);
-                    return;
-                }             
-             }
+            if (IsSingleElement(endOpElement)) 
+            {
+                moveOpControl.EnableOption = true;
+                SingleInputCompare(mr, endOpElement);
+                return;
+            }
+            else 
+            {
+                if (brother.Count != 2) return;
+                moveOpControl.EnableOption = true;
+                DoubleInputCompare(brother, endOpElement);
+                return;
+            }             
+          
         }
         private void SingleInputCompare(ModelRelation modelRelation, ModelElement modelElement) 
         {
@@ -82,7 +82,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -92,7 +92,7 @@ namespace Citta_T1.Business.Option
             {
                 if (oldName[i] != columnName[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }                  
             }
@@ -155,7 +155,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName0.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -165,7 +165,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName1.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -176,7 +176,7 @@ namespace Citta_T1.Business.Option
             {
                 if (oldColumnName0[i] != columnName0[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
             }
@@ -185,7 +185,7 @@ namespace Citta_T1.Business.Option
             {
                 if (oldColumnName1[i] != columnName1[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
             }
@@ -385,7 +385,7 @@ namespace Citta_T1.Business.Option
         {
             string fullFilePath = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
-            Global.GetCurrentDocument().StateChangeByOut(ID);
+            Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引
         public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)

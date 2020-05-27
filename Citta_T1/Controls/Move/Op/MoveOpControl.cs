@@ -665,7 +665,7 @@ namespace Citta_T1.Controls.Move.Op
         private void OptionDirty(ElementStatus status)
         {
             if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
-                Global.GetCurrentDocument().AllStatusChange(this.id);
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.id);
 
             if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set; 

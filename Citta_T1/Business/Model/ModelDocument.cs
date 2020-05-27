@@ -145,7 +145,7 @@ namespace Citta_T1.Business.Model
                     me.Status = ElementStatus.Null;
                     (me.GetControl as MoveOpControl).EnableOption = false;
                     //存在链路，后续链路中算子状态变化
-                    AllStatusChange(me.ID);
+                    DegradeChildrenStatus(me.ID);
 
                 }
             }
@@ -159,10 +159,10 @@ namespace Citta_T1.Business.Model
                 me.Status = ElementStatus.Null;
                 (me.GetControl as MoveOpControl).EnableOption = false;
                 //存在链路，后续链路中算子状态变化
-                AllStatusChange(me.ID);
+                DegradeChildrenStatus(me.ID);
             }
         }
-        public void AllStatusChange(int operatorID)
+        public void DegradeChildrenStatus(int operatorID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -171,7 +171,7 @@ namespace Citta_T1.Business.Model
                 {
                     if (me.ID != mr.EndID) continue;
                     DegradeStatus(me);  // 算子状态降级
-                    AllStatusChange(mr.EndID);
+                    DegradeChildrenStatus(mr.EndID);
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace Citta_T1.Business.Model
                     break;        
             }
         }
-        public void StateChangeByOut(int ID)
+        public void SetChildrenStatusNull(int ID)
         {
            
             foreach (ModelRelation mr in this.ModelRelations)
@@ -206,7 +206,7 @@ namespace Citta_T1.Business.Model
 
                     if (me.ID != mr.EndID) continue;
                     me.Status = ElementStatus.Null;
-                    StateChangeByOut(mr.EndID);
+                    SetChildrenStatusNull(mr.EndID);
 
                 }
             }
