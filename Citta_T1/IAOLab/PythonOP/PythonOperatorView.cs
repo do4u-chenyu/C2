@@ -183,7 +183,7 @@ namespace Citta_T1.OperatorViews
 
             
             //输出变化，修改结果算子路径
-            if (!this.oldPath.SequenceEqual(this.fullOutputFilePath))
+            if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
                 (resultElement.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
