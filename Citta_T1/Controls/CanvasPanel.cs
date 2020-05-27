@@ -193,7 +193,7 @@ namespace Citta_T1.Controls
             if (e.Button == MouseButtons.Right) 
             {
                 
-                Point pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
+                Point pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location,false);
                 if (frameWrapper.MinBoding.Contains(pw))
                 {
                     this.DelSelectControl.Show(this,e.Location);

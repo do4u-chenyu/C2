@@ -31,6 +31,7 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private int worldWidth, worldHeight;
         private Point mapOrigin;
+        private float screenFactor;
         private List<Control> controls = new List<Control>();
         public Rectangle MinBoding { get => minBoding; set => minBoding = value; }
 
@@ -43,7 +44,9 @@ namespace Citta_T1.Controls
         #region 对应画布鼠标事件
         public void FrameDown(MouseEventArgs e)
         {
-            startP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
+            mapOrigin = Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin;
+            screenFactor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
+            startP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location,false);
             if (e.Button == MouseButtons.Right)
                 return;
             else if (minBoding.IsEmpty)
@@ -68,8 +71,7 @@ namespace Citta_T1.Controls
 
         public void FrameMove(MouseEventArgs e)
         {
-            //endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
-            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
+            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location,false);
             FrameEnter(endP);
             if (e.Button != MouseButtons.Left)
             {
@@ -87,10 +89,7 @@ namespace Citta_T1.Controls
         }
         public void FrameUp(MouseEventArgs e)
         {
-            //endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
-            //log.Info("org:" + endP.ToString());
-            //log.Info("org:" + Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location).ToString());
-            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
+            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location,false);
             if (e.Button != MouseButtons.Left)
                 return;
             if (startDrag)
@@ -128,7 +127,7 @@ namespace Citta_T1.Controls
             if (Global.GetFlowControl().SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
-                e.Graphics.DrawImageUnscaled(i, Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin);
+                e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
                 i.Dispose();
                 i = null;
                 return true;
@@ -155,7 +154,7 @@ namespace Citta_T1.Controls
             Graphics g = Graphics.FromImage(i);
             g.DrawRectangle(p, frameRec);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            n.DrawImageUnscaled(i, Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin);
+            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
 
             n.Dispose();
             g.Dispose();
@@ -168,7 +167,7 @@ namespace Citta_T1.Controls
             FindControl();
             DrawRoundedRect(staticImage, 2);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            n.DrawImageUnscaled(staticImage, Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin);
+            n.DrawImageUnscaled(staticImage, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
             n.Dispose();
             CreateMoveImg();
             startSelect = noSelect;
@@ -193,7 +192,7 @@ namespace Citta_T1.Controls
             foreach (ModelRelation mr in modelRelations)
             {
                 //Point Pw = Global.GetCurrentDocument().ScreenToWorld(mr.GetBoundingRect().Location, mapOrigin);
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location,false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
@@ -208,7 +207,7 @@ namespace Citta_T1.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -240,7 +239,7 @@ namespace Citta_T1.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
-                Point ctW = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location);
+                Point ctW = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
                 if (frameRec.Contains(ctW) && frameRec.Contains(new Point(ctW.X + ct.Width,ctW.Y + ct.Height)))
                 {
                     minX.Add(ctW.X - (int)(ct.Height * 0.4));
@@ -364,7 +363,7 @@ namespace Citta_T1.Controls
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location,false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
@@ -380,7 +379,7 @@ namespace Citta_T1.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
                 if (Pw.X < 0 || Pw.Y < 0 || !minBoding.Contains(Pw) || !minBoding.Contains(new Point(Pw.X + ct.Width,Pw.Y + ct.Height)))
                     continue;
                 ct.DrawToBitmap(staticImageFrame, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -422,7 +421,7 @@ namespace Citta_T1.Controls
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
             g.DrawImage(this.moveImage, minBoding.X + dx, minBoding.Y + dy);
-            n.DrawImageUnscaled(i, Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin);
+            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.X * screenFactor));
             n.Dispose();
             g.Dispose();
             i = null;
@@ -430,10 +429,8 @@ namespace Citta_T1.Controls
 
         private void DragFrame_Up()
         {
-
             foreach(Control ct in controls)
             {
-                //Point pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin); 边界控制
                 ct.Left = ct.Left + endP.X - startP.X;
                 ct.Top = ct.Top + endP.Y - startP.Y;
             }

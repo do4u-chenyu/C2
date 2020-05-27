@@ -31,7 +31,7 @@ namespace Citta_T1.Controls
 
 
             Control ct = this.control;
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
             g.Dispose();
             return staticImage;
         }

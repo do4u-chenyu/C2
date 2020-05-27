@@ -136,7 +136,7 @@ namespace Citta_T1.Controls.Flow
                 currentDocument.WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;               
 
-                viewBoxPosition = currentDocument.WorldMap1.ScreenToWorld(new Point(50, 30));
+                viewBoxPosition = currentDocument.WorldMap1.ScreenToWorld(new Point(50, 30),true);
             }
             catch
             {

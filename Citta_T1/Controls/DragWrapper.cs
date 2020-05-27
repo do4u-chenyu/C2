@@ -109,7 +109,7 @@ namespace Citta_T1.Controls
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
@@ -124,13 +124,12 @@ namespace Citta_T1.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.GetControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location);
+                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
                 me.Hide();
             }
-
             g.Dispose();
             return staticImage;
         }

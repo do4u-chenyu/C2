@@ -250,7 +250,7 @@ namespace Citta_T1.Controls.Move.Rs
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -267,7 +267,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
+            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
