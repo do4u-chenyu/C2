@@ -57,7 +57,7 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public int ID { get => this.id; set => this.id = value; }
-        public bool EnableOpenOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
+        public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
@@ -531,6 +531,12 @@ namespace Citta_T1.Controls.Move.Op
                 case "Python算子":
                     new PythonOperatorView(this).ShowDialog();
                     break;
+                case "关键词过滤":
+                    new KeyWordOperatorView(this).ShowDialog();
+                    break;
+                case "数据标准化":
+                    new DataFormatOperatorView(this).ShowDialog();
+                    break;
                 default:
                     break;
             }
@@ -569,7 +575,7 @@ namespace Citta_T1.Controls.Move.Op
             }
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
             Global.GetMainForm().BindUiManagerFunc();
 

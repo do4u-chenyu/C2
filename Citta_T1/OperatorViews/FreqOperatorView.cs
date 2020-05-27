@@ -23,10 +23,12 @@ namespace Citta_T1.OperatorViews
         private List<bool> oldCheckedItems=new List<bool>();
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("FreqOperatorView");
+        private OptionInfoCheck optionInfoCheck;
 
         public FreqOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
             dataPath = "";
@@ -138,7 +140,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.selectColumn = this.outList.GetItemCheckText();
                 this.selectColumn.Add("频率统计结果");
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             List<string> newData = new List<string>(this.outList.GetItemCheckText());

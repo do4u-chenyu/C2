@@ -25,7 +25,7 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
+        private Dictionary<int, List<int>> modelGraphDict;  // 当前模型,以ID为key的图描述
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -39,7 +39,7 @@ namespace Citta_T1.Business.Model
         private int sizeL;
         private float screenFactor;
 
-        private Manager manager;
+        private TaskManager taskManager;
         private string userPath;
 
         /*
@@ -56,17 +56,17 @@ namespace Citta_T1.Business.Model
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
-        public Manager Manager { get => manager; set => manager = value; }
+        public TaskManager TaskManager { get => taskManager; set => taskManager = value; }
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
-        public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
-        public WorldMap WorldMap1 { get => WorldMap; set => WorldMap = value; }
 
+        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; set => modelGraphDict = value; }
+        
+        public WorldMap WorldMap1 { get => WorldMap; set => WorldMap = value; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
-        //internal WorldMap WorldMap { get; set; }
         
 
         public ModelDocument(string modelTitle, string userName)
@@ -75,13 +75,13 @@ namespace Citta_T1.Business.Model
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
-            this.modelLineDict = new Dictionary<int, List<int>>();
+            this.modelGraphDict = new Dictionary<int, List<int>>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
-            this.manager = new Manager();
+            this.taskManager = new TaskManager();
             this.WorldMap = new WorldMap();
             this.sizeL = 0;
             this.screenFactor = 1;
@@ -130,15 +130,15 @@ namespace Citta_T1.Business.Model
         }
         private void AddEdge(ModelRelation mr)
         {
-            if (!this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID] = new List<int>() { mr.EndID };
+            if (!this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID] = new List<int>() { mr.EndID };
             else
-                this.modelLineDict[mr.StartID].Add(mr.EndID);
+                this.modelGraphDict[mr.StartID].Add(mr.EndID);
         }
         private void RemoveEdge(ModelRelation mr)
         {
-            if (this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID].Remove(mr.EndID);
+            if (this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID].Remove(mr.EndID);
         }
         public void DeleteModelElement(Control control)
         {
@@ -167,7 +167,7 @@ namespace Citta_T1.Business.Model
                 {
                     if (me.ID != mr.EndID) continue; 
                     me.Status = ElementStatus.Null;
-                    (me.GetControl as MoveOpControl).EnableOpenOption = false;
+                    (me.GetControl as MoveOpControl).EnableOption = false;
                     //存在链路，后续链路中算子状态变化
                     AllStateChange(me.ID);
 
@@ -181,7 +181,7 @@ namespace Citta_T1.Business.Model
             {
                 if (me.ID != ID) continue;
                 me.Status = ElementStatus.Null;
-                (me.GetControl as MoveOpControl).EnableOpenOption = false;
+                (me.GetControl as MoveOpControl).EnableOption = false;
                 //存在链路，后续链路中算子状态变化
                 AllStateChange(me.ID);
             }
@@ -335,24 +335,12 @@ namespace Citta_T1.Business.Model
         
         public ModelElement SearchElementByID(int ID)
         {
- 
-            foreach (ModelElement me in this.ModelElements)
-            {
-                if (me.ID == ID)
-                    return me;
-            }
-            return ModelElement.Empty;
+            return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
-        public List<ModelRelation> SearchRelationByID(int ID,bool startID = true)
+        public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
             List<ModelRelation> relations = new List<ModelRelation>();
-            foreach (ModelRelation mr in this.ModelRelations)
-            {
-                if (mr.StartID == ID && startID)
-                    relations.Add(mr);
-                else if (mr.EndID == ID && !startID)
-                    relations.Add(mr);
-            }
+            relations=this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
             return relations;
         }
         public ModelElement SearchResultOperator(int ID)

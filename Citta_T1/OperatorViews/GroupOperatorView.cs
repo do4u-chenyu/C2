@@ -26,9 +26,11 @@ namespace Citta_T1.OperatorViews
         private List<int> outList;
         private int[] oldOutList;
         private List<string> oldOutName;
+        private OptionInfoCheck optionInfoCheck;
         public GroupOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             this.selectColumn = new List<string>();
             this.groupColumn = new List<int>();
             this.oldCheckedItems = new List<bool>();
@@ -45,8 +47,8 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldCheckedItems.Add(this.sortByString.Checked);
             this.oldCheckedItems.Add(this.sortByNum.Checked);
-            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             SetTextBoxName(this.dataInfo);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             
@@ -237,7 +239,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             { 
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             //输出变化，重写BCP文件
@@ -286,8 +288,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
-            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);        
+            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);        
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 

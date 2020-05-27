@@ -25,10 +25,12 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> selectColumn;
         private List<string> oldColumnName;
+        private OptionInfoCheck optionInfoCheck;
 
         public FilterOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
             dataPath = "";
@@ -39,12 +41,12 @@ namespace Citta_T1.OperatorViews
            
 
             SetTextBoxName(this.DataInfoBox);
-            this.comboBox1.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
-            this.textBoxEx1.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
-            this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.textBoxEx1.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBoxEx1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -171,7 +173,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             { 
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectColumn);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
             //输出变化，重写BCP文件
@@ -308,8 +310,8 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
-            regBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            regBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
@@ -319,8 +321,8 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.columnName);
-            dataBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
@@ -336,16 +338,16 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
-            filterBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             TextBox textBox = new TextBox();
             textBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Leave += new System.EventHandler(Global.GetOptionDao().IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().IsIllegalCharacter);
+            textBox.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
+            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
 
             Button addButton1 = new Button();

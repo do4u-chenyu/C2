@@ -237,14 +237,9 @@ namespace Citta_T1.Business.Model
             return modelTitles;
         }
 
-        public ModelDocument GetManagerRelateModel(Manager manager)
+        public ModelDocument GetManagerRelateModel(TaskManager manager)
         {
-            foreach(ModelDocument md in modelDocuments)
-            {
-                if (md.Manager == manager)
-                    return md;
-            }
-            return null;
+            return modelDocuments.Find(md => md.TaskManager == manager);
         }
         // 统计当前用户有多少元素
         public int CountAllModelElements()

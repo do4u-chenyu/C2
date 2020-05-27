@@ -262,7 +262,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             {
-                Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
+                Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
             }
 
             //输出变化，修改结果算子路径

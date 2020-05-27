@@ -28,10 +28,12 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private static LogUtil log = LogUtil.GetInstance("AvgOperatorView");
         private string selectedIndex;
+        private OptionInfoCheck optionInfoCheck;
 
         public AvgOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             selectName = new List<string>();
             this.opControl = opControl;
             InitOptionInfor();
@@ -143,7 +145,7 @@ namespace Citta_T1.OperatorViews
             ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
             if (hasResutl == null)
             { 
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectName);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectName);
                 return;
             }
             //输出变化，重写BCP文件
@@ -197,13 +199,13 @@ namespace Citta_T1.OperatorViews
 
         private void AvgComBox_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+            optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
         }
 
         private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+                optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
         }
 
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)

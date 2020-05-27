@@ -145,6 +145,12 @@ namespace Citta_T1.Utils
                 case "Python算子":
                     type = "PythonOperator";
                     break;
+                case "关键词过滤":
+                    type = "KeyWordOperator";
+                    break;
+                case "数据标准化":
+                    type = "DataFormatOperator";
+                    break;
                 default:
                     type = "Null";
                     break;
@@ -201,6 +207,12 @@ namespace Citta_T1.Utils
                     break;
                 case "PythonOperator":
                     type = "Python算子";
+                    break;
+                case "KeyWordOperator":
+                    type = "关键词过滤";
+                    break;
+                case "DataFormatOperator":
+                    type = "数据标准化";
                     break;
                 default:
                     type = "Null";
