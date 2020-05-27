@@ -44,8 +44,11 @@ namespace Citta_T1.Controls
         public void FrameDown(MouseEventArgs e)
         {
             mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            startP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
 
+            //startP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
+            startP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
+            log.Info("start:" + startP.ToString());
+            log.Info("new:" + Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location).ToString());
             if (e.Button == MouseButtons.Right)
                 return;
             else if (minBoding.IsEmpty)
@@ -70,7 +73,8 @@ namespace Citta_T1.Controls
 
         public void FrameMove(MouseEventArgs e)
         {
-            endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
+            //endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
+            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
             FrameEnter(endP);
             if (e.Button != MouseButtons.Left)
             {
@@ -88,7 +92,10 @@ namespace Citta_T1.Controls
         }
         public void FrameUp(MouseEventArgs e)
         {
-            endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
+            //endP = Global.GetCurrentDocument().ScreenToWorld(e.Location, mapOrigin);
+            //log.Info("org:" + endP.ToString());
+            //log.Info("org:" + Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location).ToString());
+            endP = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
             if (e.Button != MouseButtons.Left)
                 return;
             if (startDrag)

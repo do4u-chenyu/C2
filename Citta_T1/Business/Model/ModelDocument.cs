@@ -35,6 +35,7 @@ namespace Citta_T1.Business.Model
         private int elementCount = 0;
         
         private Point mapOrigin = new Point(-600, -300);
+        private WorldMap WorldMap;
         private int sizeL;
         private float screenFactor;
 
@@ -61,11 +62,13 @@ namespace Citta_T1.Business.Model
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
         public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
-        
+        public WorldMap WorldMap1 { get => WorldMap; set => WorldMap = value; }
 
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
-        internal WorldMap WorldMap { get; set; }
+        //internal WorldMap WorldMap { get; set; }
+        
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;

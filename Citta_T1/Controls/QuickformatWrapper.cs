@@ -276,6 +276,7 @@ namespace Citta_T1.Controls
             modelElements = Global.GetCurrentDocument().ModelElements;
 
             Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
+            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
             List<int> countWidthList = new List<int>();

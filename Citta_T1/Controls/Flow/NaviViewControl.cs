@@ -102,6 +102,7 @@ namespace Citta_T1.Controls.Flow
             Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
@@ -132,6 +133,7 @@ namespace Citta_T1.Controls.Flow
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
                 currentDocument.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                currentDocument.WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 mapOrigin = currentDocument.MapOrigin;               
 
                 viewBoxPosition = currentDocument.ScreenToWorld(new Point(50, 30), mapOrigin);
