@@ -81,10 +81,6 @@ namespace Citta_T1.Business.Model
 
             this.taskManager = new TaskManager();
             this.WorldMap = new WorldMap();
-
-
-            // lineCounter应该为`this,modelRelations`的最大值
-            //this.lineCounter = this.modelRelations.Count == 0 ? -1 :   
         }
         /*
          * 保存功能
@@ -95,15 +91,6 @@ namespace Citta_T1.Business.Model
             dSaveLoad.WriteXml();
     
         }
-
-        //private int GetMaxLineID(List<ModelRelation> mrs)
-        //{
-        //    int maxID = -1;
-        //    foreach (ModelRelation mr in mrs)
-        //    {
-        //        maxID = Math.Max(maxID, mr.)
-        //    }
-        //}
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
@@ -136,16 +123,10 @@ namespace Citta_T1.Business.Model
             if (this.modelGraphDict.ContainsKey(mr.StartID))
                 this.modelGraphDict[mr.StartID].Remove(mr.EndID);
         }
+
         public void DeleteModelElement(Control control)
         {
-            List<ModelElement> modelElements = new List<ModelElement>(this.modelElements);
-            foreach (ModelElement me in modelElements)
-            {
-                if (!me.GetControl.Equals(control))
-                    continue;
-                this.modelElements.Remove(me);
-                return;
-            }   
+            this.ModelElements.Remove(this.ModelElements.Find(me => me.GetControl == control));
         }
 
         public void DeleteModelElement(ModelElement me)
@@ -265,12 +246,10 @@ namespace Citta_T1.Business.Model
        
         public void UpdateAllLines()
         {
-            for (int i = 0;i < this.modelRelations.Count();i++)
+            foreach(ModelRelation mr in this.ModelRelations)
             {
                 try
                 {
-                    ModelRelation mr = this.modelRelations[i];
-
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
@@ -280,10 +259,6 @@ namespace Citta_T1.Business.Model
                     (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
                     (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                     mr.UpdatePoints();
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    log.Error("索引越界");
                 }
                 catch (Exception ex)
                 {
@@ -296,6 +271,7 @@ namespace Citta_T1.Business.Model
         {
             return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
+        // 寻找隶属于同一个二元算子的两个关系
         public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
             return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
@@ -310,25 +286,16 @@ namespace Citta_T1.Business.Model
         }
       
         public bool IsDuplicatedRelation(ModelRelation mr)
-        {
-            foreach (ModelRelation _mr in this.modelRelations)
-            {
-                if (_mr.EndID == mr.EndID && _mr.EndPin == mr.EndPin)
-                {
-                    return true;
-                }
-            }
-            return false;
+        {   // 关系终结于同一个元素
+            return this.ModelRelations.Exists(c => c.EndID == mr.EndID && c.EndPin == mr.EndPin);
         }
-        //修改xml内容
-
-        public static bool ModifyRSPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
+        //修改xml中所有RS的path, 用newPathPrefix替换oldPathPrefix
+        public static bool ModifyRsPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
         {
-            bool ret = false;
-            XmlDocument xmlDoc = new XmlDocument();
+            bool ret = true;
             try
             {
-                
+                XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(xmlPath);
                 XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
                 foreach (XmlNode childNode in nodes)
@@ -339,7 +306,6 @@ namespace Citta_T1.Business.Model
 
                 }
                 xmlDoc.Save(xmlPath);
-                ret = true;
             }
             catch (Exception e) 
             {

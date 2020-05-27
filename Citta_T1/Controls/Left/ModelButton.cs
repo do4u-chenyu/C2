@@ -142,7 +142,7 @@ namespace Citta_T1.Controls.Left
                 return;
             }
             // 目前的机制，到这两步，一旦失败就无法回滚了
-            ret = ModelDocument.ModifyRSPath(tmpFFP, oldModelDirectory, newModelDirectory);
+            ret = ModelDocument.ModifyRsPath(tmpFFP, oldModelDirectory, newModelDirectory);
             ret = FileUtil.FileMove(tmpFFP, newFFP);
 
             // 重命名
