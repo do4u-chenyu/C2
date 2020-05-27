@@ -304,7 +304,7 @@ namespace Citta_T1.Controls.Move.Dt
         public Point WorldBoundControl(Point Pm)
         {
 
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,false);
 
 
             if (Pw.X < 20)
@@ -391,7 +391,7 @@ namespace Citta_T1.Controls.Move.Dt
                     ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                     if (element != ModelElement.Empty)
                     {
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
+                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
                         ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
@@ -408,7 +408,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
+            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
