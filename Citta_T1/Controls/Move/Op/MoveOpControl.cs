@@ -640,7 +640,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
-            Global.GetCurrentDocument().StateChangeByDeleteControl(endID);
+            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(endID);
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == endID || mr.EndID == endID)
@@ -665,7 +665,7 @@ namespace Citta_T1.Controls.Move.Op
         private void OptionDirty(ElementStatus status)
         {
             if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
-                Global.GetCurrentDocument().AllStateChange(this.id);
+                Global.GetCurrentDocument().AllStatusChange(this.id);
 
             if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set; 

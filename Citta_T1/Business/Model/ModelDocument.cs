@@ -131,10 +131,10 @@ namespace Citta_T1.Business.Model
 
         public void DeleteModelElement(ModelElement me)
         {
-            this.modelElements.Remove(me);
+            this.ModelElements.Remove(me);
         }
 
-        public void StateChangeByDeleteControl(int ID)
+        public void StatusChangeWhenDeleteControl(int ID)
         {
 
             foreach (ModelRelation mr in this.ModelRelations)
@@ -146,12 +146,12 @@ namespace Citta_T1.Business.Model
                     me.Status = ElementStatus.Null;
                     (me.GetControl as MoveOpControl).EnableOption = false;
                     //存在链路，后续链路中算子状态变化
-                    AllStateChange(me.ID);
+                    AllStatusChange(me.ID);
 
                 }
             }
         }
-        public void StateChangeByDeletLine(int ID)
+        public void StatusChangeWhenDeleteLine(int ID)
         {
 
             foreach (ModelElement me in this.ModelElements)
@@ -160,10 +160,10 @@ namespace Citta_T1.Business.Model
                 me.Status = ElementStatus.Null;
                 (me.GetControl as MoveOpControl).EnableOption = false;
                 //存在链路，后续链路中算子状态变化
-                AllStateChange(me.ID);
+                AllStatusChange(me.ID);
             }
         }
-        public void AllStateChange(int operatorID)
+        public void AllStatusChange(int operatorID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
@@ -172,7 +172,7 @@ namespace Citta_T1.Business.Model
                 {
                     if (me.ID != mr.EndID) continue;
                     me.Status = ModifyStatus(me, me.Status);
-                    AllStateChange(mr.EndID);
+                    AllStatusChange(mr.EndID);
                 }
             }
         }

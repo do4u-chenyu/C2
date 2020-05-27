@@ -314,7 +314,7 @@ namespace Citta_T1.Controls
                     mr = mrs[i];
                     //删除线配置逻辑
                     ModelDocument doc =  Global.GetCurrentDocument();
-                    doc.StateChangeByDeletLine(mr.EndID);
+                    doc.StatusChangeWhenDeleteLine(mr.EndID);
 
                     doc.RemoveModelRelation(mr);
                     //关联算子引脚自适应改变

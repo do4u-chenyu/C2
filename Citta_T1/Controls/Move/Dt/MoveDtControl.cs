@@ -156,7 +156,7 @@ namespace Citta_T1.Controls.Move.Dt
         {
             if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && ! Global.GetCanvasPanel().DelEnable))
                 return;
-            Global.GetCurrentDocument().StateChangeByDeleteControl(this.ID);
+            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(this.ID);
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
             foreach (ModelRelation mr in modelRelations)
             {
