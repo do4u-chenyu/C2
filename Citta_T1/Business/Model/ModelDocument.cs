@@ -298,25 +298,15 @@ namespace Citta_T1.Business.Model
         }
         public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
-            List<ModelRelation> relations = new List<ModelRelation>();
-            relations=this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
-            return relations;
+            return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
         }
-        public ModelElement SearchResultOperator(int ID)
+        public ModelElement SearchResultElement(int OpID)
         {
-            foreach (ModelRelation mr in this.ModelRelations)
-            {
-                if (mr.StartID != ID) continue;
-                ModelElement modelElement = SearchElementByID(mr.EndID);
-                if (modelElement != ModelElement.Empty && modelElement.Type == ElementType.Result)
-                {
-                    modelElement.Status = modelElement.Status;
-                    return modelElement;
-                   
-                }
-                   
-            }
-            return null; 
+            // 找到OpID开头的Relation
+            ModelRelation mr = this.ModelRelations.Find(c => c.StartID == OpID);
+            if (mr == null)
+                return ModelElement.Empty;
+            return SearchElementByID(mr.EndID);
         }
       
         public bool IsDuplicatedRelation(ModelRelation mr)

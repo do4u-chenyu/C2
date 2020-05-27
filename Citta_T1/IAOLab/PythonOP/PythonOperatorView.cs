@@ -57,10 +57,10 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
             }
             //初始化输入输出路径
-            ModelElement hasResult = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResult != null)
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            if (resultElement != ModelElement.Empty)
             {
-                this.fullOutputFilePath = hasResult.GetFullFilePath();
+                this.fullOutputFilePath = resultElement.GetFullFilePath();
             }
             else
             {
@@ -88,7 +88,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
             this.opControl.SingleDataSourceColumns = column;
@@ -174,21 +174,22 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResutl == null)
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
             {
                 Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
+            
             //输出变化，修改结果算子路径
-            if (hasResutl != null && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
+            if (!this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
-                (hasResutl.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
+                (resultElement.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElement(this.opControl.ID);
             //修改结果算子内容
             (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
             (hasResultNew.GetControl as MoveRsControl).FinishTextChange();

@@ -71,7 +71,7 @@ namespace Citta_T1.Business.Option
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = endElement.ID;
             //获取当前连接的数据源的表头字段
-            BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
+            BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Empty, encoding);
             string column = bcpInfo.columnLine;
             if (startElement.GetControl is MoveDtControl)
                 separator = (startElement.GetControl as MoveDtControl).Separator;
@@ -139,13 +139,13 @@ namespace Citta_T1.Business.Option
 
             
             //获取当前连接的数据源的表头字段
-            BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Null, encoding0);
+            BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Empty, encoding0);
             string column0 = bcpInfo0.columnLine;
             if (modelElement0.GetControl is MoveDtControl)
                 separator0 = (modelElement0.GetControl as MoveDtControl).Separator;
             string[] columnName0 = column0.Split(separator0);
 
-            BcpInfo bcpInfo1 = new BcpInfo(dataSourcePath1, "", ElementType.Null, encoding1);
+            BcpInfo bcpInfo1 = new BcpInfo(dataSourcePath1, "", ElementType.Empty, encoding1);
             string column1 = bcpInfo1.columnLine;
             if (modelElement1.GetControl is MoveDtControl)
                 separator1 = (modelElement1.GetControl as MoveDtControl).Separator;
@@ -298,7 +298,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
             List<string> columns = new List<string>();
            
             //新输出字段中不包含旧字段
@@ -342,7 +342,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
             List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
             //左侧数据源判断
             if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
             {
@@ -383,7 +383,7 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string fullFilePath = Global.GetCurrentDocument().SearchResultElement(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().StateChangeByOut(ID);
         }

@@ -158,7 +158,7 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            ElementType type = ElementType.Null;
+            ElementType type = ElementType.Empty;
             char separator = '\t';
             string path = "";
             string text = "";

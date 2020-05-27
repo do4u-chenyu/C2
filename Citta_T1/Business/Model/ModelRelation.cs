@@ -35,6 +35,8 @@ namespace Citta_T1.Business.Model
         public PointF B { get => b; }
         public bool Selected { get => selected; set => selected = value; }
 
+        public static ModelRelation Empty = new ModelRelation();
+        private ModelRelation() { }
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
           
