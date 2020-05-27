@@ -161,7 +161,7 @@
     <Compile Include="Business\Schedule\Cmd\RandomOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\SortOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\UnionOperatorCmd.cs" />
-    <Compile Include="Business\Schedule\Manager.cs" />
+    <Compile Include="Business\Schedule\TaskManager.cs" />
     <Compile Include="Business\Schedule\Triple.cs" />
     <Compile Include="Business\Schedule\TripleListGen.cs" />
     <Compile Include="Controls\CanvasPanel.cs">

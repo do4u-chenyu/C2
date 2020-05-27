@@ -28,8 +28,8 @@ namespace Citta_T1.Core
         private void InitGraph(ModelDocument doc, ModelRelation mr)
         {   // 深度复制文档的图关系,同时添加最新的mr关系
             this.graph = new Dictionary<int, List<int>>();
-            foreach (int k in doc.ModelLineDict.Keys)
-                this.graph[k] = new List<int>(doc.ModelLineDict[k]);
+            foreach (int k in doc.ModelGraphDict.Keys)
+                this.graph[k] = new List<int>(doc.ModelGraphDict[k]);
 
             if (!this.graph.ContainsKey(mr.StartID))
                 this.graph[mr.StartID] = new List<int>() { mr.EndID };

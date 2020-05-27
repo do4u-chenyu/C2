@@ -381,7 +381,7 @@ namespace Citta_T1.Controls.Move.Rs
             }
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
             Global.GetMainForm().BindUiManagerFunc();
 

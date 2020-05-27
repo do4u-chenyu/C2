@@ -26,19 +26,19 @@ namespace Citta_T1.Business.Schedule
     }
 
 
-    class Manager
+    class TaskManager
     {
 
         public delegate void UpdateLog(string log);//声明一个更新主线程日志的委托
         public UpdateLog UpdateLogDelegate;
 
-        public delegate void AccomplishTask(Manager manager);//声明一个在完成任务时通知主线程的委托
+        public delegate void AccomplishTask(TaskManager manager);//声明一个在完成任务时通知主线程的委托
         public AccomplishTask TaskCallBack;
 
-        public delegate void UpdateGif(Manager manager);//声明一个更新运作动图的委托
+        public delegate void UpdateGif(TaskManager manager);//声明一个更新运作动图的委托
         public UpdateGif UpdateGifDelegate;
 
-        public delegate void UpdateBar(Manager manager);//声明一个更新进度条的委托
+        public delegate void UpdateBar(TaskManager manager);//声明一个更新进度条的委托
         public UpdateGif UpdateBarDelegate;
 
         private TripleListGen tripleList;
@@ -59,7 +59,7 @@ namespace Citta_T1.Business.Schedule
         public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
         public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
 
-        public Manager()
+        public TaskManager()
         {
             this.modelStatus = ModelStatus.Null;
         }

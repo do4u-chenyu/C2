@@ -25,7 +25,7 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
+        private Dictionary<int, List<int>> modelGraphDict;  // 当前模型,以ID为key的图描述
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -38,7 +38,7 @@ namespace Citta_T1.Business.Model
         private int sizeL;
         private float screenFactor;
 
-        private Manager manager;
+        private TaskManager taskManager;
         private string userPath;
 
         /*
@@ -55,30 +55,31 @@ namespace Citta_T1.Business.Model
 
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
-        public Manager Manager { get => manager; set => manager = value; }
+        public TaskManager TaskManager { get => taskManager; set => taskManager = value; }
         public int SizeL { get => this.sizeL; set => this.sizeL = value; }
         public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
-        public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
+        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; set => modelGraphDict = value; }
         
 
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
         internal WorldMap WorldMap { get; set; }
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
-            this.modelLineDict = new Dictionary<int, List<int>>();
+            this.modelGraphDict = new Dictionary<int, List<int>>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
-            this.manager = new Manager();
+            this.taskManager = new TaskManager();
             this.WorldMap = new WorldMap();
             this.sizeL = 0;
             this.screenFactor = 1;
@@ -127,15 +128,15 @@ namespace Citta_T1.Business.Model
         }
         private void AddEdge(ModelRelation mr)
         {
-            if (!this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID] = new List<int>() { mr.EndID };
+            if (!this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID] = new List<int>() { mr.EndID };
             else
-                this.modelLineDict[mr.StartID].Add(mr.EndID);
+                this.modelGraphDict[mr.StartID].Add(mr.EndID);
         }
         private void RemoveEdge(ModelRelation mr)
         {
-            if (this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID].Remove(mr.EndID);
+            if (this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID].Remove(mr.EndID);
         }
         public void DeleteModelElement(Control control)
         {
