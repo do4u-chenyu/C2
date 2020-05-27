@@ -78,9 +78,7 @@ namespace Citta_T1.Controls.Flow
             {
                 if (elementWorldLocDict.ContainsKey(me))
                     continue;
-
-                PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(ctOrgPosition);
+                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(me.Location);
                 PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 elementWorldLocDict[me] = loc;
             }
