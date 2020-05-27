@@ -124,10 +124,10 @@ namespace Citta_T1.Controls.Flow
             Point viewBoxPosition;
 
 
-            float factor = (this.Parent as CanvasPanel).ScreenFactor;//
+            float factor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
             try
             {
-                factor = currentDocument.WorldMap1.GetWmInfo().ScreenFactor;//
+                
                 mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;
 
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
@@ -173,8 +173,8 @@ namespace Citta_T1.Controls.Flow
 
             foreach (ModelElement me in modelElements)
             { 
-                PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(ctOrgPosition);
+                
+                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(me.Location);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 
                 // 为了解决导航框拖动时,元素漂移的问题
