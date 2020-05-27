@@ -275,12 +275,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point WorldBoundControl(Point Pm)
         {
            
-             float screenFactor = Global.GetCurrentDocument().ScreenFactor;
-             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
             
-            int orgX = Convert.ToInt32(Pm.X / screenFactor);
-            int orgY = Convert.ToInt32(Pm.Y / screenFactor);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(orgX, orgY), mapOrigin);
+
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm);
             
 
             if (Pw.X < 20)
@@ -395,7 +393,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -408,10 +406,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition);
         }
 
         #endregion
@@ -944,7 +942,7 @@ namespace Citta_T1.Controls.Move.Op
             Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().SizeL;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(

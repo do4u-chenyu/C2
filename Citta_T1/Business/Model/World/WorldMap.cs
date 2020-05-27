@@ -17,23 +17,21 @@ namespace Citta_T1.Business.Model.World
         {
             mapOrigin = new Point(-600, -300);
             screenFactor = 1;
-            sizeLevel = 1;
+            sizeLevel = 0;
         }
-
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         public int SizeLevel { get => sizeLevel; set => sizeLevel = value; }
     }
     class WorldMap
     {
-        //internal WorldMapInfo WmInfo { get; set; }
+        
         private WorldMapInfo wmInfo = new WorldMapInfo();
 
         public WorldMapInfo GetWmInfo()
         {
             return wmInfo;
         }
-
         public void SetWmInfo(WorldMapInfo value)
         {
             wmInfo = value;
@@ -54,6 +52,24 @@ namespace Citta_T1.Business.Model.World
         public Point WorldToScreen(Point Pw)
         {
             Point Ps = new Point
+            {
+                X = Convert.ToInt32((Pw.X + GetWmInfo().MapOrigin.X) * GetWmInfo().ScreenFactor),
+                Y = Convert.ToInt32((Pw.Y + GetWmInfo().MapOrigin.Y) * GetWmInfo().ScreenFactor)
+            };
+            return Ps;
+        }
+        public PointF ScreenToWorldF(PointF Ps)
+        {
+            PointF Pw = new PointF
+            {
+                X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
+                Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
+            };
+            return Pw;
+        }
+        public PointF WorldToScreenF(Point Pw)
+        {
+            PointF Ps = new PointF
             {
                 X = Convert.ToInt32((Pw.X + GetWmInfo().MapOrigin.X) * GetWmInfo().ScreenFactor),
                 Y = Convert.ToInt32((Pw.Y + GetWmInfo().MapOrigin.Y) * GetWmInfo().ScreenFactor)

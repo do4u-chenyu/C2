@@ -71,8 +71,8 @@ namespace Citta_T1.Controls.Flow
         private void PushModelDocument(ModelDocument md)
         {
             List<ModelElement> modelElements = md.ModelElements;
-            float factor = md.ScreenFactor;
-            Point mapOrigin = md.MapOrigin;
+            float factor = md.WorldMap1.GetWmInfo().ScreenFactor;
+          
             // 鼠标点下时,缓存所有元素世界坐标系
             foreach (ModelElement me in modelElements)
             {
@@ -80,7 +80,7 @@ namespace Citta_T1.Controls.Flow
                     continue;
 
                 PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                PointF ctWorldPosition = md.ScreenToWorldF(ctOrgPosition, mapOrigin);
+                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(ctOrgPosition);
                 PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 elementWorldLocDict[me] = loc;
             }
@@ -89,8 +89,8 @@ namespace Citta_T1.Controls.Flow
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
 
-            float factor = Global.GetCurrentDocument().ScreenFactor;
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+            float factor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
+            Point mapOrigin = Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin;
             
             int dx = Convert.ToInt32((startX - e.X ) * rate / factor);
             int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
@@ -101,7 +101,7 @@ namespace Citta_T1.Controls.Flow
             LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
-            Global.GetCurrentDocument().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            
             Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -127,16 +127,16 @@ namespace Citta_T1.Controls.Flow
             float factor = (this.Parent as CanvasPanel).ScreenFactor;//
             try
             {
-                factor = currentDocument.ScreenFactor;//
-                mapOrigin = currentDocument.MapOrigin;
+                factor = currentDocument.WorldMap1.GetWmInfo().ScreenFactor;//
+                mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;
 
                 Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
-                currentDocument.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                
                 currentDocument.WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                mapOrigin = currentDocument.MapOrigin;               
+                mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;               
 
-                viewBoxPosition = currentDocument.ScreenToWorld(new Point(50, 30), mapOrigin);
+                viewBoxPosition = currentDocument.WorldMap1.ScreenToWorld(new Point(50, 30));
             }
             catch
             {
@@ -174,7 +174,7 @@ namespace Citta_T1.Controls.Flow
             foreach (ModelElement me in modelElements)
             { 
                 PointF ctOrgPosition = new PointF(me.Location.X / factor, me.Location.Y / factor);
-                PointF ctWorldPosition = currentDocument.ScreenToWorldF(ctOrgPosition, mapOrigin);
+                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(ctOrgPosition);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 
                 // 为了解决导航框拖动时,元素漂移的问题

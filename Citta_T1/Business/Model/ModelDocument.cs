@@ -34,10 +34,8 @@ namespace Citta_T1.Business.Model
 
         private int elementCount = 0;
         
-        private Point mapOrigin = new Point(-600, -300);
         private WorldMap WorldMap;
-        private int sizeL;
-        private float screenFactor;
+
 
         private TaskManager taskManager;
         private string userPath;
@@ -54,11 +52,11 @@ namespace Citta_T1.Business.Model
         public List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
 
 
-        public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
+        
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
         public TaskManager TaskManager { get => taskManager; set => taskManager = value; }
-        public int SizeL { get => this.sizeL; set => this.sizeL = value; }
-        public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
+
+
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
 
@@ -83,8 +81,6 @@ namespace Citta_T1.Business.Model
 
             this.taskManager = new TaskManager();
             this.WorldMap = new WorldMap();
-            this.sizeL = 0;
-            this.screenFactor = 1;
 
 
             // lineCounter应该为`this,modelRelations`的最大值
@@ -265,44 +261,7 @@ namespace Citta_T1.Business.Model
         }
 
         
-        public Point ScreenToWorld(Point Ps, Point Pm)
-        {
-            Point Pw = new Point();
-            Pw.X = Ps.X - Pm.X;
-            Pw.Y = Ps.Y - Pm.Y;
-            return Pw;
-        }
 
-        public PointF ScreenToWorldF(PointF Ps, Point Pm)
-        {
-            PointF Pw = new PointF();
-            Pw.X = Ps.X - Pm.X;
-            Pw.Y = Ps.Y - Pm.Y;
-            return Pw;
-        }
-
-
-        //  Pw = Ps / Factor - Pm
-        public Point ScreenToWorld(Point Ps)
-        {
-            Point Pw = new Point    
-            {
-                X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
-                Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
-            };
-            return Pw;
-        }
-
-        // Ps = (Pw + Pm) * Factor
-        public Point WorldToScreen(Point Pw)
-        {
-            Point Ps = new Point
-            {
-                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
-                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
-            };
-            return Ps;
-        }
        
         public void UpdateAllLines()
         {

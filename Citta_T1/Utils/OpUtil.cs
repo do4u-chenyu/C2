@@ -57,7 +57,7 @@ namespace Citta_T1.Utils
         {
 
             Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(new Point(50, 30));
             
             if (Pw.X < 50)
             {

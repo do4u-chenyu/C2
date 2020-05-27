@@ -94,11 +94,12 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
             this.UpdateStyles();
-            int sizeLevel = Global.GetCurrentDocument().SizeL;
+            int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
             if (isLarger && sizeLevel <= 2)
             {
                 sizeLevel += 1;
-                Global.GetCurrentDocument().ScreenFactor *= factor;
+                
+                Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor *= factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -114,7 +115,8 @@ namespace Citta_T1.Controls
             else if (!isLarger && sizeLevel > 0)
             {
                 sizeLevel -= 1;
-                Global.GetCurrentDocument().ScreenFactor /=  factor;
+                
+                Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor /= factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -127,7 +129,8 @@ namespace Citta_T1.Controls
                     mr.ZoomOut();
                 }
             }
-            Global.GetCurrentDocument().SizeL = sizeLevel;
+            
+            Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel = sizeLevel;
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
@@ -136,7 +139,7 @@ namespace Citta_T1.Controls
         {
 
             Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
 
             if (Ps.Y < 70 * screenFactor)
             {
@@ -167,7 +170,7 @@ namespace Citta_T1.Controls
             location.Y -=  moveOffset.Y;
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
-            int sizeLevel = Global.GetCurrentDocument().SizeL;
+            int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
             if (type == ElementType.DataSource)
             {
                 path = e.Data.GetData("Path").ToString();
@@ -190,7 +193,7 @@ namespace Citta_T1.Controls
             if (e.Button == MouseButtons.Right) 
             {
                 
-                Point pw = Global.GetCurrentDocument().ScreenToWorld(e.Location, Global.GetCurrentDocument().MapOrigin);
+                Point pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location);
                 if (frameWrapper.MinBoding.Contains(pw))
                 {
                     this.DelSelectControl.Show(this,e.Location);
@@ -218,7 +221,7 @@ namespace Citta_T1.Controls
             }
             if (SelectDrag())
             {
-                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
             }
         }
         private bool IsValidLine(ModelRelation mr)
@@ -376,7 +379,7 @@ namespace Citta_T1.Controls
             // 控件移动
             else if (SelectDrag())
             {
-                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
             }
             // 绘制
             else if (cmd == ECommandType.PinDraw)
@@ -483,7 +486,7 @@ namespace Citta_T1.Controls
             else if (SelectDrag())
             {
                 
-                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
             }
 
             else if (cmd == ECommandType.PinDraw)
@@ -564,7 +567,7 @@ namespace Citta_T1.Controls
             if (Global.GetCurrentDocument() == null)
                 return;
 
-            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
+            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e))
                 return;
             if (frameWrapper.FramePaint(e))
                 return;
