@@ -139,28 +139,17 @@ namespace Citta_T1.Business.Model
             foreach (ModelRelation mr in this.ModelRelations)
             {
                 if (mr.StartID != ID) continue;
-                foreach (ModelElement me in this.ModelElements)
-                {
-                    if (me.ID != mr.EndID) continue; 
-                    me.Status = ElementStatus.Null;
-                    (me.GetControl as MoveOpControl).EnableOption = false;
-                    //存在链路，后续链路中算子状态变化
-                    DegradeChildrenStatus(me.ID);
-
-                }
+                StatusChangeWhenDeleteLine(mr.EndID);
             }
         }
         public void StatusChangeWhenDeleteLine(int ID)
         {
-
-            foreach (ModelElement me in this.ModelElements)
-            {
-                if (me.ID != ID) continue;
-                me.Status = ElementStatus.Null;
-                (me.GetControl as MoveOpControl).EnableOption = false;
-                //存在链路，后续链路中算子状态变化
-                DegradeChildrenStatus(me.ID);
-            }
+            ModelElement me = SearchElementByID(ID);
+            if (me == ModelElement.Empty)
+                return;
+            me.Status = ElementStatus.Null;
+            (me.GetControl as MoveOpControl).EnableOption = false;
+            DegradeChildrenStatus(me.ID);
         }
         public void DegradeChildrenStatus(int operatorID)
         {
@@ -207,7 +196,6 @@ namespace Citta_T1.Business.Model
                     if (me.ID != mr.EndID) continue;
                     me.Status = ElementStatus.Null;
                     SetChildrenStatusNull(mr.EndID);
-
                 }
             }
         }
