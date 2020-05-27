@@ -334,11 +334,9 @@ namespace Citta_T1.Business.Model
         {
             return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
-        public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
+        public List<ModelRelation> SearchRelationsByEndID(int id)
         {
-            List<ModelRelation> relations = new List<ModelRelation>();
-            relations=this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
-            return relations;
+            return this.modelRelations.FindAll(me => me.EndID == id);
         }
         public ModelElement SearchResultOperator(int ID)
         {

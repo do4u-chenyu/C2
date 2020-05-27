@@ -133,7 +133,7 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnName.Add(this.OutList.Items[i].ToString());
             }
            
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns));
         }
         #endregion
         #region 初始化配置
@@ -167,7 +167,7 @@ namespace Citta_T1.OperatorViews
                 if (!field.Contains("columnname"))
                     Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
             }
-            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
+            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
         }
       
 

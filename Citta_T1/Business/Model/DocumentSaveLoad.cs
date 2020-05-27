@@ -246,10 +246,10 @@ namespace Citta_T1.Business.Model
                             
                             if(ctl.SubTypeName == "AI实践" && ctl.Option.GetOption("columnname0") != "")
                             {
-                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname0");
+                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname0").Split('\t').ToList();
                             }
                             else if (ctl.Option.GetOption("columnname") != "")
-                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname");
+                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname").Split('\t').ToList();
                             else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
                             {
                                 ctl.DoubleDataSourceColumns["0"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
