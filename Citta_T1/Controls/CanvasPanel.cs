@@ -477,68 +477,85 @@ namespace Citta_T1.Controls
 
             if (e.Button != MouseButtons.Left) 
                 return;
-            if (Global.GetFlowControl().SelectFrame)
+            // 画框处理
+            if (SelectFrame())
             {
                 frameWrapper.FrameUp(e);
-                
+                return;
             }
-
-            else if (SelectDrag())
-            {
-                
+            // 拖拽处理
+            if (SelectDrag())
+            {   
                 dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
+                return;
             }
 
-            else if (cmd == ECommandType.PinDraw)
+            // 非画线落点处理
+            if (cmd != ECommandType.PinDraw)
+                return;
+
+            cmd = ECommandType.Null;
+            lineWhenMoving = null;
+
+            /* 不是所有位置Up都能形成曲线的
+                * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
+                */
+            if (CanNotPinDraw())
             {
-                
-                /* 不是所有位置Up都能形成曲线的
-                 * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
-                 */
-                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl))
-                {
-                    cmd = ECommandType.Null;
-                    lineWhenMoving = null;
-                    this.RepaintAllRelations();
-                    this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
-                    return;
-                }
-                /* 
-                 * 在Canvas_MouseMove的时候，对鼠标的终点进行
-                 * 只保存线索引
-                 *         __________
-                 * endP1  | MControl | startP
-                 * endP2  |          |
-                 * 
-                 *         ----------
-                 */
-                (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
-                ModelRelation mr = new ModelRelation(
-                    (startC as IMoveControl).GetID(),
-                    (endC as IMoveControl).GetID(),
-                    startP,
-                    (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                    (endC as MoveOpControl).RevisedPinIndex
-                    );
-                // 1. 关系不能重复
-                // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
-                // 3. 成环不能添加
-                ModelDocument cd = Global.GetCurrentDocument();
-                CyclicDetector cdt = new CyclicDetector(cd, mr);
-                bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
-                bool isCyclic = cdt.IsCyclic();
-                if (!isDuplicatedRelation && !isCyclic)
-                {
-                    cd.AddModelRelation(mr);
-                    //endC右键菜单设置Enable                     
-                    Global.GetOptionDao().EnableOpOptionView(mr);
-
-                }
-                cmd = ECommandType.Null;
-                lineWhenMoving = null;
-                this.Invalidate();
+                this.RepaintAllRelations();
+                this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
+                return;
             }
 
+            // 画线落点处理
+            /* 
+                * 在Canvas_MouseMove的时候，对鼠标的终点进行
+                * 只保存线索引
+                *         __________
+                * endP1  | MControl | startP
+                * endP2  |          |
+                * 
+                *         ----------
+                */
+            (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            ModelRelation mr = new ModelRelation(
+                (startC as IMoveControl).GetID(),
+                (endC as IMoveControl).GetID(),
+                startP,
+                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
+                (endC as MoveOpControl).RevisedPinIndex
+                );
+            // 1. 关系不能重复
+            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
+            // 3. 成环不能添加
+            ModelDocument cd = Global.GetCurrentDocument();
+            CyclicDetector cdt = new CyclicDetector(cd, mr);
+            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+            bool isCyclic = cdt.IsCyclic();
+            if (!isDuplicatedRelation && !isCyclic)
+            {
+                cd.AddModelRelation(mr);
+                //endC右键菜单设置Enable                     
+                Global.GetOptionDao().EnableOpOptionView(mr);
+
+            }
+            this.Invalidate();
+        }
+
+        private bool CanNotPinDraw()
+        {
+            // return this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl);
+            // OPControl 不能连 OPControl
+            if (StartC is MoveOpControl)
+                return true;
+            // 没有落点Control
+            if (EndC == null)
+                return true;
+            // 落点Control必须是OpControl
+            if (!(EndC is MoveOpControl))
+                return true;
+
+            return false;
         }
 
         private void RepaintAllRelations()
