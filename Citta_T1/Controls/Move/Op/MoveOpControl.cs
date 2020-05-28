@@ -578,7 +578,7 @@ namespace Citta_T1.Controls.Move.Op
             Global.GetMainForm().BindUiManagerFunc();
 
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+            Global.GetMainForm().UpdateRunbuttonImageInfo();
         }
 
 
