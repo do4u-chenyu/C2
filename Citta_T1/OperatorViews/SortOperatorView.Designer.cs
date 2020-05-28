@@ -105,7 +105,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(413, 19);
+            this.topPanel.Size = new System.Drawing.Size(409, 19);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -113,10 +113,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 269);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 265);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(413, 51);
+            this.bottomPanel.Size = new System.Drawing.Size(409, 51);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -159,7 +159,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 19);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 250);
+            this.keyPanel.Size = new System.Drawing.Size(116, 246);
             this.keyPanel.TabIndex = 2;
             // 
             // label9
@@ -211,7 +211,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 19);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(297, 250);
+            this.valuePanel.Size = new System.Drawing.Size(293, 246);
             this.valuePanel.TabIndex = 3;
             // 
             // groupBox3
@@ -261,7 +261,6 @@
             this.endRow.Name = "endRow";
             this.endRow.Size = new System.Drawing.Size(39, 23);
             this.endRow.TabIndex = 15;
-            this.endRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EndRow_KeyPress);
             this.endRow.Leave += new System.EventHandler(this.EndRow_Leave);
             // 
             // firstRow
@@ -274,7 +273,6 @@
             this.firstRow.Size = new System.Drawing.Size(39, 23);
             this.firstRow.TabIndex = 14;
             this.firstRow.Text = "1";
-            this.firstRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FirstRow_KeyPress);
             this.firstRow.Leave += new System.EventHandler(this.FirstRow_Leave);
             // 
             // dataInfo
@@ -416,7 +414,7 @@
             // SortOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(413, 320);
+            this.ClientSize = new System.Drawing.Size(409, 316);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

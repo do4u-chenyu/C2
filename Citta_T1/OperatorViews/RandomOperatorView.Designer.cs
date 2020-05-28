@@ -53,7 +53,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(332, 21);
+            this.topPanel.Size = new System.Drawing.Size(328, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -61,10 +61,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 147);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 143);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(332, 52);
+            this.bottomPanel.Size = new System.Drawing.Size(328, 52);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -104,7 +104,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 126);
+            this.keyPanel.Size = new System.Drawing.Size(116, 122);
             this.keyPanel.TabIndex = 2;
             // 
             // label3
@@ -149,26 +149,25 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(216, 126);
+            this.valuePanel.Size = new System.Drawing.Size(212, 122);
             this.valuePanel.TabIndex = 3;
             // 
-            // RandomNumBox
+            // randomNumBox
             // 
             this.randomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.randomNumBox.Location = new System.Drawing.Point(0, 54);
             this.randomNumBox.Margin = new System.Windows.Forms.Padding(2);
-            this.randomNumBox.Name = "RandomNumBox";
+            this.randomNumBox.Name = "randomNumBox";
             this.randomNumBox.Size = new System.Drawing.Size(150, 23);
             this.randomNumBox.TabIndex = 4;
-            this.randomNumBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RandomNumBox_KeyPress);
             this.randomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
             // 
-            // DataInfoBox
+            // dataInfoBox
             // 
             this.dataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataInfoBox.Location = new System.Drawing.Point(0, 1);
             this.dataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.dataInfoBox.Name = "DataInfoBox";
+            this.dataInfoBox.Name = "dataInfoBox";
             this.dataInfoBox.ReadOnly = true;
             this.dataInfoBox.Size = new System.Drawing.Size(150, 23);
             this.dataInfoBox.TabIndex = 3;
@@ -176,20 +175,20 @@
             this.dataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
             this.dataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
-            // OutList
+            // outList
             // 
             this.outList.DataSource = null;
             this.outList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outList.Location = new System.Drawing.Point(0, 106);
             this.outList.Margin = new System.Windows.Forms.Padding(0);
-            this.outList.Name = "OutList";
+            this.outList.Name = "outList";
             this.outList.Size = new System.Drawing.Size(150, 24);
             this.outList.TabIndex = 2;
             // 
             // RandomOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(332, 199);
+            this.ClientSize = new System.Drawing.Size(328, 195);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

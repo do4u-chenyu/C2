@@ -113,8 +113,15 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请选择排序字段!");
                 return;
             }
+            if (String.IsNullOrWhiteSpace(this.firstRow.Text)|| String.IsNullOrWhiteSpace(this.endRow.Text))
+            {
+                MessageBox.Show("请输出行数!");
+                return;
+            }
+
+            if (!IsCorrectOutOrder(this.firstRow.Text, this.endRow.Text))
+                return;
             this.DialogResult = DialogResult.OK;
-           
             SaveOption();
 
             //内容修改，引起文档dirty 
@@ -219,29 +226,67 @@ namespace Citta_T1.OperatorViews
         private void FirstRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.firstRow);
+            { 
+                if(!ConvertUtil.IsInt(this.firstRow.Text))
+                    MessageBox.Show("请输入数字"); 
+                else
+                    this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
+               
+            }
+              
         }
 
         private void FirstRow_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.firstRow);
+            if (!ConvertUtil.IsInt(this.firstRow.Text))
+            {
+                MessageBox.Show("请输入数字");
+                this.firstRow.Text = "";
+            }
+              
+            else
+                this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
         }
 
         private void EndRow_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.endRow);
+            if (!ConvertUtil.IsInt(this.endRow.Text))
+            {
+                MessageBox.Show("请输入数字");
+                this.endRow.Text = "";
+            }
+               
+            else
+                this.endRow.Text = int.Parse(this.endRow.Text).ToString();
+
         }
 
         private void EndRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.endRow);
+            {
+                if (!ConvertUtil.IsInt(this.endRow.Text))
+                    MessageBox.Show("请输入数字");
+                else
+                    this.endRow.Text = int.Parse(this.endRow.Text).ToString();
+            }
         }
         #endregion
 
         private void GroupBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
+        }
+        private bool IsCorrectOutOrder(string firstRow,string endRow)
+        {
+            int first = Convert.ToInt32(firstRow);
+            int end = Convert.ToInt32(endRow);
+            if (first > end)
+            {
+                MessageBox.Show("输出行数选择中，起始行数大于结束行数");
+                return false;
+            }
+            return true;
         }
     }
 }

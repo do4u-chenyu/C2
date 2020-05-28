@@ -157,7 +157,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             bool empty=IsOptionReay();
             if (empty) return;
@@ -186,7 +186,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -294,14 +294,14 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
-                createLine(line);
+                CreateLine(line);
             }
         }
         #endregion
         #region 用户输入非法字符判断
 
         #endregion
-        private void createLine(int addLine)
+        private void CreateLine(int addLine)
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
@@ -393,7 +393,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
                 addLine = 0;
-                createLine(addLine);
+                CreateLine(addLine);
             }
             else
             {
@@ -423,7 +423,7 @@ namespace Citta_T1.OperatorViews
                     ctlNext5.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
                 }
-                createLine(addLine);
+                CreateLine(addLine);
             }
 
         }

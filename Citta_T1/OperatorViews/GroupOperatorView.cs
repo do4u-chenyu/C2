@@ -79,7 +79,6 @@ namespace Citta_T1.OperatorViews
             this.opControl.FirstDataSourceColumns =this.columnName.ToList();
         }
        
-
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
@@ -218,7 +217,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
 
             bool empty = IsOptionReay();
@@ -247,7 +246,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -303,7 +302,7 @@ namespace Citta_T1.OperatorViews
             addButton1.BackColor = System.Drawing.SystemColors.Control;
             addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
             addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.add_Click);
+            addButton1.Click += new System.EventHandler(this.Add_Click);
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
@@ -319,13 +318,13 @@ namespace Citta_T1.OperatorViews
             delButton1.UseVisualStyleBackColor = true;
             delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.del_Click);
+            delButton1.Click += new System.EventHandler(this.Del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
             this.tableLayoutPanel1.Controls.Add(delButton1, 2, addLine);
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int addLine;
@@ -364,7 +363,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void del_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);
@@ -400,22 +399,22 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }
@@ -453,7 +452,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-        private void groupBox3_Paint(object sender, PaintEventArgs e)
+        private void GroupBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }

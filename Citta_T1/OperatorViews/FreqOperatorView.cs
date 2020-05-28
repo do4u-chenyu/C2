@@ -60,7 +60,6 @@ namespace Citta_T1.OperatorViews
 
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
             string column = bcpInfo.ColumnLine;
             this.columnName = column.Split(separator);
@@ -100,7 +99,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告           
             if (this.outList.GetItemCheckIndex().Count == 0)
@@ -155,7 +154,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();

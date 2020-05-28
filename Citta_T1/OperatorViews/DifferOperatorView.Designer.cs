@@ -120,7 +120,7 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -135,7 +135,7 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
