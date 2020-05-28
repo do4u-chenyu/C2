@@ -67,7 +67,7 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
@@ -78,13 +78,10 @@ namespace Citta_T1.OperatorViews
             List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "sortfield");
 
-            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
-       
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-
+      
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
@@ -110,10 +107,9 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            if (this.dataInfo.Text == "") return;
-            if (this.sortField.Text == "")
+            if (String.IsNullOrWhiteSpace(this.sortField.Text))
             {
                 MessageBox.Show("请选择排序字段!");
                 return;
@@ -143,7 +139,7 @@ namespace Citta_T1.OperatorViews
 
         }
        
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -202,49 +198,49 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
-        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }
         #region 输入非数字，警告
-        private void firstRow_KeyPress(object sender, KeyPressEventArgs e)
+        private void FirstRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
                 optionInfoCheck.NonNumeric_ControlText(this.firstRow);
         }
 
-        private void firstRow_Leave(object sender, EventArgs e)
+        private void FirstRow_Leave(object sender, EventArgs e)
         {
             optionInfoCheck.NonNumeric_ControlText(this.firstRow);
         }
 
-        private void endRow_Leave(object sender, EventArgs e)
+        private void EndRow_Leave(object sender, EventArgs e)
         {
             optionInfoCheck.NonNumeric_ControlText(this.endRow);
         }
 
-        private void endRow_KeyPress(object sender, KeyPressEventArgs e)
+        private void EndRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
                 optionInfoCheck.NonNumeric_ControlText(this.endRow);
         }
         #endregion
 
-        private void groupBox3_Paint(object sender, PaintEventArgs e)
+        private void GroupBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }

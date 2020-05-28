@@ -102,7 +102,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op, OpUtil.SEType(op.SubTypeName));
+                ModelElement e = ModelElement.CreateOperatorElement(op);
                 this.currentDocument.AddModelElement(e);
                 return e;               
             }

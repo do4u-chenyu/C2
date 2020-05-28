@@ -91,7 +91,7 @@ namespace Citta_T1.Controls
             Rectangle thisRect = new Rectangle(this.control.Location, new Size(this.control.Width, this.control.Height));
             foreach (ModelElement me in md)
             {
-                Control ctr = me.GetControl;
+                Control ctr = me.InnerControl;
                 //if (ctr == this.control)
                 //    continue;
                 Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));

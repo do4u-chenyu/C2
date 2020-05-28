@@ -48,7 +48,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -120,7 +120,7 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -135,7 +135,7 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -153,7 +153,7 @@
             // 
             this.valuePanel.Controls.Add(this.dataSource1);
             this.valuePanel.Controls.Add(this.dataSource0);
-            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -173,8 +173,8 @@
             this.dataSource1.Size = new System.Drawing.Size(144, 23);
             this.dataSource1.TabIndex = 10;
             this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource1_MouseClick);
-            this.dataSource1.LostFocus += new System.EventHandler(this.dataSource1_LostFocus);
+            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource1_MouseClick);
+            this.dataSource1.LostFocus += new System.EventHandler(this.DataSource1_LostFocus);
             // 
             // dataSource0
             // 
@@ -186,8 +186,8 @@
             this.dataSource0.Size = new System.Drawing.Size(144, 23);
             this.dataSource0.TabIndex = 9;
             this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource0_MouseClick);
-            this.dataSource0.LostFocus += new System.EventHandler(this.dataSource0_LostFocus);
+            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource0_MouseClick);
+            this.dataSource0.LostFocus += new System.EventHandler(this.DataSource0_LostFocus);
             // 
             // tableLayoutPanel2
             // 
@@ -222,7 +222,7 @@
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.add_Click);
+            this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
             // comboBox1
             // 
@@ -236,8 +236,8 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
-            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox1_KeyUp);
+            this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
             // 
             // comboBox2
             // 
@@ -251,8 +251,8 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(86, 24);
             this.comboBox2.TabIndex = 3;
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox2_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox2_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(this.ComboBox2_Leave);
             // 
             // panel1
             // 
@@ -280,13 +280,13 @@
             // 
             // OutList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(4, 263);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(112, 22);
-            this.OutList.TabIndex = 8;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(4, 263);
+            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outList.Name = "OutList";
+            this.outList.Size = new System.Drawing.Size(112, 22);
+            this.outList.TabIndex = 8;
             // 
             // CollideOperatorView
             // 
@@ -331,7 +331,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
         private System.Windows.Forms.TextBox dataSource1;
         private System.Windows.Forms.TextBox dataSource0;
         private System.Windows.Forms.ToolTip toolTip1;

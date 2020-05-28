@@ -111,11 +111,11 @@ namespace Citta_T1.Business.Model
                 {
                     
                     XmlElement enableoptionNode = xDoc.CreateElement("enableoption");
-                    enableoptionNode.InnerText = (me.GetControl as MoveOpControl).EnableOption.ToString();
+                    enableoptionNode.InnerText = (me.InnerControl as MoveOpControl).EnableOption.ToString();
                     modelElementXml.AppendChild(enableoptionNode);
                     //有配置信息才保存到xml中
-                    if ((me.GetControl as MoveOpControl).Option.OptionDict.Count() > 0)
-                        WriteModelOption(me.SubType, (me.GetControl as MoveOpControl).Option, xDoc, modelElementXml);
+                    if ((me.InnerControl as MoveOpControl).Option.OptionDict.Count() > 0)
+                        WriteModelOption(me.SubType, (me.InnerControl as MoveOpControl).Option, xDoc, modelElementXml);
                 }
                 if (me.Type == ElementType.Result)
                 {
@@ -231,14 +231,13 @@ namespace Citta_T1.Business.Model
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
                         bool enableOption =Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc);
-
-                        // 绑定线
-
-                        ctl.Status = EStatus(status);
-                        ctl.ID = id;
-                        ctl.EnableOption = enableOption;
-                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, SEType(subType));
+                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc)
+                        {
+                            Status = EStatus(status),
+                            ID = id,
+                            EnableOption = enableOption
+                        };
+                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
                         {
@@ -246,14 +245,14 @@ namespace Citta_T1.Business.Model
                             
                             if(ctl.SubTypeName == "AI实践" && ctl.Option.GetOption("columnname0") != "")
                             {
-                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                                ctl.FirstDataSourceColumns = ctl.Option.GetOption("columnname0").Split('\t').ToList();
                             }
                             else if (ctl.Option.GetOption("columnname") != "")
-                                ctl.SingleDataSourceColumns = ctl.Option.GetOption("columnname").Split('\t').ToList();
+                                ctl.FirstDataSourceColumns = ctl.Option.GetOption("columnname").Split('\t').ToList();
                             else if(ctl.Option.GetOption("columnname0") != "" && ctl.Option.GetOption("columnname1") != "")
                             {
-                                ctl.DoubleDataSourceColumns["0"]= ctl.Option.GetOption("columnname0").Split('\t').ToList();
-                                ctl.DoubleDataSourceColumns["1"]= ctl.Option.GetOption("columnname1").Split('\t').ToList();
+                                ctl.FirstDataSourceColumns= ctl.Option.GetOption("columnname0").Split('\t').ToList();
+                                ctl.SecondDataSourceColumns= ctl.Option.GetOption("columnname1").Split('\t').ToList();
                             }
 
                         }
@@ -264,10 +263,10 @@ namespace Citta_T1.Business.Model
                         string status = xn.SelectSingleNode("status").InnerText;
                         status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
-                        string bcpPath = xn.SelectSingleNode("path").InnerText;
+                        string fullFilePath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(bcpPath, 0, name, xnlocation);                   
+                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, xnlocation);                   
                         // 绑定线
                         cotl.ID = id;
                         #region 读分隔符
@@ -297,12 +296,14 @@ namespace Citta_T1.Business.Model
                        
                         DSUtil.Encoding encoding=xn.SelectSingleNode("encoding") == null?  DSUtil.Encoding.UTF8: EncodingType(xn.SelectSingleNode("encoding").InnerText);
 
-                        MoveRsControl ctl = new MoveRsControl(0, name, loc);
-                        ctl.ID = id;
-                        ctl.Status = EStatus(status);
-                        ctl.FullFilePath = bcpPath;
-                        ctl.Separator = separator;
-                        ctl.Encoding = encoding;
+                        MoveRsControl ctl = new MoveRsControl(0, name, loc)
+                        {
+                            ID = id,
+                            Status = EStatus(status),
+                            FullFilePath = bcpPath,
+                            Separator = separator,
+                            Encoding = encoding
+                        };
                         ModelElement resultElement = ModelElement.CreateResultElement(ctl);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
@@ -346,8 +347,7 @@ namespace Citta_T1.Business.Model
                     option.SetOption(node.Name, node.InnerText);
             return option;
         }
-        public ElementSubType SEType(string subType)
-        { return (ElementSubType)Enum.Parse(typeof(ElementSubType), subType); }
+
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
         public DSUtil.ExtType ExtType(string type)

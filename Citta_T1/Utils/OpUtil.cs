@@ -86,7 +86,7 @@ namespace Citta_T1.Utils
             List<ModelRelation> modelRelations = md.ModelRelations;
             foreach (ModelElement me in modelElements)
             {
-                Control ct = me.GetControl;
+                Control ct = me.InnerControl;
                 if (ct is IDragable)
                     (ct as IDragable).ChangeLoc(dx, dy);
             }
@@ -221,5 +221,7 @@ namespace Citta_T1.Utils
             return type;
         }
 
+        public static DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }
 }

@@ -36,10 +36,10 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
-            this.oldRandomNum =this.RandomNumBox.Text;         
+            this.oldRandomNum =this.randomNumBox.Text;         
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
         }
         #region 初始化配置
         private void InitOptionInfo()
@@ -62,40 +62,40 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     this.dataPath = me.FullFilePath;
-                    if (me.GetControl is MoveDtControl)
-                        separator = (me.GetControl as MoveDtControl).Separator;
+                    if (me.InnerControl is MoveDtControl)
+                        separator = (me.InnerControl as MoveDtControl).Separator;
                     //设置数据信息选项
-                    this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                    this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
+                    this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                    this.toolTip1.SetToolTip(this.dataInfoBox, this.dataInfoBox.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
             }
             if (this.dataPath != "")
-                SetOption(this.dataPath, this.DataInfoBox.Text, encoding, separator);
+                SetOption(this.dataPath, this.dataInfoBox.Text, encoding, separator);
 
         }
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in columnName)
             {
-                this.OutList.AddItems(name);
+                this.outList.AddItems(name);
             }
 
             //新旧数据源比较，是否清空窗口配置
             List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
 
-            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       
 
-        public void SetTextBoxName(TextBox textBox)
+        private void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
             int maxLength = 18;
@@ -122,8 +122,8 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            this.opControl.Option.SetOption("randomnum", this.RandomNumBox.Text);
-            List<int> checkIndexs = this.OutList.GetItemCheckIndex();
+            this.opControl.Option.SetOption("randomnum", this.randomNumBox.Text);
+            List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
@@ -139,43 +139,43 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             if (this.opControl.Option.GetOption("randomnum") != "")
-                this.RandomNumBox.Text = this.opControl.Option.GetOption("randomnum");
+                this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
             if (this.opControl.Option.GetOption("outfield") != "")
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = indexs.ToList();
-                this.OutList.LoadItemCheckIndex(indexs);
+                this.outList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
+                    this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
           
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.RandomNumBox.Text == "")
+            if (this.randomNumBox.Text == "")
             {
                 MessageBox.Show("请选择随机条数字段!");
                 return;
             }
-            if (this.OutList.GetItemCheckIndex().Count == 0)
+            if (this.outList.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.DataInfoBox.Text == "") return;
+            if (this.dataInfoBox.Text == "") return;
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldRandomNum!= this.RandomNumBox.Text)
+            if (this.oldRandomNum!= this.randomNumBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
             else if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.OutList.GetItemCheckText();
+            this.selectColumn = this.outList.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             { 
@@ -198,30 +198,26 @@ namespace Citta_T1.OperatorViews
             Close();
         }
         #endregion
-        private DSUtil.Encoding EnType(string type)
-        {
-            return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type);
-        }
 
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {
-            this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+            this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
         private void DataInfoBox_LostFocus(object sender, EventArgs e)
         {
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
         }
 
         private void RandomNumBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.RandomNumBox);
+                optionInfoCheck.NonNumeric_ControlText(this.randomNumBox);
         }
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.RandomNumBox);
+            optionInfoCheck.NonNumeric_ControlText(this.randomNumBox);
         }
     }
 }

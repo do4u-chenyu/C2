@@ -45,7 +45,7 @@ namespace Citta_T1.Business.Option
             if (rightMe == ModelElement.Empty || rightMe.Type != ElementType.Operator)
                 return;
 
-            MoveOpControl moveOpControl = rightMe.GetControl as MoveOpControl;
+            MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
             if (IsSingleElement(rightMe)) 
             {
@@ -72,87 +72,79 @@ namespace Citta_T1.Business.Option
             /*
              * 获取单，双输入新旧数据源旧表头
              */
-            MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
-            List<string> oldColumns0; 
-            List<string> oldColumns1 = new List<string>();
-            List<string> columns0 = new List<string>() { };
-            List<string> columns1 = new List<string>() { };
-            //mr1不为null,则me双输入算子
-            if (mr1 == null)
-            {
-                oldColumns0 = moveOpControl.SingleDataSourceColumns;
-                if (oldColumns0 == null || oldColumns0.Count() == 0)
+            MoveOpControl moveOpControl = me.InnerControl as MoveOpControl;
+            List<string> oldColumns0 = moveOpControl.FirstDataSourceColumns; 
+            List<string> oldColumns1 = moveOpControl.SecondDataSourceColumns;
+            List<string> newColumns0 = new List<string>() { };
+            List<string> newColumns1 = new List<string>() { };
 
-                    return;
-                GetNewColumns(mr0, columns0, mr1, columns1);
-            }  
-            else
-            {
-                Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
-                if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
+            // 任何情况下,第一个入度的数据源表头不能为空
+            if (oldColumns0.Count == 0)
+                return;
 
+            // 二元算子时,第二个入度的数据源表头不能为空
+            if (moveOpControl.BinaryDimension())
+                if(oldColumns1.Count == 0)
                     return;
-                oldColumns0 = doubleDataSource["0"];
-                oldColumns1 = doubleDataSource["1"];
-                if (oldColumns0 == null || oldColumns0.Count() == 0)
-                    return;
-                if (oldColumns1 == null || oldColumns1.Count() == 0)
-                    return;
-                if (mr1.EndPin != 1)
-                    GetNewColumns(mr1, columns0, mr0, columns1);
-                else
-                    GetNewColumns(mr0, columns0, mr1, columns1);
-            }
-           
-            if (mr1 == null)
-            {
-                //单输入情况1
-                if (columns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(columns0.Take(oldColumns0.Count())))
-                    me.Status = LastOptionStatus(me);
-                //单输入情况2
-                else
-                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
-            }
-            else
-            {
-                //双输入情况1
-                bool factor0 = columns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(columns0.Take(oldColumns0.Count()));
-                bool factor1 = columns1.Count() >= oldColumns1.Count() && oldColumns1.SequenceEqual(columns1.Take(oldColumns1.Count()));
-                if (factor0 && factor1)
-                    me.Status = LastOptionStatus(me);
-                //双输入情况2
-                else
-                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
-            }
-        }
-        private void GetNewColumns(ModelRelation mr0, List<string> columns0, ModelRelation mr1, List<string> columns1)
-        {
+
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
-            BcpInfo bcpInfo0 = new BcpInfo(startElement0);
-            foreach(string name in bcpInfo0.columnArray)
-                columns0.Add(name);
-            if (mr1 == null) return;
-            ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
-            BcpInfo bcpInfo1 = new BcpInfo(startElement1);
-            foreach (string name in bcpInfo1.columnArray)
-                columns1.Add(name);
+            LoadColumns(startElement0, newColumns0);
+    
+            if (moveOpControl.BinaryDimension())// 二元算子
+            {
+                ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
+                LoadColumns(startElement1, newColumns1);
+                // newColumns0对应第一个入度的表头
+                // newColumns1对应第二个入度的表头
+                // 默认线0落在入度0,线1落在入度1
+                // 线0落在入度1,线1落在入度0, 交换表头
+                if (mr0.EndPin == 1 && mr1.EndPin == 0)
+                    Swap(newColumns0, newColumns1);  
+            }
 
+            bool factor0 = newColumns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count()));
+            bool factor1 = newColumns1.Count() >= oldColumns1.Count() && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Count()));
+
+            if (factor0 && factor1)
+            {
+                me.Status = RestoreOptionStatus(me);
+                return;
+            } 
+            Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
+        }
+
+        private void Swap(List<string> A, List<string> B)
+        {
+            List<String> C = A;
+            A = B;
+            B = C;
+        }
+
+        private void LoadColumns(ModelElement me, List<string> columns)
+        {
+            columns.AddRange(new BcpInfo(me).columnArray);
         }
 
 
-      
-       
+
+
         //获取算子上次配置状态
-        private ElementStatus LastOptionStatus(ModelElement me)
+        private ElementStatus RestoreOptionStatus(ModelElement me)
         { 
-            Dictionary<string, string> optionDict = (me.GetControl as MoveOpControl).Option.OptionDict;
-            if (optionDict == null) return ElementStatus.Null;
+            Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
+
+            if (optionDict == null)
+                return ElementStatus.Null;
+
+            List<string> keys = new List<string>() { "otherSeparator", "browseChosen", "endRow" };
+
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
-                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，sort的结束行数也能为空。。。，直接判断为空会出问题
-                List<string> keys = new List<string>() { "otherSeparator", "browseChosen", "endRow" };
-                if (keys.Contains(kvp.Key)) continue;
-                if (optionDict[kvp.Key] == "")
+                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，sort的结束行数也能为空。。。，直接判断为空会出问题       
+                if (keys.Contains(kvp.Key))
+                    continue;
+
+                if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
                    return ElementStatus.Null;
             }
             return ElementStatus.Ready;

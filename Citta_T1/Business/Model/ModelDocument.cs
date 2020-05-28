@@ -126,7 +126,7 @@ namespace Citta_T1.Business.Model
 
         public void DeleteModelElement(Control control)
         {
-            this.ModelElements.Remove(this.ModelElements.Find(me => me.GetControl == control));
+            this.ModelElements.Remove(this.ModelElements.Find(me => me.InnerControl == control));
         }
 
         public void DeleteModelElement(ModelElement me)
@@ -148,7 +148,7 @@ namespace Citta_T1.Business.Model
             if (me == ModelElement.Empty)
                 return;
             me.Status = ElementStatus.Null;
-            (me.GetControl as MoveOpControl).EnableOption = false;
+            (me.InnerControl as MoveOpControl).EnableOption = false;
             DegradeChildrenStatus(me.ID);
         }
         public void DegradeChildrenStatus(int opID)
@@ -215,7 +215,7 @@ namespace Citta_T1.Business.Model
             foreach (ModelElement el1 in this.modelElements)
             {
                 el1.Show();
-                (el1.GetControl as IMoveControl).ControlNoSelect();
+                (el1.InnerControl as IMoveControl).ControlNoSelect();
             }
                 
         }
@@ -251,11 +251,11 @@ namespace Citta_T1.Business.Model
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
-                    mr.StartP = (sEle.GetControl as IMoveControl).GetStartPinLoc(0);
-                    mr.EndP = (eEle.GetControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                    mr.StartP = (sEle.InnerControl as IMoveControl).GetStartPinLoc(0);
+                    mr.EndP = (eEle.InnerControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
-                    (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
-                    (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
+                    (sEle.InnerControl as IMoveControl).OutPinInit("lineExit");
+                    (eEle.InnerControl as IMoveControl).rectInAdd(mr.EndPin);
                     mr.UpdatePoints();
                 }
                 catch (Exception ex)

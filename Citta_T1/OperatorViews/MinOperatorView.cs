@@ -41,29 +41,29 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
 
-            this.oldMinfield = this.MinValueBox.Text;
+            this.oldMinfield = this.minValueBox.Text;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            this.MinValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.MinValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.MinValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.minValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.minValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.minValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             SetTextBoxName(this.DataInfoBox);
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.MinValueBox.Text == "")
+            if (String.IsNullOrWhiteSpace(this.minValueBox.Text))
             {
                 MessageBox.Show("请选择最小值字段!");
                 return;
             }
-            if (this.OutList.GetItemCheckIndex().Count == 0)
+            if (this.outList.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.DataInfoBox.Text == "") return;
+            if (String.IsNullOrWhiteSpace(DataInfoBox.Text)) return;
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.outList.GetItemCheckText());
                 return;
             }
 
@@ -96,13 +96,13 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            List<int> checkIndexs = this.OutList.GetItemCheckIndex();
+            List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             List<int> removeIndex = new List<int>();
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);       
-            this.opControl.Option.SetOption("minfield", this.MinValueBox.Tag == null ? this.MinValueBox.SelectedIndex.ToString() : this.MinValueBox.Tag.ToString());
+            this.opControl.Option.SetOption("minfield", this.minValueBox.Tag == null ? this.minValueBox.SelectedIndex.ToString() : this.minValueBox.Tag.ToString());
           
 
 
@@ -119,8 +119,8 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("minfield") != "")
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                this.MinValueBox.Text = this.MinValueBox.Items[index].ToString();
-                this.MinValueBox.Tag = index.ToString();
+                this.minValueBox.Text = this.minValueBox.Items[index].ToString();
+                this.minValueBox.Tag = index.ToString();
             }
             if (this.opControl.Option.GetOption("outfield") != "")
             {
@@ -128,9 +128,9 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = indexs.ToList();
-                this.OutList.LoadItemCheckIndex(indexs);
+                this.outList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
+                    this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
             
         }
@@ -149,13 +149,13 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in columnName)
             {
-                this.OutList.AddItems(name);
-                this.MinValueBox.Items.Add(name);
+                this.outList.AddItems(name);
+                this.minValueBox.Items.Add(name);
             }
 
             //新旧数据源比较，是否清空窗口配置
@@ -165,12 +165,12 @@ namespace Citta_T1.OperatorViews
                 if (!field.Contains("columnname"))
                     Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
             }
-            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
        
 
-        public void SetTextBoxName(TextBox textBox)
+        private void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
             int maxLength = 18;
@@ -195,8 +195,6 @@ namespace Citta_T1.OperatorViews
         }
 
         #endregion
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {
