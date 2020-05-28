@@ -60,7 +60,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)
             {
-                this.fullOutputFilePath = resultElement.GetFullFilePath();
+                this.fullOutputFilePath = resultElement.FullFilePath;
             }
             else
             {

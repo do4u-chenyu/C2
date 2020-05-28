@@ -2,6 +2,7 @@
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -53,14 +54,9 @@ namespace Citta_T1.Business.Model
         private ElementType type;
         private ElementSubType subType;
         private Control ctl;
-        private string dataSourceFullFilePath;
-        private string description;
         private int id;
         private char separator;
         private DSUtil.Encoding encoding;
-        private DSUtil.ExtType extType;
-
-
 
         public ElementType Type { get => type; set => type = value; }
         public ElementStatus Status
@@ -101,7 +97,6 @@ namespace Citta_T1.Business.Model
         public ElementSubType SubType { get => subType; set => subType = value; }
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
-        public string RemarkName { get => this.description; set => this.description = value; }
         public int ID { get => this.id; set => this.id = value; }
         public DSUtil.Encoding Encoding
         {
@@ -135,7 +130,24 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public DSUtil.ExtType ExtType
+        {
+            get
+            {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        return (ctl as MoveDtControl).ExtType;
+                        break;
+                    case ElementType.Result:
+                        return (ctl as MoveRsControl).ExtType;
+                        break;
+                    default:
+                        break;
+                }
+                return DSUtil.ExtType.Unknow;
+            }
+        }
         public char Separator {
             get {
                 switch (this.type)
@@ -166,6 +178,58 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
+        public string Description
+        {
+            get
+            {
+                string des = String.Empty;
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        des = (ctl as MoveDtControl).Description;
+                        break;
+                    case ElementType.Operator:
+                        des = (ctl as MoveOpControl).DescriptionName;
+                        break;
+                    case ElementType.Result:
+                        des = (ctl as MoveRsControl).DescriptionName;
+                        break;
+                    default:
+                        break;
+                }
+                return des;
+            }
+            set
+            {
+                switch (this.type)
+                {
+                    case ElementType.DataSource:
+                        (ctl as MoveDtControl).Description = value;
+                        break;
+                    case ElementType.Operator:
+                        (ctl as MoveOpControl).DescriptionName = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).DescriptionName = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        public string FullFilePath
+        {
+            get
+            {
+                string path = String.Empty;
+                if (this.type == ElementType.DataSource)
+                    path = (ctl as MoveDtControl).FullFilePath;
+                else if (this.type == ElementType.Result)
+                    path = (ctl as MoveRsControl).FullFilePath;
+                return path;
+            }
+        }
+
 
         private ModelElement()
         {
@@ -173,96 +237,48 @@ namespace Citta_T1.Business.Model
         }
 
         public readonly static ModelElement Empty = new ModelElement(); 
-        public ModelElement(ElementType type, Control ctl, string des, string bcpPath,ElementSubType subType, int id, 
+
+        public ModelElement(ElementType type, 
+            Control ctl, 
+            string description, 
+            ElementSubType subType, 
+            int id, 
             char separator = '\t',
-            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
-            Init(type, ctl, des, bcpPath, subType, id, separator, extType, encoding);
+            Init(type, ctl, description, subType, id, separator, encoding);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string des, ElementSubType subType, int id)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string description, ElementSubType subType, int id)
         {
-            return new ModelElement(ElementType.Operator, ctl, des, "", subType, id);
+            return new ModelElement(ElementType.Operator, ctl, description, subType, id);
         }
-        public static ModelElement CreateResultElement(MoveRsControl ctl, string des, int id)
+        public static ModelElement CreateResultElement(MoveRsControl ctl, string description, int id)
         {
-            return new ModelElement(ElementType.Result, ctl, des, "",ElementSubType.Null, id,ctl.Separator, DSUtil.ExtType.Unknow,ctl.Encoding);
+            return new ModelElement(ElementType.Result, ctl, description, ElementSubType.Null, id,ctl.Separator,ctl.Encoding);
         }
 
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string des, string fullFilePath, int id)
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string description, int id)
         {
-            return new ModelElement(ElementType.DataSource, ctl, des, fullFilePath, ElementSubType.Null, id, ctl.Separator, ctl.ExtType, ctl.Encoding);
+            return new ModelElement(ElementType.DataSource, ctl, description, ElementSubType.Null, id, ctl.Separator, ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string des, string fullFilePath,  ElementSubType subType, int id, 
+        private void Init(ElementType type, Control ctl, string description, ElementSubType subType, int id, 
             char separator,
-            DSUtil.ExtType extType, 
             DSUtil.Encoding encoding)
         {
             this.type = type;
             this.subType = subType;
             this.ctl = ctl;
-            this.dataSourceFullFilePath = fullFilePath;
-            this.SetDescription(des);
-            this.description = des;
+            this.Description = description;
             this.id = id;
             this.separator = separator;
-            this.extType = extType;
             this.encoding = encoding;
-            
-
         }
         
-        public string GetDescription()
-        {
-            string des = "";
-            switch (this.type)
-            {
-                case ElementType.DataSource:
-                    des = (ctl as MoveDtControl).DescriptionName;
-                    break;
-                case ElementType.Operator:
-                    des = (ctl as MoveOpControl).DescriptionName;
-                    break;
-                case ElementType.Result:
-                    des = (ctl as MoveRsControl).DescriptionName;
-                    break;
-                default:
-                    break;
-            }
-            return des;
-
-        }
 
 
-        private void SetDescription(string des)
-        {
-            switch (this.type)
-            {
-                case ElementType.DataSource:
-                    (ctl as MoveDtControl).DescriptionName = des;
-                    break;
-                case ElementType.Operator:
-                    (ctl as MoveOpControl).DescriptionName = des;
-                    break;
-                case ElementType.Result:
-                    (ctl as MoveRsControl).DescriptionName = des;
-                    break;
-                default:
-                    break;
-            }
-        }
-        public string GetFullFilePath()
-        {
-            string path = "";
-            if (this.type == ElementType.DataSource)
-                path = dataSourceFullFilePath;
-            else if (this.type == ElementType.Result)
-                path = (ctl as MoveRsControl).FullFilePath;
-            return path;
-        }
 
         public void Show()
         {
