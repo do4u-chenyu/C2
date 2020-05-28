@@ -67,7 +67,7 @@ namespace Citta_T1.Business.Option
             char separator = '\t';
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
-            string dataSourcePath = startElement.GetFullFilePath();
+            string dataSourcePath = startElement.FullFilePath;
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = endElement.ID;
             //获取当前连接的数据源的表头字段
@@ -129,11 +129,11 @@ namespace Citta_T1.Business.Option
                     modelElement1 = Global.GetCurrentDocument().SearchElementByID(me.StartID);
             }
             
-            string dataSourcePath0 = modelElement0.GetFullFilePath();
+            string dataSourcePath0 = modelElement0.FullFilePath;
             DSUtil.Encoding encoding0 = modelElement0.Encoding;
             int ID0 = modelElement0.ID;
 
-            string dataSourcePath1 = modelElement1.GetFullFilePath();
+            string dataSourcePath1 = modelElement1.FullFilePath;
             DSUtil.Encoding encoding1 = modelElement1.Encoding;
             int ID1 = modelElement1.ID;
 
@@ -298,7 +298,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
             List<string> columns = new List<string>();
            
             //新输出字段中不包含旧字段
@@ -342,7 +342,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
             List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
             //左侧数据源判断
             if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
             {
@@ -383,7 +383,7 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
+            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
@@ -430,7 +430,7 @@ namespace Citta_T1.Business.Option
             {
                 char separator = '\t';
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
-                dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
+                dataInfo["dataPath" + kvp.Key.ToString()] = me.FullFilePath;
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
                 if (me.GetControl is MoveDtControl)
                     separator = (me.GetControl as MoveDtControl).Separator;

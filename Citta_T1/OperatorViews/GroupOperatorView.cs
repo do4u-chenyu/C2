@@ -244,7 +244,7 @@ namespace Citta_T1.OperatorViews
             }
 
             // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
             if (!this.oldOutName.SequenceEqual(this.selectColumn))
                 Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);

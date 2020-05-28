@@ -28,7 +28,7 @@ namespace Citta_T1.Business.Schedule
             this.OperateElement = operateElement;
             this.ResultElement = resultElement;
             this.isOperated = resultElement.Status.Equals("Done") ? true : false;
-            this.tripleName = string.Join("", dataElements.Select(c=>c.RemarkName).ToArray()) + "-" + operateElement.RemarkName + "-" + resultElement.RemarkName;
+            this.tripleName = string.Join("", dataElements.Select(c => c.Description).ToArray()) + "-" + operateElement.Description + "-" + resultElement.Description;
         }
 
         public bool IsOperated { get => isOperated; set => isOperated = value; }

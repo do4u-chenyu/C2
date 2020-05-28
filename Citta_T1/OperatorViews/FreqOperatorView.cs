@@ -145,7 +145,7 @@ namespace Citta_T1.OperatorViews
             }
 
             // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             List<string> newData = new List<string>(this.outList.GetItemCheckText());
             newData.Add("频率统计结果");

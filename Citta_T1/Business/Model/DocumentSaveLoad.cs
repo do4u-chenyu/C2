@@ -68,7 +68,7 @@ namespace Citta_T1.Business.Model
                 modelElementXml.AppendChild(typeNode);
             
                 XmlElement nameNode = xDoc.CreateElement("name");
-                nameNode.InnerText = me.GetDescription();
+                nameNode.InnerText = me.Description;
                 modelElementXml.AppendChild(nameNode);
 
                 XmlElement subTypeNode = xDoc.CreateElement("subtype");
@@ -92,7 +92,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.DataSource)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetFullFilePath();
+                    pathNode.InnerText = me.FullFilePath;
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement sepTypeNode = xDoc.CreateElement("separator"); 
@@ -120,7 +120,7 @@ namespace Citta_T1.Business.Model
                 if (me.Type == ElementType.Result)
                 {
                     XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.GetFullFilePath();
+                    pathNode.InnerText = me.FullFilePath;
                     modelElementXml.AppendChild(pathNode);
 
                     XmlElement separatorNode = xDoc.CreateElement("separator");
@@ -278,9 +278,8 @@ namespace Citta_T1.Business.Model
                         char separator = GetSeparator(ascii);
                         #endregion
                         cotl.Separator = separator;
-                        cotl.ExtType = ExtType(xn.SelectSingleNode("extType").InnerText);
                         cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
-                        ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, bcpPath, id);
+                        ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, id);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
                     else if (type == "Remark")
