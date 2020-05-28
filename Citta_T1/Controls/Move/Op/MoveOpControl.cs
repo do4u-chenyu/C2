@@ -39,8 +39,9 @@ namespace Citta_T1.Controls.Move.Op
         private string oldTextString;
         private OperatorOption option = new OperatorOption();
         private int id;
-        private List<string> firstSourceColumns;
-        private List<string> secondDataSourceColumns; 
+
+        private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
+        private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
         
         // 一些倍率
         public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
@@ -60,8 +61,8 @@ namespace Citta_T1.Controls.Move.Op
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public List<string> FirstDataSourceColumns { get => this.firstSourceColumns; set => this.firstSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
+        public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
         public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
 
 
@@ -109,7 +110,7 @@ namespace Citta_T1.Controls.Move.Op
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
             this.status = ElementStatus.Null;
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            p1.DashStyle = DashStyle.Dash;
             InitializeComponent();
             textBox.Text = description;
             this.subTypeName = subTypeName;
@@ -119,16 +120,26 @@ namespace Citta_T1.Controls.Move.Op
             InitializeOpPinPicture();
             InitializeHelpToolTip();
             ChangeSize(sizeL);
+
+
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-           
+
+            firstDataSourceColumns = new List<string>();
+            SecondDataSourceColumns = new List<string>();
+
         }
 
         // 算子维度, 目前就2元和1元算子两种
         public int OperatorDimension()
         {
             return doublelPinFlag ? 2 : 1;
+        }
+
+        public bool BinaryDimension()
+        {
+            return OperatorDimension() == 2;
         }
         public void ChangeSize(int sizeL)
         {
@@ -152,7 +163,6 @@ namespace Citta_T1.Controls.Move.Op
 
         private void InitializeOpPinPicture()
         {          
-
             int dy = 0;
             if (doublelPinFlag)
             {
