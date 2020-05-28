@@ -1,19 +1,15 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -312,7 +308,7 @@ namespace Citta_T1.OperatorViews
             filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Font= new Font("微软雅黑", 8f, FontStyle.Regular);
+            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.columnName1);
             filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
             filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
@@ -321,8 +317,8 @@ namespace Citta_T1.OperatorViews
 
             TextBox textBox = new TextBox();
             textBox.Text = "别名";
-            textBox.Font =new Font("微软雅黑",9f,FontStyle.Regular);
-            textBox.ForeColor= SystemColors.ActiveCaption;
+            textBox.Font = new Font("微软雅黑",9f,FontStyle.Regular);
+            textBox.ForeColor = SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += TextBoxEx1_Enter;
             textBox.Leave += TextBoxEx1_Leave;
