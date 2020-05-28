@@ -266,7 +266,7 @@ namespace Citta_T1.OperatorViews
             }
 
             //输出变化，修改结果算子路径
-            if (!this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
+            if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
                 (resultElement.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
 
 

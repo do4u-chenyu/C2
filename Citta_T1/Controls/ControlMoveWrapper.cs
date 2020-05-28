@@ -51,7 +51,7 @@ namespace Citta_T1.Controls
             int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
             int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
+            Point moveOffset = Utils.OpUtil.WorldBoundControl(Factor, Width, Height);
 
             mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + Now.X - Start.X;

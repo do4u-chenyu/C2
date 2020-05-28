@@ -24,7 +24,7 @@ namespace Citta_T1.Dialogs
             List<string> lastLogin = lgInfo.LoadUserInfo("lastlogin");
             foreach (string item in lastLogin)
                 userNameComboBox.Text = item;
-            mainForm = new MainForm();
+            
         }
         private void LoginButton_Click(object sender, EventArgs e)
         {  
@@ -37,8 +37,8 @@ namespace Citta_T1.Dialogs
                 lgInfo.WriteUserInfo(userName);
             lgInfo.WriteLastLogin(userName);            
             this.Hide();
-            
-            mainForm.UserName = userName;
+
+            mainForm = new MainForm(userName);
             mainForm.ShowDialog();
 
             this.Close();

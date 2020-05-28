@@ -94,7 +94,7 @@ namespace Citta_T1.Controls.Flow
             int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             // 更新canvas所有元素的位置
-            Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);
+            Point moveOffset = OpUtil.WorldBoundControl(factor, Parent.Width, Parent.Height);
             // 修改线的位置，线的位置修改了空间位置修改不一样，需要重绘一下才能生效
             LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCanvasPanel().Invalidate();
@@ -128,7 +128,7 @@ namespace Citta_T1.Controls.Flow
                 
                 mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;
 
-                Point moveOffset = OpUtil.WorldBoundControl(mapOrigin, factor, Parent.Width, Parent.Height);                
+                Point moveOffset = OpUtil.WorldBoundControl(factor, Parent.Width, Parent.Height);                
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
                 
                 currentDocument.WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
