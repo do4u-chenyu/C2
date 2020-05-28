@@ -109,7 +109,7 @@ namespace Citta_T1.OperatorViews
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
             
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;

@@ -290,7 +290,7 @@ namespace Citta_T1.OperatorViews
                 }
             }
            
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;
