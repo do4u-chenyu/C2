@@ -38,9 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.RandomNumBox = new System.Windows.Forms.TextBox();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.randomNumBox = new System.Windows.Forms.TextBox();
+            this.dataInfoBox = new System.Windows.Forms.TextBox();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -93,7 +93,7 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -142,9 +142,9 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.RandomNumBox);
-            this.valuePanel.Controls.Add(this.DataInfoBox);
-            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.randomNumBox);
+            this.valuePanel.Controls.Add(this.dataInfoBox);
+            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
@@ -154,37 +154,37 @@
             // 
             // RandomNumBox
             // 
-            this.RandomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RandomNumBox.Location = new System.Drawing.Point(0, 54);
-            this.RandomNumBox.Margin = new System.Windows.Forms.Padding(2);
-            this.RandomNumBox.Name = "RandomNumBox";
-            this.RandomNumBox.Size = new System.Drawing.Size(150, 23);
-            this.RandomNumBox.TabIndex = 4;
-            this.RandomNumBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RandomNumBox_KeyPress);
-            this.RandomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
+            this.randomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.randomNumBox.Location = new System.Drawing.Point(0, 54);
+            this.randomNumBox.Margin = new System.Windows.Forms.Padding(2);
+            this.randomNumBox.Name = "RandomNumBox";
+            this.randomNumBox.Size = new System.Drawing.Size(150, 23);
+            this.randomNumBox.TabIndex = 4;
+            this.randomNumBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RandomNumBox_KeyPress);
+            this.randomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
             // 
             // DataInfoBox
             // 
-            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.Location = new System.Drawing.Point(0, 1);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.Size = new System.Drawing.Size(150, 23);
-            this.DataInfoBox.TabIndex = 3;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
-            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+            this.dataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataInfoBox.Location = new System.Drawing.Point(0, 1);
+            this.dataInfoBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dataInfoBox.Name = "DataInfoBox";
+            this.dataInfoBox.ReadOnly = true;
+            this.dataInfoBox.Size = new System.Drawing.Size(150, 23);
+            this.dataInfoBox.TabIndex = 3;
+            this.dataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.dataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
             // OutList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(0, 106);
-            this.OutList.Margin = new System.Windows.Forms.Padding(0);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(150, 24);
-            this.OutList.TabIndex = 2;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(0, 106);
+            this.outList.Margin = new System.Windows.Forms.Padding(0);
+            this.outList.Name = "OutList";
+            this.outList.Size = new System.Drawing.Size(150, 24);
+            this.outList.TabIndex = 2;
             // 
             // RandomOperatorView
             // 
@@ -222,9 +222,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
-        private System.Windows.Forms.TextBox RandomNumBox;
-        private System.Windows.Forms.TextBox DataInfoBox;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
+        private System.Windows.Forms.TextBox randomNumBox;
+        private System.Windows.Forms.TextBox dataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

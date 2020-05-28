@@ -29,12 +29,13 @@ namespace Citta_T1.Business.Model
         }
         public void AddBlankDocument(string modelTitle,  string userName)
         {
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
             foreach (ModelDocument md in this.modelDocuments)
                 md.Hide();
             this.modelDocuments.Add(modelDocument);
-            this.currentDocument = modelDocument;    
+            this.currentDocument = modelDocument;
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
         public string SaveCurrentDocument()
         {
@@ -61,27 +62,29 @@ namespace Citta_T1.Business.Model
         }
         public ModelDocument LoadDocument(string modelTitle,string userName)
         {
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
             md.ReCountDocumentMaxElementID();
             this.currentDocument = md;
-            this.modelDocuments.Add(md);          
+            this.modelDocuments.Add(md);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             return md;
 
         }
         public void SwitchDocument(string modelTitle)
         {
             this.currentDocument = FindModelDocument(modelTitle);
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            
             foreach (ModelDocument md in this.modelDocuments)
             {
                 if (md.ModelTitle == modelTitle)
                     md.Show();
                 else
                     md.Hide();
-            }           
+            }
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
         public ModelElement AddDocumentOperator(Control ct)
         {

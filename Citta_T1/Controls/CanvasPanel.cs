@@ -217,7 +217,7 @@ namespace Citta_T1.Controls
             }
             if (SelectFrame())
             {
-                frameWrapper.FrameDown(e);
+                frameWrapper.FrameWrapper_MouseDown(e);
             }
             if (SelectDrag())
             {
@@ -372,7 +372,7 @@ namespace Citta_T1.Controls
             // 画框
             if (SelectFrame())
             {
-                frameWrapper.FrameMove(e);
+                frameWrapper.FrameWrapper_MouseMove(e);
                
             }
             if (e.Button != MouseButtons.Left) return;
@@ -480,7 +480,7 @@ namespace Citta_T1.Controls
             // 画框处理
             if (SelectFrame())
             {
-                frameWrapper.FrameUp(e);
+                frameWrapper.FrameWrapper_MouseUp(e);
                 return;
             }
             // 拖拽处理

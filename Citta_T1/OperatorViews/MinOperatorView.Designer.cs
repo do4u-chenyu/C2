@@ -39,8 +39,8 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
-            this.MinValueBox = new System.Windows.Forms.ComboBox();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.minValueBox = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -143,8 +143,8 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.DataInfoBox);
-            this.valuePanel.Controls.Add(this.OutList);
-            this.valuePanel.Controls.Add(this.MinValueBox);
+            this.valuePanel.Controls.Add(this.outList);
+            this.valuePanel.Controls.Add(this.minValueBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 16);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
@@ -167,25 +167,25 @@
             // 
             // OutList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.OutList.Location = new System.Drawing.Point(9, 96);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(150, 24);
-            this.OutList.TabIndex = 2;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.outList.Location = new System.Drawing.Point(9, 96);
+            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outList.Name = "OutList";
+            this.outList.Size = new System.Drawing.Size(150, 24);
+            this.outList.TabIndex = 2;
             // 
             // MinValueBox
             // 
-            this.MinValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.MinValueBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.MinValueBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.MinValueBox.FormattingEnabled = true;
-            this.MinValueBox.Location = new System.Drawing.Point(9, 47);
-            this.MinValueBox.Margin = new System.Windows.Forms.Padding(2);
-            this.MinValueBox.Name = "MinValueBox";
-            this.MinValueBox.Size = new System.Drawing.Size(150, 25);
-            this.MinValueBox.TabIndex = 1;
+            this.minValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.minValueBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.minValueBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.minValueBox.FormattingEnabled = true;
+            this.minValueBox.Location = new System.Drawing.Point(9, 47);
+            this.minValueBox.Margin = new System.Windows.Forms.Padding(2);
+            this.minValueBox.Name = "MinValueBox";
+            this.minValueBox.Size = new System.Drawing.Size(150, 25);
+            this.minValueBox.TabIndex = 1;
             // 
             // MinOperatorView
             // 
@@ -222,8 +222,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
-        private System.Windows.Forms.ComboBox MinValueBox;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
+        private System.Windows.Forms.ComboBox minValueBox;
         private System.Windows.Forms.TextBox DataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;
     }
