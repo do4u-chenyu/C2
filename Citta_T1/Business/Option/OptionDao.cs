@@ -387,13 +387,10 @@ namespace Citta_T1.Business.Option
                 return dataInfo;
             foreach (KeyValuePair<int,int> kvp in startControls)
             {
-                char separator = '\t';
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
                 dataInfo["dataPath" + kvp.Key.ToString()] = me.GetFullFilePath();
                 dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
-                if (me.GetControl is MoveDtControl)
-                    separator = (me.GetControl as MoveDtControl).Separator;
-                dataInfo["separator" + kvp.Key.ToString()] = separator.ToString();
+                dataInfo["separator" + kvp.Key.ToString()] = me.Separator.ToString();
             }
             return dataInfo;
         }
