@@ -39,8 +39,8 @@ namespace Citta_T1.Controls.Move.Op
         private string oldTextString;
         private OperatorOption option = new OperatorOption();
         private int id;
-        private List<string> dataSourceColumns;
-        private Dictionary<string, List<string>> doubleDataSourceColumns; 
+        private List<string> firstSourceColumns;
+        private List<string> secondDataSourceColumns; 
         
         // 一些倍率
         public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
@@ -60,9 +60,9 @@ namespace Citta_T1.Controls.Move.Op
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public List<string> SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public List<string> FirstDataSourceColumns { get => this.firstSourceColumns; set => this.firstSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
-        public Dictionary<string, List<string>> DoubleDataSourceColumns { get => this.doubleDataSourceColumns; set => this.doubleDataSourceColumns = value; }
+        public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
 
 
 
@@ -108,7 +108,6 @@ namespace Citta_T1.Controls.Move.Op
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
-            this.doubleDataSourceColumns = new Dictionary<string, List<string>>();
             this.status = ElementStatus.Null;
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             InitializeComponent();
@@ -599,7 +598,7 @@ namespace Citta_T1.Controls.Move.Op
                 if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
                 {
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                    (me.GetControl as IMoveControl).OutPinInit("noLine");
+                    (me.InnerControl as IMoveControl).OutPinInit("noLine");
                 }
 
                 if (mr.StartID == this.id || mr.EndID == this.id)
@@ -655,7 +654,7 @@ namespace Citta_T1.Controls.Move.Op
                 if (mrc.ID == endID)
                 {
                     Global.GetCurrentDocument().DeleteModelElement(mrc);
-                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
+                    Global.GetCanvasPanel().DeleteElement(mrc.InnerControl);
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }

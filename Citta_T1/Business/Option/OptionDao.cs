@@ -45,7 +45,7 @@ namespace Citta_T1.Business.Option
             if (rightMe == ModelElement.Empty || rightMe.Type != ElementType.Operator)
                 return;
 
-            MoveOpControl moveOpControl = rightMe.GetControl as MoveOpControl;
+            MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
             if (IsSingleElement(rightMe)) 
             {
@@ -72,7 +72,7 @@ namespace Citta_T1.Business.Option
             /*
              * 获取单，双输入新旧数据源旧表头
              */
-            MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
+            MoveOpControl moveOpControl = me.InnerControl as MoveOpControl;
             List<string> oldColumns0; 
             List<string> oldColumns1 = new List<string>();
             List<string> columns0 = new List<string>() { };
@@ -80,7 +80,7 @@ namespace Citta_T1.Business.Option
             //mr1不为null,则me双输入算子
             if (mr1 == null)
             {
-                oldColumns0 = moveOpControl.SingleDataSourceColumns;
+                oldColumns0 = moveOpControl.FirstDataSourceColumns;
                 if (oldColumns0 == null || oldColumns0.Count() == 0)
 
                     return;
@@ -88,12 +88,9 @@ namespace Citta_T1.Business.Option
             }  
             else
             {
-                Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
-                if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
 
-                    return;
-                oldColumns0 = doubleDataSource["0"];
-                oldColumns1 = doubleDataSource["1"];
+                oldColumns0 = moveOpControl.FirstDataSourceColumns;
+                oldColumns1 = moveOpControl.SecondDataSourceColumns;
                 if (oldColumns0 == null || oldColumns0.Count() == 0)
                     return;
                 if (oldColumns1 == null || oldColumns1.Count() == 0)
@@ -145,7 +142,7 @@ namespace Citta_T1.Business.Option
         //获取算子上次配置状态
         private ElementStatus LastOptionStatus(ModelElement me)
         { 
-            Dictionary<string, string> optionDict = (me.GetControl as MoveOpControl).Option.OptionDict;
+            Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
             if (optionDict == null) return ElementStatus.Null;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {

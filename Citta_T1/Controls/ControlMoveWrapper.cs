@@ -47,20 +47,9 @@ namespace Citta_T1.Controls
             this.StaticImage = this.CreateWorldImage();
             ModelDocument currentDoc = Global.GetCurrentDocument();
             Point mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
-
-            int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
-            int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
-            mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            Point moveOffset = Utils.OpUtil.WorldBoundControl(Factor, Width, Height);
-
-            mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
-            mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + Now.X - Start.X;
-            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor) + Now.Y - Start.Y;
-
-
-            moveOffset.X = Convert.ToInt32(moveOffset.X * Factor);
-            moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
-
+            float factor = currentDoc.WorldMap1.GetWmInfo().ScreenFactor;
+            mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
+            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * factor);
             Graphics g = Graphics.FromImage(StaticImage);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
@@ -72,8 +61,7 @@ namespace Citta_T1.Controls
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             g.Dispose();
-
-            n.DrawImageUnscaled(StaticImage, mapOrigin.X, mapOrigin.Y);
+            n.DrawImageUnscaled(StaticImage, mapOrigin);
             this.StaticImage.Dispose();
             this.StaticImage = null;
             this.RepaintCtrs();
@@ -103,7 +91,7 @@ namespace Citta_T1.Controls
             Rectangle thisRect = new Rectangle(this.control.Location, new Size(this.control.Width, this.control.Height));
             foreach (ModelElement me in md)
             {
-                Control ctr = me.GetControl;
+                Control ctr = me.InnerControl;
                 //if (ctr == this.control)
                 //    continue;
                 Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));

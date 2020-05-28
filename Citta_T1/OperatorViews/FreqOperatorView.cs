@@ -71,7 +71,7 @@ namespace Citta_T1.OperatorViews
             List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);         
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
 
-            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       

@@ -53,8 +53,8 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.SingleDataSourceColumns = this.columnName0.ToList();
-                this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
+                this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
+                this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.FirstDataSourceColumns));
             }
             //初始化输入输出路径
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
@@ -91,7 +91,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
-            this.opControl.SingleDataSourceColumns = columnName.ToList();
+            this.opControl.FirstDataSourceColumns = columnName.ToList();
             return columnName;
         }
 
@@ -185,24 +185,24 @@ namespace Citta_T1.OperatorViews
             //输出变化，修改结果算子路径
             if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
-                (resultElement.GetControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
+                (resultElement.InnerControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
-            (hasResultNew.GetControl as MoveRsControl).FinishTextChange();
-            (hasResultNew.GetControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
-            (hasResultNew.GetControl as MoveRsControl).Separator = '\t';
+            (hasResultNew.InnerControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
+            (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
+            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
+            (hasResultNew.InnerControl as MoveRsControl).Separator = '\t';
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if(separator == "commaradio")
             {
-                (hasResultNew.GetControl as MoveRsControl).Separator = ',';
+                (hasResultNew.InnerControl as MoveRsControl).Separator = ',';
             }
             else if(separator == "otherseparatorradio")
             {
-                (hasResultNew.GetControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
+                (hasResultNew.InnerControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 

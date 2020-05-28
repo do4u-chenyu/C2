@@ -173,8 +173,8 @@
             this.dataSource1.Size = new System.Drawing.Size(144, 23);
             this.dataSource1.TabIndex = 10;
             this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource1_MouseClick);
-            this.dataSource1.LostFocus += new System.EventHandler(this.dataSource1_LostFocus);
+            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource1_MouseClick);
+            this.dataSource1.LostFocus += new System.EventHandler(this.DataSource1_LostFocus);
             // 
             // dataSource0
             // 
@@ -186,8 +186,8 @@
             this.dataSource0.Size = new System.Drawing.Size(144, 23);
             this.dataSource0.TabIndex = 9;
             this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource0_MouseClick);
-            this.dataSource0.LostFocus += new System.EventHandler(this.dataSource0_LostFocus);
+            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource0_MouseClick);
+            this.dataSource0.LostFocus += new System.EventHandler(this.DataSource0_LostFocus);
             // 
             // OutList
             // 
@@ -232,7 +232,7 @@
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.add_Click);
+            this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
             // comboBox1
             // 
@@ -246,8 +246,8 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
-            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox1_KeyUp);
+            this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
             // 
             // comboBox2
             // 
@@ -261,8 +261,8 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(86, 24);
             this.comboBox2.TabIndex = 3;
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox2_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox2_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(this.ComboBox2_Leave);
             // 
             // panel1
             // 

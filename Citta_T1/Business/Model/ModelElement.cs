@@ -45,79 +45,66 @@ namespace Citta_T1.Business.Model
         Done,    //运算完毕 
         Suspend, //暂停
         Ready,   //已经完成算子配置,随时可以开始运算
-        Warn,   //配置错误状态
+        Warn,    //配置错误状态
         Null,    //初始状态
     }
     public class ModelElement
     {
-        private ElementStatus status;
-        private ElementType type;
-        private ElementSubType subType;
         private Control ctl;
-        private int id;
-        private char separator;
-        private DSUtil.Encoding encoding;
 
-        public ElementType Type { get => type; set => type = value; }
-        public ElementStatus Status
-        { 
+        public ElementType Type { get; set; }
+        public Control InnerControl { get => ctl; }
+
+        #region  封装底层控件属性,Location, ID, Encoding, ExtType, Separator, Description, FullFilePath, Status
+
+        public ElementSubType SubType { 
             get
             {
-                switch (this.type)
-                {
+                switch (this.Type)
+                { 
+                    case ElementType.Operator:
+                        return OpUtil.SEType((ctl as MoveOpControl).SubTypeName);
                     case ElementType.DataSource:
-                        this.status = ElementStatus.Done;
-                        break;
-                    case ElementType.Operator:
-                        this.status = (ctl as MoveOpControl).Status;
-                        break;
-                    case ElementType.Result:
-                        this.status = (ctl as MoveRsControl).Status;
-                        break;
+                    case ElementType.Result:  
                     default:
-                        break;
-                }
-                return this.status;
-            }
-            set
-            {
-                switch (this.type)
-                {
-                    case ElementType.Operator:
-                        (ctl as MoveOpControl).Status = value;
-                        break;
-                    case ElementType.Result:
-                        (ctl as MoveRsControl).Status = value;
-                        break;
-                    default:
-                        break;
+                        return ElementSubType.Null;
                 }
             }
         }
-        public ElementSubType SubType { get => subType; set => subType = value; }
         public Point Location { get => ctl.Location; }
-        public Control GetControl { get => ctl; }
-        public int ID { get => this.id; set => this.id = value; }
+        public int ID {
+            get
+            {
+                switch (this.Type)
+                { 
+                    case ElementType.Operator:
+                        return (ctl as MoveOpControl).ID;
+                    case ElementType.DataSource:
+                        return (ctl as MoveDtControl).ID;
+                    case ElementType.Result:
+                        return (ctl as MoveRsControl).ID;
+                    default:
+                        return -1;              
+                }
+            }
+        }
         public DSUtil.Encoding Encoding
         {
             get
             {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.DataSource:
-                        this.encoding = (ctl as MoveDtControl).Encoding;
-                        break;
+                        return (ctl as MoveDtControl).Encoding;
                     case ElementType.Result:
-                        this.encoding = (ctl as MoveRsControl).Encoding;
-                        break;
+                        return (ctl as MoveRsControl).Encoding;
                     default:
-                        break;
+                        return DSUtil.Encoding.NoNeed;
                 }
-                return this.encoding;
             }
             set
             {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.Operator:
                         (ctl as MoveDtControl).Encoding = value;
@@ -134,38 +121,34 @@ namespace Citta_T1.Business.Model
         {
             get
             {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.DataSource:
                         return (ctl as MoveDtControl).ExtType;
-                        break;
                     case ElementType.Result:
                         return (ctl as MoveRsControl).ExtType;
-                        break;
                     default:
-                        break;
+                        return DSUtil.ExtType.Unknow;
                 }
-                return DSUtil.ExtType.Unknow;
+               
             }
         }
         public char Separator {
             get {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.DataSource:
-                        this.separator = (ctl as MoveDtControl).Separator;
-                        break;
+                        return (ctl as MoveDtControl).Separator;
                     case ElementType.Result:
-                        this.separator = (ctl as MoveRsControl).Separator;
-                        break;
+                        return (ctl as MoveRsControl).Separator;
                     default:
-                        break;
+                        return '\t';
                 }
-                return this.separator;
+               
             }
             set 
             {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.Operator:
                         (ctl as MoveDtControl).Separator = value;
@@ -183,7 +166,7 @@ namespace Citta_T1.Business.Model
             get
             {
                 string des = String.Empty;
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.DataSource:
                         des = (ctl as MoveDtControl).Description;
@@ -201,7 +184,7 @@ namespace Citta_T1.Business.Model
             }
             set
             {
-                switch (this.type)
+                switch (this.Type)
                 {
                     case ElementType.DataSource:
                         (ctl as MoveDtControl).Description = value;
@@ -222,67 +205,84 @@ namespace Citta_T1.Business.Model
             get
             {
                 string path = String.Empty;
-                if (this.type == ElementType.DataSource)
+                if (this.Type == ElementType.DataSource)
                     path = (ctl as MoveDtControl).FullFilePath;
-                else if (this.type == ElementType.Result)
+                else if (this.Type == ElementType.Result)
                     path = (ctl as MoveRsControl).FullFilePath;
                 return path;
             }
         }
 
+        public ElementStatus Status
+        {
+            get
+            {
+                switch (this.Type)
+                {
+                    case ElementType.DataSource:
+                        return ElementStatus.Done;
+                    case ElementType.Operator:
+                        return (ctl as MoveOpControl).Status;
+                    case ElementType.Result:
+                        return (ctl as MoveRsControl).Status;
+                    default:
+                        return ElementStatus.Null;
+                }
+            }
+            set
+            {
+                switch (this.Type)
+                {
+                    case ElementType.Operator:
+                        (ctl as MoveOpControl).Status = value;
+                        break;
+                    case ElementType.Result:
+                        (ctl as MoveRsControl).Status = value;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        #endregion
+
+
+        public readonly static ModelElement Empty = new ModelElement();
 
         private ModelElement()
         {
-            type = ElementType.Empty;
+            Type = ElementType.Empty;
         }
 
-        public readonly static ModelElement Empty = new ModelElement(); 
-
-        public ModelElement(ElementType type, 
-            Control ctl, 
-            string description, 
-            ElementSubType subType, 
-            int id, 
-            char separator = '\t',
-            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
+       
+        private ModelElement(ElementType type,  Control ctl)
         {
-            Init(type, ctl, description, subType, id, separator, encoding);
+            Init(type, ctl);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string description, ElementSubType subType, int id)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl)
         {
-            return new ModelElement(ElementType.Operator, ctl, description, subType, id);
+            return new ModelElement(ElementType.Operator, ctl);
         }
-        public static ModelElement CreateResultElement(MoveRsControl ctl, string description, int id)
+        public static ModelElement CreateResultElement(MoveRsControl ctl)
         {
-            return new ModelElement(ElementType.Result, ctl, description, ElementSubType.Null, id,ctl.Separator,ctl.Encoding);
-        }
-
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string description, int id)
-        {
-            return new ModelElement(ElementType.DataSource, ctl, description, ElementSubType.Null, id, ctl.Separator, ctl.Encoding);
+            return new ModelElement(ElementType.Result, ctl);
         }
 
-
-        private void Init(ElementType type, Control ctl, string description, ElementSubType subType, int id, 
-            char separator,
-            DSUtil.Encoding encoding)
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl)
         {
-            this.type = type;
-            this.subType = subType;
-            this.ctl = ctl;
-            this.Description = description;
-            this.id = id;
-            this.separator = separator;
-            this.encoding = encoding;
+            return new ModelElement(ElementType.DataSource, ctl);
+        }
+
+        private void Init(ElementType type, Control ctl)
+        {
+            this.Type = type;
+            this.ctl = ctl; 
         }
         
-
-
-
         public void Show()
         {
-            switch (this.type)
+            switch (this.Type)
             {
                 case ElementType.DataSource:
                 case ElementType.Operator:
@@ -296,7 +296,7 @@ namespace Citta_T1.Business.Model
         }
         public void Hide()
         {
-            switch (this.type)
+            switch (this.Type)
             {
                 case ElementType.DataSource:
                 case ElementType.Operator:
@@ -307,7 +307,5 @@ namespace Citta_T1.Business.Model
                     break;
             }
         }
-
-
     }
 }

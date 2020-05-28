@@ -123,7 +123,7 @@ namespace Citta_T1.Controls
             for (int i = 0; i < modelElements.Count; i++)
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
-                Control ct = me.GetControl;
+                Control ct = me.InnerControl;
                 Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
