@@ -238,7 +238,7 @@ namespace Citta_T1.Business.Model
                         ctl.Status = EStatus(status);
                         ctl.ID = id;
                         ctl.EnableOption = enableOption;
-                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, name, SEType(subType), id);
+                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl, SEType(subType));
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
                         {
@@ -257,9 +257,6 @@ namespace Citta_T1.Business.Model
                             }
 
                         }
-                            
-
-
                     }
                     else if (type == "DataSource")
                     {
@@ -279,7 +276,7 @@ namespace Citta_T1.Business.Model
                         #endregion
                         cotl.Separator = separator;
                         cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
-                        ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl, name, id);
+                        ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
                     else if (type == "Remark")
@@ -306,7 +303,7 @@ namespace Citta_T1.Business.Model
                         ctl.FullFilePath = bcpPath;
                         ctl.Separator = separator;
                         ctl.Encoding = encoding;
-                        ModelElement resultElement = ModelElement.CreateResultElement(ctl, name, id);
+                        ModelElement resultElement = ModelElement.CreateResultElement(ctl);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
                     else if (type == "Relation")

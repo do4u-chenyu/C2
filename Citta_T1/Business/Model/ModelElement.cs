@@ -54,8 +54,6 @@ namespace Citta_T1.Business.Model
         private ElementType type;
         private ElementSubType subType;
         private Control ctl;
-        private int id;
-        private char separator;
         private DSUtil.Encoding encoding;
 
         public ElementType Type { get => type; set => type = value; }
@@ -97,7 +95,24 @@ namespace Citta_T1.Business.Model
         public ElementSubType SubType { get => subType; set => subType = value; }
         public Point Location { get => ctl.Location; }
         public Control GetControl { get => ctl; }
-        public int ID { get => this.id; set => this.id = value; }
+
+        #region  封装底层控件属性
+        public int ID {
+            get
+            {
+                switch (this.type)
+                { 
+                    case ElementType.Operator:
+                        return (ctl as MoveOpControl).ID;
+                    case ElementType.DataSource:
+                        return (ctl as MoveDtControl).ID;
+                    case ElementType.Result:
+                        return (ctl as MoveRsControl).ID;
+                    default:
+                        return -1;              
+                }
+            }
+        }
         public DSUtil.Encoding Encoding
         {
             get
@@ -138,14 +153,12 @@ namespace Citta_T1.Business.Model
                 {
                     case ElementType.DataSource:
                         return (ctl as MoveDtControl).ExtType;
-                        break;
                     case ElementType.Result:
                         return (ctl as MoveRsControl).ExtType;
-                        break;
                     default:
-                        break;
+                        return DSUtil.ExtType.Unknow;
                 }
-                return DSUtil.ExtType.Unknow;
+               
             }
         }
         public char Separator {
@@ -153,15 +166,13 @@ namespace Citta_T1.Business.Model
                 switch (this.type)
                 {
                     case ElementType.DataSource:
-                        this.separator = (ctl as MoveDtControl).Separator;
-                        break;
+                        return (ctl as MoveDtControl).Separator;
                     case ElementType.Result:
-                        this.separator = (ctl as MoveRsControl).Separator;
-                        break;
+                        return (ctl as MoveRsControl).Separator;
                     default:
-                        break;
+                        return '\t';
                 }
-                return this.separator;
+               
             }
             set 
             {
@@ -229,7 +240,7 @@ namespace Citta_T1.Business.Model
                 return path;
             }
         }
-
+        #endregion
 
         private ModelElement()
         {
@@ -240,40 +251,35 @@ namespace Citta_T1.Business.Model
 
         public ModelElement(ElementType type, 
             Control ctl, 
-            string description, 
             ElementSubType subType, 
-            int id, 
-            char separator = '\t',
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
         {
-            Init(type, ctl, description, subType, id, separator, encoding);
+            Init(type, ctl, subType, encoding);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl, string description, ElementSubType subType, int id)
+        public static ModelElement CreateOperatorElement(MoveOpControl ctl, ElementSubType subType)
         {
-            return new ModelElement(ElementType.Operator, ctl, description, subType, id);
+            return new ModelElement(ElementType.Operator, ctl, subType);
         }
-        public static ModelElement CreateResultElement(MoveRsControl ctl, string description, int id)
+        public static ModelElement CreateResultElement(MoveRsControl ctl)
         {
-            return new ModelElement(ElementType.Result, ctl, description, ElementSubType.Null, id,ctl.Separator,ctl.Encoding);
+            return new ModelElement(ElementType.Result, ctl, ElementSubType.Null, ctl.Encoding);
         }
 
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl, string description, int id)
+        public static ModelElement CreateDataSourceElement(MoveDtControl ctl)
         {
-            return new ModelElement(ElementType.DataSource, ctl, description, ElementSubType.Null, id, ctl.Separator, ctl.Encoding);
+            return new ModelElement(ElementType.DataSource, ctl, ElementSubType.Null, ctl.Encoding);
         }
 
 
-        private void Init(ElementType type, Control ctl, string description, ElementSubType subType, int id, 
-            char separator,
+        private void Init(ElementType type, 
+            Control ctl, 
+            ElementSubType subType,
             DSUtil.Encoding encoding)
         {
             this.type = type;
             this.subType = subType;
-            this.ctl = ctl;
-            this.Description = description;
-            this.id = id;
-            this.separator = separator;
+            this.ctl = ctl; 
             this.encoding = encoding;
         }
         

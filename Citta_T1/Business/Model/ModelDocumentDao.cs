@@ -90,7 +90,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.Description, dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt);
                 this.currentDocument.AddModelElement(e);
                 return e;
             }
@@ -99,7 +99,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveOpControl op = (ct as MoveOpControl);
                 op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op, op.DescriptionName, OpUtil.SEType(op.SubTypeName), op.ID);
+                ModelElement e = ModelElement.CreateOperatorElement(op, OpUtil.SEType(op.SubTypeName));
                 this.currentDocument.AddModelElement(e);
                 return e;               
             }
@@ -107,7 +107,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveRsControl rs = (ct as MoveRsControl);
                 rs.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateResultElement(rs, rs.DescriptionName, rs.ID);
+                ModelElement e = ModelElement.CreateResultElement(rs);
                 this.currentDocument.AddModelElement(e);
                 return e;
             }

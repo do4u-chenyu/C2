@@ -628,7 +628,6 @@ namespace Citta_T1.Controls
                 text,
                 location,
                 separator,
-                extType,
                 encoding);
             AddNewElement(btn);
         }

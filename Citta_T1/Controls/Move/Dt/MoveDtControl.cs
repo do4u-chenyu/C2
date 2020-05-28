@@ -24,7 +24,6 @@ namespace Citta_T1.Controls.Move.Dt
         private string oldTextString;
         private Point oldControlPosition;
         private DSUtil.Encoding encoding;
-        private DSUtil.ExtType extType;
         private char separator;
         private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
@@ -94,7 +93,6 @@ namespace Citta_T1.Controls.Move.Dt
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
-            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8 
             )
         {
@@ -102,12 +100,12 @@ namespace Citta_T1.Controls.Move.Dt
             this.textBox.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
-            this.extType = extType;
-            this.encoding = encoding;
+            this.Encoding = encoding;
+            this.Separator = separator;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
-            this.separator = separator;
+
         }
 
 
@@ -227,7 +225,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.ExtType, this.encoding);
         }
         #endregion
 
