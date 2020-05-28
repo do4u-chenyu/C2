@@ -28,7 +28,6 @@ namespace Citta_T1.Business.Model.World
     }
     class WorldMap
     {
-        private static bool naviewUse = true;
         private static bool canvasUse = false;
         private WorldMapInfo wmInfo = new WorldMapInfo();
         
@@ -44,25 +43,17 @@ namespace Citta_T1.Business.Model.World
         //  Pw = Ps / Factor - Pm
         public Point ScreenToWorld(Point Ps,bool mode)
         {
-
-            if(mode.Equals(naviewUse))
-            {
-                return new Point
+            return mode.Equals(canvasUse)
+                ? new Point
+                {
+                    X = Convert.ToInt32(Ps.X - GetWmInfo().MapOrigin.X * GetWmInfo().ScreenFactor),
+                    Y = Convert.ToInt32(Ps.Y - GetWmInfo().MapOrigin.Y * GetWmInfo().ScreenFactor)
+                }
+                :new Point
                 {
                     X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
                     Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
                 };
-            }
-
-            if(mode.Equals(canvasUse))
-            {
-                return new Point
-                {
-                    X = Convert.ToInt32(Ps.X - GetWmInfo().MapOrigin.X * GetWmInfo().ScreenFactor),
-                    Y = Convert.ToInt32(Ps.Y - GetWmInfo().MapOrigin.Y * GetWmInfo().ScreenFactor)
-                };
-            }               
-            return new Point(0, 0);
         }
 
         // Ps = (Pw + Pm) * Factor
@@ -75,14 +66,19 @@ namespace Citta_T1.Business.Model.World
             };
             return Ps;
         }
-        public PointF ScreenToWorldF(PointF Ps)
+        public PointF ScreenToWorldF(PointF Ps,bool mode)
         {
-            PointF Pw = new PointF
-            {
-                X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
-                Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
-            };
-            return Pw;
+            return mode.Equals(canvasUse)
+                ? new PointF
+                {
+                    X = Convert.ToInt32(Ps.X - GetWmInfo().MapOrigin.X * GetWmInfo().ScreenFactor),
+                    Y = Convert.ToInt32(Ps.Y - GetWmInfo().MapOrigin.Y * GetWmInfo().ScreenFactor)
+                }
+                : new PointF
+                {
+                    X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
+                    Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
+                };
         }
         public PointF WorldToScreenF(Point Pw)
         {
