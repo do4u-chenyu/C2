@@ -32,13 +32,13 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (element.Type)
             {
                 case ElementType.DataSource:
-                    oldName = (element.GetControl as MoveDtControl).UndoRedoChangeTextName(oldName);
+                    oldName = (element.InnerControl as MoveDtControl).UndoRedoChangeTextName(oldName);
                     break;
                 case ElementType.Operator:
-                    oldName = (element.GetControl as MoveOpControl).UndoRedoChangeTextName(oldName);
+                    oldName = (element.InnerControl as MoveOpControl).UndoRedoChangeTextName(oldName);
                     break;
                 case ElementType.Result:
-                    oldName = (element.GetControl as MoveRsControl).UndoRedoChangeTextName(oldName);
+                    oldName = (element.InnerControl as MoveRsControl).UndoRedoChangeTextName(oldName);
                     break;
                 default:
                     break;

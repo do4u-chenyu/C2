@@ -267,23 +267,23 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，修改结果算子路径
             if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
-                (resultElement.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
+                (resultElement.InnerControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
 
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
-            (hasResultNew.GetControl as MoveRsControl).FinishTextChange();
-            (hasResultNew.GetControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
-            (hasResultNew.GetControl as MoveRsControl).Separator = '\t';
+            (hasResultNew.InnerControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
+            (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
+            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
+            (hasResultNew.InnerControl as MoveRsControl).Separator = '\t';
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if (separator == "commaradio")
             {
-                (hasResultNew.GetControl as MoveRsControl).Separator = ',';
+                (hasResultNew.InnerControl as MoveRsControl).Separator = ',';
             }
             else if (separator == "otherseparatorradio")
             {
-                (hasResultNew.GetControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0];
+                (hasResultNew.InnerControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0];
             }
             BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }

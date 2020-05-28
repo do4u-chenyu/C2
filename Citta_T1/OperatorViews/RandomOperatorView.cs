@@ -62,8 +62,8 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     this.dataPath = me.FullFilePath;
-                    if (me.GetControl is MoveDtControl)
-                        separator = (me.GetControl as MoveDtControl).Separator;
+                    if (me.InnerControl is MoveDtControl)
+                        separator = (me.InnerControl as MoveDtControl).Separator;
                     //设置数据信息选项
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);

@@ -190,7 +190,7 @@ namespace Citta_T1.Controls
             {
                 if (me.ID == id)
                 {
-                    Control ct = me.GetControl;
+                    Control ct = me.InnerControl;
                     int left = dx + 40;
 
                     int top  = dy + 100;
@@ -209,7 +209,7 @@ namespace Citta_T1.Controls
             this.ctWidths = new List<int>();
             foreach (ModelElement me in modelElements)
             {
-                Control ct = me.GetControl;
+                Control ct = me.InnerControl;
                 if (!nodes.Contains(me.ID))
                 {
                     int left = dx + 60;

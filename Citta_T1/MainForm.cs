@@ -112,7 +112,7 @@ namespace Citta_T1
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
             foreach (ModelElement me in modelElements)
             {
-                this.canvasPanel.Controls.Remove(me.GetControl);
+                this.canvasPanel.Controls.Remove(me.InnerControl);
             }
             this.naviViewControl.UpdateNaviView();
   
@@ -229,7 +229,7 @@ namespace Citta_T1
         {
             foreach (ModelElement me in doc.ModelElements)
             {
-                Control ct = me.GetControl;
+                Control ct = me.InnerControl;
                 if (ct is RemarkControl)
                     continue;
                 this.canvasPanel.Controls.Add(ct);
