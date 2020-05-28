@@ -31,5 +31,18 @@ namespace Citta_T1.Utils
                 return defaultValue;
             }
         }
+        public static bool IsInt(string value)
+        {
+            try
+            {
+               
+                int.Parse(value);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

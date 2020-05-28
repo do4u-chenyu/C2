@@ -211,13 +211,20 @@ namespace Citta_T1.OperatorViews
 
         private void RandomNumBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.randomNumBox);
+
         }
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.randomNumBox);
+
+            if (!ConvertUtil.IsInt(this.randomNumBox.Text))
+            { 
+                MessageBox.Show("请输入数字");
+                this.randomNumBox.Text = "";
+            }
+            else
+                this.randomNumBox.Text = int.Parse(this.randomNumBox.Text).ToString();
+
         }
     }
 }
