@@ -129,7 +129,10 @@ namespace Citta_T1.Controls.Bottom
             List<string> blankRow = new List<string> { };
             // 将来有可能新增文件类型,这里不能只用二元逻辑
             if (extType == DSUtil.ExtType.Excel)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
+            {
+                separator = '\t';  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));    
+            }     
             else if (extType == DSUtil.ExtType.Text)
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else
