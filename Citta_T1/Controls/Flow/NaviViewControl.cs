@@ -78,7 +78,7 @@ namespace Citta_T1.Controls.Flow
             {
                 if (elementWorldLocDict.ContainsKey(me))
                     continue;
-                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(me.Location);
+                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(me.Location,true);
                 PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 elementWorldLocDict[me] = loc;
             }
@@ -172,7 +172,7 @@ namespace Citta_T1.Controls.Flow
             foreach (ModelElement me in modelElements)
             { 
                 
-                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(me.Location);
+                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(me.Location,true);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 
                 // 为了解决导航框拖动时,元素漂移的问题
