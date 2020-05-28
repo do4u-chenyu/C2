@@ -24,10 +24,10 @@ namespace Citta_T1.Business.Schedule.Cmd
         public OperatorCmd(Triple triple)
         {
             this.triple = triple;
-            triple.DataElements.ForEach(c => inputFilePaths.Add(c.GetFullFilePath()));
+            triple.DataElements.ForEach(c => inputFilePaths.Add(c.FullFilePath));
             this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
             this.outputFileTitle = this.option.GetOption("columnname");
-            this.outputFilePath = triple.ResultElement.GetFullFilePath();
+            this.outputFilePath = triple.ResultElement.FullFilePath;
             this.operatorId = triple.OperateElement.ID.ToString();
             this.sortConfig = " -S 200M -T " + Global.WorkspaceDirectory;
             InitSeparator();

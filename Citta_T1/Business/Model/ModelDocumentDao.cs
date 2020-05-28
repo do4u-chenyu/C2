@@ -90,7 +90,7 @@ namespace Citta_T1.Business.Model
             {
                 MoveDtControl dt = (ct as MoveDtControl);
                 dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.DescriptionName, dt.FullFilePath, dt.ID);
+                ModelElement e = ModelElement.CreateDataSourceElement(dt, dt.Description, dt.ID);
                 this.currentDocument.AddModelElement(e);
                 return e;
             }
@@ -256,7 +256,7 @@ namespace Citta_T1.Business.Model
             int count = 0;
             foreach (ModelDocument md in this.ModelDocuments)
                 foreach (ModelElement me in md.ModelElements)
-                    if (me.Type == ElementType.DataSource && me.GetFullFilePath() == ffp)
+                    if (me.Type == ElementType.DataSource && me.FullFilePath == ffp)
                         count++;
             return count;
         }

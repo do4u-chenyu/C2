@@ -64,7 +64,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetFullFilePath();
+                    this.dataPath = me.FullFilePath;
                     if (me.GetControl is MoveDtControl)
                         separator = (me.GetControl as MoveDtControl).Separator;
                     //设置数据信息选项
@@ -149,7 +149,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
             List<string> oldColumn = new List<string>();
