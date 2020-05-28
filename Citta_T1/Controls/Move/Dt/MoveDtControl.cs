@@ -43,7 +43,7 @@ namespace Citta_T1.Controls.Move.Dt
                     return DSUtil.ExtType.Text;
                 if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
                     return DSUtil.ExtType.Text;
-                if (FullFilePath.EndsWith(".cvs", true, System.Globalization.CultureInfo.CurrentCulture))
+                if (FullFilePath.EndsWith(".csv", true, System.Globalization.CultureInfo.CurrentCulture))
                     return DSUtil.ExtType.Text;
                 return DSUtil.ExtType.Unknow;
             }

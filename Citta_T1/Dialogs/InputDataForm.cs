@@ -392,7 +392,6 @@ namespace Citta_T1.Dialogs
             this.separator = '\t';
             PreViewBcpFile();
         }
-
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != ExtType.Text)

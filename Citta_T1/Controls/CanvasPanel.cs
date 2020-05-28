@@ -181,8 +181,6 @@ namespace Citta_T1.Controls
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
-
-
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
