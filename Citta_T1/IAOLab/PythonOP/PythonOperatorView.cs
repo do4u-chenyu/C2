@@ -88,15 +88,10 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split(separator);
-            this.opControl.FirstDataSourceColumns = columnName.ToList();
-            return columnName;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
+            return bcpInfo.ColumnArray;
         }
-
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         #endregion
 
         #region 配置信息的保存与加载

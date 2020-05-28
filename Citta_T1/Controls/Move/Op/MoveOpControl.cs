@@ -137,9 +137,14 @@ namespace Citta_T1.Controls.Move.Op
             return doublelPinFlag ? 2 : 1;
         }
 
-        public bool BinaryDimension()
+        public bool IsBinaryDimension()
         {
             return OperatorDimension() == 2;
+        }
+
+        public bool IsSingleDimension()
+        {
+            return OperatorDimension() == 1;
         }
         public void ChangeSize(int sizeL)
         {

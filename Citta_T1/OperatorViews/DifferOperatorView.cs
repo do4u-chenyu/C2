@@ -83,12 +83,9 @@ namespace Citta_T1.OperatorViews
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split(separator);
-            this.opControl.FirstDataSourceColumns = columnName.ToList();
-            return columnName;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
+            return bcpInfo.ColumnArray;
         }
 
         public void SetTextBoxName(TextBox textBox)

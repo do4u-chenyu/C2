@@ -155,8 +155,8 @@ namespace Citta_T1.OperatorViews
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
  
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            string column = bcpInfo.ColumnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
             {
@@ -200,9 +200,6 @@ namespace Citta_T1.OperatorViews
         }
 
         #endregion
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
