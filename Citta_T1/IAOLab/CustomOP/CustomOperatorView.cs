@@ -98,7 +98,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
             this.opControl.SingleDataSourceColumns = column;
@@ -258,19 +258,19 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
 
-            //生成结果控件,创建relation,bcp结果文件
-            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResutl == null)
+            //生成结果控件,创建relation,bcp 结果文件
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
             {
-                Global.GetOptionDao().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
+                Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.rsFullFilePathTextBox.Text);
             }
 
             //输出变化，修改结果算子路径
-            if (hasResutl != null && !this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
-                (hasResutl.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
+            if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.rsFullFilePathTextBox.Text))
+                (resultElement.GetControl as MoveRsControl).FullFilePath = this.rsFullFilePathTextBox.Text;
 
 
-            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
+            ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
             (hasResultNew.GetControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
             (hasResultNew.GetControl as MoveRsControl).FinishTextChange();

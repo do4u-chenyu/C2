@@ -46,9 +46,9 @@ namespace Citta_T1.Controls.Move.Op
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusBox = new System.Windows.Forms.PictureBox();
-            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             this.BinaryOperatorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SingleOperatorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
@@ -215,24 +215,6 @@ namespace Citta_T1.Controls.Move.Op
             this.statusBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
             this.statusBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
-            // txtButton
-            // 
-            this.txtButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtButton.FlatAppearance.BorderSize = 0;
-            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtButton.Location = new System.Drawing.Point(30, 2);
-            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
-            this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(60, 25);
-            this.txtButton.TabIndex = 8;
-            this.txtButton.Text = "button1";
-            this.txtButton.UseVisualStyleBackColor = false;
-            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
-            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
-            this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
-            // 
             // BinaryOperatorMenuItem
             // 
             this.BinaryOperatorMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
@@ -250,6 +232,24 @@ namespace Citta_T1.Controls.Move.Op
             this.SingleOperatorMenuItem.Size = new System.Drawing.Size(180, 24);
             this.SingleOperatorMenuItem.Text = "一元算子";
             this.SingleOperatorMenuItem.Visible = false;
+            // 
+            // txtButton
+            // 
+            this.txtButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.txtButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.txtButton.FlatAppearance.BorderSize = 0;
+            this.txtButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtButton.Location = new System.Drawing.Point(30, 2);
+            this.txtButton.Margin = new System.Windows.Forms.Padding(2);
+            this.txtButton.Name = "txtButton";
+            this.txtButton.Size = new System.Drawing.Size(60, 25);
+            this.txtButton.TabIndex = 8;
+            this.txtButton.Text = "button1";
+            this.txtButton.UseVisualStyleBackColor = false;
+            this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
+            this.txtButton.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseMove);
+            this.txtButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveOpControl_MouseUp);
             // 
             // MoveOpControl
             // 

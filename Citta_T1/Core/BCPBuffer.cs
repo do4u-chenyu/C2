@@ -154,10 +154,7 @@ namespace Citta_T1.Core
                 // 不指定sheetName的话, 用第一个sheet
                 ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
                 if (sheet == null)
-                {
-                    fs.Close();
                     return;
-                }
                     
                 IRow firstRow = sheet.GetRow(0);            // 此处会不会为空,会，然后报异常，被下面捕捉
                 int colNum = firstRow.Cells.Count;
@@ -185,8 +182,6 @@ namespace Citta_T1.Core
                     sb.AppendLine(String.Join("\t", rowContent));
                 }
                 dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim()) ;
-                workbook.Close();
-                fs.Close();
             }
             catch (System.IO.IOException ex)
             {
@@ -200,10 +195,7 @@ namespace Citta_T1.Core
             finally
             {
                 if (fs != null)
-                {
                     fs.Close();
-                    fs.Dispose();
-                }
                 if (workbook != null)
                     workbook.Close();
             }
@@ -230,20 +222,17 @@ namespace Citta_T1.Core
 
                 for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
                     sb.AppendLine(sr.ReadLine());                                   // 分隔符
-
-                sr.Close();
-                sr.Dispose();
                 dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
             }
-            catch(Exception ex) 
+            catch(Exception e) 
+            {
+                log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
+            }
+            finally
             {
                 if (sr != null)
-                {
                     sr.Close();
-                    sr.Dispose();
-                }
-                log.Error("BCPBuffer 空路径名是非法的: " + ex.ToString());
-            }  
+            }
         }
 
 

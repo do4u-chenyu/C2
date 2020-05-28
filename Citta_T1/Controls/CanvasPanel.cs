@@ -94,11 +94,12 @@ namespace Citta_T1.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
             this.UpdateStyles();
-            int sizeLevel = Global.GetCurrentDocument().SizeL;
+            int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
             if (isLarger && sizeLevel <= 2)
             {
                 sizeLevel += 1;
-                Global.GetCurrentDocument().ScreenFactor *= factor;
+                
+                Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor *= factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -114,7 +115,8 @@ namespace Citta_T1.Controls
             else if (!isLarger && sizeLevel > 0)
             {
                 sizeLevel -= 1;
-                Global.GetCurrentDocument().ScreenFactor /=  factor;
+                
+                Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor /= factor;
                 foreach (Control con in Controls)
                 {
                     if (con is IScalable && con.Visible)
@@ -127,7 +129,8 @@ namespace Citta_T1.Controls
                     mr.ZoomOut();
                 }
             }
-            Global.GetCurrentDocument().SizeL = sizeLevel;
+            
+            Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel = sizeLevel;
             Global.GetNaviViewControl().UpdateNaviView();
         }
 
@@ -136,7 +139,7 @@ namespace Citta_T1.Controls
         {
 
             Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
 
             if (Ps.Y < 70 * screenFactor)
             {
@@ -155,7 +158,7 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            ElementType type = ElementType.Null;
+            ElementType type = ElementType.Empty;
             char separator = '\t';
             string path = "";
             string text = "";
@@ -167,7 +170,7 @@ namespace Citta_T1.Controls
             location.Y -=  moveOffset.Y;
             type = (ElementType)e.Data.GetData("Type");
             text = e.Data.GetData("Text").ToString();
-            int sizeLevel = Global.GetCurrentDocument().SizeL;
+            int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
             if (type == ElementType.DataSource)
             {
                 path = e.Data.GetData("Path").ToString();
@@ -190,7 +193,7 @@ namespace Citta_T1.Controls
             if (e.Button == MouseButtons.Right) 
             {
                 
-                Point pw = Global.GetCurrentDocument().ScreenToWorld(e.Location, Global.GetCurrentDocument().MapOrigin);
+                Point pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(e.Location,false);
                 if (frameWrapper.MinBoding.Contains(pw))
                 {
                     this.DelSelectControl.Show(this,e.Location);
@@ -218,7 +221,7 @@ namespace Citta_T1.Controls
             }
             if (SelectDrag())
             {
-                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
             }
         }
         private bool IsValidLine(ModelRelation mr)
@@ -311,7 +314,7 @@ namespace Citta_T1.Controls
                     mr = mrs[i];
                     //删除线配置逻辑
                     ModelDocument doc =  Global.GetCurrentDocument();
-                    doc.StateChangeByDeletLine(mr.EndID);
+                    doc.StatusChangeWhenDeleteLine(mr.EndID);
 
                     doc.RemoveModelRelation(mr);
                     //关联算子引脚自适应改变
@@ -376,7 +379,7 @@ namespace Citta_T1.Controls
             // 控件移动
             else if (SelectDrag())
             {
-                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
             }
             // 绘制
             else if (cmd == ECommandType.PinDraw)
@@ -474,67 +477,85 @@ namespace Citta_T1.Controls
 
             if (e.Button != MouseButtons.Left) 
                 return;
-            if (Global.GetFlowControl().SelectFrame)
+            // 画框处理
+            if (SelectFrame())
             {
                 frameWrapper.FrameUp(e);
-                
+                return;
+            }
+            // 拖拽处理
+            if (SelectDrag())
+            {   
+                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e);
+                return;
             }
 
-            else if (SelectDrag())
+            // 非画线落点处理
+            if (cmd != ECommandType.PinDraw)
+                return;
+
+            cmd = ECommandType.Null;
+            lineWhenMoving = null;
+
+            /* 不是所有位置Up都能形成曲线的
+                * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
+                */
+            if (CanNotPinDraw())
             {
-                
-                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().ScreenFactor, e);
+                this.RepaintAllRelations();
+                this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
+                return;
             }
 
-            else if (cmd == ECommandType.PinDraw)
+            // 画线落点处理
+            /* 
+                * 在Canvas_MouseMove的时候，对鼠标的终点进行
+                * 只保存线索引
+                *         __________
+                * endP1  | MControl | startP
+                * endP2  |          |
+                * 
+                *         ----------
+                */
+            (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            ModelRelation mr = new ModelRelation(
+                (startC as IMoveControl).GetID(),
+                (endC as IMoveControl).GetID(),
+                startP,
+                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
+                (endC as MoveOpControl).RevisedPinIndex
+                );
+            // 1. 关系不能重复
+            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
+            // 3. 成环不能添加
+            ModelDocument cd = Global.GetCurrentDocument();
+            CyclicDetector cdt = new CyclicDetector(cd, mr);
+            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+            bool isCyclic = cdt.IsCyclic();
+            if (!isDuplicatedRelation && !isCyclic)
             {
-                
-                /* 不是所有位置Up都能形成曲线的
-                 * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
-                 */
-                if (this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl))
-                {
-                    cmd = ECommandType.Null;
-                    lineWhenMoving = null;
-                    this.RepaintAllRelations();
-                    this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
-                    return;
-                }
-                /* 
-                 * 在Canvas_MouseMove的时候，对鼠标的终点进行
-                 * 只保存线索引
-                 *         __________
-                 * endP1  | MControl | startP
-                 * endP2  |          |
-                 * 
-                 *         ----------
-                 */
-                (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
-                ModelRelation mr = new ModelRelation(
-                    (startC as IMoveControl).GetID(),
-                    (endC as IMoveControl).GetID(),
-                    startP,
-                    (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                    (endC as MoveOpControl).RevisedPinIndex
-                    );
-                // 1. 关系不能重复
-                // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
-                // 3. 成环不能添加
-                ModelDocument cd = Global.GetCurrentDocument();
-                CyclicDetector cdt = new CyclicDetector(cd, mr);
-                bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
-                bool isCyclic = cdt.IsCyclic();
-                if (!isDuplicatedRelation && !isCyclic)
-                {
-                    cd.AddModelRelation(mr);
-                    //endC右键菜单设置Enable                     
-                    Global.GetOptionDao().EnableControlOption(mr);
-                }
-                cmd = ECommandType.Null;
-                lineWhenMoving = null;
-                this.Invalidate();
-            }
+                cd.AddModelRelation(mr);
+                //endC右键菜单设置Enable                     
+                Global.GetOptionDao().EnableOpOptionView(mr);
 
+            }
+            this.Invalidate();
+        }
+
+        private bool CanNotPinDraw()
+        {
+            // return this.endC == null || !(this.endC is MoveOpControl) || !(this.startC is MoveDtControl || this.startC is MoveRsControl);
+            // OPControl 不能连 OPControl
+            if (StartC is MoveOpControl)
+                return true;
+            // 没有落点Control
+            if (EndC == null)
+                return true;
+            // 落点Control必须是OpControl
+            if (!(EndC is MoveOpControl))
+                return true;
+
+            return false;
         }
 
         private void RepaintAllRelations()
@@ -563,7 +584,7 @@ namespace Citta_T1.Controls
             if (Global.GetCurrentDocument() == null)
                 return;
 
-            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().ScreenFactor, e))
+            if (dragWrapper.DragPaint(this.Size, Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor, e))
                 return;
             if (frameWrapper.FramePaint(e))
                 return;

@@ -53,11 +53,11 @@ namespace Citta_T1.Utils
                 );
         }
 
-        public static Point WorldBoundControl(Point Pm, float factor, int width, int height)
+        public static Point WorldBoundControl(float factor, int width, int height)
         {
 
             Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(50, 30), Pm);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(new Point(50, 30),true);
             
             if (Pw.X < 50)
             {

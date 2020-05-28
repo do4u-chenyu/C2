@@ -30,6 +30,7 @@ namespace Citta_T1
 
         private ModelDocumentDao modelDocumentDao;
         private OptionDao optionDao;
+        private CreateMoveRsControl createMoveRsControl;
         public string UserName { get => this.userName; set => this.userName = value; }
 
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
@@ -38,8 +39,10 @@ namespace Citta_T1
         delegate void AsynUpdataProgressBar();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
-        public MainForm()
+        public MainForm(string userName)
         {
+            this.UserName = userName;
+
             InitializeComponent();
             this.inputDataForm = new Dialogs.InputDataForm();
             this.inputDataForm.InputDataEvent += InputDataFormEvent;
@@ -49,6 +52,8 @@ namespace Citta_T1
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
+            this.createMoveRsControl = new CreateMoveRsControl();
+            
             InitializeGlobalVariable();
             InitializeControlsLocation();
         }
@@ -76,6 +81,7 @@ namespace Citta_T1
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             Global.SetTopToolBarControl(this.topToolBarControl);
+            Global.SetCreateMoveRsControl(this.createMoveRsControl);
 
         }
 
@@ -162,7 +168,7 @@ namespace Citta_T1
             // 重绘所有Relation线
             this.canvasPanel.Invalidate(false);
             //切换文档时，更新运行按钮图标及进度条
-            UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.Manager.ModelStatus);
+            UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.TaskManager.ModelStatus);
             //切换文档时,更新撤回/重做按钮状态
             UpdateUndoRedoButton();
         }
@@ -271,6 +277,15 @@ namespace Citta_T1
             this.rightHideButton.Location = loc_flowcontrol3;
 
             this.remarkControl.Location = loc_panel3;
+
+            // 右上用户名，头像
+            int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
+            int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
+            this.usernamelabel.Text = this.userName;
+            Point userNameLocation = new Point(185, 10);
+            this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
+            this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
+            this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
 
             log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
         }
@@ -461,13 +476,6 @@ namespace Citta_T1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
-            int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
-            this.usernamelabel.Text = this.userName;
-            Point userNameLocation = new Point(185,10);
-            this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
-            this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
-            this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
             //加载文件及数据源
             LoadDocuments(this.userName);
             LoadDataSource(this.userName);
@@ -484,7 +492,7 @@ namespace Citta_T1
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
             //在模型运行完成，及终止的情况下，可以重置
             Console.WriteLine(currentManager.ModelStatus.ToString());
@@ -502,14 +510,14 @@ namespace Citta_T1
             
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
-                Global.GetCurrentDocument().Manager.Stop();
-                UpdateRunbuttonImageInfo(Global.GetCurrentDocument().Manager.ModelStatus);
+                Global.GetCurrentDocument().TaskManager.Stop();
+                UpdateRunbuttonImageInfo(Global.GetCurrentDocument().TaskManager.ModelStatus);
             }
         }
 
         private void RunButton_Click(object sender, EventArgs e)
         {
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             BindUiManagerFunc();
 
             if (this.runButton.Name == "runButton")
@@ -566,7 +574,7 @@ namespace Citta_T1
 
         public void BindUiManagerFunc()
         {
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             //初次运行时，绑定线程与ui交互的委托
             if (currentManager.ModelStatus == ModelStatus.Null)
             {
@@ -578,7 +586,7 @@ namespace Citta_T1
         }
 
         //更新进度条
-        private void UpdataProgressBar(Manager manager)
+        private void UpdataProgressBar(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             if (doneModel != Global.GetCurrentDocument())
@@ -610,7 +618,7 @@ namespace Citta_T1
         }
 
 
-        private void UpdataRunningGif(Manager manager)
+        private void UpdataRunningGif(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             if (doneModel != Global.GetCurrentDocument())
@@ -631,10 +639,10 @@ namespace Citta_T1
         }
 
         //完成任务时需要调用
-        private void Accomplish(Manager manager)
+        private void Accomplish(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if(doneModel.Manager.ModelStatus == ModelStatus.Done)
+            if(doneModel.TaskManager.ModelStatus == ModelStatus.Done)
             {
                 doneModel.Save();
             }
@@ -642,7 +650,7 @@ namespace Citta_T1
 
             if (doneModel == Global.GetCurrentDocument())
             {
-                UpdateRunbuttonImageInfo(doneModel.Manager.ModelStatus);
+                UpdateRunbuttonImageInfo(doneModel.TaskManager.ModelStatus);
 
             }
         }
@@ -651,7 +659,7 @@ namespace Citta_T1
 
         public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
         {
-            Manager manager = Global.GetCurrentDocument().Manager;
+            TaskManager manager = Global.GetCurrentDocument().TaskManager;
             ModelStatus modelStatus1 = manager.ModelStatus;
             switch (modelStatus1)
             { 

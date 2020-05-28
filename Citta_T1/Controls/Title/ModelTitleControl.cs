@@ -103,7 +103,7 @@ namespace Citta_T1.Controls.Title
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                 }
-                Global.GetCurrentDocument().Manager.CloseThread(); // 此处可能是个bug,需要讨论
+                Global.GetCurrentDocument().TaskManager.CloseThread(); // 此处可能是个bug,需要讨论
                 return;
             }                       
             DialogResult result= MessageBox.Show(String.Format("保存文件\"{0}\"?", modelTitle),
@@ -128,7 +128,7 @@ namespace Citta_T1.Controls.Title
                 mainForm.DeleteCurrentDocument();
                 parentPanel.RemoveModel(this);                  
             }
-            Global.GetCurrentDocument().Manager.CloseThread();
+            Global.GetCurrentDocument().TaskManager.CloseThread();
         }
 
         public void ShowSelectedBorder()

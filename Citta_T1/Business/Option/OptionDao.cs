@@ -5,6 +5,7 @@ using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -19,9 +20,8 @@ namespace Citta_T1.Business.Option
     {
         private static LogUtil log = LogUtil.GetInstance("OptionDao");
         //添加relation
-        public void EnableControlOption(ModelRelation mr)
+        private static bool IsSingleElement(ModelElement me)
         {
-            ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
             ElementSubType[] doubleInputs = new ElementSubType[] {
                                                 ElementSubType.CollideOperator,
                                                 ElementSubType.UnionOperator,
@@ -29,28 +29,41 @@ namespace Citta_T1.Business.Option
                                                 ElementSubType.DifferOperator,
                                                 ElementSubType.KeyWordOperator,
                                                 ElementSubType.CustomOperator2};
-            List<ModelRelation> relations = Global.GetCurrentDocument().SearchRelationByID(mr.EndID,false);
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
-            {
-                if (me.ID == mr.EndID && !doubleInputs.Contains(me.SubType))
-                {
-                    MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
-                    moveOpControl.EnableOpenOption = true;
-                    SingleInputCompare(mr, moveOpControl.SingleDataSourceColumns);
-                    break;
-                }
-                else if (me.ID == mr.EndID && doubleInputs.Contains(me.SubType) && relations.Count == 2)
-                {
-                    MoveOpControl moveOpControl = me.GetControl as MoveOpControl;
-                    moveOpControl.EnableOpenOption = true;
-                    DoubleInputCompare(relations, moveOpControl.DoubleDataSourceColumns, moveOpControl.ID);
-                    break;
-                }
-            }
+            return !doubleInputs.Contains(me.SubType);
         }
-        private void SingleInputCompare(ModelRelation modelRelation, string oldColumnName) 
+
+        //情况1   startElement.ID ----  StartID.mr.EndID      ---- endOpElement.ID
+        //情况2                         StartID.brother.EndID -----|
+        //
+        public void EnableOpOptionView(ModelRelation mr)
         {
-           if (oldColumnName == null) return;
+          
+            List<ModelRelation> brother = Global.GetCurrentDocument().SearchBrotherRelations(mr);
+            ModelElement endOpElement = Global.GetCurrentDocument().ModelElements.Find(c => c.ID == mr.EndID);
+            if (endOpElement == ModelElement.Empty)
+                return;
+
+            MoveOpControl moveOpControl = endOpElement.GetControl as MoveOpControl;
+                
+            if (IsSingleElement(endOpElement)) 
+            {
+                moveOpControl.EnableOption = true;
+                SingleInputCompare(mr, endOpElement);
+                return;
+            }
+            else 
+            {
+                if (brother.Count != 2) return;
+                moveOpControl.EnableOption = true;
+                DoubleInputCompare(brother, endOpElement);
+                return;
+            }             
+          
+        }
+        private void SingleInputCompare(ModelRelation modelRelation, ModelElement modelElement) 
+        {
+            string oldColumnName= (modelElement.GetControl as MoveOpControl).SingleDataSourceColumns;
+            if (oldColumnName == null) return;
             char separator = '\t';
             ModelElement startElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.StartID);
             ModelElement endElement = Global.GetCurrentDocument().SearchElementByID(modelRelation.EndID);
@@ -58,7 +71,7 @@ namespace Citta_T1.Business.Option
             DSUtil.Encoding encoding = startElement.Encoding;
             int ID = endElement.ID;
             //获取当前连接的数据源的表头字段
-            BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Null, encoding);
+            BcpInfo bcpInfo = new BcpInfo(dataSourcePath, "", ElementType.Empty, encoding);
             string column = bcpInfo.columnLine;
             if (startElement.GetControl is MoveDtControl)
                 separator = (startElement.GetControl as MoveDtControl).Separator;
@@ -69,7 +82,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -79,7 +92,7 @@ namespace Citta_T1.Business.Option
             {
                 if (oldName[i] != columnName[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }                  
             }
@@ -93,13 +106,12 @@ namespace Citta_T1.Business.Option
             }
             (endElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
-
-
-
         }
-        private void DoubleInputCompare(List<ModelRelation> relations, Dictionary<string, List<string>> doubleDataSource,int ID) 
+        private void DoubleInputCompare(List<ModelRelation> relations, ModelElement modelElement) 
         {
-
+            MoveOpControl moveOpControl = modelElement.GetControl as MoveOpControl;
+            Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
+            int ID = moveOpControl.ID;
             if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
                 return;
             char separator0 = '\t';
@@ -127,13 +139,13 @@ namespace Citta_T1.Business.Option
 
             
             //获取当前连接的数据源的表头字段
-            BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Null, encoding0);
+            BcpInfo bcpInfo0 = new BcpInfo(dataSourcePath0, "", ElementType.Empty, encoding0);
             string column0 = bcpInfo0.columnLine;
             if (modelElement0.GetControl is MoveDtControl)
                 separator0 = (modelElement0.GetControl as MoveDtControl).Separator;
             string[] columnName0 = column0.Split(separator0);
 
-            BcpInfo bcpInfo1 = new BcpInfo(dataSourcePath1, "", ElementType.Null, encoding1);
+            BcpInfo bcpInfo1 = new BcpInfo(dataSourcePath1, "", ElementType.Empty, encoding1);
             string column1 = bcpInfo1.columnLine;
             if (modelElement1.GetControl is MoveDtControl)
                 separator1 = (modelElement1.GetControl as MoveDtControl).Separator;
@@ -143,7 +155,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName0.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -153,7 +165,7 @@ namespace Citta_T1.Business.Option
             {
                 if (!columnName1.Contains(name))
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
                    
@@ -164,7 +176,7 @@ namespace Citta_T1.Business.Option
             {
                 if (oldColumnName0[i] != columnName0[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
             }
@@ -173,95 +185,22 @@ namespace Citta_T1.Business.Option
             {
                 if (oldColumnName1[i] != columnName1[i])
                 {
-                    Global.GetCurrentDocument().StateChangeByOut(ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(ID);
                     return;
                 }
             }
             //恢复控件上次的状态,可能会有点问题TODO
-            ModelElement modelElement = Global.GetCurrentDocument().SearchElementByID(ID);
+            ModelElement modelElement2 = Global.GetCurrentDocument().SearchElementByID(ID);
             
-            Dictionary<string, string> optionDict = (modelElement.GetControl as MoveOpControl).Option.OptionDict;
+            Dictionary<string, string> optionDict = (modelElement2.GetControl as MoveOpControl).Option.OptionDict;
             if (optionDict == null) return;
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
                 if (kvp.Key == "otherSeparator") continue;//python算子、IA多源算子中的其他分隔符字段允许为空，直接判断为空会出问题
                 if (optionDict[kvp.Key] == "") return;
             }
-            (modelElement.GetControl as MoveOpControl).Status = ElementStatus.Ready;
+            (modelElement2.GetControl as MoveOpControl).Status = ElementStatus.Ready;
 
-        }
-        public void CreateResultControl(MoveOpControl moveOpControl, List<string> columnName,char seperator = '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
-        {
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                if (mr.StartID == moveOpControl.ID) return;
-            int x = moveOpControl.Location.X + moveOpControl.Width + 15;
-            int y = moveOpControl.Location.Y;
-            string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(tmpBcpFileName), Global.GetCurrentDocument().SizeL,
-            new Point(x, y), seperator, encoding);;
-          
-            /*
-             * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
-             * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
-             */
-
-            PointF startPoint = new PointF(
-                   moveOpControl.RectOut.Location.X + moveOpControl.Location.X,
-                   moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y
-                   );
-            PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
-            Bezier line = new Bezier(startPoint, endPoint);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-
-            canvas.RepaintObject(line);
-            ModelRelation newModelRelation = new ModelRelation(
-                                moveOpControl.ID, mrc.ID,
-                                new Point(moveOpControl.RectOut.Location.X + moveOpControl.Location.X, moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y),
-                                new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
-                                0);
-            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-
-            moveOpControl.OutPinInit("lineExit");
-            mrc.rectInAdd(1);
-            string path = BCPBuffer.GetInstance().CreateNewBCPFile(tmpBcpFileName, columnName);
-            mrc.FullFilePath = path;
-        }
-
-        public void CreateResultControlCustom(MoveOpControl moveOpControl, string path, char separator= '\t', DSUtil.Encoding encoding = DSUtil.Encoding.UTF8)
-        {
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-                if (mr.StartID == moveOpControl.ID) return;
-            int x = moveOpControl.Location.X + moveOpControl.Width + 15;
-            int y = moveOpControl.Location.Y;
-            //string tmpBcpFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-            MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)), Global.GetCurrentDocument().SizeL,
-                new Point(x, y), separator, encoding);
-            /*
-             * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段
-             * 2. 控件绑定线。OpControl绑定线，RsControl绑定线
-             */
-
-            PointF startPoint = new PointF(
-                   moveOpControl.RectOut.Location.X + moveOpControl.Location.X,
-                   moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y
-                   );
-            PointF endPoint = new PointF(mrc.Location.X + mrc.RectIn.Location.X, mrc.Location.Y + mrc.RectIn.Location.Y);
-            Bezier line = new Bezier(startPoint, endPoint);
-            CanvasPanel canvas = Global.GetCanvasPanel();
-
-            canvas.RepaintObject(line);
-            ModelRelation newModelRelation = new ModelRelation(
-                                moveOpControl.ID, mrc.ID,
-                                new Point(moveOpControl.RectOut.Location.X + moveOpControl.Location.X, moveOpControl.RectOut.Location.Y + moveOpControl.Location.Y),
-                                new Point(mrc.RectIn.Location.X + mrc.Location.X, mrc.RectIn.Location.Y + mrc.Location.Y),
-                                0);
-            Global.GetCurrentDocument().AddModelRelation(newModelRelation);
-
-            moveOpControl.OutPinInit("lineExit");
-            mrc.rectInAdd(1);
-            mrc.FullFilePath = path;
         }
 
         //新数据源修改输出
@@ -359,7 +298,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             List<string> columns = new List<string>();
            
             //新输出字段中不包含旧字段
@@ -403,7 +342,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
             List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             //左侧数据源判断
             if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
             {
@@ -444,9 +383,9 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
-            Global.GetCurrentDocument().StateChangeByOut(ID);
+            Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引
         public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)
@@ -499,60 +438,11 @@ namespace Citta_T1.Business.Option
             }
             return dataInfo;
         }
-        #region 配置窗口不合法字符判断
-        public void NonNumeric_ControlText(Control control) 
-        {
-            if (control.Text == "") return;
-            Regex rg = new Regex("^[0-9]*[1-9][0-9]*$");
-            if (!rg.IsMatch(control.Text))
-            {
-                control.Text = "";
-                MessageBox.Show("请输入数字");
-            }
-        }
-        public void IsIllegalInputName(Control control,String[] columnName,String name) 
-        {
-            if (columnName.Count() == 0 || name == "") return;
-            if (!columnName.Contains(name))
-            {
-                control.Text = "";
-                MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
-            }
-        }
-        public void Control_Leave(object sender, EventArgs e)
-        {
-            List<string> columnName = new List<string>();
-            foreach ( var item in (sender as ComboBox).Items)
-            {
-                columnName.Add(item.ToString());
-            }
-            IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
-        }
-        public void Control_KeyUp(object sender, KeyEventArgs e)
-        {
-            List<string> columnName = new List<string>();
-            foreach (var item in (sender as ComboBox).Items)
-            {
-                columnName.Add(item.ToString());
-            }
-            if (e.KeyCode == Keys.Enter)
-               IsIllegalInputName((sender as ComboBox), columnName.ToArray(), (sender as ComboBox).Text);
-        }
-        public void IsIllegalCharacter(object sender, EventArgs e)
-        {
-
-            if ((sender as TextBox).Text.Contains(",") || (sender as TextBox).Text.Contains("，"))
-            {
-                (sender as TextBox).Text = ""; 
-                MessageBox.Show("输入非法字','，请重新输入过滤条件");
-            }
-        }
-        #endregion
-        #region 配置窗口获取用户某些选定数据事件
+     
         public void GetSelectedItemIndex(object sender, EventArgs e)
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
         }
-        #endregion
+   
     }
 }

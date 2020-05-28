@@ -11,9 +11,7 @@ namespace Citta_T1.Core
     {
         private List<int> vertices;
         private Dictionary<int, bool> visited;
-        //private Dictionary<int, bool> recStack;
         private Dictionary<int, List<int>> graph;
-
 
         public CyclicDetector(ModelDocument doc, ModelRelation mr)
         {
@@ -23,55 +21,21 @@ namespace Citta_T1.Core
         {
             this.vertices = new List<int>();
             this.visited = new Dictionary<int, bool>();
-            //this.recStack = new Dictionary<int, bool>();
-            foreach (ModelElement me in doc.ModelElements)
-            {
-                int ID = me.ID;
-                vertices.Add(ID);
-                //visited[ID] = false;
-                //recStack[ID] = false;
-            }
-            //this.graph = new Dictionary<int, List<int>>(doc.ModelLineDict);
-            this.graph = InitGraph(doc.ModelLineDict);
+            doc.ModelElements.ForEach(me => vertices.Add(me.ID));
+            InitGraph(doc, mr);
+        }
+
+        private void InitGraph(ModelDocument doc, ModelRelation mr)
+        {   // 深度复制文档的图关系,同时添加最新的mr关系
+            this.graph = new Dictionary<int, List<int>>();
+            foreach (int k in doc.ModelGraphDict.Keys)
+                this.graph[k] = new List<int>(doc.ModelGraphDict[k]);
+
             if (!this.graph.ContainsKey(mr.StartID))
                 this.graph[mr.StartID] = new List<int>() { mr.EndID };
             else
                 this.graph[mr.StartID].Add(mr.EndID);
         }
-
-        private Dictionary<int, List<int>> InitGraph(Dictionary<int, List<int>> dict)
-        {
-            Dictionary<int, List<int>> result = new Dictionary<int, List<int>>();
-            foreach (int k in dict.Keys)
-            {
-                result[k] = new List<int>(dict[k]);
-            }
-            return result;
-        }
-        //public bool IsCyclic()
-        //{
-        //    foreach (int vertex in this.vertices)
-        //    {
-        //        if (!this.visited[vertex] && IsCyclic(vertex, this.visited, this.recStack))
-        //            return true;
-        //    }
-        //    return false;
-        //}
-        //private bool IsCyclic(int v, Dictionary<int, bool> vst, Dictionary<int, bool> rs)
-        //{
-        //    vst[v] = true;
-        //    rs[v] = true;
-        //    if (this.graph.ContainsKey(v))
-        //    {
-        //        foreach (int neighbour in this.graph[v])
-        //        {
-        //            if ((!vst[neighbour] && IsCyclic(neighbour, vst, rs)) || rs[neighbour])
-        //                return true;
-        //        }
-        //    }
-        //    rs[v] = false;
-        //    return false;
-        //}
 
         public bool IsCyclic()
         {   // 针对图中每一个定点做一次环检测

@@ -14,7 +14,7 @@ namespace Citta_T1.Business.Model
         Relation,   // 画线关系
         Result,     // 算子运算结果
         Remark,     // 模型文档备注
-        Null
+        Empty       // 空算子,防止NULL指针异常用
     }
     public enum ElementSubType
     {
@@ -168,7 +168,8 @@ namespace Citta_T1.Business.Model
         }
 
         private ModelElement()
-        { 
+        {
+            type = ElementType.Empty;
         }
 
         public readonly static ModelElement Empty = new ModelElement(); 

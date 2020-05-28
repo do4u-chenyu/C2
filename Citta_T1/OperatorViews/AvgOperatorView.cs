@@ -28,10 +28,12 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private static LogUtil log = LogUtil.GetInstance("AvgOperatorView");
         private string selectedIndex;
+        private OptionInfoCheck optionInfoCheck;
 
         public AvgOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             selectName = new List<string>();
             this.opControl = opControl;
             InitOptionInfor();
@@ -78,7 +80,7 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding,char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
@@ -140,16 +142,19 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
-            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResutl == null)
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
             { 
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.selectName);
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectName);
                 return;
             }
+            // 对应的结果文件置脏
+            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+
             //输出变化，重写BCP文件
             List<string> oldColumn = new List<string>();
             oldColumn.Add(this.oldAvg);
-            if (hasResutl != null &&  this.oldAvg != this.AvgComBox.Text)
+            if (this.oldAvg != this.AvgComBox.Text)
                 Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
 
         }
@@ -197,13 +202,13 @@ namespace Citta_T1.OperatorViews
 
         private void AvgComBox_Leave(object sender, EventArgs e)
         {
-            Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+            optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
         }
 
         private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                Global.GetOptionDao().IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
+                optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.columnName, this.AvgComBox.Text);
         }
 
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)

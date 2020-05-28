@@ -6,6 +6,7 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Top;
+using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace Citta_T1.Core
 {
@@ -24,6 +25,7 @@ namespace Citta_T1.Core
         private static DataSourceControl dataSourceControl; // 左侧数据源面板
         private static BottomConsoleControl bottomPythonConsoleControl; //底层控制台面板
         private static TopToolBarControl topToolBarControl; // 顶层右侧工具栏
+        private static CreateMoveRsControl createMoveRsControl;//创建结果算子
 
 
         public static MainForm GetMainForm() { return mainForm; }
@@ -45,7 +47,8 @@ namespace Citta_T1.Core
         public static OptionDao GetOptionDao() { return optionDao; } 
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
-        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; }
+        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; } 
+        public static CreateMoveRsControl GetCreateMoveRsControl() { return createMoveRsControl; }
 
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
@@ -66,5 +69,6 @@ namespace Citta_T1.Core
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
 
         public const float Factor = 1.3F;
+        public static void SetCreateMoveRsControl(CreateMoveRsControl cmrc) { createMoveRsControl = cmrc; }
     }
 }

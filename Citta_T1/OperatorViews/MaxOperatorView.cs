@@ -23,11 +23,13 @@ namespace Citta_T1.OperatorViews
         private string oldOptionDict;
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("MaxOperatorView");
+        private OptionInfoCheck optionInfoCheck;
 
 
         public MaxOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
+            this.optionInfoCheck = new OptionInfoCheck();
             dataPath = "";
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
@@ -42,8 +44,8 @@ namespace Citta_T1.OperatorViews
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             SetTextBoxName(this.dataInfoBox);
-            this.maxValueBox.Leave += new System.EventHandler(Global.GetOptionDao().Control_Leave);
-            this.maxValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(Global.GetOptionDao().Control_KeyUp);
+            this.maxValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.maxValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.maxValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消
@@ -69,18 +71,21 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResutl == null)
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
             {
-                Global.GetOptionDao().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
                 return;
             }
+
+            // 对应的结果文件置脏
+            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
 
             //输出变化，重写BCP文件
             List<string> outName =new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
-            if (hasResutl != null && String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
+            if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
            
         }
@@ -150,7 +155,7 @@ namespace Citta_T1.OperatorViews
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
  
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
