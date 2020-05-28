@@ -46,7 +46,6 @@ namespace Citta_T1.Business.Model
         Ready,   //已经完成算子配置,随时可以开始运算
         Warn,   //配置错误状态
         Null,    //初始状态
-        Warn
     }
     public class ModelElement
     {
