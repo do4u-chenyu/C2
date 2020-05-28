@@ -131,6 +131,8 @@
     <Compile Include="Business\Option\OptionInfoCheck.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\DataFormatOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\KeyWordOperatorCmd.cs" />
     <Compile Include="Controls\Common\ComCheckBoxList.cs">
       <SubType>UserControl</SubType>
     </Compile>
