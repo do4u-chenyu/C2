@@ -157,8 +157,13 @@ namespace Citta_T1.Business.Option
         {
             int maxIndex = outIndex.Max();
             if (maxIndex > columnName.Length - 1)
-                return true;
-            return (!Enumerable.SequenceEqual(oldColumnList, columnName));
+                return false;
+            foreach(int index in outIndex)
+            {
+                if (oldColumnList[index] != columnName[index])
+                    return false;
+            }
+            return true;
   
         }
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
@@ -185,7 +190,7 @@ namespace Citta_T1.Business.Option
 
                     string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (IsDataSourceEqual(oldColumnList, columnName, outIndex))
+                    if (!IsDataSourceEqual(oldColumnList, columnName, outIndex))
                     {
                         opControl.Option.OptionDict["outfield"] = "";
                         return false;

@@ -58,7 +58,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请选择最大值字段!");
                 return;
             }
-            if (this.OutList.GetItemCheckIndex().Count == 0)
+            if (this.outList.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
                 return;
@@ -74,7 +74,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.OutList.GetItemCheckText());
+                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.outList.GetItemCheckText());
                 return;
             }
 
@@ -99,7 +99,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            List<int> checkIndexs = this.OutList.GetItemCheckIndex();
+            List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs =new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
@@ -131,9 +131,9 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = outIndexs.ToList();
-                this.OutList.LoadItemCheckIndex(outIndexs);
+                this.outList.LoadItemCheckIndex(outIndexs);
                 foreach(int i in outIndexs)
-                    this.oldColumnName.Add(this.OutList.Items[i].ToString());
+                    this.oldColumnName.Add(this.outList.Items[i].ToString());
             }
            
             this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
@@ -160,7 +160,7 @@ namespace Citta_T1.OperatorViews
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
             {
-                this.OutList.AddItems(name);
+                this.outList.AddItems(name);
                 this.maxValueBox.Items.Add(name);
             }
             //新旧数据源比较，是否清空窗口配置
