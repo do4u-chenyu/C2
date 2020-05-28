@@ -226,7 +226,7 @@ namespace Citta_T1.Controls
             this.staticImage = null;
             this.moveImage = null;
             controls = new List<Control>();
-            Global.GetCurrentDocument().Show();
+            
         }
         private void FramePropertySet()
         {
@@ -373,6 +373,7 @@ namespace Citta_T1.Controls
                 ct.Left = ct.Left + endP.X - startP.X;
                 ct.Top = ct.Top + endP.Y - startP.Y;
             }
+            Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
