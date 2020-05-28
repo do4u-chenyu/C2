@@ -80,7 +80,7 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding,char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
@@ -125,7 +125,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
             if (this.DataInfo.Text == "") return;
@@ -159,7 +159,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -188,8 +188,6 @@ namespace Citta_T1.OperatorViews
             
         }
         #endregion
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);

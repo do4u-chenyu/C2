@@ -221,5 +221,7 @@ namespace Citta_T1.Utils
             return type;
         }
 
+        public static DSUtil.Encoding EnType(string type)
+        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }
 }
