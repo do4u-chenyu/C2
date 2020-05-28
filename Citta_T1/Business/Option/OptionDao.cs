@@ -99,7 +99,7 @@ namespace Citta_T1.Business.Option
                 // 默认线0落在入度0,线1落在入度1
                 // 线0落在入度1,线1落在入度0, 交换表头
                 if (mr0.EndPin == 1 && mr1.EndPin == 0)
-                    Swap(newColumns0, newColumns1);  
+                    Swap(ref newColumns0, ref newColumns1);  
             }
 
             bool factor0 = newColumns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count()));
@@ -113,7 +113,7 @@ namespace Citta_T1.Business.Option
             Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
         }
 
-        private void Swap(List<string> A, List<string> B)
+        private void Swap(ref List<string> A, ref List<string> B)
         {
             List<String> C = A;
             A = B;
