@@ -53,7 +53,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName0);
+                this.opControl.SingleDataSourceColumns = this.columnName0.ToList();
                 this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.SingleDataSourceColumns));
             }
             //初始化输入输出路径
@@ -91,7 +91,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = columnName.ToList();
             return columnName;
         }
 
