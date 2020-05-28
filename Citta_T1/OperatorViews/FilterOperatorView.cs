@@ -57,7 +57,7 @@ namespace Citta_T1.OperatorViews
             bool empty=false;
             List<string> types = new List<string>();
             types.Add(this.comboBox1.GetType().Name);
-            types.Add(this.OutList.GetType().Name);
+            types.Add(this.outList.GetType().Name);
             types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
                     return empty;
                 }
             }
-            if (this.OutList.GetItemCheckIndex().Count == 0)
+            if (this.outList.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请填写输出字段!");
                 empty = true;
@@ -120,16 +120,15 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
             {
-                this.OutList.AddItems(name);
+                this.outList.AddItems(name);
                 this.comboBox1.Items.Add(name);
             }
             
-            this.opControl.FirstDataSourceColumns =this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
            
         }
 
@@ -169,7 +168,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
-            this.selectColumn = this.OutList.GetItemCheckText();
+            this.selectColumn = this.outList.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             { 
@@ -183,7 +182,7 @@ namespace Citta_T1.OperatorViews
             List<string> outName = new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
-            if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
@@ -198,7 +197,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
-            List<int> checkIndexs = this.OutList.GetItemCheckIndex();
+            List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
@@ -239,9 +238,9 @@ namespace Citta_T1.OperatorViews
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = indexs.ToList();
-                this.OutList.LoadItemCheckIndex(indexs);
+                this.outList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnName.Add(this.OutList.Items[index].ToString());
+                    this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
             if (factor1 != "" )
             {
@@ -471,7 +470,6 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-      
 
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {

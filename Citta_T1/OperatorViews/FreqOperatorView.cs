@@ -60,9 +60,8 @@ namespace Citta_T1.OperatorViews
 
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            string column = bcpInfo.ColumnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
@@ -202,18 +201,17 @@ namespace Citta_T1.OperatorViews
            
         }
         #endregion
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
-     
 
-        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }

@@ -13,20 +13,6 @@ namespace Citta_T1.Business.Option
     class OptionDao
     {
         private static LogUtil log = LogUtil.GetInstance("OptionDao");
-        //添加relation
-        private static bool IsSingleElement(ModelElement me)
-        {
-            ElementSubType[] doubleInputs = new ElementSubType[] {
-                                                ElementSubType.CollideOperator,
-                                                ElementSubType.UnionOperator,
-                                                ElementSubType.RelateOperator,
-                                                ElementSubType.DifferOperator,
-                                                ElementSubType.KeyWordOperator,
-                                                ElementSubType.CustomOperator2};
-            return !doubleInputs.Contains(me.SubType);
-        }
-
-
 
         // 情况1
         // LEFT_ME ----- StartID.MR.EndID ----- RIGHT_ME
@@ -47,10 +33,10 @@ namespace Citta_T1.Business.Option
 
             MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
-            if (IsSingleElement(rightMe)) 
+            if (moveOpControl.IsSingleDimension()) 
             {
                 moveOpControl.EnableOption = true;
-                DoInputComare(rightMe, mr, null);   
+                DoInputComare(rightMe, mr, ModelRelation.Empty);   
             }
             // 情况2
             else
@@ -83,14 +69,14 @@ namespace Citta_T1.Business.Option
                 return;
 
             // 二元算子时,第二个入度的数据源表头不能为空
-            if (moveOpControl.BinaryDimension())
+            if (moveOpControl.IsBinaryDimension())
                 if(oldColumns1.Count == 0)
                     return;
 
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
             LoadColumns(startElement0, newColumns0);
     
-            if (moveOpControl.BinaryDimension())// 二元算子
+            if (moveOpControl.IsBinaryDimension())// 二元算子
             {
                 ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
                 LoadColumns(startElement1, newColumns1);
@@ -102,8 +88,8 @@ namespace Citta_T1.Business.Option
                     Swap(ref newColumns0, ref newColumns1);  
             }
 
-            bool factor0 = newColumns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count()));
-            bool factor1 = newColumns1.Count() >= oldColumns1.Count() && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Count()));
+            bool factor0 = newColumns0.Count >= oldColumns0.Count && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count));
+            bool factor1 = newColumns1.Count >= oldColumns1.Count && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Count));
 
             if (factor0 && factor1)
             {
@@ -115,14 +101,14 @@ namespace Citta_T1.Business.Option
 
         private void Swap(ref List<string> A, ref List<string> B)
         {
-            List<String> C = A;
+            List<string> C = A;
             A = B;
             B = C;
         }
 
         private void LoadColumns(ModelElement me, List<string> columns)
         {
-            columns.AddRange(new BcpInfo(me).columnArray);
+            columns.AddRange(new BcpInfo(me).ColumnArray);
         }
 
 
@@ -136,7 +122,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null)
                 return ElementStatus.Null;
 
-            List<string> keys = new List<string>() { "otherSeparator", "browseChosen", "endRow" };
+            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow" };
 
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {

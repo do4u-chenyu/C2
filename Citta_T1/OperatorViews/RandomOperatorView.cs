@@ -78,16 +78,14 @@ namespace Citta_T1.OperatorViews
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             foreach (string name in columnName)
             {
                 this.outList.AddItems(name);
             }
 
             //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
 
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();

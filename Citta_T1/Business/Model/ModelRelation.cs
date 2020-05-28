@@ -18,8 +18,6 @@ namespace Citta_T1.Business.Model
         private PointF a;  // 贝塞尔曲线的控制点A
         private PointF b;  // 贝塞尔曲线的控制点B
 
-        private bool selected = false;
-
         public ElementType Type { get; }
         public int EndPin { get; set; }
         public int StartID { get; set; }
@@ -28,11 +26,17 @@ namespace Citta_T1.Business.Model
         public PointF EndP { get => endP; set => endP = value; }
         public PointF A { get => a;}
         public PointF B { get => b; }
-        public bool Selected { get => selected; set => selected = value; }
+        public bool Selected { get; set; } = false;
         public PointF StartP { get => startP; set => startP = value; }
 
         public static ModelRelation Empty = new ModelRelation();
-        private ModelRelation() { }
+        private ModelRelation() 
+        {
+            EndPin = StartID = EndID = -1;
+            endP = startP = a = b = new PointF(0, 0);
+            Selected = false;
+            Type = ElementType.Relation;
+        }
 
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
@@ -43,6 +47,7 @@ namespace Citta_T1.Business.Model
             this.EndP = endLocation;
             this.EndPin = endPin;
             this.Type = ElementType.Relation;
+            this.Selected = false;
             UpdatePoints();
         }
 

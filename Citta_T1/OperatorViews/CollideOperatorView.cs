@@ -71,7 +71,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToArray());
-                this.opControl.SecondDataSourceColumns= this.columnName1.ToList();
+                this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
                 
             }
            
@@ -88,10 +88,8 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split(separator);
-            return columnName;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            return bcpInfo.ColumnArray;
         }
 
         public void SetTextBoxName(TextBox textBox)
@@ -144,7 +142,7 @@ namespace Citta_T1.OperatorViews
             List<string> outName =new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName0[Convert.ToInt32(index)]); }
-            if (String.Join(",", this.oldOutList)!= this.opControl.Option.GetOption("outfield"))
+            if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
@@ -282,7 +280,7 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
                     Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1= (control1 as ComboBox).Tag==null? (control1 as ComboBox).SelectedIndex.ToString(): (control1 as ComboBox).Tag.ToString();
+                    string index1= (control1 as ComboBox).Tag == null? (control1 as ComboBox).SelectedIndex.ToString(): (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
                     string factor = index1 + "," + index2 + "," + index3;
@@ -377,7 +375,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 addLine = 0;
                 CreateLine(addLine);
             }

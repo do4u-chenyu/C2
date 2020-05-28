@@ -5,16 +5,10 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Controls.Common;
 
 namespace Citta_T1.OperatorViews
 {
@@ -46,7 +40,7 @@ namespace Citta_T1.OperatorViews
             this.minValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
             this.minValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.minValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
         }
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -63,7 +57,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (String.IsNullOrWhiteSpace(DataInfoBox.Text)) return;
+            if (String.IsNullOrWhiteSpace(dataInfoBox.Text)) return;
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
@@ -142,16 +136,15 @@ namespace Citta_T1.OperatorViews
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataPath = dataInfo["dataPath0"];
-                this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
-                SetOption(this.dataPath, this.DataInfoBox.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+                this.toolTip1.SetToolTip(this.dataInfoBox, this.dataInfoBox.Text);
+                SetOption(this.dataPath, this.dataInfoBox.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             foreach (string name in columnName)
             {
                 this.outList.AddItems(name);
@@ -198,12 +191,12 @@ namespace Citta_T1.OperatorViews
 
         private void DataInfoBox_MouseClick(object sender, MouseEventArgs e)
         {
-            this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
+            this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
         private void DataInfoBox_LostFocus(object sender, EventArgs e)
         {
-            SetTextBoxName(this.DataInfoBox);
+            SetTextBoxName(this.dataInfoBox);
         }
 
   

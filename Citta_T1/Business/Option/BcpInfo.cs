@@ -12,27 +12,36 @@ namespace Citta_T1.Business.Option
         private string name;         //对应的数据源名称
         private ElementType type;    //对应的类型:数据源 或 Result
         private DSUtil.Encoding encoding;     //BCP文件对应的编码
-        public string columnLine;
-        public List<string> columnArray;
+        private char[] separator;             //BCP文件对应的分隔符
+        private string columnLine;
+        private string[] columnArray;
+        public string ColumnLine { get => columnLine; }
+        public string[] ColumnArray { get => columnArray; }
 
         public BcpInfo(ModelElement me)
         {
-            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding);
-            this.columnArray = new List<string>( this.columnLine.Split(me.Separator));
+            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding, new char[] { me.Separator }); 
         }
 
-        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
+        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char separator)
         {
-            InitBcpInfo(fullBcpPath, name, type, encoding);
+            InitBcpInfo(fullBcpPath, name, type, encoding, new char[] { separator });
         }
 
-        private void InitBcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
+        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char[] separator)
+        {
+            InitBcpInfo(fullBcpPath, name, type, encoding, separator);
+        }
+
+
+        private void InitBcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char[] separator)
         {
             this.fullFilePath = fullBcpPath;
             fileName = System.IO.Path.GetFileName(this.fullFilePath);
             this.name = name;
             this.type = type;
             this.encoding = encoding;
+            this.separator = separator;
             InitColumnInfo();
           
         }
@@ -41,7 +50,7 @@ namespace Citta_T1.Business.Option
         private void InitColumnInfo()
         {
             this.columnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullFilePath, encoding);
-
+            columnArray = this.columnLine.Split(this.separator);
         }
     }
 }

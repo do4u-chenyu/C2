@@ -6,14 +6,9 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -78,11 +73,10 @@ namespace Citta_T1.OperatorViews
                 SetOption(this.dataPath, this.DataInfo.Text, encoding, separator);
 
         }
-        private void SetOption(string path, string dataName, string encoding,char separator)
+        private void SetOption(string path, string dataName, string encoding, char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
 
