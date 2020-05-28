@@ -2,18 +2,12 @@
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.SS.Formula.Functions;
-using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
@@ -198,6 +192,7 @@ namespace Citta_T1.Controls
         private const bool endSelect = false;
         private const bool startSelect = true;
         private const int arcRadius = 2;
+        private const double minBodingRec_Off = 0.4;
         private Bitmap staticImage, moveImage;
         private Point startP, endP;
         private bool selectStatus;
@@ -223,8 +218,8 @@ namespace Citta_T1.Controls
             frameRec = initRec;
             minBodingRec = initRec;
             selectStatus = endSelect;
-            this.staticImage = null;
-            this.moveImage = null;
+            staticImage = null;
+            moveImage = null;
             controls = new List<Control>(); 
         }
         private void FramePropertySet()
@@ -409,10 +404,10 @@ namespace Citta_T1.Controls
                 Point ctW = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
                 if (frameRec.Contains(ctW) && frameRec.Contains(new Point(ctW.X + ct.Width,ctW.Y + ct.Height)))
                 {
-                    minX.Add(ctW.X - (int)(ct.Height * 0.4));
-                    minY.Add(ctW.Y - (int)(ct.Height * 0.4));
-                    maxX.Add(ctW.X + ct.Width + (int)(ct.Height * 0.4));
-                    maxY.Add(ctW.Y + (int)(ct.Height * 1.4));
+                    minX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
+                    minY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
+                    maxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
+                    maxY.Add(ctW.Y + ct.Height+ (int)(ct.Height * minBodingRec_Off));
                     controls.Add(ct);
                 }
             }
