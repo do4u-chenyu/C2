@@ -269,10 +269,12 @@ namespace Citta_T1.Business.Model
         {
             return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
+
         // 寻找隶属于同一个二元算子的两个关系
         public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
             return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
+
         }
         public ModelElement SearchResultElementByOpID(int OpID)
         {

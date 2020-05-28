@@ -76,7 +76,7 @@ namespace Citta_T1.OperatorViews
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
                 this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
-                this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName0);//单输入的也要赋值
+                this.opControl.SingleDataSourceColumns =this.columnName0.ToList();//单输入的也要赋值
                 this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
                 foreach (string name in this.columnName0)
                     this.outList0.AddItems(name);
@@ -101,7 +101,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = columnName.ToList();
             return columnName;
         }
 

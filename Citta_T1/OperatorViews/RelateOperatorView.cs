@@ -101,7 +101,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
-            this.opControl.SingleDataSourceColumns = column;
+            this.opControl.SingleDataSourceColumns = columnName.ToList();
             return columnName;
         }
         private DSUtil.Encoding EnType(string type)
