@@ -61,9 +61,9 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
-                    this.dataPath = me.GetFullFilePath();
-                    if (me.GetControl is MoveDtControl)
-                        separator = (me.GetControl as MoveDtControl).Separator;
+                    this.dataPath = me.FullFilePath;
+                    if (me.InnerControl is MoveDtControl)
+                        separator = (me.InnerControl as MoveDtControl).Separator;
                     //设置数据信息选项
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
@@ -129,7 +129,7 @@ namespace Citta_T1.OperatorViews
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
 
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;
@@ -183,7 +183,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
             List<string> outName = new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))

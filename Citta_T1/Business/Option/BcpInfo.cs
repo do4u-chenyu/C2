@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Option
 
         public BcpInfo(ModelElement me)
         {
-            InitBcpInfo(me.GetFullFilePath(), me.GetDescription(), me.Type, me.Encoding);
+            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding);
             this.columnArray = new List<string>( this.columnLine.Split(me.Separator));
         }
 

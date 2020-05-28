@@ -112,7 +112,7 @@ namespace Citta_T1
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
             foreach (ModelElement me in modelElements)
             {
-                this.canvasPanel.Controls.Remove(me.GetControl);
+                this.canvasPanel.Controls.Remove(me.InnerControl);
             }
             this.naviViewControl.UpdateNaviView();
   
@@ -168,7 +168,7 @@ namespace Citta_T1
             // 重绘所有Relation线
             this.canvasPanel.Invalidate(false);
             //切换文档时，更新运行按钮图标及进度条
-            UpdateRunbuttonImageInfo(this.modelDocumentDao.CurrentDocument.TaskManager.ModelStatus);
+            UpdateRunbuttonImageInfo();
             //切换文档时,更新撤回/重做按钮状态
             UpdateUndoRedoButton();
         }
@@ -229,7 +229,7 @@ namespace Citta_T1
         {
             foreach (ModelElement me in doc.ModelElements)
             {
-                Control ct = me.GetControl;
+                Control ct = me.InnerControl;
                 if (ct is RemarkControl)
                     continue;
                 this.canvasPanel.Controls.Add(ct);
@@ -511,7 +511,7 @@ namespace Citta_T1
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 Global.GetCurrentDocument().TaskManager.Stop();
-                UpdateRunbuttonImageInfo(Global.GetCurrentDocument().TaskManager.ModelStatus);
+                UpdateRunbuttonImageInfo();
             }
         }
 
@@ -557,7 +557,7 @@ namespace Citta_T1
                 currentManager.Continue();
             }
 
-            UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+            UpdateRunbuttonImageInfo();
         }
 
         public void SetCanvasEnable(bool status)
@@ -650,18 +650,18 @@ namespace Citta_T1
 
             if (doneModel == Global.GetCurrentDocument())
             {
-                UpdateRunbuttonImageInfo(doneModel.TaskManager.ModelStatus);
+                UpdateRunbuttonImageInfo();
 
             }
         }
 
 
 
-        public void UpdateRunbuttonImageInfo(ModelStatus modelStatus)
+        public void UpdateRunbuttonImageInfo()
         {
             TaskManager manager = Global.GetCurrentDocument().TaskManager;
-            ModelStatus modelStatus1 = manager.ModelStatus;
-            switch (modelStatus1)
+            ModelStatus modelStatus = manager.ModelStatus;
+            switch (modelStatus)
             { 
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:

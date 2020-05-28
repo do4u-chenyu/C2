@@ -577,7 +577,7 @@ namespace Citta_T1.Controls.Move.Op
             Global.GetMainForm().BindUiManagerFunc();
 
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+            Global.GetMainForm().UpdateRunbuttonImageInfo();
         }
 
 
@@ -598,7 +598,7 @@ namespace Citta_T1.Controls.Move.Op
                 if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
                 {
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                    (me.GetControl as IMoveControl).OutPinInit("noLine");
+                    (me.InnerControl as IMoveControl).OutPinInit("noLine");
                 }
 
                 if (mr.StartID == this.id || mr.EndID == this.id)
@@ -654,7 +654,7 @@ namespace Citta_T1.Controls.Move.Op
                 if (mrc.ID == endID)
                 {
                     Global.GetCurrentDocument().DeleteModelElement(mrc);
-                    Global.GetCanvasPanel().DeleteElement(mrc.GetControl);
+                    Global.GetCanvasPanel().DeleteElement(mrc.InnerControl);
                     Global.GetNaviViewControl().UpdateNaviView();  
                     return;
                 }

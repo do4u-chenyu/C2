@@ -33,13 +33,13 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (element.Type)
             {
                 case ElementType.DataSource:
-                    oldLocation = (element.GetControl as MoveDtControl).UndoRedoMoveLocation(oldLocation);
+                    oldLocation = (element.InnerControl as MoveDtControl).UndoRedoMoveLocation(oldLocation);
                     break;
                 case ElementType.Operator:
-                    oldLocation = (element.GetControl as MoveOpControl).UndoRedoMoveLocation(oldLocation);
+                    oldLocation = (element.InnerControl as MoveOpControl).UndoRedoMoveLocation(oldLocation);
                     break;
                 case ElementType.Result:
-                    oldLocation = (element.GetControl as MoveRsControl).UndoRedoMoveLocation(oldLocation);
+                    oldLocation = (element.InnerControl as MoveRsControl).UndoRedoMoveLocation(oldLocation);
                     break;
                 default:
                     break;

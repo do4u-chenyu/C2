@@ -20,16 +20,35 @@ namespace Citta_T1.Controls.Move.Dt
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
-        public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
+        public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         private string oldTextString;
         private Point oldControlPosition;
         private DSUtil.Encoding encoding;
-        private DSUtil.ExtType extType;
         private char separator;
         private int id;
         public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
         public int ID { get => this.id; set => this.id = value; }
-        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+
+        public DSUtil.ExtType ExtType
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(FullFilePath))
+                    return DSUtil.ExtType.Unknow;
+                if (FullFilePath.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Excel;
+                if (FullFilePath.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Excel;
+                if (FullFilePath.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                if (FullFilePath.EndsWith(".cvs", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                return DSUtil.ExtType.Unknow;
+            }
+        }
+
         public char Separator { get => separator; set => separator = value; }
 
         //绘制引脚
@@ -74,7 +93,6 @@ namespace Citta_T1.Controls.Move.Dt
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
-            DSUtil.ExtType extType = DSUtil.ExtType.Unknow, 
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8 
             )
         {
@@ -82,12 +100,12 @@ namespace Citta_T1.Controls.Move.Dt
             this.textBox.Text = name;
             this.Location = loc;
             this.Name = bcpPath;
-            this.extType = extType;
-            this.encoding = encoding;
+            this.Encoding = encoding;
+            this.Separator = separator;
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
-            this.separator = separator;
+
         }
 
 
@@ -164,7 +182,7 @@ namespace Citta_T1.Controls.Move.Dt
                 {
                     ModelDocument doc = Global.GetCurrentDocument();
                     doc.RemoveModelRelation(mr);
-                    Control lineEndC = doc.SearchElementByID(mr.EndID).GetControl;
+                    Control lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     Global.GetCanvasPanel().Invalidate();
                 }
@@ -207,7 +225,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.ExtType, this.encoding);
         }
         #endregion
 

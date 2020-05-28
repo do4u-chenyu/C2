@@ -145,7 +145,7 @@ namespace Citta_T1.OperatorViews
             }
 
             // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             List<string> newData = new List<string>(this.outList.GetItemCheckText());
             newData.Add("频率统计结果");
@@ -172,7 +172,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
 
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;

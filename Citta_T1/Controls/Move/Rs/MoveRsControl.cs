@@ -31,6 +31,24 @@ namespace Citta_T1.Controls.Move.Rs
         private string oldTextString;
         private string fullFilePath;
         private DSUtil.Encoding encoding;
+        public DSUtil.ExtType ExtType
+        {  get
+            {
+                if (String.IsNullOrWhiteSpace(FullFilePath))
+                    return DSUtil.ExtType.Unknow;
+                if (FullFilePath.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Excel;
+                if (FullFilePath.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Excel;
+                if (FullFilePath.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                if (FullFilePath.EndsWith(".cvs", true, System.Globalization.CultureInfo.CurrentCulture))
+                    return DSUtil.ExtType.Text;
+                return DSUtil.ExtType.Unknow;
+            }
+        }
         private char separator;
 
         // 一些倍率
@@ -88,6 +106,7 @@ namespace Citta_T1.Controls.Move.Rs
         public string FullFilePath { get => this.fullFilePath; set => this.fullFilePath = value; }
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
+        
 
         public MoveRsControl()
         {
@@ -330,7 +349,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             if (System.IO.File.Exists(this.FullFilePath))
             {
-                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.separator, DSUtil.ExtType.Text, this.encoding);
+                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.separator, this.ExtType, this.encoding);
             }
         }
 
@@ -386,7 +405,7 @@ namespace Citta_T1.Controls.Move.Rs
             Global.GetMainForm().BindUiManagerFunc();
 
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+            Global.GetMainForm().UpdateRunbuttonImageInfo();
 
         }
 
