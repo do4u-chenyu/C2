@@ -223,7 +223,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             bool empty = IsOptionReay();
             if (empty) return;
@@ -252,7 +252,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
        
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
