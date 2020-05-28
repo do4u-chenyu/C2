@@ -89,7 +89,7 @@ namespace Citta_T1.Business.Schedule
 
         public void Reset()
         {
-            foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done))
+            foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
             {
                 triple.OperateElement.Status = ElementStatus.Ready;
             }
@@ -109,6 +109,9 @@ namespace Citta_T1.Business.Schedule
             resetEvent.Set();
         }
 
+        //锁
+        private readonly object _objLock = new object();
+
         public void Stop()
         {
             this.modelStatus = ModelStatus.Stop;
@@ -116,14 +119,19 @@ namespace Citta_T1.Business.Schedule
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
             resetEvent.Dispose();
 
-            foreach (Process p in cmdProcessList)
+            lock (_objLock)
             {
-                UpdateLogDelegate("当前process名字：" + p.ProcessName);
-                if (p.ProcessName == "cmd")
+                foreach (Process p in cmdProcessList)
                 {
-                    p.Kill();
+                    UpdateLogDelegate("当前process名字：" + p.ProcessName);
+                    if (p.ProcessName == "cmd")
+                    {
+                        p.Kill();
+                    }
                 }
             }
+
+
 
 
             foreach (Task currentTask in parallelTasks)
@@ -195,37 +203,38 @@ namespace Citta_T1.Business.Schedule
             parallelTasks = new List<Task>();
             foreach (Triple tmpTri in currentModelTripleList)
             {
+                bool isDataElementError = false;
                 if (tmpTri.OperateElement.Status == ElementStatus.Done)
                 {
                     continue;
                 }
                 else
                 {
-                    //判断数据节点是否算完
+                    //判断数据节点是否算完，如果数据节点（上一个的结果算子）为error，跳过这个循环，并将其结果算子也置为error
                     foreach (ModelElement tmpDE in tmpTri.DataElements)
                     {
                         if (tmpDE.Type == ElementType.Result)
                         {
                             while (tmpDE.Status != ElementStatus.Done)
                             {
+                                UpdateLogDelegate(tmpTri.TripleName +"的data状态："+ tmpDE.Status);
+                                if (tmpDE.Status == ElementStatus.Warn)
+                                {
+                                    isDataElementError = true;
+                                    break;
+                                }
                                 Thread.Sleep(1000);
                             }
                         }
+                        if (isDataElementError) break;
+                    }
+                    if (isDataElementError)
+                    {
+                        tmpTri.ResultElement.Status = ElementStatus.Warn;
+                        continue;
                     }
                     //该三元组未算过，且数据节点都已经算完，开一个子任务去算
-                    Task t = new Task(() => 
-                    {
-                        try
-                        {
-                            TaskMethod(tmpTri);
-                        }
-                        catch(Exception ex)
-                        {
-                            UpdateLogDelegate("task异常了:" + ex.Message);
-                            Thread.Sleep(10000);
-
-                        }
-                    }, tokenSource.Token);
+                    Task t = new Task(() => TaskMethod(tmpTri), tokenSource.Token);
                     t.Start();
                     parallelTasks.Add(t);
 
@@ -248,61 +257,85 @@ namespace Citta_T1.Business.Schedule
 
         bool TaskMethod(Triple triple)
         {
-                if (resetEvent.SafeWaitHandle.IsClosed)
+            if (resetEvent.SafeWaitHandle.IsClosed)
+            {
+                UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                return true;
+            }
+            //阻止当前线程
+            resetEvent.WaitOne();
+
+            tokenSource.Token.ThrowIfCancellationRequested();
+
+            triple.OperateElement.Status = ElementStatus.Runnnig;
+            UpdateLogDelegate(triple.TripleName + "开始运行");
+            List<string> cmds = new List<string>();
+
+            int retryCount = 3;
+            bool isTaskMethodError = false;
+            while (retryCount > 0)
+            {
+                try
                 {
-                    UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
-                    return true;
+                    switch (triple.OperateElement.SubType)
+                    {
+                        case ElementSubType.MaxOperator: cmds = (new MaxOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.FilterOperator: cmds = (new FilterOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.CollideOperator: cmds = (new CollideOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.UnionOperator: cmds = (new UnionOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.DifferOperator: cmds = (new DifferOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.RandomOperator: cmds = (new RandomOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.MinOperator: cmds = (new MinOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.AvgOperator: cmds = (new AvgOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.SortOperator: cmds = (new SortOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.FreqOperator: cmds = (new FreqOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.RelateOperator: cmds = (new RelateOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.GroupOperator: cmds = (new GroupOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.CustomOperator1: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
+                    }
+                    break;
                 }
-                //阻止当前线程
-                resetEvent.WaitOne();
-
-                tokenSource.Token.ThrowIfCancellationRequested();
-
-                triple.OperateElement.Status = ElementStatus.Runnnig;
-
-
-                UpdateLogDelegate(triple.TripleName + "开始运行");
-                //Thread.Sleep(10000);
-
-                List<string> cmds = new List<string>();
-                switch (triple.OperateElement.SubType)
+                catch (System.IO.IOException ex)
                 {
-                    case ElementSubType.MaxOperator: cmds = (new MaxOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.FilterOperator: cmds = (new FilterOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.CollideOperator: cmds = (new CollideOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.UnionOperator: cmds = (new UnionOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.DifferOperator: cmds = (new DifferOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.RandomOperator: cmds = (new RandomOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.MinOperator: cmds = (new MinOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.AvgOperator: cmds = (new AvgOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.SortOperator: cmds = (new SortOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.FreqOperator: cmds = (new FreqOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.RelateOperator: cmds = (new RelateOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.GroupOperator: cmds = (new GroupOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.CustomOperator1: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
-                    case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
+                    UpdateLogDelegate("TaskMethod异常: " + ex.Message);
+                    Thread.Sleep(1000);
+                    retryCount--;
                 }
-                RunLinuxCommand(cmds);
-
-                if (resetEvent.SafeWaitHandle.IsClosed)
+                catch (Exception ex)
                 {
-                    UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
-                    return true;
+                    UpdateLogDelegate("TaskMethod其他异常: " + ex.Message);
+                    isTaskMethodError = true;
+                    break;
                 }
-                //阻止当前线程
-                resetEvent.WaitOne();
+            }
 
-                //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
-                triple.OperateElement.Status = ElementStatus.Done;
-                triple.ResultElement.Status = ElementStatus.Done;
-                triple.IsOperated = true;
-                UpdateBarDelegate(this);
-                UpdateLogDelegate(triple.TripleName + "结束运行");
+            UpdateLogDelegate("retryCount个数"+retryCount);
+            if (retryCount == 0 || isTaskMethodError)
+            {
+                triple.OperateElement.Status = ElementStatus.Warn;
+                triple.ResultElement.Status = ElementStatus.Warn;
+                return false;
+            }
 
+            RunLinuxCommand(cmds);
+            if (resetEvent.SafeWaitHandle.IsClosed)
+            {
+                UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
+                return true;
+            }
+            //阻止当前线程
+            resetEvent.WaitOne();
+
+            //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
+            triple.OperateElement.Status = ElementStatus.Done;
+            triple.ResultElement.Status = ElementStatus.Done;
+            triple.IsOperated = true;
+            UpdateBarDelegate(this);
+            UpdateLogDelegate(triple.TripleName + "结束运行");
 
             return true;
-
         }
 
         public void RunLinuxCommand(List<string> cmds)
@@ -325,11 +358,16 @@ namespace Citta_T1.Business.Schedule
             {
                 if (p.Start())//开始进程  
                 {
-                    this.cmdProcessList.Add(p);
+                    lock (_objLock)
+                    {
+                        this.cmdProcessList.Add(p);
+                    }
+
+                    
 
                     foreach (string cmd in cmds)
                     {
-                        UpdateLogDelegate("执行命令: " + cmd);
+                        //UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
                     //此处要exit两次?
@@ -343,7 +381,11 @@ namespace Citta_T1.Business.Schedule
             catch (Exception ex)
             {
                 //异常停止的处理方法
-                this.cmdProcessList.Remove(p);
+                lock (_objLock)
+                {
+                    this.cmdProcessList.Remove(p);
+                }
+                
                 UpdateLogDelegate("异常: " + ex.Message);
 
             }
@@ -351,7 +393,10 @@ namespace Citta_T1.Business.Schedule
             {
                 if (p != null)
                     p.Close();
-                this.cmdProcessList.Remove(p);
+                lock (_objLock)
+                {
+                    this.cmdProcessList.Remove(p);
+                }
             }
         }
 
