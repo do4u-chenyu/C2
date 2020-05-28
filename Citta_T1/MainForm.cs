@@ -36,7 +36,8 @@ namespace Citta_T1
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
-        delegate void AsynUpdataProgressBar();
+        delegate void AsynUpdateProgressBar();
+        delegate void AsynUpdateOpErrorMessage();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
         public MainForm(string userName)
@@ -493,11 +494,12 @@ namespace Citta_T1
         private void ResetButton_Click(object sender, EventArgs e)
         {
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
+            
             //在模型运行完成，及终止的情况下，可以重置
             Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
             {
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
                 MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -578,15 +580,26 @@ namespace Citta_T1
             //初次运行时，绑定线程与ui交互的委托
             if (currentManager.ModelStatus == ModelStatus.Null)
             {
-                currentManager.UpdateLogDelegate = UpdataLogStatus;
+                currentManager.UpdateLogDelegate = UpdateLogStatus;
                 currentManager.TaskCallBack = Accomplish;
-                currentManager.UpdateGifDelegate = UpdataRunningGif;
-                currentManager.UpdateBarDelegate = UpdataProgressBar;
+                currentManager.UpdateGifDelegate = UpdateRunningGif;
+                currentManager.UpdateBarDelegate = UpdateProgressBar;
+                currentManager.UpdateOpErrorDelegate = UpdateOpErrorMessage;
             }
         }
 
+        //更新op算子错误信息
+        private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
+        {
+            this.Invoke(new AsynUpdateOpErrorMessage(delegate () {
+                ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+                MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
+                op.SetStatusBoxErrorContent(error);
+            }));
+        }
+
         //更新进度条
-        private void UpdataProgressBar(TaskManager manager)
+        private void UpdateProgressBar(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             if (doneModel != Global.GetCurrentDocument())
@@ -594,7 +607,7 @@ namespace Citta_T1
 
 
             if (manager.ModelStatus == ModelStatus.Running)
-                this.Invoke(new AsynUpdataProgressBar(delegate () {
+                this.Invoke(new AsynUpdateProgressBar(delegate () {
                     this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done)*100/manager.TripleList.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%"; 
                 }));
@@ -602,7 +615,7 @@ namespace Citta_T1
 
 
         //更新log
-        private void UpdataLogStatus(string logContent)
+        private void UpdateLogStatus(string logContent)
         {
             if (InvokeRequired)
             {
@@ -618,7 +631,7 @@ namespace Citta_T1
         }
 
 
-        private void UpdataRunningGif(TaskManager manager)
+        private void UpdateRunningGif(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
             if (doneModel != Global.GetCurrentDocument())
