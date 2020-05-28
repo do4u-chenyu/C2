@@ -21,6 +21,7 @@ namespace Citta_T1.Utils
         public static float THRESHOLD = 5;
         public static float DISTNOTONLINE = -1;
         public static int CUTPOINTNUM = 10;
+        public static int CUTPTSOFFSET = 10;
         
         public enum LineStatus
         {
@@ -267,8 +268,8 @@ namespace Citta_T1.Utils
                 pts[i] = points[index];
             }
             // 第一个点和最后一个点向中间靠拢，解决点Pin的时候误触的问题
-            pts[0].X += 8;
-            pts[cutPointNum - 1].X -= 8; 
+            pts[0].X += LineUtil.CUTPTSOFFSET;
+            pts[cutPointNum - 1].X -= LineUtil.CUTPTSOFFSET;
             return pts;
         }
         /// <summary>

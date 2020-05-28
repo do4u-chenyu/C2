@@ -189,7 +189,8 @@ namespace Citta_T1.Controls
         {
             selectLineIndexs.Clear();
             Global.GetMainForm().BlankButtonFocus();                    // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            this.ClickOnLine(e);
+            if (!(sender is Citta_T1.Controls.Move.Dt.MoveDtControl || sender is Citta_T1.Controls.Move.Op.MoveOpControl || sender is Citta_T1.Controls.Move.Rs.MoveRsControl))
+                this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right) 
             {
                 
