@@ -53,7 +53,7 @@ namespace Citta_T1.Utils
                 );
         }
 
-        public static Point WorldBoundControl(Point Pm, float factor, int width, int height)
+        public static Point WorldBoundControl(float factor, int width, int height)
         {
 
             Point dragOffset = new Point(0, 0);
