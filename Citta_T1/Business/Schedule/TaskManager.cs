@@ -98,7 +98,7 @@ namespace Citta_T1.Business.Schedule
         {
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
             {
-                if(triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.GetControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
+                if(triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
                 triple.OperateElement.Status = ElementStatus.Ready;
             }
         }
@@ -225,8 +225,8 @@ namespace Citta_T1.Business.Schedule
                     {
 
                         string filename = "";
-                        if (tmpDE.Type == ElementType.DataSource) filename = (tmpDE.GetControl as MoveDtControl).FullFilePath;
-                        if (tmpDE.Type == ElementType.Result) filename = (tmpDE.GetControl as MoveRsControl).FullFilePath;
+                        if (tmpDE.Type == ElementType.DataSource) filename = (tmpDE.InnerControl as MoveDtControl).FullFilePath;
+                        if (tmpDE.Type == ElementType.Result) filename = (tmpDE.InnerControl as MoveRsControl).FullFilePath;
                         if (!File.Exists(filename))
                         {
                             tmpTri.OperateElement.Status = ElementStatus.Warn;

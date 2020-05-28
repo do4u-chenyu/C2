@@ -593,7 +593,7 @@ namespace Citta_T1
         {
             this.Invoke(new AsynUpdateOpErrorMessage(delegate () {
                 ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-                MoveOpControl op = model.SearchElementByID(id).GetControl as MoveOpControl;
+                MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
             }));
         }
