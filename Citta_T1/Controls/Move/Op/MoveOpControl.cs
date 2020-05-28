@@ -275,12 +275,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point WorldBoundControl(Point Pm)
         {
            
-             float screenFactor = Global.GetCurrentDocument().ScreenFactor;
-             Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
+
             
-            int orgX = Convert.ToInt32(Pm.X / screenFactor);
-            int orgY = Convert.ToInt32(Pm.Y / screenFactor);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(orgX, orgY), mapOrigin);
+
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,true);
             
 
             if (Pw.X < 20)
@@ -395,7 +393,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -408,10 +406,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
@@ -575,7 +573,7 @@ namespace Citta_T1.Controls.Move.Op
             }
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
-            Manager currentManager = Global.GetCurrentDocument().Manager;
+            TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
             Global.GetMainForm().BindUiManagerFunc();
 
@@ -642,7 +640,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
-            Global.GetCurrentDocument().StateChangeByDeleteControl(endID);
+            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(endID);
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == endID || mr.EndID == endID)
@@ -667,7 +665,7 @@ namespace Citta_T1.Controls.Move.Op
         private void OptionDirty(ElementStatus status)
         {
             if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
-                Global.GetCurrentDocument().AllStateChange(this.id);
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.id);
 
             if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set;
@@ -947,7 +945,7 @@ namespace Citta_T1.Controls.Move.Op
             Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().SizeL;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(

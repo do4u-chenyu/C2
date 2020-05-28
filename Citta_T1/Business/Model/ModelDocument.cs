@@ -25,7 +25,7 @@ namespace Citta_T1.Business.Model
 
         private List<ModelElement> modelElements;     
         private List<ModelRelation> modelRelations;
-        private Dictionary<int, List<int>> modelLineDict;  // 边字典 node -> List<node>
+        private Dictionary<int, List<int>> modelGraphDict;  // 当前模型,以ID为key的图描述
         private string remarkDescription;  // 备注描述信息
         private bool remarkVisible;        // 备注控件是否可见
 
@@ -34,11 +34,10 @@ namespace Citta_T1.Business.Model
 
         private int elementCount = 0;
         
-        private Point mapOrigin = new Point(-600, -300);
-        private int sizeL;
-        private float screenFactor;
+        private WorldMap WorldMap;
 
-        private Manager manager;
+
+        private TaskManager taskManager;
         private string userPath;
 
         /*
@@ -53,39 +52,35 @@ namespace Citta_T1.Business.Model
         public List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
 
 
-        public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
+        
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
-        public Manager Manager { get => manager; set => manager = value; }
-        public int SizeL { get => this.sizeL; set => this.sizeL = value; }
-        public float ScreenFactor { get => this.screenFactor; set => this.screenFactor = value; }
+        public TaskManager TaskManager { get => taskManager; set => taskManager = value; }
+
+
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
-        public Dictionary<int, List<int>> ModelLineDict { get => modelLineDict; set => modelLineDict = value; }
-        
 
+        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; set => modelGraphDict = value; }
+        
+        public WorldMap WorldMap1 { get => WorldMap; set => WorldMap = value; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
-        internal WorldMap WorldMap { get; set; }
+        
+
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
             this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
-            this.modelLineDict = new Dictionary<int, List<int>>();
+            this.modelGraphDict = new Dictionary<int, List<int>>();
             this.remarkDescription = "";
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.savePath = Path.Combine(this.userPath, modelTitle);
 
-            this.manager = new Manager();
+            this.taskManager = new TaskManager();
             this.WorldMap = new WorldMap();
-            this.sizeL = 0;
-            this.screenFactor = 1;
-
-
-            // lineCounter应该为`this,modelRelations`的最大值
-            //this.lineCounter = this.modelRelations.Count == 0 ? -1 :   
         }
         /*
          * 保存功能
@@ -96,15 +91,6 @@ namespace Citta_T1.Business.Model
             dSaveLoad.WriteXml();
     
         }
-
-        //private int GetMaxLineID(List<ModelRelation> mrs)
-        //{
-        //    int maxID = -1;
-        //    foreach (ModelRelation mr in mrs)
-        //    {
-        //        maxID = Math.Max(maxID, mr.)
-        //    }
-        //}
         public void AddModelElement(ModelElement modelElement)
         {
             this.modelElements.Add(modelElement);
@@ -127,84 +113,78 @@ namespace Citta_T1.Business.Model
         }
         private void AddEdge(ModelRelation mr)
         {
-            if (!this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID] = new List<int>() { mr.EndID };
+            if (!this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID] = new List<int>() { mr.EndID };
             else
-                this.modelLineDict[mr.StartID].Add(mr.EndID);
+                this.modelGraphDict[mr.StartID].Add(mr.EndID);
         }
         private void RemoveEdge(ModelRelation mr)
         {
-            if (this.modelLineDict.ContainsKey(mr.StartID))
-                this.modelLineDict[mr.StartID].Remove(mr.EndID);
+            if (this.modelGraphDict.ContainsKey(mr.StartID))
+                this.modelGraphDict[mr.StartID].Remove(mr.EndID);
         }
+
         public void DeleteModelElement(Control control)
         {
-            List<ModelElement> modelElements = new List<ModelElement>(this.modelElements);
-            foreach (ModelElement me in modelElements)
-            {
-                if (!me.GetControl.Equals(control))
-                    continue;
-                this.modelElements.Remove(me);
-                return;
-            }   
+            this.ModelElements.Remove(this.ModelElements.Find(me => me.GetControl == control));
         }
 
         public void DeleteModelElement(ModelElement me)
         {
-            this.modelElements.Remove(me);
+            this.ModelElements.Remove(me);
         }
 
-        public void StateChangeByDeleteControl(int ID)
+        public void StatusChangeWhenDeleteControl(int ID)
         {
-
             foreach (ModelRelation mr in this.ModelRelations)
             {
                 if (mr.StartID != ID) continue;
-                foreach (ModelElement me in this.ModelElements)
-                {
-                    if (me.ID != mr.EndID) continue; 
-                    me.Status = ElementStatus.Null;
-                    (me.GetControl as MoveOpControl).EnableOption = false;
-                    //存在链路，后续链路中算子状态变化
-                    AllStateChange(me.ID);
-
-                }
+                StatusChangeWhenDeleteLine(mr.EndID);
             }
         }
-        public void StateChangeByDeletLine(int ID)
+        public void StatusChangeWhenDeleteLine(int ID)
         {
-
-            foreach (ModelElement me in this.ModelElements)
-            {
-                if (me.ID != ID) continue;
-                me.Status = ElementStatus.Null;
-                (me.GetControl as MoveOpControl).EnableOption = false;
-                //存在链路，后续链路中算子状态变化
-                AllStateChange(me.ID);
-            }
+            ModelElement me = SearchElementByID(ID);
+            if (me == ModelElement.Empty)
+                return;
+            me.Status = ElementStatus.Null;
+            (me.GetControl as MoveOpControl).EnableOption = false;
+            DegradeChildrenStatus(me.ID);
         }
-        public void AllStateChange(int operatorID)
+        public void DegradeChildrenStatus(int opID)
         {
             foreach (ModelRelation mr in this.ModelRelations)
             {
-                if (mr.StartID != operatorID) continue;
+                if (mr.StartID != opID) continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
                     if (me.ID != mr.EndID) continue;
-                    me.Status = ModifyStatus(me, me.Status);
-                    AllStateChange(mr.EndID);
+                    DegradeStatus(me);  // 算子状态降级
+                    DegradeChildrenStatus(mr.EndID);
                 }
             }
         }
-        private ElementStatus ModifyStatus(ModelElement me, ElementStatus status)
+        // 算子状态降级规则:
+        // Op算子  : Done状态降为Ready; Ready状态保持不变
+        // 其他算子: 全部降为Null状态
+        private void DegradeStatus(ModelElement me)
         {
-            if (me.Type == ElementType.Operator && status == ElementStatus.Done || status == ElementStatus.Ready)
-                return ElementStatus.Ready;
-            else 
-                return ElementStatus.Null;
-
+            switch (me.Status)
+            {
+                case ElementStatus.Done:
+                case ElementStatus.Ready:
+                    me.Status = me.Type == ElementType.Operator ? ElementStatus.Ready : ElementStatus.Null;
+                    break;
+                case ElementStatus.Null:
+                case ElementStatus.Runnnig:
+                case ElementStatus.Stop:
+                case ElementStatus.Suspend:
+                default:
+                    me.Status = ElementStatus.Null;
+                    break;        
+            }
         }
-        public void StateChangeByOut(int ID)
+        public void SetChildrenStatusNull(int ID)
         {
            
             foreach (ModelRelation mr in this.ModelRelations)
@@ -212,11 +192,9 @@ namespace Citta_T1.Business.Model
                 if (mr.StartID != ID)  continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
-
                     if (me.ID != mr.EndID) continue;
                     me.Status = ElementStatus.Null;
-                    StateChangeByOut(mr.EndID);
-
+                    SetChildrenStatusNull(mr.EndID);
                 }
             }
         }
@@ -262,53 +240,14 @@ namespace Citta_T1.Business.Model
         }
 
         
-        public Point ScreenToWorld(Point Ps, Point Pm)
-        {
-            Point Pw = new Point();
-            Pw.X = Ps.X - Pm.X;
-            Pw.Y = Ps.Y - Pm.Y;
-            return Pw;
-        }
 
-        public PointF ScreenToWorldF(PointF Ps, Point Pm)
-        {
-            PointF Pw = new PointF();
-            Pw.X = Ps.X - Pm.X;
-            Pw.Y = Ps.Y - Pm.Y;
-            return Pw;
-        }
-
-
-        //  Pw = Ps / Factor - Pm
-        public Point ScreenToWorld(Point Ps)
-        {
-            Point Pw = new Point    
-            {
-                X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
-                Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
-            };
-            return Pw;
-        }
-
-        // Ps = (Pw + Pm) * Factor
-        public Point WorldToScreen(Point Pw)
-        {
-            Point Ps = new Point
-            {
-                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
-                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
-            };
-            return Ps;
-        }
        
         public void UpdateAllLines()
         {
-            for (int i = 0;i < this.modelRelations.Count();i++)
+            foreach(ModelRelation mr in this.ModelRelations)
             {
                 try
                 {
-                    ModelRelation mr = this.modelRelations[i];
-
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
@@ -318,10 +257,6 @@ namespace Citta_T1.Business.Model
                     (sEle.GetControl as IMoveControl).OutPinInit("lineExit");
                     (eEle.GetControl as IMoveControl).rectInAdd(mr.EndPin);
                     mr.UpdatePoints();
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    log.Error("索引越界");
                 }
                 catch (Exception ex)
                 {
@@ -334,58 +269,46 @@ namespace Citta_T1.Business.Model
         {
             return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
-        public List<ModelRelation> SearchRelationsByEndID(int id)
+
+        // 寻找隶属于同一个二元算子的两个关系
+        public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
-            return this.modelRelations.FindAll(me => me.EndID == id);
+            return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
+
         }
-        public ModelElement SearchResultOperator(int ID)
+        public ModelElement SearchResultElementByOpID(int OpID)
         {
-            foreach (ModelRelation mr in this.ModelRelations)
-            {
-                if (mr.StartID != ID) continue;
-                ModelElement modelElement = SearchElementByID(mr.EndID);
-                if (modelElement != ModelElement.Empty && modelElement.Type == ElementType.Result)
-                {
-                    modelElement.Status = modelElement.Status;
-                    return modelElement;
-                   
-                }
-                   
-            }
-            return null; 
+            // 找到OpID开头的Relation
+            ModelRelation mr = this.ModelRelations.Find(c => c.StartID == OpID);
+            if (mr == null)
+                return ModelElement.Empty;
+            return SearchElementByID(mr.EndID);
         }
       
         public bool IsDuplicatedRelation(ModelRelation mr)
-        {
-            foreach (ModelRelation _mr in this.modelRelations)
-            {
-                if (_mr.EndID == mr.EndID && _mr.EndPin == mr.EndPin)
-                {
-                    return true;
-                }
-            }
-            return false;
+        {   // 关系终结于同一个元素
+            return this.ModelRelations.Exists(c => c.EndID == mr.EndID && c.EndPin == mr.EndPin);
         }
-        //修改xml内容
-
-        public static bool ModifyRSPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
+        //修改xml中所有RS的path, 用newPathPrefix替换oldPathPrefix
+        public static bool ModifyRsPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
         {
-            bool ret = false;
-            XmlDocument xmlDoc = new XmlDocument();
+            bool ret = true;
             try
             {
-                
+                XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(xmlPath);
                 XmlNodeList nodes = xmlDoc.GetElementsByTagName("ModelElement");
                 foreach (XmlNode childNode in nodes)
                 {
                     XmlNode pathNode = childNode.SelectSingleNode("path");
-                    if (pathNode != null && !String.IsNullOrEmpty(pathNode.InnerText) && pathNode.InnerText.StartsWith(oldPathPrefix))
+                    if (pathNode == null || String.IsNullOrEmpty(pathNode.InnerText))
+                        continue;
+
+                    if (pathNode.InnerText.StartsWith(oldPathPrefix))
                         pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
 
                 }
                 xmlDoc.Save(xmlPath);
-                ret = true;
             }
             catch (Exception e) 
             {

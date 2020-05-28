@@ -170,7 +170,7 @@ namespace Citta_T1.Controls
         {
 
             Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
 
 
             if (Ps.X > 2000 * screenFactor)
@@ -275,7 +275,8 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
-            Global.GetCurrentDocument().MapOrigin = new System.Drawing.Point(0,0);
+            
+            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
             List<int> countWidthList = new List<int>();

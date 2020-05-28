@@ -36,10 +36,9 @@ namespace Citta_T1.Business.Model
         public PointF A { get => a;}
         public PointF B { get => b; }
         public bool Selected { get => selected; set => selected = value; }
-        // 安全空类，防止用null报空指针异常
-        private ModelRelation()
-        { }
-        public static readonly ModelRelation Empty = new ModelRelation();
+        public static ModelRelation Empty = new ModelRelation();
+        private ModelRelation() { }
+
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
           

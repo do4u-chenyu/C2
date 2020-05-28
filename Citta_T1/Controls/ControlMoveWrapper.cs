@@ -29,11 +29,9 @@ namespace Citta_T1.Controls
             g.Clear(Color.White);
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
-            mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor);
-            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor);
+
             Control ct = this.control;
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(ct.Location, mapOrigin);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
             g.Dispose();
             return staticImage;
         }
@@ -48,14 +46,14 @@ namespace Citta_T1.Controls
             }
             this.StaticImage = this.CreateWorldImage();
             ModelDocument currentDoc = Global.GetCurrentDocument();
-            Point mapOrigin = currentDoc.MapOrigin;
+            Point mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
 
             int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
             int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
             mapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             Point moveOffset = Utils.OpUtil.WorldBoundControl(mapOrigin, Factor, Width, Height);
 
-            mapOrigin = currentDoc.MapOrigin;
+            mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + Now.X - Start.X;
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor) + Now.Y - Start.Y;
 
@@ -67,10 +65,10 @@ namespace Citta_T1.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
-                PointF s = currentDoc.ScreenToWorldF(mr.StartP, mapOrigin);
-                PointF a = currentDoc.ScreenToWorldF(mr.A, mapOrigin);
-                PointF b = currentDoc.ScreenToWorldF(mr.B, mapOrigin);
-                PointF e = currentDoc.ScreenToWorldF(mr.EndP, mapOrigin);
+                PointF s = currentDoc.WorldMap1.ScreenToWorldF(mr.StartP);
+                PointF a = currentDoc.WorldMap1.ScreenToWorldF(mr.A);
+                PointF b = currentDoc.WorldMap1.ScreenToWorldF(mr.B);
+                PointF e = currentDoc.WorldMap1.ScreenToWorldF(mr.EndP);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             g.Dispose();

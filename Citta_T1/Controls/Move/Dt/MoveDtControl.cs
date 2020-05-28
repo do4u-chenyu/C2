@@ -156,7 +156,7 @@ namespace Citta_T1.Controls.Move.Dt
         {
             if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && ! Global.GetCanvasPanel().DelEnable))
                 return;
-            Global.GetCurrentDocument().StateChangeByDeleteControl(this.ID);
+            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(this.ID);
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
             foreach (ModelRelation mr in modelRelations)
             {
@@ -303,12 +303,8 @@ namespace Citta_T1.Controls.Move.Dt
 
         public Point WorldBoundControl(Point Pm)
         {
-            float screenFactor = Global.GetCurrentDocument().ScreenFactor;
-            Point mapOrigin = Global.GetCurrentDocument().MapOrigin;
 
-            int orgX = Convert.ToInt32(Pm.X / screenFactor);
-            int orgY = Convert.ToInt32(Pm.Y / screenFactor);
-            Point Pw = Global.GetCurrentDocument().ScreenToWorld(new Point(orgX, orgY), mapOrigin);
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,false);
 
 
             if (Pw.X < 20)
@@ -395,7 +391,7 @@ namespace Citta_T1.Controls.Move.Dt
                     ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                     if (element != ModelElement.Empty)
                     {
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
                         ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
@@ -409,10 +405,10 @@ namespace Citta_T1.Controls.Move.Dt
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().ScreenToWorld(oldControlPosition);
+            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion

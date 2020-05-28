@@ -27,6 +27,7 @@ namespace Citta_T1.Business.Option
         }
 
 
+
         // 情况1
         // LEFT_ME ----- StartID.MR.EndID ----- RIGHT_ME
         // RIGHT_ME.EnableOption开启设置菜单
@@ -54,7 +55,7 @@ namespace Citta_T1.Business.Option
             // 情况2
             else
             {
-                List<ModelRelation> brothers = Global.GetCurrentDocument().SearchRelationsByEndID(mr.EndID);
+                List<ModelRelation> brothers = Global.GetCurrentDocument().SearchBrotherRelations(mr);
                 if (brothers.Count != 2) return;
                 moveOpControl.EnableOption = true;
                 DoInputComare(rightMe, brothers[0], brothers[1]);
@@ -81,6 +82,7 @@ namespace Citta_T1.Business.Option
             {
                 oldColumns0 = moveOpControl.SingleDataSourceColumns;
                 if (oldColumns0 == null || oldColumns0.Count() == 0)
+
                     return;
                 GetNewColumns(mr0, columns0, mr1, columns1);
             }  
@@ -88,6 +90,7 @@ namespace Citta_T1.Business.Option
             {
                 Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
                 if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
+
                     return;
                 oldColumns0 = doubleDataSource["0"];
                 oldColumns1 = doubleDataSource["1"];
@@ -108,7 +111,7 @@ namespace Citta_T1.Business.Option
                     me.Status = LastOptionStatus(me);
                 //单输入情况2
                 else
-                    Global.GetCurrentDocument().StateChangeByOut(me.ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
             }
             else
             {
@@ -119,7 +122,7 @@ namespace Citta_T1.Business.Option
                     me.Status = LastOptionStatus(me);
                 //双输入情况2
                 else
-                    Global.GetCurrentDocument().StateChangeByOut(me.ID);
+                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
             }
            
 
@@ -144,8 +147,7 @@ namespace Citta_T1.Business.Option
        
         //获取算子上次配置状态
         private ElementStatus LastOptionStatus(ModelElement me)
-        {
-            
+        { 
             Dictionary<string, string> optionDict = (me.GetControl as MoveOpControl).Option.OptionDict;
             if (optionDict == null) return ElementStatus.Null;
             foreach (KeyValuePair<string, string> kvp in optionDict)
@@ -255,7 +257,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
            
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             List<string> columns = new List<string>();
            
             //新输出字段中不包含旧字段
@@ -299,7 +301,7 @@ namespace Citta_T1.Business.Option
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {
             List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             //左侧数据源判断
             if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
             {
@@ -340,9 +342,9 @@ namespace Citta_T1.Business.Option
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultOperator(ID).GetFullFilePath();
+            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).GetFullFilePath();
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
-            Global.GetCurrentDocument().StateChangeByOut(ID);
+            Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引
         public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)

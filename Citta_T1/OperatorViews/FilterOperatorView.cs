@@ -120,7 +120,7 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Null, EnType(encoding));
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
@@ -170,17 +170,20 @@ namespace Citta_T1.OperatorViews
 
             //生成结果控件,创建relation,bcp结果文件
             this.selectColumn = this.OutList.GetItemCheckText();
-            ModelElement hasResutl = Global.GetCurrentDocument().SearchResultOperator(this.opControl.ID);
-            if (hasResutl == null)
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
             { 
                 Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
                 return;
             }
+            // 对应的结果文件置脏
+            BCPBuffer.GetInstance().SetDirty(resultElement.GetFullFilePath());
+
             //输出变化，重写BCP文件
             List<string> outName = new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
-            if (hasResutl != null && !this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
+            if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
         }
 
