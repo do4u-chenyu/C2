@@ -38,7 +38,7 @@
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
+            this.dataInfoBox = new System.Windows.Forms.TextBox();
             this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.minValueBox = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -142,7 +142,7 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.DataInfoBox);
+            this.valuePanel.Controls.Add(this.dataInfoBox);
             this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Controls.Add(this.minValueBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -154,16 +154,16 @@
             // 
             // DataInfoBox
             // 
-            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.Location = new System.Drawing.Point(9, 2);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.Size = new System.Drawing.Size(150, 23);
-            this.DataInfoBox.TabIndex = 3;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
-            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+            this.dataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataInfoBox.Location = new System.Drawing.Point(9, 2);
+            this.dataInfoBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dataInfoBox.Name = "DataInfoBox";
+            this.dataInfoBox.ReadOnly = true;
+            this.dataInfoBox.Size = new System.Drawing.Size(150, 23);
+            this.dataInfoBox.TabIndex = 3;
+            this.dataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.dataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
             // OutList
             // 
@@ -224,7 +224,7 @@
         private System.Windows.Forms.Label label2;
         private Citta_T1.Controls.Common.ComCheckBoxList outList;
         private System.Windows.Forms.ComboBox minValueBox;
-        private System.Windows.Forms.TextBox DataInfoBox;
+        private System.Windows.Forms.TextBox dataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }
