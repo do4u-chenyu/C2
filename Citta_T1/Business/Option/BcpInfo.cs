@@ -13,8 +13,20 @@ namespace Citta_T1.Business.Option
         private ElementType type;    //对应的类型:数据源 或 Result
         private DSUtil.Encoding encoding;     //BCP文件对应的编码
         public string columnLine;
+        public List<string> columnArray;
+
+        public BcpInfo(ModelElement me)
+        {
+            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding);
+            this.columnArray = new List<string>( this.columnLine.Split(me.Separator));
+        }
 
         public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
+        {
+            InitBcpInfo(fullBcpPath, name, type, encoding);
+        }
+
+        private void InitBcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding)
         {
             this.fullFilePath = fullBcpPath;
             fileName = System.IO.Path.GetFileName(this.fullFilePath);
@@ -22,8 +34,9 @@ namespace Citta_T1.Business.Option
             this.type = type;
             this.encoding = encoding;
             InitColumnInfo();
-
+          
         }
+
         // 根据第一行初始化列信息
         private void InitColumnInfo()
         {

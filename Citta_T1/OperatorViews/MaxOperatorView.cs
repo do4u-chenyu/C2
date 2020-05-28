@@ -109,7 +109,7 @@ namespace Citta_T1.OperatorViews
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
             
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;
@@ -136,7 +136,7 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnName.Add(this.OutList.Items[i].ToString());
             }
            
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns));
         }
         #endregion
         #region 初始化配置
@@ -170,7 +170,7 @@ namespace Citta_T1.OperatorViews
                 if (!field.Contains("columnname"))
                     Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
             }
-            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
+            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
         }
       
 

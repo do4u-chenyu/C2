@@ -65,10 +65,10 @@ namespace Citta_T1.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
-                PointF s = currentDoc.WorldMap1.ScreenToWorldF(mr.StartP);
-                PointF a = currentDoc.WorldMap1.ScreenToWorldF(mr.A);
-                PointF b = currentDoc.WorldMap1.ScreenToWorldF(mr.B);
-                PointF e = currentDoc.WorldMap1.ScreenToWorldF(mr.EndP);
+                PointF s = currentDoc.WorldMap1.ScreenToWorldF(mr.StartP,false);
+                PointF a = currentDoc.WorldMap1.ScreenToWorldF(mr.A, false);
+                PointF b = currentDoc.WorldMap1.ScreenToWorldF(mr.B, false);
+                PointF e = currentDoc.WorldMap1.ScreenToWorldF(mr.EndP, false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             g.Dispose();

@@ -173,6 +173,11 @@ namespace Citta_T1.Business.Schedule
 
                     }
                 }
+                //运行前，把所有warn状态的结果算子重置为null状态，把所有warn状态的op算子重置为ready状态
+                if (resultElement.Status == ElementStatus.Warn) resultElement.Status = ElementStatus.Null;
+                if (operateElement.Status == ElementStatus.Warn) operateElement.Status = ElementStatus.Ready;
+                //TODO
+                //判断data算子的路径文件是否存在，不存在，则把对应op算子状态改为warn,并且me里的报错状态赋值
 
                 this.currentModelTripleList.Add(new Triple(dataElements, operateElement, resultElement));
 

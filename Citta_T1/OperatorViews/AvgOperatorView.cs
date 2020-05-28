@@ -95,8 +95,8 @@ namespace Citta_T1.OperatorViews
                     Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
             }
 
-            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+            this.opControl.SingleDataSourceColumns =  this.columnName.ToList();
+            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       
 
@@ -170,7 +170,7 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
             this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;

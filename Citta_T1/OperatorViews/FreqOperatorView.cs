@@ -71,8 +71,8 @@ namespace Citta_T1.OperatorViews
             List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);         
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
 
-            this.opControl.SingleDataSourceColumns = String.Join("\t", this.columnName);
-            this.opControl.Option.SetOption("columnname", this.opControl.SingleDataSourceColumns);
+            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       
         public void SetTextBoxName(TextBox textBox)
@@ -172,7 +172,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
 
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
+            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
                 this.opControl.Status = ElementStatus.Ready;

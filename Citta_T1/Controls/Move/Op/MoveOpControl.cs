@@ -39,7 +39,7 @@ namespace Citta_T1.Controls.Move.Op
         private string oldTextString;
         private OperatorOption option = new OperatorOption();
         private int id;
-        private string dataSourceColumns;
+        private List<string> dataSourceColumns;
         private Dictionary<string, List<string>> doubleDataSourceColumns; 
         
         // 一些倍率
@@ -60,7 +60,7 @@ namespace Citta_T1.Controls.Move.Op
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
-        public string SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
+        public List<string> SingleDataSourceColumns { get => this.dataSourceColumns; set => this.dataSourceColumns = value; }
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
         public Dictionary<string, List<string>> DoubleDataSourceColumns { get => this.doubleDataSourceColumns; set => this.doubleDataSourceColumns = value; }
 
@@ -578,7 +578,7 @@ namespace Citta_T1.Controls.Move.Op
             Global.GetMainForm().BindUiManagerFunc();
 
             currentManager.Start();
-            Global.GetMainForm().UpdateRunbuttonImageInfo(currentManager.ModelStatus);
+            Global.GetMainForm().UpdateRunbuttonImageInfo();
         }
 
 
@@ -668,11 +668,14 @@ namespace Citta_T1.Controls.Move.Op
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.id);
 
             if (status == ElementStatus.Null)
-                this.statusBox.Image = Properties.Resources.set; 
+                this.statusBox.Image = Properties.Resources.set;
             else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
             else if (status == ElementStatus.Ready)
                 this.statusBox.Image = Properties.Resources.setSuccess;
+            else if (status == ElementStatus.Warn)
+                this.statusBox.Image = Properties.Resources.warn;
+
         }
         #endregion
 

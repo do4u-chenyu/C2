@@ -1,9 +1,11 @@
 ﻿using Citta_T1.Core;
 using Citta_T1.Utils;
+using log4net.Util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,9 +36,9 @@ namespace Citta_T1.Business.Model
         public PointF A { get => a;}
         public PointF B { get => b; }
         public bool Selected { get => selected; set => selected = value; }
-
         public static ModelRelation Empty = new ModelRelation();
         private ModelRelation() { }
+
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
         {
           
