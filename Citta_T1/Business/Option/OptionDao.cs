@@ -80,7 +80,7 @@ namespace Citta_T1.Business.Option
             //mr1不为null,则me双输入算子
             if (mr1 == null)
             {
-                oldColumns0 = moveOpControl.SingleDataSourceColumns;
+                oldColumns0 = moveOpControl.FirstDataSourceColumns;
                 if (oldColumns0 == null || oldColumns0.Count() == 0)
 
                     return;
@@ -88,12 +88,9 @@ namespace Citta_T1.Business.Option
             }  
             else
             {
-                Dictionary<string, List<string>> doubleDataSource = moveOpControl.DoubleDataSourceColumns;
-                if (!doubleDataSource.ContainsKey("0") || !doubleDataSource.ContainsKey("1"))
 
-                    return;
-                oldColumns0 = doubleDataSource["0"];
-                oldColumns1 = doubleDataSource["1"];
+                oldColumns0 = moveOpControl.FirstDataSourceColumns;
+                oldColumns1 = moveOpControl.SecondDataSourceColumns;
                 if (oldColumns0 == null || oldColumns0.Count() == 0)
                     return;
                 if (oldColumns1 == null || oldColumns1.Count() == 0)

@@ -129,7 +129,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox1.Items.Add(name);
             }
             
-            this.opControl.SingleDataSourceColumns =this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns =this.columnName.ToList();
            
         }
 
@@ -197,7 +197,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns));
+            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
@@ -262,7 +262,7 @@ namespace Citta_T1.OperatorViews
                 InitNewFactorControl(count - 1);
             else
             {
-                this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns)); 
+                this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns)); 
                 return; 
             } 
             for (int i = 2; i < (count + 1); i++)
@@ -286,7 +286,7 @@ namespace Citta_T1.OperatorViews
                 control2.Tag = Nums[1].ToString();
                 control3.Tag = Nums[2].ToString();
             }
-            this.opControl.Option.SetOption("columnname",string.Join("\t", this.opControl.SingleDataSourceColumns));
+            this.opControl.Option.SetOption("columnname",string.Join("\t", this.opControl.FirstDataSourceColumns));
         }
         private void InitNewFactorControl(int count)
         {

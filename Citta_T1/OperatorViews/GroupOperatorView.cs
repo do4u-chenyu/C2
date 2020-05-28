@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
                
-            this.opControl.SingleDataSourceColumns =this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns =this.columnName.ToList();
         }
        
         private DSUtil.Encoding EnType(string type)
@@ -160,7 +160,7 @@ namespace Citta_T1.OperatorViews
                 InitNewFactorControl(count - 1);
             else
             {
-                this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns));
+                this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
                 return;
             }
 
@@ -178,13 +178,13 @@ namespace Citta_T1.OperatorViews
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
                 control1.Tag = Nums[0].ToString();
             }
-            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.SingleDataSourceColumns));
+            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
 
         }
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname", String.Join("\t",this.opControl.SingleDataSourceColumns));
+            this.opControl.Option.SetOption("columnname", String.Join("\t",this.opControl.FirstDataSourceColumns));
             string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
             this.groupColumn.Add(this.comboBox1.SelectedIndex);

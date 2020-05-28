@@ -95,7 +95,7 @@ namespace Citta_T1.OperatorViews
                     Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
             }
 
-            this.opControl.SingleDataSourceColumns =  this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns =  this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       
