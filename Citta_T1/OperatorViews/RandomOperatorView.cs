@@ -62,8 +62,8 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     this.dataPath = me.FullFilePath;
-                    if (me.GetControl is MoveDtControl)
-                        separator = (me.GetControl as MoveDtControl).Separator;
+                    if (me.InnerControl is MoveDtControl)
+                        separator = (me.InnerControl as MoveDtControl).Separator;
                     //设置数据信息选项
                     this.DataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.DataInfoBox, this.DataInfoBox.Text);
@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
             List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
             Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
 
-            this.opControl.SingleDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
       

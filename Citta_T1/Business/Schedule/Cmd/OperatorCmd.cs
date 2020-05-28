@@ -25,7 +25,7 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             this.triple = triple;
             triple.DataElements.ForEach(c => inputFilePaths.Add(c.FullFilePath));
-            this.option = (triple.OperateElement.GetControl as MoveOpControl).Option;
+            this.option = (triple.OperateElement.InnerControl as MoveOpControl).Option;
             this.outputFileTitle = this.option.GetOption("columnname");
             this.outputFilePath = triple.ResultElement.FullFilePath;
             this.operatorId = triple.OperateElement.ID.ToString();
@@ -102,7 +102,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 if (me.Type == ElementType.DataSource)
                 {
-                    separators.Add((me.GetControl as MoveDtControl).Separator.ToString());
+                    separators.Add((me.InnerControl as MoveDtControl).Separator.ToString());
                 }
                 else
                 {

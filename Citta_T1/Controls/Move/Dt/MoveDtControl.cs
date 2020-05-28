@@ -182,7 +182,7 @@ namespace Citta_T1.Controls.Move.Dt
                 {
                     ModelDocument doc = Global.GetCurrentDocument();
                     doc.RemoveModelRelation(mr);
-                    Control lineEndC = doc.SearchElementByID(mr.EndID).GetControl;
+                    Control lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     Global.GetCanvasPanel().Invalidate();
                 }

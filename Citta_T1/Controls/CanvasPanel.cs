@@ -319,9 +319,9 @@ namespace Citta_T1.Controls
 
                     doc.RemoveModelRelation(mr);
                     //关联算子引脚自适应改变
-                    Control lineStartC = doc.SearchElementByID(mr.StartID).GetControl;
+                    Control lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
                     this.RepaintStartcPin(lineStartC, mr.StartID);
-                    Control lineEndC = doc.SearchElementByID(mr.EndID).GetControl;
+                    Control lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     //删除线文档dirty
 
@@ -402,7 +402,7 @@ namespace Citta_T1.Controls
                 // 遍历一遍之后如果没有被校正，则this.endC=null
                 foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
                 {
-                    Control con = modelEle.GetControl;
+                    Control con = modelEle.InnerControl;
                     if (modelEle.Type == ElementType.Operator && con != startC)
                     {
                         // 修正坐标
@@ -636,9 +636,11 @@ namespace Citta_T1.Controls
         {
             MoveRsControl btn = new MoveRsControl(sizeL,
                                 desciption,
-                                location);
-            btn.Separator = separator;
-            btn.Encoding = encoding;
+                                location)
+            {
+                Separator = separator,
+                Encoding = encoding
+            };
             AddNewElement(btn);
             return btn;
         }

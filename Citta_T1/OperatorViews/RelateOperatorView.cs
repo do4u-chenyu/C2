@@ -78,8 +78,8 @@ namespace Citta_T1.OperatorViews
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 
-            this.opControl.DoubleDataSourceColumns["0"] = this.columnName0.ToList();
-            this.opControl.DoubleDataSourceColumns["1"] = this.columnName1.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
+            this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
           
 
             foreach (string name in this.columnName0)
@@ -101,7 +101,7 @@ namespace Citta_T1.OperatorViews
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
             string column = bcpInfo.columnLine;
             string[] columnName = column.Split(separator);
-            this.opControl.SingleDataSourceColumns = columnName.ToList();
+            this.opControl.FirstDataSourceColumns = columnName.ToList();
             return columnName;
         }
         private DSUtil.Encoding EnType(string type)
@@ -181,8 +181,8 @@ namespace Citta_T1.OperatorViews
                 InitNewFactorControl(count - 1);
             else
             {
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
-                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
                 return;
             }
             for (int i = 2; i < (count + 1); i++)
@@ -204,14 +204,14 @@ namespace Citta_T1.OperatorViews
                 control2.Tag = Nums[1].ToString();
                 control3.Tag = Nums[2].ToString();
             }
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
         }
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.DoubleDataSourceColumns["0"]));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.DoubleDataSourceColumns["1"]));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
             List<int> checkIndexs0 = this.OutList0.GetItemCheckIndex();
             List<int> outIndexs0 = new List<int>(this.oldOutList0);
