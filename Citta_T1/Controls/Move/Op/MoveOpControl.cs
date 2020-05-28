@@ -1049,6 +1049,11 @@ namespace Citta_T1.Controls.Move.Op
         }
         #endregion
 
+        public void SetStatusBoxErrorContent(string error)
+        {
+            this.helpToolTip.SetToolTip(this.statusBox, error);
+        }
+
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
