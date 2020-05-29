@@ -34,27 +34,27 @@
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.keyWordColBox = new System.Windows.Forms.ComboBox();
             this.conditionSelectBox = new System.Windows.Forms.ComboBox();
             this.dataColumnBox = new System.Windows.Forms.ComboBox();
-            this.dataSource1 = new System.Windows.Forms.TextBox();
-            this.dataSource0 = new System.Windows.Forms.TextBox();
+            this.keyWordBox = new System.Windows.Forms.TextBox();
+            this.dataSourceBox = new System.Windows.Forms.TextBox();
             this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.dataSourceTip = new System.Windows.Forms.ToolTip(this.components);
+            this.keyWordTip = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -96,7 +96,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(493, 37);
+            this.topPanel.Size = new System.Drawing.Size(489, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -105,11 +105,55 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 177);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 173);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(493, 212);
+            this.bottomPanel.Size = new System.Drawing.Size(489, 212);
             this.bottomPanel.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(28, 15);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(462, 163);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "过滤条件预览：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(6, 41);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(376, 17);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "[2] AND,\'空格\'表示与运算;  OR,\'|\'表示或运算； NOT,\'!\'表示非运算。";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(387, 17);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "[1] 行与行之间按或运算处理；每行支持逻辑或、逻辑与、逻辑非运算。";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox1.Location = new System.Drawing.Point(0, 62);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(478, 101);
+            this.textBox1.TabIndex = 0;
             // 
             // cancelButton
             // 
@@ -148,7 +192,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(124, 140);
+            this.keyPanel.Size = new System.Drawing.Size(124, 136);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -157,115 +201,15 @@
             this.valuePanel.Controls.Add(this.keyWordColBox);
             this.valuePanel.Controls.Add(this.conditionSelectBox);
             this.valuePanel.Controls.Add(this.dataColumnBox);
-            this.valuePanel.Controls.Add(this.dataSource1);
-            this.valuePanel.Controls.Add(this.dataSource0);
+            this.valuePanel.Controls.Add(this.keyWordBox);
+            this.valuePanel.Controls.Add(this.dataSourceBox);
             this.valuePanel.Controls.Add(this.OutList);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(124, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(369, 140);
+            this.valuePanel.Size = new System.Drawing.Size(365, 136);
             this.valuePanel.TabIndex = 3;
-            // 
-            // keyWordColBox
-            // 
-            this.keyWordColBox.FormattingEnabled = true;
-            this.keyWordColBox.Location = new System.Drawing.Point(218, 54);
-            this.keyWordColBox.Name = "keyWordColBox";
-            this.keyWordColBox.Size = new System.Drawing.Size(121, 20);
-            this.keyWordColBox.TabIndex = 13;
-            // 
-            // conditionSelectBox
-            // 
-            this.conditionSelectBox.FormattingEnabled = true;
-            this.conditionSelectBox.Location = new System.Drawing.Point(137, 54);
-            this.conditionSelectBox.Name = "conditionSelectBox";
-            this.conditionSelectBox.Size = new System.Drawing.Size(74, 20);
-            this.conditionSelectBox.TabIndex = 12;
-            // 
-            // dataColumnBox
-            // 
-            this.dataColumnBox.FormattingEnabled = true;
-            this.dataColumnBox.Location = new System.Drawing.Point(5, 54);
-            this.dataColumnBox.Name = "dataColumnBox";
-            this.dataColumnBox.Size = new System.Drawing.Size(126, 20);
-            this.dataColumnBox.TabIndex = 11;
-            // 
-            // dataSource1
-            // 
-            this.dataSource1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSource1.Location = new System.Drawing.Point(218, 2);
-            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSource1.Name = "dataSource1";
-            this.dataSource1.ReadOnly = true;
-            this.dataSource1.Size = new System.Drawing.Size(121, 23);
-            this.dataSource1.TabIndex = 10;
-            this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // dataSource0
-            // 
-            this.dataSource0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSource0.Location = new System.Drawing.Point(4, 2);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSource0.Name = "dataSource0";
-            this.dataSource0.ReadOnly = true;
-            this.dataSource0.Size = new System.Drawing.Size(127, 23);
-            this.dataSource0.TabIndex = 9;
-            this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // OutList
-            // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(6, 107);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(112, 21);
-            this.OutList.TabIndex = 8;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(28, 15);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(462, 163);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "过滤条件预览：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(0, 62);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(478, 101);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(6, 23);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(387, 17);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "[1] 行与行之间按或运算处理；每行支持逻辑或、逻辑与、逻辑非运算。";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(6, 41);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(376, 17);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "[2] AND,\'空格\'表示与运算;  OR,\'|\'表示或运算； NOT,\'!\'表示非运算。";
             // 
             // label6
             // 
@@ -278,10 +222,70 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词：";
             // 
+            // keyWordColBox
+            // 
+            this.keyWordColBox.FormattingEnabled = true;
+            this.keyWordColBox.Location = new System.Drawing.Point(218, 54);
+            this.keyWordColBox.Name = "keyWordColBox";
+            this.keyWordColBox.Size = new System.Drawing.Size(121, 20);
+            this.keyWordColBox.TabIndex = 13;
+            // 
+            // conditionSelectBox
+            // 
+            this.conditionSelectBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.conditionSelectBox.FormattingEnabled = true;
+            this.conditionSelectBox.Items.AddRange(new object[] {
+            "命中提取",
+            "过滤去噪"});
+            this.conditionSelectBox.Location = new System.Drawing.Point(137, 54);
+            this.conditionSelectBox.Name = "conditionSelectBox";
+            this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
+            this.conditionSelectBox.TabIndex = 12;
+            // 
+            // dataColumnBox
+            // 
+            this.dataColumnBox.FormattingEnabled = true;
+            this.dataColumnBox.Location = new System.Drawing.Point(5, 54);
+            this.dataColumnBox.Name = "dataColumnBox";
+            this.dataColumnBox.Size = new System.Drawing.Size(126, 20);
+            this.dataColumnBox.TabIndex = 11;
+            // 
+            // keyWordBox
+            // 
+            this.keyWordBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keyWordBox.Location = new System.Drawing.Point(218, 2);
+            this.keyWordBox.Margin = new System.Windows.Forms.Padding(2);
+            this.keyWordBox.Name = "keyWordBox";
+            this.keyWordBox.ReadOnly = true;
+            this.keyWordBox.Size = new System.Drawing.Size(121, 23);
+            this.keyWordBox.TabIndex = 10;
+            this.keyWordBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dataSourceBox
+            // 
+            this.dataSourceBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceBox.Location = new System.Drawing.Point(4, 2);
+            this.dataSourceBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceBox.Name = "dataSourceBox";
+            this.dataSourceBox.ReadOnly = true;
+            this.dataSourceBox.Size = new System.Drawing.Size(127, 23);
+            this.dataSourceBox.TabIndex = 9;
+            this.dataSourceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // OutList
+            // 
+            this.OutList.DataSource = null;
+            this.OutList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.OutList.Location = new System.Drawing.Point(6, 107);
+            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.OutList.Name = "OutList";
+            this.OutList.Size = new System.Drawing.Size(112, 21);
+            this.OutList.TabIndex = 8;
+            // 
             // KeyWordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(493, 389);
+            this.ClientSize = new System.Drawing.Size(489, 385);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -295,12 +299,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "关键词过滤算子设置";
             this.bottomPanel.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -316,10 +320,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private Citta_T1.Controls.Common.ComCheckBoxList OutList;
-        private System.Windows.Forms.TextBox dataSource1;
-        private System.Windows.Forms.TextBox dataSource0;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.TextBox keyWordBox;
+        private System.Windows.Forms.TextBox dataSourceBox;
+        private System.Windows.Forms.ToolTip dataSourceTip;
+        private System.Windows.Forms.ToolTip keyWordTip;
         private System.Windows.Forms.ComboBox keyWordColBox;
         private System.Windows.Forms.ComboBox conditionSelectBox;
         private System.Windows.Forms.ComboBox dataColumnBox;
