@@ -214,15 +214,7 @@ namespace Citta_T1.OperatorViews
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-
-            if (!ConvertUtil.IsInt(this.randomNumBox.Text))
-            { 
-                MessageBox.Show("请输入数字");
-                this.randomNumBox.Text = "";
-            }
-            else
-                this.randomNumBox.Text = int.Parse(this.randomNumBox.Text).ToString();
-
+            ConvertUtil.ControlTextTryParseInt(randomNumBox, "\"{0}\" 不是数字, 请输入一个整数.");
         }
     }
 }

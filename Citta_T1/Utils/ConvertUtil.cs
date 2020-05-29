@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
@@ -42,6 +43,19 @@ namespace Citta_T1.Utils
             catch
             {
                 return false;
+            }
+        }
+
+        public static void ControlTextTryParseInt(Control ct, string errrorMessage = "")
+        {
+            try
+            {
+                ct.Text = int.Parse(ct.Text).ToString();
+            }
+            catch
+            {
+                MessageBox.Show(String.Format(errrorMessage, ct.Text));
+                ct.Text = String.Empty;
             }
         }
     }
