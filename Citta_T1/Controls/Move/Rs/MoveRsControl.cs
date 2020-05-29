@@ -126,6 +126,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
+
             
         }
 
