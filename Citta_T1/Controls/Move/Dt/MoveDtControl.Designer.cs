@@ -30,9 +30,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
             this.rightPictureBox = new System.Windows.Forms.PictureBox();
-            this.leftPicture = new System.Windows.Forms.PictureBox();
-            this.leftPinPictureBox = new System.Windows.Forms.PictureBox();
-            this.rightPinPictureBox = new System.Windows.Forms.PictureBox();
+            this.leftPictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,13 +41,11 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CopyFilePathToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nameToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBox = new System.Windows.Forms.TextBox();
             this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rightPinPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,33 +66,17 @@
             // 
             // leftPicture
             // 
-            this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPicture.Location = new System.Drawing.Point(7, 3);
-            this.leftPicture.Name = "leftPicture";
-            this.leftPicture.Size = new System.Drawing.Size(14, 19);
-            this.leftPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.leftPicture.TabIndex = 0;
-            this.leftPicture.TabStop = false;
-            this.leftPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
-            this.leftPicture.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
-            this.leftPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
-            this.leftPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
-            // 
-            // leftPinPictureBox
-            // 
-            this.leftPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.leftPinPictureBox.Name = "leftPinPictureBox";
-            this.leftPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.leftPinPictureBox.TabIndex = 0;
-            this.leftPinPictureBox.TabStop = false;
-            // 
-            // rightPinPictureBox
-            // 
-            this.rightPinPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.rightPinPictureBox.Name = "rightPinPictureBox";
-            this.rightPinPictureBox.Size = new System.Drawing.Size(100, 50);
-            this.rightPinPictureBox.TabIndex = 0;
-            this.rightPinPictureBox.TabStop = false;
+            this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
+            this.leftPictureBox.Location = new System.Drawing.Point(7, 3);
+            this.leftPictureBox.Name = "leftPicture";
+            this.leftPictureBox.Size = new System.Drawing.Size(14, 19);
+            this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.leftPictureBox.TabIndex = 0;
+            this.leftPictureBox.TabStop = false;
+            this.leftPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseDown);
+            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
+            this.leftPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
+            this.leftPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
             // 
             // contextMenuStrip
             // 
@@ -236,7 +216,7 @@
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
-            this.Controls.Add(this.leftPicture);
+            this.Controls.Add(this.leftPictureBox);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MoveDtControl";
@@ -246,9 +226,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveDtControl_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rightPinPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -256,64 +234,16 @@
         }
 
         #endregion
-        #region 组件设计器生成的代码
-
-        /// <summary> 
-        /// 设计器支持所需的方法 - 不要修改
-        /// 使用代码编辑器修改此方法的内容。
-        /// </summary>
-        //private void InitializeComponent()
-        //{
-        //    ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
-        //    ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).BeginInit();
-        //    ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).BeginInit();
-        //    this.SuspendLayout();
-        //    // 
-        //    // leftPicture
-        //    // 
-        //    this.leftPicture.Image = global::Citta_T1.Properties.Resources.u72;
-        //    this.leftPicture.Location = new System.Drawing.Point(15, 4);
-        //    this.leftPicture.Size = new System.Drawing.Size(17, 20);
-        //    // 
-        //    // textBox1
-        //    // 
-        //    this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-        //    // 
-        //    // txtButton
-        //    // 
-        //    this.txtButton.FlatAppearance.BorderSize = 0;
-        //    // 
-        //    // MoveDtControl
-        //    // 
-        //    this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-        //    this.Name = "MoveDtControl";
-        //    this.LocationChanged += new System.EventHandler(this.MoveDtControl_LocationChanged);
-        //    this.Controls.SetChildIndex(this.leftPicture, 0);
-        //    this.Controls.SetChildIndex(this.rightPictureBox, 0);
-        //    this.Controls.SetChildIndex(this.leftPinPictureBox, 0);
-        //    this.Controls.SetChildIndex(this.textBox1, 0);
-        //    this.Controls.SetChildIndex(this.txtButton, 0);
-        //    ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();
-        //    ((System.ComponentModel.ISupportInitialize)(this.leftPicture)).EndInit();
-        //    ((System.ComponentModel.ISupportInitialize)(this.leftPinPictureBox)).EndInit();
-        //    this.ResumeLayout(false);
-        //    this.PerformLayout();
-
-        //}
-
-        #endregion
-
-        public System.Windows.Forms.PictureBox rightPictureBox;
-        public System.Windows.Forms.PictureBox leftPicture;
-        public System.Windows.Forms.PictureBox leftPinPictureBox;
-        public System.Windows.Forms.PictureBox rightPinPictureBox;
+    
+        private System.Windows.Forms.PictureBox rightPictureBox;
+        private System.Windows.Forms.PictureBox leftPictureBox;
         public System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;
-        private System.Windows.Forms.ToolTip nameToolTip;
+        private System.Windows.Forms.ToolTip helpToolTip;
         private System.Windows.Forms.TextBox textBox;
         private Citta_T1.Controls.Common.NoFocusButton txtButton;
         private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;

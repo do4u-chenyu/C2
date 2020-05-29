@@ -52,7 +52,7 @@ namespace Citta_T1.Controls.Move.Rs
         private char separator;
 
         // 一些倍率
-        public string DescriptionName { get => this.textBox.Text; set => this.textBox.Text = value; }
+        public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         public string SubTypeName { get => typeName; }
         public char Separator { get => this.separator; set => this.separator = value; }
         // 一些倍率
@@ -65,7 +65,7 @@ namespace Citta_T1.Controls.Move.Rs
         private int startX;
         private int startY;
         private Point oldControlPosition;
-        public ECommandType cmd = ECommandType.Null;
+        private ECommandType cmd = ECommandType.Null;
 
 
 
@@ -116,10 +116,10 @@ namespace Citta_T1.Controls.Move.Rs
         public MoveRsControl(int size,string desciption, Point loc)
         {
             InitializeComponent();
-            DescriptionName = desciption;
+            Description = desciption;
             this.typeName = "运算结果";
             this.Location = loc;
-            SetOpControlName(DescriptionName);
+            SetOpControlName(Description);
             ChangeSize(size);
             
             InitializeOpPinPicture();
@@ -133,7 +133,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
-            SetOpControlName(DescriptionName);
+            SetOpControlName(Description);
 
 
         }
@@ -324,7 +324,7 @@ namespace Citta_T1.Controls.Move.Rs
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.nameToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -468,7 +468,7 @@ namespace Citta_T1.Controls.Move.Rs
 
         public void rightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.rightPictureBox, this.FullFilePath);
+            this.helpToolTip.SetToolTip(this.rightPictureBox, this.FullFilePath);
         }
 
         #region 针脚事件
@@ -594,9 +594,9 @@ namespace Citta_T1.Controls.Move.Rs
         private void StatusDirty()
         {
             if (this.status == ElementStatus.Null)
-                this.leftPicture.Image = Properties.Resources.resultNull;
+                this.leftPictureBox.Image = Properties.Resources.resultNull;
             else if (this.status == ElementStatus.Done)
-                this.leftPicture.Image = Properties.Resources.resultDone;
+                this.leftPictureBox.Image = Properties.Resources.resultDone;
             // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (!System.IO.File.Exists(this.FullFilePath))
                 return;
@@ -728,7 +728,7 @@ namespace Citta_T1.Controls.Move.Rs
         }
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
         public void rectInAdd(int pinIndex)
         {
@@ -759,7 +759,7 @@ namespace Citta_T1.Controls.Move.Rs
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            this.saveFileDialog.FileName = DescriptionName + ".bcp";
+            this.saveFileDialog.FileName = Description + ".bcp";
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {

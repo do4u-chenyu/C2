@@ -44,7 +44,7 @@ namespace Citta_T1.Controls.Move.Op
         private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
         
         // 一些倍率
-        public string DescriptionName { get => textBox.Text; set => textBox.Text = value; }
+        public string Description { get => textBox.Text; set => textBox.Text = value; }
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         private ElementStatus status;
@@ -1133,7 +1133,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.helpToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void ControlSelect()

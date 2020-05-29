@@ -172,10 +172,10 @@ namespace Citta_T1.Business.Model
                         des = (ctl as MoveDtControl).Description;
                         break;
                     case ElementType.Operator:
-                        des = (ctl as MoveOpControl).DescriptionName;
+                        des = (ctl as MoveOpControl).Description;
                         break;
                     case ElementType.Result:
-                        des = (ctl as MoveRsControl).DescriptionName;
+                        des = (ctl as MoveRsControl).Description;
                         break;
                     default:
                         break;
@@ -190,10 +190,10 @@ namespace Citta_T1.Business.Model
                         (ctl as MoveDtControl).Description = value;
                         break;
                     case ElementType.Operator:
-                        (ctl as MoveOpControl).DescriptionName = value;
+                        (ctl as MoveOpControl).Description = value;
                         break;
                     case ElementType.Result:
-                        (ctl as MoveRsControl).DescriptionName = value;
+                        (ctl as MoveRsControl).Description = value;
                         break;
                     default:
                         break;
