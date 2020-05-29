@@ -352,25 +352,13 @@ namespace Citta_T1.Business.Option
            
             Dictionary<string, string> dataInfo=new Dictionary<string, string>();
             Dictionary<int, int> startControls = new Dictionary<int,int>();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
+            List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
+            foreach (ModelRelation mr in relations)
             {
-                if (mr.EndID == ID && singelOperation)
-                {
-                    startControls[mr.EndPin] = mr.StartID;
-                    break;
-                }
-                else if (mr.EndID == ID && !singelOperation)
-                    startControls[mr.EndPin] = mr.StartID;
-
-            }
-            if(startControls.Count == 0)
-                return dataInfo;
-            foreach (KeyValuePair<int,int> kvp in startControls)
-            {
-                ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
-                dataInfo["dataPath" + kvp.Key.ToString()] = me.FullFilePath;
-                dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
-                dataInfo["separator" + kvp.Key.ToString()] = me.Separator.ToString();
+                ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                dataInfo["dataPath" + mr.EndPin] = me.FullFilePath;
+                dataInfo["encoding" + mr.EndPin] = me.Encoding.ToString();
+                dataInfo["separator" + mr.EndPin] = me.Separator.ToString();
             }
             return dataInfo;
         }

@@ -26,18 +26,20 @@ namespace Citta_T1.Business.Option
         private MoveRsControl NewMoveRsControl(MoveOpControl moc, string resultFilePath, List<string> columns) 
         {
             //创建MoveRsControl控件
+            string path;
             char separator = '\t';
             DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
             Point location = WorldBoundControl(moc);
             int id = Global.GetCurrentDocument().ElementCount;
             string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");
             int sizeL = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
-            string path;
+            
             if (resultFilePath == string.Empty)
                 path = String.Format("L{0}_{1}.bcp", id, createTime);
             else
                 path = resultFilePath;
-           string name = Path.GetFileNameWithoutExtension(path);
+            string name = Path.GetFileNameWithoutExtension(path);
+
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
                                 name, sizeL,location, separator, encoding);
 
