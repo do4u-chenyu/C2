@@ -207,7 +207,6 @@ namespace Citta_T1.OperatorViews
         {
             SetTextBoxName(this.dataInfoBox);
         }
-        
     }
 
 }

@@ -239,7 +239,6 @@ namespace Citta_T1.Controls.Move.Rs
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
                 RenameMenuItem_Click(this, e);
-
         }
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)

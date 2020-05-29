@@ -354,16 +354,14 @@ namespace Citta_T1.Business.Option
             Dictionary<int, int> startControls = new Dictionary<int,int>();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
-                if (mr.EndID == ID && singelOperation)
+                if (mr.EndID == ID)
                 {
                     startControls[mr.EndPin] = mr.StartID;
-                    break;
+                    if (!singelOperation)
+                        break;
                 }
-                else if (mr.EndID == ID && !singelOperation)
-                    startControls[mr.EndPin] = mr.StartID;
-
             }
-            if(startControls.Count == 0)
+            if (startControls.Count == 0)
                 return dataInfo;
             foreach (KeyValuePair<int,int> kvp in startControls)
             {
