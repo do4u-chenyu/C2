@@ -2,6 +2,7 @@
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -189,6 +190,7 @@ namespace Citta_T1.Controls
     }
     class FrameWrapper
     {
+        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private const bool endSelect = false;
         private const bool startSelect = true;
         private const int arcRadius = 2;
@@ -203,6 +205,11 @@ namespace Citta_T1.Controls
         private Point mapOrigin;
         private float screenFactor;
         private List<Control> controls = new List<Control>();
+        private List<int> minBodingBuffMinX ;
+        private List<int> minBodingBuffMinY ;
+        private List<int> minBodingBuffMaxX ;
+        private List<int> minBodingBuffMaxY ;
+        private Point moveOffset;
         public Rectangle MinBoding { get => minBodingRec; set => minBodingRec = value; }
         FrameWrapperVFX frameWrapperVFX = new FrameWrapperVFX();
         public FrameWrapper()
@@ -220,8 +227,13 @@ namespace Citta_T1.Controls
             selectStatus = endSelect;
             staticImage = null;
             moveImage = null;
-            controls = new List<Control>(); 
-        }
+            controls = new List<Control>();
+            minBodingBuffMinX = new List<int>();
+            minBodingBuffMinY = new List<int>();
+            minBodingBuffMaxX = new List<int>();
+            minBodingBuffMaxY = new List<int>();
+            moveOffset = new Point(0, 0);
+    }
         private void FramePropertySet()
         {
             mapOrigin = Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin;
@@ -364,16 +376,16 @@ namespace Citta_T1.Controls
         {
             foreach (Control ct in controls)
             {
-                ct.Left = ct.Left + endP.X - startP.X;
-                ct.Top = ct.Top + endP.Y - startP.Y;
+                ct.Left = ct.Left + endP.X - startP.X + moveOffset.X;
+                ct.Top = ct.Top + endP.Y - startP.Y + moveOffset.Y;
             }
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
-            minBodingRec.X = minBodingRec.X + endP.X - startP.X;
-            minBodingRec.Y = minBodingRec.Y + endP.Y - startP.Y;
+            minBodingRec.X = minBodingRec.X + endP.X - startP.X + moveOffset.X;
+            minBodingRec.Y = minBodingRec.Y + endP.Y - startP.Y + moveOffset.Y;
             
             frameWrapperVFX.DrawRoundedRect(minBodingRec, staticImage, arcRadius);
         }
@@ -392,39 +404,36 @@ namespace Citta_T1.Controls
         }
         private void FindControl()
         {
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            List<int> minX = new List<int>();
-            List<int> minY = new List<int>();
-            List<int> maxX = new List<int>();
-            List<int> maxY = new List<int>();
-            for (int i = 0; i < modelElements.Count; i++)
+            foreach(ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
-                ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.InnerControl;
-                Point ctW = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
-                if (frameRec.Contains(ctW) && frameRec.Contains(new Point(ctW.X + ct.Width,ctW.Y + ct.Height)))
-                {
-                    minX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
-                    minY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
-                    maxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
-                    maxY.Add(ctW.Y + ct.Height+ (int)(ct.Height * minBodingRec_Off));
-                    controls.Add(ct);
-                }
-            }
-            if (minX.Count == 0)
+                UpDateMinBodingBuff(ct);
+            }               
+            if (minBodingBuffMinX.Count == 0)
             {
-                minBodingRec = new Rectangle(0, 0, 0, 0);
+                minBodingRec = initRec;
                 return;
             }
-            UpDateMinBoding(minX, minY, maxX, maxY);
+            minBodingRec = new Rectangle(minBodingBuffMinX.Min(),
+                                         minBodingBuffMinY.Min(),
+                                         minBodingBuffMaxX.Max() - minBodingBuffMinX.Min(),
+                                         minBodingBuffMaxY.Max() - minBodingBuffMinY.Min());            
         }
-        private void UpDateMinBoding(List<int> minX, List<int> minY, List<int> maxX, List<int> maxY)
+
+        private void UpDateMinBodingBuff(Control ct)
         {
-            int x = minX.Min();
-            int y = minY.Min();
-            int width = maxX.Max() - x;
-            int height = maxY.Max() - y;
-            minBodingRec = new Rectangle(x, y, width, height);
+
+            Point ctW = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location, false);
+            if (!frameRec.Contains(ctW) || !frameRec.Contains(new Point(ctW.X + ct.Width, ctW.Y + ct.Height)))
+            {
+                return;
+            }            
+            minBodingBuffMinX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
+            minBodingBuffMinY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
+            minBodingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
+            minBodingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBodingRec_Off));
+            controls.Add(ct);
+            
         }
         #endregion
         private void MoveImage_Display(int dx, int dy)
@@ -436,12 +445,36 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            g.DrawImage(this.moveImage, minBodingRec.X + dx, minBodingRec.Y + dy);
-            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
+            moveOffset = WorldBoundControl(new Point(minBodingRec.X + dx, minBodingRec.Y + dy));
+            g.DrawImage(moveImage, minBodingRec.X + dx + moveOffset.X, minBodingRec.Y + dy + moveOffset.Y);
+            n.DrawImageUnscaled(i,
+                                Convert.ToInt32(mapOrigin.X * screenFactor),
+                                Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
             g.Dispose();
             i = null;
         }
-
+        public Point WorldBoundControl(Point Pm)
+        {
+            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm, true);
+            Point off = new Point(0, 0);
+            if (Pw.X < 20)
+            {
+                off.X = 20 - Pm.X;
+            }
+            if (Pw.Y < 70)
+            {
+                off.Y =  70 - Pm.Y;
+            }
+            if (Pw.X > 2000 - minBodingRec.Width)
+            {
+                off.X = Global.GetCanvasPanel().Width - minBodingRec.Width;
+            }
+            if (Pw.Y > 980 - minBodingRec.Height)
+            {
+                off.Y = Global.GetCanvasPanel().Height - minBodingRec.Height;
+            }
+            return off;
+        }
     }
 }
