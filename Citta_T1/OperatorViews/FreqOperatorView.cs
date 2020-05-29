@@ -139,7 +139,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.selectColumn = this.outList.GetItemCheckText();
                 this.selectColumn.Add("频率统计结果");
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
                 return;
             }
 

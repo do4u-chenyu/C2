@@ -138,8 +138,8 @@ namespace Citta_T1.OperatorViews
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
-            { 
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectName);
+            {
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectName);
                 return;
             }
             // 对应的结果文件置脏

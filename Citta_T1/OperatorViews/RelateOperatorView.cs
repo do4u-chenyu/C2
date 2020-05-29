@@ -271,7 +271,7 @@ namespace Citta_T1.OperatorViews
             if (resultElement == ModelElement.Empty)
             {
                 this.selectColumn = this.outList0.GetItemCheckText().Concat(this.outList1.GetItemCheckText()).ToList();
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
                 return;
             }
 
