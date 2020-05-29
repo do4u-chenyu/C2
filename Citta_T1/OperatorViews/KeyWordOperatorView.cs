@@ -18,7 +18,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl = opControl;
             InitializeComponent();
-            
+            InitOptionInfo();
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -34,15 +34,15 @@ namespace Citta_T1.OperatorViews
         #region 加载连接数据
         private void InitOptionInfo()
         {
-            Dictionary<string, string>  dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
+            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID, false);
             if (AccessOptionCheck(dataInfoDic.Keys.ToList()))
                 return;
-            this.dataSourcePath = dataInfoDic["dataPath0"];
-            this.dataSourceBox.Text = Path.GetFileNameWithoutExtension(this.dataSourcePath);
-            this.dataSourceTip.SetToolTip(this.dataSourceBox, this.dataSourceBox.Text);
-            this.keyWordPath = dataInfoDic["dataPath1"];
-            this.keyWordBox.Text = Path.GetFileNameWithoutExtension(dataInfoDic["dataPath1"]);
-            this.keyWordTip.SetToolTip(this.keyWordBox, this.keyWordBox.Text);           
+            dataSourcePath = dataInfoDic["dataPath0"];
+            dataSourceBox.Text = Path.GetFileNameWithoutExtension(dataSourcePath);
+            dataSourceTip.SetToolTip(dataSourceBox, dataSourceBox.Text);
+            keyWordPath = dataInfoDic["dataPath1"];
+            keyWordBox.Text = Path.GetFileNameWithoutExtension(dataInfoDic["dataPath1"]);
+            keyWordTip.SetToolTip(keyWordBox, keyWordBox.Text);           
         }
         private bool AccessOptionCheck(List<string> dataInfoKeys)
         {

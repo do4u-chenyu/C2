@@ -224,10 +224,11 @@
             // 
             // keyWordColBox
             // 
+            this.keyWordColBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.keyWordColBox.FormattingEnabled = true;
             this.keyWordColBox.Location = new System.Drawing.Point(218, 54);
             this.keyWordColBox.Name = "keyWordColBox";
-            this.keyWordColBox.Size = new System.Drawing.Size(121, 20);
+            this.keyWordColBox.Size = new System.Drawing.Size(121, 25);
             this.keyWordColBox.TabIndex = 13;
             // 
             // conditionSelectBox
@@ -244,10 +245,11 @@
             // 
             // dataColumnBox
             // 
+            this.dataColumnBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataColumnBox.FormattingEnabled = true;
             this.dataColumnBox.Location = new System.Drawing.Point(5, 54);
             this.dataColumnBox.Name = "dataColumnBox";
-            this.dataColumnBox.Size = new System.Drawing.Size(126, 20);
+            this.dataColumnBox.Size = new System.Drawing.Size(126, 25);
             this.dataColumnBox.TabIndex = 11;
             // 
             // keyWordBox
