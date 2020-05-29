@@ -172,7 +172,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.fullOutputFilePath);
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 

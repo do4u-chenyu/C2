@@ -288,9 +288,6 @@ namespace Citta_T1.Controls.Move.Op
 
         public Point WorldBoundControl(Point Pm)
         {
-           
-
-            
 
             Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,true);
             

@@ -126,6 +126,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             this.status = ElementStatus.Null;
             endLineIndexs.Add(-1);
+
             
         }
 
@@ -239,7 +240,6 @@ namespace Citta_T1.Controls.Move.Rs
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
                 RenameMenuItem_Click(this, e);
-
         }
 
         private void MoveRsControl_MouseUp(object sender, MouseEventArgs e)

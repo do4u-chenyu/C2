@@ -176,8 +176,8 @@ namespace Citta_T1.OperatorViews
             this.selectColumn = this.outList.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
-            { 
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
+            {
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
                 return;
             }
             // 对应的结果文件置脏
@@ -214,15 +214,7 @@ namespace Citta_T1.OperatorViews
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-
-            if (!ConvertUtil.IsInt(this.randomNumBox.Text))
-            { 
-                MessageBox.Show("请输入数字");
-                this.randomNumBox.Text = "";
-            }
-            else
-                this.randomNumBox.Text = int.Parse(this.randomNumBox.Text).ToString();
-
+            ConvertUtil.ControlTextTryParseInt(randomNumBox, "\"{0}\" 不是数字, 请输入一个整数.");
         }
     }
 }

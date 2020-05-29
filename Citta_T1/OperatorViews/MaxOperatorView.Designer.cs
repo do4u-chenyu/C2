@@ -39,7 +39,7 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.dataInfoBox = new System.Windows.Forms.TextBox();
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.maxValueBox = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
@@ -143,7 +143,7 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.dataInfoBox);
-            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Controls.Add(this.maxValueBox);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 18);
@@ -168,13 +168,13 @@
             // 
             // OutList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(0, 106);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(150, 24);
-            this.OutList.TabIndex = 2;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(0, 106);
+            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outList.Name = "OutList";
+            this.outList.Size = new System.Drawing.Size(150, 24);
+            this.outList.TabIndex = 2;
             // 
             // maxValueBox
             // 
@@ -224,7 +224,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
         private System.Windows.Forms.ComboBox maxValueBox;
         private System.Windows.Forms.TextBox dataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;

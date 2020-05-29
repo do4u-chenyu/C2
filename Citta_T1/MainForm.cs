@@ -30,7 +30,7 @@ namespace Citta_T1
 
         private ModelDocumentDao modelDocumentDao;
         private OptionDao optionDao;
-        private CreateMoveRsControl createMoveRsControl;
+        private MoveRsControlFactory createMoveRsControl;
         public string UserName { get => this.userName; set => this.userName = value; }
 
         public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
@@ -53,7 +53,7 @@ namespace Citta_T1
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
-            this.createMoveRsControl = new CreateMoveRsControl();
+           
             
             InitializeGlobalVariable();
             InitializeControlsLocation();
@@ -82,7 +82,7 @@ namespace Citta_T1
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             Global.SetTopToolBarControl(this.topToolBarControl);
-            Global.SetCreateMoveRsControl(this.createMoveRsControl);
+            
 
         }
 
