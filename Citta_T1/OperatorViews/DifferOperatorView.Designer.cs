@@ -95,7 +95,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(551, 37);
+            this.topPanel.Size = new System.Drawing.Size(547, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -103,10 +103,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 329);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 325);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(551, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(547, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -146,7 +146,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 292);
+            this.keyPanel.Size = new System.Drawing.Size(116, 288);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -160,7 +160,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(435, 292);
+            this.valuePanel.Size = new System.Drawing.Size(431, 288);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -271,7 +271,7 @@
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(439, 160);
+            this.panel1.Size = new System.Drawing.Size(425, 160);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -291,7 +291,7 @@
             // DifferOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(551, 393);
+            this.ClientSize = new System.Drawing.Size(547, 389);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
