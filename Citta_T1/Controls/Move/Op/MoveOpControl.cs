@@ -109,9 +109,17 @@ namespace Citta_T1.Controls.Move.Op
             
             InitializeComponent();
             InitializeContextMenuStrip();
-            this.Status = ElementStatus.Null;
+
+            Type = ElementType.Operator; 
             Description = description;
             Location = loc;
+            FullFilePath = String.Empty;
+            Encoding = DSUtil.Encoding.NoNeed;
+            Separator = DSUtil.DefaultSeparator;
+            //Status = ElementStatus.Null;
+
+
+
             this.subTypeName = subTypeName;
 
             doublelPinFlag = doublePin.Contains(SubTypeName);

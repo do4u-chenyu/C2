@@ -68,19 +68,20 @@ namespace Citta_T1.Controls.Move.Rs
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         
-
-        public MoveRsControl()
+        public MoveRsControl(int size, string desciption, Point loc)
         {
-            InitializeComponent();
-            InitializeOpPinPicture();
-        }
-        public MoveRsControl(int size,string desciption, Point loc)
-        {
+           
             InitializeComponent();
             InitializeContextMenuStrip();
-            Status = ElementStatus.Null;
+
+            Type = ElementType.Result;
             Description = desciption;
             Location = loc;
+            FullFilePath = String.Empty;
+            Encoding = DSUtil.Encoding.GBK;
+            Separator = DSUtil.DefaultSeparator;
+            Status = ElementStatus.Null;
+
             SetOpControlName(Description);
             ChangeSize(size);
             

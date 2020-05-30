@@ -230,14 +230,15 @@ namespace Citta_T1.Business.Model
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        bool enableOption =Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
+                        bool enableOption = Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
                         MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc)
                         {
+                            Type = ElementType.Operator,
                             Status = EStatus(status),
                             ID = id,
                             EnableOption = enableOption
                         };
-                        ModelElement operatorElement = ModelElement.CreateOperatorElement(ctl);
+                        ModelElement operatorElement = ModelElement.CreateModelElement(ctl);
                         this.modelDocument.ModelElements.Add(operatorElement);
                         if (xn.SelectSingleNode("option") != null)
                         {
@@ -266,7 +267,8 @@ namespace Citta_T1.Business.Model
                         string fullFilePath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
                         Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, xnlocation);                   
+                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, xnlocation);
+                        cotl.Type = ElementType.DataSource;
                         // 绑定线
                         cotl.ID = id;
                         #region 读分隔符
@@ -275,7 +277,7 @@ namespace Citta_T1.Business.Model
                         #endregion
                         cotl.Separator = separator;
                         cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
-                        ModelElement dataSourceElement = ModelElement.CreateDataSourceElement(cotl);
+                        ModelElement dataSourceElement = ModelElement.CreateModelElement(cotl);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
                     else if (type == "Remark")
@@ -298,13 +300,14 @@ namespace Citta_T1.Business.Model
 
                         MoveRsControl ctl = new MoveRsControl(0, name, loc)
                         {
+                            Type = ElementType.Result,
                             ID = id,
                             Status = EStatus(status),
                             FullFilePath = bcpPath,
                             Separator = separator,
                             Encoding = encoding
                         };
-                        ModelElement resultElement = ModelElement.CreateResultElement(ctl);
+                        ModelElement resultElement = ModelElement.CreateModelElement(ctl);
                         this.modelDocument.ModelElements.Add(resultElement);
                     }
                     else if (type == "Relation")
@@ -350,8 +353,6 @@ namespace Citta_T1.Business.Model
 
         public ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
-        public DSUtil.ExtType ExtType(string type)
-        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
         public DSUtil.Encoding EncodingType(string type)
         { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private PointF ToPointFType(string point)

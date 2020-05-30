@@ -47,8 +47,6 @@ namespace Citta_T1.Controls.Move
 
         public MoveBaseControl()
         {
-            //cmd = ECommandType.Null;
-            oldTextString = String.Empty;
             InitializeComponent();
         }
 

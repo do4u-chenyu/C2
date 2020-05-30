@@ -66,12 +66,15 @@ namespace Citta_T1.Controls.Move.Dt
         {
             InitializeComponent();
             InitializeContextMenuStrip();
-            this.Status = ElementStatus.Null;
+
+            this.Type = ElementType.DataSource;
             this.Description = name;
             this.Location = loc;
             this.FullFilePath = bcpPath;
             this.Encoding = encoding;
             this.Separator = separator;
+            this.Status = ElementStatus.Done;
+
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper(this);

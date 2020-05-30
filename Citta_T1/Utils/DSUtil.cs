@@ -20,5 +20,7 @@ namespace Citta_T1.Utils
             Text,
             Unknow
         }
+
+        public static readonly char DefaultSeparator = '\t';
     }
 }
