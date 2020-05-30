@@ -30,8 +30,8 @@ namespace Citta_T1.Business.Option
             int count = 0;
             List<string> keys = this.OptionDict.Keys.ToList();
             foreach (string key in keys)
-            { 
-                if(key.Contains(name))
+            {
+                if (key.Contains(name))
                     count += 1;
             }
             return count;

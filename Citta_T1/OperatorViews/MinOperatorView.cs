@@ -27,7 +27,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.optionInfoCheck = new OptionInfoCheck();
-            dataPath = "";
+            dataPath = String.Empty;
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
@@ -95,9 +95,9 @@ namespace Citta_T1.OperatorViews
             List<int> removeIndex = new List<int>();
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
-            this.opControl.Option.SetOption("outfield", outField);       
+            this.opControl.Option.SetOption("outfield", outField);
             this.opControl.Option.SetOption("minfield", this.minValueBox.Tag == null ? this.minValueBox.SelectedIndex.ToString() : this.minValueBox.Tag.ToString());
-          
+
 
 
 
@@ -110,13 +110,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("minfield") != "")
+            if (this.opControl.Option.GetOption("minfield") != String.Empty)
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
                 this.minValueBox.Text = this.minValueBox.Items[index].ToString();
                 this.minValueBox.Tag = index.ToString();
             }
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (this.opControl.Option.GetOption("outfield") != String.Empty)
             {
 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
@@ -126,7 +126,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
-            
+
         }
         #endregion
         #region 初始化配置
@@ -161,7 +161,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
-       
+
 
         private void SetTextBoxName(TextBox textBox)
         {
@@ -199,6 +199,6 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.dataInfoBox);
         }
 
-  
+
     }
 }

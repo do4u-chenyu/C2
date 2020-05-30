@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Common
@@ -29,8 +26,6 @@ namespace Citta_T1.Controls.Common
         private Panel pnlBack;
         private Panel pnlCheck;
 
-        private System.Drawing.Point DragOffset; //用于记录窗体大小变化的位置
-
         //单击列表项状态更改事件
         public delegate void CheckBoxListItemClick(object sender, ItemCheckEventArgs e);
         public event CheckBoxListItemClick ItemClick;
@@ -53,7 +48,7 @@ namespace Citta_T1.Controls.Common
             //下拉箭头
             this.btnSelect = new ButtonS();
             btnSelect.FlatStyle = FlatStyle.Flat;
-            btnSelect.Click += new EventHandler(btnSelect_Click);
+            btnSelect.Click += new EventHandler(BtnSelect_Click);
 
             //全选
             this.lbSelectAll = new Label();
@@ -64,7 +59,7 @@ namespace Citta_T1.Controls.Common
             lbSelectAll.ForeColor = Color.Blue;
             lbSelectAll.Cursor = Cursors.Hand;
             lbSelectAll.TextAlign = ContentAlignment.MiddleCenter;
-            lbSelectAll.Click += new EventHandler(lbSelectAll_Click);
+            lbSelectAll.Click += new EventHandler(LbSelectAll_Click);
 
             //取消
             lbSelectNo = new Label();
@@ -75,7 +70,7 @@ namespace Citta_T1.Controls.Common
             lbSelectNo.ForeColor = Color.Blue;
             lbSelectNo.Cursor = Cursors.Hand;
             lbSelectNo.TextAlign = ContentAlignment.MiddleCenter;
-            lbSelectNo.Click += new EventHandler(lbSelectNo_Click);
+            lbSelectNo.Click += new EventHandler(LbSelectNo_Click);
 
             //生成checkboxlist
             this.checkListBox = new CheckedListBox();
@@ -85,7 +80,7 @@ namespace Citta_T1.Controls.Common
             checkListBox.CheckOnClick = true;
             checkListBox.ScrollAlwaysVisible = true;
             //checkListBox.LostFocus += new EventHandler(checkListBox_LostFocus);
-            checkListBox.ItemCheck += new ItemCheckEventHandler(checkListBox_ItemCheck);
+            checkListBox.ItemCheck += new ItemCheckEventHandler(CheckListBox_ItemCheck);
 
             //生成checkListBoxTmp
             this.checkListBoxTmp = new CheckedListBox();
@@ -105,7 +100,7 @@ namespace Citta_T1.Controls.Common
             frmCheckList.BackColor = SystemColors.Control;
             frmCheckList.ShowInTaskbar = false;
             frmCheckList.Activated += new System.EventHandler(this.frmCheckList_Activated);
-            frmCheckList.Deactivate += new System.EventHandler(this.frmCheckList_Deactivate);
+            frmCheckList.Deactivate += new System.EventHandler(this.FrmCheckList_Deactivate);
 
 
             //可拖动窗体大小变化的LABEL
@@ -127,9 +122,7 @@ namespace Citta_T1.Controls.Common
             // 
             textBox1 = new TextBox();
             textBox1.Size = new System.Drawing.Size(50, 25);
-            textBox1.LostFocus += new EventHandler(textBox1_LostFocus); //失去焦点后发生事件
-            textBox1.GotFocus += new EventHandler(textBox1_GotFocus);  //获取焦点前发生事件
-            textBox1.TextChanged += new EventHandler(textBox1_TextChanged);
+            textBox1.TextChanged += new EventHandler(TextBox1_TextChanged);
 
             //
             pnlCheck = new Panel();
@@ -157,7 +150,7 @@ namespace Citta_T1.Controls.Common
 
         }
 
-        private void frmCheckList_Deactivate(object sender, EventArgs e)
+        private void FrmCheckList_Deactivate(object sender, EventArgs e)
         {
             if (!this.btnSelect.RectangleToScreen(this.btnSelect.ClientRectangle).Contains(Cursor.Position))
             {
@@ -196,20 +189,6 @@ namespace Citta_T1.Controls.Common
                 }
             }
 
-            //找到改变状态的checkbox
-            //for (int i = 0; i < checkListBox.Items.Count; i++)
-            //{
-            //    if (GetItemText(checkListBox.Items[i]) == GetItemText(this.checkListBoxTmp.Items[e.Index]))
-            //    {
-            //        checkListBox.SetItemChecked(i, e.NewValue == CheckState.Checked ? true : false);
-            //    }
-            //}
-
-            
-
-
-            //获取选中的数量//old
-            //int nCount = this.checkListBox.CheckedItems.Count;
             if (checkedList.Contains(this.checkDict[e.Index]))
             {
                 if (e.NewValue != CheckState.Checked)
@@ -228,7 +207,7 @@ namespace Citta_T1.Controls.Common
             tbSelectedValue.Text = "已选择" + nCount.ToString() + "项";
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             if (this.textBox1.Text == "")
             {
@@ -261,16 +240,6 @@ namespace Citta_T1.Controls.Common
             }
 
             checkListBoxTmp.ItemCheck += checkListBoxTmp_ItemCheck;
-        }
-
-        private void textBox1_GotFocus(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_LostFocus(object sender, EventArgs e)
-        {
-
         }
 
         private void ReloationGrip()
@@ -325,7 +294,7 @@ namespace Citta_T1.Controls.Common
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void btnSelect_Click(object sender, EventArgs e)
+        public void BtnSelect_Click(object sender, EventArgs e)
         {
             if (this.frmCheckList.Visible == false)
             {
@@ -342,7 +311,7 @@ namespace Citta_T1.Controls.Common
         }
 
         //全选事件
-        private void lbSelectAll_Click(object sender, EventArgs e)
+        private void LbSelectAll_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < checkListBox.Items.Count; i++)
             {
@@ -351,7 +320,7 @@ namespace Citta_T1.Controls.Common
             tbSelectedValue.Text = "已选择" + checkListBox.Items.Count.ToString() + "项";
         }
         //取消
-        private void lbSelectNo_Click(object sender, EventArgs e)
+        private void LbSelectNo_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < checkListBox.Items.Count; i++)
             {
@@ -360,16 +329,7 @@ namespace Citta_T1.Controls.Common
             tbSelectedValue.Text = "已选择0项";
         }
 
-        private void checkListBox_LostFocus(object sender, EventArgs e)
-        {
-            //如果鼠标位置在下拉框按钮的以为地方，则隐藏下拉框
-            if (!this.btnSelect.RectangleToScreen(this.btnSelect.ClientRectangle).Contains(Cursor.Position))
-            {
-                frmCheckList.Hide();
-            }
-        }
-
-        private void checkListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CheckListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (ItemClick != null)
             {
@@ -436,58 +396,6 @@ namespace Citta_T1.Controls.Common
         }
         #endregion
 
-        /// <summary>
-        /// 鼠标按下
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lbGrip_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                int offsetX = System.Math.Abs(Cursor.Position.X - frmCheckList.RectangleToScreen(this.frmCheckList.ClientRectangle).Right);
-                int offsetY = System.Math.Abs(Cursor.Position.Y - frmCheckList.RectangleToScreen(this.frmCheckList.ClientRectangle).Bottom);
-                this.DragOffset = new Point(offsetX, offsetY);
-            }
-        }
-
-        /// <summary>
-        /// 鼠标移动
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lbGrip_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                //获取拉伸长度
-                int curWidth = Cursor.Position.X - frmCheckList.Location.X;
-                int curHeight = Cursor.Position.Y - frmCheckList.Location.Y;
-                if (curWidth < this.Width)
-                {
-                    curWidth = this.Width;
-                }
-
-                if (curHeight < checkListBox.Height)
-                {
-                    curHeight = checkListBox.Height;
-                }
-
-                this.frmCheckList.Size = new Size(this.Width, curHeight);
-                this.pnlCheck.Size = frmCheckList.Size;
-                this.checkListBox.Height = (this.frmCheckList.Height - lbGrip.Height) < 50 ? 50 : this.frmCheckList.Height - lbGrip.Height;
-
-                ReloationGrip();
-                SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-                SetStyle(ControlStyles.ResizeRedraw, true);
-                SetStyle(ControlStyles.UserPaint, true);
-                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-
-
-
-            }
-        }
-
         #endregion
 
         /// <summary>
@@ -504,27 +412,6 @@ namespace Citta_T1.Controls.Common
                 return checkListBox.DataSource;
             }
         }
-        /// <summary>
-        /// 设置值
-        /// </summary>
-        public string ValueMember
-        {
-            set
-            {
-                checkListBox.ValueMember = value;
-            }
-        }
-        /// <summary>
-        /// 设置显示名称
-        /// </summary>
-        public string DisplayMember
-        {
-            set
-            {
-                checkListBox.DisplayMember = value;
-            }
-        }
-
         /// <summary>
         /// 添加项
         /// </summary>

@@ -178,7 +178,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
            
-            if (this.opControl.Option.GetOption("sortfield") != "")
+            if (this.opControl.Option.GetOption("sortfield") != String.Empty)
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
@@ -241,7 +241,7 @@ namespace Citta_T1.OperatorViews
             if (!ConvertUtil.IsInt(this.firstRow.Text))
             {
                 MessageBox.Show("请输入数字");
-                this.firstRow.Text = "";
+                this.firstRow.Text = String.Empty;
             }
               
             else
@@ -253,7 +253,7 @@ namespace Citta_T1.OperatorViews
             if (!ConvertUtil.IsInt(this.endRow.Text))
             {
                 MessageBox.Show("请输入数字");
-                this.endRow.Text = "";
+                this.endRow.Text = String.Empty;
             }
                
             else

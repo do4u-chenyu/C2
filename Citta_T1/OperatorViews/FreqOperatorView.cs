@@ -216,7 +216,7 @@ namespace Citta_T1.OperatorViews
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }

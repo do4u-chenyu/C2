@@ -184,7 +184,7 @@
             this.dataInfo.TabIndex = 7;
             this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
-            this.dataInfo.LostFocus += new System.EventHandler(this.dataInfo_LostFocus);
+            this.dataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
             // 
             // groupBox2
             // 

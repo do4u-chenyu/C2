@@ -23,7 +23,7 @@ namespace Citta_T1.Business.Option
             }
             return MoveRsControlFactoryInstance;
         }
-        private MoveRsControl NewMoveRsControl(MoveOpControl moc, string resultFilePath, List<string> columns) 
+        private MoveRsControl NewMoveRsControl(MoveOpControl moc, string resultFilePath, List<string> columns)
         {
             //创建MoveRsControl控件
             string path;
@@ -33,7 +33,7 @@ namespace Citta_T1.Business.Option
             int id = Global.GetCurrentDocument().ElementCount;
             string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");
             int sizeL = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
-            
+
             if (resultFilePath == string.Empty)
                 path = String.Format("L{0}_{1}.bcp", id, createTime);
             else
@@ -41,7 +41,7 @@ namespace Citta_T1.Business.Option
             string name = Path.GetFileNameWithoutExtension(path);
 
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
-                                name, sizeL,location, separator, encoding);
+                                name, sizeL, location, separator, encoding);
 
             //创建MoveRsControl的Xml文件
             if (resultFilePath == string.Empty)
