@@ -255,7 +255,7 @@ namespace Citta_T1.Business.Model
                     mr.EndP = (eEle.InnerControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.InnerControl as IMoveControl).OutPinInit("lineExit");
-                    (eEle.InnerControl as IMoveControl).rectInAdd(mr.EndPin);
+                    (eEle.InnerControl as IMoveControl).RectInAdd(mr.EndPin);
                     mr.UpdatePoints();
                 }
                 catch (Exception ex)

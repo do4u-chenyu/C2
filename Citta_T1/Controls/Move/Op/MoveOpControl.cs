@@ -21,7 +21,7 @@ namespace Citta_T1.Controls.Move.Op
     public delegate void ModelDocumentDirtyEventHandler();
   
 
-    public partial class MoveOpControl : UserControl, IScalable, IDragable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IScalable, IDragable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
@@ -35,28 +35,24 @@ namespace Citta_T1.Controls.Move.Op
         private bool doublelPinFlag = false;
 
         private string subTypeName;
-        private string oldTextString;
         private OperatorOption option = new OperatorOption();
-        private int id;
 
         private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
         private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
         
         // 一些倍率
-        public string Description { get => textBox.Text; set => textBox.Text = value; }
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
-        private ElementStatus status;
         private Pen p1 = new Pen(Color.Green, 2f);
-        public ElementStatus Status { 
-            get => this.status;
+        public override ElementStatus Status
+        {
+            get => base.Status;
             set
             {
                 OptionDirty(value);
-                this.status = value;
+                base.Status = value;
             }  
         }
-        public int ID { get => this.id; set => this.id = value; }
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
@@ -108,12 +104,16 @@ namespace Citta_T1.Controls.Move.Op
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
         {
-            this.status = ElementStatus.Null;
+
             p1.DashStyle = DashStyle.Dash;
+            
             InitializeComponent();
-            textBox.Text = description;
-            this.subTypeName = subTypeName;
+            InitializeContextMenuStrip();
+            this.Status = ElementStatus.Null;
+            Description = description;
             Location = loc;
+            this.subTypeName = subTypeName;
+
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
@@ -183,7 +183,16 @@ namespace Citta_T1.Controls.Move.Op
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
             SetOpControlName(this.textBox.Text);
         }
-
+        private void InitializeContextMenuStrip()
+        {
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OptionMenuItem,
+            this.RenameMenuItem,
+            this.RemarkMenuItem,
+            this.RunMenuItem,
+            this.ErrorLogMenuItem,
+            this.DeleteMenuItem });
+        }
         private void InitializeHelpToolTip()
         {
             switch (subTypeName)
@@ -264,13 +273,13 @@ namespace Citta_T1.Controls.Move.Op
                 bool isNeedMoveLine = false;
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
-                    if (mr.StartID == this.id)
+                    if (mr.StartID == this.ID)
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
                         isNeedMoveLine = true;
                     }
-                    if (mr.EndID == this.id)
+                    if (mr.EndID == this.ID)
                     {
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
@@ -432,7 +441,7 @@ namespace Citta_T1.Controls.Move.Op
                 length = bytes.Length;
             return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
-        private int ConutTxtWidth(int chineseRatio, int otherRatio)
+        private int CountTextWidth(int chineseRatio, int otherRatio)
         {
             int padding = 3;
             int addValue = 10;
@@ -447,7 +456,7 @@ namespace Citta_T1.Controls.Move.Op
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
+            int txtWidth = CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
             {
@@ -601,18 +610,18 @@ namespace Citta_T1.Controls.Move.Op
             foreach (ModelRelation mr in modelRelations)
             {
                 
-                if (mr.StartID == this.id)
+                if (mr.StartID == this.ID)
                 {
                     DeleteResultControl(mr.EndID, modelRelations);
                     
                 }
-                if ((mr.EndID == this.id) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
+                if ((mr.EndID == this.ID) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
                 {
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                     (me.InnerControl as IMoveControl).OutPinInit("noLine");
                 }
 
-                if (mr.StartID == this.id || mr.EndID == this.id)
+                if (mr.StartID == this.ID || mr.EndID == this.ID)
                 {
                     Global.GetCurrentDocument().RemoveModelRelation(mr);
                     Global.GetCanvasPanel().Invalidate();
@@ -674,8 +683,8 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void OptionDirty(ElementStatus status)
         {
-            if (this.status == ElementStatus.Done && status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.id);
+            if (this.Status == ElementStatus.Done && status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.ID);
 
             if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set;
@@ -1040,7 +1049,7 @@ namespace Citta_T1.Controls.Move.Op
         }
 
 
-        public void rectInAdd(int pinIndex)
+        public void RectInAdd(int pinIndex)
         {
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {

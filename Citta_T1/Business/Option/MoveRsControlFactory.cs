@@ -92,7 +92,7 @@ namespace Citta_T1.Business.Option
                                 0);
             Global.GetCurrentDocument().AddModelRelation(newModelRelation);
             moc.OutPinInit("lineExit");
-            mrc.rectInAdd(1);
+            mrc.RectInAdd(1);
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, List<string> columnName)
         {

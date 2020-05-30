@@ -18,9 +18,8 @@ namespace Citta_T1.Controls.Move
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         public DSUtil.Encoding Encoding { get; set; }
         public char Separator { get; set ; }
-        public ElementStatus Status { get; set; }
+        public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
-
         public DSUtil.ExtType ExtType
         {
             get
@@ -41,7 +40,8 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-        private string oldTextString;
+        protected string oldTextString;
+
 
         //private ECommandType cmd;
 

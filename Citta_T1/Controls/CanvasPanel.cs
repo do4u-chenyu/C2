@@ -517,7 +517,7 @@ namespace Citta_T1.Controls
                 * 
                 *         ----------
                 */
-            (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
             ModelRelation mr = new ModelRelation(
                 (startC as IMoveControl).GetID(),
                 (endC as IMoveControl).GetID(),
