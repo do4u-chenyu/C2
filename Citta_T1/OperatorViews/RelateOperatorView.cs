@@ -280,9 +280,11 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，重写BCP文件
             List<string> oldName = this.oldColumnName0.Concat(this.oldColumnName1).ToList();
-            if (!oldName.SequenceEqual(this.outColumnName0.Concat(this.outColumnName1)))
-                Global.GetOptionDao().IsModifyDoubleOut(this.oldColumnName0,this.outColumnName0,this.oldColumnName1,this.outColumnName1, this.opControl.ID);
-            
+            List<string> nowName = this.outColumnName0.Concat(this.outColumnName1).ToList();
+            if (!oldName.SequenceEqual(nowName))
+                Global.GetOptionDao().DoOutputCompare(oldName, nowName, this.opControl.ID);
+
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

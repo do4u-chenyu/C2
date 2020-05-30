@@ -261,48 +261,7 @@ namespace Citta_T1.Business.Option
             else
                 IsNewOut(currentcolumns, ID);
 
-        }
-        public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
-        {
-            List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            //左侧数据源判断
-            if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
-            {
-                IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
-                return;
-            }
-            //右侧数据源判断,新输出字段中不包含旧字段
-            foreach (string cn in oldColumns1)
-            {
-                if (!currentcolumns1.Contains(cn))
-                {
-                    IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
-                    return;
-                }
-            }
-
-            //判断输出顺序是否一致，如排序算子
-
-            if (oldColumns1.Count > 0)
-            {
-                for (int i = 0; i < oldColumns1.Count(); i++)
-                {
-                    if (oldColumns1[i] != currentcolumns1[i])
-                    {
-                        IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
-                        return;
-                    }
-                }
-                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0)
-                {
-                    List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
-                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
-                }
-            }
-            else if(oldColumns1.Count == 0)
-            { IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID); }
-        }
+        }     
 
         public void IsNewOut( List<string> currentColumns, int ID)
         {
