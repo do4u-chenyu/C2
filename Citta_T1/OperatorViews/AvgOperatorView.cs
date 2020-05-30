@@ -129,11 +129,16 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-           
             SaveOption();
-            //内容修改，引起文档dirty
+
+            //情况1：内容修改
+            //       引起文档dirty
+            //情况2：内容不修改
+            //        返回
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
+            else
+                return;
             //生成结果控件,创建relation,bcp结果文件
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
@@ -149,7 +154,7 @@ namespace Citta_T1.OperatorViews
             List<string> oldColumn = new List<string>();
             oldColumn.Add(this.oldAvg);
             if (this.oldAvg != this.AvgComBox.Text)
-                Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectName, this.opControl.ID);
 
         }
 

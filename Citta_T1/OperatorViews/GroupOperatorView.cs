@@ -243,7 +243,7 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
             if (!this.oldOutName.SequenceEqual(this.selectColumn))
-                Global.GetOptionDao().IsModifyOut(this.oldOutName, this.selectColumn, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(this.oldOutName, this.selectColumn, this.opControl.ID);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

@@ -183,7 +183,7 @@ namespace Citta_T1.OperatorViews
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
             if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, outName, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

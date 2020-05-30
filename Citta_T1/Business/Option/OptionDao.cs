@@ -139,7 +139,7 @@ namespace Citta_T1.Business.Option
 
         //新数据源修改输出
 
-        public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
+        public bool IsDataSourceNotEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
         {
             int maxIndex = outIndex.Max();
             if (maxIndex > columnName.Length - 1)
@@ -176,7 +176,7 @@ namespace Citta_T1.Business.Option
 
                     string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (!IsDataSourceEqual(oldColumnList, columnName, outIndex))
+                    if (!IsDataSourceNotEqual(oldColumnList, columnName, outIndex))
                     {
                         opControl.Option.OptionDict["outfield"] = "";
                         return false;
@@ -218,12 +218,12 @@ namespace Citta_T1.Business.Option
 
                     string[] checkIndexs = opControl.Option.GetOption(field).Split(',');
                     int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (field == "outfield1" && IsDataSourceEqual(oldColumnList1, columnName0, outIndex))
+                    if (field == "outfield1" && !IsDataSourceNotEqual(oldColumnList1, columnName0, outIndex))
                     {
                         opControl.Option.OptionDict[field] = "";
                         return false;
                     }
-                    if (field != "outfield1" && IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
+                    if (field != "outfield1" && !IsDataSourceNotEqual(oldColumnList0, columnName0, outIndex))
                     {
                         opControl.Option.OptionDict[field] = "";
                         return false;
@@ -233,50 +233,34 @@ namespace Citta_T1.Business.Option
             catch (Exception ex) { log.Error(ex.Message); };
             return true;
         }
-        //修改配置输出
-        public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
+        //配置窗口输出的改变，引起后续子图状态改变逻辑
+
+      
+        public void DoOutputCompare(List<string> oldColumns, List<string> currentcolumns, int ID)  
         {
+
+            /*
+            * 情况1：新输出和旧输出字段数目一致，且顺序一致
+            *       后续子图Null状态
+            * 情况2：新输出>旧输出字段数目一致，且顺序一致
+            *       重写连接的结果Xml文件表头
+            * 情况3：其他情况
+            *      后续子图Null状态
+            */
            
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            List<string> columns = new List<string>();
-           
-            //新输出字段中不包含旧字段
-            foreach (string cn in oldColumns)
-            {
-                if (!currentcolumns.Contains(cn))
-                {
-                    IsNewOut(currentcolumns, ID);
-                    return;
-                }    
-            }
-            //新输出字段包含就字段，但是新输出字段数目少于旧字段数目，如并集的重复选择
-            if (oldColumns.Count > currentcolumns.Count)
-            {
-                IsNewOut(currentcolumns, ID);
+
+            int oldCount = oldColumns.Count;
+            int nowCount = currentcolumns.Count;
+            if (nowCount == oldCount && oldColumns.SequenceEqual(currentcolumns))
                 return;
-            }
-            //判断输出顺序是否一致，如排序算子
-
-            if (oldColumns.Count > 0)
+            else if (nowCount > oldCount && oldColumns.SequenceEqual(currentcolumns.Take(oldCount)))
             {
-                for (int i = 0; i < oldColumns.Count(); i++)
-                {
-                    if (oldColumns[i] != currentcolumns[i])
-                    {
-                        IsNewOut(currentcolumns, ID);
-                        return;
-                    }
-                }
-                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0)
-                {
-                    List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
-                    BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
-                }
+                string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
+                BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+            }    
+            else
+                IsNewOut(currentcolumns, ID);
 
-            }
-            else if (oldColumns.Count == 0)
-            { IsNewOut(currentcolumns, ID); }
-                   
         }
         public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
         {

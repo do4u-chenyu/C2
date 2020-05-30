@@ -254,7 +254,7 @@ namespace Citta_T1.OperatorViews
             }
             //输出变化，重写BCP文件
             if (resultElement != null && !this.oldColumnName.SequenceEqual(this.selectColumn))
-                Global.GetOptionDao().IsModifyOut(this.oldColumnName, this.selectColumn, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnName, this.selectColumn, this.opControl.ID);
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
