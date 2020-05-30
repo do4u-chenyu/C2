@@ -247,7 +247,7 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
                 List<int> fieldColumn = new List<int>() { Nums[0] };
-                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl,this.columnName,"factor1", fieldColumn))
+                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();

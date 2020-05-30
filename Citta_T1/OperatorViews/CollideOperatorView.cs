@@ -72,7 +72,6 @@ namespace Citta_T1.OperatorViews
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToArray());
                 this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
-                
             }
            
             foreach (string name in this.columnName0)

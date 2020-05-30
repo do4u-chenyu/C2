@@ -186,7 +186,7 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            (hasResultNew.InnerControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
+            (hasResultNew.InnerControl as MoveRsControl).Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
             (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
             (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
             (hasResultNew.InnerControl as MoveRsControl).Separator = '\t';

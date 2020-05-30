@@ -74,7 +74,7 @@ namespace Citta_T1.Controls.Move.Dt
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
-        public int sizeLevel = 0;
+        private int sizeLevel = 0;
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
@@ -167,7 +167,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         public void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
+            this.helpToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
@@ -463,7 +463,7 @@ namespace Citta_T1.Controls.Move.Dt
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.nameToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -698,7 +698,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         private void LeftPicture_MouseEnter(object sender, EventArgs e)
         {
-            this.nameToolTip.SetToolTip(this.leftPicture, String.Format("元素ID: {0}", this.ID.ToString()));
+            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void rectInAdd(int pinIndex)

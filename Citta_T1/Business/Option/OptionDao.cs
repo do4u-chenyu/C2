@@ -343,6 +343,7 @@ namespace Citta_T1.Business.Option
                 dataInfo["dataPath" + mr.EndPin] = me.FullFilePath;
                 dataInfo["encoding" + mr.EndPin] = me.Encoding.ToString();
                 dataInfo["separator" + mr.EndPin] = me.Separator.ToString();
+
             }
             return dataInfo;
         }
