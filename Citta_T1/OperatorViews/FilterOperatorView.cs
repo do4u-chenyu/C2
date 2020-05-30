@@ -33,7 +33,7 @@ namespace Citta_T1.OperatorViews
             this.optionInfoCheck = new OptionInfoCheck();
             oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
-            dataPath = "";
+            dataPath = String.Empty;
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
@@ -61,25 +61,25 @@ namespace Citta_T1.OperatorViews
             types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
             }
             if (this.outList.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请填写输出字段!");
+                MessageBox.Show("请填写输出字段");
                 empty = true;
                 return empty;
             }
@@ -89,7 +89,7 @@ namespace Citta_T1.OperatorViews
         private void InitOptionInfo()
         {
             int startID = -1;
-            string encoding = "";
+            string encoding = String.Empty;
             char separator = '\t';
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;

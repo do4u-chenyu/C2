@@ -31,7 +31,7 @@ namespace Citta_T1.OperatorViews
             this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
-            dataPath = "";
+            dataPath = String.Empty;
             oldColumnName = new List<string>();
             InitOptionInfo();
             LoadOption();

@@ -17,7 +17,7 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string oldAvg;
-        private string dataPath = "";
+        private string dataPath = String.Empty;
         private string[] columnName;
         private List<string> selectName;
         private string oldOptionDict;

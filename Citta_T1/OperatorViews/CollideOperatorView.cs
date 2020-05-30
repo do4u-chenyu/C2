@@ -210,7 +210,7 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
 
             }
-            if (factor1 != "")
+            if (factor1 != String.Empty)
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);

@@ -16,7 +16,6 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string dataPath;
-        private string oldMaxfield;
         private List<int> oldOutList;
         private ElementStatus oldstatus;
         private string[] columnName;
@@ -30,7 +29,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.optionInfoCheck = new OptionInfoCheck();
-            dataPath = "";
+            dataPath = String.Empty;
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
@@ -39,7 +38,6 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
 
-            this.oldMaxfield = this.maxValueBox.Text;
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
@@ -52,10 +50,10 @@ namespace Citta_T1.OperatorViews
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.dataInfoBox.Text == "") return;
-            if (this.maxValueBox.Text == "")
+            if (this.dataInfoBox.Text == String.Empty) return;
+            if (this.maxValueBox.Text == String.Empty)
             {
-                MessageBox.Show("请选择最大值字段!");
+                MessageBox.Show("请选择最大值字段");
                 return;
             }
             if (this.outList.GetItemCheckIndex().Count == 0)
@@ -104,8 +102,8 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
-            if (this.maxValueBox.Text == "")
-                this.opControl.Option.SetOption("maxfield", "");
+            if (this.maxValueBox.Text == String.Empty)
+                this.opControl.Option.SetOption("maxfield", String.Empty);
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
 
@@ -119,13 +117,13 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             int maxIndex = -1;
-            if (this.opControl.Option.GetOption("maxfield") != "")
+            if (this.opControl.Option.GetOption("maxfield") != String.Empty)
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
                 this.maxValueBox.Tag = maxIndex.ToString();
             }
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (this.opControl.Option.GetOption("outfield") != String.Empty)
             {
 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');

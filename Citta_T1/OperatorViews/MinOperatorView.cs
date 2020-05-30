@@ -16,7 +16,6 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string dataPath;
-        private string oldMinfield;
         private List<int> oldOutList;
         private string[] columnName;
         private string oldOptionDict;
@@ -35,7 +34,6 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
 
-            this.oldMinfield = this.minValueBox.Text;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             this.minValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
             this.minValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
