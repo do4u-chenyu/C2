@@ -27,7 +27,6 @@ namespace Citta_T1.Controls.Move.Op
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
         private ControlMoveWrapper controlMoveWrapper;
-        private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
         private string opControlName;
@@ -428,10 +427,10 @@ namespace Citta_T1.Controls.Move.Op
         #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return EncodingOfGB2312.GetString(bytes, startIndex, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
         private int ConutTxtWidth(int chineseRatio, int otherRatio)
         {
@@ -450,7 +449,7 @@ namespace Citta_T1.Controls.Move.Op
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
-            if (EncodingOfGB2312.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";

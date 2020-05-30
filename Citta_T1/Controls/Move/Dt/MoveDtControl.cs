@@ -66,8 +66,6 @@ namespace Citta_T1.Controls.Move.Dt
         private Size normalStatus = new Size(53, 28);
 
         #region 继承属性
-        private static readonly  System.Text.Encoding GBKEncoding = System.Text.Encoding.GetEncoding("GB2312");
-
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -434,10 +432,10 @@ namespace Citta_T1.Controls.Move.Dt
         #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = GBKEncoding.GetBytes(text);
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return GBKEncoding.GetString(bytes, startIndex, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
         private int ConutTxtWidth(int chineseRatio, int otherRatio)
         {
@@ -456,7 +454,7 @@ namespace Citta_T1.Controls.Move.Dt
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
             this.txtButton.Text = this.opControlName;
-            if (GBKEncoding.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";

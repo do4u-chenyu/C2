@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,6 @@ namespace Citta_T1.OperatorViews
         private string dataSourcePath;
         private string keyWordPath;
         private MoveOpControl opControl;
-        private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
 
         public KeyWordOperatorView(MoveOpControl opControl)
         {
@@ -78,10 +78,10 @@ namespace Citta_T1.OperatorViews
         }
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return EncodingOfGB2312.GetString(bytes, startIndex, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
         #endregion
 

@@ -43,23 +43,12 @@ namespace Citta_T1.Controls.Move
 
         private string oldTextString;
 
-        private static readonly Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
+        //private ECommandType cmd;
 
-        private ECommandType cmd = ECommandType.Null;
-
-
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-
-        private Bitmap staticImage;
         public MoveBaseControl()
         {
+            //cmd = ECommandType.Null;
+            oldTextString = String.Empty;
             InitializeComponent();
         }
 

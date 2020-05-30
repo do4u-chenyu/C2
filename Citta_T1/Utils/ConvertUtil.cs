@@ -9,6 +9,8 @@ namespace Citta_T1.Utils
 {
     class ConvertUtil
     {
+
+        public static readonly Encoding GB2312 = System.Text.Encoding.GetEncoding("GB2312");
         public static bool TryParseBool(string value, bool defaultValue = false)
         {
             try

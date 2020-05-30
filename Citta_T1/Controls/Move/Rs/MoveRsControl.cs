@@ -19,8 +19,6 @@ namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : UserControl, IScalable, IDragable, IMoveControl
     {
-        private static System.Text.Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-
         private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
@@ -295,10 +293,10 @@ namespace Citta_T1.Controls.Move.Rs
 
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = EncodingOfGB2312.GetBytes(text);
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return EncodingOfGB2312.GetString(bytes, startIndex, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
         private int ConutTxtWidth(int chineseRatio, int otherRatio)
         {
@@ -317,7 +315,7 @@ namespace Citta_T1.Controls.Move.Rs
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
-            if (EncodingOfGB2312.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";

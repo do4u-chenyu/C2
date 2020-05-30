@@ -117,7 +117,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -271,7 +271,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
@@ -280,7 +280,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
