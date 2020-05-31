@@ -17,7 +17,6 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Op
 {
-    public delegate void DeleteOperatorEventHandler(Control control); 
 
     public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
     {

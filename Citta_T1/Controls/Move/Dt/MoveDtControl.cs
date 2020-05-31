@@ -15,7 +15,6 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Dt
 {
-    public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");

@@ -10,9 +10,6 @@ namespace Citta_T1.Controls.Move
 {
     public partial class MoveBaseControl : UserControl
     {
-        //
-        //  此类正在施工中,暂时没有引用，会有编译器报错
-        //
         public ElementType Type { get; set; }
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
@@ -51,7 +48,7 @@ namespace Citta_T1.Controls.Move
         }
 
         // 单元素拖拽
-        public virtual void ChangeLoc(float dx, float dy)
+        public void ChangeLoc(float dx, float dy)
         {
             int left = this.Left + Convert.ToInt32(dx);
             int top = this.Top + Convert.ToInt32(dy);
