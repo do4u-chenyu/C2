@@ -126,7 +126,8 @@ namespace Citta_T1.Business.Option
 
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
-                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，sort的结束行数也能为空。。。，直接判断为空会出问题       
+                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空题 ，  
+                //sort的结束行数也能为空。。。，直接判断为空会出问
                 if (keys.Contains(kvp.Key))
                     continue;
 
@@ -152,15 +153,24 @@ namespace Citta_T1.Business.Option
             return true;
   
         }
+       
         public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
         {
             //新数据源与旧数据源表头不匹配，对应配置内容是否清空进行判断
 
             if (opControl.Option.GetOption("columnname") == "") return true;
+            if (opControl.Option.GetOption(field) == "") return true;
+            //遍历配置字典，配置索引超过新列的长度，配置清空
+            foreach (KeyValuePair<string, string> pair in opControl.Option.OptionDict)
+            {
+                if (pair.Key.Contains(field))
+                { }
+            }
             string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
             try
             {
-                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
+                //复选框配置的判断
+                if (field.Contains("factor"))
                 {
                     foreach (int fl in fieldList)
                     {
@@ -171,7 +181,7 @@ namespace Citta_T1.Business.Option
                         }
                     }
                 }
-                else if (field.Contains("outfield") && opControl.Option.GetOption(field) != "")
+                else if (field.Contains("outfield"))
                 {
 
                     string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
@@ -183,7 +193,7 @@ namespace Citta_T1.Business.Option
                     }
 
                 }
-                else if(opControl.Option.GetOption(field) != "")
+                else 
                 {
                     //单选框配置的判断
                     int index = Convert.ToInt32(opControl.Option.GetOption(field));
@@ -223,7 +233,7 @@ namespace Citta_T1.Business.Option
                         opControl.Option.OptionDict[field] = "";
                         return false;
                     }
-                    if (field != "outfield1" && !IsDataSourceNotEqual(oldColumnList0, columnName0, outIndex))
+                    if (field != "outfield0" && !IsDataSourceNotEqual(oldColumnList0, columnName0, outIndex))
                     {
                         opControl.Option.OptionDict[field] = "";
                         return false;
@@ -289,7 +299,7 @@ namespace Citta_T1.Business.Option
  
         }
 
-        //配置初始化
+        //配置初始化，获取数据源表头信息
         public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
         {
            
