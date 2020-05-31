@@ -61,7 +61,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
-            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8 
+            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8 
             )
         {
             InitializeComponent();

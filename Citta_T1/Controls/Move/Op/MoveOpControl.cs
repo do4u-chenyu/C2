@@ -114,8 +114,8 @@ namespace Citta_T1.Controls.Move.Op
             Description = description;
             Location = loc;
             FullFilePath = String.Empty;
-            Encoding = DSUtil.Encoding.NoNeed;
-            Separator = DSUtil.DefaultSeparator;
+            Encoding = OpUtil.Encoding.NoNeed;
+            Separator = OpUtil.DefaultSeparator;
             //Status = ElementStatus.Null;
 
 

@@ -163,8 +163,8 @@ namespace Citta_T1.Controls
             char separator = '\t';
             string path = "";
             string text = "";
-            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
-            DSUtil.ExtType extType;
+            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
+            OpUtil.ExtType extType;
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             Point moveOffset = WorldBoundControl(location);
             location.X -=  moveOffset.X;
@@ -176,8 +176,8 @@ namespace Citta_T1.Controls
             {
                 path = e.Data.GetData("Path").ToString();
                 separator = (char)e.Data.GetData("Separator");
-                encoding = (DSUtil.Encoding)e.Data.GetData("Encoding");
-                extType = (DSUtil.ExtType)e.Data.GetData("ExtType");
+                encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
                 AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
@@ -621,7 +621,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
@@ -632,7 +632,7 @@ namespace Citta_T1.Controls
                 encoding);
             AddNewElement(btn);
         }
-        public MoveRsControl AddNewResult(string desciption, int sizeL, Point location, char separator, DSUtil.Encoding encoding) 
+        public MoveRsControl AddNewResult(string desciption, int sizeL, Point location, char separator, OpUtil.Encoding encoding) 
         {
             MoveRsControl btn = new MoveRsControl(sizeL,
                                 desciption,

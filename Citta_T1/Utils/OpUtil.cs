@@ -14,26 +14,7 @@ namespace Citta_T1.Utils
 {
     public class OpUtil
     {
-        /// <summary>
-        /// MD5字符串加密
-        /// </summary>
-        /// <param name="txt"></param>
-        /// <returns>加密后字符串</returns>
-        public static string GenerateMD5(string txt)
-        {
-            using (MD5 mi = MD5.Create())
-            {
-                byte[] buffer = Encoding.Default.GetBytes(txt);
-                //开始加密
-                byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < newBuffer.Length; i++)
-                {
-                    sb.Append(newBuffer[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-        }
+        public static readonly char DefaultSeparator = '\t';
 
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {
@@ -221,7 +202,26 @@ namespace Citta_T1.Utils
             return type;
         }
 
-        public static DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+        public enum Encoding
+        {
+            UTF8,
+            GBK,
+            NoNeed
+        }
+        public enum ExtType
+        {
+            Excel,
+            Text,
+            Unknow
+        }
+
+        public static Encoding EncodingEnum(string type)
+        { return (Encoding)Enum.Parse(typeof(Encoding), type); }
+
+        public static ExtType ExtTypeEnum(string type)
+        { return (ExtType)Enum.Parse(typeof(ExtType), type); }
+
+        public static ElementStatus EStatus(string status)
+        { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
     }
 }

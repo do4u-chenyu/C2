@@ -83,7 +83,7 @@ namespace Citta_T1.OperatorViews
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
             this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
             return bcpInfo.ColumnArray;
         }

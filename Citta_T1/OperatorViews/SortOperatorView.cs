@@ -67,7 +67,7 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
             this.columnName = bcpInfo.ColumnArray;
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
             foreach (string name in columnName)

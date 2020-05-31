@@ -116,8 +116,8 @@ namespace Citta_T1.Business.DataSource
                         separator = Convert.ToChar(ascii);
                     }
                     #endregion
-                    DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
-                    DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
+                    OpUtil.ExtType extType = OpUtil.ExtTypeEnum(xn.SelectSingleNode("extType").InnerText);
+                    OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
                     DataButton dataButton = new DataButton(filePath, dataName, separator, extType, encoding);
                     dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
@@ -126,9 +126,5 @@ namespace Citta_T1.Business.DataSource
             }
             return dataSourceList;
         }
-        public DSUtil.ExtType ExtType(string type)
-        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
-        public DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }
 }

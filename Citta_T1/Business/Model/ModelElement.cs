@@ -74,9 +74,9 @@ namespace Citta_T1.Business.Model
         }
         public Point Location { get => ctl.Location; }
         public int ID { get => ctl.ID; }
-        public DSUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
+        public OpUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
   
-        public DSUtil.ExtType ExtType { get => ctl.ExtType; }
+        public OpUtil.ExtType ExtType { get => ctl.ExtType; }
 
         public char Separator { get => ctl.Separator; set => ctl.Separator = value; }
 

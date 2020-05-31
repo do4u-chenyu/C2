@@ -229,12 +229,12 @@ namespace Citta_T1.Business.Model
                         status = textInfo.ToTitleCase(status).ToString();
                         string subType = xn.SelectSingleNode("subtype").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        Point location = ToPointType(xn.SelectSingleNode("location").InnerText);
                         bool enableOption = Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), loc)
+                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), location)
                         {
                             Type = ElementType.Operator,
-                            Status = EStatus(status),
+                            Status = OpUtil.EStatus(status),
                             ID = id,
                             EnableOption = enableOption
                         };
@@ -261,22 +261,18 @@ namespace Citta_T1.Business.Model
                     else if (type == "DataSource")
                     {
                         String name = xn.SelectSingleNode("name").InnerText;
-                        string status = xn.SelectSingleNode("status").InnerText;
-                        status = textInfo.ToTitleCase(status).ToString();
-                        string subType = xn.SelectSingleNode("subtype").InnerText;
                         string fullFilePath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point xnlocation = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, xnlocation);
-                        cotl.Type = ElementType.DataSource;
-                        // 绑定线
-                        cotl.ID = id;
-                        #region 读分隔符
-                        int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
-                        char separator = GetSeparator(ascii);
-                        #endregion
-                        cotl.Separator = separator;
-                        cotl.Encoding = EncodingType(xn.SelectSingleNode("encoding").InnerText);
+                        Point location = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
+                        OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
+                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, location)
+                        {
+                            Type = ElementType.DataSource,
+                            ID = id,
+                            Separator = separator,
+                            Encoding = encoding
+                        };
                         ModelElement dataSourceElement = ModelElement.CreateModelElement(cotl);
                         this.modelDocument.ModelElements.Add(dataSourceElement);
                     }
@@ -291,19 +287,17 @@ namespace Citta_T1.Business.Model
                         string status = xn.SelectSingleNode("status").InnerText;
                         status = textInfo.ToTitleCase(status).ToString();
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point loc = ToPointType(xn.SelectSingleNode("location").InnerText);
-                        string bcpPath = xn.SelectSingleNode("path").InnerText;
-                        int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
-                        char separator = GetSeparator(ascii);
-                       
-                        DSUtil.Encoding encoding=xn.SelectSingleNode("encoding") == null?  DSUtil.Encoding.UTF8: EncodingType(xn.SelectSingleNode("encoding").InnerText);
+                        Point location = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        string fullFilePath = xn.SelectSingleNode("path").InnerText;
+                        char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
+                        OpUtil.Encoding encoding = xn.SelectSingleNode("encoding") == null ? OpUtil.Encoding.UTF8 : OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
 
-                        MoveRsControl ctl = new MoveRsControl(0, name, loc)
+                        MoveRsControl ctl = new MoveRsControl(0, name, location)
                         {
                             Type = ElementType.Result,
                             ID = id,
-                            Status = EStatus(status),
-                            FullFilePath = bcpPath,
+                            Status = OpUtil.EStatus(status),
+                            FullFilePath = fullFilePath,
                             Separator = separator,
                             Encoding = encoding
                         };
@@ -328,20 +322,6 @@ namespace Citta_T1.Business.Model
                
             }
         }
-        #region 读分隔符
-        private char GetSeparator(int ascii)
-        {
-            if (ascii < 0 || ascii > 255)
-            {
-                log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
-                return '\t';
-            }
-            else
-            {
-              return Convert.ToChar(ascii);
-            }
-        }
-        #endregion
       
         private OperatorOption ReadOption(XmlNode xn)
         {
@@ -351,10 +331,7 @@ namespace Citta_T1.Business.Model
             return option;
         }
 
-        public ElementStatus EStatus(string status)
-        { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
-        public DSUtil.Encoding EncodingType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
+
         private PointF ToPointFType(string point)
         {
             PointF location = new PointF();

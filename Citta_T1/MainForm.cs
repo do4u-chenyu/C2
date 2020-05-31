@@ -460,7 +460,7 @@ namespace Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
         }
 
-        private void InputDataFormEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
@@ -468,7 +468,7 @@ namespace Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByFullFilePath(string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
+        public void PreViewDataByFullFilePath(string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowBottomPanel(); 
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);

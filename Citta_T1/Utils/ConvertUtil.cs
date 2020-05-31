@@ -60,5 +60,22 @@ namespace Citta_T1.Utils
                 ct.Text = String.Empty;
             }
         }
+
+        public static char TryParseAscii(string asciiChar, char defaultValue = '\t')
+        {
+            int ascii = TryParseInt(asciiChar, (int)defaultValue);
+
+            if (ascii < 0 || ascii > 255)
+                return defaultValue;
+
+            try
+            {
+                return Convert.ToChar(ascii);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
     }
 }

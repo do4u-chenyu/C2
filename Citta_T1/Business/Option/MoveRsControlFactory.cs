@@ -28,7 +28,7 @@ namespace Citta_T1.Business.Option
             //创建MoveRsControl控件
             string path;
             char separator = '\t';
-            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8;
+            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
             Point location = WorldBoundControl(moc);
             int id = Global.GetCurrentDocument().ElementCount;
             string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");

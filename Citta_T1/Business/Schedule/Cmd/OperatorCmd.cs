@@ -206,7 +206,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             else
             {
-                if(JudgeInputFileEncoding(inputfile) == DSUtil.Encoding.GBK)
+                if(JudgeInputFileEncoding(inputfile) == OpUtil.Encoding.GBK)
                 {
                     return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputfile);
                 }
@@ -230,7 +230,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             return num; 
         }
 
-        public DSUtil.Encoding JudgeInputFileEncoding(string inputfile)
+        public OpUtil.Encoding JudgeInputFileEncoding(string inputfile)
         {
             return triple.DataElements[inputFilePaths.IndexOf(inputfile)].Encoding;
         }

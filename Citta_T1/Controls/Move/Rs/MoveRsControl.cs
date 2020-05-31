@@ -78,8 +78,8 @@ namespace Citta_T1.Controls.Move.Rs
             Description = desciption;
             Location = loc;
             FullFilePath = String.Empty;
-            Encoding = DSUtil.Encoding.GBK;
-            Separator = DSUtil.DefaultSeparator;
+            Encoding = OpUtil.Encoding.GBK;
+            Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
             SetOpControlName(Description);
