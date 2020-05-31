@@ -262,11 +262,10 @@ namespace Citta_T1.Controls
 
         public void SetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
-            ModelRelation mr;
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             for (int i = 0; i < mrs.Count; i++)
             {
-                mr = mrs[i];
+                ModelRelation mr = mrs[i];
                 if (exceptLineIndex != null && exceptLineIndex.Contains(i))
                     mr.Selected = !mr.Selected;
                 else

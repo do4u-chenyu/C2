@@ -50,6 +50,13 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
         }
 
-        
+        // 单元素拖拽
+        public virtual void ChangeLoc(float dx, float dy)
+        {
+            int left = this.Left + Convert.ToInt32(dx);
+            int top = this.Top + Convert.ToInt32(dy);
+            this.Location = new Point(left, top);
+        }
+
     }
 }

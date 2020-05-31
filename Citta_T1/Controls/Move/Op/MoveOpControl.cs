@@ -21,7 +21,7 @@ namespace Citta_T1.Controls.Move.Op
     public delegate void ModelDocumentDirtyEventHandler();
   
 
-    public partial class MoveOpControl : MoveBaseControl, IScalable, IDragable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
@@ -77,7 +77,7 @@ namespace Citta_T1.Controls.Move.Op
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
 
-        public ECommandType cmd = ECommandType.Null;
+        private ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
 
@@ -910,19 +910,6 @@ namespace Citta_T1.Controls.Move.Op
             rect.Y = Convert.ToInt32(rect.Top * f);
             return rect;
         }
-        #endregion
-
-        #region 拖动实现
-
-        public void ChangeLoc(float dx, float dy)
-        {
-
-            int left = this.Left + Convert.ToInt32(dx);
-            int top = this.Top + Convert.ToInt32(dy);
-            this.Location = new Point(left, top);
-        }
-
-
         #endregion
 
         #region IMoveControl 接口实现方法

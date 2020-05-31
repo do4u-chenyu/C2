@@ -9,6 +9,7 @@ using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
 using NPOI.SS.Formula.Functions;
 using Citta_T1.Core;
+using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Utils
 {
@@ -62,15 +63,7 @@ namespace Citta_T1.Utils
         // 当前文档在canvas里整体拖动dx, dy
         public static void CanvasDragLocation(float dx, float dy)
         {
-            ModelDocument md = Global.GetCurrentDocument();
-            List <ModelElement> modelElements = md.ModelElements;
-            List<ModelRelation> modelRelations = md.ModelRelations;
-            foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.InnerControl;
-                if (ct is IDragable)
-                    (ct as IDragable).ChangeLoc(dx, dy);
-            }
+            Global.GetCurrentDocument().ModelElements.ForEach(me => me.InnerControl.ChangeLoc(dx, dy));
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
         }

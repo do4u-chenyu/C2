@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
 {
-    public partial class MoveRsControl : MoveBaseControl, IScalable, IDragable, IMoveControl
+    public partial class MoveRsControl : MoveBaseControl, IScalable, IMoveControl
     {
         private string opControlName;
         private bool isMouseDown = false;
@@ -34,6 +34,7 @@ namespace Citta_T1.Controls.Move.Rs
         private int startX;
         private int startY;
         private Point oldControlPosition;
+
         private ECommandType cmd = ECommandType.Null;
 
         List<int> startLineIndexs = new List<int>() { };
@@ -249,9 +250,6 @@ namespace Citta_T1.Controls.Move.Rs
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }
-                
-
-
         }
 
         public Point UndoRedoMoveLocation(Point location)
@@ -547,16 +545,6 @@ namespace Citta_T1.Controls.Move.Rs
             rect.X = Convert.ToInt32(rect.Left * f);
             rect.Y = Convert.ToInt32(rect.Top * f);
             return rect;
-        }
-        #endregion
-
-        #region 拖动实现
-
-        public void ChangeLoc(float dx, float dy)
-        {
-            int left = this.Left + Convert.ToInt32(dx);
-            int top = this.Top + Convert.ToInt32(dy);
-            this.Location = new Point(left, top);
         }
         #endregion
 

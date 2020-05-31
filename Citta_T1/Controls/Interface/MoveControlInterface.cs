@@ -12,11 +12,7 @@ namespace Citta_T1.Controls.Interface
     {
         void ChangeSize(int sizeL);
     }
-    // 拖拽接口
-    public interface IDragable
-    {
-        void ChangeLoc(float dx, float dy);
-    }
+
     // 画布上的所有可移动控件接口
     interface IMoveControl
     {

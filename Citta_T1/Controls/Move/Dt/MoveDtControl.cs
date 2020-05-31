@@ -16,7 +16,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Controls.Move.Dt
 {
     public delegate void DtDocumentDirtyEventHandler();
-    public partial class MoveDtControl: MoveBaseControl, IScalable, IDragable, IMoveControl
+    public partial class MoveDtControl: MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
@@ -53,8 +53,7 @@ namespace Citta_T1.Controls.Move.Dt
         // 以该控件为终点的所有点
         #endregion
 
-        public ECommandType cmd = ECommandType.Null;
-
+        private ECommandType cmd = ECommandType.Null;
 
         ControlMoveWrapper controlMoveWrapper;
 
@@ -560,16 +559,6 @@ namespace Citta_T1.Controls.Move.Dt
         }
         #endregion
 
-        #region 拖动实现
-        public void ChangeLoc(float dx, float dy)
-        {
-            int left = this.Left + Convert.ToInt32(dx);
-            int top = this.Top + Convert.ToInt32(dy);
-            this.Location = new Point(left, top);
-
-        }
-        #endregion
-
         #region 接口实现
         /*
          * 当空间移动的时候，更新该控件连接线的坐标
@@ -592,11 +581,6 @@ namespace Citta_T1.Controls.Move.Dt
         {
             // 不存在连DtControl 的 LeftPin的情况
             return p;
-        }
-
-        public int GetID()
-        {
-            return this.ID;
         }
         public PointF GetEndPinLoc(int pinIndex)
         {
