@@ -74,14 +74,7 @@ namespace Citta_T1.OperatorViews
             {
                 return fileName;
             }
-            return SubstringByte(fileName, 0, maxLength);
-        }
-        private string SubstringByte(string text, int startIndex, int length)
-        {
-            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
-            if (bytes.Length < length)
-                length = bytes.Length;
-            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
+            return ConvertUtil.SubstringByte(fileName, 0, maxLength);
         }
         #endregion
 

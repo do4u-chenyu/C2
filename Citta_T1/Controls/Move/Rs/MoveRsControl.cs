@@ -263,13 +263,6 @@ namespace Citta_T1.Controls.Move.Rs
 
         #region 控件名称长短改变时改变控件大小
 
-        private string SubstringByte(string text, int startIndex, int length)
-        {
-            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
-            if (bytes.Length < length)
-                length = bytes.Length;
-            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
-        }
         private int CountTextWidth(int chineseRatio, int otherRatio)
         {
             int padding = 3;
@@ -282,7 +275,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             this.Description = name;
             int maxLength = 24;
-            name = SubstringByte(name, 0, maxLength);
+            name = ConvertUtil.SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = CountTextWidth(sumCount, sumCountDigit);
@@ -315,12 +308,9 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region 右键菜单
-        public void PreviewMenuItem_Click(object sender, EventArgs e)
+        private void PreviewMenuItem_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists(this.FullFilePath))
-            {
-                Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
-            }
+            Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
 
         public void RenameMenuItem_Click(object sender, EventArgs e)

@@ -77,5 +77,12 @@ namespace Citta_T1.Utils
                 return defaultValue;
             }
         }
+
+        public static string SubstringByte(string text, int startIndex, int length)
+        {
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
+            length = Math.Min(bytes.Length, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
+        }
     }
 }
