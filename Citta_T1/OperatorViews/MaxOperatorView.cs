@@ -16,7 +16,6 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string dataPath;
-        private string oldMaxfield;
         private List<int> oldOutList;
         private ElementStatus oldstatus;
         private string[] columnName;
@@ -30,16 +29,15 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.optionInfoCheck = new OptionInfoCheck();
-            dataPath = "";
+            dataPath = String.Empty;
             this.columnName = new string[] { };
             this.oldColumnName = new List<string>();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
-      
+
             InitOptionInfo();
             LoadOption();
-                       
-            this.oldMaxfield = this.maxValueBox.Text;           
+
             this.oldstatus = opControl.Status;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
@@ -52,10 +50,10 @@ namespace Citta_T1.OperatorViews
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.dataInfoBox.Text == "") return;
-            if (this.maxValueBox.Text == "")
+            if (this.dataInfoBox.Text == String.Empty) return;
+            if (this.maxValueBox.Text == String.Empty)
             {
-                MessageBox.Show("请选择最大值字段!");
+                MessageBox.Show("请选择最大值字段");
                 return;
             }
             if (this.outList.GetItemCheckIndex().Count == 0)
@@ -64,7 +62,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            
+
             SaveOption();
             //内容修改，引起文档dirty
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
@@ -82,12 +80,12 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName =new List<string>();
+            List<string> outName = new List<string>();
             foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
             if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
-           
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -100,15 +98,15 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
-            List<int> outIndexs =new List<int>(this.oldOutList);
+            List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
-            if (this.maxValueBox.Text == "")
-                this.opControl.Option.SetOption("maxfield", "");
+            if (this.maxValueBox.Text == String.Empty)
+                this.opControl.Option.SetOption("maxfield", String.Empty);
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
-            
+
             if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
                 return;
             else
@@ -119,23 +117,23 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             int maxIndex = -1;
-            if (this.opControl.Option.GetOption("maxfield") != "")
+            if (this.opControl.Option.GetOption("maxfield") != String.Empty)
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
                 this.maxValueBox.Tag = maxIndex.ToString();
             }
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (this.opControl.Option.GetOption("outfield") != String.Empty)
             {
-                
+
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = outIndexs.ToList();
                 this.outList.LoadItemCheckIndex(outIndexs);
-                foreach(int i in outIndexs)
+                foreach (int i in outIndexs)
                     this.oldColumnName.Add(this.outList.Items[i].ToString());
             }
-           
+
             this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
         }
         #endregion
@@ -170,7 +168,7 @@ namespace Citta_T1.OperatorViews
             }
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
         }
-      
+
 
 
         public void SetTextBoxName(TextBox textBox)
@@ -182,7 +180,7 @@ namespace Citta_T1.OperatorViews
             int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
 
             //防止截取字符串时中文乱码
-            foreach(Match mc in chs)
+            foreach (Match mc in chs)
             {
                 if (dataName.IndexOf(mc.ToString()) == maxLength)
                 {
@@ -193,7 +191,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
 

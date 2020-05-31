@@ -30,13 +30,13 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             this.optionInfoCheck = new OptionInfoCheck();
-            this.dataPath = "";
+            this.dataPath = String.Empty;
             this.oldOutList = new List<int>();
             oldColumnName = new List<string>();
             this.opControl = opControl;
             InitOptionInfo();
             LoadOption();
-            this.oldRandomNum =this.randomNumBox.Text;         
+            this.oldRandomNum = this.randomNumBox.Text;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             SetTextBoxName(this.dataInfoBox);
@@ -45,7 +45,7 @@ namespace Citta_T1.OperatorViews
         private void InitOptionInfo()
         {
             int startID = -1;
-            string encoding = "";
+            string encoding = String.Empty;
             char separator = '\t';
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
@@ -71,7 +71,7 @@ namespace Citta_T1.OperatorViews
                     break;
                 }
             }
-            if (this.dataPath != "")
+            if (this.dataPath != String.Empty)
                 SetOption(this.dataPath, this.dataInfoBox.Text, encoding, separator);
 
         }
@@ -91,7 +91,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
-      
+
 
         private void SetTextBoxName(TextBox textBox)
         {
@@ -113,7 +113,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -136,9 +136,9 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("randomnum") != "")
+            if (this.opControl.Option.GetOption("randomnum") != String.Empty)
                 this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (this.opControl.Option.GetOption("outfield") != String.Empty)
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -147,28 +147,28 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
-          
+
         }
         #endregion
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.randomNumBox.Text == "")
+            if (this.randomNumBox.Text == String.Empty)
             {
-                MessageBox.Show("请选择随机条数字段!");
+                MessageBox.Show("随机条数字段不能为空,请输入一个整数");
                 return;
             }
             if (this.outList.GetItemCheckIndex().Count == 0)
             {
-                MessageBox.Show("请选择输出字段!");
+                MessageBox.Show("请选择算子要输出的字段");
                 return;
             }
             this.DialogResult = DialogResult.OK;
-            if (this.dataInfoBox.Text == "") return;
+            if (this.dataInfoBox.Text == String.Empty) return;
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldRandomNum!= this.randomNumBox.Text)
+            if (this.oldRandomNum != this.randomNumBox.Text)
                 Global.GetMainForm().SetDocumentDirty();
             else if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetMainForm().SetDocumentDirty();

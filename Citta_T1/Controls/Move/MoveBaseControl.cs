@@ -18,9 +18,8 @@ namespace Citta_T1.Controls.Move
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         public DSUtil.Encoding Encoding { get; set; }
         public char Separator { get; set ; }
-        public ElementStatus Status { get; set; }
+        public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
-
         public DSUtil.ExtType ExtType
         {
             get
@@ -41,23 +40,11 @@ namespace Citta_T1.Controls.Move
             }
         }
 
-        private string oldTextString;
-
-        private static readonly Encoding EncodingOfGB2312 = System.Text.Encoding.GetEncoding("GB2312");
-
-        private ECommandType cmd = ECommandType.Null;
+        protected string oldTextString;
 
 
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
+        //private ECommandType cmd;
 
-        private Bitmap staticImage;
         public MoveBaseControl()
         {
             InitializeComponent();

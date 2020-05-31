@@ -96,7 +96,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(489, 37);
+            this.topPanel.Size = new System.Drawing.Size(485, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -105,10 +105,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 173);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 169);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(489, 212);
+            this.bottomPanel.Size = new System.Drawing.Size(485, 212);
             this.bottomPanel.TabIndex = 1;
             // 
             // groupBox1
@@ -119,7 +119,7 @@
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(28, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(462, 163);
+            this.groupBox1.Size = new System.Drawing.Size(445, 163);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "过滤条件预览：";
@@ -192,7 +192,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(124, 136);
+            this.keyPanel.Size = new System.Drawing.Size(124, 132);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -208,7 +208,7 @@
             this.valuePanel.Location = new System.Drawing.Point(124, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(365, 136);
+            this.valuePanel.Size = new System.Drawing.Size(361, 132);
             this.valuePanel.TabIndex = 3;
             // 
             // label6
@@ -287,7 +287,7 @@
             // KeyWordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(489, 385);
+            this.ClientSize = new System.Drawing.Size(485, 381);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

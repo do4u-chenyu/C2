@@ -40,6 +40,7 @@
             this.valuePanel = new System.Windows.Forms.Panel();
             this.dataSource1 = new System.Windows.Forms.TextBox();
             this.dataSource0 = new System.Windows.Forms.TextBox();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -48,7 +49,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
-            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -95,7 +95,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(545, 37);
+            this.topPanel.Size = new System.Drawing.Size(541, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -103,10 +103,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 329);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 325);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(545, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(541, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -146,7 +146,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 292);
+            this.keyPanel.Size = new System.Drawing.Size(116, 288);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -160,7 +160,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(429, 292);
+            this.valuePanel.Size = new System.Drawing.Size(425, 288);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -188,6 +188,16 @@
             this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource0_MouseClick);
             this.dataSource0.LostFocus += new System.EventHandler(this.DataSource0_LostFocus);
+            // 
+            // outList
+            // 
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(4, 263);
+            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outList.Name = "outList";
+            this.outList.Size = new System.Drawing.Size(112, 22);
+            this.outList.TabIndex = 8;
             // 
             // tableLayoutPanel2
             // 
@@ -261,7 +271,7 @@
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(437, 160);
+            this.panel1.Size = new System.Drawing.Size(419, 160);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -278,20 +288,10 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // outList
-            // 
-            this.outList.DataSource = null;
-            this.outList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList.Location = new System.Drawing.Point(4, 263);
-            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.outList.Name = "outList";
-            this.outList.Size = new System.Drawing.Size(112, 22);
-            this.outList.TabIndex = 8;
-            // 
             // CollideOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(545, 393);
+            this.ClientSize = new System.Drawing.Size(541, 389);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

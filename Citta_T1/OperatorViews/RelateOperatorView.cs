@@ -40,8 +40,8 @@ namespace Citta_T1.OperatorViews
             this.oldOutList1 = new List<int>();
             oldColumnName0 = new List<string>();
             oldColumnName1 = new List<string>();
-            dataPath0 = "";
-            dataPath1 = "";
+            dataPath0 = String.Empty;
+            dataPath1 = String.Empty;
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
@@ -124,7 +124,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -143,7 +143,7 @@ namespace Citta_T1.OperatorViews
         {
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("outfield0") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, null, "outfield0"))
+            if (this.opControl.Option.GetOption("outfield0") != String.Empty && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, null, "outfield0"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -152,7 +152,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName0.Add(this.outList0.Items[index].ToString());
             }
-            if (this.opControl.Option.GetOption("outfield1") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName1, null, "outfield1"))
+            if (this.opControl.Option.GetOption("outfield1") != String.Empty && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName1, null, "outfield1"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -300,7 +300,7 @@ namespace Citta_T1.OperatorViews
             types.Add(this.outList0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写连接条件");
                     empty = true;
@@ -309,7 +309,7 @@ namespace Citta_T1.OperatorViews
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写连接条件");
                     empty = true;

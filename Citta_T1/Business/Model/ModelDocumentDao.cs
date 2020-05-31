@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Flow;
+using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
@@ -86,40 +87,13 @@ namespace Citta_T1.Business.Model
             }
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
-        public ModelElement AddDocumentOperator(Control ct)
+        public ModelElement AddDocumentOperator(MoveBaseControl ct)
         {
-         
-            if (ct is MoveDtControl)
-            {
-                MoveDtControl dt = (ct as MoveDtControl);
-                dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt);
-                this.currentDocument.AddModelElement(e);
-                return e;
-            }
-
-            if (ct is MoveOpControl)
-            {
-                MoveOpControl op = (ct as MoveOpControl);
-                op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op);
-                this.currentDocument.AddModelElement(e);
-                return e;               
-            }
-            if (ct is MoveRsControl)
-            {
-                MoveRsControl rs = (ct as MoveRsControl);
-                rs.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateResultElement(rs);
-                this.currentDocument.AddModelElement(e);
-                return e;
-            }
-
-            return ModelElement.Empty;
+            ct.ID = this.currentDocument.ElementCount++;
+            ModelElement e = ModelElement.CreateModelElement(ct);
+            this.currentDocument.AddModelElement(e);
+            return e;
         }
-
-
-
 
         private ModelDocument FindModelDocument(string modelTitle)
         {

@@ -105,7 +105,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(409, 19);
+            this.topPanel.Size = new System.Drawing.Size(405, 19);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -113,17 +113,17 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 265);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 272);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(409, 51);
+            this.bottomPanel.Size = new System.Drawing.Size(405, 40);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(330, 14);
+            this.cancelButton.Location = new System.Drawing.Point(330, 7);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
@@ -138,7 +138,7 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(240, 14);
+            this.confirmButton.Location = new System.Drawing.Point(240, 7);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
@@ -159,7 +159,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 19);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 246);
+            this.keyPanel.Size = new System.Drawing.Size(116, 253);
             this.keyPanel.TabIndex = 2;
             // 
             // label9
@@ -211,7 +211,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 19);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(293, 246);
+            this.valuePanel.Size = new System.Drawing.Size(289, 253);
             this.valuePanel.TabIndex = 3;
             // 
             // groupBox3
@@ -414,7 +414,7 @@
             // SortOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(409, 316);
+            this.ClientSize = new System.Drawing.Size(405, 312);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

@@ -38,7 +38,7 @@ namespace Citta_T1.OperatorViews
             this.oldOutName = new List<string>();
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            dataPath = "";
+            dataPath = String.Empty;
             InitOptionInfo();
             LoadOption();
             this.oldCheckedItems.Add(this.noRepetition.Checked);
@@ -99,7 +99,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion

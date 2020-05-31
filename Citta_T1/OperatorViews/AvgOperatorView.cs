@@ -17,7 +17,7 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string oldAvg;
-        private string dataPath = "";
+        private string dataPath = String.Empty;
         private string[] columnName;
         private List<string> selectName;
         private string oldOptionDict;
@@ -114,7 +114,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion

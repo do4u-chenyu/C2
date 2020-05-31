@@ -31,7 +31,7 @@ namespace Citta_T1.OperatorViews
             this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
-            dataPath = "";
+            dataPath = String.Empty;
             oldColumnName = new List<string>();
             InitOptionInfo();
             LoadOption();
@@ -94,7 +94,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -216,7 +216,7 @@ namespace Citta_T1.OperatorViews
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }

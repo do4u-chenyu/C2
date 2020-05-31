@@ -1,7 +1,8 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
-using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -10,46 +11,16 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Citta_T1.Core.UndoRedo.Command;
 
 
 namespace Citta_T1.Controls.Move.Dt
 {
     public delegate void DtDocumentDirtyEventHandler();
-    public partial class MoveDtControl: UserControl, IScalable, IDragable, IMoveControl
+    public partial class MoveDtControl: MoveBaseControl, IScalable, IDragable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
-        public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
-        private string oldTextString;
         private Point oldControlPosition;
-        private DSUtil.Encoding encoding;
-        private char separator;
-        private int id;
-        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
-        public int ID { get => this.id; set => this.id = value; }
-
-        public DSUtil.ExtType ExtType
-        {
-            get
-            {
-                if (String.IsNullOrWhiteSpace(FullFilePath))
-                    return DSUtil.ExtType.Unknow;
-                if (FullFilePath.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
-                if (FullFilePath.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
-                if (FullFilePath.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                if (FullFilePath.EndsWith(".cvs", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                return DSUtil.ExtType.Unknow;
-            }
-        }
-
-        public char Separator { get => separator; set => separator = value; }
 
         //绘制引脚
         private string lineStaus = "noLine";
@@ -66,8 +37,6 @@ namespace Citta_T1.Controls.Move.Dt
         private Size normalStatus = new Size(53, 28);
 
         #region 继承属性
-        private static readonly  System.Text.Encoding GBKEncoding = System.Text.Encoding.GetEncoding("GB2312");
-
         private string opControlName;
         private Point mouseOffset;
         // 一些倍率
@@ -89,7 +58,6 @@ namespace Citta_T1.Controls.Move.Dt
 
         ControlMoveWrapper controlMoveWrapper;
 
-        public string FullFilePath => this.Name;
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
@@ -97,11 +65,16 @@ namespace Citta_T1.Controls.Move.Dt
             )
         {
             InitializeComponent();
-            this.textBox.Text = name;
+            InitializeContextMenuStrip();
+
+            this.Type = ElementType.DataSource;
+            this.Description = name;
             this.Location = loc;
-            this.Name = bcpPath;
+            this.FullFilePath = bcpPath;
             this.Encoding = encoding;
             this.Separator = separator;
+            this.Status = ElementStatus.Done;
+
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
@@ -218,14 +191,28 @@ namespace Citta_T1.Controls.Move.Dt
 
         #region 新方法
 
-        public void InitializeOpPinPicture()
+        private void InitializeOpPinPicture()
         {
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
             SetOpControlName(this.textBox.Text);
         }
+
+        private void InitializeContextMenuStrip()
+        {
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PreviewMenuItem,
+            this.OptionMenuItem,
+            this.RenameMenuItem,
+            this.RunMenuItem,
+            this.LogMenuItem,
+            this.DeleteMenuItem,
+            this.toolStripSeparator1,
+            this.ExplorerToolStripMenuItem,
+            this.CopyFilePathToClipboardToolStripMenuItem});
+        }
         public void PreViewMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this.Name, this.separator, this.ExtType, this.encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
         #endregion
 
@@ -307,7 +294,7 @@ namespace Citta_T1.Controls.Move.Dt
                 CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
-                    if (mr.StartID == this.id)
+                    if (mr.StartID == this.ID)
                     {
                         mr.StartP = this.GetStartPinLoc(0);
                         mr.UpdatePoints();
@@ -434,12 +421,12 @@ namespace Citta_T1.Controls.Move.Dt
         #region 控件名称长短改变时改变控件大小
         private string SubstringByte(string text, int startIndex, int length)
         {
-            byte[] bytes = GBKEncoding.GetBytes(text);
+            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
             if (bytes.Length < length)
                 length = bytes.Length;
-            return GBKEncoding.GetString(bytes, startIndex, length);
+            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
-        private int ConutTxtWidth(int chineseRatio, int otherRatio)
+        private int CountTextWidth(int chineseRatio, int otherRatio)
         {
             int padding = 3;
             int addValue = 10;
@@ -454,9 +441,9 @@ namespace Citta_T1.Controls.Move.Dt
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = ConutTxtWidth(sumCount, sumCountDigit);
+            int txtWidth = CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = this.opControlName;
-            if (GBKEncoding.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
@@ -632,9 +619,6 @@ namespace Citta_T1.Controls.Move.Dt
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        #region 划线动作
-        #endregion
-
         private void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
@@ -701,7 +685,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
-        public void rectInAdd(int pinIndex)
+        public void RectInAdd(int pinIndex)
         {
 
         }

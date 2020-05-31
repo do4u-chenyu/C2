@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
                 this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
             }
-           if(this.opControl.Option.GetOption("outname") != "")
+           if(this.opControl.Option.GetOption("outname") != String.Empty)
            {
                 this.oldColumnName = this.opControl.Option.GetOption("outname").Split('\t').ToList();
             }
@@ -117,7 +117,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -168,16 +168,15 @@ namespace Citta_T1.OperatorViews
         }
         private string OutColumnName(string name,string alias)
         {
-            string columnName = alias == "别名"? name: alias;
-            return columnName;
+            return alias == "别名" ? name : alias;
         }
         private void LoadOption()
         {
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("noRepetition") != "")
+            if (this.opControl.Option.GetOption("noRepetition") != String.Empty)
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("repetition") != "")
+            if (this.opControl.Option.GetOption("repetition") != String.Empty)
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
             if (factor1 != "")
             {
@@ -270,18 +269,18 @@ namespace Citta_T1.OperatorViews
             types.Add(this.textBoxEx1.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写过滤条件");
                     empty = true;
                     return empty;
                 }
@@ -450,7 +449,7 @@ namespace Citta_T1.OperatorViews
             TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "别名")
             {
-                TextBoxEx.Text = "";
+                TextBoxEx.Text = String.Empty;
             }
             TextBoxEx.ForeColor = Color.Black;
         }
@@ -458,7 +457,7 @@ namespace Citta_T1.OperatorViews
         private void TextBoxEx1_Leave(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == "")
+            if (TextBoxEx.Text == String.Empty)
             {
                 TextBoxEx.Text = "别名";
                 TextBoxEx.ForeColor = SystemColors.ActiveCaption;

@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    public delegate void NewElementEventHandler(Control ct);
+    public delegate void NewElementEventHandler(MoveBaseControl ct);
 
     public enum ECommandType
     {
@@ -517,7 +518,7 @@ namespace Citta_T1.Controls
                 * 
                 *         ----------
                 */
-            (endC as MoveOpControl).rectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
             ModelRelation mr = new ModelRelation(
                 (startC as IMoveControl).GetID(),
                 (endC as IMoveControl).GetID(),
@@ -644,7 +645,7 @@ namespace Citta_T1.Controls
             return btn;
         }
 
-        private void AddNewElement(Control btn)
+        private void AddNewElement(MoveBaseControl btn)
         {
             this.Controls.Add(btn);
             Global.GetNaviViewControl().UpdateNaviView();

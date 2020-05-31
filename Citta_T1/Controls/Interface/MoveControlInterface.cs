@@ -30,7 +30,7 @@ namespace Citta_T1.Controls.Interface
         PointF GetEndPinLoc(int pinIndex);
 
         void OutPinInit(String status);
-        void rectInAdd(int pinIndex);
+        void RectInAdd(int pinIndex);
         void InPinInit(int pinIndex);
         void ControlSelect();
         void ControlNoSelect();

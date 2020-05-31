@@ -411,11 +411,6 @@
     <Compile Include="OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Bottom\BottomLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -447,6 +442,11 @@
     </Compile>
     <Compile Include="Controls\Move\Op\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
@@ -705,6 +705,7 @@
     <None Include="res\toolbox\reset.png" />
     <None Include="res\toolbox\redo.png" />
     <None Include="res\toolbox\undo.png" />
+    <None Include="res\leftpanelmenu\LeftpanelOpIcon.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

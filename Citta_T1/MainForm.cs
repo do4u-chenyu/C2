@@ -4,6 +4,7 @@ using Citta_T1.Business.Option;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
+using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
@@ -118,7 +119,7 @@ namespace Citta_T1
   
         }
 
-        private void NewDocumentOperator(Control ct)
+        private void NewDocumentOperator(MoveBaseControl ct)
         {          
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
