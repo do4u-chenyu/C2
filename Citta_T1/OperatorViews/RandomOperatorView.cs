@@ -85,9 +85,6 @@ namespace Citta_T1.OperatorViews
                 this.outList.AddItems(name);
             }
 
-            //新旧数据源比较，是否清空窗口配置
-            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
-
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
@@ -136,9 +133,9 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("randomnum") != String.Empty)
+            if (!string.IsNullOrEmpty( this.opControl.Option.GetOption("randomnum")))
                 this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
-            if (this.opControl.Option.GetOption("outfield") != String.Empty)
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);

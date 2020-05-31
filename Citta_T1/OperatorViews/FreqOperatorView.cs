@@ -66,10 +66,6 @@ namespace Citta_T1.OperatorViews
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
 
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);         
-            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
-
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
@@ -188,7 +184,7 @@ namespace Citta_T1.OperatorViews
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));            
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);

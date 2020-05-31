@@ -231,9 +231,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            int count = this.opControl.Option.KeysCount("factor");
-            string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("outfield") != "" && Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -242,12 +240,14 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
             }
+            int count = this.opControl.Option.KeysCount("factor");
+            string factor1 = this.opControl.Option.GetOption("factor1");
             if (factor1 != "" )
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
-                List<int> fieldColumn = new List<int>() { Nums[0] };
-                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
+                int index = Nums[0] ;
+                if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "factor1", index))
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
@@ -266,12 +266,13 @@ namespace Citta_T1.OperatorViews
             } 
             for (int i = 2; i < (count + 1); i++)
             {
-                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                string name = "factor" + i.ToString();
+                string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
-                List<int> fieldColumn1 = new List<int>() { Nums[1] };
-                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(),fieldColumn1)) continue;
+                int index =  Nums[1];
+                if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, name, index)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
                 control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();

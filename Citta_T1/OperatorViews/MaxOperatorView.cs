@@ -117,13 +117,13 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             int maxIndex = -1;
-            if (this.opControl.Option.GetOption("maxfield") != String.Empty)
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "maxfield"))
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
                 this.maxValueBox.Tag = maxIndex.ToString();
             }
-            if (this.opControl.Option.GetOption("outfield") != String.Empty)
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
             {
 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
@@ -159,14 +159,9 @@ namespace Citta_T1.OperatorViews
                 this.outList.AddItems(name);
                 this.maxValueBox.Items.Add(name);
             }
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
-            foreach (string field in keys)
-            {
-                if (!field.Contains("columnname"))
-                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
-            }
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
+           
+           
         }
 
 

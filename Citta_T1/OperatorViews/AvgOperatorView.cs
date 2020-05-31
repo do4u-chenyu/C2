@@ -79,16 +79,6 @@ namespace Citta_T1.OperatorViews
             this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
-
-
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
-            foreach (string field in keys)
-            {
-                if (!field.Contains("columnname"))
-                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
-            }
-
             this.opControl.FirstDataSourceColumns =  this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
@@ -178,7 +168,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("avgfield") != "")
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "avgfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();

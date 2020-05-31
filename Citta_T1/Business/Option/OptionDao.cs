@@ -140,108 +140,51 @@ namespace Citta_T1.Business.Option
 
         //新数据源修改输出
 
-        public bool IsDataSourceNotEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
+        public bool IsDataSourceNotEqual(string[] columnName, int[] outIndex) 
         {
             int maxIndex = outIndex.Max();
             if (maxIndex > columnName.Length - 1)
                 return false;
-            foreach(int index in outIndex)
-            {
-                if (oldColumnList[index] != columnName[index])
-                    return false;
-            }
             return true;
   
         }
-       
-        public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
+       //单选框
+       //复选框 字段名、数据源表头
+        public bool IsClearOption(MoveOpControl moc, string[] columns,string name, int selectIndex = -1)
         {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否清空进行判断
+            //不存在旧数据源，直接返回
+            bool clear = false;
+            string optionValues = moc.Option.GetOption(name);
+            if (optionValues == "")
+                return !clear;          
+            int maxIndex= columns.Length - 1;
+            //复选框配置的判断
 
-            if (opControl.Option.GetOption("columnname") == "") return true;
-            if (opControl.Option.GetOption(field) == "") return true;
-            //遍历配置字典，配置索引超过新列的长度，配置清空
-            foreach (KeyValuePair<string, string> pair in opControl.Option.OptionDict)
+            if (name.Contains("outfield"))
             {
-                if (pair.Key.Contains(field))
-                { }
+                int[] indexs = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse);
+                int index = indexs.Max();
+                if (index > maxIndex)
+                {
+                    moc.Option.OptionDict[name] = "";
+                    clear = true;
+                }
             }
-            string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
-            try
+            else
             {
-                //复选框配置的判断
-                if (field.Contains("factor"))
+                //单选框配置的判断
+                int index;
+                if (selectIndex != -1)
+                    index = selectIndex;
+                else
+                    index = Convert.ToInt32(optionValues);
+                if (index > maxIndex)
                 {
-                    foreach (int fl in fieldList)
-                    {
-                        if (fl > columnName.Length - 1 || oldColumnList[fl] != columnName[fl])
-                        {
-                            opControl.Option.OptionDict[field] = "";
-                            return false;
-                        }
-                    }
-                }
-                else if (field.Contains("outfield"))
-                {
-
-                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (!IsDataSourceNotEqual(oldColumnList, columnName, outIndex))
-                    {
-                        opControl.Option.OptionDict["outfield"] = "";
-                        return false;
-                    }
-
-                }
-                else 
-                {
-                    //单选框配置的判断
-                    int index = Convert.ToInt32(opControl.Option.GetOption(field));
-                    if (index > columnName.Length - 1 || oldColumnList[index] != columnName[index])
-                        opControl.Option.OptionDict[field] = "";
-                }
+                    moc.Option.OptionDict[name] = "";
+                    clear = true;
+                }      
             }
-            catch (Exception ex) { log.Error(ex.Message); }
-            return true;
-        }
-        public bool IsDoubleDataSourceChange(MoveOpControl opControl, string[] columnName0, string[] columnName1, string field, List<int> fieldList = null)
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (opControl.Option.GetOption("columnname0") == "" || opControl.Option.GetOption("columnname1") == "") return true;
-            string[] oldColumnList0 = opControl.Option.GetOption("columnname0").Split('\t');
-            string[] oldColumnList1 = opControl.Option.GetOption("columnname1").Split('\t');
-
-            try
-            { 
-                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
-                {
-                    bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
-                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName1[fieldList[1]];
-                    if (IsEqual0 || IsEqual1)
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                }
-                else if (field.Contains("outfield"))
-                {
-
-                    string[] checkIndexs = opControl.Option.GetOption(field).Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (field == "outfield1" && !IsDataSourceNotEqual(oldColumnList1, columnName0, outIndex))
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                    if (field != "outfield0" && !IsDataSourceNotEqual(oldColumnList0, columnName0, outIndex))
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-            return true;
+            return clear;
         }
         //配置窗口输出的改变，引起后续子图状态改变逻辑
 

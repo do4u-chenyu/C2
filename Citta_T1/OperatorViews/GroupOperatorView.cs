@@ -117,8 +117,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            int count = this.opControl.Option.KeysCount("factor");
-            string factor1 = this.opControl.Option.GetOption("factor1");
+
             if (!String.IsNullOrEmpty( this.opControl.Option.GetOption("noRepetition")))
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("repetition")))
@@ -133,24 +132,23 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("sortByString") != "")
                 this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
 
-            if (this.opControl.Option.GetOption("outfield") != "" && Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
             {
                 this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
                 foreach (int index in this.oldOutList)
                     this.oldOutName.Add(this.columnName[index]);
             }
-            if (!String.IsNullOrEmpty(factor1))
-
+            int count = this.opControl.Option.KeysCount("group");
+            string factor1 = this.opControl.Option.GetOption("group1");
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "group1"))
             {
-                string[] factorList = factor1.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>() { Nums[0] };
-                if (Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor1", fieldColumn))
-                {
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                    this.comboBox1.Tag = Nums[0].ToString();
-                }
-                   
+               
+                int index = Convert.ToInt32(factor1);
+                this.comboBox1.Text = this.comboBox1.Items[index].ToString();
+                this.comboBox1.Tag = index.ToString();
+
+
+
             }
             if (count > 1)
                 InitNewFactorControl(count - 1);
@@ -163,16 +161,13 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 2; i < (count + 1); i++)
             {
-                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
-                if (factor == "") continue;
-                string[] factorList = factor.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn1 = new List<int>() { Nums[0] };
-                if (!Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "factor" + i.ToString(), fieldColumn1)) continue;
-
+                string name = "group" + i.ToString();
+                if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, name)) continue;
+  
+                int index = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
-                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
-                control1.Tag = Nums[0].ToString();
+                control1.Text = (control1 as ComboBox).Items[index].ToString();
+                control1.Tag = index.ToString();
             }
             this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
 
@@ -182,7 +177,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", String.Join("\t",this.opControl.FirstDataSourceColumns));
             string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("group1", factor1);
             this.groupColumn.Add(this.comboBox1.SelectedIndex);
             
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -192,7 +187,7 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string factor = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     this.groupColumn.Add(Convert.ToInt32(factor));
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                    this.opControl.Option.SetOption("group" + (i + 2).ToString(), factor);
                 }
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());

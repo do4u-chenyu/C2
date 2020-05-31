@@ -73,10 +73,6 @@ namespace Citta_T1.OperatorViews
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
 
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
-            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "sortfield");
-
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
         }
@@ -178,7 +174,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
            
-            if (this.opControl.Option.GetOption("sortfield") != String.Empty)
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();

@@ -141,9 +141,8 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            int count = this.opControl.Option.KeysCount("factor");
-            string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("outfield0") != String.Empty && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, null, "outfield0"))
+            
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, "outfield0"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -152,7 +151,9 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName0.Add(this.outList0.Items[index].ToString());
             }
-            if (this.opControl.Option.GetOption("outfield1") != String.Empty && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName1, null, "outfield1"))
+
+            
+            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, "outfield1"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -161,12 +162,16 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnName1.Add(this.outList1.Items[index].ToString());
             }
+
+            int count = this.opControl.Option.KeysCount("factor");
+            string factor1 = this.opControl.Option.GetOption("factor1");
             if (factor1 != "")
             {
-                string[] factorList = factor1.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums);
-                if (Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor1", fieldColumn))
+                
+                int[] Nums = Array.ConvertAll<string, int>(factor1.Split(','), int.Parse);
+                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, "factor1", Nums[0]);
+                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, "factor1", Nums[1]);
+                if (!case0 && !case1)
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
@@ -185,12 +190,15 @@ namespace Citta_T1.OperatorViews
             }
             for (int i = 2; i < (count + 1); i++)
             {
-                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                string name = "factor" + i.ToString();
+                string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
-                string[] factorList = factor.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums.Skip(1));
-                if (!Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor" + i.ToString(), fieldColumn)) continue;
+
+                int[] Nums = Array.ConvertAll<string, int>(factor.Split(','), int.Parse);
+                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, name, Nums[1]);
+                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, name, Nums[2]);
+                if (case0 || case1) continue;
+                
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
