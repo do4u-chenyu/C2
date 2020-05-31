@@ -18,13 +18,10 @@ using System.Windows.Forms;
 namespace Citta_T1.Controls.Move.Op
 {
     public delegate void DeleteOperatorEventHandler(Control control); 
-    public delegate void ModelDocumentDirtyEventHandler();
-  
 
     public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
-        public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
 
         private ControlMoveWrapper controlMoveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
@@ -560,19 +557,6 @@ namespace Citta_T1.Controls.Move.Op
             }
         }
 
-        public void RenameMenuItem_Click(object sender, EventArgs e)
-        {
-
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            this.textBox.ReadOnly = false;
-            this.oldTextString = this.textBox.Text;
-            this.txtButton.Visible = false;
-            this.textBox.Visible = true;
-            this.textBox.Focus();//获取焦点
-            this.textBox.Select(this.textBox.TextLength, 0);
-            ModelDocumentDirtyEvent?.Invoke();
-        }
 
         public void RunMenuItem_Click(object sender, EventArgs e)
         {

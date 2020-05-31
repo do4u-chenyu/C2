@@ -313,19 +313,6 @@ namespace Citta_T1.Controls.Move.Rs
             Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
 
-        public void RenameMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                this.textBox.Text = this.oldTextString;
-            this.textBox.ReadOnly = false;
-            this.oldTextString = this.textBox.Text;
-            this.txtButton.Visible = false;
-            this.textBox.Visible = true;
-            this.textBox.Focus();//获取焦点
-            this.textBox.Select(this.textBox.TextLength, 0);
-        }
-
-
         public void RunMenuItem_Click(object sender, EventArgs e)
         {
             //运行到此

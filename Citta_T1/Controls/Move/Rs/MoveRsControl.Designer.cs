@@ -26,7 +26,6 @@ namespace Citta_T1.Controls.Move.Rs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveRsControl));
             this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ErrorLogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,15 +97,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.PreviewMenuItem.Text = "预览";
             this.PreviewMenuItem.ToolTipText = "会在底层数据预览面板展示运算结果的前100行";
             this.PreviewMenuItem.Click += new System.EventHandler(this.PreviewMenuItem_Click);
-            // 
-            // RenameMenuItem
-            // 
-            this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(217, 24);
-            this.RenameMenuItem.Text = "重命名";
-            this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
+
             // 
             // SaveAsToolStripMenuItem
             // 
@@ -191,7 +182,6 @@ namespace Citta_T1.Controls.Move.Rs
 
         #endregion
         private System.Windows.Forms.ToolStripMenuItem PreviewMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ErrorLogMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

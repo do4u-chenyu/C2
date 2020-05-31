@@ -26,7 +26,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
             this.PreviewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,15 +105,6 @@
             this.OptionMenuItem.Text = "设置";
             this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
-            // RenameMenuItem
-            // 
-            this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(196, 24);
-            this.RenameMenuItem.Text = "重命名";
-            this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
-            // 
             // RunMenuItem
             // 
             this.RunMenuItem.Enabled = false;
@@ -188,7 +178,6 @@
         #endregion
     
         private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem LogMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteMenuItem;

@@ -58,5 +58,17 @@ namespace Citta_T1.Controls.Move
             this.Location = new Point(left, top);
         }
 
+        protected void RenameMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
+            this.textBox.ReadOnly = false;
+            this.oldTextString = this.textBox.Text;
+            this.txtButton.Visible = false;
+            this.textBox.Visible = true;
+            this.textBox.Focus();//获取焦点
+            this.textBox.Select(this.textBox.TextLength, 0);
+        }
+
     }
 }

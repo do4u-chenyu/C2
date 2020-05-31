@@ -14,7 +14,6 @@ namespace Citta_T1.Controls.Move.Op
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOpControl));
             this.OptionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RemarkMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ErrorLogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,8 +68,7 @@ namespace Citta_T1.Controls.Move.Op
             // 
             // OptionMenuItem
             // 
-            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.OptionMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OptionMenuItem.BackgroundImage")));
+            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control; 
             this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.OptionMenuItem.Enabled = false;
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
@@ -81,19 +79,8 @@ namespace Citta_T1.Controls.Move.Op
             this.OptionMenuItem.ToolTipText = "配置算子";
             this.OptionMenuItem.Click += new System.EventHandler(this.OptionMenuItem_Click);
             // 
-            // RenameMenuItem
-            // 
-            this.RenameMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RenameMenuItem.BackgroundImage")));
-            this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.RenameMenuItem.Name = "RenameMenuItem";
-            this.RenameMenuItem.Size = new System.Drawing.Size(133, 24);
-            this.RenameMenuItem.Text = "重命名";
-            this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
-            // 
             // RemarkMenuItem
             // 
-            this.RemarkMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RemarkMenuItem.BackgroundImage")));
             this.RemarkMenuItem.Enabled = false;
             this.RemarkMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RemarkMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
@@ -104,7 +91,6 @@ namespace Citta_T1.Controls.Move.Op
             // 
             // RunMenuItem
             // 
-            this.RunMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("RunMenuItem.BackgroundImage")));
             this.RunMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.RunMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.RunMenuItem.Name = "RunMenuItem";
@@ -115,7 +101,6 @@ namespace Citta_T1.Controls.Move.Op
             // 
             // ErrorLogMenuItem
             // 
-            this.ErrorLogMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ErrorLogMenuItem.BackgroundImage")));
             this.ErrorLogMenuItem.Enabled = false;
             this.ErrorLogMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.ErrorLogMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
@@ -125,7 +110,6 @@ namespace Citta_T1.Controls.Move.Op
             // 
             // DeleteMenuItem
             // 
-            this.DeleteMenuItem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DeleteMenuItem.BackgroundImage")));
             this.DeleteMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.DeleteMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
             this.DeleteMenuItem.Name = "DeleteMenuItem";
@@ -175,7 +159,6 @@ namespace Citta_T1.Controls.Move.Op
 
         #endregion
         private System.Windows.Forms.ToolStripMenuItem OptionMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RemarkMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ErrorLogMenuItem;
