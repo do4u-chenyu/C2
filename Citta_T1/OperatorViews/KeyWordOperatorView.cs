@@ -36,7 +36,7 @@ namespace Citta_T1.OperatorViews
         #region 加载连接数据
         private void InitOptionInfo()
         {
-            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID, false);
+            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID);
             if (AccessOptionCheck(dataInfoDic.Keys.ToList()))
                 return;
             

@@ -226,11 +226,10 @@ namespace Citta_T1.Business.Option
         }
 
         //配置初始化，获取数据源表头信息
-        public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
+        public Dictionary<string, string> GetDataSourceInfo(int ID)
         {
 
             Dictionary<string, string> dataInfo = new Dictionary<string, string>();
-            Dictionary<int, int> startControls = new Dictionary<int, int>();
             List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
             foreach (ModelRelation mr in relations)
             {
