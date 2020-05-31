@@ -16,27 +16,27 @@ namespace Citta_T1.Controls.Move
         public ElementType Type { get; set; }
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
-        public DSUtil.Encoding Encoding { get; set; }
+        public OpUtil.Encoding Encoding { get; set; }
         public char Separator { get; set ; }
         public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
-        public DSUtil.ExtType ExtType
+        public OpUtil.ExtType ExtType
         {
             get
             {
                 if (String.IsNullOrWhiteSpace(FullFilePath))
-                    return DSUtil.ExtType.Unknow;
+                    return OpUtil.ExtType.Unknow;
                 if (FullFilePath.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
+                    return OpUtil.ExtType.Excel;
                 if (FullFilePath.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
+                    return OpUtil.ExtType.Excel;
                 if (FullFilePath.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
+                    return OpUtil.ExtType.Text;
                 if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
+                    return OpUtil.ExtType.Text;
                 if (FullFilePath.EndsWith(".cvs", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                return DSUtil.ExtType.Unknow;
+                    return OpUtil.ExtType.Text;
+                return OpUtil.ExtType.Unknow;
             }
         }
 
@@ -50,6 +50,13 @@ namespace Citta_T1.Controls.Move
             InitializeComponent();
         }
 
-        
+        // 单元素拖拽
+        public virtual void ChangeLoc(float dx, float dy)
+        {
+            int left = this.Left + Convert.ToInt32(dx);
+            int top = this.Top + Convert.ToInt32(dy);
+            this.Location = new Point(left, top);
+        }
+
     }
 }

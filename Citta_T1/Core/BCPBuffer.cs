@@ -49,27 +49,27 @@ namespace Citta_T1.Core
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
-        public string GetCachePreViewBcpContent(string fullFilePath, DSUtil.Encoding encoding, bool isForceRead = false)
+        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, DSUtil.ExtType.Text, encoding, isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
         }
 
         public string GetCachePreViewExcelContent(string fullFilePath, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, DSUtil.ExtType.Excel, DSUtil.Encoding.NoNeed, isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
 
-        private string GetCachePreViewFileContent(string fullFilePath, DSUtil.ExtType type, DSUtil.Encoding encoding, bool isForceRead = false)
+        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
             // 数据不存在 或 需要强制读取时 按照路径重新读取
             if (!HitCache(fullFilePath) || isForceRead)
                 switch (type)
                 {
-                    case DSUtil.ExtType.Excel:
+                    case OpUtil.ExtType.Excel:
                         PreLoadExcelFile(fullFilePath);
                         break;
-                    case DSUtil.ExtType.Text:
+                    case OpUtil.ExtType.Text:
                         PreLoadBcpFile(fullFilePath, encoding);
                         break;
                     default:
@@ -80,7 +80,7 @@ namespace Citta_T1.Core
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
             return ret;
         }
-        public string GetCacheColumnLine(string fullFilePath, DSUtil.Encoding encoding, bool isForceRead = false)
+        public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
 
             string ret = String.Empty;
@@ -101,7 +101,7 @@ namespace Citta_T1.Core
         }
 
 
-        public void TryLoadFile(string fullFilePath, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
@@ -109,13 +109,13 @@ namespace Citta_T1.Core
 
             switch(extType)
             {
-                case DSUtil.ExtType.Excel:
+                case OpUtil.ExtType.Excel:
                     PreLoadExcelFile(fullFilePath);
                     break;
-                case DSUtil.ExtType.Text:
+                case OpUtil.ExtType.Text:
                     PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
                     break;
-                case DSUtil.ExtType.Unknow:
+                case OpUtil.ExtType.Unknow:
                 default:
                     break;
             }                
@@ -204,12 +204,12 @@ namespace Citta_T1.Core
         /*
          * 按行读取文件，不分割
          */
-        private void PreLoadBcpFile(string fullFilePath, DSUtil.Encoding encoding)
+        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
             StreamReader sr = null;
             try
             {
-                if (encoding == DSUtil.Encoding.UTF8)
+                if (encoding == OpUtil.Encoding.UTF8)
                     sr = File.OpenText(fullFilePath);
                 else
                 {

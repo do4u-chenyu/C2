@@ -21,7 +21,7 @@ namespace Citta_T1.Controls.Move.Op
     public delegate void ModelDocumentDirtyEventHandler();
   
 
-    public partial class MoveOpControl : MoveBaseControl, IScalable, IDragable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
         public event ModelDocumentDirtyEventHandler ModelDocumentDirtyEvent;
@@ -29,7 +29,6 @@ namespace Citta_T1.Controls.Move.Op
         private ControlMoveWrapper controlMoveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
-        private string opControlName;
         private Point mouseOffset;
 
         private bool doublelPinFlag = false;
@@ -77,7 +76,7 @@ namespace Citta_T1.Controls.Move.Op
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
 
-        public ECommandType cmd = ECommandType.Null;
+        private ECommandType cmd = ECommandType.Null;
 
         // 绘制引脚
 
@@ -114,8 +113,8 @@ namespace Citta_T1.Controls.Move.Op
             Description = description;
             Location = loc;
             FullFilePath = String.Empty;
-            Encoding = DSUtil.Encoding.NoNeed;
-            Separator = DSUtil.DefaultSeparator;
+            Encoding = OpUtil.Encoding.NoNeed;
+            Separator = OpUtil.DefaultSeparator;
             //Status = ElementStatus.Null;
 
 
@@ -305,7 +304,7 @@ namespace Citta_T1.Controls.Move.Op
         public Point WorldBoundControl(Point Pm)
         {
 
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,true);
+            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm,true);
             
 
             if (Pw.X < 20)
@@ -420,7 +419,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -433,10 +432,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
@@ -459,21 +458,21 @@ namespace Citta_T1.Controls.Move.Op
         }
         public void SetOpControlName(string name)
         {
-            this.opControlName = name;
+            this.Description = name;
             int maxLength = 24;
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -755,13 +754,12 @@ namespace Citta_T1.Controls.Move.Op
 
         public string UndoRedoChangeTextName(string des)
         {
-            string ret = this.opControlName;
-            this.oldTextString = this.textBox.Text;
-            this.textBox.Text = des;
-            SetOpControlName(des);
+            oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-            return ret;
+            return oldTextString;
         }
         #endregion
 
@@ -912,19 +910,6 @@ namespace Citta_T1.Controls.Move.Op
         }
         #endregion
 
-        #region 拖动实现
-
-        public void ChangeLoc(float dx, float dy)
-        {
-
-            int left = this.Left + Convert.ToInt32(dx);
-            int top = this.Top + Convert.ToInt32(dy);
-            this.Location = new Point(left, top);
-        }
-
-
-        #endregion
-
         #region IMoveControl 接口实现方法
         public void UpdateLineWhenMoving()
         {
@@ -972,7 +957,7 @@ namespace Citta_T1.Controls.Move.Op
             Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap.GetWmInfo().SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(
@@ -1012,10 +997,6 @@ namespace Citta_T1.Controls.Move.Op
             return revisedP;
         }
 
-        public int GetID()
-        {
-            return this.ID;
-        }
         public PointF GetEndPinLoc(int pinIndex)
         {
             switch (pinIndex)

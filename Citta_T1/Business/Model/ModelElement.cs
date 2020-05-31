@@ -1,4 +1,5 @@
-﻿using Citta_T1.Controls.Move;
+﻿using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
@@ -52,7 +53,6 @@ namespace Citta_T1.Business.Model
     public class ModelElement
     {
         private MoveBaseControl ctl;
-
         public ElementType Type { get; set; }
         public MoveBaseControl InnerControl { get => ctl; }
 
@@ -74,9 +74,9 @@ namespace Citta_T1.Business.Model
         }
         public Point Location { get => ctl.Location; }
         public int ID { get => ctl.ID; }
-        public DSUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
+        public OpUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
   
-        public DSUtil.ExtType ExtType { get => ctl.ExtType; }
+        public OpUtil.ExtType ExtType { get => ctl.ExtType; }
 
         public char Separator { get => ctl.Separator; set => ctl.Separator = value; }
 

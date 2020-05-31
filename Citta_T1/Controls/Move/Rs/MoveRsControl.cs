@@ -16,9 +16,8 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
 {
-    public partial class MoveRsControl : MoveBaseControl, IScalable, IDragable, IMoveControl
+    public partial class MoveRsControl : MoveBaseControl, IScalable, IMoveControl
     {
-        private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
 
@@ -34,9 +33,9 @@ namespace Citta_T1.Controls.Move.Rs
         private int startX;
         private int startY;
         private Point oldControlPosition;
+
         private ECommandType cmd = ECommandType.Null;
 
-        List<int> startLineIndexs = new List<int>() { };
         List<int> endLineIndexs = new List<int>() { };
 
         //绘制引脚
@@ -78,8 +77,8 @@ namespace Citta_T1.Controls.Move.Rs
             Description = desciption;
             Location = loc;
             FullFilePath = String.Empty;
-            Encoding = DSUtil.Encoding.GBK;
-            Separator = DSUtil.DefaultSeparator;
+            Encoding = OpUtil.Encoding.GBK;
+            Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
             SetOpControlName(Description);
@@ -243,24 +242,21 @@ namespace Citta_T1.Controls.Move.Rs
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }
-                
-
-
         }
 
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
@@ -284,21 +280,21 @@ namespace Citta_T1.Controls.Move.Rs
         }
         public void SetOpControlName(string name)
         {
-            this.opControlName = name;
+            this.Description = name;
             int maxLength = 24;
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -430,13 +426,12 @@ namespace Citta_T1.Controls.Move.Rs
 
         public string UndoRedoChangeTextName(string des)
         {
-            string ret = this.opControlName;
-            this.oldTextString = this.textBox.Text;
-            this.textBox.Text = des;
-            SetOpControlName(des);
+            oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-            return ret;
+            return oldTextString;
         }
         #endregion
 
@@ -550,16 +545,6 @@ namespace Citta_T1.Controls.Move.Rs
         }
         #endregion
 
-        #region 拖动实现
-
-        public void ChangeLoc(float dx, float dy)
-        {
-            int left = this.Left + Convert.ToInt32(dx);
-            int top = this.Top + Convert.ToInt32(dy);
-            this.Location = new Point(left, top);
-        }
-        #endregion
-
         #region 状态改变
         private void StatusDirty()
         {
@@ -612,11 +597,6 @@ namespace Citta_T1.Controls.Move.Rs
         public PointF RevisePointLoc(PointF p)
         {
             return p;
-        }
-
-        public int GetID()
-        {
-            return this.ID;
         }
 
         public PointF GetStartPinLoc(int pinIndex)

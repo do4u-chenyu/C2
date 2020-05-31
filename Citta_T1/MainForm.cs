@@ -33,7 +33,6 @@ namespace Citta_T1
         private OptionDao optionDao;
         public string UserName { get => this.userName; set => this.userName = value; }
 
-        public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
         delegate void AsynUpdateProgressBar();
@@ -53,7 +52,6 @@ namespace Citta_T1
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
-           
             
             InitializeGlobalVariable();
             InitializeControlsLocation();
@@ -82,21 +80,17 @@ namespace Citta_T1
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             Global.SetTopToolBarControl(this.topToolBarControl);
-            
-
         }
 
         private void RemarkChange(RemarkControl rc)
         {
             SetDocumentDirty();
             this.modelDocumentDao.UpdateRemark(rc);
-            
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
-            
+            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);   
         }
         public void SetDocumentDirty()
         {
@@ -111,24 +105,17 @@ namespace Citta_T1
         {
             UndoRedoManager.GetInstance().Remove(modelDocumentDao.CurrentDocument);
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
-            foreach (ModelElement me in modelElements)
-            {
-                this.canvasPanel.Controls.Remove(me.InnerControl);
-            }
+            modelElements.ForEach(me => canvasPanel.Controls.Remove(me.InnerControl));
             this.naviViewControl.UpdateNaviView();
-  
         }
 
         private void NewDocumentOperator(MoveBaseControl ct)
         {          
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
-            if (me == ModelElement.Empty)
-                return;
             ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
-                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
-            
+                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd); 
         }
 
         public void SaveCurrentDocument()
@@ -192,11 +179,9 @@ namespace Citta_T1
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
-
         }
-        private void LoadDocuments(string userName)
+        private void LoadDocuments()
         {
-
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("我的新模型");
@@ -228,16 +213,11 @@ namespace Citta_T1
         }
         private void CanvasAddElement(ModelDocument doc)
         {
-            foreach (ModelElement me in doc.ModelElements)
-            {
-                Control ct = me.InnerControl;
-                if (ct is RemarkControl)
-                    continue;
-                this.canvasPanel.Controls.Add(ct);
-                this.naviViewControl.UpdateNaviView();
-            }
+            doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
+            this.naviViewControl.UpdateNaviView();
             doc.UpdateAllLines();
         }
+
         private void InitializeControlsLocation()
         {
             log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
@@ -460,7 +440,7 @@ namespace Citta_T1
                 this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
         }
 
-        private void InputDataFormEvent(string name, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             this.dataSourceControl.GenDataButton(name, fullFilePath, separator, extType, encoding);
             this.dataSourceControl.Visible = true;
@@ -468,7 +448,7 @@ namespace Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByFullFilePath(string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding, bool isForceRead = false)
+        public void PreViewDataByFullFilePath(string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             this.ShowBottomPanel(); 
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
@@ -478,14 +458,14 @@ namespace Citta_T1
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源
-            LoadDocuments(this.userName);
-            LoadDataSource(this.userName);
+            LoadDocuments();
+            LoadDataSource();
             InitializeMainFormEventHandler();
 
         }
-        private void LoadDataSource(string userName)
+        private void LoadDataSource()
         {
-            DataSourceInfo dataSource = new DataSourceInfo(userName);
+            DataSourceInfo dataSource = new DataSourceInfo(this.userName);
             List<DataButton> dataButtons = dataSource.LoadDataSourceInfo();
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);
@@ -544,7 +524,7 @@ namespace Citta_T1
                 }
                 currentManager.Start();
                 int taskNum = currentManager.TripleList.CountOpStatus(ElementStatus.Ready);
-                this.progressBar1.Step = taskNum > 0 ? 100/taskNum : 100;
+                this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
 
                 this.progressBar1.Value = 0;
                 this.progressBarLabel.Text = "0%";
@@ -617,17 +597,10 @@ namespace Citta_T1
         //更新log
         private void UpdateLogStatus(string logContent)
         {
-            if (InvokeRequired)
+            this.Invoke(new AsynUpdateLog(delegate (string tlog)
             {
-                this.Invoke(new AsynUpdateLog(delegate (string tlog)
-                {
-                    log.Info(tlog);
-                }), logContent);
-            }
-            else
-            {
-                log.Info(logContent);
-            }
+                log.Info(tlog);
+            }), logContent);
         }
 
 
@@ -660,21 +633,16 @@ namespace Citta_T1
                 doneModel.Save();
             }
 
-
             if (doneModel == Global.GetCurrentDocument())
             {
                 UpdateRunbuttonImageInfo();
-
             }
         }
-
-
 
         public void UpdateRunbuttonImageInfo()
         {
             TaskManager manager = Global.GetCurrentDocument().TaskManager;
-            ModelStatus modelStatus = manager.ModelStatus;
-            switch (modelStatus)
+            switch (manager.ModelStatus)
             { 
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
@@ -684,7 +652,6 @@ namespace Citta_T1
                     this.currentModelRunLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
-                    //SetCanvasEnable(true);
                     break;
                 //点击运行按钮
                 case ModelStatus.Running:
@@ -696,12 +663,10 @@ namespace Citta_T1
                     this.progressBarLabel.Show();
                     this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
-                    //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                    //SetCanvasEnable(true);
                     break;
                 default:
                     this.runButton.Name = "runButton";
@@ -711,50 +676,35 @@ namespace Citta_T1
                     this.currentModelFinLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
-                    //SetCanvasEnable(true);
                     break;
             }
         }
         private void ShowLeftFold()
         {
-            if (this.isLeftViewPanelMinimum == true)
+            if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
-
-            }
-            InitializeControlsLocation();
-            if (this.leftToolBoxPanel.Width == 187)
-            {
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
-            if (this.leftToolBoxPanel.Width == 10)
-            {
-                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-            }
+            InitializeControlsLocation();
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
-            if (this.isLeftViewPanelMinimum == true)
+            if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
-
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
             else
             {
                 this.isLeftViewPanelMinimum = true;
                 this.leftToolBoxPanel.Width = 10;
-            }
-            InitializeControlsLocation();
-            if (this.leftToolBoxPanel.Width == 187)
-            {
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            }
-            if (this.leftToolBoxPanel.Width == 10)
-            {
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             }
+
+            InitializeControlsLocation();
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)

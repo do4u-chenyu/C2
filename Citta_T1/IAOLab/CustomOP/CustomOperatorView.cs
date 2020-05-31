@@ -98,7 +98,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EnType(encoding), separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
             this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
             return bcpInfo.ColumnArray;
         }
@@ -269,8 +269,8 @@ namespace Citta_T1.OperatorViews
             //修改结果算子内容
             (hasResultNew.InnerControl as MoveRsControl).Description = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
             (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
-            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
-            (hasResultNew.InnerControl as MoveRsControl).Separator = '\t';
+            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
+            (hasResultNew.InnerControl as MoveRsControl).Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if (separator == "commaradio")
             {

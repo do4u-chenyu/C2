@@ -11,7 +11,7 @@ namespace Citta_T1.Business.Option
         private string fileName;     //BCP文件名
         private string name;         //对应的数据源名称
         private ElementType type;    //对应的类型:数据源 或 Result
-        private DSUtil.Encoding encoding;     //BCP文件对应的编码
+        private OpUtil.Encoding encoding;     //BCP文件对应的编码
         private char[] separator;             //BCP文件对应的分隔符
         private string columnLine;
         private string[] columnArray;
@@ -23,18 +23,18 @@ namespace Citta_T1.Business.Option
             InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding, new char[] { me.Separator }); 
         }
 
-        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char separator)
+        public BcpInfo(string fullBcpPath, string name, ElementType type, OpUtil.Encoding encoding, char separator)
         {
             InitBcpInfo(fullBcpPath, name, type, encoding, new char[] { separator });
         }
 
-        public BcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char[] separator)
+        public BcpInfo(string fullBcpPath, string name, ElementType type, OpUtil.Encoding encoding, char[] separator)
         {
             InitBcpInfo(fullBcpPath, name, type, encoding, separator);
         }
 
 
-        private void InitBcpInfo(string fullBcpPath, string name, ElementType type, DSUtil.Encoding encoding, char[] separator)
+        private void InitBcpInfo(string fullBcpPath, string name, ElementType type, OpUtil.Encoding encoding, char[] separator)
         {
             this.fullFilePath = fullBcpPath;
             fileName = System.IO.Path.GetFileName(this.fullFilePath);
