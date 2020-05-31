@@ -28,9 +28,8 @@ namespace Citta_T1.Business.Model
         {
             ModelDocuments = new List<ModelDocument>();         
         }
-        public void AddBlankDocument(string modelTitle,  string userName)
+        public void AddBlankDocument(string modelTitle, string userName)
         {
-            
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
             ModelDocuments.ForEach(md => md.Hide());
             ModelDocuments.Add(modelDocument);

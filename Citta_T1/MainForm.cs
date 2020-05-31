@@ -33,7 +33,6 @@ namespace Citta_T1
         private OptionDao optionDao;
         public string UserName { get => this.userName; set => this.userName = value; }
 
-        public bool IsBottomViewPanelMinimum { get => isBottomViewPanelMinimum; set => isBottomViewPanelMinimum = value; }
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
         delegate void AsynUpdateProgressBar();
@@ -53,7 +52,6 @@ namespace Citta_T1
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
-           
             
             InitializeGlobalVariable();
             InitializeControlsLocation();
@@ -82,21 +80,17 @@ namespace Citta_T1
             Global.SetDataSourceControl(this.dataSourceControl);
             Global.SetBottomPythonConsoleControl(this.bottomPyConsole);
             Global.SetTopToolBarControl(this.topToolBarControl);
-            
-
         }
 
         private void RemarkChange(RemarkControl rc)
         {
             SetDocumentDirty();
             this.modelDocumentDao.UpdateRemark(rc);
-            
         }
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
-            
+            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);   
         }
         public void SetDocumentDirty()
         {
@@ -185,11 +179,9 @@ namespace Citta_T1
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
             this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
             this.remarkControl.RemarkChangeEvent += RemarkChange;
-
         }
         private void LoadDocuments()
         {
-
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
             {
                 this.modelTitlePanel.AddModel("我的新模型");
@@ -221,16 +213,11 @@ namespace Citta_T1
         }
         private void CanvasAddElement(ModelDocument doc)
         {
-            foreach (ModelElement me in doc.ModelElements)
-            {
-                Control ct = me.InnerControl;
-                if (ct is RemarkControl)
-                    continue;
-                this.canvasPanel.Controls.Add(ct);
-                this.naviViewControl.UpdateNaviView();
-            }
+            doc.ModelElements.ForEach(me => this.canvasPanel.Controls.Add(me.InnerControl));
+            this.naviViewControl.UpdateNaviView();
             doc.UpdateAllLines();
         }
+
         private void InitializeControlsLocation()
         {
             log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
@@ -655,8 +642,7 @@ namespace Citta_T1
         public void UpdateRunbuttonImageInfo()
         {
             TaskManager manager = Global.GetCurrentDocument().TaskManager;
-            ModelStatus modelStatus = manager.ModelStatus;
-            switch (modelStatus)
+            switch (manager.ModelStatus)
             { 
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
