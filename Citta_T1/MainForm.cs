@@ -537,7 +537,7 @@ namespace Citta_T1
                 }
                 currentManager.Start();
                 int taskNum = currentManager.TripleList.CountOpStatus(ElementStatus.Ready);
-                this.progressBar1.Step = taskNum > 0 ? 100/taskNum : 100;
+                this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
 
                 this.progressBar1.Value = 0;
                 this.progressBarLabel.Text = "0%";
@@ -610,17 +610,10 @@ namespace Citta_T1
         //更新log
         private void UpdateLogStatus(string logContent)
         {
-            if (InvokeRequired)
+            this.Invoke(new AsynUpdateLog(delegate (string tlog)
             {
-                this.Invoke(new AsynUpdateLog(delegate (string tlog)
-                {
-                    log.Info(tlog);
-                }), logContent);
-            }
-            else
-            {
-                log.Info(logContent);
-            }
+                log.Info(tlog);
+            }), logContent);
         }
 
 
@@ -653,15 +646,11 @@ namespace Citta_T1
                 doneModel.Save();
             }
 
-
             if (doneModel == Global.GetCurrentDocument())
             {
                 UpdateRunbuttonImageInfo();
-
             }
         }
-
-
 
         public void UpdateRunbuttonImageInfo()
         {
@@ -677,7 +666,6 @@ namespace Citta_T1
                     this.currentModelRunLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
-                    //SetCanvasEnable(true);
                     break;
                 //点击运行按钮
                 case ModelStatus.Running:
@@ -689,12 +677,10 @@ namespace Citta_T1
                     this.progressBarLabel.Show();
                     this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
-                    //SetCanvasEnable(false);
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
-                    //SetCanvasEnable(true);
                     break;
                 default:
                     this.runButton.Name = "runButton";
@@ -704,50 +690,35 @@ namespace Citta_T1
                     this.currentModelFinLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
-                    //SetCanvasEnable(true);
                     break;
             }
         }
         private void ShowLeftFold()
         {
-            if (this.isLeftViewPanelMinimum == true)
+            if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
-
-            }
-            InitializeControlsLocation();
-            if (this.leftToolBoxPanel.Width == 187)
-            {
                 this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
-            if (this.leftToolBoxPanel.Width == 10)
-            {
-                this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
-            }
+            InitializeControlsLocation();
         }
         private void LeftFoldButton_Click(object sender, EventArgs e)
         {
-            if (this.isLeftViewPanelMinimum == true)
+            if (this.isLeftViewPanelMinimum)
             {
                 this.isLeftViewPanelMinimum = false;
                 this.leftToolBoxPanel.Width = 187;
-
+                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             }
             else
             {
                 this.isLeftViewPanelMinimum = true;
                 this.leftToolBoxPanel.Width = 10;
-            }
-            InitializeControlsLocation();
-            if (this.leftToolBoxPanel.Width == 187)
-            {
-                this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            }
-            if (this.leftToolBoxPanel.Width == 10)
-            {
                 this.toolTip1.SetToolTip(this.leftFoldButton, "展开左侧面板");
             }
+
+            InitializeControlsLocation();
         }
 
         private void HelpPictureBox_Click(object sender, EventArgs e)
