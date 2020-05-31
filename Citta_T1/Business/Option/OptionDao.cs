@@ -144,32 +144,19 @@ namespace Citta_T1.Business.Option
             string optionValues = moc.Option.GetOption(name);
             if (string.IsNullOrEmpty(optionValues) )
                 return !clear;          
-            int maxIndex = columns.Length - 1;
+            
             //复选框配置的判断
-
+            int index;
+            int maxIndex = columns.Length - 1;
             if (name.Contains("outfield"))
+                index = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse).Max();
+            else//单选框配置的判断
+                index = selectIndex != -1 ? selectIndex : Convert.ToInt32(optionValues);
+
+            if (index > maxIndex)
             {
-                int[] indexs = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse);
-                int index = indexs.Max();
-                if (index > maxIndex)
-                {
-                    moc.Option.OptionDict[name] = "";
-                    clear = true;
-                }
-            }
-            else
-            {
-                //单选框配置的判断
-                int index;
-                if (selectIndex != -1)
-                    index = selectIndex;
-                else
-                    index = Convert.ToInt32(optionValues);
-                if (index > maxIndex)
-                {
-                    moc.Option.OptionDict[name] = "";
-                    clear = true;
-                }      
+                moc.Option.OptionDict[name] = "";
+                clear = true;
             }
             return clear;
         }
@@ -206,22 +193,23 @@ namespace Citta_T1.Business.Option
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引
-        public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)
+        public void UpdateOutputCheckIndexs(List<int> nowIndexs, List<int> oldIndexs)
         {
-            foreach (int index in checkIndexs)
+            foreach (int index in oldIndexs)
             {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
+                if (!nowIndexs.Contains(index))
                 {
-                    outIndexs.Clear();
-                    outIndexs.AddRange(checkIndexs);
-                    break;
+                    oldIndexs.Clear();
+                    oldIndexs.AddRange(nowIndexs);
+                    return;
                 }
             }
+            foreach (int index in nowIndexs)
+            {
+                if (!oldIndexs.Contains(index))
+                    oldIndexs.Add(index);
+            }
+            
 
         }
 
