@@ -37,7 +37,6 @@ namespace Citta_T1.Controls.Move.Dt
         private Size normalStatus = new Size(53, 28);
 
         #region 继承属性
-        private string opControlName;
         private Point mouseOffset;
         // 一些倍率
         // 画布上的缩放倍率
@@ -128,13 +127,12 @@ namespace Citta_T1.Controls.Move.Dt
 
         public string UndoRedoChangeTextName(string des)
         {
-            string ret = this.opControlName;
-            this.oldTextString = this.textBox.Text;
-            this.textBox.Text = des;
-            SetOpControlName(des);
+            this.oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-            return ret;
+            return oldTextString;
         }
 
         public void RightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -435,21 +433,21 @@ namespace Citta_T1.Controls.Move.Dt
         }
         private void SetOpControlName(string name)
         {
-            this.opControlName = name;
+            this.Description = name;
             int maxLength = 24;
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = CountTextWidth(sumCount, sumCountDigit);
-            this.txtButton.Text = this.opControlName;
-            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
+            this.txtButton.Text = name;
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)

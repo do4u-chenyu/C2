@@ -18,7 +18,6 @@ namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : MoveBaseControl, IScalable, IMoveControl
     {
-        private string opControlName;
         private bool isMouseDown = false;
         private Point mouseOffset;
 
@@ -282,21 +281,21 @@ namespace Citta_T1.Controls.Move.Rs
         }
         public void SetOpControlName(string name)
         {
-            this.opControlName = name;
+            this.Description = name;
             int maxLength = 24;
             name = SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
             int txtWidth = CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.opControlName).Length > maxLength)
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
                 txtWidth += 10;
                 this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.opControlName);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
         }
 
         private void ResizeControl(int txtWidth, Size controlSize)
@@ -428,13 +427,12 @@ namespace Citta_T1.Controls.Move.Rs
 
         public string UndoRedoChangeTextName(string des)
         {
-            string ret = this.opControlName;
-            this.oldTextString = this.textBox.Text;
-            this.textBox.Text = des;
-            SetOpControlName(des);
+            oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
-            return ret;
+            return oldTextString;
         }
         #endregion
 
