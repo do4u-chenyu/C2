@@ -27,28 +27,21 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         public Bitmap staticImage;
-        public Bitmap staticImage2;
-
 
         //屏幕拖动涉及的变量
         private float screenFactor = 1;
         private DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
 
-        Graphics g;
-
-
-        // 绘图
-        // 绘图
-        public List<Bezier> lines = new List<Bezier>() { };
-        
-        public ECommandType cmd = ECommandType.Null;
-        public PointF startP;
-        public PointF endP;
-        private Control startC;
-        private Control endC;
-        Rectangle invalidateRectWhenMoving;
-        Bezier lineWhenMoving;
+        private Graphics g;
+ 
+        private ECommandType cmd = ECommandType.Null;
+        private PointF startP;
+        private PointF endP;
+        private MoveBaseControl startC;
+        private MoveBaseControl endC;
+        private Rectangle invalidateRectWhenMoving;
+        private Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
 
 
@@ -56,21 +49,13 @@ namespace Citta_T1.Controls
 
         private bool delEnable = false;
         private bool startCopy = false;
-        public void SetStartP(PointF p)
-        {
-            startP = p;
-        }
-
-
-        public Control StartC { get => startC; set => startC = value; }
-        public Control EndC { get => endC;  set => endC = value; }
+        public MoveBaseControl StartC { get => startC; set => startC = value; }
+        public MoveBaseControl EndC { get => endC;  set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
-
-
-
-
+        public PointF StartP { get => startP; set => startP = value; }
+        public PointF EndP { get => endP; set => endP = value; }
 
         public CanvasPanel()
         {
@@ -159,25 +144,19 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            ElementType type = ElementType.Empty;
-            char separator = '\t';
-            string path = "";
-            string text = "";
-            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
-            OpUtil.ExtType extType;
+            ElementType type = (ElementType)e.Data.GetData("Type");
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
             Point moveOffset = WorldBoundControl(location);
             location.X -=  moveOffset.X;
             location.Y -=  moveOffset.Y;
-            type = (ElementType)e.Data.GetData("Type");
-            text = e.Data.GetData("Text").ToString();
+            string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.GetWmInfo().SizeLevel;
             if (type == ElementType.DataSource)
             {
-                path = e.Data.GetData("Path").ToString();
-                separator = (char)e.Data.GetData("Separator");
-                encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
-                extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
+                string path = e.Data.GetData("Path").ToString();
+                char separator = (char)e.Data.GetData("Separator");
+                OpUtil.Encoding encoding = (OpUtil.Encoding)e.Data.GetData("Encoding");
+                OpUtil.ExtType extType = (OpUtil.ExtType)e.Data.GetData("ExtType");
                 AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
@@ -205,11 +184,12 @@ namespace Citta_T1.Controls
                 frameWrapper.MinBoding = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
                 
             }
+
             if (sender is MoveDtControl || sender is MoveRsControl)
             {
                 this.cmd = ECommandType.PinDraw;
-                this.StartC = sender as Control;
-                this.SetStartP(new PointF(e.X, e.Y));
+                this.StartC = sender as MoveBaseControl;
+                this.StartP = new PointF(e.X, e.Y);
                 this.staticImage = new Bitmap(this.Width, this.Height);
                 Graphics g = Graphics.FromImage(this.staticImage);
                 g.Clear(this.BackColor);
@@ -225,13 +205,10 @@ namespace Citta_T1.Controls
                 dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap.GetWmInfo().ScreenFactor, e);
             }
         }
-        private bool IsValidLine(ModelRelation mr)
+        private bool IsValidModelRelation(ModelRelation mr)
         {
             // 合法的线有 Dt-Op Rs-Op
             ModelDocument md = Global.GetCurrentDocument();
-            List<ModelRelation> mrs = md.ModelRelations;
-            List<ModelElement> mes = md.ModelElements;
-
             ModelElement sMe = md.SearchElementByID(mr.StartID);
             ModelElement eMe = md.SearchElementByID(mr.EndID);
 
@@ -253,7 +230,7 @@ namespace Citta_T1.Controls
             else
             {
                 if (mrIndex < mrs.Count && !this.SelectDrag() && !this.SelectFrame())
-                    if (IsValidLine(mrs[mrIndex]))
+                    if (IsValidModelRelation(mrs[mrIndex]))
                         selectLineIndexs.Add(mrIndex);
                     else
                     {
@@ -306,28 +283,24 @@ namespace Citta_T1.Controls
 
         public void DeleteSelectedLines()
         {
-            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            ModelRelation mr;
+            List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations; 
             foreach (int i in selectLineIndexs)
             {
                 try
                 {
-                    mr = mrs[i];
+                    ModelRelation mr = mrs[i];
                     //删除线配置逻辑
                     ModelDocument doc =  Global.GetCurrentDocument();
                     doc.StatusChangeWhenDeleteLine(mr.EndID);
 
                     doc.RemoveModelRelation(mr);
                     //关联算子引脚自适应改变
-                    Control lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
+                    MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
                     this.RepaintStartcPin(lineStartC, mr.StartID);
-                    Control lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
+                    MoveBaseControl lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
                     (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                     //删除线文档dirty
-
-
                     Global.GetMainForm().SetDocumentDirty();
-                   
                 }
                 catch (Exception e)
                 {
@@ -412,8 +385,8 @@ namespace Citta_T1.Controls
                             break;
                     }
                 }
-                endP = nowP;
-                lineWhenMoving = new Bezier(startP, nowP);
+                EndP = nowP;
+                lineWhenMoving = new Bezier(StartP, nowP);
                 // 不应该挡住其他的线
                 CoverPanelByRect(invalidateRectWhenMoving);
                 lineWhenMoving.OnMouseMove(nowP);
@@ -504,7 +477,7 @@ namespace Citta_T1.Controls
             if (CanNotPinDraw())
             {
                 this.RepaintAllRelations();
-                this.RepaintStartcPin(startC, (startC as IMoveControl).GetID());
+                this.RepaintStartcPin(StartC, StartC.ID);
                 return;
             }
 
@@ -520,9 +493,9 @@ namespace Citta_T1.Controls
                 */
             (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
             ModelRelation mr = new ModelRelation(
-                (startC as IMoveControl).GetID(),
-                (endC as IMoveControl).GetID(),
-                startP,
+                StartC.ID,
+                EndC.ID,
+                StartP,
                 (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
                 (endC as MoveOpControl).RevisedPinIndex
                 );
@@ -664,7 +637,7 @@ namespace Citta_T1.Controls
         
         #region 关于引脚在画线状态的改变
         
-        private void RepaintStartcPin(Control startC,int id)
+        private void RepaintStartcPin(MoveBaseControl startC, int id)
         {
             //int id = (startC as IMoveControl).GetID();
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)

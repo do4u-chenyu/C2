@@ -1012,10 +1012,6 @@ namespace Citta_T1.Controls.Move.Op
             return revisedP;
         }
 
-        public int GetID()
-        {
-            return this.ID;
-        }
         public PointF GetEndPinLoc(int pinIndex)
         {
             switch (pinIndex)

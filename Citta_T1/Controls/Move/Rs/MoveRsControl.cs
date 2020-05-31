@@ -614,11 +614,6 @@ namespace Citta_T1.Controls.Move.Rs
             return p;
         }
 
-        public int GetID()
-        {
-            return this.ID;
-        }
-
         public PointF GetStartPinLoc(int pinIndex)
         {
             return new PointF(
