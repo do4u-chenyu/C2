@@ -84,5 +84,14 @@ namespace Citta_T1.Utils
             length = Math.Min(bytes.Length, length);
             return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
         }
+
+        public static int CountTextWidth(int chineseRatio, int otherRatio)
+        {
+            int padding = 3;
+            int addValue = 10;
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+                addValue -= 10;
+            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
+        }
     }
 }

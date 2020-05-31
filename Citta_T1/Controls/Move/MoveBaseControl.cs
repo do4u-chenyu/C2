@@ -66,6 +66,5 @@ namespace Citta_T1.Controls.Move
             this.textBox.Focus();//获取焦点
             this.textBox.Select(this.textBox.TextLength, 0);
         }
-
     }
 }
