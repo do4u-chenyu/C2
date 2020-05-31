@@ -137,14 +137,14 @@ namespace Citta_T1.Business.Option
             return ElementStatus.Ready;
         }
        
-        public bool IsClearOption(MoveOpControl moc, string[] columns,string name, int selectIndex = -1)
+        public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
         {
             //不存在旧数据源，直接返回
             bool clear = false;
             string optionValues = moc.Option.GetOption(name);
-            if (optionValues == "")
+            if (string.IsNullOrEmpty(optionValues) )
                 return !clear;          
-            int maxIndex= columns.Length - 1;
+            int maxIndex = columns.Length - 1;
             //复选框配置的判断
 
             if (name.Contains("outfield"))

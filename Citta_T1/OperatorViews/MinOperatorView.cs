@@ -108,13 +108,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "minfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "minfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
                 this.minValueBox.Text = this.minValueBox.Items[index].ToString();
                 this.minValueBox.Tag = index.ToString();
             }
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');

@@ -174,7 +174,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
            
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "sortfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();

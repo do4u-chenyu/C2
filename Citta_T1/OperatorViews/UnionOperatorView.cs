@@ -182,8 +182,8 @@ namespace Citta_T1.OperatorViews
             {
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
-                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, "factor1", Nums[0]);
-                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, "factor1", Nums[1]);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
@@ -209,8 +209,8 @@ namespace Citta_T1.OperatorViews
 
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
-                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, name, Nums[0]);
-                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, name, Nums[1]);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[0]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[1]);
                 if (case0 || case1) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];

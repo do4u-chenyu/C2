@@ -231,7 +231,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -247,7 +247,7 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor1.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
                 int index = Nums[0] ;
-                if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "factor1", index))
+                if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "factor1", index))
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
@@ -272,7 +272,7 @@ namespace Citta_T1.OperatorViews
                 string[] factorList = factor.Split(',');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length-1).ToArray(), int.Parse);
                 int index =  Nums[1];
-                if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, name, index)) continue;
+                if (Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, name, index)) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];          
                 control1.Text =(control1 as ComboBox).Items[Nums[0]].ToString();

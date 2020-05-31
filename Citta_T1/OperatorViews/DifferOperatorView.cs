@@ -128,7 +128,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -143,8 +143,8 @@ namespace Citta_T1.OperatorViews
             {
 
                 int[] Nums = Array.ConvertAll<string, int>(factor1.Split(','), int.Parse);
-                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, "factor1", Nums[0]);
-                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, "factor1", Nums[1]);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
@@ -169,8 +169,8 @@ namespace Citta_T1.OperatorViews
                 if (factor == "") continue;
 
                 int[] Nums = Array.ConvertAll<string, int>(factor.Split(','), int.Parse);
-                bool case0 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName0, name, Nums[1]);
-                bool case1 = Global.GetOptionDao().IsClearOption(this.opControl, this.columnName1, name, Nums[2]);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[1]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[2]);
                 if (case0 || case1) continue;
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];

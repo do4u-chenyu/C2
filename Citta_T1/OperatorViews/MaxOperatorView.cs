@@ -117,13 +117,13 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
             int maxIndex = -1;
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "maxfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "maxfield"))
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
                 this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
                 this.maxValueBox.Tag = maxIndex.ToString();
             }
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
 
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');

@@ -135,7 +135,7 @@ namespace Citta_T1.OperatorViews
         {
             if (!string.IsNullOrEmpty( this.opControl.Option.GetOption("randomnum")))
                 this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);

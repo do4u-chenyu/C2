@@ -168,7 +168,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "avgfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "avgfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();

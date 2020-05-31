@@ -132,7 +132,7 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("sortByString") != "")
                 this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
 
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
                 this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
                 foreach (int index in this.oldOutList)
@@ -140,7 +140,7 @@ namespace Citta_T1.OperatorViews
             }
             int count = this.opControl.Option.KeysCount("group");
             string factor1 = this.opControl.Option.GetOption("group1");
-            if (!Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "group1"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "group1"))
             {
                
                 int index = Convert.ToInt32(factor1);
@@ -162,7 +162,7 @@ namespace Citta_T1.OperatorViews
             for (int i = 2; i < (count + 1); i++)
             {
                 string name = "group" + i.ToString();
-                if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, name)) continue;
+                if (Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, name)) continue;
   
                 int index = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];

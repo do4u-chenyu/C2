@@ -184,7 +184,7 @@ namespace Citta_T1.OperatorViews
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));            
-            if (Global.GetOptionDao().IsClearOption(this.opControl, this.columnName, "outfield"))
+            if (Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
