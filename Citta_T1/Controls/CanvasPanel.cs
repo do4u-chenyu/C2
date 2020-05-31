@@ -26,7 +26,7 @@ namespace Citta_T1.Controls
     {
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
-        public Bitmap staticImage;
+        private Bitmap staticImage;
 
         //屏幕拖动涉及的变量
         private float screenFactor = 1;

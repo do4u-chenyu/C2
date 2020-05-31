@@ -235,38 +235,34 @@ namespace Citta_T1.Business.Option
         }
         //配置窗口输出的改变，引起后续子图状态改变逻辑
 
-      
-        public void DoOutputCompare(List<string> oldColumns, List<string> currentcolumns, int ID)  
+
+        //
+        // 情况1：新输出和旧输出字段数目一致，且顺序一致
+        //       后续子图Null状态
+        // 情况2：新输出>旧输出字段数目一致，且顺序一致
+        //       重写连接的结果Xml文件表头
+        // 情况3：其他情况
+        //       后续子图Null状态
+        //
+        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)  
         {
-
-            /*
-            * 情况1：新输出和旧输出字段数目一致，且顺序一致
-            *       后续子图Null状态
-            * 情况2：新输出>旧输出字段数目一致，且顺序一致
-            *       重写连接的结果Xml文件表头
-            * 情况3：其他情况
-            *      后续子图Null状态
-            */
-           
-
             int oldCount = oldColumns.Count;
-            int nowCount = currentcolumns.Count;
-            if (nowCount == oldCount && oldColumns.SequenceEqual(currentcolumns))
+            int nowCount = nowColumns.Count;
+            if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
-            else if (nowCount > oldCount && oldColumns.SequenceEqual(currentcolumns.Take(oldCount)))
+            if (nowCount > oldCount && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
             {
                 string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-                BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns);
+                BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
+                return;
             }    
-            else
-                IsNewOut(currentcolumns, ID);
-
+            IsNewOut(nowColumns, ID);
         }     
 
-        public void IsNewOut( List<string> currentColumns, int ID)
+        public void IsNewOut(List<string> nowColumns, int ID)
         {
             string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
+            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, nowColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引

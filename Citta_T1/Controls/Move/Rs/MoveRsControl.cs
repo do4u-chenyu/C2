@@ -36,7 +36,6 @@ namespace Citta_T1.Controls.Move.Rs
 
         private ECommandType cmd = ECommandType.Null;
 
-        List<int> startLineIndexs = new List<int>() { };
         List<int> endLineIndexs = new List<int>() { };
 
         //绘制引脚

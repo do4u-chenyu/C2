@@ -46,10 +46,6 @@ namespace Citta_T1.Controls.Move.Dt
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
-
-        // 以该控件为起点的所有点
-        private List<int> startLineIndexs = new List<int>() { };
-        // 以该控件为终点的所有点
         #endregion
 
         private ECommandType cmd = ECommandType.Null;
