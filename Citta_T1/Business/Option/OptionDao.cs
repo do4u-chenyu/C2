@@ -137,19 +137,6 @@ namespace Citta_T1.Business.Option
             return ElementStatus.Ready;
         }
        
-
-        //新数据源修改输出
-
-        public bool IsDataSourceNotEqual(string[] columnName, int[] outIndex) 
-        {
-            int maxIndex = outIndex.Max();
-            if (maxIndex > columnName.Length - 1)
-                return false;
-            return true;
-  
-        }
-       //单选框
-       //复选框 字段名、数据源表头
         public bool IsClearOption(MoveOpControl moc, string[] columns,string name, int selectIndex = -1)
         {
             //不存在旧数据源，直接返回
