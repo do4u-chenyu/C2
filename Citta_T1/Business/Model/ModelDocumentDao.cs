@@ -26,24 +26,22 @@ namespace Citta_T1.Business.Model
         private string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
-            modelDocuments = new List<ModelDocument>();         
+            ModelDocuments = new List<ModelDocument>();         
         }
         public void AddBlankDocument(string modelTitle,  string userName)
         {
             
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
-            foreach (ModelDocument md in this.modelDocuments)
-                md.Hide();
-            this.modelDocuments.Add(modelDocument);
-            this.currentDocument = modelDocument;
+            ModelDocuments.ForEach(md => md.Hide());
+            ModelDocuments.Add(modelDocument);
+            CurrentDocument = modelDocument;
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
         public string SaveCurrentDocument()
         {
-
-            this.currentDocument.Save();
-            this.currentDocument.Dirty = false;
-            return this.currentDocument.ModelTitle;
+            CurrentDocument.Save();
+            CurrentDocument.Dirty = false;
+            return CurrentDocument.ModelTitle;
         }
 
         public string[] SaveAllDocuments()
@@ -61,24 +59,23 @@ namespace Citta_T1.Business.Model
             }
             return titles.ToArray();
         }
-        public ModelDocument LoadDocument(string modelTitle,string userName)
+        public ModelDocument LoadDocument(string modelTitle, string userName)
         {
             
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
             md.ReCountDocumentMaxElementID();
-            this.currentDocument = md;
-            this.modelDocuments.Add(md);
+            CurrentDocument = md;
+            ModelDocuments.Add(md);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             return md;
 
         }
         public void SwitchDocument(string modelTitle)
         {
-            this.currentDocument = FindModelDocument(modelTitle);
-            
-            foreach (ModelDocument md in this.modelDocuments)
+            CurrentDocument = FindModelDocument(modelTitle);
+            foreach (ModelDocument md in ModelDocuments)
             {
                 if (md.ModelTitle == modelTitle)
                     md.Show();
@@ -91,7 +88,7 @@ namespace Citta_T1.Business.Model
         {
             ct.ID = this.currentDocument.ElementCount++;
             ModelElement e = ModelElement.CreateModelElement(ct);
-            this.currentDocument.AddModelElement(e);
+            CurrentDocument.AddModelElement(e);
             return e;
         }
 
@@ -106,24 +103,23 @@ namespace Citta_T1.Business.Model
         }
         public List<ModelElement> DeleteCurrentDocument()
         {
-            if (this.currentDocument == null)
+            if (CurrentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements;
-            this.ModelDocuments.Remove(this.currentDocument);
-            return modelElements; 
+            this.ModelDocuments.Remove(CurrentDocument);
+            return CurrentDocument.ModelElements; 
         }
         public void UpdateRemark(RemarkControl remarkControl)
         { 
-            if (this.currentDocument == null)
+            if (this.CurrentDocument == null)
                 return;
-            this.currentDocument.RemarkDescription = remarkControl.RemarkText;
+            this.CurrentDocument.RemarkDescription = remarkControl.RemarkText;
         }
 
         public string GetRemark()
         {
-            string remark = "";
-            if (this.currentDocument != null)
-                remark = this.currentDocument.RemarkDescription;
+            string remark = String.Empty;
+            if (this.CurrentDocument != null)
+                remark = this.CurrentDocument.RemarkDescription;
             return remark;
         }
 

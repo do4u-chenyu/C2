@@ -305,7 +305,7 @@ namespace Citta_T1.Controls.Move.Op
         public Point WorldBoundControl(Point Pm)
         {
 
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(Pm,true);
+            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm,true);
             
 
             if (Pw.X < 20)
@@ -420,7 +420,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -433,10 +433,10 @@ namespace Citta_T1.Controls.Move.Op
         public Point UndoRedoMoveLocation(Point location)
         {
             this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap1.WorldToScreen(location);
+            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap1.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
         }
 
         #endregion
@@ -972,7 +972,7 @@ namespace Citta_T1.Controls.Move.Op
             Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().WorldMap1.GetWmInfo().SizeLevel;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap.GetWmInfo().SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(

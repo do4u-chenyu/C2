@@ -111,24 +111,17 @@ namespace Citta_T1
         {
             UndoRedoManager.GetInstance().Remove(modelDocumentDao.CurrentDocument);
             List<ModelElement> modelElements = modelDocumentDao.DeleteCurrentDocument();
-            foreach (ModelElement me in modelElements)
-            {
-                this.canvasPanel.Controls.Remove(me.InnerControl);
-            }
+            modelElements.ForEach(me => canvasPanel.Controls.Remove(me.InnerControl));
             this.naviViewControl.UpdateNaviView();
-  
         }
 
         private void NewDocumentOperator(MoveBaseControl ct)
         {          
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
-            if (me == ModelElement.Empty)
-                return;
             ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
-                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
-            
+                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd); 
         }
 
         public void SaveCurrentDocument()
@@ -194,7 +187,7 @@ namespace Citta_T1
             this.remarkControl.RemarkChangeEvent += RemarkChange;
 
         }
-        private void LoadDocuments(string userName)
+        private void LoadDocuments()
         {
 
             if (this.modelDocumentDao.WithoutDocumentLogin(this.userName))
@@ -478,14 +471,14 @@ namespace Citta_T1
         private void MainForm_Load(object sender, EventArgs e)
         {
             //加载文件及数据源
-            LoadDocuments(this.userName);
-            LoadDataSource(this.userName);
+            LoadDocuments();
+            LoadDataSource();
             InitializeMainFormEventHandler();
 
         }
-        private void LoadDataSource(string userName)
+        private void LoadDataSource()
         {
-            DataSourceInfo dataSource = new DataSourceInfo(userName);
+            DataSourceInfo dataSource = new DataSourceInfo(this.userName);
             List<DataButton> dataButtons = dataSource.LoadDataSourceInfo();
             foreach (DataButton dataButton in dataButtons)
                 this.dataSourceControl.GenDataButton(dataButton);

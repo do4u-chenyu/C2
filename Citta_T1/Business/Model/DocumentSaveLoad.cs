@@ -28,7 +28,7 @@ namespace Citta_T1.Business.Model
             this.modelPath = model.SavePath;
             this.modelFilePath = Path.Combine(this.modelPath, model.ModelTitle + ".xml");
             this.modelDocument = model;
-            this.screenFactor = model.WorldMap1.GetWmInfo().ScreenFactor;
+            this.screenFactor = model.WorldMap.GetWmInfo().ScreenFactor;
         }
         public void WriteXml()
         {
@@ -43,7 +43,7 @@ namespace Citta_T1.Business.Model
             modelDocumentXml.AppendChild(versionElement);
             // 写坐标原点
             XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
-            mapOriginNode.InnerText = this.modelDocument.WorldMap1.GetWmInfo().MapOrigin.ToString();
+            mapOriginNode.InnerText = this.modelDocument.WorldMap.GetWmInfo().MapOrigin.ToString();
             modelDocumentXml.AppendChild(mapOriginNode);
             // 写算子,数据源，Result
             List<ModelElement> modelElements = this.modelDocument.ModelElements;
@@ -210,7 +210,7 @@ namespace Citta_T1.Business.Model
             try
             {             
                 XmlNode mapOriginNode = rootNode.SelectSingleNode("MapOrigin");
-                this.modelDocument.WorldMap1.GetWmInfo().MapOrigin = ToPointType(mapOriginNode.InnerText);
+                this.modelDocument.WorldMap.GetWmInfo().MapOrigin = ToPointType(mapOriginNode.InnerText);
             }
             catch (Exception e) { log.Error(e.Message); }
 
