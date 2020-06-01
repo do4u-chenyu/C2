@@ -82,7 +82,7 @@ namespace Citta_T1.Business.Model
 
         public string Description { get => ctl.Description; set => ctl.Description = value; }
 
-        public string FullFilePath { get => ctl.FullFilePath; }
+        public string FullFilePath { get => ctl.FullFilePath; set => ctl.FullFilePath = value; }
 
         public ElementStatus Status { get => ctl.Status; set => ctl.Status = value; }
         #endregion
