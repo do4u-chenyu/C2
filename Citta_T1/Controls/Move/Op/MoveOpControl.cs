@@ -925,7 +925,7 @@ namespace Citta_T1.Controls.Move.Op
             Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
-                int sizeLevel = Global.GetCurrentDocument().WorldMap.GetWmInfo().SizeLevel;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(

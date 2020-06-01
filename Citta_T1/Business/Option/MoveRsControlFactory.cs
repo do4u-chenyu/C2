@@ -32,7 +32,7 @@ namespace Citta_T1.Business.Option
             Point location = WorldBoundControl(moc);
             int id = Global.GetCurrentDocument().ElementCount;
             string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");
-            int sizeL = Global.GetCurrentDocument().WorldMap.GetWmInfo().SizeLevel;
+            int sizeL = Global.GetCurrentDocument().WorldMap.SizeLevel;
 
             if (resultFilePath == string.Empty)
                 path = String.Format("L{0}_{1}.bcp", id, createTime);

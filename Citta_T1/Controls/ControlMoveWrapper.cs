@@ -46,8 +46,8 @@ namespace Citta_T1.Controls
             }
             this.StaticImage = this.CreateWorldImage();
             ModelDocument currentDoc = Global.GetCurrentDocument();
-            Point mapOrigin = currentDoc.WorldMap.GetWmInfo().MapOrigin;
-            float factor = currentDoc.WorldMap.GetWmInfo().ScreenFactor;
+            Point mapOrigin = currentDoc.WorldMap.MapOrigin;
+            float factor = currentDoc.WorldMap.ScreenFactor;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * factor);
             Graphics g = Graphics.FromImage(StaticImage);

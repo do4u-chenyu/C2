@@ -89,7 +89,7 @@ namespace Citta_T1.Utils
         {
             int padding = 3;
             int addValue = 10;
-            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))   // chineseRatio = 1 && otherRatio = 0
                 addValue -= 10;
             return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
         }

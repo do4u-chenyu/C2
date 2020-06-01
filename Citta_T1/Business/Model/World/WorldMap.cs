@@ -31,14 +31,11 @@ namespace Citta_T1.Business.Model.World
         private static bool canvasUse = false;
         private WorldMapInfo wmInfo = new WorldMapInfo();
         
-        public WorldMapInfo GetWmInfo()
-        {
-            return wmInfo;
-        }
-        public void SetWmInfo(WorldMapInfo value)
-        {
-            wmInfo = value;
-        }
+        public Point MapOrigin { get => wmInfo.MapOrigin; set => wmInfo.MapOrigin = value; }
+        public float ScreenFactor { get => wmInfo.ScreenFactor; set => wmInfo.ScreenFactor = value; }
+
+        public int SizeLevel { get => wmInfo.SizeLevel; set => wmInfo.SizeLevel = value; }
+
 
         //  Pw = Ps / Factor - Pm
         public Point ScreenToWorld(Point Ps,bool mode)
@@ -46,13 +43,13 @@ namespace Citta_T1.Business.Model.World
             return mode.Equals(canvasUse)
                 ? new Point
                 {
-                    X = Convert.ToInt32(Ps.X - GetWmInfo().MapOrigin.X * GetWmInfo().ScreenFactor),
-                    Y = Convert.ToInt32(Ps.Y - GetWmInfo().MapOrigin.Y * GetWmInfo().ScreenFactor)
+                    X = Convert.ToInt32(Ps.X - MapOrigin.X * ScreenFactor),
+                    Y = Convert.ToInt32(Ps.Y - MapOrigin.Y * ScreenFactor)
                 }
                 :new Point
                 {
-                    X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
-                    Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
+                    X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
+                    Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
                 };
         }
 
@@ -61,8 +58,8 @@ namespace Citta_T1.Business.Model.World
         {
             Point Ps = new Point
             {
-                X = Convert.ToInt32((Pw.X + GetWmInfo().MapOrigin.X) * GetWmInfo().ScreenFactor),
-                Y = Convert.ToInt32((Pw.Y + GetWmInfo().MapOrigin.Y) * GetWmInfo().ScreenFactor)
+                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
+                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
             };
             return Ps;
         }
@@ -71,21 +68,21 @@ namespace Citta_T1.Business.Model.World
             return mode.Equals(canvasUse)
                 ? new PointF
                 {
-                    X = Convert.ToInt32(Ps.X - GetWmInfo().MapOrigin.X * GetWmInfo().ScreenFactor),
-                    Y = Convert.ToInt32(Ps.Y - GetWmInfo().MapOrigin.Y * GetWmInfo().ScreenFactor)
+                    X = Convert.ToInt32(Ps.X - MapOrigin.X * ScreenFactor),
+                    Y = Convert.ToInt32(Ps.Y - MapOrigin.Y * ScreenFactor)
                 }
                 : new PointF
                 {
-                    X = Convert.ToInt32(Ps.X / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.X),
-                    Y = Convert.ToInt32(Ps.Y / GetWmInfo().ScreenFactor - GetWmInfo().MapOrigin.Y)
+                    X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
+                    Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
                 };
         }
         public PointF WorldToScreenF(Point Pw)
         {
             PointF Ps = new PointF
             {
-                X = Convert.ToInt32((Pw.X + GetWmInfo().MapOrigin.X) * GetWmInfo().ScreenFactor),
-                Y = Convert.ToInt32((Pw.Y + GetWmInfo().MapOrigin.Y) * GetWmInfo().ScreenFactor)
+                X = Convert.ToInt32((Pw.X + MapOrigin.X) * ScreenFactor),
+                Y = Convert.ToInt32((Pw.Y + MapOrigin.Y) * ScreenFactor)
             };
             return Ps;
         }
