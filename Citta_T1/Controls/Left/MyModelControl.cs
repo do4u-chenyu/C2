@@ -1,14 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Core;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Core;
 
 namespace Citta_T1.Controls.Left
 {
@@ -19,8 +12,8 @@ namespace Citta_T1.Controls.Left
             InitializeComponent(); 
         }
 
-        private static int ButtonLeftX = 15;
-        private static int ButtonBottomOffsetY = 12;
+        private static readonly int ButtonLeftX = 15;
+        private static readonly int ButtonBottomOffsetY = 12;
         public void AddModel(string modelName)
         {
             ModelButton mb = new ModelButton(modelName);
@@ -45,7 +38,7 @@ namespace Citta_T1.Controls.Left
             foreach (Control ct in this.Controls)
             {
                 if (ct is ModelButton)
-                    if ((ct as ModelButton).ModelTitle== modelTitle)
+                    if ((ct as ModelButton).ModelTitle == modelTitle)
                         return true;
             }
             return false;
