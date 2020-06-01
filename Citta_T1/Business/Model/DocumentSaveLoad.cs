@@ -110,7 +110,7 @@ namespace Citta_T1.Business.Model
                     mexw.Write("enableoption", (me.InnerControl as MoveOpControl).EnableOption.ToString());
                     //有配置信息才保存到xml中
                     if ((me.InnerControl as MoveOpControl).Option.OptionDict.Count() > 0)
-                        WriteModelOption(me.SubType, (me.InnerControl as MoveOpControl).Option, xDoc, mexw.Element);
+                        WriteModelOption((me.InnerControl as MoveOpControl).Option, xDoc, mexw.Element);
                     continue;
                 }
 
@@ -123,7 +123,7 @@ namespace Citta_T1.Business.Model
             }
         }
         #region 配置信息存到xml
-        private void WriteModelOption(ElementSubType type,OperatorOption option, XmlDocument xDoc, XmlElement modelElementXml)
+        private void WriteModelOption(OperatorOption option, XmlDocument xDoc, XmlElement modelElementXml)
         {
             XmlElement optionNode = xDoc.CreateElement("option");
             modelElementXml.AppendChild(optionNode);
@@ -289,8 +289,8 @@ namespace Citta_T1.Business.Model
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();
-                foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
-                    option.SetOption(node.Name, node.InnerText);
+            foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
+                option.SetOption(node.Name, node.InnerText);
             return option;
         }
 
