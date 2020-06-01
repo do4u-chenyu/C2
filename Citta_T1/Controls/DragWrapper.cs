@@ -169,7 +169,7 @@ namespace Citta_T1.Controls
             int dx = Convert.ToInt32((now.X - start.X) / Factor);
             int dy = Convert.ToInt32((now.Y - start.Y) / Factor);
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            moveOffset = Utils.OpUtil.WorldBoundControl(Factor, Width, Height);       
+            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);       
             Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;  
         }
     }

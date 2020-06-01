@@ -111,6 +111,31 @@ namespace Citta_T1.Business.Model.World
             }
             return Pm;
         }
+
+        public Point WorldBoundControl(float factor, int width, int height)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            Point Pw = ScreenToWorld(new Point(50, 30), true);
+
+            if (Pw.X < 50)
+            {
+                dragOffset.X = 50 - Pw.X;
+            }
+            if (Pw.Y < 30)
+            {
+                dragOffset.Y = 30 - Pw.Y;
+            }
+            if (Pw.X > 2000 - Convert.ToInt32(width / factor))
+            {
+                dragOffset.X = 2000 - Convert.ToInt32(width / factor) - Pw.X;
+            }
+            if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
+            {
+                dragOffset.Y = 980 - Convert.ToInt32(height / factor) - Pw.Y;
+            }
+            return dragOffset;
+        }
         #endregion
 
     }
