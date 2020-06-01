@@ -795,7 +795,7 @@ namespace Citta_T1
             this.remarkControl.Location = new System.Drawing.Point(694, 111);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
-            this.remarkControl.RemarkText = "";
+            this.remarkControl.RemarkDescription = "";
             this.remarkControl.Size = new System.Drawing.Size(160, 160);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;

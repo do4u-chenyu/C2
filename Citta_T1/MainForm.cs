@@ -143,7 +143,7 @@ namespace Citta_T1
             this.naviViewControl.UpdateNaviView();
             // 切换文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
-            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
             this.remarkControl.RemarkChangeEvent += RemarkChange;
             // 切换文档时, 显示或隐藏备注控件
             if (Global.GetCurrentDocument().RemarkVisible)
@@ -177,7 +177,7 @@ namespace Citta_T1
             CanvasAddElement(this.modelDocumentDao.CurrentDocument);
             // 加载文档时，需要暂时关闭remark的TextChange事件
             this.remarkControl.RemarkChangeEvent -= RemarkChange;
-            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
             this.remarkControl.RemarkChangeEvent += RemarkChange;
         }
         private void LoadDocuments()
@@ -209,7 +209,7 @@ namespace Citta_T1
             // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
             // 更新当前模型备注信息
-            this.remarkControl.RemarkText = this.modelDocumentDao.GetRemark();
+            this.remarkControl.RemarkDescription = this.modelDocumentDao.RemarkDescription;
         }
         private void CanvasAddElement(ModelDocument doc)
         {

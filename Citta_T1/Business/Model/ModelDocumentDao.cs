@@ -1,29 +1,20 @@
 ﻿using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
     class ModelDocumentDao
     {
-        private ModelDocument currentDocument;
-        private List<ModelDocument> modelDocuments;
-        
-        
-        public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
-        public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-        private string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
+        public List<ModelDocument> ModelDocuments { get; set; }
+        public ModelDocument CurrentDocument { get; set; }
+        private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
             ModelDocuments = new List<ModelDocument>();         
@@ -85,7 +76,7 @@ namespace Citta_T1.Business.Model
         }
         public ModelElement AddDocumentOperator(MoveBaseControl ct)
         {
-            ct.ID = this.currentDocument.ElementCount++;
+            ct.ID = this.CurrentDocument.ElementCount++;
             ModelElement e = ModelElement.CreateModelElement(ct);
             CurrentDocument.AddModelElement(e);
             return e;
@@ -93,13 +84,9 @@ namespace Citta_T1.Business.Model
 
         private ModelDocument FindModelDocument(string modelTitle)
         {
-            foreach (ModelDocument md in this.modelDocuments)
-            {
-                if (md.ModelTitle == modelTitle)
-                    return md;
-            }
-            return null;
+            return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
         }
+
         public List<ModelElement> DeleteCurrentDocument()
         {
             if (CurrentDocument == null)
@@ -109,18 +96,11 @@ namespace Citta_T1.Business.Model
         }
         public void UpdateRemark(RemarkControl remarkControl)
         { 
-            if (this.CurrentDocument == null)
-                return;
-            this.CurrentDocument.RemarkDescription = remarkControl.RemarkText;
+            if (this.CurrentDocument != null)
+                this.CurrentDocument.RemarkDescription = remarkControl.RemarkDescription;
         }
 
-        public string GetRemark()
-        {
-            string remark = String.Empty;
-            if (this.CurrentDocument != null)
-                remark = this.CurrentDocument.RemarkDescription;
-            return remark;
-        }
+        public string RemarkDescription => CurrentDocument == null ? String.Empty : CurrentDocument.RemarkDescription;
 
         public bool WithoutDocumentLogin(string userName)
         {
@@ -150,7 +130,7 @@ namespace Citta_T1.Business.Model
                     string[] saveTitle = LoadAllModelTitle(userName);
                     if (saveTitle.Length == 0)
                         return;
-                    foreach (ModelDocument mb in this.modelDocuments)
+                    foreach (ModelDocument mb in this.ModelDocuments)
                     {
                         if (!saveTitle.Contains(mb.ModelTitle))
                             continue;
@@ -159,7 +139,7 @@ namespace Citta_T1.Business.Model
                         xn.AppendChild(childElement);                     
                     }
                     //关闭界面，用户只留下一个未保存的文档，则加载时随机打开一个文档
-                    if (this.modelDocuments.Count == 1 && !saveTitle.Contains(this.modelDocuments[0].ModelTitle))
+                    if (this.ModelDocuments.Count == 1 && !saveTitle.Contains(this.ModelDocuments[0].ModelTitle))
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = saveTitle[0];
@@ -211,7 +191,7 @@ namespace Citta_T1.Business.Model
 
         public ModelDocument GetManagerRelateModel(TaskManager manager)
         {
-            return modelDocuments.Find(md => md.TaskManager == manager);
+            return ModelDocuments.Find(md => md.TaskManager == manager);
         }
         // 统计当前用户有多少元素
         public int CountAllModelElements()
