@@ -373,10 +373,6 @@ namespace Citta_T1
             }
         }
 
-        private void ShowBottomPreviewPanel()
-        {
-
-        }
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
             log.Info("MinMaxPictureBox_Click");
@@ -407,18 +403,6 @@ namespace Citta_T1
         {
             InitializeControlsLocation();
         }
-
-
-
-        private void dataGridView1_Load(object sender, EventArgs e)
-        {
-
-        }
-        private void dataGridView2_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void ImportButton_Click(object sender, EventArgs e)
         {
