@@ -28,8 +28,8 @@ namespace Citta_T1.Business.Model.World
     }
     class WorldMap
     {
-        private static bool canvasUse = false;
-        private WorldMapInfo wmInfo = new WorldMapInfo();
+        private static readonly bool canvasUse = false;
+        private readonly WorldMapInfo wmInfo = new WorldMapInfo();
         
         public Point MapOrigin { get => wmInfo.MapOrigin; set => wmInfo.MapOrigin = value; }
         public float ScreenFactor { get => wmInfo.ScreenFactor; set => wmInfo.ScreenFactor = value; }
@@ -86,5 +86,32 @@ namespace Citta_T1.Business.Model.World
             };
             return Ps;
         }
+        #region 边界控制---lxf专用&&算子边界控制&&画布拖动边界控制
+        public Point WorldBoundRSControl(Control moc)
+        {
+            /*
+             * 结果算子位置不超过地图右边界、下边界
+             */
+
+            int rightBorder = 2000 - 2 * moc.Width;
+            int lowerBorder = 980 - moc.Height;
+            int interval = moc.Height + 5;
+
+            Point Pm = new Point(moc.Location.X + moc.Width + 25, moc.Location.Y);
+            Point Pw = ScreenToWorld(Pm, true);
+
+            if (Pw.X > rightBorder)
+            {
+                Pm.X = moc.Location.X;
+                Pm.Y = moc.Location.Y + interval;
+            }
+            if (Pw.Y > lowerBorder)
+            {
+                Pm.Y = moc.Location.Y - interval;
+            }
+            return Pm;
+        }
+        #endregion
+
     }
 }

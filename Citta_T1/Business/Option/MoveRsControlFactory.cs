@@ -29,7 +29,7 @@ namespace Citta_T1.Business.Option
             string path;
             char separator = '\t';
             OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
-            Point location = WorldBoundControl(moc);
+            Point location = Global.GetCurrentDocument().WorldMap.WorldBoundRSControl(moc);
             int id = Global.GetCurrentDocument().ElementCount;
             string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");
             int sizeL = Global.GetCurrentDocument().WorldMap.SizeLevel;
@@ -49,30 +49,6 @@ namespace Citta_T1.Business.Option
 
             mrc.FullFilePath = path;
             return mrc;
-        }
-        private Point WorldBoundControl(MoveOpControl moc)
-        {
-            /*
-             * 结果算子位置不超过地图右边界、下边界
-             */
-            
-            int rightBorder = 2000 - 2 * moc.Width;
-            int lowerBorder = 980 - moc.Height;
-            int interval = moc.Height + 5;
-
-            Point Pm = new Point(moc.Location.X + moc.Width + 25, moc.Location.Y);
-            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm, true);
-
-            if (Pw.X > rightBorder)
-            {
-                Pm.X = moc.Location.X;
-                Pm.Y = moc.Location.Y + interval;
-            }
-            if (Pw.Y > lowerBorder)
-            {
-                Pm.Y = moc.Location.Y - interval;
-            }
-            return Pm;
         }
         private void NewLineOpControlToRsControl(MoveOpControl moc,MoveRsControl mrc) 
         {
