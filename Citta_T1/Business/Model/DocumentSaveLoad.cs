@@ -102,7 +102,7 @@ namespace Citta_T1.Business.Model
                     .Write("type", me.Type)
                     .Write("name", me.Description)
                     .Write("subtype", me.SubType)
-                    .Write("location", ConvertUtil.PointDivision(me.Location, this.screenFactor))
+                    .Write("location", LocationWithoutScale(me.Location))
                     .Write("status", me.Status);
 
                 if (me.Type == ElementType.Operator)
@@ -137,7 +137,7 @@ namespace Citta_T1.Business.Model
         }
 
         #endregion
-        private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml,List<ModelRelation> modelRelations)
+        private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelRelation> modelRelations)
         {
            
             foreach (ModelRelation mr in modelRelations)

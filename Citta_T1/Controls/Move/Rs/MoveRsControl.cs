@@ -261,7 +261,7 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        public void SetOpControlName(string name)
+        private void SetOpControlName(string name)
         {
             this.Description = name;
             int maxLength = 24;
@@ -291,7 +291,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -471,7 +471,7 @@ namespace Citta_T1.Controls.Move.Rs
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             ExtensionMethods.SetDouble(this);
-            DrawRoundRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
+            DrawRoundedRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
             
             if (zoomUp)
             {
@@ -488,27 +488,6 @@ namespace Citta_T1.Controls.Move.Rs
             }
 
 
-        }
-        public void SetControlsBySize(float f, Control control)
-        {
-            control.Width = Convert.ToInt32(control.Width * f);
-            control.Height = Convert.ToInt32(control.Height * f);
-            control.Left = Convert.ToInt32(control.Left * f);
-            control.Top = Convert.ToInt32(control.Top * f);
-            control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
-
-            //遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in control.Controls)
-                SetControlsBySize(f, con);
-
-        }
-        public Rectangle SetRectBySize(float f, Rectangle rect)
-        {
-            rect.Width = Convert.ToInt32(rect.Width * f);
-            rect.Height = Convert.ToInt32(rect.Height * f);
-            rect.X = Convert.ToInt32(rect.Left * f);
-            rect.Y = Convert.ToInt32(rect.Top * f);
-            return rect;
         }
         #endregion
 
@@ -658,7 +637,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -667,7 +646,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {

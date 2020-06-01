@@ -68,7 +68,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Select(this.textBox.TextLength, 0);
         }
 
-        protected void DrawRoundRect(int x, int y, int width, int height, int radius)
+        protected void DrawRoundedRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
             {   // bitmap是重型资源,需要强制释放
@@ -106,5 +106,28 @@ namespace Citta_T1.Controls.Move
 
             this.BackgroundImage = this.staticImage;
         }
+
+        protected void SetControlsBySize(float f, Control control)
+        {
+            control.Width = Convert.ToInt32(control.Width * f);
+            control.Height = Convert.ToInt32(control.Height * f);
+            control.Left = Convert.ToInt32(control.Left * f);
+            control.Top = Convert.ToInt32(control.Top * f);
+            control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
+
+            //遍历窗体中的控件，重新设置控件的值
+            foreach (Control con in control.Controls)
+                SetControlsBySize(f, con);
+        }
+
+        protected Rectangle SetRectBySize(float f, Rectangle rect)
+        {
+            rect.Width = Convert.ToInt32(rect.Width * f);
+            rect.Height = Convert.ToInt32(rect.Height * f);
+            rect.X = Convert.ToInt32(rect.Left * f);
+            rect.Y = Convert.ToInt32(rect.Top * f);
+            return rect;
+        }
+
     }
 }
