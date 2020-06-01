@@ -9,12 +9,45 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
+    class ModelElementXmlWriter
+    {
+        private XmlDocument doc;
+
+        public ModelElementXmlWriter(XmlDocument xmlDoc, XmlElement parent)
+        {
+            doc = xmlDoc;
+            Element = doc.CreateElement("ModelElement");
+            parent.AppendChild(Element);
+        }
+
+        public XmlElement Element { get; }
+
+        public ModelElementXmlWriter Write(string key, string value)
+        {
+            XmlElement xe = doc.CreateElement(key);
+            xe.InnerText = value;
+            Element.AppendChild(xe);
+            return this;
+        }
+
+        public ModelElementXmlWriter Write(string key, Enum value)
+        {
+            return Write(key, value.ToString());
+        }
+
+        public ModelElementXmlWriter Write(string key, int value)
+        {
+            return Write(key, value.ToString());
+        }
+    }
+
     class DocumentSaveLoad
     {
         private string modelPath;
@@ -53,86 +86,37 @@ namespace Citta_T1.Business.Model
             WriteModelRelations(xDoc, modelDocumentXml, modelRelations);
             // 写备注
             WriteModelRemark(xDoc, modelDocumentXml, this.modelDocument.RemarkDescription);
-            xDoc.Save(modelFilePath);
-           
+
+            xDoc.Save(modelFilePath);  
         }
         private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
         {
             foreach (ModelElement me in modelElements)
             {
-                XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
-                modelDocumentXml.AppendChild(modelElementXml);
+                ModelElementXmlWriter mexw = new ModelElementXmlWriter(xDoc, modelDocumentXml);
 
-                XmlElement typeNode = xDoc.CreateElement("type");
-                typeNode.InnerText = me.Type.ToString();
-                modelElementXml.AppendChild(typeNode);
-            
-                XmlElement nameNode = xDoc.CreateElement("name");
-                nameNode.InnerText = me.Description;
-                modelElementXml.AppendChild(nameNode);
+                mexw.Write("id", me.ID)
+                    .Write("type", me.Type)
+                    .Write("name", me.Description)
+                    .Write("subtype", me.SubType)
+                    .Write("location", ConvertUtil.PointDivision(me.Location, this.screenFactor).ToString())
+                    .Write("status", me.Status);
 
-                XmlElement subTypeNode = xDoc.CreateElement("subtype");
-                subTypeNode.InnerText = me.SubType.ToString();
-                modelElementXml.AppendChild(subTypeNode);
-
-                XmlElement locationNode = xDoc.CreateElement("location");
-                int x = Convert.ToInt32(me.Location.X / screenFactor);
-                int y = Convert.ToInt32(me.Location.Y / screenFactor);
-                locationNode.InnerText = new Point(x,y).ToString();
-                modelElementXml.AppendChild(locationNode);
-
-                XmlElement statusNode = xDoc.CreateElement("status");
-                statusNode.InnerText = me.Status.ToString();
-                modelElementXml.AppendChild(statusNode);
-
-                XmlElement idNode = xDoc.CreateElement("id");
-                idNode.InnerText = me.ID.ToString();
-                modelElementXml.AppendChild(idNode);
-
-                if (me.Type == ElementType.DataSource)
-                {
-                    XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.FullFilePath;
-                    modelElementXml.AppendChild(pathNode);
-
-                    XmlElement sepTypeNode = xDoc.CreateElement("separator"); 
-                    sepTypeNode.InnerText = Convert.ToInt32(me.Separator).ToString(); 
-                    modelElementXml.AppendChild(sepTypeNode);
-
-                    XmlElement extTypeNode = xDoc.CreateElement("extType");
-                    extTypeNode.InnerText = me.ExtType.ToString();
-                    modelElementXml.AppendChild(extTypeNode);
-
-                    XmlElement encodingNode = xDoc.CreateElement("encoding");
-                    encodingNode.InnerText = me.Encoding.ToString();
-                    modelElementXml.AppendChild(encodingNode);
-                }
                 if (me.Type == ElementType.Operator)
                 {
-                    
-                    XmlElement enableoptionNode = xDoc.CreateElement("enableoption");
-                    enableoptionNode.InnerText = (me.InnerControl as MoveOpControl).EnableOption.ToString();
-                    modelElementXml.AppendChild(enableoptionNode);
+                    mexw.Write("enableoption", (me.InnerControl as MoveOpControl).EnableOption.ToString());
                     //有配置信息才保存到xml中
                     if ((me.InnerControl as MoveOpControl).Option.OptionDict.Count() > 0)
-                        WriteModelOption(me.SubType, (me.InnerControl as MoveOpControl).Option, xDoc, modelElementXml);
-                }
-                if (me.Type == ElementType.Result)
-                {
-                    XmlElement pathNode = xDoc.CreateElement("path");
-                    pathNode.InnerText = me.FullFilePath;
-                    modelElementXml.AppendChild(pathNode);
-
-                    XmlElement separatorNode = xDoc.CreateElement("separator");
-                    separatorNode.InnerText = Convert.ToInt32(me.Separator).ToString();
-                    modelElementXml.AppendChild(separatorNode);
-
-                    XmlElement encodingNode = xDoc.CreateElement("encoding");
-                    encodingNode.InnerText = me.Encoding.ToString();
-                    modelElementXml.AppendChild(encodingNode);
+                        WriteModelOption(me.SubType, (me.InnerControl as MoveOpControl).Option, xDoc, mexw.Element);
+                    continue;
                 }
 
+                mexw.Write("path", me.FullFilePath)
+                    .Write("separator", me.Separator)
+                    .Write("encoding", me.Encoding);
 
+                if (me.Type == ElementType.DataSource)
+                    mexw.Write("extType", me.ExtType);       
             }
         }
         #region 配置信息存到xml
@@ -147,7 +131,6 @@ namespace Citta_T1.Business.Model
                 fieldNode.InnerText = kvp.Value;
                 optionNode.AppendChild(fieldNode);
             }
-
         }
 
         #endregion
