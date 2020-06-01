@@ -16,20 +16,27 @@ using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
-    class ModelElementXmlWriter
+    class ModelXmlWriter
     {
         private XmlDocument doc;
 
-        public ModelElementXmlWriter(XmlDocument xmlDoc, XmlElement parent)
+        public ModelXmlWriter(string nodeName,XmlDocument xmlDoc, XmlElement parent)
         {
             doc = xmlDoc;
-            Element = doc.CreateElement("ModelElement");
+            Element = doc.CreateElement(nodeName);
             parent.AppendChild(Element);
+        }
+
+        public ModelXmlWriter(string nodeName, XmlDocument xmlDoc)
+        {
+            doc = xmlDoc;
+            Element = doc.CreateElement(nodeName);
+            doc.AppendChild(Element);
         }
 
         public XmlElement Element { get; }
 
-        public ModelElementXmlWriter Write(string key, string value)
+        public ModelXmlWriter Write(string key, string value)
         {
             XmlElement xe = doc.CreateElement(key);
             xe.InnerText = value;
@@ -37,12 +44,16 @@ namespace Citta_T1.Business.Model
             return this;
         }
 
-        public ModelElementXmlWriter Write(string key, Enum value)
+        public ModelXmlWriter Write(string key, Enum value)
         {
             return Write(key, value.ToString());
         }
 
-        public ModelElementXmlWriter Write(string key, int value)
+        public ModelXmlWriter Write(string key, int value)
+        {
+            return Write(key, value.ToString());
+        }
+        public ModelXmlWriter Write(string key, Point value)
         {
             return Write(key, value.ToString());
         }
@@ -68,38 +79,30 @@ namespace Citta_T1.Business.Model
             Directory.CreateDirectory(modelPath);
             Utils.FileUtil.AddPathPower(modelPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
-            XmlElement modelDocumentXml = xDoc.CreateElement("ModelDocument");
-            xDoc.AppendChild(modelDocumentXml);
-            //写入版本号
-            XmlElement versionElement = xDoc.CreateElement("Version");
-            versionElement.InnerText = "V1.0";
-            modelDocumentXml.AppendChild(versionElement);
+            ModelXmlWriter mxw = new ModelXmlWriter("ModelDocument",xDoc);
+            // 写入版本号 
+            mxw.Write("Version", "V1.0");
             // 写坐标原点
-            XmlElement mapOriginNode = xDoc.CreateElement("MapOrigin");
-            mapOriginNode.InnerText = this.modelDocument.WorldMap.MapOrigin.ToString();
-            modelDocumentXml.AppendChild(mapOriginNode);
+            mxw.Write("MapOrigin", this.modelDocument.WorldMap.MapOrigin);
             // 写算子,数据源，Result
-            List<ModelElement> modelElements = this.modelDocument.ModelElements;
-            WriteModelElements(xDoc, modelDocumentXml, modelElements);
-            // 写关系
-            List<ModelRelation> modelRelations = this.modelDocument.ModelRelations;    
-            WriteModelRelations(xDoc, modelDocumentXml, modelRelations);
+            WriteModelElements(xDoc, mxw.Element, this.modelDocument.ModelElements);
+            // 写关系 
+            WriteModelRelations(xDoc, mxw.Element, this.modelDocument.ModelRelations);
             // 写备注
-            WriteModelRemark(xDoc, modelDocumentXml, this.modelDocument.RemarkDescription);
-
+            WriteModelRemark(xDoc, mxw.Element, this.modelDocument.RemarkDescription);
             xDoc.Save(modelFilePath);  
         }
         private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
         {
             foreach (ModelElement me in modelElements)
             {
-                ModelElementXmlWriter mexw = new ModelElementXmlWriter(xDoc, modelDocumentXml);
+                ModelXmlWriter mexw = new ModelXmlWriter("ModelElement", xDoc, modelDocumentXml);
 
                 mexw.Write("id", me.ID)
                     .Write("type", me.Type)
                     .Write("name", me.Description)
                     .Write("subtype", me.SubType)
-                    .Write("location", ConvertUtil.PointDivision(me.Location, this.screenFactor).ToString())
+                    .Write("location", ConvertUtil.PointDivision(me.Location, this.screenFactor))
                     .Write("status", me.Status);
 
                 if (me.Type == ElementType.Operator)
@@ -139,50 +142,27 @@ namespace Citta_T1.Business.Model
            
             foreach (ModelRelation mr in modelRelations)
             {
-                XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
-                modelDocumentXml.AppendChild(modelElementXml);
-
-                XmlElement typeNode = xDoc.CreateElement("type");
-                typeNode.InnerText = mr.Type.ToString();
-                modelElementXml.AppendChild(typeNode);
-
-                XmlElement startControlNode = xDoc.CreateElement("start");
-                startControlNode.InnerText = mr.StartID.ToString();
-                modelElementXml.AppendChild(startControlNode);
-
-                XmlElement endControlNode = xDoc.CreateElement("end");
-                endControlNode.InnerText = mr.EndID.ToString();
-                modelElementXml.AppendChild(endControlNode);
-
-                XmlElement startLocationNode = xDoc.CreateElement("startlocation");
-                int x1 = Convert.ToInt32(mr.StartP.X / screenFactor);
-                int y1 = Convert.ToInt32(mr.StartP.Y / screenFactor);
-                startLocationNode.InnerText = new Point(x1, y1).ToString();
-                modelElementXml.AppendChild(startLocationNode);
-
-                XmlElement endLocationNode = xDoc.CreateElement("endlocation");
-                int x2 = Convert.ToInt32(mr.EndP.X / screenFactor);
-                int y2 = Convert.ToInt32(mr.EndP.Y / screenFactor);
-                endLocationNode.InnerText = new Point(x2, y2).ToString();
-                modelElementXml.AppendChild(endLocationNode);
-
-                XmlElement endPinLabelNode = xDoc.CreateElement("endpin");
-                endPinLabelNode.InnerText = mr.EndPin.ToString();
-                modelElementXml.AppendChild(endPinLabelNode);
+                ModelXmlWriter mexw = new ModelXmlWriter("ModelElement", xDoc, modelDocumentXml);
+                mexw.Write("type", mr.Type)
+                    .Write("start", mr.StartID)
+                    .Write("end", mr.EndID)
+                    .Write("startlocation", LocationWithoutScale(mr.StartP))
+                    .Write("endlocation", LocationWithoutScale(mr.EndP))
+                    .Write("endpin", mr.EndPin);
             }
+        }
+        private Point LocationWithoutScale(PointF point)
+        {
+            int x = Convert.ToInt32(point.X / screenFactor);
+            int y = Convert.ToInt32(point.Y / screenFactor);
+            return new Point(x, y);
         }
         private void WriteModelRemark(XmlDocument xDoc, XmlElement modelDocumentXml, string remarkDescription)
         {
-            XmlElement modelElementXml = xDoc.CreateElement("ModelElement");
-
-            XmlElement typeNode = xDoc.CreateElement("type");
-            typeNode.InnerText = "Remark";
-            modelElementXml.AppendChild(typeNode);
-
-            XmlElement nameNode = xDoc.CreateElement("name");
-            nameNode.InnerText = remarkDescription;
-            modelElementXml.AppendChild(nameNode);
-            modelDocumentXml.AppendChild(modelElementXml);
+        
+            ModelXmlWriter mexw = new ModelXmlWriter("ModelElement", xDoc, modelDocumentXml);
+            mexw.Write("type", "Remark")
+                .Write("name", remarkDescription);
         }
         public void ReadXml()
         {
