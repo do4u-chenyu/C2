@@ -92,8 +92,6 @@ namespace Citta_T1.Controls
             foreach (ModelElement me in md)
             {
                 Control ctr = me.InnerControl;
-                //if (ctr == this.control)
-                //    continue;
                 Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));
                 cp.Invalidate(ctrRect);
                 cp.Update();
