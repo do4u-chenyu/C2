@@ -216,11 +216,7 @@ namespace Citta_T1.Business.Model
         // 统计当前用户有多少元素
         public int CountAllModelElements()
         {
-            int count = 0;
-            foreach (ModelDocument md in this.ModelDocuments)
-                count += md.ModelElements.Count;
-
-            return count;
+            return this.ModelDocuments.Sum(md => md.ModelElements.Count);
         }
         // 特定Datasource在当前所有打开模型中的引用次数
         public int CountDataSourceUsage(string ffp)
