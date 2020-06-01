@@ -215,7 +215,6 @@ namespace Citta_T1.Business.Schedule
                     //判断数据节点是否算完，如果数据节点（上一个的结果算子）为error，跳过这个循环，并将其结果算子也置为error
                     foreach (ModelElement tmpDE in tmpTri.DataElements)
                     {
-
                         string filename = String.Empty;
                         if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
                         if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;

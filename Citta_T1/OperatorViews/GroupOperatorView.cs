@@ -138,9 +138,9 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in this.oldOutList)
                     this.oldOutName.Add(this.columnName[index]);
             }
-            int count = this.opControl.Option.KeysCount("group");
-            string factor1 = this.opControl.Option.GetOption("group1");
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "group1"))
+            int count = this.opControl.Option.KeysCount("factor");
+            string factor1 = this.opControl.Option.GetOption("factor1");
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "factor1"))
             {
                
                 int index = Convert.ToInt32(factor1);
@@ -161,7 +161,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 2; i < (count + 1); i++)
             {
-                string name = "group" + i.ToString();
+                string name = "factor" + i.ToString();
                 if (Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, name)) continue;
   
                 int index = Convert.ToInt32(this.opControl.Option.GetOption(name));
@@ -177,7 +177,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", String.Join("\t",this.opControl.FirstDataSourceColumns));
             string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
-            this.opControl.Option.SetOption("group1", factor1);
+            this.opControl.Option.SetOption("factor1", factor1);
             this.groupColumn.Add(this.comboBox1.SelectedIndex);
             
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -187,7 +187,7 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string factor = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     this.groupColumn.Add(Convert.ToInt32(factor));
-                    this.opControl.Option.SetOption("group" + (i + 2).ToString(), factor);
+                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());

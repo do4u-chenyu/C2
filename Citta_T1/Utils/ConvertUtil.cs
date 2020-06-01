@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,9 +90,14 @@ namespace Citta_T1.Utils
         {
             int padding = 3;
             int addValue = 10;
-            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
+            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))   // chineseRatio = 1 && otherRatio = 0
                 addValue -= 10;
             return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
+        }
+
+        public static Point PointDivision(Point point, float div)
+        {
+            return new Point(Convert.ToInt32(point.X / div), Convert.ToInt32(point.Y / div));
         }
     }
 }

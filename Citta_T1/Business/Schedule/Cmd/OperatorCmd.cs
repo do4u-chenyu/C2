@@ -101,7 +101,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 if (me.Type == ElementType.DataSource)
                 {
-                    separators.Add(me.InnerControl.Separator.ToString());
+                    separators.Add(me.Separator.ToString());
                 }
                 else
                 {
