@@ -154,7 +154,7 @@ namespace Citta_T1.OperatorViews
                 InitNewFactorControl(count - 1);
             else
             {
-                this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
+                this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
                 return;
             }
 
@@ -169,13 +169,13 @@ namespace Citta_T1.OperatorViews
                 control1.Text = (control1 as ComboBox).Items[index].ToString();
                 control1.Tag = index.ToString();
             }
-            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
 
         }
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname", String.Join("\t",this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t",this.opControl.FirstDataSourceColumns));
             string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
             this.groupColumn.Add(this.comboBox1.SelectedIndex);

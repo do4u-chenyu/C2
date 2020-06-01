@@ -134,7 +134,7 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnName.Add(this.outList.Items[i].ToString());
             }
 
-            this.opControl.Option.SetOption("columnname", string.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
         }
         #endregion
         #region 初始化配置

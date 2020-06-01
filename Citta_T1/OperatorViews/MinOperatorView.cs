@@ -150,7 +150,7 @@ namespace Citta_T1.OperatorViews
             }
 
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
-            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
 
 

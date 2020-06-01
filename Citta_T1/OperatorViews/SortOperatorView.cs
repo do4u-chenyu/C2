@@ -33,7 +33,7 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
             dataPath = "";
            
-            this.oldColumnName = this.opControl.Option.GetOption("columnname").Split('\t').ToList();
+            this.oldColumnName = this.opControl.Option.GetOption("columnname0").Split('\t').ToList();
             InitOptionInfo();
             LoadOption();
             this.oldFirstRow = this.firstRow.Text;
@@ -74,7 +74,7 @@ namespace Citta_T1.OperatorViews
                 this.sortField.Items.Add(name);
 
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
-            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
       
         public void SetTextBoxName(TextBox textBox)
