@@ -146,11 +146,11 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
+                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                    
                     string factor = index1 + "," + index2 + "," + control3.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
@@ -231,21 +231,13 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            bool empty = IsOptionReay();
+            bool empty = HasEmptyOption();
             if (empty) return;
+            if (IsRepetitionCondition()) return;
             SaveOption();
-            //判断取并条件是否有完全重复的
-
-            var duplicateValues = this.opControl.Option.OptionDict.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
-            foreach (var  item in duplicateValues)
-            {
-                MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
-                return;
-            }
-
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
-           
+    
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
@@ -259,13 +251,42 @@ namespace Citta_T1.OperatorViews
             if (resultElement != null && !this.oldColumnName.SequenceEqual(this.selectColumn))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, this.selectColumn, this.opControl.ID);
         }
-
+        private bool IsRepetitionCondition()
+        {
+            bool repetition = false;
+            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
+            string factor1 = index01 + "," + index02 + "," + this.textBoxEx1.Text;
+            Dictionary<string, string> factors = new Dictionary<string, string>();
+            factors["factor1"] = factor1;
+            if (this.tableLayoutPanel1.RowCount > 0)
+            {
+                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
+                {
+                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                    string factor = index1 + "," + index2 + "," + control3.Text;
+                    factors["factor" + (i + 2).ToString()] = factor;
+                   
+                }
+            }
+            var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
+            foreach (var item in duplicateValues)
+            {
+                MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
+                repetition = true;
+            }
+            return repetition;
+        }
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
-        private bool IsOptionReay()
+        private bool HasEmptyOption()
         {
             bool empty = false;
             List<string> types = new List<string>();
@@ -276,8 +297,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    empty = true;
-                    return empty;
+                    return !empty;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -285,8 +305,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    empty = true;
-                    return empty;
+                    return !empty;
                 }
             }
             return empty;
