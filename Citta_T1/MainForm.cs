@@ -450,6 +450,8 @@ namespace Citta_T1
 
         public void PreViewDataByFullFilePath(string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
+            if (!System.IO.File.Exists(fullFilePath))
+                return;
             this.ShowBottomPanel(); 
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();

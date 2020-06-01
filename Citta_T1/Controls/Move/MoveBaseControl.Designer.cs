@@ -34,6 +34,7 @@ namespace Citta_T1.Controls.Move
             this.textBox = new System.Windows.Forms.TextBox();
             this.helpToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.txtButton = new Citta_T1.Controls.Common.NoFocusButton();
+            this.RenameMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +79,15 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Size = new System.Drawing.Size(60, 25);
             this.txtButton.TabIndex = 1;
             // 
+            // RenameMenuItem
+            // 
+            this.RenameMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.RenameMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
+            this.RenameMenuItem.Name = "RenameMenuItem";
+            this.RenameMenuItem.Size = new System.Drawing.Size(217, 24);
+            this.RenameMenuItem.Text = "重命名";
+            this.RenameMenuItem.Click += new System.EventHandler(this.RenameMenuItem_Click);
+            // 
             // MoveBaseControl
             // 
             this.AllowDrop = true;
@@ -108,6 +118,7 @@ namespace Citta_T1.Controls.Move
         protected System.Windows.Forms.TextBox textBox;
         protected System.Windows.Forms.ToolTip helpToolTip;
         protected Citta_T1.Controls.Common.NoFocusButton txtButton;
+        protected System.Windows.Forms.ToolStripMenuItem RenameMenuItem;
         protected System.ComponentModel.IContainer components;
     }
 }

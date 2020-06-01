@@ -225,8 +225,8 @@ namespace Citta_T1.Business.Schedule
                     {
 
                         string filename = "";
-                        if (tmpDE.Type == ElementType.DataSource) filename = (tmpDE.InnerControl as MoveDtControl).FullFilePath;
-                        if (tmpDE.Type == ElementType.Result) filename = (tmpDE.InnerControl as MoveRsControl).FullFilePath;
+                        if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
+                        if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
                         if (!File.Exists(filename))
                         {
                             tmpTri.OperateElement.Status = ElementStatus.Warn;

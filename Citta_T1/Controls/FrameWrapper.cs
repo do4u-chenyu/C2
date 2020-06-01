@@ -193,6 +193,7 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private const bool endSelect = false;
         private const bool startSelect = true;
+        
         private const int arcRadius = 2;
         private const double minBodingRec_Off = 0.4;
         private Bitmap staticImage, moveImage;
@@ -236,8 +237,8 @@ namespace Citta_T1.Controls
     }
         private void FramePropertySet()
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap.GetWmInfo().MapOrigin;
-            screenFactor = Global.GetCurrentDocument().WorldMap.GetWmInfo().ScreenFactor;
+            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
+            screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
         }
         #endregion
         #region 框选后画布鼠标基本操作事件

@@ -180,7 +180,7 @@ namespace Citta_T1.OperatorViews
             //输出变化，修改结果算子路径
             if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
-                (resultElement.InnerControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
+                resultElement.FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
@@ -193,11 +193,11 @@ namespace Citta_T1.OperatorViews
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if(separator == "commaradio")
             {
-                (hasResultNew.InnerControl as MoveRsControl).Separator = ',';
+                hasResultNew.Separator = ',';
             }
             else if(separator == "otherseparatorradio")
             {
-                (hasResultNew.InnerControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
+                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 

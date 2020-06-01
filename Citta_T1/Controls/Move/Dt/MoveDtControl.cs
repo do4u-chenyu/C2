@@ -15,7 +15,6 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Dt
 {
-    public delegate void DtDocumentDirtyEventHandler();
     public partial class MoveDtControl: MoveBaseControl, IScalable, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
@@ -203,7 +202,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
         }
-        public void PreViewMenuItem_Click(object sender, EventArgs e)
+        private void PreViewMenuItem_Click(object sender, EventArgs e)
         {
             Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
@@ -412,29 +411,14 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        private string SubstringByte(string text, int startIndex, int length)
-        {
-            byte[] bytes = ConvertUtil.GB2312.GetBytes(text);
-            if (bytes.Length < length)
-                length = bytes.Length;
-            return ConvertUtil.GB2312.GetString(bytes, startIndex, length);
-        }
-        private int CountTextWidth(int chineseRatio, int otherRatio)
-        {
-            int padding = 3;
-            int addValue = 10;
-            if ((chineseRatio + otherRatio == 1) && (chineseRatio != 0))
-                addValue -= 10;
-            return padding * 2 + chineseRatio * 12 + otherRatio * 7 + addValue;
-        }
         private void SetOpControlName(string name)
         {
             this.Description = name;
             int maxLength = 24;
-            name = SubstringByte(name, 0, maxLength);
+            name = ConvertUtil.SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
             int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = CountTextWidth(sumCount, sumCountDigit);
+            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
@@ -467,18 +451,6 @@ namespace Citta_T1.Controls.Move.Dt
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-        }
-
-        private void RenameMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            this.textBox.ReadOnly = false;
-            this.oldTextString = this.textBox.Text;
-            this.txtButton.Visible = false;
-            this.textBox.Visible = true;
-            this.textBox.Focus();//获取焦点
-            this.textBox.Select(this.textBox.TextLength, 0);
         }
         #endregion
 
@@ -531,7 +503,7 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 托块的放大与缩小
-        public void SetControlsBySize(float f, Control control)
+        private void SetControlsBySize(float f, Control control)
         {
             control.Width = Convert.ToInt32(control.Width * f);
             control.Height = Convert.ToInt32(control.Height * f);

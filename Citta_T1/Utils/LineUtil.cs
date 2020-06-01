@@ -69,45 +69,32 @@ namespace Citta_T1.Utils
         /// <returns></returns>
         public static double PointToLineD(double x1, double y1, double x2, double y2, double x0, double y0)
         {
-            double distance = 0;
-            double a, b, c;
-            a = DistanceOf2P(x1, y1, x2, y2);// 线段的长度    
-            b = DistanceOf2P(x1, y1, x0, y0);// (x1,y1)到点的距离    
-            c = DistanceOf2P(x2, y2, x0, y0);// (x2,y2)到点的距离    
+            double a = DistanceOf2P(x1, y1, x2, y2);// 线段的长度    
+            double b = DistanceOf2P(x1, y1, x0, y0);// (x1,y1)到点的距离    
+            double c = DistanceOf2P(x2, y2, x0, y0);// (x2,y2)到点的距离    
             // 距离太近时
             if (c <= 0.000001 || b <= 0.000001)
-            {
-                distance = 0;
-                return distance;
-            }
+                return 0;
+
             // 线太短时
             if (a <= 0.000001)
-            {
-                distance = b;
-                return distance;
-            }
+                return b;
             /*
              *        P 
              *           B-----C       
              */
             if (c * c >= a * a + b * b)
-            {
-                distance = b;
-                return distance;
-            }
+                return b;
             /*
              *           P
              *  B-----C       
              */
             if (b * b >= a * a + c * c)
-            {
-                distance = c;
-                return distance;
-            }
+                return c;
+
             double p = (a + b + c) / 2;// 半周长    
             double s = Math.Sqrt(p * (p - a) * (p - b) * (p - c));// 海伦公式求面积    
-            distance = 2 * s / a;// 返回点到线的距离（利用三角形面积公式求高）    
-            return distance;
+            return 2 * s / a;// 返回点到线的距离（利用三角形面积公式求高）    
         }
         public static float PointToLine(PointF p1, PointF lineStartP, PointF lineEndP)
         {
@@ -253,7 +240,7 @@ namespace Citta_T1.Utils
         private PointF[] GetPoints()
         {
             PointF[] pointList = new PointF[] { new PointF(this.StartP.X, this.StartP.Y), a, b, new PointF(this.EndP.X, this.EndP.Y) };
-            return this.draw_bezier_curves(pointList, pointList.Length, 0.01F);
+            return this.DrawBezierCurves(pointList, pointList.Length, 0.01F);
         }
         private PointF[] GetCutPointFs()
         {
@@ -278,13 +265,13 @@ namespace Citta_T1.Utils
         /// <param name="count">点数(n+1)</param>
         /// <param name="step">步长,步长越小，轨迹点越密集</param>
         /// <returns></returns>
-        public PointF[] draw_bezier_curves(PointF[] points, int count, float step)
+        public PointF[] DrawBezierCurves(PointF[] points, int count, float step)
         {
             List<PointF> bezier_curves_points = new List<PointF>();
             float t = 0F;
             do
             {
-                PointF temp_point = bezier_interpolation_func(t, points, count);    // 计算插值点
+                PointF temp_point = BezierInterpolationFunc(t, points, count);    // 计算插值点
                 t += step;
                 bezier_curves_points.Add(temp_point);
             }
@@ -299,7 +286,7 @@ namespace Citta_T1.Utils
         /// <param name="points">起点，n-1个控制点，终点</param>
         /// <param name="count">n+1个点</param>
         /// <returns></returns>
-        private PointF bezier_interpolation_func(float t, PointF[] points, int count)
+        private PointF BezierInterpolationFunc(float t, PointF[] points, int count)
         {
             PointF Point = new PointF();
             float[] part = new float[count];
@@ -308,7 +295,7 @@ namespace Citta_T1.Utils
             {
                 ulong tmp;
                 int n_order = count - 1;    // 阶数
-                tmp = calc_combination_number(n_order, i);
+                tmp = CalcCombinationNumber(n_order, i);
                 sum_x += (float)(tmp * points[i].X * Math.Pow((1 - t), n_order - i) * Math.Pow(t, i));
                 sum_y += (float)(tmp * points[i].Y * Math.Pow((1 - t), n_order - i) * Math.Pow(t, i));
             }
@@ -322,7 +309,7 @@ namespace Citta_T1.Utils
         /// <param name="n"></param>
         /// <param name="k"></param>
         /// <returns></returns>
-        private ulong calc_combination_number(int n, int k)
+        private ulong CalcCombinationNumber(int n, int k)
         {
             ulong[] result = new ulong[n + 1];
             for (int i = 1; i <= n; i++)
