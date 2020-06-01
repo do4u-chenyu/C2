@@ -1,6 +1,5 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
@@ -13,7 +12,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 {
     class OperatorCmd
     {
-        Triple triple;
+        public Triple triple;
         public List<string> inputFilePaths = new List<string>();
         public OperatorOption option;
         public string outputFilePath;
@@ -153,24 +152,24 @@ namespace Citta_T1.Business.Schedule.Cmd
             return (int.Parse(optionLine) + 1).ToString();
         }
 
-        public string TransOutputField(string[] outfield)
+        public string TransOutputField(string[] outField)
         {
-            string outfieldLine = " $" + (int.Parse(outfield[0]) + 1).ToString();
-            for (int i = 1; i < outfield.Length; i++)
+            string outFieldLine = " $" + (int.Parse(outField[0]) + 1).ToString();
+            for (int i = 1; i < outField.Length; i++)
             {
-                outfieldLine = outfieldLine + ",$" + (int.Parse(outfield[i]) + 1).ToString();
+                outFieldLine = outFieldLine + ",$" + (int.Parse(outField[i]) + 1).ToString();
             }
-            return outfieldLine;
+            return outFieldLine;
         }
 
-        public string TransDifferOutputField(string[] outfield)
+        public string TransDifferOutputField(string[] outField)
         {
-            string outfieldLine = " $" + (int.Parse(outfield[0]) + 2).ToString();
-            for (int i = 1; i < outfield.Length; i++)
+            string outFieldLine = " $" + (int.Parse(outField[0]) + 2).ToString();
+            for (int i = 1; i < outField.Length; i++)
             {
-                outfieldLine = outfieldLine + ",$" + (int.Parse(outfield[i]) + 2).ToString();
+                outFieldLine = outFieldLine + ",$" + (int.Parse(outField[i]) + 2).ToString();
             }
-            return outfieldLine;
+            return outFieldLine;
         }
         public string TransConditionToCmd(string condition)
         {
@@ -192,27 +191,27 @@ namespace Citta_T1.Business.Schedule.Cmd
 
 
 
-        public string TransInputfileToCmd(string inputfile)
+        public string TransInputfileToCmd(string inputFile)
         {
             /*
              * 判断条件
              * 1、是否是excel,是:cat_xls，否:2
              * 2、bcp是什么格式，判断encoding,是gbk:tail | iconv ,否：tail
              */
-            string filename = System.IO.Path.GetFileName(inputfile);
+            string filename = System.IO.Path.GetFileName(inputFile);
             if (filename.IndexOf(".xls") > 0)
             {
-                return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputfile);
+                return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
             }
             else
             {
-                if(JudgeInputFileEncoding(inputfile) == OpUtil.Encoding.GBK)
+                if(JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
                 {
-                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputfile);
+                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
                 }
                 else
                 {
-                    return string.Format("sbin\\tail.exe -n +2 {0} | sbin\\tr.exe -d '\\r' ", inputfile);
+                    return string.Format("sbin\\tail.exe -n +2 {0} | sbin\\tr.exe -d '\\r' ", inputFile);
                 }
             }
         }
@@ -230,9 +229,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             return num; 
         }
 
-        public OpUtil.Encoding JudgeInputFileEncoding(string inputfile)
+        public OpUtil.Encoding JudgeInputFileEncoding(string inputFile)
         {
-            return triple.DataElements[inputFilePaths.IndexOf(inputfile)].Encoding;
+            return triple.DataElements[inputFilePaths.IndexOf(inputFile)].Encoding;
         }
 
     }

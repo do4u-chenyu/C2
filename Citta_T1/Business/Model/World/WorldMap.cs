@@ -38,7 +38,7 @@ namespace Citta_T1.Business.Model.World
 
 
         //  Pw = Ps / Factor - Pm
-        public Point ScreenToWorld(Point Ps,bool mode)
+        public Point ScreenToWorld(Point Ps, bool mode)
         {
             return mode.Equals(canvasUse)
                 ? new Point
@@ -63,7 +63,7 @@ namespace Citta_T1.Business.Model.World
             };
             return Ps;
         }
-        public PointF ScreenToWorldF(PointF Ps,bool mode)
+        public PointF ScreenToWorldF(PointF Ps, bool mode)
         {
             return mode.Equals(canvasUse)
                 ? new PointF

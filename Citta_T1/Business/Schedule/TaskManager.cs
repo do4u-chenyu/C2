@@ -1,21 +1,13 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Schedule.Cmd;
+using Citta_T1.Controls.Move.Op;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
-using Citta_T1.Business.Option;
-using System.Diagnostics;
-using Citta_T1.Business.Schedule.Cmd;
-using NPOI.HSSF.Record;
-using System.Windows.Forms;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Rs;
-using System.IO;
-using Citta_T1.Controls.Move.Op;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -223,8 +215,7 @@ namespace Citta_T1.Business.Schedule
                     //判断数据节点是否算完，如果数据节点（上一个的结果算子）为error，跳过这个循环，并将其结果算子也置为error
                     foreach (ModelElement tmpDE in tmpTri.DataElements)
                     {
-
-                        string filename = "";
+                        string filename = String.Empty;
                         if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
                         if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
                         if (!File.Exists(filename))
@@ -376,7 +367,7 @@ namespace Citta_T1.Business.Schedule
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
                 return "";
-            string errorMessage = "";
+            string errorMessage = String.Empty;
 
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -398,7 +389,7 @@ namespace Citta_T1.Business.Schedule
                     }
                     foreach (string cmd in cmds)
                     {
-                        //UpdateLogDelegate("执行命令: " + cmd);
+                        UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
                     p.StandardInput.WriteLine("exit");

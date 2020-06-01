@@ -53,7 +53,7 @@ namespace Citta_T1.Controls
             Bitmap moveImage = new Bitmap(minBodingRec.Width + 2, minBodingRec.Height + 3);
             Rectangle realRect = new Rectangle(minBodingRec.Location, new Size(minBodingRec.Width + 2, minBodingRec.Height + 3));
             Bitmap staticImageFrame = CreateWorldImage(worldWidth, worldHeight, controls, true);
-            DrawRoundedRect(minBodingRec, staticImageFrame, 2);
+            DrawRoundRect(minBodingRec, staticImageFrame, 2);
             Graphics gM = Graphics.FromImage(moveImage);
             gM.DrawImage(staticImageFrame, 0, 0, realRect, GraphicsUnit.Pixel);
             SetImgTransparency(moveImage);
@@ -119,7 +119,7 @@ namespace Citta_T1.Controls
         }
         #endregion
         #region 阴影相关特效
-        public void DrawRoundedRect(Rectangle minBodingRec, Bitmap bitmap, int radius)
+        public void DrawRoundRect(Rectangle minBodingRec, Bitmap bitmap, int radius)
         {
 
             Graphics g = Graphics.FromImage(bitmap);
@@ -352,7 +352,7 @@ namespace Citta_T1.Controls
         {
             CreateRect();
             FindControl();
-            frameWrapperVFX.DrawRoundedRect(minBodingRec, staticImage, arcRadius);
+            frameWrapperVFX.DrawRoundRect(minBodingRec, staticImage, arcRadius);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             n.DrawImageUnscaled(staticImage, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
@@ -388,7 +388,7 @@ namespace Citta_T1.Controls
             minBodingRec.X = minBodingRec.X + endP.X - startP.X + moveOffset.X;
             minBodingRec.Y = minBodingRec.Y + endP.Y - startP.Y + moveOffset.Y;
             
-            frameWrapperVFX.DrawRoundedRect(minBodingRec, staticImage, arcRadius);
+            frameWrapperVFX.DrawRoundRect(minBodingRec, staticImage, arcRadius);
         }
         #endregion
         #region 最小外包矩形计算
@@ -453,6 +453,7 @@ namespace Citta_T1.Controls
                                 Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
             g.Dispose();
+            i.Dispose();
             i = null;
         }
         public Point WorldBoundControl(Point Pm)

@@ -30,7 +30,6 @@ namespace Citta_T1.Controls.Move.Dt
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         public Rectangle rectOut;
         private String pinStatus = "noEnter";
-        private Bitmap staticImage;
 
         private Size changeStatus = new Size(0, 28);
         private Size normalStatus = new Size(53, 28);
@@ -235,7 +234,7 @@ namespace Citta_T1.Controls.Move.Dt
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
             ExtensionMethods.SetDouble(this);
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
+            DrawRoundRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -441,7 +440,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
         #endregion
@@ -569,46 +568,7 @@ namespace Citta_T1.Controls.Move.Dt
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void DrawRoundedRect(int x, int y, int width, int height, int radius)
-        {
-            if (this.staticImage != null)
-            {   // bitmap是重型资源,需要强制释放
-                this.staticImage.Dispose();
-                this.staticImage = null;
-            }
-            this.staticImage = new Bitmap(this.Width, this.Height);
-            Graphics g = Graphics.FromImage(staticImage);
-            g.Clear(Color.White);
-            //去掉圆角的锯齿
-            System.Drawing.Pen p = new System.Drawing.Pen(Color.DarkGray, 1);
-
-            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
-            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
-
-            //上
-            g.DrawLine(pen, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            //下
-            g.DrawLine(pen, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            //左
-            g.DrawLine(pen, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            //右
-            g.DrawLine(pen, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-
-            //左上角
-            g.DrawArc(pen, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            //右上角
-            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            //左下角
-            g.DrawArc(pen, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            //右下角
-            g.DrawArc(pen, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-            g.Dispose();
-
-            this.BackgroundImage = this.staticImage;
-        }
-
-        private void UpdateRounde(int x, int y, int width, int height, int radius)
+        private void UpdateRound(int x, int y, int width, int height, int radius)
         {
             Pen p1 = new Pen(Color.Green, 2f);
             p1.DashStyle = DashStyle.Dash;
@@ -654,14 +614,14 @@ namespace Citta_T1.Controls.Move.Dt
         {
             pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 
