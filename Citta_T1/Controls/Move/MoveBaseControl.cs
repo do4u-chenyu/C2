@@ -68,7 +68,7 @@ namespace Citta_T1.Controls.Move
             this.textBox.Select(this.textBox.TextLength, 0);
         }
 
-        protected void DrawRoundedRect(int x, int y, int width, int height, int radius)
+        protected void DrawRoundRect(int x, int y, int width, int height, int radius)
         {
             if (this.staticImage != null)
             {   // bitmap是重型资源,需要强制释放

@@ -469,7 +469,7 @@ namespace Citta_T1.Controls.Move.Op
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)((txtWidth -1 )* f), this.Height - (int)(4 * f));
             
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -836,7 +836,7 @@ namespace Citta_T1.Controls.Move.Op
 
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -1041,7 +1041,7 @@ namespace Citta_T1.Controls.Move.Op
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void UpdateRounde(int x, int y, int width, int height, int radius)
+        private void UpdateRound(int x, int y, int width, int height, int radius)
         {
             Graphics g = Graphics.FromImage(staticImage);
             
@@ -1070,14 +1070,14 @@ namespace Citta_T1.Controls.Move.Op
         {
             double f = Math.Pow(factor, sizeLevel);
             pen = new Pen(Color.DarkGray, 1.5f);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 }

@@ -291,7 +291,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -471,7 +471,7 @@ namespace Citta_T1.Controls.Move.Rs
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             ExtensionMethods.SetDouble(this);
-            DrawRoundedRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
+            DrawRoundRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
             
             if (zoomUp)
             {
@@ -581,7 +581,7 @@ namespace Citta_T1.Controls.Move.Rs
 
         #endregion
 
-        private void UpdateRounde(int x, int y, int width, int height, int radius)
+        private void UpdateRound(int x, int y, int width, int height, int radius)
         {
             Pen p1 = new Pen(Color.Green, 2f);
             p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
@@ -658,8 +658,8 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -667,7 +667,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
