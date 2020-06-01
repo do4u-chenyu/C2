@@ -121,32 +121,12 @@ namespace Citta_T1.Controls
         }
 
         #endregion
-        private Point WorldBoundControl(Point Ps)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-
-            if (Ps.Y < 70 * screenFactor)
-            {
-                dragOffset.Y = Ps.Y - 70;
-            }
-            if (Ps.X > 2000 * screenFactor)
-            {
-                dragOffset.X = Ps.X - 2000;
-            }
-            if (Ps.Y > 900 * screenFactor)
-            {
-                dragOffset.Y = Ps.Y - 900;
-            }
-            return dragOffset;
-        }
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
             ElementType type = (ElementType)e.Data.GetData("Type");
             Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
-            Point moveOffset = WorldBoundControl(location);
+            Point moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(location);
             location.X -=  moveOffset.X;
             location.Y -=  moveOffset.Y;
             string text = e.Data.GetData("Text").ToString();

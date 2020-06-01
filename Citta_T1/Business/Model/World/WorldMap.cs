@@ -136,6 +136,26 @@ namespace Citta_T1.Business.Model.World
             }
             return dragOffset;
         }
+        public Point WorldBoundControl(Point Ps)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = ScreenFactor;
+
+            if (Ps.Y < 70 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 70;
+            }
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
+        }
         #endregion
 
     }
