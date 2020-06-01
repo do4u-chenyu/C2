@@ -15,6 +15,7 @@ namespace Citta_T1.Utils
     {
         public static Pen Gray = new Pen(Color.Gray, 1);
         public static Pen GrayBold = new Pen(Color.Green, 2);
+        public static Pen DarkGray = new Pen(Color.DarkGray, 1);
     }
     public static class LineUtil
     {
