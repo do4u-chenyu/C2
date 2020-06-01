@@ -46,7 +46,7 @@ namespace Citta_T1.OperatorViews
         {
             int startID = -1;
             string encoding = String.Empty;
-            char separator = '\t';
+            char separator = OpUtil.DefaultSeparator;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
@@ -62,8 +62,7 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     this.dataPath = me.FullFilePath;
-                    if (me.InnerControl is MoveDtControl)
-                        separator = (me.InnerControl as MoveDtControl).Separator;
+                    separator = me.Separator;
                     //设置数据信息选项
                     this.dataInfoBox.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.dataInfoBox, this.dataInfoBox.Text);
