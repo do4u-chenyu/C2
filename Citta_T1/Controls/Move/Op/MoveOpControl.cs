@@ -110,9 +110,6 @@ namespace Citta_T1.Controls.Move.Op
             FullFilePath = String.Empty;
             Encoding = OpUtil.Encoding.NoNeed;
             Separator = OpUtil.DefaultSeparator;
-            //Status = ElementStatus.Null;
-
-
 
             this.subTypeName = subTypeName;
 
@@ -436,7 +433,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        public void SetOpControlName(string name)
+        private void SetOpControlName(string name)
         {
             this.Description = name;
             int maxLength = 24;
@@ -469,7 +466,7 @@ namespace Citta_T1.Controls.Move.Op
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)((txtWidth -1 )* f), this.Height - (int)(4 * f));
             
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -836,7 +833,7 @@ namespace Citta_T1.Controls.Move.Op
 
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             if (zoomUp)
             {
                 SetControlsBySize(factor, this);
@@ -852,28 +849,6 @@ namespace Citta_T1.Controls.Move.Op
                 this.rectIn_down = SetRectBySize(1 / factor, this.rectIn_down);
                 this.rectIn_up = SetRectBySize(1 / factor, this.rectIn_up);
             }
-
-
-        }
-        public void SetControlsBySize(float f, Control control)
-        {      
-            control.Width = Convert.ToInt32(control.Width * f);
-            control.Height = Convert.ToInt32(control.Height * f);
-            control.Left = Convert.ToInt32(control.Left * f);
-            control.Top = Convert.ToInt32(control.Top * f);
-            control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
-
-            //遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in control.Controls)
-                SetControlsBySize(f, con);
-        }
-        public Rectangle SetRectBySize(float f, Rectangle rect)
-        {
-            rect.Width = Convert.ToInt32(rect.Width * f);
-            rect.Height = Convert.ToInt32(rect.Height * f);
-            rect.X = Convert.ToInt32(rect.Left * f);
-            rect.Y = Convert.ToInt32(rect.Top * f);
-            return rect;
         }
         #endregion
 
@@ -1041,7 +1016,7 @@ namespace Citta_T1.Controls.Move.Op
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void UpdateRound(int x, int y, int width, int height, int radius)
+        private void UpdateRounde(int x, int y, int width, int height, int radius)
         {
             Graphics g = Graphics.FromImage(staticImage);
             
@@ -1070,14 +1045,14 @@ namespace Citta_T1.Controls.Move.Op
         {
             double f = Math.Pow(factor, sizeLevel);
             pen = new Pen(Color.DarkGray, 1.5f);
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            UpdateRounde((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 }
