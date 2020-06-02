@@ -20,9 +20,9 @@ namespace Citta_T1.Controls.Left
             InitializeComponent(); 
         }
 
-        private static int ButtonGapHeight = 50;
-        private static int ButtonLeftX = 17;
-        private static int ButtonBottomOffsetY = 40;
+        private static readonly int ButtonGapHeight = 50;
+        private static readonly int ButtonLeftX = 17;
+        private static readonly int ButtonBottomOffsetY = 40;
 
         private Dictionary<string, DataButton> dataSourceDictI2B;
 
@@ -35,7 +35,7 @@ namespace Citta_T1.Controls.Left
         public Dictionary<string, DataButton> DataSourceDictI2B { get => dataSourceDictI2B; }
 
         // 手工导入时调用
-        public void GenDataButton(string dataName, string fullFilePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
             DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);

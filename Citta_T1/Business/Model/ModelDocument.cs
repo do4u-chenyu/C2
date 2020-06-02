@@ -20,7 +20,6 @@ namespace Citta_T1.Business.Model
      */
     class ModelDocument
     {
-        private string userName;//用户名
         private string modelTitle;
 
         private List<ModelElement> modelElements;     
@@ -32,9 +31,9 @@ namespace Citta_T1.Business.Model
         private string savePath;
         private bool dirty;//字段表示模型是否被修改
 
-        private int elementCount = 0;
+        private int elementCount;
         
-        private WorldMap WorldMap;
+        private WorldMap worldMap;
 
 
         private TaskManager taskManager;
@@ -43,26 +42,24 @@ namespace Citta_T1.Business.Model
         /*
          * 传入参数为模型文档名称，当前用户名
          */
-        public string ModelTitle {get => this.modelTitle;}
+        public string ModelTitle { get => this.modelTitle; }
         public bool Dirty { get => dirty; set => dirty = value; }
 
         public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
-        public string SavePath { get => savePath; set => savePath = value; }
-        public List<ModelRelation> ModelRelations { get => this.modelRelations; set => this.modelRelations = value; }
-        public List<ModelElement> ModelElements { get => this.modelElements; set => this.modelElements = value; }
-
-
+        public string SavePath { get => savePath; }
+        public List<ModelRelation> ModelRelations { get => this.modelRelations; }
+        public List<ModelElement> ModelElements { get => this.modelElements; }
         
         public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
-        public TaskManager TaskManager { get => taskManager; set => taskManager = value; }
+        public TaskManager TaskManager { get => taskManager; }
 
 
         public string UserPath { get => userPath; set => userPath = value; }
         public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
 
-        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; set => modelGraphDict = value; }
+        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; }
         
-        public WorldMap WorldMap1 { get => WorldMap; set => WorldMap = value; }
+        public WorldMap WorldMap { get => worldMap; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
         
@@ -70,17 +67,16 @@ namespace Citta_T1.Business.Model
         public ModelDocument(string modelTitle, string userName)
         {
             this.modelTitle = modelTitle;
-            this.userName = userName;
             this.modelElements = new List<ModelElement>();
             this.modelRelations = new List<ModelRelation>();
             this.modelGraphDict = new Dictionary<int, List<int>>();
-            this.remarkDescription = "";
+            this.remarkDescription = String.Empty;
             this.remarkVisible = false;
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.savePath = Path.Combine(this.userPath, modelTitle);
-
+            this.elementCount = 0;
             this.taskManager = new TaskManager();
-            this.WorldMap = new WorldMap();
+            this.worldMap = new WorldMap();
         }
         /*
          * 保存功能
@@ -95,10 +91,6 @@ namespace Citta_T1.Business.Model
         {
             this.modelElements.Add(modelElement);
         }
-        public void RemoveModelElement(ModelElement modelElement)
-        {
-            this.modelElements.Remove(modelElement);
-        }
         public void AddModelRelation(ModelRelation mr, bool setDirty = true)
         {
             this.modelRelations.Add(mr);
@@ -108,7 +100,7 @@ namespace Citta_T1.Business.Model
         }
         public void RemoveModelRelation(ModelRelation mr)
         {
-            this.modelRelations.Remove(mr);
+            this.ModelRelations.Remove(mr);
             this.RemoveEdge(mr);
         }
         private void AddEdge(ModelRelation mr)
@@ -185,8 +177,7 @@ namespace Citta_T1.Business.Model
             }
         }
         public void SetChildrenStatusNull(int ID)
-        {
-           
+        {      
             foreach (ModelRelation mr in this.ModelRelations)
             {              
                 if (mr.StartID != ID)  continue;
@@ -202,7 +193,7 @@ namespace Citta_T1.Business.Model
 
         public void Load()
         {
-            if (File.Exists(Path.Combine(savePath, modelTitle +".xml")))
+            if (File.Exists(Path.Combine(savePath, modelTitle + ".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
@@ -222,8 +213,7 @@ namespace Citta_T1.Business.Model
 
         public void Hide()
         {
-            foreach (ModelElement el1 in this.modelElements)
-                el1.Hide();
+            this.ModelElements.ForEach(me => me.Hide());
         }
 
         public int ReCountDocumentMaxElementID()
@@ -255,7 +245,7 @@ namespace Citta_T1.Business.Model
                     mr.EndP = (eEle.InnerControl as IMoveControl).GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.InnerControl as IMoveControl).OutPinInit("lineExit");
-                    (eEle.InnerControl as IMoveControl).rectInAdd(mr.EndPin);
+                    (eEle.InnerControl as IMoveControl).RectInAdd(mr.EndPin);
                     mr.UpdatePoints();
                 }
                 catch (Exception ex)

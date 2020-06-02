@@ -125,7 +125,7 @@
     <Compile Include="Business\Model\ModelDocument.cs" />
     <Compile Include="Business\Model\ModelElement.cs" />
     <Compile Include="Business\Model\ModelRelation.cs" />
-    <Compile Include="Business\Option\CreateMoveRsControl.cs" />
+    <Compile Include="Business\Option\MoveRsControlFactory.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Option\OptionDao.cs" />
     <Compile Include="Business\Option\OptionInfoCheck.cs" />
@@ -140,6 +140,12 @@
       <DependentUpon>ComCheckBoxList.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\FrameWrapper.cs" />
+    <Compile Include="Controls\Move\MoveBaseControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Move\MoveBaseControl.Designer.cs">
+      <DependentUpon>MoveBaseControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\UndoRedo\Command\ElementAddCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\ElementDeleteCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\ElementMoveCommand.cs" />
@@ -405,11 +411,6 @@
     <Compile Include="OperatorViews\UnionOperatorView.Designer.cs">
       <DependentUpon>UnionOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Bottom\BottomLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -442,11 +443,15 @@
     <Compile Include="Controls\Move\Op\MoveOpControl.Designer.cs">
       <DependentUpon>MoveOpControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Core\CyclicDetector.cs" />
     <Compile Include="Core\DoubleBuffer.cs" />
-    <Compile Include="Utils\DSUtil.cs" />
     <Compile Include="Core\BCPBuffer.cs" />
     <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Core\Global.cs" />
@@ -491,6 +496,9 @@
     <EmbeddedResource Include="Controls\Flow\RightHideButton.resx">
       <DependentUpon>RightHideButton.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Move\MoveBaseControl.resx">
+      <DependentUpon>MoveBaseControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Move\Rs\MoveRsControl.resx">
       <DependentUpon>MoveRsControl.cs</DependentUpon>
@@ -696,6 +704,7 @@
     <None Include="res\toolbox\reset.png" />
     <None Include="res\toolbox\redo.png" />
     <None Include="res\toolbox\undo.png" />
+    <None Include="res\leftpanelmenu\LeftpanelOpIcon.png" />
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

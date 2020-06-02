@@ -105,7 +105,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(413, 19);
+            this.topPanel.Size = new System.Drawing.Size(405, 19);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -113,24 +113,24 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 269);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 272);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(413, 51);
+            this.bottomPanel.Size = new System.Drawing.Size(405, 40);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(330, 14);
+            this.cancelButton.Location = new System.Drawing.Point(330, 7);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -138,14 +138,14 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(240, 14);
+            this.confirmButton.Location = new System.Drawing.Point(240, 7);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -159,7 +159,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 19);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 250);
+            this.keyPanel.Size = new System.Drawing.Size(116, 253);
             this.keyPanel.TabIndex = 2;
             // 
             // label9
@@ -211,7 +211,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 19);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(297, 250);
+            this.valuePanel.Size = new System.Drawing.Size(289, 253);
             this.valuePanel.TabIndex = 3;
             // 
             // groupBox3
@@ -225,7 +225,7 @@
             this.groupBox3.Size = new System.Drawing.Size(199, 30);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox3_Paint);
+            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox3_Paint);
             // 
             // sortByString
             // 
@@ -261,8 +261,7 @@
             this.endRow.Name = "endRow";
             this.endRow.Size = new System.Drawing.Size(39, 23);
             this.endRow.TabIndex = 15;
-            this.endRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.endRow_KeyPress);
-            this.endRow.Leave += new System.EventHandler(this.endRow_Leave);
+            this.endRow.Leave += new System.EventHandler(this.EndRow_Leave);
             // 
             // firstRow
             // 
@@ -274,8 +273,7 @@
             this.firstRow.Size = new System.Drawing.Size(39, 23);
             this.firstRow.TabIndex = 14;
             this.firstRow.Text = "1";
-            this.firstRow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.firstRow_KeyPress);
-            this.firstRow.Leave += new System.EventHandler(this.firstRow_Leave);
+            this.firstRow.Leave += new System.EventHandler(this.FirstRow_Leave);
             // 
             // dataInfo
             // 
@@ -287,8 +285,8 @@
             this.dataInfo.Size = new System.Drawing.Size(134, 23);
             this.dataInfo.TabIndex = 13;
             this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataInfo_MouseClick);
-            this.dataInfo.LostFocus += new System.EventHandler(this.dataInfo_LostFocus);
+            this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
+            this.dataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
             // 
             // sortField
             // 
@@ -346,7 +344,7 @@
             this.groupBox2.Size = new System.Drawing.Size(197, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox2_Paint);
+            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox2_Paint);
             // 
             // repetition
             // 
@@ -385,7 +383,7 @@
             this.groupBox1.Size = new System.Drawing.Size(199, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // descendingOrder
             // 
@@ -416,7 +414,7 @@
             // SortOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(413, 320);
+            this.ClientSize = new System.Drawing.Size(405, 312);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

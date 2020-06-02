@@ -1,4 +1,6 @@
-﻿using Citta_T1.Controls.Move.Dt;
+﻿using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
@@ -50,10 +52,9 @@ namespace Citta_T1.Business.Model
     }
     public class ModelElement
     {
-        private Control ctl;
-
+        private MoveBaseControl ctl;
         public ElementType Type { get; set; }
-        public Control InnerControl { get => ctl; }
+        public MoveBaseControl InnerControl { get => ctl; }
 
         #region  封装底层控件属性,Location, ID, Encoding, ExtType, Separator, Description, FullFilePath, Status
 
@@ -71,179 +72,22 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-        public Point Location { get => ctl.Location; }
-        public int ID {
-            get
-            {
-                switch (this.Type)
-                { 
-                    case ElementType.Operator:
-                        return (ctl as MoveOpControl).ID;
-                    case ElementType.DataSource:
-                        return (ctl as MoveDtControl).ID;
-                    case ElementType.Result:
-                        return (ctl as MoveRsControl).ID;
-                    default:
-                        return -1;              
-                }
-            }
-        }
-        public DSUtil.Encoding Encoding
-        {
-            get
-            {
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        return (ctl as MoveDtControl).Encoding;
-                    case ElementType.Result:
-                        return (ctl as MoveRsControl).Encoding;
-                    default:
-                        return DSUtil.Encoding.NoNeed;
-                }
-            }
-            set
-            {
-                switch (this.Type)
-                {
-                    case ElementType.Operator:
-                        (ctl as MoveDtControl).Encoding = value;
-                        break;
-                    case ElementType.Result:
-                        (ctl as MoveRsControl).Encoding = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        public DSUtil.ExtType ExtType
-        {
-            get
-            {
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        return (ctl as MoveDtControl).ExtType;
-                    case ElementType.Result:
-                        return (ctl as MoveRsControl).ExtType;
-                    default:
-                        return DSUtil.ExtType.Unknow;
-                }
-               
-            }
-        }
-        public char Separator {
-            get {
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        return (ctl as MoveDtControl).Separator;
-                    case ElementType.Result:
-                        return (ctl as MoveRsControl).Separator;
-                    default:
-                        return '\t';
-                }
-               
-            }
-            set 
-            {
-                switch (this.Type)
-                {
-                    case ElementType.Operator:
-                        (ctl as MoveDtControl).Separator = value;
-                        break;
-                    case ElementType.Result:
-                        (ctl as MoveRsControl).Separator = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        public string Description
-        {
-            get
-            {
-                string des = String.Empty;
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        des = (ctl as MoveDtControl).Description;
-                        break;
-                    case ElementType.Operator:
-                        des = (ctl as MoveOpControl).DescriptionName;
-                        break;
-                    case ElementType.Result:
-                        des = (ctl as MoveRsControl).DescriptionName;
-                        break;
-                    default:
-                        break;
-                }
-                return des;
-            }
-            set
-            {
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        (ctl as MoveDtControl).Description = value;
-                        break;
-                    case ElementType.Operator:
-                        (ctl as MoveOpControl).DescriptionName = value;
-                        break;
-                    case ElementType.Result:
-                        (ctl as MoveRsControl).DescriptionName = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        public string FullFilePath
-        {
-            get
-            {
-                string path = String.Empty;
-                if (this.Type == ElementType.DataSource)
-                    path = (ctl as MoveDtControl).FullFilePath;
-                else if (this.Type == ElementType.Result)
-                    path = (ctl as MoveRsControl).FullFilePath;
-                return path;
-            }
-        }
 
-        public ElementStatus Status
-        {
-            get
-            {
-                switch (this.Type)
-                {
-                    case ElementType.DataSource:
-                        return ElementStatus.Done;
-                    case ElementType.Operator:
-                        return (ctl as MoveOpControl).Status;
-                    case ElementType.Result:
-                        return (ctl as MoveRsControl).Status;
-                    default:
-                        return ElementStatus.Null;
-                }
-            }
-            set
-            {
-                switch (this.Type)
-                {
-                    case ElementType.Operator:
-                        (ctl as MoveOpControl).Status = value;
-                        break;
-                    case ElementType.Result:
-                        (ctl as MoveRsControl).Status = value;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        public Point Location { get => ctl.Location; }
+
+        public int ID { get => ctl.ID; }
+
+        public OpUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
+  
+        public OpUtil.ExtType ExtType { get => ctl.ExtType; }
+
+        public char Separator { get => ctl.Separator; set => ctl.Separator = value; }
+
+        public string Description { get => ctl.Description; set => ctl.Description = value; }
+
+        public string FullFilePath { get => ctl.FullFilePath; set => ctl.FullFilePath = value; }
+
+        public ElementStatus Status { get => ctl.Status; set => ctl.Status = value; }
         #endregion
 
 
@@ -255,26 +99,18 @@ namespace Citta_T1.Business.Model
         }
 
        
-        private ModelElement(ElementType type,  Control ctl)
+        private ModelElement(ElementType type, MoveBaseControl ctl)
         {
             Init(type, ctl);
         }
 
-        public static ModelElement CreateOperatorElement(MoveOpControl ctl)
+
+        public static ModelElement CreateModelElement(MoveBaseControl ctl)
         {
-            return new ModelElement(ElementType.Operator, ctl);
-        }
-        public static ModelElement CreateResultElement(MoveRsControl ctl)
-        {
-            return new ModelElement(ElementType.Result, ctl);
+            return new ModelElement(ctl.Type, ctl);
         }
 
-        public static ModelElement CreateDataSourceElement(MoveDtControl ctl)
-        {
-            return new ModelElement(ElementType.DataSource, ctl);
-        }
-
-        private void Init(ElementType type, Control ctl)
+        private void Init(ElementType type, MoveBaseControl ctl)
         {
             this.Type = type;
             this.ctl = ctl; 
@@ -282,30 +118,11 @@ namespace Citta_T1.Business.Model
         
         public void Show()
         {
-            switch (this.Type)
-            {
-                case ElementType.DataSource:
-                case ElementType.Operator:
-                case ElementType.Result:
-                    ctl.Show();
-                    break;
-                default:
-                    break;
-            }
-
+            ctl.Show();
         }
         public void Hide()
         {
-            switch (this.Type)
-            {
-                case ElementType.DataSource:
-                case ElementType.Operator:
-                case ElementType.Result:
-                    ctl.Hide();
-                    break;
-                default:
-                    break;
-            }
+            ctl.Hide();
         }
     }
 }

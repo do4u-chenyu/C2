@@ -14,12 +14,12 @@ namespace Citta_T1.Business.DataSource
     class DataSourceInfo
     {
         private string userPath;
-        private string DataSourcePath;
+        private string dataSourcePath;
         private static LogUtil log = LogUtil.GetInstance("DataSourceInfo");
         public DataSourceInfo(string userName)
         {
-            this.userPath = System.IO.Path.Combine(Global.WorkspaceDirectory, userName);
-            this.DataSourcePath = System.IO.Path.Combine(this.userPath, "DataSourceInformation.xml");
+            this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
+            this.dataSourcePath = Path.Combine(this.userPath, "DataSourceInformation.xml");
          }
        
         public void WriteDataSourceInfo(DataButton db)
@@ -27,20 +27,19 @@ namespace Citta_T1.Business.DataSource
             Directory.CreateDirectory(userPath);
             Utils.FileUtil.AddPathPower(userPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
-            if (!File.Exists(DataSourcePath))
+            if (!File.Exists(dataSourcePath))
             {
-
                 XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
                 xDoc.AppendChild(rootElement);
 
                 XmlElement versionElement = xDoc.CreateElement("Version");
                 versionElement.InnerText = "V1.0";
                 rootElement.AppendChild(versionElement);
-                xDoc.Save(DataSourcePath);
+                xDoc.Save(dataSourcePath);
             }
-            xDoc.Load(DataSourcePath);
+            xDoc.Load(dataSourcePath);
             WriteOneDataSource(db, xDoc);
-            xDoc.Save(DataSourcePath);
+            xDoc.Save(dataSourcePath);
         }
 
         public void SaveDataSourceInfo(DataButton[] dbs)
@@ -55,7 +54,7 @@ namespace Citta_T1.Business.DataSource
                 WriteOneDataSource(db, xDoc);
             }
             // 保存时覆盖原文件
-            xDoc.Save(DataSourcePath);
+            xDoc.Save(dataSourcePath);
         }
 
         private void WriteOneDataSource(DataButton db, XmlDocument xDoc)
@@ -92,43 +91,27 @@ namespace Citta_T1.Business.DataSource
         {
             XmlDocument xDoc = new XmlDocument();
             List<DataButton> dataSourceList = new List<DataButton>();
-            if (!File.Exists(DataSourcePath))
+            if (!File.Exists(dataSourcePath))
                 return dataSourceList;
-            xDoc.Load(DataSourcePath);
+            xDoc.Load(dataSourcePath);
             XmlNode rootNode = xDoc.SelectSingleNode("DataSourceDocument");
             XmlNodeList nodeList = rootNode.SelectNodes("DataSource");
             foreach (XmlNode xn in nodeList)
             {
                 try
                 {
-                    string filePath = xn.SelectSingleNode("path").InnerText;
+                    string fullFilePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
-                    #region 读分隔符
-                    char separator;
-                    int ascii = int.Parse(xn.SelectSingleNode("separator").InnerText);
-                    if (ascii < 0 || ascii > 255)
-                    {
-                        separator = '\t';
-                        log.Warn("在xml中读取分隔符失败，已使用默认分隔符'\t'替代");
-                    }
-                    else
-                    {
-                        separator = Convert.ToChar(ascii);
-                    }
-                    #endregion
-                    DSUtil.ExtType extType = ExtType(xn.SelectSingleNode("extType").InnerText);
-                    DSUtil.Encoding encoding = EnType(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(filePath, dataName, separator, extType, encoding);
-                    dataButton.Count = Convert.ToInt32(xn.SelectSingleNode("count").InnerText);
+                    char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
+                    OpUtil.ExtType extType = OpUtil.ExtTypeEnum(xn.SelectSingleNode("extType").InnerText);
+                    OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
+                    DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
+                    dataButton.Count = ConvertUtil.TryParseInt(xn.SelectSingleNode("count").InnerText);
                     dataSourceList.Add(dataButton);
                 }
                 catch (Exception e) { log.Error(e.Message); }
             }
             return dataSourceList;
         }
-        public DSUtil.ExtType ExtType(string type)
-        { return (DSUtil.ExtType)Enum.Parse(typeof(DSUtil.ExtType), type); }
-        public DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
     }
 }

@@ -1,47 +1,37 @@
 ﻿using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Flow;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
+using Citta_T1.Controls.Move;
 using Citta_T1.Core;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 using System.Xml;
 
 namespace Citta_T1.Business.Model
 {
     class ModelDocumentDao
     {
-        private ModelDocument currentDocument;
-        private List<ModelDocument> modelDocuments;
-        
-        
-        public List<ModelDocument> ModelDocuments { get => modelDocuments; set => modelDocuments = value; }
-        public ModelDocument CurrentDocument { get => currentDocument; set => currentDocument = value; }
-        private string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
+        public List<ModelDocument> ModelDocuments { get; set; }
+        public ModelDocument CurrentDocument { get; set; }
+        private readonly string userInfoPath = Path.Combine(Global.WorkspaceDirectory, "UserInformation.xml");
         public ModelDocumentDao()
         {
-            modelDocuments = new List<ModelDocument>();         
+            ModelDocuments = new List<ModelDocument>();         
         }
-        public void AddBlankDocument(string modelTitle,  string userName)
+        public void AddBlankDocument(string modelTitle, string userName)
         {
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             ModelDocument modelDocument = new ModelDocument(modelTitle, userName);
-            foreach (ModelDocument md in this.modelDocuments)
-                md.Hide();
-            this.modelDocuments.Add(modelDocument);
-            this.currentDocument = modelDocument;    
+            ModelDocuments.ForEach(md => md.Hide());
+            ModelDocuments.Add(modelDocument);
+            CurrentDocument = modelDocument;
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
         public string SaveCurrentDocument()
         {
-
-            this.currentDocument.Save();
-            this.currentDocument.Dirty = false;
-            return this.currentDocument.ModelTitle;
+            CurrentDocument.Save();
+            CurrentDocument.Dirty = false;
+            return CurrentDocument.ModelTitle;
         }
 
         public string[] SaveAllDocuments()
@@ -59,96 +49,58 @@ namespace Citta_T1.Business.Model
             }
             return titles.ToArray();
         }
-        public ModelDocument LoadDocument(string modelTitle,string userName)
+        public ModelDocument LoadDocument(string modelTitle, string userName)
         {
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            
             ModelDocument md = new ModelDocument(modelTitle, userName);
             md.Load();
             md.Hide();
             md.ReCountDocumentMaxElementID();
-            this.currentDocument = md;
-            this.modelDocuments.Add(md);          
+            CurrentDocument = md;
+            ModelDocuments.Add(md);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             return md;
 
         }
         public void SwitchDocument(string modelTitle)
         {
-            this.currentDocument = FindModelDocument(modelTitle);
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
-            foreach (ModelDocument md in this.modelDocuments)
+            CurrentDocument = FindModelDocument(modelTitle);
+            foreach (ModelDocument md in ModelDocuments)
             {
                 if (md.ModelTitle == modelTitle)
                     md.Show();
                 else
                     md.Hide();
-            }           
+            }
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
-        public ModelElement AddDocumentOperator(Control ct)
+        public ModelElement AddDocumentOperator(MoveBaseControl ct)
         {
-         
-            if (ct is MoveDtControl)
-            {
-                MoveDtControl dt = (ct as MoveDtControl);
-                dt.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateDataSourceElement(dt);
-                this.currentDocument.AddModelElement(e);
-                return e;
-            }
-
-            if (ct is MoveOpControl)
-            {
-                MoveOpControl op = (ct as MoveOpControl);
-                op.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateOperatorElement(op);
-                this.currentDocument.AddModelElement(e);
-                return e;               
-            }
-            if (ct is MoveRsControl)
-            {
-                MoveRsControl rs = (ct as MoveRsControl);
-                rs.ID = this.currentDocument.ElementCount++;
-                ModelElement e = ModelElement.CreateResultElement(rs);
-                this.currentDocument.AddModelElement(e);
-                return e;
-            }
-
-            return ModelElement.Empty;
+            ct.ID = this.CurrentDocument.ElementCount++;
+            ModelElement e = ModelElement.CreateModelElement(ct);
+            CurrentDocument.AddModelElement(e);
+            return e;
         }
-
-
-
 
         private ModelDocument FindModelDocument(string modelTitle)
         {
-            foreach (ModelDocument md in this.modelDocuments)
-            {
-                if (md.ModelTitle == modelTitle)
-                    return md;
-            }
-            return null;
+            return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
         }
+
         public List<ModelElement> DeleteCurrentDocument()
         {
-            if (this.currentDocument == null)
+            if (CurrentDocument == null)
                 throw new NullReferenceException();
-            List<ModelElement> modelElements = this.currentDocument.ModelElements;
-            this.ModelDocuments.Remove(this.currentDocument);
-            return modelElements; 
+            this.ModelDocuments.Remove(CurrentDocument);
+            return CurrentDocument.ModelElements; 
         }
         public void UpdateRemark(RemarkControl remarkControl)
         { 
-            if (this.currentDocument == null)
-                return;
-            this.currentDocument.RemarkDescription = remarkControl.RemarkText;
+            if (this.CurrentDocument != null)
+                this.CurrentDocument.RemarkDescription = remarkControl.RemarkDescription;
         }
 
-        public string GetRemark()
-        {
-            string remark = "";
-            if (this.currentDocument != null)
-                remark = this.currentDocument.RemarkDescription;
-            return remark;
-        }
+        public string RemarkDescription => CurrentDocument == null ? String.Empty : CurrentDocument.RemarkDescription;
 
         public bool WithoutDocumentLogin(string userName)
         {
@@ -178,7 +130,7 @@ namespace Citta_T1.Business.Model
                     string[] saveTitle = LoadAllModelTitle(userName);
                     if (saveTitle.Length == 0)
                         return;
-                    foreach (ModelDocument mb in this.modelDocuments)
+                    foreach (ModelDocument mb in this.ModelDocuments)
                     {
                         if (!saveTitle.Contains(mb.ModelTitle))
                             continue;
@@ -187,7 +139,7 @@ namespace Citta_T1.Business.Model
                         xn.AppendChild(childElement);                     
                     }
                     //关闭界面，用户只留下一个未保存的文档，则加载时随机打开一个文档
-                    if (this.modelDocuments.Count == 1 && !saveTitle.Contains(this.modelDocuments[0].ModelTitle))
+                    if (this.ModelDocuments.Count == 1 && !saveTitle.Contains(this.ModelDocuments[0].ModelTitle))
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = saveTitle[0];
@@ -239,16 +191,12 @@ namespace Citta_T1.Business.Model
 
         public ModelDocument GetManagerRelateModel(TaskManager manager)
         {
-            return modelDocuments.Find(md => md.TaskManager == manager);
+            return ModelDocuments.Find(md => md.TaskManager == manager);
         }
         // 统计当前用户有多少元素
         public int CountAllModelElements()
         {
-            int count = 0;
-            foreach (ModelDocument md in this.ModelDocuments)
-                count += md.ModelElements.Count;
-
-            return count;
+            return this.ModelDocuments.Sum(md => md.ModelElements.Count);
         }
         // 特定Datasource在当前所有打开模型中的引用次数
         public int CountDataSourceUsage(string ffp)

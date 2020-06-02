@@ -1,14 +1,6 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -32,7 +24,7 @@ namespace Citta_T1.OperatorViews
             Close();
         }
 
-        private void createLine(int addLine)
+        private void CreateLine(int addLine)
         {
             // 添加控件
             Label label = new Label();
@@ -96,7 +88,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
                 addLine = 0;
-                createLine(addLine);
+                CreateLine(addLine);
             }
             else
             {
@@ -126,7 +118,7 @@ namespace Citta_T1.OperatorViews
                     ctlNext4.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
                 }
-                createLine(addLine);
+                CreateLine(addLine);
             }
 
         }

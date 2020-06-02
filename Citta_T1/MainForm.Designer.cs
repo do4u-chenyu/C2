@@ -339,7 +339,6 @@ namespace Citta_T1
             this.bottomLogControl.Name = "bottomLogControl";
             this.bottomLogControl.Size = new System.Drawing.Size(906, 241);
             this.bottomLogControl.TabIndex = 1;
-            this.bottomLogControl.Load += new System.EventHandler(this.dataGridView1_Load);
             // 
             // bottomPyConsole
             // 
@@ -349,7 +348,6 @@ namespace Citta_T1
             this.bottomPyConsole.Name = "bottomPyConsole";
             this.bottomPyConsole.Size = new System.Drawing.Size(906, 241);
             this.bottomPyConsole.TabIndex = 2;
-            this.bottomPyConsole.Load += new System.EventHandler(this.dataGridView2_Load);
             // 
             // panel4
             // 
@@ -795,7 +793,7 @@ namespace Citta_T1
             this.remarkControl.Location = new System.Drawing.Point(694, 111);
             this.remarkControl.Margin = new System.Windows.Forms.Padding(4);
             this.remarkControl.Name = "remarkControl";
-            this.remarkControl.RemarkText = "";
+            this.remarkControl.RemarkDescription = "";
             this.remarkControl.Size = new System.Drawing.Size(160, 160);
             this.remarkControl.TabIndex = 26;
             this.remarkControl.Visible = false;

@@ -109,14 +109,14 @@ namespace Citta_T1.Controls
             // 先画线，避免线盖住控件
             foreach (ModelRelation mr in modelRelations)
             {
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(mr.GetBoundingRect().Location, false);
+                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(mr.GetBoundingRect().Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
-                PointF s = Global.GetCurrentDocument().WorldMap1.ScreenToWorldF(mr.StartP,false);
-                PointF a = Global.GetCurrentDocument().WorldMap1.ScreenToWorldF(mr.A,false);
-                PointF b = Global.GetCurrentDocument().WorldMap1.ScreenToWorldF(mr.B,false);
-                PointF e = Global.GetCurrentDocument().WorldMap1.ScreenToWorldF(mr.EndP,false);
+                PointF s = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.StartP,false);
+                PointF a = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.A,false);
+                PointF b = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.B,false);
+                PointF e = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.EndP,false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             // 反向遍历,解决Move时旧控件压在新控件上
@@ -124,7 +124,7 @@ namespace Citta_T1.Controls
             {
                 ModelElement me = modelElements[modelElements.Count - i - 1];
                 Control ct = me.InnerControl;
-                Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location, false);
+                Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
                 ct.DrawToBitmap(staticImage, new Rectangle(Pw.X, Pw.Y, ct.Width, ct.Height));
@@ -155,26 +155,22 @@ namespace Citta_T1.Controls
             OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
             
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             // 将所有控件都显示出来
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-                     
-            foreach (ModelElement me in modelElements)
-            {
-                me.Show();
-            }
+            Global.GetCurrentDocument().ModelElements.ForEach(me => me.Show());
+
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
             Global.GetNaviViewControl().UpdateNaviView();
         }
         private void DragEdgeCheck(out Point mapOrigin,out Point moveOffset)
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin;           
+            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;           
             int dx = Convert.ToInt32((now.X - start.X) / Factor);
             int dy = Convert.ToInt32((now.Y - start.Y) / Factor);
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            moveOffset = Utils.OpUtil.WorldBoundControl(Factor, Width, Height);       
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = mapOrigin;  
+            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);       
+            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;  
         }
     }
 }

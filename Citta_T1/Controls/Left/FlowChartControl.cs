@@ -10,9 +10,8 @@ namespace Citta_T1.Controls.Left
         {
             InitializeComponent();
             this.toolTip1.SetToolTip(this.customOPButton1, HelpUtil.CustomOperator1HelpInfo);
-            this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
-
             this.toolTip1.SetToolTip(this.customOPButton2, HelpUtil.CustomOperator2HelpInfo);
+            this.toolTip1.SetToolTip(this.pythonOPButton, HelpUtil.PythonOperatorHelpInfo);
         }
 
         private void FlowChartControl_MouseDown(object sender, MouseEventArgs e)
@@ -21,7 +20,7 @@ namespace Citta_T1.Controls.Left
             {
                 DataObject dragDropData = new DataObject();
                 dragDropData.SetData("Type", ElementType.Operator);
-                dragDropData.SetData("Path", "");
+                dragDropData.SetData("Path", string.Empty);
                 dragDropData.SetData("Text", (sender as Button).Text);
                 (sender as Button).DoDragDrop(dragDropData, DragDropEffects.Copy | DragDropEffects.Move);
             }

@@ -95,7 +95,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(555, 37);
+            this.topPanel.Size = new System.Drawing.Size(547, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -103,10 +103,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 333);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 325);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(555, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(547, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
@@ -120,7 +120,7 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -135,7 +135,7 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -146,7 +146,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 296);
+            this.keyPanel.Size = new System.Drawing.Size(116, 288);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -160,7 +160,7 @@
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(439, 296);
+            this.valuePanel.Size = new System.Drawing.Size(431, 288);
             this.valuePanel.TabIndex = 3;
             // 
             // dataSource1
@@ -173,8 +173,8 @@
             this.dataSource1.Size = new System.Drawing.Size(144, 23);
             this.dataSource1.TabIndex = 10;
             this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource1_MouseClick);
-            this.dataSource1.LostFocus += new System.EventHandler(this.dataSource1_LostFocus);
+            this.dataSource1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource1_MouseClick);
+            this.dataSource1.LostFocus += new System.EventHandler(this.DataSource1_LostFocus);
             // 
             // dataSource0
             // 
@@ -186,8 +186,8 @@
             this.dataSource0.Size = new System.Drawing.Size(144, 23);
             this.dataSource0.TabIndex = 9;
             this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataSource0_MouseClick);
-            this.dataSource0.LostFocus += new System.EventHandler(this.dataSource0_LostFocus);
+            this.dataSource0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataSource0_MouseClick);
+            this.dataSource0.LostFocus += new System.EventHandler(this.DataSource0_LostFocus);
             // 
             // OutList
             // 
@@ -232,7 +232,7 @@
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.add_Click);
+            this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
             // comboBox1
             // 
@@ -246,8 +246,8 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
-            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox1_KeyUp);
+            this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
             // 
             // comboBox2
             // 
@@ -261,8 +261,8 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(86, 24);
             this.comboBox2.TabIndex = 3;
-            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox2_KeyUp);
-            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_Leave);
+            this.comboBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox2_KeyUp);
+            this.comboBox2.Leave += new System.EventHandler(this.ComboBox2_Leave);
             // 
             // panel1
             // 
@@ -271,7 +271,7 @@
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(439, 160);
+            this.panel1.Size = new System.Drawing.Size(425, 160);
             this.panel1.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -291,7 +291,7 @@
             // DifferOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(555, 397);
+            this.ClientSize = new System.Drawing.Size(547, 389);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);

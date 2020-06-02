@@ -13,20 +13,6 @@ namespace Citta_T1.Business.Option
     class OptionDao
     {
         private static LogUtil log = LogUtil.GetInstance("OptionDao");
-        //添加relation
-        private static bool IsSingleElement(ModelElement me)
-        {
-            ElementSubType[] doubleInputs = new ElementSubType[] {
-                                                ElementSubType.CollideOperator,
-                                                ElementSubType.UnionOperator,
-                                                ElementSubType.RelateOperator,
-                                                ElementSubType.DifferOperator,
-                                                ElementSubType.KeyWordOperator,
-                                                ElementSubType.CustomOperator2};
-            return !doubleInputs.Contains(me.SubType);
-        }
-
-
 
         // 情况1
         // LEFT_ME ----- StartID.MR.EndID ----- RIGHT_ME
@@ -47,10 +33,10 @@ namespace Citta_T1.Business.Option
 
             MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
-            if (IsSingleElement(rightMe)) 
+            if (moveOpControl.IsSingleDimension()) 
             {
                 moveOpControl.EnableOption = true;
-                DoInputComare(rightMe, mr, null);   
+                DoInputComare(rightMe, mr, ModelRelation.Empty);   
             }
             // 情况2
             else
@@ -73,318 +59,173 @@ namespace Citta_T1.Business.Option
              * 获取单，双输入新旧数据源旧表头
              */
             MoveOpControl moveOpControl = me.InnerControl as MoveOpControl;
-            List<string> oldColumns0; 
-            List<string> oldColumns1 = new List<string>();
-            List<string> columns0 = new List<string>() { };
-            List<string> columns1 = new List<string>() { };
-            //mr1不为null,则me双输入算子
-            if (mr1 == null)
-            {
-                oldColumns0 = moveOpControl.FirstDataSourceColumns;
-                if (oldColumns0 == null || oldColumns0.Count() == 0)
+            List<string> oldColumns0 = moveOpControl.FirstDataSourceColumns; 
+            List<string> oldColumns1 = moveOpControl.SecondDataSourceColumns;
+            List<string> newColumns0 = new List<string>() { };
+            List<string> newColumns1 = new List<string>() { };
 
-                    return;
-                GetNewColumns(mr0, columns0, mr1, columns1);
-            }  
-            else
-            {
+            // 任何情况下,第一个入度的数据源表头不能为空
+            if (oldColumns0.Count == 0)
+                return;
 
-                oldColumns0 = moveOpControl.FirstDataSourceColumns;
-                oldColumns1 = moveOpControl.SecondDataSourceColumns;
-                if (oldColumns0 == null || oldColumns0.Count() == 0)
+            // 二元算子时,第二个入度的数据源表头不能为空
+            if (moveOpControl.IsBinaryDimension())
+                if(oldColumns1.Count == 0)
                     return;
-                if (oldColumns1 == null || oldColumns1.Count() == 0)
-                    return;
-                if (mr1.EndPin != 1)
-                    GetNewColumns(mr1, columns0, mr0, columns1);
-                else
-                    GetNewColumns(mr0, columns0, mr1, columns1);
-            }
-           
-            if (mr1 == null)
-            {
-                //单输入情况1
-                if (columns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(columns0.Take(oldColumns0.Count())))
-                    me.Status = LastOptionStatus(me);
-                //单输入情况2
-                else
-                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
-            }
-            else
-            {
-                //双输入情况1
-                bool factor0 = columns0.Count() >= oldColumns0.Count() && oldColumns0.SequenceEqual(columns0.Take(oldColumns0.Count()));
-                bool factor1 = columns1.Count() >= oldColumns1.Count() && oldColumns1.SequenceEqual(columns1.Take(oldColumns1.Count()));
-                if (factor0 && factor1)
-                    me.Status = LastOptionStatus(me);
-                //双输入情况2
-                else
-                    Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
-            }
-        }
-        private void GetNewColumns(ModelRelation mr0, List<string> columns0, ModelRelation mr1, List<string> columns1)
-        {
+
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
-            BcpInfo bcpInfo0 = new BcpInfo(startElement0);
-            foreach(string name in bcpInfo0.columnArray)
-                columns0.Add(name);
-            if (mr1 == null) return;
-            ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
-            BcpInfo bcpInfo1 = new BcpInfo(startElement1);
-            foreach (string name in bcpInfo1.columnArray)
-                columns1.Add(name);
+            LoadColumns(startElement0, newColumns0);
+    
+            if (moveOpControl.IsBinaryDimension())// 二元算子
+            {
+                ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
+                LoadColumns(startElement1, newColumns1);
+                // newColumns0对应第一个入度的表头
+                // newColumns1对应第二个入度的表头
+                // 默认线0落在入度0,线1落在入度1
+                // 线0落在入度1,线1落在入度0, 交换表头
+                if (mr0.EndPin == 1 && mr1.EndPin == 0)
+                    Swap(ref newColumns0, ref newColumns1);  
+            }
 
+            bool factor0 = newColumns0.Count >= oldColumns0.Count && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count));
+            bool factor1 = newColumns1.Count >= oldColumns1.Count && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Count));
+
+            if (factor0 && factor1)
+            {
+                me.Status = RestoreOptionStatus(me);
+                return;
+            } 
+            Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
+        }
+
+        private void Swap(ref List<string> A, ref List<string> B)
+        {
+            List<string> C = A;
+            A = B;
+            B = C;
+        }
+
+        private void LoadColumns(ModelElement me, List<string> columns)
+        {
+            columns.AddRange(new BcpInfo(me).ColumnArray);
         }
 
 
-      
-       
+
+
         //获取算子上次配置状态
-        private ElementStatus LastOptionStatus(ModelElement me)
+        private ElementStatus RestoreOptionStatus(ModelElement me)
         { 
             Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
-            if (optionDict == null) return ElementStatus.Null;
+
+            if (optionDict == null)
+                return ElementStatus.Null;
+
+            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow" };
+
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
-                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空，sort的结束行数也能为空。。。，直接判断为空会出问题
-                List<string> keys = new List<string>() { "otherSeparator", "browseChosen", "endRow" };
-                if (keys.Contains(kvp.Key)) continue;
-                if (optionDict[kvp.Key] == "")
+                //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空题 ，  
+                //sort的结束行数也能为空。。。，直接判断为空会出问
+                if (keys.Contains(kvp.Key))
+                    continue;
+
+                if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
                    return ElementStatus.Null;
             }
             return ElementStatus.Ready;
         }
        
-
-        //新数据源修改输出
-
-        public bool IsDataSourceEqual(string[] oldColumnList, string[] columnName, int[] outIndex) 
+        public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
         {
-            int maxIndex = outIndex.Max();
-            if (maxIndex > columnName.Length - 1)
-                return true;
-            return (!Enumerable.SequenceEqual(oldColumnList, columnName));
-  
-        }
-        public bool IsSingleDataSourceChange(MoveOpControl opControl, string[] columnName,string field, List<int> fieldList = null)
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否清空进行判断
+            //不存在旧数据源，直接返回
+            bool clear = false;
+            string optionValues = moc.Option.GetOption(name);
+            if (string.IsNullOrEmpty(optionValues) )
+                return !clear;          
+            
+            //复选框配置的判断
+            int index;
+            int maxIndex = columns.Length - 1;
+            if (name.Contains("outfield"))
+                index = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse).Max();
+            else//单选框配置的判断
+                index = selectIndex != -1 ? selectIndex : Convert.ToInt32(optionValues);
 
-            if (opControl.Option.GetOption("columnname") == "") return true;
-            string[] oldColumnList = opControl.Option.GetOption("columnname").Split('\t');
-            try
+            if (index > maxIndex)
             {
-                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
-                {
-                    foreach (int fl in fieldList)
-                    {
-                        if (fl > columnName.Length - 1 || oldColumnList[fl] != columnName[fl])
-                        {
-                            opControl.Option.OptionDict[field] = "";
-                            return false;
-                        }
-                    }
-                }
-                else if (field.Contains("outfield") && opControl.Option.GetOption(field) != "")
-                {
-
-                    string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (IsDataSourceEqual(oldColumnList, columnName, outIndex))
-                    {
-                        opControl.Option.OptionDict["outfield"] = "";
-                        return false;
-                    }
-
-                }
-                else if(opControl.Option.GetOption(field) != "")
-                {
-                    //单选框配置的判断
-                    int index = Convert.ToInt32(opControl.Option.GetOption(field));
-                    if (index > columnName.Length - 1 || oldColumnList[index] != columnName[index])
-                        opControl.Option.OptionDict[field] = "";
-                }
+                moc.Option.OptionDict[name] = "";
+                clear = true;
             }
-            catch (Exception ex) { log.Error(ex.Message); }
-            return true;
+            return clear;
         }
-        public bool IsDoubleDataSourceChange(MoveOpControl opControl, string[] columnName0, string[] columnName1, string field, List<int> fieldList = null)
-        {
-            //新数据源与旧数据源表头不匹配，对应配置内容是否情况进行判断
-            if (opControl.Option.GetOption("columnname0") == "" || opControl.Option.GetOption("columnname1") == "") return true;
-            string[] oldColumnList0 = opControl.Option.GetOption("columnname0").Split('\t');
-            string[] oldColumnList1 = opControl.Option.GetOption("columnname1").Split('\t');
+        //配置窗口输出的改变，引起后续子图状态改变逻辑
 
-            try
-            { 
-                if (field.Contains("factor") && opControl.Option.GetOption(field) != "")
-                {
-                    bool IsEqual0 = fieldList[0] > columnName0.Length - 1 || oldColumnList0[fieldList[0]] != columnName0[fieldList[0]];
-                    bool IsEqual1 = fieldList[1] > columnName1.Length - 1 || oldColumnList1[fieldList[1]] != columnName1[fieldList[1]];
-                    if (IsEqual0 || IsEqual1)
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                }
-                else if (field.Contains("outfield"))
-                {
 
-                    string[] checkIndexs = opControl.Option.GetOption(field).Split(',');
-                    int[] outIndex = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                    if (field == "outfield1" && IsDataSourceEqual(oldColumnList1, columnName0, outIndex))
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                    if (field != "outfield1" && IsDataSourceEqual(oldColumnList0, columnName0, outIndex))
-                    {
-                        opControl.Option.OptionDict[field] = "";
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex) { log.Error(ex.Message); };
-            return true;
-        }
-        //修改配置输出
-        public void IsModifyOut(List<string> oldColumns, List<string> currentcolumns, int ID)  
+        //
+        // 情况1：新输出和旧输出字段数目一致，且顺序一致
+        //       后续子图Null状态
+        // 情况2：新输出>旧输出字段数目一致，且顺序一致
+        //       重写连接的结果Xml文件表头
+        // 情况3：其他情况
+        //       后续子图Null状态
+        //
+        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)  
         {
-           
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            List<string> columns = new List<string>();
-           
-            //新输出字段中不包含旧字段
-            foreach (string cn in oldColumns)
-            {
-                if (!currentcolumns.Contains(cn))
-                {
-                    IsNewOut(currentcolumns, ID);
-                    return;
-                }    
-            }
-            //新输出字段包含就字段，但是新输出字段数目少于旧字段数目，如并集的重复选择
-            if (oldColumns.Count > currentcolumns.Count)
-            {
-                IsNewOut(currentcolumns, ID);
+            int oldCount = oldColumns.Count;
+            int nowCount = nowColumns.Count;
+            if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
-            }
-            //判断输出顺序是否一致，如排序算子
-
-            if (oldColumns.Count > 0)
+            if (nowCount > oldCount && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
             {
-                for (int i = 0; i < oldColumns.Count(); i++)
-                {
-                    if (oldColumns[i] != currentcolumns[i])
-                    {
-                        IsNewOut(currentcolumns, ID);
-                        return;
-                    }
-                }
-                if (currentcolumns.Skip(oldColumns.Count()).Count() != 0)
-                {
-                    List<string> outColumns = oldColumns.Concat(currentcolumns.Skip(oldColumns.Count())).ToList<string>();
-                    BCPBuffer.GetInstance().ReWriteBCPFile(path, outColumns);
-                }
-
-            }
-            else if (oldColumns.Count == 0)
-            { IsNewOut(currentcolumns, ID); }
-                   
-        }
-        public void IsModifyDoubleOut(List<string> oldColumns0, List<string> currentcolumns0, List<string> oldColumns1, List<string> currentcolumns1, int ID)
-        {
-            List<string> columns = new List<string>();
-            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            //左侧数据源判断
-            if (oldColumns0.Count() != currentcolumns0.Count()|| !oldColumns0.SequenceEqual(currentcolumns0))
-            {
-                IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
+                string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
+                BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
                 return;
-            }
-            //右侧数据源判断,新输出字段中不包含旧字段
-            foreach (string cn in oldColumns1)
-            {
-                if (!currentcolumns1.Contains(cn))
-                {
-                    IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
-                    return;
-                }
-            }
+            }    
+            IsNewOut(nowColumns, ID);
+        }     
 
-            //判断输出顺序是否一致，如排序算子
-
-            if (oldColumns1.Count > 0)
-            {
-                for (int i = 0; i < oldColumns1.Count(); i++)
-                {
-                    if (oldColumns1[i] != currentcolumns1[i])
-                    {
-                        IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID);
-                        return;
-                    }
-                }
-                if (currentcolumns1.Skip(oldColumns1.Count()).Count() != 0)
-                {
-                    List<string> outColumns = oldColumns1.Concat(currentcolumns1.Skip(oldColumns1.Count())).ToList<string>();
-                    BCPBuffer.GetInstance().ReWriteBCPFile(path, currentcolumns0.Concat(outColumns).ToList());
-                }
-            }
-            else if(oldColumns1.Count == 0)
-            { IsNewOut(currentcolumns0.Concat(currentcolumns1).ToList(), ID); }
-        }
-
-        public void IsNewOut( List<string> currentColumns, int ID)
+        public void IsNewOut(List<string> nowColumns, int ID)
         {
             string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
-            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, currentColumns);
+            BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, nowColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
         //更新输出列表选定项的索引
-        public void UpdateOutputCheckIndexs(List<int> checkIndexs, List<int> outIndexs)
+        public void UpdateOutputCheckIndexs(List<int> nowIndexs, List<int> oldIndexs)
         {
-            foreach (int index in checkIndexs)
+            foreach (int index in oldIndexs)
             {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
+                if (!nowIndexs.Contains(index))
                 {
-                    outIndexs.Clear();
-                    outIndexs.AddRange(checkIndexs);
-                    break;
+                    oldIndexs.Clear();
+                    oldIndexs.AddRange(nowIndexs);
+                    return;
                 }
             }
- 
+            foreach (int index in nowIndexs)
+            {
+                if (!oldIndexs.Contains(index))
+                    oldIndexs.Add(index);
+            }
+            
+
         }
 
-        //配置初始化
-        public Dictionary<string, string> GetDataSourceInfo(int ID, bool singelOperation = true)
+        //配置初始化，获取数据源表头信息
+        public Dictionary<string, string> GetDataSourceInfo(int ID)
         {
-           
-            Dictionary<string, string> dataInfo=new Dictionary<string, string>();
-            Dictionary<int, int> startControls = new Dictionary<int,int>();
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
-            {
-                if (mr.EndID == ID && singelOperation)
-                {
-                    startControls[mr.EndPin] = mr.StartID;
-                    break;
-                }
-                else if (mr.EndID == ID && !singelOperation)
-                    startControls[mr.EndPin] = mr.StartID;
 
-            }
-            if(startControls.Count == 0)
-                return dataInfo;
-            foreach (KeyValuePair<int,int> kvp in startControls)
+            Dictionary<string, string> dataInfo = new Dictionary<string, string>();
+            List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
+            foreach (ModelRelation mr in relations)
             {
-                ModelElement me = Global.GetCurrentDocument().SearchElementByID(kvp.Value);
-                dataInfo["dataPath" + kvp.Key.ToString()] = me.FullFilePath;
-                dataInfo["encoding" + kvp.Key.ToString()] = me.Encoding.ToString();
-                dataInfo["separator" + kvp.Key.ToString()] = me.Separator.ToString();
+                ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                dataInfo["dataPath" + mr.EndPin] = me.FullFilePath;
+                dataInfo["encoding" + mr.EndPin] = me.Encoding.ToString();
+                dataInfo["separator" + mr.EndPin] = me.Separator.ToString();
+
             }
             return dataInfo;
         }

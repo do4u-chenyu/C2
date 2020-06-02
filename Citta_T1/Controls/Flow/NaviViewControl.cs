@@ -71,14 +71,14 @@ namespace Citta_T1.Controls.Flow
         private void PushModelDocument(ModelDocument md)
         {
             List<ModelElement> modelElements = md.ModelElements;
-            float factor = md.WorldMap1.GetWmInfo().ScreenFactor;
+            float factor = md.WorldMap.ScreenFactor;
           
             // 鼠标点下时,缓存所有元素世界坐标系
             foreach (ModelElement me in modelElements)
             {
                 if (elementWorldLocDict.ContainsKey(me))
                     continue;
-                PointF ctWorldPosition = md.WorldMap1.ScreenToWorldF(me.Location,true);
+                PointF ctWorldPosition = md.WorldMap.ScreenToWorldF(me.Location,true);
                 PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 elementWorldLocDict[me] = loc;
             }
@@ -87,21 +87,22 @@ namespace Citta_T1.Controls.Flow
         private void NaviViewControl_MouseUp(object sender, MouseEventArgs e)
         {
 
-            float factor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
-            Point mapOrigin = Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin;
+            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            Point mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
             
             int dx = Convert.ToInt32((startX - e.X ) * rate / factor);
             int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             // 更新canvas所有元素的位置
-            Point moveOffset = OpUtil.WorldBoundControl(factor, Parent.Width, Parent.Height);
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = mapOrigin;
+            Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                     .WorldBoundControl(factor, Parent.Width, Parent.Height);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;
             // 修改线的位置，线的位置修改了空间位置修改不一样，需要重绘一下才能生效
             LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             
-            Global.GetCurrentDocument().WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
             Global.GetNaviViewControl().UpdateNaviView();
@@ -123,19 +124,20 @@ namespace Citta_T1.Controls.Flow
             Point viewBoxPosition;
 
 
-            float factor = Global.GetCurrentDocument().WorldMap1.GetWmInfo().ScreenFactor;
+            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             try
             {
                 
-                mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;
+                mapOrigin = currentDocument.WorldMap.MapOrigin;
 
-                Point moveOffset = OpUtil.WorldBoundControl(factor, Parent.Width, Parent.Height);                
+                Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                         .WorldBoundControl(factor, Parent.Width, Parent.Height);
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
                 
-                currentDocument.WorldMap1.GetWmInfo().MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                mapOrigin = currentDocument.WorldMap1.GetWmInfo().MapOrigin;               
+                currentDocument.WorldMap.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                mapOrigin = currentDocument.WorldMap.MapOrigin;               
 
-                viewBoxPosition = currentDocument.WorldMap1.ScreenToWorld(new Point(50, 30),true);
+                viewBoxPosition = currentDocument.WorldMap.ScreenToWorld(new Point(50, 30),true);
             }
             catch
             {
@@ -173,7 +175,7 @@ namespace Citta_T1.Controls.Flow
             foreach (ModelElement me in modelElements)
             { 
                 
-                PointF ctWorldPosition = currentDocument.WorldMap1.ScreenToWorldF(me.Location,true);
+                PointF ctWorldPosition = currentDocument.WorldMap.ScreenToWorldF(me.Location,true);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 
                 // 为了解决导航框拖动时,元素漂移的问题

@@ -54,7 +54,7 @@ namespace Citta_T1.OperatorViews
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
                 this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
-                this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.FirstDataSourceColumns));
+                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             }
             //初始化输入输出路径
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
@@ -88,15 +88,10 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split(separator);
-            this.opControl.FirstDataSourceColumns = columnName.ToList();
-            return columnName;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
+            return bcpInfo.ColumnArray;
         }
-
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         #endregion
 
         #region 配置信息的保存与加载
@@ -177,7 +172,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                Global.GetCreateMoveRsControl().CreateResultControlCustom(this.opControl, this.fullOutputFilePath);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.fullOutputFilePath);
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
@@ -185,24 +180,24 @@ namespace Citta_T1.OperatorViews
             //输出变化，修改结果算子路径
             if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
-                (resultElement.InnerControl as MoveRsControl).FullFilePath = this.fullOutputFilePath;
+                resultElement.FullFilePath = this.fullOutputFilePath;
                 CreateNewBlankBCPFile(this.fullOutputFilePath);
             }
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            (hasResultNew.InnerControl as MoveRsControl).textBox.Text = System.IO.Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
+            (hasResultNew.InnerControl as MoveRsControl).Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
             (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
-            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? DSUtil.Encoding.UTF8 : DSUtil.Encoding.GBK;
-            (hasResultNew.InnerControl as MoveRsControl).Separator = '\t';
+            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
+            (hasResultNew.InnerControl as MoveRsControl).Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if(separator == "commaradio")
             {
-                (hasResultNew.InnerControl as MoveRsControl).Separator = ',';
+                hasResultNew.Separator = ',';
             }
             else if(separator == "otherseparatorradio")
             {
-                (hasResultNew.InnerControl as MoveRsControl).Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
+                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0] ;
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 

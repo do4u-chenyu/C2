@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Configuration;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
@@ -18,24 +14,16 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             List<string> cmds = new List<string>();
             string inputFilePath1 = inputFilePaths.First();//左输入文件
-            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : "";//右输入文件
+            string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
 
             //两个文件的输出字段分别合并
-            string inputFiled1 = "";
-            string inputFiled2 = "";
-            for (int i = 1; i <= GetOptionFactorCount(); i++)
+            string inputField1 = "$" + TransInputLine(option.GetOption("factor1").Split(',')[0]);
+            string inputField2 = "$" + TransInputLine(option.GetOption("factor1").Split(',')[1]);
+            for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
                 string[] tmpfactor = option.GetOption("factor" + i.ToString()).Split(',');
-                if (i == 1)
-                {
-                    inputFiled1 = "$" + TransInputLine(tmpfactor[0]);
-                    inputFiled2 = "$" + TransInputLine(tmpfactor[1]);
-                }
-                else
-                {
-                    inputFiled1 = inputFiled1 + ",$" + TransInputLine(tmpfactor[0]);
-                    inputFiled2 = inputFiled2 + ",$" + TransInputLine(tmpfactor[1]);
-                }
+                inputField1 = inputField1 + ",$" + TransInputLine(tmpfactor[0]);
+                inputField2 = inputField2 + ",$" + TransInputLine(tmpfactor[1]);
             }
 
             //并集生成1个临时文件
@@ -44,8 +32,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             //重写表头（覆盖）
             ReWriteBCPFile("union");
 
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1),inputFiled1,filterBatPath1, this.separators[0]));
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2),inputFiled2,filterBatPath1, this.separators[1]));
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1),inputField1,filterBatPath1, this.separators[0]));
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2),inputField2,filterBatPath1, this.separators[1]));
             
             //是否合并后的文件去重
             if (option.GetOption("noRepetition") == "True")

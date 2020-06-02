@@ -31,7 +31,7 @@ namespace Citta_T1.OperatorViews
             this.optionInfoCheck = new OptionInfoCheck();
             this.oldOutList = new List<int>();
             this.opControl = opControl;
-            dataPath = "";
+            dataPath = String.Empty;
             oldColumnName = new List<string>();
             InitOptionInfo();
             LoadOption();
@@ -60,19 +60,14 @@ namespace Citta_T1.OperatorViews
 
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            string column = bcpInfo.ColumnLine;
             this.columnName = column.Split(separator);
             foreach (string name in this.columnName)
                 this.outList.AddItems(name);
 
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);         
-            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "outfield");
-
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
-            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
       
         public void SetTextBoxName(TextBox textBox)
@@ -95,12 +90,12 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告           
             if (this.outList.GetItemCheckIndex().Count == 0)
@@ -140,7 +135,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.selectColumn = this.outList.GetItemCheckText();
                 this.selectColumn.Add("频率统计结果");
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
                 return;
             }
 
@@ -155,7 +150,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -189,7 +184,7 @@ namespace Citta_T1.OperatorViews
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));            
-            if (this.opControl.Option.GetOption("outfield") != "")
+            if (Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -202,24 +197,22 @@ namespace Citta_T1.OperatorViews
            
         }
         #endregion
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
 
-        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }

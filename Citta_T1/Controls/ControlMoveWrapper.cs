@@ -31,7 +31,7 @@ namespace Citta_T1.Controls
 
 
             Control ct = this.control;
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(ct.Location,false);
+            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location,false);
             g.Dispose();
             return staticImage;
         }
@@ -46,18 +46,18 @@ namespace Citta_T1.Controls
             }
             this.StaticImage = this.CreateWorldImage();
             ModelDocument currentDoc = Global.GetCurrentDocument();
-            Point mapOrigin = currentDoc.WorldMap1.GetWmInfo().MapOrigin;
-            float factor = currentDoc.WorldMap1.GetWmInfo().ScreenFactor;
+            Point mapOrigin = currentDoc.WorldMap.MapOrigin;
+            float factor = currentDoc.WorldMap.ScreenFactor;
             mapOrigin.X = Convert.ToInt32(mapOrigin.X * factor);
             mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * factor);
             Graphics g = Graphics.FromImage(StaticImage);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
-                PointF s = currentDoc.WorldMap1.ScreenToWorldF(mr.StartP,false);
-                PointF a = currentDoc.WorldMap1.ScreenToWorldF(mr.A, false);
-                PointF b = currentDoc.WorldMap1.ScreenToWorldF(mr.B, false);
-                PointF e = currentDoc.WorldMap1.ScreenToWorldF(mr.EndP, false);
+                PointF s = currentDoc.WorldMap.ScreenToWorldF(mr.StartP,false);
+                PointF a = currentDoc.WorldMap.ScreenToWorldF(mr.A, false);
+                PointF b = currentDoc.WorldMap.ScreenToWorldF(mr.B, false);
+                PointF e = currentDoc.WorldMap.ScreenToWorldF(mr.EndP, false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             g.Dispose();
@@ -92,8 +92,6 @@ namespace Citta_T1.Controls
             foreach (ModelElement me in md)
             {
                 Control ctr = me.InnerControl;
-                //if (ctr == this.control)
-                //    continue;
                 Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));
                 cp.Invalidate(ctrRect);
                 cp.Update();

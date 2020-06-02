@@ -1,17 +1,13 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Schedule.Cmd;
+using Citta_T1.Controls.Move.Op;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
-using Citta_T1.Business.Option;
-using System.Diagnostics;
-using Citta_T1.Business.Schedule.Cmd;
-using NPOI.HSSF.Record;
-using System.Windows.Forms;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -39,7 +35,10 @@ namespace Citta_T1.Business.Schedule
         public UpdateGif UpdateGifDelegate;
 
         public delegate void UpdateBar(TaskManager manager);//声明一个更新进度条的委托
-        public UpdateGif UpdateBarDelegate;
+        public UpdateBar UpdateBarDelegate;
+
+        public delegate void UpdateOpError(TaskManager manager,int id,string errorMessage);//声明一个op算子异常时修改提示内容的委托
+        public UpdateOpError UpdateOpErrorDelegate;
 
         private TripleListGen tripleList;
         private Thread scheduleThread = null;
@@ -91,6 +90,7 @@ namespace Citta_T1.Business.Schedule
         {
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
             {
+                if(triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
                 triple.OperateElement.Status = ElementStatus.Ready;
             }
         }
@@ -124,15 +124,9 @@ namespace Citta_T1.Business.Schedule
                 foreach (Process p in cmdProcessList)
                 {
                     UpdateLogDelegate("当前process名字：" + p.ProcessName);
-                    if (p.ProcessName == "cmd")
-                    {
-                        p.Kill();
-                    }
+                    p.Kill();
                 }
             }
-
-
-
 
             foreach (Task currentTask in parallelTasks)
             {
@@ -203,6 +197,14 @@ namespace Citta_T1.Business.Schedule
             parallelTasks = new List<Task>();
             foreach (Triple tmpTri in currentModelTripleList)
             {
+                //运行前，把所有warn状态的结果算子重置为null状态，把所有warn状态的op算子重置为ready状态
+                if (tmpTri.ResultElement.Status == ElementStatus.Warn) tmpTri.ResultElement.Status = ElementStatus.Null;
+                if (tmpTri.OperateElement.Status == ElementStatus.Warn)
+                {
+                    tmpTri.OperateElement.Status = ElementStatus.Ready;
+                    UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "配置算子");
+                }
+
                 bool isDataElementError = false;
                 if (tmpTri.OperateElement.Status == ElementStatus.Done)
                 {
@@ -213,11 +215,21 @@ namespace Citta_T1.Business.Schedule
                     //判断数据节点是否算完，如果数据节点（上一个的结果算子）为error，跳过这个循环，并将其结果算子也置为error
                     foreach (ModelElement tmpDE in tmpTri.DataElements)
                     {
+                        string filename = String.Empty;
+                        if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
+                        if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
+                        if (!File.Exists(filename))
+                        {
+                            tmpTri.OperateElement.Status = ElementStatus.Warn;
+                            UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "文件\"" + filename + "\"不存在，请确认后重新运行。");
+                            isDataElementError = true;
+                            break;
+                        }
+
                         if (tmpDE.Type == ElementType.Result)
                         {
                             while (tmpDE.Status != ElementStatus.Done)
                             {
-                                UpdateLogDelegate(tmpTri.TripleName +"的data状态："+ tmpDE.Status);
                                 if (tmpDE.Status == ElementStatus.Warn)
                                 {
                                     isDataElementError = true;
@@ -271,7 +283,8 @@ namespace Citta_T1.Business.Schedule
             UpdateLogDelegate(triple.TripleName + "开始运行");
             List<string> cmds = new List<string>();
 
-            int retryCount = 3;
+            int retryCount = 3;//最多重试次数
+            string errorMessage = "";
             bool isTaskMethodError = false;
             while (retryCount > 0)
             {
@@ -301,27 +314,36 @@ namespace Citta_T1.Business.Schedule
                 }
                 catch (System.IO.IOException ex)
                 {
+                    errorMessage = ex.Message;
                     UpdateLogDelegate("TaskMethod异常: " + ex.Message);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
                     retryCount--;
                 }
                 catch (Exception ex)
                 {
+                    errorMessage = ex.Message;
                     UpdateLogDelegate("TaskMethod其他异常: " + ex.Message);
                     isTaskMethodError = true;
                     break;
                 }
             }
 
-            UpdateLogDelegate("retryCount个数"+retryCount);
             if (retryCount == 0 || isTaskMethodError)
             {
+                UpdateOpErrorDelegate(this, triple.OperateElement.ID, errorMessage + "请确认问题后重新运行。");
                 triple.OperateElement.Status = ElementStatus.Warn;
                 triple.ResultElement.Status = ElementStatus.Warn;
                 return false;
             }
 
-            RunLinuxCommand(cmds);
+            if (!string.IsNullOrEmpty(RunLinuxCommand(cmds)))
+            {
+                UpdateOpErrorDelegate(this, triple.OperateElement.ID, errorMessage + "cmd执行语句异常，请确认问题后重新运行。");
+                triple.OperateElement.Status = ElementStatus.Warn;
+                triple.ResultElement.Status = ElementStatus.Warn;
+                return false;
+            }
+            
             if (resetEvent.SafeWaitHandle.IsClosed)
             {
                 UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");
@@ -340,11 +362,12 @@ namespace Citta_T1.Business.Schedule
             return true;
         }
 
-        public void RunLinuxCommand(List<string> cmds)
+        public string RunLinuxCommand(List<string> cmds)
         {
             // 补充条件检查, cmds 不能为空
             if (cmds == null || !cmds.Any())
-                return;
+                return "";
+            string errorMessage = String.Empty;
 
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -364,18 +387,11 @@ namespace Citta_T1.Business.Schedule
                     {
                         this.cmdProcessList.Add(p);
                     }
-
-                    
-
                     foreach (string cmd in cmds)
                     {
-                        //UpdateLogDelegate("执行命令: " + cmd);
+                        UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
-                    //此处要exit两次?
-                    //退出visual studio 到 cmd.exe
-                    //p.StandardInput.WriteLine("exit");
-                    //退出cmd.exe
                     p.StandardInput.WriteLine("exit");
                     p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
                 }
@@ -383,12 +399,8 @@ namespace Citta_T1.Business.Schedule
             catch (Exception ex)
             {
                 //异常停止的处理方法
-                lock (_objLock)
-                {
-                    this.cmdProcessList.Remove(p);
-                }
-                
-                UpdateLogDelegate("异常: " + ex.Message);
+                errorMessage = ex.Message;
+                UpdateLogDelegate("RunLinuxCommand进程异常: " + ex.Message);
 
             }
             finally
@@ -400,6 +412,7 @@ namespace Citta_T1.Business.Schedule
                     this.cmdProcessList.Remove(p);
                 }
             }
+            return errorMessage;
         }
 
     }

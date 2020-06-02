@@ -10,18 +10,17 @@ using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using static Citta_T1.Utils.DSUtil;
 
 namespace Citta_T1.Dialogs
 {
     // 
-    public delegate void DelegateInputData(string name, string filePath, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding);
+    public delegate void DelegateInputData(string name, string filePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding);
     public partial class InputDataForm : Form
     {
         private static LogUtil log = LogUtil.GetInstance("InputDataForm"); // 获取日志模块
 
-        private DSUtil.Encoding encoding = DSUtil.Encoding.GBK;
-        private ExtType extType = ExtType.Unknow;
+        private OpUtil.Encoding encoding = OpUtil.Encoding.GBK;
+        private OpUtil.ExtType extType = OpUtil.ExtType.Unknow;
         private string fullFilePath;
         private int maxNumOfRow = 100;
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
@@ -44,14 +43,14 @@ namespace Citta_T1.Dialogs
 
         public void ReSetParams()
         {
-            this.encoding = DSUtil.Encoding.GBK;
+            this.encoding = OpUtil.Encoding.GBK;
             this.gbkLable.Font = bold_font;
             this.utf8Lable.Font = font;
 
             this.radioButton1.Checked = true;
-            this.separator = '\t';
+            this.separator = OpUtil.DefaultSeparator;
 
-            this.extType = DSUtil.ExtType.Text;
+            this.extType = OpUtil.ExtType.Text;
 
             this.Clean();
         }
@@ -65,9 +64,9 @@ namespace Citta_T1.Dialogs
             OpenFileDialog fd = new OpenFileDialog();           
             fd.Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx";
             if (this.gbkLable.Font.Bold)
-                this.encoding = DSUtil.Encoding.GBK;
+                this.encoding = OpUtil.Encoding.GBK;
             else
-                this.encoding = DSUtil.Encoding.UTF8;
+                this.encoding = OpUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 fullFilePath = fd.FileName;     
@@ -75,12 +74,12 @@ namespace Citta_T1.Dialogs
                 ext = Path.GetExtension(fullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
                 {
-                    this.extType = ExtType.Excel;
+                    this.extType = OpUtil.ExtType.Excel;
                     PreViewExcelFile();
                 }
                 else
                 {
-                    this.extType = ExtType.Text;
+                    this.extType = OpUtil.ExtType.Text;
                     PreViewBcpFile();
                 }          
             }
@@ -120,17 +119,17 @@ namespace Citta_T1.Dialogs
             else
             {
                 if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
-                    this.extType = DSUtil.ExtType.Excel;
+                    this.extType = OpUtil.ExtType.Excel;
                 else
-                    this.extType = DSUtil.ExtType.Text;
+                    this.extType = OpUtil.ExtType.Text;
 
                 BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding);
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
             }
-            this.extType = DSUtil.ExtType.Unknow;
-            this.encoding = DSUtil.Encoding.UTF8;
+            this.extType = OpUtil.ExtType.Unknow;
+            this.encoding = OpUtil.Encoding.UTF8;
         }
         private void InitInvalidCharPattern()
         {
@@ -155,11 +154,11 @@ namespace Citta_T1.Dialogs
 
         private void UTF8Lable_Click(object sender, EventArgs e)
         {
-            if (this.extType == ExtType.Text)
+            if (this.extType == OpUtil.ExtType.Text)
             {
                 this.gbkLable.Font = font;
                 this.utf8Lable.Font = bold_font;
-                this.encoding = DSUtil.Encoding.UTF8;
+                this.encoding = OpUtil.Encoding.UTF8;
                 PreViewBcpFile();
             }
         }
@@ -187,7 +186,7 @@ namespace Citta_T1.Dialogs
                 return;
             System.IO.StreamReader sr;
             FileStream fs = null;
-            if (this.encoding == DSUtil.Encoding.UTF8)
+            if (this.encoding == OpUtil.Encoding.UTF8)
             {
                 sr = File.OpenText(fullFilePath);
             }
@@ -375,11 +374,11 @@ namespace Citta_T1.Dialogs
 
         private void GBKLable_Click(object sender, EventArgs e)
         {
-            if (this.extType == ExtType.Text)
+            if (this.extType == OpUtil.ExtType.Text)
             {
                 this.gbkLable.Font = bold_font;
                 this.utf8Lable.Font = font;
-                this.encoding = DSUtil.Encoding.GBK;
+                this.encoding = OpUtil.Encoding.GBK;
                 PreViewBcpFile();
             }
 
@@ -387,14 +386,14 @@ namespace Citta_T1.Dialogs
 
         private void radioButton1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.extType != ExtType.Text)
+            if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.separator = '\t';
             PreViewBcpFile();
         }
         private void radioButton2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.extType != ExtType.Text)
+            if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.separator = ',';
             PreViewBcpFile();
@@ -402,7 +401,7 @@ namespace Citta_T1.Dialogs
         }
         private void radioButton3_MouseDown(object sender, MouseEventArgs e)
         {
-            if (this.extType != ExtType.Text)
+            if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.radioButton3.Checked = true;
             this.textBoxEx1.Focus();
@@ -425,7 +424,7 @@ namespace Citta_T1.Dialogs
 
         private void textBoxEx1_TextChanged(object sender, EventArgs e)
         {
-            if (this.extType == ExtType.Text)
+            if (this.extType == OpUtil.ExtType.Text)
             {
                 this.radioButton3.Checked = true;
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")

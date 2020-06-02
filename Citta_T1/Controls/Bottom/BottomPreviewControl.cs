@@ -118,8 +118,8 @@ namespace Citta_T1.Controls.Bottom
 
         public void PreViewDataByFullFilePath(string fullFilePath,
             char separator = '\t',
-            DSUtil.ExtType extType = DSUtil.ExtType.Text, 
-            DSUtil.Encoding encoding = DSUtil.Encoding.UTF8,
+            OpUtil.ExtType extType = OpUtil.ExtType.Text,
+            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8,
             bool isForceRead = false,
             int maxNumOfFile = 100
             )
@@ -128,9 +128,12 @@ namespace Citta_T1.Controls.Bottom
             List<string> rows;
             List<string> blankRow = new List<string> { };
             // 将来有可能新增文件类型,这里不能只用二元逻辑
-            if (extType == DSUtil.ExtType.Excel)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
-            else if (extType == DSUtil.ExtType.Text)
+            if (extType == OpUtil.ExtType.Excel)
+            {
+                separator = OpUtil.DefaultSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));    
+            }     
+            else if (extType == OpUtil.ExtType.Text)
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else
                 rows = new List<string>();

@@ -6,14 +6,9 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -22,7 +17,7 @@ namespace Citta_T1.OperatorViews
     {
         private MoveOpControl opControl;
         private string oldAvg;
-        private string dataPath = "";
+        private string dataPath = String.Empty;
         private string[] columnName;
         private List<string> selectName;
         private string oldOptionDict;
@@ -48,8 +43,8 @@ namespace Citta_T1.OperatorViews
         private void InitOptionInfor()
         {
             int startID = -1;
-            string encoding = "";
-            char separator = '\t';
+            string encoding = String.Empty;
+            char separator = OpUtil.DefaultSeparator;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
@@ -64,9 +59,8 @@ namespace Citta_T1.OperatorViews
             {
                 if (me.ID == startID)
                 {
+                    separator = me.Separator;
                     this.dataPath = me.FullFilePath;
-                    if (me.InnerControl is MoveDtControl)
-                        separator = (me.InnerControl as MoveDtControl).Separator;
                     //设置数据信息选项
                     this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
                     this.toolTip1.SetToolTip(this.DataInfo, this.DataInfo.Text);
@@ -78,25 +72,14 @@ namespace Citta_T1.OperatorViews
                 SetOption(this.dataPath, this.DataInfo.Text, encoding, separator);
 
         }
-        private void SetOption(string path, string dataName, string encoding,char separator)
+        private void SetOption(string path, string dataName, string encoding, char separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
-
-
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
-            foreach (string field in keys)
-            {
-                if (!field.Contains("columnname"))
-                    Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, field);
-            }
-
             this.opControl.FirstDataSourceColumns =  this.columnName.ToList();
-            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
       
 
@@ -120,12 +103,12 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
 
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
             if (this.DataInfo.Text == "") return;
@@ -135,17 +118,22 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             this.DialogResult = DialogResult.OK;
-           
             SaveOption();
-            //内容修改，引起文档dirty
+
+            //情况1：内容修改
+            //       引起文档dirty
+            //情况2：内容不修改
+            //        返回
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
+            else
+                return;
             //生成结果控件,创建relation,bcp结果文件
             this.selectName.Add(this.AvgComBox.SelectedItem.ToString());
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
-            { 
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectName);
+            {
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectName);
                 return;
             }
             // 对应的结果文件置脏
@@ -155,11 +143,11 @@ namespace Citta_T1.OperatorViews
             List<string> oldColumn = new List<string>();
             oldColumn.Add(this.oldAvg);
             if (this.oldAvg != this.AvgComBox.Text)
-                Global.GetOptionDao().IsModifyOut(oldColumn, this.selectName, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectName, this.opControl.ID);
 
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -179,7 +167,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("avgfield") != "")
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "avgfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
@@ -188,8 +176,6 @@ namespace Citta_T1.OperatorViews
             
         }
         #endregion
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
         private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);

@@ -33,7 +33,7 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
             dataPath = "";
            
-            this.oldColumnName = this.opControl.Option.GetOption("columnname").Split('\t').ToList();
+            this.oldColumnName = this.opControl.Option.GetOption("columnname0").Split('\t').ToList();
             InitOptionInfo();
             LoadOption();
             this.oldFirstRow = this.firstRow.Text;
@@ -67,24 +67,16 @@ namespace Citta_T1.OperatorViews
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            this.columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            this.columnName = bcpInfo.ColumnArray;
             this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
             foreach (string name in columnName)
                 this.sortField.Items.Add(name);
 
-            //新旧数据源比较，是否清空窗口配置
-            List<string> keys = new List<string>(this.opControl.Option.OptionDict.Keys);
-            Global.GetOptionDao().IsSingleDataSourceChange(this.opControl, this.columnName, "sortfield");
-
             this.opControl.FirstDataSourceColumns = this.columnName.ToList();
-            this.opControl.Option.SetOption("columnname", String.Join("\t", this.columnName));
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
-       
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-
+      
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
@@ -105,21 +97,27 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            if (this.dataInfo.Text == "") return;
-            if (this.sortField.Text == "")
+            if (String.IsNullOrWhiteSpace(this.sortField.Text))
             {
                 MessageBox.Show("请选择排序字段!");
                 return;
             }
+            if (String.IsNullOrWhiteSpace(this.firstRow.Text)|| String.IsNullOrWhiteSpace(this.endRow.Text))
+            {
+                MessageBox.Show("请输出行数!");
+                return;
+            }
+
+            if (!IsCorrectOutOrder(this.firstRow.Text, this.endRow.Text))
+                return;
             this.DialogResult = DialogResult.OK;
-           
             SaveOption();
 
             //内容修改，引起文档dirty 
@@ -130,7 +128,7 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.columnName.ToList());
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.columnName.ToList());
                 return;
             }
 
@@ -143,7 +141,7 @@ namespace Citta_T1.OperatorViews
 
         }
        
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -176,7 +174,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
            
-            if (this.opControl.Option.GetOption("sortfield") != "")
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
@@ -202,51 +200,89 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         
-        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
 
-        private void groupBox2_Paint(object sender, PaintEventArgs e)
+        private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
-        private void dataInfo_MouseClick(object sender, MouseEventArgs e)
+        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
         }
 
-        private void dataInfo_LostFocus(object sender, EventArgs e)
+        private void DataInfo_LostFocus(object sender, EventArgs e)
         {
             SetTextBoxName(this.dataInfo);
         }
         #region 输入非数字，警告
-        private void firstRow_KeyPress(object sender, KeyPressEventArgs e)
+        private void FirstRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.firstRow);
+            { 
+                if(!ConvertUtil.IsInt(this.firstRow.Text))
+                    MessageBox.Show("请输入数字"); 
+                else
+                    this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
+               
+            }
+              
         }
 
-        private void firstRow_Leave(object sender, EventArgs e)
+        private void FirstRow_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.firstRow);
+            if (!ConvertUtil.IsInt(this.firstRow.Text))
+            {
+                MessageBox.Show("请输入数字");
+                this.firstRow.Text = String.Empty;
+            }
+              
+            else
+                this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
         }
 
-        private void endRow_Leave(object sender, EventArgs e)
+        private void EndRow_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.NonNumeric_ControlText(this.endRow);
+            if (!ConvertUtil.IsInt(this.endRow.Text))
+            {
+                MessageBox.Show("请输入数字");
+                this.endRow.Text = String.Empty;
+            }
+               
+            else
+                this.endRow.Text = int.Parse(this.endRow.Text).ToString();
+
         }
 
-        private void endRow_KeyPress(object sender, KeyPressEventArgs e)
+        private void EndRow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-                optionInfoCheck.NonNumeric_ControlText(this.endRow);
+            {
+                if (!ConvertUtil.IsInt(this.endRow.Text))
+                    MessageBox.Show("请输入数字");
+                else
+                    this.endRow.Text = int.Parse(this.endRow.Text).ToString();
+            }
         }
         #endregion
 
-        private void groupBox3_Paint(object sender, PaintEventArgs e)
+        private void GroupBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
+        }
+        private bool IsCorrectOutOrder(string firstRow,string endRow)
+        {
+            int first = Convert.ToInt32(firstRow);
+            int end = Convert.ToInt32(endRow);
+            if (first > end)
+            {
+                MessageBox.Show("输出行数选择中，起始行数大于结束行数");
+                return false;
+            }
+            return true;
         }
     }
 }

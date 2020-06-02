@@ -9,31 +9,13 @@ using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
 using NPOI.SS.Formula.Functions;
 using Citta_T1.Core;
+using Citta_T1.Controls.Move;
 
 namespace Citta_T1.Utils
 {
     public class OpUtil
     {
-        /// <summary>
-        /// MD5字符串加密
-        /// </summary>
-        /// <param name="txt"></param>
-        /// <returns>加密后字符串</returns>
-        public static string GenerateMD5(string txt)
-        {
-            using (MD5 mi = MD5.Create())
-            {
-                byte[] buffer = Encoding.Default.GetBytes(txt);
-                //开始加密
-                byte[] newBuffer = mi.ComputeHash(buffer);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < newBuffer.Length; i++)
-                {
-                    sb.Append(newBuffer[i].ToString("x2"));
-                }
-                return sb.ToString();
-            }
-        }
+        public static readonly char DefaultSeparator = '\t';
 
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {
@@ -53,43 +35,10 @@ namespace Citta_T1.Utils
                 );
         }
 
-        public static Point WorldBoundControl(float factor, int width, int height)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            Point Pw = Global.GetCurrentDocument().WorldMap1.ScreenToWorld(new Point(50, 30),true);
-            
-            if (Pw.X < 50)
-            {
-                dragOffset.X = 50 - Pw.X;
-            }
-            if (Pw.Y < 30)
-            {
-                dragOffset.Y = 30 - Pw.Y;
-            }
-            if (Pw.X > 2000 - Convert.ToInt32(width / factor))
-            {
-                dragOffset.X = 2000 - Convert.ToInt32(width / factor) - Pw.X;
-            }
-            if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
-            {
-                dragOffset.Y = 980 - Convert.ToInt32(height / factor) - Pw.Y;
-            }
-            return dragOffset;
-        }
-
         // 当前文档在canvas里整体拖动dx, dy
         public static void CanvasDragLocation(float dx, float dy)
         {
-            ModelDocument md = Global.GetCurrentDocument();
-            List <ModelElement> modelElements = md.ModelElements;
-            List<ModelRelation> modelRelations = md.ModelRelations;
-            foreach (ModelElement me in modelElements)
-            {
-                Control ct = me.InnerControl;
-                if (ct is IDragable)
-                    (ct as IDragable).ChangeLoc(dx, dy);
-            }
+            Global.GetCurrentDocument().ModelElements.ForEach(me => me.InnerControl.ChangeLoc(dx, dy));
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
         }
@@ -221,5 +170,26 @@ namespace Citta_T1.Utils
             return type;
         }
 
+        public enum Encoding
+        {
+            UTF8,
+            GBK,
+            NoNeed
+        }
+        public enum ExtType
+        {
+            Excel,
+            Text,
+            Unknow
+        }
+
+        public static Encoding EncodingEnum(string type)
+        { return (Encoding)Enum.Parse(typeof(Encoding), type); }
+
+        public static ExtType ExtTypeEnum(string type)
+        { return (ExtType)Enum.Parse(typeof(ExtType), type); }
+
+        public static ElementStatus EStatus(string status)
+        { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
     }
 }

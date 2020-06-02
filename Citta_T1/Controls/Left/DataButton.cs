@@ -1,33 +1,31 @@
 ﻿
-using System;
-using System.Windows.Forms;
-
 using Citta_T1.Business.Model;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using System;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Left
 {
     public partial class DataButton : UserControl
     {
-        private DSUtil.Encoding encoding;
-        private DSUtil.ExtType extType;
+        private OpUtil.Encoding encoding;
+        private OpUtil.ExtType extType;
         private char separator;
         private int count = 0;
         private string oldTextString;
-        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
-        public DSUtil.ExtType ExtType { get => extType; set => extType = value; }
+        public OpUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
+        public OpUtil.ExtType ExtType { get => extType; set => extType = value; }
         public char Separator { get => separator; set => separator = value; }
         public string FullFilePath { get => this.txtButton.Name; set => this.txtButton.Name = value; }
         public string DataSourceName { get => this.txtButton.Text; set => this.txtButton.Text = value; }
-        public int Count
-        { get => this.count; set => this.count = value; }
+        public int Count { get => this.count; set => this.count = value; }
 
 
         private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
-        public DataButton(string ffp, string dataSourceName, char separator, DSUtil.ExtType extType, DSUtil.Encoding encoding)
+        public DataButton(string ffp, string dataSourceName, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             InitializeComponent();
             txtButton.Name = ffp;
@@ -52,7 +50,7 @@ namespace Citta_T1.Controls.Left
                                     encoding.ToString(),
                                     this.ExtType,
                                     Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
-                                    this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+                                    this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 
@@ -121,7 +119,7 @@ namespace Citta_T1.Controls.Left
                                         encoding.ToString(),
                                         this.ExtType,
                                         Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
-                                        this.Separator == '\t' ? "TAB" : this.Separator.ToString());
+                                        this.Separator == OpUtil.DefaultSeparator ? "TAB" : this.Separator.ToString());
             this.helpToolTip.SetToolTip(this.leftPictureBox, helpInfo);
         }
 

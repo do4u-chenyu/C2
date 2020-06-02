@@ -40,8 +40,8 @@ namespace Citta_T1.OperatorViews
             this.oldOutList1 = new List<int>();
             oldColumnName0 = new List<string>();
             oldColumnName1 = new List<string>();
-            dataPath0 = "";
-            dataPath1 = "";
+            dataPath0 = String.Empty;
+            dataPath1 = String.Empty;
             this.opControl = opControl;
             this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
             InitOptionInfo();
@@ -62,7 +62,7 @@ namespace Citta_T1.OperatorViews
         private void InitOptionInfo()
         {
             //获取两个数据源表头字段
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID, false);
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataPath0 = dataInfo["dataPath0"];
@@ -85,12 +85,12 @@ namespace Citta_T1.OperatorViews
             foreach (string name in this.columnName0)
             {
                 this.comboBox1.Items.Add(name);
-                this.OutList0.AddItems(name);
+                this.outList0.AddItems(name);
             }
             foreach (string name in this.columnName1)
             {
                 this.comboBox2.Items.Add(name);
-                this.OutList1.AddItems(name);
+                this.outList1.AddItems(name);
             }
                 
         }
@@ -98,15 +98,13 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
 
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, EnType(encoding));
-            string column = bcpInfo.columnLine;
-            string[] columnName = column.Split(separator);
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            string[] columnName = bcpInfo.ColumnArray;
             this.opControl.FirstDataSourceColumns = columnName.ToList();
             return columnName;
         }
-        private DSUtil.Encoding EnType(string type)
-        { return (DSUtil.Encoding)Enum.Parse(typeof(DSUtil.Encoding), type); }
-        public void SetTextBoxName(TextBox textBox)
+
+        private void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
             int maxLength = 18;
@@ -126,7 +124,7 @@ namespace Citta_T1.OperatorViews
 
             if (sumcount + sumcountDigit > maxLength)
             {
-                textBox.Text = System.Text.Encoding.GetEncoding("GB2312").GetString(System.Text.Encoding.GetEncoding("GB2312").GetBytes(dataName), 0, maxLength) + "...";
+                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
         #endregion
@@ -138,37 +136,42 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
-                createLine(line);
+                CreateLine(line);
             }
         }
         private void LoadOption()
         {
-            int count = this.opControl.Option.KeysCount("factor");
-            string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("outfield0") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, null, "outfield0"))
+            
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "outfield0"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList0 = indexs.ToList();
-                this.OutList0.LoadItemCheckIndex(indexs);
+                this.outList0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnName0.Add(this.OutList0.Items[index].ToString());
+                    this.oldColumnName0.Add(this.outList0.Items[index].ToString());
             }
-            if (this.opControl.Option.GetOption("outfield1") != "" && Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName1, null, "outfield1"))
+
+            
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "outfield1"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList1 = indexs.ToList();
-                this.OutList1.LoadItemCheckIndex(indexs);              
+                this.outList1.LoadItemCheckIndex(indexs);              
                 foreach (int index in indexs)
-                    this.oldColumnName1.Add(this.OutList1.Items[index].ToString());
+                    this.oldColumnName1.Add(this.outList1.Items[index].ToString());
             }
+
+            int count = this.opControl.Option.KeysCount("factor");
+            string factor1 = this.opControl.Option.GetOption("factor1");
             if (factor1 != "")
             {
-                string[] factorList = factor1.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums);
-                if (Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor1", fieldColumn))
+                
+                int[] Nums = Array.ConvertAll<string, int>(factor1.Split(','), int.Parse);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
+                if (!case0 && !case1)
                 {
                     this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
                     this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
@@ -187,12 +190,15 @@ namespace Citta_T1.OperatorViews
             }
             for (int i = 2; i < (count + 1); i++)
             {
-                string factor = this.opControl.Option.GetOption("factor" + i.ToString());
+                string name = "factor" + i.ToString();
+                string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
-                string[] factorList = factor.Split(',');
-                int[] Nums = Array.ConvertAll<string, int>(factorList, int.Parse);
-                List<int> fieldColumn = new List<int>(Nums.Skip(1));
-                if (!Global.GetOptionDao().IsDoubleDataSourceChange(this.opControl, this.columnName0, this.columnName1, "factor" + i.ToString(), fieldColumn)) continue;
+
+                int[] Nums = Array.ConvertAll<string, int>(factor.Split(','), int.Parse);
+                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[1]);
+                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[2]);
+                if (case0 || case1) continue;
+                
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
@@ -213,20 +219,20 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
-            List<int> checkIndexs0 = this.OutList0.GetItemCheckIndex();
+            List<int> checkIndexs0 = this.outList0.GetItemCheckIndex();
             List<int> outIndexs0 = new List<int>(this.oldOutList0);
           
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs0, outIndexs0);
             foreach (int index in outIndexs0)
-                this.outColumnName0.Add(this.OutList0.Items[index].ToString());
+                this.outColumnName0.Add(this.outList0.Items[index].ToString());
             string outField0 = string.Join(",", outIndexs0);
             this.opControl.Option.SetOption("outfield0", outField0);
 
-            List<int> checkIndexs1 = this.OutList1.GetItemCheckIndex();
+            List<int> checkIndexs1 = this.outList1.GetItemCheckIndex();
             List<int> outIndexs1 = new List<int>(this.oldOutList1);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs1, outIndexs1);
             foreach (int index in outIndexs1)
-                this.outColumnName1.Add(this.OutList1.Items[index].ToString());
+                this.outColumnName1.Add(this.outList1.Items[index].ToString());
             string outField1 = string.Join(",", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
@@ -258,7 +264,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        private void confirmButton_Click(object sender, EventArgs e)
+        private void ConfirmButton_Click(object sender, EventArgs e)
         {
             bool empty = IsOptionReay();
             if (empty) return;
@@ -272,8 +278,8 @@ namespace Citta_T1.OperatorViews
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                this.selectColumn = this.OutList0.GetItemCheckText().Concat(this.OutList1.GetItemCheckText()).ToList();
-                Global.GetCreateMoveRsControl().CreateResultControl(this.opControl, this.selectColumn);
+                this.selectColumn = this.outList0.GetItemCheckText().Concat(this.outList1.GetItemCheckText()).ToList();
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
                 return;
             }
 
@@ -282,12 +288,14 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，重写BCP文件
             List<string> oldName = this.oldColumnName0.Concat(this.oldColumnName1).ToList();
-            if (!oldName.SequenceEqual(this.outColumnName0.Concat(this.outColumnName1)))
-                Global.GetOptionDao().IsModifyDoubleOut(this.oldColumnName0,this.outColumnName0,this.oldColumnName1,this.outColumnName1, this.opControl.ID);
-            
+            List<string> nowName = this.outColumnName0.Concat(this.outColumnName1).ToList();
+            if (!oldName.SequenceEqual(nowName))
+                Global.GetOptionDao().DoOutputCompare(oldName, nowName, this.opControl.ID);
+
+
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
@@ -297,10 +305,10 @@ namespace Citta_T1.OperatorViews
             bool empty = false;
             List<string> types = new List<string>();
             types.Add(this.comboBox1.GetType().Name);
-            types.Add(this.OutList0.GetType().Name);
+            types.Add(this.outList0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写连接条件");
                     empty = true;
@@ -309,14 +317,14 @@ namespace Citta_T1.OperatorViews
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写连接条件");
                     empty = true;
                     return empty;
                 }
             }
-            if (this.OutList0.GetItemCheckIndex().Count == 0 || this.OutList1.GetItemCheckIndex().Count == 0)
+            if (this.outList0.GetItemCheckIndex().Count == 0 || this.outList1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请填写输出字段");
                 empty = true;
@@ -327,7 +335,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
 
-        private void createLine(int addLine)
+        private void CreateLine(int addLine)
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
@@ -382,7 +390,7 @@ namespace Citta_T1.OperatorViews
             addButton1.BackColor = System.Drawing.SystemColors.Control;
             addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
             addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.add_Click);
+            addButton1.Click += new System.EventHandler(this.Add_Click);
             addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             addButton1.Name = addLine.ToString();
             addButton1.UseVisualStyleBackColor = true;
@@ -398,13 +406,13 @@ namespace Citta_T1.OperatorViews
             delButton1.UseVisualStyleBackColor = true;
             delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.del_Click);
+            delButton1.Click += new System.EventHandler(this.Del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
             this.tableLayoutPanel1.Controls.Add(delButton1, 5, addLine);
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int addLine;
@@ -414,7 +422,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
                 addLine = 0;
-                createLine(addLine);
+                CreateLine(addLine);
             }
             else
             {
@@ -444,12 +452,12 @@ namespace Citta_T1.OperatorViews
                     ctlNext5.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
                 }
-                createLine(addLine);
+                CreateLine(addLine);
             }
 
         }
 
-        private void del_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);
@@ -498,7 +506,7 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.dataSource1);
         }
 
-        private void dataSource0_MouseClick(object sender, MouseEventArgs e)
+        private void DataSource0_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
         }
@@ -508,7 +516,7 @@ namespace Citta_T1.OperatorViews
             SetTextBoxName(this.dataSource0);
         }
 
-        private void dataSource1_MouseClick(object sender, MouseEventArgs e)
+        private void DataSource1_MouseClick(object sender, MouseEventArgs e)
         {
             this.dataSource1.Text = Path.GetFileNameWithoutExtension(this.dataPath1);
         }

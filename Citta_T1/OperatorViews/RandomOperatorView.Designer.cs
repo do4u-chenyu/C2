@@ -38,9 +38,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.RandomNumBox = new System.Windows.Forms.TextBox();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.randomNumBox = new System.Windows.Forms.TextBox();
+            this.dataInfoBox = new System.Windows.Forms.TextBox();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -53,7 +53,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(332, 21);
+            this.topPanel.Size = new System.Drawing.Size(324, 21);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -61,17 +61,17 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 147);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 153);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(332, 52);
+            this.bottomPanel.Size = new System.Drawing.Size(324, 38);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(266, 14);
+            this.cancelButton.Location = new System.Drawing.Point(255, 6);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
@@ -86,14 +86,14 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(184, 14);
+            this.confirmButton.Location = new System.Drawing.Point(173, 6);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.confirmButton_Click);
+            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -104,7 +104,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 126);
+            this.keyPanel.Size = new System.Drawing.Size(116, 132);
             this.keyPanel.TabIndex = 2;
             // 
             // label3
@@ -142,54 +142,53 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.RandomNumBox);
-            this.valuePanel.Controls.Add(this.DataInfoBox);
-            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.randomNumBox);
+            this.valuePanel.Controls.Add(this.dataInfoBox);
+            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(216, 126);
+            this.valuePanel.Size = new System.Drawing.Size(208, 132);
             this.valuePanel.TabIndex = 3;
             // 
-            // RandomNumBox
+            // randomNumBox
             // 
-            this.RandomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RandomNumBox.Location = new System.Drawing.Point(0, 54);
-            this.RandomNumBox.Margin = new System.Windows.Forms.Padding(2);
-            this.RandomNumBox.Name = "RandomNumBox";
-            this.RandomNumBox.Size = new System.Drawing.Size(150, 23);
-            this.RandomNumBox.TabIndex = 4;
-            this.RandomNumBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RandomNumBox_KeyPress);
-            this.RandomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
+            this.randomNumBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.randomNumBox.Location = new System.Drawing.Point(0, 54);
+            this.randomNumBox.Margin = new System.Windows.Forms.Padding(2);
+            this.randomNumBox.Name = "randomNumBox";
+            this.randomNumBox.Size = new System.Drawing.Size(150, 23);
+            this.randomNumBox.TabIndex = 4;
+            this.randomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
             // 
-            // DataInfoBox
+            // dataInfoBox
             // 
-            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.Location = new System.Drawing.Point(0, 1);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.Size = new System.Drawing.Size(150, 23);
-            this.DataInfoBox.TabIndex = 3;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
-            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+            this.dataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataInfoBox.Location = new System.Drawing.Point(0, 1);
+            this.dataInfoBox.Margin = new System.Windows.Forms.Padding(2);
+            this.dataInfoBox.Name = "dataInfoBox";
+            this.dataInfoBox.ReadOnly = true;
+            this.dataInfoBox.Size = new System.Drawing.Size(150, 23);
+            this.dataInfoBox.TabIndex = 3;
+            this.dataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.dataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
-            // OutList
+            // outList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(0, 106);
-            this.OutList.Margin = new System.Windows.Forms.Padding(0);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(150, 24);
-            this.OutList.TabIndex = 2;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(0, 106);
+            this.outList.Margin = new System.Windows.Forms.Padding(0);
+            this.outList.Name = "outList";
+            this.outList.Size = new System.Drawing.Size(150, 24);
+            this.outList.TabIndex = 2;
             // 
             // RandomOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(332, 199);
+            this.ClientSize = new System.Drawing.Size(324, 191);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -222,9 +221,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
-        private System.Windows.Forms.TextBox RandomNumBox;
-        private System.Windows.Forms.TextBox DataInfoBox;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
+        private System.Windows.Forms.TextBox randomNumBox;
+        private System.Windows.Forms.TextBox dataInfoBox;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }
