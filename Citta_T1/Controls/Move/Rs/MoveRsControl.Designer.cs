@@ -57,7 +57,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
             this.leftPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseDown);
-            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             this.leftPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseMove);
             this.leftPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MoveRsControl_MouseUp);
             // 

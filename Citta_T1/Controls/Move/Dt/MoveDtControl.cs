@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Dt
 {
-    public partial class MoveDtControl: MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveDtControl: MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
@@ -41,7 +41,7 @@ namespace Citta_T1.Controls.Move.Dt
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
-        private int sizeLevel = 0;
+        
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
@@ -208,27 +208,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         #endregion
 
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
-        }
-
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -543,33 +523,6 @@ namespace Citta_T1.Controls.Move.Dt
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             e.Graphics.FillEllipse(trnsRedBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
-        }
-
-        private void UpdateRound(int x, int y, int width, int height, int radius)
-        {
-            Pen p1 = new Pen(Color.Green, 2f);
-            p1.DashStyle = DashStyle.Dash;
-            Graphics g = Graphics.FromImage(staticImage);
-
-
-            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
-            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
-            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-
-            g.Dispose();
-            this.BackgroundImage = this.staticImage;
-        }
-        private void LeftPicture_MouseEnter(object sender, EventArgs e)
-        {
-            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void RectInAdd(int pinIndex)

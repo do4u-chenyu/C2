@@ -412,7 +412,7 @@ namespace Citta_T1.Dialogs
             }
             try
             {
-                this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                this.separator = Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
                 PreViewBcpFile();
             }
             catch (Exception)
@@ -432,7 +432,7 @@ namespace Citta_T1.Dialogs
                 else
                     try
                     {
-                        this.separator = System.Text.RegularExpressions.Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
+                        this.separator = Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
                     }
                     catch (Exception ex)
                     {
@@ -448,13 +448,13 @@ namespace Citta_T1.Dialogs
             this.radioButton3.Checked = true;
         }
 
-        public void Demo(string demo,string src)
+        public void Demo(string demo, string src)
         {
             this.saveFileDialog.FileName = demo;
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                string srcFilePath = Application.StartupPath + src;
+                string srcFilePath = Path.Combine(Application.StartupPath, src);
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
@@ -470,22 +470,22 @@ namespace Citta_T1.Dialogs
         }
         private void DemoDownloadExcel_Click(object sender, EventArgs e)
         {
-            Demo("demo_excel.xlsx",@"\Demo\demo_excel.xlsx");
+            Demo("demo_excel.xlsx", @"\Demo\demo_excel.xlsx");
         }
 
         private void DemoDownloadCsv_Click(object sender, EventArgs e)
         {
-            Demo("demo_csv.csv",@"\Demo\demo_csv.csv");
+            Demo("demo_csv.csv", @"\Demo\demo_csv.csv");
         }
 
         private void DemoDownloadTxt_Click(object sender, EventArgs e)
         {
-            Demo("demo_txt.txt",@"\Demo\demo_txt.txt");
+            Demo("demo_txt.txt", @"\Demo\demo_txt.txt");
         }
 
         private void DemoDownloadBcp_Click(object sender, EventArgs e)
         {
-            Demo("demo_bcp.bcp",@"\Demo\demo_bcp.bcp");
+            Demo("demo_bcp.bcp", @"\Demo\demo_bcp.bcp");
         }
     }
 }

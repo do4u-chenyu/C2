@@ -54,6 +54,7 @@ namespace Citta_T1.Controls.Move
             this.leftPictureBox.Size = new System.Drawing.Size(18, 22);
             this.leftPictureBox.TabIndex = 4;
             this.leftPictureBox.TabStop = false;
+            this.leftPictureBox.MouseEnter += new System.EventHandler(this.LeftPicture_MouseEnter);
             // 
             // contextMenuStrip
             // 

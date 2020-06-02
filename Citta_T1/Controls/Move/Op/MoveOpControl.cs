@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Controls.Move.Op
 {
 
-    public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
@@ -60,8 +60,8 @@ namespace Citta_T1.Controls.Move.Op
         // 一些倍率
         // 画布上的缩放倍率
         float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
+   
+
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -143,25 +143,6 @@ namespace Citta_T1.Controls.Move.Op
         public bool IsSingleDimension()
         {
             return OperatorDimension() == 1;
-        }
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
         }
 
         private void InitializeOpPinPicture()
@@ -402,7 +383,6 @@ namespace Citta_T1.Controls.Move.Op
                 cmd = ECommandType.Null;
                 this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
-
             }
 
             if (oldControlPosition != this.Location)
@@ -670,7 +650,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region textBox
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -682,7 +662,7 @@ namespace Citta_T1.Controls.Move.Op
                 
         }
 
-        public void TextBox_Leave(object sender, EventArgs e)
+        private void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -825,7 +805,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
@@ -1014,31 +994,6 @@ namespace Citta_T1.Controls.Move.Op
             e.Graphics.DrawEllipse(pen, rectIn_up);
             e.Graphics.FillEllipse(trnsRedBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
-        }
-
-        private void UpdateRound(int x, int y, int width, int height, int radius)
-        {
-            Graphics g = Graphics.FromImage(staticImage);
-            
-
-            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
-            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
-            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-
-            g.Dispose();
-            this.BackgroundImage = this.staticImage;
-        }
-        private void LeftPicture_MouseEnter(object sender, EventArgs e)
-        {
-            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
 
         public void ControlSelect()
