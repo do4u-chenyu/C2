@@ -63,7 +63,7 @@ namespace Citta_T1.Business.Schedule.Cmd
                     outTitleList.Add(col1[int.Parse(ind)]);
                 }
             }
-            else if (className == "union")
+            else if (className == "union" || className == "format")
             {
                 string[] col0 = this.option.GetOption("outname").Split('\t');
                 foreach (string ind in col0)
