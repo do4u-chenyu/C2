@@ -48,9 +48,10 @@
             this.dataColumnBox = new System.Windows.Forms.ComboBox();
             this.keyWordBox = new System.Windows.Forms.TextBox();
             this.dataSourceBox = new System.Windows.Forms.TextBox();
-            this.OutList = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.dataSourceTip = new System.Windows.Forms.ToolTip(this.components);
             this.keyWordTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label7 = new System.Windows.Forms.Label();
             this.bottomPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -96,7 +97,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(485, 37);
+            this.topPanel.Size = new System.Drawing.Size(477, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -105,14 +106,15 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 169);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 161);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(485, 212);
+            this.bottomPanel.Size = new System.Drawing.Size(477, 212);
             this.bottomPanel.TabIndex = 1;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.textBox1);
@@ -148,11 +150,11 @@
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(0, 62);
+            this.textBox1.Location = new System.Drawing.Point(0, 81);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(478, 101);
+            this.textBox1.Size = new System.Drawing.Size(445, 82);
             this.textBox1.TabIndex = 0;
             // 
             // cancelButton
@@ -192,7 +194,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(124, 132);
+            this.keyPanel.Size = new System.Drawing.Size(124, 124);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -203,12 +205,12 @@
             this.valuePanel.Controls.Add(this.dataColumnBox);
             this.valuePanel.Controls.Add(this.keyWordBox);
             this.valuePanel.Controls.Add(this.dataSourceBox);
-            this.valuePanel.Controls.Add(this.OutList);
+            this.valuePanel.Controls.Add(this.outList);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(124, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(361, 132);
+            this.valuePanel.Size = new System.Drawing.Size(353, 124);
             this.valuePanel.TabIndex = 3;
             // 
             // label6
@@ -274,20 +276,30 @@
             this.dataSourceBox.TabIndex = 9;
             this.dataSourceBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // OutList
+            // outList
             // 
-            this.OutList.DataSource = null;
-            this.OutList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutList.Location = new System.Drawing.Point(6, 107);
-            this.OutList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.OutList.Name = "OutList";
-            this.OutList.Size = new System.Drawing.Size(112, 21);
-            this.OutList.TabIndex = 8;
+            this.outList.DataSource = null;
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(6, 107);
+            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outList.Name = "outList";
+            this.outList.Size = new System.Drawing.Size(112, 21);
+            this.outList.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(6, 60);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(408, 17);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "[3] 当前算子仅支持100行关键词组合与过滤，超出的我们会做默认忽略处理";
             // 
             // KeyWordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(485, 381);
+            this.ClientSize = new System.Drawing.Size(477, 373);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -321,7 +333,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList OutList;
+        private Citta_T1.Controls.Common.ComCheckBoxList outList;
         private System.Windows.Forms.TextBox keyWordBox;
         private System.Windows.Forms.TextBox dataSourceBox;
         private System.Windows.Forms.ToolTip dataSourceTip;
@@ -334,5 +346,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
