@@ -447,14 +447,14 @@ namespace Citta_T1.Dialogs
         {
             this.radioButton3.Checked = true;
         }
-        
-        private void Demodownload_excel_Click(object sender, EventArgs e)
+
+        public void Demo(string demo,string src)
         {
-            this.saveFileDialog.FileName = "demo_excel.xlsx";
+            this.saveFileDialog.FileName = demo;
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                string srcFilePath = Application.StartupPath + @"\Demo\demo_excel.xlsx";
+                string srcFilePath = Application.StartupPath + src;
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
@@ -466,66 +466,26 @@ namespace Citta_T1.Dialogs
                     log.Error("导出文件出错:" + ex.Message);
                 }
             }
+
+        }
+        private void DemoDownloadExcel_Click(object sender, EventArgs e)
+        {
+            Demo("demo_excel.xlsx",@"\Demo\demo_excel.xlsx");
         }
 
-        private void Demodownload_csv_Click(object sender, EventArgs e)
+        private void DemoDownloadCsv_Click(object sender, EventArgs e)
         {
-            this.saveFileDialog.FileName = "demo_csv.csv";
-            DialogResult dr = this.saveFileDialog.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                string srcFilePath = Application.StartupPath + @"\Demo\demo_csv.csv";
-                string dstFilePath = this.saveFileDialog.FileName;
-                try
-                {
-                    FileInfo file = new FileInfo(srcFilePath);
-                    file.CopyTo(dstFilePath, true);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("导出文件出错:" + ex.Message);
-                }
-            }
+            Demo("demo_csv.csv",@"\Demo\demo_csv.csv");
         }
 
-        private void Demodownload_txt_Click(object sender, EventArgs e)
+        private void DemoDownloadTxt_Click(object sender, EventArgs e)
         {
-            this.saveFileDialog.FileName = "demo_txt.txt";
-            DialogResult dr = this.saveFileDialog.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                string srcFilePath = Application.StartupPath + @"\Demo\demo_txt.txt";
-                string dstFilePath = this.saveFileDialog.FileName;
-                try
-                {
-                    FileInfo file = new FileInfo(srcFilePath);
-                    file.CopyTo(dstFilePath, true);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("导出文件出错:" + ex.Message);
-                }
-            }
+            Demo("demo_txt.txt",@"\Demo\demo_txt.txt");
         }
 
-        private void Demodownload_bcp_Click(object sender, EventArgs e)
+        private void DemoDownloadBcp_Click(object sender, EventArgs e)
         {
-            this.saveFileDialog.FileName = "demo_bcp.bcp";
-            DialogResult dr = this.saveFileDialog.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                string srcFilePath = Application.StartupPath + @"\Demo\demo_bcp.bcp";
-                string dstFilePath = this.saveFileDialog.FileName;
-                try
-                {
-                    FileInfo file = new FileInfo(srcFilePath);
-                    file.CopyTo(dstFilePath, true);
-                }
-                catch (Exception ex)
-                {
-                    log.Error("导出文件出错:" + ex.Message);
-                }
-            }
+            Demo("demo_bcp.bcp",@"\Demo\demo_bcp.bcp");
         }
     }
 }
