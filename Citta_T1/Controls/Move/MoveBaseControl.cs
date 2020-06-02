@@ -162,5 +162,27 @@ namespace Citta_T1.Controls.Move
         {
             this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
         }
+
+
+
+        protected void UpdateRound(int x, int y, int width, int height, int radius)
+        {
+            Graphics g = Graphics.FromImage(staticImage);
+
+            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
+            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
+            g.DrawLine(MyPens.GreenDash2f, new PointF(x + radius, y), new PointF(x + width - radius, y));
+            g.DrawLine(MyPens.GreenDash2f, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
+            g.DrawLine(MyPens.GreenDash2f, new PointF(x, y + radius), new PointF(x, y + height - radius));
+            g.DrawLine(MyPens.GreenDash2f, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
+            g.DrawArc(MyPens.GreenDash2f, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
+            g.DrawArc(MyPens.GreenDash2f, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
+            g.DrawArc(MyPens.GreenDash2f, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
+            g.DrawArc(MyPens.GreenDash2f, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
+
+            g.Dispose();
+            this.BackgroundImage = this.staticImage;
+        }
     }
 }
