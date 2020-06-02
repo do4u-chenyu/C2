@@ -130,7 +130,7 @@ namespace Citta_T1.Controls.Move.Dt
             return oldTextString;
         }
 
-        public void RightPictureBox_MouseEnter(object sender, EventArgs e)
+        private void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             this.helpToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
         }
@@ -213,23 +213,16 @@ namespace Citta_T1.Controls.Move.Dt
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
             ExtensionMethods.SetDouble(this);
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * Math.Pow(factor, sizeLevel)), this.Height - (int)(1 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-            if (zoomUp)
-            {
-                SetControlsBySize(factor, this);
-                this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.Invalidate();
-            }
-            else
-            {
-                SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
-            }
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundedRect(0, 0, this.Width - (int)(6 * f), this.Height - (int)(1 * f), (int)(3 * f));
+            factor = zoomUp ? factor : 1 / factor;
 
+            SetControlsBySize(factor, this);
+            this.rectOut = SetRectBySize(factor, this.rectOut);
+            this.Invalidate();
         }
-        //int i = 0;
+
         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {

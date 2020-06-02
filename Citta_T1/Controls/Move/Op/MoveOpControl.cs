@@ -810,25 +810,17 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            if (zoomUp)
-            {
-                SetControlsBySize(factor, this);
-                this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
-                this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate(); // TODO [Dk] 干嘛用的？，为什么下面不写一个重绘？
-            }
-            else
-            {
-                SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
-                this.rectIn_down = SetRectBySize(1 / factor, this.rectIn_down);
-                this.rectIn_up = SetRectBySize(1 / factor, this.rectIn_up);
-            }
+
+            factor = zoomUp ? factor : 1 / factor;
+
+            SetControlsBySize(factor, this);
+            this.rectOut = SetRectBySize(factor, this.rectOut);
+            this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
+            this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
+            this.Invalidate();
         }
         #endregion
 
