@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
 {
-    public partial class MoveRsControl : MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
         private bool isMouseDown = false;
         private Point mouseOffset;
@@ -26,8 +26,6 @@ namespace Citta_T1.Controls.Move.Rs
         // 一些倍率
         // 画布上的缩放倍率
         float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -109,25 +107,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.toolStripSeparator1,
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
-        }
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
         }
 
         /*
@@ -465,7 +444,7 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.

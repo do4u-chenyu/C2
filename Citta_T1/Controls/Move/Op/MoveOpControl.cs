@@ -18,7 +18,7 @@ using System.Windows.Forms;
 namespace Citta_T1.Controls.Move.Op
 {
 
-    public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
@@ -60,8 +60,8 @@ namespace Citta_T1.Controls.Move.Op
         // 一些倍率
         // 画布上的缩放倍率
         float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
+   
+
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -143,25 +143,6 @@ namespace Citta_T1.Controls.Move.Op
         public bool IsSingleDimension()
         {
             return OperatorDimension() == 1;
-        }
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
         }
 
         private void InitializeOpPinPicture()
@@ -825,7 +806,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.

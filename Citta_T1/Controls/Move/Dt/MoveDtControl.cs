@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Dt
 {
-    public partial class MoveDtControl: MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveDtControl: MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
@@ -41,7 +41,7 @@ namespace Citta_T1.Controls.Move.Dt
         // 画布上的缩放倍率
         float factor = Global.Factor;
         // 缩放等级
-        private int sizeLevel = 0;
+        
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
@@ -208,27 +208,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         #endregion
 
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
-        }
-
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.

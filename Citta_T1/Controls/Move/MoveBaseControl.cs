@@ -40,12 +40,16 @@ namespace Citta_T1.Controls.Move
 
         protected string oldTextString;
         protected Bitmap staticImage;
+        // 缩放等级
+        protected int sizeLevel;
 
         //private ECommandType cmd;
 
         public MoveBaseControl()
         {
             InitializeComponent();
+            oldTextString = String.Empty;
+            sizeLevel = 0;
         }
 
         // 单元素拖拽
@@ -128,6 +132,32 @@ namespace Citta_T1.Controls.Move
             rect.Y = Convert.ToInt32(rect.Top * f);
             return rect;
         }
+
+        public void ChangeSize(int sizeL)
+        {
+            if (sizeL > sizeLevel)
+            {
+                while (sizeL > sizeLevel)
+                {
+                    ChangeSize(true);
+                    sizeLevel += 1;
+                }
+            }
+            else
+            {
+                while (sizeL < sizeLevel)
+                {
+                    ChangeSize(false);
+                    sizeLevel -= 1;
+                }
+            }
+        }
+
+        protected virtual void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        {
+
+        }
+
 
     }
 }

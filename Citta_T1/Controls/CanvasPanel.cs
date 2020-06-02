@@ -86,12 +86,9 @@ namespace Citta_T1.Controls
                 sizeLevel += 1;
                 
                 Global.GetCurrentDocument().WorldMap.ScreenFactor *= factor;
-                foreach (Control con in Controls)
+                foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
                 {
-                    if (con is IScalable && con.Visible)
-                    {
-                        (con as IScalable).ChangeSize(sizeLevel);
-                    }
+                    me.InnerControl.ChangeSize(sizeLevel);
                 }
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
@@ -103,12 +100,9 @@ namespace Citta_T1.Controls
                 sizeLevel -= 1;
                 
                 Global.GetCurrentDocument().WorldMap.ScreenFactor /= factor;
-                foreach (Control con in Controls)
+                foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
                 {
-                    if (con is IScalable && con.Visible)
-                    {
-                        (con as IScalable).ChangeSize(sizeLevel);
-                    }
+                    me.InnerControl.ChangeSize(sizeLevel);
                 }
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
