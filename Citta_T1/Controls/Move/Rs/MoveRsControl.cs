@@ -561,10 +561,7 @@ namespace Citta_T1.Controls.Move.Rs
             g.Dispose();
             this.BackgroundImage = this.staticImage;
         }
-        private void LeftPicture_MouseEnter(object sender, EventArgs e)
-        {
-            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
-        }
+
         public void RectInAdd(int pinIndex)
         {
 
