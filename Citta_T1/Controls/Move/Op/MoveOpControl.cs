@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -35,10 +34,8 @@ namespace Citta_T1.Controls.Move.Op
         private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
         private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
         
-        // 一些倍率
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
-        private Pen p1 = new Pen(Color.Green, 2f);
         public override ElementStatus Status
         {
             get => base.Status;
@@ -97,10 +94,7 @@ namespace Citta_T1.Controls.Move.Op
 
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
-        {
-
-            p1.DashStyle = DashStyle.Dash;
-            
+        {           
             InitializeComponent();
             InitializeContextMenuStrip();
 
@@ -125,7 +119,7 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
             firstDataSourceColumns = new List<string>();
-            SecondDataSourceColumns = new List<string>();
+            secondDataSourceColumns = new List<string>();
 
         }
 
@@ -147,11 +141,7 @@ namespace Citta_T1.Controls.Move.Op
 
         private void InitializeOpPinPicture()
         {          
-            int dy = 0;
-            if (doublelPinFlag)
-            {
-                dy = 5;
-            }
+            int dy = doublelPinFlag ? 5 : 0;
             rectIn_up = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
@@ -265,7 +255,6 @@ namespace Citta_T1.Controls.Move.Op
                         mr.UpdatePoints();
                         isNeedMoveLine = true;
                     }
-                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 if (isNeedMoveLine)
                 {
