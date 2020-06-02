@@ -20,36 +20,7 @@ namespace Citta_T1.Controls.Move.Dt
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         private Point oldControlPosition;
-<<<<<<< HEAD
-        private DSUtil.Encoding encoding;
-        private char separator;
-        private int id;
-        public DSUtil.Encoding Encoding { get => this.encoding; set => this.encoding = value; }
-        public int ID { get => this.id; set => this.id = value; }
 
-        public DSUtil.ExtType ExtType
-        {
-            get
-            {
-                if (String.IsNullOrWhiteSpace(FullFilePath))
-                    return DSUtil.ExtType.Unknow;
-                if (FullFilePath.EndsWith(".xlsx", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
-                if (FullFilePath.EndsWith(".xls", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Excel;
-                if (FullFilePath.EndsWith(".txt", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                if (FullFilePath.EndsWith(".bcp", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                if (FullFilePath.EndsWith(".csv", true, System.Globalization.CultureInfo.CurrentCulture))
-                    return DSUtil.ExtType.Text;
-                return DSUtil.ExtType.Unknow;
-            }
-        }
-
-        public char Separator { get => separator; set => separator = value; }
-=======
->>>>>>> f630ceb99d31dcdd6a336631a914e499c53bd564
 
         //绘制引脚
         private string lineStaus = "noLine";
@@ -312,7 +283,6 @@ namespace Citta_T1.Controls.Move.Dt
                  * 2. 如果关系中的startC 是当前控件，则更新关系的坐标
                  * 3. 重绘线
                  */
-                CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
