@@ -198,7 +198,7 @@ namespace Citta_T1.Utils
         /// 对点而言，需要知道自己距离哪个线最近，如果都是-1则表示该点不在任一条线附近
         /// </summary>
         /// <returns></returns>
-        public float PointToLine(PointF p)
+        public float Distance(PointF p)
         {
             float threshold = LineUtil.THRESHOLD;
             PointF lineStartP;

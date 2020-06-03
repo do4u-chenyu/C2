@@ -66,8 +66,6 @@
             this.textBox.Size = new System.Drawing.Size(111, 23);
             this.textBox.TabIndex = 5;
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

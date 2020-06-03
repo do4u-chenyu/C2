@@ -24,8 +24,7 @@ namespace Citta_T1.Controls.Move.Op
         private ControlMoveWrapper controlMoveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
-        private Point mouseOffset;
-
+   
         private bool doublelPinFlag = false;
 
         private string subTypeName;
@@ -46,24 +45,11 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
-        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
         public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
         public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
 
-
-
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-   
-
-
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-        private Point oldControlPosition;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为终点的所有点
@@ -75,15 +61,10 @@ namespace Citta_T1.Controls.Move.Op
 
         private Point leftPin = new Point(2, 10);
         private Point rightPin = new Point(140, 10);
-
-
-        private int pinWidth = 6;
-        private int pinHeight = 6;
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn_down;
         private Rectangle rectIn_up;
-        private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
         private List<int> linePinArray = new List<int> { };
@@ -310,13 +291,12 @@ namespace Citta_T1.Controls.Move.Op
             {
                 if (rectOut.Contains(e.Location))
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     cmd = ECommandType.PinDraw;
-                    CanvasPanel canvas = (this.Parent as CanvasPanel);
-                    canvas.CanvasPanel_MouseDown(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -376,11 +356,10 @@ namespace Citta_T1.Controls.Move.Op
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    CanvasPanel canvas = Global.GetCanvasPanel();
-                    canvas.CanvasPanel_MouseUp(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
                 this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
@@ -393,7 +372,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -409,7 +388,7 @@ namespace Citta_T1.Controls.Move.Op
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion
@@ -649,26 +628,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region textBox
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-                
-        }
-
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            FinishTextChange();
-        }
-
-        private void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
@@ -709,8 +669,6 @@ namespace Citta_T1.Controls.Move.Op
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-
-
             if(rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;

@@ -37,19 +37,31 @@ namespace Citta_T1.Controls.Move
                 return OpUtil.ExtType.Unknow;
             }
         }
+        
 
         protected string oldTextString;
         protected Bitmap staticImage;
         // 缩放等级
         protected int sizeLevel;
 
+        // 画布上的缩放倍率
+        protected float factor = Global.Factor;
+        // 出度矩形框
+        protected Rectangle rectOut;
+        // 算子上一次位置
+        protected Point oldControlPosition;
+        // 移动时的鼠标偏移量
+        protected Point mouseOffset;
+
+
+        protected int pinWidth  = 6;
+        protected int pinHeight = 6;
+        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         //private ECommandType cmd;
 
         public MoveBaseControl()
         {
             InitializeComponent();
-            oldTextString = String.Empty;
-            sizeLevel = 0;
         }
 
         // 单元素拖拽
@@ -175,6 +187,28 @@ namespace Citta_T1.Controls.Move
 
             g.Dispose();
             this.BackgroundImage = this.staticImage;
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
+            // 按下回车键
+            if (e.KeyChar == 13)
+            {
+                FinishTextChange();
+            }
+        }
+
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
+            FinishTextChange();
+        }
+
+        public virtual void FinishTextChange()
+        { 
         }
     }
 }
