@@ -52,7 +52,6 @@ namespace Citta_T1.Controls.Move.Rs
             // leftPictureBox
             // 
             this.leftPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("leftPictureBox.Image")));
-            this.leftPictureBox.Location = new System.Drawing.Point(11, 3);
             this.leftPictureBox.Size = new System.Drawing.Size(15, 21);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;

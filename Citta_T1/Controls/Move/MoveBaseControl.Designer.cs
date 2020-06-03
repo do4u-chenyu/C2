@@ -49,7 +49,7 @@ namespace Citta_T1.Controls.Move
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Location = new System.Drawing.Point(11, 2);
+            this.leftPictureBox.Location = new System.Drawing.Point(11, 4);
             this.leftPictureBox.Name = "leftPictureBox";
             this.leftPictureBox.Size = new System.Drawing.Size(18, 22);
             this.leftPictureBox.TabIndex = 4;
