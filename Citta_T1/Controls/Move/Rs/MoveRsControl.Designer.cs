@@ -68,8 +68,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

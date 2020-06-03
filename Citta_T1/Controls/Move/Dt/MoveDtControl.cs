@@ -56,26 +56,9 @@ namespace Citta_T1.Controls.Move.Dt
 
         }
 
-
         #region 重写方法
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-        public void TextBox_Leave(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            FinishTextChange();
-        }
 
-        private void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;

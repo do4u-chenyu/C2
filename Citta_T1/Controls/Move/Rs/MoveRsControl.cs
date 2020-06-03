@@ -193,8 +193,8 @@ namespace Citta_T1.Controls.Move.Rs
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
-                this.isMouseDown = false;
-                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                isMouseDown = false;
+                controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -314,21 +314,7 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region textBox
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-
-        public void TextBox_Leave(object sender, EventArgs e)
-        {
-            FinishTextChange();
-        }
-
-        public void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
