@@ -139,22 +139,21 @@ namespace Citta_T1.Controls
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
         {
             selectLineIndexs.Clear();
-            Global.GetMainForm().BlankButtonFocus();                    // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            if (!(sender is Citta_T1.Controls.Move.Dt.MoveDtControl || sender is Citta_T1.Controls.Move.Op.MoveOpControl || sender is Citta_T1.Controls.Move.Rs.MoveRsControl))
+            // 强制编辑控件失去焦点,触发算子控件的Leave事件
+            Global.GetMainForm().BlankButtonFocus();  
+            if (!(sender is MoveBaseControl))
                 this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right) 
-            {
-                
-                Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location,false);
+            { 
+                Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
                 if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
-                    this.DelSelectControl.Show(this,e.Location);
+                    this.DelSelectControl.Show(this, e.Location);
                     return;
                 }
                     
                 Global.GetFlowControl().ResetStatus();
-                frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
-                
+                frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态         
             }
 
             if (sender is MoveDtControl || sender is MoveRsControl)
@@ -296,22 +295,20 @@ namespace Citta_T1.Controls
         {
             float minDist = 100;
             float dist;
-            float threshold = LineUtil.THRESHOLD;
-            float distNotOnLine = LineUtil.DISTNOTONLINE;
-            int mrIndex = 0;
+            int i = 0;
             int index = 0;
             foreach(ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 Bezier line = new Bezier(mr.StartP, mr.EndP);
-                dist = line.PointToLine(p);
-                if (Math.Abs(dist - distNotOnLine) > 0.0001 && dist < minDist)
+                dist = line.Distance(p);
+                if (Math.Abs(dist - LineUtil.DISTNOTONLINE) > 0.0001 && dist < minDist)
                 {
                     minDist = dist;
-                    index = mrIndex;
+                    index = i;
                 }
-                mrIndex += 1;
+                i += 1;
             }
-            if (minDist < threshold)
+            if (minDist < LineUtil.THRESHOLD)
                 return index;
             else
                 return -1;
