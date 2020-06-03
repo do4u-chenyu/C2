@@ -133,7 +133,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("dataSelectIndex", this.dataColumnBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("keySelectIndex", this.keyWordColBox.SelectedIndex.ToString());
             this.opControl.Option.SetOption("conditionSlect", this.conditionSelectBox.SelectedIndex.ToString());
-
+            this.opControl.Option.SetOption("keyWordText", this.keyWordPreviewBox.Text);
             if (this.oldOptionDictStr == string.Join(",", this.opControl.Option.OptionDict.ToList())
                 && this.opControl.Status != ElementStatus.Null
                 && this.opControl.Status != ElementStatus.Warn)
