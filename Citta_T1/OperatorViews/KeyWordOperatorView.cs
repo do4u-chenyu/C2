@@ -106,19 +106,30 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            if (Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield"))
+            if (!Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield"))
             {
-                return;
+                string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                oldOutList = indexs.ToList();
+                outList.LoadItemCheckIndex(indexs);
+                oldColumnName.AddRange(from int index in indexs
+                                       select outList.Items[index].ToString());
             }
-            string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            oldOutList = indexs.ToList();
-            outList.LoadItemCheckIndex(indexs);
-            oldColumnName.AddRange(from int index in indexs
-                                        select outList.Items[index].ToString());
+            if (!Global.GetOptionDao().IsCleanOption(opControl, 
+                                                    dataSrcColName, 
+                                                    "dataSelectIndex",
+                                                    Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"))))
+            {
+                dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
+            }
+            if (!Global.GetOptionDao().IsCleanOption(opControl,
+                                                    dataSrcColName,
+                                                    "keySelectIndex",
+                                                    Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"))))
+            {
+                keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
+            }
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));
-            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
-            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
         }
         private void SaveOption()
         {
