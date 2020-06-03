@@ -187,10 +187,12 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
 
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
-                return;
-            else
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
 
         }
 

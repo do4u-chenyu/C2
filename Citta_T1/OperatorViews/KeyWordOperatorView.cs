@@ -146,13 +146,16 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("keySelectIndex", keyWordColBox.SelectedIndex.ToString());
             opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
             opControl.Option.SetOption("keyWordText", keyWordPreviewBox.Text);
-            if (this.oldOptionDictStr == string.Join(",", this.opControl.Option.OptionDict.ToList())
-                && this.opControl.Status != ElementStatus.Null
-                && this.opControl.Status != ElementStatus.Warn)
-            {
-                return;
-            }
-            this.opControl.Status = ElementStatus.Ready;
+
+
+
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+                this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
         private void GetDataInfo()
         {

@@ -86,6 +86,8 @@ namespace Citta_T1.OperatorViews
             if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
 
+           
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -106,11 +108,14 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("maxfield", String.Empty);
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
-
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
-                return;
-            else
+            
+            
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
 
         }
 
