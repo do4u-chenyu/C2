@@ -1,4 +1,6 @@
-﻿using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -12,15 +14,18 @@ namespace Citta_T1.OperatorViews
 {
     public partial class KeyWordOperatorView : Form
     {
-        private string dataSourcePath;
-        private string keyWordPath;
+        private const int colIndexDefault = 0;
+        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private string dataSourcePath, dataSourceEncode, keyWordPath, keyWordEncode;
         private MoveOpControl opControl;
+        private string[] dataSrcColName, keyWordColName;       
 
         public KeyWordOperatorView(MoveOpControl opControl)
         {
             this.opControl = opControl;
             InitializeComponent();
             InitOptionInfo();
+            
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -35,23 +40,42 @@ namespace Citta_T1.OperatorViews
         }
         #region 加载连接数据
         private void InitOptionInfo()
-        {
+        {           
             Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID);
-            if (AccessOptionCheck(dataInfoDic.Keys.ToList()))
-                return;
-            
-            dataSourcePath = dataInfoDic["dataPath0"];
+
+
+            _ = dataInfoDic.TryGetValue("dataPath0", out dataSourcePath);
+            _ = dataInfoDic.TryGetValue("dataPath1", out keyWordPath);
+            _ = dataInfoDic.TryGetValue("encoding0", out dataSourceEncode);
+            _ = dataInfoDic.TryGetValue("encoding1", out keyWordEncode);
+
             dataSourceBox.Text = SetTextBoxName(dataSourcePath);
             dataSourceTip.SetToolTip(dataSourceBox, dataSourceBox.Text);
 
-            keyWordPath = dataInfoDic["dataPath1"];
             keyWordBox.Text = SetTextBoxName(keyWordPath);
-            keyWordTip.SetToolTip(keyWordBox, keyWordBox.Text);           
+            keyWordTip.SetToolTip(keyWordBox, keyWordBox.Text);
+            dataSrcColName = SetOption(this.dataSourcePath, 
+                                       this.dataSourceBox.Text, 
+                                       dataInfoDic["encoding0"], 
+                                       dataInfoDic["separator0"].ToCharArray());
+            keyWordColName = SetOption(this.keyWordPath,
+                                       this.keyWordBox.Text,
+                                       dataInfoDic["encoding1"],
+                                       dataInfoDic["separator1"].ToCharArray());
+            this.opControl.FirstDataSourceColumns = this.dataSrcColName.ToList();
+            this.opControl.SecondDataSourceColumns = this.keyWordColName.ToList();
+            this.dataColumnBox.Items.AddRange(dataSrcColName);
+            this.keyWordColBox.Items.AddRange(keyWordColName);
+            this.outList.Items.AddRange(dataSrcColName);
+            this.dataColumnBox.SelectedIndex = colIndexDefault;
+            this.keyWordColBox.SelectedIndex = colIndexDefault;
+            this.conditionSelectBox.SelectedIndex = colIndexDefault;
         }
-        private bool AccessOptionCheck(List<string> dataInfoKeys)
+        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
-            List<string> keyCheck = new List<string> { "dataPath0", "encoding0", "dataPath1", "encoding1" };
-            return !keyCheck.ToList().Except(dataInfoKeys.ToList()).Any();
+            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
+            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
+            return bcpInfo.ColumnArray;
         }
         private string SetTextBoxName(string filePath)
         {
@@ -74,9 +98,25 @@ namespace Citta_T1.OperatorViews
             {
                 return fileName;
             }
-            return ConvertUtil.SubstringByte(fileName, 0, maxLength);
+            return ConvertUtil.SubstringByte(fileName, colIndexDefault, maxLength);
         }
         #endregion
+        #region 检查
+        private bool IsOptionReady()
+        {
+            bool empty = false;
+            
+            if (this.outList.GetItemCheckIndex().Count == colIndexDefault)
+            {
+                MessageBox.Show("请选择输出字段!");
+                empty = true;
+                return empty;
+            }
+            return empty;
+        }
+        #endregion
+        #region 配置信息的保存与修改
 
+        #endregion
     }
 }

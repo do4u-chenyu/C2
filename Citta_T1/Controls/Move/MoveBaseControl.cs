@@ -88,22 +88,14 @@ namespace Citta_T1.Controls.Move
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
-            //上
+    
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            //下
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            //左
             g.DrawLine(MyPens.DarkGray, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            //右
             g.DrawLine(MyPens.DarkGray, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-
-            //左上角
             g.DrawArc(MyPens.DarkGray, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            //右上角
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            //左下角
             g.DrawArc(MyPens.DarkGray, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            //右下角
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
             
             g.Dispose();

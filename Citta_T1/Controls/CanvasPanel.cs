@@ -147,14 +147,14 @@ namespace Citta_T1.Controls
             {
                 
                 Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location,false);
-                if (frameWrapper.MinBoding.Contains(pw))
+                if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
                     this.DelSelectControl.Show(this,e.Location);
                     return;
                 }
                     
                 Global.GetFlowControl().ResetStatus();
-                frameWrapper.MinBoding = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
+                frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态
                 
             }
 
