@@ -207,7 +207,9 @@ namespace Citta_T1.Business.Model
                         {
                             ctl.Option = ReadOption(xn);
                             ctl.FirstDataSourceColumns  = ctl.Option.GetOption("columnname0").Split('\t').ToList();
-                            ctl.SecondDataSourceColumns = ctl.Option.GetOption("columnname1").Split('\t').ToList();
+                            if(ctl.IsBinaryDimension())
+                                ctl.SecondDataSourceColumns = ctl.Option.GetOption("columnname1").Split('\t').ToList();
+
                         }
                     }
                     else if (type == "DataSource")
