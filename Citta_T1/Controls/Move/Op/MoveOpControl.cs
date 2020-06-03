@@ -165,6 +165,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void InitializeHelpToolTip()
         {
+            string appPath = System.Windows.Forms.Application.StartupPath;
             switch (subTypeName)
             {
                 case "关联算子":
@@ -172,36 +173,47 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
+                    SetPictureBoxImage("collideOp.png");
                     break;
                 case "取并集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
+                    SetPictureBoxImage("unionOp.png");
                     break;
                 case "取差集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
+                    SetPictureBoxImage("differOp.png");
                     break;
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
+                    SetPictureBoxImage("randomOp.png");
                     break;
                 case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
+                    SetPictureBoxImage("filterOp.png");
                     break;
                 case "取最大值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
+                    SetPictureBoxImage("maxOp.png");
                     break;
                 case "取最小值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    SetPictureBoxImage("minOp.png");
                     break;
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
+                    SetPictureBoxImage("avgOp.png");
                     break;
                 case "频率算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
+                    SetPictureBoxImage("freqOp.png");
                     break;
                 case "排序算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
+                    SetPictureBoxImage("sortOp.png");
                     break;
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
+                    SetPictureBoxImage("groupOp.png");
                     break;
                 case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
@@ -214,9 +226,11 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
+                    SetPictureBoxImage("wordFilter.png");
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
+                    SetPictureBoxImage("dataStandarOp.png");
                     break;
                 default:
                     break;
@@ -989,6 +1003,16 @@ namespace Citta_T1.Controls.Move.Op
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+        private void SetPictureBoxImage(string picName)
+        {
+            string appPath = System.Windows.Forms.Application.StartupPath;
+            //仅当图片存在时才加载图片
+            if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))
+            {  
+                Image img = Image.FromFile(filename: appPath + @"\res\opControl\" + picName);
+                this.leftPictureBox.Image = img;
+            }
         }
     }
 }

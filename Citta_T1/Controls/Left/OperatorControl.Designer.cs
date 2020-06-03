@@ -31,16 +31,16 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorControl));
             this.leftPanelOpRelate = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.relateOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.collideOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.differOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.randomOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.maxOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.filterOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.avgOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.minOpPictureBox = new System.Windows.Forms.PictureBox();
             this.leftPanelOpCollide = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.unionOpPictureBox = new System.Windows.Forms.PictureBox();
             this.lefPanelOpUnion = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpDiffer = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpRandom = new Citta_T1.Controls.Common.NoFocusButton();
@@ -48,31 +48,31 @@
             this.leftPanelOpMax = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpMin = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpAvg = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.freqOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.sortOpPictureBox = new System.Windows.Forms.PictureBox();
+            this.groupOpPictureBox = new System.Windows.Forms.PictureBox();
             this.leftPanelOpFreq = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpSort = new Citta_T1.Controls.Common.NoFocusButton();
             this.leftPanelOpGroup = new Citta_T1.Controls.Common.NoFocusButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.leftPanelOpWordFilter = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.wordFilterOpPictureBox = new System.Windows.Forms.PictureBox();
             this.leftPanelOpDataStandar = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            this.dataStandarOpPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.randomOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.avgOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unionOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.freqOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sortOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordFilterOpPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataStandarOpPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // leftPanelOpRelate
@@ -89,77 +89,77 @@
             this.leftPanelOpRelate.UseVisualStyleBackColor = true;
             this.leftPanelOpRelate.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // pictureBox1
+            // relateOpPictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(36, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.relateOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("relateOpPictureBox.Image")));
+            this.relateOpPictureBox.Location = new System.Drawing.Point(36, 8);
+            this.relateOpPictureBox.Name = "relateOpPictureBox";
+            this.relateOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.relateOpPictureBox.TabIndex = 1;
+            this.relateOpPictureBox.TabStop = false;
             // 
-            // pictureBox2
+            // collideOpPictureBox
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(36, 55);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
+            this.collideOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("collideOpPictureBox.Image")));
+            this.collideOpPictureBox.Location = new System.Drawing.Point(36, 55);
+            this.collideOpPictureBox.Name = "collideOpPictureBox";
+            this.collideOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.collideOpPictureBox.TabIndex = 3;
+            this.collideOpPictureBox.TabStop = false;
             // 
-            // pictureBox3
+            // differOpPictureBox
             // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(36, 149);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox3.TabIndex = 4;
-            this.pictureBox3.TabStop = false;
+            this.differOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("differOpPictureBox.Image")));
+            this.differOpPictureBox.Location = new System.Drawing.Point(36, 149);
+            this.differOpPictureBox.Name = "differOpPictureBox";
+            this.differOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.differOpPictureBox.TabIndex = 4;
+            this.differOpPictureBox.TabStop = false;
             // 
-            // pictureBox4
+            // randomOpPictureBox
             // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(36, 197);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox4.TabIndex = 6;
-            this.pictureBox4.TabStop = false;
+            this.randomOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("randomOpPictureBox.Image")));
+            this.randomOpPictureBox.Location = new System.Drawing.Point(36, 197);
+            this.randomOpPictureBox.Name = "randomOpPictureBox";
+            this.randomOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.randomOpPictureBox.TabIndex = 6;
+            this.randomOpPictureBox.TabStop = false;
             // 
-            // pictureBox5
+            // maxOpPictureBox
             // 
-            this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(36, 292);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
+            this.maxOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("maxOpPictureBox.Image")));
+            this.maxOpPictureBox.Location = new System.Drawing.Point(36, 292);
+            this.maxOpPictureBox.Name = "maxOpPictureBox";
+            this.maxOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.maxOpPictureBox.TabIndex = 7;
+            this.maxOpPictureBox.TabStop = false;
             // 
-            // pictureBox6
+            // filterOpPictureBox
             // 
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(36, 246);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox6.TabIndex = 8;
-            this.pictureBox6.TabStop = false;
+            this.filterOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("filterOpPictureBox.Image")));
+            this.filterOpPictureBox.Location = new System.Drawing.Point(36, 246);
+            this.filterOpPictureBox.Name = "filterOpPictureBox";
+            this.filterOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.filterOpPictureBox.TabIndex = 8;
+            this.filterOpPictureBox.TabStop = false;
             // 
-            // pictureBox7
+            // avgOpPictureBox
             // 
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
-            this.pictureBox7.Location = new System.Drawing.Point(36, 388);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox7.TabIndex = 9;
-            this.pictureBox7.TabStop = false;
+            this.avgOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("avgOpPictureBox.Image")));
+            this.avgOpPictureBox.Location = new System.Drawing.Point(36, 388);
+            this.avgOpPictureBox.Name = "avgOpPictureBox";
+            this.avgOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.avgOpPictureBox.TabIndex = 9;
+            this.avgOpPictureBox.TabStop = false;
             // 
-            // pictureBox8
+            // minOpPictureBox
             // 
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(36, 341);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox8.TabIndex = 10;
-            this.pictureBox8.TabStop = false;
+            this.minOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minOpPictureBox.Image")));
+            this.minOpPictureBox.Location = new System.Drawing.Point(36, 341);
+            this.minOpPictureBox.Name = "minOpPictureBox";
+            this.minOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.minOpPictureBox.TabIndex = 10;
+            this.minOpPictureBox.TabStop = false;
             // 
             // leftPanelOpCollide
             // 
@@ -175,14 +175,14 @@
             this.leftPanelOpCollide.UseVisualStyleBackColor = true;
             this.leftPanelOpCollide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // pictureBox10
+            // unionOpPictureBox
             // 
-            this.pictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox10.Image")));
-            this.pictureBox10.Location = new System.Drawing.Point(36, 101);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox10.TabIndex = 4;
-            this.pictureBox10.TabStop = false;
+            this.unionOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("unionOpPictureBox.Image")));
+            this.unionOpPictureBox.Location = new System.Drawing.Point(36, 101);
+            this.unionOpPictureBox.Name = "unionOpPictureBox";
+            this.unionOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.unionOpPictureBox.TabIndex = 4;
+            this.unionOpPictureBox.TabStop = false;
             // 
             // lefPanelOpUnion
             // 
@@ -284,32 +284,32 @@
             this.leftPanelOpAvg.UseVisualStyleBackColor = true;
             this.leftPanelOpAvg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // pictureBox9
+            // freqOpPictureBox
             // 
-            this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(36, 437);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox9.TabIndex = 26;
-            this.pictureBox9.TabStop = false;
+            this.freqOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("freqOpPictureBox.Image")));
+            this.freqOpPictureBox.Location = new System.Drawing.Point(36, 437);
+            this.freqOpPictureBox.Name = "freqOpPictureBox";
+            this.freqOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.freqOpPictureBox.TabIndex = 26;
+            this.freqOpPictureBox.TabStop = false;
             // 
-            // pictureBox11
+            // sortOpPictureBox
             // 
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
-            this.pictureBox11.Location = new System.Drawing.Point(36, 486);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox11.TabIndex = 27;
-            this.pictureBox11.TabStop = false;
+            this.sortOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("sortOpPictureBox.Image")));
+            this.sortOpPictureBox.Location = new System.Drawing.Point(36, 486);
+            this.sortOpPictureBox.Name = "sortOpPictureBox";
+            this.sortOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.sortOpPictureBox.TabIndex = 27;
+            this.sortOpPictureBox.TabStop = false;
             // 
-            // pictureBox12
+            // groupOpPictureBox
             // 
-            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
-            this.pictureBox12.Location = new System.Drawing.Point(36, 534);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox12.TabIndex = 28;
-            this.pictureBox12.TabStop = false;
+            this.groupOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("groupOpPictureBox.Image")));
+            this.groupOpPictureBox.Location = new System.Drawing.Point(36, 534);
+            this.groupOpPictureBox.Name = "groupOpPictureBox";
+            this.groupOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.groupOpPictureBox.TabIndex = 28;
+            this.groupOpPictureBox.TabStop = false;
             // 
             // leftPanelOpFreq
             // 
@@ -371,14 +371,14 @@
             this.leftPanelOpWordFilter.UseVisualStyleBackColor = true;
             this.leftPanelOpWordFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // pictureBox13
+            // wordFilterOpPictureBox
             // 
-            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
-            this.pictureBox13.Location = new System.Drawing.Point(36, 579);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox13.TabIndex = 33;
-            this.pictureBox13.TabStop = false;
+            this.wordFilterOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("wordFilterOpPictureBox.Image")));
+            this.wordFilterOpPictureBox.Location = new System.Drawing.Point(36, 579);
+            this.wordFilterOpPictureBox.Name = "wordFilterOpPictureBox";
+            this.wordFilterOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.wordFilterOpPictureBox.TabIndex = 33;
+            this.wordFilterOpPictureBox.TabStop = false;
             // 
             // leftPanelOpDataStandar
             // 
@@ -395,14 +395,14 @@
             this.leftPanelOpDataStandar.UseVisualStyleBackColor = true;
             this.leftPanelOpDataStandar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
-            // pictureBox14
+            // dataStandarOpPictureBox
             // 
-            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
-            this.pictureBox14.Location = new System.Drawing.Point(36, 624);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox14.TabIndex = 35;
-            this.pictureBox14.TabStop = false;
+            this.dataStandarOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dataStandarOpPictureBox.Image")));
+            this.dataStandarOpPictureBox.Location = new System.Drawing.Point(36, 624);
+            this.dataStandarOpPictureBox.Name = "dataStandarOpPictureBox";
+            this.dataStandarOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.dataStandarOpPictureBox.TabIndex = 35;
+            this.dataStandarOpPictureBox.TabStop = false;
             // 
             // OperatorControl
             // 
@@ -411,16 +411,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Controls.Add(this.pictureBox14);
+            this.Controls.Add(this.dataStandarOpPictureBox);
             this.Controls.Add(this.leftPanelOpDataStandar);
-            this.Controls.Add(this.pictureBox13);
+            this.Controls.Add(this.wordFilterOpPictureBox);
             this.Controls.Add(this.leftPanelOpWordFilter);
             this.Controls.Add(this.leftPanelOpGroup);
             this.Controls.Add(this.leftPanelOpSort);
             this.Controls.Add(this.leftPanelOpFreq);
-            this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.groupOpPictureBox);
+            this.Controls.Add(this.sortOpPictureBox);
+            this.Controls.Add(this.freqOpPictureBox);
             this.Controls.Add(this.leftPanelOpRelate);
             this.Controls.Add(this.leftPanelOpAvg);
             this.Controls.Add(this.leftPanelOpMin);
@@ -430,31 +430,31 @@
             this.Controls.Add(this.leftPanelOpDiffer);
             this.Controls.Add(this.lefPanelOpUnion);
             this.Controls.Add(this.leftPanelOpCollide);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.minOpPictureBox);
+            this.Controls.Add(this.avgOpPictureBox);
+            this.Controls.Add(this.filterOpPictureBox);
+            this.Controls.Add(this.maxOpPictureBox);
+            this.Controls.Add(this.randomOpPictureBox);
+            this.Controls.Add(this.unionOpPictureBox);
+            this.Controls.Add(this.differOpPictureBox);
+            this.Controls.Add(this.collideOpPictureBox);
+            this.Controls.Add(this.relateOpPictureBox);
             this.Name = "OperatorControl";
             this.Size = new System.Drawing.Size(187, 675);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.relateOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collideOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.differOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.randomOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filterOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.avgOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unionOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.freqOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sortOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wordFilterOpPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataStandarOpPictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,15 +462,15 @@
         #endregion
 
         
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox relateOpPictureBox;
+        private System.Windows.Forms.PictureBox collideOpPictureBox;
+        private System.Windows.Forms.PictureBox differOpPictureBox;
+        private System.Windows.Forms.PictureBox randomOpPictureBox;
+        private System.Windows.Forms.PictureBox maxOpPictureBox;
+        private System.Windows.Forms.PictureBox filterOpPictureBox;
+        private System.Windows.Forms.PictureBox avgOpPictureBox;
+        private System.Windows.Forms.PictureBox minOpPictureBox;
+        private System.Windows.Forms.PictureBox unionOpPictureBox;
         private Citta_T1.Controls.Common.NoFocusButton leftPanelOpRelate;
         private Citta_T1.Controls.Common.NoFocusButton leftPanelOpCollide;
         private Citta_T1.Controls.Common.NoFocusButton lefPanelOpUnion;
@@ -483,13 +483,13 @@
         private Citta_T1.Controls.Common.NoFocusButton leftPanelOpFreq;
         private Citta_T1.Controls.Common.NoFocusButton leftPanelOpSort;
         private Citta_T1.Controls.Common.NoFocusButton leftPanelOpGroup;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.PictureBox freqOpPictureBox;
+        private System.Windows.Forms.PictureBox sortOpPictureBox;
+        private System.Windows.Forms.PictureBox groupOpPictureBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private Common.NoFocusButton leftPanelOpWordFilter;
-        private System.Windows.Forms.PictureBox pictureBox13;
+        private System.Windows.Forms.PictureBox wordFilterOpPictureBox;
         private Common.NoFocusButton leftPanelOpDataStandar;
-        private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.PictureBox dataStandarOpPictureBox;
     }
 }
