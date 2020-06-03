@@ -27,8 +27,7 @@ namespace Citta_T1.Controls.Move.Rs
         //绘制引脚
         private Point leftPin = new Point(2, 11);
         private Point rightPin = new Point(130, 8);
-        private int pinWidth = 6;
-        private int pinHeight = 6;
+
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn;
@@ -123,7 +122,6 @@ namespace Citta_T1.Controls.Move.Rs
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
 
-                CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
@@ -136,7 +134,6 @@ namespace Citta_T1.Controls.Move.Rs
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
                     }
-                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
@@ -357,7 +354,7 @@ namespace Citta_T1.Controls.Move.Rs
         }
 
         #region 针脚事件
-        public void PinOpLeaveAndEnter(Point mousePosition)
+        private void PinOpLeaveAndEnter(Point mousePosition)
         {
             if (rectIn.Contains(mousePosition))
             {

@@ -61,10 +61,6 @@ namespace Citta_T1.Controls.Move.Op
 
         private Point leftPin = new Point(2, 10);
         private Point rightPin = new Point(140, 10);
-
-
-        private int pinWidth = 6;
-        private int pinHeight = 6;
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn_down;
@@ -676,8 +672,6 @@ namespace Citta_T1.Controls.Move.Op
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-
-
             if(rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;

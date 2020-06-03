@@ -20,8 +20,7 @@ namespace Citta_T1.Controls.Move.Dt
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 9);
-        private int pinWidth = 6;
-        private int pinHeight = 6;
+
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private String pinStatus = "noEnter";
