@@ -35,9 +35,10 @@
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.keyWordPreviewBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
@@ -51,7 +52,6 @@
             this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.dataSourceTip = new System.Windows.Forms.ToolTip(this.components);
             this.keyWordTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
             this.bottomPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -62,7 +62,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(34, 103);
+            this.label3.Location = new System.Drawing.Point(34, 94);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 22);
@@ -97,7 +97,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(477, 37);
+            this.topPanel.Size = new System.Drawing.Size(465, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -106,10 +106,10 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 161);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 167);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(477, 212);
+            this.bottomPanel.Size = new System.Drawing.Size(465, 194);
             this.bottomPanel.TabIndex = 1;
             // 
             // groupBox1
@@ -117,20 +117,30 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.keyWordPreviewBox);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(28, 15);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(445, 163);
+            this.groupBox1.Size = new System.Drawing.Size(437, 143);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "过滤条件预览：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(6, 60);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(408, 17);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "[3] 当前算子仅支持100行关键词组合与过滤，超出的我们会做默认忽略处理";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(6, 41);
+            this.label5.Location = new System.Drawing.Point(7, 40);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(376, 17);
             this.label5.TabIndex = 2;
@@ -146,22 +156,22 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "[1] 行与行之间按或运算处理；每行支持逻辑或、逻辑与、逻辑非运算。";
             // 
-            // textBox1
+            // keyWordPreviewBox
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(0, 81);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(445, 82);
-            this.textBox1.TabIndex = 0;
+            this.keyWordPreviewBox.BackColor = System.Drawing.SystemColors.Control;
+            this.keyWordPreviewBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keyWordPreviewBox.Location = new System.Drawing.Point(0, 81);
+            this.keyWordPreviewBox.Multiline = true;
+            this.keyWordPreviewBox.Name = "keyWordPreviewBox";
+            this.keyWordPreviewBox.ReadOnly = true;
+            this.keyWordPreviewBox.Size = new System.Drawing.Size(434, 55);
+            this.keyWordPreviewBox.TabIndex = 0;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(409, 183);
+            this.cancelButton.Location = new System.Drawing.Point(391, 163);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
@@ -176,7 +186,7 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(319, 183);
+            this.confirmButton.Location = new System.Drawing.Point(309, 163);
             this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
@@ -194,7 +204,7 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(124, 124);
+            this.keyPanel.Size = new System.Drawing.Size(124, 130);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
@@ -210,7 +220,7 @@
             this.valuePanel.Location = new System.Drawing.Point(124, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(353, 124);
+            this.valuePanel.Size = new System.Drawing.Size(341, 130);
             this.valuePanel.TabIndex = 3;
             // 
             // label6
@@ -232,6 +242,7 @@
             this.keyWordColBox.Name = "keyWordColBox";
             this.keyWordColBox.Size = new System.Drawing.Size(121, 25);
             this.keyWordColBox.TabIndex = 13;
+            this.keyWordColBox.SelectedIndexChanged += new System.EventHandler(this.keyWordColBox_SelectedIndexChanged);
             // 
             // conditionSelectBox
             // 
@@ -279,27 +290,17 @@
             // outList
             // 
             this.outList.DataSource = null;
-            this.outList.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList.Location = new System.Drawing.Point(6, 107);
+            this.outList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outList.Location = new System.Drawing.Point(6, 96);
             this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.outList.Name = "outList";
-            this.outList.Size = new System.Drawing.Size(112, 21);
+            this.outList.Size = new System.Drawing.Size(125, 22);
             this.outList.TabIndex = 8;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(6, 60);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(408, 17);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "[3] 当前算子仅支持100行关键词组合与过滤，超出的我们会做默认忽略处理";
             // 
             // KeyWordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(477, 373);
+            this.ClientSize = new System.Drawing.Size(465, 361);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -344,7 +345,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox keyWordPreviewBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
     }
