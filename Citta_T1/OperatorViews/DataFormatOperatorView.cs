@@ -22,7 +22,6 @@ namespace Citta_T1.OperatorViews
         private List<string> selectColumn;
         private List<int> formatColumn;
         private List<bool> oldCheckedItems;
-        private List<int> outList;
         private int[] oldOutList;
         private List<string> oldOutName;
         private OptionInfoCheck optionInfoCheck;

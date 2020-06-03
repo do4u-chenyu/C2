@@ -11,6 +11,10 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             List<string> cmds = new List<string>();
 
+
+            //包含不包含
+            //string containCmd = option.GetOption("contain") == "true" ? "~" : "~!";
+
             //TODO
             cmds.Add("sbin\\echo.exe keyword");
 
