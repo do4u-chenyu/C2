@@ -366,7 +366,7 @@
     <Compile Include="OperatorViews\KeyWordOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OperatorViews\KeyWordOperatorView.Designer.cs">
+    <Compile Include="OperatorViews\KeyWordOperatorView.designer.cs">
       <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">

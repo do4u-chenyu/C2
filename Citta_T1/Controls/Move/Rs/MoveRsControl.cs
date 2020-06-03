@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
 {
-    public partial class MoveRsControl : MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
         private bool isMouseDown = false;
         private Point mouseOffset;
@@ -26,8 +26,6 @@ namespace Citta_T1.Controls.Move.Rs
         // 一些倍率
         // 画布上的缩放倍率
         float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -109,25 +107,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.toolStripSeparator1,
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
-        }
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
         }
 
         /*
@@ -291,7 +270,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -402,7 +381,7 @@ namespace Citta_T1.Controls.Move.Rs
         }
         #endregion
 
-        public void RightPictureBox_MouseEnter(object sender, EventArgs e)
+        private void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             this.helpToolTip.SetToolTip(this.rightPictureBox, this.FullFilePath);
         }
@@ -465,29 +444,21 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             ExtensionMethods.SetDouble(this);
-            DrawRoundedRect((int)(4 * Math.Pow(factor, sizeLevel)), 0, this.Width - (int)(11 * Math.Pow(factor, sizeLevel)), this.Height - (int)(2 * Math.Pow(factor, sizeLevel)), (int)(3 * Math.Pow(factor, sizeLevel)));
-            
-            if (zoomUp)
-            {
-                SetControlsBySize(factor, this);
-                this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn = SetRectBySize(factor, this.rectIn);
-            }
+            double f = Math.Pow(factor, sizeLevel);
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+    
+            factor = zoomUp ? factor : 1 / factor;
 
-            else
-            {
-                SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
-                this.rectIn = SetRectBySize(1 / factor, this.rectIn);
-            }
-
-
+            SetControlsBySize(factor, this);
+            this.rectOut = SetRectBySize(factor, this.rectOut);
+            this.rectIn = SetRectBySize(factor, this.rectIn);
+            this.Invalidate();
         }
         #endregion
 
@@ -560,32 +531,6 @@ namespace Citta_T1.Controls.Move.Rs
 
         #endregion
 
-        private void UpdateRound(int x, int y, int width, int height, int radius)
-        {
-            Pen p1 = new Pen(Color.Green, 2f);
-            p1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            Graphics g = Graphics.FromImage(staticImage);
-
-
-            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
-            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
-            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-
-            g.Dispose();
-            this.BackgroundImage = this.staticImage;
-        }
-        private void LeftPicture_MouseEnter(object sender, EventArgs e)
-        {
-            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
-        }
         public void RectInAdd(int pinIndex)
         {
 
@@ -637,7 +582,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
@@ -646,7 +591,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {

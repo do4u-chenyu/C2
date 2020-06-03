@@ -11,14 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Op
 {
 
-    public partial class MoveOpControl : MoveBaseControl, IScalable, IMoveControl
+    public partial class MoveOpControl : MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
@@ -35,10 +34,8 @@ namespace Citta_T1.Controls.Move.Op
         private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
         private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
         
-        // 一些倍率
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
-        private Pen p1 = new Pen(Color.Green, 2f);
         public override ElementStatus Status
         {
             get => base.Status;
@@ -60,8 +57,8 @@ namespace Citta_T1.Controls.Move.Op
         // 一些倍率
         // 画布上的缩放倍率
         float factor = Global.Factor;
-        // 缩放等级
-        private int sizeLevel = 0;
+   
+
 
         // 绘制贝塞尔曲线的起点
         private int startX;
@@ -97,10 +94,7 @@ namespace Citta_T1.Controls.Move.Op
 
         
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
-        {
-
-            p1.DashStyle = DashStyle.Dash;
-            
+        {           
             InitializeComponent();
             InitializeContextMenuStrip();
 
@@ -125,7 +119,7 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
             firstDataSourceColumns = new List<string>();
-            SecondDataSourceColumns = new List<string>();
+            secondDataSourceColumns = new List<string>();
 
         }
 
@@ -144,33 +138,10 @@ namespace Citta_T1.Controls.Move.Op
         {
             return OperatorDimension() == 1;
         }
-        public void ChangeSize(int sizeL)
-        {
-            if (sizeL > sizeLevel)
-            {
-                while (sizeL > sizeLevel)
-                {
-                    ChangeSize(true);
-                    sizeLevel += 1;
-                }
-            }
-            else
-            {
-                while (sizeL < sizeLevel)
-                {
-                    ChangeSize(false);
-                    sizeLevel -= 1;
-                }
-            }
-        }
 
         private void InitializeOpPinPicture()
         {          
-            int dy = 0;
-            if (doublelPinFlag)
-            {
-                dy = 5;
-            }
+            int dy = doublelPinFlag ? 5 : 0;
             rectIn_up = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
             this.leftPinArray.Add(rectIn_up);
             this.endLineIndexs.Add(-1);
@@ -284,7 +255,6 @@ namespace Citta_T1.Controls.Move.Op
                         mr.UpdatePoints();
                         isNeedMoveLine = true;
                     }
-                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 if (isNeedMoveLine)
                 {
@@ -402,7 +372,6 @@ namespace Citta_T1.Controls.Move.Op
                 cmd = ECommandType.Null;
                 this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
-
             }
 
             if (oldControlPosition != this.Location)
@@ -466,7 +435,7 @@ namespace Citta_T1.Controls.Move.Op
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)((txtWidth -1 )* f), this.Height - (int)(4 * f));
             
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
 
@@ -670,7 +639,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region textBox
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -682,7 +651,7 @@ namespace Citta_T1.Controls.Move.Op
                 
         }
 
-        public void TextBox_Leave(object sender, EventArgs e)
+        private void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
@@ -825,30 +794,22 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region 托块的放大与缩小
-        private void ChangeSize(bool zoomUp, float factor = Global.Factor)
+        protected override void ChangeSize(bool zoomUp, float factor = Global.Factor)
         {
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
-
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-            if (zoomUp)
-            {
-                SetControlsBySize(factor, this);
-                this.rectOut = SetRectBySize(factor, this.rectOut);
-                this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
-                this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
-                this.Invalidate(); // TODO [Dk] 干嘛用的？，为什么下面不写一个重绘？
-            }
-            else
-            {
-                SetControlsBySize(1 / factor, this);
-                this.rectOut = SetRectBySize(1 / factor, this.rectOut);
-                this.rectIn_down = SetRectBySize(1 / factor, this.rectIn_down);
-                this.rectIn_up = SetRectBySize(1 / factor, this.rectIn_up);
-            }
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+
+            factor = zoomUp ? factor : 1 / factor;
+
+            SetControlsBySize(factor, this);
+            this.rectOut = SetRectBySize(factor, this.rectOut);
+            this.rectIn_down = SetRectBySize(factor, this.rectIn_down);
+            this.rectIn_up = SetRectBySize(factor, this.rectIn_up);
+            this.Invalidate();
         }
         #endregion
 
@@ -1016,43 +977,18 @@ namespace Citta_T1.Controls.Move.Op
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
-        private void UpdateRound(int x, int y, int width, int height, int radius)
-        {
-            Graphics g = Graphics.FromImage(staticImage);
-            
-
-            g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
-            g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
-            g.DrawLine(p1, new PointF(x + radius, y), new PointF(x + width - radius, y));
-            g.DrawLine(p1, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
-            g.DrawLine(p1, new PointF(x, y + radius), new PointF(x, y + height - radius));
-            g.DrawLine(p1, new PointF(x + width, y + radius), new PointF(x + width, y + height - radius));
-            g.DrawArc(p1, new Rectangle(x, y, radius * 2, radius * 2), 180, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
-            g.DrawArc(p1, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
-            g.DrawArc(p1, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-
-            g.Dispose();
-            this.BackgroundImage = this.staticImage;
-        }
-        private void LeftPicture_MouseEnter(object sender, EventArgs e)
-        {
-            this.helpToolTip.SetToolTip(this.leftPictureBox, String.Format("元素ID: {0}", this.ID.ToString()));
-        }
-
         public void ControlSelect()
         {
             double f = Math.Pow(factor, sizeLevel);
             pen = new Pen(Color.DarkGray, 1.5f);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 }

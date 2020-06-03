@@ -26,6 +26,7 @@ namespace Citta_T1.OperatorViews
         private List<string> oldColumnName;
         private static LogUtil log = LogUtil.GetInstance("SortOperatorView");
         private OptionInfoCheck optionInfoCheck;
+        
         public SortOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();

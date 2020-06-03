@@ -13,8 +13,10 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
+    
     class FrameWrapperVFX
     {
+        // 拖拽过程中的高级视觉特效类
         private bool backImgMode = false;
         private Pen p = new Pen(Color.Gray, 1f);
         public FrameWrapperVFX()
@@ -58,7 +60,9 @@ namespace Citta_T1.Controls
             gM.DrawImage(staticImageFrame, 0, 0, realRect, GraphicsUnit.Pixel);
             SetImgTransparency(moveImage);
             gM.Dispose();
+            staticImageFrame.Dispose();
             staticImageFrame = null;
+
             return moveImage;
 
         }
@@ -201,17 +205,18 @@ namespace Citta_T1.Controls
         private bool selectStatus;
         private Pen p = new Pen(Color.Gray, 1f);
         private Rectangle initRec = new Rectangle(0, 0, 0, 0);
-        private Rectangle frameRec, minBodingRec;
-        private int worldWidth, worldHeight;
+        private Rectangle frameRec, minBoundingBox;
+        private readonly int worldWidth;
+        private readonly int worldHeight;
         private Point mapOrigin;
         private float screenFactor;
         private List<Control> controls = new List<Control>();
-        private List<int> minBodingBuffMinX ;
-        private List<int> minBodingBuffMinY ;
-        private List<int> minBodingBuffMaxX ;
-        private List<int> minBodingBuffMaxY ;
+        private List<int> minBoundingBuffMinX ;
+        private List<int> minBoundingBuffMinY ;
+        private List<int> minBoundingBuffMaxX ;
+        private List<int> minBoundingBuffMaxY ;
         private Point moveOffset;
-        public Rectangle MinBoding { get => minBodingRec; set => minBodingRec = value; }
+        public Rectangle MinBoundingBox { get => minBoundingBox; set => minBoundingBox = value; }
         FrameWrapperVFX frameWrapperVFX = new FrameWrapperVFX();
         public FrameWrapper()
         {
@@ -224,15 +229,15 @@ namespace Citta_T1.Controls
         public void InitFrame()
         {
             frameRec = initRec;
-            minBodingRec = initRec;
+            minBoundingBox = initRec;
             selectStatus = endSelect;
             staticImage = null;
             moveImage = null;
             controls = new List<Control>();
-            minBodingBuffMinX = new List<int>();
-            minBodingBuffMinY = new List<int>();
-            minBodingBuffMaxX = new List<int>();
-            minBodingBuffMaxY = new List<int>();
+            minBoundingBuffMinX = new List<int>();
+            minBoundingBuffMinY = new List<int>();
+            minBoundingBuffMaxX = new List<int>();
+            minBoundingBuffMaxY = new List<int>();
             moveOffset = new Point(0, 0);
     }
         private void FramePropertySet()
@@ -250,7 +255,7 @@ namespace Citta_T1.Controls
             {
                 return;
             }
-            if (minBodingRec.IsEmpty || !minBodingRec.Contains(startP))
+            if (minBoundingBox.IsEmpty || !minBoundingBox.Contains(startP))
             {
                 SelectFrame_MouseDown();
                 return;
@@ -288,7 +293,7 @@ namespace Citta_T1.Controls
         }
         public void FrameWrapper_MouseEnter(Point pw)
         {           
-            if (minBodingRec.Contains(pw))
+            if (minBoundingBox.Contains(pw))
             {
                 Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
                 return;
@@ -302,7 +307,12 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
-            minBodingRec = new Rectangle(0, 0, 0, 0);
+            minBoundingBox = new Rectangle(0, 0, 0, 0);
+            if (!staticImage.Equals(null))
+            {
+                staticImage.Dispose();
+                staticImage = null;
+            }    
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
 
         }
@@ -352,11 +362,11 @@ namespace Citta_T1.Controls
         {
             CreateRect();
             FindControl();
-            frameWrapperVFX.DrawRoundRect(minBodingRec, staticImage, arcRadius);
+            frameWrapperVFX.DrawRoundRect(minBoundingBox, staticImage, arcRadius);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             n.DrawImageUnscaled(staticImage, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
             n.Dispose();
-            moveImage = frameWrapperVFX.UpdateMoveImg(minBodingRec, worldWidth, worldHeight, controls);
+            moveImage = frameWrapperVFX.UpdateMoveImg(minBoundingBox, worldWidth, worldHeight, controls);
             selectStatus = endSelect;
         }
         #endregion
@@ -385,10 +395,10 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
-            minBodingRec.X = minBodingRec.X + endP.X - startP.X + moveOffset.X;
-            minBodingRec.Y = minBodingRec.Y + endP.Y - startP.Y + moveOffset.Y;
+            minBoundingBox.X = minBoundingBox.X + endP.X - startP.X + moveOffset.X;
+            minBoundingBox.Y = minBoundingBox.Y + endP.Y - startP.Y + moveOffset.Y;
             
-            frameWrapperVFX.DrawRoundRect(minBodingRec, staticImage, arcRadius);
+            frameWrapperVFX.DrawRoundRect(minBoundingBox, staticImage, arcRadius);
         }
         #endregion
         #region 最小外包矩形计算
@@ -410,15 +420,15 @@ namespace Citta_T1.Controls
                 Control ct = me.InnerControl;
                 UpDateMinBodingBuff(ct);
             }               
-            if (minBodingBuffMinX.Count == 0)
+            if (minBoundingBuffMinX.Count == 0)
             {
-                minBodingRec = initRec;
+                minBoundingBox = initRec;
                 return;
             }
-            minBodingRec = new Rectangle(minBodingBuffMinX.Min(),
-                                         minBodingBuffMinY.Min(),
-                                         minBodingBuffMaxX.Max() - minBodingBuffMinX.Min(),
-                                         minBodingBuffMaxY.Max() - minBodingBuffMinY.Min());            
+            minBoundingBox = new Rectangle(minBoundingBuffMinX.Min(),
+                                         minBoundingBuffMinY.Min(),
+                                         minBoundingBuffMaxX.Max() - minBoundingBuffMinX.Min(),
+                                         minBoundingBuffMaxY.Max() - minBoundingBuffMinY.Min());            
         }
 
         private void UpDateMinBodingBuff(Control ct)
@@ -429,25 +439,25 @@ namespace Citta_T1.Controls
             {
                 return;
             }            
-            minBodingBuffMinX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
-            minBodingBuffMinY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
-            minBodingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
-            minBodingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBodingRec_Off));
+            minBoundingBuffMinX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
+            minBoundingBuffMinY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
+            minBoundingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
+            minBoundingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBodingRec_Off));
             controls.Add(ct);
             
         }
         #endregion
         private void MoveImage_Display(int dx, int dy)
         {
-            if (staticImage == null || minBodingRec.IsEmpty)
+            if (staticImage == null || minBoundingBox.IsEmpty)
             {
                 return;
             }
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            moveOffset = WorldBoundControl(new Point(minBodingRec.X + dx, minBodingRec.Y + dy));
-            g.DrawImage(moveImage, minBodingRec.X + dx + moveOffset.X, minBodingRec.Y + dy + moveOffset.Y);
+            moveOffset = WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy));
+            g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);
             n.DrawImageUnscaled(i,
                                 Convert.ToInt32(mapOrigin.X * screenFactor),
                                 Convert.ToInt32(mapOrigin.Y * screenFactor));
@@ -468,13 +478,13 @@ namespace Citta_T1.Controls
             {
                 off.Y =  70 - Pm.Y;
             }
-            if (Pw.X > 2000 - minBodingRec.Width)
+            if (Pw.X > 2000 - minBoundingBox.Width)
             {
-                off.X = Global.GetCanvasPanel().Width - minBodingRec.Width;
+                off.X = Global.GetCanvasPanel().Width - minBoundingBox.Width;
             }
-            if (Pw.Y > 980 - minBodingRec.Height)
+            if (Pw.Y > 980 - minBoundingBox.Height)
             {
-                off.Y = Global.GetCanvasPanel().Height - minBodingRec.Height;
+                off.Y = Global.GetCanvasPanel().Height - minBoundingBox.Height;
             }
             return off;
         }

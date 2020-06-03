@@ -43,7 +43,6 @@ namespace Citta_T1.Business.Option
             this.encoding = encoding;
             this.separator = separator;
             InitColumnInfo();
-          
         }
 
         // 根据第一行初始化列信息

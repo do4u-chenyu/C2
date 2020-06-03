@@ -65,7 +65,7 @@ namespace Citta_T1
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.panel5 = new System.Windows.Forms.Panel();
             this.saveAllButton = new System.Windows.Forms.Button();
-            this.importButton = new System.Windows.Forms.Button();
+            this.ImportButton = new System.Windows.Forms.Button();
             this.saveModelButton = new System.Windows.Forms.Button();
             this.newModelButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -469,7 +469,7 @@ namespace Citta_T1
             // panel5
             // 
             this.panel5.Controls.Add(this.saveAllButton);
-            this.panel5.Controls.Add(this.importButton);
+            this.panel5.Controls.Add(this.ImportButton);
             this.panel5.Controls.Add(this.saveModelButton);
             this.panel5.Controls.Add(this.newModelButton);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
@@ -491,18 +491,18 @@ namespace Citta_T1
             this.saveAllButton.UseVisualStyleBackColor = false;
             this.saveAllButton.Click += new System.EventHandler(this.SaveAllButton_Click);
             // 
-            // importButton
+            // ImportButton
             // 
-            this.importButton.BackColor = System.Drawing.Color.White;
-            this.importButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.importButton.Image = ((System.Drawing.Image)(resources.GetObject("importButton.Image")));
-            this.importButton.Location = new System.Drawing.Point(88, 8);
-            this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(79, 32);
-            this.importButton.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.importButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
-            this.importButton.UseVisualStyleBackColor = false;
-            this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
+            this.ImportButton.BackColor = System.Drawing.Color.White;
+            this.ImportButton.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ImportButton.Image = ((System.Drawing.Image)(resources.GetObject("ImportButton.Image")));
+            this.ImportButton.Location = new System.Drawing.Point(88, 8);
+            this.ImportButton.Name = "ImportButton";
+            this.ImportButton.Size = new System.Drawing.Size(79, 32);
+            this.ImportButton.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.ImportButton, "导入本地数据文件,支持bcp,cvs,txt,xls四种格式");
+            this.ImportButton.UseVisualStyleBackColor = false;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // saveModelButton
             // 
@@ -716,12 +716,14 @@ namespace Citta_T1
             this.canvasPanel.DelEnable = false;
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.EndC = null;
+            this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.ScreenFactor = 1F;
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
             this.canvasPanel.StartC = null;
+            this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 5;
             // 
             // progressBarLabel
@@ -788,6 +790,7 @@ namespace Citta_T1
             // 
             // remarkControl
             // 
+            this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.remarkControl.BackColor = System.Drawing.Color.Transparent;
             this.remarkControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.remarkControl.Location = new System.Drawing.Point(694, 111);
@@ -945,7 +948,7 @@ namespace Citta_T1
         private Citta_T1.Controls.Title.ModelTitlePanel modelTitlePanel;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button ImportButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
         private Controls.Left.DataSourceControl dataSourceControl;

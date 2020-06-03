@@ -159,7 +159,7 @@
             this.label10.Size = new System.Drawing.Size(123, 31);
             this.label10.TabIndex = 15;
             this.label10.Text = "excel模板";
-            this.label10.Click += new System.EventHandler(this.Demodownload_excel_Click);
+            this.label10.Click += new System.EventHandler(this.DemoDownloadExcel_Click);
             // 
             // label9
             // 
@@ -172,7 +172,7 @@
             this.label9.Size = new System.Drawing.Size(100, 31);
             this.label9.TabIndex = 14;
             this.label9.Text = "csv模板";
-            this.label9.Click += new System.EventHandler(this.Demodownload_csv_Click);
+            this.label9.Click += new System.EventHandler(this.DemoDownloadCsv_Click);
             // 
             // label6
             // 
@@ -196,7 +196,7 @@
             this.label8.Size = new System.Drawing.Size(96, 31);
             this.label8.TabIndex = 13;
             this.label8.Text = "txt模板";
-            this.label8.Click += new System.EventHandler(this.Demodownload_txt_Click);
+            this.label8.Click += new System.EventHandler(this.DemoDownloadTxt_Click);
             // 
             // label11
             // 
@@ -209,7 +209,7 @@
             this.label11.Size = new System.Drawing.Size(106, 31);
             this.label11.TabIndex = 16;
             this.label11.Text = "bcp模板";
-            this.label11.Click += new System.EventHandler(this.Demodownload_bcp_Click);
+            this.label11.Click += new System.EventHandler(this.DemoDownloadBcp_Click);
             // 
             // addButton
             // 
