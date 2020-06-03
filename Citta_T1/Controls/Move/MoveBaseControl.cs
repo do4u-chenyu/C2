@@ -48,6 +48,8 @@ namespace Citta_T1.Controls.Move
         protected float factor = Global.Factor;
         // 出度矩形框
         protected Rectangle rectOut;
+        // 算子上一次位置
+        protected Point oldControlPosition;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         //private ECommandType cmd;
 

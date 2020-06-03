@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -22,11 +21,6 @@ namespace Citta_T1.Controls.Move.Rs
         private Point mouseOffset;
 
         private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
-
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-        private Point oldControlPosition;
 
         private ECommandType cmd = ECommandType.Null;
 
@@ -121,8 +115,8 @@ namespace Citta_T1.Controls.Move.Rs
                 if (cmd == ECommandType.PinDraw)
                 {
                     lineStatus = "lineExit";
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                     return;
@@ -157,14 +151,13 @@ namespace Citta_T1.Controls.Move.Rs
             {
                 if (rectOut.Contains(e.Location))
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;
-                    CanvasPanel canvas = (this.Parent as CanvasPanel);
-                    canvas.CanvasPanel_MouseDown(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -197,11 +190,10 @@ namespace Citta_T1.Controls.Move.Rs
                 {
                     isMouseDown = false;
                     cmd = ECommandType.Null;
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    CanvasPanel canvas = Global.GetCanvasPanel();
-                    canvas.CanvasPanel_MouseUp(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 this.isMouseDown = false;
                 this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
@@ -214,7 +206,7 @@ namespace Citta_T1.Controls.Move.Rs
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -224,11 +216,11 @@ namespace Citta_T1.Controls.Move.Rs
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldControlPosition = this.Location;
+            oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion

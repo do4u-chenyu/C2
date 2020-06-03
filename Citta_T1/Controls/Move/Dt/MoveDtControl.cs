@@ -17,10 +17,6 @@ namespace Citta_T1.Controls.Move.Dt
     public partial class MoveDtControl: MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
-        private Point oldControlPosition;
-
-
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 9);
@@ -35,10 +31,6 @@ namespace Citta_T1.Controls.Move.Dt
 
         #region 继承属性
         private Point mouseOffset;
-
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
         #endregion
 
         private ECommandType cmd = ECommandType.Null;
@@ -230,8 +222,8 @@ namespace Citta_T1.Controls.Move.Dt
             // 开始划线
             else if (cmd == ECommandType.PinDraw)
             {
-                startX = this.Location.X + e.X;
-                startY = this.Location.Y + e.Y;
+                int startX = this.Location.X + e.X;
+                int startY = this.Location.Y + e.Y;
                 MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                 Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                 
@@ -298,8 +290,8 @@ namespace Citta_T1.Controls.Move.Dt
                 if (rectOut.Contains(e.Location))
                 {
                     lineStaus = "lineExit";
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
@@ -335,8 +327,8 @@ namespace Citta_T1.Controls.Move.Dt
             {
                 if (cmd == ECommandType.PinDraw)
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                     cmd = ECommandType.Null;
                 }
@@ -354,7 +346,7 @@ namespace Citta_T1.Controls.Move.Dt
                     ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                     if (element != ModelElement.Empty)
                     {
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                         ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
@@ -367,11 +359,11 @@ namespace Citta_T1.Controls.Move.Dt
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldControlPosition = this.Location;
+            oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion
