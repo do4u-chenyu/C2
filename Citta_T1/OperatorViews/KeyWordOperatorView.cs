@@ -17,10 +17,9 @@ namespace Citta_T1.OperatorViews
     {
         private const int colIndexDefault = 0;
         private const bool readyStatus = true;
-        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
-        private string dataSourcePath, dataSourceEncoding,dataSourceSep;
-        private string keyWordPath, keyWordEncoding, keyWordExtType,keyWordSep;
-        private MoveOpControl opControl;
+        private readonly MoveOpControl opControl;
+        private string dataSourcePath, dataSourceEncoding, dataSourceSep;
+        private string keyWordPath, keyWordEncoding, keyWordExtType, keyWordSep;
         private string[] dataSrcColName, keyWordColName;
         private List<int> oldOutList;
         private List<string> oldColumnName;
@@ -45,7 +44,9 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            {
                 Global.GetMainForm().SetDocumentDirty();
+            }
             //生成结果控件,创建relation,bcp结果文件
             this.selectOutColumn = this.outList.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
@@ -58,12 +59,12 @@ namespace Citta_T1.OperatorViews
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
-            { outName.Add(this.dataSrcColName[Convert.ToInt32(index)]); }
+            List<string> outName = (from string index in this.opControl.Option.GetOption("outfield").Split(',')
+                                    select this.dataSrcColName[Convert.ToInt32(index)]).ToList();
             if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
+            {
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
+            }
         }
 
         private void keyWordColBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -93,47 +94,47 @@ namespace Citta_T1.OperatorViews
                                        this.keyWordBox.Text,
                                        keyWordEncoding,
                                        keyWordSep.ToCharArray());
-            this.opControl.FirstDataSourceColumns = this.dataSrcColName.ToList();
-            this.opControl.SecondDataSourceColumns = this.keyWordColName.ToList();
-            this.dataColumnBox.Items.AddRange(dataSrcColName);
-            this.keyWordColBox.Items.AddRange(keyWordColName);
-            this.outList.Items.AddRange(dataSrcColName);
-            this.dataColumnBox.SelectedIndex = colIndexDefault;
-            this.keyWordColBox.SelectedIndex = colIndexDefault;
-            this.conditionSelectBox.SelectedIndex = colIndexDefault;
+            opControl.FirstDataSourceColumns = dataSrcColName.ToList();
+            opControl.SecondDataSourceColumns = keyWordColName.ToList();
+            dataColumnBox.Items.AddRange(dataSrcColName);
+            keyWordColBox.Items.AddRange(keyWordColName);
+            outList.Items.AddRange(dataSrcColName);
+            dataColumnBox.SelectedIndex = colIndexDefault;
+            keyWordColBox.SelectedIndex = colIndexDefault;
+            conditionSelectBox.SelectedIndex = colIndexDefault;
             UpdatePreviewText();
         }
         private void LoadOption()
         {
-            if (Global.GetOptionDao().IsCleanOption(this.opControl, this.dataSrcColName, "outfield"))
+            if (Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield"))
             {
                 return;
             }
-            string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-            this.oldOutList = indexs.ToList();
-            this.outList.LoadItemCheckIndex(indexs);
-            foreach (int index in indexs)
-                this.oldColumnName.Add(this.outList.Items[index].ToString());
-            this.conditionSelectBox.SelectedIndex = Convert.ToInt32(this.opControl.Option.GetOption("conditionSlect"));
-            this.keyWordColBox.SelectedIndex = Convert.ToInt32(this.opControl.Option.GetOption("keySelectIndex"));
-            this.dataColumnBox.SelectedIndex = Convert.ToInt32(this.opControl.Option.GetOption("dataSelectIndex"));
+            string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+            oldOutList = indexs.ToList();
+            outList.LoadItemCheckIndex(indexs);
+            oldColumnName.AddRange(from int index in indexs
+                                        select outList.Items[index].ToString());
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));
+            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
+            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
         }
         private void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            opControl.Option.OptionDict.Clear();
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join(",", outIndexs);
-            this.opControl.Option.SetOption("outfield", outField);
 
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-            this.opControl.Option.SetOption("dataSelectIndex", this.dataColumnBox.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("keySelectIndex", this.keyWordColBox.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("conditionSlect", this.conditionSelectBox.SelectedIndex.ToString());
-            this.opControl.Option.SetOption("keyWordText", this.keyWordPreviewBox.Text);
+            opControl.Option.SetOption("outfield", outField);
+            opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
+            opControl.Option.SetOption("columnname1", string.Join("\t", opControl.SecondDataSourceColumns));
+            opControl.Option.SetOption("dataSelectIndex", dataColumnBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("keySelectIndex", keyWordColBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("keyWordText", keyWordPreviewBox.Text);
             if (this.oldOptionDictStr == string.Join(",", this.opControl.Option.OptionDict.ToList())
                 && this.opControl.Status != ElementStatus.Null
                 && this.opControl.Status != ElementStatus.Warn)
@@ -245,20 +246,28 @@ namespace Citta_T1.OperatorViews
             string line;
             if (extType == OpUtil.ExtType.Excel)
             {
+                separator = "\t".ToCharArray();
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath,
                                                                                             isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
+            {
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath,
                                                                                           encoding,
                                                                                           isForceRead).Split('\n'));
+            }
             else
+            {
                 rows = new List<string>();
+            }
+
             for (int i = 0; i < Math.Min(rows.Count - 1, maxNumOfFile); i++)
             {
                 List<string> lines = new List<string>(rows[i + 1].TrimEnd('\r').Split(separator));
                 if (colIndex >= lines.Count)
+                {
                     continue;
+                }
                 line = lines[colIndex];
                 if (line.Equals(string.Empty))
                 {
