@@ -29,10 +29,6 @@ namespace Citta_T1.Controls.Move.Dt
         private Size changeStatus = new Size(0, 28);
         private Size normalStatus = new Size(53, 28);
 
-        #region 继承属性
-        private Point mouseOffset;
-        #endregion
-
         private ECommandType cmd = ECommandType.Null;
 
         ControlMoveWrapper controlMoveWrapper;

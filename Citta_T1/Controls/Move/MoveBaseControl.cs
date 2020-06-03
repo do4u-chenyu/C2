@@ -50,6 +50,8 @@ namespace Citta_T1.Controls.Move
         protected Rectangle rectOut;
         // 算子上一次位置
         protected Point oldControlPosition;
+        // 移动时的鼠标偏移量
+        protected Point mouseOffset;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         //private ECommandType cmd;
 

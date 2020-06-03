@@ -18,8 +18,6 @@ namespace Citta_T1.Controls.Move.Rs
     public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
         private bool isMouseDown = false;
-        private Point mouseOffset;
-
         private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         private ECommandType cmd = ECommandType.Null;

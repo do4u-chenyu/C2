@@ -24,8 +24,7 @@ namespace Citta_T1.Controls.Move.Op
         private ControlMoveWrapper controlMoveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
-        private Point mouseOffset;
-
+   
         private bool doublelPinFlag = false;
 
         private string subTypeName;
