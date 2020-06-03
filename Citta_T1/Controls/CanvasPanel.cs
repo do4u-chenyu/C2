@@ -18,9 +18,9 @@ namespace Citta_T1.Controls
 
     public enum ECommandType
     {
-        Hold,
-        PinDraw,
         Null,
+        Hold,
+        PinDraw
     }
     public partial class CanvasPanel : UserControl
     {

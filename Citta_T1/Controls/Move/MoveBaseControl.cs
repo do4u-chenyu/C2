@@ -37,19 +37,23 @@ namespace Citta_T1.Controls.Move
                 return OpUtil.ExtType.Unknow;
             }
         }
+        
 
         protected string oldTextString;
         protected Bitmap staticImage;
         // 缩放等级
         protected int sizeLevel;
 
+        // 画布上的缩放倍率
+        protected float factor = Global.Factor;
+        // 出度矩形框
+        protected Rectangle rectOut;
+        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
         //private ECommandType cmd;
 
         public MoveBaseControl()
         {
             InitializeComponent();
-            oldTextString = String.Empty;
-            sizeLevel = 0;
         }
 
         // 单元素拖拽

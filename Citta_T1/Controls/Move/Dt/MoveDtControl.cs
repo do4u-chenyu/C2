@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -29,7 +28,6 @@ namespace Citta_T1.Controls.Move.Dt
         private int pinHeight = 6;
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
-        public Rectangle rectOut;
         private String pinStatus = "noEnter";
 
         private Size changeStatus = new Size(0, 28);
@@ -37,11 +35,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         #region 继承属性
         private Point mouseOffset;
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-        // 缩放等级
-        
+
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;

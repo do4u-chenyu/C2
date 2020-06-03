@@ -23,10 +23,6 @@ namespace Citta_T1.Controls.Move.Rs
 
         private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-
         // 绘制贝塞尔曲线的起点
         private int startX;
         private int startY;
@@ -44,7 +40,6 @@ namespace Citta_T1.Controls.Move.Rs
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn;
-        private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
@@ -62,8 +57,7 @@ namespace Citta_T1.Controls.Move.Rs
             }
         }
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
-        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
-        
+
         public MoveRsControl(int size, string desciption, Point loc)
         {
            

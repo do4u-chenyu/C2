@@ -46,18 +46,10 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
-        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
         public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
         public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
-
-
-
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-   
 
 
         // 绘制贝塞尔曲线的起点
@@ -83,7 +75,6 @@ namespace Citta_T1.Controls.Move.Op
         private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn_down;
         private Rectangle rectIn_up;
-        private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private String rectArea = "rectIn_down rectIn_up rectOut";
         private List<int> linePinArray = new List<int> { };
