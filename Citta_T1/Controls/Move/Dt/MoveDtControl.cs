@@ -22,7 +22,7 @@ namespace Citta_T1.Controls.Move.Dt
         private Point rightPin = new Point(126, 9);
 
         private Pen pen = new Pen(Color.DarkGray, 1f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
+        private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
         private String pinStatus = "noEnter";
 
         private Size changeStatus = new Size(0, 28);
@@ -478,7 +478,7 @@ namespace Citta_T1.Controls.Move.Dt
             
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
