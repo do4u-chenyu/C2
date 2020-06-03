@@ -110,7 +110,7 @@ namespace Citta_T1.Controls.Move.Op
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper(this);
             InitializeOpPinPicture();
-            InitializeHelpToolTip();
+            InitializeHelpInfoAndOpIcon();
             ChangeSize(sizeL);
 
 
@@ -163,9 +163,8 @@ namespace Citta_T1.Controls.Move.Op
             this.ErrorLogMenuItem,
             this.DeleteMenuItem });
         }
-        private void InitializeHelpToolTip()
+        private void InitializeHelpInfoAndOpIcon()
         {
-            string appPath = System.Windows.Forms.Application.StartupPath;
             switch (subTypeName)
             {
                 case "关联算子":
