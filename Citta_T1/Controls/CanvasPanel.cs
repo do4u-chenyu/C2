@@ -33,7 +33,6 @@ namespace Citta_T1.Controls
         private DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
 
-        private Graphics g;
  
         private ECommandType cmd = ECommandType.Null;
         private PointF startP;
@@ -163,6 +162,11 @@ namespace Citta_T1.Controls
                 this.cmd = ECommandType.PinDraw;
                 this.StartC = sender as MoveBaseControl;
                 this.StartP = new PointF(e.X, e.Y);
+                if (this.staticImage != null)
+                {   
+                    this.staticImage.Dispose();
+                    this.staticImage = null;
+                }
                 this.staticImage = new Bitmap(this.Width, this.Height);
                 Graphics g = Graphics.FromImage(this.staticImage);
                 g.Clear(this.BackColor);
@@ -313,8 +317,8 @@ namespace Citta_T1.Controls
                 return -1;
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        { 
-            
+        {
+            this.endC = null;
             // 画框
             if (SelectFrame())
             {
@@ -400,7 +404,7 @@ namespace Citta_T1.Controls
         {
             if (this.staticImage == null)
                 return;
-            g = this.CreateGraphics();
+            Graphics g = this.CreateGraphics();
             if (r.X < 0) r.X = 0;
             if (r.X > this.staticImage.Width) r.X = 0;
             if (r.Y < 0) r.Y = 0;
@@ -420,7 +424,6 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
         {
-
             if (e.Button != MouseButtons.Left) 
                 return;
             // 画框处理
