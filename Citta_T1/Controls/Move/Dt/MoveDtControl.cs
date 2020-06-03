@@ -215,7 +215,7 @@ namespace Citta_T1.Controls.Move.Dt
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect(0, 0, this.Width - (int)(6 * f), this.Height - (int)(1 * f), (int)(3 * f));
+            DrawRoundRect(0, 0, this.Width - (int)(6 * f), this.Height - (int)(1 * f), (int)(3 * f));
             factor = zoomUp ? factor : 1 / factor;
 
             SetControlsBySize(factor, this);
@@ -223,7 +223,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.Invalidate();
         }
 
-        #region MOC的事件
+         #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
             bool isNeedMoveLine = false;
@@ -413,7 +413,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(10 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)(txtWidth * f), this.Height - (int)(4 * f));
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
 
         #endregion
@@ -537,14 +537,14 @@ namespace Citta_T1.Controls.Move.Dt
         {
             pen = new Pen(Color.DarkGray, 1.5f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
             UpdateRound((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         public void ControlNoSelect()
         {
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
-            DrawRoundedRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+            DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
     }
 

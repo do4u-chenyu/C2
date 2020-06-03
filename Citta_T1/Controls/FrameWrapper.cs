@@ -13,8 +13,10 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
+    
     class FrameWrapperVFX
     {
+        // 拖拽过程中的高级视觉特效类
         private bool backImgMode = false;
         private Pen p = new Pen(Color.Gray, 1f);
         public FrameWrapperVFX()
@@ -306,6 +308,11 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
             minBoundingBox = new Rectangle(0, 0, 0, 0);
+            if (!staticImage.Equals(null))
+            {
+                staticImage.Dispose();
+                staticImage = null;
+            }    
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
 
         }

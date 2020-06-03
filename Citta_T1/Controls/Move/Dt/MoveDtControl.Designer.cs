@@ -51,7 +51,6 @@
             // leftPictureBox
             // 
             this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.u72;
-            this.leftPictureBox.Location = new System.Drawing.Point(7, 3);
             this.leftPictureBox.Size = new System.Drawing.Size(14, 19);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
