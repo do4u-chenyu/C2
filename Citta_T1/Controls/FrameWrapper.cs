@@ -2,7 +2,6 @@
 using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    
+
     class FrameWrapperVFX
     {
         // 拖拽过程中的高级视觉特效类
@@ -21,7 +20,7 @@ namespace Citta_T1.Controls
         private Pen p = new Pen(Color.Gray, 1f);
         public FrameWrapperVFX()
         {
-            p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            p.DashStyle = DashStyle.Dash;
         }
        
         #region 静态图生成相关特效
@@ -43,7 +42,7 @@ namespace Citta_T1.Controls
             }
             else
             {
-                DrawSelectControls(staticImage, controls);
+                DrawSelectedControls(staticImage, controls);
             } 
             g.Dispose();
             return staticImage;
@@ -100,7 +99,7 @@ namespace Citta_T1.Controls
                 me.Hide();
             }
         }
-        private void DrawSelectControls(Bitmap staticImage, List<Control> controls)
+        private void DrawSelectedControls(Bitmap staticImage, List<Control> controls)
         {
             foreach (Control ct in controls)
             {                               
@@ -123,14 +122,14 @@ namespace Citta_T1.Controls
         }
         #endregion
         #region 阴影相关特效
-        public void DrawRoundRect(Rectangle minBodingRec, Bitmap bitmap, int radius)
+        public void DrawRoundRect(Rectangle minBoundingRect, Bitmap bitmap, int radius)
         {
 
             Graphics g = Graphics.FromImage(bitmap);
-            int x = minBodingRec.X;
-            int y = minBodingRec.Y;
-            int width = minBodingRec.Width;
-            int height = minBodingRec.Height;
+            int x = minBoundingRect.X;
+            int y = minBoundingRect.Y;
+            int width = minBoundingRect.Width;
+            int height = minBoundingRect.Height;
             if (width == 0 || height == 0)
             {
                 return;
@@ -153,7 +152,7 @@ namespace Citta_T1.Controls
             g.DrawArc(p, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
 
 
-            DrawShadow(g, x, y, width, height, radius, minBodingRec);
+            DrawShadow(g, x, y, width, height, radius, minBoundingRect);
             g.Dispose();
 
         }
@@ -194,12 +193,12 @@ namespace Citta_T1.Controls
     }
     class FrameWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
+        private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private const bool endSelect = false;
         private const bool startSelect = true;
         
         private const int arcRadius = 2;
-        private const double minBodingRec_Off = 0.4;
+        private const double minBoundingRectOffset = 0.4;
         private Bitmap staticImage, moveImage;
         private Point startP, endP;
         private bool selectStatus;
@@ -418,7 +417,7 @@ namespace Citta_T1.Controls
             foreach(ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
                 Control ct = me.InnerControl;
-                UpDateMinBodingBuff(ct);
+                UpdateMinBoundingBuff(ct);
             }               
             if (minBoundingBuffMinX.Count == 0)
             {
@@ -431,7 +430,7 @@ namespace Citta_T1.Controls
                                          minBoundingBuffMaxY.Max() - minBoundingBuffMinY.Min());            
         }
 
-        private void UpDateMinBodingBuff(Control ct)
+        private void UpdateMinBoundingBuff(Control ct)
         {
 
             Point ctW = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location, false);
@@ -439,10 +438,10 @@ namespace Citta_T1.Controls
             {
                 return;
             }            
-            minBoundingBuffMinX.Add(ctW.X - (int)(ct.Height * minBodingRec_Off));
-            minBoundingBuffMinY.Add(ctW.Y - (int)(ct.Height * minBodingRec_Off));
-            minBoundingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBodingRec_Off));
-            minBoundingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBodingRec_Off));
+            minBoundingBuffMinX.Add(ctW.X - (int)(ct.Height * minBoundingRectOffset));
+            minBoundingBuffMinY.Add(ctW.Y - (int)(ct.Height * minBoundingRectOffset));
+            minBoundingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBoundingRectOffset));
+            minBoundingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBoundingRectOffset));
             controls.Add(ct);
             
         }
