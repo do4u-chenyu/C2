@@ -225,7 +225,7 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
-                    SetPictureBoxImage("wordFilter.png");
+                    SetPictureBoxImage("wordFilterOp.png");
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
@@ -1004,11 +1004,11 @@ namespace Citta_T1.Controls.Move.Op
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void SetPictureBoxImage(string picName)
-        {
+        {            
             string appPath = System.Windows.Forms.Application.StartupPath;
             //仅当图片存在时才加载图片
             if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))
-            {  
+            {
                 Image img = Image.FromFile(filename: appPath + @"\res\opControl\" + picName);
                 this.leftPictureBox.Image = img;
             }
