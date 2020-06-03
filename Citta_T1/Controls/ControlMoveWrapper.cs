@@ -88,11 +88,10 @@ namespace Citta_T1.Controls
             CanvasPanel cp = Global.GetCanvasPanel();
             List<ModelElement> md = Global.GetCurrentDocument().ModelElements;
 
-            Rectangle thisRect = new Rectangle(this.control.Location, new Size(this.control.Width, this.control.Height));
             foreach (ModelElement me in md)
             {
                 Control ctr = me.InnerControl;
-                Rectangle ctrRect = new Rectangle(ctr.Location, new Size(ctr.Width, ctr.Height));
+                Rectangle ctrRect = new Rectangle(me.Location, ctr.Size);
                 cp.Invalidate(ctrRect);
                 cp.Update();
             }
