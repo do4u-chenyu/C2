@@ -20,6 +20,15 @@ namespace Citta_T1.Business.Option
                 return defaultValue;
             return OptionDict[OpKey];
         }
+
+        public string[] GetOptionSplit(string OpKey, string defaultValue = "", char separator = '\t')
+        {
+            string[] ret = GetOption(OpKey, defaultValue).Split(separator);
+            if (ret.Length == 1 && String.IsNullOrEmpty(ret[0]))
+                ret = new string[0];
+            return ret;    
+        }
+
         public void SetOption(string OpKey, string OpVaule)
         {
             OptionDict[OpKey] = OpVaule;

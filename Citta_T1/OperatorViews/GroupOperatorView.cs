@@ -76,7 +76,7 @@ namespace Citta_T1.OperatorViews
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
                
-            this.opControl.FirstDataSourceColumns =this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName;
         }
        
         public void SetTextBoxName(TextBox textBox)

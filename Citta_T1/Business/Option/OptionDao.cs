@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
@@ -59,18 +58,18 @@ namespace Citta_T1.Business.Option
              * 获取单，双输入新旧数据源旧表头
              */
             MoveOpControl moveOpControl = me.InnerControl as MoveOpControl;
-            List<string> oldColumns0 = moveOpControl.FirstDataSourceColumns; 
-            List<string> oldColumns1 = moveOpControl.SecondDataSourceColumns;
+            string[] oldColumns0 = moveOpControl.FirstDataSourceColumns;
+            string[] oldColumns1 = moveOpControl.SecondDataSourceColumns;
             List<string> newColumns0 = new List<string>() { };
             List<string> newColumns1 = new List<string>() { };
 
             // 任何情况下,第一个入度的数据源表头不能为空
-            if (oldColumns0.Count == 0)
+            if (oldColumns0.Length == 0)
                 return;
 
             // 二元算子时,第二个入度的数据源表头不能为空
             if (moveOpControl.IsBinaryDimension())
-                if(oldColumns1.Count == 0)
+                if(oldColumns1.Length == 0)
                     return;
 
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
@@ -88,8 +87,8 @@ namespace Citta_T1.Business.Option
                     Swap(ref newColumns0, ref newColumns1);  
             }
 
-            bool factor0 = newColumns0.Count >= oldColumns0.Count && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Count));
-            bool factor1 = newColumns1.Count >= oldColumns1.Count && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Count));
+            bool factor0 = newColumns0.Count >= oldColumns0.Length && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Length));
+            bool factor1 = newColumns1.Count >= oldColumns1.Length && oldColumns1.SequenceEqual(newColumns1.Take(oldColumns1.Length));
 
             if (factor0 && factor1)
             {

@@ -67,7 +67,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 this.columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
+                this.opControl.FirstDataSourceColumns = this.columnName0;
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
@@ -75,7 +75,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip2.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
+                this.opControl.SecondDataSourceColumns = this.columnName1;
             }
            if(this.opControl.Option.GetOption("outname") != String.Empty)
            {

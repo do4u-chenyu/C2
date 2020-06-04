@@ -78,7 +78,7 @@ namespace Citta_T1.OperatorViews
             this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
-            this.opControl.FirstDataSourceColumns =  this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns =  this.columnName;
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
       

@@ -78,8 +78,8 @@ namespace Citta_T1.OperatorViews
                 this.columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 
-            this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
-            this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
+            this.opControl.FirstDataSourceColumns  = this.columnName0;
+            this.opControl.SecondDataSourceColumns = this.columnName1;
           
 
             foreach (string name in this.columnName0)
@@ -97,11 +97,8 @@ namespace Citta_T1.OperatorViews
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
-
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            string[] columnName = bcpInfo.ColumnArray;
-            this.opControl.FirstDataSourceColumns = columnName.ToList();
-            return columnName;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray; ;
         }
 
         private void SetTextBoxName(TextBox textBox)

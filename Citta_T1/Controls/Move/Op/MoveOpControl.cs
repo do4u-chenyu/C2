@@ -30,9 +30,6 @@ namespace Citta_T1.Controls.Move.Op
         private string subTypeName;
         private OperatorOption option = new OperatorOption();
 
-        private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
-        private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
-        
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         public override ElementStatus Status
@@ -47,8 +44,9 @@ namespace Citta_T1.Controls.Move.Op
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
 
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
-        public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
-        public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
+
+        public string[] FirstDataSourceColumns { get; set; }  //第一个入度的表头配置
+        public string[] SecondDataSourceColumns { get; set; } //第二个入度的表头配置
 
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
@@ -65,8 +63,8 @@ namespace Citta_T1.Controls.Move.Op
         private SolidBrush whiteSmkeBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn_down;
         private Rectangle rectIn_up;
-        private String pinStatus = "noEnter";
-        private String rectArea = "rectIn_down rectIn_up rectOut";
+        private string pinStatus = "noEnter";
+        private string rectArea = "rectIn_down rectIn_up rectOut";
         private List<int> linePinArray = new List<int> { };
         
 
@@ -99,8 +97,8 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            firstDataSourceColumns = new List<string>();
-            secondDataSourceColumns = new List<string>();
+            FirstDataSourceColumns  = new string[0];
+            SecondDataSourceColumns = new string[0];
 
         }
 
@@ -783,33 +781,6 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region IMoveControl 接口实现方法
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            
-        }
-
-        public void SaveEndLines(int line_index)
-        {
-            /*
-             * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
-             */
-            try
-            {
-                //this.endLineIndexs[revisedPinIndex] = line_index;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveOpControl SaveEndLines 出错: " + ex.ToString());
-            }
-        }
         public PointF RevisePointLoc(PointF p)
         {
             /*
@@ -961,7 +932,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void SetPictureBoxImage(string picName)
         {            
-            string appPath = System.Windows.Forms.Application.StartupPath;
+            string appPath = Application.StartupPath;
             //仅当图片存在时才加载图片
             if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))
             {

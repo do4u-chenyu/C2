@@ -149,7 +149,7 @@ namespace Citta_T1.OperatorViews
                 this.minValueBox.Items.Add(name);
             }
 
-            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName;
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
 

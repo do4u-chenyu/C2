@@ -94,8 +94,8 @@ namespace Citta_T1.OperatorViews
                                        this.keyWordBox.Text,
                                        keyWordEncoding,
                                        keyWordSep.ToCharArray());
-            opControl.FirstDataSourceColumns = dataSrcColName.ToList();
-            opControl.SecondDataSourceColumns = keyWordColName.ToList();
+            opControl.FirstDataSourceColumns = dataSrcColName;
+            opControl.SecondDataSourceColumns = keyWordColName;
             dataColumnBox.Items.AddRange(dataSrcColName);
             keyWordColBox.Items.AddRange(keyWordColName);
             outList.Items.AddRange(dataSrcColName);
@@ -172,8 +172,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
-            return bcpInfo.ColumnArray;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
         private string SetTextBoxName(string filePath)
         {
