@@ -160,7 +160,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
-            this.opControl.Option.SetOption("outfield", string.Join(",", checkIndexs));
+            this.opControl.Option.SetOption("outfield", string.Join("\t", checkIndexs));
 
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
@@ -188,13 +188,12 @@ namespace Citta_T1.OperatorViews
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));            
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = indexs.ToList();
                 this.outList.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnName.Add(this.outList.Items[index].ToString());
-
             }
            
         }

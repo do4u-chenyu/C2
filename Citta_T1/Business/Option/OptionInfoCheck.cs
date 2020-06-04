@@ -41,10 +41,10 @@ namespace Citta_T1.Business.Option
         public void IsIllegalCharacter(object sender, EventArgs e)
         {
 
-            if ((sender as TextBox).Text.Contains(",") || (sender as TextBox).Text.Contains("，"))
+            if ((sender as TextBox).Text.Contains("\\t"))
             {
                 (sender as TextBox).Text = "";
-                MessageBox.Show("输入非法字','，请重新输入过滤条件");
+                MessageBox.Show("输入非法字'\\t'，请重新输入过滤条件");
             }
         }
         #endregion

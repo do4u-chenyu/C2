@@ -59,7 +59,7 @@ namespace Citta_T1.OperatorViews
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-            List<string> outName = (from string index in this.opControl.Option.GetOption("outfield").Split(',')
+            List<string> outName = (from string index in this.opControl.Option.GetOptionSplit("outfield")
                                     select this.dataSrcColName[Convert.ToInt32(index)]).ToList();
             if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
             {
@@ -108,7 +108,7 @@ namespace Citta_T1.OperatorViews
         {
             if (!Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield"))
             {
-                string[] checkIndexs = opControl.Option.GetOption("outfield").Split(',');
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList = indexs.ToList();
                 outList.LoadItemCheckIndex(indexs);
@@ -137,7 +137,7 @@ namespace Citta_T1.OperatorViews
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join(",", outIndexs);
+            string outField = string.Join("\t", outIndexs);
 
             opControl.Option.SetOption("outfield", outField);
             opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));

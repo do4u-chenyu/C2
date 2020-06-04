@@ -129,7 +129,7 @@ namespace Citta_T1.OperatorViews
             
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "outfield"))
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = indexs.ToList();
                 this.OutList.LoadItemCheckIndex(indexs);
@@ -141,7 +141,7 @@ namespace Citta_T1.OperatorViews
             if (factor1 != "")
             {
 
-                int[] Nums = Array.ConvertAll<string, int>(factor1.Split(','), int.Parse);
+                int[] Nums = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
@@ -167,7 +167,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                int[] Nums = Array.ConvertAll<string, int>(factor.Split(','), int.Parse);
+                int[] Nums = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[1]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[2]);
                 if (case0 || case1) continue;
@@ -193,12 +193,12 @@ namespace Citta_T1.OperatorViews
             List<int> checkIndexs = this.OutList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join(",", outIndexs);
+            string outField = string.Join("\t", outIndexs);
 
             this.opControl.Option.SetOption("outfield", outField);
             string index00 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string index11 = comboBox2.Tag == null ? comboBox2.SelectedIndex.ToString() : comboBox2.Tag.ToString();
-            string factor1 = index00 + "," + index11;
+            string factor1 = index00 + "\t" + index11;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -210,7 +210,7 @@ namespace Citta_T1.OperatorViews
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
-                    string factor = index1 + "," + index2 + "," + index3;
+                    string factor = index1 + "\t" + index2 + "\t" + index3;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -249,7 +249,7 @@ namespace Citta_T1.OperatorViews
             //输出变化，重写BCP文件
 
             List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
+            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
             { outName.Add(this.columnName0[Convert.ToInt32(index)]); }
             if (!this.oldOutList.SequenceEqual(this.OutList.GetItemCheckIndex()))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);

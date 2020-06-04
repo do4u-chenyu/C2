@@ -148,7 +148,7 @@ namespace Citta_T1.Business.Option
             int index;
             int maxIndex = columns.Length - 1;
             if (name.Contains("outfield"))
-                index = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse).Max();
+                index = Array.ConvertAll<string, int>(optionValues.Split('\t'), int.Parse).Max();
             else//单选框配置的判断
                 index = selectIndex != -1 ? selectIndex : Convert.ToInt32(optionValues);
 

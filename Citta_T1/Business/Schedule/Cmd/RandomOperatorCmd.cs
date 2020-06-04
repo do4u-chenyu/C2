@@ -14,7 +14,7 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();//输入文件
-            string outField = TransOutputField(option.GetOption("outfield").Split(','));//输出字段
+            string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
             string randomNum = ConvertUtil.TryParseInt(option.GetOption("randomnum")) > 0 ? option.GetOption("randomnum") : "1";//随机条数
 
             //重写表头（覆盖）

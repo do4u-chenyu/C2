@@ -79,7 +79,7 @@ namespace Citta_T1.OperatorViews
             }
            if(this.opControl.Option.GetOption("outname") != String.Empty)
            {
-                this.oldColumnName = this.opControl.Option.GetOption("outname").Split('\t').ToList();
+                this.oldColumnName = this.opControl.Option.GetOptionSplit("outname").ToList();
             }
            
 
@@ -139,7 +139,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
             string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
-            string factor1 = index01 + "," + index02 + "," + this.textBoxEx1.Text;
+            string factor1 = index01 + "\t" + index02 + "\t" + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectColumn.Add(OutColumnName(this.comboBox1.Text, this.textBoxEx1.Text));
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -152,7 +152,7 @@ namespace Citta_T1.OperatorViews
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                    
-                    string factor = index1 + "," + index2 + "," + control3.Text;
+                    string factor = index1 + "\t" + index2 + "\t" + control3.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                     this.selectColumn.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
                 }
@@ -183,7 +183,7 @@ namespace Citta_T1.OperatorViews
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
             if (factor1 != "")
             {
-                string[] factorList = factor1.Split(',');
+                string[] factorList = factor1.Split('\t');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
@@ -210,7 +210,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                string[] factorList = factor.Split(',');
+                string[] factorList = factor.Split('\t');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[0]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[1]);

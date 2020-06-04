@@ -34,7 +34,7 @@ namespace Citta_T1.OperatorViews
             this.opControl = opControl;
             dataPath = "";
            
-            this.oldColumnName = this.opControl.Option.GetOption("columnname0").Split('\t').ToList();
+            this.oldColumnName = this.opControl.Option.GetOptionSplit("columnname0").ToList();
             InitOptionInfo();
             LoadOption();
             this.oldFirstRow = this.firstRow.Text;
@@ -153,7 +153,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            this.opControl.Option.SetOption("outfield", String.Join(",",this.outList));
+            this.opControl.Option.SetOption("outfield", String.Join("\t", this.outList));
             this.opControl.Option.SetOption("sortfield", this.sortField.Tag == null ? this.sortField.SelectedIndex.ToString() : this.sortField.Tag.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());

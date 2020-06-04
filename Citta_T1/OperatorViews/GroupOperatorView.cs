@@ -134,7 +134,7 @@ namespace Citta_T1.OperatorViews
 
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
-                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOption("outfield").Split(','), int.Parse);
+                this.oldOutList = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit("outfield"), int.Parse);
                 foreach (int index in this.oldOutList)
                     this.oldOutName.Add(this.columnName[index]);
             }
@@ -203,7 +203,7 @@ namespace Citta_T1.OperatorViews
                 if (!this.groupColumn.Contains(index))
                     this.outList.Add(index);
             }
-            this.opControl.Option.SetOption("outfield", string.Join(",", this.outList));
+            this.opControl.Option.SetOption("outfield", string.Join("\t", this.outList));
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))

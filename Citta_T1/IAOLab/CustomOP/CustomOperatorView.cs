@@ -152,7 +152,7 @@ namespace Citta_T1.OperatorViews
                     break;
                 }
             }
-            string outField = string.Join(",", outIndexs);
+            string outField = string.Join("\t", outIndexs);
             this.opControl.Option.SetOption("outfield0", outField);
 
 
@@ -173,7 +173,7 @@ namespace Citta_T1.OperatorViews
                         break;
                     }
                 }
-                string outField1 = string.Join(",", outIndexs1);
+                string outField1 = string.Join("\t", outIndexs1);
                 this.opControl.Option.SetOption("outfield1", outField1);
             }
 
@@ -211,7 +211,7 @@ namespace Citta_T1.OperatorViews
             int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("outfield0") != "")
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList0 = outIndexs.ToList();
                 this.outList0.LoadItemCheckIndex(outIndexs);
@@ -222,7 +222,7 @@ namespace Citta_T1.OperatorViews
             int[] outIndexs1 = new int[] { };
             if (this.opControl.Option.GetOption("outfield1") != "")
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 outIndexs1 = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList1 = outIndexs1.ToList();
                 this.outList1.LoadItemCheckIndex(outIndexs1);

@@ -64,7 +64,7 @@ namespace Citta_T1.OperatorViews
             }
             if (this.opControl.Option.GetOption("outname") != String.Empty)
             {
-                this.oldOutName = this.opControl.Option.GetOption("outname").Split('\t').ToList();
+                this.oldOutName = this.opControl.Option.GetOptionSplit("outname").ToList();
             }
         }
 
@@ -120,7 +120,7 @@ namespace Citta_T1.OperatorViews
             string factor1 = this.opControl.Option.GetOption("factor1");
             if (factor1 != "")
             {
-                string[] factorList = factor1.Split(',');
+                string[] factorList = factor1.Split('\t');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "factor1", Nums[0]);
                 if (!case0)
@@ -143,7 +143,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                string[] factorList = factor.Split(',');
+                string[] factorList = factor.Split('\t');
                 int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, name, Nums[0]);
                 if (case0) continue;
@@ -162,7 +162,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.FirstDataSourceColumns));
             string index1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
-            string factor1 = index1 + "," + this.textBox1.Text;
+            string factor1 = index1 + "\t" + this.textBox1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectColumn.Add(OutColumnName(this.comboBox1.Text, this.textBox1.Text));
 
@@ -176,7 +176,7 @@ namespace Citta_T1.OperatorViews
                     //Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string tmpIndex = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
 
-                    string factor = tmpIndex + "," + control2.Text;
+                    string factor = tmpIndex + "\t" + control2.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                     this.selectColumn.Add(OutColumnName((control1 as ComboBox).Text, control2.Text));
                 }

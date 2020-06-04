@@ -81,7 +81,7 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，重写BCP文件
             List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOption("outfield").Split(','))
+            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
             { outName.Add(this.columnName[Convert.ToInt32(index)]); }
             if (String.Join(",", this.oldOutList) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
@@ -102,7 +102,7 @@ namespace Citta_T1.OperatorViews
             List<int> checkIndexs = this.outList.GetItemCheckIndex();
             List<int> outIndexs = new List<int>(this.oldOutList);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join(",", outIndexs);
+            string outField = string.Join("\t", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
             if (this.maxValueBox.Text == String.Empty)
                 this.opControl.Option.SetOption("maxfield", String.Empty);
@@ -131,7 +131,7 @@ namespace Citta_T1.OperatorViews
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "outfield"))
             {
 
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
                 int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList = outIndexs.ToList();
                 this.outList.LoadItemCheckIndex(outIndexs);

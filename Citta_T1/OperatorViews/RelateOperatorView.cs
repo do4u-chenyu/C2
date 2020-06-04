@@ -141,7 +141,7 @@ namespace Citta_T1.OperatorViews
             
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "outfield0"))
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList0 = indexs.ToList();
                 this.outList0.LoadItemCheckIndex(indexs);
@@ -152,7 +152,7 @@ namespace Citta_T1.OperatorViews
             
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "outfield1"))
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList1 = indexs.ToList();
                 this.outList1.LoadItemCheckIndex(indexs);              
@@ -165,7 +165,7 @@ namespace Citta_T1.OperatorViews
             if (factor1 != "")
             {
                 
-                int[] Nums = Array.ConvertAll<string, int>(factor1.Split(','), int.Parse);
+                int[] Nums = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "factor1", Nums[0]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
@@ -191,7 +191,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                int[] Nums = Array.ConvertAll<string, int>(factor.Split(','), int.Parse);
+                int[] Nums = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, name, Nums[1]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName1, name, Nums[2]);
                 if (case0 || case1) continue;
@@ -222,7 +222,7 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs0, outIndexs0);
             foreach (int index in outIndexs0)
                 this.outColumnName0.Add(this.outList0.Items[index].ToString());
-            string outField0 = string.Join(",", outIndexs0);
+            string outField0 = string.Join("\t", outIndexs0);
             this.opControl.Option.SetOption("outfield0", outField0);
 
             List<int> checkIndexs1 = this.outList1.GetItemCheckIndex();
@@ -230,12 +230,12 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs1, outIndexs1);
             foreach (int index in outIndexs1)
                 this.outColumnName1.Add(this.outList1.Items[index].ToString());
-            string outField1 = string.Join(",", outIndexs1);
+            string outField1 = string.Join("\t", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
             string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
-            string factor1 = index01 + "," + index02;
+            string factor1 = index01 + "\t" + index02;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -247,7 +247,7 @@ namespace Citta_T1.OperatorViews
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
-                    string factor = index1 + "," + index2 + "," + index3;
+                    string factor = index1 + "\t" + index2 + "\t" + index3;
               
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }

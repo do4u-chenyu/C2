@@ -19,8 +19,8 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             //待统计频率字段合并
             //uniq统计频率的结果第一列是频次。需要修改输出顺序，把频率结果放在最后一列
-            string inputFields = TransOutputField(option.GetOption("outfield").Split(','));
-            int outFieldCount = option.GetOption("outfield").Split(',').Count() + 1;//多了一列频率结果
+            string inputFields = TransOutputField(option.GetOptionSplit("outfield")) ;
+            int outFieldCount = option.GetOptionSplit("outfield").Count() + 1;//多了一列频率结果
             string outField = "$2";
             for (int i = 3; i <= outFieldCount; i++) 
             {
