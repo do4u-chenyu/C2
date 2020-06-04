@@ -150,6 +150,7 @@ namespace Citta_T1.Controls.Move.Op
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
+                    SetPictureBoxImage("releateOp.png");
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
