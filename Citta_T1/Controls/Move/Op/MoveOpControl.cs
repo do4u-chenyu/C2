@@ -94,8 +94,8 @@ namespace Citta_T1.Controls.Move.Op
 
     }
 
-    // 算子维度, 目前就2元和1元算子两种
-    public int OperatorDimension()
+        // 算子维度, 目前就2元和1元算子两种
+        public int OperatorDimension()
         {
             return doublelPinFlag ? 2 : 1;
         }
@@ -303,7 +303,7 @@ namespace Citta_T1.Controls.Move.Op
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
-            if (e.Clicks == 1)
+            if (e.Clicks == 1) 
                 MoveOpControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
@@ -389,8 +389,6 @@ namespace Citta_T1.Controls.Move.Op
             
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
-
-
         #endregion
 
         #region 右键菜单

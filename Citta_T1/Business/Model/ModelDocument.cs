@@ -20,63 +20,45 @@ namespace Citta_T1.Business.Model
      */
     class ModelDocument
     {
-        private string modelTitle;
-
-        private List<ModelElement> modelElements;     
-        private List<ModelRelation> modelRelations;
-        private Dictionary<int, List<int>> modelGraphDict;  // 当前模型,以ID为key的图描述
-        private string remarkDescription;  // 备注描述信息
-        private bool remarkVisible;        // 备注控件是否可见
-
-        private string savePath;
-        private bool dirty;//字段表示模型是否被修改
-
-        private int elementCount;
-        
-        private WorldMap worldMap;
-
-
-        private TaskManager taskManager;
-        private string userPath;
 
         /*
          * 传入参数为模型文档名称，当前用户名
          */
-        public string ModelTitle { get => this.modelTitle; }
-        public bool Dirty { get => dirty; set => dirty = value; }
+        public string ModelTitle { get; }   // 文档标题
+        public bool Dirty { get; set; }     // 字段表示模型是否被修改
 
-        public int ElementCount { get => this.elementCount; set => this.elementCount = value; }
-        public string SavePath { get => savePath; }
-        public List<ModelRelation> ModelRelations { get => this.modelRelations; }
-        public List<ModelElement> ModelElements { get => this.modelElements; }
-        
-        public string RemarkDescription { get => remarkDescription; set => remarkDescription = value; }
-        public TaskManager TaskManager { get => taskManager; }
+        public int ElementCount { get; set; }
+        public string SavePath { get; }
+        public List<ModelRelation> ModelRelations { get; } // 所有线关系
+        public List<ModelElement> ModelElements { get; }   // 所有元素
+
+        public string RemarkDescription { get; set; }      // 备注描述
+        public TaskManager TaskManager { get; }
 
 
-        public string UserPath { get => userPath; set => userPath = value; }
-        public bool RemarkVisible { get => remarkVisible; set => remarkVisible = value; }
+        public string UserPath { get; set; }
+        public bool RemarkVisible { get; set; }
+        // 当前模型,以ID为key的图描述
+        public Dictionary<int, List<int>> ModelGraphDict { get; }
 
-        public Dictionary<int, List<int>> ModelGraphDict { get => modelGraphDict; }
-        
-        public WorldMap WorldMap { get => worldMap; }
+        public WorldMap WorldMap { get; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
         
 
         public ModelDocument(string modelTitle, string userName)
         {
-            this.modelTitle = modelTitle;
-            this.modelElements = new List<ModelElement>();
-            this.modelRelations = new List<ModelRelation>();
-            this.modelGraphDict = new Dictionary<int, List<int>>();
-            this.remarkDescription = String.Empty;
-            this.remarkVisible = false;
-            this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
-            this.savePath = Path.Combine(this.userPath, modelTitle);
-            this.elementCount = 0;
-            this.taskManager = new TaskManager();
-            this.worldMap = new WorldMap();
+            this.ModelTitle = modelTitle;
+            this.ModelElements = new List<ModelElement>();
+            this.ModelRelations = new List<ModelRelation>();
+            this.ModelGraphDict = new Dictionary<int, List<int>>();
+            this.RemarkDescription = String.Empty;
+            this.RemarkVisible = false;
+            this.UserPath = Path.Combine(Global.WorkspaceDirectory, userName);
+            this.SavePath = Path.Combine(this.UserPath, modelTitle);
+            this.ElementCount = 0;
+            this.TaskManager = new TaskManager();
+            this.WorldMap = new WorldMap();
         }
         /*
          * 保存功能
@@ -85,15 +67,14 @@ namespace Citta_T1.Business.Model
         {
             DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
             dSaveLoad.WriteXml();
-    
         }
         public void AddModelElement(ModelElement modelElement)
         {
-            this.modelElements.Add(modelElement);
+            this.ModelElements.Add(modelElement);
         }
         public void AddModelRelation(ModelRelation mr, bool setDirty = true)
         {
-            this.modelRelations.Add(mr);
+            this.ModelRelations.Add(mr);
             this.AddEdge(mr);
             if (setDirty)
                 Global.GetMainForm().SetDocumentDirty();
@@ -105,15 +86,15 @@ namespace Citta_T1.Business.Model
         }
         private void AddEdge(ModelRelation mr)
         {
-            if (!this.modelGraphDict.ContainsKey(mr.StartID))
-                this.modelGraphDict[mr.StartID] = new List<int>() { mr.EndID };
+            if (!this.ModelGraphDict.ContainsKey(mr.StartID))
+                this.ModelGraphDict[mr.StartID] = new List<int>() { mr.EndID };
             else
-                this.modelGraphDict[mr.StartID].Add(mr.EndID);
+                this.ModelGraphDict[mr.StartID].Add(mr.EndID);
         }
         private void RemoveEdge(ModelRelation mr)
         {
-            if (this.modelGraphDict.ContainsKey(mr.StartID))
-                this.modelGraphDict[mr.StartID].Remove(mr.EndID);
+            if (this.ModelGraphDict.ContainsKey(mr.StartID))
+                this.ModelGraphDict[mr.StartID].Remove(mr.EndID);
         }
 
         public void DeleteModelElement(Control control)
@@ -193,7 +174,7 @@ namespace Citta_T1.Business.Model
 
         public void Load()
         {
-            if (File.Exists(Path.Combine(savePath, modelTitle + ".xml")))
+            if (File.Exists(Path.Combine(SavePath, ModelTitle + ".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
                 dSaveLoad.ReadXml();        
@@ -203,7 +184,7 @@ namespace Citta_T1.Business.Model
 
         public void Show()
         {
-            foreach (ModelElement el1 in this.modelElements)
+            foreach (ModelElement el1 in this.ModelElements)
             {
                 el1.Show();
                 (el1.InnerControl as IMoveControl).ControlNoSelect();
@@ -218,19 +199,11 @@ namespace Citta_T1.Business.Model
 
         public int ReCountDocumentMaxElementID()
         {
-            if (this.modelElements.Count == 0)
+            if (this.ModelElements.Count == 0)
                 return 0;
-            foreach (ModelElement me in this.modelElements)
-            {
-                if (me.ID > ElementCount)
-                    ElementCount = me.ID;
-            }
-            ElementCount += 1;
+            ElementCount = Math.Max(ElementCount, ModelElements.Max(me => me.ID)) + 1;
             return ElementCount;
         }
-
-        
-
        
         public void UpdateAllLines()
         {
@@ -257,22 +230,19 @@ namespace Citta_T1.Business.Model
         
         public ModelElement SearchElementByID(int ID)
         {
-            return this.modelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
+            return this.ModelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
         }
 
         // 寻找隶属于同一个二元算子的两个关系
         public List<ModelRelation> SearchBrotherRelations(ModelRelation modelRelation)
         {
-            return this.modelRelations.FindAll(me => me.EndID == modelRelation.EndID);
-
+            return this.ModelRelations.FindAll(me => me.EndID == modelRelation.EndID);
         }
         public ModelElement SearchResultElementByOpID(int OpID)
         {
             // 找到OpID开头的Relation
             ModelRelation mr = this.ModelRelations.Find(c => c.StartID == OpID);
-            if (mr == null)
-                return ModelElement.Empty;
-            return SearchElementByID(mr.EndID);
+            return mr == null ? ModelElement.Empty : SearchElementByID(mr.EndID);
         }
       
         public bool IsDuplicatedRelation(ModelRelation mr)
@@ -295,8 +265,7 @@ namespace Citta_T1.Business.Model
                         continue;
 
                     if (pathNode.InnerText.StartsWith(oldPathPrefix))
-                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
-
+                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);  
                 }
                 xmlDoc.Save(xmlPath);
             }

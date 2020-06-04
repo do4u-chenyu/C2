@@ -1,52 +1,38 @@
 ﻿using Citta_T1.Core;
-using Citta_T1.Utils;
-using log4net.Util;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Model
 {
     class ModelRelation
     {
-        private PointF startP;
-        private PointF endP;
-        private PointF a;  // 贝塞尔曲线的控制点A
-        private PointF b;  // 贝塞尔曲线的控制点B
-
-        public ElementType Type { get; }
+        public ElementType Type { get { return ElementType.Relation; } }
         public int EndPin { get; set; }
         public int StartID { get; set; }
         public int EndID { get; set; }
 
-        public PointF EndP { get => endP; set => endP = value; }
-        public PointF A { get => a;}
-        public PointF B { get => b; }
-        public bool Selected { get; set; } = false;
-        public PointF StartP { get => startP; set => startP = value; }
+        public PointF EndP { get; set; }
+        public PointF A { get; set; }    // 贝塞尔曲线的控制点A
+        public PointF B { get; set; }    // 贝塞尔曲线的控制点B
+        public PointF StartP { get; set; }
+        public bool Selected { get; set; }
 
         public static ModelRelation Empty = new ModelRelation();
+        // 默认不能自己构造,仅给Empty使用
         private ModelRelation() 
         {
             EndPin = StartID = EndID = -1;
-            endP = startP = a = b = new PointF(0, 0);
+            EndP = StartP = A = B = new PointF(0, 0);
             Selected = false;
-            Type = ElementType.Relation;
         }
 
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
-        {
-          
+        {      
             this.StartID = startID;
             this.EndID = endID;
             this.StartP = startLocation;
             this.EndP = endLocation;
             this.EndPin = endPin;
-            this.Type = ElementType.Relation;
             this.Selected = false;
             UpdatePoints();
         }
@@ -54,56 +40,35 @@ namespace Citta_T1.Business.Model
         public void ChangeLoc(float x, float y)
         {
             this.StartP = new PointF(this.StartP.X + x, this.StartP.Y + y);
-            this.endP = new PointF(this.endP.X + x, this.endP.Y + y);
+            this.EndP = new PointF(this.EndP.X + x, this.EndP.Y + y);
             UpdatePoints();
         }
-        // MoveOpControl.ChangeSize
+
         public void ZoomOut(float zoomFactor = Global.Factor)
         {
             this.StartP = new PointF(this.StartP.X / zoomFactor, this.StartP.Y / zoomFactor);
-            this.endP = new PointF(this.endP.X / zoomFactor, this.endP.Y / zoomFactor);
+            this.EndP = new PointF(this.EndP.X / zoomFactor, this.EndP.Y / zoomFactor);
             UpdatePoints();
         }
 
         public void ZoomIn(float zoomFactor = Global.Factor)
         {
             this.StartP = new PointF(this.StartP.X * zoomFactor, this.StartP.Y * zoomFactor);
-            this.endP = new PointF(this.endP.X * zoomFactor, this.endP.Y * zoomFactor);
+            this.EndP = new PointF(this.EndP.X * zoomFactor, this.EndP.Y * zoomFactor);
             UpdatePoints();
         }
         public void UpdatePoints()
         {
-            this.a = new PointF((StartP.X + endP.X) / 2, StartP.Y);
-            this.b = new PointF((StartP.X + endP.X) / 2, endP.Y);
-        }
-
-        public void OnMouseMoveEndP(PointF p)
-        {
-            endP = p;
-            UpdatePoints();
-        }
-
-        public void OnMouseMoveStartP(PointF p)
-        {
-            StartP = p;
-            UpdatePoints();
-        }
-
-        public RectangleF GetBoundingRectF()
-        {
-            float x = Math.Min(StartP.X, endP.X);
-            float y = Math.Min(StartP.Y, endP.Y);
-            float w = Math.Abs(StartP.X - endP.X);
-            float h = Math.Abs(StartP.Y - endP.Y);
-            return new RectangleF(x, y, w, h);
+            this.A = new PointF((StartP.X + EndP.X) / 2, StartP.Y);
+            this.B = new PointF((StartP.X + EndP.X) / 2, EndP.Y);
         }
 
         public Rectangle GetBoundingRect()
         {
-            float x = Math.Min(StartP.X, endP.X);
-            float y = Math.Min(StartP.Y, endP.Y);
-            float w = Math.Abs(StartP.X - endP.X);
-            float h = Math.Abs(StartP.Y - endP.Y);
+            float x = Math.Min(StartP.X, EndP.X);
+            float y = Math.Min(StartP.Y, EndP.Y);
+            float w = Math.Abs(StartP.X - EndP.X);
+            float h = Math.Abs(StartP.Y - EndP.Y);
             return new Rectangle(Convert.ToInt32(x), Convert.ToInt32(y), Convert.ToInt32(w), Convert.ToInt32(h));
         }
     }

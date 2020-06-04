@@ -387,8 +387,7 @@ namespace Citta_T1.Controls.Move.Dt
         }
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
-        {
-            
+        {     
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
