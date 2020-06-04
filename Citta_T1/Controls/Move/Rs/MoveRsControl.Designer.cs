@@ -52,7 +52,6 @@ namespace Citta_T1.Controls.Move.Rs
             // leftPictureBox
             // 
             this.leftPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("leftPictureBox.Image")));
-            this.leftPictureBox.Location = new System.Drawing.Point(11, 3);
             this.leftPictureBox.Size = new System.Drawing.Size(15, 21);
             this.leftPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.leftPictureBox.TabIndex = 0;
@@ -69,8 +68,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.textBox.TabIndex = 5;
             this.textBox.Text = "连接算子";
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

@@ -48,10 +48,7 @@ namespace Citta_T1.Controls.Move.Op
             this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox.ReadOnly = true;
             this.textBox.TabIndex = 5;
-            this.textBox.Text = "b";
             this.textBox.Visible = false;
-            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
-            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

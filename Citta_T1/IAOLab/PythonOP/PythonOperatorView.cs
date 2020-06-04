@@ -53,7 +53,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
+                this.opControl.FirstDataSourceColumns = this.columnName0;
                 this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             }
             //初始化输入输出路径
@@ -89,8 +89,7 @@ namespace Citta_T1.OperatorViews
         {
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
-            return bcpInfo.ColumnArray;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
         #endregion
 
@@ -126,14 +125,14 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
             this.opControl.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
-            
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null)
-                return;
-            else
-            {
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
-            }
-                
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+
         }
 
         private void LoadOption()
@@ -186,10 +185,10 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            (hasResultNew.InnerControl as MoveRsControl).Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
-            (hasResultNew.InnerControl as MoveRsControl).FinishTextChange();
-            (hasResultNew.InnerControl as MoveRsControl).Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
-            (hasResultNew.InnerControl as MoveRsControl).Separator = OpUtil.DefaultSeparator;
+            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
+            hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
+            hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
+            hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             if(separator == "commaradio")
             {

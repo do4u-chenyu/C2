@@ -94,8 +94,8 @@ namespace Citta_T1.OperatorViews
                                        this.keyWordBox.Text,
                                        keyWordEncoding,
                                        keyWordSep.ToCharArray());
-            opControl.FirstDataSourceColumns = dataSrcColName.ToList();
-            opControl.SecondDataSourceColumns = keyWordColName.ToList();
+            opControl.FirstDataSourceColumns = dataSrcColName;
+            opControl.SecondDataSourceColumns = keyWordColName;
             dataColumnBox.Items.AddRange(dataSrcColName);
             keyWordColBox.Items.AddRange(keyWordColName);
             outList.Items.AddRange(dataSrcColName);
@@ -146,13 +146,16 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("keySelectIndex", keyWordColBox.SelectedIndex.ToString());
             opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
             opControl.Option.SetOption("keyWordText", keyWordPreviewBox.Text);
-            if (this.oldOptionDictStr == string.Join(",", this.opControl.Option.OptionDict.ToList())
-                && this.opControl.Status != ElementStatus.Null
-                && this.opControl.Status != ElementStatus.Warn)
-            {
-                return;
-            }
-            this.opControl.Status = ElementStatus.Ready;
+
+
+
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+                this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
         private void GetDataInfo()
         {
@@ -169,8 +172,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
-            return bcpInfo.ColumnArray;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
         private string SetTextBoxName(string filePath)
         {

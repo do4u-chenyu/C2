@@ -68,8 +68,8 @@ namespace Citta_T1.OperatorViews
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 
-            this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
-            this.opControl.SecondDataSourceColumns = this.columnName1.ToList();
+            this.opControl.FirstDataSourceColumns  = this.columnName0;
+            this.opControl.SecondDataSourceColumns = this.columnName1;
            
 
             foreach (string name in this.columnName0)
@@ -84,8 +84,7 @@ namespace Citta_T1.OperatorViews
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
-            return bcpInfo.ColumnArray;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
 
         public void SetTextBoxName(TextBox textBox)
@@ -215,11 +214,14 @@ namespace Citta_T1.OperatorViews
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
-            
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
-                return;
-            else
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+
 
         }
         #endregion

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -18,33 +17,16 @@ namespace Citta_T1.Controls.Move.Dt
     public partial class MoveDtControl: MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        private Point oldControlPosition;
-
-
         //绘制引脚
         private string lineStaus = "noLine";
         private Point rightPin = new Point(126, 9);
-        private int pinWidth = 6;
-        private int pinHeight = 6;
+
         private Pen pen = new Pen(Color.DarkGray, 1f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
-        public Rectangle rectOut;
+        private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
         private String pinStatus = "noEnter";
 
         private Size changeStatus = new Size(0, 28);
         private Size normalStatus = new Size(53, 28);
-
-        #region 继承属性
-        private Point mouseOffset;
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-        // 缩放等级
-        
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-        #endregion
 
         private ECommandType cmd = ECommandType.Null;
 
@@ -73,26 +55,9 @@ namespace Citta_T1.Controls.Move.Dt
 
         }
 
-
         #region 重写方法
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-        public void TextBox_Leave(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            FinishTextChange();
-        }
 
-        private void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
@@ -235,8 +200,8 @@ namespace Citta_T1.Controls.Move.Dt
             // 开始划线
             else if (cmd == ECommandType.PinDraw)
             {
-                startX = this.Location.X + e.X;
-                startY = this.Location.Y + e.Y;
+                int startX = this.Location.X + e.X;
+                int startY = this.Location.Y + e.Y;
                 MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                 Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                 
@@ -303,8 +268,8 @@ namespace Citta_T1.Controls.Move.Dt
                 if (rectOut.Contains(e.Location))
                 {
                     lineStaus = "lineExit";
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
@@ -340,8 +305,8 @@ namespace Citta_T1.Controls.Move.Dt
             {
                 if (cmd == ECommandType.PinDraw)
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                     cmd = ECommandType.Null;
                 }
@@ -359,7 +324,7 @@ namespace Citta_T1.Controls.Move.Dt
                     ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                     if (element != ModelElement.Empty)
                     {
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                         ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
@@ -372,11 +337,11 @@ namespace Citta_T1.Controls.Move.Dt
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldControlPosition = this.Location;
+            oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion
@@ -474,23 +439,6 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 接口实现
-        /*
-         * 当空间移动的时候，更新该控件连接线的坐标
-         */
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            //this.startLineIndexs.Add(line_index);
-        }
-
-        public void SaveEndLines(int line_index)
-        {
-            
-        }
-
         public PointF RevisePointLoc(PointF p)
         {
             // 不存在连DtControl 的 LeftPin的情况
@@ -513,7 +461,7 @@ namespace Citta_T1.Controls.Move.Dt
             
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 

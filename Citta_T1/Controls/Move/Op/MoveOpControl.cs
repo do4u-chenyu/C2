@@ -24,16 +24,12 @@ namespace Citta_T1.Controls.Move.Op
         private ControlMoveWrapper controlMoveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
-        private Point mouseOffset;
-
+   
         private bool doublelPinFlag = false;
 
         private string subTypeName;
         private OperatorOption option = new OperatorOption();
 
-        private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
-        private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
-        
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
         public override ElementStatus Status
@@ -46,24 +42,12 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
-        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
-        public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
-        public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
 
+        public string[] FirstDataSourceColumns { get; set; }  //第一个入度的表头配置
+        public string[] SecondDataSourceColumns { get; set; } //第二个入度的表头配置
 
-
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-   
-
-
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-        private Point oldControlPosition;
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
         // 以该控件为终点的所有点
@@ -75,17 +59,12 @@ namespace Citta_T1.Controls.Move.Op
 
         private Point leftPin = new Point(2, 10);
         private Point rightPin = new Point(140, 10);
-
-
-        private int pinWidth = 6;
-        private int pinHeight = 6;
         private Pen pen = new Pen(Color.DarkGray, 1f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
+        private SolidBrush whiteSmkeBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn_down;
         private Rectangle rectIn_up;
-        private Rectangle rectOut;
-        private String pinStatus = "noEnter";
-        private String rectArea = "rectIn_down rectIn_up rectOut";
+        private string pinStatus = "noEnter";
+        private string rectArea = "rectIn_down rectIn_up rectOut";
         private List<int> linePinArray = new List<int> { };
         
 
@@ -110,7 +89,7 @@ namespace Citta_T1.Controls.Move.Op
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper();
             InitializeOpPinPicture();
-            InitializeHelpToolTip();
+            InitializeHelpInfoAndOpIcon();
             ChangeSize(sizeL);
 
 
@@ -118,8 +97,8 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            firstDataSourceColumns = new List<string>();
-            secondDataSourceColumns = new List<string>();
+            FirstDataSourceColumns  = new string[0];
+            SecondDataSourceColumns = new string[0];
 
         }
 
@@ -163,45 +142,57 @@ namespace Citta_T1.Controls.Move.Op
             this.ErrorLogMenuItem,
             this.DeleteMenuItem });
         }
-        private void InitializeHelpToolTip()
+        private void InitializeHelpInfoAndOpIcon()
         {
             switch (subTypeName)
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
+                    SetPictureBoxImage("releateOp.png");
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
+                    SetPictureBoxImage("collideOp.png");
                     break;
                 case "取并集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
+                    SetPictureBoxImage("unionOp.png");
                     break;
                 case "取差集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
+                    SetPictureBoxImage("differOp.png");
                     break;
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
+                    SetPictureBoxImage("randomOp.png");
                     break;
                 case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
+                    SetPictureBoxImage("filterOp.png");
                     break;
                 case "取最大值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
+                    SetPictureBoxImage("maxOp.png");
                     break;
                 case "取最小值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
+                    SetPictureBoxImage("minOp.png");
                     break;
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
+                    SetPictureBoxImage("avgOp.png");
                     break;
                 case "频率算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
+                    SetPictureBoxImage("freqOp.png");
                     break;
                 case "排序算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
+                    SetPictureBoxImage("sortOp.png");
                     break;
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
+                    SetPictureBoxImage("groupOp.png");
                     break;
                 case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
@@ -214,9 +205,11 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
+                    SetPictureBoxImage("wordFilterOp.png");
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
+                    SetPictureBoxImage("dataStandarOp.png");
                     break;
                 default:
                     break;
@@ -297,13 +290,12 @@ namespace Citta_T1.Controls.Move.Op
             {
                 if (rectOut.Contains(e.Location))
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     cmd = ECommandType.PinDraw;
-                    CanvasPanel canvas = (this.Parent as CanvasPanel);
-                    canvas.CanvasPanel_MouseDown(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -363,11 +355,10 @@ namespace Citta_T1.Controls.Move.Op
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    CanvasPanel canvas = Global.GetCanvasPanel();
-                    canvas.CanvasPanel_MouseUp(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
                 this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
@@ -380,7 +371,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -396,7 +387,7 @@ namespace Citta_T1.Controls.Move.Op
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion
@@ -623,9 +614,6 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void OptionDirty(ElementStatus status)
         {
-            if (this.Status == ElementStatus.Done && status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.ID);
-
             if (status == ElementStatus.Null)
                 this.statusBox.Image = Properties.Resources.set;
             else if (status == ElementStatus.Done)
@@ -639,26 +627,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region textBox
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-                
-        }
-
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            FinishTextChange();
-        }
-
-        private void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
@@ -699,8 +668,6 @@ namespace Citta_T1.Controls.Move.Op
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-
-
             if(rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
@@ -814,33 +781,6 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region IMoveControl 接口实现方法
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            
-        }
-
-        public void SaveEndLines(int line_index)
-        {
-            /*
-             * 绘制动作结束后，将线索引存起来，存哪个针脚看线坐标修正结果
-             */
-            try
-            {
-                //this.endLineIndexs[revisedPinIndex] = line_index;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveOpControl SaveEndLines 出错: " + ex.ToString());
-            }
-        }
         public PointF RevisePointLoc(PointF p)
         {
             /*
@@ -969,11 +909,11 @@ namespace Citta_T1.Controls.Move.Op
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(trnsRedBrush, rectIn_down);
+            e.Graphics.FillEllipse(whiteSmkeBrush, rectIn_down);
             e.Graphics.DrawEllipse(pen, rectIn_down);
-            e.Graphics.FillEllipse(trnsRedBrush, rectIn_up);
+            e.Graphics.FillEllipse(whiteSmkeBrush, rectIn_up);
             e.Graphics.DrawEllipse(pen, rectIn_up);
-            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.FillEllipse(whiteSmkeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
@@ -989,6 +929,16 @@ namespace Citta_T1.Controls.Move.Op
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
+        }
+        private void SetPictureBoxImage(string picName)
+        {            
+            string appPath = Application.StartupPath;
+            //仅当图片存在时才加载图片
+            if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))
+            {
+                Image img = Image.FromFile(filename: appPath + @"\res\opControl\" + picName);
+                this.leftPictureBox.Image = img;
+            }
         }
     }
 }

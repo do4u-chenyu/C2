@@ -127,8 +127,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox1.Items.Add(name);
             }
             
-            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
-           
+            this.opControl.FirstDataSourceColumns = this.columnName;    
         }
 
         public void SetTextBoxName(TextBox textBox)
@@ -221,10 +220,13 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outfield", outField);
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
-                return;
-            else
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
 
         }
 
@@ -285,7 +287,7 @@ namespace Citta_T1.OperatorViews
                 control2.Tag = Nums[1].ToString();
                 control3.Tag = Nums[2].ToString();
             }
-            this.opControl.Option.SetOption("columnname0",string.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
         }
         private void InitNewFactorControl(int count)
         {

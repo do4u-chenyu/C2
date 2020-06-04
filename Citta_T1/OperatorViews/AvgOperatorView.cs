@@ -78,7 +78,7 @@ namespace Citta_T1.OperatorViews
             this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.AvgComBox.Items.Add(name);
-            this.opControl.FirstDataSourceColumns =  this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns =  this.columnName;
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
         }
       
@@ -158,11 +158,13 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
             this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
-                return;
-            else
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
 
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
 
         private void LoadOption()

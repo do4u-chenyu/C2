@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -19,18 +18,7 @@ namespace Citta_T1.Controls.Move.Rs
     public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
         private bool isMouseDown = false;
-        private Point mouseOffset;
-
         private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
-
-        // 一些倍率
-        // 画布上的缩放倍率
-        float factor = Global.Factor;
-
-        // 绘制贝塞尔曲线的起点
-        private int startX;
-        private int startY;
-        private Point oldControlPosition;
 
         private ECommandType cmd = ECommandType.Null;
 
@@ -39,12 +27,10 @@ namespace Citta_T1.Controls.Move.Rs
         //绘制引脚
         private Point leftPin = new Point(2, 11);
         private Point rightPin = new Point(130, 8);
-        private int pinWidth = 6;
-        private int pinHeight = 6;
+
         private Pen pen = new Pen(Color.DarkGray, 1f);
-        private SolidBrush trnsRedBrush = new SolidBrush(Color.WhiteSmoke);
+        private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
         private Rectangle rectIn;
-        private Rectangle rectOut;
         private String pinStatus = "noEnter";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
@@ -62,8 +48,7 @@ namespace Citta_T1.Controls.Move.Rs
             }
         }
         public Rectangle RectIn { get => rectIn; set => rectIn = value; }
-        public Rectangle RectOut { get => rectOut; set => rectOut = value; }
-        
+
         public MoveRsControl(int size, string desciption, Point loc)
         {
            
@@ -127,8 +112,8 @@ namespace Citta_T1.Controls.Move.Rs
                 if (cmd == ECommandType.PinDraw)
                 {
                     lineStatus = "lineExit";
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
                     return;
@@ -161,14 +146,13 @@ namespace Citta_T1.Controls.Move.Rs
             {
                 if (rectOut.Contains(e.Location))
                 {
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     isMouseDown = true;
                     cmd = ECommandType.PinDraw;
-                    CanvasPanel canvas = (this.Parent as CanvasPanel);
-                    canvas.CanvasPanel_MouseDown(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
@@ -201,14 +185,13 @@ namespace Citta_T1.Controls.Move.Rs
                 {
                     isMouseDown = false;
                     cmd = ECommandType.Null;
-                    startX = this.Location.X + e.X;
-                    startY = this.Location.Y + e.Y;
+                    int startX = this.Location.X + e.X;
+                    int startY = this.Location.Y + e.Y;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    CanvasPanel canvas = Global.GetCanvasPanel();
-                    canvas.CanvasPanel_MouseUp(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
-                this.isMouseDown = false;
-                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                isMouseDown = false;
+                controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -218,7 +201,7 @@ namespace Citta_T1.Controls.Move.Rs
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }
@@ -228,11 +211,11 @@ namespace Citta_T1.Controls.Move.Rs
 
         public Point UndoRedoMoveLocation(Point location)
         {
-            this.oldControlPosition = this.Location;
+            oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition,false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
         #endregion
@@ -328,21 +311,7 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region textBox
-        public void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 按下回车键
-            if (e.KeyChar == 13)
-            {
-                FinishTextChange();
-            }
-        }
-
-        public void TextBox_Leave(object sender, EventArgs e)
-        {
-            FinishTextChange();
-        }
-
-        public void FinishTextChange()
+        public override void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
                 this.textBox.Text = this.oldTextString;
@@ -385,7 +354,7 @@ namespace Citta_T1.Controls.Move.Rs
         }
 
         #region 针脚事件
-        public void PinOpLeaveAndEnter(Point mousePosition)
+        private void PinOpLeaveAndEnter(Point mousePosition)
         {
             if (rectIn.Contains(mousePosition))
             {
@@ -478,36 +447,13 @@ namespace Citta_T1.Controls.Move.Rs
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(trnsRedBrush, rectIn);
+            e.Graphics.FillEllipse(whiteSmokeBrush, rectIn);
             e.Graphics.DrawEllipse(pen, rectIn);
-            e.Graphics.FillEllipse(trnsRedBrush, rectOut);
+            e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
 
         #region IMoveControl接口
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            //this.startLineIndexs.Add(line_index);
-        }
-        public void SaveEndLines(int line_index)
-        {
-            try
-            {
-                //this.endLineIndexs[0] = line_index;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveRsControl SaveEndLines 出错: " + ex.ToString());
-            }
-        }
         // 修正坐标
         public PointF RevisePointLoc(PointF p)
         {

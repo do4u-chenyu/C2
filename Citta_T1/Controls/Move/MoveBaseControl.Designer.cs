@@ -49,7 +49,7 @@ namespace Citta_T1.Controls.Move
             // 
             // leftPictureBox
             // 
-            this.leftPictureBox.Location = new System.Drawing.Point(11, 2);
+            this.leftPictureBox.Location = new System.Drawing.Point(11, 4);
             this.leftPictureBox.Name = "leftPictureBox";
             this.leftPictureBox.Size = new System.Drawing.Size(18, 22);
             this.leftPictureBox.TabIndex = 4;
@@ -70,6 +70,8 @@ namespace Citta_T1.Controls.Move
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(60, 23);
             this.textBox.TabIndex = 2;
+            this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.textBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // txtButton
             // 

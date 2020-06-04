@@ -206,8 +206,8 @@ namespace Citta_T1.Business.Model
                         if (xn.SelectSingleNode("option") != null)
                         {
                             ctl.Option = ReadOption(xn);
-                            ctl.FirstDataSourceColumns  = ctl.Option.GetOption("columnname0").Split('\t').ToList();
-                            ctl.SecondDataSourceColumns = ctl.Option.GetOption("columnname1").Split('\t').ToList();
+                            ctl.FirstDataSourceColumns  = ctl.Option.GetOptionSplit("columnname0");
+                            ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                         }
                     }
                     else if (type == "DataSource")

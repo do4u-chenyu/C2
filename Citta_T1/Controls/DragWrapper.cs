@@ -113,10 +113,10 @@ namespace Citta_T1.Controls
                 if (Pw.X < 0 || Pw.Y < 0)
                     continue;
 
-                PointF s = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.StartP,false);
-                PointF a = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.A,false);
-                PointF b = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.B,false);
-                PointF e = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.EndP,false);
+                PointF s = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.StartP, false);
+                PointF a = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.A, false);
+                PointF b = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.B, false);
+                PointF e = Global.GetCurrentDocument().WorldMap.ScreenToWorldF(mr.EndP, false);
                 LineUtil.DrawBezier(g, s, a, b, e, mr.Selected);
             }
             // 反向遍历,解决Move时旧控件压在新控件上

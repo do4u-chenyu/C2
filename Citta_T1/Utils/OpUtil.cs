@@ -1,15 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Security.Cryptography;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Collections.Generic;
-
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
-using NPOI.SS.Formula.Functions;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
-using Citta_T1.Controls.Move;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Citta_T1.Utils
 {

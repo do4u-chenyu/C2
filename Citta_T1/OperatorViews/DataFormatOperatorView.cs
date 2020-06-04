@@ -74,7 +74,7 @@ namespace Citta_T1.OperatorViews
             this.columnName = bcpInfo.ColumnArray;
             foreach (string name in this.columnName)
                 this.comboBox1.Items.Add(name);
-            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName;
         }
 
         public void SetTextBoxName(TextBox textBox)
@@ -182,10 +182,13 @@ namespace Citta_T1.OperatorViews
                 }
             }
             this.opControl.Option.SetOption("outname", String.Join("\t", this.selectColumn));
-            if (this.oldOptionDict == string.Join(",", this.opControl.Option.OptionDict.ToList()) && this.opControl.Status != ElementStatus.Null && this.opControl.Status != ElementStatus.Warn)
-                return;
-            else
+
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
 
         }
 

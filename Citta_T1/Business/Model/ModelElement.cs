@@ -12,15 +12,16 @@ namespace Citta_T1.Business.Model
 {
     public enum ElementType
     {
+        Empty,      // 空算子,防止NULL指针异常用
         Operator,   // 算子
         DataSource, // 数据源
         Relation,   // 画线关系
         Result,     // 算子运算结果
-        Remark,     // 模型文档备注
-        Empty       // 空算子,防止NULL指针异常用
+        Remark      // 模型文档备注     
     }
     public enum ElementSubType
     {
+        Null,
         RelateOperator, //关联算子
         CollideOperator,//取交集
         UnionOperator,  //取并集
@@ -37,18 +38,17 @@ namespace Citta_T1.Business.Model
         CustomOperator2, //自定义算子, 二元算子
         PythonOperator,  //Python算子
         DataFormatOperator, //数据标准化
-        KeyWordOperator, //关键词过滤
-        Null
+        KeyWordOperator  //关键词过滤  
     }
     public enum ElementStatus
     {
+        Null,    //初始状态
         Runnnig, //正在计算
         Stop,    //停止
         Done,    //运算完毕 
         Suspend, //暂停
         Ready,   //已经完成算子配置,随时可以开始运算
-        Warn,    //配置错误状态
-        Null,    //初始状态
+        Warn     //配置错误状态  
     }
     public class ModelElement
     {
