@@ -25,9 +25,6 @@ namespace Citta_T1.Controls.Move.Dt
         private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
         private String pinStatus = "noEnter";
 
-        private Size changeStatus = new Size(0, 28);
-        private Size normalStatus = new Size(53, 28);
-
         private ECommandType cmd = ECommandType.Null;
 
         ControlMoveWrapper controlMoveWrapper;
@@ -49,11 +46,15 @@ namespace Citta_T1.Controls.Move.Dt
             this.Separator = separator;
             this.Status = ElementStatus.Done;
 
+            changeStatus = new Size(0, 28);
+            normalStatus = new Size(53, 28);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper();
 
-        }
+
+
+    }
 
         #region 重写方法
 
@@ -347,26 +348,7 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        private void SetOpControlName(string name)
-        {
-            this.Description = name;
-            int maxLength = 24;
-            name = ConvertUtil.SubstringByte(name, 0, maxLength);
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
-            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
-            this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
-            {
-                txtWidth += 10;
-                this.txtButton.Text = name + "...";
-            }
-            changeStatus.Width = normalStatus.Width + txtWidth;
-            ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
-        }
-
-        private void ResizeControl(int txtWidth, Size controlSize)
+        protected override void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
             int pading = 4;

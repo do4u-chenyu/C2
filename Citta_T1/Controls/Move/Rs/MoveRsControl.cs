@@ -36,8 +36,6 @@ namespace Citta_T1.Controls.Move.Rs
         private String lineStatus = "noLine";
         private ControlMoveWrapper controlMoveWrapper;
 
-        private Size changeStatus = new Size(0, 28);
-        private Size normalStatus = new Size(58, 28);
         public override ElementStatus Status
         {
             get => base.Status;
@@ -63,16 +61,18 @@ namespace Citta_T1.Controls.Move.Rs
             Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
-            SetOpControlName(Description);
             ChangeSize(size);
-            
+
+            changeStatus = new Size(0, 28);
+            normalStatus = new Size(58, 28);
+
             InitializeOpPinPicture();
             this.controlMoveWrapper = new ControlMoveWrapper();
 
             endLineIndexs.Add(-1);
 
-            
-        }
+
+    }
 
         private void InitializeOpPinPicture()
         {
@@ -221,26 +221,8 @@ namespace Citta_T1.Controls.Move.Rs
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        private void SetOpControlName(string name)
-        {
-            this.Description = name;
-            int maxLength = 24;
-            name = ConvertUtil.SubstringByte(name, 0, maxLength);
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
-            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
-            this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
-            {
-                txtWidth += 10;
-                this.txtButton.Text = name + "...";
-            }
-            changeStatus.Width = normalStatus.Width + txtWidth;
-            ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
-        }
 
-        private void ResizeControl(int txtWidth, Size controlSize)
+        protected override void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
             int pading = 4;

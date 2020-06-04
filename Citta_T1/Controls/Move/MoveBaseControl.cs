@@ -5,6 +5,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move
@@ -37,7 +38,9 @@ namespace Citta_T1.Controls.Move
                 return OpUtil.ExtType.Unknow;
             }
         }
-        
+
+        protected Size changeStatus;
+        protected Size normalStatus;
 
         protected string oldTextString;
         protected Bitmap staticImage;
@@ -207,8 +210,31 @@ namespace Citta_T1.Controls.Move
             FinishTextChange();
         }
 
+        protected void SetOpControlName(string name)
+        {
+            this.Description = name;
+            int maxLength = 24;
+            name = ConvertUtil.SubstringByte(name, 0, maxLength);
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
+            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
+            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
+            this.txtButton.Text = name;
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
+            {
+                txtWidth += 10;
+                this.txtButton.Text = name + "...";
+            }
+            changeStatus.Width = normalStatus.Width + txtWidth;
+            ResizeControl(txtWidth, changeStatus);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
+        }
+
         public virtual void FinishTextChange()
         { 
+        }
+
+        protected virtual void ResizeControl(int txtWidth, Size controlSize)
+        {
         }
     }
 }
