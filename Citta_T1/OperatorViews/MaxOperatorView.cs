@@ -164,7 +164,7 @@ namespace Citta_T1.OperatorViews
                 this.outList.AddItems(name);
                 this.maxValueBox.Items.Add(name);
             }
-            this.opControl.FirstDataSourceColumns = this.columnName.ToList();
+            this.opControl.FirstDataSourceColumns = this.columnName;
            
            
         }

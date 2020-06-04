@@ -30,8 +30,8 @@ namespace Citta_T1.Controls.Move.Op
         private string subTypeName;
         private OperatorOption option = new OperatorOption();
 
-        private List<string> firstDataSourceColumns;  // 第一个入度的数据源表头
-        private List<string> secondDataSourceColumns; // 第二个入度的数据源表头
+        private string[] firstDataSourceColumns;  // 第一个入度的数据源表头
+        private string[] secondDataSourceColumns; // 第二个入度的数据源表头
         
         public string SubTypeName { get => subTypeName; }
         public OperatorOption Option { get => this.option; set => this.option = value; }
@@ -47,8 +47,8 @@ namespace Citta_T1.Controls.Move.Op
         public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
 
         public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
-        public List<string> FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
-        public List<string> SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
+        public string[] FirstDataSourceColumns  { get => this.firstDataSourceColumns; set => this.firstDataSourceColumns = value; }
+        public string[] SecondDataSourceColumns { get => this.secondDataSourceColumns; set => this.secondDataSourceColumns = value; }
 
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
         private int revisedPinIndex;
@@ -99,8 +99,8 @@ namespace Citta_T1.Controls.Move.Op
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true); // 双缓冲DoubleBuffer
 
-            firstDataSourceColumns = new List<string>();
-            secondDataSourceColumns = new List<string>();
+            firstDataSourceColumns  = new string[0];
+            secondDataSourceColumns = new string[0];
 
         }
 

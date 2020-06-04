@@ -75,8 +75,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
                 this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
                 columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.columnName0.ToList();
-                this.opControl.FirstDataSourceColumns =this.columnName0.ToList();//单输入的也要赋值
+                this.opControl.FirstDataSourceColumns = this.columnName0;//单输入的也要赋值
                 this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
                 foreach (string name in this.columnName0)
                     this.outList0.AddItems(name);
@@ -88,7 +87,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 this.toolTip1.SetToolTip(this.dataSource1, this.dataSource1.Text);
                 columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns= this.columnName1.ToList();
+                this.opControl.SecondDataSourceColumns= this.columnName1;
                 this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
                 foreach (string name in this.columnName1)
                     this.outList1.AddItems(name);
@@ -99,10 +98,8 @@ namespace Citta_T1.OperatorViews
         {
 
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.opControl.FirstDataSourceColumns = bcpInfo.ColumnArray.ToList();
-            return bcpInfo.ColumnArray;
+            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
-
         public void SetTextBoxName(TextBox textBox)
         {
             string dataName = textBox.Text;
