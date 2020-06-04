@@ -18,7 +18,6 @@ namespace Citta_T1.Controls.Move.Dt
     public partial class MoveDtControl: MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveDtControl));
         private Point oldControlPosition;
 
 
@@ -70,7 +69,7 @@ namespace Citta_T1.Controls.Move.Dt
 
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.controlMoveWrapper = new ControlMoveWrapper();
 
         }
 

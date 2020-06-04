@@ -108,7 +108,7 @@ namespace Citta_T1.Controls.Move.Op
             this.subTypeName = subTypeName;
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
-            this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.controlMoveWrapper = new ControlMoveWrapper();
             InitializeOpPinPicture();
             InitializeHelpToolTip();
             ChangeSize(sizeL);

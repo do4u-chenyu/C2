@@ -82,7 +82,7 @@ namespace Citta_T1.Controls.Move.Rs
             ChangeSize(size);
             
             InitializeOpPinPicture();
-            this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.controlMoveWrapper = new ControlMoveWrapper();
 
             endLineIndexs.Add(-1);
 
@@ -137,7 +137,6 @@ namespace Citta_T1.Controls.Move.Rs
                 int top = this.Top + e.Y - mouseOffset.Y;
                 this.Location = new Point(left, top);
 
-                CanvasPanel canvas = Global.GetCanvasPanel();
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
@@ -150,7 +149,6 @@ namespace Citta_T1.Controls.Move.Rs
                         mr.EndP = this.GetEndPinLoc(mr.EndPin);
                         mr.UpdatePoints();
                     }
-                    Bezier newLine = new Bezier(mr.StartP, mr.EndP);
                 }
                 this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }

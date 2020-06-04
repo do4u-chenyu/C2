@@ -274,8 +274,8 @@
             this.textBoxEx1.Name = "textBoxEx1";
             this.textBoxEx1.Size = new System.Drawing.Size(29, 35);
             this.textBoxEx1.TabIndex = 23;
-            this.textBoxEx1.TextChanged += new System.EventHandler(this.textBoxEx1_TextChanged);
-            this.textBoxEx1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBoxEx1_MouseDown);
+            this.textBoxEx1.TextChanged += new System.EventHandler(this.TextBoxEx1_TextChanged);
+            this.textBoxEx1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBoxEx1_MouseDown);
             // 
             // radioButton3
             // 
@@ -287,7 +287,7 @@
             this.radioButton3.TabIndex = 22;
             this.radioButton3.Text = "其他";
             this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton3_MouseDown);
+            this.radioButton3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RadioButton3_MouseDown);
             // 
             // radioButton2
             // 
@@ -300,7 +300,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "逗号";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton2_MouseDown);
+            this.radioButton2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RadioButton2_MouseDown);
             // 
             // radioButton1
             // 
@@ -314,7 +314,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "TAB";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radioButton1_MouseDown);
+            this.radioButton1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RadioButton1_MouseDown);
             // 
             // label4
             // 
