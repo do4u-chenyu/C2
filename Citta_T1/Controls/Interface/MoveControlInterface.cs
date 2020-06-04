@@ -7,9 +7,6 @@ namespace Citta_T1.Controls.Interface
     // 画布上的所有可移动控件接口
     interface IMoveControl
     {
-        void UpdateLineWhenMoving();
-        void SaveStartLines(int line_index);
-        void SaveEndLines(int line_index);
         // 修正坐标
         PointF RevisePointLoc(PointF p);
         PointF GetStartPinLoc(int pinIndex);

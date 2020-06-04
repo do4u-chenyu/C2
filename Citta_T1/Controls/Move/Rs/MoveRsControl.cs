@@ -67,7 +67,7 @@ namespace Citta_T1.Controls.Move.Rs
             ChangeSize(size);
             
             InitializeOpPinPicture();
-            this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.controlMoveWrapper = new ControlMoveWrapper();
 
             endLineIndexs.Add(-1);
 
@@ -454,29 +454,6 @@ namespace Citta_T1.Controls.Move.Rs
         }
 
         #region IMoveControl接口
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            //this.startLineIndexs.Add(line_index);
-        }
-        public void SaveEndLines(int line_index)
-        {
-            try
-            {
-                //this.endLineIndexs[0] = line_index;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveRsControl SaveEndLines 出错: " + ex.ToString());
-            }
-        }
         // 修正坐标
         public PointF RevisePointLoc(PointF p)
         {

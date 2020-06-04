@@ -51,7 +51,7 @@ namespace Citta_T1.Controls.Move.Dt
 
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            this.controlMoveWrapper = new ControlMoveWrapper(this);
+            this.controlMoveWrapper = new ControlMoveWrapper();
 
         }
 
@@ -439,23 +439,6 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 接口实现
-        /*
-         * 当空间移动的时候，更新该控件连接线的坐标
-         */
-        public void UpdateLineWhenMoving()
-        {
-
-        }
-        public void SaveStartLines(int line_index)
-        {
-            //this.startLineIndexs.Add(line_index);
-        }
-
-        public void SaveEndLines(int line_index)
-        {
-            
-        }
-
         public PointF RevisePointLoc(PointF p)
         {
             // 不存在连DtControl 的 LeftPin的情况

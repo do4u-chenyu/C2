@@ -705,6 +705,7 @@
     <None Include="res\toolbox\redo.png" />
     <None Include="res\toolbox\undo.png" />
     <None Include="res\leftpanelmenu\LeftpanelOpIcon.png" />
+    <Content Include="res\opControl\releateOp.png" />
     <Content Include="res\opControl\wordFilterOp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -858,12 +859,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

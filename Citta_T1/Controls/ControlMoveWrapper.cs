@@ -13,30 +13,44 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    class ControlMoveWrapper : DragWrapper
+    class ControlMoveWrapper
     {
-        private Control control;
         private static LogUtil log = LogUtil.GetInstance("ControlMoveWrapper");
+        private int width;
+        private int height;
+        private Point start, now;
+        private bool startDrag;
 
-        public ControlMoveWrapper(Control ctr)
+        private int worldWidth;
+        private int worldHeight;
+        private Bitmap staticImage;
+
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
+        public float Factor { get; set; }
+        public bool StartDrag { get => startDrag; set => startDrag = value; }
+        public int WorldWidth { get => worldWidth; set => worldWidth = value; }
+        public int WorldHeight { get => worldHeight; set => worldHeight = value; }
+        public Point Start { get => start; set => start = value; }
+        public Point Now { get => now; set => now = value; }
+        public Bitmap StaticImage { get => staticImage; set => staticImage = value; }
+
+        public ControlMoveWrapper()
         {
-            this.control = ctr;
+            this.worldWidth = 2000;
+            this.worldHeight = 1000;
+            this.startDrag = false;
         }
-        public override Bitmap CreateWorldImage()
+        public Bitmap CreateWorldImage()
         {
             Bitmap staticImage = new Bitmap(Convert.ToInt32(this.WorldWidth * Factor), Convert.ToInt32(this.WorldHeight * Factor));
             Graphics g = Graphics.FromImage(staticImage);
             g.Clear(Color.White);
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
-
-
-            Control ct = this.control;
-            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(ct.Location,false);
             g.Dispose();
             return staticImage;
         }
 
-        public override void MoveWorldImage(Graphics n)
+        public void MoveWorldImage(Graphics n)
         {
             // 每次Move都需要画一张新图
             if (this.StaticImage != null)
@@ -67,8 +81,13 @@ namespace Citta_T1.Controls
             this.RepaintCtrs();
         }
 
-
-        public override void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public void InitDragWrapper(Size canvasSize, float canvasFactor)
+        {
+            width = canvasSize.Width;
+            height = canvasSize.Height;
+            Factor = canvasFactor;
+        }
+        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.Now = e.Location;
@@ -79,7 +98,29 @@ namespace Citta_T1.Controls
             this.StartDrag = false;
             this.Start = e.Location;
         }
-        
+        public void DragDown(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        {
+            this.startDrag = true;
+            this.start = e.Location;
+            if (this.staticImage != null)
+            {   // bitmap是重型资源,需要强制释放
+                this.staticImage.Dispose();
+                this.staticImage = null;
+            }
+            this.InitDragWrapper(canvasSize, canvasFactor);
+            this.staticImage = this.CreateWorldImage();
+        }
+        public void DragMove(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                return;
+            this.now = e.Location;
+            this.InitDragWrapper(canvasSize, canvasFactor);
+            Graphics n = Global.GetCanvasPanel().CreateGraphics();
+
+            this.MoveWorldImage(n);
+            n.Dispose();
+        }
         /// <summary>
         ///  重绘碰到的控件
         /// </summary>

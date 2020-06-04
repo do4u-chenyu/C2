@@ -315,6 +315,7 @@ namespace Citta_T1.Controls
         }
         public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
         {
+            // 别删这句话，删了就出问题
             this.endC = null;
             // 画框
             if (SelectFrame())

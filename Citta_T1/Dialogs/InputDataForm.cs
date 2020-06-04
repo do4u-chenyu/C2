@@ -204,7 +204,6 @@ namespace Citta_T1.Dialogs
             }
             String[] headers = header.Split(this.separator);
             int numOfCol = header.Split(this.separator).Length;
-            DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[numOfCol];
             this.dataGridView1.DataSource = null;
             DvgClean(false);
             try
@@ -284,7 +283,6 @@ namespace Citta_T1.Dialogs
             ISheet sheet = null;
             IWorkbook workbook = null;
             FileStream fs = null;
-            DataTable data = new DataTable();
             int startRow = 0;
             //
             try
@@ -384,14 +382,14 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void radioButton1_MouseDown(object sender, MouseEventArgs e)
+        private void RadioButton1_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != OpUtil.ExtType.Text)
                 return;
             this.separator = '\t';
             PreViewBcpFile();
         }
-        private void radioButton2_MouseDown(object sender, MouseEventArgs e)
+        private void RadioButton2_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != OpUtil.ExtType.Text)
                 return;
@@ -399,7 +397,7 @@ namespace Citta_T1.Dialogs
             PreViewBcpFile();
 
         }
-        private void radioButton3_MouseDown(object sender, MouseEventArgs e)
+        private void RadioButton3_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.extType != OpUtil.ExtType.Text)
                 return;
@@ -422,7 +420,7 @@ namespace Citta_T1.Dialogs
 
         }
 
-        private void textBoxEx1_TextChanged(object sender, EventArgs e)
+        private void TextBoxEx1_TextChanged(object sender, EventArgs e)
         {
             if (this.extType == OpUtil.ExtType.Text)
             {
@@ -443,7 +441,7 @@ namespace Citta_T1.Dialogs
             }
         }
 
-        private void textBoxEx1_MouseDown(object sender, MouseEventArgs e)
+        private void TextBoxEx1_MouseDown(object sender, MouseEventArgs e)
         {
             this.radioButton3.Checked = true;
         }
