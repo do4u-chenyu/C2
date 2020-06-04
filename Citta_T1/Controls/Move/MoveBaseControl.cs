@@ -212,6 +212,16 @@ namespace Citta_T1.Controls.Move
             return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
         }
 
+        public string UndoRedoChangeTextName(string des)
+        {
+            oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return oldTextString;
+        }
+
         private void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)

@@ -617,16 +617,6 @@ namespace Citta_T1.Controls.Move.Op
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetCanvasPanel().Invalidate(false);
         }
-
-        public string UndoRedoChangeTextName(string des)
-        {
-            oldTextString = Description;
-            Description = des;
-            SetOpControlName(Description);
-            Global.GetCurrentDocument().UpdateAllLines();
-            Global.GetCanvasPanel().Invalidate(false);
-            return oldTextString;
-        }
         #endregion
 
         #region 针脚事件

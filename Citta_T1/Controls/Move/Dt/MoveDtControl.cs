@@ -82,16 +82,6 @@ namespace Citta_T1.Controls.Move.Dt
             Global.GetCanvasPanel().Invalidate(false);
         }
 
-        public string UndoRedoChangeTextName(string des)
-        {
-            this.oldTextString = Description;
-            Description = des;
-            SetOpControlName(Description);
-            Global.GetCurrentDocument().UpdateAllLines();
-            Global.GetCanvasPanel().Invalidate(false);
-            return oldTextString;
-        }
-
         private void RightPictureBox_MouseEnter(object sender, EventArgs e)
         {
             this.helpToolTip.SetToolTip(this.rightPictureBox, FullFilePath);
