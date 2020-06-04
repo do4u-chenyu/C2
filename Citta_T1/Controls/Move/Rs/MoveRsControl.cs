@@ -94,12 +94,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.CopyFilePathToClipboardToolStripMenuItem});
         }
 
-        /*
-        System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
-        leftPicture1.Location = new System.Drawing.Point(16, 24);
-        this.Controls.Add(leftPicture1);
-        */
-
 
         #region MOC的事件
         private void MoveRsControl_MouseMove(object sender, MouseEventArgs e)
@@ -208,16 +202,6 @@ namespace Citta_T1.Controls.Move.Rs
                 Global.GetMainForm().SetDocumentDirty();
             }
         }
-
-        public Point UndoRedoMoveLocation(Point location)
-        {
-            oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
-        }
-
         #endregion
 
         #region 控件名称长短改变时改变控件大小

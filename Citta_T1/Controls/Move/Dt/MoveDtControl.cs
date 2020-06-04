@@ -51,9 +51,6 @@ namespace Citta_T1.Controls.Move.Dt
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.controlMoveWrapper = new ControlMoveWrapper();
-
-
-
     }
 
         #region 重写方法
@@ -335,16 +332,6 @@ namespace Citta_T1.Controls.Move.Dt
             }
 
         }
-
-        public Point UndoRedoMoveLocation(Point location)
-        {
-            oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
-        }
-
         #endregion
 
         #region 控件名称长短改变时改变控件大小

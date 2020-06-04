@@ -203,6 +203,15 @@ namespace Citta_T1.Controls.Move
             }
         }
 
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
+        }
+
         private void TextBox_Leave(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)

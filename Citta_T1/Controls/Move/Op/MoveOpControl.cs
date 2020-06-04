@@ -27,11 +27,8 @@ namespace Citta_T1.Controls.Move.Op
    
         private bool doublelPinFlag = false;
 
-        private string subTypeName;
-        private OperatorOption option = new OperatorOption();
-
-        public string SubTypeName { get => subTypeName; }
-        public OperatorOption Option { get => this.option; set => this.option = value; }
+        public string SubTypeName { get; }
+        public OperatorOption Option { get; set; }
         public override ElementStatus Status
         {
             get => base.Status;
@@ -41,15 +38,15 @@ namespace Citta_T1.Controls.Move.Op
                 base.Status = value;
             }  
         }
-        public bool EnableOption { get => this.OptionMenuItem.Enabled; set => this.OptionMenuItem.Enabled = value; }
+        public bool EnableOption { get => OptionMenuItem.Enabled; set => OptionMenuItem.Enabled = value; }
 
-        public int RevisedPinIndex { get => revisedPinIndex; set => revisedPinIndex = value; }
+        public int RevisedPinIndex { get; set; }
 
         public string[] FirstDataSourceColumns { get; set; }  //第一个入度的表头配置
         public string[] SecondDataSourceColumns { get; set; } //第二个入度的表头配置
 
         public List<Rectangle> leftPinArray = new List<Rectangle> {};
-        private int revisedPinIndex;
+
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
 
@@ -79,7 +76,8 @@ namespace Citta_T1.Controls.Move.Op
             Encoding = OpUtil.Encoding.NoNeed;
             Separator = OpUtil.DefaultSeparator;
 
-            this.subTypeName = subTypeName;
+            SubTypeName = subTypeName;
+            Option = new OperatorOption();
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.controlMoveWrapper = new ControlMoveWrapper();
@@ -129,7 +127,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void InitializeContextMenuStrip()
         {
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStrip.Items.AddRange(new ToolStripItem[] {
             this.OptionMenuItem,
             this.RenameMenuItem,
             this.RemarkMenuItem,
@@ -139,7 +137,7 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void InitializeHelpInfoAndOpIcon()
         {
-            switch (subTypeName)
+            switch (SubTypeName)
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
@@ -375,16 +373,6 @@ namespace Citta_T1.Controls.Move.Op
 
 
         }
-
-        public Point UndoRedoMoveLocation(Point location)
-        {
-            this.oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
-        }
-
         #endregion
 
         #region 控件名称长短改变时改变控件大小
@@ -421,7 +409,7 @@ namespace Citta_T1.Controls.Move.Op
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
             }
-            switch (subTypeName)
+            switch (SubTypeName)
             {
                 case "关联算子":
                     new RelateOperatorView(this).ShowDialog();
@@ -806,7 +794,7 @@ namespace Citta_T1.Controls.Move.Op
                         // 绑定控件
                         canvas.EndC = this;
                         isRevised = true;
-                        this.revisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
+                        this.RevisedPinIndex = leftPinArray.IndexOf(_leftPinRect);
                     }
                 }
             }
