@@ -1,5 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Drawing;
@@ -60,7 +62,6 @@ namespace Citta_T1.Controls.Move
         protected int pinWidth  = 6;
         protected int pinHeight = 6;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
-        //private ECommandType cmd;
 
         public MoveBaseControl()
         {
@@ -203,6 +204,38 @@ namespace Citta_T1.Controls.Move
             }
         }
 
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
+                return;
+            FinishTextChange();
+        }
+
+        public void FinishTextChange()
+        {
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.txtButton.Visible = true;
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            SetOpControlName(this.textBox.Text);
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != ModelElement.Empty)
+            {
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
+            }
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+        }
+
         public Point UndoRedoMoveLocation(Point location)
         {
             oldControlPosition = this.Location;
@@ -222,12 +255,7 @@ namespace Citta_T1.Controls.Move
             return oldTextString;
         }
 
-        private void TextBox_Leave(object sender, EventArgs e)
-        {
-            if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
-                return;
-            FinishTextChange();
-        }
+
 
         protected void SetOpControlName(string name)
         {
@@ -246,10 +274,6 @@ namespace Citta_T1.Controls.Move
             changeStatus.Width = normalStatus.Width + txtWidth;
             ResizeControl(txtWidth, changeStatus);
             this.helpToolTip.SetToolTip(this.txtButton, this.Description);
-        }
-
-        public virtual void FinishTextChange()
-        { 
         }
 
         protected virtual void ResizeControl(int txtWidth, Size controlSize)

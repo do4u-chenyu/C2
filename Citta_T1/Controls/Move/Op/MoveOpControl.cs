@@ -587,35 +587,6 @@ namespace Citta_T1.Controls.Move.Op
         }
         #endregion
 
-        #region textBox
-        public override void FinishTextChange()
-        {
-            if (this.textBox.Text.Trim().Length == 0)
-                this.textBox.Text = this.oldTextString;
-    
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
-            this.txtButton.Visible = true;
-            if (this.oldTextString == this.textBox.Text)
-                return;
-
-            SetOpControlName(this.textBox.Text);
-
-            // 构造重命名命令类,压入undo栈
-            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != ModelElement.Empty)
-            {
-                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
-                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
-            }
-    
-            this.oldTextString = this.textBox.Text;
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetCurrentDocument().UpdateAllLines();
-            Global.GetCanvasPanel().Invalidate(false);
-        }
-        #endregion
-
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
