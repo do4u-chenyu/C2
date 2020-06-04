@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Option;
+using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
@@ -55,6 +56,118 @@ namespace Citta_T1.Business.Model
         public ModelXmlWriter Write(string key, Point value)
         {
             return Write(key, value.ToString());
+        }
+    }
+    class ModelElementFactory
+    {
+        private XmlNode xn;
+        private MoveBaseControl mbc;
+        private ModelRelation mr;
+        public MoveBaseControl Control { get => mbc; set => mbc = value; }
+        public ModelRelation relation { get => mr; set => mr = value; }
+        private int id;
+        private string name;
+        private string subType;
+        private ElementStatus status;
+        private Point location;
+        private ElementType type;
+        private bool enableOption;
+        private string fullFilePath;
+        private char separator;
+        private OpUtil.Encoding encoding;
+        private int startID;
+        private int endID;
+        private PointF startLocation;
+        private PointF endLocation;
+        private int endPin;
+        TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
+        public ModelElementFactory(XmlNode xmlNode)
+        {
+            xn = xmlNode;
+        }
+        public ModelElementFactory AddAtrtribute(string label)
+        {
+            string value = xn.SelectSingleNode(label).InnerText;
+            switch (value)
+            {
+                case "name":
+                    name = value;
+                    return this;
+                case "status":
+                    status = OpUtil.EStatus(textInfo.ToTitleCase(value));
+                    return this;
+                case "subtype":
+                    subType = OpUtil.SubTypeName(value);
+                    return this;
+                case "id":
+                    id = Convert.ToInt32(value);
+                    return this;
+                case "location":
+                    location = ToPointType(value);
+                    return this;
+                case "enableOption":
+                    enableOption = Convert.ToBoolean(value);
+                    return this;
+                case "fullFilePath":
+                    fullFilePath = value;
+                    return this;
+                case "separator":
+                    separator = ConvertUtil.TryParseAscii(value);
+                    return this;
+                case "encoding":
+                    encoding = OpUtil.EncodingEnum(value);
+                    return this;
+                default:
+                    return this;
+            }
+           
+            
+        }
+        public ModelElementFactory Done()
+        {
+            if (type == ElementType.DataSource)
+            {
+                Control = new MoveDtControl(fullFilePath, 0, name, location)
+                {
+                    Type = ElementType.DataSource,
+                    ID = id,
+                    Separator = separator,
+                    Encoding = encoding
+                };
+            }
+            else if (type == ElementType.Operator)
+            {
+                Control = new MoveOpControl(0, name, subType, location)
+                {
+                    Type = ElementType.Result,
+                    ID = id,
+                    Status = status,
+                    EnableOption = enableOption
+                };
+            }
+            else if (type == ElementType.Result)
+            {
+                Control = new MoveRsControl(0, name, location)
+                {
+                    Type = ElementType.Result,
+                    ID = id,
+                    Status = status,
+                    FullFilePath = fullFilePath,
+                    Separator = separator,
+                    Encoding = encoding
+                };
+            }
+            else if (type == ElementType.Relation)
+                mr = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
+           
+            return this;
+        }
+
+        public Point ToPointType(string point)
+        {
+            //这部分代码准备挪出去
+            Point location = new Point();
+            return location;
         }
     }
 
@@ -214,7 +327,7 @@ namespace Citta_T1.Business.Model
                         String name = xn.SelectSingleNode("name").InnerText;
                         string fullFilePath = xn.SelectSingleNode("path").InnerText;
                         int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point location = ToPointType(xn.SelectSingleNode("location").InnerText);
+                        Point location = ToPointType(xn.SelectSingleNode("subtype").InnerText);
                         char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
                         OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
                         MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, location)
@@ -295,7 +408,7 @@ namespace Citta_T1.Business.Model
             catch (Exception e) { log.Error(e.Message); }
             return location;
         }
-        private Point ToPointType(string point)
+        public Point ToPointType(string point)
         {
             Point location = new Point();
             try
