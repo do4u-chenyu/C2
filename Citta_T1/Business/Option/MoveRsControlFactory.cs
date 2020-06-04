@@ -27,15 +27,14 @@ namespace Citta_T1.Business.Option
         {
             //创建MoveRsControl控件
             string path;
-            char separator = '\t';
+            char separator = OpUtil.DefaultSeparator;
             OpUtil.Encoding encoding = OpUtil.Encoding.UTF8;
             Point location = Global.GetCurrentDocument().WorldMap.WorldBoundRSControl(moc);
             int id = Global.GetCurrentDocument().ElementCount;
-            string createTime = DateTime.Now.ToString("yyyyMMdd_hhmmss");
             int sizeL = Global.GetCurrentDocument().WorldMap.SizeLevel;
 
             if (resultFilePath == string.Empty)
-                path = String.Format("L{0}_{1}.bcp", id, createTime);
+                path = String.Format("L{0}_{1}.bcp", id, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
             else
                 path = resultFilePath;
             string name = Path.GetFileNameWithoutExtension(path);
@@ -88,7 +87,6 @@ namespace Citta_T1.Business.Option
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
         {
-
             MoveRsControl mrc = NewMoveRsControl(moc, path, null);
             NewLineOpControlToRsControl(moc, mrc);
         }
