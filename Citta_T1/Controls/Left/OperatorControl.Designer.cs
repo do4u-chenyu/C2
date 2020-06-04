@@ -109,10 +109,12 @@
             // 
             // differOpPictureBox
             // 
+            this.differOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.differOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("differOpPictureBox.Image")));
-            this.differOpPictureBox.Location = new System.Drawing.Point(13, 118);
+            this.differOpPictureBox.Location = new System.Drawing.Point(13, 114);
             this.differOpPictureBox.Name = "differOpPictureBox";
-            this.differOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.differOpPictureBox.Size = new System.Drawing.Size(20, 27);
+            this.differOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.differOpPictureBox.TabIndex = 4;
             this.differOpPictureBox.TabStop = false;
             // 
@@ -201,17 +203,18 @@
             // 
             // leftPanelOpDiffer
             // 
+            this.leftPanelOpDiffer.BackColor = System.Drawing.Color.Transparent;
             this.leftPanelOpDiffer.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.leftPanelOpDiffer.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.leftPanelOpDiffer.FlatAppearance.BorderSize = 0;
             this.leftPanelOpDiffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDiffer.Location = new System.Drawing.Point(33, 111);
+            this.leftPanelOpDiffer.Location = new System.Drawing.Point(33, 110);
             this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
             this.leftPanelOpDiffer.Size = new System.Drawing.Size(61, 37);
             this.leftPanelOpDiffer.TabIndex = 20;
             this.leftPanelOpDiffer.Text = "取差集";
-            this.leftPanelOpDiffer.UseVisualStyleBackColor = true;
+            this.leftPanelOpDiffer.UseVisualStyleBackColor = false;
             this.leftPanelOpDiffer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);
             // 
             // leftPanelOpRandom
@@ -306,9 +309,9 @@
             // groupOpPictureBox
             // 
             this.groupOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("groupOpPictureBox.Image")));
-            this.groupOpPictureBox.Location = new System.Drawing.Point(13, 407);
+            this.groupOpPictureBox.Location = new System.Drawing.Point(13, 406);
             this.groupOpPictureBox.Name = "groupOpPictureBox";
-            this.groupOpPictureBox.Size = new System.Drawing.Size(20, 21);
+            this.groupOpPictureBox.Size = new System.Drawing.Size(20, 30);
             this.groupOpPictureBox.TabIndex = 28;
             this.groupOpPictureBox.TabStop = false;
             // 
@@ -411,7 +414,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.dataStandarOpPictureBox);
             this.Controls.Add(this.leftPanelOpDataStandar);
             this.Controls.Add(this.wordFilterOpPictureBox);
