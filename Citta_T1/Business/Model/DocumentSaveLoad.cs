@@ -399,8 +399,8 @@ namespace Citta_T1.Business.Model
         private PointF ToPointFType(string point)
         {
             PointF location = new PointF();
-            try
-            {
+            try 
+            { 
                 string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
                 string[] xy = coordinate.Split(',');
                 location = new PointF(Convert.ToSingle(xy[0]), Convert.ToSingle(xy[1]));
@@ -410,15 +410,7 @@ namespace Citta_T1.Business.Model
         }
         public Point ToPointType(string point)
         {
-            Point location = new Point();
-            try
-            {
-                string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
-                string[] xy = coordinate.Split(',');
-                location = new Point(Convert.ToInt32(xy[0]), Convert.ToInt32(xy[1]));
-            }
-            catch (Exception e) { log.Error(e.Message); }
-            return location;
+            return Point.Round(ToPointFType(point));
         }
        
     }

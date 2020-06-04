@@ -724,18 +724,18 @@ namespace Citta_T1.Controls.Move.Op
                 double multiper = Math.Pow(Global.Factor, sizeLevel);
                 Rectangle leftPinRect = new Rectangle(
                     new Point(
-                        this.Location.X + (int)((_leftPinRect.Location.X) * multiper),
-                        this.Location.Y + (int)((_leftPinRect.Location.Y) * multiper)
+                        this.Location.X + (int)(_leftPinRect.Location.X * multiper),
+                        this.Location.Y + (int)(_leftPinRect.Location.Y * multiper)
                         ),
                     new Size(
-                        (int)((_leftPinRect.Width) * multiper),
-                        (int)((_leftPinRect.Height) * multiper)
+                        (int)(_leftPinRect.Width * multiper),
+                        (int)(_leftPinRect.Height * multiper)
                         )
                     );
 
-                e.DrawRectangle(System.Drawing.Pens.Black, leftPinRect.Location.X, leftPinRect.Location.Y, leftPinRect.Width, leftPinRect.Height);
+                e.DrawRectangle(Pens.Black, leftPinRect);
                 int pinLeftX = leftPinRect.X;
-                int pinTopY = leftPinRect.Y;
+                int pinTopY  = leftPinRect.Y;
 
                 if (leftPinRect.IntersectsWith(rect))
                 {
@@ -745,8 +745,8 @@ namespace Citta_T1.Controls.Move.Op
                     {
                         maxIntersectPerct = iou;
                         revisedP = new PointF(
-                            pinLeftX + leftPinRect.Width / 2,
-                            pinTopY + leftPinRect.Height / 2);
+                            pinLeftX + leftPinRect.Width  / 2,
+                            pinTopY  + leftPinRect.Height / 2);
                         // 绑定控件
                         canvas.EndC = this;
                         isRevised = true;
