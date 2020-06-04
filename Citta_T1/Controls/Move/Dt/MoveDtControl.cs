@@ -26,8 +26,7 @@ namespace Citta_T1.Controls.Move.Dt
         private String pinStatus = "noEnter";
 
         private ECommandType cmd = ECommandType.Null;
-
-        ControlMoveWrapper controlMoveWrapper;
+        MoveWrapper moveWrapper;
 
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
@@ -50,7 +49,7 @@ namespace Citta_T1.Controls.Move.Dt
             normalStatus = new Size(53, 28);
             InitializeOpPinPicture();
             ChangeSize(sizeL);
-            this.controlMoveWrapper = new ControlMoveWrapper();
+            this.moveWrapper = new MoveWrapper();
     }
 
         #region 重写方法
@@ -218,7 +217,7 @@ namespace Citta_T1.Controls.Move.Dt
                     }
                 }
                 if (isNeedMoveLine)
-                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
         }
 
@@ -268,7 +267,7 @@ namespace Citta_T1.Controls.Move.Dt
                 cmd = ECommandType.Hold;
             }
             oldControlPosition = this.Location;
-            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
 
@@ -300,7 +299,7 @@ namespace Citta_T1.Controls.Move.Dt
                 }
                 if (cmd == ECommandType.Hold)
                 {
-                    this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                     cmd = ECommandType.Null;
                 }
                 cmd = ECommandType.Null;

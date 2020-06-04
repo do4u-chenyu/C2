@@ -30,11 +30,10 @@ namespace Citta_T1.Controls.Move.Rs
 
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
-        private Rectangle rectIn;
         private String pinStatus = "noEnter";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
-        private ControlMoveWrapper controlMoveWrapper;
+        private MoveWrapper moveWrapper;
 
         public override ElementStatus Status
         {
@@ -45,7 +44,7 @@ namespace Citta_T1.Controls.Move.Rs
                 StatusDirty();
             }
         }
-        public Rectangle RectIn { get => rectIn; set => rectIn = value; }
+        public Rectangle RectIn { get; set; }
 
         public MoveRsControl(int size, string desciption, Point loc)
         {
@@ -67,7 +66,7 @@ namespace Citta_T1.Controls.Move.Rs
             normalStatus = new Size(58, 28);
 
             InitializeOpPinPicture();
-            this.controlMoveWrapper = new ControlMoveWrapper();
+            this.moveWrapper = new MoveWrapper();
 
             endLineIndexs.Add(-1);
 
@@ -76,7 +75,7 @@ namespace Citta_T1.Controls.Move.Rs
 
         private void InitializeOpPinPicture()
         {
-            rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
+            RectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
             SetOpControlName(Description);
         }
@@ -129,7 +128,7 @@ namespace Citta_T1.Controls.Move.Rs
                         mr.UpdatePoints();
                     }
                 }
-                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -154,7 +153,7 @@ namespace Citta_T1.Controls.Move.Rs
                 isMouseDown = true;
             }
             oldControlPosition = this.Location;
-            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -185,7 +184,7 @@ namespace Citta_T1.Controls.Move.Rs
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 isMouseDown = false;
-                controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
 
             }
@@ -311,10 +310,10 @@ namespace Citta_T1.Controls.Move.Rs
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectIn.Contains(mousePosition))
+            if (RectIn.Contains(mousePosition))
             {
                 if (pinStatus == "rectIn" || linePinArray.Contains(1)) return;
-                rectIn = RectEnter(rectIn);
+                RectIn = RectEnter(RectIn);
                 this.Invalidate();
                 pinStatus = "rectIn";
             }
@@ -330,7 +329,7 @@ namespace Citta_T1.Controls.Move.Rs
                 switch (pinStatus)
                 {
                     case "rectIn":
-                        rectIn = RectLeave(rectIn);
+                        RectIn = RectLeave(RectIn);
                         break;
                     case "rectOut":
                         rectOut = RectLeave(rectOut);
@@ -379,7 +378,7 @@ namespace Citta_T1.Controls.Move.Rs
 
             SetControlsBySize(factor, this);
             this.rectOut = SetRectBySize(factor, this.rectOut);
-            this.rectIn = SetRectBySize(factor, this.rectIn);
+            this.RectIn = SetRectBySize(factor, this.RectIn);
             this.Invalidate();
         }
         #endregion
@@ -402,8 +401,8 @@ namespace Citta_T1.Controls.Move.Rs
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(whiteSmokeBrush, rectIn);
-            e.Graphics.DrawEllipse(pen, rectIn);
+            e.Graphics.FillEllipse(whiteSmokeBrush, RectIn);
+            e.Graphics.DrawEllipse(pen, RectIn);
             e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
@@ -424,8 +423,8 @@ namespace Citta_T1.Controls.Move.Rs
         public PointF GetEndPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2,
-                this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
+                this.Location.X + this.RectIn.Location.X + this.RectIn.Width / 2,
+                this.Location.Y + this.RectIn.Location.Y + this.RectIn.Height / 2);
         }
 
         #endregion
@@ -435,7 +434,7 @@ namespace Citta_T1.Controls.Move.Rs
 
             if (pinStatus != "rectIn" && !linePinArray.Contains(1))
             {
-                rectIn = RectEnter(rectIn);
+                RectIn = RectEnter(RectIn);
                 linePinArray.Add(1);
                 this.Invalidate();
             }

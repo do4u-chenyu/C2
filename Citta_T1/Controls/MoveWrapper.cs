@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    class ControlMoveWrapper
+    class MoveWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("ControlMoveWrapper");
+        private static LogUtil log = LogUtil.GetInstance("MoveWrapper");
         private int width;
         private int height;
         private Point start, now;
@@ -35,7 +35,7 @@ namespace Citta_T1.Controls
         public Point Now { get => now; set => now = value; }
         public Bitmap StaticImage { get => staticImage; set => staticImage = value; }
 
-        public ControlMoveWrapper()
+        public MoveWrapper()
         {
             this.worldWidth = 2000;
             this.worldHeight = 1000;

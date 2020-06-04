@@ -21,7 +21,7 @@ namespace Citta_T1.Controls.Move.Op
     {
         private static LogUtil log = LogUtil.GetInstance("MoveOpControl");
 
-        private ControlMoveWrapper controlMoveWrapper;
+        private MoveWrapper moveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
    
@@ -39,13 +39,12 @@ namespace Citta_T1.Controls.Move.Op
             }  
         }
         public bool EnableOption { get => OptionMenuItem.Enabled; set => OptionMenuItem.Enabled = value; }
-
         public int RevisedPinIndex { get; set; }
 
         public string[] FirstDataSourceColumns { get; set; }  //第一个入度的表头配置
         public string[] SecondDataSourceColumns { get; set; } //第二个入度的表头配置
 
-        public List<Rectangle> leftPinArray = new List<Rectangle> {};
+        private List<Rectangle> leftPinArray = new List<Rectangle> {};
 
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
@@ -80,7 +79,7 @@ namespace Citta_T1.Controls.Move.Op
             Option = new OperatorOption();
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
-            this.controlMoveWrapper = new ControlMoveWrapper();
+            this.moveWrapper = new MoveWrapper();
 
             changeStatus = new Size(0, 29);
             normalStatus = new Size(72, 29);
@@ -244,7 +243,7 @@ namespace Citta_T1.Controls.Move.Op
                 }
                 if (isNeedMoveLine)
                 {
-                    this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 }
             }
         }
@@ -295,7 +294,7 @@ namespace Citta_T1.Controls.Move.Op
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             oldControlPosition = this.Location;
          }
 
@@ -354,7 +353,7 @@ namespace Citta_T1.Controls.Move.Op
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
-                this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                 Global.GetNaviViewControl().UpdateNaviView();
             }
 
@@ -370,8 +369,6 @@ namespace Citta_T1.Controls.Move.Op
                 }
                 Global.GetMainForm().SetDocumentDirty();
             }
-
-
         }
         #endregion
 

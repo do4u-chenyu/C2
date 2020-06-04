@@ -182,7 +182,7 @@
     <Compile Include="Controls\Common\NoFocusButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ControlMoveWrapper.cs" />
+    <Compile Include="Controls\MoveWrapper.cs" />
     <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
