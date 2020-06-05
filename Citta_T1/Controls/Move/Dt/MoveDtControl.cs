@@ -171,7 +171,7 @@ namespace Citta_T1.Controls.Move.Dt
                 #region 控件移动部分
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                this.Location = WorldBoundControl(new Point(left, top));
+                Global.GetCurrentDocument().WorldMap.WorldBoundControl(new Point(left, top),this);
 
                 #endregion
                 /*
@@ -196,7 +196,7 @@ namespace Citta_T1.Controls.Move.Dt
         public Point WorldBoundControl(Point Pm)
         {
 
-            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm,false);
+            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm,true);
 
 
             if (Pw.X < 20)

@@ -156,6 +156,30 @@ namespace Citta_T1.Business.Model.World
             }
             return dragOffset;
         }
+        public void WorldBoundControl(Point Pm,Control ct)
+        {
+
+            Point Pw = ScreenToWorld(Pm, true);
+
+
+            if (Pw.X < 20)
+            {
+                Pm.X = 20;
+            }
+            if (Pw.Y < 70)
+            {
+                Pm.Y = 70;
+            }
+            if (Pw.X > 2000 - ct.Width)
+            {
+                Pm.X = ct.Parent.Width - ct.Width;
+            }
+            if (Pw.Y > 980 - ct.Height)
+            {
+                Pm.Y = ct.Parent.Height - ct.Height;
+            }
+            ct.Location =  Pm;
+        }
         #endregion
 
     }
