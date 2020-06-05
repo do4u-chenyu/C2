@@ -1,12 +1,7 @@
-﻿using Citta_T1.Controls.Interface;
-using Citta_T1.Controls.Move;
-using Citta_T1.Controls.Move.Dt;
+﻿using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
-using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model
 {

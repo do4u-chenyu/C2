@@ -14,7 +14,7 @@ namespace Citta_T1.Business.Option
 
         public Dictionary<string, string> OptionDict { get => optionDict; }
 
-        public string GetOption(string OpKey, string defaultValue = "")
+        public string GetOption(string OpKey, string defaultValue = null)
         {
             if (!OptionDict.ContainsKey(OpKey) || String.IsNullOrEmpty(OptionDict[OpKey]))
                 return defaultValue;

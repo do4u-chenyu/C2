@@ -106,30 +106,22 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield"))
-            {
-                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
-                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-                oldOutList = indexs.ToList();
-                outList.LoadItemCheckIndex(indexs);
-                oldColumnName.AddRange(from int index in indexs
-                                       select outList.Items[index].ToString());
-            }
-           
-            if (!Global.GetOptionDao().IsCleanOption(opControl, 
-                                                    dataSrcColName, 
-                                                    "dataSelectIndex"))
-            {
-                dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
-            }
-            if (!Global.GetOptionDao().IsCleanOption(opControl,
+            _ = Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield");
+            _ = Global.GetOptionDao().IsCleanOption(opControl,
                                                     dataSrcColName,
-                                                    "keySelectIndex"))
-            {
-                keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
-            }
-
-            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));
+                                                    "dataSelectIndex");
+            _ = Global.GetOptionDao().IsCleanOption(opControl,
+                                                    keyWordColName,
+                                                    "keySelectIndex");
+            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+            oldOutList = indexs.ToList();
+            outList.LoadItemCheckIndex(indexs);
+            oldColumnName.AddRange(from int index in indexs
+                                   select outList.Items[index].ToString());
+            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
+            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));          
         }
         private void SaveOption()
         {

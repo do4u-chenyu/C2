@@ -113,8 +113,8 @@ namespace Citta_T1.Controls.Move.Rs
                 }
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                this.Location = new Point(left, top);
-
+                Global.GetCurrentDocument
+                    ().WorldMap.WorldBoundControl(new Point(left, top), this);
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)

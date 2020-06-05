@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -171,8 +170,8 @@ namespace Citta_T1.Controls.Move.Dt
                 #region 控件移动部分
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                this.Location = WorldBoundControl(new Point(left, top));
-
+                Global.GetCurrentDocument().WorldMap
+                      .WorldBoundControl(new Point(left, top), this);
                 #endregion
                 /*
                  * 1. 遍历所有关系
@@ -193,30 +192,6 @@ namespace Citta_T1.Controls.Move.Dt
             }
         }
 
-        public Point WorldBoundControl(Point Pm)
-        {
-
-            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm,false);
-
-
-            if (Pw.X < 20)
-            {
-                Pm.X = 20;
-            }
-            if (Pw.Y < 70)
-            {
-                Pm.Y = 70;
-            }
-            if (Pw.X > 2000 - this.Width)
-            {
-                Pm.X = this.Parent.Width - this.Width;
-            }
-            if (Pw.Y > 980 - this.Height)
-            {
-                Pm.Y = this.Parent.Height - this.Height;
-            }
-            return Pm;
-        }
 
         private void MoveDtControl_MouseDown(object sender, MouseEventArgs e)
         {
