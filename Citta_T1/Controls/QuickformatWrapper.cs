@@ -1,15 +1,10 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
