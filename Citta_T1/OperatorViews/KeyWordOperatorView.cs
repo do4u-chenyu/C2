@@ -106,11 +106,11 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            _ = Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield");
-            _ = Global.GetOptionDao().IsCleanOption(opControl,
+            Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield");
+            Global.GetOptionDao().IsCleanOption(opControl,
                                                     dataSrcColName,
                                                     "dataSelectIndex");
-            _ = Global.GetOptionDao().IsCleanOption(opControl,
+            Global.GetOptionDao().IsCleanOption(opControl,
                                                     keyWordColName,
                                                     "keySelectIndex");
             string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
@@ -119,9 +119,9 @@ namespace Citta_T1.OperatorViews
             outList.LoadItemCheckIndex(indexs);
             oldColumnName.AddRange(from int index in indexs
                                    select outList.Items[index].ToString());
-            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
-            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
-            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));          
+            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex",null));
+            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex",null));
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect",null));          
         }
         private void SaveOption()
         {
@@ -152,13 +152,13 @@ namespace Citta_T1.OperatorViews
         private void GetDataInfo()
         {
             Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID);
-            _ = dataInfoDic.TryGetValue("dataPath0", out dataSourcePath);
-            _ = dataInfoDic.TryGetValue("dataPath1", out keyWordPath);
-            _ = dataInfoDic.TryGetValue("encoding0", out dataSourceEncoding);
-            _ = dataInfoDic.TryGetValue("encoding1", out keyWordEncoding);
-            _ = dataInfoDic.TryGetValue("extType1", out keyWordExtType);
-            _ = dataInfoDic.TryGetValue("separator0", out dataSourceSep);
-            _ = dataInfoDic.TryGetValue("separator1", out keyWordSep);
+            dataInfoDic.TryGetValue("dataPath0", out dataSourcePath);
+            dataInfoDic.TryGetValue("dataPath1", out keyWordPath);
+            dataInfoDic.TryGetValue("encoding0", out dataSourceEncoding);
+            dataInfoDic.TryGetValue("encoding1", out keyWordEncoding);
+            dataInfoDic.TryGetValue("extType1", out keyWordExtType);
+            dataInfoDic.TryGetValue("separator0", out dataSourceSep);
+            dataInfoDic.TryGetValue("separator1", out keyWordSep);
         }
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
