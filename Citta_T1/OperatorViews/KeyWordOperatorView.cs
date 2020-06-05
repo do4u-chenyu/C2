@@ -115,20 +115,20 @@ namespace Citta_T1.OperatorViews
                 oldColumnName.AddRange(from int index in indexs
                                        select outList.Items[index].ToString());
             }
+           
             if (!Global.GetOptionDao().IsCleanOption(opControl, 
                                                     dataSrcColName, 
-                                                    "dataSelectIndex",
-                                                    Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"))))
+                                                    "dataSelectIndex"))
             {
                 dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex"));
             }
             if (!Global.GetOptionDao().IsCleanOption(opControl,
                                                     dataSrcColName,
-                                                    "keySelectIndex",
-                                                    Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"))))
+                                                    "keySelectIndex"))
             {
                 keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex"));
             }
+
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect"));
         }
         private void SaveOption()
