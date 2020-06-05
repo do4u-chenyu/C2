@@ -17,7 +17,6 @@ namespace Citta_T1.OperatorViews
 
     public partial class FilterOperatorView : Form
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterOperatorView));
         private MoveOpControl opControl;
         private string dataPath;
         private List<int> oldOutList;

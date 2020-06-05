@@ -87,7 +87,7 @@ namespace Citta_T1.Business.Option
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
         {
-            MoveRsControl mrc = NewMoveRsControl(moc, path, new List<string>());
+            MoveRsControl mrc = NewMoveRsControl(moc, path, null);
             NewLineOpControlToRsControl(moc, mrc);
         }
     }

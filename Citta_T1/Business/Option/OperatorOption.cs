@@ -21,6 +21,11 @@ namespace Citta_T1.Business.Option
             return OptionDict[OpKey];
         }
 
+        public override string ToString()
+        {
+            return string.Join(",", OptionDict.ToList());
+        }
+
         public string[] GetOptionSplit(string OpKey, char separator = '\t', string defaultValue = "")
         {
             string[] ret = GetOption(OpKey, defaultValue).Split(separator);

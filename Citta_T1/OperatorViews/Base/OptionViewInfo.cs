@@ -22,8 +22,6 @@ namespace Citta_T1.OperatorViews.Base
         
         private OptionInfoCheck optionInfoCheck;  // 用户配置信息通用检查
 
-        public static readonly OptionViewInfo Empty; 
-
         public MoveOpControl OpControl { get => opControl; set => opControl = value; }
         public string DataPath0 { get => dataPath0; set => dataPath0 = value; }
         public string DataPath1 { get => dataPath1; set => dataPath1 = value; }
