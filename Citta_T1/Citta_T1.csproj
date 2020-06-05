@@ -333,7 +333,13 @@
     <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\Base\OptionViewInfo.cs" />
+    <Compile Include="OperatorViews\Base\BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorViews\Base\OperatorViewInfo.cs" />
     <Compile Include="OperatorViews\CollideOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -564,6 +570,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\Base\BaseOperatorView.resx">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\CollideOperatorView.resx">
       <DependentUpon>CollideOperatorView.cs</DependentUpon>

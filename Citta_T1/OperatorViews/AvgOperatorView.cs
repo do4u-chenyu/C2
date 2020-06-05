@@ -15,25 +15,23 @@ namespace Citta_T1.OperatorViews
 {
     public partial class AvgOperatorView : Form
     {
-        private OptionViewInfo optionViewInfo;
+        private OperatorViewInfo operatorViewInfo;
         private string oldAvg;
         private string selectedIndex;
-
-       
 
         public AvgOperatorView(MoveOpControl opControl)
         {
             InitializeComponent();
-            optionViewInfo = new OptionViewInfo();
-            optionViewInfo.OpControl = opControl;
-
+            operatorViewInfo = new OperatorViewInfo
+            {
+                OpControl = opControl,
+                OldOptionDictStr = opControl.Option.ToString()
+            };
             InitOptionInfor();
             LoadOption();
            
             this.oldAvg = this.AvgComBox.Text;
-            optionViewInfo.OldOptionDictStr = optionViewInfo.OpControl.Option.ToString();
-
-            SetTextBoxName(this.DataInfo);
+            SetTextBoxName(this.dataSourceTB0);
         }
         #region 初始化配置
         private void InitOptionInfor()
@@ -45,7 +43,7 @@ namespace Citta_T1.OperatorViews
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.EndID == optionViewInfo.OpControl.ID)
+                if (mr.EndID == operatorViewInfo.OpControl.ID)
                 {
                     startID = mr.StartID;
                     break;
@@ -56,26 +54,26 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     separator = me.Separator;
-                    optionViewInfo.DataPath0 = me.FullFilePath;
+                    operatorViewInfo.DataSourceFFP0 = me.FullFilePath;
                     //设置数据信息选项
-                    this.DataInfo.Text = Path.GetFileNameWithoutExtension(this.optionViewInfo.DataPath0);
-                    this.toolTip1.SetToolTip(this.DataInfo, this.DataInfo.Text);
+                    this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.operatorViewInfo.DataSourceFFP0);
+                    this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
             }
-            if (!String.IsNullOrEmpty(optionViewInfo.DataPath0))
-                SetOption(this.optionViewInfo.DataPath0, this.DataInfo.Text, encoding, separator);
+            if (!String.IsNullOrEmpty(operatorViewInfo.DataSourceFFP0))
+                SetOption(this.operatorViewInfo.DataSourceFFP0, this.dataSourceTB0.Text, encoding, separator);
 
         }
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            optionViewInfo.NowColumnName0 = bcpInfo.ColumnArray;
-            foreach (string name in optionViewInfo.NowColumnName0)
+            operatorViewInfo.NowColumnsName0 = bcpInfo.ColumnArray;
+            foreach (string name in operatorViewInfo.NowColumnsName0)
                 this.AvgComBox.Items.Add(name);
-            optionViewInfo.OpControl.FirstDataSourceColumns = optionViewInfo.NowColumnName0;
-            optionViewInfo.OpControl.Option.SetOption("columnname0", String.Join("\t", optionViewInfo.NowColumnName0));
+            operatorViewInfo.OpControl.FirstDataSourceColumns = operatorViewInfo.NowColumnsName0;
+            operatorViewInfo.OpControl.Option.SetOption("columnname0", String.Join("\t", operatorViewInfo.NowColumnsName0));
         }
       
 
@@ -107,7 +105,7 @@ namespace Citta_T1.OperatorViews
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (this.DataInfo.Text == "") return;
+            if (this.dataSourceTB0.Text == "") return;
             if (this.AvgComBox.Text == "")
             {
                 MessageBox.Show("请选择平均值字段!");
@@ -120,16 +118,16 @@ namespace Citta_T1.OperatorViews
             //       引起文档dirty
             //情况2：内容不修改
             //        返回
-            if (optionViewInfo.OldOptionDictStr != string.Join(",", optionViewInfo.OpControl.Option.OptionDict.ToList()))
+            if (operatorViewInfo.OldOptionDictStr != string.Join(",", operatorViewInfo.OpControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             else
                 return;
             //生成结果控件,创建relation,bcp结果文件
-            optionViewInfo.SelectedColumns.Add(this.AvgComBox.SelectedItem.ToString());
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(optionViewInfo.OpControl.ID);
+            operatorViewInfo.SelectedColumns.Add(this.AvgComBox.SelectedItem.ToString());
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(operatorViewInfo.OpControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(optionViewInfo.OpControl, optionViewInfo.SelectedColumns);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(operatorViewInfo.OpControl, operatorViewInfo.SelectedColumns);
                 return;
             }
             // 对应的结果文件置脏
@@ -139,7 +137,7 @@ namespace Citta_T1.OperatorViews
             List<string> oldColumn = new List<string>();
             oldColumn.Add(this.oldAvg);
             if (this.oldAvg != this.AvgComBox.Text)
-                Global.GetOptionDao().DoOutputCompare(oldColumn, optionViewInfo.SelectedColumns, optionViewInfo.OpControl.ID);
+                Global.GetOptionDao().DoOutputCompare(oldColumn, operatorViewInfo.SelectedColumns, operatorViewInfo.OpControl.ID);
 
         }
 
@@ -152,22 +150,22 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            optionViewInfo.OpControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
-            optionViewInfo.OpControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
+            operatorViewInfo.OpControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
+            operatorViewInfo.OpControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
 
-            ElementStatus oldStatus = optionViewInfo.OpControl.Status;
-            if (optionViewInfo.OldOptionDictStr != string.Join(",", optionViewInfo.OpControl.Option.OptionDict.ToList()))
-                optionViewInfo.OpControl.Status = ElementStatus.Ready;
+            ElementStatus oldStatus = operatorViewInfo.OpControl.Status;
+            if (operatorViewInfo.OldOptionDictStr != string.Join(",", operatorViewInfo.OpControl.Option.OptionDict.ToList()))
+                operatorViewInfo.OpControl.Status = ElementStatus.Ready;
 
-            if (oldStatus == ElementStatus.Done && optionViewInfo.OpControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(optionViewInfo.OpControl.ID);
+            if (oldStatus == ElementStatus.Done && operatorViewInfo.OpControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(operatorViewInfo.OpControl.ID);
         }
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsCleanOption(optionViewInfo.OpControl, optionViewInfo.NowColumnName0, "avgfield"))
+            if (!Global.GetOptionDao().IsCleanOption(operatorViewInfo.OpControl, operatorViewInfo.NowColumnsName0, "avgfield"))
             {
-                int index = Convert.ToInt32(optionViewInfo.OpControl.Option.GetOption("avgfield"));
+                int index = Convert.ToInt32(operatorViewInfo.OpControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
                 this.selectedIndex = index.ToString();
             }
@@ -176,23 +174,23 @@ namespace Citta_T1.OperatorViews
         #endregion
         private void DataInfo_MouseClick(object sender, MouseEventArgs e)
         {
-            this.DataInfo.Text = Path.GetFileNameWithoutExtension(optionViewInfo.DataPath0);
+            this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(operatorViewInfo.DataSourceFFP0);
         }
 
         private void DataInfo_LostFocus(object sender, EventArgs e)
         {
-            SetTextBoxName(this.DataInfo);
+            SetTextBoxName(this.dataSourceTB0);
         }
 
         private void AvgComBox_Leave(object sender, EventArgs e)
         {
-            this.optionViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, optionViewInfo.NowColumnName0, this.AvgComBox.Text);
+            this.operatorViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, operatorViewInfo.NowColumnsName0, this.AvgComBox.Text);
         }
 
         private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                this.optionViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, optionViewInfo.NowColumnName0, this.AvgComBox.Text);
+                this.operatorViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, operatorViewInfo.NowColumnsName0, this.AvgComBox.Text);
         }
 
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)

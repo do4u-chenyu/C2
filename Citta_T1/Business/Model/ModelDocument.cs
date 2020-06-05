@@ -201,7 +201,7 @@ namespace Citta_T1.Business.Model
         {
             if (this.ModelElements.Count == 0)
                 return 0;
-            ElementCount = Math.Max(ElementCount, ModelElements.Max(me => me.ID)) + 1;
+            ElementCount = 1 + Math.Max(ElementCount, ModelElements.Max(me => me.ID));
             return ElementCount;
         }
        

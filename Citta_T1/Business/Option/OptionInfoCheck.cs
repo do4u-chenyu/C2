@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Business.Option
 {
-    class OptionInfoCheck
+    public class OptionInfoCheck
     {
         #region 配置窗口不合法字符判断
        
