@@ -573,7 +573,7 @@ namespace Citta_T1.Controls
                 location,
                 separator,
                 encoding);
-            AddNewElement(btn);
+            AddNewElement(btn);          
         }
         public MoveRsControl AddNewResult(string desciption, int sizeL, Point location, char separator, OpUtil.Encoding encoding) 
         {

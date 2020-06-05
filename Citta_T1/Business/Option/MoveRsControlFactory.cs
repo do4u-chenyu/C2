@@ -42,7 +42,7 @@ namespace Citta_T1.Business.Option
             MoveRsControl mrc = Global.GetCanvasPanel().AddNewResult(
                                 name, sizeL, location, separator, encoding);
 
-            //创建MoveRsControl的Xml文件
+            //创建MoveRsControl的结果BCP文件
             if (resultFilePath == string.Empty)
                 path = BCPBuffer.GetInstance().CreateNewBCPFile(path, columns);
 
@@ -87,7 +87,7 @@ namespace Citta_T1.Business.Option
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
         {
-            MoveRsControl mrc = NewMoveRsControl(moc, path, null);
+            MoveRsControl mrc = NewMoveRsControl(moc, path, new List<string>());
             NewLineOpControlToRsControl(moc, mrc);
         }
     }
