@@ -166,23 +166,6 @@ namespace Citta_T1.Controls
             
 
         }
-        private Point WorldBoundControl(Point Ps, int width, int height)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-
-
-            if (Ps.X > 2000 * screenFactor)
-            {
-                dragOffset.X = Ps.X - 2000;
-            }
-            if (Ps.Y > 900 * screenFactor)
-            {
-                dragOffset.Y = Ps.Y - 900;
-            }
-            return dragOffset;
-        }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
 
@@ -194,7 +177,8 @@ namespace Citta_T1.Controls
                     int left = dx + 40;
 
                     int top  = dy + 100;
-                    Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
+                    Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top));
                     log.Info(moveOffset.ToString());
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
@@ -214,8 +198,8 @@ namespace Citta_T1.Controls
                 {
                     int left = dx + 60;
                     int top =  dy + 100;
-                    Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
-
+                    Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top));
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
 

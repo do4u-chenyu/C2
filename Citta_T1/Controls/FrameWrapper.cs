@@ -455,7 +455,9 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            moveOffset = WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy));
+            moveOffset = Global.GetCurrentDocument().WorldMap
+                               .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
+                                                  minBoundingBox);
             g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);
             n.DrawImageUnscaled(i,
                                 Convert.ToInt32(mapOrigin.X * screenFactor),
@@ -464,28 +466,6 @@ namespace Citta_T1.Controls
             g.Dispose();
             i.Dispose();
             i = null;
-        }
-        public Point WorldBoundControl(Point Pm)
-        {
-            Point Pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(Pm, true);
-            Point off = new Point(0, 0);
-            if (Pw.X < 20)
-            {
-                off.X = 20 - Pm.X;
-            }
-            if (Pw.Y < 70)
-            {
-                off.Y =  70 - Pm.Y;
-            }
-            if (Pw.X > 2000 - minBoundingBox.Width)
-            {
-                off.X = Global.GetCanvasPanel().Width - minBoundingBox.Width;
-            }
-            if (Pw.Y > 980 - minBoundingBox.Height)
-            {
-                off.Y = Global.GetCanvasPanel().Height - minBoundingBox.Height;
-            }
-            return off;
         }
     }
 }

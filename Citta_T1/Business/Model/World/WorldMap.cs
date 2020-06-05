@@ -1,4 +1,5 @@
-﻿using NPOI.SS.Formula.Functions;
+﻿using Citta_T1.Core;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -158,10 +159,7 @@ namespace Citta_T1.Business.Model.World
         }
         public void WorldBoundControl(Point Pm,Control ct)
         {
-
             Point Pw = ScreenToWorld(Pm, true);
-
-
             if (Pw.X < 20)
             {
                 Pm.X = 20;
@@ -178,7 +176,46 @@ namespace Citta_T1.Business.Model.World
             {
                 Pm.Y = ct.Parent.Height - ct.Height;
             }
-            ct.Location =  Pm;
+            ct.Location = Pm;
+        }
+        public Point WorldBoundControl(Point Pm, Rectangle minBoundingBox)
+        {
+            Point Pw = ScreenToWorld(Pm, true);
+            Point off = new Point(0, 0);
+            if (Pw.X < 20)
+            {
+                off.X = 20 - Pm.X;
+            }
+            if (Pw.Y < 70)
+            {
+                off.Y = 70 - Pm.Y;
+            }
+            if (Pw.X > 2000 - minBoundingBox.Width)
+            {
+                off.X = Global.GetCanvasPanel().Width - minBoundingBox.Width;
+            }
+            if (Pw.Y > 980 - minBoundingBox.Height)
+            {
+                off.Y = Global.GetCanvasPanel().Height - minBoundingBox.Height;
+            }
+            return off;
+        }
+        public Point WorldBoundControlQuick(Point Ps)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+
+
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
         }
         #endregion
 

@@ -112,8 +112,9 @@ namespace Citta_T1.Controls.Move.Rs
                     return;
                 }
                 int left = this.Left + e.X - mouseOffset.X;
-                int top = this.Top + e.Y - mouseOffset.Y;                
-                Global.GetCurrentDocument().WorldMap.WorldBoundControl(new Point(left, top), this);
+                int top = this.Top + e.Y - mouseOffset.Y;
+                Global.GetCurrentDocument
+                    ().WorldMap.WorldBoundControl(new Point(left, top), this);
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
