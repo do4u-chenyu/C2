@@ -24,11 +24,11 @@ namespace Citta_T1.OperatorViews.Base
 
         protected OptionInfoCheck optionInfoCheck;  // 用户配置信息通用检查
 
-        public BaseOperatorView(MoveOpControl opControl)
+        public BaseOperatorView()
         {
             InitializeComponent();
-            this.opControl = opControl;
-            oldOptionDictStr = opControl.Option.ToString();
+            this.opControl = null;
+            oldOptionDictStr = String.Empty;
             dataSourceFFP0 = String.Empty;
             dataSourceFFP1 = String.Empty;
             nowColumnsName0 = new string[0];
@@ -39,7 +39,11 @@ namespace Citta_T1.OperatorViews.Base
             oldOutList1 = new List<int>();
             selectedColumns = new List<string>();
             optionInfoCheck = new OptionInfoCheck();
-
+        }
+        public BaseOperatorView(MoveOpControl opControl) : this()
+        {
+            this.opControl = opControl;
+            oldOptionDictStr = opControl.Option.ToString();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
