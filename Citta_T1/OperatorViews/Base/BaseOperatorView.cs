@@ -32,7 +32,7 @@ namespace Citta_T1.OperatorViews.Base
             dataSourceFFP0 = String.Empty;
             dataSourceFFP1 = String.Empty;
             nowColumnsName0 = new string[0];
-            nowColumnsName1 = new string[1];
+            nowColumnsName1 = new string[0];
             oldColumnsName0 = new List<string>();
             oldColumnsName1 = new List<string>();
             oldOutList0 = new List<int>();
