@@ -72,12 +72,12 @@ namespace Citta_T1.Business.Model
         {
             this.ModelElements.Add(modelElement);
         }
-        public void AddModelRelation(ModelRelation mr, bool setDirty = true)
+        public void AddModelRelation(ModelRelation mr)
         {
             this.ModelRelations.Add(mr);
             this.AddEdge(mr);
-            if (setDirty)
-                Global.GetMainForm().SetDocumentDirty();
+
+
         }
         public void RemoveModelRelation(ModelRelation mr)
         {

@@ -1,6 +1,10 @@
 ﻿using Citta_T1.Controls.Move;
+using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Citta_T1.Business.Model
@@ -118,6 +122,75 @@ namespace Citta_T1.Business.Model
         public void Hide()
         {
             ctl.Hide();
+        }
+        public static ModelElement CreateModelElement(Dictionary<string,string> dict)
+        {
+            if (!(dict.ContainsKey("id") 
+                && dict.ContainsKey("name") 
+                && dict.ContainsKey("location")
+                && dict.ContainsKey("type")))
+                return ModelElement.Empty;
+            string type = dict["type"];
+            string name = dict["name"];
+            int id = Convert.ToInt32(dict["id"]);           
+            Point location = OpUtil.ToPointType(dict["location"]);
+            
+            if (type == "DataSource")
+            {
+                if (!(dict.ContainsKey("path")
+                    && dict.ContainsKey("separator")
+                    && dict.ContainsKey("encoding")))
+                    return ModelElement.Empty;
+                string path = dict["path"];
+                char separator = ConvertUtil.TryParseAscii(dict["separator"]);
+                OpUtil.Encoding encoding = OpUtil.EncodingEnum(dict["encoding"]);
+                MoveDtControl Control = new MoveDtControl(path, 0, name, location)
+                {
+                    ID = id,
+                    Separator = separator,
+                    Encoding = encoding
+                };
+                return CreateModelElement(Control);
+            }
+            else if (type == "Operator")
+            {
+                if (!(dict.ContainsKey("subtype")
+                    && dict.ContainsKey("status") 
+                    && dict.ContainsKey("enableoption")))
+                    return ModelElement.Empty;
+                string subType = dict["subtype"];
+                bool enableOption = Convert.ToBoolean(dict["enableoption"]);
+                ElementStatus status = OpUtil.EStatus(dict["status"]);
+                MoveOpControl Control = new MoveOpControl(0, name, subType, location)
+                {
+                    ID = id,
+                    Status = status,
+                    EnableOption = enableOption
+                };
+                return CreateModelElement(Control);
+            }
+            else 
+            {
+                if (!(dict.ContainsKey("status")
+                    && dict.ContainsKey("path") 
+                    && dict.ContainsKey("separator")
+                    && dict.ContainsKey("encoding")))
+                    return ModelElement.Empty;
+                string path = dict["path"];
+                ElementStatus status = OpUtil.EStatus(dict["status"]);
+                char separator = ConvertUtil.TryParseAscii(dict["separator"]);
+                OpUtil.Encoding encoding = OpUtil.EncodingEnum(dict["encoding"]);
+                MoveRsControl Control = new MoveRsControl(0, name, location)
+                {
+                    ID = id,
+                    Status = status,
+                    FullFilePath = path,
+                    Separator = separator,
+                    Encoding = encoding
+                };
+                return CreateModelElement(Control);
+            }
+         
         }
     }
 }

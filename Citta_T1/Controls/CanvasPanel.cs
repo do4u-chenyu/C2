@@ -479,6 +479,7 @@ namespace Citta_T1.Controls
             if (!isDuplicatedRelation && !isCyclic)
             {
                 cd.AddModelRelation(mr);
+                Global.GetMainForm().SetDocumentDirty();
                 //endC右键菜单设置Enable                     
                 Global.GetOptionDao().EnableOpOptionView(mr);
 

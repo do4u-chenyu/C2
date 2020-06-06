@@ -66,6 +66,7 @@ namespace Citta_T1.Business.Option
                                 endPoint,
                                 0);
             Global.GetCurrentDocument().AddModelRelation(newModelRelation);
+            Global.GetMainForm().SetDocumentDirty();
             moc.OutPinInit("lineExit");
             mrc.RectInAdd(1);
         }

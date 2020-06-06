@@ -63,7 +63,7 @@ namespace Citta_T1.Utils
 
         public static char TryParseAscii(string asciiChar, char defaultValue = '\t')
         {
-            int ascii = TryParseInt(asciiChar, (int)defaultValue);
+            int ascii = TryParseInt(asciiChar, defaultValue);
 
             if (ascii < 0 || ascii > 255)
                 return defaultValue;

@@ -1,19 +1,19 @@
 ﻿using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
-using log4net.Util.TypeConverters;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Citta_T1.Business.Model
 {
@@ -59,76 +59,53 @@ namespace Citta_T1.Business.Model
             return Write(key, value.ToString());
         }
     }
-    //class ModelElementFactory
-    //{
-    //    private XmlNode xn;
-    //    private MoveBaseControl mbc;
-    //    private ModelRelation mr;    
-    //    private Dictionary<string, string> AttributeDict; 
-    //    TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
-    //    public MoveBaseControl Control { get => mbc; set => mbc = value; }
-    //    public ModelRelation Relation { get => mr; set => mr = value; }
-    //    public ModelElementFactory(XmlNode xmlNode)
-    //    {
-    //        xn = xmlNode;
-    //        AttributeDict = new Dictionary<string, string>();
-    //    }
-    //    public ModelElementFactory AddAtrtribute(string label)
-    //    {
-    //        string value = xn.SelectSingleNode(label).InnerText;
-    //        AttributeDict[label] = value;
-    //        return this;
-    //    }
+    class ModelXmlReader
+    {
+        private XmlNode xn;
+        private Dictionary<string, string> dict;
+        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        public ModelXmlReader(XmlNode xmlNode)
+        {
+            xn = xmlNode;
+            dict = new Dictionary<string, string>();
+        }
+        public ModelXmlReader Read(string label)
+        {
+            try
+            {
+                string value = xn.SelectSingleNode(label).InnerText;
+                dict[label] = value;
 
+            }
+            catch (Exception e)
+            {
+                log.Error("读取xml文件出错， error: " + e.Message);
+            }
+            return this;
+        }
+        public ModelElement Done()
+        {
+           return ModelElement.CreateModelElement(dict);
+        }
 
-    //    public ModelElementFactory Done()
-    //    {
-    //        string type =  AttributeDict["type"];
-    //        string name = AttributeDict["name"];
-    //        string subType = AttributeDict["subType"];
-    //        int id = Convert.ToInt32( AttributeDict["id"]);
-    //        string fullFilePath = AttributeDict["fullFilePath"];
-    //        char separator = AttributeDict["separator"];
-    //        if (type == "DataSource")
-    //        {
-    //            Control = new MoveDtControl(fullFilePath, 0, name, location)
-    //            {
-    //                Type = ElementType.DataSource,
-    //                ID = id,
-    //                Separator = separator,
-    //                Encoding = encoding
-    //            };
-    //        }
-    //        else if (type =="Operator")
-    //        {
-    //            Control = new MoveOpControl(0, name, subType, location)
-    //            {
-    //                Type = ElementType.Result,
-    //                ID = id,
-    //                Status = status,
-    //                EnableOption = enableOption
-    //            };
-    //        }
-    //        else if (type == "Result")
-    //        {
-    //            Control = new MoveRsControl(0, name, location)
-    //            {
-    //                Type = ElementType.Result,
-    //                ID = id,
-    //                Status = status,
-    //                FullFilePath = fullFilePath,
-    //                Separator = separator,
-    //                Encoding = encoding
-    //            };
-    //        }
-    //        else if (type == "Relation")
-    //            Relation = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
+        public ModelRelation RelationDone()
+        {
+            try
+            {
+                return new ModelRelation(Convert.ToInt32(dict["start"]),
+                                         Convert.ToInt32(dict["end"]),
+                                         OpUtil.ToPointFType(dict["startlocation"]),
+                                         OpUtil.ToPointFType(dict["endlocation"]),
+                                         Convert.ToInt32(dict["endpin"]));
+            }
+            catch (Exception e) 
+            {
+                log.Info(e.Message);
+                return ModelRelation.Empty;
+            }
            
-    //        return this;
-    //    }
-
-       
-    //}
+        }
+    }
 
     class DocumentSaveLoad
     {
@@ -235,127 +212,94 @@ namespace Citta_T1.Business.Model
             mexw.Write("type", "Remark")
                 .Write("name", remarkDescription);
         }
+        private string GetXmlNodeInnerText(XmlNode node,string nodeName)
+        {
+            string text = "";
+            try
+            { text = node.SelectSingleNode(nodeName).InnerText; }
+            catch (Exception e)
+            {
+                log.Error(e.Message);
+            }
+            return text;
+        } 
         public void ReadXml()
         {
-            TextInfo textInfo = Thread.CurrentThread.CurrentCulture.TextInfo;
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(modelFilePath);
-            XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
+            XmlNodeList nodeLists;
             try
-            {             
-                XmlNode mapOriginNode = rootNode.SelectSingleNode("MapOrigin");
-                this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(mapOriginNode.InnerText);
+            {
+                XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
+                this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
+                nodeLists = rootNode.SelectNodes("ModelElement");
             }
-            catch (Exception e) { log.Error(e.Message); }
-
-
-            var nodeLists = rootNode.SelectNodes("ModelElement");
+            catch (Exception e) 
+            {
+                log.Error(e.Message);
+                return;
+            }
+           
             foreach (XmlNode xn in nodeLists)
             {
-                string type = xn.SelectSingleNode("type").InnerText;
-                try
+                string type = GetXmlNodeInnerText(xn, "type");
+                if (type == "Remark")
+                    this.modelDocument.RemarkDescription = GetXmlNodeInnerText(xn, "name");
+                else if (type == "Relation")
                 {
-                    if (type == "Operator")
-                    {
-                                              
-                        String name = xn.SelectSingleNode("name").InnerText;
-                        string status = xn.SelectSingleNode("status").InnerText;
-                        status = textInfo.ToTitleCase(status).ToString();
-                        string subType = xn.SelectSingleNode("subtype").InnerText;
-                        int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point location = OpUtil.ToPointType(xn.SelectSingleNode("location").InnerText);
-                        bool enableOption = Convert.ToBoolean(xn.SelectSingleNode("enableoption").InnerText);
-                        MoveOpControl ctl = new MoveOpControl(0, name, OpUtil.SubTypeName(subType), location)
-                        {
-                            Type = ElementType.Operator,
-                            Status = OpUtil.EStatus(status),
-                            ID = id,
-                            EnableOption = enableOption
-                        };
-                        ModelElement operatorElement = ModelElement.CreateModelElement(ctl);
-                        this.modelDocument.ModelElements.Add(operatorElement);
-                        if (xn.SelectSingleNode("option") != null)
-                        {
-                            ctl.Option = ReadOption(xn);
-                            ctl.FirstDataSourceColumns  = ctl.Option.GetOptionSplit("columnname0");
-                            ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
-                        }
-                    }
-                    else if (type == "DataSource")
-                    {
-                        String name = xn.SelectSingleNode("name").InnerText;
-                        string fullFilePath = xn.SelectSingleNode("path").InnerText;
-                        int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point location = OpUtil.ToPointType(xn.SelectSingleNode("location").InnerText);
-                        char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
-                        OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
-                        MoveDtControl cotl = new MoveDtControl(fullFilePath, 0, name, location)
-                        {
-                            Type = ElementType.DataSource,
-                            ID = id,
-                            Separator = separator,
-                            Encoding = encoding
-                        };
-                        ModelElement dataSourceElement = ModelElement.CreateModelElement(cotl);
-                        this.modelDocument.ModelElements.Add(dataSourceElement);
-                    }
-                    else if (type == "Remark")
-                    {
-                        String name = xn.SelectSingleNode("name").InnerText;
-                        this.modelDocument.RemarkDescription = name;
-                    }
-                    else if (type == "Result")
-                    {
-                        String name = xn.SelectSingleNode("name").InnerText;
-                        string status = xn.SelectSingleNode("status").InnerText;
-                        status = textInfo.ToTitleCase(status).ToString();
-                        int id = Convert.ToInt32(xn.SelectSingleNode("id").InnerText);
-                        Point location = OpUtil.ToPointType(xn.SelectSingleNode("location").InnerText);
-                        string fullFilePath = xn.SelectSingleNode("path").InnerText;
-                        char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
-                        OpUtil.Encoding encoding = xn.SelectSingleNode("encoding") == null ? OpUtil.Encoding.UTF8 : OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
+                    ModelXmlReader mxr1 = new ModelXmlReader(xn);
+                    mxr1.Read("start")
+                        .Read("end")
+                        .Read("startlocation")
+                        .Read("endlocation")
+                        .Read("endpin");
+                    if (mxr1.RelationDone() == ModelRelation.Empty)
+                        continue;
+                    this.modelDocument.AddModelRelation(mxr1.RelationDone());
+                }
+                else
+                {
+                    ModelXmlReader mxr0 = new ModelXmlReader(xn);
+                    mxr0.Read("name")
+                        .Read("status")
+                        .Read("subtype")
+                        .Read("id")
+                        .Read("location")
+                        .Read("enableoption")
+                        .Read("type")
+                        .Read("path")
+                        .Read("separator")
+                        .Read("encoding");
 
-                        MoveRsControl ctl = new MoveRsControl(0, name, location)
-                        {
-                            Type = ElementType.Result,
-                            ID = id,
-                            Status = OpUtil.EStatus(status),
-                            FullFilePath = fullFilePath,
-                            Separator = separator,
-                            Encoding = encoding
-                        };
-                        ModelElement resultElement = ModelElement.CreateModelElement(ctl);
-                        this.modelDocument.ModelElements.Add(resultElement);
-                    }
-                    else if (type == "Relation")
-                    {
-                        int startID = Convert.ToInt32(xn.SelectSingleNode("start").InnerText);
-                        int endID = Convert.ToInt32(xn.SelectSingleNode("end").InnerText);
-                        PointF startLocation = OpUtil.ToPointFType(xn.SelectSingleNode("startlocation").InnerText);
-                        PointF endLocation = OpUtil.ToPointFType(xn.SelectSingleNode("endlocation").InnerText);
-                        int endPin = Convert.ToInt32(xn.SelectSingleNode("endpin").InnerText);
-                        ModelRelation mr = new ModelRelation(startID, endID, startLocation, endLocation, endPin);
-                        this.modelDocument.AddModelRelation(mr, false);
-                    }
+
+                    ModelElement element = mxr0.Done();
+                    if (element == ModelElement.Empty)
+                        continue;
+                    this.modelDocument.ModelElements.Add(element);
+                    if (GetXmlNodeInnerText(xn, "type") != "Operator")
+                        continue;
+                    MoveOpControl ctl = element.InnerControl as MoveOpControl;
+                    ctl.Option = ReadOption(xn);
+                    ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
+                    ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                 }
-                catch(Exception e) 
-                { 
-                    log.Error("读取xml文件出错， error: " + e.Message); 
-                }
-               
             }
         }
       
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();
-            foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
-                option.SetOption(node.Name, node.InnerText);
+            try
+            {
+                foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
+                    option.SetOption(node.Name, node.InnerText);
+            }
+            catch (Exception e)
+            { 
+                log.Error(e.Message);
+                option = new OperatorOption(); 
+            }
             return option;
-        }
-
-
-        
-       
+        }  
     }
 }
