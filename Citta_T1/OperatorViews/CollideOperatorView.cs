@@ -197,9 +197,7 @@ namespace Citta_T1.OperatorViews
         }
 
         private void LoadOption()
-        {
-            
-            
+        {     
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName0, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");

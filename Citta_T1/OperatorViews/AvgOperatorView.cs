@@ -8,14 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class AvgOperatorView : Form
+    public partial class AvgOperatorView : BaseOperatorView
     {
-        private OperatorViewInfo operatorViewInfo;
         private string oldAvg;
         private string selectedIndex;
 
@@ -27,14 +25,14 @@ namespace Citta_T1.OperatorViews
                 OpControl = opControl,
                 OldOptionDictStr = opControl.Option.ToString()
             };
-            InitOptionInfor();
+            InitOptionInfo();
             LoadOption();
            
             this.oldAvg = this.AvgComBox.Text;
             SetTextBoxName(this.dataSourceTB0);
         }
         #region 初始化配置
-        private void InitOptionInfor()
+        private void InitOptionInfo()
         {
             int startID = -1;
             string encoding = String.Empty;
@@ -75,34 +73,10 @@ namespace Citta_T1.OperatorViews
             operatorViewInfo.OpControl.FirstDataSourceColumns = operatorViewInfo.NowColumnsName0;
             operatorViewInfo.OpControl.Option.SetOption("columnname0", String.Join("\t", operatorViewInfo.NowColumnsName0));
         }
-      
 
-        public void SetTextBoxName(TextBox textBox)
-        {
-            string dataName = textBox.Text;
-            int maxLength = 18;
-            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
-            int sumcount = chs.Count * 2;
-            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
-
-            //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
-            {
-                if (dataName.IndexOf(mc.ToString()) == maxLength)
-                {
-                    maxLength -= 1;
-                    break;
-                }
-            }
-
-            if (sumcount + sumcountDigit > maxLength)
-            {
-                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
-            }
-        }
         #endregion
 
-        private void ConfirmButton_Click(object sender, EventArgs e)
+        protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
             if (this.dataSourceTB0.Text == "") return;
@@ -141,11 +115,6 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
         #region 配置信息的保存与加载
         private void SaveOption()
         {
@@ -172,15 +141,6 @@ namespace Citta_T1.OperatorViews
             
         }
         #endregion
-        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(operatorViewInfo.DataSourceFFP0);
-        }
-
-        private void DataInfo_LostFocus(object sender, EventArgs e)
-        {
-            SetTextBoxName(this.dataSourceTB0);
-        }
 
         private void AvgComBox_Leave(object sender, EventArgs e)
         {

@@ -47,5 +47,15 @@ namespace Citta_T1.OperatorViews.Base
                 textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
             }
         }
+
+        private void DataSourceTB1_MouseHover(object sender, EventArgs e)
+        {
+            this.toolTip1.SetToolTip(dataSourceTB1, operatorViewInfo.DataSourceFFP1);
+        }
+
+        private void DataSourceTB0_MouseHover(object sender, EventArgs e)
+        {
+            this.toolTip1.SetToolTip(dataSourceTB0, operatorViewInfo.DataSourceFFP0);
+        }
     }
 }
