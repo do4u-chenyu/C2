@@ -3,11 +3,6 @@
     partial class CustomOperatorView
     {
         /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -29,11 +24,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.confirmButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataSource0 = new System.Windows.Forms.TextBox();
-            this.dataSource1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.fixRadioButton = new System.Windows.Forms.RadioButton();
             this.fixSecondTextBox = new System.Windows.Forms.TextBox();
@@ -44,13 +35,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.outList0 = new Citta_T1.Controls.Common.ComCheckBoxList();
-            this.outList1 = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.label7 = new System.Windows.Forms.Label();
             this.rsFullFilePathTextBox = new System.Windows.Forms.TextBox();
             this.browseButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.outputFileEncodeSettingGroup = new System.Windows.Forms.GroupBox();
             this.gbkRadio = new System.Windows.Forms.RadioButton();
             this.utfRadio = new System.Windows.Forms.RadioButton();
@@ -76,7 +64,6 @@
             this.confirmButton.TabIndex = 1;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // cancelButton
             // 
@@ -89,7 +76,6 @@
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // label1
             // 
@@ -104,24 +90,24 @@
             // 
             // dataSource0
             // 
-            this.dataSource0.Location = new System.Drawing.Point(96, 41);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSource0.Name = "dataSource0";
-            this.dataSource0.ReadOnly = true;
-            this.dataSource0.Size = new System.Drawing.Size(150, 21);
-            this.dataSource0.TabIndex = 10;
-            this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB0.Location = new System.Drawing.Point(96, 41);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "dataSource0";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 21);
+            this.dataSourceTB0.TabIndex = 10;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dataSource1
             // 
-            this.dataSource1.Location = new System.Drawing.Point(302, 41);
-            this.dataSource1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSource1.Name = "dataSource1";
-            this.dataSource1.ReadOnly = true;
-            this.dataSource1.Size = new System.Drawing.Size(150, 21);
-            this.dataSource1.TabIndex = 11;
-            this.dataSource1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSource1.Visible = false;
+            this.dataSourceTB1.Location = new System.Drawing.Point(302, 41);
+            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB1.Name = "dataSource1";
+            this.dataSourceTB1.ReadOnly = true;
+            this.dataSourceTB1.Size = new System.Drawing.Size(150, 21);
+            this.dataSourceTB1.TabIndex = 11;
+            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB1.Visible = false;
             // 
             // label2
             // 
@@ -234,24 +220,24 @@
             // 
             // outList0
             // 
-            this.outList0.DataSource = null;
-            this.outList0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList0.Location = new System.Drawing.Point(96, 138);
-            this.outList0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outList0.Name = "outList0";
-            this.outList0.Size = new System.Drawing.Size(150, 22);
-            this.outList0.TabIndex = 23;
+            this.outListCCBL0.DataSource = null;
+            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Location = new System.Drawing.Point(96, 138);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.outListCCBL0.Name = "outList0";
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL0.TabIndex = 23;
             // 
             // outList1
             // 
-            this.outList1.DataSource = null;
-            this.outList1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList1.Location = new System.Drawing.Point(302, 138);
-            this.outList1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outList1.Name = "outList1";
-            this.outList1.Size = new System.Drawing.Size(150, 22);
-            this.outList1.TabIndex = 24;
-            this.outList1.Visible = false;
+            this.outListCCBL1.DataSource = null;
+            this.outListCCBL1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL1.Location = new System.Drawing.Point(302, 138);
+            this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.outListCCBL1.Name = "outList1";
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL1.TabIndex = 24;
+            this.outListCCBL1.Visible = false;
             // 
             // label7
             // 
@@ -345,7 +331,7 @@
             this.otherSeparatorText.Name = "otherSeparatorText";
             this.otherSeparatorText.Size = new System.Drawing.Size(54, 23);
             this.otherSeparatorText.TabIndex = 3;
-            this.otherSeparatorText.TextChanged += new System.EventHandler(this.otherSeparatorText_TextChanged);
+            this.otherSeparatorText.TextChanged += new System.EventHandler(this.OtherSeparatorText_TextChanged);
             // 
             // otherSeparatorRadio
             // 
@@ -391,8 +377,8 @@
             this.Controls.Add(this.browseButton);
             this.Controls.Add(this.rsFullFilePathTextBox);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.outList1);
-            this.Controls.Add(this.outList0);
+            this.Controls.Add(this.outListCCBL1);
+            this.Controls.Add(this.outListCCBL0);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -403,8 +389,8 @@
             this.Controls.Add(this.fixSecondTextBox);
             this.Controls.Add(this.fixRadioButton);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataSource1);
-            this.Controls.Add(this.dataSource0);
+            this.Controls.Add(this.dataSourceTB1);
+            this.Controls.Add(this.dataSourceTB0);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
@@ -426,11 +412,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button confirmButton;
-        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox dataSource0;
-        private System.Windows.Forms.TextBox dataSource1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton fixRadioButton;
         private System.Windows.Forms.TextBox fixSecondTextBox;
@@ -441,13 +423,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private Citta_T1.Controls.Common.ComCheckBoxList outList0;
-        private Citta_T1.Controls.Common.ComCheckBoxList outList1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox rsFullFilePathTextBox;
         private System.Windows.Forms.Button browseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox outputFileEncodeSettingGroup;
         private System.Windows.Forms.GroupBox outputFileSeparatorSettingGroup;
         private System.Windows.Forms.RadioButton utfRadio;
