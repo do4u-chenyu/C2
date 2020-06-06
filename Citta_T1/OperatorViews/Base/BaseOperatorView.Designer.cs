@@ -120,8 +120,8 @@
         }
 
         #endregion
-        protected System.Windows.Forms.TextBox dataSourceTB1; // 左表框
-        protected System.Windows.Forms.TextBox dataSourceTB0; // 右表框
+        protected System.Windows.Forms.TextBox dataSourceTB1; // 右表框
+        protected System.Windows.Forms.TextBox dataSourceTB0; // 左表框
         protected System.Windows.Forms.Button cancelButton;   // 取消键
         protected System.Windows.Forms.Button confirmButton;  // 确认键
         protected System.Windows.Forms.ToolTip toolTip1;      // 浮动提示栏,一个就够了

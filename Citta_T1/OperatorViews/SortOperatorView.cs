@@ -2,54 +2,31 @@
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
+using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class SortOperatorView : Form
+    public partial class SortOperatorView : BaseOperatorView
     {
-        private MoveOpControl opControl;
-        private string dataPath;
-        private string[] columnName;
-        private string oldOptionDict;
-        private string oldSort;
-        private List<bool> oldCheckedItems = new List<bool>();
-        private string oldFirstRow;
-        private string oldEndRow;
         private List<int> outList;
-        private List<string> oldColumnName;
-        private static LogUtil log = LogUtil.GetInstance("SortOperatorView");
-        private OptionInfoCheck optionInfoCheck;
         
-        public SortOperatorView(MoveOpControl opControl)
+        public SortOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            this.optionInfoCheck = new OptionInfoCheck();
-            this.opControl = opControl;
-            dataPath = "";
-           
-            this.oldColumnName = this.opControl.Option.GetOptionSplit("columnname0").ToList();
             InitOptionInfo();
             LoadOption();
-            this.oldFirstRow = this.firstRow.Text;
-            this.oldEndRow = this.endRow.Text;
-            this.oldSort = this.sortField.Text;
-            this.oldCheckedItems.Add(this.repetition.Checked);
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
-            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
-            this.oldCheckedItems.Add(this.descendingOrder.Checked);
-            this.oldCheckedItems.Add(this.sortByString.Checked);
-            this.oldCheckedItems.Add(this.sortByNum.Checked);
-            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            this.sortField.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.sortField.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            SetTextBoxName(this.dataInfo);
+           
+            this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
+
+            this.sortField.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.sortField.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.sortField.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
@@ -60,50 +37,27 @@ namespace Citta_T1.OperatorViews
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                this.dataPath = dataInfo["dataPath0"];
-                this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                this.toolTip1.SetToolTip(this.dataInfo, this.dataInfo.Text);
-                SetOption(this.dataPath, this.dataInfo.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.dataSourceFFP0 = dataInfo["dataPath0"];
+                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
+                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceFFP0);
+                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
         }
         private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.columnName = bcpInfo.ColumnArray;
-            this.outList = Enumerable.Range(0,this.columnName.Length).ToList();
-            foreach (string name in columnName)
+            this.nowColumnsName0 = bcpInfo.ColumnArray;
+            this.outList = Enumerable.Range(0,this.nowColumnsName0.Length).ToList();
+            foreach (string name in nowColumnsName0)
                 this.sortField.Items.Add(name);
 
-            this.opControl.FirstDataSourceColumns = this.columnName;
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.columnName));
+            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
-      
-        public void SetTextBoxName(TextBox textBox)
-        {
-            string dataName = textBox.Text;
-            int maxLength = 18;
-            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
-            int sumcount = chs.Count * 2;
-            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
-
-            //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
-            {
-                if (dataName.IndexOf(mc.ToString()) == maxLength)
-                {
-                    maxLength -= 1;
-                    break;
-                }
-            }
-
-            if (sumcount + sumcountDigit > maxLength)
-            {
-                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
-            }
-        }
+     
         #endregion
         #region 添加取消
-        private void ConfirmButton_Click(object sender, EventArgs e)
+        protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(this.sortField.Text))
             {
@@ -122,14 +76,14 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.columnName.ToList());
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.nowColumnsName0.ToList());
                 return;
             }
 
@@ -137,16 +91,11 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            if (!this.oldColumnName.SequenceEqual(this.columnName))
-                Global.GetOptionDao().IsNewOut(this.columnName.ToList(), this.opControl.ID);
+            if (!this.oldColumnsName0.SequenceEqual(this.nowColumnsName0))
+                Global.GetOptionDao().IsNewOut(this.nowColumnsName0.ToList(), this.opControl.ID);
 
         }
        
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
         #endregion
 
         #region 配置信息的保存与加载
@@ -166,7 +115,7 @@ namespace Citta_T1.OperatorViews
 
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -177,7 +126,7 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
            
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.columnName, "sortfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
@@ -212,29 +161,8 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
-        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.dataInfo.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-        }
 
-        private void DataInfo_LostFocus(object sender, EventArgs e)
-        {
-            SetTextBoxName(this.dataInfo);
-        }
         #region 输入非数字，警告
-        private void FirstRow_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            { 
-                if(!ConvertUtil.IsInt(this.firstRow.Text))
-                    MessageBox.Show("请输入数字"); 
-                else
-                    this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
-               
-            }
-              
-        }
-
         private void FirstRow_Leave(object sender, EventArgs e)
         {
             if (!ConvertUtil.IsInt(this.firstRow.Text))
@@ -260,16 +188,6 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void EndRow_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                if (!ConvertUtil.IsInt(this.endRow.Text))
-                    MessageBox.Show("请输入数字");
-                else
-                    this.endRow.Text = int.Parse(this.endRow.Text).ToString();
-            }
-        }
         #endregion
 
         private void GroupBox3_Paint(object sender, PaintEventArgs e)
