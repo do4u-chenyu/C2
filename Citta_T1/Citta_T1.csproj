@@ -339,7 +339,6 @@
     <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\Base\OperatorViewInfo.cs" />
     <Compile Include="OperatorViews\CollideOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>

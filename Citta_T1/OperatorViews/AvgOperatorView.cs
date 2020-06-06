@@ -17,14 +17,9 @@ namespace Citta_T1.OperatorViews
         private string oldAvg;
         private string selectedIndex;
 
-        public AvgOperatorView(MoveOpControl opControl)
+        public AvgOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            operatorViewInfo = new OperatorViewInfo
-            {
-                OpControl = opControl,
-                OldOptionDictStr = opControl.Option.ToString()
-            };
             InitOptionInfo();
             LoadOption();
            
@@ -41,7 +36,7 @@ namespace Citta_T1.OperatorViews
             List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             foreach (ModelRelation mr in modelRelations)
             {
-                if (mr.EndID == operatorViewInfo.OpControl.ID)
+                if (mr.EndID == this.opControl.ID)
                 {
                     startID = mr.StartID;
                     break;
@@ -52,26 +47,26 @@ namespace Citta_T1.OperatorViews
                 if (me.ID == startID)
                 {
                     separator = me.Separator;
-                    operatorViewInfo.DataSourceFFP0 = me.FullFilePath;
+                    this.dataSourceFFP0 = me.FullFilePath;
                     //设置数据信息选项
-                    this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.operatorViewInfo.DataSourceFFP0);
+                    this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
                     this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
             }
-            if (!String.IsNullOrEmpty(operatorViewInfo.DataSourceFFP0))
-                SetOption(this.operatorViewInfo.DataSourceFFP0, this.dataSourceTB0.Text, encoding, separator);
+            if (!String.IsNullOrEmpty(this.dataSourceFFP0))
+                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, encoding, separator);
 
         }
         private void SetOption(string path, string dataName, string encoding, char separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            operatorViewInfo.NowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in operatorViewInfo.NowColumnsName0)
+            this.nowColumnsName0 = bcpInfo.ColumnArray;
+            foreach (string name in this.nowColumnsName0)
                 this.AvgComBox.Items.Add(name);
-            operatorViewInfo.OpControl.FirstDataSourceColumns = operatorViewInfo.NowColumnsName0;
-            operatorViewInfo.OpControl.Option.SetOption("columnname0", String.Join("\t", operatorViewInfo.NowColumnsName0));
+            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
 
         #endregion
@@ -92,16 +87,16 @@ namespace Citta_T1.OperatorViews
             //       引起文档dirty
             //情况2：内容不修改
             //        返回
-            if (operatorViewInfo.OldOptionDictStr != string.Join(",", operatorViewInfo.OpControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             else
                 return;
             //生成结果控件,创建relation,bcp结果文件
-            operatorViewInfo.SelectedColumns.Add(this.AvgComBox.SelectedItem.ToString());
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(operatorViewInfo.OpControl.ID);
+            this.selectedColumns.Add(this.AvgComBox.SelectedItem.ToString());
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(operatorViewInfo.OpControl, operatorViewInfo.SelectedColumns);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
             // 对应的结果文件置脏
@@ -111,7 +106,7 @@ namespace Citta_T1.OperatorViews
             List<string> oldColumn = new List<string>();
             oldColumn.Add(this.oldAvg);
             if (this.oldAvg != this.AvgComBox.Text)
-                Global.GetOptionDao().DoOutputCompare(oldColumn, operatorViewInfo.SelectedColumns, operatorViewInfo.OpControl.ID);
+                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectedColumns, this.opControl.ID);
 
         }
 
@@ -119,22 +114,22 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            operatorViewInfo.OpControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
-            operatorViewInfo.OpControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
+            this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.AvgComBox.SelectedIndex.ToString() : this.selectedIndex);
+            this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
 
-            ElementStatus oldStatus = operatorViewInfo.OpControl.Status;
-            if (operatorViewInfo.OldOptionDictStr != string.Join(",", operatorViewInfo.OpControl.Option.OptionDict.ToList()))
-                operatorViewInfo.OpControl.Status = ElementStatus.Ready;
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+                this.opControl.Status = ElementStatus.Ready;
 
-            if (oldStatus == ElementStatus.Done && operatorViewInfo.OpControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(operatorViewInfo.OpControl.ID);
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsCleanOption(operatorViewInfo.OpControl, operatorViewInfo.NowColumnsName0, "avgfield"))
+            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "avgfield"))
             {
-                int index = Convert.ToInt32(operatorViewInfo.OpControl.Option.GetOption("avgfield"));
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.AvgComBox.Text = this.AvgComBox.Items[index].ToString();
                 this.selectedIndex = index.ToString();
             }
@@ -144,13 +139,13 @@ namespace Citta_T1.OperatorViews
 
         private void AvgComBox_Leave(object sender, EventArgs e)
         {
-            this.operatorViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, operatorViewInfo.NowColumnsName0, this.AvgComBox.Text);
+            this.optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.nowColumnsName0, this.AvgComBox.Text);
         }
 
         private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                this.operatorViewInfo.OptionInfoCheck.IsIllegalInputName(this.AvgComBox, operatorViewInfo.NowColumnsName0, this.AvgComBox.Text);
+                this.optionInfoCheck.IsIllegalInputName(this.AvgComBox, this.nowColumnsName0, this.AvgComBox.Text);
         }
 
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
