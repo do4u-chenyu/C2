@@ -357,8 +357,8 @@ namespace Citta_T1.Controls.Move.Op
             if (f != 1)
                 pading += 1;
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
-            this.rightPictureBox.Location = new Point(this.Width - (int)(25 * f), (int)(5 * f));
-            this.statusBox.Location = new Point(this.Width - (int)(42 * f), (int)(5 * f));
+            this.rightPictureBox.Location = new Point(this.Width - (int)(25 * f), (int)(7 * f));
+            this.statusBox.Location = new Point(this.Width - (int)(42 * f), (int)(7 * f));
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
             this.textBox.Size = new Size((int)((txtWidth -1 )* f), this.Height - (int)(4 * f));
