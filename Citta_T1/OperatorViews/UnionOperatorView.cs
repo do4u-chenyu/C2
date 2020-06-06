@@ -46,7 +46,6 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSourceFFP0 = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                 this.nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
                 this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
             }
@@ -54,7 +53,6 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSourceFFP1 = dataInfo["dataPath1"];
                 this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.toolTip1.SetToolTip(this.dataSourceTB1, this.dataSourceTB1.Text);
                 this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
                 this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
             }
@@ -86,7 +84,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 CreateLine(line);
             }
         }
@@ -120,7 +118,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -413,7 +411,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
-            this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;
+            this.tableLayoutPanel1.RowCount -= 1;
 
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 

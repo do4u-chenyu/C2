@@ -44,14 +44,12 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSourceFFP0 = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceFFP0);
                 this.nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
                 this.dataSourceFFP1 = dataInfo["dataPath1"];
                 this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.toolTip1.SetToolTip(this.dataSourceTB1, this.dataSourceFFP1);
                 this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 

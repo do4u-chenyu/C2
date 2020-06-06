@@ -16,16 +16,11 @@ namespace Citta_T1.OperatorViews
     public partial class DataFormatOperatorView : BaseOperatorView
     {
         private List<string> oldOutName;
-        private List<int> formatColumn;
-        private List<bool> oldCheckedItems;
 
 
         public DataFormatOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-
-            this.formatColumn = new List<int>();
-            this.oldCheckedItems = new List<bool>();
             this.oldOutName = new List<string>();
 
             InitOptionInfo();
@@ -48,7 +43,6 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSourceFFP0 = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                 SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
             if (this.opControl.Option.GetOption("outname") != String.Empty)

@@ -81,9 +81,9 @@
             this.dataSourceTB1.Name = "dataSourceTB1";
             this.dataSourceTB1.ReadOnly = true;
             this.dataSourceTB1.Size = new System.Drawing.Size(100, 21);
-            this.dataSourceTB1.TabIndex = 0;
+            this.dataSourceTB1.TabIndex = 1;
             this.dataSourceTB1.Visible = false;
-            this.dataSourceTB0.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
+            this.dataSourceTB1.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
             // 
             // outListCCBL0
             // 

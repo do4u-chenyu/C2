@@ -7,7 +7,6 @@ using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
@@ -50,7 +49,6 @@ namespace Citta_T1.OperatorViews
                     this.dataSourceFFP0 = me.FullFilePath;
                     //设置数据信息选项
                     this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                    this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
@@ -118,7 +116,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outfield", this.AvgComBox.SelectedIndex.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)

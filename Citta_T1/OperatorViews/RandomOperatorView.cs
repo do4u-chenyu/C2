@@ -51,7 +51,6 @@ namespace Citta_T1.OperatorViews
                     separator = me.Separator;
                     //设置数据信息选项
                     this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                    this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceFFP0);
                     encoding = me.Encoding.ToString();
                     break;
                 }
@@ -85,7 +84,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outfield", outField);
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
