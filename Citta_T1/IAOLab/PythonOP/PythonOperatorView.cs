@@ -1,9 +1,9 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.IAOLab.PythonOP;
+using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -14,22 +14,16 @@ using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class PythonOperatorView : Form
+    public partial class PythonOperatorView : BaseOperatorView
     {
-
-        private MoveOpControl opControl;
-        private string dataPath0;
-        private string[] columnName0;
         private string oldPath;
         private string fullOutputFilePath;
         private string noChangedOutputFilePath;
-        private string oldOptionDict;
         private List<string> previewTextList = new List<string>(new string[]{"", "", "", "", ""});
 
-        public PythonOperatorView(MoveOpControl opControl)
+        public PythonOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            this.opControl = opControl;
             
             InitOptionInfo();//初始化配置内容
             PythonInterpreterInfoLoad();//加载虚拟机
@@ -37,8 +31,6 @@ namespace Citta_T1.OperatorViews
 
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
-            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-
             InitPreViewText();
         }
 
@@ -49,11 +41,10 @@ namespace Citta_T1.OperatorViews
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                this.dataPath0 = dataInfo["dataPath0"];
-                this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.columnName0;
+                this.dataSourceFFP0 = dataInfo["dataPath0"];
+                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
+                nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
+                this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
                 this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             }
             //初始化输入输出路径
@@ -127,7 +118,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("cmd", String.Join(" ", this.previewTextList));
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -156,7 +147,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 添加取消
-        private void ConfirmButton_Click(object sender, System.EventArgs e)
+        protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (!IsOptionReady()) return;
 
@@ -164,7 +155,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
@@ -201,17 +192,10 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 
         }
-
-        private void CancelButton_Click(object sender, System.EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
         private bool IsOptionReady()
         {
             //输入源没连上
-            if (String.IsNullOrEmpty(this.dataSource0.Text)) return false;
+            if (String.IsNullOrEmpty(this.dataSourceTB0.Text)) return false;
 
             //虚拟机是否勾选
             if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
@@ -323,7 +307,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 预览框
-        private void pythonChosenComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void PythonChosenComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //动态改变preview内容
             this.previewTextList[0] = GetVirtualMachinFullPath(this.pythonChosenComboBox.Text);
@@ -342,13 +326,13 @@ namespace Citta_T1.OperatorViews
             UpdatePreviewText();
         }
 
-        private void pyParamTextBox_TextChanged(object sender, EventArgs e)
+        private void PyParamTextBox_TextChanged(object sender, EventArgs e)
         {
             this.previewTextList[2] = this.pyParamTextBox.Text;
             UpdatePreviewText();
         }
 
-        private void noInputFileRadio_CheckedChanged(object sender, EventArgs e)
+        private void NoInputFileRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (this.noInputFileRadio.Checked)
             {
@@ -357,7 +341,7 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void paramInputFileRadio_CheckedChanged(object sender, EventArgs e)
+        private void ParamInputFileRadio_CheckedChanged(object sender, EventArgs e)
         {
             if (this.paramInputFileRadio.Checked)
             {
@@ -366,7 +350,7 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void paramInputFileTextBox_TextChanged(object sender, EventArgs e)
+        private void ParamInputFileTextBox_TextChanged(object sender, EventArgs e)
         {
             if (this.paramInputFileRadio.Checked)
             {
@@ -375,7 +359,7 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void noOutputFileRadio_CheckedChanged(object sender, EventArgs e)
+        private void NoOutputFileRadio_CheckedChanged(object sender, EventArgs e)
         {
             // 此时不需要 rsChosenButton
             this.rsChosenButton.Enabled = false;
@@ -406,7 +390,7 @@ namespace Citta_T1.OperatorViews
                 UpdatePreviewText();
             }
         }
-        private void paramPrefixTagTextBox_TextChanged(object sender, EventArgs e)
+        private void ParamPrefixTagTextBox_TextChanged(object sender, EventArgs e)
         {
             if (this.paramRadioButton.Checked)
             {
@@ -510,7 +494,7 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void otherSeparatorText_TextChanged(object sender, EventArgs e)
+        private void OtherSeparatorText_TextChanged(object sender, EventArgs e)
         {
             this.otherSeparatorRadio.Checked = true;
             if (String.IsNullOrEmpty(this.otherSeparatorText.Text))

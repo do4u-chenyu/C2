@@ -3,11 +3,6 @@
     partial class PythonOperatorView
     {
         /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -28,11 +23,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.confirmButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.pythonChosenComboBox = new System.Windows.Forms.ComboBox();
-            this.dataSource0 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,7 +35,6 @@
             this.stdoutRadioButton = new System.Windows.Forms.RadioButton();
             this.browseChosenTextBox = new System.Windows.Forms.TextBox();
             this.paramPrefixTagTextBox = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label6 = new System.Windows.Forms.Label();
             this.pyBrowseButton = new System.Windows.Forms.Button();
             this.rsChosenButton = new System.Windows.Forms.Button();
@@ -90,7 +80,6 @@
             this.confirmButton.TabIndex = 1;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // cancelButton
             // 
@@ -103,7 +92,6 @@
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // pythonChosenComboBox
             // 
@@ -115,18 +103,18 @@
             this.pythonChosenComboBox.TabIndex = 3;
             this.pythonChosenComboBox.Text = "未配置Python虚拟机";
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
-            this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.pythonChosenComboBox_SelectedIndexChanged);
+            this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
             // 
             // dataSource0
             // 
-            this.dataSource0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSource0.Location = new System.Drawing.Point(137, 15);
-            this.dataSource0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSource0.Name = "dataSource0";
-            this.dataSource0.ReadOnly = true;
-            this.dataSource0.Size = new System.Drawing.Size(150, 31);
-            this.dataSource0.TabIndex = 12;
-            this.dataSource0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "dataSource0";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 31);
+            this.dataSourceTB0.TabIndex = 12;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -172,7 +160,7 @@
             this.pyParamTextBox.Name = "pyParamTextBox";
             this.pyParamTextBox.Size = new System.Drawing.Size(367, 31);
             this.pyParamTextBox.TabIndex = 17;
-            this.pyParamTextBox.TextChanged += new System.EventHandler(this.pyParamTextBox_TextChanged);
+            this.pyParamTextBox.TextChanged += new System.EventHandler(this.PyParamTextBox_TextChanged);
             // 
             // noOutputFileRadio
             // 
@@ -186,7 +174,7 @@
             this.noOutputFileRadio.TabStop = true;
             this.noOutputFileRadio.Text = "无结果文件";
             this.noOutputFileRadio.UseVisualStyleBackColor = true;
-            this.noOutputFileRadio.CheckedChanged += new System.EventHandler(this.noOutputFileRadio_CheckedChanged);
+            this.noOutputFileRadio.CheckedChanged += new System.EventHandler(this.NoOutputFileRadio_CheckedChanged);
             // 
             // rsFullFileNameTextBox
             // 
@@ -261,7 +249,7 @@
             this.paramPrefixTagTextBox.Text = "-f2";
             this.paramPrefixTagTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.paramPrefixTagTextBox, "参数标识");
-            this.paramPrefixTagTextBox.TextChanged += new System.EventHandler(this.paramPrefixTagTextBox_TextChanged);
+            this.paramPrefixTagTextBox.TextChanged += new System.EventHandler(this.ParamPrefixTagTextBox_TextChanged);
             // 
             // label6
             // 
@@ -324,7 +312,7 @@
             this.paramInputFileRadio.Text = "传参指定输入文件";
             this.toolTip1.SetToolTip(this.paramInputFileRadio, "结果文件路径以参数的形式传入自定义脚本中");
             this.paramInputFileRadio.UseVisualStyleBackColor = true;
-            this.paramInputFileRadio.CheckedChanged += new System.EventHandler(this.paramInputFileRadio_CheckedChanged);
+            this.paramInputFileRadio.CheckedChanged += new System.EventHandler(this.ParamInputFileRadio_CheckedChanged);
             // 
             // paramInputFileTextBox
             // 
@@ -337,7 +325,7 @@
             this.paramInputFileTextBox.Text = "-f1";
             this.paramInputFileTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.paramInputFileTextBox, "参数标识");
-            this.paramInputFileTextBox.TextChanged += new System.EventHandler(this.paramInputFileTextBox_TextChanged);
+            this.paramInputFileTextBox.TextChanged += new System.EventHandler(this.ParamInputFileTextBox_TextChanged);
             // 
             // saveFileDialog1
             // 
@@ -436,7 +424,7 @@
             this.otherSeparatorText.Size = new System.Drawing.Size(68, 31);
             this.otherSeparatorText.TabIndex = 3;
             this.otherSeparatorText.MaxLength = 1;
-            this.otherSeparatorText.TextChanged += new System.EventHandler(this.otherSeparatorText_TextChanged);
+            this.otherSeparatorText.TextChanged += new System.EventHandler(this.OtherSeparatorText_TextChanged);
             // 
             // otherSeparatorRadio
             // 
@@ -515,7 +503,7 @@
             this.noInputFileRadio.TabStop = true;
             this.noInputFileRadio.Text = "无指定输入文件（脚本中输入文件的路径可与算子连接的数据源路径不一致）";
             this.noInputFileRadio.UseVisualStyleBackColor = true;
-            this.noInputFileRadio.CheckedChanged += new System.EventHandler(this.noInputFileRadio_CheckedChanged);
+            this.noInputFileRadio.CheckedChanged += new System.EventHandler(this.NoInputFileRadio_CheckedChanged);
             // 
             // outputFileSettingTab
             // 
@@ -583,7 +571,7 @@
             this.Controls.Add(this.pyParamTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataSource0);
+            this.Controls.Add(this.dataSourceTB0);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pythonChosenComboBox);
             this.Controls.Add(this.cancelButton);
@@ -612,18 +600,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button confirmButton;
-        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ComboBox pythonChosenComboBox;
-        private System.Windows.Forms.TextBox dataSource0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox pyParamTextBox;
         private System.Windows.Forms.TextBox paramPrefixTagTextBox;
         private System.Windows.Forms.TextBox browseChosenTextBox;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.RadioButton browseChosenRadioButton;
         private System.Windows.Forms.RadioButton paramRadioButton;
