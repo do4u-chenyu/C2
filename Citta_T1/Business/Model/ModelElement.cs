@@ -158,7 +158,7 @@ namespace Citta_T1.Business.Model
                     && dict.ContainsKey("status") 
                     && dict.ContainsKey("enableoption")))
                     return ModelElement.Empty;
-                string subType = dict["subtype"];
+                string subType =OpUtil.SubTypeName(dict["subtype"]);
                 bool enableOption = Convert.ToBoolean(dict["enableoption"]);
                 ElementStatus status = OpUtil.EStatus(dict["status"]);
                 MoveOpControl Control = new MoveOpControl(0, name, subType, location)
