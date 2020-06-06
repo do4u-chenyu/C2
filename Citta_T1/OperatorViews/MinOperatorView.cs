@@ -20,9 +20,9 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             LoadOption();
 
-            this.minValueBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.minValueBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.minValueBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.minValueBox.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.minValueBox.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.minValueBox.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             SetTextBoxName(this.dataSourceTB0);
         }
         #region 添加取消
@@ -43,7 +43,7 @@ namespace Citta_T1.OperatorViews
             if (String.IsNullOrWhiteSpace(dataSourceTB0.Text)) return;
             SaveOption();
             //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
