@@ -1,11 +1,7 @@
 ﻿namespace Citta_T1.OperatorViews
 {
     partial class FilterOperatorView
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+    {       
 
         /// <summary>
         /// Clean up any resources being used.
@@ -34,12 +30,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.DataInfoBox = new System.Windows.Forms.TextBox();
-            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -47,7 +39,6 @@
             this.textBoxEx1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -119,7 +110,6 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -150,8 +140,8 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.DataInfoBox);
-            this.valuePanel.Controls.Add(this.outList);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,26 +153,26 @@
             // 
             // DataInfoBox
             // 
-            this.DataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfoBox.Location = new System.Drawing.Point(5, 4);
-            this.DataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfoBox.Name = "DataInfoBox";
-            this.DataInfoBox.ReadOnly = true;
-            this.DataInfoBox.Size = new System.Drawing.Size(137, 23);
-            this.DataInfoBox.TabIndex = 9;
-            this.DataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
-            this.DataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(5, 4);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "DataInfoBox";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(137, 23);
+            this.dataSourceTB0.TabIndex = 9;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
+            this.dataSourceTB0.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
             // 
             // OutList
             // 
-            this.outList.DataSource = null;
-            this.outList.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList.Location = new System.Drawing.Point(4, 263);
-            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.outList.Name = "OutList";
-            this.outList.Size = new System.Drawing.Size(112, 22);
-            this.outList.TabIndex = 8;
+            this.outListCCBL0.DataSource = null;
+            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outListCCBL0.Name = "OutList";
+            this.outListCCBL0.Size = new System.Drawing.Size(112, 22);
+            this.outListCCBL0.TabIndex = 8;
             // 
             // tableLayoutPanel2
             // 
@@ -322,8 +312,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -333,9 +321,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private Citta_T1.Controls.Common.ComCheckBoxList outList;
-        private System.Windows.Forms.TextBox DataInfoBox;
         private System.Windows.Forms.TextBox textBoxEx1;
-        private System.Windows.Forms.ToolTip toolTip1;
+
     }
 }
