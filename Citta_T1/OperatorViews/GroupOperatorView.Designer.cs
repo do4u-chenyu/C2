@@ -2,10 +2,7 @@
 {
     partial class GroupOperatorView
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+       
 
         /// <summary>
         /// Clean up any resources being used.
@@ -33,17 +30,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
+            this.bottomPanel = new System.Windows.Forms.Panel();           
             this.keyPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sortByString = new System.Windows.Forms.RadioButton();
-            this.sortByNum = new System.Windows.Forms.RadioButton();
-            this.dataInfo = new System.Windows.Forms.TextBox();
+            this.sortByNum = new System.Windows.Forms.RadioButton();         
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
@@ -55,8 +49,7 @@
             this.noRepetition = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.comboBox2 = new System.Windows.Forms.ComboBox();           
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -131,7 +124,6 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -187,7 +179,7 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.groupBox3);
-            this.valuePanel.Controls.Add(this.dataInfo);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.groupBox1);
@@ -240,16 +232,16 @@
             // 
             // dataInfo
             // 
-            this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataInfo.Location = new System.Drawing.Point(6, 2);
-            this.dataInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.dataInfo.Name = "dataInfo";
-            this.dataInfo.ReadOnly = true;
-            this.dataInfo.Size = new System.Drawing.Size(150, 23);
-            this.dataInfo.TabIndex = 9;
-            this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
-            this.dataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "dataInfo";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 9;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dataSourceTB0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
+            this.dataSourceTB0.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
             // 
             // groupBox2
             // 
@@ -451,8 +443,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -469,8 +459,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.RadioButton descendingOrder;
-        private System.Windows.Forms.TextBox dataInfo;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton sortByString;

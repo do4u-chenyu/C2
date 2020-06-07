@@ -20,7 +20,7 @@ namespace Citta_T1.OperatorViews
     {
         private List<string> selectColumn;
 
-        public FilterOperatorView(MoveOpControl opControl):base(opControl)
+        public FilterOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();          
             InitOptionInfo();

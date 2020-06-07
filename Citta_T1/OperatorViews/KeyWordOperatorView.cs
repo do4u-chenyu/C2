@@ -2,6 +2,7 @@
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
+using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -13,31 +14,23 @@ using System.Windows.Forms;
 namespace Citta_T1.OperatorViews
 {
 
-    public partial class KeyWordOperatorView : Form
+    public partial class KeyWordOperatorView : BaseOperatorView
     {
         private const int colIndexDefault = 0;
         private const bool readyStatus = true;
-        private readonly MoveOpControl opControl;
-        private string dataSourcePath, dataSourceEncoding, dataSourceSep;
-        private string keyWordPath, keyWordEncoding, keyWordExtType, keyWordSep;
-        private string[] dataSrcColName, keyWordColName;
-        private List<int> oldOutList;
-        private List<string> oldColumnName;
-        private List<string> selectOutColumn;
-        private string oldOptionDictStr;
 
-        public KeyWordOperatorView(MoveOpControl opControl)
+        private string dataSourceEncoding, dataSourceSep;
+        private string keyWordEncoding, keyWordExtType, keyWordSep;
+        private List<string> selectOutColumn;
+
+        public KeyWordOperatorView(MoveOpControl opControl) : base(opControl)
         {
-            this.opControl = opControl;
-            this.oldOptionDictStr = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            oldOutList = new List<int>();
-            oldColumnName = new List<string>();
             InitializeComponent();
             InitOptionInfo();
             LoadOption();
         }
 
-        private void ConfirmButton_Click(object sender, EventArgs e)
+        protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
             if (!OptionStatusCheck().Equals(readyStatus))
                 return;
@@ -48,7 +41,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             }
             //生成结果控件,创建relation,bcp结果文件
-            this.selectOutColumn = this.outList.GetItemCheckText();
+            this.selectOutColumn = this.outListCCBL0.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
@@ -60,10 +53,10 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
             List<string> outName = (from string index in this.opControl.Option.GetOptionSplit("outfield")
-                                    select this.dataSrcColName[Convert.ToInt32(index)]).ToList();
-            if (!this.oldOutList.SequenceEqual(this.outList.GetItemCheckIndex()))
+                                    select this.nowColumnsName0[Convert.ToInt32(index)]).ToList();
+            if (!this.oldOutList0.SequenceEqual(this.outListCCBL0.GetItemCheckIndex()))
             {
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnName, outName, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
             }
         }
 
@@ -72,33 +65,28 @@ namespace Citta_T1.OperatorViews
             UpdatePreviewText();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
         #region 加载连接数据
         private void InitOptionInfo()
         {
             GetDataInfo(); 
-            dataSourceBox.Text = SetTextBoxName(dataSourcePath);
-            dataSourceTip.SetToolTip(dataSourceBox, dataSourceBox.Text);
+            dataSourceTB0.Text = SetTextBoxName(dataSourceFFP0);
+            toolTip1.SetToolTip(dataSourceTB0, dataSourceTB0.Text);
 
-            keyWordBox.Text = SetTextBoxName(keyWordPath);
-            keyWordTip.SetToolTip(keyWordBox, keyWordBox.Text);
-            dataSrcColName = SetOption(this.dataSourcePath,
-                                       this.dataSourceBox.Text,
+            dataSourceTB1.Text = SetTextBoxName(dataSourceFFP1);
+            toolTip1.SetToolTip(dataSourceTB1, dataSourceTB1.Text);
+            nowColumnsName0 = SetOption(this.dataSourceFFP0,
+                                       this.dataSourceTB0.Text,
                                        dataSourceEncoding,
                                        dataSourceSep.ToCharArray());
-            keyWordColName = SetOption(this.keyWordPath,
-                                       this.keyWordBox.Text,
+            nowColumnsName1 = SetOption(this.dataSourceFFP1,
+                                       this.dataSourceTB1.Text,
                                        keyWordEncoding,
                                        keyWordSep.ToCharArray());
-            opControl.FirstDataSourceColumns = dataSrcColName;
-            opControl.SecondDataSourceColumns = keyWordColName;
-            dataColumnBox.Items.AddRange(dataSrcColName);
-            keyWordColBox.Items.AddRange(keyWordColName);
-            outList.Items.AddRange(dataSrcColName);
+            opControl.FirstDataSourceColumns = nowColumnsName0;
+            opControl.SecondDataSourceColumns = nowColumnsName1;
+            dataColumnBox.Items.AddRange(nowColumnsName0);
+            keyWordColBox.Items.AddRange(nowColumnsName1);
+            outListCCBL0.Items.AddRange(nowColumnsName0);
             dataColumnBox.SelectedIndex = colIndexDefault;
             keyWordColBox.SelectedIndex = colIndexDefault;
             conditionSelectBox.SelectedIndex = colIndexDefault;
@@ -106,19 +94,19 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            Global.GetOptionDao().IsCleanOption(opControl, dataSrcColName, "outfield");
+            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "outfield");
             Global.GetOptionDao().IsCleanOption(opControl,
-                                                    dataSrcColName,
+                                                    nowColumnsName0,
                                                     "dataSelectIndex");
             Global.GetOptionDao().IsCleanOption(opControl,
-                                                    keyWordColName,
+                                                    nowColumnsName1,
                                                     "keySelectIndex");
             string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
             int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            oldOutList = indexs.ToList();
-            outList.LoadItemCheckIndex(indexs);
-            oldColumnName.AddRange(from int index in indexs
-                                   select outList.Items[index].ToString());
+            oldOutList0 = indexs.ToList();
+            outListCCBL0.LoadItemCheckIndex(indexs);
+            oldColumnsName0.AddRange(from int index in indexs
+                                   select outListCCBL0.Items[index].ToString());
             dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex",null));
             keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex",null));
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect",null));          
@@ -126,8 +114,8 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             opControl.Option.OptionDict.Clear();
-            List<int> checkIndexs = this.outList.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList);
+            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
+            List<int> outIndexs = new List<int>(this.oldOutList0);
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join("\t", outIndexs);
 
@@ -152,8 +140,8 @@ namespace Citta_T1.OperatorViews
         private void GetDataInfo()
         {
             Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID);
-            dataInfoDic.TryGetValue("dataPath0", out dataSourcePath);
-            dataInfoDic.TryGetValue("dataPath1", out keyWordPath);
+            dataInfoDic.TryGetValue("dataPath0", out dataSourceFFP0);
+            dataInfoDic.TryGetValue("dataPath1", out dataSourceFFP1);
             dataInfoDic.TryGetValue("encoding0", out dataSourceEncoding);
             dataInfoDic.TryGetValue("encoding1", out keyWordEncoding);
             dataInfoDic.TryGetValue("extType1", out keyWordExtType);
@@ -193,7 +181,7 @@ namespace Citta_T1.OperatorViews
         #region 检查
         private bool OptionStatusCheck()
         {
-            if (this.outList.GetItemCheckIndex().Count == colIndexDefault)
+            if (this.outListCCBL0.GetItemCheckIndex().Count == colIndexDefault)
             {
                 MessageBox.Show("您需要选择输出字段");
                 return !readyStatus;
@@ -204,7 +192,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与更新
         private void UpdatePreviewText()
         {
-            this.keyWordPreviewBox.Text = new KeyWordCombine().KeyWordPreView(keyWordPath,
+            this.keyWordPreviewBox.Text = new KeyWordCombine().KeyWordPreView(dataSourceFFP1,
                                                                               keyWordSep.ToCharArray(),
                                                                               keyWordColBox.SelectedIndex,
                                                                               keyWordExtType,
