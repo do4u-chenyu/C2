@@ -15,12 +15,11 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -148,7 +147,7 @@ namespace HZH_Controls.Controls
         void Parent_Paint(object sender, PaintEventArgs e)
         {
             if (blnLoading)
-                return;           
+                return;
             if (shadowHeight > 0)
             {
                 var control = sender as Control;

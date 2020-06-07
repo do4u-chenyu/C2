@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Citta_T1.Controls.Title;
+﻿using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
@@ -38,7 +31,7 @@ namespace Citta_T1.Utils
                     Control ret = FindControlByName(ct, name);
                     if (ret != null)
                         return ret;
-                }          
+                }
             }
             return null;
         }

@@ -43,14 +43,14 @@ namespace Citta_T1.Business.Schedule.Cmd
                 {
                     //如果是or，开启一个新列表
                     collideList.Add(collideTmpList);
-                    collideTmpList = new List<string[]>{tmpFactor.Skip(1).Take(2).ToArray()};
+                    collideTmpList = new List<string[]> { tmpFactor.Skip(1).Take(2).ToArray() };
                 }
             }
             collideList.Add(collideTmpList);
 
             //重写表头（覆盖）
             ReWriteBCPFile("collide");
-            
+
             foreach (List<string[]> tmpList in collideList)
             {
                 string inputField1 = "$" + TransInputLine(tmpList[0][0]);

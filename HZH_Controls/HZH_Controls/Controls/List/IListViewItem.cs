@@ -14,9 +14,6 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HZH_Controls.Controls
 {

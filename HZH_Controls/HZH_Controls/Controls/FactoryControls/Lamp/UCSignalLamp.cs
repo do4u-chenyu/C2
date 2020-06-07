@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -185,7 +182,7 @@ namespace HZH_Controls.Controls
         {
             base.OnPaint(e);
             var g = e.Graphics;
-            g.SetGDIHigh();           
+            g.SetGDIHigh();
 
             Color c1 = lampColor[intColorIndex];
             g.FillEllipse(new SolidBrush(c1), new Rectangle(this.ClientRectangle.Location, this.ClientRectangle.Size - new Size(1, 1)));

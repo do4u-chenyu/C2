@@ -29,7 +29,7 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.AvgComBox = new System.Windows.Forms.ComboBox();
+            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -117,7 +117,7 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.AvgComBox);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
@@ -138,18 +138,18 @@
             // 
             // AvgComBox
             // 
-            this.AvgComBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.AvgComBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.AvgComBox.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.AvgComBox.FormattingEnabled = true;
-            this.AvgComBox.Location = new System.Drawing.Point(0, 64);
-            this.AvgComBox.Margin = new System.Windows.Forms.Padding(2);
-            this.AvgComBox.Name = "AvgComBox";
-            this.AvgComBox.Size = new System.Drawing.Size(136, 24);
-            this.AvgComBox.TabIndex = 1;
-            this.AvgComBox.SelectionChangeCommitted += new System.EventHandler(this.AvgComBox_SelectionChangeCommitted);
-            this.AvgComBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AvgComBox_KeyUp);
-            this.AvgComBox.Leave += new System.EventHandler(this.AvgComBox_Leave);
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(0, 64);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "AvgComBox";
+            this.comboBox0.Size = new System.Drawing.Size(136, 24);
+            this.comboBox0.TabIndex = 1;
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.AvgComBox_SelectionChangeCommitted);
+            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AvgComBox_KeyUp);
+            this.comboBox0.Leave += new System.EventHandler(this.AvgComBox_Leave);
             // 
             // AvgOperatorView
             // 
@@ -183,6 +183,6 @@
         private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox AvgComBox;
+        private System.Windows.Forms.ComboBox comboBox0;
     }
 }

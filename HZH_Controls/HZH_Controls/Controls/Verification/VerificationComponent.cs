@@ -17,9 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -476,7 +474,7 @@ namespace HZH_Controls.Controls
         /// </summary>
         public void CloseErrorTips()
         {
-            for (int i = 0; i < 1; )
+            for (int i = 0; i < 1;)
             {
                 try
                 {

@@ -14,14 +14,13 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace HZH_Controls.Controls
 {
@@ -250,12 +249,12 @@ namespace HZH_Controls.Controls
                     return;
                 if (!typeof(IDataGridViewRow).IsAssignableFrom(value) || !value.IsSubclassOf(typeof(Control)))
                     throw new Exception("行控件没有实现IDataGridViewRow接口");
-                m_rowType = value;                      
+                m_rowType = value;
                 if (m_columns != null && m_columns.Count > 0)
                     ReloadSource();
             }
         }
-      
+
         /// <summary>
         /// The m select row
         /// </summary>
@@ -335,7 +334,7 @@ namespace HZH_Controls.Controls
             }
             return null;
         }
-              
+
         #region 事件
         /// <summary>
         /// The head CheckBox change event
@@ -468,14 +467,14 @@ namespace HZH_Controls.Controls
             { return; }
             try
             {
-                ControlHelper.FreezeControl(this, true);              
+                ControlHelper.FreezeControl(this, true);
                 Rows = new List<IDataGridViewRow>();
                 if (m_columns == null || m_columns.Count <= 0)
                     return;
                 if (m_dataSource != null)
                 {
                     int intIndex = 0;
-                   
+
                     int intSourceCount = 0;
                     if (m_dataSource is DataTable)
                     {
@@ -509,7 +508,7 @@ namespace HZH_Controls.Controls
                                 row.RowHeight = m_rowHeight;
                             item.Visible = true;
                             item.BringToFront();
-                         
+
                             Rows.Add(row);
                             row.RowIndex = Rows.IndexOf(row);
                         }
@@ -517,7 +516,7 @@ namespace HZH_Controls.Controls
                     }
 
                     if (intIndex < intSourceCount)
-                    {                      
+                    {
                         for (int i = intIndex; i < intSourceCount; i++)
                         {
                             IDataGridViewRow row = (IDataGridViewRow)Activator.CreateInstance(m_rowType);
@@ -546,9 +545,9 @@ namespace HZH_Controls.Controls
                             row.RowIndex = Rows.IndexOf(row);
                             this.panRow.Controls.Add(rowControl);
                             rowControl.BringToFront();
-                        
+
                         }
-                    }                 
+                    }
                 }
                 else
                 {
@@ -563,7 +562,7 @@ namespace HZH_Controls.Controls
                 ControlHelper.FreezeControl(this, false);
             }
         }
-      
+
         /// <summary>
         /// 快捷键
         /// </summary>
@@ -707,8 +706,8 @@ namespace HZH_Controls.Controls
                 ControlHelper.FreezeControl(this, false);
             }
         }
-      
+
         #endregion
-    
+
     }
 }

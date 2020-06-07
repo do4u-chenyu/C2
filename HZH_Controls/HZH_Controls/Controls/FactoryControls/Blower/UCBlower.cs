@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -215,7 +212,7 @@ namespace HZH_Controls.Controls
 
             //底座
             GraphicsPath gpDZ = new GraphicsPath();
-            gpDZ.AddLines(new Point[] 
+            gpDZ.AddLines(new Point[]
             {
                 new Point( m_rectWorking.Left+m_rectWorking.Width/2,m_rectWorking.Top+m_rectWorking.Height/2),
                 new Point(m_rectWorking.Left+2,this.Height),

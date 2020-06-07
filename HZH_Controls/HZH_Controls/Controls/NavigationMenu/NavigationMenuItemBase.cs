@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace HZH_Controls.Controls
 {
-   public class NavigationMenuItemBase
+    public class NavigationMenuItemBase
     {
         /// <summary>
         /// The icon

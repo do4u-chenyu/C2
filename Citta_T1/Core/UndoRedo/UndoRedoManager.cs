@@ -1,9 +1,5 @@
 ﻿using Citta_T1.Business.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo
 {
@@ -118,7 +114,7 @@ namespace Citta_T1.Core.UndoRedo
 
             undoRedoDict[md].RedoStack.Clear();
             undoRedoDict[md].UndoStack.Clear();
-            undoRedoDict.Remove(md);    
+            undoRedoDict.Remove(md);
         }
     }
 }

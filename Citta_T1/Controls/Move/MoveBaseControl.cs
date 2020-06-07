@@ -18,7 +18,7 @@ namespace Citta_T1.Controls.Move
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         public OpUtil.Encoding Encoding { get; set; }
-        public char Separator { get; set ; }
+        public char Separator { get; set; }
         public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
         public OpUtil.ExtType ExtType
@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move
         protected Point mouseOffset;
 
 
-        protected int pinWidth  = 6;
+        protected int pinWidth = 6;
         protected int pinHeight = 6;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
@@ -104,7 +104,7 @@ namespace Citta_T1.Controls.Move
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
-    
+
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y), new PointF(x + width - radius, y));
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
             g.DrawLine(MyPens.DarkGray, new PointF(x, y + radius), new PointF(x, y + height - radius));
@@ -113,7 +113,7 @@ namespace Citta_T1.Controls.Move
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
             g.DrawArc(MyPens.DarkGray, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-            
+
             g.Dispose();
 
             this.BackgroundImage = this.staticImage;

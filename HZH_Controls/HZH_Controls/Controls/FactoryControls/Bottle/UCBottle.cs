@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -275,8 +272,8 @@ namespace HZH_Controls.Controls
 
             //画空瓶子
             GraphicsPath pathPS = new GraphicsPath();
-            Point[] psPS = new Point[] 
-            {       
+            Point[] psPS = new Point[]
+            {
                 new Point(m_workingRect.Left, m_workingRect.Top),
                 new Point(m_workingRect.Right - 1, m_workingRect.Top),
                 new Point(m_workingRect.Right - 1, m_workingRect.Bottom - 15),
@@ -293,10 +290,10 @@ namespace HZH_Controls.Controls
             Rectangle rectYT = Rectangle.Empty;
             if (decYTHeight < 15)
             {
-                PointF[] psYT = new PointF[] 
-                { 
-                    new PointF((float)(m_workingRect.Left+(15-decYTHeight))+3,(float)(m_workingRect.Bottom-decYTHeight)),                   
-                    new PointF((float)(m_workingRect.Right-(15-decYTHeight))-3,(float)(m_workingRect.Bottom-decYTHeight)),  
+                PointF[] psYT = new PointF[]
+                {
+                    new PointF((float)(m_workingRect.Left+(15-decYTHeight))+3,(float)(m_workingRect.Bottom-decYTHeight)),
+                    new PointF((float)(m_workingRect.Right-(15-decYTHeight))-3,(float)(m_workingRect.Bottom-decYTHeight)),
                     new PointF(m_workingRect.Right-1-m_workingRect.Width/4, m_workingRect.Bottom),
                     new PointF(m_workingRect.Left+m_workingRect.Width/4, m_workingRect.Bottom),
                 };
@@ -306,8 +303,8 @@ namespace HZH_Controls.Controls
             }
             else
             {
-                PointF[] psYT = new PointF[] 
-                { 
+                PointF[] psYT = new PointF[]
+                {
                     new PointF(m_workingRect.Left,(float)(m_workingRect.Bottom-decYTHeight)),
                     new PointF(m_workingRect.Right-1,(float)(m_workingRect.Bottom-decYTHeight)),
                     new PointF(m_workingRect.Right-1,m_workingRect.Bottom-15),
@@ -346,12 +343,12 @@ namespace HZH_Controls.Controls
             g.FillRectangle(new SolidBrush(bottleMouthColor), new Rectangle(m_workingRect.Left + m_workingRect.Width / 4, m_workingRect.Bottom, m_workingRect.Width / 2, 15));
             //画瓶颈阴影
             GraphicsPath pathPJ = new GraphicsPath();
-            Point[] psPJ = new Point[] 
-            {       
+            Point[] psPJ = new Point[]
+            {
                 new Point(m_workingRect.Left, m_workingRect.Bottom-15),
                 new Point(m_workingRect.Right-1, m_workingRect.Bottom-15),
                 new Point(m_workingRect.Right-1-m_workingRect.Width/4, m_workingRect.Bottom),
-                new Point(m_workingRect.Left+m_workingRect.Width/4, m_workingRect.Bottom)               
+                new Point(m_workingRect.Left+m_workingRect.Width/4, m_workingRect.Bottom)
             };
             pathPJ.AddLines(psPJ);
             pathPJ.CloseAllFigures();

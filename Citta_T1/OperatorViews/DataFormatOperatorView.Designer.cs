@@ -31,8 +31,8 @@
             this.valuePanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox0 = new System.Windows.Forms.ComboBox();
+            this.textBox0 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -154,8 +154,8 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox0, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox0, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 54);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
@@ -185,29 +185,29 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(44, 3);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(116, 25);
-            this.comboBox1.TabIndex = 2;
+            this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(44, 3);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "comboBox1";
+            this.comboBox0.Size = new System.Drawing.Size(116, 25);
+            this.comboBox0.TabIndex = 2;
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(165, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(114, 21);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "别名";
-            this.textBox1.ForeColor = System.Drawing.Color.Gray;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Enter += new System.EventHandler(this.TextBox1_Enter);
-            this.textBox1.Leave += new System.EventHandler(this.TextBox1_Leave);
+            this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox0.Location = new System.Drawing.Point(165, 5);
+            this.textBox0.Name = "textBox1";
+            this.textBox0.Size = new System.Drawing.Size(114, 21);
+            this.textBox0.TabIndex = 6;
+            this.textBox0.Text = "别名";
+            this.textBox0.ForeColor = System.Drawing.Color.Gray;
+            this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox0.Enter += new System.EventHandler(this.TextBox1_Enter);
+            this.textBox0.Leave += new System.EventHandler(this.TextBox1_Leave);
             // 
             // label3
             // 
@@ -292,10 +292,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.Label label3;
     }
 }

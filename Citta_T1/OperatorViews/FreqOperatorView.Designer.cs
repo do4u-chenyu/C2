@@ -24,7 +24,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -172,8 +171,6 @@
             this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
             this.dataSourceTB0.TabIndex = 7;
             this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSourceTB0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
-            this.dataSourceTB0.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
             // 
             // groupBox2
             // 

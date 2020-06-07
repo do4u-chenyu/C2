@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
@@ -48,7 +47,7 @@ namespace Citta_T1.Controls.Move.Rs
 
         public MoveRsControl(int size, string desciption, Point loc)
         {
-           
+
             InitializeComponent();
             InitializeContextMenuStrip();
 
@@ -71,7 +70,7 @@ namespace Citta_T1.Controls.Move.Rs
             endLineIndexs.Add(-1);
 
 
-    }
+        }
 
         private void InitializeOpPinPicture()
         {
@@ -343,7 +342,7 @@ namespace Citta_T1.Controls.Move.Rs
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-    
+
             factor = zoomUp ? factor : 1 / factor;
 
             SetControlsBySize(factor, this);
@@ -362,10 +361,10 @@ namespace Citta_T1.Controls.Move.Rs
                 this.leftPictureBox.Image = Properties.Resources.resultDone;
             // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (System.IO.File.Exists(this.FullFilePath))
-                BCPBuffer.GetInstance().SetDirty(this.FullFilePath);        
+                BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
         }
 
-    
+
         #endregion
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {

@@ -1,14 +1,10 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
@@ -68,7 +64,7 @@ namespace Citta_T1.Controls
             g.SmoothingMode = SmoothingMode.AntiAlias;
             foreach (ModelRelation mr in currentDoc.ModelRelations)
             {
-                PointF s = currentDoc.WorldMap.ScreenToWorldF(mr.StartP,false);
+                PointF s = currentDoc.WorldMap.ScreenToWorldF(mr.StartP, false);
                 PointF a = currentDoc.WorldMap.ScreenToWorldF(mr.A, false);
                 PointF b = currentDoc.WorldMap.ScreenToWorldF(mr.B, false);
                 PointF e = currentDoc.WorldMap.ScreenToWorldF(mr.EndP, false);

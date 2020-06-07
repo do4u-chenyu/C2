@@ -1,11 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Dialogs;
-using Citta_T1.Business.Model;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
-using Citta_T1.Core.UndoRedo.Command;
+using Citta_T1.Dialogs;
+using Citta_T1.Utils;
+using System;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Top
 {
@@ -110,7 +109,7 @@ namespace Citta_T1.Controls.Top
 
         private void MoreButton_MouseClick(object sender, MouseEventArgs e)
         {
-            ConfigForm config = new ConfigForm(); 
+            ConfigForm config = new ConfigForm();
             config.ShowDialog();
         }
 

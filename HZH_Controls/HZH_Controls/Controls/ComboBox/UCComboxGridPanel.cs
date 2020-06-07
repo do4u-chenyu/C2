@@ -16,10 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
@@ -93,7 +90,7 @@ namespace HZH_Controls.Controls
         /// The string last search text
         /// </summary>
         private string strLastSearchText = string.Empty;
-      
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UCComboxGridPanel" /> class.
         /// </summary>
@@ -105,7 +102,7 @@ namespace HZH_Controls.Controls
             m_page.ShowSourceChanged += m_page_ShowSourceChanged;
         }
 
-      
+
 
         /// <summary>
         /// Handles the ItemClick event of the ucDataGridView1 control.

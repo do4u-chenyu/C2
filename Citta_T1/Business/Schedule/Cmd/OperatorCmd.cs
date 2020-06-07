@@ -112,7 +112,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 
         public string TransOFSToCmd(string separator)
         {
-            if(separator == "|")
+            if (separator == "|")
             {
                 return "\t";
             }
@@ -120,7 +120,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 return "|";
             }
-            
+
         }
 
         public string TransChoiceToCmd(string choice)
@@ -141,8 +141,8 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             switch (choice)
             {
-                case "0":return "&&";
-                case "1":return "||";
+                case "0": return "&&";
+                case "1": return "||";
             }
             return "and、or无该选项";
         }
@@ -182,7 +182,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 if (condition.IndexOf('\\') >= 0)
                     condition = condition.Replace("\\", "\\\\");
-                if ( condition.IndexOf('\"') >= 0)
+                if (condition.IndexOf('\"') >= 0)
                     condition = condition.Replace("\"", "\\\"");
                 return "\"" + condition + "\"";
             }
@@ -205,7 +205,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             else
             {
-                if(JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
+                if (JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
                 {
                     return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
                 }
@@ -226,7 +226,7 @@ namespace Citta_T1.Business.Schedule.Cmd
                     num++;
                 }
             }
-            return num; 
+            return num;
         }
 
         public OpUtil.Encoding JudgeInputFileEncoding(string inputFile)

@@ -16,10 +16,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -86,7 +82,7 @@ namespace HZH_Controls.Forms
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(new MethodInvoker(delegate() { SetMessage(strText, intValue); }));
+                this.BeginInvoke(new MethodInvoker(delegate () { SetMessage(strText, intValue); }));
             }
             else
             {

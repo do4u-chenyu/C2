@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -119,7 +116,7 @@ namespace HZH_Controls.Controls
         public MindMappingItemEntity SelectEntity
         {
             get { return selectEntity; }
-           private set { selectEntity = value; }
+            private set { selectEntity = value; }
         }
         /// <summary>
         /// Gets or sets the data source.
@@ -271,12 +268,12 @@ namespace HZH_Controls.Controls
                 if (item.DrawRectangle.Contains(mouseLocation))
                 {
                     selectEntity = item;
-                    if (ItemClicked != null )
+                    if (ItemClicked != null)
                     {
                         ItemClicked(item, null);
                     }
                 }
-               
+
                 if (item.ExpansionRectangle.Contains(mouseLocation))
                 {
                     item.IsExpansion = !item.IsExpansion;
@@ -357,12 +354,12 @@ namespace HZH_Controls.Controls
             //连线
             if (item.ParentItem != null)
             {
-                g.DrawLines(new Pen(new SolidBrush(lineColor), 1), new PointF[] 
-                { 
+                g.DrawLines(new Pen(new SolidBrush(lineColor), 1), new PointF[]
+                {
                     new PointF(item.ParentItem.DrawRectangle.Right,item.ParentItem.DrawRectangle.Top+item.ParentItem.DrawRectangle.Height/2),
                     new PointF(item.ParentItem.DrawRectangle.Right+12,item.ParentItem.DrawRectangle.Top+item.ParentItem.DrawRectangle.Height/2),
                     //new PointF(item.ParentItem.DrawRectangle.Right+12,item.DrawRectangle.Top+item.DrawRectangle.Height/2),                    
-                    new PointF(item.DrawRectangle.Left-12,item.DrawRectangle.Top+item.DrawRectangle.Height/2),                 
+                    new PointF(item.DrawRectangle.Left-12,item.DrawRectangle.Top+item.DrawRectangle.Height/2),
                     new PointF(item.DrawRectangle.Left,item.DrawRectangle.Top+item.DrawRectangle.Height/2),
                 });
             }

@@ -29,11 +29,11 @@ namespace Citta_T1.Business.Schedule.Cmd
             for (int i = 2; i <= GetOptionFactorCount(); i++)
                 relateList.Add(option.GetOption("factor" + i.ToString()));
 
-            string relateOption = "\"" + string.Join("|",relateList) + "\"";
+            string relateOption = "\"" + string.Join("|", relateList) + "\"";
 
             ReWriteBCPFile("relate");
 
-            cmds.Add(string.Format("sbin\\relate.exe {0} {1} {2} {3} {4} {5} {6} {7} {8}| sbin\\iconv.exe -f gbk -t utf-8  >> {9}", 
+            cmds.Add(string.Format("sbin\\relate.exe {0} {1} {2} {3} {4} {5} {6} {7} {8}| sbin\\iconv.exe -f gbk -t utf-8  >> {9}",
                 inputFilePath1, inputFileEncoding1, inputFileSeparator1,
                 inputFilePath2, inputFileEncoding2, inputFileSeparator2,
                 outField1, outField2, relateOption, this.outputFilePath));

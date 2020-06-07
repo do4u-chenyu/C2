@@ -24,7 +24,7 @@ namespace Citta_T1.Business.Option
         // RIGHT_ME.EnableOption开启设置菜单
         // 更新子图的配置状态
         public void EnableOpOptionView(ModelRelation mr)
-        {      
+        {
             ModelElement rightMe = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
             // 手工划线时关系的ENDID必须为OPControl
             if (rightMe == ModelElement.Empty || rightMe.Type != ElementType.Operator)
@@ -32,10 +32,10 @@ namespace Citta_T1.Business.Option
 
             MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
-            if (moveOpControl.IsSingleDimension()) 
+            if (moveOpControl.IsSingleDimension())
             {
                 moveOpControl.EnableOption = true;
-                DoInputComare(rightMe, mr, ModelRelation.Empty);   
+                DoInputComare(rightMe, mr, ModelRelation.Empty);
             }
             // 情况2
             else
@@ -44,7 +44,7 @@ namespace Citta_T1.Business.Option
                 if (brothers.Count != 2) return;
                 moveOpControl.EnableOption = true;
                 DoInputComare(rightMe, brothers[0], brothers[1]);
-            }                
+            }
         }
 
         //  情况1: 旧表是新表的子集，且顺序一致
@@ -69,12 +69,12 @@ namespace Citta_T1.Business.Option
 
             // 二元算子时,第二个入度的数据源表头不能为空
             if (moveOpControl.IsBinaryDimension())
-                if(oldColumns1.Length == 0)
+                if (oldColumns1.Length == 0)
                     return;
 
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
             LoadColumns(startElement0, newColumns0);
-    
+
             if (moveOpControl.IsBinaryDimension())// 二元算子
             {
                 ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
@@ -84,7 +84,7 @@ namespace Citta_T1.Business.Option
                 // 默认线0落在入度0,线1落在入度1
                 // 线0落在入度1,线1落在入度0, 交换表头
                 if (mr0.EndPin == 1 && mr1.EndPin == 0)
-                    Swap(ref newColumns0, ref newColumns1);  
+                    Swap(ref newColumns0, ref newColumns1);
             }
 
             bool factor0 = newColumns0.Count >= oldColumns0.Length && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Length));
@@ -94,7 +94,7 @@ namespace Citta_T1.Business.Option
             {
                 me.Status = RestoreOptionStatus(me);
                 return;
-            } 
+            }
             Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
         }
 
@@ -115,7 +115,7 @@ namespace Citta_T1.Business.Option
 
         //获取算子上次配置状态
         private ElementStatus RestoreOptionStatus(ModelElement me)
-        { 
+        {
             Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
 
             if (optionDict == null)
@@ -131,19 +131,19 @@ namespace Citta_T1.Business.Option
                     continue;
 
                 if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
-                   return ElementStatus.Null;
+                    return ElementStatus.Null;
             }
             return ElementStatus.Ready;
         }
-       
+
         public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
         {
             //不存在旧数据源，直接返回
             bool clear = false;
             string optionValues = moc.Option.GetOption(name);
-            if (string.IsNullOrEmpty(optionValues) )
-                return !clear;          
-            
+            if (string.IsNullOrEmpty(optionValues))
+                return !clear;
+
             //复选框配置的判断
             int index;
             int maxIndex = columns.Length - 1;
@@ -170,7 +170,7 @@ namespace Citta_T1.Business.Option
         // 情况3：其他情况
         //       后续子图Null状态
         //
-        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)  
+        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)
         {
             int oldCount = oldColumns.Count;
             int nowCount = nowColumns.Count;
@@ -181,9 +181,9 @@ namespace Citta_T1.Business.Option
                 string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
                 return;
-            }    
+            }
             IsNewOut(nowColumns, ID);
-        }     
+        }
 
         public void IsNewOut(List<string> nowColumns, int ID)
         {
@@ -208,7 +208,7 @@ namespace Citta_T1.Business.Option
                 if (!oldIndexs.Contains(index))
                     oldIndexs.Add(index);
             }
-            
+
 
         }
 
@@ -220,10 +220,10 @@ namespace Citta_T1.Business.Option
             foreach (ModelRelation mr in relations)
             {
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                dataSourceInfoDict["dataPath"    + mr.EndPin] = me.FullFilePath;
-                dataSourceInfoDict["encoding"    + mr.EndPin] = me.Encoding.ToString();
-                dataSourceInfoDict["separator"   + mr.EndPin] = me.Separator.ToString();
-                dataSourceInfoDict["extType"     + mr.EndPin] = me.ExtType.ToString();
+                dataSourceInfoDict["dataPath" + mr.EndPin] = me.FullFilePath;
+                dataSourceInfoDict["encoding" + mr.EndPin] = me.Encoding.ToString();
+                dataSourceInfoDict["separator" + mr.EndPin] = me.Separator.ToString();
+                dataSourceInfoDict["extType" + mr.EndPin] = me.ExtType.ToString();
                 dataSourceInfoDict["description" + mr.EndPin] = me.Description;
             }
             return dataSourceInfoDict;
@@ -232,6 +232,6 @@ namespace Citta_T1.Business.Option
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
         }
-   
+
     }
 }

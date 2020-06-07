@@ -3,31 +3,23 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
     public partial class FreqOperatorView : BaseOperatorView
     {
-       
-        private List<string> selectColumn;
-        private List<bool> oldCheckedItems=new List<bool>();
-        private static LogUtil log = LogUtil.GetInstance("FreqOperatorView");
-
-
+        private List<bool> oldCheckedItems = new List<bool>();
 
         public FreqOperatorView(MoveOpControl opControl) : base(opControl)
         {
-            InitializeComponent();           
-            InitOptionInfo();
+            InitializeComponent();
+            InitByDataSource();
             LoadOption();
-            
+
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
@@ -37,30 +29,16 @@ namespace Citta_T1.OperatorViews
 
         }
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-        }
-
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            string column = bcpInfo.ColumnLine;
-            this.nowColumnsName0 = column.Split(separator);
-            foreach (string name in this.nowColumnsName0)
-                this.outListCCBL0.AddItems(name);
-
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
-      
-       
+
+
         #endregion
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
@@ -88,22 +66,22 @@ namespace Citta_T1.OperatorViews
 
             if (this.oldCheckedItems[0] != this.repetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldCheckedItems[1] != this.noRepetition.Checked)
+            else if (this.oldCheckedItems[1] != this.noRepetition.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldCheckedItems[2] != this.ascendingOrder.Checked)
+            else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
                 Global.GetMainForm().SetDocumentDirty();
-            else if(this.oldCheckedItems[3] != this.descendingOrder .Checked)
+            else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
                 Global.GetMainForm().SetDocumentDirty();
             else if (String.Join("\t", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-           
+
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                this.selectColumn = this.outListCCBL0.GetItemCheckText();
-                this.selectColumn.Add("频率统计结果");
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
+                this.selectedColumns = this.outListCCBL0.GetItemCheckText();
+                this.selectedColumns.Add("频率统计结果");
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
 
@@ -149,7 +127,7 @@ namespace Citta_T1.OperatorViews
             if (this.opControl.Option.GetOption("ascendingOrder") != "")
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (this.opControl.Option.GetOption("descendingOrder") != "")
-                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));            
+                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
@@ -159,7 +137,7 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
             }
-           
+
         }
         #endregion
         private void GroupBox1_Paint(object sender, PaintEventArgs e)
@@ -170,16 +148,6 @@ namespace Citta_T1.OperatorViews
         private void GroupBox2_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
-        }
-
-        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-        }
-
-        private void DataInfo_LostFocus(object sender, EventArgs e)
-        {
-            SetTextBoxName(this.dataSourceTB0);
         }
     }
 }

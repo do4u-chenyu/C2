@@ -13,10 +13,6 @@
 //
 // If you use this code, please keep this note.
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
 
 namespace HZH_Controls
@@ -68,6 +64,6 @@ namespace HZH_Controls
             get { return dark; }
             internal set { dark = value; }
         }
-      
+
     }
 }

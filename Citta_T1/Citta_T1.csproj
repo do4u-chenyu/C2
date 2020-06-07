@@ -369,11 +369,11 @@
     <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\KeyWordOperatorView.cs">
+    <Compile Include="OperatorViews\KeywordOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OperatorViews\KeyWordOperatorView.designer.cs">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    <Compile Include="OperatorViews\KeywordOperatorView.designer.cs">
+      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">
       <SubType>Form</SubType>
@@ -588,8 +588,8 @@
     <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\KeyWordOperatorView.resx">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    <EmbeddedResource Include="OperatorViews\KeywordOperatorView.resx">
+      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
       <DependentUpon>MaxOperatorView.cs</DependentUpon>

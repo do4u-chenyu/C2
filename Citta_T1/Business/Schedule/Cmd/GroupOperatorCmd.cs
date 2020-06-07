@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
 
             //是否去重(是对整个文件去重)、升降序
-            string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u | ",this.sortConfig) : String.Empty;
+            string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u | ", this.sortConfig) : String.Empty;
             string order = option.GetOption("ascendingOrder").ToLower() == "true" ? String.Empty : "-r ";
             string type = option.GetOption("sortByNum").ToLower() == "true" ? "-n" : String.Empty;
 
@@ -33,7 +33,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //重写表头（覆盖）
             ReWriteBCPFile();
 
-            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe -t\"{7}\" {8} {2} {3} {4} | sbin\\awk.exe -F\"{7}\" -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, order, groupFieldCmd, outField, this.outputFilePath, this.separators[0],type));
+            cmds.Add(string.Format("{0} | {1} sbin\\sort.exe -t\"{7}\" {8} {2} {3} {4} | sbin\\awk.exe -F\"{7}\" -v OFS='\\t' '{{ print {5}}}'>> {6}", TransInputfileToCmd(inputFilePath), repetition, this.sortConfig, order, groupFieldCmd, outField, this.outputFilePath, this.separators[0], type));
 
             return cmds;
         }

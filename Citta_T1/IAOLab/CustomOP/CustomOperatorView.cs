@@ -31,7 +31,7 @@ namespace Citta_T1.OperatorViews
             else
                 this.Text = "AI实践算子设置";
 
-    
+
             //旧状态记录
             this.oldPath = this.rsFullFilePathTextBox.Text;
             this.oldOutList0 = this.outListCCBL0.GetItemCheckIndex();
@@ -41,7 +41,7 @@ namespace Citta_T1.OperatorViews
             InitOptionInfo();
             //加载配置内容
             LoadOption();
-            
+
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
         }
@@ -69,7 +69,7 @@ namespace Citta_T1.OperatorViews
                 this.dataSourceFFP1 = dataInfo["dataPath1"];
                 this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
                 nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns= this.nowColumnsName1;
+                this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
                 this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
                 foreach (string name in this.nowColumnsName1)
                     this.outListCCBL1.AddItems(name);
@@ -88,7 +88,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-       
+
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -250,7 +250,7 @@ namespace Citta_T1.OperatorViews
 
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                if(opControl.OperatorDimension() == 2)
+                if (opControl.OperatorDimension() == 2)
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
@@ -273,7 +273,7 @@ namespace Citta_T1.OperatorViews
             }
 
             //有任一框中非数字
-            if( !IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
+            if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
                 empty = true;

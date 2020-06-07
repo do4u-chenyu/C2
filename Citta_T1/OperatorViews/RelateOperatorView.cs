@@ -23,7 +23,7 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitOptionInfo();
             LoadOption();
-           
+
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
@@ -53,9 +53,9 @@ namespace Citta_T1.OperatorViews
                 this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
             }
 
-            this.opControl.FirstDataSourceColumns  = this.nowColumnsName0;
+            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
             this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
-          
+
 
             foreach (string name in this.nowColumnsName0)
             {
@@ -67,7 +67,7 @@ namespace Citta_T1.OperatorViews
                 this.comboBox2.Items.Add(name);
                 this.outListCCBL1.AddItems(name);
             }
-                
+
         }
 
         private string[] SetOption(string path, string dataName, string encoding, char[] separator)
@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            
+
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield0"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
@@ -101,13 +101,13 @@ namespace Citta_T1.OperatorViews
                     this.oldColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
             }
 
-            
+
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "outfield1"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList1 = indexs.ToList();
-                this.outListCCBL1.LoadItemCheckIndex(indexs);              
+                this.outListCCBL1.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                     this.oldColumnsName1.Add(this.outListCCBL1.Items[index].ToString());
             }
@@ -116,7 +116,7 @@ namespace Citta_T1.OperatorViews
             string factor1 = this.opControl.Option.GetOption("factor1");
             if (factor1 != "")
             {
-                
+
                 int[] Nums = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", Nums[0]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
@@ -147,7 +147,7 @@ namespace Citta_T1.OperatorViews
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name, Nums[1]);
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, name, Nums[2]);
                 if (case0 || case1) continue;
-                
+
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
@@ -170,7 +170,7 @@ namespace Citta_T1.OperatorViews
 
             List<int> checkIndexs0 = this.outListCCBL0.GetItemCheckIndex();
             List<int> outIndexs0 = new List<int>(this.oldOutList0);
-          
+
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs0, outIndexs0);
             foreach (int index in outIndexs0)
                 this.outColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
@@ -200,7 +200,7 @@ namespace Citta_T1.OperatorViews
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
                     string factor = index1 + "\t" + index2 + "\t" + index3;
-              
+
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
@@ -225,7 +225,7 @@ namespace Citta_T1.OperatorViews
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
-           
+
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {

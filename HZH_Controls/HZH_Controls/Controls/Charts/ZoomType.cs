@@ -19,7 +19,7 @@ namespace HZH_Controls.Controls
     /// Enum ZoomType
     /// </summary>
 	public enum ZoomType
-	{
+    {
         /// <summary>
         /// The none
         /// </summary>
@@ -32,5 +32,5 @@ namespace HZH_Controls.Controls
         /// The reduce
         /// </summary>
 		Reduce
-	}
+    }
 }

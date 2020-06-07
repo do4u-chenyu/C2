@@ -14,14 +14,9 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
-using System.Diagnostics;
 
 
 namespace HZH_Controls.Controls
@@ -35,7 +30,7 @@ namespace HZH_Controls.Controls
     [Designer(typeof(ScrollbarControlDesigner))]
     [DefaultEvent("Scroll")]
     public class UCVScrollbar : UCControlBase
-    {        
+    {
         /// <summary>
         /// The mo large change
         /// </summary>
@@ -314,7 +309,7 @@ namespace HZH_Controls.Controls
 
         }
 
-      
+
 
         /// <summary>
         /// Handles the MouseDown event of the CustomScrollbar control.
@@ -419,7 +414,7 @@ namespace HZH_Controls.Controls
                     }
                 }
             }
-          
+
         }
 
         /// <summary>
@@ -516,5 +511,5 @@ namespace HZH_Controls.Controls
                 Scroll(this, new EventArgs());
         }
 
-    } 
+    }
 }

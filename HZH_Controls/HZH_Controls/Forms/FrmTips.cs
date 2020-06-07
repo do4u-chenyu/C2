@@ -15,11 +15,8 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HZH_Controls.Forms
@@ -255,7 +252,7 @@ namespace HZH_Controls.Forms
                         FrmTips frmTips = list[i];
                         if (frmTips.InvokeRequired)
                         {
-                            frmTips.BeginInvoke(new MethodInvoker(delegate()
+                            frmTips.BeginInvoke(new MethodInvoker(delegate ()
                             {
                                 switch (item.Key.ShowAlign)
                                 {

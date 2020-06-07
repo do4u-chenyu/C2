@@ -15,12 +15,11 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -224,7 +223,7 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(1))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Left + 2, m_drawRect.Top),
                     new Point(m_drawRect.Right - 2, m_drawRect.Top),
@@ -239,7 +238,7 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(2))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Right, m_drawRect.Top),
                     new Point(m_drawRect.Right, m_drawRect.Top+(m_drawRect.Height-m_lineWidth-4)/2),
@@ -255,14 +254,14 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(3))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Right, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                     new Point(m_drawRect.Right, m_drawRect.Bottom),
                     new Point(m_drawRect.Right-m_lineWidth, m_drawRect.Bottom-m_lineWidth),
                     new Point(m_drawRect.Right-m_lineWidth, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                     new Point(m_drawRect.Right-m_lineWidth/2, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2-m_lineWidth/2),
-                    new Point(m_drawRect.Right, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),                 
+                    new Point(m_drawRect.Right, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                 });
                     path.CloseAllFigures();
                     e.Graphics.FillPath(new SolidBrush(ForeColor), path);
@@ -271,7 +270,7 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(4))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Left + 2, m_drawRect.Bottom),
                     new Point(m_drawRect.Right - 2, m_drawRect.Bottom),
@@ -286,14 +285,14 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(5))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Left, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                     new Point(m_drawRect.Left, m_drawRect.Bottom),
                     new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Bottom-m_lineWidth),
                     new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                     new Point(m_drawRect.Left+m_lineWidth/2, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2-m_lineWidth/2),
-                    new Point(m_drawRect.Left, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),                 
+                    new Point(m_drawRect.Left, m_drawRect.Bottom-(m_drawRect.Height-m_lineWidth-4)/2),
                 });
                     path.CloseAllFigures();
                     e.Graphics.FillPath(new SolidBrush(ForeColor), path);
@@ -303,7 +302,7 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(6))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
                     new Point(m_drawRect.Left, m_drawRect.Top),
                     new Point(m_drawRect.Left, m_drawRect.Top+(m_drawRect.Height-m_lineWidth-4)/2),
@@ -319,14 +318,14 @@ namespace HZH_Controls.Controls
                 if (vs.Contains(7))
                 {
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(new Point[] 
+                    path.AddLines(new Point[]
                 {
-                    new Point(m_drawRect.Left+m_lineWidth/2, m_drawRect.Height/2+1),            
-                    new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Height/2-m_lineWidth/2+1),    
+                    new Point(m_drawRect.Left+m_lineWidth/2, m_drawRect.Height/2+1),
+                    new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Height/2-m_lineWidth/2+1),
                     new Point(m_drawRect.Right-m_lineWidth, m_drawRect.Height/2-m_lineWidth/2+1),
                     new Point(m_drawRect.Right-m_lineWidth/2, m_drawRect.Height/2+1),
                     new Point(m_drawRect.Right-m_lineWidth, m_drawRect.Height/2+m_lineWidth/2+1),
-                    new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Height/2+m_lineWidth/2+1),    
+                    new Point(m_drawRect.Left+m_lineWidth, m_drawRect.Height/2+m_lineWidth/2+1),
                     new Point(m_drawRect.Left+m_lineWidth/2, m_drawRect.Height/2+1)
                 });
                     path.CloseAllFigures();

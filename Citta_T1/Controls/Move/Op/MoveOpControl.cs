@@ -23,7 +23,7 @@ namespace Citta_T1.Controls.Move.Op
         private MoveWrapper moveWrapper;
         private static string doublePin = "关联算子 取差集 碰撞算子 取并集 多源算子 关键词过滤";
 
-   
+
         private bool doublelPinFlag = false;
 
         public string SubTypeName { get; }
@@ -35,7 +35,7 @@ namespace Citta_T1.Controls.Move.Op
             {
                 OptionDirty(value);
                 base.Status = value;
-            }  
+            }
         }
         public bool EnableOption { get => OptionMenuItem.Enabled; set => OptionMenuItem.Enabled = value; }
         public int RevisedPinIndex { get; set; }
@@ -43,7 +43,7 @@ namespace Citta_T1.Controls.Move.Op
         public string[] FirstDataSourceColumns { get; set; }  //第一个入度的表头配置
         public string[] SecondDataSourceColumns { get; set; } //第二个入度的表头配置
 
-        private List<Rectangle> leftPinArray = new List<Rectangle> {};
+        private List<Rectangle> leftPinArray = new List<Rectangle> { };
 
         // 以该控件为终点的所有点
         private List<int> endLineIndexs = new List<int>() { };
@@ -61,13 +61,13 @@ namespace Citta_T1.Controls.Move.Op
         private string pinStatus = "noEnter";
         private string rectArea = "rectIn_down rectIn_up rectOut";
         private List<int> linePinArray = new List<int> { };
-    
+
         public MoveOpControl(int sizeL, string description, string subTypeName, Point loc)
-        {           
+        {
             InitializeComponent();
             InitializeContextMenuStrip();
 
-            Type = ElementType.Operator; 
+            Type = ElementType.Operator;
             Description = description;
             Location = loc;
             FullFilePath = String.Empty;
@@ -87,11 +87,11 @@ namespace Citta_T1.Controls.Move.Op
             InitializeHelpInfoAndOpIcon();
             ChangeSize(sizeL);
 
-            FirstDataSourceColumns  = new string[0];
+            FirstDataSourceColumns = new string[0];
             SecondDataSourceColumns = new string[0];
 
 
-    }
+        }
 
         // 算子维度, 目前就2元和1元算子两种
         public int OperatorDimension()
@@ -110,7 +110,7 @@ namespace Citta_T1.Controls.Move.Op
         }
 
         private void InitializeOpPinPicture()
-        {          
+        {
             int dy = doublelPinFlag ? 5 : 0;
             rectIn_up = new Rectangle(this.leftPin.X, this.leftPin.Y - dy, this.pinWidth, this.pinHeight);
             this.leftPinArray.Add(rectIn_up);
@@ -205,7 +205,7 @@ namespace Citta_T1.Controls.Move.Op
                 default:
                     break;
             }
-    
+
         }
 
         #region MOC的事件
@@ -217,7 +217,7 @@ namespace Citta_T1.Controls.Move.Op
 
             if (cmd == ECommandType.Null)
                 return;
-            else if(cmd == ECommandType.Hold)
+            else if (cmd == ECommandType.Hold)
             {
                 #region 控件移动
                 int left = this.Left + e.X - mouseOffset.X;
@@ -272,14 +272,14 @@ namespace Citta_T1.Controls.Move.Op
             }
             this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             oldControlPosition = this.Location;
-         }
+        }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             // 单击鼠标, 移动控件
-            if (e.Clicks == 1) 
+            if (e.Clicks == 1)
                 MoveOpControl_MouseDown(sender, e);
             // 双击鼠标, 改名字
             if (e.Clicks == 2)
@@ -305,11 +305,11 @@ namespace Citta_T1.Controls.Move.Op
                 if (this.OptionMenuItem.Enabled)
                     ShowOptionDialog();
                 else
-                    MessageBox.Show("请先画线连接数据源, 然后才能配置算子参数", 
+                    MessageBox.Show("请先画线连接数据源, 然后才能配置算子参数",
                         "没有对应的数据源",
-                        MessageBoxButtons.OK, 
+                        MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-               
+
             }
         }
 
@@ -353,7 +353,7 @@ namespace Citta_T1.Controls.Move.Op
         {
             double f = Math.Pow(factor, sizeLevel);
             int pading = 4;
-            
+
             if (f != 1)
                 pading += 1;
             this.Size = new Size((int)(controlSize.Width * f), (int)(controlSize.Height * f));
@@ -361,8 +361,8 @@ namespace Citta_T1.Controls.Move.Op
             this.statusBox.Location = new Point(this.Width - (int)(42 * f), (int)(7 * f));
             this.rectOut.Location = new Point(this.Width - (int)(10 * f), (int)(11 * f));
             this.txtButton.Size = new Size((int)(txtWidth * f), this.Height - (int)(pading * f));
-            this.textBox.Size = new Size((int)((txtWidth -1 )* f), this.Height - (int)(4 * f));
-            
+            this.textBox.Size = new Size((int)((txtWidth - 1) * f), this.Height - (int)(4 * f));
+
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         #endregion
@@ -428,7 +428,7 @@ namespace Citta_T1.Controls.Move.Op
                     new PythonOperatorView(this).ShowDialog();
                     break;
                 case "关键词过滤":
-                    new KeyWordOperatorView(this).ShowDialog();
+                    new KeywordOperatorView(this).ShowDialog();
                     break;
                 case "数据标准化":
                     new DataFormatOperatorView(this).ShowDialog();
@@ -475,11 +475,11 @@ namespace Citta_T1.Controls.Move.Op
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
             foreach (ModelRelation mr in modelRelations)
             {
-                
+
                 if (mr.StartID == this.ID)
                 {
                     DeleteResultControl(mr.EndID, modelRelations);
-                    
+
                 }
                 if ((mr.EndID == this.ID) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
                 {
@@ -493,7 +493,7 @@ namespace Citta_T1.Controls.Move.Op
                     Global.GetCanvasPanel().Invalidate();
                 }
             }
-         
+
             ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
             //删除自身
@@ -541,11 +541,11 @@ namespace Citta_T1.Controls.Move.Op
                 {
                     Global.GetCurrentDocument().DeleteModelElement(mrc);
                     Global.GetCanvasPanel().DeleteElement(mrc.InnerControl);
-                    Global.GetNaviViewControl().UpdateNaviView();  
+                    Global.GetNaviViewControl().UpdateNaviView();
                     return;
                 }
             }
-            
+
         }
         private void OptionDirty(ElementStatus status)
         {
@@ -564,7 +564,7 @@ namespace Citta_T1.Controls.Move.Op
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if(rectIn_up.Contains(mousePosition))
+            if (rectIn_up.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(0)) return;
                 rectIn_up = RectEnter(rectIn_up);
@@ -575,13 +575,13 @@ namespace Citta_T1.Controls.Move.Op
 
             else if (rectIn_down.Contains(mousePosition))
             {
-                if (rectArea.Contains(pinStatus)|| linePinArray.Contains(1)) return;
+                if (rectArea.Contains(pinStatus) || linePinArray.Contains(1)) return;
                 rectIn_down = RectEnter(rectIn_down);
                 this.Invalidate();
                 pinStatus = "rectIn_down";
 
             }
-            else if(rectOut.Contains(mousePosition))
+            else if (rectOut.Contains(mousePosition))
             {
                 if (rectArea.Contains(pinStatus) || linePinArray.Contains(-1)) return;
                 rectOut = RectEnter(rectOut);
@@ -590,11 +590,11 @@ namespace Citta_T1.Controls.Move.Op
             }
 
             else if (pinStatus != "noEnter")
-            {             
+            {
                 switch (pinStatus)
                 {
                     case "rectIn_down":
-                        if(!linePinArray.Contains(1))
+                        if (!linePinArray.Contains(1))
                             rectIn_down = RectLeave(rectIn_down);
                         break;
                     case "rectIn_up":
@@ -610,11 +610,11 @@ namespace Citta_T1.Controls.Move.Op
                 this.Invalidate();
             }
         }
-        
+
         public void OutPinInit(String status)
         {
             if ((pinStatus != "rectOut") && (status == "lineExit") && (!linePinArray.Contains(-1)))
-            {              
+            {
                 rectOut = RectEnter(rectOut);
                 linePinArray.Add(-1);
                 this.Invalidate();
@@ -627,11 +627,11 @@ namespace Citta_T1.Controls.Move.Op
             linePinArray.Remove(pinIndex);
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
-                rectIn_down = RectLeave(rectIn_down);               
+                rectIn_down = RectLeave(rectIn_down);
             }
             if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
             {
-                rectIn_up = RectLeave(rectIn_up);               
+                rectIn_up = RectLeave(rectIn_up);
             }
             this.Invalidate();
         }
@@ -683,7 +683,7 @@ namespace Citta_T1.Controls.Move.Op
              * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
              * 2. 如果在，对该点就行修正
              */
-             // 鼠标判定矩形大小
+            // 鼠标判定矩形大小
             int mouseR = 15;
             bool isRevised = false;
             float maxIntersectPerct = 0.0F;
@@ -711,7 +711,7 @@ namespace Citta_T1.Controls.Move.Op
 
                 e.DrawRectangle(Pens.Black, leftPinRect);
                 int pinLeftX = leftPinRect.X;
-                int pinTopY  = leftPinRect.Y;
+                int pinTopY = leftPinRect.Y;
 
                 if (leftPinRect.IntersectsWith(rect))
                 {
@@ -721,8 +721,8 @@ namespace Citta_T1.Controls.Move.Op
                     {
                         maxIntersectPerct = iou;
                         revisedP = new PointF(
-                            pinLeftX + leftPinRect.Width  / 2,
-                            pinTopY  + leftPinRect.Height / 2);
+                            pinLeftX + leftPinRect.Width / 2,
+                            pinTopY + leftPinRect.Height / 2);
                         // 绑定控件
                         canvas.EndC = this;
                         isRevised = true;
@@ -742,11 +742,11 @@ namespace Citta_T1.Controls.Move.Op
             {
                 case 0:
                     return new PointF(
-                        this.Location.X + this.rectIn_up.Location.X + this.rectIn_up.Width / 2, 
+                        this.Location.X + this.rectIn_up.Location.X + this.rectIn_up.Width / 2,
                         this.Location.Y + this.rectIn_up.Location.Y + this.rectIn_up.Height / 2);
                 case 1:
                     return new PointF(
-                        this.Location.X + this.rectIn_down.Location.X + this.rectIn_down.Width / 2, 
+                        this.Location.X + this.rectIn_down.Location.X + this.rectIn_down.Width / 2,
                         this.Location.Y + this.rectIn_down.Location.Y + this.rectIn_down.Height / 2);
                 default:
                     // TODO [DK] 需要定义一个异常
@@ -756,12 +756,12 @@ namespace Citta_T1.Controls.Move.Op
         public PointF GetStartPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
 
         public void BindEndLine(int pinIndex, int relationIndex)
-        { 
+        {
             try
             {
                 this.endLineIndexs[pinIndex] = relationIndex;
@@ -781,13 +781,13 @@ namespace Citta_T1.Controls.Move.Op
         {
             if ((pinIndex == 1) && (pinStatus != "rectIn_down") && (!linePinArray.Contains(1)))
             {
-                
+
                 rectIn_down = RectEnter(rectIn_down);
                 linePinArray.Add(pinIndex);
             }
             if ((pinIndex == 0) && (pinStatus != "rectIn_up") && (!linePinArray.Contains(0)))
             {
-                
+
                 rectIn_up = RectEnter(rectIn_up);
                 linePinArray.Add(pinIndex);
             }
@@ -827,7 +827,7 @@ namespace Citta_T1.Controls.Move.Op
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
         }
         private void SetPictureBoxImage(string picName)
-        {            
+        {
             string appPath = Application.StartupPath;
             //仅当图片存在时才加载图片
             if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))

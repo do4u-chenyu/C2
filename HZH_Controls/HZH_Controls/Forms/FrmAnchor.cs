@@ -15,12 +15,7 @@
 // ***********************************************************************
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HZH_Controls.Forms
@@ -67,7 +62,7 @@ namespace HZH_Controls.Forms
         /// <param name="childControl">子控件</param>
         /// <param name="deviation">偏移</param>
         /// <param name="isNotFocus">是否无焦点窗体</param>
-        public FrmAnchor(Control parentControl, Control childControl, Point? deviation = null,bool isNotFocus=true)
+        public FrmAnchor(Control parentControl, Control childControl, Point? deviation = null, bool isNotFocus = true)
         {
             m_isNotFocus = isNotFocus;
             m_parentControl = parentControl;
@@ -110,7 +105,7 @@ namespace HZH_Controls.Forms
             this.HandleDestroyed += FrmDownBoard_HandleDestroyed;
 
             m_size = size;
-            m_deviation = deviation;           
+            m_deviation = deviation;
         }
 
         /// <summary>
@@ -288,7 +283,7 @@ namespace HZH_Controls.Forms
             {
                 Form frm = this.Owner as Form;
                 IntPtr _ptr = ControlHelper.GetForegroundWindow();
-                if (_ptr != frm.Handle && _ptr!=this.Handle)
+                if (_ptr != frm.Handle && _ptr != this.Handle)
                 {
                     this.Hide();
                 }

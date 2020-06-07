@@ -13,7 +13,6 @@
 //
 // If you use this code, please keep this note.
 // ***********************************************************************
-using System.Collections.Generic;
 
 #pragma warning disable 1591
 
@@ -23,7 +22,7 @@ namespace HZH_Controls
     /// 图标枚举，包含Awesome图标和Elegant图标，分别以A和E开头
     /// 图标样式可参照  http://www.fontawesome.com.cn/faicons/  和  https://www.elegantthemes.com/blog/resources/elegant-icon-font
     /// </summary>
-    public enum FontIcons 
+    public enum FontIcons
     {
         #region Awesome    English:Awesome
         /// <summary>
@@ -2732,1443 +2731,1443 @@ namespace HZH_Controls
         /// <summary>
         /// The e arrow up
         /// </summary>
-       E_arrow_up = 0x21,
-       /// <summary>
-       /// The e arrow down
-       /// </summary>
-       E_arrow_down = 0x22,
-       /// <summary>
-       /// The e arrow left
-       /// </summary>
-       E_arrow_left = 0x23,
-       /// <summary>
-       /// The e arrow right
-       /// </summary>
-       E_arrow_right = 0x24,
-       /// <summary>
-       /// The e arrow left up
-       /// </summary>
-       E_arrow_left_up = 0x25,
-       /// <summary>
-       /// The e arrow right up
-       /// </summary>
-       E_arrow_right_up = 0x26,
-       /// <summary>
-       /// The e arrow right down
-       /// </summary>
-       E_arrow_right_down = 0x27,
-       /// <summary>
-       /// The e arrow left down
-       /// </summary>
-       E_arrow_left_down = 0x28,
-       /// <summary>
-       /// The e arrow up down
-       /// </summary>
-       E_arrow_up_down = 0x29,
-       /// <summary>
-       /// The e arrow up down alt
-       /// </summary>
-       E_arrow_up_down_alt = 0x2a,
-       /// <summary>
-       /// The e arrow left right alt
-       /// </summary>
-       E_arrow_left_right_alt = 0x2b,
-       /// <summary>
-       /// The e arrow left right
-       /// </summary>
-       E_arrow_left_right = 0x2c,
-       /// <summary>
-       /// The e arrow expand alt2
-       /// </summary>
-       E_arrow_expand_alt2 = 0x2d,
-       /// <summary>
-       /// The e arrow expand alt
-       /// </summary>
-       E_arrow_expand_alt = 0x2e,
-       /// <summary>
-       /// The e arrow condense
-       /// </summary>
-       E_arrow_condense = 0x2f,
-       /// <summary>
-       /// The e arrow expand
-       /// </summary>
-       E_arrow_expand = 0x30,
-       /// <summary>
-       /// The e arrow move
-       /// </summary>
-       E_arrow_move = 0x31,
-       /// <summary>
-       /// The e arrow carrot up
-       /// </summary>
-       E_arrow_carrot_up = 0x32,
-       /// <summary>
-       /// The e arrow carrot down
-       /// </summary>
-       E_arrow_carrot_down = 0x33,
-       /// <summary>
-       /// The e arrow carrot left
-       /// </summary>
-       E_arrow_carrot_left = 0x34,
-       /// <summary>
-       /// The e arrow carrot right
-       /// </summary>
-       E_arrow_carrot_right = 0x35,
-       /// <summary>
-       /// The e arrow carrot 2up
-       /// </summary>
-       E_arrow_carrot_2up = 0x36,
-       /// <summary>
-       /// The e arrow carrot 2down
-       /// </summary>
-       E_arrow_carrot_2down = 0x37,
-       /// <summary>
-       /// The e arrow carrot 2left
-       /// </summary>
-       E_arrow_carrot_2left = 0x38,
-       /// <summary>
-       /// The e arrow carrot 2right
-       /// </summary>
-       E_arrow_carrot_2right = 0x39,
-       /// <summary>
-       /// The e arrow carrot up alt2
-       /// </summary>
-       E_arrow_carrot_up_alt2 = 0x3a,
-       /// <summary>
-       /// The e arrow carrot down alt2
-       /// </summary>
-       E_arrow_carrot_down_alt2 = 0x3b,
-       /// <summary>
-       /// The e arrow carrot left alt2
-       /// </summary>
-       E_arrow_carrot_left_alt2 = 0x3c,
-       /// <summary>
-       /// The e arrow carrot right alt2
-       /// </summary>
-       E_arrow_carrot_right_alt2 = 0x3d,
-       /// <summary>
-       /// The e arrow carrot 2up alt2
-       /// </summary>
-       E_arrow_carrot_2up_alt2 = 0x3e,
-       /// <summary>
-       /// The e arrow carrot 2down alt2
-       /// </summary>
-       E_arrow_carrot_2down_alt2 = 0x3f,
-       /// <summary>
-       /// The e arrow carrot 2left alt2
-       /// </summary>
-       E_arrow_carrot_2left_alt2 = 0x40,
-       /// <summary>
-       /// The e arrow carrot 2right alt2
-       /// </summary>
-       E_arrow_carrot_2right_alt2 = 0x41,
-       /// <summary>
-       /// The e arrow triangle up
-       /// </summary>
-       E_arrow_triangle_up = 0x42,
-       /// <summary>
-       /// The e arrow triangle down
-       /// </summary>
-       E_arrow_triangle_down = 0x43,
-       /// <summary>
-       /// The e arrow triangle left
-       /// </summary>
-       E_arrow_triangle_left = 0x44,
-       /// <summary>
-       /// The e arrow triangle right
-       /// </summary>
-       E_arrow_triangle_right = 0x45,
-       /// <summary>
-       /// The e arrow triangle up alt2
-       /// </summary>
-       E_arrow_triangle_up_alt2 = 0x46,
-       /// <summary>
-       /// The e arrow triangle down alt2
-       /// </summary>
-       E_arrow_triangle_down_alt2 = 0x47,
-       /// <summary>
-       /// The e arrow triangle left alt2
-       /// </summary>
-       E_arrow_triangle_left_alt2 = 0x48,
-       /// <summary>
-       /// The e arrow triangle right alt2
-       /// </summary>
-       E_arrow_triangle_right_alt2 = 0x49,
-       /// <summary>
-       /// The e arrow back
-       /// </summary>
-       E_arrow_back = 0x4a,
-       /// <summary>
-       /// The e icon minus 06
-       /// </summary>
-       E_icon_minus_06 = 0x4b,
-       /// <summary>
-       /// The e icon plus
-       /// </summary>
-       E_icon_plus = 0x4c,
-       /// <summary>
-       /// The e icon close
-       /// </summary>
-       E_icon_close = 0x4d,
-       /// <summary>
-       /// The e icon check
-       /// </summary>
-       E_icon_check = 0x4e,
-       /// <summary>
-       /// The e icon minus alt2
-       /// </summary>
-       E_icon_minus_alt2 = 0x4f,
-       /// <summary>
-       /// The e icon plus alt2
-       /// </summary>
-       E_icon_plus_alt2 = 0x50,
-       /// <summary>
-       /// The e icon close alt2
-       /// </summary>
-       E_icon_close_alt2 = 0x51,
-       /// <summary>
-       /// The e icon check alt2
-       /// </summary>
-       E_icon_check_alt2 = 0x52,
-       /// <summary>
-       /// The e icon zoom out alt
-       /// </summary>
-       E_icon_zoom_out_alt = 0x53,
-       /// <summary>
-       /// The e icon zoom in alt
-       /// </summary>
-       E_icon_zoom_in_alt = 0x54,
-       /// <summary>
-       /// The e icon search
-       /// </summary>
-       E_icon_search = 0x55,
-       /// <summary>
-       /// The e icon box empty
-       /// </summary>
-       E_icon_box_empty = 0x56,
-       /// <summary>
-       /// The e icon box selected
-       /// </summary>
-       E_icon_box_selected = 0x57,
-       /// <summary>
-       /// The e icon minus box
-       /// </summary>
-       E_icon_minus_box = 0x58,
-       /// <summary>
-       /// The e icon plus box
-       /// </summary>
-       E_icon_plus_box = 0x59,
-       /// <summary>
-       /// The e icon box checked
-       /// </summary>
-       E_icon_box_checked = 0x5a,
-       /// <summary>
-       /// The e icon circle empty
-       /// </summary>
-       E_icon_circle_empty = 0x5b,
-       /// <summary>
-       /// The e icon circle slelected
-       /// </summary>
-       E_icon_circle_slelected = 0x5c,
-       /// <summary>
-       /// The e icon stop alt2
-       /// </summary>
-       E_icon_stop_alt2 = 0x5d,
-       /// <summary>
-       /// The e icon stop
-       /// </summary>
-       E_icon_stop = 0x5e,
-       /// <summary>
-       /// The e icon pause alt2
-       /// </summary>
-       E_icon_pause_alt2 = 0x5f,
-       /// <summary>
-       /// The e icon pause
-       /// </summary>
-       E_icon_pause = 0x60,
-       /// <summary>
-       /// The e icon menu
-       /// </summary>
-       E_icon_menu = 0x61,
-       /// <summary>
-       /// The e icon menu square alt2
-       /// </summary>
-       E_icon_menu_square_alt2 = 0x62,
-       /// <summary>
-       /// The e icon menu circle alt2
-       /// </summary>
-       E_icon_menu_circle_alt2 = 0x63,
-       /// <summary>
-       /// The e icon ul
-       /// </summary>
-       E_icon_ul = 0x64,
-       /// <summary>
-       /// The e icon ol
-       /// </summary>
-       E_icon_ol = 0x65,
-       /// <summary>
-       /// The e icon adjust horiz
-       /// </summary>
-       E_icon_adjust_horiz = 0x66,
-       /// <summary>
-       /// The e icon adjust vert
-       /// </summary>
-       E_icon_adjust_vert = 0x67,
-       /// <summary>
-       /// The e icon document alt
-       /// </summary>
-       E_icon_document_alt = 0x68,
-       /// <summary>
-       /// The e icon documents alt
-       /// </summary>
-       E_icon_documents_alt = 0x69,
-       /// <summary>
-       /// The e icon pencil
-       /// </summary>
-       E_icon_pencil = 0x6a,
-       /// <summary>
-       /// The e icon pencil edit alt
-       /// </summary>
-       E_icon_pencil_edit_alt = 0x6b,
-       /// <summary>
-       /// The e icon pencil edit
-       /// </summary>
-       E_icon_pencil_edit = 0x6c,
-       /// <summary>
-       /// The e icon folder alt
-       /// </summary>
-       E_icon_folder_alt = 0x6d,
-       /// <summary>
-       /// The e icon folder open alt
-       /// </summary>
-       E_icon_folder_open_alt = 0x6e,
-       /// <summary>
-       /// The e icon folder add alt
-       /// </summary>
-       E_icon_folder_add_alt = 0x6f,
-       /// <summary>
-       /// The e icon information alt
-       /// </summary>
-       E_icon_info_alt = 0x70,
-       /// <summary>
-       /// The e icon error oct alt
-       /// </summary>
-       E_icon_error_oct_alt = 0x71,
-       /// <summary>
-       /// The e icon error circle alt
-       /// </summary>
-       E_icon_error_circle_alt = 0x72,
-       /// <summary>
-       /// The e icon error triangle alt
-       /// </summary>
-       E_icon_error_triangle_alt = 0x73,
-       /// <summary>
-       /// The e icon question alt2
-       /// </summary>
-       E_icon_question_alt2 = 0x74,
-       /// <summary>
-       /// The e icon question
-       /// </summary>
-       E_icon_question = 0x75,
-       /// <summary>
-       /// The e icon comment alt
-       /// </summary>
-       E_icon_comment_alt = 0x76,
-       /// <summary>
-       /// The e icon chat alt
-       /// </summary>
-       E_icon_chat_alt = 0x77,
-       /// <summary>
-       /// The e icon vol mute alt
-       /// </summary>
-       E_icon_vol_mute_alt = 0x78,
-       /// <summary>
-       /// The e icon volume low alt
-       /// </summary>
-       E_icon_volume_low_alt = 0x79,
-       /// <summary>
-       /// The e icon volume high alt
-       /// </summary>
-       E_icon_volume_high_alt = 0x7a,
-       /// <summary>
-       /// The e icon quotations
-       /// </summary>
-       E_icon_quotations = 0x7b,
-       /// <summary>
-       /// The e icon quotations alt2
-       /// </summary>
-       E_icon_quotations_alt2 = 0x7c,
-       /// <summary>
-       /// The e icon clock alt
-       /// </summary>
-       E_icon_clock_alt = 0x7d,
-       /// <summary>
-       /// The e icon lock alt
-       /// </summary>
-       E_icon_lock_alt = 0x7e,
-       /// <summary>
-       /// The e icon lock open alt
-       /// </summary>
-       E_icon_lock_open_alt = 0xe000,
-       /// <summary>
-       /// The e icon key alt
-       /// </summary>
-       E_icon_key_alt = 0xe001,
-       /// <summary>
-       /// The e icon cloud alt
-       /// </summary>
-       E_icon_cloud_alt = 0xe002,
-       /// <summary>
-       /// The e icon cloud upload alt
-       /// </summary>
-       E_icon_cloud_upload_alt = 0xe003,
-       /// <summary>
-       /// The e icon cloud download alt
-       /// </summary>
-       E_icon_cloud_download_alt = 0xe004,
-       /// <summary>
-       /// The e icon image
-       /// </summary>
-       E_icon_image = 0xe005,
-       /// <summary>
-       /// The e icon images
-       /// </summary>
-       E_icon_images = 0xe006,
-       /// <summary>
-       /// The e icon lightbulb alt
-       /// </summary>
-       E_icon_lightbulb_alt = 0xe007,
-       /// <summary>
-       /// The e icon gift alt
-       /// </summary>
-       E_icon_gift_alt = 0xe008,
-       /// <summary>
-       /// The e icon house alt
-       /// </summary>
-       E_icon_house_alt = 0xe009,
-       /// <summary>
-       /// The e icon genius
-       /// </summary>
-       E_icon_genius = 0xe00a,
-       /// <summary>
-       /// The e icon mobile
-       /// </summary>
-       E_icon_mobile = 0xe00b,
-       /// <summary>
-       /// The e icon tablet
-       /// </summary>
-       E_icon_tablet = 0xe00c,
-       /// <summary>
-       /// The e icon laptop
-       /// </summary>
-       E_icon_laptop = 0xe00d,
-       /// <summary>
-       /// The e icon desktop
-       /// </summary>
-       E_icon_desktop = 0xe00e,
-       /// <summary>
-       /// The e icon camera alt
-       /// </summary>
-       E_icon_camera_alt = 0xe00f,
-       /// <summary>
-       /// The e icon mail alt
-       /// </summary>
-       E_icon_mail_alt = 0xe010,
-       /// <summary>
-       /// The e icon cone alt
-       /// </summary>
-       E_icon_cone_alt = 0xe011,
-       /// <summary>
-       /// The e icon ribbon alt
-       /// </summary>
-       E_icon_ribbon_alt = 0xe012,
-       /// <summary>
-       /// The e icon bag alt
-       /// </summary>
-       E_icon_bag_alt = 0xe013,
-       /// <summary>
-       /// The e icon creditcard
-       /// </summary>
-       E_icon_creditcard = 0xe014,
-       /// <summary>
-       /// The e icon cart alt
-       /// </summary>
-       E_icon_cart_alt = 0xe015,
-       /// <summary>
-       /// The e icon paperclip
-       /// </summary>
-       E_icon_paperclip = 0xe016,
-       /// <summary>
-       /// The e icon tag alt
-       /// </summary>
-       E_icon_tag_alt = 0xe017,
-       /// <summary>
-       /// The e icon tags alt
-       /// </summary>
-       E_icon_tags_alt = 0xe018,
-       /// <summary>
-       /// The e icon trash alt
-       /// </summary>
-       E_icon_trash_alt = 0xe019,
-       /// <summary>
-       /// The e icon cursor alt
-       /// </summary>
-       E_icon_cursor_alt = 0xe01a,
-       /// <summary>
-       /// The e icon mic alt
-       /// </summary>
-       E_icon_mic_alt = 0xe01b,
-       /// <summary>
-       /// The e icon compass alt
-       /// </summary>
-       E_icon_compass_alt = 0xe01c,
-       /// <summary>
-       /// The e icon pin alt
-       /// </summary>
-       E_icon_pin_alt = 0xe01d,
-       /// <summary>
-       /// The e icon pushpin alt
-       /// </summary>
-       E_icon_pushpin_alt = 0xe01e,
-       /// <summary>
-       /// The e icon map alt
-       /// </summary>
-       E_icon_map_alt = 0xe01f,
-       /// <summary>
-       /// The e icon drawer alt
-       /// </summary>
-       E_icon_drawer_alt = 0xe020,
-       /// <summary>
-       /// The e icon toolbox alt
-       /// </summary>
-       E_icon_toolbox_alt = 0xe021,
-       /// <summary>
-       /// The e icon book alt
-       /// </summary>
-       E_icon_book_alt = 0xe022,
-       /// <summary>
-       /// The e icon calendar
-       /// </summary>
-       E_icon_calendar = 0xe023,
-       /// <summary>
-       /// The e icon film
-       /// </summary>
-       E_icon_film = 0xe024,
-       /// <summary>
-       /// The e icon table
-       /// </summary>
-       E_icon_table = 0xe025,
-       /// <summary>
-       /// The e icon contacts alt
-       /// </summary>
-       E_icon_contacts_alt = 0xe026,
-       /// <summary>
-       /// The e icon headphones
-       /// </summary>
-       E_icon_headphones = 0xe027,
-       /// <summary>
-       /// The e icon lifesaver
-       /// </summary>
-       E_icon_lifesaver = 0xe028,
-       /// <summary>
-       /// The e icon piechart
-       /// </summary>
-       E_icon_piechart = 0xe029,
-       /// <summary>
-       /// The e icon refresh
-       /// </summary>
-       E_icon_refresh = 0xe02a,
-       /// <summary>
-       /// The e icon link alt
-       /// </summary>
-       E_icon_link_alt = 0xe02b,
-       /// <summary>
-       /// The e icon link
-       /// </summary>
-       E_icon_link = 0xe02c,
-       /// <summary>
-       /// The e icon loading
-       /// </summary>
-       E_icon_loading = 0xe02d,
-       /// <summary>
-       /// The e icon blocked
-       /// </summary>
-       E_icon_blocked = 0xe02e,
-       /// <summary>
-       /// The e icon archive alt
-       /// </summary>
-       E_icon_archive_alt = 0xe02f,
-       /// <summary>
-       /// The e icon heart alt
-       /// </summary>
-       E_icon_heart_alt = 0xe030,
-       /// <summary>
-       /// The e icon star alt
-       /// </summary>
-       E_icon_star_alt = 0xe031,
-       /// <summary>
-       /// The e icon star half alt
-       /// </summary>
-       E_icon_star_half_alt = 0xe032,
-       /// <summary>
-       /// The e icon star
-       /// </summary>
-       E_icon_star = 0xe033,
-       /// <summary>
-       /// The e icon star half
-       /// </summary>
-       E_icon_star_half = 0xe034,
-       /// <summary>
-       /// The e icon tools
-       /// </summary>
-       E_icon_tools = 0xe035,
-       /// <summary>
-       /// The e icon tool
-       /// </summary>
-       E_icon_tool = 0xe036,
-       /// <summary>
-       /// The e icon cog
-       /// </summary>
-       E_icon_cog = 0xe037,
-       /// <summary>
-       /// The e icon cogs
-       /// </summary>
-       E_icon_cogs = 0xe038,
-       /// <summary>
-       /// The e arrow up alt
-       /// </summary>
-       E_arrow_up_alt = 0xe039,
-       /// <summary>
-       /// The e arrow down alt
-       /// </summary>
-       E_arrow_down_alt = 0xe03a,
-       /// <summary>
-       /// The e arrow left alt
-       /// </summary>
-       E_arrow_left_alt = 0xe03b,
-       /// <summary>
-       /// The e arrow right alt
-       /// </summary>
-       E_arrow_right_alt = 0xe03c,
-       /// <summary>
-       /// The e arrow left up alt
-       /// </summary>
-       E_arrow_left_up_alt = 0xe03d,
-       /// <summary>
-       /// The e arrow right up alt
-       /// </summary>
-       E_arrow_right_up_alt = 0xe03e,
-       /// <summary>
-       /// The e arrow right down alt
-       /// </summary>
-       E_arrow_right_down_alt = 0xe03f,
-       /// <summary>
-       /// The e arrow left down alt
-       /// </summary>
-       E_arrow_left_down_alt = 0xe040,
-       /// <summary>
-       /// The e arrow condense alt
-       /// </summary>
-       E_arrow_condense_alt = 0xe041,
-       /// <summary>
-       /// The e arrow expand alt3
-       /// </summary>
-       E_arrow_expand_alt3 = 0xe042,
-       /// <summary>
-       /// The e arrow carrot up alt
-       /// </summary>
-       E_arrow_carrot_up_alt = 0xe043,
-       /// <summary>
-       /// The e arrow carrot down alt
-       /// </summary>
-       E_arrow_carrot_down_alt = 0xe044,
-       /// <summary>
-       /// The e arrow carrot left alt
-       /// </summary>
-       E_arrow_carrot_left_alt = 0xe045,
-       /// <summary>
-       /// The e arrow carrot right alt
-       /// </summary>
-       E_arrow_carrot_right_alt = 0xe046,
-       /// <summary>
-       /// The e arrow carrot 2up alt
-       /// </summary>
-       E_arrow_carrot_2up_alt = 0xe047,
-       /// <summary>
-       /// The e arrow carrot 2DWNN alt
-       /// </summary>
-       E_arrow_carrot_2dwnn_alt = 0xe048,
-       /// <summary>
-       /// The e arrow carrot 2left alt
-       /// </summary>
-       E_arrow_carrot_2left_alt = 0xe049,
-       /// <summary>
-       /// The e arrow carrot 2right alt
-       /// </summary>
-       E_arrow_carrot_2right_alt = 0xe04a,
-       /// <summary>
-       /// The e arrow triangle up alt
-       /// </summary>
-       E_arrow_triangle_up_alt = 0xe04b,
-       /// <summary>
-       /// The e arrow triangle down alt
-       /// </summary>
-       E_arrow_triangle_down_alt = 0xe04c,
-       /// <summary>
-       /// The e arrow triangle left alt
-       /// </summary>
-       E_arrow_triangle_left_alt = 0xe04d,
-       /// <summary>
-       /// The e arrow triangle right alt
-       /// </summary>
-       E_arrow_triangle_right_alt = 0xe04e,
-       /// <summary>
-       /// The e icon minus alt
-       /// </summary>
-       E_icon_minus_alt = 0xe04f,
-       /// <summary>
-       /// The e icon plus alt
-       /// </summary>
-       E_icon_plus_alt = 0xe050,
-       /// <summary>
-       /// The e icon close alt
-       /// </summary>
-       E_icon_close_alt = 0xe051,
-       /// <summary>
-       /// The e icon check alt
-       /// </summary>
-       E_icon_check_alt = 0xe052,
-       /// <summary>
-       /// The e icon zoom out
-       /// </summary>
-       E_icon_zoom_out = 0xe053,
-       /// <summary>
-       /// The e icon zoom in
-       /// </summary>
-       E_icon_zoom_in = 0xe054,
-       /// <summary>
-       /// The e icon stop alt
-       /// </summary>
-       E_icon_stop_alt = 0xe055,
-       /// <summary>
-       /// The e icon menu square alt
-       /// </summary>
-       E_icon_menu_square_alt = 0xe056,
-       /// <summary>
-       /// The e icon menu circle alt
-       /// </summary>
-       E_icon_menu_circle_alt = 0xe057,
-       /// <summary>
-       /// The e icon document
-       /// </summary>
-       E_icon_document = 0xe058,
-       /// <summary>
-       /// The e icon documents
-       /// </summary>
-       E_icon_documents = 0xe059,
-       /// <summary>
-       /// The e icon pencil alt
-       /// </summary>
-       E_icon_pencil_alt = 0xe05a,
-       /// <summary>
-       /// The e icon folder
-       /// </summary>
-       E_icon_folder = 0xe05b,
-       /// <summary>
-       /// The e icon folder open
-       /// </summary>
-       E_icon_folder_open = 0xe05c,
-       /// <summary>
-       /// The e icon folder add
-       /// </summary>
-       E_icon_folder_add = 0xe05d,
-       /// <summary>
-       /// The e icon folder upload
-       /// </summary>
-       E_icon_folder_upload = 0xe05e,
-       /// <summary>
-       /// The e icon folder download
-       /// </summary>
-       E_icon_folder_download = 0xe05f,
-       /// <summary>
-       /// The e icon information
-       /// </summary>
-       E_icon_info = 0xe060,
-       /// <summary>
-       /// The e icon error circle
-       /// </summary>
-       E_icon_error_circle = 0xe061,
-       /// <summary>
-       /// The e icon error oct
-       /// </summary>
-       E_icon_error_oct = 0xe062,
-       /// <summary>
-       /// The e icon error triangle
-       /// </summary>
-       E_icon_error_triangle = 0xe063,
-       /// <summary>
-       /// The e icon question alt
-       /// </summary>
-       E_icon_question_alt = 0xe064,
-       /// <summary>
-       /// The e icon comment
-       /// </summary>
-       E_icon_comment = 0xe065,
-       /// <summary>
-       /// The e icon chat
-       /// </summary>
-       E_icon_chat = 0xe066,
-       /// <summary>
-       /// The e icon vol mute
-       /// </summary>
-       E_icon_vol_mute = 0xe067,
-       /// <summary>
-       /// The e icon volume low
-       /// </summary>
-       E_icon_volume_low = 0xe068,
-       /// <summary>
-       /// The e icon volume high
-       /// </summary>
-       E_icon_volume_high = 0xe069,
-       /// <summary>
-       /// The e icon quotations alt
-       /// </summary>
-       E_icon_quotations_alt = 0xe06a,
-       /// <summary>
-       /// The e icon clock
-       /// </summary>
-       E_icon_clock = 0xe06b,
-       /// <summary>
-       /// The e icon lock
-       /// </summary>
-       E_icon_lock = 0xe06c,
-       /// <summary>
-       /// The e icon lock open
-       /// </summary>
-       E_icon_lock_open = 0xe06d,
-       /// <summary>
-       /// The e icon key
-       /// </summary>
-       E_icon_key = 0xe06e,
-       /// <summary>
-       /// The e icon cloud
-       /// </summary>
-       E_icon_cloud = 0xe06f,
-       /// <summary>
-       /// The e icon cloud upload
-       /// </summary>
-       E_icon_cloud_upload = 0xe070,
-       /// <summary>
-       /// The e icon cloud download
-       /// </summary>
-       E_icon_cloud_download = 0xe071,
-       /// <summary>
-       /// The e icon lightbulb
-       /// </summary>
-       E_icon_lightbulb = 0xe072,
-       /// <summary>
-       /// The e icon gift
-       /// </summary>
-       E_icon_gift = 0xe073,
-       /// <summary>
-       /// The e icon house
-       /// </summary>
-       E_icon_house = 0xe074,
-       /// <summary>
-       /// The e icon camera
-       /// </summary>
-       E_icon_camera = 0xe075,
-       /// <summary>
-       /// The e icon mail
-       /// </summary>
-       E_icon_mail = 0xe076,
-       /// <summary>
-       /// The e icon cone
-       /// </summary>
-       E_icon_cone = 0xe077,
-       /// <summary>
-       /// The e icon ribbon
-       /// </summary>
-       E_icon_ribbon = 0xe078,
-       /// <summary>
-       /// The e icon bag
-       /// </summary>
-       E_icon_bag = 0xe079,
-       /// <summary>
-       /// The e icon cart
-       /// </summary>
-       E_icon_cart = 0xe07a,
-       /// <summary>
-       /// The e icon tag
-       /// </summary>
-       E_icon_tag = 0xe07b,
-       /// <summary>
-       /// The e icon tags
-       /// </summary>
-       E_icon_tags = 0xe07c,
-       /// <summary>
-       /// The e icon trash
-       /// </summary>
-       E_icon_trash = 0xe07d,
-       /// <summary>
-       /// The e icon cursor
-       /// </summary>
-       E_icon_cursor = 0xe07e,
-       /// <summary>
-       /// The e icon mic
-       /// </summary>
-       E_icon_mic = 0xe07f,
-       /// <summary>
-       /// The e icon compass
-       /// </summary>
-       E_icon_compass = 0xe080,
-       /// <summary>
-       /// The e icon pin
-       /// </summary>
-       E_icon_pin = 0xe081,
-       /// <summary>
-       /// The e icon pushpin
-       /// </summary>
-       E_icon_pushpin = 0xe082,
-       /// <summary>
-       /// The e icon map
-       /// </summary>
-       E_icon_map = 0xe083,
-       /// <summary>
-       /// The e icon drawer
-       /// </summary>
-       E_icon_drawer = 0xe084,
-       /// <summary>
-       /// The e icon toolbox
-       /// </summary>
-       E_icon_toolbox = 0xe085,
-       /// <summary>
-       /// The e icon book
-       /// </summary>
-       E_icon_book = 0xe086,
-       /// <summary>
-       /// The e icon contacts
-       /// </summary>
-       E_icon_contacts = 0xe087,
-       /// <summary>
-       /// The e icon archive
-       /// </summary>
-       E_icon_archive = 0xe088,
-       /// <summary>
-       /// The e icon heart
-       /// </summary>
-       E_icon_heart = 0xe089,
-       /// <summary>
-       /// The e icon profile
-       /// </summary>
-       E_icon_profile = 0xe08a,
-       /// <summary>
-       /// The e icon group
-       /// </summary>
-       E_icon_group = 0xe08b,
-       /// <summary>
-       /// The e icon grid 2X2
-       /// </summary>
-       E_icon_grid_2x2 = 0xe08c,
-       /// <summary>
-       /// The e icon grid 3X3
-       /// </summary>
-       E_icon_grid_3x3 = 0xe08d,
-       /// <summary>
-       /// The e icon music
-       /// </summary>
-       E_icon_music = 0xe08e,
-       /// <summary>
-       /// The e icon pause alt
-       /// </summary>
-       E_icon_pause_alt = 0xe08f,
-       /// <summary>
-       /// The e icon phone
-       /// </summary>
-       E_icon_phone = 0xe090,
-       /// <summary>
-       /// The e icon upload
-       /// </summary>
-       E_icon_upload = 0xe091,
-       /// <summary>
-       /// The e icon download
-       /// </summary>
-       E_icon_download = 0xe092,
-       /// <summary>
-       /// The e social facebook
-       /// </summary>
-       E_social_facebook = 0xe093,
-       /// <summary>
-       /// The e social twitter
-       /// </summary>
-       E_social_twitter = 0xe094,
-       /// <summary>
-       /// The e social pinterest
-       /// </summary>
-       E_social_pinterest = 0xe095,
-       /// <summary>
-       /// The e social googleplus
-       /// </summary>
-       E_social_googleplus = 0xe096,
-       /// <summary>
-       /// The e social tumblr
-       /// </summary>
-       E_social_tumblr = 0xe097,
-       /// <summary>
-       /// The e social tumbleupon
-       /// </summary>
-       E_social_tumbleupon = 0xe098,
-       /// <summary>
-       /// The e social wordpress
-       /// </summary>
-       E_social_wordpress = 0xe099,
-       /// <summary>
-       /// The e social instagram
-       /// </summary>
-       E_social_instagram = 0xe09a,
-       /// <summary>
-       /// The e social dribbble
-       /// </summary>
-       E_social_dribbble = 0xe09b,
-       /// <summary>
-       /// The e social vimeo
-       /// </summary>
-       E_social_vimeo = 0xe09c,
-       /// <summary>
-       /// The e social linkedin
-       /// </summary>
-       E_social_linkedin = 0xe09d,
-       /// <summary>
-       /// The e social RSS
-       /// </summary>
-       E_social_rss = 0xe09e,
-       /// <summary>
-       /// The e social deviantart
-       /// </summary>
-       E_social_deviantart = 0xe09f,
-       /// <summary>
-       /// The e social share
-       /// </summary>
-       E_social_share = 0xe0a0,
-       /// <summary>
-       /// The e social myspace
-       /// </summary>
-       E_social_myspace = 0xe0a1,
-       /// <summary>
-       /// The e social skype
-       /// </summary>
-       E_social_skype = 0xe0a2,
-       /// <summary>
-       /// The e social youtube
-       /// </summary>
-       E_social_youtube = 0xe0a3,
-       /// <summary>
-       /// The e social picassa
-       /// </summary>
-       E_social_picassa = 0xe0a4,
-       /// <summary>
-       /// The e social googledrive
-       /// </summary>
-       E_social_googledrive = 0xe0a5,
-       /// <summary>
-       /// The e social flickr
-       /// </summary>
-       E_social_flickr = 0xe0a6,
-       /// <summary>
-       /// The e social blogger
-       /// </summary>
-       E_social_blogger = 0xe0a7,
-       /// <summary>
-       /// The e social spotify
-       /// </summary>
-       E_social_spotify = 0xe0a8,
-       /// <summary>
-       /// The e social delicious
-       /// </summary>
-       E_social_delicious = 0xe0a9,
-       /// <summary>
-       /// The e social facebook circle
-       /// </summary>
-       E_social_facebook_circle = 0xe0aa,
-       /// <summary>
-       /// The e social twitter circle
-       /// </summary>
-       E_social_twitter_circle = 0xe0ab,
-       /// <summary>
-       /// The e social pinterest circle
-       /// </summary>
-       E_social_pinterest_circle = 0xe0ac,
-       /// <summary>
-       /// The e social googleplus circle
-       /// </summary>
-       E_social_googleplus_circle = 0xe0ad,
-       /// <summary>
-       /// The e social tumblr circle
-       /// </summary>
-       E_social_tumblr_circle = 0xe0ae,
-       /// <summary>
-       /// The e social stumbleupon circle
-       /// </summary>
-       E_social_stumbleupon_circle = 0xe0af,
-       /// <summary>
-       /// The e social wordpress circle
-       /// </summary>
-       E_social_wordpress_circle = 0xe0b0,
-       /// <summary>
-       /// The e social instagram circle
-       /// </summary>
-       E_social_instagram_circle = 0xe0b1,
-       /// <summary>
-       /// The e social dribbble circle
-       /// </summary>
-       E_social_dribbble_circle = 0xe0b2,
-       /// <summary>
-       /// The e social vimeo circle
-       /// </summary>
-       E_social_vimeo_circle = 0xe0b3,
-       /// <summary>
-       /// The e social linkedin circle
-       /// </summary>
-       E_social_linkedin_circle = 0xe0b4,
-       /// <summary>
-       /// The e social RSS circle
-       /// </summary>
-       E_social_rss_circle = 0xe0b5,
-       /// <summary>
-       /// The e social deviantart circle
-       /// </summary>
-       E_social_deviantart_circle = 0xe0b6,
-       /// <summary>
-       /// The e social share circle
-       /// </summary>
-       E_social_share_circle = 0xe0b7,
-       /// <summary>
-       /// The e social myspace circle
-       /// </summary>
-       E_social_myspace_circle = 0xe0b8,
-       /// <summary>
-       /// The e social skype circle
-       /// </summary>
-       E_social_skype_circle = 0xe0b9,
-       /// <summary>
-       /// The e social youtube circle
-       /// </summary>
-       E_social_youtube_circle = 0xe0ba,
-       /// <summary>
-       /// The e social picassa circle
-       /// </summary>
-       E_social_picassa_circle = 0xe0bb,
-       /// <summary>
-       /// The e social googledrive alt2
-       /// </summary>
-       E_social_googledrive_alt2 = 0xe0bc,
-       /// <summary>
-       /// The e social flickr circle
-       /// </summary>
-       E_social_flickr_circle = 0xe0bd,
-       /// <summary>
-       /// The e social blogger circle
-       /// </summary>
-       E_social_blogger_circle = 0xe0be,
-       /// <summary>
-       /// The e social spotify circle
-       /// </summary>
-       E_social_spotify_circle = 0xe0bf,
-       /// <summary>
-       /// The e social delicious circle
-       /// </summary>
-       E_social_delicious_circle = 0xe0c0,
-       /// <summary>
-       /// The e social facebook square
-       /// </summary>
-       E_social_facebook_square = 0xe0c1,
-       /// <summary>
-       /// The e social twitter square
-       /// </summary>
-       E_social_twitter_square = 0xe0c2,
-       /// <summary>
-       /// The e social pinterest square
-       /// </summary>
-       E_social_pinterest_square = 0xe0c3,
-       /// <summary>
-       /// The e social googleplus square
-       /// </summary>
-       E_social_googleplus_square = 0xe0c4,
-       /// <summary>
-       /// The e social tumblr square
-       /// </summary>
-       E_social_tumblr_square = 0xe0c5,
-       /// <summary>
-       /// The e social stumbleupon square
-       /// </summary>
-       E_social_stumbleupon_square = 0xe0c6,
-       /// <summary>
-       /// The e social wordpress square
-       /// </summary>
-       E_social_wordpress_square = 0xe0c7,
-       /// <summary>
-       /// The e social instagram square
-       /// </summary>
-       E_social_instagram_square = 0xe0c8,
-       /// <summary>
-       /// The e social dribbble square
-       /// </summary>
-       E_social_dribbble_square = 0xe0c9,
-       /// <summary>
-       /// The e social vimeo square
-       /// </summary>
-       E_social_vimeo_square = 0xe0ca,
-       /// <summary>
-       /// The e social linkedin square
-       /// </summary>
-       E_social_linkedin_square = 0xe0cb,
-       /// <summary>
-       /// The e social RSS square
-       /// </summary>
-       E_social_rss_square = 0xe0cc,
-       /// <summary>
-       /// The e social deviantart square
-       /// </summary>
-       E_social_deviantart_square = 0xe0cd,
-       /// <summary>
-       /// The e social share square
-       /// </summary>
-       E_social_share_square = 0xe0ce,
-       /// <summary>
-       /// The e social myspace square
-       /// </summary>
-       E_social_myspace_square = 0xe0cf,
-       /// <summary>
-       /// The e social skype square
-       /// </summary>
-       E_social_skype_square = 0xe0d0,
-       /// <summary>
-       /// The e social youtube square
-       /// </summary>
-       E_social_youtube_square = 0xe0d1,
-       /// <summary>
-       /// The e social picassa square
-       /// </summary>
-       E_social_picassa_square = 0xe0d2,
-       /// <summary>
-       /// The e social googledrive square
-       /// </summary>
-       E_social_googledrive_square = 0xe0d3,
-       /// <summary>
-       /// The e social flickr square
-       /// </summary>
-       E_social_flickr_square = 0xe0d4,
-       /// <summary>
-       /// The e social blogger square
-       /// </summary>
-       E_social_blogger_square = 0xe0d5,
-       /// <summary>
-       /// The e social spotify square
-       /// </summary>
-       E_social_spotify_square = 0xe0d6,
-       /// <summary>
-       /// The e social delicious square
-       /// </summary>
-       E_social_delicious_square = 0xe0d7,
-       /// <summary>
-       /// The e icon printer
-       /// </summary>
-       E_icon_printer = 0xe103,
-       /// <summary>
-       /// The e icon calulator
-       /// </summary>
-       E_icon_calulator = 0xe0ee,
-       /// <summary>
-       /// The e icon building
-       /// </summary>
-       E_icon_building = 0xe0ef,
-       /// <summary>
-       /// The e icon floppy
-       /// </summary>
-       E_icon_floppy = 0xe0e8,
-       /// <summary>
-       /// The e icon drive
-       /// </summary>
-       E_icon_drive = 0xe0ea,
-       /// <summary>
-       /// The e icon search 2
-       /// </summary>
-       E_icon_search_2 = 0xe101,
-       /// <summary>
-       /// The e icon identifier
-       /// </summary>
-       E_icon_id = 0xe107,
-       /// <summary>
-       /// The e icon identifier 2
-       /// </summary>
-       E_icon_id_2 = 0xe108,
-       /// <summary>
-       /// The e icon puzzle
-       /// </summary>
-       E_icon_puzzle = 0xe102,
-       /// <summary>
-       /// The e icon like
-       /// </summary>
-       E_icon_like = 0xe106,
-       /// <summary>
-       /// The e icon dislike
-       /// </summary>
-       E_icon_dislike = 0xe0eb,
-       /// <summary>
-       /// The e icon mug
-       /// </summary>
-       E_icon_mug = 0xe105,
-       /// <summary>
-       /// The e icon currency
-       /// </summary>
-       E_icon_currency = 0xe0ed,
-       /// <summary>
-       /// The e icon wallet
-       /// </summary>
-       E_icon_wallet = 0xe100,
-       /// <summary>
-       /// The e icon pens
-       /// </summary>
-       E_icon_pens = 0xe104,
-       /// <summary>
-       /// The e icon easel
-       /// </summary>
-       E_icon_easel = 0xe0e9,
-       /// <summary>
-       /// The e icon flowchart
-       /// </summary>
-       E_icon_flowchart = 0xe109,
-       /// <summary>
-       /// The e icon datareport
-       /// </summary>
-       E_icon_datareport = 0xe0ec,
-       /// <summary>
-       /// The e icon briefcase
-       /// </summary>
-       E_icon_briefcase = 0xe0fe,
-       /// <summary>
-       /// The e icon shield
-       /// </summary>
-       E_icon_shield = 0xe0f6,
-       /// <summary>
-       /// The e icon percent
-       /// </summary>
-       E_icon_percent = 0xe0fb,
-       /// <summary>
-       /// The e icon globe
-       /// </summary>
-       E_icon_globe = 0xe0e2,
-       /// <summary>
-       /// The e icon globe 2
-       /// </summary>
-       E_icon_globe_2 = 0xe0e3,
-       /// <summary>
-       /// The e icon target
-       /// </summary>
-       E_icon_target = 0xe0f5,
-       /// <summary>
-       /// The e icon hourglass
-       /// </summary>
-       E_icon_hourglass = 0xe0e1,
-       /// <summary>
-       /// The e icon balance
-       /// </summary>
-       E_icon_balance = 0xe0ff,
-       /// <summary>
-       /// The e icon rook
-       /// </summary>
-       E_icon_rook = 0xe0f8,
-       /// <summary>
-       /// The e icon printer alt
-       /// </summary>
-       E_icon_printer_alt = 0xe0fa,
-       /// <summary>
-       /// The e icon calculator alt
-       /// </summary>
-       E_icon_calculator_alt = 0xe0e7,
-       /// <summary>
-       /// The e icon building alt
-       /// </summary>
-       E_icon_building_alt = 0xe0fd,
-       /// <summary>
-       /// The e icon floppy alt
-       /// </summary>
-       E_icon_floppy_alt = 0xe0e4,
-       /// <summary>
-       /// The e icon drive alt
-       /// </summary>
-       E_icon_drive_alt = 0xe0e5,
-       /// <summary>
-       /// The e icon search alt
-       /// </summary>
-       E_icon_search_alt = 0xe0f7,
-       /// <summary>
-       /// The e icon identifier alt
-       /// </summary>
-       E_icon_id_alt = 0xe0e0,
-       /// <summary>
-       /// The e icon identifier 2 alt
-       /// </summary>
-       E_icon_id_2_alt = 0xe0fc,
-       /// <summary>
-       /// The e icon puzzle alt
-       /// </summary>
-       E_icon_puzzle_alt = 0xe0f9,
-       /// <summary>
-       /// The e icon like alt
-       /// </summary>
-       E_icon_like_alt = 0xe0dd,
-       /// <summary>
-       /// The e icon dislike alt
-       /// </summary>
-       E_icon_dislike_alt = 0xe0f1,
-       /// <summary>
-       /// The e icon mug alt
-       /// </summary>
-       E_icon_mug_alt = 0xe0dc,
-       /// <summary>
-       /// The e icon currency alt
-       /// </summary>
-       E_icon_currency_alt = 0xe0f3,
-       /// <summary>
-       /// The e icon wallet alt
-       /// </summary>
-       E_icon_wallet_alt = 0xe0d8,
-       /// <summary>
-       /// The e icon pens alt
-       /// </summary>
-       E_icon_pens_alt = 0xe0db,
-       /// <summary>
-       /// The e icon easel alt
-       /// </summary>
-       E_icon_easel_alt = 0xe0f0,
-       /// <summary>
-       /// The e icon flowchart alt
-       /// </summary>
-       E_icon_flowchart_alt = 0xe0df,
-       /// <summary>
-       /// The e icon datareport alt
-       /// </summary>
-       E_icon_datareport_alt = 0xe0f2,
-       /// <summary>
-       /// The e icon briefcase alt
-       /// </summary>
-       E_icon_briefcase_alt = 0xe0f4,
-       /// <summary>
-       /// The e icon shield alt
-       /// </summary>
-       E_icon_shield_alt = 0xe0d9,
-       /// <summary>
-       /// The e icon percent alt
-       /// </summary>
-       E_icon_percent_alt = 0xe0da,
-       /// <summary>
-       /// The e icon globe alt
-       /// </summary>
-       E_icon_globe_alt = 0xe0de,
-       /// <summary>
-       /// The e icon clipboard
-       /// </summary>
-       E_icon_clipboard = 0xe0e6,
+        E_arrow_up = 0x21,
+        /// <summary>
+        /// The e arrow down
+        /// </summary>
+        E_arrow_down = 0x22,
+        /// <summary>
+        /// The e arrow left
+        /// </summary>
+        E_arrow_left = 0x23,
+        /// <summary>
+        /// The e arrow right
+        /// </summary>
+        E_arrow_right = 0x24,
+        /// <summary>
+        /// The e arrow left up
+        /// </summary>
+        E_arrow_left_up = 0x25,
+        /// <summary>
+        /// The e arrow right up
+        /// </summary>
+        E_arrow_right_up = 0x26,
+        /// <summary>
+        /// The e arrow right down
+        /// </summary>
+        E_arrow_right_down = 0x27,
+        /// <summary>
+        /// The e arrow left down
+        /// </summary>
+        E_arrow_left_down = 0x28,
+        /// <summary>
+        /// The e arrow up down
+        /// </summary>
+        E_arrow_up_down = 0x29,
+        /// <summary>
+        /// The e arrow up down alt
+        /// </summary>
+        E_arrow_up_down_alt = 0x2a,
+        /// <summary>
+        /// The e arrow left right alt
+        /// </summary>
+        E_arrow_left_right_alt = 0x2b,
+        /// <summary>
+        /// The e arrow left right
+        /// </summary>
+        E_arrow_left_right = 0x2c,
+        /// <summary>
+        /// The e arrow expand alt2
+        /// </summary>
+        E_arrow_expand_alt2 = 0x2d,
+        /// <summary>
+        /// The e arrow expand alt
+        /// </summary>
+        E_arrow_expand_alt = 0x2e,
+        /// <summary>
+        /// The e arrow condense
+        /// </summary>
+        E_arrow_condense = 0x2f,
+        /// <summary>
+        /// The e arrow expand
+        /// </summary>
+        E_arrow_expand = 0x30,
+        /// <summary>
+        /// The e arrow move
+        /// </summary>
+        E_arrow_move = 0x31,
+        /// <summary>
+        /// The e arrow carrot up
+        /// </summary>
+        E_arrow_carrot_up = 0x32,
+        /// <summary>
+        /// The e arrow carrot down
+        /// </summary>
+        E_arrow_carrot_down = 0x33,
+        /// <summary>
+        /// The e arrow carrot left
+        /// </summary>
+        E_arrow_carrot_left = 0x34,
+        /// <summary>
+        /// The e arrow carrot right
+        /// </summary>
+        E_arrow_carrot_right = 0x35,
+        /// <summary>
+        /// The e arrow carrot 2up
+        /// </summary>
+        E_arrow_carrot_2up = 0x36,
+        /// <summary>
+        /// The e arrow carrot 2down
+        /// </summary>
+        E_arrow_carrot_2down = 0x37,
+        /// <summary>
+        /// The e arrow carrot 2left
+        /// </summary>
+        E_arrow_carrot_2left = 0x38,
+        /// <summary>
+        /// The e arrow carrot 2right
+        /// </summary>
+        E_arrow_carrot_2right = 0x39,
+        /// <summary>
+        /// The e arrow carrot up alt2
+        /// </summary>
+        E_arrow_carrot_up_alt2 = 0x3a,
+        /// <summary>
+        /// The e arrow carrot down alt2
+        /// </summary>
+        E_arrow_carrot_down_alt2 = 0x3b,
+        /// <summary>
+        /// The e arrow carrot left alt2
+        /// </summary>
+        E_arrow_carrot_left_alt2 = 0x3c,
+        /// <summary>
+        /// The e arrow carrot right alt2
+        /// </summary>
+        E_arrow_carrot_right_alt2 = 0x3d,
+        /// <summary>
+        /// The e arrow carrot 2up alt2
+        /// </summary>
+        E_arrow_carrot_2up_alt2 = 0x3e,
+        /// <summary>
+        /// The e arrow carrot 2down alt2
+        /// </summary>
+        E_arrow_carrot_2down_alt2 = 0x3f,
+        /// <summary>
+        /// The e arrow carrot 2left alt2
+        /// </summary>
+        E_arrow_carrot_2left_alt2 = 0x40,
+        /// <summary>
+        /// The e arrow carrot 2right alt2
+        /// </summary>
+        E_arrow_carrot_2right_alt2 = 0x41,
+        /// <summary>
+        /// The e arrow triangle up
+        /// </summary>
+        E_arrow_triangle_up = 0x42,
+        /// <summary>
+        /// The e arrow triangle down
+        /// </summary>
+        E_arrow_triangle_down = 0x43,
+        /// <summary>
+        /// The e arrow triangle left
+        /// </summary>
+        E_arrow_triangle_left = 0x44,
+        /// <summary>
+        /// The e arrow triangle right
+        /// </summary>
+        E_arrow_triangle_right = 0x45,
+        /// <summary>
+        /// The e arrow triangle up alt2
+        /// </summary>
+        E_arrow_triangle_up_alt2 = 0x46,
+        /// <summary>
+        /// The e arrow triangle down alt2
+        /// </summary>
+        E_arrow_triangle_down_alt2 = 0x47,
+        /// <summary>
+        /// The e arrow triangle left alt2
+        /// </summary>
+        E_arrow_triangle_left_alt2 = 0x48,
+        /// <summary>
+        /// The e arrow triangle right alt2
+        /// </summary>
+        E_arrow_triangle_right_alt2 = 0x49,
+        /// <summary>
+        /// The e arrow back
+        /// </summary>
+        E_arrow_back = 0x4a,
+        /// <summary>
+        /// The e icon minus 06
+        /// </summary>
+        E_icon_minus_06 = 0x4b,
+        /// <summary>
+        /// The e icon plus
+        /// </summary>
+        E_icon_plus = 0x4c,
+        /// <summary>
+        /// The e icon close
+        /// </summary>
+        E_icon_close = 0x4d,
+        /// <summary>
+        /// The e icon check
+        /// </summary>
+        E_icon_check = 0x4e,
+        /// <summary>
+        /// The e icon minus alt2
+        /// </summary>
+        E_icon_minus_alt2 = 0x4f,
+        /// <summary>
+        /// The e icon plus alt2
+        /// </summary>
+        E_icon_plus_alt2 = 0x50,
+        /// <summary>
+        /// The e icon close alt2
+        /// </summary>
+        E_icon_close_alt2 = 0x51,
+        /// <summary>
+        /// The e icon check alt2
+        /// </summary>
+        E_icon_check_alt2 = 0x52,
+        /// <summary>
+        /// The e icon zoom out alt
+        /// </summary>
+        E_icon_zoom_out_alt = 0x53,
+        /// <summary>
+        /// The e icon zoom in alt
+        /// </summary>
+        E_icon_zoom_in_alt = 0x54,
+        /// <summary>
+        /// The e icon search
+        /// </summary>
+        E_icon_search = 0x55,
+        /// <summary>
+        /// The e icon box empty
+        /// </summary>
+        E_icon_box_empty = 0x56,
+        /// <summary>
+        /// The e icon box selected
+        /// </summary>
+        E_icon_box_selected = 0x57,
+        /// <summary>
+        /// The e icon minus box
+        /// </summary>
+        E_icon_minus_box = 0x58,
+        /// <summary>
+        /// The e icon plus box
+        /// </summary>
+        E_icon_plus_box = 0x59,
+        /// <summary>
+        /// The e icon box checked
+        /// </summary>
+        E_icon_box_checked = 0x5a,
+        /// <summary>
+        /// The e icon circle empty
+        /// </summary>
+        E_icon_circle_empty = 0x5b,
+        /// <summary>
+        /// The e icon circle slelected
+        /// </summary>
+        E_icon_circle_slelected = 0x5c,
+        /// <summary>
+        /// The e icon stop alt2
+        /// </summary>
+        E_icon_stop_alt2 = 0x5d,
+        /// <summary>
+        /// The e icon stop
+        /// </summary>
+        E_icon_stop = 0x5e,
+        /// <summary>
+        /// The e icon pause alt2
+        /// </summary>
+        E_icon_pause_alt2 = 0x5f,
+        /// <summary>
+        /// The e icon pause
+        /// </summary>
+        E_icon_pause = 0x60,
+        /// <summary>
+        /// The e icon menu
+        /// </summary>
+        E_icon_menu = 0x61,
+        /// <summary>
+        /// The e icon menu square alt2
+        /// </summary>
+        E_icon_menu_square_alt2 = 0x62,
+        /// <summary>
+        /// The e icon menu circle alt2
+        /// </summary>
+        E_icon_menu_circle_alt2 = 0x63,
+        /// <summary>
+        /// The e icon ul
+        /// </summary>
+        E_icon_ul = 0x64,
+        /// <summary>
+        /// The e icon ol
+        /// </summary>
+        E_icon_ol = 0x65,
+        /// <summary>
+        /// The e icon adjust horiz
+        /// </summary>
+        E_icon_adjust_horiz = 0x66,
+        /// <summary>
+        /// The e icon adjust vert
+        /// </summary>
+        E_icon_adjust_vert = 0x67,
+        /// <summary>
+        /// The e icon document alt
+        /// </summary>
+        E_icon_document_alt = 0x68,
+        /// <summary>
+        /// The e icon documents alt
+        /// </summary>
+        E_icon_documents_alt = 0x69,
+        /// <summary>
+        /// The e icon pencil
+        /// </summary>
+        E_icon_pencil = 0x6a,
+        /// <summary>
+        /// The e icon pencil edit alt
+        /// </summary>
+        E_icon_pencil_edit_alt = 0x6b,
+        /// <summary>
+        /// The e icon pencil edit
+        /// </summary>
+        E_icon_pencil_edit = 0x6c,
+        /// <summary>
+        /// The e icon folder alt
+        /// </summary>
+        E_icon_folder_alt = 0x6d,
+        /// <summary>
+        /// The e icon folder open alt
+        /// </summary>
+        E_icon_folder_open_alt = 0x6e,
+        /// <summary>
+        /// The e icon folder add alt
+        /// </summary>
+        E_icon_folder_add_alt = 0x6f,
+        /// <summary>
+        /// The e icon information alt
+        /// </summary>
+        E_icon_info_alt = 0x70,
+        /// <summary>
+        /// The e icon error oct alt
+        /// </summary>
+        E_icon_error_oct_alt = 0x71,
+        /// <summary>
+        /// The e icon error circle alt
+        /// </summary>
+        E_icon_error_circle_alt = 0x72,
+        /// <summary>
+        /// The e icon error triangle alt
+        /// </summary>
+        E_icon_error_triangle_alt = 0x73,
+        /// <summary>
+        /// The e icon question alt2
+        /// </summary>
+        E_icon_question_alt2 = 0x74,
+        /// <summary>
+        /// The e icon question
+        /// </summary>
+        E_icon_question = 0x75,
+        /// <summary>
+        /// The e icon comment alt
+        /// </summary>
+        E_icon_comment_alt = 0x76,
+        /// <summary>
+        /// The e icon chat alt
+        /// </summary>
+        E_icon_chat_alt = 0x77,
+        /// <summary>
+        /// The e icon vol mute alt
+        /// </summary>
+        E_icon_vol_mute_alt = 0x78,
+        /// <summary>
+        /// The e icon volume low alt
+        /// </summary>
+        E_icon_volume_low_alt = 0x79,
+        /// <summary>
+        /// The e icon volume high alt
+        /// </summary>
+        E_icon_volume_high_alt = 0x7a,
+        /// <summary>
+        /// The e icon quotations
+        /// </summary>
+        E_icon_quotations = 0x7b,
+        /// <summary>
+        /// The e icon quotations alt2
+        /// </summary>
+        E_icon_quotations_alt2 = 0x7c,
+        /// <summary>
+        /// The e icon clock alt
+        /// </summary>
+        E_icon_clock_alt = 0x7d,
+        /// <summary>
+        /// The e icon lock alt
+        /// </summary>
+        E_icon_lock_alt = 0x7e,
+        /// <summary>
+        /// The e icon lock open alt
+        /// </summary>
+        E_icon_lock_open_alt = 0xe000,
+        /// <summary>
+        /// The e icon key alt
+        /// </summary>
+        E_icon_key_alt = 0xe001,
+        /// <summary>
+        /// The e icon cloud alt
+        /// </summary>
+        E_icon_cloud_alt = 0xe002,
+        /// <summary>
+        /// The e icon cloud upload alt
+        /// </summary>
+        E_icon_cloud_upload_alt = 0xe003,
+        /// <summary>
+        /// The e icon cloud download alt
+        /// </summary>
+        E_icon_cloud_download_alt = 0xe004,
+        /// <summary>
+        /// The e icon image
+        /// </summary>
+        E_icon_image = 0xe005,
+        /// <summary>
+        /// The e icon images
+        /// </summary>
+        E_icon_images = 0xe006,
+        /// <summary>
+        /// The e icon lightbulb alt
+        /// </summary>
+        E_icon_lightbulb_alt = 0xe007,
+        /// <summary>
+        /// The e icon gift alt
+        /// </summary>
+        E_icon_gift_alt = 0xe008,
+        /// <summary>
+        /// The e icon house alt
+        /// </summary>
+        E_icon_house_alt = 0xe009,
+        /// <summary>
+        /// The e icon genius
+        /// </summary>
+        E_icon_genius = 0xe00a,
+        /// <summary>
+        /// The e icon mobile
+        /// </summary>
+        E_icon_mobile = 0xe00b,
+        /// <summary>
+        /// The e icon tablet
+        /// </summary>
+        E_icon_tablet = 0xe00c,
+        /// <summary>
+        /// The e icon laptop
+        /// </summary>
+        E_icon_laptop = 0xe00d,
+        /// <summary>
+        /// The e icon desktop
+        /// </summary>
+        E_icon_desktop = 0xe00e,
+        /// <summary>
+        /// The e icon camera alt
+        /// </summary>
+        E_icon_camera_alt = 0xe00f,
+        /// <summary>
+        /// The e icon mail alt
+        /// </summary>
+        E_icon_mail_alt = 0xe010,
+        /// <summary>
+        /// The e icon cone alt
+        /// </summary>
+        E_icon_cone_alt = 0xe011,
+        /// <summary>
+        /// The e icon ribbon alt
+        /// </summary>
+        E_icon_ribbon_alt = 0xe012,
+        /// <summary>
+        /// The e icon bag alt
+        /// </summary>
+        E_icon_bag_alt = 0xe013,
+        /// <summary>
+        /// The e icon creditcard
+        /// </summary>
+        E_icon_creditcard = 0xe014,
+        /// <summary>
+        /// The e icon cart alt
+        /// </summary>
+        E_icon_cart_alt = 0xe015,
+        /// <summary>
+        /// The e icon paperclip
+        /// </summary>
+        E_icon_paperclip = 0xe016,
+        /// <summary>
+        /// The e icon tag alt
+        /// </summary>
+        E_icon_tag_alt = 0xe017,
+        /// <summary>
+        /// The e icon tags alt
+        /// </summary>
+        E_icon_tags_alt = 0xe018,
+        /// <summary>
+        /// The e icon trash alt
+        /// </summary>
+        E_icon_trash_alt = 0xe019,
+        /// <summary>
+        /// The e icon cursor alt
+        /// </summary>
+        E_icon_cursor_alt = 0xe01a,
+        /// <summary>
+        /// The e icon mic alt
+        /// </summary>
+        E_icon_mic_alt = 0xe01b,
+        /// <summary>
+        /// The e icon compass alt
+        /// </summary>
+        E_icon_compass_alt = 0xe01c,
+        /// <summary>
+        /// The e icon pin alt
+        /// </summary>
+        E_icon_pin_alt = 0xe01d,
+        /// <summary>
+        /// The e icon pushpin alt
+        /// </summary>
+        E_icon_pushpin_alt = 0xe01e,
+        /// <summary>
+        /// The e icon map alt
+        /// </summary>
+        E_icon_map_alt = 0xe01f,
+        /// <summary>
+        /// The e icon drawer alt
+        /// </summary>
+        E_icon_drawer_alt = 0xe020,
+        /// <summary>
+        /// The e icon toolbox alt
+        /// </summary>
+        E_icon_toolbox_alt = 0xe021,
+        /// <summary>
+        /// The e icon book alt
+        /// </summary>
+        E_icon_book_alt = 0xe022,
+        /// <summary>
+        /// The e icon calendar
+        /// </summary>
+        E_icon_calendar = 0xe023,
+        /// <summary>
+        /// The e icon film
+        /// </summary>
+        E_icon_film = 0xe024,
+        /// <summary>
+        /// The e icon table
+        /// </summary>
+        E_icon_table = 0xe025,
+        /// <summary>
+        /// The e icon contacts alt
+        /// </summary>
+        E_icon_contacts_alt = 0xe026,
+        /// <summary>
+        /// The e icon headphones
+        /// </summary>
+        E_icon_headphones = 0xe027,
+        /// <summary>
+        /// The e icon lifesaver
+        /// </summary>
+        E_icon_lifesaver = 0xe028,
+        /// <summary>
+        /// The e icon piechart
+        /// </summary>
+        E_icon_piechart = 0xe029,
+        /// <summary>
+        /// The e icon refresh
+        /// </summary>
+        E_icon_refresh = 0xe02a,
+        /// <summary>
+        /// The e icon link alt
+        /// </summary>
+        E_icon_link_alt = 0xe02b,
+        /// <summary>
+        /// The e icon link
+        /// </summary>
+        E_icon_link = 0xe02c,
+        /// <summary>
+        /// The e icon loading
+        /// </summary>
+        E_icon_loading = 0xe02d,
+        /// <summary>
+        /// The e icon blocked
+        /// </summary>
+        E_icon_blocked = 0xe02e,
+        /// <summary>
+        /// The e icon archive alt
+        /// </summary>
+        E_icon_archive_alt = 0xe02f,
+        /// <summary>
+        /// The e icon heart alt
+        /// </summary>
+        E_icon_heart_alt = 0xe030,
+        /// <summary>
+        /// The e icon star alt
+        /// </summary>
+        E_icon_star_alt = 0xe031,
+        /// <summary>
+        /// The e icon star half alt
+        /// </summary>
+        E_icon_star_half_alt = 0xe032,
+        /// <summary>
+        /// The e icon star
+        /// </summary>
+        E_icon_star = 0xe033,
+        /// <summary>
+        /// The e icon star half
+        /// </summary>
+        E_icon_star_half = 0xe034,
+        /// <summary>
+        /// The e icon tools
+        /// </summary>
+        E_icon_tools = 0xe035,
+        /// <summary>
+        /// The e icon tool
+        /// </summary>
+        E_icon_tool = 0xe036,
+        /// <summary>
+        /// The e icon cog
+        /// </summary>
+        E_icon_cog = 0xe037,
+        /// <summary>
+        /// The e icon cogs
+        /// </summary>
+        E_icon_cogs = 0xe038,
+        /// <summary>
+        /// The e arrow up alt
+        /// </summary>
+        E_arrow_up_alt = 0xe039,
+        /// <summary>
+        /// The e arrow down alt
+        /// </summary>
+        E_arrow_down_alt = 0xe03a,
+        /// <summary>
+        /// The e arrow left alt
+        /// </summary>
+        E_arrow_left_alt = 0xe03b,
+        /// <summary>
+        /// The e arrow right alt
+        /// </summary>
+        E_arrow_right_alt = 0xe03c,
+        /// <summary>
+        /// The e arrow left up alt
+        /// </summary>
+        E_arrow_left_up_alt = 0xe03d,
+        /// <summary>
+        /// The e arrow right up alt
+        /// </summary>
+        E_arrow_right_up_alt = 0xe03e,
+        /// <summary>
+        /// The e arrow right down alt
+        /// </summary>
+        E_arrow_right_down_alt = 0xe03f,
+        /// <summary>
+        /// The e arrow left down alt
+        /// </summary>
+        E_arrow_left_down_alt = 0xe040,
+        /// <summary>
+        /// The e arrow condense alt
+        /// </summary>
+        E_arrow_condense_alt = 0xe041,
+        /// <summary>
+        /// The e arrow expand alt3
+        /// </summary>
+        E_arrow_expand_alt3 = 0xe042,
+        /// <summary>
+        /// The e arrow carrot up alt
+        /// </summary>
+        E_arrow_carrot_up_alt = 0xe043,
+        /// <summary>
+        /// The e arrow carrot down alt
+        /// </summary>
+        E_arrow_carrot_down_alt = 0xe044,
+        /// <summary>
+        /// The e arrow carrot left alt
+        /// </summary>
+        E_arrow_carrot_left_alt = 0xe045,
+        /// <summary>
+        /// The e arrow carrot right alt
+        /// </summary>
+        E_arrow_carrot_right_alt = 0xe046,
+        /// <summary>
+        /// The e arrow carrot 2up alt
+        /// </summary>
+        E_arrow_carrot_2up_alt = 0xe047,
+        /// <summary>
+        /// The e arrow carrot 2DWNN alt
+        /// </summary>
+        E_arrow_carrot_2dwnn_alt = 0xe048,
+        /// <summary>
+        /// The e arrow carrot 2left alt
+        /// </summary>
+        E_arrow_carrot_2left_alt = 0xe049,
+        /// <summary>
+        /// The e arrow carrot 2right alt
+        /// </summary>
+        E_arrow_carrot_2right_alt = 0xe04a,
+        /// <summary>
+        /// The e arrow triangle up alt
+        /// </summary>
+        E_arrow_triangle_up_alt = 0xe04b,
+        /// <summary>
+        /// The e arrow triangle down alt
+        /// </summary>
+        E_arrow_triangle_down_alt = 0xe04c,
+        /// <summary>
+        /// The e arrow triangle left alt
+        /// </summary>
+        E_arrow_triangle_left_alt = 0xe04d,
+        /// <summary>
+        /// The e arrow triangle right alt
+        /// </summary>
+        E_arrow_triangle_right_alt = 0xe04e,
+        /// <summary>
+        /// The e icon minus alt
+        /// </summary>
+        E_icon_minus_alt = 0xe04f,
+        /// <summary>
+        /// The e icon plus alt
+        /// </summary>
+        E_icon_plus_alt = 0xe050,
+        /// <summary>
+        /// The e icon close alt
+        /// </summary>
+        E_icon_close_alt = 0xe051,
+        /// <summary>
+        /// The e icon check alt
+        /// </summary>
+        E_icon_check_alt = 0xe052,
+        /// <summary>
+        /// The e icon zoom out
+        /// </summary>
+        E_icon_zoom_out = 0xe053,
+        /// <summary>
+        /// The e icon zoom in
+        /// </summary>
+        E_icon_zoom_in = 0xe054,
+        /// <summary>
+        /// The e icon stop alt
+        /// </summary>
+        E_icon_stop_alt = 0xe055,
+        /// <summary>
+        /// The e icon menu square alt
+        /// </summary>
+        E_icon_menu_square_alt = 0xe056,
+        /// <summary>
+        /// The e icon menu circle alt
+        /// </summary>
+        E_icon_menu_circle_alt = 0xe057,
+        /// <summary>
+        /// The e icon document
+        /// </summary>
+        E_icon_document = 0xe058,
+        /// <summary>
+        /// The e icon documents
+        /// </summary>
+        E_icon_documents = 0xe059,
+        /// <summary>
+        /// The e icon pencil alt
+        /// </summary>
+        E_icon_pencil_alt = 0xe05a,
+        /// <summary>
+        /// The e icon folder
+        /// </summary>
+        E_icon_folder = 0xe05b,
+        /// <summary>
+        /// The e icon folder open
+        /// </summary>
+        E_icon_folder_open = 0xe05c,
+        /// <summary>
+        /// The e icon folder add
+        /// </summary>
+        E_icon_folder_add = 0xe05d,
+        /// <summary>
+        /// The e icon folder upload
+        /// </summary>
+        E_icon_folder_upload = 0xe05e,
+        /// <summary>
+        /// The e icon folder download
+        /// </summary>
+        E_icon_folder_download = 0xe05f,
+        /// <summary>
+        /// The e icon information
+        /// </summary>
+        E_icon_info = 0xe060,
+        /// <summary>
+        /// The e icon error circle
+        /// </summary>
+        E_icon_error_circle = 0xe061,
+        /// <summary>
+        /// The e icon error oct
+        /// </summary>
+        E_icon_error_oct = 0xe062,
+        /// <summary>
+        /// The e icon error triangle
+        /// </summary>
+        E_icon_error_triangle = 0xe063,
+        /// <summary>
+        /// The e icon question alt
+        /// </summary>
+        E_icon_question_alt = 0xe064,
+        /// <summary>
+        /// The e icon comment
+        /// </summary>
+        E_icon_comment = 0xe065,
+        /// <summary>
+        /// The e icon chat
+        /// </summary>
+        E_icon_chat = 0xe066,
+        /// <summary>
+        /// The e icon vol mute
+        /// </summary>
+        E_icon_vol_mute = 0xe067,
+        /// <summary>
+        /// The e icon volume low
+        /// </summary>
+        E_icon_volume_low = 0xe068,
+        /// <summary>
+        /// The e icon volume high
+        /// </summary>
+        E_icon_volume_high = 0xe069,
+        /// <summary>
+        /// The e icon quotations alt
+        /// </summary>
+        E_icon_quotations_alt = 0xe06a,
+        /// <summary>
+        /// The e icon clock
+        /// </summary>
+        E_icon_clock = 0xe06b,
+        /// <summary>
+        /// The e icon lock
+        /// </summary>
+        E_icon_lock = 0xe06c,
+        /// <summary>
+        /// The e icon lock open
+        /// </summary>
+        E_icon_lock_open = 0xe06d,
+        /// <summary>
+        /// The e icon key
+        /// </summary>
+        E_icon_key = 0xe06e,
+        /// <summary>
+        /// The e icon cloud
+        /// </summary>
+        E_icon_cloud = 0xe06f,
+        /// <summary>
+        /// The e icon cloud upload
+        /// </summary>
+        E_icon_cloud_upload = 0xe070,
+        /// <summary>
+        /// The e icon cloud download
+        /// </summary>
+        E_icon_cloud_download = 0xe071,
+        /// <summary>
+        /// The e icon lightbulb
+        /// </summary>
+        E_icon_lightbulb = 0xe072,
+        /// <summary>
+        /// The e icon gift
+        /// </summary>
+        E_icon_gift = 0xe073,
+        /// <summary>
+        /// The e icon house
+        /// </summary>
+        E_icon_house = 0xe074,
+        /// <summary>
+        /// The e icon camera
+        /// </summary>
+        E_icon_camera = 0xe075,
+        /// <summary>
+        /// The e icon mail
+        /// </summary>
+        E_icon_mail = 0xe076,
+        /// <summary>
+        /// The e icon cone
+        /// </summary>
+        E_icon_cone = 0xe077,
+        /// <summary>
+        /// The e icon ribbon
+        /// </summary>
+        E_icon_ribbon = 0xe078,
+        /// <summary>
+        /// The e icon bag
+        /// </summary>
+        E_icon_bag = 0xe079,
+        /// <summary>
+        /// The e icon cart
+        /// </summary>
+        E_icon_cart = 0xe07a,
+        /// <summary>
+        /// The e icon tag
+        /// </summary>
+        E_icon_tag = 0xe07b,
+        /// <summary>
+        /// The e icon tags
+        /// </summary>
+        E_icon_tags = 0xe07c,
+        /// <summary>
+        /// The e icon trash
+        /// </summary>
+        E_icon_trash = 0xe07d,
+        /// <summary>
+        /// The e icon cursor
+        /// </summary>
+        E_icon_cursor = 0xe07e,
+        /// <summary>
+        /// The e icon mic
+        /// </summary>
+        E_icon_mic = 0xe07f,
+        /// <summary>
+        /// The e icon compass
+        /// </summary>
+        E_icon_compass = 0xe080,
+        /// <summary>
+        /// The e icon pin
+        /// </summary>
+        E_icon_pin = 0xe081,
+        /// <summary>
+        /// The e icon pushpin
+        /// </summary>
+        E_icon_pushpin = 0xe082,
+        /// <summary>
+        /// The e icon map
+        /// </summary>
+        E_icon_map = 0xe083,
+        /// <summary>
+        /// The e icon drawer
+        /// </summary>
+        E_icon_drawer = 0xe084,
+        /// <summary>
+        /// The e icon toolbox
+        /// </summary>
+        E_icon_toolbox = 0xe085,
+        /// <summary>
+        /// The e icon book
+        /// </summary>
+        E_icon_book = 0xe086,
+        /// <summary>
+        /// The e icon contacts
+        /// </summary>
+        E_icon_contacts = 0xe087,
+        /// <summary>
+        /// The e icon archive
+        /// </summary>
+        E_icon_archive = 0xe088,
+        /// <summary>
+        /// The e icon heart
+        /// </summary>
+        E_icon_heart = 0xe089,
+        /// <summary>
+        /// The e icon profile
+        /// </summary>
+        E_icon_profile = 0xe08a,
+        /// <summary>
+        /// The e icon group
+        /// </summary>
+        E_icon_group = 0xe08b,
+        /// <summary>
+        /// The e icon grid 2X2
+        /// </summary>
+        E_icon_grid_2x2 = 0xe08c,
+        /// <summary>
+        /// The e icon grid 3X3
+        /// </summary>
+        E_icon_grid_3x3 = 0xe08d,
+        /// <summary>
+        /// The e icon music
+        /// </summary>
+        E_icon_music = 0xe08e,
+        /// <summary>
+        /// The e icon pause alt
+        /// </summary>
+        E_icon_pause_alt = 0xe08f,
+        /// <summary>
+        /// The e icon phone
+        /// </summary>
+        E_icon_phone = 0xe090,
+        /// <summary>
+        /// The e icon upload
+        /// </summary>
+        E_icon_upload = 0xe091,
+        /// <summary>
+        /// The e icon download
+        /// </summary>
+        E_icon_download = 0xe092,
+        /// <summary>
+        /// The e social facebook
+        /// </summary>
+        E_social_facebook = 0xe093,
+        /// <summary>
+        /// The e social twitter
+        /// </summary>
+        E_social_twitter = 0xe094,
+        /// <summary>
+        /// The e social pinterest
+        /// </summary>
+        E_social_pinterest = 0xe095,
+        /// <summary>
+        /// The e social googleplus
+        /// </summary>
+        E_social_googleplus = 0xe096,
+        /// <summary>
+        /// The e social tumblr
+        /// </summary>
+        E_social_tumblr = 0xe097,
+        /// <summary>
+        /// The e social tumbleupon
+        /// </summary>
+        E_social_tumbleupon = 0xe098,
+        /// <summary>
+        /// The e social wordpress
+        /// </summary>
+        E_social_wordpress = 0xe099,
+        /// <summary>
+        /// The e social instagram
+        /// </summary>
+        E_social_instagram = 0xe09a,
+        /// <summary>
+        /// The e social dribbble
+        /// </summary>
+        E_social_dribbble = 0xe09b,
+        /// <summary>
+        /// The e social vimeo
+        /// </summary>
+        E_social_vimeo = 0xe09c,
+        /// <summary>
+        /// The e social linkedin
+        /// </summary>
+        E_social_linkedin = 0xe09d,
+        /// <summary>
+        /// The e social RSS
+        /// </summary>
+        E_social_rss = 0xe09e,
+        /// <summary>
+        /// The e social deviantart
+        /// </summary>
+        E_social_deviantart = 0xe09f,
+        /// <summary>
+        /// The e social share
+        /// </summary>
+        E_social_share = 0xe0a0,
+        /// <summary>
+        /// The e social myspace
+        /// </summary>
+        E_social_myspace = 0xe0a1,
+        /// <summary>
+        /// The e social skype
+        /// </summary>
+        E_social_skype = 0xe0a2,
+        /// <summary>
+        /// The e social youtube
+        /// </summary>
+        E_social_youtube = 0xe0a3,
+        /// <summary>
+        /// The e social picassa
+        /// </summary>
+        E_social_picassa = 0xe0a4,
+        /// <summary>
+        /// The e social googledrive
+        /// </summary>
+        E_social_googledrive = 0xe0a5,
+        /// <summary>
+        /// The e social flickr
+        /// </summary>
+        E_social_flickr = 0xe0a6,
+        /// <summary>
+        /// The e social blogger
+        /// </summary>
+        E_social_blogger = 0xe0a7,
+        /// <summary>
+        /// The e social spotify
+        /// </summary>
+        E_social_spotify = 0xe0a8,
+        /// <summary>
+        /// The e social delicious
+        /// </summary>
+        E_social_delicious = 0xe0a9,
+        /// <summary>
+        /// The e social facebook circle
+        /// </summary>
+        E_social_facebook_circle = 0xe0aa,
+        /// <summary>
+        /// The e social twitter circle
+        /// </summary>
+        E_social_twitter_circle = 0xe0ab,
+        /// <summary>
+        /// The e social pinterest circle
+        /// </summary>
+        E_social_pinterest_circle = 0xe0ac,
+        /// <summary>
+        /// The e social googleplus circle
+        /// </summary>
+        E_social_googleplus_circle = 0xe0ad,
+        /// <summary>
+        /// The e social tumblr circle
+        /// </summary>
+        E_social_tumblr_circle = 0xe0ae,
+        /// <summary>
+        /// The e social stumbleupon circle
+        /// </summary>
+        E_social_stumbleupon_circle = 0xe0af,
+        /// <summary>
+        /// The e social wordpress circle
+        /// </summary>
+        E_social_wordpress_circle = 0xe0b0,
+        /// <summary>
+        /// The e social instagram circle
+        /// </summary>
+        E_social_instagram_circle = 0xe0b1,
+        /// <summary>
+        /// The e social dribbble circle
+        /// </summary>
+        E_social_dribbble_circle = 0xe0b2,
+        /// <summary>
+        /// The e social vimeo circle
+        /// </summary>
+        E_social_vimeo_circle = 0xe0b3,
+        /// <summary>
+        /// The e social linkedin circle
+        /// </summary>
+        E_social_linkedin_circle = 0xe0b4,
+        /// <summary>
+        /// The e social RSS circle
+        /// </summary>
+        E_social_rss_circle = 0xe0b5,
+        /// <summary>
+        /// The e social deviantart circle
+        /// </summary>
+        E_social_deviantart_circle = 0xe0b6,
+        /// <summary>
+        /// The e social share circle
+        /// </summary>
+        E_social_share_circle = 0xe0b7,
+        /// <summary>
+        /// The e social myspace circle
+        /// </summary>
+        E_social_myspace_circle = 0xe0b8,
+        /// <summary>
+        /// The e social skype circle
+        /// </summary>
+        E_social_skype_circle = 0xe0b9,
+        /// <summary>
+        /// The e social youtube circle
+        /// </summary>
+        E_social_youtube_circle = 0xe0ba,
+        /// <summary>
+        /// The e social picassa circle
+        /// </summary>
+        E_social_picassa_circle = 0xe0bb,
+        /// <summary>
+        /// The e social googledrive alt2
+        /// </summary>
+        E_social_googledrive_alt2 = 0xe0bc,
+        /// <summary>
+        /// The e social flickr circle
+        /// </summary>
+        E_social_flickr_circle = 0xe0bd,
+        /// <summary>
+        /// The e social blogger circle
+        /// </summary>
+        E_social_blogger_circle = 0xe0be,
+        /// <summary>
+        /// The e social spotify circle
+        /// </summary>
+        E_social_spotify_circle = 0xe0bf,
+        /// <summary>
+        /// The e social delicious circle
+        /// </summary>
+        E_social_delicious_circle = 0xe0c0,
+        /// <summary>
+        /// The e social facebook square
+        /// </summary>
+        E_social_facebook_square = 0xe0c1,
+        /// <summary>
+        /// The e social twitter square
+        /// </summary>
+        E_social_twitter_square = 0xe0c2,
+        /// <summary>
+        /// The e social pinterest square
+        /// </summary>
+        E_social_pinterest_square = 0xe0c3,
+        /// <summary>
+        /// The e social googleplus square
+        /// </summary>
+        E_social_googleplus_square = 0xe0c4,
+        /// <summary>
+        /// The e social tumblr square
+        /// </summary>
+        E_social_tumblr_square = 0xe0c5,
+        /// <summary>
+        /// The e social stumbleupon square
+        /// </summary>
+        E_social_stumbleupon_square = 0xe0c6,
+        /// <summary>
+        /// The e social wordpress square
+        /// </summary>
+        E_social_wordpress_square = 0xe0c7,
+        /// <summary>
+        /// The e social instagram square
+        /// </summary>
+        E_social_instagram_square = 0xe0c8,
+        /// <summary>
+        /// The e social dribbble square
+        /// </summary>
+        E_social_dribbble_square = 0xe0c9,
+        /// <summary>
+        /// The e social vimeo square
+        /// </summary>
+        E_social_vimeo_square = 0xe0ca,
+        /// <summary>
+        /// The e social linkedin square
+        /// </summary>
+        E_social_linkedin_square = 0xe0cb,
+        /// <summary>
+        /// The e social RSS square
+        /// </summary>
+        E_social_rss_square = 0xe0cc,
+        /// <summary>
+        /// The e social deviantart square
+        /// </summary>
+        E_social_deviantart_square = 0xe0cd,
+        /// <summary>
+        /// The e social share square
+        /// </summary>
+        E_social_share_square = 0xe0ce,
+        /// <summary>
+        /// The e social myspace square
+        /// </summary>
+        E_social_myspace_square = 0xe0cf,
+        /// <summary>
+        /// The e social skype square
+        /// </summary>
+        E_social_skype_square = 0xe0d0,
+        /// <summary>
+        /// The e social youtube square
+        /// </summary>
+        E_social_youtube_square = 0xe0d1,
+        /// <summary>
+        /// The e social picassa square
+        /// </summary>
+        E_social_picassa_square = 0xe0d2,
+        /// <summary>
+        /// The e social googledrive square
+        /// </summary>
+        E_social_googledrive_square = 0xe0d3,
+        /// <summary>
+        /// The e social flickr square
+        /// </summary>
+        E_social_flickr_square = 0xe0d4,
+        /// <summary>
+        /// The e social blogger square
+        /// </summary>
+        E_social_blogger_square = 0xe0d5,
+        /// <summary>
+        /// The e social spotify square
+        /// </summary>
+        E_social_spotify_square = 0xe0d6,
+        /// <summary>
+        /// The e social delicious square
+        /// </summary>
+        E_social_delicious_square = 0xe0d7,
+        /// <summary>
+        /// The e icon printer
+        /// </summary>
+        E_icon_printer = 0xe103,
+        /// <summary>
+        /// The e icon calulator
+        /// </summary>
+        E_icon_calulator = 0xe0ee,
+        /// <summary>
+        /// The e icon building
+        /// </summary>
+        E_icon_building = 0xe0ef,
+        /// <summary>
+        /// The e icon floppy
+        /// </summary>
+        E_icon_floppy = 0xe0e8,
+        /// <summary>
+        /// The e icon drive
+        /// </summary>
+        E_icon_drive = 0xe0ea,
+        /// <summary>
+        /// The e icon search 2
+        /// </summary>
+        E_icon_search_2 = 0xe101,
+        /// <summary>
+        /// The e icon identifier
+        /// </summary>
+        E_icon_id = 0xe107,
+        /// <summary>
+        /// The e icon identifier 2
+        /// </summary>
+        E_icon_id_2 = 0xe108,
+        /// <summary>
+        /// The e icon puzzle
+        /// </summary>
+        E_icon_puzzle = 0xe102,
+        /// <summary>
+        /// The e icon like
+        /// </summary>
+        E_icon_like = 0xe106,
+        /// <summary>
+        /// The e icon dislike
+        /// </summary>
+        E_icon_dislike = 0xe0eb,
+        /// <summary>
+        /// The e icon mug
+        /// </summary>
+        E_icon_mug = 0xe105,
+        /// <summary>
+        /// The e icon currency
+        /// </summary>
+        E_icon_currency = 0xe0ed,
+        /// <summary>
+        /// The e icon wallet
+        /// </summary>
+        E_icon_wallet = 0xe100,
+        /// <summary>
+        /// The e icon pens
+        /// </summary>
+        E_icon_pens = 0xe104,
+        /// <summary>
+        /// The e icon easel
+        /// </summary>
+        E_icon_easel = 0xe0e9,
+        /// <summary>
+        /// The e icon flowchart
+        /// </summary>
+        E_icon_flowchart = 0xe109,
+        /// <summary>
+        /// The e icon datareport
+        /// </summary>
+        E_icon_datareport = 0xe0ec,
+        /// <summary>
+        /// The e icon briefcase
+        /// </summary>
+        E_icon_briefcase = 0xe0fe,
+        /// <summary>
+        /// The e icon shield
+        /// </summary>
+        E_icon_shield = 0xe0f6,
+        /// <summary>
+        /// The e icon percent
+        /// </summary>
+        E_icon_percent = 0xe0fb,
+        /// <summary>
+        /// The e icon globe
+        /// </summary>
+        E_icon_globe = 0xe0e2,
+        /// <summary>
+        /// The e icon globe 2
+        /// </summary>
+        E_icon_globe_2 = 0xe0e3,
+        /// <summary>
+        /// The e icon target
+        /// </summary>
+        E_icon_target = 0xe0f5,
+        /// <summary>
+        /// The e icon hourglass
+        /// </summary>
+        E_icon_hourglass = 0xe0e1,
+        /// <summary>
+        /// The e icon balance
+        /// </summary>
+        E_icon_balance = 0xe0ff,
+        /// <summary>
+        /// The e icon rook
+        /// </summary>
+        E_icon_rook = 0xe0f8,
+        /// <summary>
+        /// The e icon printer alt
+        /// </summary>
+        E_icon_printer_alt = 0xe0fa,
+        /// <summary>
+        /// The e icon calculator alt
+        /// </summary>
+        E_icon_calculator_alt = 0xe0e7,
+        /// <summary>
+        /// The e icon building alt
+        /// </summary>
+        E_icon_building_alt = 0xe0fd,
+        /// <summary>
+        /// The e icon floppy alt
+        /// </summary>
+        E_icon_floppy_alt = 0xe0e4,
+        /// <summary>
+        /// The e icon drive alt
+        /// </summary>
+        E_icon_drive_alt = 0xe0e5,
+        /// <summary>
+        /// The e icon search alt
+        /// </summary>
+        E_icon_search_alt = 0xe0f7,
+        /// <summary>
+        /// The e icon identifier alt
+        /// </summary>
+        E_icon_id_alt = 0xe0e0,
+        /// <summary>
+        /// The e icon identifier 2 alt
+        /// </summary>
+        E_icon_id_2_alt = 0xe0fc,
+        /// <summary>
+        /// The e icon puzzle alt
+        /// </summary>
+        E_icon_puzzle_alt = 0xe0f9,
+        /// <summary>
+        /// The e icon like alt
+        /// </summary>
+        E_icon_like_alt = 0xe0dd,
+        /// <summary>
+        /// The e icon dislike alt
+        /// </summary>
+        E_icon_dislike_alt = 0xe0f1,
+        /// <summary>
+        /// The e icon mug alt
+        /// </summary>
+        E_icon_mug_alt = 0xe0dc,
+        /// <summary>
+        /// The e icon currency alt
+        /// </summary>
+        E_icon_currency_alt = 0xe0f3,
+        /// <summary>
+        /// The e icon wallet alt
+        /// </summary>
+        E_icon_wallet_alt = 0xe0d8,
+        /// <summary>
+        /// The e icon pens alt
+        /// </summary>
+        E_icon_pens_alt = 0xe0db,
+        /// <summary>
+        /// The e icon easel alt
+        /// </summary>
+        E_icon_easel_alt = 0xe0f0,
+        /// <summary>
+        /// The e icon flowchart alt
+        /// </summary>
+        E_icon_flowchart_alt = 0xe0df,
+        /// <summary>
+        /// The e icon datareport alt
+        /// </summary>
+        E_icon_datareport_alt = 0xe0f2,
+        /// <summary>
+        /// The e icon briefcase alt
+        /// </summary>
+        E_icon_briefcase_alt = 0xe0f4,
+        /// <summary>
+        /// The e icon shield alt
+        /// </summary>
+        E_icon_shield_alt = 0xe0d9,
+        /// <summary>
+        /// The e icon percent alt
+        /// </summary>
+        E_icon_percent_alt = 0xe0da,
+        /// <summary>
+        /// The e icon globe alt
+        /// </summary>
+        E_icon_globe_alt = 0xe0de,
+        /// <summary>
+        /// The e icon clipboard
+        /// </summary>
+        E_icon_clipboard = 0xe0e6,
         #endregion
-    }  
+    }
 }

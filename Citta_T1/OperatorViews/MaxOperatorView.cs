@@ -65,7 +65,7 @@ namespace Citta_T1.OperatorViews
             if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
 
-           
+
 
         }
         #endregion
@@ -81,8 +81,8 @@ namespace Citta_T1.OperatorViews
                 this.opControl.Option.SetOption("maxfield", String.Empty);
             else
                 this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
-            
-            
+
+
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
@@ -136,7 +136,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL0.AddItems(name);
                 this.maxValueBox.Items.Add(name);
             }
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0; 
+            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
         }
         #endregion
     }

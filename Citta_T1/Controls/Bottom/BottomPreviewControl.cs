@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Citta_T1.Core;
 using Citta_T1.Utils;
-using System.Reflection;
-using Citta_T1.Core;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Bottom
 {
@@ -131,8 +125,8 @@ namespace Citta_T1.Controls.Bottom
             if (extType == OpUtil.ExtType.Excel)
             {
                 separator = OpUtil.DefaultSeparator;  // 当文件类型是Excel是,内部分隔符自动为'\t',此时用其他分隔符没有意义
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));    
-            }     
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
+            }
             else if (extType == OpUtil.ExtType.Text)
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else

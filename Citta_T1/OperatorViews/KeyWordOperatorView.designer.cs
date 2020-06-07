@@ -1,6 +1,6 @@
 ﻿namespace Citta_T1.OperatorViews
 {
-    partial class KeyWordOperatorView
+    partial class KeywordOperatorView
     {
       
         /// <summary>
@@ -33,13 +33,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.keyWordPreviewBox = new System.Windows.Forms.TextBox();
+            this.keywordPreviewBox = new System.Windows.Forms.TextBox();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.keyWordColBox = new System.Windows.Forms.ComboBox();
+            this.combox1 = new System.Windows.Forms.ComboBox();
             this.conditionSelectBox = new System.Windows.Forms.ComboBox();
-            this.dataColumnBox = new System.Windows.Forms.ComboBox();
+            this.combox0 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -142,7 +142,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.keyWordPreviewBox);
+            this.groupBox1.Controls.Add(this.keywordPreviewBox);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(12, 5);
             this.groupBox1.Name = "groupBox1";
@@ -183,15 +183,15 @@
             // 
             // keyWordPreviewBox
             // 
-            this.keyWordPreviewBox.BackColor = System.Drawing.SystemColors.Control;
-            this.keyWordPreviewBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.keyWordPreviewBox.Location = new System.Drawing.Point(0, 81);
-            this.keyWordPreviewBox.Multiline = true;
-            this.keyWordPreviewBox.Name = "keyWordPreviewBox";
-            this.keyWordPreviewBox.ReadOnly = true;
-            this.keyWordPreviewBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.keyWordPreviewBox.Size = new System.Drawing.Size(434, 89);
-            this.keyWordPreviewBox.TabIndex = 0;
+            this.keywordPreviewBox.BackColor = System.Drawing.SystemColors.Control;
+            this.keywordPreviewBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.keywordPreviewBox.Location = new System.Drawing.Point(0, 81);
+            this.keywordPreviewBox.Multiline = true;
+            this.keywordPreviewBox.Name = "keyWordPreviewBox";
+            this.keywordPreviewBox.ReadOnly = true;
+            this.keywordPreviewBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.keywordPreviewBox.Size = new System.Drawing.Size(434, 89);
+            this.keywordPreviewBox.TabIndex = 0;
             // 
             // keyPanel
             // 
@@ -208,9 +208,9 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.label6);
-            this.valuePanel.Controls.Add(this.keyWordColBox);
+            this.valuePanel.Controls.Add(this.combox1);
             this.valuePanel.Controls.Add(this.conditionSelectBox);
-            this.valuePanel.Controls.Add(this.dataColumnBox);
+            this.valuePanel.Controls.Add(this.combox0);
             this.valuePanel.Controls.Add(this.dataSourceTB1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
@@ -223,9 +223,9 @@
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataColumnBox, 0);
+            this.valuePanel.Controls.SetChildIndex(this.combox0, 0);
             this.valuePanel.Controls.SetChildIndex(this.conditionSelectBox, 0);
-            this.valuePanel.Controls.SetChildIndex(this.keyWordColBox, 0);
+            this.valuePanel.Controls.SetChildIndex(this.combox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label6, 0);
             // 
             // label6
@@ -241,13 +241,13 @@
             // 
             // keyWordColBox
             // 
-            this.keyWordColBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.keyWordColBox.FormattingEnabled = true;
-            this.keyWordColBox.Location = new System.Drawing.Point(218, 44);
-            this.keyWordColBox.Name = "keyWordColBox";
-            this.keyWordColBox.Size = new System.Drawing.Size(121, 25);
-            this.keyWordColBox.TabIndex = 13;
-            this.keyWordColBox.SelectedIndexChanged += new System.EventHandler(this.keyWordColBox_SelectedIndexChanged);
+            this.combox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.combox1.FormattingEnabled = true;
+            this.combox1.Location = new System.Drawing.Point(218, 44);
+            this.combox1.Name = "keyWordColBox";
+            this.combox1.Size = new System.Drawing.Size(121, 25);
+            this.combox1.TabIndex = 13;
+            this.combox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
             // 
             // conditionSelectBox
             // 
@@ -263,12 +263,12 @@
             // 
             // dataColumnBox
             // 
-            this.dataColumnBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataColumnBox.FormattingEnabled = true;
-            this.dataColumnBox.Location = new System.Drawing.Point(2, 44);
-            this.dataColumnBox.Name = "dataColumnBox";
-            this.dataColumnBox.Size = new System.Drawing.Size(126, 25);
-            this.dataColumnBox.TabIndex = 11;
+            this.combox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.combox0.FormattingEnabled = true;
+            this.combox0.Location = new System.Drawing.Point(2, 44);
+            this.combox0.Name = "dataColumnBox";
+            this.combox0.Size = new System.Drawing.Size(126, 25);
+            this.combox0.TabIndex = 11;
             // 
             // KeyWordOperatorView
             // 
@@ -300,13 +300,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox keyWordColBox;
+        private System.Windows.Forms.ComboBox combox1;
         private System.Windows.Forms.ComboBox conditionSelectBox;
-        private System.Windows.Forms.ComboBox dataColumnBox;
+        private System.Windows.Forms.ComboBox combox0;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox keyWordPreviewBox;
+        private System.Windows.Forms.TextBox keywordPreviewBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
     }

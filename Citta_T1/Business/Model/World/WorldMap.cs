@@ -1,11 +1,6 @@
 ﻿using Citta_T1.Core;
-using NPOI.SS.Formula.Functions;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model.World
@@ -31,7 +26,7 @@ namespace Citta_T1.Business.Model.World
     {
         private static readonly bool canvasUse = false;
         private readonly WorldMapInfo wmInfo = new WorldMapInfo();
-        
+
         public Point MapOrigin { get => wmInfo.MapOrigin; set => wmInfo.MapOrigin = value; }
         public float ScreenFactor { get => wmInfo.ScreenFactor; set => wmInfo.ScreenFactor = value; }
 
@@ -47,7 +42,7 @@ namespace Citta_T1.Business.Model.World
                     X = Convert.ToInt32(Ps.X - MapOrigin.X * ScreenFactor),
                     Y = Convert.ToInt32(Ps.Y - MapOrigin.Y * ScreenFactor)
                 }
-                :new Point
+                : new Point
                 {
                     X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
                     Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
@@ -157,7 +152,7 @@ namespace Citta_T1.Business.Model.World
             }
             return dragOffset;
         }
-        public void WorldBoundControl(Point Pm,Control ct)
+        public void WorldBoundControl(Point Pm, Control ct)
         {
             Point Pw = ScreenToWorld(Pm, true);
             if (Pw.X < 20)

@@ -9,7 +9,7 @@ namespace HZH_Controls.Controls
     public partial class GraphicalOverlayComponent : Component
     {
         public event EventHandler<PaintEventArgs> Paint;
-        
+
         public GraphicalOverlayComponent()
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace HZH_Controls.Controls
             InitializeComponent();
         }
         private Control owner;
-        [Browsable(true), Category("自定义属性"), Description("父控件"), Localizable(true)]    
+        [Browsable(true), Category("自定义属性"), Description("父控件"), Localizable(true)]
         public Control Owner
         {
             get { return owner; }
@@ -58,8 +58,8 @@ namespace HZH_Controls.Controls
             Type type = control.GetType();
             System.Reflection.PropertyInfo pi = type.GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             pi.SetValue(control, true, null);
-           
-            
+
+
             control.Paint -= new PaintEventHandler(Control_Paint);
             control.Paint += new PaintEventHandler(Control_Paint);
 

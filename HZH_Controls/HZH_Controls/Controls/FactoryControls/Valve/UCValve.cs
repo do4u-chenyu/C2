@@ -14,14 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using HZH_Controls.Controls;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -288,7 +284,7 @@ namespace HZH_Controls.Controls
                     rectJK2 = new Rectangle(rectGuan.Right - this.Height / 8 - rectGuan.Height / 2, rectGuan.Top - this.Height / 8, rectGuan.Height / 2, rectGuan.Height + this.Height / 4);
                     linePath.AddLine(new Point(rectGuan.Left - 10, rectGuan.Top + rectGuan.Height / 2), new Point(rectGuan.Right + 10, rectGuan.Top + rectGuan.Height / 2));
                     rectZ = new Rectangle(rectGuan.Left + (rectGuan.Width - rectGuan.Height / 4) / 2, 10, rectGuan.Height / 4, rectGuan.Top - 10);
-                    Point[] psTop = new Point[]             
+                    Point[] psTop = new Point[]
                     {
                         new Point(rectGuan.Left+(rectGuan.Width-rectGuan.Height/2)/2,rectGuan.Top- this.Height / 8- 5 ),
                         new Point(rectGuan.Right-(rectGuan.Width-rectGuan.Height/2)/2,rectGuan.Top- this.Height / 8- 5 ),
@@ -312,7 +308,7 @@ namespace HZH_Controls.Controls
                     rectJK2 = new Rectangle(rectGuan.Right - this.Height / 8 - rectGuan.Height / 2, rectGuan.Top - this.Height / 8, rectGuan.Height / 2, rectGuan.Height + this.Height / 4);
                     linePath.AddLine(new Point(rectGuan.Left - 10, rectGuan.Top + rectGuan.Height / 2), new Point(rectGuan.Right + 10, rectGuan.Top + rectGuan.Height / 2));
                     rectZ = new Rectangle(rectGuan.Left + (rectGuan.Width - rectGuan.Height / 4) / 2, rectGuan.Bottom + 10, rectGuan.Height / 4, this.Height - 10 - (rectGuan.Bottom + 10));
-                    Point[] psBottom = new Point[]             
+                    Point[] psBottom = new Point[]
                     {
                         new Point(rectGuan.Left+(rectGuan.Width-rectGuan.Height/2)/2,rectGuan.Bottom+ this.Height / 8+ 5 ),
                         new Point(rectGuan.Right-(rectGuan.Width-rectGuan.Height/2)/2,rectGuan.Bottom+ this.Height / 8+ 5 ),
@@ -336,10 +332,10 @@ namespace HZH_Controls.Controls
                     rectJK2 = new Rectangle(0, this.Height - this.Width / 8 - rectGuan.Width / 2, rectGuan.Width + this.Width / 4, rectGuan.Width / 2);
                     linePath.AddLine(new Point(rectGuan.Left + rectGuan.Width / 2, rectGuan.Top - 10), new Point(rectGuan.Left + rectGuan.Width / 2, rectGuan.Bottom + 10));
                     rectZ = new Rectangle(rectGuan.Right, rectGuan.Top + (rectGuan.Height - rectGuan.Width / 4) / 2, rectGuan.Right - 10, rectGuan.Width / 4);
-                    Point[] psLeft = new Point[]             
+                    Point[] psLeft = new Point[]
                     {
                         new Point(rectGuan.Right+ this.Width / 8+ 5 ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2),
-                        new Point(rectGuan.Right+ this.Width / 8+ 5 ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2+rectGuan.Width / 2),                      
+                        new Point(rectGuan.Right+ this.Width / 8+ 5 ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2+rectGuan.Width / 2),
                         new Point(rectGuan.Right-2, rectGuan.Top +(rectGuan.Height-rectGuan.Width)/2+rectGuan.Width),
                         new Point(rectGuan.Right-2, rectGuan.Top +(rectGuan.Height-rectGuan.Width)/2),
                     };
@@ -360,10 +356,10 @@ namespace HZH_Controls.Controls
                     rectJK2 = new Rectangle(this.Width - (rectGuan.Width + this.Width / 4), this.Height - this.Width / 8 - rectGuan.Width / 2, rectGuan.Width + this.Width / 4, rectGuan.Width / 2);
                     linePath.AddLine(new Point(rectGuan.Left + rectGuan.Width / 2, rectGuan.Top - 10), new Point(rectGuan.Left + rectGuan.Width / 2, rectGuan.Bottom + 10));
                     rectZ = new Rectangle(10, rectGuan.Top + (rectGuan.Height - rectGuan.Width / 4) / 2, rectGuan.Left - 10, rectGuan.Width / 4);
-                    Point[] psRight = new Point[]             
+                    Point[] psRight = new Point[]
                     {
                         new Point(rectGuan.Left- (this.Width / 8+ 5) ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2),
-                        new Point(rectGuan.Left-( this.Width / 8+ 5) ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2+rectGuan.Width / 2),                      
+                        new Point(rectGuan.Left-( this.Width / 8+ 5) ,rectGuan.Top + (rectGuan.Height - rectGuan.Width / 2) / 2+rectGuan.Width / 2),
                         new Point(rectGuan.Left+2, rectGuan.Top +(rectGuan.Height-rectGuan.Width)/2+rectGuan.Width),
                         new Point(rectGuan.Left+2, rectGuan.Top +(rectGuan.Height-rectGuan.Width)/2),
                     };

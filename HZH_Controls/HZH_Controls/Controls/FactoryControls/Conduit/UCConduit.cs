@@ -15,12 +15,10 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -240,8 +238,8 @@ namespace HZH_Controls.Controls
                 #region H    English:H
                 case ConduitStyle.Horizontal_None_None:
                     path.AddLines(new PointF[]
-                    { 
-                        new PointF(0, 0), 
+                    {
+                        new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right, 0),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height)
@@ -251,8 +249,8 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Horizontal_Up_None:
                     path.AddLines(new PointF[]
-                    { 
-                        new PointF(0, 0), 
+                    {
+                        new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right, 0),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0+intPenWidth, this.Height)
@@ -267,8 +265,8 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Horizontal_Down_None:
                     path.AddLines(new PointF[]
-                    { 
-                        new PointF(intPenWidth, 0), 
+                    {
+                        new PointF(intPenWidth, 0),
                         new PointF(this.ClientRectangle.Right, 0),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height)
@@ -283,10 +281,10 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Horizontal_None_Up:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(this.ClientRectangle.Right-intPenWidth, this.Height),
                         new PointF(0, this.Height),
-                        new PointF(0, 0), 
+                        new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right-intPenWidth, 0)
                     });
                     path.AddArc(new Rectangle(this.ClientRectangle.Right - intPenWidth * 2, intPenWidth * -1, intPenWidth * 2, intPenWidth * 2), 0, 90);
@@ -299,10 +297,10 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Horizontal_None_Down:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height),
-                        new PointF(0, 0), 
+                        new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right-intPenWidth, 0)
                     });
                     path.AddArc(new Rectangle(this.ClientRectangle.Right - intPenWidth * 2, -1, intPenWidth * 2, intPenWidth * 2), 270, 90);
@@ -387,15 +385,15 @@ namespace HZH_Controls.Controls
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Left - conduitWidth, this.ClientRectangle.Bottom - conduitWidth * 2, conduitWidth * 2, conduitWidth * 2), startAngle = 90, sweepAngle = -1 * (float)angleUp });
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Right - conduitWidth, this.ClientRectangle.Top, conduitWidth * 2, conduitWidth * 2), startAngle = 270, sweepAngle = -1 * (float)angleUp });
 
-                    tileLine.Add(new Point[] 
-                    { 
-                        new Point((int)(this.ClientRectangle.Right+1 - Math.Sin(Math.PI * (angleUp / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Top + conduitWidth - Math.Cos(Math.PI * (angleUp / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Left,this.ClientRectangle.Bottom-conduitWidth-1) 
-                    });
-                    tileLine.Add(new Point[] 
+                    tileLine.Add(new Point[]
                     {
-                        new Point((int)(this.ClientRectangle.Left+1 + Math.Sin(Math.PI * (angleUp / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Bottom - conduitWidth + Math.Cos(Math.PI * (angleUp / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Right,this.ClientRectangle.Top+conduitWidth) 
+                        new Point((int)(this.ClientRectangle.Right+1 - Math.Sin(Math.PI * (angleUp / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Top + conduitWidth - Math.Cos(Math.PI * (angleUp / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Left,this.ClientRectangle.Bottom-conduitWidth-1)
+                    });
+                    tileLine.Add(new Point[]
+                    {
+                        new Point((int)(this.ClientRectangle.Left+1 + Math.Sin(Math.PI * (angleUp / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Bottom - conduitWidth + Math.Cos(Math.PI * (angleUp / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Right,this.ClientRectangle.Top+conduitWidth)
                     });
 
                     break;
@@ -415,15 +413,15 @@ namespace HZH_Controls.Controls
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Left - conduitWidth, this.ClientRectangle.Top, conduitWidth * 2, conduitWidth * 2), startAngle = 270, sweepAngle = (float)angleDown });
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Right - conduitWidth, this.ClientRectangle.Bottom - conduitWidth * 2, conduitWidth * 2, conduitWidth * 2), startAngle = 90, sweepAngle = (float)angleDown });
 
-                    tileLine.Add(new Point[] 
-                    { 
-                        new Point((int)(this.ClientRectangle.Left + Math.Sin(Math.PI * (angleDown / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Top + conduitWidth - Math.Cos(Math.PI * (angleDown / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Right-1,this.ClientRectangle.Bottom-conduitWidth-1) 
-                    });
-                    tileLine.Add(new Point[] 
+                    tileLine.Add(new Point[]
                     {
-                        new Point((int)(this.ClientRectangle.Right - Math.Sin(Math.PI * (angleDown / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Bottom - conduitWidth + Math.Cos(Math.PI * (angleDown / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Left,this.ClientRectangle.Top+conduitWidth) 
+                        new Point((int)(this.ClientRectangle.Left + Math.Sin(Math.PI * (angleDown / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Top + conduitWidth - Math.Cos(Math.PI * (angleDown / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Right-1,this.ClientRectangle.Bottom-conduitWidth-1)
+                    });
+                    tileLine.Add(new Point[]
+                    {
+                        new Point((int)(this.ClientRectangle.Right - Math.Sin(Math.PI * (angleDown / 180.00F)) * conduitWidth),(int)( this.ClientRectangle.Bottom - conduitWidth + Math.Cos(Math.PI * (angleDown / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Left,this.ClientRectangle.Top+conduitWidth)
                     });
                     break;
                 #endregion
@@ -431,8 +429,8 @@ namespace HZH_Controls.Controls
                 #region V    English:V
                 case ConduitStyle.Vertical_None_None:
                     path.AddLines(new PointF[]
-                    { 
-                        new PointF(0, 0), 
+                    {
+                        new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right, 0),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height)
@@ -442,7 +440,7 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Vertical_Left_None:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(this.ClientRectangle.Right, intPenWidth),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height),
@@ -458,7 +456,7 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Vertical_Right_None:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(this.ClientRectangle.Right, 0),
                         new PointF(this.ClientRectangle.Right, this.Height),
                         new PointF(0, this.Height),
@@ -474,7 +472,7 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Vertical_None_Left:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(0, this.Height),
                         new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right, 0),
@@ -490,7 +488,7 @@ namespace HZH_Controls.Controls
                     break;
                 case ConduitStyle.Vertical_None_Right:
                     path.AddLines(new PointF[]
-                    { 
+                    {
                         new PointF(0, this.Height-intPenWidth),
                         new PointF(0, 0),
                         new PointF(this.ClientRectangle.Right, 0),
@@ -576,15 +574,15 @@ namespace HZH_Controls.Controls
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Left - 1, ClientRectangle.Top - conduitWidth, conduitWidth * 2, conduitWidth * 2), startAngle = 180, sweepAngle = -1 * (float)angleLeft });
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Right - conduitWidth * 2, this.ClientRectangle.Bottom - conduitWidth, conduitWidth * 2, conduitWidth * 2), startAngle = 0, sweepAngle = -1 * (float)angleLeft });
 
-                    tileLine.Add(new Point[] 
-                    { 
-                        new Point((int)(this.ClientRectangle.Left + conduitWidth),this.ClientRectangle.Top), 
-                        new Point((int)(this.ClientRectangle.Right-conduitWidth+Math.Cos(Math.PI * (angleLeft / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Bottom-Math.Sin(Math.PI * (angleLeft / 180.00F)) * conduitWidth)) 
-                    });
-                    tileLine.Add(new Point[] 
+                    tileLine.Add(new Point[]
                     {
-                        new Point((int)(this.ClientRectangle.Left-1+conduitWidth-Math.Cos(Math.PI * (angleLeft / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Top+Math.Sin(Math.PI * (angleLeft / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Right-conduitWidth,this.ClientRectangle.Bottom) 
+                        new Point((int)(this.ClientRectangle.Left + conduitWidth),this.ClientRectangle.Top),
+                        new Point((int)(this.ClientRectangle.Right-conduitWidth+Math.Cos(Math.PI * (angleLeft / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Bottom-Math.Sin(Math.PI * (angleLeft / 180.00F)) * conduitWidth))
+                    });
+                    tileLine.Add(new Point[]
+                    {
+                        new Point((int)(this.ClientRectangle.Left-1+conduitWidth-Math.Cos(Math.PI * (angleLeft / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Top+Math.Sin(Math.PI * (angleLeft / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Right-conduitWidth,this.ClientRectangle.Bottom)
                     });
                     break;
                 case ConduitStyle.Vertical_Tilt_Right:
@@ -603,18 +601,18 @@ namespace HZH_Controls.Controls
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Right - conduitWidth * 2, ClientRectangle.Top - conduitWidth, conduitWidth * 2, conduitWidth * 2), startAngle = 0, sweepAngle = (float)angleRight });
                     lstArcs.Add(new ArcEntity() { rect = new Rectangle(this.ClientRectangle.Left - 1, this.ClientRectangle.Bottom - conduitWidth, conduitWidth * 2, conduitWidth * 2), startAngle = 180, sweepAngle = (float)angleRight });
 
-                    tileLine.Add(new Point[] 
-                    { 
-                        new Point((int)(this.ClientRectangle.Right - conduitWidth),this.ClientRectangle.Top), 
-                        new Point((int)(this.ClientRectangle.Left + conduitWidth - Math.Cos(Math.PI * (angleRight / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Bottom-Math.Sin(Math.PI * (angleRight / 180.00F)) * conduitWidth)) 
-                    });
-                    tileLine.Add(new Point[] 
+                    tileLine.Add(new Point[]
                     {
-                        new Point((int)(this.ClientRectangle.Right - conduitWidth+Math.Cos(Math.PI * (angleRight / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Top+Math.Sin(Math.PI * (angleRight / 180.00F)) * conduitWidth)), 
-                        new Point(this.ClientRectangle.Left + conduitWidth,this.ClientRectangle.Bottom) 
+                        new Point((int)(this.ClientRectangle.Right - conduitWidth),this.ClientRectangle.Top),
+                        new Point((int)(this.ClientRectangle.Left + conduitWidth - Math.Cos(Math.PI * (angleRight / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Bottom-Math.Sin(Math.PI * (angleRight / 180.00F)) * conduitWidth))
+                    });
+                    tileLine.Add(new Point[]
+                    {
+                        new Point((int)(this.ClientRectangle.Right - conduitWidth+Math.Cos(Math.PI * (angleRight / 180.00F)) * conduitWidth),(int)(this.ClientRectangle.Top+Math.Sin(Math.PI * (angleRight / 180.00F)) * conduitWidth)),
+                        new Point(this.ClientRectangle.Left + conduitWidth,this.ClientRectangle.Bottom)
                     });
                     break;
-                #endregion
+                    #endregion
             }
             base.Region = new Region(path);
             g.FillPath(new SolidBrush(conduitColor), path);
@@ -625,7 +623,7 @@ namespace HZH_Controls.Controls
             {
                 _intPenWidth = conduitWidth;
             }
-            int intCount = _intPenWidth / 2 / 4;            
+            int intCount = _intPenWidth / 2 / 4;
             for (int i = 0; i < intCount; i++)
             {
                 int _penWidth = _intPenWidth / 2 - 4 * i;

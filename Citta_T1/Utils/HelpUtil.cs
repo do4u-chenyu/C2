@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Citta_T1.Utils
+﻿namespace Citta_T1.Utils
 {
     class HelpUtil
     {
@@ -17,7 +11,7 @@ namespace Citta_T1.Utils
         public static string RandomOperatorHelpInfo = "随机采样:随机输出n条数据.";
         public static string FilterOperatorHelpInfo = "条件筛选:根据数值筛选条件设置查看符合条件的所在行数据.";
         public static string FreqOperatorHelpInfo = "频率统计:统计选择字段出现次数.";
-        public static string SortOperatorHelpInfo = "排序算子:根据选择字段进行排序,支持数据去重"; 
+        public static string SortOperatorHelpInfo = "排序算子:根据选择字段进行排序,支持数据去重";
         public static string GroupOperatorHelpInfo = "分组算子:根据选择字段对文本进行分组展示";
         public static string RelateOperatorHelpInfo = "关联算子:根据选择的关联条件将两个数据表进行连接，默认左连接.";
         public static string CustomOperator1HelpInfo = "AI实践:灵活配置算子,用于各种模型探索和展示.一元算子,支持一个输入数据源.";

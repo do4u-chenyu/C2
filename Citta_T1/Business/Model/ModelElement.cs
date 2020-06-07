@@ -57,15 +57,16 @@ namespace Citta_T1.Business.Model
 
         #region  封装底层控件属性,Location, ID, Encoding, ExtType, Separator, Description, FullFilePath, Status
 
-        public ElementSubType SubType { 
+        public ElementSubType SubType
+        {
             get
             {
                 switch (this.Type)
-                { 
+                {
                     case ElementType.Operator:
                         return OpUtil.SEType((ctl as MoveOpControl).SubTypeName);
                     case ElementType.DataSource:
-                    case ElementType.Result:  
+                    case ElementType.Result:
                     default:
                         return ElementSubType.Null;
                 }
@@ -77,7 +78,7 @@ namespace Citta_T1.Business.Model
         public int ID { get => ctl.ID; }
 
         public OpUtil.Encoding Encoding { get => ctl.Encoding; set => ctl.Encoding = value; }
-  
+
         public OpUtil.ExtType ExtType { get => ctl.ExtType; }
 
         public char Separator { get => ctl.Separator; set => ctl.Separator = value; }
@@ -97,7 +98,7 @@ namespace Citta_T1.Business.Model
             Type = ElementType.Empty;
         }
 
-       
+
         private ModelElement(ElementType type, MoveBaseControl ctl)
         {
             Init(type, ctl);
@@ -112,9 +113,9 @@ namespace Citta_T1.Business.Model
         private void Init(ElementType type, MoveBaseControl ctl)
         {
             this.Type = type;
-            this.ctl = ctl; 
+            this.ctl = ctl;
         }
-        
+
         public void Show()
         {
             ctl.Show();
@@ -123,18 +124,18 @@ namespace Citta_T1.Business.Model
         {
             ctl.Hide();
         }
-        public static ModelElement CreateModelElement(Dictionary<string,string> dict)
+        public static ModelElement CreateModelElement(Dictionary<string, string> dict)
         {
-            if (!(dict.ContainsKey("id") 
-                && dict.ContainsKey("name") 
+            if (!(dict.ContainsKey("id")
+                && dict.ContainsKey("name")
                 && dict.ContainsKey("location")
                 && dict.ContainsKey("type")))
                 return ModelElement.Empty;
             string type = dict["type"];
             string name = dict["name"];
-            int id = Convert.ToInt32(dict["id"]);           
+            int id = Convert.ToInt32(dict["id"]);
             Point location = OpUtil.ToPointType(dict["location"]);
-            
+
             if (type == "DataSource")
             {
                 if (!(dict.ContainsKey("path")
@@ -155,10 +156,10 @@ namespace Citta_T1.Business.Model
             else if (type == "Operator")
             {
                 if (!(dict.ContainsKey("subtype")
-                    && dict.ContainsKey("status") 
+                    && dict.ContainsKey("status")
                     && dict.ContainsKey("enableoption")))
                     return ModelElement.Empty;
-                string subType =OpUtil.SubTypeName(dict["subtype"]);
+                string subType = OpUtil.SubTypeName(dict["subtype"]);
                 bool enableOption = Convert.ToBoolean(dict["enableoption"]);
                 ElementStatus status = OpUtil.EStatus(dict["status"]);
                 MoveOpControl Control = new MoveOpControl(0, name, subType, location)
@@ -169,10 +170,10 @@ namespace Citta_T1.Business.Model
                 };
                 return CreateModelElement(Control);
             }
-            else 
+            else
             {
                 if (!(dict.ContainsKey("status")
-                    && dict.ContainsKey("path") 
+                    && dict.ContainsKey("path")
                     && dict.ContainsKey("separator")
                     && dict.ContainsKey("encoding")))
                     return ModelElement.Empty;
@@ -190,7 +191,7 @@ namespace Citta_T1.Business.Model
                 };
                 return CreateModelElement(Control);
             }
-         
+
         }
     }
 }

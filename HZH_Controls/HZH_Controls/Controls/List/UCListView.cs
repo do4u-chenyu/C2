@@ -14,14 +14,11 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace HZH_Controls.Controls
 {
@@ -104,7 +101,7 @@ namespace HZH_Controls.Controls
                 }
             }
         }
-        
+
         /// <summary>
         /// The m data source
         /// </summary>

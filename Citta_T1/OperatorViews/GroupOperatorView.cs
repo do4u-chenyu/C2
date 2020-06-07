@@ -3,73 +3,51 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
     public partial class GroupOperatorView : BaseOperatorView
     {
-       
-        private string dataPath;
-       
-        private List<string> selectColumn;
+
         private List<int> groupColumn;
         private List<bool> oldCheckedItems;
         private List<int> outList;
-        private static LogUtil log = LogUtil.GetInstance("GroupOperatorView");
         public GroupOperatorView(MoveOpControl opControl) : base(opControl)
         {
-            InitializeComponent();
-            this.selectColumn = new List<string>();
             this.groupColumn = new List<int>();
-            this.oldCheckedItems = new List<bool>();         
-            dataPath = String.Empty;
-            InitOptionInfo();
+            this.oldCheckedItems = new List<bool>();
+
+            InitializeComponent();
+            InitByDataSource();
             LoadOption();
+
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.repetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldCheckedItems.Add(this.sortByString.Checked);
             this.oldCheckedItems.Add(this.sortByNum.Checked);
-            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataPath = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                SetOption(this.dataPath, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-  
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.comboBox0.Items.AddRange(nowColumnsName0);
         }
 
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in this.nowColumnsName0)
-                this.comboBox1.Items.Add(name);
-               
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-        }
-       
         #endregion
         #region 配置信息的保存与加载
         private void InitNewFactorControl(int count)
@@ -86,11 +64,11 @@ namespace Citta_T1.OperatorViews
         private void LoadOption()
         {
 
-            if (!String.IsNullOrEmpty( this.opControl.Option.GetOption("noRepetition")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("noRepetition")))
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("repetition")))
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (!String.IsNullOrEmpty( this.opControl.Option.GetOption("ascendingOrder")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("ascendingOrder")))
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("descendingOrder")))
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
@@ -110,13 +88,10 @@ namespace Citta_T1.OperatorViews
             string factor1 = this.opControl.Option.GetOption("factor1");
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1"))
             {
-               
+
                 int index = Convert.ToInt32(factor1);
-                this.comboBox1.Text = this.comboBox1.Items[index].ToString();
-                this.comboBox1.Tag = index.ToString();
-
-
-
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
             }
             if (count > 1)
                 InitNewFactorControl(count - 1);
@@ -131,7 +106,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 if (Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name)) continue;
-  
+
                 int index = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[index].ToString();
@@ -143,11 +118,11 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t",this.opControl.FirstDataSourceColumns));
-            string factor1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            string factor1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
-            this.groupColumn.Add(this.comboBox1.SelectedIndex);
-            
+            this.groupColumn.Add(this.comboBox0.SelectedIndex);
+
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
@@ -175,7 +150,7 @@ namespace Citta_T1.OperatorViews
 
             ElementStatus oldStatus = this.opControl.Status;
 
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -190,7 +165,7 @@ namespace Citta_T1.OperatorViews
             bool empty = IsOptionReay();
             if (empty) return;
             //判断分组字段是否重复选择
-            if( IsDuplicateSelect()) return;
+            if (IsDuplicateSelect()) return;
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
@@ -198,26 +173,26 @@ namespace Citta_T1.OperatorViews
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             foreach (int index in this.outList)
-                this.selectColumn.Add(this.nowColumnsName0[index]);
+                this.selectedColumns.Add(this.nowColumnsName0[index]);
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectColumn);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
 
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-            if (!this.oldColumnsName0.SequenceEqual(this.selectColumn))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectColumn, this.opControl.ID);
+            if (!this.oldColumnsName0.SequenceEqual(this.selectedColumns))
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
-     
+
         private bool IsOptionReay()
         {
             bool empty = false;
             List<string> types = new List<string>();
-            types.Add(this.comboBox1.GetType().Name);
+            types.Add(this.comboBox0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
@@ -250,11 +225,11 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.nowColumnsName0);
             dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);        
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
-           
+
             Button addButton1 = new Button();
             addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             addButton1.FlatAppearance.BorderSize = 0;
@@ -370,44 +345,34 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
-
-        private void DataInfo_MouseClick(object sender, MouseEventArgs e)
-        {
-            this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-        }
-
-        private void DataInfo_LostFocus(object sender, EventArgs e)
-        {
-            SetTextBoxName(this.dataSourceTB0);
-        }
         #region 分组字段重复选择判断
         private bool IsDuplicateSelect()
         {
             bool ret = false;
-            Dictionary<int,string> selectedIndex = new Dictionary<int, string>();
-    
-            string index0 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            Dictionary<int, string> selectedIndex = new Dictionary<int, string>();
+
+            string index0 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             selectedIndex[0] = index0;
-      
+
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    selectedIndex[i+1] = index1;
+                    selectedIndex[i + 1] = index1;
                 }
             }
             var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             List<int> indexs = new List<int>();
             foreach (var item in duplicateValues)
                 indexs.Add(Convert.ToInt32(item.Key));
-            if (indexs != null&& indexs.Count()>0)
+            if (indexs != null && indexs.Count() > 0)
             {
                 string name = "";
                 foreach (int num in indexs)
                     name += this.nowColumnsName0[num];
-                MessageBox.Show("分组字段" +  name + "重复选择，请保持每个字段只被选择一次");
+                MessageBox.Show("分组字段" + name + "重复选择，请保持每个字段只被选择一次");
                 ret = true;
             }
             return ret;

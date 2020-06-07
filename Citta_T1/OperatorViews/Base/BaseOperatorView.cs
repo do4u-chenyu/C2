@@ -1,11 +1,9 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
+﻿using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -26,6 +24,7 @@ namespace Citta_T1.OperatorViews.Base
         protected string oldOptionDictStr;          // 旧配置字典的字符串表述
 
         protected OptionInfoCheck optionInfoCheck;  // 用户配置信息通用检查
+        protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
 
         public BaseOperatorView()
         {
@@ -42,30 +41,30 @@ namespace Citta_T1.OperatorViews.Base
             oldOutList1 = new List<int>();
             selectedColumns = new List<string>();
             optionInfoCheck = new OptionInfoCheck();
+            dataInfo = new Dictionary<string, string>();
         }
         public BaseOperatorView(MoveOpControl opControl) : this()
         {
             this.opControl = opControl;
             oldOptionDictStr = opControl.Option.ToString();
         }
-
+        // 初始化左右表数据源
         protected void InitDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            
+            dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
+            // 左表
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                this.dataSourceFFP0     = dataInfo["dataPath0"];
+                this.dataSourceFFP0 = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = dataInfo["description0"];
                 BcpInfo bcpInfo = new BcpInfo(dataSourceFFP0, OpUtil.EncodingEnum(dataInfo["encoding0"]), dataInfo["separator0"].ToCharArray());
                 opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
                 this.nowColumnsName0 = bcpInfo.ColumnArray;
             }
-            
-            
+            // 右表
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
             {
-                this.dataSourceFFP1     = dataInfo["dataPath1"];
+                this.dataSourceFFP1 = dataInfo["dataPath1"];
                 this.dataSourceTB1.Text = dataInfo["description1"]; ;
                 BcpInfo bcpInfo = new BcpInfo(dataSourceFFP1, OpUtil.EncodingEnum(dataInfo["encoding1"]), dataInfo["separator1"].ToCharArray());
                 opControl.SecondDataSourceColumns = bcpInfo.ColumnArray;

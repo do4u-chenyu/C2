@@ -68,7 +68,7 @@ namespace Citta_T1.Controls
             this.ControlChange(Start, Now);
             n.Dispose();
             this.StartDrag = false;
-            this.Start = e.Location;           
+            this.Start = e.Location;
 
         }
         public bool DragPaint(Size canvasSize, float canvasFactor, PaintEventArgs e)
@@ -92,7 +92,7 @@ namespace Citta_T1.Controls
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
             g.Clear(Color.White);
-            List<ModelElement>  modelElements  = Global.GetCurrentDocument().ModelElements;
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
 
@@ -136,15 +136,15 @@ namespace Citta_T1.Controls
 
         public void ControlChange(Point start, Point now)
         {
-            DragEdgeCheck(out Point mapOrigin, out Point moveOffset);           
+            DragEdgeCheck(out Point mapOrigin, out Point moveOffset);
             int dx = Convert.ToInt32((now.X - start.X) / this.Factor);
             int dy = Convert.ToInt32((now.Y - start.Y) / this.Factor);
-            
+
             // 移动当前文档中的所有控件
             LineUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
-            
+
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             // 将所有控件都显示出来
             Global.GetCurrentDocument().ModelElements.ForEach(me => me.Show());
@@ -153,14 +153,14 @@ namespace Citta_T1.Controls
             Global.GetCanvasPanel().Invalidate(false);
             Global.GetNaviViewControl().UpdateNaviView();
         }
-        private void DragEdgeCheck(out Point mapOrigin,out Point moveOffset)
+        private void DragEdgeCheck(out Point mapOrigin, out Point moveOffset)
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;           
+            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
             int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
             int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);       
-            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;  
+            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;
         }
     }
 }

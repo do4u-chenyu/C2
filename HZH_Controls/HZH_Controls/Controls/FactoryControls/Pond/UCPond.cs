@@ -13,14 +13,9 @@
 //
 // If you use this code, please keep this note.
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -168,7 +163,7 @@ namespace HZH_Controls.Controls
             //划边
             g.FillRectangle(new SolidBrush(wallColor), 0, 0, wallWidth, this.Height);
             g.FillRectangle(new SolidBrush(wallColor), 0, this.Height - wallWidth, this.Width, wallWidth);
-            g.FillRectangle(new SolidBrush(wallColor), this.Width - wallWidth-1, 0, wallWidth, this.Height);
+            g.FillRectangle(new SolidBrush(wallColor), this.Width - wallWidth - 1, 0, wallWidth, this.Height);
         }
     }
 }

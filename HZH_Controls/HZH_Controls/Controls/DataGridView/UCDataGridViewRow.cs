@@ -16,10 +16,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
@@ -160,7 +159,7 @@ namespace HZH_Controls.Controls
                     {
                         if (DataSource is DataRow)
                         {
-                            DataRow row=DataSource as DataRow;
+                            DataRow row = DataSource as DataRow;
                             if (com.Format != null)
                             {
                                 cs[0].Text = com.Format(row[com.DataField]);

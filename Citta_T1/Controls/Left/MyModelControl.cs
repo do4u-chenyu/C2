@@ -9,7 +9,7 @@ namespace Citta_T1.Controls.Left
     {
         public MyModelControl()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private static readonly int ButtonLeftX = 15;
@@ -80,7 +80,7 @@ namespace Citta_T1.Controls.Left
                 LayoutModelButtonLocation(ct);
                 Controls.Add(ct);
             }
-               
+
 
             this.ResumeLayout(false);
             this.PerformLayout();

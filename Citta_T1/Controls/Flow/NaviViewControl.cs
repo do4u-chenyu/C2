@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
-using System.Drawing.Drawing2D;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -72,13 +66,13 @@ namespace Citta_T1.Controls.Flow
         {
             List<ModelElement> modelElements = md.ModelElements;
             float factor = md.WorldMap.ScreenFactor;
-          
+
             // 鼠标点下时,缓存所有元素世界坐标系
             foreach (ModelElement me in modelElements)
             {
                 if (elementWorldLocDict.ContainsKey(me))
                     continue;
-                PointF ctWorldPosition = md.WorldMap.ScreenToWorldF(me.Location,true);
+                PointF ctWorldPosition = md.WorldMap.ScreenToWorldF(me.Location, true);
                 PointF loc = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
                 elementWorldLocDict[me] = loc;
             }
@@ -89,9 +83,9 @@ namespace Citta_T1.Controls.Flow
 
             float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             Point mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
-            
-            int dx = Convert.ToInt32((startX - e.X ) * rate / factor);
-            int dy = Convert.ToInt32((startY - e.Y ) * rate / factor);
+
+            int dx = Convert.ToInt32((startX - e.X) * rate / factor);
+            int dy = Convert.ToInt32((startY - e.Y) * rate / factor);
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
             // 更新canvas所有元素的位置
             Point moveOffset = Global.GetCurrentDocument().WorldMap
@@ -101,7 +95,7 @@ namespace Citta_T1.Controls.Flow
             LineUtil.ChangeLoc((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
             Global.GetCanvasPanel().Invalidate();
             OpUtil.CanvasDragLocation((startX - e.X) * rate - moveOffset.X * factor, (startY - e.Y) * rate - moveOffset.Y * factor);
-            
+
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             startX = e.X;
             startY = e.Y;
@@ -127,17 +121,17 @@ namespace Citta_T1.Controls.Flow
             float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             try
             {
-                
+
                 mapOrigin = currentDocument.WorldMap.MapOrigin;
 
                 Point moveOffset = Global.GetCurrentDocument().WorldMap
                                          .WorldBoundControl(factor, Parent.Width, Parent.Height);
                 OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
-                
-                currentDocument.WorldMap.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
-                mapOrigin = currentDocument.WorldMap.MapOrigin;               
 
-                viewBoxPosition = currentDocument.WorldMap.ScreenToWorld(new Point(50, 30),true);
+                currentDocument.WorldMap.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+                mapOrigin = currentDocument.WorldMap.MapOrigin;
+
+                viewBoxPosition = currentDocument.WorldMap.ScreenToWorld(new Point(50, 30), true);
             }
             catch
             {
@@ -173,11 +167,11 @@ namespace Citta_T1.Controls.Flow
             List<ModelRelation> modelRelations = currentDocument.ModelRelations;
 
             foreach (ModelElement me in modelElements)
-            { 
-                
-                PointF ctWorldPosition = currentDocument.WorldMap.ScreenToWorldF(me.Location,true);
+            {
+
+                PointF ctWorldPosition = currentDocument.WorldMap.ScreenToWorldF(me.Location, true);
                 PointF ctScreenPos = new PointF(ctWorldPosition.X / rate, ctWorldPosition.Y / rate);
-                
+
                 // 为了解决导航框拖动时,元素漂移的问题
                 if (elementWorldLocDict.ContainsKey(me))
                 {
@@ -186,10 +180,11 @@ namespace Citta_T1.Controls.Flow
                     if (Math.Abs(loc.X - ctScreenPos.X) + Math.Abs(loc.Y - ctScreenPos.Y) <= 1)
                         ctScreenPos = loc;
                     else
-                    // 如果偏移过大,更新缓存的坐标
+                        // 如果偏移过大,更新缓存的坐标
                         elementWorldLocDict[me] = ctScreenPos;
                 }
-                else { // 新增元素,加入缓存
+                else
+                { // 新增元素,加入缓存
                     elementWorldLocDict[me] = ctScreenPos;
                 }
 
@@ -200,7 +195,7 @@ namespace Citta_T1.Controls.Flow
             foreach (ModelRelation mr in modelRelations)
             {
                 ModelElement startMe = currentDocument.SearchElementByID(mr.StartID);
-                ModelElement endMe   = currentDocument.SearchElementByID(mr.EndID);
+                ModelElement endMe = currentDocument.SearchElementByID(mr.EndID);
                 if (endMe == ModelElement.Empty || startMe == ModelElement.Empty)
                     continue;
                 if (!elementWorldLocDict.ContainsKey(startMe) || !elementWorldLocDict.ContainsKey(endMe))
@@ -209,7 +204,7 @@ namespace Citta_T1.Controls.Flow
                 PointF e = new PointF();
                 s.X = elementWorldLocDict[startMe].X + Convert.ToInt32(142 / rate);
                 s.Y = elementWorldLocDict[startMe].Y + Convert.ToInt32(25 / (rate * 2));
-                e.X = elementWorldLocDict[endMe].X ;
+                e.X = elementWorldLocDict[endMe].X;
                 e.Y = elementWorldLocDict[endMe].Y + Convert.ToInt32(25 / (rate * 2));
 
                 Bezier line = new Bezier(s, e);
@@ -217,7 +212,7 @@ namespace Citta_T1.Controls.Flow
             }
 
             g.Dispose();
-            
+
         }
 
     }

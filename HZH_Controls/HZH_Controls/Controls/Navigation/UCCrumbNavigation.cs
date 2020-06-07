@@ -13,15 +13,10 @@
 //
 // If you use this code, please keep this note.
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -59,7 +54,7 @@ namespace HZH_Controls.Controls
         /// <summary>
         /// The m paths
         /// </summary>
-        GraphicsPath[] m_paths;     
+        GraphicsPath[] m_paths;
 
         private CrumbNavigationItem[] items;
 

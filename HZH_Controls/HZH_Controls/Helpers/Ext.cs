@@ -14,8 +14,6 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -212,7 +210,7 @@ namespace HZH_Controls
         /// <param name="data">数据</param>
         /// <param name="digits">小数位数</param>
         /// <returns>System.Decimal.</returns>
-        public static decimal ToDecimal(this  object data, int digits)
+        public static decimal ToDecimal(this object data, int digits)
         {
             return Math.Round(ToDecimal(data), digits, System.MidpointRounding.AwayFromZero);
         }
@@ -222,7 +220,7 @@ namespace HZH_Controls
         /// </summary>
         /// <param name="data">数据</param>
         /// <returns>System.Nullable&lt;System.Decimal&gt;.</returns>
-        public static decimal? ToDecimalOrNull(this  object data)
+        public static decimal? ToDecimalOrNull(this object data)
         {
             if (data == null)
                 return null;

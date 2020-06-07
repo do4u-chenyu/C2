@@ -15,13 +15,13 @@ namespace Citta_T1.OperatorViews
     public partial class SortOperatorView : BaseOperatorView
     {
         private List<int> outList;
-        
+
         public SortOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitOptionInfo();
             LoadOption();
-           
+
             this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
 
             this.sortField.Leave += new EventHandler(optionInfoCheck.Control_Leave);
@@ -30,7 +30,7 @@ namespace Citta_T1.OperatorViews
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.sortField.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
-      
+
         #region 配置初始化
         private void InitOptionInfo()
         {
@@ -46,14 +46,14 @@ namespace Citta_T1.OperatorViews
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
             this.nowColumnsName0 = bcpInfo.ColumnArray;
-            this.outList = Enumerable.Range(0,this.nowColumnsName0.Length).ToList();
+            this.outList = Enumerable.Range(0, this.nowColumnsName0.Length).ToList();
             foreach (string name in nowColumnsName0)
                 this.sortField.Items.Add(name);
 
             this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
-     
+
         #endregion
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请选择排序字段!");
                 return;
             }
-            if (String.IsNullOrWhiteSpace(this.firstRow.Text)|| String.IsNullOrWhiteSpace(this.endRow.Text))
+            if (String.IsNullOrWhiteSpace(this.firstRow.Text) || String.IsNullOrWhiteSpace(this.endRow.Text))
             {
                 MessageBox.Show("请输出行数!");
                 return;
@@ -93,7 +93,7 @@ namespace Citta_T1.OperatorViews
             if (!this.oldColumnsName0.SequenceEqual(this.nowColumnsName0))
                 Global.GetOptionDao().IsNewOut(this.nowColumnsName0.ToList(), this.opControl.ID);
 
-        }    
+        }
         #endregion
 
         #region 配置信息的保存与加载
@@ -108,7 +108,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
             this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked.ToString());
             this.opControl.Option.SetOption("sortByString", this.sortByString.Checked.ToString());
-            this.opControl.Option.SetOption("firstRow", this.firstRow.Text);         
+            this.opControl.Option.SetOption("firstRow", this.firstRow.Text);
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
 
 
@@ -123,13 +123,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-           
+
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
                 this.sortField.Text = this.sortField.Items[index].ToString();
                 this.sortField.Tag = index.ToString();
-            }   
+            }
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
             if (this.opControl.Option.GetOption("noRepetition") != "")
@@ -149,7 +149,7 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-        
+
         private void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
@@ -168,7 +168,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请输入数字");
                 this.firstRow.Text = String.Empty;
             }
-              
+
             else
                 this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
         }
@@ -180,7 +180,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请输入数字");
                 this.endRow.Text = String.Empty;
             }
-               
+
             else
                 this.endRow.Text = int.Parse(this.endRow.Text).ToString();
 
@@ -192,7 +192,7 @@ namespace Citta_T1.OperatorViews
         {
             e.Graphics.Clear(this.BackColor);
         }
-        private bool IsCorrectOutOrder(string firstRow,string endRow)
+        private bool IsCorrectOutOrder(string firstRow, string endRow)
         {
             int first = Convert.ToInt32(firstRow);
             int end = Convert.ToInt32(endRow);

@@ -23,7 +23,7 @@ namespace Citta_T1
     {
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
-        
+
         private string userName;
         private Citta_T1.Dialogs.InputDataForm inputDataForm;
         private Citta_T1.Dialogs.CreateNewModelForm createNewModelForm;
@@ -52,7 +52,7 @@ namespace Citta_T1
 
             this.modelDocumentDao = new ModelDocumentDao();
             this.optionDao = new OptionDao();
-            
+
             InitializeGlobalVariable();
             InitializeControlsLocation();
         }
@@ -90,7 +90,7 @@ namespace Citta_T1
 
         private void ModelTitlePanel_NewModelDocument(string modelTitle)
         {
-            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);   
+            this.modelDocumentDao.AddBlankDocument(modelTitle, this.userName);
         }
         public void SetDocumentDirty()
         {
@@ -110,12 +110,12 @@ namespace Citta_T1
         }
 
         private void NewDocumentOperator(MoveBaseControl ct)
-        {          
+        {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
             ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
-                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd); 
+                UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
         }
 
         public void SaveCurrentDocument()
@@ -187,7 +187,7 @@ namespace Citta_T1
                 this.modelTitlePanel.AddModel("我的新模型");
                 this.modelDocumentDao.AddBlankDocument("我的新模型", this.userName);
                 return;
-            } 
+            }
             // 穷举当前用户空间的所有模型
             string[] modelTitles = this.modelDocumentDao.LoadSaveModelTitle(this.userName);
             // 多文档面板加载控件
@@ -196,7 +196,7 @@ namespace Citta_T1
             foreach (string mt in modelTitles)
             {
                 ModelDocument doc = this.modelDocumentDao.LoadDocument(mt, this.userName);
-                CanvasAddElement(doc);                    
+                CanvasAddElement(doc);
             }
             // 将用户本地保存的模型文档加载到左侧myModelControl
             string[] allModelTitle = this.modelDocumentDao.LoadAllModelTitle(this.userName);
@@ -205,7 +205,7 @@ namespace Citta_T1
                 this.myModelControl.AddModel(modelTitle);
                 if (!modelTitles.Contains(modelTitle))
                     this.myModelControl.EnableClosedDocumentMenu(modelTitle);
-            }   
+            }
             // 显示当前模型
             this.modelDocumentDao.CurrentDocument.Show();
             // 更新当前模型备注信息
@@ -221,7 +221,7 @@ namespace Citta_T1
         private void InitializeControlsLocation()
         {
             log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
-            
+
             Point org = new Point(this.canvasPanel.Width, 0);
             Point org2 = new Point(0, this.canvasPanel.Height);
             int x = org.X - 10 - this.naviViewControl.Width;
@@ -237,11 +237,11 @@ namespace Citta_T1
             x = x - (this.canvasPanel.Width) / 2 + 100;
             this.resetButton.Location = new Point(x + 100, y + 50);
             this.stopButton.Location = new Point(x + 50, y + 50);
-            this.runButton.Location      = new Point(x, y + 50);
+            this.runButton.Location = new Point(x, y + 50);
 
             //运行状态动图、进度条定位
-            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
-            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 -50);
+            this.currentModelRunBackLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
+            this.currentModelFinLab.Location = new Point(x, this.canvasPanel.Height / 2 - 50);
             this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
@@ -382,7 +382,8 @@ namespace Citta_T1
                 this.bottomViewPanel.Height = 280;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\minfold.png");
             }
-            else {
+            else
+            {
                 this.isBottomViewPanelMinimum = true;
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
@@ -411,14 +412,14 @@ namespace Citta_T1
             this.inputDataForm.ReSetParams();
         }
 
-          
+
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
             this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
             this.createNewModelForm.Owner = this;
             DialogResult dialogResult = this.createNewModelForm.ShowDialog();
-            
+
             // 模型标题栏添加新标题
             if (dialogResult == DialogResult.OK)
                 this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
@@ -436,7 +437,7 @@ namespace Citta_T1
         {
             if (!System.IO.File.Exists(fullFilePath))
                 return;
-            this.ShowBottomPanel(); 
+            this.ShowBottomPanel();
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
         }
@@ -460,7 +461,7 @@ namespace Citta_T1
         private void ResetButton_Click(object sender, EventArgs e)
         {
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            
+
             //在模型运行完成，及终止的情况下，可以重置
             Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
@@ -475,7 +476,7 @@ namespace Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            
+
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
                 Global.GetCurrentDocument().TaskManager.Stop();
@@ -557,7 +558,8 @@ namespace Citta_T1
         //更新op算子错误信息
         private void UpdateOpErrorMessage(TaskManager manager, int id, string error)
         {
-            this.Invoke(new AsynUpdateOpErrorMessage(delegate () {
+            this.Invoke(new AsynUpdateOpErrorMessage(delegate ()
+            {
                 ModelDocument model = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
                 MoveOpControl op = model.SearchElementByID(id).InnerControl as MoveOpControl;
                 op.SetStatusBoxErrorContent(error);
@@ -573,9 +575,10 @@ namespace Citta_T1
 
 
             if (manager.ModelStatus == ModelStatus.Running)
-                this.Invoke(new AsynUpdateProgressBar(delegate () {
-                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done)*100/manager.TripleList.CurrentModelTripleList.Count;
-                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%"; 
+                this.Invoke(new AsynUpdateProgressBar(delegate ()
+                {
+                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
                 }));
         }
 
@@ -597,16 +600,19 @@ namespace Citta_T1
                 return;
 
             if (manager.ModelStatus == ModelStatus.GifDone)
-                this.Invoke(new AsynUpdateGif(delegate () {
-                        this.currentModelRunBackLab.Hide();
-                        this.currentModelRunLab.Hide();
-                        this.currentModelFinLab.Show();
-                    }));
+                this.Invoke(new AsynUpdateGif(delegate ()
+                {
+                    this.currentModelRunBackLab.Hide();
+                    this.currentModelRunLab.Hide();
+                    this.currentModelFinLab.Show();
+                }));
             else if (manager.ModelStatus == ModelStatus.Done)
-                this.Invoke(new AsynUpdateGif(delegate () {
+                this.Invoke(new AsynUpdateGif(delegate ()
+                {
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
-                    this.currentModelFinLab.Hide(); }));
+                    this.currentModelFinLab.Hide();
+                }));
 
         }
 
@@ -614,7 +620,7 @@ namespace Citta_T1
         private void Accomplish(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if(doneModel.TaskManager.ModelStatus == ModelStatus.Done)
+            if (doneModel.TaskManager.ModelStatus == ModelStatus.Done)
             {
                 doneModel.Save();
             }
@@ -629,7 +635,7 @@ namespace Citta_T1
         {
             TaskManager manager = Global.GetCurrentDocument().TaskManager;
             switch (manager.ModelStatus)
-            { 
+            {
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
@@ -695,7 +701,7 @@ namespace Citta_T1
 
         private void HelpPictureBox_Click(object sender, EventArgs e)
         {
-            string helpfile = Application.StartupPath; 
+            string helpfile = Application.StartupPath;
             helpfile += @"\Doc\citta帮助文档.chm";
             Help.ShowHelp(this, helpfile);
         }
@@ -710,7 +716,7 @@ namespace Citta_T1
             string currentModelTitle = this.modelDocumentDao.CurrentDocument.ModelTitle;
             this.modelDocumentDao.UpdateRemark(this.remarkControl);
             this.modelTitlePanel.ResetDirtyPictureBox(currentModelTitle, false);
-            SaveCurrentDocument();         
+            SaveCurrentDocument();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

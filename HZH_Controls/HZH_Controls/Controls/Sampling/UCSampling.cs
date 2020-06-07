@@ -15,12 +15,10 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -252,10 +250,10 @@ namespace HZH_Controls.Controls
             e.Graphics.SetGDIHigh();
 
             this.Region = new System.Drawing.Region(m_borderPath);
-           
+
             if (_bitCache != null)
                 e.Graphics.DrawImage(_bitCache, 0, 0);
-           
+
         }
     }
 }

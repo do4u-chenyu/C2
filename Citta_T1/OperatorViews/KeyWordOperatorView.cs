@@ -6,27 +6,22 @@ using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
 
-    public partial class KeyWordOperatorView : BaseOperatorView
+    public partial class KeywordOperatorView : BaseOperatorView
     {
         private const int colIndexDefault = 0;
         private const bool readyStatus = true;
+        private string keywordEncoding, keywordExtType, keywordSep;
 
-        private string dataSourceEncoding, dataSourceSep;
-        private string keyWordEncoding, keyWordExtType, keyWordSep;
-        private List<string> selectOutColumn;
-
-        public KeyWordOperatorView(MoveOpControl opControl) : base(opControl)
+        public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
         }
 
@@ -36,16 +31,16 @@ namespace Citta_T1.OperatorViews
                 return;
             SaveOption();
             this.DialogResult = DialogResult.OK;
-            if (this.oldOptionDictStr !=this.opControl.Option.ToString())
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
             {
                 Global.GetMainForm().SetDocumentDirty();
             }
             //生成结果控件,创建relation,bcp结果文件
-            this.selectOutColumn = this.outListCCBL0.GetItemCheckText();
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectOutColumn);
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
 
@@ -60,53 +55,45 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void keyWordColBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void KeywordComBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdatePreviewText();
         }
 
         #region 加载连接数据
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            GetDataInfo(); 
-            dataSourceTB0.Text = SetTextBoxName(dataSourceFFP0);
-            dataSourceTB1.Text = SetTextBoxName(dataSourceFFP1);
-            nowColumnsName0 = SetOption(this.dataSourceFFP0,
-                                       this.dataSourceTB0.Text,
-                                       dataSourceEncoding,
-                                       dataSourceSep.ToCharArray());
-            nowColumnsName1 = SetOption(this.dataSourceFFP1,
-                                       this.dataSourceTB1.Text,
-                                       keyWordEncoding,
-                                       keyWordSep.ToCharArray());
-            opControl.FirstDataSourceColumns = nowColumnsName0;
-            opControl.SecondDataSourceColumns = nowColumnsName1;
-            dataColumnBox.Items.AddRange(nowColumnsName0);
-            keyWordColBox.Items.AddRange(nowColumnsName1);
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 每个控件自定义的数据源配置逻辑
+            dataInfo.TryGetValue("encoding1", out keywordEncoding);
+            dataInfo.TryGetValue("extType1", out keywordExtType);
+            dataInfo.TryGetValue("separator1", out keywordSep);
+
+            combox0.Items.AddRange(nowColumnsName0);
+            combox0.SelectedIndex = colIndexDefault;
+
+            combox1.Items.AddRange(nowColumnsName1);
+            combox1.SelectedIndex = colIndexDefault;
+
             outListCCBL0.Items.AddRange(nowColumnsName0);
-            dataColumnBox.SelectedIndex = colIndexDefault;
-            keyWordColBox.SelectedIndex = colIndexDefault;
             conditionSelectBox.SelectedIndex = colIndexDefault;
             UpdatePreviewText();
         }
         private void LoadOption()
         {
             Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "outfield");
-            Global.GetOptionDao().IsCleanOption(opControl,
-                                                    nowColumnsName0,
-                                                    "dataSelectIndex");
-            Global.GetOptionDao().IsCleanOption(opControl,
-                                                    nowColumnsName1,
-                                                    "keySelectIndex");
+            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "dataSelectIndex");
+            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName1, "keySelectIndex");
             string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
             int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             oldOutList0 = indexs.ToList();
             outListCCBL0.LoadItemCheckIndex(indexs);
             oldColumnsName0.AddRange(from int index in indexs
-                                   select outListCCBL0.Items[index].ToString());
-            dataColumnBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex",null));
-            keyWordColBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex",null));
-            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect",null));          
+                                     select outListCCBL0.Items[index].ToString());
+            combox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
+            combox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", null));
         }
         private void SaveOption()
         {
@@ -119,61 +106,20 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("outfield", outField);
             opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
             opControl.Option.SetOption("columnname1", string.Join("\t", opControl.SecondDataSourceColumns));
-            opControl.Option.SetOption("dataSelectIndex", dataColumnBox.SelectedIndex.ToString());
-            opControl.Option.SetOption("keySelectIndex", keyWordColBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("dataSelectIndex", combox0.SelectedIndex.ToString());
+            opControl.Option.SetOption("keySelectIndex", combox1.SelectedIndex.ToString());
             opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
-            opControl.Option.SetOption("keyWordText", keyWordPreviewBox.Text);
-
-
+            opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
 
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
-        private void GetDataInfo()
-        {
-            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfoDict(opControl.ID);
-            dataInfoDic.TryGetValue("dataPath0", out dataSourceFFP0);
-            dataInfoDic.TryGetValue("dataPath1", out dataSourceFFP1);
-            dataInfoDic.TryGetValue("encoding0", out dataSourceEncoding);
-            dataInfoDic.TryGetValue("encoding1", out keyWordEncoding);
-            dataInfoDic.TryGetValue("extType1", out keyWordExtType);
-            dataInfoDic.TryGetValue("separator0", out dataSourceSep);
-            dataInfoDic.TryGetValue("separator1", out keyWordSep);
-        }
 
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
-        }
-        private string SetTextBoxName(string filePath)
-        {
-            String fileName = Path.GetFileNameWithoutExtension(filePath);
-            int maxLength = 18;
-            MatchCollection chs = Regex.Matches(fileName, "[\u4E00-\u9FA5]");
-            int sumcount = chs.Count * 2;
-            int sumcountDigit = Regex.Matches(fileName, "[a-zA-Z0-9]").Count;
-
-            //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
-            {
-                if (fileName.IndexOf(mc.ToString()) == maxLength)
-                {
-                    maxLength -= 1;
-                    break;
-                }
-            }
-            if (sumcount + sumcountDigit <= maxLength)
-            {
-                return fileName;
-            }
-            return ConvertUtil.SubstringByte(fileName, colIndexDefault, maxLength);
-        }
         #endregion
         #region 检查
         private bool OptionStatusCheck()
@@ -189,21 +135,21 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与更新
         private void UpdatePreviewText()
         {
-            this.keyWordPreviewBox.Text = new KeyWordCombine().KeyWordPreView(dataSourceFFP1,
-                                                                              keyWordSep.ToCharArray(),
-                                                                              keyWordColBox.SelectedIndex,
-                                                                              keyWordExtType,
-                                                                              keyWordEncoding);
+            this.keywordPreviewBox.Text = new KeywordCombine().KeywordPreView(dataSourceFFP1,
+                                                                              keywordSep.ToCharArray(),
+                                                                              combox1.SelectedIndex,
+                                                                              keywordExtType,
+                                                                              keywordEncoding);
         }
         #endregion
     }
-    public class KeyWordCombine
+    public class KeywordCombine
     {
         private const string defaultInfo = "发生未知的原因，关键词组合失败，您需要联系开发团队或者重命名关键词文件并导入";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
         private List<string> datas = new List<string>();
 
-        public string KeyWordPreView(string kerWordFile,
+        public string KeywordPreView(string keywordFile,
                                      char[] separator,
                                      int colIndex,
                                      string extType,
@@ -214,7 +160,7 @@ namespace Citta_T1.OperatorViews
             {
                 return blankSpaceSepInfo;
             }
-            KeyWordRead(kerWordFile,
+            KeywordRead(keywordFile,
                         separator,
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
@@ -224,7 +170,7 @@ namespace Citta_T1.OperatorViews
                 result = defaultInfo;
             return result;
         }
-        public void KeyWordRead(string fullFilePath,
+        public void KeywordRead(string fullFilePath,
                                         char[] separator,
                                         int colIndex,
                                         OpUtil.ExtType extType = OpUtil.ExtType.Text,
@@ -264,7 +210,7 @@ namespace Citta_T1.OperatorViews
                     continue;
                 }
                 line.Replace(" ", "OR");
-                datas.Add(line);                                                 
+                datas.Add(line);
             }
         }
     }

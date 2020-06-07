@@ -1,8 +1,8 @@
-﻿﻿using System;
+﻿using Citta_T1.IAOLab.PythonOP;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Citta_T1.Utils;
-using Citta_T1.IAOLab.PythonOP;
 
 namespace Citta_T1.Controls.Bottom
 {
@@ -115,7 +115,7 @@ namespace Citta_T1.Controls.Bottom
             ConsoleControl.ConsoleControl console = CreateNewConsoleControl(owner, false);
             if (consoles.ContainsKey(console.Name))
                 consoles.Remove(console.Name);
-            consoles.Add(console.Name, console) ;
+            consoles.Add(console.Name, console);
             StartPythonProcess(console, console.Name, PythonInitParams);
         }
 
@@ -310,11 +310,11 @@ namespace Citta_T1.Controls.Bottom
             {
                 return false;
             }
-           
+
             return true;
         }
 
- 
-          
+
+
     }
 }

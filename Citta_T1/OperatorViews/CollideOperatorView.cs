@@ -3,66 +3,39 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class CollideOperatorView :  BaseOperatorView
+    public partial class CollideOperatorView : BaseOperatorView
     {
-        
+
         public CollideOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();            
+            InitByDataSource();
             LoadOption();
-          
+
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
 
             //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-                
-            }
-            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataSourceFFP1 = dataInfo["dataPath1"];
-                this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToArray());
-                this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
-            }
-           
-            foreach (string name in this.nowColumnsName0)
-            {
-                this.comboBox1.Items.Add(name);
-                this.outListCCBL0.AddItems(name);
-            }            
-
-            foreach (string name in this.nowColumnsName1)
-                this.comboBox2.Items.Add(name);
-        }
-
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return bcpInfo.ColumnArray;
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.comboBox0.Items.AddRange(nowColumnsName0);
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
+            this.comboBox1.Items.AddRange(nowColumnsName1);
         }
 
         #endregion
@@ -80,8 +53,8 @@ namespace Citta_T1.OperatorViews
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
-            { 
-               MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
+            {
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
 
@@ -89,7 +62,7 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName =new List<string>();
+            List<string> outName = new List<string>();
             foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
             { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
             if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
@@ -100,7 +73,7 @@ namespace Citta_T1.OperatorViews
         {
             bool empty = false;
             List<string> types = new List<string>();
-            types.Add(this.comboBox1.GetType().Name);
+            types.Add(this.comboBox0.GetType().Name);
             types.Add(this.outListCCBL0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
@@ -133,7 +106,7 @@ namespace Citta_T1.OperatorViews
         private void InitNewFactorControl(int count)
         {
             for (int line = 0; line < count; line++)
-            { 
+            {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
@@ -142,7 +115,7 @@ namespace Citta_T1.OperatorViews
         }
 
         private void LoadOption()
-        {     
+        {
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
@@ -162,22 +135,22 @@ namespace Citta_T1.OperatorViews
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
                 {
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();                 
-                    this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
-                    this.comboBox1.Tag = Nums[0].ToString();
-                    this.comboBox2.Tag = Nums[1].ToString();
+                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[1]].ToString();
+                    this.comboBox0.Tag = Nums[0].ToString();
+                    this.comboBox1.Tag = Nums[1].ToString();
                 }
-                   
+
             }
             if (count - 1 > 0)
                 InitNewFactorControl(count - 1);
             else
-            {  
+            {
                 this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
                 this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
                 return;
             }
-              
+
             for (int i = 2; i < (count + 1); i++)
             {
                 string name = "factor" + i.ToString();
@@ -202,7 +175,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
         }
-        
+
         private void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
@@ -215,8 +188,8 @@ namespace Citta_T1.OperatorViews
             string outField = string.Join("\t", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
 
-            string index00 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
-            string index11 = comboBox2.Tag == null ? comboBox2.SelectedIndex.ToString() : comboBox2.Tag.ToString();
+            string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
+            string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string factor1 = index00 + "\t" + index11;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -226,7 +199,7 @@ namespace Citta_T1.OperatorViews
                     Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
                     Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1= (control1 as ComboBox).Tag == null? (control1 as ComboBox).SelectedIndex.ToString(): (control1 as ComboBox).Tag.ToString();
+                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
                     string factor = index1 + "\t" + index2 + "\t" + index3;
@@ -257,7 +230,7 @@ namespace Citta_T1.OperatorViews
             "AND",
             "OR"});
             regBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp); 
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
@@ -402,24 +375,24 @@ namespace Citta_T1.OperatorViews
         private void ComboBox1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                optionInfoCheck.IsIllegalInputName(this.comboBox1, this.nowColumnsName0, this.comboBox1.Text);
+                optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
         }
 
         private void ComboBox1_Leave(object sender, EventArgs e)
         {
-            optionInfoCheck.IsIllegalInputName(this.comboBox1, this.nowColumnsName0, this.comboBox1.Text);
+            optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
         }
 
         private void ComboBox2_Leave(object sender, EventArgs e)
         {
             optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
         }
-        
+
         private void ComboBox2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
         }
-       
+
     }
 }

@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -198,8 +195,8 @@ namespace HZH_Controls.Controls
             switch (direction)
             {
                 case ArrowDirection.Left:
-                    ps = new Point[] 
-                    { 
+                    ps = new Point[]
+                    {
                         new Point(0,this.Height/2),
                         new Point(40,0),
                         new Point(40,this.Height/4),
@@ -211,20 +208,20 @@ namespace HZH_Controls.Controls
                     };
                     break;
                 case ArrowDirection.Right:
-                    ps = new Point[] 
+                    ps = new Point[]
                     {
                         new Point(0,this.Height/4),
                         new Point(this.Width-40,this.Height/4),
                         new Point(this.Width-40,0),
                         new Point(this.Width-1,this.Height/2),
                         new Point(this.Width-40,this.Height),
-                        new Point(this.Width-40,this.Height-this.Height/4),                      
+                        new Point(this.Width-40,this.Height-this.Height/4),
                         new Point(0,this.Height-this.Height/4),
                         new Point(0,this.Height/4)
                     };
                     break;
                 case ArrowDirection.Top:
-                    ps = new Point[] 
+                    ps = new Point[]
                     {
                        new Point(this.Width/2,0),
                        new Point(this.Width,40),
@@ -237,7 +234,7 @@ namespace HZH_Controls.Controls
                     };
                     break;
                 case ArrowDirection.Bottom:
-                    ps = new Point[] 
+                    ps = new Point[]
                     {
                        new Point(this.Width-this.Width/4,0),
                        new Point(this.Width-this.Width/4,this.Height-40),
@@ -246,12 +243,12 @@ namespace HZH_Controls.Controls
                        new Point(0,this.Height-40),
                        new Point(this.Width/4,this.Height-40),
                        new Point(this.Width/4,0),
-                       new Point(this.Width-this.Width/4,0),                      
+                       new Point(this.Width-this.Width/4,0),
                     };
                     break;
                 case ArrowDirection.Left_Right:
-                    ps = new Point[] 
-                    { 
+                    ps = new Point[]
+                    {
                         new Point(0,this.Height/2),
                         new Point(40,0),
                         new Point(40,this.Height/4),
@@ -262,11 +259,11 @@ namespace HZH_Controls.Controls
                         new Point(this.Width-40,this.Height-this.Height/4),
                         new Point(40,this.Height-this.Height/4),
                         new Point(40,this.Height),
-                        new Point(0,this.Height/2),                       
+                        new Point(0,this.Height/2),
                     };
                     break;
                 case ArrowDirection.Top_Bottom:
-                    ps = new Point[] 
+                    ps = new Point[]
                     {
                        new Point(this.Width/2,0),
                        new Point(this.Width,40),
@@ -278,7 +275,7 @@ namespace HZH_Controls.Controls
                        new Point(this.Width/4,this.Height-40),
                        new Point(this.Width/4,40),
                        new Point(0,40),
-                       new Point(this.Width/2,0),                      
+                       new Point(this.Width/2,0),
                     };
                     break;
             }

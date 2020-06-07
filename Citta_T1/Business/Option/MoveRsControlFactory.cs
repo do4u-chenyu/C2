@@ -1,11 +1,10 @@
-﻿using Citta_T1.Controls.Move.Op;
-using System;
-using System.Collections.Generic;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
@@ -49,7 +48,7 @@ namespace Citta_T1.Business.Option
             mrc.FullFilePath = path;
             return mrc;
         }
-        private void NewLineOpControlToRsControl(MoveOpControl moc,MoveRsControl mrc) 
+        private void NewLineOpControlToRsControl(MoveOpControl moc, MoveRsControl mrc)
         {
             int startX = moc.RectOut.Location.X + moc.Location.X;
             int startY = moc.RectOut.Location.Y + moc.Location.Y;
@@ -76,7 +75,7 @@ namespace Citta_T1.Business.Option
             /*
              * 创建新结果算子
              */
-            MoveRsControl mrc= NewMoveRsControl(moc, string.Empty, columnName);
+            MoveRsControl mrc = NewMoveRsControl(moc, string.Empty, columnName);
 
             /*
              * 1. 形成线。以OpCotrol的右针脚为起点，以RS的左针脚为起点，形成线段

@@ -14,13 +14,10 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Windows.Forms;
-
 using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -357,7 +354,7 @@ namespace HZH_Controls.Controls
                 base.OnPaint(null);
             }
 
-         
+
         }
 
 

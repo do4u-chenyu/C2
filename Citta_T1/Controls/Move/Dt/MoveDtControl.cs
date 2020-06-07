@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Dt
 {
-    public partial class MoveDtControl: MoveBaseControl, IMoveControl
+    public partial class MoveDtControl : MoveBaseControl, IMoveControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         //绘制引脚
@@ -30,7 +30,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         public MoveDtControl(string bcpPath, int sizeL, string name, Point loc,
             char separator = '\t',
-            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8 
+            OpUtil.Encoding encoding = OpUtil.Encoding.UTF8
             )
         {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace Citta_T1.Controls.Move.Dt
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.moveWrapper = new MoveWrapper();
-    }
+        }
 
         #region 重写方法
         private void RightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace Citta_T1.Controls.Move.Dt
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
-            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && ! Global.GetCanvasPanel().DelEnable))
+            if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
             Global.GetCurrentDocument().StatusChangeWhenDeleteControl(this.ID);
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
@@ -145,7 +145,7 @@ namespace Citta_T1.Controls.Move.Dt
             this.Invalidate();
         }
 
-         #region MOC的事件
+        #region MOC的事件
         private void MoveDtControl_MouseMove(object sender, MouseEventArgs e)
         {
             bool isNeedMoveLine = false;
@@ -162,7 +162,7 @@ namespace Citta_T1.Controls.Move.Dt
                 int startY = this.Location.Y + e.Y;
                 MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                 Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
-                
+
                 return;
             }
             else
@@ -304,7 +304,7 @@ namespace Citta_T1.Controls.Move.Dt
                 rectOut = RectEnter(rectOut);
                 pinStatus = "rectOut";
                 this.Invalidate();
-               
+
             }
             else if (pinStatus != "noEnter")
             {
@@ -335,7 +335,7 @@ namespace Citta_T1.Controls.Move.Dt
         public void OutPinInit(String status)
         {
             this.lineStaus = status;
-            PinOpLeaveAndEnter(new Point(0,0));
+            PinOpLeaveAndEnter(new Point(0, 0));
         }
 
         public void InPinInit(int endLineIndex)
@@ -357,12 +357,12 @@ namespace Citta_T1.Controls.Move.Dt
         public PointF GetStartPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2, 
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
-        {     
+        {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);

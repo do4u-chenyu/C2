@@ -19,7 +19,7 @@ namespace Citta_T1.Business.Model
 
         public static ModelRelation Empty = new ModelRelation();
         // 默认不能自己构造,仅给Empty使用
-        private ModelRelation() 
+        private ModelRelation()
         {
             EndPin = StartID = EndID = -1;
             EndP = StartP = A = B = new PointF(0, 0);
@@ -27,7 +27,7 @@ namespace Citta_T1.Business.Model
         }
 
         public ModelRelation(int startID, int endID, PointF startLocation, PointF endLocation, int endPin)
-        {      
+        {
             this.StartID = startID;
             this.EndID = endID;
             this.StartP = startLocation;

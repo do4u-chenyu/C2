@@ -16,24 +16,24 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();//输入文件
             string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
-            
+
             //过滤条件拼接
-           
+
             string[] factor1 = option.GetOptionSplit("factor1");
             string awkIfCmd = String.Format("(${0}{1}{2})", TransInputLine(factor1[0]), TransChoiceToCmd(factor1[1]), TransConditionToCmd(factor1[2]));
             for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
                 string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
-                awkIfCmd = String.Format("{0} {1}(${2}{3}{4})",awkIfCmd, TransAndOrToCmd(tmpFactor[0]), TransInputLine(tmpFactor[1]), TransChoiceToCmd(tmpFactor[2]), TransConditionToCmd(tmpFactor[3]));
+                awkIfCmd = String.Format("{0} {1}(${2}{3}{4})", awkIfCmd, TransAndOrToCmd(tmpFactor[0]), TransInputLine(tmpFactor[1]), TransChoiceToCmd(tmpFactor[2]), TransConditionToCmd(tmpFactor[3]));
             }
             string awkExec = string.Format("{{if({0}){{print {1} }} }}", awkIfCmd, outField);
-            
+
             //过滤条件写入临时配置文件，需判断输入文件格式。（解决条件为中文时的编码问题）
             string filterBatPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_filterChoice.bat";
-            
+
             //目前输入文件统一转换为utf-8
             UTF8Encoding utf8 = new UTF8Encoding(false);
-            StreamWriter streamWriter = new StreamWriter(filterBatPath, false, utf8);   
+            StreamWriter streamWriter = new StreamWriter(filterBatPath, false, utf8);
             streamWriter.Write(awkExec);
             streamWriter.Close();
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -143,7 +141,7 @@ namespace HZH_Controls
                 int inext = CallNextHookEx(_hHook, nCode, msg, lParam);
                 return inext;
             });
-            if (pid ==0)
+            if (pid == 0)
                 pid = AppDomain.GetCurrentThreadId();
             _hHook = SetWindowsHookEx((int)hookType, _hookProcedure, wParam, pid);
 

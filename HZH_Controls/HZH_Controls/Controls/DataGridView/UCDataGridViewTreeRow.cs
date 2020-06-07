@@ -14,14 +14,13 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Collections;
 
 namespace HZH_Controls.Controls
 {
@@ -359,9 +358,9 @@ namespace HZH_Controls.Controls
                                 };
                                 c = lbl;
                             }
-                            else 
+                            else
                             {
-                                Control cc = (Control)Activator.CreateInstance(item.CustomCellType);     
+                                Control cc = (Control)Activator.CreateInstance(item.CustomCellType);
                                 cc.Dock = DockStyle.Fill;
                                 c = cc;
                             }

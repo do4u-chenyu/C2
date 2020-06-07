@@ -158,7 +158,7 @@ namespace Citta_T1.Controls
                 }
             }
 
-            
+
 
         }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
@@ -171,7 +171,7 @@ namespace Citta_T1.Controls
                     Control ct = me.InnerControl;
                     int left = dx + 40;
 
-                    int top  = dy + 100;
+                    int top = dy + 100;
                     Point moveOffset = Global.GetCurrentDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top));
                     log.Info(moveOffset.ToString());
@@ -192,7 +192,7 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     int left = dx + 60;
-                    int top =  dy + 100;
+                    int top = dy + 100;
                     Point moveOffset = Global.GetCurrentDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top));
                     ct.Left = left - moveOffset.X;
@@ -254,7 +254,7 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
-            
+
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
@@ -280,11 +280,11 @@ namespace Citta_T1.Controls
                         FormatLoc(id, countDeep, ctHeight, modelElements);
                         leavelList.Add(id);
                     }
-                    countWidthList.Add(ctHeight);       
+                    countWidthList.Add(ctHeight);
                 }
                 count = countWidthList.Max();
                 countDeep = 0;
-                this.ctWidths = new List<int>(); 
+                this.ctWidths = new List<int>();
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, count, modelElements);

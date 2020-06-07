@@ -13,12 +13,8 @@
 //
 // If you use this code, please keep this note.
 // ***********************************************************************
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
@@ -87,8 +83,8 @@ namespace HZH_Controls.Controls
             base.OnPaint(e);
             e.Graphics.SetGDIHigh();
 
-            e.Graphics.DrawLines(new Pen(borderColor), new Point[] 
-            { 
+            e.Graphics.DrawLines(new Pen(borderColor), new Point[]
+            {
                 new Point(e.ClipRectangle.Left,e.ClipRectangle.Top),
                 new Point(e.ClipRectangle.Right-1,e.ClipRectangle.Top),
                 new Point(e.ClipRectangle.Right-1,e.ClipRectangle.Bottom-1),

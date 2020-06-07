@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Forms;
-using Citta_T1.Utils;
-using System.IO;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
-using Citta_T1.Business.Model;
+using Citta_T1.Utils;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Left
 {
@@ -131,9 +131,9 @@ namespace Citta_T1.Controls.Left
 
             string newModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, ModelTitle);
             string oldModelDirectory = Path.Combine(Global.GetCurrentDocument().UserPath, oldTextString);
-            string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml"); 
+            string tmpFFP = Path.Combine(newModelDirectory, oldTextString + ".xml");
             string newFFP = Path.Combine(newModelDirectory, ModelTitle + ".xml");
-    
+
             // 开始移动文件
             bool ret = FileUtil.DirecotryMove(oldModelDirectory, newModelDirectory);
             if (!ret) // 失败回滚

@@ -15,13 +15,8 @@
 // ***********************************************************************
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using HZH_Controls.Controls;
 
 namespace HZH_Controls.Forms
 {
@@ -159,7 +154,7 @@ namespace HZH_Controls.Forms
                     Values[i] = txt.InputText;
                     if (m_mastInputs.ContainsKey(i) && string.IsNullOrWhiteSpace(txt.InputText))
                     {
-                        HZH_Controls.Forms.FrmTips.ShowTipsInfo(this, "[" + m_mastInputs[i] + "]必须输入。");                        
+                        HZH_Controls.Forms.FrmTips.ShowTipsInfo(this, "[" + m_mastInputs[i] + "]必须输入。");
                         this.ActiveControl = txt.txtInput;
                         return;
                     }

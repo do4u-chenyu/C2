@@ -22,7 +22,7 @@ namespace Citta_T1.Controls.Left
         public int Count { get => this.count; set => this.count = value; }
 
 
-        private static string DataButtonFlowTemplate  = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
+        private static string DataButtonFlowTemplate = "编码:{0} 文件类型:{1} 引用次数:{2} 分割符:{3}";
 
 
         public DataButton(string ffp, string dataSourceName, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -46,7 +46,7 @@ namespace Citta_T1.Controls.Left
             helpInfo = DataSourceName;
             this.helpToolTip.SetToolTip(this.txtButton, helpInfo);
 
-            helpInfo = String.Format(DataButtonFlowTemplate, 
+            helpInfo = String.Format(DataButtonFlowTemplate,
                                     encoding.ToString(),
                                     this.ExtType,
                                     Global.GetModelDocumentDao().CountDataSourceUsage(this.FullFilePath),
@@ -79,9 +79,9 @@ namespace Citta_T1.Controls.Left
 
             // 数据源引用大于0时,弹出警告窗,告诉用户该模型还在使用
             if (count > 0)
-                rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"", 
-                    "卸载 " + this.DataSourceName, 
-                    MessageBoxButtons.OKCancel, 
+                rs = MessageBox.Show("有模型在使用此数据, 继续卸载请点击 \"确定\"",
+                    "卸载 " + this.DataSourceName,
+                    MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Information);
             else // count == 0, 不需要特别的警告信息
                 rs = MessageBox.Show("卸载数据源,请点击 \"确定\"",
@@ -168,7 +168,7 @@ namespace Citta_T1.Controls.Left
             this.textBox.ReadOnly = true;
             this.textBox.Visible = false;
             this.txtButton.Text = this.textBox.Text;
-            this.txtButton.Visible = true;  
+            this.txtButton.Visible = true;
             if (this.oldTextString != this.textBox.Text)
             {
                 this.oldTextString = this.textBox.Text;

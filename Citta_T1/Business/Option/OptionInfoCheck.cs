@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Business.Option
@@ -9,7 +8,7 @@ namespace Citta_T1.Business.Option
     public class OptionInfoCheck
     {
         #region 配置窗口不合法字符判断
-       
+
         public void IsIllegalInputName(Control control, String[] columnName, String name)
         {
             if (columnName.Count() == 0 || name == "") return;

@@ -32,9 +32,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             //重写表头（覆盖）
             ReWriteBCPFile("union");
 
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1),inputField1,filterBatPath1, this.separators[0]));
-            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2),inputField2,filterBatPath1, this.separators[1]));
-            
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath1), inputField1, filterBatPath1, this.separators[0]));
+            cmds.Add(string.Format("{0}  | sbin\\awk.exe -F\"{3}\" -v OFS='\\t' '{{print {1}}}' >> {2}", TransInputfileToCmd(inputFilePath2), inputField2, filterBatPath1, this.separators[1]));
+
             //是否合并后的文件去重
             if (option.GetOption("noRepetition") == "True")
             {

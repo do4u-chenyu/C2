@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Business;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Citta_T1.Business;
 
 namespace Citta_T1.Dialogs
 {
@@ -12,7 +12,7 @@ namespace Citta_T1.Dialogs
         public LoginForm()
         {
             InitializeComponent();
-            
+
         }
         private void LoginForm_Load(object sender, EventArgs e)
         {
@@ -24,10 +24,10 @@ namespace Citta_T1.Dialogs
             List<string> lastLogin = lgInfo.LoadUserInfo("lastlogin");
             foreach (string item in lastLogin)
                 userNameComboBox.Text = item;
-            
+
         }
         private void LoginButton_Click(object sender, EventArgs e)
-        {  
+        {
             string userName = this.userNameComboBox.Text;
             if (userName == "")
                 return;
@@ -35,14 +35,14 @@ namespace Citta_T1.Dialogs
             lgInfo.CreatNewXml();
             if (this.loginCheckBox.Checked && !users.Contains(userName))
                 lgInfo.WriteUserInfo(userName);
-            lgInfo.WriteLastLogin(userName);            
+            lgInfo.WriteLastLogin(userName);
             this.Hide();
 
             mainForm = new MainForm(userName);
             mainForm.ShowDialog();
 
             this.Close();
-           
+
         }
 
     }

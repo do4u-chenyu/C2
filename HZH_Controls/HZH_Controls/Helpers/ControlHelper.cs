@@ -22,11 +22,9 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using HZH_Controls.Controls;
 
 namespace HZH_Controls
 {
@@ -209,7 +207,7 @@ namespace HZH_Controls
                 }
                 SetControlEnableds(lstCs.ToArray(), false);
             }
-            ThreadPool.QueueUserWorkItem(delegate(object a)
+            ThreadPool.QueueUserWorkItem(delegate (object a)
             {
                 try
                 {
@@ -912,13 +910,13 @@ namespace HZH_Controls
         public static Point[] GetRhombusFromRectangle(Rectangle rect)
         {
             return new Point[5]
-			{
-				new Point(rect.X, rect.Y + rect.Height / 2),
-				new Point(rect.X + rect.Width / 2, rect.Y + rect.Height - 1),
-				new Point(rect.X + rect.Width - 1, rect.Y + rect.Height / 2),
-				new Point(rect.X + rect.Width / 2, rect.Y),
-				new Point(rect.X, rect.Y + rect.Height / 2)
-			};
+            {
+                new Point(rect.X, rect.Y + rect.Height / 2),
+                new Point(rect.X + rect.Width / 2, rect.Y + rect.Height - 1),
+                new Point(rect.X + rect.Width - 1, rect.Y + rect.Height / 2),
+                new Point(rect.X + rect.Width / 2, rect.Y),
+                new Point(rect.X, rect.Y + rect.Height / 2)
+            };
         }
 
         /// <summary>
@@ -1298,9 +1296,9 @@ namespace HZH_Controls
         public static PointF[] GetPointsFrom(string points, float soureWidth, float sourceHeight, float width, float height, float dx = 0f, float dy = 0f)
         {
             string[] array = points.Split(new char[1]
-			{
-				' '
-			}, StringSplitOptions.RemoveEmptyEntries);
+            {
+                ' '
+            }, StringSplitOptions.RemoveEmptyEntries);
             PointF[] array2 = new PointF[array.Length];
             for (int i = 0; i < array.Length; i++)
             {

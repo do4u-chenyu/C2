@@ -14,17 +14,14 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 
+using HZH_Controls.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
-using HZH_Controls.Properties;
 
 namespace HZH_Controls.Controls
 {
@@ -560,16 +557,16 @@ namespace HZH_Controls.Controls
                         GraphicsPath pathCheck = rectCheck.CreateRoundedRectanglePath(3);
                         e.Graphics.FillPath(new SolidBrush(Color.FromArgb(247, 247, 247)), pathCheck);
                         if (e.Node.Checked)
-                        {                           
-                            e.Graphics.DrawLines(new Pen(new SolidBrush(m_nodeSelectedColor),2), new Point[] 
-                            { 
+                        {
+                            e.Graphics.DrawLines(new Pen(new SolidBrush(m_nodeSelectedColor), 2), new Point[]
+                            {
                                 new Point(rectCheck.Left+2,rectCheck.Top+8),
                                 new Point(rectCheck.Left+6,rectCheck.Top+12),
                                 new Point(rectCheck.Right-4,rectCheck.Top+4)
                             });
                         }
 
-                        e.Graphics.DrawPath(new Pen(new SolidBrush(Color.FromArgb(200, 200, 200))), pathCheck);                       
+                        e.Graphics.DrawPath(new Pen(new SolidBrush(Color.FromArgb(200, 200, 200))), pathCheck);
                     }
                     if (flag)
                     {

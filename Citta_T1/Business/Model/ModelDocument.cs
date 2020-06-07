@@ -1,13 +1,11 @@
 using Citta_T1.Business.Model.World;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
-using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -44,7 +42,7 @@ namespace Citta_T1.Business.Model
         public WorldMap WorldMap { get; }
         private static LogUtil log = LogUtil.GetInstance("ModelDocument");
 
-        
+
 
         public ModelDocument(string modelTitle, string userName)
         {
@@ -154,14 +152,14 @@ namespace Citta_T1.Business.Model
                 case ElementStatus.Suspend:
                 default:
                     me.Status = ElementStatus.Null;
-                    break;        
+                    break;
             }
         }
         public void SetChildrenStatusNull(int ID)
-        {      
+        {
             foreach (ModelRelation mr in this.ModelRelations)
-            {              
-                if (mr.StartID != ID)  continue;
+            {
+                if (mr.StartID != ID) continue;
                 foreach (ModelElement me in this.ModelElements)
                 {
                     if (me.ID != mr.EndID) continue;
@@ -170,14 +168,14 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-       
+
 
         public void Load()
         {
             if (File.Exists(Path.Combine(SavePath, ModelTitle + ".xml")))
             {
                 DocumentSaveLoad dSaveLoad = new DocumentSaveLoad(this);
-                dSaveLoad.ReadXml();        
+                dSaveLoad.ReadXml();
             }
         }
 
@@ -189,7 +187,7 @@ namespace Citta_T1.Business.Model
                 el1.Show();
                 (el1.InnerControl as IMoveControl).ControlNoSelect();
             }
-                
+
         }
 
         public void Hide()
@@ -204,10 +202,10 @@ namespace Citta_T1.Business.Model
             ElementCount = 1 + Math.Max(ElementCount, ModelElements.Max(me => me.ID));
             return ElementCount;
         }
-       
+
         public void UpdateAllLines()
         {
-            foreach(ModelRelation mr in this.ModelRelations)
+            foreach (ModelRelation mr in this.ModelRelations)
             {
                 try
                 {
@@ -227,7 +225,7 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-        
+
         public ModelElement SearchElementByID(int ID)
         {
             return this.ModelElements.Find(me => me.ID == ID) ?? ModelElement.Empty;
@@ -244,13 +242,13 @@ namespace Citta_T1.Business.Model
             ModelRelation mr = this.ModelRelations.Find(c => c.StartID == OpID);
             return mr == null ? ModelElement.Empty : SearchElementByID(mr.EndID);
         }
-      
+
         public bool IsDuplicatedRelation(ModelRelation mr)
         {   // 关系终结于同一个元素
             return this.ModelRelations.Exists(c => c.EndID == mr.EndID && c.EndPin == mr.EndPin);
         }
         //修改xml中所有RS的path, 用newPathPrefix替换oldPathPrefix
-        public static bool ModifyRsPath(string xmlPath, string oldPathPrefix, string newPathPrefix) 
+        public static bool ModifyRsPath(string xmlPath, string oldPathPrefix, string newPathPrefix)
         {
             bool ret = true;
             try
@@ -265,16 +263,16 @@ namespace Citta_T1.Business.Model
                         continue;
 
                     if (pathNode.InnerText.StartsWith(oldPathPrefix))
-                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);  
+                        pathNode.InnerText = pathNode.InnerText.Replace(oldPathPrefix, newPathPrefix);
                 }
                 xmlDoc.Save(xmlPath);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 log.Info("ModelDocument ModifyRSPath 出错: " + e.ToString());
                 ret = false;
             }
             return ret;
         }
-}
+    }
 }

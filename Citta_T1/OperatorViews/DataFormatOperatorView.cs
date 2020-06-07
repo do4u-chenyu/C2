@@ -3,11 +3,9 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,51 +13,32 @@ namespace Citta_T1.OperatorViews
 {
     public partial class DataFormatOperatorView : BaseOperatorView
     {
-        private List<string> oldOutName;
-
-
         public DataFormatOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            this.oldOutName = new List<string>();
-
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
-            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.textBox1.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
-            this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
 
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
 
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
+
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.comboBox0.Items.AddRange(nowColumnsName0);
             if (this.opControl.Option.GetOption("outname") != String.Empty)
-            {
-                this.oldOutName = this.opControl.Option.GetOptionSplit("outname").ToList();
-            }
+                this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
         }
-
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in this.nowColumnsName0)
-                this.comboBox1.Items.Add(name);
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-        }
-
         #endregion
 
         #region 配置信息的保存与加载
@@ -85,9 +64,9 @@ namespace Citta_T1.OperatorViews
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", Nums[0]);
                 if (!case0)
                 {
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                    this.comboBox1.Tag = Nums[0].ToString();
-                    this.textBox1.Text = factorList[1];
+                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
+                    this.comboBox0.Tag = Nums[0].ToString();
+                    this.textBox0.Text = factorList[1];
                 }
             }
             if (count > 1)
@@ -108,8 +87,8 @@ namespace Citta_T1.OperatorViews
                 bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name, Nums[0]);
                 if (case0) continue;
 
-                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i-2);  
-                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i-2);
+                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i - 2);
+                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i - 2);
                 control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
                 control1.Tag = Nums[0].ToString();
                 control2.Text = factorList[1];
@@ -121,10 +100,10 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            string index1 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
-            string factor1 = index1 + "\t" + this.textBox1.Text;
+            string index1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
+            string factor1 = index1 + "\t" + this.textBox0.Text;
             this.opControl.Option.SetOption("factor1", factor1);
-            this.selectedColumns.Add(OutColumnName(this.comboBox1.Text, this.textBox1.Text));
+            this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
 
             if (this.tableLayoutPanel1.RowCount > 0)
             {
@@ -182,15 +161,15 @@ namespace Citta_T1.OperatorViews
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-            if (!this.oldOutName.SequenceEqual(this.selectedColumns))
-                Global.GetOptionDao().DoOutputCompare(this.oldOutName, this.selectedColumns, this.opControl.ID);
+            if (!this.oldColumnsName0.SequenceEqual(this.selectedColumns))
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
 
         private bool IsOptionReay()
         {
             bool empty = false;
             List<string> types = new List<string>();
-            types.Add(this.comboBox1.GetType().Name);
+            types.Add(this.comboBox0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
@@ -217,8 +196,8 @@ namespace Citta_T1.OperatorViews
         private bool IsDuplicateSelect()
         {
             bool repetition = false;
-            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-            string factor1 = index01 + "," + this.textBox1.Text;
+            string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
+            string factor1 = index01 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>();
             factors["factor1"] = factor1;
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -242,7 +221,7 @@ namespace Citta_T1.OperatorViews
             return repetition;
         }
         #endregion
-        
+
         private void CreateLine(int addLine)
         {
             // 添加控件
@@ -251,7 +230,7 @@ namespace Citta_T1.OperatorViews
             label.AutoSize = true;
             label.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            label.Text = (addLine+2).ToString();
+            label.Text = (addLine + 2).ToString();
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
 
 
@@ -334,7 +313,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
-                    
+
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
                     this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
                     ctlNext.Text = (k + 3).ToString();
@@ -377,7 +356,7 @@ namespace Citta_T1.OperatorViews
             {
                 Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
-                ctlNext.Text = (k+2).ToString();
+                ctlNext.Text = (k + 2).ToString();
                 Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
                 Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);

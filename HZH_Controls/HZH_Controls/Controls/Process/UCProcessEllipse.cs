@@ -14,14 +14,9 @@
 // If you use this code, please keep this note.
 // ***********************************************************************
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 
 namespace HZH_Controls.Controls
 {
@@ -224,7 +219,7 @@ namespace HZH_Controls.Controls
         /// <summary>
         /// The m font
         /// </summary>
-      
+
         /// <summary>
         /// 获取或设置控件显示的文字的字体。
         /// </summary>
@@ -255,7 +250,7 @@ namespace HZH_Controls.Controls
         /// <PermissionSet>
         ///   <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Unrestricted="true" />
         /// </PermissionSet>
-        [Description("文字颜色"), Category("自定义"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),Localizable(true)]
+        [Description("文字颜色"), Category("自定义"), DesignerSerializationVisibility(DesignerSerializationVisibility.Visible), Localizable(true)]
         public override Color ForeColor
         {
             get
@@ -302,7 +297,7 @@ namespace HZH_Controls.Controls
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.SetStyle(ControlStyles.UserPaint, true);
             ForeColor = Color.White;
-            Font = new Font("Arial Unicode MS", 20); 
+            Font = new Font("Arial Unicode MS", 20);
         }
 
         /// <summary>

@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿using Citta_T1.Core;
 using Citta_T1.Utils;
-using Citta_T1.Core;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Title
 {
@@ -57,7 +49,7 @@ namespace Citta_T1.Controls.Title
 
             //运行按钮在不同状态名字不同  runButton pauseButton  continueButton
             string[] runButtonNameList = { "runButton", "pauseButton", "continueButton" };
-            foreach(string buttonName in runButtonNameList)
+            foreach (string buttonName in runButtonNameList)
             {
                 if (Utils.ControlUtil.FindControlByName(Utils.ControlUtil.FindRootConrtol(this), buttonName) != null)
                 {

@@ -1,19 +1,12 @@
 ﻿using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Threading;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace Citta_T1.Business.Model
 {
@@ -21,7 +14,7 @@ namespace Citta_T1.Business.Model
     {
         private XmlDocument doc;
 
-        public ModelXmlWriter(string nodeName,XmlDocument xmlDoc, XmlElement parent)
+        public ModelXmlWriter(string nodeName, XmlDocument xmlDoc, XmlElement parent)
         {
             doc = xmlDoc;
             Element = doc.CreateElement(nodeName);
@@ -85,7 +78,7 @@ namespace Citta_T1.Business.Model
         }
         public ModelElement Done()
         {
-           return ModelElement.CreateModelElement(dict);
+            return ModelElement.CreateModelElement(dict);
         }
 
         public ModelRelation RelationDone()
@@ -98,12 +91,12 @@ namespace Citta_T1.Business.Model
                                          OpUtil.ToPointFType(dict["endlocation"]),
                                          Convert.ToInt32(dict["endpin"]));
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 log.Info(e.Message);
                 return ModelRelation.Empty;
             }
-           
+
         }
     }
 
@@ -127,7 +120,7 @@ namespace Citta_T1.Business.Model
             Directory.CreateDirectory(modelPath);
             Utils.FileUtil.AddPathPower(modelPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
-            ModelXmlWriter mxw = new ModelXmlWriter("ModelDocument",xDoc);
+            ModelXmlWriter mxw = new ModelXmlWriter("ModelDocument", xDoc);
             // 写入版本号 
             mxw.Write("Version", "V1.0");
             // 写坐标原点
@@ -138,7 +131,7 @@ namespace Citta_T1.Business.Model
             WriteModelRelations(xDoc, mxw.Element, this.modelDocument.ModelRelations);
             // 写备注
             WriteModelRemark(xDoc, mxw.Element, this.modelDocument.RemarkDescription);
-            xDoc.Save(modelFilePath);  
+            xDoc.Save(modelFilePath);
         }
         private void WriteModelElements(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelElement> modelElements)
         {
@@ -167,7 +160,7 @@ namespace Citta_T1.Business.Model
                     .Write("encoding", me.Encoding);
 
                 if (me.Type == ElementType.DataSource)
-                    mexw.Write("extType", me.ExtType);       
+                    mexw.Write("extType", me.ExtType);
             }
         }
         #region 配置信息存到xml
@@ -187,7 +180,7 @@ namespace Citta_T1.Business.Model
         #endregion
         private void WriteModelRelations(XmlDocument xDoc, XmlElement modelDocumentXml, List<ModelRelation> modelRelations)
         {
-           
+
             foreach (ModelRelation mr in modelRelations)
             {
                 ModelXmlWriter mexw = new ModelXmlWriter("ModelElement", xDoc, modelDocumentXml);
@@ -207,12 +200,12 @@ namespace Citta_T1.Business.Model
         }
         private void WriteModelRemark(XmlDocument xDoc, XmlElement modelDocumentXml, string remarkDescription)
         {
-        
+
             ModelXmlWriter mexw = new ModelXmlWriter("ModelElement", xDoc, modelDocumentXml);
             mexw.Write("type", "Remark")
                 .Write("name", remarkDescription);
         }
-        private string GetXmlNodeInnerText(XmlNode node,string nodeName)
+        private string GetXmlNodeInnerText(XmlNode node, string nodeName)
         {
             string text = "";
             try
@@ -222,7 +215,7 @@ namespace Citta_T1.Business.Model
                 log.Error(e.Message);
             }
             return text;
-        } 
+        }
         public void ReadXml()
         {
             XmlDocument xDoc = new XmlDocument();
@@ -234,12 +227,12 @@ namespace Citta_T1.Business.Model
                 this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 log.Error(e.Message);
                 return;
             }
-           
+
             foreach (XmlNode xn in nodeLists)
             {
                 string type = GetXmlNodeInnerText(xn, "type");
@@ -285,7 +278,7 @@ namespace Citta_T1.Business.Model
                 }
             }
         }
-      
+
         private OperatorOption ReadOption(XmlNode xn)
         {
             OperatorOption option = new OperatorOption();
@@ -295,11 +288,11 @@ namespace Citta_T1.Business.Model
                     option.SetOption(node.Name, node.InnerText);
             }
             catch (Exception e)
-            { 
+            {
                 log.Error(e.Message);
-                option = new OperatorOption(); 
+                option = new OperatorOption();
             }
             return option;
-        }  
+        }
     }
 }

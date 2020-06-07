@@ -29,7 +29,7 @@ namespace Citta_T1.OperatorViews
         }
         #region 初始化配置
         private void InitOptionInfo()
-        { 
+        {
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
@@ -74,7 +74,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!string.IsNullOrEmpty( this.opControl.Option.GetOption("randomnum")))
+            if (!string.IsNullOrEmpty(this.opControl.Option.GetOption("randomnum")))
                 this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {

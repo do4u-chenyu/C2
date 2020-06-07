@@ -17,12 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace HZH_Controls.Controls
 {
@@ -110,7 +106,7 @@ namespace HZH_Controls.Controls
                 Graphics g = Graphics.FromImage(bit);
                 g.SetGDIHigh();
                 GraphicsPath path = new GraphicsPath();
-                path.AddLines(new Point[] 
+                path.AddLines(new Point[]
                 {
                     new Point(1,1),
                     new Point(11,1),

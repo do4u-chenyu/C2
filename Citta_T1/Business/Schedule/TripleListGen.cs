@@ -1,9 +1,6 @@
 ﻿using Citta_T1.Business.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -116,7 +113,7 @@ namespace Citta_T1.Business.Schedule
                 nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
             }
 
-            for(int i = 0;i<nodeIdPinDict.Count;i++)
+            for (int i = 0; i < nodeIdPinDict.Count; i++)
                 beforeNodeId.Add(nodeIdPinDict[i]);
 
             return beforeNodeId;

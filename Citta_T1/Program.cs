@@ -1,14 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Configuration;
-using System.Windows.Forms;
-
-using Citta_T1.Utils;
+﻿using Citta_T1.Core;
 using Citta_T1.Dialogs;
+using Citta_T1.Utils;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Citta_T1.Core;
+using System.Windows.Forms;
 
 namespace Citta_T1
 {
@@ -60,14 +58,14 @@ namespace Citta_T1
                 workspaceDirectory = ConfigUtil.DefaultWorkspaceDirectory;
 
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
-                // 如果硬盘不存在,用程序所在目录
+            // 如果硬盘不存在,用程序所在目录
             if (!System.IO.Directory.Exists(root))
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
         }
 
-        
+
         #region 确保程序只运行一个实例
         private static Process RunningInstance()
         {

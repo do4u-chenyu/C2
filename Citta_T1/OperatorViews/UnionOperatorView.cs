@@ -22,7 +22,7 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitOptionInfo();
             LoadOption();
-   
+
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
@@ -34,13 +34,13 @@ namespace Citta_T1.OperatorViews
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox2.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-           
+
 
         }
         #region 初始化配置
         private void InitOptionInfo()
         {
-            
+
             Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
@@ -56,11 +56,11 @@ namespace Citta_T1.OperatorViews
                 this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
                 this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
             }
-           if(this.opControl.Option.GetOption("outname") != String.Empty)
-           {
+            if (this.opControl.Option.GetOption("outname") != String.Empty)
+            {
                 this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
             }
-           
+
 
             foreach (string name in this.nowColumnsName0)
                 this.comboBox1.Items.Add(name);
@@ -107,7 +107,7 @@ namespace Citta_T1.OperatorViews
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
-                   
+
                     string factor = index1 + "\t" + index2 + "\t" + control3.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                     this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
@@ -125,7 +125,7 @@ namespace Citta_T1.OperatorViews
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
 
         }
-        private string OutColumnName(string name,string alias)
+        private string OutColumnName(string name, string alias)
         {
             return alias == "别名" ? name : alias;
         }
@@ -196,7 +196,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
-    
+
             if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
@@ -229,7 +229,7 @@ namespace Citta_T1.OperatorViews
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                     string factor = index1 + "," + index2 + "," + control3.Text;
                     factors["factor" + (i + 2).ToString()] = factor;
-                   
+
                 }
             }
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
@@ -293,7 +293,7 @@ namespace Citta_T1.OperatorViews
 
             TextBox textBox = new TextBox();
             textBox.Text = "别名";
-            textBox.Font = new Font("微软雅黑",9f,FontStyle.Regular);
+            textBox.Font = new Font("微软雅黑", 9f, FontStyle.Regular);
             textBox.ForeColor = SystemColors.ActiveCaption;
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += TextBoxEx1_Enter;
@@ -438,7 +438,7 @@ namespace Citta_T1.OperatorViews
             {
                 TextBoxEx.Text = "别名";
                 TextBoxEx.ForeColor = SystemColors.ActiveCaption;
-            }           
+            }
         }
 
     }

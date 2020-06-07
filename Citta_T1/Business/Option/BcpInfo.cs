@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Citta_T1.Utils;
-using Citta_T1.Business.Model;
+﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Business.Option
 {
@@ -19,7 +18,7 @@ namespace Citta_T1.Business.Option
 
         public BcpInfo(ModelElement me)
         {
-            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding, new char[] { me.Separator }); 
+            InitBcpInfo(me.FullFilePath, me.Description, me.Type, me.Encoding, new char[] { me.Separator });
         }
 
         // 简易版本，很多情况下name和type都不需要用
