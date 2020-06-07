@@ -38,7 +38,7 @@ namespace Citta_T1.OperatorViews
             this.oldOutList1 = this.outListCCBL1.GetItemCheckIndex();
 
             //初始化配置内容
-            InitOptionInfo();
+            InitByDataSource();
             //加载配置内容
             LoadOption();
 
@@ -47,48 +47,23 @@ namespace Citta_T1.OperatorViews
         }
 
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            //获取两个数据源表头字段
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
+            this.outListCCBL1.Items.AddRange(nowColumnsName1);
 
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.nowColumnsName0;//单输入的也要赋值
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-                foreach (string name in this.nowColumnsName0)
-                    this.outListCCBL0.AddItems(name);
-
-            }
-            if (this.Text != "AI实践算子设置" && dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataSourceFFP1 = dataInfo["dataPath1"];
-                this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
-                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-                foreach (string name in this.nowColumnsName1)
-                    this.outListCCBL1.AddItems(name);
-            }
-        }
-
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
         #endregion
 
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-
-
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);

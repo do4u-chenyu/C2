@@ -25,7 +25,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
 
-            InitOptionInfo();//初始化配置内容
+            InitByDataSource();//初始化配置内容
             PythonInterpreterInfoLoad();//加载虚拟机
             LoadOption();//加载配置内容
 
@@ -35,18 +35,12 @@ namespace Citta_T1.OperatorViews
         }
 
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            //初始化数据源
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            }
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             //初始化输入输出路径
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)
@@ -75,12 +69,6 @@ namespace Citta_T1.OperatorViews
             string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
             this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(" ", this.previewTextList);
-        }
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
         }
         #endregion
 
