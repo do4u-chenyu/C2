@@ -28,36 +28,17 @@ namespace Citta_T1.OperatorViews
         #region 初始化配置
         private void InitOptionInfo()
         {
-            int startID = -1;
-            string encoding = String.Empty;
-            char separator = OpUtil.DefaultSeparator;
-            List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
-            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
-            foreach (ModelRelation mr in modelRelations)
+            
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
+            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
-                if (mr.EndID == this.opControl.ID)
-                {
-                    startID = mr.StartID;
-                    break;
-                }
+                this.dataSourceFFP0 = dataInfo["dataPath0"];
+                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
+                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
-            foreach (ModelElement me in modelElements)
-            {
-                if (me.ID == startID)
-                {
-                    separator = me.Separator;
-                    this.dataSourceFFP0 = me.FullFilePath;
-                    //设置数据信息选项
-                    this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                    encoding = me.Encoding.ToString();
-                    break;
-                }
-            }
-            if (!String.IsNullOrEmpty(this.dataSourceFFP0))
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, encoding, separator);
 
         }
-        private void SetOption(string path, string dataName, string encoding, char separator)
+        private void SetOption(string path, string dataName, string encoding, char[] separator)
         {
             BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
             this.nowColumnsName0 = bcpInfo.ColumnArray;
