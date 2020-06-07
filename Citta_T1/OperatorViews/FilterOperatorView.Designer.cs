@@ -123,8 +123,7 @@
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
+            this.confirmButton.UseVisualStyleBackColor = false;         
             // 
             // keyPanel
             // 

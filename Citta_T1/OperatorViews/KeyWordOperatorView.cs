@@ -36,7 +36,7 @@ namespace Citta_T1.OperatorViews
                 return;
             SaveOption();
             this.DialogResult = DialogResult.OK;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr !=this.opControl.Option.ToString())
             {
                 Global.GetMainForm().SetDocumentDirty();
             }
@@ -70,10 +70,7 @@ namespace Citta_T1.OperatorViews
         {
             GetDataInfo(); 
             dataSourceTB0.Text = SetTextBoxName(dataSourceFFP0);
-            toolTip1.SetToolTip(dataSourceTB0, dataSourceTB0.Text);
-
             dataSourceTB1.Text = SetTextBoxName(dataSourceFFP1);
-            toolTip1.SetToolTip(dataSourceTB1, dataSourceTB1.Text);
             nowColumnsName0 = SetOption(this.dataSourceFFP0,
                                        this.dataSourceTB0.Text,
                                        dataSourceEncoding,

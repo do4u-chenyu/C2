@@ -32,7 +32,6 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
-            this.oldOptionDictStr = string.Join(",", this.opControl.Option.OptionDict.ToList());
 
             SetTextBoxName(this.dataSourceTB0);
 
@@ -45,7 +44,6 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataSourceFFP0 = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                 SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
         }

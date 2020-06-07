@@ -24,7 +24,7 @@ namespace Citta_T1.OperatorViews
         private List<int> groupColumn;
         private List<bool> oldCheckedItems;
         private List<int> outList;
-        
+        private static LogUtil log = LogUtil.GetInstance("GroupOperatorView");
         public GroupOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
@@ -44,7 +44,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
-            
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
@@ -55,7 +54,6 @@ namespace Citta_T1.OperatorViews
             {
                 this.dataPath = dataInfo["dataPath0"];
                 this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataPath);
-                this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                 SetOption(this.dataPath, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
             }
   
@@ -176,6 +174,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outfield", string.Join("\t", this.outList));
 
             ElementStatus oldStatus = this.opControl.Status;
+
             if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
                 this.opControl.Status = ElementStatus.Ready;
 
@@ -195,7 +194,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             foreach (int index in this.outList)

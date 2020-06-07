@@ -95,7 +95,6 @@ namespace Citta_T1.OperatorViews
                     this.dataSourceFFP0 = me.FullFilePath;
                     separator = me.Separator;
                     this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                    this.toolTip1.SetToolTip(this.dataSourceTB0, this.dataSourceTB0.Text);
                     encoding = me.Encoding.ToString();
                     break;
                 }
@@ -127,7 +126,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
-            if (this.oldOptionDictStr!= string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr!= this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件

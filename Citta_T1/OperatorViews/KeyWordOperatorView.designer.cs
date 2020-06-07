@@ -72,7 +72,6 @@
             this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(320, 180);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // outListCCBL0
             // 
