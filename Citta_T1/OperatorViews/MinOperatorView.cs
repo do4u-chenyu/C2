@@ -3,10 +3,8 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -17,19 +15,19 @@ namespace Citta_T1.OperatorViews
         public MinOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
 
-            this.minValueBox.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.minValueBox.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.minValueBox.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             SetTextBoxName(this.dataSourceTB0);
         }
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
-            if (String.IsNullOrWhiteSpace(this.minValueBox.Text))
+            if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择最小值字段!");
                 return;
@@ -72,7 +70,7 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join("\t", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
-            this.opControl.Option.SetOption("minfield", this.minValueBox.Tag == null ? this.minValueBox.SelectedIndex.ToString() : this.minValueBox.Tag.ToString());
+            this.opControl.Option.SetOption("minfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -80,8 +78,6 @@ namespace Citta_T1.OperatorViews
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
-
         }
 
         private void LoadOption()
@@ -89,8 +85,8 @@ namespace Citta_T1.OperatorViews
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "minfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                this.minValueBox.Text = this.minValueBox.Items[index].ToString();
-                this.minValueBox.Tag = index.ToString();
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
             }
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
@@ -106,27 +102,11 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-        }
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in nowColumnsName0)
-            {
-                this.outListCCBL0.AddItems(name);
-                this.minValueBox.Items.Add(name);
-            }
-
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+            this.InitDataSource();
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
+            this.comboBox0.Items.AddRange(nowColumnsName0);
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
         #endregion

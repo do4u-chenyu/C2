@@ -6,7 +6,6 @@ using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,40 +15,22 @@ namespace Citta_T1.OperatorViews
     public partial class RandomOperatorView : BaseOperatorView
     {
         private string oldRandomNum;
-        private List<string> oldColumnsName = new List<string>();
 
         public RandomOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
             this.oldRandomNum = this.randomNumBox.Text;
 
             SetTextBoxName(this.dataSourceTB0);
         }
         #region 初始化配置
-        private void InitOptionInfo()
-        {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-
-        }
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in nowColumnsName0)
-            {
-                this.outListCCBL0.AddItems(name);
-            }
-
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+        private void InitByDataSource()
+        {   // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
         }
         #endregion
@@ -83,7 +64,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnsName.Add(this.outListCCBL0.Items[index].ToString());
+                    this.oldColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
             }
 
         }
@@ -125,7 +106,7 @@ namespace Citta_T1.OperatorViews
             foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
             { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
             if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName, outName, this.opControl.ID);
+                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
         }
         #endregion
 

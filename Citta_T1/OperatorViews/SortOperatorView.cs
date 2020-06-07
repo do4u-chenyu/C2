@@ -6,7 +6,6 @@ using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,46 +18,34 @@ namespace Citta_T1.OperatorViews
         public SortOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
 
             this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
 
-            this.sortField.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.sortField.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.sortField.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
 
         #region 配置初始化
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-        }
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outList = Enumerable.Range(0, this.nowColumnsName0.Length).ToList();
-            foreach (string name in nowColumnsName0)
-                this.sortField.Items.Add(name);
-
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
-        }
 
+        }
         #endregion
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(this.sortField.Text))
+            if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择排序字段!");
                 return;
@@ -101,7 +88,7 @@ namespace Citta_T1.OperatorViews
         {
 
             this.opControl.Option.SetOption("outfield", String.Join("\t", this.outList));
-            this.opControl.Option.SetOption("sortfield", this.sortField.Tag == null ? this.sortField.SelectedIndex.ToString() : this.sortField.Tag.ToString());
+            this.opControl.Option.SetOption("sortfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
@@ -127,8 +114,8 @@ namespace Citta_T1.OperatorViews
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "sortfield"))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-                this.sortField.Text = this.sortField.Items[index].ToString();
-                this.sortField.Tag = index.ToString();
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
             }
             if (this.opControl.Option.GetOption("repetition") != "")
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));

@@ -70,11 +70,11 @@ namespace Citta_T1.OperatorViews
             dataInfo.TryGetValue("extType1", out keywordExtType);
             dataInfo.TryGetValue("separator1", out keywordSep);
 
-            combox0.Items.AddRange(nowColumnsName0);
-            combox0.SelectedIndex = colIndexDefault;
+            comboBox0.Items.AddRange(nowColumnsName0);
+            comboBox0.SelectedIndex = colIndexDefault;
 
-            combox1.Items.AddRange(nowColumnsName1);
-            combox1.SelectedIndex = colIndexDefault;
+            comboBox1.Items.AddRange(nowColumnsName1);
+            comboBox1.SelectedIndex = colIndexDefault;
 
             outListCCBL0.Items.AddRange(nowColumnsName0);
             conditionSelectBox.SelectedIndex = colIndexDefault;
@@ -91,8 +91,8 @@ namespace Citta_T1.OperatorViews
             outListCCBL0.LoadItemCheckIndex(indexs);
             oldColumnsName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
-            combox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
-            combox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
+            comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
+            comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", null));
         }
         private void SaveOption()
@@ -106,8 +106,8 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("outfield", outField);
             opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
             opControl.Option.SetOption("columnname1", string.Join("\t", opControl.SecondDataSourceColumns));
-            opControl.Option.SetOption("dataSelectIndex", combox0.SelectedIndex.ToString());
-            opControl.Option.SetOption("keySelectIndex", combox1.SelectedIndex.ToString());
+            opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex.ToString());
+            opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex.ToString());
             opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
             opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
 
@@ -137,7 +137,7 @@ namespace Citta_T1.OperatorViews
         {
             this.keywordPreviewBox.Text = new KeywordCombine().KeywordPreView(dataSourceFFP1,
                                                                               keywordSep.ToCharArray(),
-                                                                              combox1.SelectedIndex,
+                                                                              comboBox1.SelectedIndex,
                                                                               keywordExtType,
                                                                               keywordEncoding);
         }

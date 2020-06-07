@@ -38,7 +38,7 @@
             this.sortByNum = new System.Windows.Forms.RadioButton();
             this.endRow = new System.Windows.Forms.TextBox();
             this.firstRow = new System.Windows.Forms.TextBox();
-            this.sortField = new System.Windows.Forms.ComboBox();
+            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -189,7 +189,7 @@
             this.valuePanel.Controls.Add(this.endRow);
             this.valuePanel.Controls.Add(this.firstRow);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.sortField);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Controls.Add(this.label8);
             this.valuePanel.Controls.Add(this.label7);
             this.valuePanel.Controls.Add(this.label6);
@@ -276,15 +276,15 @@
             // 
             // sortField
             // 
-            this.sortField.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.sortField.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.sortField.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sortField.FormattingEnabled = true;
-            this.sortField.Location = new System.Drawing.Point(2, 44);
-            this.sortField.Margin = new System.Windows.Forms.Padding(2);
-            this.sortField.Name = "sortField";
-            this.sortField.Size = new System.Drawing.Size(134, 24);
-            this.sortField.TabIndex = 12;
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(2, 44);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "sortField";
+            this.comboBox0.Size = new System.Drawing.Size(134, 24);
+            this.comboBox0.TabIndex = 12;
             // 
             // label8
             // 
@@ -447,7 +447,7 @@
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox sortField;
+        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.TextBox endRow;
         private System.Windows.Forms.TextBox firstRow;
         private System.Windows.Forms.Label label9;

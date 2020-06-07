@@ -3,10 +3,8 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -17,20 +15,20 @@ namespace Citta_T1.OperatorViews
         public MaxOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
 
             SetTextBoxName(this.dataSourceTB0);
-            this.maxValueBox.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.maxValueBox.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.maxValueBox.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
         {
             //未设置字段警告
             if (this.dataSourceTB0.Text == String.Empty) return;
-            if (this.maxValueBox.Text == String.Empty)
+            if (this.comboBox0.Text == String.Empty)
             {
                 MessageBox.Show("请选择最大值字段");
                 return;
@@ -77,10 +75,10 @@ namespace Citta_T1.OperatorViews
             Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
             string outField = string.Join("\t", outIndexs);
             this.opControl.Option.SetOption("outfield", outField);
-            if (this.maxValueBox.Text == String.Empty)
+            if (this.comboBox0.Text == String.Empty)
                 this.opControl.Option.SetOption("maxfield", String.Empty);
             else
-                this.opControl.Option.SetOption("maxfield", this.maxValueBox.Tag == null ? this.maxValueBox.SelectedIndex.ToString() : this.maxValueBox.Tag.ToString());
+                this.opControl.Option.SetOption("maxfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
 
 
             ElementStatus oldStatus = this.opControl.Status;
@@ -98,8 +96,8 @@ namespace Citta_T1.OperatorViews
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "maxfield"))
             {
                 maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.maxValueBox.Text = this.maxValueBox.Items[maxIndex].ToString();
-                this.maxValueBox.Tag = maxIndex.ToString();
+                this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
+                this.comboBox0.Tag = maxIndex.ToString();
             }
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
@@ -116,27 +114,11 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-        }
-
-        private void SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            this.nowColumnsName0 = bcpInfo.ColumnArray;
-            foreach (string name in this.nowColumnsName0)
-            {
-                this.outListCCBL0.AddItems(name);
-                this.maxValueBox.Items.Add(name);
-            }
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
+            this.InitDataSource();
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
+            this.comboBox0.Items.AddRange(nowColumnsName0);
         }
         #endregion
     }

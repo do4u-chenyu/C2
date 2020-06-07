@@ -3,11 +3,9 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,59 +19,31 @@ namespace Citta_T1.OperatorViews
         public RelateOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
 
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox2.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox2.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            this.comboBox2.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
 
         }
         #region 配置初始化
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            //获取两个数据源表头字段
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-            }
-            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataSourceFFP1 = dataInfo["dataPath1"];
-                this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-            }
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.comboBox0.Items.AddRange(nowColumnsName0);
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
 
-            this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-            this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
-
-
-            foreach (string name in this.nowColumnsName0)
-            {
-                this.comboBox1.Items.Add(name);
-                this.outListCCBL0.AddItems(name);
-            }
-            foreach (string name in this.nowColumnsName1)
-            {
-                this.comboBox2.Items.Add(name);
-                this.outListCCBL1.AddItems(name);
-            }
-
-        }
-
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray; ;
+            this.comboBox0.Items.AddRange(nowColumnsName1);
+            this.outListCCBL0.Items.AddRange(nowColumnsName1);
         }
 
         #endregion
@@ -122,10 +92,10 @@ namespace Citta_T1.OperatorViews
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
                 {
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                    this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
-                    this.comboBox1.Tag = Nums[0].ToString();
-                    this.comboBox2.Tag = Nums[1].ToString();
+                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[1]].ToString();
+                    this.comboBox0.Tag = Nums[0].ToString();
+                    this.comboBox1.Tag = Nums[1].ToString();
                 }
 
             }
@@ -185,8 +155,8 @@ namespace Citta_T1.OperatorViews
             string outField1 = string.Join("\t", outIndexs1);
             this.opControl.Option.SetOption("outfield1", outField1);
 
-            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
+            string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
+            string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "\t" + index02;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -249,7 +219,7 @@ namespace Citta_T1.OperatorViews
         {
             bool empty = false;
             List<string> types = new List<string>();
-            types.Add(this.comboBox1.GetType().Name);
+            types.Add(this.comboBox0.GetType().Name);
             types.Add(this.outListCCBL0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {

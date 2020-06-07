@@ -37,9 +37,9 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.combox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.conditionSelectBox = new System.Windows.Forms.ComboBox();
-            this.combox0 = new System.Windows.Forms.ComboBox();
+            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -208,9 +208,9 @@
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.label6);
-            this.valuePanel.Controls.Add(this.combox1);
+            this.valuePanel.Controls.Add(this.comboBox1);
             this.valuePanel.Controls.Add(this.conditionSelectBox);
-            this.valuePanel.Controls.Add(this.combox0);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Controls.Add(this.dataSourceTB1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
@@ -223,9 +223,9 @@
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.combox0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.comboBox0, 0);
             this.valuePanel.Controls.SetChildIndex(this.conditionSelectBox, 0);
-            this.valuePanel.Controls.SetChildIndex(this.combox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.comboBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.label6, 0);
             // 
             // label6
@@ -241,13 +241,13 @@
             // 
             // keyWordColBox
             // 
-            this.combox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.combox1.FormattingEnabled = true;
-            this.combox1.Location = new System.Drawing.Point(218, 44);
-            this.combox1.Name = "keyWordColBox";
-            this.combox1.Size = new System.Drawing.Size(121, 25);
-            this.combox1.TabIndex = 13;
-            this.combox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(218, 44);
+            this.comboBox1.Name = "keyWordColBox";
+            this.comboBox1.Size = new System.Drawing.Size(121, 25);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
             // 
             // conditionSelectBox
             // 
@@ -263,12 +263,12 @@
             // 
             // dataColumnBox
             // 
-            this.combox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.combox0.FormattingEnabled = true;
-            this.combox0.Location = new System.Drawing.Point(2, 44);
-            this.combox0.Name = "dataColumnBox";
-            this.combox0.Size = new System.Drawing.Size(126, 25);
-            this.combox0.TabIndex = 11;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(2, 44);
+            this.comboBox0.Name = "dataColumnBox";
+            this.comboBox0.Size = new System.Drawing.Size(126, 25);
+            this.comboBox0.TabIndex = 11;
             // 
             // KeyWordOperatorView
             // 
@@ -300,9 +300,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox combox1;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox conditionSelectBox;
-        private System.Windows.Forms.ComboBox combox0;
+        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

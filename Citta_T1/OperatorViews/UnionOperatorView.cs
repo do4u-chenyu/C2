@@ -3,12 +3,10 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -20,62 +18,33 @@ namespace Citta_T1.OperatorViews
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            InitOptionInfo();
+            InitByDataSource();
             LoadOption();
 
             SetTextBoxName(this.dataSourceTB0);
             SetTextBoxName(this.dataSourceTB1);
+            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox2.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox2.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.textBoxEx1.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
-            this.textBoxEx1.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
+            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            this.comboBox2.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
 
 
         }
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataSourceFFP0 = dataInfo["dataPath0"];
-                this.dataSourceTB0.Text = Path.GetFileNameWithoutExtension(this.dataSourceFFP0);
-                this.nowColumnsName0 = SetOption(this.dataSourceFFP0, this.dataSourceTB0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.nowColumnsName0;
-            }
-            if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataSourceFFP1 = dataInfo["dataPath1"];
-                this.dataSourceTB1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.nowColumnsName1 = SetOption(this.dataSourceFFP1, this.dataSourceTB1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns = this.nowColumnsName1;
-            }
-            if (this.opControl.Option.GetOption("outname") != String.Empty)
-            {
-                this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
-            }
-
-
-            foreach (string name in this.nowColumnsName0)
-                this.comboBox1.Items.Add(name);
-
-            foreach (string name in this.nowColumnsName1)
-                this.comboBox2.Items.Add(name);
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
+            this.comboBox0.Items.AddRange(nowColumnsName0);
+            this.comboBox1.Items.AddRange(nowColumnsName1);
         }
-
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return bcpInfo.ColumnArray;
-        }
-
         #endregion
         #region 配置信息的保存与加载
         private void InitNewFactorControl(int count)
@@ -93,11 +62,11 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
-            string factor1 = index01 + "\t" + index02 + "\t" + this.textBoxEx1.Text;
+            string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
+            string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string factor1 = index01 + "\t" + index02 + "\t" + this.textBox0.Text;
             this.opControl.Option.SetOption("factor1", factor1);
-            this.selectedColumns.Add(OutColumnName(this.comboBox1.Text, this.textBoxEx1.Text));
+            this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
@@ -145,11 +114,11 @@ namespace Citta_T1.OperatorViews
                 bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
                 if (!case0 && !case1)
                 {
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[0]].ToString();
-                    this.comboBox2.Text = this.comboBox2.Items[Nums[1]].ToString();
-                    this.textBoxEx1.Text = factorList[2];
-                    this.comboBox1.Tag = Nums[0].ToString();
-                    this.comboBox2.Tag = Nums[1].ToString();
+                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
+                    this.comboBox1.Text = this.comboBox1.Items[Nums[1]].ToString();
+                    this.textBox0.Text = factorList[2];
+                    this.comboBox0.Tag = Nums[0].ToString();
+                    this.comboBox1.Tag = Nums[1].ToString();
                 }
             }
             if (count > 1)
@@ -213,9 +182,9 @@ namespace Citta_T1.OperatorViews
         private bool IsRepetitionCondition()
         {
             bool repetition = false;
-            string index01 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
-            string index02 = this.comboBox2.Tag == null ? this.comboBox2.SelectedIndex.ToString() : this.comboBox2.Tag.ToString();
-            string factor1 = index01 + "," + index02 + "," + this.textBoxEx1.Text;
+            string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
+            string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
+            string factor1 = index01 + "," + index02 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>();
             factors["factor1"] = factor1;
             if (this.tableLayoutPanel1.RowCount > 0)
@@ -244,8 +213,8 @@ namespace Citta_T1.OperatorViews
         {
             bool empty = false;
             List<string> types = new List<string>();
-            types.Add(this.comboBox1.GetType().Name);
-            types.Add(this.textBoxEx1.GetType().Name);
+            types.Add(this.comboBox0.GetType().Name);
+            types.Add(this.textBox0.GetType().Name);
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
