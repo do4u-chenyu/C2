@@ -213,22 +213,21 @@ namespace Citta_T1.Business.Option
         }
 
         //配置初始化，获取数据源表头信息
-        public Dictionary<string, string> GetDataSourceInfo(int ID)
+        public Dictionary<string, string> GetDataSourceInfoDict(int ID)
         {
-
-            Dictionary<string, string> dataInfo = new Dictionary<string, string>();
+            Dictionary<string, string> dataSourceInfoDict = new Dictionary<string, string>();
             List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
             foreach (ModelRelation mr in relations)
             {
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                dataInfo["dataPath" + mr.EndPin] = me.FullFilePath;
-                dataInfo["encoding" + mr.EndPin] = me.Encoding.ToString();
-                dataInfo["separator" + mr.EndPin] = me.Separator.ToString();
-                dataInfo["extType" + mr.EndPin] = me.ExtType.ToString();
+                dataSourceInfoDict["dataPath"    + mr.EndPin] = me.FullFilePath;
+                dataSourceInfoDict["encoding"    + mr.EndPin] = me.Encoding.ToString();
+                dataSourceInfoDict["separator"   + mr.EndPin] = me.Separator.ToString();
+                dataSourceInfoDict["extType"     + mr.EndPin] = me.ExtType.ToString();
+                dataSourceInfoDict["description" + mr.EndPin] = me.Description;
             }
-            return dataInfo;
+            return dataSourceInfoDict;
         }
-     
         public void GetSelectedItemIndex(object sender, EventArgs e)
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();

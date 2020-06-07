@@ -38,7 +38,7 @@ namespace Citta_T1.OperatorViews
         private void InitOptionInfo()
         {
             //初始化数据源
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
+            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfoDict(this.opControl.ID);
             if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
             {
                 this.dataSourceFFP0 = dataInfo["dataPath0"];

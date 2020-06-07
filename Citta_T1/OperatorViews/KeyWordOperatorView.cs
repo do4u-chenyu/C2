@@ -136,7 +136,7 @@ namespace Citta_T1.OperatorViews
         }
         private void GetDataInfo()
         {
-            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfo(opControl.ID);
+            Dictionary<string, string> dataInfoDic = Global.GetOptionDao().GetDataSourceInfoDict(opControl.ID);
             dataInfoDic.TryGetValue("dataPath0", out dataSourceFFP0);
             dataInfoDic.TryGetValue("dataPath1", out dataSourceFFP1);
             dataInfoDic.TryGetValue("encoding0", out dataSourceEncoding);
