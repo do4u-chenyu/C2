@@ -209,8 +209,9 @@ namespace Citta_T1.OperatorViews
                 {
                     continue;
                 }
-                line.Replace(" ", "OR");
-                datas.Add(line);
+                    
+                datas.Add(((line.Contains(" AND ")) || (line.Contains(" OR ")))?
+                            line: line.Replace(" ", "OR"));
             }
         }
     }

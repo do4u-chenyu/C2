@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
-    class ClipboardWrapper
+    class ClipBoardWrapper
     {
-        private List<Control> clipboardControls;
-        public List<Control> ClipboardControls { get => clipboardControls; set => clipboardControls = value; }
-        public void ClipboardPaste()
+        private List<Control> clipBoardCts;
+        public ClipBoardWrapper()
         {
-            foreach(Control ct in clipboardControls)
-            {
-                //创建新的控件
-            }
+            clipBoardCts = new List<Control>();
         }
+        
+        public List<Control> ClipBoardCts { get => clipBoardCts; set => clipBoardCts = value; }
+        
     }
 }
