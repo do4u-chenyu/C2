@@ -119,5 +119,27 @@ namespace Citta_T1.OperatorViews.Base
         {
             this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
+
+        private void ComboBox0_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
+        }
+
+        private void ComboBox0_Leave(object sender, EventArgs e)
+        {
+            optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
+        }
+
+        private void ComboBox1_Leave(object sender, EventArgs e)
+        {
+            optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
+        }
+
+        private void ComboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
+        }
     }
 }

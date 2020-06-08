@@ -97,17 +97,6 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-        private void AvgComBox_Leave(object sender, EventArgs e)
-        {
-            this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             this.selectedIndex = this.comboBox0.SelectedIndex.ToString();

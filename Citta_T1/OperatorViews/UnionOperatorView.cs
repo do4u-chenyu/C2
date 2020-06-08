@@ -21,11 +21,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
             //selectindex会在某些不确定情况触发，这种情况是不期望的

@@ -36,9 +36,7 @@
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.conditionSelectBox = new System.Windows.Forms.ComboBox();
-            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -78,6 +76,22 @@
             this.outListCCBL0.Location = new System.Drawing.Point(4, 86);
             this.outListCCBL0.Size = new System.Drawing.Size(125, 22);
             this.outListCCBL0.TabIndex = 8;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Location = new System.Drawing.Point(2, 44);
+            this.comboBox0.Size = new System.Drawing.Size(126, 25);
+            this.comboBox0.TabIndex = 11;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Location = new System.Drawing.Point(218, 44);
+            this.comboBox1.Size = new System.Drawing.Size(121, 25);
+            this.comboBox1.TabIndex = 13;
+            this.comboBox1.Visible = true;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -227,16 +241,6 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词：";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(218, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 25);
-            this.comboBox1.TabIndex = 13;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
-            // 
             // conditionSelectBox
             // 
             this.conditionSelectBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -248,15 +252,6 @@
             this.conditionSelectBox.Name = "conditionSelectBox";
             this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
             this.conditionSelectBox.TabIndex = 12;
-            // 
-            // comboBox0
-            // 
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.FormattingEnabled = true;
-            this.comboBox0.Location = new System.Drawing.Point(2, 44);
-            this.comboBox0.Name = "comboBox0";
-            this.comboBox0.Size = new System.Drawing.Size(126, 25);
-            this.comboBox0.TabIndex = 11;
             // 
             // KeywordOperatorView
             // 
@@ -288,9 +283,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox conditionSelectBox;
-        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox keywordPreviewBox;

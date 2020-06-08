@@ -31,18 +31,40 @@
             this.valuePanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.textBox0 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 9;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(459, 11);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(358, 11);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Location = new System.Drawing.Point(44, 4);
+            this.comboBox0.Size = new System.Drawing.Size(116, 25);
             // 
             // label2
             // 
@@ -86,32 +108,6 @@
             this.bottomPanel.Size = new System.Drawing.Size(529, 52);
             this.bottomPanel.TabIndex = 1;
             // 
-            // cancelButton
-            // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(459, 11);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(358, 11);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
-            // 
             // keyPanel
             // 
             this.keyPanel.Controls.Add(this.label2);
@@ -134,17 +130,9 @@
             this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(413, 250);
             this.valuePanel.TabIndex = 3;
-            // 
-            // dataInfo
-            // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSourceTB0.Location = new System.Drawing.Point(6, 2);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB0.Name = "dataInfo";
-            this.dataSourceTB0.ReadOnly = true;
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
-            this.dataSourceTB0.TabIndex = 9;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
             // tableLayoutPanel2
             // 
@@ -164,6 +152,10 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 32);
             this.tableLayoutPanel2.TabIndex = 6;
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.label3, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.textBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 
@@ -183,29 +175,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.FormattingEnabled = true;
-            this.comboBox0.Location = new System.Drawing.Point(44, 3);
-            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox0.Name = "comboBox1";
-            this.comboBox0.Size = new System.Drawing.Size(116, 25);
-            this.comboBox0.TabIndex = 2;
-            // 
-            // textBox1
+            // textBox0
             // 
             this.textBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox0.Location = new System.Drawing.Point(165, 5);
-            this.textBox0.Name = "textBox1";
-            this.textBox0.Size = new System.Drawing.Size(114, 21);
+            this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox0.ForeColor = System.Drawing.Color.Gray;
+            this.textBox0.Location = new System.Drawing.Point(165, 4);
+            this.textBox0.Name = "textBox0";
+            this.textBox0.Size = new System.Drawing.Size(114, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.ForeColor = System.Drawing.Color.Gray;
-            this.textBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox0.Enter += new System.EventHandler(this.TextBox1_Enter);
             this.textBox0.Leave += new System.EventHandler(this.TextBox1_Leave);
             // 
@@ -245,30 +224,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(358, 85);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(138, 11);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(129, 20);
-            this.comboBox2.TabIndex = 3;
-            // 
-            // StandardOperatorView
+            // DataFormatOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(529, 323);
-            this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "StandardOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "DataFormatOperatorView";
             this.Text = "数据标准化算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
@@ -291,8 +256,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox textBox0;

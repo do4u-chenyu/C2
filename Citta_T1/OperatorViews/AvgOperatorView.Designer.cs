@@ -29,7 +29,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -148,8 +147,6 @@
             this.comboBox0.Size = new System.Drawing.Size(136, 24);
             this.comboBox0.TabIndex = 1;
             this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.AvgComBox_SelectionChangeCommitted);
-            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AvgComBox_KeyUp);
-            this.comboBox0.Leave += new System.EventHandler(this.AvgComBox_Leave);
             // 
             // AvgOperatorView
             // 
@@ -183,6 +180,5 @@
         private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox0;
     }
 }

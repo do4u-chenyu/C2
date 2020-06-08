@@ -361,28 +361,5 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-
-        private void ComboBox1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void ComboBox1_Leave(object sender, EventArgs e)
-        {
-            optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void ComboBox2_Leave(object sender, EventArgs e)
-        {
-            optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
-        }
-
-        private void ComboBox2_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                optionInfoCheck.IsIllegalInputName((sender as ComboBox), this.nowColumnsName1, (sender as ComboBox).Text);
-        }
-
     }
 }

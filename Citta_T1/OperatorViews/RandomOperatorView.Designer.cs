@@ -36,6 +36,35 @@
             this.valuePanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(0, 1);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 3;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(255, 6);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(173, 6);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // outListCCBL0
+            // 
+            this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(0);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
+            this.outListCCBL0.TabIndex = 2;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Visible = false;
+            // 
             // topPanel
             // 
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -55,32 +84,6 @@
             this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(324, 38);
             this.bottomPanel.TabIndex = 1;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(255, 6);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(173, 6);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
             // 
             // keyPanel
             // 
@@ -138,6 +141,9 @@
             this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(208, 132);
             this.valuePanel.TabIndex = 3;
+            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.randomNumBox, 0);
             // 
             // randomNumBox
             // 
@@ -149,42 +155,16 @@
             this.randomNumBox.TabIndex = 4;
             this.randomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
             // 
-            // dataInfoBox
-            // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSourceTB0.Location = new System.Drawing.Point(0, 1);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB0.Name = "dataInfoBox";
-            this.dataSourceTB0.ReadOnly = true;
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
-            this.dataSourceTB0.TabIndex = 3;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // outList
-            // 
-            this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
-            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(0);
-            this.outListCCBL0.Name = "outList";
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
-            this.outListCCBL0.TabIndex = 2;
-            // 
             // RandomOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(324, 191);
-            this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "RandomOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "随机算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

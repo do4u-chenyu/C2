@@ -21,11 +21,6 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -40,8 +35,8 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
 
-            this.comboBox0.Items.AddRange(nowColumnsName1);
-            this.outListCCBL0.Items.AddRange(nowColumnsName1);
+            this.comboBox1.Items.AddRange(nowColumnsName1);
+            this.outListCCBL1.Items.AddRange(nowColumnsName1);
         }
 
         #endregion

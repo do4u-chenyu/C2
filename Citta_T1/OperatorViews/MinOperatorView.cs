@@ -17,9 +17,6 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消

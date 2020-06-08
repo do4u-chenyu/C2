@@ -20,8 +20,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.textBoxEx1.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
