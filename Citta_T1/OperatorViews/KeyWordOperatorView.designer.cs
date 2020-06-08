@@ -31,7 +31,6 @@
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.keywordPreviewBox = new System.Windows.Forms.TextBox();
             this.keyPanel = new System.Windows.Forms.Panel();
@@ -140,7 +139,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.keywordPreviewBox);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -155,21 +153,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(6, 61);
+            this.label7.Location = new System.Drawing.Point(6, 47);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(408, 17);
+            this.label7.Size = new System.Drawing.Size(204, 17);
             this.label7.TabIndex = 3;
-            this.label7.Text = "[3] 当前算子仅支持100行关键词组合与过滤，超出的我们会做默认忽略处理";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(7, 42);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(376, 17);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "[2] AND,\'空格\'表示与运算;  OR,\'|\'表示或运算； NOT,\'!\'表示非运算。";
+            this.label7.Text = "[2] 当前算子仅支持100行关键词处理";
             // 
             // label4
             // 
@@ -177,17 +165,17 @@
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(7, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(387, 17);
+            this.label4.Size = new System.Drawing.Size(159, 17);
             this.label4.TabIndex = 1;
-            this.label4.Text = "[1] 行与行之间按或运算处理；每行支持逻辑或、逻辑与、逻辑非运算。";
+            this.label4.Text = "[1] 行与行之间按或运算处理";
             // 
-            // keyWordPreviewBox
+            // keywordPreviewBox
             // 
             this.keywordPreviewBox.BackColor = System.Drawing.SystemColors.Control;
             this.keywordPreviewBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.keywordPreviewBox.Location = new System.Drawing.Point(0, 81);
             this.keywordPreviewBox.Multiline = true;
-            this.keywordPreviewBox.Name = "keyWordPreviewBox";
+            this.keywordPreviewBox.Name = "keywordPreviewBox";
             this.keywordPreviewBox.ReadOnly = true;
             this.keywordPreviewBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.keywordPreviewBox.Size = new System.Drawing.Size(434, 89);
@@ -239,12 +227,12 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "关键词：";
             // 
-            // keyWordColBox
+            // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(218, 44);
-            this.comboBox1.Name = "keyWordColBox";
+            this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 25);
             this.comboBox1.TabIndex = 13;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
@@ -261,16 +249,16 @@
             this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
             this.conditionSelectBox.TabIndex = 12;
             // 
-            // dataColumnBox
+            // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox0.FormattingEnabled = true;
             this.comboBox0.Location = new System.Drawing.Point(2, 44);
-            this.comboBox0.Name = "dataColumnBox";
+            this.comboBox0.Name = "comboBox0";
             this.comboBox0.Size = new System.Drawing.Size(126, 25);
             this.comboBox0.TabIndex = 11;
             // 
-            // KeyWordOperatorView
+            // KeywordOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(461, 357);
@@ -279,7 +267,7 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Name = "KeyWordOperatorView";
+            this.Name = "KeywordOperatorView";
             this.Text = "关键词过滤算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -304,7 +292,6 @@
         private System.Windows.Forms.ComboBox conditionSelectBox;
         private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox keywordPreviewBox;
         private System.Windows.Forms.Label label6;
