@@ -65,12 +65,8 @@ namespace Citta_T1.OperatorViews
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
             //输出变化，重写BCP文件
-            List<string> oldColumn = new List<string>();
-            oldColumn.Add(this.oldAvg);
-            if (this.oldAvg != this.comboBox0.Text)
-                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(new List<string>() { this.oldAvg }, this.selectedColumns, this.opControl.ID);
 
         }
 

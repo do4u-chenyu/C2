@@ -59,11 +59,7 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
-            { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
-            if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
+             Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
 
         private bool IsOptionReay()
@@ -178,11 +174,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
 
-            string outField = string.Join("\t", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
 
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
