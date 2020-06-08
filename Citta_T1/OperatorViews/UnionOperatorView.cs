@@ -175,8 +175,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             //输出变化，重写BCP文件
-            if (resultElement != null && !this.oldColumnsName0.SequenceEqual(this.selectedColumns))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
         private bool IsRepetitionCondition()
         {
