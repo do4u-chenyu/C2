@@ -120,9 +120,8 @@
             this.comboBox0.Name = "comboBox0";
             this.comboBox0.Size = new System.Drawing.Size(86, 24);
             this.comboBox0.TabIndex = 2;
-            this.comboBox1.Visible = false;
-            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox0_KeyUp);
-            this.comboBox0.Leave += new System.EventHandler(this.ComboBox0_Leave);
+            this.comboBox0.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             // 
             // comboBox2
             // 
@@ -137,8 +136,8 @@
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Visible = false;
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ComboBox1_KeyUp);
-            this.comboBox1.Leave += new System.EventHandler(this.ComboBox1_Leave);
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
             // 
             // BaseOperatorView
             // 
