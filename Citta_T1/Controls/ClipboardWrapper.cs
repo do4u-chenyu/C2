@@ -1,20 +1,15 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
+﻿
+using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
 {
     class ClipBoardWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private List<Control> clipBoardCts;
         public ClipBoardWrapper()
         {
@@ -24,6 +19,25 @@ namespace Citta_T1.Controls
         public List<Control> ClipBoardCts { get => clipBoardCts; set => clipBoardCts = value; }
         public void ClipBoardPaste()
         {
+            foreach(Control ct in clipBoardCts)
+            {
+                string text = ct.Controls["textBox"].Text;
+                int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;  
+                Point location = ct.Location;
+                if (ct.Name.Equals("MoveOpControl"))
+                {
+                    Global.GetCanvasPanel().AddNewOperator(sizeLevel, text, location);
+                }
+                if (ct.Name.Equals("MoveDtControl"))
+                {
+                    string path = (ct as MoveDtControl).FullFilePath;
+                    char separator = (ct as MoveDtControl).Separator;
+                    OpUtil.Encoding encoding = (ct as MoveDtControl).Encoding;
+                    OpUtil.ExtType extType = (ct as MoveDtControl).ExtType;
+                    Global.GetCanvasPanel().AddNewDataSource(path, sizeLevel, text,
+                        location, separator, extType, encoding);
+                }
+            }
         }
     }
 }

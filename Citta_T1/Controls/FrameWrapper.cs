@@ -216,6 +216,8 @@ namespace Citta_T1.Controls
         private List<int> minBoundingBuffMaxY;
         private Point moveOffset;
         public Rectangle MinBoundingBox { get => minBoundingBox; set => minBoundingBox = value; }
+        public List<Control> Controls { get => controls; set => controls = value; }
+
         FrameWrapperVFX frameWrapperVFX = new FrameWrapperVFX();
         public FrameWrapper()
         {
