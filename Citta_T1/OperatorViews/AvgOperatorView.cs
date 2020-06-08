@@ -21,7 +21,6 @@ namespace Citta_T1.OperatorViews
             LoadOption();
 
             this.oldAvg = this.comboBox0.Text;
-            SetTextBoxName(this.dataSourceTB0);
         }
         #region 初始化配置
         private void InitByDataSource()

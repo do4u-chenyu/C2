@@ -20,9 +20,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
-
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox0.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
