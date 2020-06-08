@@ -88,8 +88,9 @@ namespace Citta_T1.OperatorViews
             List<string> newData = new List<string>(this.outListCCBL0.GetItemCheckText());
             newData.Add("频率统计结果");
             //输出变化，重写BCP文件,它只要输出列名变化，表头就会改变
-            if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
+            if (String.Join("\t", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsNewOut(newData, this.opControl.ID);
+
 
         }
 
