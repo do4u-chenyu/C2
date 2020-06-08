@@ -165,7 +165,7 @@ namespace Citta_T1.OperatorViews
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            result = "(" + string.Join(" OR ", datas) + ")";
+            result = string.Join(" OR ", datas);
             if (result.Equals(string.Empty))
                 result = defaultInfo;
             return result;
