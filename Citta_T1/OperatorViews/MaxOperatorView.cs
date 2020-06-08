@@ -18,9 +18,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            SetTextBoxName(this.dataSourceTB0);
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消
@@ -57,11 +54,8 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
-            { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
-            if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
+
+             Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.outListCCBL0.GetItemCheckText(), this.opControl.ID);
 
 
 
@@ -70,10 +64,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join("\t", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
             if (this.comboBox0.Text == String.Empty)
                 this.opControl.Option.SetOption("maxfield", String.Empty);

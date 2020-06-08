@@ -31,6 +31,8 @@
             this.dataSourceTB1 = new System.Windows.Forms.TextBox();
             this.outListCCBL0 = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.outListCCBL1 = new Citta_T1.Controls.Common.ComCheckBoxList();
+            this.comboBox0 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
@@ -106,6 +108,37 @@
             this.outListCCBL1.TabIndex = 0;
             this.outListCCBL1.Visible = false;
             // 
+            // comboBox1
+            // 
+            this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(2, 4);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "comboBox0";
+            this.comboBox0.Size = new System.Drawing.Size(86, 24);
+            this.comboBox0.TabIndex = 2;
+            this.comboBox0.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            // 
+            // comboBox2
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(92, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(86, 24);
+            this.comboBox1.TabIndex = 3;
+            this.comboBox1.Visible = false;
+            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            // 
             // BaseOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -127,8 +160,10 @@
         protected System.Windows.Forms.Button cancelButton;   // 取消键
         protected System.Windows.Forms.Button confirmButton;  // 确认键
         protected System.Windows.Forms.ToolTip toolTip1;      // 浮动提示栏,一个就够了
-        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL0;
-        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL1;
+        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL0;  // 左表输出选项框
+        protected Citta_T1.Controls.Common.ComCheckBoxList outListCCBL1;  // 右表输出选项框
+        protected System.Windows.Forms.ComboBox comboBox0;    // 左侧第一行条件选择框
+        protected System.Windows.Forms.ComboBox comboBox1;    // 右侧第一行条件选择框
         protected System.ComponentModel.IContainer components;
     }
 }

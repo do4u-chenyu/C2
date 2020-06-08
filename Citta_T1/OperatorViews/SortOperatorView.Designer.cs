@@ -38,7 +38,6 @@
             this.sortByNum = new System.Windows.Forms.RadioButton();
             this.endRow = new System.Windows.Forms.TextBox();
             this.firstRow = new System.Windows.Forms.TextBox();
-            this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -447,7 +446,6 @@
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox0;
         private System.Windows.Forms.TextBox endRow;
         private System.Windows.Forms.TextBox firstRow;
         private System.Windows.Forms.Label label9;

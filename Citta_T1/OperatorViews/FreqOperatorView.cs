@@ -24,9 +24,6 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
-
-            SetTextBoxName(this.dataSourceTB0);
-
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -91,8 +88,9 @@ namespace Citta_T1.OperatorViews
             List<string> newData = new List<string>(this.outListCCBL0.GetItemCheckText());
             newData.Add("频率统计结果");
             //输出变化，重写BCP文件,它只要输出列名变化，表头就会改变
-            if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
+            if (String.Join("\t", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
                 Global.GetOptionDao().IsNewOut(newData, this.opControl.ID);
+
 
         }
 
@@ -110,7 +108,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -120,13 +118,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("noRepetition") != "")
+            if (this.opControl.Option.GetOption("noRepetition") != String.Empty)
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (this.opControl.Option.GetOption("repetition") != "")
+            if (this.opControl.Option.GetOption("repetition") != String.Empty)
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("ascendingOrder") != "")
+            if (this.opControl.Option.GetOption("ascendingOrder") != String.Empty)
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (this.opControl.Option.GetOption("descendingOrder") != "")
+            if (this.opControl.Option.GetOption("descendingOrder") != String.Empty)
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {

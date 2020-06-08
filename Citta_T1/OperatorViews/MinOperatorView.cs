@@ -17,11 +17,7 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            SetTextBoxName(this.dataSourceTB0);
         }
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)
@@ -55,20 +51,14 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
-            { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
-            if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
+
+            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.outListCCBL0.GetItemCheckText(), this.opControl.ID);
         }
         #endregion
         #region 配置信息的保存与加载
         private void SaveOption()
         {
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join("\t", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
             this.opControl.Option.SetOption("minfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
 

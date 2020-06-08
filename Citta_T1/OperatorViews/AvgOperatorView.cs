@@ -21,7 +21,6 @@ namespace Citta_T1.OperatorViews
             LoadOption();
 
             this.oldAvg = this.comboBox0.Text;
-            SetTextBoxName(this.dataSourceTB0);
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -66,12 +65,8 @@ namespace Citta_T1.OperatorViews
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
             //输出变化，重写BCP文件
-            List<string> oldColumn = new List<string>();
-            oldColumn.Add(this.oldAvg);
-            if (this.oldAvg != this.comboBox0.Text)
-                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(new List<string>() { this.oldAvg }, this.selectedColumns, this.opControl.ID);
 
         }
 
@@ -101,17 +96,6 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-
-        private void AvgComBox_Leave(object sender, EventArgs e)
-        {
-            this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
 
         private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
         {

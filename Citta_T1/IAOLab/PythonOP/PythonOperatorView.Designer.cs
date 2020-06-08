@@ -67,31 +67,29 @@
             this.outputFileSeparatorSettingGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // confirmButton
+            // dataSourceTB0
             // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(377, 437);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 1;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
+            this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 12;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(462, 437);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(377, 437);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.TabIndex = 1;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Visible = false;
             // 
             // pythonChosenComboBox
             // 
@@ -99,22 +97,11 @@
             this.pythonChosenComboBox.FormattingEnabled = true;
             this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 49);
             this.pythonChosenComboBox.Name = "pythonChosenComboBox";
-            this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 32);
+            this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 25);
             this.pythonChosenComboBox.TabIndex = 3;
             this.pythonChosenComboBox.Text = "未配置Python虚拟机";
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
-            // 
-            // dataSource0
-            // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSourceTB0.Location = new System.Drawing.Point(137, 15);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB0.Name = "dataSource0";
-            this.dataSourceTB0.ReadOnly = true;
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 31);
-            this.dataSourceTB0.TabIndex = 12;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
@@ -123,7 +110,7 @@
             this.label1.Location = new System.Drawing.Point(45, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 31);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 11;
             this.label1.Text = "数据信息：";
             this.toolTip1.SetToolTip(this.label1, "数据源名称");
@@ -135,7 +122,7 @@
             this.label2.Location = new System.Drawing.Point(3, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(198, 31);
+            this.label2.Size = new System.Drawing.Size(132, 22);
             this.label2.TabIndex = 13;
             this.label2.Text = "Python虚拟机：";
             this.toolTip1.SetToolTip(this.label2, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
@@ -147,7 +134,7 @@
             this.label4.Location = new System.Drawing.Point(15, 122);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(182, 31);
+            this.label4.Size = new System.Drawing.Size(122, 22);
             this.label4.TabIndex = 16;
             this.label4.Text = "脚本传入参数：";
             this.toolTip1.SetToolTip(this.label4, "脚本需要传入的其他参数");
@@ -158,7 +145,7 @@
             this.pyParamTextBox.Location = new System.Drawing.Point(137, 122);
             this.pyParamTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyParamTextBox.Name = "pyParamTextBox";
-            this.pyParamTextBox.Size = new System.Drawing.Size(367, 31);
+            this.pyParamTextBox.Size = new System.Drawing.Size(367, 23);
             this.pyParamTextBox.TabIndex = 17;
             this.pyParamTextBox.TextChanged += new System.EventHandler(this.PyParamTextBox_TextChanged);
             // 
@@ -169,7 +156,7 @@
             this.noOutputFileRadio.Location = new System.Drawing.Point(10, 9);
             this.noOutputFileRadio.Margin = new System.Windows.Forms.Padding(2);
             this.noOutputFileRadio.Name = "noOutputFileRadio";
-            this.noOutputFileRadio.Size = new System.Drawing.Size(125, 28);
+            this.noOutputFileRadio.Size = new System.Drawing.Size(86, 21);
             this.noOutputFileRadio.TabIndex = 31;
             this.noOutputFileRadio.TabStop = true;
             this.noOutputFileRadio.Text = "无结果文件";
@@ -183,7 +170,7 @@
             this.rsFullFileNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rsFullFileNameTextBox.Name = "rsFullFileNameTextBox";
             this.rsFullFileNameTextBox.ReadOnly = true;
-            this.rsFullFileNameTextBox.Size = new System.Drawing.Size(329, 31);
+            this.rsFullFileNameTextBox.Size = new System.Drawing.Size(329, 23);
             this.rsFullFileNameTextBox.TabIndex = 30;
             this.rsFullFileNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.rsFullFileNameTextBox, "自动指定的结果文件路径");
@@ -195,7 +182,7 @@
             this.browseChosenRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.browseChosenRadioButton.Location = new System.Drawing.Point(10, 84);
             this.browseChosenRadioButton.Name = "browseChosenRadioButton";
-            this.browseChosenRadioButton.Size = new System.Drawing.Size(179, 28);
+            this.browseChosenRadioButton.Size = new System.Drawing.Size(122, 21);
             this.browseChosenRadioButton.TabIndex = 29;
             this.browseChosenRadioButton.TabStop = true;
             this.browseChosenRadioButton.Text = "浏览指定结果文件";
@@ -208,7 +195,7 @@
             this.paramRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.paramRadioButton.Location = new System.Drawing.Point(10, 57);
             this.paramRadioButton.Name = "paramRadioButton";
-            this.paramRadioButton.Size = new System.Drawing.Size(179, 28);
+            this.paramRadioButton.Size = new System.Drawing.Size(122, 21);
             this.paramRadioButton.TabIndex = 28;
             this.paramRadioButton.Text = "传参指定结果文件";
             this.toolTip1.SetToolTip(this.paramRadioButton, "结果文件路径以参数的形式传入自定义脚本中");
@@ -221,7 +208,7 @@
             this.stdoutRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.stdoutRadioButton.Location = new System.Drawing.Point(10, 33);
             this.stdoutRadioButton.Name = "stdoutRadioButton";
-            this.stdoutRadioButton.Size = new System.Drawing.Size(289, 28);
+            this.stdoutRadioButton.Size = new System.Drawing.Size(195, 21);
             this.stdoutRadioButton.TabIndex = 27;
             this.stdoutRadioButton.Text = "将脚本stdout重定向到结果文件";
             this.toolTip1.SetToolTip(this.stdoutRadioButton, "Python脚本的标准输出流(stdout)作为运算结果重定向到结果文件");
@@ -235,7 +222,7 @@
             this.browseChosenTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.browseChosenTextBox.Name = "browseChosenTextBox";
             this.browseChosenTextBox.ReadOnly = true;
-            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 31);
+            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 23);
             this.browseChosenTextBox.TabIndex = 25;
             // 
             // paramPrefixTagTextBox
@@ -244,7 +231,7 @@
             this.paramPrefixTagTextBox.Location = new System.Drawing.Point(134, 56);
             this.paramPrefixTagTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.paramPrefixTagTextBox.Name = "paramPrefixTagTextBox";
-            this.paramPrefixTagTextBox.Size = new System.Drawing.Size(32, 31);
+            this.paramPrefixTagTextBox.Size = new System.Drawing.Size(32, 23);
             this.paramPrefixTagTextBox.TabIndex = 24;
             this.paramPrefixTagTextBox.Text = "-f2";
             this.paramPrefixTagTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -258,7 +245,7 @@
             this.label6.Location = new System.Drawing.Point(19, 86);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(174, 31);
+            this.label6.Size = new System.Drawing.Size(116, 22);
             this.label6.TabIndex = 24;
             this.label6.Text = "Python脚本：";
             this.toolTip1.SetToolTip(this.label6, "自定义的第三方Python脚本");
@@ -296,7 +283,7 @@
             this.paramInputFileFullPath.Margin = new System.Windows.Forms.Padding(2);
             this.paramInputFileFullPath.Name = "paramInputFileFullPath";
             this.paramInputFileFullPath.ReadOnly = true;
-            this.paramInputFileFullPath.Size = new System.Drawing.Size(329, 31);
+            this.paramInputFileFullPath.Size = new System.Drawing.Size(329, 23);
             this.paramInputFileFullPath.TabIndex = 35;
             this.paramInputFileFullPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.paramInputFileFullPath, "自动指定的结果文件路径");
@@ -307,7 +294,7 @@
             this.paramInputFileRadio.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.paramInputFileRadio.Location = new System.Drawing.Point(11, 61);
             this.paramInputFileRadio.Name = "paramInputFileRadio";
-            this.paramInputFileRadio.Size = new System.Drawing.Size(179, 28);
+            this.paramInputFileRadio.Size = new System.Drawing.Size(122, 21);
             this.paramInputFileRadio.TabIndex = 34;
             this.paramInputFileRadio.Text = "传参指定输入文件";
             this.toolTip1.SetToolTip(this.paramInputFileRadio, "结果文件路径以参数的形式传入自定义脚本中");
@@ -320,7 +307,7 @@
             this.paramInputFileTextBox.Location = new System.Drawing.Point(135, 59);
             this.paramInputFileTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.paramInputFileTextBox.Name = "paramInputFileTextBox";
-            this.paramInputFileTextBox.Size = new System.Drawing.Size(32, 31);
+            this.paramInputFileTextBox.Size = new System.Drawing.Size(32, 23);
             this.paramInputFileTextBox.TabIndex = 33;
             this.paramInputFileTextBox.Text = "-f1";
             this.paramInputFileTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -342,7 +329,7 @@
             this.pyFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyFullFilePathTextBox.Name = "pyFullFilePathTextBox";
             this.pyFullFilePathTextBox.ReadOnly = true;
-            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(311, 31);
+            this.pyFullFilePathTextBox.Size = new System.Drawing.Size(311, 23);
             this.pyFullFilePathTextBox.TabIndex = 25;
             // 
             // openFileDialog1
@@ -369,12 +356,12 @@
             this.previewCmdText.BackColor = System.Drawing.SystemColors.Control;
             this.previewCmdText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.previewCmdText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewCmdText.Location = new System.Drawing.Point(2, 26);
+            this.previewCmdText.Location = new System.Drawing.Point(2, 18);
             this.previewCmdText.Margin = new System.Windows.Forms.Padding(2);
             this.previewCmdText.Multiline = true;
             this.previewCmdText.Name = "previewCmdText";
             this.previewCmdText.ReadOnly = true;
-            this.previewCmdText.Size = new System.Drawing.Size(509, 49);
+            this.previewCmdText.Size = new System.Drawing.Size(509, 57);
             this.previewCmdText.TabIndex = 2;
             // 
             // gbkRadio
@@ -383,7 +370,7 @@
             this.gbkRadio.Location = new System.Drawing.Point(109, 18);
             this.gbkRadio.Margin = new System.Windows.Forms.Padding(2);
             this.gbkRadio.Name = "gbkRadio";
-            this.gbkRadio.Size = new System.Drawing.Size(70, 28);
+            this.gbkRadio.Size = new System.Drawing.Size(51, 21);
             this.gbkRadio.TabIndex = 1;
             this.gbkRadio.TabStop = true;
             this.gbkRadio.Text = "GBK";
@@ -396,7 +383,7 @@
             this.utfRadio.Location = new System.Drawing.Point(11, 18);
             this.utfRadio.Margin = new System.Windows.Forms.Padding(2);
             this.utfRadio.Name = "utfRadio";
-            this.utfRadio.Size = new System.Drawing.Size(87, 28);
+            this.utfRadio.Size = new System.Drawing.Size(60, 21);
             this.utfRadio.TabIndex = 0;
             this.utfRadio.TabStop = true;
             this.utfRadio.Text = "UTF-8";
@@ -411,7 +398,7 @@
             this.helpLabel.Location = new System.Drawing.Point(11, 439);
             this.helpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.helpLabel.Name = "helpLabel";
-            this.helpLabel.Size = new System.Drawing.Size(109, 21);
+            this.helpLabel.Size = new System.Drawing.Size(73, 16);
             this.helpLabel.TabIndex = 33;
             this.helpLabel.Text = "       帮助说明";
             this.helpLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -420,10 +407,10 @@
             // 
             this.otherSeparatorText.Location = new System.Drawing.Point(214, 16);
             this.otherSeparatorText.Margin = new System.Windows.Forms.Padding(2);
-            this.otherSeparatorText.Name = "otherSeparatorText";
-            this.otherSeparatorText.Size = new System.Drawing.Size(68, 31);
-            this.otherSeparatorText.TabIndex = 3;
             this.otherSeparatorText.MaxLength = 1;
+            this.otherSeparatorText.Name = "otherSeparatorText";
+            this.otherSeparatorText.Size = new System.Drawing.Size(68, 23);
+            this.otherSeparatorText.TabIndex = 3;
             this.otherSeparatorText.TextChanged += new System.EventHandler(this.OtherSeparatorText_TextChanged);
             // 
             // otherSeparatorRadio
@@ -432,7 +419,7 @@
             this.otherSeparatorRadio.Location = new System.Drawing.Point(159, 18);
             this.otherSeparatorRadio.Margin = new System.Windows.Forms.Padding(2);
             this.otherSeparatorRadio.Name = "otherSeparatorRadio";
-            this.otherSeparatorRadio.Size = new System.Drawing.Size(71, 28);
+            this.otherSeparatorRadio.Size = new System.Drawing.Size(50, 21);
             this.otherSeparatorRadio.TabIndex = 2;
             this.otherSeparatorRadio.TabStop = true;
             this.otherSeparatorRadio.Text = "其他";
@@ -444,7 +431,7 @@
             this.commaRadio.Location = new System.Drawing.Point(87, 18);
             this.commaRadio.Margin = new System.Windows.Forms.Padding(2);
             this.commaRadio.Name = "commaRadio";
-            this.commaRadio.Size = new System.Drawing.Size(71, 28);
+            this.commaRadio.Size = new System.Drawing.Size(50, 21);
             this.commaRadio.TabIndex = 1;
             this.commaRadio.TabStop = true;
             this.commaRadio.Text = "逗号";
@@ -457,7 +444,7 @@
             this.tabRadio.Location = new System.Drawing.Point(13, 18);
             this.tabRadio.Margin = new System.Windows.Forms.Padding(2);
             this.tabRadio.Name = "tabRadio";
-            this.tabRadio.Size = new System.Drawing.Size(69, 28);
+            this.tabRadio.Size = new System.Drawing.Size(49, 21);
             this.tabRadio.TabIndex = 0;
             this.tabRadio.TabStop = true;
             this.tabRadio.Text = "TAB";
@@ -482,11 +469,11 @@
             this.inputFileSettingTab.Controls.Add(this.paramInputFileRadio);
             this.inputFileSettingTab.Controls.Add(this.paramInputFileTextBox);
             this.inputFileSettingTab.Controls.Add(this.noInputFileRadio);
-            this.inputFileSettingTab.Location = new System.Drawing.Point(4, 33);
+            this.inputFileSettingTab.Location = new System.Drawing.Point(4, 26);
             this.inputFileSettingTab.Margin = new System.Windows.Forms.Padding(2);
             this.inputFileSettingTab.Name = "inputFileSettingTab";
             this.inputFileSettingTab.Padding = new System.Windows.Forms.Padding(2);
-            this.inputFileSettingTab.Size = new System.Drawing.Size(511, 107);
+            this.inputFileSettingTab.Size = new System.Drawing.Size(511, 114);
             this.inputFileSettingTab.TabIndex = 3;
             this.inputFileSettingTab.Text = "输入文件设置";
             // 
@@ -498,7 +485,7 @@
             this.noInputFileRadio.Location = new System.Drawing.Point(11, 19);
             this.noInputFileRadio.Margin = new System.Windows.Forms.Padding(2);
             this.noInputFileRadio.Name = "noInputFileRadio";
-            this.noInputFileRadio.Size = new System.Drawing.Size(647, 28);
+            this.noInputFileRadio.Size = new System.Drawing.Size(434, 21);
             this.noInputFileRadio.TabIndex = 32;
             this.noInputFileRadio.TabStop = true;
             this.noInputFileRadio.Text = "无指定输入文件（脚本中输入文件的路径可与算子连接的数据源路径不一致）";
@@ -517,11 +504,11 @@
             this.outputFileSettingTab.Controls.Add(this.paramRadioButton);
             this.outputFileSettingTab.Controls.Add(this.paramPrefixTagTextBox);
             this.outputFileSettingTab.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outputFileSettingTab.Location = new System.Drawing.Point(4, 33);
+            this.outputFileSettingTab.Location = new System.Drawing.Point(4, 26);
             this.outputFileSettingTab.Margin = new System.Windows.Forms.Padding(2);
             this.outputFileSettingTab.Name = "outputFileSettingTab";
             this.outputFileSettingTab.Padding = new System.Windows.Forms.Padding(2);
-            this.outputFileSettingTab.Size = new System.Drawing.Size(511, 107);
+            this.outputFileSettingTab.Size = new System.Drawing.Size(511, 114);
             this.outputFileSettingTab.TabIndex = 0;
             this.outputFileSettingTab.Text = "结果文件设置";
             // 
@@ -559,7 +546,6 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(531, 479);
-            this.ControlBox = false;
             this.Controls.Add(this.outputFileSeparatorSettingGroup);
             this.Controls.Add(this.outputFileEncodeSettingGroup);
             this.Controls.Add(this.tabControl1);
@@ -576,13 +562,26 @@
             this.Controls.Add(this.pythonChosenComboBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PythonOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Python算子设置";
+            this.Controls.SetChildIndex(this.confirmButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
+            this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.pyParamTextBox, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.pyFullFilePathTextBox, 0);
+            this.Controls.SetChildIndex(this.pyBrowseButton, 0);
+            this.Controls.SetChildIndex(this.previewCmdGroup, 0);
+            this.Controls.SetChildIndex(this.helpLabel, 0);
+            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
+            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.previewCmdGroup.ResumeLayout(false);
             this.previewCmdGroup.PerformLayout();
             this.tabControl1.ResumeLayout(false);
