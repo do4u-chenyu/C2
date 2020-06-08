@@ -22,8 +22,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
             this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);

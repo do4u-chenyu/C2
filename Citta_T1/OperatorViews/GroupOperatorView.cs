@@ -35,7 +35,6 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.sortByNum.Checked);
             this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }

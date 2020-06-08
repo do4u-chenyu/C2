@@ -41,9 +41,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             //加载配置内容
             LoadOption();
-
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
         }
 
         #region 初始化配置

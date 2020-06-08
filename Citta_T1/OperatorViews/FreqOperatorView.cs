@@ -24,9 +24,6 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.noRepetition.Checked);
             this.oldCheckedItems.Add(this.ascendingOrder.Checked);
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
-
-            SetTextBoxName(this.dataSourceTB0);
-
         }
         #region 初始化配置
         private void InitByDataSource()
