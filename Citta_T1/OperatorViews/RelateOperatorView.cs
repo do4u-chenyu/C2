@@ -176,7 +176,7 @@ namespace Citta_T1.OperatorViews
             }
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)

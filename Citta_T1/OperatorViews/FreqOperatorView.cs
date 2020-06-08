@@ -110,7 +110,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -120,13 +120,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("noRepetition") != "")
+            if (this.opControl.Option.GetOption("noRepetition") != String.Empty)
                 this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (this.opControl.Option.GetOption("repetition") != "")
+            if (this.opControl.Option.GetOption("repetition") != String.Empty)
                 this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("ascendingOrder") != "")
+            if (this.opControl.Option.GetOption("ascendingOrder") != String.Empty)
                 this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (this.opControl.Option.GetOption("descendingOrder") != "")
+            if (this.opControl.Option.GetOption("descendingOrder") != String.Empty)
                 this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {

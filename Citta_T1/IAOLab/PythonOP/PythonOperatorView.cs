@@ -143,7 +143,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp结果文件
@@ -164,8 +164,8 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.fullOutputFilePath));
-            hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
+            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.fullOutputFilePath);
+            //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
@@ -175,7 +175,7 @@ namespace Citta_T1.OperatorViews
             }
             else if (separator == "otherseparatorradio")
             {
-                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? '\t' : this.otherSeparatorText.Text[0];
+                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultSeparator : this.otherSeparatorText.Text[0];
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 
@@ -192,7 +192,7 @@ namespace Citta_T1.OperatorViews
                 return false;
             }
             //脚本是否导入
-            if (this.pyFullFilePathTextBox.Text == "")
+            if (String.IsNullOrEmpty(pyFullFilePathTextBox.Text))
             {
                 MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
                 return false;
@@ -324,7 +324,7 @@ namespace Citta_T1.OperatorViews
         {
             if (this.noInputFileRadio.Checked)
             {
-                this.previewTextList[3] = "";
+                this.previewTextList[3] = String.Empty;
                 UpdatePreviewText();
             }
         }
@@ -353,7 +353,7 @@ namespace Citta_T1.OperatorViews
             this.rsChosenButton.Enabled = false;
             if (this.noInputFileRadio.Checked)
             {
-                this.previewTextList[4] = "";
+                this.previewTextList[4] = String.Empty;
                 UpdatePreviewText();
             }
         }
@@ -399,7 +399,7 @@ namespace Citta_T1.OperatorViews
 
             if (this.browseChosenRadioButton.Checked)
             {
-                this.previewTextList[4] = "";
+                this.previewTextList[4] = String.Empty;
                 UpdatePreviewText();
             }
         }
@@ -411,7 +411,7 @@ namespace Citta_T1.OperatorViews
             if (this.browseChosenRadioButton.Checked)
             {
                 this.fullOutputFilePath = this.browseChosenTextBox.Text;
-                this.previewTextList[4] = "";
+                this.previewTextList[4] = String.Empty;
                 UpdatePreviewText();
             }
         }
@@ -436,7 +436,7 @@ namespace Citta_T1.OperatorViews
                 }
             }
             //TODO默认返回一个
-            return "";
+            return String.Empty;
         }
 
         private void SetControlRadioCheck(Control group, string radioName, RadioButton defaulRb)
@@ -477,7 +477,7 @@ namespace Citta_T1.OperatorViews
             {
                 using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
                 {
-                    sw.Write("");
+                    sw.Write(String.Empty); //TODO 这一行应该不需要
                 }
             }
         }

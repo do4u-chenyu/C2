@@ -60,6 +60,7 @@ namespace Citta_T1.OperatorViews.Base
                 BcpInfo bcpInfo = new BcpInfo(dataSourceFFP0, OpUtil.EncodingEnum(dataInfo["encoding0"]), dataInfo["separator0"].ToCharArray());
                 opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
                 this.nowColumnsName0 = bcpInfo.ColumnArray;
+                SetTextBoxName(this.dataSourceTB0);
             }
             // 右表
             if (dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
@@ -69,6 +70,7 @@ namespace Citta_T1.OperatorViews.Base
                 BcpInfo bcpInfo = new BcpInfo(dataSourceFFP1, OpUtil.EncodingEnum(dataInfo["encoding1"]), dataInfo["separator1"].ToCharArray());
                 opControl.SecondDataSourceColumns = bcpInfo.ColumnArray;
                 this.nowColumnsName1 = bcpInfo.ColumnArray;
+                SetTextBoxName(this.dataSourceTB1); // 一元算子,TB1是不可见,赋值了也没事,统一逻辑后可以减少重复代码
             }
         }
 
