@@ -114,7 +114,10 @@ namespace Citta_T1.Business.Schedule
             }
 
             for (int i = 0; i < nodeIdPinDict.Count; i++)
-                beforeNodeId.Add(nodeIdPinDict[i]);
+            {
+                if (nodeIdPinDict.ContainsKey(i))
+                    beforeNodeId.Add(nodeIdPinDict[i]);
+            }
 
             return beforeNodeId;
         }
@@ -139,11 +142,17 @@ namespace Citta_T1.Business.Schedule
             foreach (int resultNodeId in needSearchNodeIds)
             {
                 /*拿到一个待溯源的节点
+                 *（new）0、判断这个节点是否是结果算子，如果是op算子，说明该算子没有配
                  * 1、判断这个节点是否在endnode列表里，不在，说明没有入度，即为根，不需要再找上游了。在，下一步。
                  * 2、通过relation找到它对应的start，可能有1个，可能有2个【我一次直接溯2层吧，算子不可能出现在待溯源的列表里
                  * 3、找到算子（必定1个），结果\数据（1或多），new 一个triple
                  * 4、结果\数据 判断是否存在在 haveSearchedNodes, 不在则加入needSearchNodes
                  */
+                ModelElement resultElement = modelElements.Find(c => c.ID == resultNodeId);
+                if (resultElement.Type != ElementType.Result)
+                {
+                    continue;
+                }
 
                 if (!endNodes.Exists(c => c == resultNodeId))
                 {
@@ -152,8 +161,6 @@ namespace Citta_T1.Business.Schedule
 
                 int operateNodeId = FindBeforeNodeIds(resultNodeId).First();
                 List<int> dataNodeIds = FindBeforeNodeIds(operateNodeId);
-
-                ModelElement resultElement = modelElements.Find(c => c.ID == resultNodeId);
                 ModelElement operateElement = modelElements.Find(c => c.ID == operateNodeId);
 
                 List<ModelElement> dataElements = new List<ModelElement>();
