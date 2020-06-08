@@ -21,8 +21,7 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
+
             this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
@@ -166,7 +165,7 @@ namespace Citta_T1.OperatorViews
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
 
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);

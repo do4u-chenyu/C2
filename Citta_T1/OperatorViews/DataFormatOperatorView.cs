@@ -22,9 +22,7 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
-            SetTextBoxName(this.dataSourceTB0);
             //selectindex会在某些不确定情况触发，这种情况是不期望的
-
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
 
@@ -123,7 +121,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outname", String.Join("\t", this.selectedColumns));
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -148,7 +146,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
             this.DialogResult = DialogResult.OK;
             //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
             //生成结果控件,创建relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);

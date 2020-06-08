@@ -21,10 +21,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
-
             //selectindex会在某些不确定情况触发，这种情况是不期望的
             this.comboBox0.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
@@ -122,10 +118,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join("\t", outIndexs);
+
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
 
             this.opControl.Option.SetOption("outfield", outField);
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
@@ -148,7 +142,7 @@ namespace Citta_T1.OperatorViews
             }
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -179,12 +173,7 @@ namespace Citta_T1.OperatorViews
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
-            { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
-            if (!this.oldOutList0.SequenceEqual(this.outListCCBL0.GetItemCheckIndex()))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
 
 

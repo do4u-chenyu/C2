@@ -21,7 +21,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            SetTextBoxName(this.dataSourceTB0);
         }
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)

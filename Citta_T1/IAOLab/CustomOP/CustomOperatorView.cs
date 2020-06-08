@@ -41,9 +41,6 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             //加载配置内容
             LoadOption();
-
-            SetTextBoxName(this.dataSourceTB0);
-            SetTextBoxName(this.dataSourceTB1);
         }
 
         #region 初始化配置
@@ -129,21 +126,21 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("fix") != "")
+            if (this.opControl.Option.GetOption("fix") != String.Empty)
                 this.fixRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("fix"));
-            if (this.opControl.Option.GetOption("random") != "")
+            if (this.opControl.Option.GetOption("random") != String.Empty)
                 this.randomRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("random"));
-            if (this.opControl.Option.GetOption("fixSecond") != "")
+            if (this.opControl.Option.GetOption("fixSecond") != String.Empty)
                 this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
-            if (this.opControl.Option.GetOption("randomBegin") != "")
+            if (this.opControl.Option.GetOption("randomBegin") != String.Empty)
                 this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
-            if (this.opControl.Option.GetOption("randomEnd") != "")
+            if (this.opControl.Option.GetOption("randomEnd") != String.Empty)
                 this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
-            if (this.opControl.Option.GetOption("path") != "")
+            if (this.opControl.Option.GetOption("path") != String.Empty)
                 this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
 
             int[] outIndexs = new int[] { };
-            if (this.opControl.Option.GetOption("outfield0") != "")
+            if (this.opControl.Option.GetOption("outfield0") != String.Empty)
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -154,7 +151,7 @@ namespace Citta_T1.OperatorViews
             }
 
             int[] outIndexs1 = new int[] { };
-            if (this.opControl.Option.GetOption("outfield1") != "")
+            if (this.opControl.Option.GetOption("outfield1") != String.Empty)
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 outIndexs1 = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -183,7 +180,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldOptionDictStr != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp 结果文件
@@ -200,8 +197,8 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
-            hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
+            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
+            //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
@@ -336,7 +333,7 @@ namespace Citta_T1.OperatorViews
                 return;
             try
             {
-                char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
+                char separator = Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
             }
             catch (Exception)
             {
