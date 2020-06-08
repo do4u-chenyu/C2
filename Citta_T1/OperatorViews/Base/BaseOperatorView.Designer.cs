@@ -1,4 +1,6 @@
-﻿namespace Citta_T1.OperatorViews.Base
+﻿using Citta_T1.Core;
+
+namespace Citta_T1.OperatorViews.Base
 {
     partial class BaseOperatorView
     {
@@ -122,6 +124,7 @@
             this.comboBox0.TabIndex = 2;
             this.comboBox0.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             // 
             // comboBox2
             // 
@@ -138,6 +141,7 @@
             this.comboBox1.Visible = false;
             this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
             // 
             // BaseOperatorView
             // 

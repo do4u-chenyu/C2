@@ -20,8 +20,6 @@ namespace Citta_T1.OperatorViews
             LoadOption();
             this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
-            //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
 
         #region 初始化配置

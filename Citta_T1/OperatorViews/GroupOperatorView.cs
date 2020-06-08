@@ -33,8 +33,6 @@ namespace Citta_T1.OperatorViews
             this.oldCheckedItems.Add(this.descendingOrder.Checked);
             this.oldCheckedItems.Add(this.sortByString.Checked);
             this.oldCheckedItems.Add(this.sortByNum.Checked);
-            //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 初始化配置
         private void InitByDataSource()

@@ -12,14 +12,12 @@ namespace Citta_T1.OperatorViews
     public partial class AvgOperatorView : BaseOperatorView
     {
         private string oldAvg;
-        private string selectedIndex;
 
         public AvgOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
             this.oldAvg = this.comboBox0.Text;
         }
         #region 初始化配置
@@ -74,7 +72,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.comboBox0.SelectedIndex.ToString() : this.selectedIndex);
+            this.opControl.Option.SetOption("avgfield", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("outfield", this.comboBox0.SelectedIndex.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
@@ -91,15 +89,10 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.selectedIndex = index.ToString();
+                this.comboBox0.Tag = index.ToString();
             }
 
         }
         #endregion
-
-        private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            this.selectedIndex = this.comboBox0.SelectedIndex.ToString();
-        }
     }
 }

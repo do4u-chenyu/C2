@@ -17,8 +17,6 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
         }
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, EventArgs e)

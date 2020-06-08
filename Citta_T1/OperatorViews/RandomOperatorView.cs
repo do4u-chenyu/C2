@@ -5,7 +5,6 @@ using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 

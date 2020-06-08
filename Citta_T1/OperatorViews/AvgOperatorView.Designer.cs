@@ -146,7 +146,6 @@
             this.comboBox0.Name = "AvgComBox";
             this.comboBox0.Size = new System.Drawing.Size(136, 24);
             this.comboBox0.TabIndex = 1;
-            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.AvgComBox_SelectionChangeCommitted);
             // 
             // AvgOperatorView
             // 
