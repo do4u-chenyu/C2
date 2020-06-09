@@ -195,6 +195,19 @@ namespace Citta_T1.Business.Model
             this.ModelElements.ForEach(me => me.Hide());
         }
 
+        public void Enable()
+        {
+            this.ModelElements.ForEach(me => me.Enable());
+        }
+        public void EnableRs()
+        {
+            this.ModelElements.FindAll(me => me.Type==ElementType.Result).ForEach(rs => rs.Enable());
+        }
+        public void UnEnable()
+        {
+            this.ModelElements.ForEach(me => me.UnEnable());
+        }
+
         public int ReCountDocumentMaxElementID()
         {
             if (this.ModelElements.Count == 0)

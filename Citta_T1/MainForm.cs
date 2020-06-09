@@ -2,6 +2,7 @@
 using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Business.Schedule;
+using Citta_T1.Controls;
 using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
 using Citta_T1.Controls.Move;
@@ -36,6 +37,7 @@ namespace Citta_T1
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
         delegate void AsynUpdateProgressBar();
+        delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
@@ -515,11 +517,10 @@ namespace Citta_T1
 
                 this.progressBar1.Value = 0;
                 this.progressBarLabel.Text = "0%";
-
             }
             else if (this.runButton.Name == "pauseButton")
             {
-                currentManager.Pause();
+                currentManager.Pause(); 
             }
             else if (this.runButton.Name == "continueButton")
             {
@@ -552,6 +553,7 @@ namespace Citta_T1
                 currentManager.UpdateGifDelegate = UpdateRunningGif;
                 currentManager.UpdateBarDelegate = UpdateProgressBar;
                 currentManager.UpdateOpErrorDelegate = UpdateOpErrorMessage;
+                currentManager.UpdateMaskDelegate = EnableRunningControl;
             }
         }
 
@@ -639,11 +641,12 @@ namespace Citta_T1
                 //点击暂停按钮，均隐藏
                 case ModelStatus.Pause:
                     this.runButton.Name = "continueButton";
-                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    this.runButton.Image = global::Citta_T1.Properties.Resources.continual;
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
+                    EnableRunningRsControl();
                     break;
                 //点击运行按钮
                 case ModelStatus.Running:
@@ -654,23 +657,64 @@ namespace Citta_T1
                     this.progressBar1.Show();
                     this.progressBarLabel.Show();
                     this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
-                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
+                    UnEnableRunningControl();
                     break;
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
-                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
                     break;
                 default:
                     this.runButton.Name = "runButton";
-                    this.runButton.Image = ((System.Drawing.Image)resources.GetObject("runButton.Image"));
+                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
                     this.progressBar1.Hide();
                     this.progressBarLabel.Hide();
+                    EnableRunningControl();
                     break;
             }
         }
+
+        private void UnEnableRunningControl()
+        {
+            //禁止的控件
+            /*
+             * 1、当前模型的element
+             * 2、右上方菜单栏
+             * 3、左侧菜单栏
+             */
+            Global.GetCurrentDocument().UnEnable();
+            EnableCommonControl(false);
+        }
+        private void EnableRunningControl()
+        {
+            Global.GetCurrentDocument().Enable();
+            EnableCommonControl(true);
+        }
+        private void EnableRunningRsControl()
+        {
+            Global.GetCurrentDocument().EnableRs();
+            EnableCommonControl(false);
+        }
+        private void EnableRunningControl(TaskManager manager)
+        {
+            ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
+            this.Invoke(new AsynUpdateMask(delegate ()
+            {
+                doneModel.Enable();
+                EnableCommonControl(true);
+            }));
+        }
+
+        private void EnableCommonControl(bool status)
+        {
+            this.topToolBarControl.Enabled = status;
+            this.panel5.Enabled = status;
+            this.leftToolBoxPanel.Enabled = status;
+            this.flowControl.Enabled = status;
+        }
+
         private void ShowLeftFold()
         {
             if (this.isLeftViewPanelMinimum)

@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
 using Citta_T1.Controls.Move.Dt;
@@ -138,7 +139,8 @@ namespace Citta_T1.Controls
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
             Global.GetMainForm().BlankButtonFocus();
-            if (!(sender is MoveBaseControl))
+            ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
+            if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
                 this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right)
             {

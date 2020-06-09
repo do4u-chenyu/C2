@@ -124,6 +124,16 @@ namespace Citta_T1.Business.Model
         {
             ctl.Hide();
         }
+
+        public void Enable()
+        {
+            ctl.Enabled = true;
+        }
+        public void UnEnable()
+        {
+            ctl.Enabled = false;
+        }
+
         public static ModelElement CreateModelElement(Dictionary<string, string> dict)
         {
             if (!(dict.ContainsKey("id")
