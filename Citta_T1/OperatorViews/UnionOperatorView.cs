@@ -21,8 +21,8 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            this.textBox0.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
-            this.textBox0.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
+            this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
+            this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -232,9 +232,9 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            dataBox.Leave += new System.EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -243,9 +243,9 @@ namespace Citta_T1.OperatorViews
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            filterBox.Leave += new System.EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = new TextBox();
@@ -255,8 +255,8 @@ namespace Citta_T1.OperatorViews
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += TextBoxEx1_Enter;
             textBox.Leave += TextBoxEx1_Leave;
-            textBox.Leave += new System.EventHandler(optionInfoCheck.IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
+            textBox.Leave += new System.EventHandler(this.IsIllegalCharacter);
+            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
             Button addButton1 = new Button();

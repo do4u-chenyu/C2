@@ -122,9 +122,9 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox0.Name = "comboBox0";
             this.comboBox0.Size = new System.Drawing.Size(86, 24);
             this.comboBox0.TabIndex = 2;
-            this.comboBox0.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(OptionDao.GetSelectedItemIndex);
+            this.comboBox0.Leave += new System.EventHandler(this.Control_Leave);
+            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             // 
             // comboBox2
             // 
@@ -139,9 +139,9 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Visible = false;
-            this.comboBox1.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(OptionDao.GetSelectedItemIndex);
+            this.comboBox1.Leave += new System.EventHandler(this.Control_Leave);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             // 
             // BaseOperatorView
             // 

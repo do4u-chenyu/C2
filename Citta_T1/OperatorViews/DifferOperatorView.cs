@@ -214,9 +214,9 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
-            regBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            regBox.Leave += new System.EventHandler(this.Control_Leave);
+            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
             ComboBox dataBox = new ComboBox();
@@ -225,9 +225,9 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            dataBox.Leave += new System.EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
@@ -236,9 +236,9 @@ namespace Citta_T1.OperatorViews
             filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            filterBox.Leave += new System.EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             Button addButton1 = new Button();

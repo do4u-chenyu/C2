@@ -228,10 +228,5 @@ namespace Citta_T1.Business.Option
             }
             return dataSourceInfoDict;
         }
-        public void GetSelectedItemIndex(object sender, EventArgs e)
-        {
-            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
-        }
-
     }
 }
