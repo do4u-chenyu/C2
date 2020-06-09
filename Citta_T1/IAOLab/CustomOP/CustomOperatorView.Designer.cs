@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.fixRadioButton = new System.Windows.Forms.RadioButton();
@@ -51,31 +50,53 @@
             this.outputFileSeparatorSettingGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // confirmButton
+            // dataSourceTB1
             // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(305, 286);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 1;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
+            this.dataSourceTB1.Location = new System.Drawing.Point(302, 41);
+            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB1.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB1.TabIndex = 11;
+            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(96, 41);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 10;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(401, 286);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(305, 286);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            this.confirmButton.TabIndex = 1;
+            // 
+            // outListCCBL0
+            // 
+            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Location = new System.Drawing.Point(96, 138);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL0.TabIndex = 23;
+            // 
+            // outListCCBL1
+            // 
+            this.outListCCBL1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL1.Location = new System.Drawing.Point(302, 138);
+            this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL1.TabIndex = 24;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Visible = false;
             // 
             // label1
             // 
@@ -87,27 +108,6 @@
             this.label1.Size = new System.Drawing.Size(90, 22);
             this.label1.TabIndex = 3;
             this.label1.Text = "数据信息：";
-            // 
-            // dataSource0
-            // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(96, 41);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB0.Name = "dataSource0";
-            this.dataSourceTB0.ReadOnly = true;
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 21);
-            this.dataSourceTB0.TabIndex = 10;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // dataSource1
-            // 
-            this.dataSourceTB1.Location = new System.Drawing.Point(302, 41);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB1.Name = "dataSource1";
-            this.dataSourceTB1.ReadOnly = true;
-            this.dataSourceTB1.Size = new System.Drawing.Size(150, 21);
-            this.dataSourceTB1.TabIndex = 11;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataSourceTB1.Visible = false;
             // 
             // label2
             // 
@@ -217,27 +217,6 @@
             this.label6.Size = new System.Drawing.Size(90, 22);
             this.label6.TabIndex = 22;
             this.label6.Text = "输出字段：";
-            // 
-            // outList0
-            // 
-            this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outListCCBL0.Location = new System.Drawing.Point(96, 138);
-            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL0.Name = "outList0";
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 22);
-            this.outListCCBL0.TabIndex = 23;
-            // 
-            // outList1
-            // 
-            this.outListCCBL1.DataSource = null;
-            this.outListCCBL1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outListCCBL1.Location = new System.Drawing.Point(302, 138);
-            this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL1.Name = "outList1";
-            this.outListCCBL1.Size = new System.Drawing.Size(150, 22);
-            this.outListCCBL1.TabIndex = 24;
-            this.outListCCBL1.Visible = false;
             // 
             // label7
             // 
@@ -371,7 +350,6 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(474, 320);
-            this.ControlBox = false;
             this.Controls.Add(this.outputFileSeparatorSettingGroup);
             this.Controls.Add(this.outputFileEncodeSettingGroup);
             this.Controls.Add(this.browseButton);
@@ -394,13 +372,32 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CustomOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AI实践算子设置";
+            this.Controls.SetChildIndex(this.confirmButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.fixRadioButton, 0);
+            this.Controls.SetChildIndex(this.fixSecondTextBox, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.randomRadioButton, 0);
+            this.Controls.SetChildIndex(this.randomBeginTextBox, 0);
+            this.Controls.SetChildIndex(this.randomEndTextBox, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.Controls.SetChildIndex(this.outListCCBL1, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.rsFullFilePathTextBox, 0);
+            this.Controls.SetChildIndex(this.browseButton, 0);
+            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
+            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.outputFileEncodeSettingGroup.ResumeLayout(false);
             this.outputFileEncodeSettingGroup.PerformLayout();
             this.outputFileSeparatorSettingGroup.ResumeLayout(false);

@@ -20,16 +20,8 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
             this.textBoxEx1.Leave += new EventHandler(optionInfoCheck.IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new KeyEventHandler(optionInfoCheck.IsIllegalCharacter);
-            //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-
         }
         private bool IsOptionReay()
         {
@@ -97,11 +89,8 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> outName = new List<string>();
-            foreach (string index in this.opControl.Option.GetOptionSplit("outfield"))
-            { outName.Add(this.nowColumnsName0[Convert.ToInt32(index)]); }
-            if (!this.oldOutList0.SequenceEqual(this.outListCCBL0.GetItemCheckIndex()))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
+
+             Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
 
 
@@ -111,12 +100,11 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join("\t", outIndexs);
+
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
+
             string factor1 = index00 + "\t" + index11 + "\t" + this.textBoxEx1.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             if (this.tableLayoutPanel1.RowCount > 0)

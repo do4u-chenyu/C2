@@ -12,14 +12,12 @@ namespace Citta_T1.OperatorViews
     public partial class AvgOperatorView : BaseOperatorView
     {
         private string oldAvg;
-        private string selectedIndex;
 
         public AvgOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
             this.oldAvg = this.comboBox0.Text;
         }
         #region 初始化配置
@@ -65,12 +63,8 @@ namespace Citta_T1.OperatorViews
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
             //输出变化，重写BCP文件
-            List<string> oldColumn = new List<string>();
-            oldColumn.Add(this.oldAvg);
-            if (this.oldAvg != this.comboBox0.Text)
-                Global.GetOptionDao().DoOutputCompare(oldColumn, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(new List<string>() { this.oldAvg }, this.selectedColumns, this.opControl.ID);
 
         }
 
@@ -78,7 +72,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
 
-            this.opControl.Option.SetOption("avgfield", this.selectedIndex == null ? this.comboBox0.SelectedIndex.ToString() : this.selectedIndex);
+            this.opControl.Option.SetOption("avgfield", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("outfield", this.comboBox0.SelectedIndex.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;
@@ -95,26 +89,10 @@ namespace Citta_T1.OperatorViews
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
                 this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.selectedIndex = index.ToString();
+                this.comboBox0.Tag = index.ToString();
             }
 
         }
         #endregion
-
-        private void AvgComBox_Leave(object sender, EventArgs e)
-        {
-            this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void AvgComBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                this.optionInfoCheck.IsIllegalInputName(this.comboBox0, this.nowColumnsName0, this.comboBox0.Text);
-        }
-
-        private void AvgComBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            this.selectedIndex = this.comboBox0.SelectedIndex.ToString();
-        }
     }
 }

@@ -46,13 +46,9 @@ namespace Citta_T1.OperatorViews
 
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
+
             //输出变化，重写BCP文件
-            List<string> outName = (from string index in this.opControl.Option.GetOptionSplit("outfield")
-                                    select this.nowColumnsName0[Convert.ToInt32(index)]).ToList();
-            if (!this.oldOutList0.SequenceEqual(this.outListCCBL0.GetItemCheckIndex()))
-            {
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, outName, this.opControl.ID);
-            }
+            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
         }
 
         private void KeywordComBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,10 +94,7 @@ namespace Citta_T1.OperatorViews
         private void SaveOption()
         {
             opControl.Option.OptionDict.Clear();
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs, outIndexs);
-            string outField = string.Join("\t", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
 
             opControl.Option.SetOption("outfield", outField);
             opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
@@ -165,7 +158,7 @@ namespace Citta_T1.OperatorViews
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            result = "(" + string.Join(" OR ", datas) + ")";
+            result = string.Join(" OR ", datas);
             if (result.Equals(string.Empty))
                 result = defaultInfo;
             return result;

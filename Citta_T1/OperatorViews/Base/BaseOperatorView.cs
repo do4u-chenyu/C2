@@ -28,7 +28,7 @@ namespace Citta_T1.OperatorViews.Base
 
         public BaseOperatorView()
         {
-            InitializeComponent();
+
             this.opControl = null;
             oldOptionDictStr = String.Empty;
             dataSourceFFP0 = String.Empty;
@@ -42,6 +42,7 @@ namespace Citta_T1.OperatorViews.Base
             selectedColumns = new List<string>();
             optionInfoCheck = new OptionInfoCheck();
             dataInfo = new Dictionary<string, string>();
+            InitializeComponent();
         }
         public BaseOperatorView(MoveOpControl opControl) : this()
         {

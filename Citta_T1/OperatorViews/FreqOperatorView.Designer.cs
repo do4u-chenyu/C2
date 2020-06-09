@@ -37,13 +37,42 @@
             this.noRepetition = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
-            this.ascendingOrder = new System.Windows.Forms.RadioButton();     
+            this.ascendingOrder = new System.Windows.Forms.RadioButton();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
+            this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
+            this.dataSourceTB0.TabIndex = 7;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(326, 19);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(236, 19);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // outListCCBL0
+            // 
+            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Location = new System.Drawing.Point(0, 42);
+            this.outListCCBL0.Size = new System.Drawing.Size(135, 21);
+            this.outListCCBL0.TabIndex = 1;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.Visible = false;
             // 
             // label3
             // 
@@ -98,32 +127,6 @@
             this.bottomPanel.Size = new System.Drawing.Size(417, 64);
             this.bottomPanel.TabIndex = 1;
             // 
-            // cancelButton
-            // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(326, 19);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.confirmButton.Location = new System.Drawing.Point(236, 19);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
-            // 
             // keyPanel
             // 
             this.keyPanel.Controls.Add(this.label4);
@@ -160,17 +163,10 @@
             this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(301, 162);
             this.valuePanel.TabIndex = 3;
-            // 
-            // dataInfo
-            // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
-            this.dataSourceTB0.Name = "dataInfo";
-            this.dataSourceTB0.ReadOnly = true;
-            this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
-            this.dataSourceTB0.TabIndex = 7;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
             // groupBox2
             // 
@@ -250,31 +246,16 @@
             this.ascendingOrder.Text = "从小到大";
             this.ascendingOrder.UseVisualStyleBackColor = true;
             // 
-            // outList
-            // 
-            this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outListCCBL0.Location = new System.Drawing.Point(0, 42);
-            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.outListCCBL0.Name = "outList";
-            this.outListCCBL0.Size = new System.Drawing.Size(135, 21);
-            this.outListCCBL0.TabIndex = 1;
-            // 
             // FreqOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(417, 263);
-            this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FreqOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "频率统计算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);

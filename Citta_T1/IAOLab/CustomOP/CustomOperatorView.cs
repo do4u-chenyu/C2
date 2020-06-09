@@ -68,43 +68,13 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
 
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            foreach (int index in checkIndexs)
-            {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
-                {
-                    outIndexs = new List<int>(checkIndexs);
-                    break;
-                }
-            }
-            string outField = string.Join("\t", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield0", outField);
 
 
             if (this.Text != "AI实践算子设置")
-            {
-                List<int> checkIndexs1 = this.outListCCBL1.GetItemCheckIndex();
-                List<int> outIndexs1 = new List<int>(this.oldOutList1);
-                foreach (int index in checkIndexs1)
-                {
-                    if (!outIndexs1.Contains(index))
-                        outIndexs1.Add(index);
-                }
-                foreach (int index in outIndexs1)
-                {
-                    if (!checkIndexs1.Contains(index))
-                    {
-                        outIndexs1 = new List<int>(checkIndexs1);
-                        break;
-                    }
-                }
-                string outField1 = string.Join("\t", outIndexs1);
+            {               
+                string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
                 this.opControl.Option.SetOption("outfield1", outField1);
             }
 

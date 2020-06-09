@@ -13,23 +13,12 @@ namespace Citta_T1.OperatorViews
 {
     public partial class RelateOperatorView : BaseOperatorView
     {
-        private List<string> outColumnsName0 = new List<string>();
-        private List<string> outColumnsName1 = new List<string>();
 
         public RelateOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.comboBox0.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox0.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            this.comboBox1.Leave += new EventHandler(optionInfoCheck.Control_Leave);
-            this.comboBox1.KeyUp += new KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            //selectindex会在某些不确定情况触发，这种情况是不期望的
-            this.comboBox0.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-            this.comboBox1.SelectionChangeCommitted += new EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
-
         }
         #region 配置初始化
         private void InitByDataSource()
@@ -40,8 +29,8 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
 
-            this.comboBox0.Items.AddRange(nowColumnsName1);
-            this.outListCCBL0.Items.AddRange(nowColumnsName1);
+            this.comboBox1.Items.AddRange(nowColumnsName1);
+            this.outListCCBL1.Items.AddRange(nowColumnsName1);
         }
 
         #endregion
@@ -136,21 +125,10 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
-            List<int> checkIndexs0 = this.outListCCBL0.GetItemCheckIndex();
-            List<int> outIndexs0 = new List<int>(this.oldOutList0);
-
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs0, outIndexs0);
-            foreach (int index in outIndexs0)
-                this.outColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
-            string outField0 = string.Join("\t", outIndexs0);
+            string outField0 = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield0", outField0);
 
-            List<int> checkIndexs1 = this.outListCCBL1.GetItemCheckIndex();
-            List<int> outIndexs1 = new List<int>(this.oldOutList1);
-            Global.GetOptionDao().UpdateOutputCheckIndexs(checkIndexs1, outIndexs1);
-            foreach (int index in outIndexs1)
-                this.outColumnsName1.Add(this.outListCCBL1.Items[index].ToString());
-            string outField1 = string.Join("\t", outIndexs1);
+            string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield1", outField1);
 
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
@@ -195,9 +173,9 @@ namespace Citta_T1.OperatorViews
             //生成结果控件,创建relation,bcp结果文件
 
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText().Concat(this.outListCCBL1.GetItemCheckText()).ToList();
             if (resultElement == ModelElement.Empty)
             {
-                this.selectedColumns = this.outListCCBL0.GetItemCheckText().Concat(this.outListCCBL1.GetItemCheckText()).ToList();
                 MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
                 return;
             }
@@ -207,9 +185,7 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，重写BCP文件
             List<string> oldName = this.oldColumnsName0.Concat(this.oldColumnsName1).ToList();
-            List<string> nowName = this.outColumnsName0.Concat(this.outColumnsName1).ToList();
-            if (!oldName.SequenceEqual(nowName))
-                Global.GetOptionDao().DoOutputCompare(oldName, nowName, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(oldName, this.selectedColumns, this.opControl.ID);
 
 
         }
