@@ -69,7 +69,7 @@ namespace Citta_T1.OperatorViews
         }
 
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
 
             this.opControl.Option.SetOption("avgfield", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());

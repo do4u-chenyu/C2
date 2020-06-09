@@ -51,11 +51,11 @@ namespace Citta_T1.OperatorViews
 
             //输出变化，重写BCP文件
 
-            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.outListCCBL0.GetItemCheckText(), this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.outListCCBL0.GetItemCheckText(), this.opControl.ID);
         }
         #endregion
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
             string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
@@ -85,7 +85,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
             }
 
         }

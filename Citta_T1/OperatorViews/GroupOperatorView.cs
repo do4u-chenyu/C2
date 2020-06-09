@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.oldOutList0 = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
                 foreach (int index in this.oldOutList0)
-                    this.oldColumnsName0.Add(this.nowColumnsName0[index]);
+                    this.oldOutName0.Add(this.nowColumnsName0[index]);
             }
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
@@ -110,7 +110,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
 
         }
-        private void SaveOption()
+        protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
@@ -179,8 +179,8 @@ namespace Citta_T1.OperatorViews
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             //输出变化，重写BCP文件
-            if (!this.oldColumnsName0.SequenceEqual(this.selectedColumns))
-                Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
+            if (!this.oldOutName0.SequenceEqual(this.selectedColumns))
+                Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
         }
 
         private bool IsOptionReay()
@@ -219,9 +219,9 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(optionInfoCheck.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(optionInfoCheck.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(Global.GetOptionDao().GetSelectedItemIndex);
+            dataBox.Leave += new System.EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
 
@@ -341,7 +341,7 @@ namespace Citta_T1.OperatorViews
             e.Graphics.Clear(this.BackColor);
         }
         #region 分组字段重复选择判断
-        private bool IsDuplicateSelect()
+        protected override bool IsDuplicateSelect()
         {
             bool ret = false;
             Dictionary<int, string> selectedIndex = new Dictionary<int, string>();

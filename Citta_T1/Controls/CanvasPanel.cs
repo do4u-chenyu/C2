@@ -48,7 +48,7 @@ namespace Citta_T1.Controls
 
 
         private bool delEnable = false;
-        private bool startCopy = false;
+        private ClipBoardWrapper clipBoard = new ClipBoardWrapper();
         public MoveBaseControl StartC { get => startC; set => startC = value; }
         public MoveBaseControl EndC { get => endC; set => endC = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
@@ -557,7 +557,7 @@ namespace Citta_T1.Controls
         {
             this.Controls.Add(ctl);
         }
-        private void AddNewOperator(int sizeL, string text, Point location)
+        public void AddNewOperator(int sizeL, string text, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
@@ -567,7 +567,7 @@ namespace Citta_T1.Controls
             AddNewElement(btn);
         }
 
-        private void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
                 path,
@@ -630,14 +630,12 @@ namespace Citta_T1.Controls
         }
         public void ControlSelect_Copy()
         {
-            startCopy = true;
+            clipBoard.ClipBoardCts = frameWrapper.Controls;
         }
         public void ControlSelect_paste()
         {
-            if (!startCopy)
-                return;
             log.Info("sss");
-            frameWrapper.FramePaste();
+            clipBoard.ClipBoardPaste();
         }
     }
 }

@@ -216,6 +216,8 @@ namespace Citta_T1.Controls
         private List<int> minBoundingBuffMaxY;
         private Point moveOffset;
         public Rectangle MinBoundingBox { get => minBoundingBox; set => minBoundingBox = value; }
+        public List<Control> Controls { get => controls; set => controls = value; }
+
         FrameWrapperVFX frameWrapperVFX = new FrameWrapperVFX();
         public FrameWrapper()
         {
@@ -455,9 +457,9 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-            moveOffset = Global.GetCurrentDocument().WorldMap
-                               .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
-                                                  minBoundingBox);
+           //// moveOffset = Global.GetCurrentDocument().WorldMap
+           //                    .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
+           //                                       minBoundingBox);
             g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);
             n.DrawImageUnscaled(i,
                                 Convert.ToInt32(mapOrigin.X * screenFactor),
