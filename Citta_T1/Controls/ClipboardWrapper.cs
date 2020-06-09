@@ -23,7 +23,7 @@ namespace Citta_T1.Controls
             {
                 string text = ct.Controls["textBox"].Text;
                 int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;  
-                Point location = ct.Location;
+                Point location = new Point(ct.Left + ct.Width/2,ct.Top + ct.Height/2);
                 if (ct.Name.Equals("MoveOpControl"))
                 {
                     Global.GetCanvasPanel().AddNewOperator(sizeLevel, text, location);
