@@ -2,6 +2,8 @@
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,7 +137,39 @@ namespace Citta_T1.Business.Option
             }
             return ElementStatus.Ready;
         }
-
+        public bool IsCleanSingleOperatorOption(MoveOpControl moc, string[] newColumns)
+        {
+            return IsCleanOption(moc, newColumns, "columnname0");
+        }
+        public bool IsCleanBinaryOperatorOption(MoveOpControl moc, string[] newColumns0, string[] newColumns1)
+        {
+            bool emptyOption0 = IsCleanOption(moc, newColumns0, "columnname0");
+            bool emptyOption1 = IsCleanOption(moc, newColumns1, "columnname1");
+            return emptyOption0 || emptyOption1;
+        }
+        public bool IsCleanOption(MoveOpControl moc, string[] newColumns, string field)
+        {
+            bool emptyOption = false;
+            /*
+             * 判断配置中是field否为空，为空则认为整个配置字典为空
+             */
+            string optionValues = moc.Option.GetOption(field);
+            if (string.IsNullOrEmpty(optionValues))
+                return !emptyOption;
+            string[] oldColumns0 = optionValues.Split('\t');
+            /*
+             * 新旧数据源不一致，清空算子用户配置内容
+             */
+            bool factor0 = newColumns.Length >= oldColumns0.Length && oldColumns0.SequenceEqual(newColumns.Take(oldColumns0.Length));
+            if (!factor0)
+            {
+                emptyOption = true;
+                List<string> keys = new List<string>(moc.Option.OptionDict.Keys); 
+                foreach (string key in keys)
+                    moc.Option.OptionDict[key] = "";
+            } 
+            return emptyOption;
+        }
         public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
         {
             //不存在旧数据源，直接返回

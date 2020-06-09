@@ -57,6 +57,8 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
+
             string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
             this.opControl.Option.SetOption("minfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
@@ -71,22 +73,19 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "minfield"))
-            {
-                int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
-            }
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
-            {
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
 
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList0 = indexs.ToList();
-                this.outListCCBL0.LoadItemCheckIndex(indexs);
-                foreach (int index in indexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-            }
+            int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
+            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+            this.comboBox0.Tag = index.ToString();
+
+            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            this.oldOutList0 = indexs.ToList();
+            this.outListCCBL0.LoadItemCheckIndex(indexs);
+            foreach (int i in indexs)
+                this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
 
         }
         #endregion
@@ -96,7 +95,7 @@ namespace Citta_T1.OperatorViews
             this.InitDataSource();
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.comboBox0.Items.AddRange(nowColumnsName0);
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
+            
         }
         #endregion
     }

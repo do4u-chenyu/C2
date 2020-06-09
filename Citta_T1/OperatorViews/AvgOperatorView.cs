@@ -11,14 +11,13 @@ namespace Citta_T1.OperatorViews
 {
     public partial class AvgOperatorView : BaseOperatorView
     {
-        private string oldAvg;
 
         public AvgOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-            this.oldAvg = this.comboBox0.Text;
+            
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -27,53 +26,33 @@ namespace Citta_T1.OperatorViews
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
+
         }
 
 
         #endregion
 
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        #region 是否配置完毕
+        protected override bool IsOptionNotReady()
         {
-            //未设置字段警告
-            if (this.dataSourceTB0.Text == "") return;
+            bool empty = true;
+            if (this.dataSourceTB0.Text == "") return empty;
             if (this.comboBox0.Text == "")
             {
                 MessageBox.Show("请选择平均值字段!");
-                return;
+                return empty;
             }
-            this.DialogResult = DialogResult.OK;
-            SaveOption();
-
-            //情况1：内容修改
-            //       引起文档dirty
-            //情况2：内容不修改
-            //        返回
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            else
-                return;
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectedColumns.Add(this.comboBox0.SelectedItem.ToString());
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(new List<string>() { this.oldAvg }, this.selectedColumns, this.opControl.ID);
-
+            return !empty;
         }
-
+        #endregion
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
             this.opControl.Option.SetOption("avgfield", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("outfield", this.comboBox0.SelectedIndex.ToString());
+            this.selectedColumns.Add(this.comboBox0.SelectedItem.ToString());
+
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -85,12 +64,13 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "avgfield"))
-            {
-                int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
-            }
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
+
+            int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
+            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+            this.comboBox0.Tag = index.ToString();
+            this.oldOutName0 = new List<string>() { this.comboBox0.Items[index].ToString() };
 
         }
         #endregion

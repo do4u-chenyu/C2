@@ -62,13 +62,15 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
+            
             string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield", outField);
+
             if (this.comboBox0.Text == String.Empty)
                 this.opControl.Option.SetOption("maxfield", String.Empty);
             else
                 this.opControl.Option.SetOption("maxfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
-
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -81,25 +83,22 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+            
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
             int maxIndex = -1;
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "maxfield"))
-            {
-                maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
-                this.comboBox0.Tag = maxIndex.ToString();
-            }
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
-            {
+            maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+            this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
+            this.comboBox0.Tag = maxIndex.ToString();
 
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-                int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList0 = outIndexs.ToList();
-                this.outListCCBL0.LoadItemCheckIndex(outIndexs);
-                foreach (int i in outIndexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
-            }
+            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+            int[] outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            this.oldOutList0 = outIndexs.ToList();
+            this.outListCCBL0.LoadItemCheckIndex(outIndexs);
+            foreach (int i in outIndexs)
+                this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
 
-            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
+            
         }
         #endregion
         #region 初始化配置
