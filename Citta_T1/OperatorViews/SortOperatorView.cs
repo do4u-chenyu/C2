@@ -33,7 +33,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outList = Enumerable.Range(0, this.nowColumnsName0.Length).ToList();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
-
         }
         #endregion
         #region 添加取消
@@ -111,22 +110,14 @@ namespace Citta_T1.OperatorViews
                 this.comboBox0.Text = this.comboBox0.Items[index].ToString();
                 this.comboBox0.Tag = index.ToString();
             }
-            if (this.opControl.Option.GetOption("repetition") != "")
-                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (this.opControl.Option.GetOption("noRepetition") != "")
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("ascendingOrder") != "")
-                this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (this.opControl.Option.GetOption("descendingOrder") != "")
-                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
-            if (this.opControl.Option.GetOption("sortByNum") != "")
-                this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
-            if (this.opControl.Option.GetOption("sortByString") != "")
-                this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
-            if (this.opControl.Option.GetOption("firstRow") != "")
-                this.firstRow.Text = this.opControl.Option.GetOption("firstRow");
-            if (this.opControl.Option.GetOption("endRow") != "")
-                this.endRow.Text = this.opControl.Option.GetOption("endRow");
+            this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition", "False"));
+            this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
+            this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder", "True"));
+            this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder", "False"));
+            this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum", "True"));
+            this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString", "False"));
+            this.firstRow.Text = this.opControl.Option.GetOption("firstRow", "1");
+            this.endRow.Text = this.opControl.Option.GetOption("endRow");
 
         }
         #endregion
