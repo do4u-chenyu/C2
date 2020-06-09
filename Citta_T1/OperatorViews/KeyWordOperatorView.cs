@@ -48,7 +48,7 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
         }
 
         private void KeywordComBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,13 +85,13 @@ namespace Citta_T1.OperatorViews
             int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             oldOutList0 = indexs.ToList();
             outListCCBL0.LoadItemCheckIndex(indexs);
-            oldColumnsName0.AddRange(from int index in indexs
+            oldOutName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
             comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
             comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", null));
         }
-        private void SaveOption()
+        protected override void SaveOption()
         {
             opControl.Option.OptionDict.Clear();
             string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());

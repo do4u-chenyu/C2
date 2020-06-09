@@ -59,7 +59,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
@@ -117,7 +117,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = outIndexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
-                    this.oldColumnsName0.Add(this.outListCCBL0.Items[i].ToString());
+                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
             }
 
             int[] outIndexs1 = new int[] { };
@@ -128,7 +128,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = outIndexs1.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
-                    this.oldColumnsName0.Add(this.outListCCBL1.Items[i].ToString());
+                    this.oldOutName0.Add(this.outListCCBL1.Items[i].ToString());
             }
 
 
@@ -186,7 +186,6 @@ namespace Citta_T1.OperatorViews
         private bool IsOptionReady()
         {
             bool empty = false;
-            List<string> types = new List<string>();
             if (this.dataSourceTB0.Text == "") return true;
             if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 

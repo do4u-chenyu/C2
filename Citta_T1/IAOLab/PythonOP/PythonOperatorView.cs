@@ -73,7 +73,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
             string inputOption = GetControlRadioName(this.inputFileSettingTab).ToLower();
             string outputOption = GetControlRadioName(this.outputFileSettingTab).ToLower();

@@ -30,7 +30,7 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-            this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
+            this.oldOutName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.comboBox1.Items.AddRange(nowColumnsName1);
         }
@@ -46,7 +46,7 @@ namespace Citta_T1.OperatorViews
                 CreateLine(line);
             }
         }
-        private void SaveOption()
+        protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
@@ -165,7 +165,7 @@ namespace Citta_T1.OperatorViews
                 return;
             }
             //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldColumnsName0, this.selectedColumns, this.opControl.ID);
+            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
         }
         private bool IsRepetitionCondition()
         {

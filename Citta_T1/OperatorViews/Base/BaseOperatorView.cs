@@ -1,9 +1,11 @@
-﻿using Citta_T1.Business.Option;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -16,8 +18,8 @@ namespace Citta_T1.OperatorViews.Base
         protected string dataSourceFFP1;            // 右表数据源路径
         protected string[] nowColumnsName0;         // 当前左表(pin0)数据源表头字段(columnName)
         protected string[] nowColumnsName1;         // 当前右表(pin1)数据源表头字段
-        protected List<string> oldColumnsName0;     // 上一次左表(pin0)数据源表头字段
-        protected List<string> oldColumnsName1;     // 上一次右表(pin1数据源表头字段
+        protected List<string> oldOutName0;         // 上一次（左输出）输出表头字段
+        protected List<string> oldOutName1;         // 上一次（右输出）输出表头字段
         protected List<int> oldOutList0;            // 上一次用户选择的左表输出字段的索引
         protected List<int> oldOutList1;            // 上一次用户选择的右表输出字段的索引
         protected List<string> selectedColumns;     // 本次配置用户选择的输出字段名称
@@ -25,7 +27,7 @@ namespace Citta_T1.OperatorViews.Base
 
         protected OptionInfoCheck optionInfoCheck;  // 用户配置信息通用检查
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
-
+        private OptionDao OptionDao;
         public BaseOperatorView()
         {
 
@@ -35,13 +37,14 @@ namespace Citta_T1.OperatorViews.Base
             dataSourceFFP1 = String.Empty;
             nowColumnsName0 = new string[0];
             nowColumnsName1 = new string[0];
-            oldColumnsName0 = new List<string>();
-            oldColumnsName1 = new List<string>();
+            oldOutName0 = new List<string>();
+            oldOutName1 = new List<string>();
             oldOutList0 = new List<int>();
             oldOutList1 = new List<int>();
             selectedColumns = new List<string>();
             optionInfoCheck = new OptionInfoCheck();
             dataInfo = new Dictionary<string, string>();
+            OptionDao = new OptionDao();
             InitializeComponent();
         }
         public BaseOperatorView(MoveOpControl opControl) : this()
@@ -81,10 +84,40 @@ namespace Citta_T1.OperatorViews.Base
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
-
+        protected virtual bool IsOptionNotReady()
+        {
+            return false;
+        }
+        protected virtual void SaveOption()
+        {
+        }
+        protected virtual bool IsDuplicateSelect()
+        {
+            return false;
+        }
         protected virtual void ConfirmButton_Click(object sender, EventArgs e)
         {
-
+            //配置窗口所有选项是否配置完毕
+            if (IsOptionNotReady()) return;
+            //判断标准化字段是否重复选择
+            if (IsDuplicateSelect()) return;//数据标准化窗口
+            SaveOption();
+            this.DialogResult = DialogResult.OK;
+            //内容修改，引起文档dirty
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
+                Global.GetMainForm().SetDocumentDirty();
+            //生成结果控件,创建relation,bcp结果文件
+            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+            if (resultElement == ModelElement.Empty)
+            {
+                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
+                return;
+            }
+            // 对应的结果文件置脏
+            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
+            //输出变化，重写BCP文件
+            if (!this.oldOutName0.SequenceEqual(this.selectedColumns))
+                Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
         }
 
         protected void SetTextBoxName(TextBox textBox)

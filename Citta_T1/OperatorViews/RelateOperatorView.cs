@@ -55,7 +55,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnsName0.Add(this.outListCCBL0.Items[index].ToString());
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
             }
 
 
@@ -66,7 +66,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = indexs.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldColumnsName1.Add(this.outListCCBL1.Items[index].ToString());
+                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
             }
 
             int count = this.opControl.Option.KeysCount("factor");
@@ -119,7 +119,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
             this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
         }
-        private void SaveOption()
+        protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
@@ -184,7 +184,7 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            List<string> oldName = this.oldColumnsName0.Concat(this.oldColumnsName1).ToList();
+            List<string> oldName = this.oldOutName0.Concat(this.oldOutName1).ToList();
             Global.GetOptionDao().DoOutputCompare(oldName, this.selectedColumns, this.opControl.ID);
 
 

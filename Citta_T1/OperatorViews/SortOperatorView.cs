@@ -21,7 +21,7 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            this.oldColumnsName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
+            this.oldOutName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
         }
 
         #region 配置初始化
@@ -71,14 +71,14 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
 
             //输出变化，重写BCP文件
-            if (!this.oldColumnsName0.SequenceEqual(this.nowColumnsName0))
+            if (!this.oldOutName0.SequenceEqual(this.nowColumnsName0))
                 Global.GetOptionDao().IsNewOut(this.nowColumnsName0.ToList(), this.opControl.ID);
 
         }
         #endregion
 
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
 
             this.opControl.Option.SetOption("outfield", String.Join("\t", this.outList));
