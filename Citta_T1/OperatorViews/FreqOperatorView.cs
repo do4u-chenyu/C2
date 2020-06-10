@@ -118,14 +118,10 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("noRepetition") != String.Empty)
-                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (this.opControl.Option.GetOption("repetition") != String.Empty)
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("ascendingOrder") != String.Empty)
-                this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (this.opControl.Option.GetOption("descendingOrder") != String.Empty)
-                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
+            repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
+            noRepetition.Checked    = Convert.ToBoolean(opControl.Option.GetOption("noRepetition", "False"));
+            ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
+            descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
