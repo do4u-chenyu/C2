@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
@@ -15,7 +14,6 @@ namespace Citta_T1.OperatorViews
     public partial class KeywordOperatorView : BaseOperatorView
     {
         private const int colIndexDefault = 0;
-        private const bool readyStatus = true;
         private string keywordEncoding, keywordExtType, keywordSep;
 
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
@@ -24,32 +22,7 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
         }
-
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            if (!OptionStatusCheck().Equals(readyStatus))
-                return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-            {
-                Global.GetMainForm().SetDocumentDirty();
-            }
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
+       
 
         private void KeywordComBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -78,9 +51,9 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "outfield");
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "dataSelectIndex");
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName1, "keySelectIndex");
+            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
+
             string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
             int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             oldOutList0 = indexs.ToList();
@@ -94,16 +67,14 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             opControl.Option.OptionDict.Clear();
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-
-            opControl.Option.SetOption("outfield", outField);
-            opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
-            opControl.Option.SetOption("columnname1", string.Join("\t", opControl.SecondDataSourceColumns));
-            opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex.ToString());
-            opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex.ToString());
-            opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex);
+            opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex);
+            opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex);
             opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
-
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -115,14 +86,15 @@ namespace Citta_T1.OperatorViews
 
         #endregion
         #region 检查
-        private bool OptionStatusCheck()
+        protected override bool IsOptionNotReady()
         {
+            bool notReady = true;
             if (this.outListCCBL0.GetItemCheckIndex().Count == colIndexDefault)
             {
                 MessageBox.Show("您需要选择输出字段");
-                return !readyStatus;
+                return notReady;
             }
-            return readyStatus;
+            return !notReady;
         }
         #endregion
         #region 配置信息的保存与更新

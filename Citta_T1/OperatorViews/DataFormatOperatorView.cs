@@ -79,14 +79,12 @@ namespace Citta_T1.OperatorViews
                 control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                 control1.Tag = indexs1[0].ToString();
                 control2.Text = factorList1[1];
-            }
-           
-
+            }   
         }
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string index1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string factor1 = index1 + "\t" + this.textBox0.Text;
             this.opControl.Option.SetOption("factor1", factor1);
@@ -107,7 +105,7 @@ namespace Citta_T1.OperatorViews
                     this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control2.Text));
                 }
             }
-            this.opControl.Option.SetOption("outname", String.Join("\t", this.selectedColumns));
+            this.opControl.Option.SetOption("outname",this.selectedColumns);
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -128,16 +126,17 @@ namespace Citta_T1.OperatorViews
 
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
-            List<string> types = new List<string>();
-            types.Add(this.comboBox0.GetType().Name);
+            bool notReady = true;
+            List<string> types = new List<string>
+            {
+                this.comboBox0.GetType().Name
+            };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请选择字段");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -145,11 +144,10 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请选择字段");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
-            return empty;
+            return !notReady;
         }
         #endregion
 
@@ -159,8 +157,10 @@ namespace Citta_T1.OperatorViews
             bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string factor1 = index01 + "," + this.textBox0.Text;
-            Dictionary<string, string> factors = new Dictionary<string, string>();
-            factors["factor1"] = factor1;
+            Dictionary<string, string> factors = new Dictionary<string, string>
+            {
+                ["factor1"] = factor1
+            };
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
@@ -186,31 +186,37 @@ namespace Citta_T1.OperatorViews
         private void CreateLine(int addLine)
         {
             // 添加控件
-            Label label = new Label();
-            label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            label.AutoSize = true;
-            label.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            label.Text = (addLine + 2).ToString();
+            Label label = new Label
+            {
+                Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right))),
+                AutoSize = true,
+                Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Text = (addLine + 2).ToString()
+            };
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
 
 
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ComboBox dataBox = new ComboBox
+            {
+                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
+                AutoCompleteSource = AutoCompleteSource.ListItems,
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right
+            };
             dataBox.Items.AddRange(this.nowColumnsName0);
             dataBox.Leave += new System.EventHandler(this.Control_Leave);
             dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            TextBox textBox = new TextBox();
-            textBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            textBox.Text = "别名";
-            textBox.Font = new Font("微软雅黑", 9f, FontStyle.Regular);
-            textBox.ForeColor = SystemColors.ActiveCaption;
+            TextBox textBox = new TextBox
+            {
+                Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right))),
+                Text = "别名",
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
+                ForeColor = SystemColors.ActiveCaption
+            };
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += TextBox1_Enter;
             textBox.Leave += TextBox1_Leave;

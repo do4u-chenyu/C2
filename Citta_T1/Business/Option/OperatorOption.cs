@@ -36,6 +36,31 @@ namespace Citta_T1.Business.Option
             OptionDict[OpKey] = OpVaule;
         }
 
+        public void SetOption(string OpKey, int OpVaule)
+        {
+            SetOption(OpKey, OpVaule.ToString());
+        }
+
+        public void SetOption(string OpKey, bool OpVaule)
+        {
+            SetOption(OpKey, OpVaule.ToString());
+        }
+
+        public void SetOption(string OpKey, string[] OpVauleList)
+        {
+            SetOption(OpKey, String.Join("\t", OpVauleList));
+        }
+
+        public void SetOption(string OpKey, List<int> OpVauleList)
+        {
+            SetOption(OpKey, String.Join("\t", OpVauleList));
+        }
+
+        public void SetOption(string OpKey, List<string> OpVauleList)
+        {
+            SetOption(OpKey, String.Join("\t", OpVauleList));
+        }
+
         public int KeysCount(string name)
         {
             int count = 0;

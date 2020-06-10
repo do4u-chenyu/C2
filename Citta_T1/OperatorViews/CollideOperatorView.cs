@@ -32,43 +32,17 @@ namespace Citta_T1.OperatorViews
         }
 
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        #region 判断是否配置完毕
+        protected override bool IsOptionNotReady()
         {
-            bool empty = IsOptionReay();
-            if (empty) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-             Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
-
-        private bool IsOptionReay()
-        {
-            bool empty = false;
+            bool notReady = true;
             List<string> types = new List<string>() { this.comboBox0.GetType().Name, this.outListCCBL0.GetType().Name };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写碰撞条件!");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -76,17 +50,15 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写碰撞条件!");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请填写输出字段!");
-                empty = true;
-                return empty;
+                return notReady;
             }
-            return empty;
+            return !notReady;
         }
         #endregion
         #region 保存加载
@@ -116,15 +88,10 @@ namespace Citta_T1.OperatorViews
             
             string factor1 = this.opControl.Option.GetOption("factor1");
             int[] optionItems0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
-            bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", optionItems0[0]);
-            bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", optionItems0[1]);
-            if (!case0 && !case1)
-            {
-                this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
-                this.comboBox0.Tag = optionItems0[0].ToString();
-                this.comboBox1.Tag = optionItems0[1].ToString();
-            }
+            this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
+            this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
+            this.comboBox0.Tag = optionItems0[0].ToString();
+            this.comboBox1.Tag = optionItems0[1].ToString();
 
             int count = this.opControl.Option.KeysCount("factor");
             if (count <= 1)
@@ -153,11 +120,12 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield", outField);
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
+
 
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();

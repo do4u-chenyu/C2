@@ -38,6 +38,9 @@ namespace Citta_T1.Controls
                         location, separator, extType, encoding);
                 }
             }
+            clipBoardCts.Clear();
+            //Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            //Global.GetFlowControl().ResetStatus();
         }
     }
 }

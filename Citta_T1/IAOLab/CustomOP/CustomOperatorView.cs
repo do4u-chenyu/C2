@@ -48,8 +48,8 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.outListCCBL1.Items.AddRange(nowColumnsName1);
@@ -60,21 +60,16 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
-            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
+            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
+            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
             this.opControl.Option.SetOption("randomBegin", this.randomBeginTextBox.Text);
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
-
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield0", outField);
-
-
-            if (this.Text != "AI实践算子设置")
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
+            if (opControl.OperatorDimension() == 2)
             {               
-                string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
-                this.opControl.Option.SetOption("outfield1", outField1);
+                this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
             }
 
             string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
@@ -127,7 +122,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = outIndexs1.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
-                    this.oldOutName0.Add(this.outListCCBL1.Items[i].ToString());
+                    this.oldOutName1.Add(this.outListCCBL1.Items[i].ToString());
             }
 
 
@@ -141,8 +136,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
-            bool empty = IsOptionReady();
-            if (empty) return;
+            if (IsOptionNotReady()) return;
 
             this.DialogResult = DialogResult.OK;
 
@@ -182,9 +176,9 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }
 
-        private bool IsOptionReady()
+        protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             if (this.dataSourceTB0.Text == "") return true;
             if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 
@@ -194,40 +188,35 @@ namespace Citta_T1.OperatorViews
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             if (opControl.OperatorDimension() == 2 && this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             if (this.rsFullFilePathTextBox.Text == "")
             {
                 MessageBox.Show("请选择结果文件路径");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             //有任一框中非数字
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
-                empty = true;
-                return empty;
+                return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
                 MessageBox.Show("未输入其他类型分隔符内容");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
-            return empty;
+            return !notReady;
         }
         #endregion
 

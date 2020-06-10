@@ -79,29 +79,31 @@ namespace Citta_T1.OperatorViews.Base
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        // 是否配置完毕
         protected virtual bool IsOptionNotReady()
         {
+          
             return false;
         }
         protected virtual void SaveOption()
         {
         }
+        // 判断标准化字段是否重复选择
         protected virtual bool IsDuplicateSelect()
         {
             return false;
         }
         protected virtual void ConfirmButton_Click(object sender, EventArgs e)
         {
-            //配置窗口所有选项是否配置完毕
+            
             if (IsOptionNotReady()) return;
-            //判断标准化字段是否重复选择
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
             this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
+
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
+            // 生成结果控件,relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
@@ -110,8 +112,10 @@ namespace Citta_T1.OperatorViews.Base
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
+            // 输出字段变化，重写BCP文件
+            // 单输出算子时oldOutName1为0数组,不影响逻辑
+            List<string> oldOutNames = this.oldOutName0.Concat(this.oldOutName1).ToList();
+            Global.GetOptionDao().DoOutputCompare(oldOutNames, this.selectedColumns, this.opControl.ID);
         }
 
         protected void SetTextBoxName(TextBox textBox)
