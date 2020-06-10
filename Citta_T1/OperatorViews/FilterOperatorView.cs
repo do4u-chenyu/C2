@@ -149,18 +149,8 @@ namespace Citta_T1.OperatorViews
             }
             
         }
-        private void InitNewFactorControl(int count)
-        {
-            for (int line = 0; line < count; line++)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                CreateLine(line);
-            }
-        }
         #endregion
-        private void CreateLine(int addLine)
+        protected override void CreateLine(int addLine)
         {
             // 添加控件
             ComboBox regBox = new ComboBox();

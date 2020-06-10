@@ -192,5 +192,21 @@ namespace Citta_T1.OperatorViews.Base
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
         }
+
+        protected void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+                CreateLine(line);
+            }
+        }
+
+        protected virtual void CreateLine(int addLine)
+        { 
+        
+        }
     }
 }
