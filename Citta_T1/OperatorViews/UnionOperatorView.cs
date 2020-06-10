@@ -120,11 +120,11 @@ namespace Citta_T1.OperatorViews
                 int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = factorList1[2];
                 control1.Tag = itemsList1[0].ToString();
                 control2.Tag = itemsList1[1].ToString();

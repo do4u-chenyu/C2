@@ -16,7 +16,6 @@ namespace Citta_T1.OperatorViews
 
         public DifferOperatorView(MoveOpControl opControl) : base(opControl)
         {
-
             InitializeComponent();
             InitByDataSource();
             LoadOption();

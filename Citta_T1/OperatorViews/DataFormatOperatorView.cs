@@ -79,9 +79,7 @@ namespace Citta_T1.OperatorViews
                 control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                 control1.Tag = indexs1[0].ToString();
                 control2.Text = factorList1[1];
-            }
-           
-
+            }   
         }
         protected override void SaveOption()
         {

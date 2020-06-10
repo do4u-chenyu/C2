@@ -48,17 +48,17 @@ namespace Citta_T1.Business.Option
 
         public void SetOption(string OpKey, string[] OpVauleList)
         {
-            SetOption(OpKey, String.Join("\t", OpVauleList.ToString()));
+            SetOption(OpKey, String.Join("\t", OpVauleList));
         }
 
         public void SetOption(string OpKey, List<int> OpVauleList)
         {
-            SetOption(OpKey, String.Join("\t", OpVauleList.ToString()));
+            SetOption(OpKey, String.Join("\t", OpVauleList));
         }
 
         public void SetOption(string OpKey, List<string> OpVauleList)
         {
-            SetOption(OpKey, String.Join("\t", OpVauleList.ToString()));
+            SetOption(OpKey, String.Join("\t", OpVauleList));
         }
 
         public int KeysCount(string name)
