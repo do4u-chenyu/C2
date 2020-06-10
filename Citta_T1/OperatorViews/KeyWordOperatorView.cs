@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
@@ -89,13 +88,13 @@ namespace Citta_T1.OperatorViews
         #region 检查
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             if (this.outListCCBL0.GetItemCheckIndex().Count == colIndexDefault)
             {
                 MessageBox.Show("您需要选择输出字段");
-                return !empty;
+                return notReady;
             }
-            return empty;
+            return !notReady;
         }
         #endregion
         #region 配置信息的保存与更新

@@ -182,48 +182,48 @@ namespace Citta_T1.OperatorViews
         }
         protected override bool IsOptionNotReady()
         {
-            bool empty = true;
+            bool notReady = true;
             //输入源没连上
-            if (String.IsNullOrEmpty(this.dataSourceTB0.Text)) return empty;
+            if (String.IsNullOrEmpty(this.dataSourceTB0.Text)) return notReady;
 
             //虚拟机是否勾选
             if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
             {
                 MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
-                return empty;
+                return notReady;
             }
             //脚本是否导入
             if (String.IsNullOrEmpty(pyFullFilePathTextBox.Text))
             {
                 MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
-                return empty;
+                return notReady;
             }
             //输入文件设置，选2时是否写了参数
             if (GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" && String.IsNullOrEmpty(this.paramInputFileTextBox.Text))
             {
                 MessageBox.Show("未配置输入文件设置中的指定输入文件参数。");
-                return empty;
+                return notReady;
             }
             //结果文件设置，选3时是否写了参数
             if (GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" && String.IsNullOrEmpty(this.paramPrefixTagTextBox.Text))
             {
                 MessageBox.Show("未配置结果文件设置中的指定结果文件参数。");
-                return empty;
+                return notReady;
             }
             //结果文件设置，选4时是否选择约定路径
             if (GetControlRadioName(this.outputFileSettingTab) == "browseChosenRadioButton" && String.IsNullOrEmpty(this.browseChosenTextBox.Text))
             {
                 MessageBox.Show("结果文件设置中的浏览指定结果文件未导入，请点击约定按钮添加结果文件路径。");
-                return empty;
+                return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
                 MessageBox.Show("未输入其他类型分隔符内容");
-                return empty;
+                return notReady;
             }
 
-            return !empty;
+            return !notReady;
         }
         #endregion
 

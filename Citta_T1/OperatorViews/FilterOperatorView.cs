@@ -3,6 +3,7 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -26,18 +27,19 @@ namespace Citta_T1.OperatorViews
   
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
-            List<string> types = new List<string>();
-            types.Add(this.comboBox0.GetType().Name);
-            types.Add(this.outListCCBL0.GetType().Name);
-            types.Add(this.textBoxEx1.GetType().Name);
+            bool notReady = true;
+            List<string> types = new List<string>
+            {
+                this.comboBox0.GetType().Name,
+                this.outListCCBL0.GetType().Name,
+                this.textBoxEx1.GetType().Name
+            };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -45,17 +47,15 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请填写输出字段");
-                empty = true;
-                return empty;
+                return notReady;
             }
-            return empty;
+            return !notReady;
         }
         #region 初始化配置
         private void InitByDataSource()

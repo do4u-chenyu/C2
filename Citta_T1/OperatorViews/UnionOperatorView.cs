@@ -167,7 +167,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             List<string> types = new List<string>();
             types.Add(this.comboBox0.GetType().Name);
             types.Add(this.textBox0.GetType().Name);
@@ -176,7 +176,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    return !empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -184,10 +184,10 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    return !empty;
+                    return notReady;
                 }
             }
-            return empty;
+            return !notReady;
         }
         #endregion
         private void CreateLine(int addLine)

@@ -40,23 +40,23 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
-                return !empty;
+                return notReady;
             }
             if (!this.noRepetition.Checked && !this.repetition.Checked)
             {
                 MessageBox.Show("请选择数据是否进行去重");
-                return !empty;
+                return notReady;
             }
             if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
             {
                 MessageBox.Show("请选择数据排序");
-                return !empty;
+                return notReady;
             }
-            return empty;
+            return !notReady;
         }
 
 

@@ -66,20 +66,20 @@ namespace Citta_T1.OperatorViews
         #region 判断是否配置完毕
         protected override bool IsOptionNotReady()
         {
-            bool empty = true;
+            bool notReady = true;
             if (this.dataSourceTB0.Text == String.Empty)
-                return empty;
+                return notReady;
             if (this.randomNumBox.Text == String.Empty)
             {
                 MessageBox.Show("随机条数字段不能为空,请输入一个整数");
-                return empty;
+                return notReady;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择算子要输出的字段");
-                return empty;
+                return notReady;
             }
-            return !empty;
+            return !notReady;
         }       
         #endregion
 
