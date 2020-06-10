@@ -86,7 +86,7 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string index1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string factor1 = index1 + "\t" + this.textBox0.Text;
             this.opControl.Option.SetOption("factor1", factor1);
@@ -107,7 +107,7 @@ namespace Citta_T1.OperatorViews
                     this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control2.Text));
                 }
             }
-            this.opControl.Option.SetOption("outname", String.Join("\t", this.selectedColumns));
+            this.opControl.Option.SetOption("outname",this.selectedColumns);
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
