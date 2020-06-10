@@ -1,10 +1,8 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -76,8 +74,7 @@ namespace Citta_T1.OperatorViews
         {
             this.InitDataSource();
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
-            this.comboBox0.Items.AddRange(nowColumnsName0);
-            
+            this.comboBox0.Items.AddRange(nowColumnsName0);          
         }
         #endregion
     }

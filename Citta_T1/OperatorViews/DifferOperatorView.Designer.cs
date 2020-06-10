@@ -27,10 +27,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.keyPanel = new System.Windows.Forms.Panel();
-            this.valuePanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -113,36 +109,21 @@
             this.label1.Text = "数据信息：";
             // 
             // topPanel
-            // 
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.topPanel.Name = "topPanel";
+            // ;
             this.topPanel.Size = new System.Drawing.Size(560, 37);
-            this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
-            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 325);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(560, 64);
-            this.bottomPanel.TabIndex = 1;
             // 
             // keyPanel
             // 
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.keyPanel.Name = "keyPanel";
             this.keyPanel.Size = new System.Drawing.Size(116, 288);
-            this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
@@ -248,10 +229,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel keyPanel;
-        private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

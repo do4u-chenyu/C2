@@ -26,13 +26,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.keyPanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.valuePanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sortByString = new System.Windows.Forms.RadioButton();
             this.sortByNum = new System.Windows.Forms.RadioButton();
@@ -428,10 +424,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel keyPanel;
-        private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

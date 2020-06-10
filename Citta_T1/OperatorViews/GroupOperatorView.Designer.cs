@@ -28,12 +28,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.keyPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.valuePanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sortByString = new System.Windows.Forms.RadioButton();
             this.sortByNum = new System.Windows.Forms.RadioButton();
@@ -115,23 +111,12 @@
             // 
             // topPanel
             // 
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(527, 21);
-            this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
-            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 387);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(527, 49);
-            this.bottomPanel.TabIndex = 1;
             // 
             // keyPanel
             // 
@@ -139,13 +124,8 @@
             this.keyPanel.Controls.Add(this.label4);
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.keyPanel.Name = "keyPanel";
             this.keyPanel.Size = new System.Drawing.Size(116, 366);
-            this.keyPanel.TabIndex = 2;
             // 
             // label5
             // 
@@ -177,12 +157,8 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
-            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
-            this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(411, 366);
-            this.valuePanel.TabIndex = 3;
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
@@ -393,10 +369,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel keyPanel;
-        private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

@@ -25,10 +25,6 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.keyPanel = new System.Windows.Forms.Panel();
-            this.valuePanel = new System.Windows.Forms.Panel();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -58,23 +54,12 @@
             // 
             // topPanel
             // 
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(387, 37);
-            this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
-            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 125);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(387, 64);
-            this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
@@ -106,23 +91,15 @@
             // 
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.keyPanel.Name = "keyPanel";
             this.keyPanel.Size = new System.Drawing.Size(116, 88);
-            this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
-            this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(271, 88);
-            this.valuePanel.TabIndex = 3;
             // 
             // dataSourceTB0
             // 
@@ -173,10 +150,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel keyPanel;
-        private System.Windows.Forms.Panel valuePanel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }
