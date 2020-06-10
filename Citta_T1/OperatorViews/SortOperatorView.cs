@@ -21,7 +21,7 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
 
-            this.oldOutName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
+            
         }
 
         #region 配置初始化
@@ -36,44 +36,24 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        protected override bool IsOptionNotReady()
         {
+            bool empty = true;
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择排序字段!");
-                return;
+                return empty;
             }
             if (String.IsNullOrWhiteSpace(this.firstRow.Text))
             {
                 MessageBox.Show("请输出行数!");
-                return;
+                return empty;
             }
 
             if (!IsCorrectOutOrder(this.firstRow.Text, this.endRow.Text))
-                return;
-            this.DialogResult = DialogResult.OK;
-            SaveOption();
-
-            //内容修改，引起文档dirty 
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-
-            //生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.nowColumnsName0.ToList());
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-            if (!this.oldOutName0.SequenceEqual(this.nowColumnsName0))
-                Global.GetOptionDao().IsNewOut(this.nowColumnsName0.ToList(), this.opControl.ID);
-
-        }
+                return empty;
+            return !empty;
+        }      
         #endregion
 
         #region 配置信息的保存与加载
@@ -90,7 +70,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("sortByString", this.sortByString.Checked);
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
-
+            this.selectedColumns = this.nowColumnsName0.ToList();
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -117,7 +97,7 @@ namespace Citta_T1.OperatorViews
             this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString", "False"));
             this.firstRow.Text = this.opControl.Option.GetOption("firstRow", "1");
             this.endRow.Text = this.opControl.Option.GetOption("endRow");
-
+            this.oldOutName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
         }
         #endregion
 

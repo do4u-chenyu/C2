@@ -170,7 +170,7 @@ namespace Citta_T1.Business.Option
             } 
             return emptyOption;
         }
-        
+
         //配置窗口输出的改变，引起后续子图状态改变逻辑
 
 
@@ -182,6 +182,7 @@ namespace Citta_T1.Business.Option
         // 情况3：其他情况
         //       后续子图Null状态
         //
+
         public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)
         {
             int oldCount = oldColumns.Count;

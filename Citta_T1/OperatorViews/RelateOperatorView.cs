@@ -104,6 +104,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText().Concat(this.outListCCBL1.GetItemCheckText()).ToList();
 
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
@@ -134,36 +135,8 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            bool empty = IsOptionReay();
-            if (empty) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            this.selectedColumns = this.outListCCBL0.GetItemCheckText().Concat(this.outListCCBL1.GetItemCheckText()).ToList();
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-            List<string> oldName = this.oldOutName0.Concat(this.oldOutName1).ToList();
-            Global.GetOptionDao().DoOutputCompare(oldName, this.selectedColumns, this.opControl.ID);
-
-
-        }
-        private bool IsOptionReay()
+        #region 判断是否配置完毕       
+        protected override bool IsOptionNotReady()
         {
             bool empty = false;
             List<string> types = new List<string>();

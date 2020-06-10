@@ -38,60 +38,25 @@ namespace Citta_T1.OperatorViews
 
         #endregion
         #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        protected override bool IsOptionNotReady()
         {
-            //未设置字段警告           
+            bool empty = false;
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
-                return;
+                return !empty;
             }
             if (!this.noRepetition.Checked && !this.repetition.Checked)
             {
                 MessageBox.Show("请选择数据是否进行去重");
-                return;
+                return !empty;
             }
             if (!this.ascendingOrder.Checked && !this.descendingOrder.Checked)
             {
                 MessageBox.Show("请选择数据排序");
-                return;
+                return !empty;
             }
-            this.DialogResult = DialogResult.OK;
-            if (this.dataSourceTB0.Text == "") return;
-            SaveOption();
-            //内容修改，引起文档dirty
-
-            if (this.oldCheckedItems[0] != this.repetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[1] != this.noRepetition.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[2] != this.ascendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (this.oldCheckedItems[3] != this.descendingOrder.Checked)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (String.Join("\t", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                this.selectedColumns = this.outListCCBL0.GetItemCheckText();
-                this.selectedColumns.Add("频率统计结果");
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            List<string> newData = new List<string>(this.outListCCBL0.GetItemCheckText());
-            newData.Add("频率统计结果");
-            //输出变化，重写BCP文件,它只要输出列名变化，表头就会改变
-            if (String.Join("\t", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetOptionDao().IsNewOut(newData, this.opControl.ID);
-
-
+            return empty;
         }
 
 
@@ -105,6 +70,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);
             this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked);
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
+            this.selectedColumns.Add("频率统计结果");
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -121,7 +88,7 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-             repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
+            repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
             noRepetition.Checked    = Convert.ToBoolean(opControl.Option.GetOption("noRepetition", "False"));
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
@@ -132,7 +99,7 @@ namespace Citta_T1.OperatorViews
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
                 this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-
+            this.oldOutName0.Add("频率统计结果");
 
         }
         #endregion

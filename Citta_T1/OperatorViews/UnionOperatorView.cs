@@ -134,29 +134,8 @@ namespace Citta_T1.OperatorViews
 
 
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            bool empty = HasEmptyOption();
-            if (empty) return;
-            if (IsRepetitionCondition()) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
-        private bool IsRepetitionCondition()
+        #region 判断是否配置完毕
+        protected override bool IsDuplicateSelect()
         {
             bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
@@ -186,7 +165,7 @@ namespace Citta_T1.OperatorViews
             }
             return repetition;
         }
-        private bool HasEmptyOption()
+        protected override bool IsOptionNotReady()
         {
             bool empty = false;
             List<string> types = new List<string>();

@@ -92,6 +92,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("factor1", factor1);
             this.groupColumn.Add(this.comboBox0.SelectedIndex);
 
+
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
@@ -116,6 +117,8 @@ namespace Citta_T1.OperatorViews
                     this.outList.Add(index);
             }
             this.opControl.Option.SetOption("outfield", this.outList);
+            foreach (int index in this.outList)
+                this.selectedColumns.Add(this.nowColumnsName0[index]);
 
             ElementStatus oldStatus = this.opControl.Status;
 
@@ -127,37 +130,9 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
+        #region 判断是否配置完毕
 
-            bool empty = IsOptionReay();
-            if (empty) return;
-            //判断分组字段是否重复选择
-            if (IsDuplicateSelect()) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            foreach (int index in this.outList)
-                this.selectedColumns.Add(this.nowColumnsName0[index]);
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-            //输出变化，重写BCP文件
-            if (!this.oldOutName0.SequenceEqual(this.selectedColumns))
-                Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
-
-        private bool IsOptionReay()
+        protected override bool IsOptionNotReady()
         {
             bool empty = false;
             List<string> types = new List<string>
@@ -169,8 +144,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写过滤条件!");
-                    empty = true;
-                    return empty;
+                    return !empty;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -178,8 +152,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写过滤条件!");
-                    empty = true;
-                    return empty;
+                    return !empty;
                 }
             }
             return empty;

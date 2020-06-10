@@ -37,6 +37,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("randomnum", this.randomNumBox.Text);
             this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
@@ -62,42 +63,24 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        #region 判断是否配置完毕
+        protected override bool IsOptionNotReady()
         {
-            //未设置字段警告
+            bool empty = true;
+            if (this.dataSourceTB0.Text == String.Empty)
+                return empty;
             if (this.randomNumBox.Text == String.Empty)
             {
                 MessageBox.Show("随机条数字段不能为空,请输入一个整数");
-                return;
+                return empty;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择算子要输出的字段");
-                return;
+                return empty;
             }
-            this.DialogResult = DialogResult.OK;
-            if (this.dataSourceTB0.Text == String.Empty) return;
-            SaveOption();
-            //内容修改，引起文档dirty
-            if (this.oldRandomNum != this.randomNumBox.Text)
-                Global.GetMainForm().SetDocumentDirty();
-            else if (String.Join(",", this.oldOutList0) != this.opControl.Option.GetOption("outfield"))
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-            //输出变化，重写BCP文件
-
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
+            return !empty;
+        }       
         #endregion
 
         private void RandomNumBox_Leave(object sender, EventArgs e)

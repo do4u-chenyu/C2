@@ -136,8 +136,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
-            bool empty = IsOptionReady();
-            if (empty) return;
+            if (IsOptionNotReady()) return;
 
             this.DialogResult = DialogResult.OK;
 
@@ -177,9 +176,9 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }
 
-        private bool IsOptionReady()
+        protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool empty = true;
             if (this.dataSourceTB0.Text == "") return true;
             if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 
@@ -189,21 +188,18 @@ namespace Citta_T1.OperatorViews
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
-                empty = true;
                 return empty;
             }
 
             if (opControl.OperatorDimension() == 2 && this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
-                empty = true;
                 return empty;
             }
 
             if (this.rsFullFilePathTextBox.Text == "")
             {
                 MessageBox.Show("请选择结果文件路径");
-                empty = true;
                 return empty;
             }
 
@@ -211,18 +207,16 @@ namespace Citta_T1.OperatorViews
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
-                empty = true;
                 return empty;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
                 MessageBox.Show("未输入其他类型分隔符内容");
-                empty = true;
                 return empty;
             }
 
-            return empty;
+            return !empty;
         }
         #endregion
 

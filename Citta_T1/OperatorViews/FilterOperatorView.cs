@@ -23,6 +23,7 @@ namespace Citta_T1.OperatorViews
             this.textBoxEx1.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
+  
         protected override bool IsOptionNotReady()
         {
             bool empty = false;
@@ -65,11 +66,6 @@ namespace Citta_T1.OperatorViews
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.comboBox0.Items.AddRange(nowColumnsName0);
         }
-        #endregion
-        #region 添加取消
-       
-
-
         #endregion
         #region 配置信息的保存与加载
         protected override void SaveOption()

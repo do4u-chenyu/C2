@@ -18,41 +18,24 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             LoadOption();
         }
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
+        #region 判断是否配置完毕
+        protected override bool IsOptionNotReady()
         {
-            //未设置字段警告
+            bool empty = true;
+            if (String.IsNullOrWhiteSpace(dataSourceTB0.Text))
+                return empty;
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择最小值字段!");
-                return;
+                return empty;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择输出字段!");
-                return;
+                return empty;
             }
-            this.DialogResult = DialogResult.OK;
-            if (String.IsNullOrWhiteSpace(dataSourceTB0.Text)) return;
-            SaveOption();
-            //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.outListCCBL0.GetItemCheckText());
-                return;
-            }
-
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.outListCCBL0.GetItemCheckText(), this.opControl.ID);
-        }
+            return !empty;
+        }       
         #endregion
         #region 配置信息的保存与加载
         protected override void SaveOption()
@@ -60,6 +43,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("minfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
