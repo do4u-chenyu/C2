@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
@@ -30,8 +29,7 @@ namespace Citta_T1.OperatorViews
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
-            if (this.opControl.Option.GetOption("outname") != String.Empty)
-                this.oldOutName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
+            this.oldOutName0 = this.opControl.Option.GetOptionSplit("outname").ToList();
         }
         #endregion
 

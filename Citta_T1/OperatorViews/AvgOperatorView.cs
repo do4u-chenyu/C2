@@ -27,8 +27,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);
 
         }
-
-
         #endregion
 
         #region 是否配置完毕
@@ -70,7 +68,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Text = this.comboBox0.Items[index].ToString();
             this.comboBox0.Tag = index.ToString();
             this.oldOutName0 = new List<string>() { this.comboBox0.Items[index].ToString() };
-
         }
         #endregion
     }
