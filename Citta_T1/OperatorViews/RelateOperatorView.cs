@@ -193,10 +193,9 @@ namespace Citta_T1.OperatorViews
             data2box.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             data2box.Items.AddRange(this.nowColumnsName1);
-            data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            data2box.Leave += new System.EventHandler(this.Control_Leave);
-            data2box.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            data2box.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            data2box.Leave += new EventHandler(this.Control_Leave);
+            data2box.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            data2box.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
 
             Button addButton = NewAddButton(addLine.ToString());

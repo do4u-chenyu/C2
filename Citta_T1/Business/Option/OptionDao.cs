@@ -2,19 +2,14 @@
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
-using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Citta_T1.Business.Option
 {
     class OptionDao
     {
-        private static LogUtil log = LogUtil.GetInstance("OptionDao");
-
         // 情况1
         // LEFT_ME ----- StartID.MR.EndID ----- RIGHT_ME
         // RIGHT_ME.EnableOption开启设置菜单
