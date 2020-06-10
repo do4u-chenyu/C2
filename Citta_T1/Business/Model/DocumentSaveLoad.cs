@@ -64,15 +64,18 @@ namespace Citta_T1.Business.Model
         }
         public ModelXmlReader Read(string label)
         {
+            dict[label] = string.Empty;
             try
             {
-                string value = xn.SelectSingleNode(label).InnerText;
-                dict[label] = value;
+                XmlNode node = xn.SelectSingleNode(label);
+                if (node == null)
+                    return this;
+                dict[label] = node.InnerText;
 
             }
             catch (Exception e)
             {
-                log.Error("读取xml文件出错， error: " + e.Message);
+                log.Error("读取xml文件出错这里， error: " + e.Message);
             }
             return this;
         }
@@ -269,7 +272,7 @@ namespace Citta_T1.Business.Model
                     if (element == ModelElement.Empty)
                         continue;
                     this.modelDocument.ModelElements.Add(element);
-                    if (GetXmlNodeInnerText(xn, "type") != "Operator")
+                    if (type != "Operator")
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
                     ctl.Option = ReadOption(xn);
@@ -284,12 +287,15 @@ namespace Citta_T1.Business.Model
             OperatorOption option = new OperatorOption();
             try
             {
-                foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
-                    option.SetOption(node.Name, node.InnerText);
+                XmlNode node = xn.SelectSingleNode("option");
+                if (node == null)
+                    return option;
+                foreach (XmlNode child in node.ChildNodes)
+                    option.SetOption(child.Name, child.InnerText);
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("读配置出错 ： "+e.Message);
                 option = new OperatorOption();
             }
             return option;

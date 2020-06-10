@@ -23,7 +23,7 @@ namespace Citta_T1.OperatorViews
             this.textBoxEx1.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
-        private bool IsOptionReay()
+        protected override bool IsOptionNotReady()
         {
             bool empty = false;
             List<string> types = new List<string>();
@@ -67,31 +67,7 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            bool empty = IsOptionReay();
-            if (empty) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-
-            //生成结果控件,创建relation,bcp结果文件
-            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-            // 对应的结果文件置脏
-            BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-
-            //输出变化，重写BCP文件
-
-             Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
+       
 
 
         #endregion
@@ -100,6 +76,8 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.selectedColumns = this.outListCCBL0.GetItemCheckText();
+
 
             string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
