@@ -45,7 +45,7 @@
             // 
             // dataSourceTB1
             // 
-            this.dataSourceTB1.Location = new System.Drawing.Point(233, 2);
+            this.dataSourceTB1.Location = new System.Drawing.Point(238, 2);
             this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(150, 23);
             this.dataSourceTB1.TabIndex = 12;
@@ -183,7 +183,7 @@
             this.label4.Location = new System.Drawing.Point(155, 0);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 27);
+            this.label4.Size = new System.Drawing.Size(84, 27);
             this.label4.TabIndex = 10;
             // 
             // tableLayoutPanel2
