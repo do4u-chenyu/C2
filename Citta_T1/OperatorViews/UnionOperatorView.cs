@@ -326,10 +326,6 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
 
         private void TextBoxEx1_Enter(object sender, EventArgs e)
         {

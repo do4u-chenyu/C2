@@ -205,7 +205,7 @@
             this.groupBox1.Size = new System.Drawing.Size(138, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // repetition
             // 

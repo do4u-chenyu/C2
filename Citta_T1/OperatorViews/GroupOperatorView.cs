@@ -263,15 +263,7 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
 
-        private void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
         #region 分组字段重复选择判断
         protected override bool IsDuplicateSelect()
         {
@@ -305,10 +297,5 @@ namespace Citta_T1.OperatorViews
             return ret;
         }
         #endregion
-
-        private void GroupBox3_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
     }
 }

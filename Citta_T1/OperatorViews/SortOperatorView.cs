@@ -94,16 +94,6 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
 
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
         #region 输入非数字，警告
         private void FirstRow_Leave(object sender, EventArgs e)
         {
@@ -132,10 +122,6 @@ namespace Citta_T1.OperatorViews
 
         #endregion
 
-        private void GroupBox3_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
         private bool IsCorrectOutOrder(string firstRow, string endRow)
         {
             if (endRow == "") return true;

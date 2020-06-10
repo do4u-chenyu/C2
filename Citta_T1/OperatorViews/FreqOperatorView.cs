@@ -89,14 +89,5 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
     }
 }
