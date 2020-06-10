@@ -24,12 +24,11 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox0 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -188,11 +187,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(358, 85);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // DataFormatOperatorView
             // 
@@ -219,7 +214,6 @@
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

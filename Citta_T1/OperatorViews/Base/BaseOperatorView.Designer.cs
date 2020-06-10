@@ -40,6 +40,7 @@ namespace Citta_T1.OperatorViews.Base
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -200,6 +201,14 @@ namespace Citta_T1.OperatorViews.Base
             this.label1.TabIndex = 0;
             this.label1.Text = "数据信息：";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 0);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
             // BaseOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -238,5 +247,6 @@ namespace Citta_T1.OperatorViews.Base
         protected System.Windows.Forms.Panel valuePanel;      // 右侧面板，放置各种选项输入框
 
         protected System.Windows.Forms.Label label1;          // 数据源提示label
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;  // 输入框所在的动态布局layout控件
     }
 }
