@@ -94,12 +94,12 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
-                    string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
+                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 5 + 0] as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.Controls[i * 5 + 1] as ComboBox;
+                    ComboBox control3 = this.tableLayoutPanel1.Controls[i * 5 + 2] as ComboBox;
+                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                    string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
                     string factor = index1 + "\t" + index2 + "\t" + index3;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }

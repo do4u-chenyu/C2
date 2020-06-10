@@ -10,18 +10,11 @@ namespace Citta_T1.OperatorViews
 {
     public partial class FreqOperatorView : BaseOperatorView
     {
-        private List<bool> oldCheckedItems = new List<bool>();
-
         public FreqOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.oldCheckedItems.Add(this.repetition.Checked);
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
-            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
-            this.oldCheckedItems.Add(this.descendingOrder.Checked);
         }
         #region 初始化配置
         private void InitByDataSource()

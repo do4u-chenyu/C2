@@ -11,14 +11,11 @@ namespace Citta_T1.OperatorViews
 
     public partial class RandomOperatorView : BaseOperatorView
     {
-        private string oldRandomNum;
-
         public RandomOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-            this.oldRandomNum = this.randomNumBox.Text;
         }
         #region 初始化配置
         private void InitByDataSource()
