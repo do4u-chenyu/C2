@@ -154,31 +154,146 @@ namespace Citta_T1.Controls
                 Global.GetFlowControl().ResetStatus();
                 frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态         
             }
+            else if (e.Button == MouseButtons.Left)
+            {
+                if (sender is MoveDtControl || sender is MoveRsControl)
+                    this.MouseDownWhenPinDraw(sender, e);
+                else if (SelectFrame())
+                    frameWrapper.FrameWrapper_MouseDown(e);
+                else if (SelectDrag())
+                    dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+            }
 
-            if (sender is MoveDtControl || sender is MoveRsControl)
+        }
+        private void MouseDownWhenPinDraw(object sender, MouseEventArgs e)
+        {
+            this.cmd = ECommandType.PinDraw;
+            this.StartC = sender as MoveBaseControl;
+            this.StartP = new PointF(e.X, e.Y);
+            if (this.staticImage != null)
             {
-                this.cmd = ECommandType.PinDraw;
-                this.StartC = sender as MoveBaseControl;
-                this.StartP = new PointF(e.X, e.Y);
-                if (this.staticImage != null)
-                {
-                    this.staticImage.Dispose();
-                    this.staticImage = null;
-                }
-                this.staticImage = new Bitmap(this.Width, this.Height);
-                Graphics g = Graphics.FromImage(this.staticImage);
-                g.Clear(this.BackColor);
-                this.RepaintStatic(g);
-                g.Dispose();
+                this.staticImage.Dispose();
+                this.staticImage = null;
             }
+            this.staticImage = new Bitmap(this.Width, this.Height);
+            Graphics g = Graphics.FromImage(this.staticImage);
+            g.Clear(this.BackColor);
+            this.RepaintStatic(g);
+            g.Dispose();
+        }
+        public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            // 别删这句话，删了就出问题
+            this.endC = null;
+            if (e.Button != MouseButtons.Left) return;
+            // 画框
             if (SelectFrame())
+                frameWrapper.FrameWrapper_MouseMove(e);
+            // 控件移动
+            else if (SelectDrag())
+                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+            // 绘制
+            else if (cmd == ECommandType.PinDraw)
+                this.MouseMoveWhenPinDraw(e);
+        }
+        private void MouseMoveWhenPinDraw(MouseEventArgs e)
+        {
+            // 吸附效果实现
+            /*
+             * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
+             * 2. 如果在，对该点就行修正
+             * 3. 
+             */
+            PointF nowP = e.Location;
+            if (this.lineWhenMoving != null)
+                invalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
+            else
+                invalidateRectWhenMoving = new Rectangle();
+            // 遍历所有OpControl的leftPin
+            // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
+            // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
+            // 遍历一遍之后如果没有被校正，则this.endC=null
+            foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
             {
-                frameWrapper.FrameWrapper_MouseDown(e);
+                Control con = modelEle.InnerControl;
+                if (modelEle.Type == ElementType.Operator && con != startC)
+                {
+                    // 修正坐标
+                    nowP = (con as IMoveControl).RevisePointLoc(nowP);
+                    // 完成一次矫正
+                    if (this.endC != null)
+                        break;
+                }
             }
-            if (SelectDrag())
+            EndP = nowP;
+            this.lineWhenMoving = new Bezier(StartP, nowP);
+            // 不应该挡住其他的线
+            CoverPanelByRect(invalidateRectWhenMoving);
+            this.lineWhenMoving.OnMouseMove(nowP);
+            // 重绘曲线
+            RepaintObject(this.lineWhenMoving);
+        }
+        public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+            // 画框处理
+            if (SelectFrame())
+                frameWrapper.FrameWrapper_MouseUp(e);
+            // 拖拽处理
+            else if (SelectDrag())
+                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+            // 非画线落点处理
+            else if (cmd == ECommandType.PinDraw)
+                this.MouseUpWhenPinDraw();
+        }
+        private void MouseUpWhenPinDraw()
+        {
+            cmd = ECommandType.Null;
+            lineWhenMoving = null;
+
+            /* 不是所有位置Up都能形成曲线的
+             * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
+             */
+            if (CanNotPinDraw())
             {
-                dragWrapper.DragDown(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
+                this.RepaintAllRelations();
+                this.RepaintStartcPin(StartC, StartC.ID);
+                return;
             }
+
+            // 画线落点处理
+            /* 
+                * 在Canvas_MouseMove的时候，对鼠标的终点进行
+                * 只保存线索引
+                *         __________
+                * endP1  | MControl | startP
+                * endP2  |          |
+                *         ----------
+                */
+            (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            ModelRelation mr = new ModelRelation(
+                StartC.ID,
+                EndC.ID,
+                StartP,
+                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
+                (endC as MoveOpControl).RevisedPinIndex
+                );
+            // 1. 关系不能重复
+            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
+            // 3. 成环不能添加
+            ModelDocument cd = Global.GetCurrentDocument();
+            CyclicDetector cdt = new CyclicDetector(cd, mr);
+            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+            bool isCyclic = cdt.IsCyclic();
+            if (!isDuplicatedRelation && !isCyclic)
+            {
+                cd.AddModelRelation(mr);
+                Global.GetMainForm().SetDocumentDirty();
+                //endC右键菜单设置Enable                     
+                Global.GetOptionDao().EnableOpOptionView(mr);
+            }
+            this.Invalidate();
         }
         private bool IsValidModelRelation(ModelRelation mr)
         {
@@ -256,38 +371,41 @@ namespace Citta_T1.Controls
 
         private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.DeleteSelectedLines();
+            this.DeleteSelectedLinesByIndex();
         }
 
-        public void DeleteSelectedLines()
+        public void DeleteSelectedLinesByIndex()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             foreach (int i in selectLineIndexs)
             {
-                try
-                {
-                    ModelRelation mr = mrs[i];
-                    //删除线配置逻辑
-                    ModelDocument doc = Global.GetCurrentDocument();
-                    doc.StatusChangeWhenDeleteLine(mr.EndID);
-
-                    doc.RemoveModelRelation(mr);
-                    //关联算子引脚自适应改变
-                    MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
-                    this.RepaintStartcPin(lineStartC, mr.StartID);
-                    MoveBaseControl lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
-                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
-                    //删除线文档dirty
-                    Global.GetMainForm().SetDocumentDirty();
-                }
-                catch (Exception e)
-                {
-                    log.Error("CanvasPanel删除线时发生错误:" + e);
-                }
-
+                ModelRelation mr = mrs[i];
+                this.DeleteSelectedLine(mr);
             }
             selectLineIndexs.Clear();
             this.Invalidate(false);
+        }
+        private void DeleteSelectedLine(ModelRelation mr)
+        {
+            try
+            {
+                //删除线配置逻辑
+                ModelDocument doc = Global.GetCurrentDocument();
+                doc.StatusChangeWhenDeleteLine(mr.EndID);
+
+                doc.RemoveModelRelation(mr);
+                //关联算子引脚自适应改变
+                MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
+                this.RepaintStartcPin(lineStartC, mr.StartID);
+                MoveBaseControl lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
+                (lineEndC as IMoveControl).InPinInit(mr.EndPin);
+                //删除线文档dirty
+                Global.GetMainForm().SetDocumentDirty();
+            }
+            catch (Exception e)
+            {
+                log.Error("CanvasPanel删除线时发生错误:" + e);
+            }
         }
         /// <summary>
         /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1
@@ -315,61 +433,6 @@ namespace Citta_T1.Controls
                 return index;
             else
                 return -1;
-        }
-        public void CanvasPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            // 别删这句话，删了就出问题
-            this.endC = null;
-            // 画框
-            if (SelectFrame())
-            {
-                frameWrapper.FrameWrapper_MouseMove(e);
-
-            }
-            if (e.Button != MouseButtons.Left) return;
-            // 控件移动
-            else if (SelectDrag())
-            {
-                dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
-            }
-            // 绘制
-            else if (cmd == ECommandType.PinDraw)
-            {
-                // 吸附效果实现
-                /*
-                 * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
-                 * 2. 如果在，对该点就行修正
-                 * 3. 
-                 */
-                PointF nowP = e.Location;
-                if (this.lineWhenMoving != null)
-                    invalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
-                else
-                    invalidateRectWhenMoving = new Rectangle();
-                // 遍历所有OpControl的leftPin
-                // 是否在一轮循环中被多次修正？=> 只要控件不堆叠在一起，就不会出现被多个控件修正的情况
-                // 只要在循环中被修正一次，就退出，防止被多个控件修正坐标
-                // 遍历一遍之后如果没有被校正，则this.endC=null
-                foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
-                {
-                    Control con = modelEle.InnerControl;
-                    if (modelEle.Type == ElementType.Operator && con != startC)
-                    {
-                        // 修正坐标
-                        nowP = (con as IMoveControl).RevisePointLoc(nowP);
-                        // 完成一次矫正
-                        if (this.endC != null)
-                            break;
-                    }
-                }
-                EndP = nowP;
-                this.lineWhenMoving = new Bezier(StartP, nowP);
-                // 不应该挡住其他的线
-                CoverPanelByRect(invalidateRectWhenMoving);
-                this.lineWhenMoving.OnMouseMove(nowP);
-                // 重绘曲线
-                RepaintObject(this.lineWhenMoving);
-            }
         }
         /*
          * 根据lines来重绘保存好的静态图
@@ -419,74 +482,6 @@ namespace Citta_T1.Controls
             g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
             g.Dispose();
 
-        }
-        public void CanvasPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button != MouseButtons.Left)
-                return;
-            // 画框处理
-            if (SelectFrame())
-            {
-                frameWrapper.FrameWrapper_MouseUp(e);
-                return;
-            }
-            // 拖拽处理
-            if (SelectDrag())
-            {
-                dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
-                return;
-            }
-
-            // 非画线落点处理
-            if (cmd != ECommandType.PinDraw)
-                return;
-
-            cmd = ECommandType.Null;
-            lineWhenMoving = null;
-
-            /* 不是所有位置Up都能形成曲线的
-             * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
-             */
-            if (CanNotPinDraw())
-            {
-                this.RepaintAllRelations();
-                this.RepaintStartcPin(StartC, StartC.ID);
-                return;
-            }
-
-            // 画线落点处理
-            /* 
-                * 在Canvas_MouseMove的时候，对鼠标的终点进行
-                * 只保存线索引
-                *         __________
-                * endP1  | MControl | startP
-                * endP2  |          |
-                *         ----------
-                */
-            (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
-            ModelRelation mr = new ModelRelation(
-                StartC.ID,
-                EndC.ID,
-                StartP,
-                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                (endC as MoveOpControl).RevisedPinIndex
-                );
-            // 1. 关系不能重复
-            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
-            // 3. 成环不能添加
-            ModelDocument cd = Global.GetCurrentDocument();
-            CyclicDetector cdt = new CyclicDetector(cd, mr);
-            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
-            bool isCyclic = cdt.IsCyclic();
-            if (!isDuplicatedRelation && !isCyclic)
-            {
-                cd.AddModelRelation(mr);
-                Global.GetMainForm().SetDocumentDirty();
-                //endC右键菜单设置Enable                     
-                Global.GetOptionDao().EnableOpOptionView(mr);
-
-            }
-            this.Invalidate();
         }
 
         private bool CanNotPinDraw()

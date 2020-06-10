@@ -691,7 +691,6 @@ namespace Citta_T1.Controls.Move.Op
                    new Size(mouseR, mouseR));
             CanvasPanel canvas = Global.GetCanvasPanel();
 
-            Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
                 int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
@@ -707,7 +706,6 @@ namespace Citta_T1.Controls.Move.Op
                         )
                     );
 
-                e.DrawRectangle(Pens.Black, leftPinRect);
                 int pinLeftX = leftPinRect.X;
                 int pinTopY = leftPinRect.Y;
 
@@ -728,7 +726,6 @@ namespace Citta_T1.Controls.Move.Op
                     }
                 }
             }
-            e.Dispose();
             if (!isRevised)
                 canvas.EndC = null;
             return revisedP;
