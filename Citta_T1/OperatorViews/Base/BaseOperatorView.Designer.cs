@@ -39,6 +39,7 @@ namespace Citta_T1.OperatorViews.Base
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
@@ -188,6 +189,17 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(32, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 0);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "数据信息：";
+            // 
             // BaseOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -224,5 +236,7 @@ namespace Citta_T1.OperatorViews.Base
         protected System.Windows.Forms.Panel bottomPanel;     // 底部面板，放置确认，取消两个按钮 
         protected System.Windows.Forms.Panel keyPanel;        // 左侧面板，放置输入框提示label
         protected System.Windows.Forms.Panel valuePanel;      // 右侧面板，放置各种选项输入框
+
+        protected System.Windows.Forms.Label label1;          // 数据源提示label
     }
 }
