@@ -181,5 +181,16 @@ namespace Citta_T1.OperatorViews.Base
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
         }
+
+        //更新后续子图所有节点状态
+        protected void UpdateSubGraphStatus()
+        {
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
+                this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
@@ -76,12 +75,8 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         #endregion

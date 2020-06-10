@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -73,13 +71,8 @@ namespace Citta_T1.OperatorViews
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
             this.selectedColumns.Add("频率统计结果");
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()

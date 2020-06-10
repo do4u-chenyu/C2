@@ -78,14 +78,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
-
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
