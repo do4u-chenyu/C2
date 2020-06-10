@@ -12,7 +12,7 @@ namespace Citta_T1.Business.Model
 {
     class ModelXmlWriter
     {
-        private XmlDocument doc;
+        private  readonly XmlDocument doc;
 
         public ModelXmlWriter(string nodeName, XmlDocument xmlDoc, XmlElement parent)
         {
@@ -54,9 +54,9 @@ namespace Citta_T1.Business.Model
     }
     class ModelXmlReader
     {
-        private XmlNode xn;
-        private Dictionary<string, string> dict;
-        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        private readonly XmlNode xn;
+        private readonly Dictionary<string, string> dict;
+        private static readonly LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public ModelXmlReader(XmlNode xmlNode)
         {
             xn = xmlNode;
@@ -88,6 +88,12 @@ namespace Citta_T1.Business.Model
         {
             try
             {
+                if(String.IsNullOrEmpty(dict["start"])
+                    || String.IsNullOrEmpty(dict["end"])
+                    || String.IsNullOrEmpty(dict["startlocation"])
+                    || String.IsNullOrEmpty(dict["endlocation"])
+                    || String.IsNullOrEmpty(dict["endpin"]))
+                    return ModelRelation.Empty;
                 return new ModelRelation(Convert.ToInt32(dict["start"]),
                                          Convert.ToInt32(dict["end"]),
                                          OpUtil.ToPointFType(dict["startlocation"]),
@@ -105,12 +111,12 @@ namespace Citta_T1.Business.Model
 
     class DocumentSaveLoad
     {
-        private string modelPath;
-        private string modelFilePath;
-        private ModelDocument modelDocument;
-        private float screenFactor;
+        private readonly string modelPath;
+        private readonly string modelFilePath;
+        private readonly ModelDocument modelDocument;
+        private readonly float screenFactor;
 
-        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        private static readonly LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
@@ -212,10 +218,14 @@ namespace Citta_T1.Business.Model
         {
             string text = String.Empty;
             try
-            { text = node.SelectSingleNode(nodeName).InnerText; }
+            {
+                if (node.SelectSingleNode(nodeName)==null)
+                    return text;
+                text = node.SelectSingleNode(nodeName).InnerText;
+            }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("DocumentSaveLoad 读取InnerText: " + e.Message);
             }
             return text;
         }
@@ -229,10 +239,12 @@ namespace Citta_T1.Business.Model
                 XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
                 this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
+                if (rootNode == null || nodeLists == null)
+                    return;
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("DocumentSaveLoad 读取Xml: " + e.Message);
                 return;
             }
 
