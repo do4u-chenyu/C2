@@ -215,7 +215,7 @@ namespace Citta_T1.OperatorViews.Base
             e.Graphics.Clear(this.BackColor);
         }
 
-        protected Button CreateDelButton(string name)
+        protected Button NewDelButton(string name)
         {
             Button delButton = new Button();
             delButton.FlatAppearance.BorderColor = SystemColors.Control;
@@ -230,6 +230,13 @@ namespace Citta_T1.OperatorViews.Base
             delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton.Name = name;
             return delButton;
+        }
+
+        protected Button NewAddButton(string name)
+        {
+            Button addButton = NewDelButton(name);
+            addButton.BackgroundImage = Properties.Resources.add;
+            return addButton;
         }
     }
 }
