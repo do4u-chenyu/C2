@@ -102,11 +102,11 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 int[] optionItems1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2]; 
                 control1.Text = (control1 as ComboBox).Items[optionItems1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[optionItems1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[optionItems1[2]].ToString();
                 control1.Tag = optionItems1[0].ToString();
                 control2.Tag = optionItems1[1].ToString();
@@ -133,9 +133,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                    Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
@@ -215,7 +215,7 @@ namespace Citta_T1.OperatorViews
             delButton1.UseVisualStyleBackColor = true;
             delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.Delete_Click);
+            delButton1.Click += new System.EventHandler(this.Del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
             this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
@@ -264,7 +264,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void Delete_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);

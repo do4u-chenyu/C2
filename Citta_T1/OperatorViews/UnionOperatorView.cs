@@ -114,10 +114,10 @@ namespace Citta_T1.OperatorViews
 
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
+                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 control3.Text = factorList1[2];
                 control1.Tag = itemsList1[0].ToString();
                 control2.Tag = itemsList1[1].ToString();
@@ -247,7 +247,7 @@ namespace Citta_T1.OperatorViews
             delButton1.UseVisualStyleBackColor = true;
             delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
             delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.DelButton1_Click);
+            delButton1.Click += new System.EventHandler(this.Del_Click);
             delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton1.Name = addLine.ToString();
             this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
@@ -296,7 +296,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void DelButton1_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);

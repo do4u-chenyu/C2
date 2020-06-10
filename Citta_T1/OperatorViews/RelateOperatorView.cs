@@ -80,15 +80,15 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == "") continue;
+                if (factor == String.Empty) continue;
 
                 int[] itemsList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);              
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];  
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
                 control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
                 control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
                 control1.Tag = itemsList1[0].ToString();
                 control2.Tag = itemsList1[1].ToString();
@@ -112,9 +112,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 6 + 3];
+                    Control control1 = this.tableLayoutPanel1.Controls[i * 6 + 0];
+                    Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
+                    Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 3];
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();

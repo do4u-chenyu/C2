@@ -76,7 +76,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[num].ToString();
                 control1.Tag = num.ToString();
             }
