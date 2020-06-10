@@ -201,7 +201,7 @@ namespace Citta_T1.Business.Model
         }
         public void EnableRs()
         {
-            this.ModelElements.FindAll(me => me.Type==ElementType.Result).ForEach(rs => rs.Enable());
+            this.ModelElements.FindAll(me => me.Type == ElementType.Result).ForEach(rs => rs.Enable());
         }
         public void UnEnable()
         {

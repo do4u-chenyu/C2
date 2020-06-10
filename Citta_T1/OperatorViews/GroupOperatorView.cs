@@ -58,20 +58,12 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("noRepetition")))
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("repetition")))
-                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("ascendingOrder")))
-                this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder"));
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("descendingOrder")))
-                this.descendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("descendingOrder"));
-
-            if (this.opControl.Option.GetOption("sortByNum") != "")
-                this.sortByNum.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByNum"));
-            if (this.opControl.Option.GetOption("sortByString") != "")
-                this.sortByString.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("sortByString"));
+            noRepetition.Checked = Convert.ToBoolean(opControl.Option.GetOption("noRepetition", "False"));
+            repetition.Checked = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
+            ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "True"));
+            descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "False"));
+            sortByNum.Checked    = Convert.ToBoolean(opControl.Option.GetOption("sortByNum", "True"));
+            sortByString.Checked = Convert.ToBoolean(opControl.Option.GetOption("sortByString", "False"));
 
             if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
             {
