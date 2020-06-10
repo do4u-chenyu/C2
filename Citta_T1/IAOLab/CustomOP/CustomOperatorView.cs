@@ -48,8 +48,8 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.outListCCBL1.Items.AddRange(nowColumnsName1);
@@ -60,21 +60,16 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
-            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
+            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
+            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
             this.opControl.Option.SetOption("randomBegin", this.randomBeginTextBox.Text);
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
-
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield0", outField);
-
-
-            if (this.Text != "AI实践算子设置")
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
+            if (opControl.OperatorDimension() == 2)
             {               
-                string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
-                this.opControl.Option.SetOption("outfield1", outField1);
+                this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
             }
 
             string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();

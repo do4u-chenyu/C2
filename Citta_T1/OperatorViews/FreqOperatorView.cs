@@ -100,7 +100,7 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
-            this.opControl.Option.SetOption("outfield", string.Join("\t", outListCCBL0.GetItemCheckIndex()));
+            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);

@@ -123,12 +123,12 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield", outField);
 
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();

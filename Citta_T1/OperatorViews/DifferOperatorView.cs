@@ -16,7 +16,6 @@ namespace Citta_T1.OperatorViews
 
         public DifferOperatorView(MoveOpControl opControl) : base(opControl)
         {
-
             InitializeComponent();
             InitByDataSource();
             LoadOption();
@@ -93,13 +92,12 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-
-            this.opControl.Option.SetOption("outfield", outField);
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string factor1 = index00 + "\t" + index11;
@@ -108,9 +106,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                    Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
+                    Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
