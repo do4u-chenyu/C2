@@ -124,24 +124,13 @@
             // 
             // topPanel
             // 
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(461, 22);
-            this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
             this.bottomPanel.Controls.Add(this.groupBox1);
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
-            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 145);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(461, 212);
-            this.bottomPanel.TabIndex = 1;
             this.bottomPanel.Controls.SetChildIndex(this.confirmButton, 0);
             this.bottomPanel.Controls.SetChildIndex(this.cancelButton, 0);
             this.bottomPanel.Controls.SetChildIndex(this.groupBox1, 0);
@@ -196,12 +185,8 @@
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 22);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.keyPanel.Name = "keyPanel";
             this.keyPanel.Size = new System.Drawing.Size(102, 123);
-            this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
@@ -212,12 +197,8 @@
             this.valuePanel.Controls.Add(this.dataSourceTB1);
             this.valuePanel.Controls.Add(this.dataSourceTB0);
             this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(102, 22);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
-            this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(359, 123);
-            this.valuePanel.TabIndex = 3;
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);

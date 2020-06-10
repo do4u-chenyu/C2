@@ -70,8 +70,6 @@
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Location = new System.Drawing.Point(0, 149);
             this.bottomPanel.Size = new System.Drawing.Size(324, 42);
             // 

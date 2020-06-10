@@ -138,12 +138,8 @@
             this.valuePanel.Controls.Add(this.groupBox2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
-            this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(301, 162);
-            this.valuePanel.TabIndex = 3;
             this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
