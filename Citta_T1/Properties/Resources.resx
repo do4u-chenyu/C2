@@ -193,4 +193,46 @@
   <data name="continual" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\toolbox\continual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="avgOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\avgOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="collideOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\collideOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dataStandarOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\dataStandarOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="differOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\differOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="filterOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\filterOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="freqOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\freqOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="groupOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\groupOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="maxOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\maxOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\minOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="randomOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\randomOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="releateOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\releateOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sortOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\sortOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unionOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\unionOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wordFilterOp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\res\opControl\wordFilterOp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
