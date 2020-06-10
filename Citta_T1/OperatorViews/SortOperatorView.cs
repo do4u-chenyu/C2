@@ -17,9 +17,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             InitByDataSource();
-            LoadOption();
-
-            
+            LoadOption();  
         }
 
         #region 配置初始化

@@ -5,6 +5,7 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -212,6 +213,23 @@ namespace Citta_T1.OperatorViews.Base
         protected void GroupBox_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
+        }
+
+        protected Button CreateDelButton(string name)
+        {
+            Button delButton = new Button();
+            delButton.FlatAppearance.BorderColor = SystemColors.Control;
+            delButton.FlatAppearance.BorderSize = 0;
+            delButton.FlatAppearance.MouseDownBackColor = SystemColors.Control;
+            delButton.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            delButton.FlatStyle = FlatStyle.Flat;
+            delButton.BackColor = SystemColors.Control;
+            delButton.UseVisualStyleBackColor = true;
+            delButton.BackgroundImage = Properties.Resources.div;
+            delButton.BackgroundImageLayout = ImageLayout.Center;
+            delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            delButton.Name = name;
+            return delButton;
         }
     }
 }
