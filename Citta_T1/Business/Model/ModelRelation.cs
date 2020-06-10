@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Citta_T1.Business.Model
 {
-    class ModelRelation
+    public class ModelRelation
     {
         public ElementType Type { get { return ElementType.Relation; } }
         public int EndPin { get; set; }
