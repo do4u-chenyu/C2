@@ -191,8 +191,8 @@
             this.textBox0.Size = new System.Drawing.Size(86, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.Enter += new System.EventHandler(this.TextBoxEx1_Enter);
-            this.textBox0.Leave += new System.EventHandler(this.TextBoxEx1_Leave);
+            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox_Leave);
             // 
             // groupBox1
             // 
@@ -205,7 +205,7 @@
             this.groupBox1.Size = new System.Drawing.Size(138, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // repetition
             // 

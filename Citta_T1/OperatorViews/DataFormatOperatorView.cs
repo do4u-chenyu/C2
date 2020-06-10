@@ -191,18 +191,7 @@ namespace Citta_T1.OperatorViews
             dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            TextBox textBox = new TextBox
-            {
-                Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right))),
-                Text = "别名",
-                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
-                ForeColor = SystemColors.ActiveCaption
-            };
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Enter += TextBox1_Enter;
-            textBox.Leave += TextBox1_Leave;
-            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+            TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
             Button addButton = NewAddButton(addLine.ToString());
@@ -300,26 +289,5 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
         }
-
-        private void TextBox1_Enter(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == "别名")
-            {
-                TextBoxEx.Text = String.Empty;
-            }
-            TextBoxEx.ForeColor = Color.Black;
-        }
-
-        private void TextBox1_Leave(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == String.Empty)
-            {
-                TextBoxEx.Text = "别名";
-                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
-            }
-        }
-
     }
 }

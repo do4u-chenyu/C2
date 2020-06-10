@@ -210,7 +210,7 @@ namespace Citta_T1.OperatorViews.Base
         
         }
 
-        protected void GroupBox_Paint(object sender, PaintEventArgs e)
+        protected void GroupBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
@@ -237,6 +237,43 @@ namespace Citta_T1.OperatorViews.Base
             Button addButton = NewDelButton(name);
             addButton.BackgroundImage = Properties.Resources.add;
             return addButton;
+        }
+
+        protected TextBox NewAliasTextBox()
+        {
+            TextBox textBox = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Text = "别名",
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
+                ForeColor = SystemColors.ActiveCaption
+            };
+            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Enter += AliasTextBox_Enter;
+            textBox.Leave += AliasTextBox_Enter;
+            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
+            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+            return textBox;
+        }
+
+        protected void AliasTextBox_Enter(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == "别名")
+            {
+                TextBoxEx.Text = String.Empty;
+            }
+            TextBoxEx.ForeColor = Color.Black;
+        }
+
+        protected void AliasTextBox_Leave(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == String.Empty)
+            {
+                TextBoxEx.Text = "别名";
+                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
+            }
         }
     }
 }
