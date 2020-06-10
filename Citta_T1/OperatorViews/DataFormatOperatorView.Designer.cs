@@ -154,8 +154,8 @@
             this.textBox0.Size = new System.Drawing.Size(114, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox_Enter);
-            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox1_Enter);
+            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox1_Enter);
             // 
             // label3
             // 
