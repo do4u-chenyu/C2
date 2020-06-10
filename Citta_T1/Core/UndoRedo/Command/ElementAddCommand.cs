@@ -9,7 +9,7 @@ namespace Citta_T1.Core.UndoRedo.Command
         private readonly ModelElement me;
         public ElementAddCommand(ModelElement element)
         {
-            this.me = element;        
+            this.me = element;
         }
         public bool Redo()
         {

@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
@@ -13,54 +12,45 @@ namespace Citta_T1.Controls
 {
     class DragWrapper
     {
-        private int width;
-        private int height;
-        private Point start, now;
-        private bool startDrag;
-
-        private int worldWidth;
-        private int worldHeight;
-        private Bitmap staticImage;
-
-        public int Width { get => width; set => width = value; }
-        public int Height { get => height; set => height = value; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public float Factor { get; set; }
-        public bool StartDrag { get => startDrag; set => startDrag = value; }
-        public int WorldWidth { get => worldWidth; set => worldWidth = value; }
-        public int WorldHeight { get => worldHeight; set => worldHeight = value; }
-        public Point Start { get => start; set => start = value; }
-        public Point Now { get => now; set => now = value; }
-        public Bitmap StaticImage { get => staticImage; set => staticImage = value; }
+        public bool StartDrag { get; set; }
+        public int WorldWidth { get; set; }
+        public int WorldHeight { get; set; }
+        public Point Start { get; set; }
+        public Point Now { get; set; }
+        public Bitmap StaticImage { get; set; }
 
         public DragWrapper()
         {
-            worldWidth = 2000;
-            worldHeight = 1000;
-            startDrag = false;
+            WorldWidth = 2000;
+            WorldHeight = 1000;
+            StartDrag = false;
         }
         public void InitDragWrapper(Size canvasSize, float canvasFactor)
         {
-            width = canvasSize.Width;
-            height = canvasSize.Height;
+            Width = canvasSize.Width;
+            Height = canvasSize.Height;
             Factor = canvasFactor;
         }
         public void DragDown(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
-            this.startDrag = true;
-            this.start = e.Location;
-            if (this.staticImage != null)
+            this.StartDrag = true;
+            this.Start = e.Location;
+            if (this.StaticImage != null)
             {   // bitmap是重型资源,需要强制释放
-                this.staticImage.Dispose();
-                this.staticImage = null;
+                this.StaticImage.Dispose();
+                this.StaticImage = null;
             }
             this.InitDragWrapper(canvasSize, canvasFactor);
-            this.staticImage = this.CreateWorldImage();
+            this.StaticImage = this.CreateWorldImage();
         }
         public void DragMove(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
                 return;
-            this.now = e.Location;
+            this.Now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
 
@@ -72,18 +62,18 @@ namespace Citta_T1.Controls
             if (e.Button == MouseButtons.Right)
                 return;
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            this.now = e.Location;
+            this.Now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.MoveWorldImage(n);
-            this.ControlChange(start, now);
+            this.ControlChange(Start, Now);
             n.Dispose();
-            this.startDrag = false;
-            this.start = e.Location;           
+            this.StartDrag = false;
+            this.Start = e.Location;
 
         }
         public bool DragPaint(Size canvasSize, float canvasFactor, PaintEventArgs e)
         {
-            if (this.startDrag && this.staticImage != null)
+            if (this.StartDrag && this.StaticImage != null)
             {
                 this.InitDragWrapper(canvasSize, canvasFactor);
                 this.MoveWorldImage(e.Graphics);
@@ -94,7 +84,7 @@ namespace Citta_T1.Controls
         //生成当前模型控件快照
         public virtual Bitmap CreateWorldImage()
         {
-            Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * Factor), Convert.ToInt32(worldHeight * Factor));
+            Bitmap staticImage = new Bitmap(Convert.ToInt32(WorldWidth * Factor), Convert.ToInt32(WorldHeight * Factor));
             Graphics g = Graphics.FromImage(staticImage);
 
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
@@ -102,7 +92,7 @@ namespace Citta_T1.Controls
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
             g.Clear(Color.White);
-            List<ModelElement>  modelElements  = Global.GetCurrentDocument().ModelElements;
+            List<ModelElement> modelElements = Global.GetCurrentDocument().ModelElements;
             List<ModelRelation> modelRelations = Global.GetCurrentDocument().ModelRelations;
 
 
@@ -137,24 +127,24 @@ namespace Citta_T1.Controls
         public virtual void MoveWorldImage(Graphics n)
         {
             DragEdgeCheck(out Point mapOrigin, out Point moveOffset);
-            mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + now.X - start.X;
-            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor) + now.Y - start.Y;
+            mapOrigin.X = Convert.ToInt32(mapOrigin.X * Factor) + Now.X - Start.X;
+            mapOrigin.Y = Convert.ToInt32(mapOrigin.Y * Factor) + Now.Y - Start.Y;
             moveOffset.X = Convert.ToInt32(moveOffset.X * Factor);
             moveOffset.Y = Convert.ToInt32(moveOffset.Y * Factor);
-            n.DrawImageUnscaled(this.staticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
+            n.DrawImageUnscaled(this.StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
         }
 
         public void ControlChange(Point start, Point now)
         {
-            DragEdgeCheck(out Point mapOrigin, out Point moveOffset);           
+            DragEdgeCheck(out Point mapOrigin, out Point moveOffset);
             int dx = Convert.ToInt32((now.X - start.X) / this.Factor);
             int dy = Convert.ToInt32((now.Y - start.Y) / this.Factor);
-            
+
             // 移动当前文档中的所有控件
             LineUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
-            
+
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);
             // 将所有控件都显示出来
             Global.GetCurrentDocument().ModelElements.ForEach(me => me.Show());
@@ -163,14 +153,14 @@ namespace Citta_T1.Controls
             Global.GetCanvasPanel().Invalidate(false);
             Global.GetNaviViewControl().UpdateNaviView();
         }
-        private void DragEdgeCheck(out Point mapOrigin,out Point moveOffset)
+        private void DragEdgeCheck(out Point mapOrigin, out Point moveOffset)
         {
-            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;           
-            int dx = Convert.ToInt32((now.X - start.X) / Factor);
-            int dy = Convert.ToInt32((now.Y - start.Y) / Factor);
+            mapOrigin = Global.GetCurrentDocument().WorldMap.MapOrigin;
+            int dx = Convert.ToInt32((Now.X - Start.X) / Factor);
+            int dy = Convert.ToInt32((Now.Y - Start.Y) / Factor);
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx, mapOrigin.Y + dy);
-            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);       
-            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;  
+            moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(Factor, Width, Height);
+            Global.GetCurrentDocument().WorldMap.MapOrigin = mapOrigin;
         }
     }
 }

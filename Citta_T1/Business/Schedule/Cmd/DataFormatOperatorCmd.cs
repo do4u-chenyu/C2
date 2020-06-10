@@ -14,10 +14,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFilePath = inputFilePaths.First();//输入文件
 
             //拼接输出字段facotr1\factor2...\factorN
-            string outField = "$" + TransInputLine(option.GetOption("factor1").Split(',')[0]);
+            string outField = "$" + TransInputLine(option.GetOptionSplit("factor1")[0]);
             for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
-                string[] tmpFactor = option.GetOption("factor" + i.ToString()).Split(',');
+                string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 outField = outField + ",$" + TransInputLine(tmpFactor[0]);
             }
 

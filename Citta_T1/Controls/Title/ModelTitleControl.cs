@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Citta_T1.Core;
+using System;
 using System.Text.RegularExpressions;
-using Citta_T1.Business;
-using Citta_T1.Utils;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Left;
-using Citta_T1.Core;
+using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Title
 {
     public delegate void DocumentSwitchEventHandler(string modelTitle);
-    
+
     public partial class ModelTitleControl : UserControl
     {
         private string modelTitle;
@@ -27,7 +16,7 @@ namespace Citta_T1.Controls.Title
         public string ModelTitle { get => modelTitle; }
         public bool Dirty { get => dirty; set => dirty = value; }
         public event DocumentSwitchEventHandler ModelDocumentSwitch;
-    
+
 
         public ModelTitleControl()
         {
@@ -73,7 +62,7 @@ namespace Citta_T1.Controls.Title
                         this.modelTitlelabel.Text += "...";
                 }
             }
-            
+
         }
         public void SetNewModelTitle(string modelTitle, int nr)
         {
@@ -86,7 +75,7 @@ namespace Citta_T1.Controls.Title
                     this.modelTitlelabel.Text += "...";
             }
         }
- 
+
 
         private void ClosePictureBox_Click(object sender, EventArgs e)
         {
@@ -96,7 +85,7 @@ namespace Citta_T1.Controls.Title
             ModelTitlePanel parentPanel = Global.GetModelTitlePanel();
             MainForm mainForm = Global.GetMainForm();
             if (!Global.GetCurrentDocument().Dirty)
-            {    
+            {
                 if (parentPanel.Controls.Count != 2)
                 {
                     Global.GetMyModelControl().EnableClosedDocumentMenu(this.modelTitle);
@@ -105,10 +94,10 @@ namespace Citta_T1.Controls.Title
                 }
                 Global.GetCurrentDocument().TaskManager.CloseThread(); // 此处可能是个bug,需要讨论
                 return;
-            }                       
-            DialogResult result= MessageBox.Show(String.Format("保存文件\"{0}\"?", modelTitle),
+            }
+            DialogResult result = MessageBox.Show(String.Format("保存文件\"{0}\"?", modelTitle),
                                                  "保存",
-                                                  MessageBoxButtons.YesNoCancel, 
+                                                  MessageBoxButtons.YesNoCancel,
                                                   MessageBoxIcon.Question);
             // 取消操作
             if (result == DialogResult.Cancel)
@@ -116,7 +105,7 @@ namespace Citta_T1.Controls.Title
 
             // 保存文件
             if (result == DialogResult.Yes)
-            {                
+            {
                 mainForm.SaveCurrentDocument();
                 ClearDirtyPictureBox();
             }
@@ -126,7 +115,7 @@ namespace Citta_T1.Controls.Title
             {
                 Global.GetMyModelControl().EnableClosedDocumentMenu(this.modelTitle);
                 mainForm.DeleteCurrentDocument();
-                parentPanel.RemoveModel(this);                  
+                parentPanel.RemoveModel(this);
             }
             Global.GetCurrentDocument().TaskManager.CloseThread();
         }
@@ -140,7 +129,7 @@ namespace Citta_T1.Controls.Title
             this.selected = true;
             ModelDocumentSwitch?.Invoke(modelTitle);
         }
-        
+
         private void MdelTitlelabel_Click(object sender, EventArgs e)
         {
             ShowSelectedBorder();

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs
 {
@@ -55,9 +55,9 @@ namespace Citta_T1.Dialogs
             string pythonVersion = String.Empty;
             if (CheckPythonInterpreter(pythonFFP, ref pythonVersion) != 0)
             {
-                MessageBox.Show(String.Format("Python解释器似乎无法正常使用: {0}", pythonFFP), 
-                    "Python解释器导入错误", 
-                    MessageBoxButtons.OK, 
+                MessageBox.Show(String.Format("Python解释器似乎无法正常使用: {0}", pythonFFP),
+                    "Python解释器导入错误",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return;
             }
@@ -84,7 +84,7 @@ namespace Citta_T1.Dialogs
                     if (row.Cells[0].Value.ToString() == pythonFFP)
                         return true;
                 }
-               
+
             }
             return false;
         }
@@ -98,7 +98,7 @@ namespace Citta_T1.Dialogs
         {
             // 默认别名采用 python 解释器的可执行文件名,但一般都是python.exe,看不出区别
             // 用正则表达式从路径中提取带版本号的python解释器名称,失败时采用默认命名
-            string aliasDefault = "Python" + pythonVersion;      
+            string aliasDefault = "Python" + pythonVersion;
             this.pythonFFPTextBox.Text = pythonFFP;
             // 第一行 默认选中
             if (this.dataGridView.Rows.Count == 0)
@@ -117,7 +117,7 @@ namespace Citta_T1.Dialogs
             {
                 this.pythonFFPTextBox.Text = pythonFFP;
                 this.chosenPythonLable.Text = alias;
-            }       
+            }
         }
 
         private bool SavePythonConfig()
@@ -147,7 +147,7 @@ namespace Citta_T1.Dialogs
         // 运行python --version, 检查环境是否有问题
         private int CheckPythonInterpreter(string pythonFFP, ref string pythonVersion)
         {
-            
+
             int defaultExitCode = 1;
             Process p = new Process();
             p.StartInfo.FileName = pythonFFP;
@@ -231,7 +231,7 @@ namespace Citta_T1.Dialogs
             // 寻找可能的Python路径,
             string possibleInitialDirectory = ConfigUtil.GetDefaultPythonOpenFileDirectory();
             if (!String.IsNullOrEmpty(possibleInitialDirectory))
-                pythonOpenFileDialog.InitialDirectory = possibleInitialDirectory;  
+                pythonOpenFileDialog.InitialDirectory = possibleInitialDirectory;
         }
 
 
@@ -250,7 +250,7 @@ namespace Citta_T1.Dialogs
             }
             // 特殊字符判断
             if (value.IndexOfAny(IllegalCharacter) != -1)
-            {  
+            {
                 dataGridView.Rows[e.RowIndex].ErrorText = "别名不能含有特殊字符 " + String.Join(" ", IllegalCharacter);
                 e.Cancel = true;
                 return;
@@ -277,13 +277,13 @@ namespace Citta_T1.Dialogs
             {
                 // 全部都没选中时, chosen清空，  选定的当前列, 需要用 EditedFormattedValue,此时Value尚未提交
                 DataGridViewCell cell = dataGridView.Rows[i].Cells[CheckBoxColumnIndex];
-                if (i == e.RowIndex ? (bool)cell.EditedFormattedValue : (bool)cell.Value) 
+                if (i == e.RowIndex ? (bool)cell.EditedFormattedValue : (bool)cell.Value)
                 {
                     this.chosenPythonLable.Text = dataGridView.Rows[i].Cells[AliasColumnIndex].Value.ToString().Trim();
                     return;
-                }         
+                }
             }
-            this.chosenPythonLable.Text = String.Empty;         
+            this.chosenPythonLable.Text = String.Empty;
         }
 
         private void DataGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

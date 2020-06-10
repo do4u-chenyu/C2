@@ -128,11 +128,11 @@
     <Compile Include="Business\Option\MoveRsControlFactory.cs" />
     <Compile Include="Business\Option\OperatorOption.cs" />
     <Compile Include="Business\Option\OptionDao.cs" />
-    <Compile Include="Business\Option\OptionInfoCheck.cs" />
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DataFormatOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\KeyWordOperatorCmd.cs" />
+    <Compile Include="Controls\ClipboardWrapper.cs" />
     <Compile Include="Controls\Common\ComCheckBoxList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,7 +182,7 @@
     <Compile Include="Controls\Common\NoFocusButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ControlMoveWrapper.cs" />
+    <Compile Include="Controls\MoveWrapper.cs" />
     <Compile Include="Controls\DragWrapper.cs" />
     <Compile Include="Controls\Interface\MoveControlInterface.cs" />
     <Compile Include="Controls\Left\DataButton.cs">
@@ -333,6 +333,12 @@
     <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="OperatorViews\Base\BaseOperatorView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </Compile>
     <Compile Include="OperatorViews\CollideOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,11 +369,11 @@
     <Compile Include="OperatorViews\GroupOperatorView.Designer.cs">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\KeyWordOperatorView.cs">
+    <Compile Include="OperatorViews\KeywordOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OperatorViews\KeyWordOperatorView.designer.cs">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    <Compile Include="OperatorViews\KeywordOperatorView.designer.cs">
+      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
     </Compile>
     <Compile Include="OperatorViews\MaxOperatorView.cs">
       <SubType>Form</SubType>
@@ -564,6 +570,9 @@
     <EmbeddedResource Include="OperatorViews\AvgOperatorView.resx">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OperatorViews\Base\BaseOperatorView.resx">
+      <DependentUpon>BaseOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\CollideOperatorView.resx">
       <DependentUpon>CollideOperatorView.cs</DependentUpon>
     </EmbeddedResource>
@@ -579,8 +588,8 @@
     <EmbeddedResource Include="OperatorViews\GroupOperatorView.resx">
       <DependentUpon>GroupOperatorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OperatorViews\KeyWordOperatorView.resx">
-      <DependentUpon>KeyWordOperatorView.cs</DependentUpon>
+    <EmbeddedResource Include="OperatorViews\KeywordOperatorView.resx">
+      <DependentUpon>KeywordOperatorView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OperatorViews\MaxOperatorView.resx">
       <DependentUpon>MaxOperatorView.cs</DependentUpon>
@@ -700,6 +709,12 @@
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="res\toolbox\continue.png" />
+    <None Include="res\toolbox\run.png" />
+    <None Include="res\toolbox\continual.png" />
+    <Content Include="sbin\xargs.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="res\toolbox\saveall.png" />
     <None Include="res\toolbox\reset.png" />
     <None Include="res\toolbox\redo.png" />
@@ -748,6 +763,9 @@
     <Content Include="sbin\cat_xls.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="sbin\grep.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\iconv.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -758,6 +776,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\msys-mpfr-6.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sbin\msys-pcre-1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="sbin\relate.exe">
@@ -859,12 +880,12 @@
   <ItemGroup>
     <PublishFile Include="sbin\true.exe">
       <Visible>False</Visible>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

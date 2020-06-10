@@ -1,9 +1,6 @@
 ﻿using Citta_T1.Business.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Business.Schedule
 {
@@ -35,6 +32,6 @@ namespace Citta_T1.Business.Schedule
         public List<ModelElement> DataElements { get => dataElements; set => dataElements = value; }
         public ModelElement OperateElement { get => operateElement; set => operateElement = value; }
         public ModelElement ResultElement { get => resultElement; set => resultElement = value; }
-        public string TripleName { get => tripleName;}
+        public string TripleName { get => tripleName; }
     }
 }

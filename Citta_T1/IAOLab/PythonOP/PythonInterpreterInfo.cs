@@ -1,9 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-
-namespace Citta_T1.IAOLab.PythonOP
+﻿namespace Citta_T1.IAOLab.PythonOP
 {
     class PythonInterpreterInfo
     {

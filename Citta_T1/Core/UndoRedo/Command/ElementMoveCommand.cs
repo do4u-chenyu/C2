@@ -1,7 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using System.Drawing;
 
 
@@ -30,20 +27,7 @@ namespace Citta_T1.Core.UndoRedo.Command
 
         private bool Move()
         {
-            switch (element.Type)
-            {
-                case ElementType.DataSource:
-                    oldLocation = (element.InnerControl as MoveDtControl).UndoRedoMoveLocation(oldLocation);
-                    break;
-                case ElementType.Operator:
-                    oldLocation = (element.InnerControl as MoveOpControl).UndoRedoMoveLocation(oldLocation);
-                    break;
-                case ElementType.Result:
-                    oldLocation = (element.InnerControl as MoveRsControl).UndoRedoMoveLocation(oldLocation);
-                    break;
-                default:
-                    break;
-            }
+            oldLocation = element.InnerControl.UndoRedoMoveLocation(oldLocation);
             return true;
         }
     }

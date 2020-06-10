@@ -1,9 +1,6 @@
 ﻿using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.IAOLab.PythonOP
 {
@@ -12,7 +9,7 @@ namespace Citta_T1.IAOLab.PythonOP
         private List<PythonInterpreterInfo> pythonInterpreterInfos;
 
         public PythonInterpreterInfo DefaultPythonInterpreterInfo { get { return pythonInterpreterInfos.Find(c => c.ChosenDefault); } }
-        
+
         public PythonInterpreterInfo[] Others { get { return pythonInterpreterInfos.FindAll(c => !c.ChosenDefault).ToArray(); } }
 
         public PythonInterpreterInfo[] AllPII { get { return pythonInterpreterInfos.ToArray(); } }
@@ -40,7 +37,7 @@ namespace Citta_T1.IAOLab.PythonOP
             }
         }
 
-      
+
 
 
     }

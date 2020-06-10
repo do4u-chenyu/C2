@@ -6,7 +6,6 @@ using Citta_T1.Controls.Flow;
 using Citta_T1.Controls.Left;
 using Citta_T1.Controls.Title;
 using Citta_T1.Controls.Top;
-using Org.BouncyCastle.Asn1.Mozilla;
 
 namespace Citta_T1.Core
 {
@@ -34,21 +33,22 @@ namespace Citta_T1.Core
         public static CanvasPanel GetCanvasPanel() { return canvasPanel; }
         public static ModelDocumentDao GetModelDocumentDao() { return modelDocumentDao; }
 
-        public static ModelDocument GetCurrentDocument() {
+        public static ModelDocument GetCurrentDocument()
+        {
             ModelDocument ret = null;
             if (GetModelDocumentDao() != null)
                 ret = GetModelDocumentDao().CurrentDocument;
-            return ret; 
+            return ret;
         }
         public static FlowControl GetFlowControl() { return flowControl; }
         public static MyModelControl GetMyModelControl() { return myModelControl; }
         public static RemarkControl GetRemarkControl() { return remarkControl; }
-        public static BottomLogControl GetLogView() { return logView; } 
-        public static OptionDao GetOptionDao() { return optionDao; } 
+        public static BottomLogControl GetLogView() { return logView; }
+        public static OptionDao GetOptionDao() { return optionDao; }
         public static DataSourceControl GetDataSourceControl() { return dataSourceControl; }
         public static BottomConsoleControl GetBottomPythonConsoleControl() { return bottomPythonConsoleControl; }
-        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; } 
-   
+        public static TopToolBarControl GetTopToolBarControl() { return topToolBarControl; }
+
 
 
         public static void SetMainForm(MainForm mf) { mainForm = mf; }
@@ -69,6 +69,6 @@ namespace Citta_T1.Core
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
 
         public const float Factor = 1.3F;
-       
+
     }
 }

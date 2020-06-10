@@ -1,10 +1,6 @@
-﻿using NPOI.SS.Formula.Functions;
+﻿using Citta_T1.Core;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Business.Model.World
@@ -30,7 +26,7 @@ namespace Citta_T1.Business.Model.World
     {
         private static readonly bool canvasUse = false;
         private readonly WorldMapInfo wmInfo = new WorldMapInfo();
-        
+
         public Point MapOrigin { get => wmInfo.MapOrigin; set => wmInfo.MapOrigin = value; }
         public float ScreenFactor { get => wmInfo.ScreenFactor; set => wmInfo.ScreenFactor = value; }
 
@@ -46,7 +42,7 @@ namespace Citta_T1.Business.Model.World
                     X = Convert.ToInt32(Ps.X - MapOrigin.X * ScreenFactor),
                     Y = Convert.ToInt32(Ps.Y - MapOrigin.Y * ScreenFactor)
                 }
-                :new Point
+                : new Point
                 {
                     X = Convert.ToInt32(Ps.X / ScreenFactor - MapOrigin.X),
                     Y = Convert.ToInt32(Ps.Y / ScreenFactor - MapOrigin.Y)
@@ -146,6 +142,66 @@ namespace Citta_T1.Business.Model.World
             {
                 dragOffset.Y = Ps.Y - 70;
             }
+            if (Ps.X > 2000 * screenFactor)
+            {
+                dragOffset.X = Ps.X - 2000;
+            }
+            if (Ps.Y > 900 * screenFactor)
+            {
+                dragOffset.Y = Ps.Y - 900;
+            }
+            return dragOffset;
+        }
+        public void WorldBoundControl(Point Pm, Control ct)
+        {
+            Point Pw = ScreenToWorld(Pm, true);
+            if (Pw.X < 20)
+            {
+                Pm.X = 20;
+            }
+            if (Pw.Y < 70)
+            {
+                Pm.Y = 70;
+            }
+            if (Pw.X > 2000 - ct.Width)
+            {
+                Pm.X = ct.Parent.Width - ct.Width;
+            }
+            if (Pw.Y > 980 - ct.Height)
+            {
+                Pm.Y = ct.Parent.Height - ct.Height;
+            }
+            ct.Location = Pm;
+        }
+        public Point WorldBoundControl(Point Pm, Rectangle minBoundingBox)
+        {
+            Point Pw = ScreenToWorld(Pm, true);
+            Point off = new Point(0, 0);
+            if (Pw.X < 20)
+            {
+                off.X = 20 - Pm.X;
+            }
+            if (Pw.Y < 70)
+            {
+                off.Y = 70 - Pm.Y;
+            }
+            if (Pw.X > 2000 - minBoundingBox.Width)
+            {
+                off.X = Global.GetCanvasPanel().Width - minBoundingBox.Width;
+            }
+            if (Pw.Y > 980 - minBoundingBox.Height)
+            {
+                off.Y = Global.GetCanvasPanel().Height - minBoundingBox.Height;
+            }
+            return off;
+        }
+        public Point WorldBoundControlQuick(Point Ps)
+        {
+
+            Point dragOffset = new Point(0, 0);
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+
+
             if (Ps.X > 2000 * screenFactor)
             {
                 dragOffset.X = Ps.X - 2000;

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Utils
@@ -67,9 +63,9 @@ namespace Citta_T1.Utils
                 FileUtil.AnotherOpenFilePathMethod(fullFilePath);
             }
         }
-        
 
-        private static  void AnotherOpenFilePathMethod(string fullFilePath)
+
+        private static void AnotherOpenFilePathMethod(string fullFilePath)
         {
             try
             {
@@ -86,8 +82,9 @@ namespace Citta_T1.Utils
             try
             {
                 System.IO.Directory.Delete(directoryPath, true);
-            } catch
-            { 
+            }
+            catch
+            {
                 // 如果无法回滚的话,这个地方只能直接忽略了
             }
         }
@@ -95,7 +92,7 @@ namespace Citta_T1.Utils
         public static bool CreateDirectory(string dicectoryPath)
         {
             bool ret = true;
-            try 
+            try
             {
                 Directory.CreateDirectory(dicectoryPath);
             }

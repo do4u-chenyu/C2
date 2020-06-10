@@ -37,7 +37,10 @@ namespace Citta_T1.Business.Schedule
         public delegate void UpdateBar(TaskManager manager);//声明一个更新进度条的委托
         public UpdateBar UpdateBarDelegate;
 
-        public delegate void UpdateOpError(TaskManager manager,int id,string errorMessage);//声明一个op算子异常时修改提示内容的委托
+        public delegate void UpdateMask(TaskManager manager);//声明一个运行遮罩的委托
+        public UpdateMask UpdateMaskDelegate;
+
+        public delegate void UpdateOpError(TaskManager manager, int id, string errorMessage);//声明一个op算子异常时修改提示内容的委托
         public UpdateOpError UpdateOpErrorDelegate;
 
         private TripleListGen tripleList;
@@ -90,7 +93,7 @@ namespace Citta_T1.Business.Schedule
         {
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
             {
-                if(triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
+                if (triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
                 triple.OperateElement.Status = ElementStatus.Ready;
             }
         }
@@ -259,6 +262,7 @@ namespace Citta_T1.Business.Schedule
             TaskCallBack(this);
             UpdateGifDelegate(this);
             this.modelStatus = ModelStatus.Done;
+            UpdateMaskDelegate(this);
             Thread.Sleep(1000);
             UpdateGifDelegate(this);
         }
@@ -343,7 +347,7 @@ namespace Citta_T1.Business.Schedule
                 triple.ResultElement.Status = ElementStatus.Warn;
                 return false;
             }
-            
+
             if (resetEvent.SafeWaitHandle.IsClosed)
             {
                 UpdateLogDelegate(triple.TripleName + "该resetEvent已被释放");

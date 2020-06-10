@@ -3,11 +3,6 @@
     partial class MaxOperatorView
     {
         /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -28,20 +23,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.dataInfoBox = new System.Windows.Forms.TextBox();
-            this.outList = new Citta_T1.Controls.Common.ComCheckBoxList();
-            this.maxValueBox = new System.Windows.Forms.ComboBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -111,7 +99,6 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -126,7 +113,6 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -142,9 +128,9 @@
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.dataInfoBox);
-            this.valuePanel.Controls.Add(this.outList);
-            this.valuePanel.Controls.Add(this.maxValueBox);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.outListCCBL0);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 18);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
@@ -154,40 +140,38 @@
             // 
             // dataInfoBox
             // 
-            this.dataInfoBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataInfoBox.Location = new System.Drawing.Point(0, 3);
-            this.dataInfoBox.Margin = new System.Windows.Forms.Padding(2);
-            this.dataInfoBox.Name = "dataInfoBox";
-            this.dataInfoBox.ReadOnly = true;
-            this.dataInfoBox.Size = new System.Drawing.Size(150, 23);
-            this.dataInfoBox.TabIndex = 3;
-            this.dataInfoBox.TabStop = false;
-            this.dataInfoBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataInfoBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfoBox_MouseClick);
-            this.dataInfoBox.LostFocus += new System.EventHandler(this.DataInfoBox_LostFocus);
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(0, 3);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "dataInfoBox";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 3;
+            this.dataSourceTB0.TabStop = false;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OutList
             // 
-            this.outList.DataSource = null;
-            this.outList.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outList.Location = new System.Drawing.Point(0, 106);
-            this.outList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.outList.Name = "OutList";
-            this.outList.Size = new System.Drawing.Size(150, 24);
-            this.outList.TabIndex = 2;
+            this.outListCCBL0.DataSource = null;
+            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.outListCCBL0.Location = new System.Drawing.Point(0, 106);
+            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.outListCCBL0.Name = "OutList";
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
+            this.outListCCBL0.TabIndex = 2;
             // 
             // maxValueBox
             // 
-            this.maxValueBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.maxValueBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.maxValueBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.maxValueBox.FormattingEnabled = true;
-            this.maxValueBox.IntegralHeight = false;
-            this.maxValueBox.Location = new System.Drawing.Point(0, 54);
-            this.maxValueBox.Margin = new System.Windows.Forms.Padding(2);
-            this.maxValueBox.Name = "maxValueBox";
-            this.maxValueBox.Size = new System.Drawing.Size(150, 25);
-            this.maxValueBox.TabIndex = 1;
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.IntegralHeight = false;
+            this.comboBox0.Location = new System.Drawing.Point(0, 54);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "maxValueBox";
+            this.comboBox0.Size = new System.Drawing.Size(150, 25);
+            this.comboBox0.TabIndex = 1;
             // 
             // MaxOperatorView
             // 
@@ -219,14 +203,8 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private Citta_T1.Controls.Common.ComCheckBoxList outList;
-        private System.Windows.Forms.ComboBox maxValueBox;
-        private System.Windows.Forms.TextBox dataInfoBox;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

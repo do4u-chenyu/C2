@@ -1,8 +1,5 @@
 ﻿
 using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
@@ -29,20 +26,7 @@ namespace Citta_T1.Core.UndoRedo.Command
 
         private bool DoCommand()
         {
-            switch (element.Type)
-            {
-                case ElementType.DataSource:
-                    oldName = (element.InnerControl as MoveDtControl).UndoRedoChangeTextName(oldName);
-                    break;
-                case ElementType.Operator:
-                    oldName = (element.InnerControl as MoveOpControl).UndoRedoChangeTextName(oldName);
-                    break;
-                case ElementType.Result:
-                    oldName = (element.InnerControl as MoveRsControl).UndoRedoChangeTextName(oldName);
-                    break;
-                default:
-                    break;
-            }
+            oldName = element.InnerControl.UndoRedoChangeTextName(oldName);
             return true;
         }
     }

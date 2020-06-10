@@ -1,9 +1,5 @@
 ﻿using Citta_T1.Business.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Citta_T1.Core
 {
@@ -41,7 +37,7 @@ namespace Citta_T1.Core
         {   // 针对图中每一个定点做一次环检测
             foreach (int vertex in vertices)
                 if (IsCyclic(vertex))
-                    return true; 
+                    return true;
             return false;
         }
 
@@ -55,7 +51,7 @@ namespace Citta_T1.Core
             // 访问到一个叶子节点，没有子节点，直接返回
             if (!this.graph.ContainsKey(vertex))
                 return visited[vertex] = false;  // 每个DSF过程到叶子节点后，vistited对应退栈置false
-           
+
             // 访问每一个子节点
             foreach (int child in this.graph[vertex])
                 if (IsCyclic(child))
@@ -63,6 +59,6 @@ namespace Citta_T1.Core
             //所有节点访问完毕，退栈
             return visited[vertex] = false;
         }
-    }       
+    }
 }
 

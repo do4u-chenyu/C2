@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using Citta_T1.Core;
+﻿using Citta_T1.Core;
 using log4net;
+using System.Reflection;
 
 namespace Citta_T1.Utils
 {

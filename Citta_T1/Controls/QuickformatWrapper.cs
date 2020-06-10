@@ -1,15 +1,10 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move;
 using Citta_T1.Core;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
@@ -163,25 +158,8 @@ namespace Citta_T1.Controls
                 }
             }
 
-            
-
-        }
-        private Point WorldBoundControl(Point Ps, int width, int height)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
 
 
-            if (Ps.X > 2000 * screenFactor)
-            {
-                dragOffset.X = Ps.X - 2000;
-            }
-            if (Ps.Y > 900 * screenFactor)
-            {
-                dragOffset.Y = Ps.Y - 900;
-            }
-            return dragOffset;
         }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
@@ -193,8 +171,9 @@ namespace Citta_T1.Controls
                     Control ct = me.InnerControl;
                     int left = dx + 40;
 
-                    int top  = dy + 100;
-                    Point moveOffset = WorldBoundControl(new Point(left,top), ct.Width, ct.Height);
+                    int top = dy + 100;
+                    Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top));
                     log.Info(moveOffset.ToString());
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
@@ -213,9 +192,9 @@ namespace Citta_T1.Controls
                 if (!nodes.Contains(me.ID))
                 {
                     int left = dx + 60;
-                    int top =  dy + 100;
-                    Point moveOffset = WorldBoundControl(new Point(left, top), ct.Width, ct.Height);
-
+                    int top = dy + 100;
+                    Point moveOffset = Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top));
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
 
@@ -275,7 +254,7 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
-            
+
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
@@ -301,11 +280,11 @@ namespace Citta_T1.Controls
                         FormatLoc(id, countDeep, ctHeight, modelElements);
                         leavelList.Add(id);
                     }
-                    countWidthList.Add(ctHeight);       
+                    countWidthList.Add(ctHeight);
                 }
                 count = countWidthList.Max();
                 countDeep = 0;
-                this.ctWidths = new List<int>(); 
+                this.ctWidths = new List<int>();
             }
             //散元素沉底
             ForamtSingleNode(leavelList, 0, count, modelElements);

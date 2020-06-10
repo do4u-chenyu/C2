@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
-
-using Citta_T1.Utils;
+using System.Threading;
 
 
 namespace Citta_T1.Business.Schedule.Cmd
@@ -28,10 +27,10 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             int sleepSecond = DefaultSleepSecond;
 
-            if(option.GetOption("fix").ToLower() == "true")
+            if (option.GetOption("fix").ToLower() == "true")
             {
                 int tmpSec = ConvertUtil.TryParseInt(option.GetOption("fixSecond"));
-                sleepSecond = tmpSec  <= 0 ? DefaultSleepSecond : tmpSec;
+                sleepSecond = tmpSec <= 0 ? DefaultSleepSecond : tmpSec;
             }
             else
             {

@@ -3,11 +3,6 @@
     partial class AvgOperatorView
     {
         /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -28,18 +23,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.valuePanel = new System.Windows.Forms.Panel();
-            this.DataInfo = new System.Windows.Forms.TextBox();
-            this.AvgComBox = new System.Windows.Forms.ComboBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -73,7 +62,7 @@
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Margin = new System.Windows.Forms.Padding(2);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(391, 37);
+            this.topPanel.Size = new System.Drawing.Size(387, 37);
             this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
@@ -81,24 +70,23 @@
             this.bottomPanel.Controls.Add(this.cancelButton);
             this.bottomPanel.Controls.Add(this.confirmButton);
             this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomPanel.Location = new System.Drawing.Point(0, 129);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 125);
             this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
             this.bottomPanel.Name = "bottomPanel";
-            this.bottomPanel.Size = new System.Drawing.Size(391, 64);
+            this.bottomPanel.Size = new System.Drawing.Size(387, 64);
             this.bottomPanel.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.cancelButton.Location = new System.Drawing.Point(326, 19);
+            this.cancelButton.Location = new System.Drawing.Point(319, 19);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -113,7 +101,6 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -123,52 +110,47 @@
             this.keyPanel.Location = new System.Drawing.Point(0, 37);
             this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
             this.keyPanel.Name = "keyPanel";
-            this.keyPanel.Size = new System.Drawing.Size(116, 92);
+            this.keyPanel.Size = new System.Drawing.Size(116, 88);
             this.keyPanel.TabIndex = 2;
             // 
             // valuePanel
             // 
-            this.valuePanel.Controls.Add(this.DataInfo);
-            this.valuePanel.Controls.Add(this.AvgComBox);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
             this.valuePanel.Name = "valuePanel";
-            this.valuePanel.Size = new System.Drawing.Size(275, 92);
+            this.valuePanel.Size = new System.Drawing.Size(271, 88);
             this.valuePanel.TabIndex = 3;
             // 
-            // DataInfo
+            // dataSourceTB0
             // 
-            this.DataInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DataInfo.Location = new System.Drawing.Point(0, 0);
-            this.DataInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.DataInfo.Name = "DataInfo";
-            this.DataInfo.ReadOnly = true;
-            this.DataInfo.Size = new System.Drawing.Size(136, 23);
-            this.DataInfo.TabIndex = 2;
-            this.DataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
-            this.DataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(0, 0);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "DataInfo";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(136, 23);
+            this.dataSourceTB0.TabIndex = 2;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AvgComBox
             // 
-            this.AvgComBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.AvgComBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.AvgComBox.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.AvgComBox.FormattingEnabled = true;
-            this.AvgComBox.Location = new System.Drawing.Point(0, 64);
-            this.AvgComBox.Margin = new System.Windows.Forms.Padding(2);
-            this.AvgComBox.Name = "AvgComBox";
-            this.AvgComBox.Size = new System.Drawing.Size(136, 24);
-            this.AvgComBox.TabIndex = 1;
-            this.AvgComBox.SelectionChangeCommitted += new System.EventHandler(this.AvgComBox_SelectionChangeCommitted);
-            this.AvgComBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AvgComBox_KeyUp);
-            this.AvgComBox.Leave += new System.EventHandler(this.AvgComBox_Leave);
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(0, 64);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "AvgComBox";
+            this.comboBox0.Size = new System.Drawing.Size(136, 24);
+            this.comboBox0.TabIndex = 1;
             // 
             // AvgOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(391, 193);
+            this.ClientSize = new System.Drawing.Size(387, 189);
             this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
@@ -195,12 +177,7 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox AvgComBox;
-        private System.Windows.Forms.TextBox DataInfo;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

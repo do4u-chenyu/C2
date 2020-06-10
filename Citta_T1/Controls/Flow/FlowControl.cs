@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using Citta_T1.Core;
+using System;
 using System.Windows.Forms;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Interface;
-using Citta_T1.Core;
-using Citta_T1.Properties;
-using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -20,12 +14,12 @@ namespace Citta_T1.Controls.Flow
         public bool SelectFrame { get => selectFrame; set => selectFrame = value; }
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowControl));
         public FlowControl()
-        { 
+        {
             InitializeComponent();
             SelectDrag = false;
             SelectFrame = false;
             SelectRemark = false;
-            
+
         }
         // 恢复到编辑模式
         public void ResetStatus()
@@ -61,7 +55,7 @@ namespace Citta_T1.Controls.Flow
         private void MovePictureBox_MouseEnter(object sender, EventArgs e)
         {
             DragChange(true);
-            
+
         }
         private void MovePictureBox_Click(object sender, EventArgs e)
         {
@@ -103,7 +97,7 @@ namespace Citta_T1.Controls.Flow
 
         private void ZoomUpPictureBox_Click(object sender, EventArgs e)
         {
-            SelectFrame = false; 
+            SelectFrame = false;
             ChangeCursor();
             FrameChange(SelectFrame);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
@@ -166,7 +160,7 @@ namespace Citta_T1.Controls.Flow
         private void FramePictureBox_Click(object sender, EventArgs e)
         {
             Global.GetCanvasPanel().SetAllLineStatus(null, true);
-            SelectFrame = !SelectFrame;         
+            SelectFrame = !SelectFrame;
             SelectDrag = false;
             ChangeCursor();
             DragChange(SelectDrag);
@@ -196,7 +190,7 @@ namespace Citta_T1.Controls.Flow
                 return;
             }
             this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("zoomUpPictureBox.Image")));
-            this.zoomUpPictureBox.Location = new System.Drawing.Point(54, 5);           
+            this.zoomUpPictureBox.Location = new System.Drawing.Point(54, 5);
             this.zoomUpPictureBox.Size = new System.Drawing.Size(22, 22);
         }
         private void ZoomDownChange(bool flag)

@@ -1,11 +1,10 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
-using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
+using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -13,123 +12,54 @@ using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews
 {
-    public partial class CustomOperatorView : Form
+    public partial class CustomOperatorView : BaseOperatorView
     {
-        private MoveOpControl opControl;
-        private string dataPath0;
-        private string dataPath1;
-        private string[] columnName0;
-        private string[] columnName1;
-
-        private string oldOptionDict;
-
-        private List<int> oldOutList0;
-        private List<int> oldOutList1;
-        private List<string> oldColumnName;
-
         private string oldPath;
 
-        public CustomOperatorView(MoveOpControl opControl)
+        public CustomOperatorView(MoveOpControl opControl) : base(opControl)
         {
 
             InitializeComponent();
 
             if (opControl.OperatorDimension() == 2)
             {
-                this.dataSource1.Visible = true;
-                this.outList1.Visible = true;
+                this.dataSourceTB1.Visible = true;
+                this.outListCCBL1.Visible = true;
                 this.Text = "多源算子设置";
             }
             else
                 this.Text = "AI实践算子设置";
 
-            this.opControl = opControl;
 
             //旧状态记录
             this.oldPath = this.rsFullFilePathTextBox.Text;
-            this.oldOutList0 = this.outList0.GetItemCheckIndex();
-            this.oldOutList1 = this.outList1.GetItemCheckIndex();
-
-            this.oldOptionDict = string.Join(",", this.opControl.Option.OptionDict.ToList());
-            this.oldColumnName = new List<string>();
+            this.oldOutList0 = this.outListCCBL0.GetItemCheckIndex();
+            this.oldOutList1 = this.outListCCBL1.GetItemCheckIndex();
 
             //初始化配置内容
-            InitOptionInfo();
+            InitByDataSource();
             //加载配置内容
             LoadOption();
-            
-            SetTextBoxName(this.dataSource0);
-            SetTextBoxName(this.dataSource1);
         }
 
         #region 初始化配置
-        private void InitOptionInfo()
+        private void InitByDataSource()
         {
-            //获取两个数据源表头字段
-            Dictionary<string, string> dataInfo = Global.GetOptionDao().GetDataSourceInfo(this.opControl.ID);
+            // 初始化左右表数据源配置信息
+            this.InitDataSource();
+            // 窗体自定义的初始化逻辑
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
 
+            this.outListCCBL0.Items.AddRange(nowColumnsName0);
+            this.outListCCBL1.Items.AddRange(nowColumnsName1);
 
-            if (dataInfo.ContainsKey("dataPath0") && dataInfo.ContainsKey("encoding0"))
-            {
-                this.dataPath0 = dataInfo["dataPath0"];
-                this.dataSource0.Text = Path.GetFileNameWithoutExtension(this.dataPath0);
-                this.toolTip1.SetToolTip(this.dataSource0, this.dataSource0.Text);
-                columnName0 = SetOption(this.dataPath0, this.dataSource0.Text, dataInfo["encoding0"], dataInfo["separator0"].ToCharArray());
-                this.opControl.FirstDataSourceColumns = this.columnName0;//单输入的也要赋值
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-                foreach (string name in this.columnName0)
-                    this.outList0.AddItems(name);
-
-            }
-            if (this.Text != "AI实践算子设置" && dataInfo.ContainsKey("dataPath1") && dataInfo.ContainsKey("encoding1"))
-            {
-                this.dataPath1 = dataInfo["dataPath1"];
-                this.dataSource1.Text = Path.GetFileNameWithoutExtension(dataInfo["dataPath1"]);
-                this.toolTip1.SetToolTip(this.dataSource1, this.dataSource1.Text);
-                columnName1 = SetOption(this.dataPath1, this.dataSource1.Text, dataInfo["encoding1"], dataInfo["separator1"].ToCharArray());
-                this.opControl.SecondDataSourceColumns= this.columnName1;
-                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
-                foreach (string name in this.columnName1)
-                    this.outList1.AddItems(name);
-            }
-        }
-
-        private string[] SetOption(string path, string dataName, string encoding, char[] separator)
-        {
-
-            BcpInfo bcpInfo = new BcpInfo(path, dataName, ElementType.Empty, OpUtil.EncodingEnum(encoding), separator);
-            return opControl.FirstDataSourceColumns = bcpInfo.ColumnArray;
-        }
-        public void SetTextBoxName(TextBox textBox)
-        {
-            string dataName = textBox.Text;
-            int maxLength = 18;
-            MatchCollection chs = Regex.Matches(dataName, "[\u4E00-\u9FA5]");
-            int sumcount = chs.Count * 2;
-            int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
-
-            //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
-            {
-                if (dataName.IndexOf(mc.ToString()) == maxLength)
-                {
-                    maxLength -= 1;
-                    break;
-                }
-            }
-
-            if (sumcount + sumcountDigit > maxLength)
-            {
-                textBox.Text = ConvertUtil.GB2312.GetString(ConvertUtil.GB2312.GetBytes(dataName), 0, maxLength) + "...";
-            }
         }
         #endregion
 
         #region 配置信息的保存与加载
-        private void SaveOption()
+        protected override void SaveOption()
         {
-
-       
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -137,43 +67,13 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
 
-            List<int> checkIndexs = this.outList0.GetItemCheckIndex();
-            List<int> outIndexs = new List<int>(this.oldOutList0);
-            foreach (int index in checkIndexs)
-            {
-                if (!outIndexs.Contains(index))
-                    outIndexs.Add(index);
-            }
-            foreach (int index in outIndexs)
-            {
-                if (!checkIndexs.Contains(index))
-                {
-                    outIndexs = new List<int>(checkIndexs);
-                    break;
-                }
-            }
-            string outField = string.Join(",", outIndexs);
+            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("outfield0", outField);
 
 
             if (this.Text != "AI实践算子设置")
-            {
-                List<int> checkIndexs1 = this.outList1.GetItemCheckIndex();
-                List<int> outIndexs1 = new List<int>(this.oldOutList1);
-                foreach (int index in checkIndexs1)
-                {
-                    if (!outIndexs1.Contains(index))
-                        outIndexs1.Add(index);
-                }
-                foreach (int index in outIndexs1)
-                {
-                    if (!checkIndexs1.Contains(index))
-                    {
-                        outIndexs1 = new List<int>(checkIndexs1);
-                        break;
-                    }
-                }
-                string outField1 = string.Join(",", outIndexs1);
+            {               
+                string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
                 this.opControl.Option.SetOption("outfield1", outField1);
             }
 
@@ -185,7 +85,7 @@ namespace Citta_T1.OperatorViews
 
 
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
@@ -195,39 +95,39 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("fix") != "")
+            if (this.opControl.Option.GetOption("fix") != String.Empty)
                 this.fixRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("fix"));
-            if (this.opControl.Option.GetOption("random") != "")
+            if (this.opControl.Option.GetOption("random") != String.Empty)
                 this.randomRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("random"));
-            if (this.opControl.Option.GetOption("fixSecond") != "")
+            if (this.opControl.Option.GetOption("fixSecond") != String.Empty)
                 this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
-            if (this.opControl.Option.GetOption("randomBegin") != "")
+            if (this.opControl.Option.GetOption("randomBegin") != String.Empty)
                 this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
-            if (this.opControl.Option.GetOption("randomEnd") != "")
+            if (this.opControl.Option.GetOption("randomEnd") != String.Empty)
                 this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
-            if (this.opControl.Option.GetOption("path") != "")
+            if (this.opControl.Option.GetOption("path") != String.Empty)
                 this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
 
             int[] outIndexs = new int[] { };
-            if (this.opControl.Option.GetOption("outfield0") != "")
+            if (this.opControl.Option.GetOption("outfield0") != String.Empty)
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield0").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList0 = outIndexs.ToList();
-                this.outList0.LoadItemCheckIndex(outIndexs);
+                this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
-                    this.oldColumnName.Add(this.outList0.Items[i].ToString());
+                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
             }
 
             int[] outIndexs1 = new int[] { };
-            if (this.opControl.Option.GetOption("outfield1") != "")
+            if (this.opControl.Option.GetOption("outfield1") != String.Empty)
             {
-                string[] checkIndexs = this.opControl.Option.GetOption("outfield1").Split(',');
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 outIndexs1 = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
                 this.oldOutList1 = outIndexs1.ToList();
-                this.outList1.LoadItemCheckIndex(outIndexs1);
+                this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
-                    this.oldColumnName.Add(this.outList1.Items[i].ToString());
+                    this.oldOutName0.Add(this.outListCCBL1.Items[i].ToString());
             }
 
 
@@ -239,7 +139,7 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 添加取消
-        private void ConfirmButton_Click(object sender, System.EventArgs e)
+        protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             bool empty = IsOptionReady();
             if (empty) return;
@@ -249,7 +149,7 @@ namespace Citta_T1.OperatorViews
             SaveOption();
 
             //内容修改，引起文档dirty 
-            if (this.oldOptionDict != string.Join(",", this.opControl.Option.OptionDict.ToList()))
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
             //生成结果控件,创建relation,bcp 结果文件
@@ -266,8 +166,8 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text));
-            hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
+            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
+            //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
@@ -282,23 +182,15 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }
 
-        private void CancelButton_Click(object sender, System.EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-
         private bool IsOptionReady()
         {
             bool empty = false;
-            List<string> types = new List<string>();
-            if (this.dataSource0.Text == "") return true;
-            if (opControl.OperatorDimension() == 2 && this.dataSource1.Text == "") return true;
+            if (this.dataSourceTB0.Text == "") return true;
+            if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 
-            if (this.outList0.GetItemCheckIndex().Count == 0)
+            if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
-                if(opControl.OperatorDimension() == 2)
+                if (opControl.OperatorDimension() == 2)
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
@@ -306,7 +198,7 @@ namespace Citta_T1.OperatorViews
                 return empty;
             }
 
-            if (opControl.OperatorDimension() == 2 && this.outList1.GetItemCheckIndex().Count == 0)
+            if (opControl.OperatorDimension() == 2 && this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
                 empty = true;
@@ -321,7 +213,7 @@ namespace Citta_T1.OperatorViews
             }
 
             //有任一框中非数字
-            if( !IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
+            if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
                 empty = true;
@@ -402,14 +294,14 @@ namespace Citta_T1.OperatorViews
             return false;
         }
 
-        private void otherSeparatorText_TextChanged(object sender, EventArgs e)
+        private void OtherSeparatorText_TextChanged(object sender, EventArgs e)
         {
             this.otherSeparatorRadio.Checked = true;
             if (String.IsNullOrEmpty(this.otherSeparatorText.Text))
                 return;
             try
             {
-                char separator = System.Text.RegularExpressions.Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
+                char separator = Regex.Unescape(this.otherSeparatorText.Text).ToCharArray()[0];
             }
             catch (Exception)
             {

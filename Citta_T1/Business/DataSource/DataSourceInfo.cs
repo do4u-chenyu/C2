@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using Citta_T1.Controls.Left;
+﻿using Citta_T1.Controls.Left;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
 
 namespace Citta_T1.Business.DataSource
 {
@@ -20,8 +17,8 @@ namespace Citta_T1.Business.DataSource
         {
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.dataSourcePath = Path.Combine(this.userPath, "DataSourceInformation.xml");
-         }
-       
+        }
+
         public void WriteDataSourceInfo(DataButton db)
         {
             Directory.CreateDirectory(userPath);
@@ -67,7 +64,7 @@ namespace Citta_T1.Business.DataSource
             dataSourceNode.AppendChild(nameNode);
 
             XmlElement sepNode = xDoc.CreateElement("separator");
-            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString(); 
+            sepNode.InnerText = Convert.ToInt32(db.Separator).ToString();
             dataSourceNode.AppendChild(sepNode);
 
             XmlElement extTypeNode = xDoc.CreateElement("extType");
@@ -87,7 +84,7 @@ namespace Citta_T1.Business.DataSource
             dataSourceNode.AppendChild(countNode);
         }
 
-        public List<DataButton> LoadDataSourceInfo() 
+        public List<DataButton> LoadDataSourceInfo()
         {
             XmlDocument xDoc = new XmlDocument();
             List<DataButton> dataSourceList = new List<DataButton>();

@@ -1,9 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Text;
-using System.Configuration;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace Citta_T1.Utils
 {
@@ -16,17 +14,17 @@ namespace Citta_T1.Utils
             try
             {
                 value = ConfigurationManager.AppSettings[key];
-            } 
+            }
             catch (ConfigurationErrorsException)
             {
                 value = defaultValue;
             }
-            return String.IsNullOrEmpty(value) ? defaultValue : value.Trim(); 
+            return String.IsNullOrEmpty(value) ? defaultValue : value.Trim();
         }
         public static bool TrySetAppSettingsByKey(string key, string configValue)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            try 
+            try
             {
                 // 先清空
                 config.AppSettings.Settings.Remove(key);

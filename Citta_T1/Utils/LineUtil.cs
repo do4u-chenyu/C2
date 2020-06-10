@@ -1,16 +1,11 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls;
-using Citta_T1.Controls.Move;
 using Citta_T1.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Citta_T1.Utils    
+namespace Citta_T1.Utils
 {
     public static class MyPens
     {
@@ -28,7 +23,7 @@ namespace Citta_T1.Utils
         public static float DISTNOTONLINE = -1;
         public static int CUTPOINTNUM = 10;
         public static int CUTPTSOFFSET = 10;
-        
+
         public enum LineStatus
         {
             Null,
@@ -129,8 +124,8 @@ namespace Citta_T1.Utils
         public PointF A { get => a; set => a = value; }
         public PointF B { get => b; set => b = value; }
 
-    //Pen pen;
-    public Bezier(PointF p1, PointF p2)
+        //Pen pen;
+        public Bezier(PointF p1, PointF p2)
         {
             startP = p1;
             endP = p2;
@@ -163,7 +158,7 @@ namespace Citta_T1.Utils
             // TODO [DK] 没有考虑到坐标系放大系数
             return GetRect(startP, endP);
         }
-        private  RectangleF GetRect(PointF p1, PointF p2, float width = 5)
+        private RectangleF GetRect(PointF p1, PointF p2, float width = 5)
         {
             float x = Math.Min(p1.X, p2.X);
             float y = Math.Min(p1.Y, p2.Y);

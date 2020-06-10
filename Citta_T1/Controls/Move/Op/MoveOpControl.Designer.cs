@@ -64,7 +64,7 @@ namespace Citta_T1.Controls.Move.Op
             // 
             // OptionMenuItem
             // 
-            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control; 
+            this.OptionMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.OptionMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.OptionMenuItem.Enabled = false;
             this.OptionMenuItem.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
@@ -117,7 +117,7 @@ namespace Citta_T1.Controls.Move.Op
             // 
             this.statusBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.statusBox.Image = ((System.Drawing.Image)(resources.GetObject("statusBox.Image")));
-            this.statusBox.Location = new System.Drawing.Point(98, 5);
+            this.statusBox.Location = new System.Drawing.Point(98, 7);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(14, 14);
             this.statusBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -132,7 +132,6 @@ namespace Citta_T1.Controls.Move.Op
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.statusBox);
             this.Description = "b";
             this.Name = "MoveOpControl";

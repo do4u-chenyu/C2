@@ -1,10 +1,13 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move
@@ -15,7 +18,7 @@ namespace Citta_T1.Controls.Move
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
         public OpUtil.Encoding Encoding { get; set; }
-        public char Separator { get; set ; }
+        public char Separator { get; set; }
         public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
         public OpUtil.ExtType ExtType
@@ -37,7 +40,9 @@ namespace Citta_T1.Controls.Move
                 return OpUtil.ExtType.Unknow;
             }
         }
-        
+
+        protected Size changeStatus;
+        protected Size normalStatus;
 
         protected string oldTextString;
         protected Bitmap staticImage;
@@ -54,10 +59,9 @@ namespace Citta_T1.Controls.Move
         protected Point mouseOffset;
 
 
-        protected int pinWidth  = 6;
+        protected int pinWidth = 6;
         protected int pinHeight = 6;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
-        //private ECommandType cmd;
 
         public MoveBaseControl()
         {
@@ -100,7 +104,7 @@ namespace Citta_T1.Controls.Move
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
 
-    
+
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y), new PointF(x + width - radius, y));
             g.DrawLine(MyPens.DarkGray, new PointF(x + radius, y + height), new PointF(x + width - radius, y + height));
             g.DrawLine(MyPens.DarkGray, new PointF(x, y + radius), new PointF(x, y + height - radius));
@@ -109,7 +113,7 @@ namespace Citta_T1.Controls.Move
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y, radius * 2, radius * 2), 270, 90);
             g.DrawArc(MyPens.DarkGray, new Rectangle(x, y + height - radius * 2, radius * 2, radius * 2), 90, 90);
             g.DrawArc(MyPens.DarkGray, new Rectangle(x + width - radius * 2, y + height - radius * 2, radius * 2, radius * 2), 0, 90);
-            
+
             g.Dispose();
 
             this.BackgroundImage = this.staticImage;
@@ -207,8 +211,73 @@ namespace Citta_T1.Controls.Move
             FinishTextChange();
         }
 
-        public virtual void FinishTextChange()
-        { 
+        public void FinishTextChange()
+        {
+            if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.txtButton.Visible = true;
+            if (this.oldTextString == this.textBox.Text)
+                return;
+
+            SetOpControlName(this.textBox.Text);
+            // 构造重命名命令类,压入undo栈
+            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+            if (element != ModelElement.Empty)
+            {
+                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
+            }
+
+            this.oldTextString = this.textBox.Text;
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+        }
+
+        public Point UndoRedoMoveLocation(Point location)
+        {
+            oldControlPosition = this.Location;
+            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
+            Global.GetNaviViewControl().UpdateNaviView();
+            Global.GetMainForm().SetDocumentDirty();
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
+        }
+
+        public string UndoRedoChangeTextName(string des)
+        {
+            oldTextString = Description;
+            Description = des;
+            SetOpControlName(Description);
+            Global.GetCurrentDocument().UpdateAllLines();
+            Global.GetCanvasPanel().Invalidate(false);
+            return oldTextString;
+        }
+
+
+
+        protected void SetOpControlName(string name)
+        {
+            this.Description = name;
+            int maxLength = 24;
+            name = ConvertUtil.SubstringByte(name, 0, maxLength);
+            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
+            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
+            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
+            this.txtButton.Text = name;
+            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
+            {
+                txtWidth += 10;
+                this.txtButton.Text = name + "...";
+            }
+            changeStatus.Width = normalStatus.Width + txtWidth;
+            ResizeControl(txtWidth, changeStatus);
+            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
+        }
+
+        protected virtual void ResizeControl(int txtWidth, Size controlSize)
+        {
         }
     }
 }

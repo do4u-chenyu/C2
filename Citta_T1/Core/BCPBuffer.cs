@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Collections.Generic;
-using System.Text;
-using System;
-using System.Windows.Forms;
-using NPOI.XSSF.UserModel;
+﻿using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
-using Citta_T1.Utils;
+using System.Windows.Forms;
 
 namespace Citta_T1.Core
 {
@@ -88,7 +88,7 @@ namespace Citta_T1.Core
             if (!HitCache(fullFilePath) || isForceRead)
             {
                 if (regexXls.IsMatch(fullFilePath))
-                { 
+                {
                     PreLoadExcelFile(fullFilePath);
                 }
                 else
@@ -107,7 +107,7 @@ namespace Citta_T1.Core
             if (HitCache(fullFilePath))
                 return;
 
-            switch(extType)
+            switch (extType)
             {
                 case OpUtil.ExtType.Excel:
                     PreLoadExcelFile(fullFilePath);
@@ -118,7 +118,7 @@ namespace Citta_T1.Core
                 case OpUtil.ExtType.Unknow:
                 default:
                     break;
-            }                
+            }
         }
 
         private bool HitCache(string fullFilePath)
@@ -128,7 +128,7 @@ namespace Citta_T1.Core
                 && dataPreviewDict[fullFilePath].IsNotEmpty()  // 没内容认为是没命中, 空文件每次读也无所谓
                 && dataPreviewDict[fullFilePath].NotDirty;     // 外部置脏数据了,得重读
         }
-        
+
 
         public void Remove(string bcpFullPath)
         {
@@ -148,14 +148,14 @@ namespace Citta_T1.Core
                 fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
 
                 if (fullFilePath.EndsWith(".xlsx")) // 2007版本
-                    workbook = new XSSFWorkbook(fs);       
+                    workbook = new XSSFWorkbook(fs);
                 else
                     workbook = new HSSFWorkbook(fs);   // 2003版本
                 // 不指定sheetName的话, 用第一个sheet
                 ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
                 if (sheet == null)
                     return;
-                    
+
                 IRow firstRow = sheet.GetRow(0);            // 此处会不会为空,会，然后报异常，被下面捕捉
                 int colNum = firstRow.Cells.Count;
                 string[] headers = new string[colNum];
@@ -174,14 +174,14 @@ namespace Citta_T1.Core
                     {
                         sb.AppendLine(String.Empty);
                         continue;
-                    } 　　　　　　
+                    }
 
                     for (int j = 0; j < colNum; j++)
                         rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
-          
+
                     sb.AppendLine(String.Join("\t", rowContent));
                 }
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim()) ;
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
             }
             catch (System.IO.IOException ex)
             {
@@ -224,7 +224,7 @@ namespace Citta_T1.Core
                     sb.AppendLine(sr.ReadLine());                                   // 分隔符
                 dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
                 log.Error("BCPBuffer 预加载BCP文件出错: " + e.ToString());
             }
@@ -245,22 +245,22 @@ namespace Citta_T1.Core
             }
             return BcpBufferSingleInstance;
         }
-        
+
         public void SetDirty(string fullFilePath)
-        {  
+        {
             // 如果未命中缓存,肯定是每次重新加载,不需要设置Dirty
             if (!HitCache(fullFilePath))
                 return;
             dataPreviewDict[fullFilePath].Dirty = true;
         }
         public string CreateNewBCPFile(string fileName, List<string> columnName)
-        {    
+        {
             if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
             {
                 Directory.CreateDirectory(Global.GetCurrentDocument().SavePath);
                 FileUtil.AddPathPower(Global.GetCurrentDocument().SavePath, "FullControl");
             }
-  
+
             string fullFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, fileName);
             ReWriteBCPFile(fullFilePath, columnName);
             return fullFilePath;
@@ -269,7 +269,7 @@ namespace Citta_T1.Core
         {
             using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
             {
-                string columns = String.Join("\t", columnName); 
+                string columns = String.Join("\t", columnName);
                 sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
                 sw.Flush();
             }

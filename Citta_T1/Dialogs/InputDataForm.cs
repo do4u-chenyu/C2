@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Citta_T1.Core;
+using Citta_T1.Utils;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Utils;
-using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 
 namespace Citta_T1.Dialogs
 {
@@ -26,7 +26,7 @@ namespace Citta_T1.Dialogs
         private Font bold_font = new Font("微软雅黑", 12F, (FontStyle.Bold | FontStyle.Underline), GraphicsUnit.Point, 134);
         private Font font = new Font("微软雅黑", 12F, FontStyle.Underline, GraphicsUnit.Point, 134);
         private char separator = '\t';
-        
+
         private string invalidChars = "&\"' ";
         private string invalidCharsPattern;
         private string[] invalidStringArr;
@@ -61,7 +61,7 @@ namespace Citta_T1.Dialogs
              */
             string fileName = "";
             string ext;
-            OpenFileDialog fd = new OpenFileDialog();           
+            OpenFileDialog fd = new OpenFileDialog();
             fd.Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx";
             if (this.gbkLable.Font.Bold)
                 this.encoding = OpUtil.Encoding.GBK;
@@ -69,7 +69,7 @@ namespace Citta_T1.Dialogs
                 this.encoding = OpUtil.Encoding.UTF8;
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                fullFilePath = fd.FileName;     
+                fullFilePath = fd.FileName;
                 fileName = Path.GetFileNameWithoutExtension(fullFilePath);
                 ext = Path.GetExtension(fullFilePath);
                 if (ext == ".xls" || ext == ".xlsx")
@@ -81,13 +81,13 @@ namespace Citta_T1.Dialogs
                 {
                     this.extType = OpUtil.ExtType.Text;
                     PreViewBcpFile();
-                }          
+                }
             }
             //if (this.textBox1.Text == "请输入数据名称" || this.textBox1.Text == "")
             this.textBox1.Text = fileName;
             ControlUtil.DisableOrder(this.dataGridView1);
         }
-        
+
 
         // 添加按钮
         public event DelegateInputData InputDataEvent;
@@ -226,7 +226,7 @@ namespace Citta_T1.Dialogs
                     else
                     {
                         induplicatedName[headerText] += 1;
-                        induplicatedName[headerText] = induplicatedName[headerText]; 
+                        induplicatedName[headerText] = induplicatedName[headerText];
                     }
                     headerText = induplicatedName[headerText] + "_" + headerText;
                     cols[i].ColumnName = headerText;
@@ -302,7 +302,7 @@ namespace Citta_T1.Dialogs
                     fs.Close();
                     return;
                 }
-                
+
                 IRow firstRow = sheet.GetRow(0);
                 int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
                 DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];

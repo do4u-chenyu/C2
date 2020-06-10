@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             string inputFilePath1 = inputFilePaths.First();//左输入文件
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
-            string outField = TransDifferOutputField(option.GetOption("outfield").Split(','));//输出字段
+            string outField = TransDifferOutputField(option.GetOptionSplit("outfield"));//输出字段
 
             //目前一个算子固定生成4个临时文件
             string filterBatPath1 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_differ1.tmp";
@@ -27,13 +27,14 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             //取差条件拼接
             List<string[]> differTmpList = new List<string[]>();
-            string[] factor1 = option.GetOption("factor1").Split(',');
+            string[] factor1 = option.GetOptionSplit("factor1");
             differTmpList.Add(factor1);
             for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
-                string[] tmpFactor = option.GetOption("factor" + i.ToString()).Split(',');
+
+                string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 string andOr = tmpFactor[0];
-                if(andOr == "0")
+                if (andOr == "0")
                 {
                     //如果是AND，那么添加到当前列表
                     differTmpList.Add(tmpFactor.Skip(1).Take(2).ToArray());
@@ -42,19 +43,19 @@ namespace Citta_T1.Business.Schedule.Cmd
                 {
                     //如果是or，开启一个新列表
                     differList.Add(differTmpList);
-                    differTmpList = new List<string[]>{tmpFactor.Skip(1).Take(2).ToArray()};
+                    differTmpList = new List<string[]> { tmpFactor.Skip(1).Take(2).ToArray() };
                 }
             }
             differList.Add(differTmpList);
 
             //重写表头（覆盖）
             ReWriteBCPFile("differ");
-            
+
             foreach (List<string[]> tmpList in differList)
             {
                 string inputField1 = "$" + TransInputLine(tmpList[0][0]);
                 string inputField2 = "$" + TransInputLine(tmpList[0][1]);
-                for(int i = 1; i < tmpList.Count; i++)
+                for (int i = 1; i < tmpList.Count; i++)
                 {
                     inputField1 = inputField1 + ",$" + TransInputLine(tmpList[i][0]);
                     inputField2 = inputField2 + ",$" + TransInputLine(tmpList[i][1]);

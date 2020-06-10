@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Core;
+using System;
 using System.Drawing;
-using System.Reflection;
 using System.Windows.Forms;
-using Citta_T1.Core;
-using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Flow
 {
@@ -52,7 +50,7 @@ namespace Citta_T1.Controls.Flow
             Global.GetFlowControl().Visible = false;
             Global.GetFlowControl().SelectRemark = false;
             Global.GetRemarkControl().Visible = false;
-            Global.GetFlowControl().RemarkChange(false); 
+            Global.GetFlowControl().RemarkChange(false);
 
         }
 

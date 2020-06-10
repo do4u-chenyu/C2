@@ -31,7 +31,7 @@ namespace Citta_T1.Controls.Common
         public event CheckBoxListItemClick ItemClick;
 
         //原checkboxlist和临时checkboxlist的索引对应关系，解决字段同名问题
-        private Dictionary<int,int> checkDict;
+        private Dictionary<int, int> checkDict;
 
         public ComCheckBoxList()
         {
@@ -229,7 +229,7 @@ namespace Citta_T1.Controls.Common
                 if (GetItemText(checkListBox.Items[i]).Contains(this.textBox1.Text))
                 {
                     checkListBoxTmp.Items.Add(GetItemText(checkListBox.Items[i]), checkListBox.GetItemChecked(i) ? CheckState.Checked : CheckState.Unchecked);
-                    this.checkDict.Add(count,i);//key:tmp索引，value:原始索引
+                    this.checkDict.Add(count, i);//key:tmp索引，value:原始索引
                     count++;
                 }
             }

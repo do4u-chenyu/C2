@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Citta_T1.Business.Model;
 
 namespace Citta_T1.Business.Option
 {
@@ -21,12 +18,17 @@ namespace Citta_T1.Business.Option
             return OptionDict[OpKey];
         }
 
-        public string[] GetOptionSplit(string OpKey, string defaultValue = "", char separator = '\t')
+        public override string ToString()
+        {
+            return string.Join(",", OptionDict.ToList());
+        }
+
+        public string[] GetOptionSplit(string OpKey, char separator = '\t', string defaultValue = "")
         {
             string[] ret = GetOption(OpKey, defaultValue).Split(separator);
             if (ret.Length == 1 && String.IsNullOrEmpty(ret[0]))
                 ret = new string[0];
-            return ret;    
+            return ret;
         }
 
         public void SetOption(string OpKey, string OpVaule)
@@ -46,5 +48,5 @@ namespace Citta_T1.Business.Option
             return count;
         }
     }
-   
+
 }

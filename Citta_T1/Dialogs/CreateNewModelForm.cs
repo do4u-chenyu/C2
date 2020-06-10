@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Core;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using Citta_T1.Utils;
-using Citta_T1.Business.Model;
-using Citta_T1.Core;
 
 namespace Citta_T1.Dialogs
 {

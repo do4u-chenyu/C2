@@ -15,7 +15,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             string inputFilePath1 = inputFilePaths.First();//左输入文件
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
-            string outField = TransDifferOutputField(option.GetOption("outfield").Split(','));//输出字段
+            string outField = TransDifferOutputField(option.GetOptionSplit("outfield"));//输出字段
 
             //目前一个算子固定生成4个临时文件
             string filterBatPath1 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_collide1.tmp";
@@ -26,11 +26,12 @@ namespace Citta_T1.Business.Schedule.Cmd
             //碰撞条件拼接
             List<List<string[]>> collideList = new List<List<string[]>>();
             List<string[]> collideTmpList = new List<string[]>();
-            string[] factor1 = option.GetOption("factor1").Split(',');
+            string[] factor1 = option.GetOptionSplit("factor1");
+
             collideTmpList.Add(factor1);
             for (int i = 2; i <= GetOptionFactorCount(); i++)
             {
-                string[] tmpFactor = option.GetOption("factor" + i.ToString()).Split(',');
+                string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 string andOr = tmpFactor[0];
                 //string[] differfactor = tmpfactor[1:];
                 if (andOr == "0")
@@ -42,14 +43,14 @@ namespace Citta_T1.Business.Schedule.Cmd
                 {
                     //如果是or，开启一个新列表
                     collideList.Add(collideTmpList);
-                    collideTmpList = new List<string[]>{tmpFactor.Skip(1).Take(2).ToArray()};
+                    collideTmpList = new List<string[]> { tmpFactor.Skip(1).Take(2).ToArray() };
                 }
             }
             collideList.Add(collideTmpList);
 
             //重写表头（覆盖）
             ReWriteBCPFile("collide");
-            
+
             foreach (List<string[]> tmpList in collideList)
             {
                 string inputField1 = "$" + TransInputLine(tmpList[0][0]);

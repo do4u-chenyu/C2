@@ -1,13 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Core;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using Citta_T1.Core;
-using Citta_T1.Utils;
 
 namespace Citta_T1.Business
 {
@@ -16,7 +10,7 @@ namespace Citta_T1.Business
         private string path;
         private string UserInfoPath;
         public LoginInfo()
-        { 
+        {
             this.path = Global.WorkspaceDirectory;
             this.UserInfoPath = Path.Combine(path, "UserInformation.xml");
         }
@@ -31,14 +25,14 @@ namespace Citta_T1.Business
                 XmlDocument xDoc = new XmlDocument();
                 XmlElement rootElement = xDoc.CreateElement("login");
                 xDoc.AppendChild(rootElement);
-                
+
 
                 XmlElement versionElement = xDoc.CreateElement("Version");
                 versionElement.InnerText = "V1.0";
                 rootElement.AppendChild(versionElement);
                 xDoc.Save(UserInfoPath);
             }
-           
+
         }
         public void WriteUserInfo(string userName)
         {
@@ -49,7 +43,7 @@ namespace Citta_T1.Business
             node.AppendChild(userNode);
             XmlElement nameNode = xDoc.CreateElement("name");
             nameNode.InnerText = userName;
-            userNode.AppendChild(nameNode);           
+            userNode.AppendChild(nameNode);
             xDoc.Save(UserInfoPath);
         }
         public void WriteLastLogin(string userName)
@@ -62,12 +56,12 @@ namespace Citta_T1.Business
             {
                 for (int i = 0; i < bodyNode.Count; i++)
                     node.RemoveChild(bodyNode[i]);
-            }             
+            }
             XmlElement childElement = xDoc.CreateElement("lastlogin");
             node.AppendChild(childElement);
             XmlElement nameNode = xDoc.CreateElement("name");
             nameNode.InnerText = userName;
-            childElement.AppendChild(nameNode);               
+            childElement.AppendChild(nameNode);
             xDoc.Save(UserInfoPath);
         }
         public List<string> LoadUserInfo(string userType)

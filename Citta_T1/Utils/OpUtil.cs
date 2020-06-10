@@ -3,13 +3,14 @@ using Citta_T1.Core;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Citta_T1.Utils
 {
     public class OpUtil
     {
         public static readonly char DefaultSeparator = '\t';
-
+        private static LogUtil log = LogUtil.GetInstance("OpUtil");
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {
             // [top, left, bottom, right]
@@ -184,5 +185,23 @@ namespace Citta_T1.Utils
 
         public static ElementStatus EStatus(string status)
         { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
+
+
+        public static PointF ToPointFType(string point)
+        {
+            PointF location = new PointF();
+            try
+            {
+                string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
+                string[] xy = coordinate.Split(',');
+                location = new PointF(Convert.ToSingle(xy[0]), Convert.ToSingle(xy[1]));
+            }
+            catch (Exception e) { log.Error(e.Message); }
+            return location;
+        }
+        public static Point ToPointType(string point)
+        {
+            return Point.Round(ToPointFType(point));
+        }
     }
 }

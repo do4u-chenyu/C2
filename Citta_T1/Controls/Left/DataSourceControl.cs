@@ -1,23 +1,23 @@
-﻿using System;
+﻿using Citta_T1.Business.DataSource;
+using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Citta_T1.Business.DataSource;
-using Citta_T1.Core;
-using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Left
 {
     public partial class DataSourceControl : UserControl
     {
         // 从`FormInputData.cs`导入模块收到的数据，以索引的形式存储
-       
+
         public DataSourceControl()
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
         private static readonly int ButtonGapHeight = 50;
@@ -67,19 +67,19 @@ namespace Citta_T1.Controls.Left
 
         private void ExternalData_Click(object sender, EventArgs e)
         {
-            this.externalDataLabel.Font = new Font("微软雅黑", 12,FontStyle.Bold );
+            this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
             this.localDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Regular);
             this.externalFrame.Visible = true;
             this.localFrame.Visible = false;
         }
 
-         private void LocalData_Click(object sender, EventArgs e)
-         {
-             this.localDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
-             this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Regular);
-             this.localFrame.Visible = true;
-             this.externalFrame.Visible = false; ;
-         }
+        private void LocalData_Click(object sender, EventArgs e)
+        {
+            this.localDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Bold);
+            this.externalDataLabel.Font = new Font("微软雅黑", 12, FontStyle.Regular);
+            this.localFrame.Visible = true;
+            this.externalFrame.Visible = false; ;
+        }
 
         private void ReLayoutLocalFrame()
         {

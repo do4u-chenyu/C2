@@ -2,6 +2,8 @@
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace Citta_T1.Business.Option
         // RIGHT_ME.EnableOption开启设置菜单
         // 更新子图的配置状态
         public void EnableOpOptionView(ModelRelation mr)
-        {      
+        {
             ModelElement rightMe = Global.GetCurrentDocument().SearchElementByID(mr.EndID);
             // 手工划线时关系的ENDID必须为OPControl
             if (rightMe == ModelElement.Empty || rightMe.Type != ElementType.Operator)
@@ -32,10 +34,10 @@ namespace Citta_T1.Business.Option
 
             MoveOpControl moveOpControl = rightMe.InnerControl as MoveOpControl;
             // 情况1   
-            if (moveOpControl.IsSingleDimension()) 
+            if (moveOpControl.IsSingleDimension())
             {
                 moveOpControl.EnableOption = true;
-                DoInputComare(rightMe, mr, ModelRelation.Empty);   
+                DoInputComare(rightMe, mr, ModelRelation.Empty);
             }
             // 情况2
             else
@@ -44,7 +46,7 @@ namespace Citta_T1.Business.Option
                 if (brothers.Count != 2) return;
                 moveOpControl.EnableOption = true;
                 DoInputComare(rightMe, brothers[0], brothers[1]);
-            }                
+            }
         }
 
         //  情况1: 旧表是新表的子集，且顺序一致
@@ -69,12 +71,12 @@ namespace Citta_T1.Business.Option
 
             // 二元算子时,第二个入度的数据源表头不能为空
             if (moveOpControl.IsBinaryDimension())
-                if(oldColumns1.Length == 0)
+                if (oldColumns1.Length == 0)
                     return;
 
             ModelElement startElement0 = Global.GetCurrentDocument().SearchElementByID(mr0.StartID);
             LoadColumns(startElement0, newColumns0);
-    
+
             if (moveOpControl.IsBinaryDimension())// 二元算子
             {
                 ModelElement startElement1 = Global.GetCurrentDocument().SearchElementByID(mr1.StartID);
@@ -84,7 +86,7 @@ namespace Citta_T1.Business.Option
                 // 默认线0落在入度0,线1落在入度1
                 // 线0落在入度1,线1落在入度0, 交换表头
                 if (mr0.EndPin == 1 && mr1.EndPin == 0)
-                    Swap(ref newColumns0, ref newColumns1);  
+                    Swap(ref newColumns0, ref newColumns1);
             }
 
             bool factor0 = newColumns0.Count >= oldColumns0.Length && oldColumns0.SequenceEqual(newColumns0.Take(oldColumns0.Length));
@@ -94,7 +96,7 @@ namespace Citta_T1.Business.Option
             {
                 me.Status = RestoreOptionStatus(me);
                 return;
-            } 
+            }
             Global.GetCurrentDocument().SetChildrenStatusNull(me.ID);
         }
 
@@ -115,7 +117,7 @@ namespace Citta_T1.Business.Option
 
         //获取算子上次配置状态
         private ElementStatus RestoreOptionStatus(ModelElement me)
-        { 
+        {
             Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
 
             if (optionDict == null)
@@ -131,24 +133,56 @@ namespace Citta_T1.Business.Option
                     continue;
 
                 if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
-                   return ElementStatus.Null;
+                    return ElementStatus.Null;
             }
             return ElementStatus.Ready;
         }
-       
+        public bool IsCleanSingleOperatorOption(MoveOpControl moc, string[] newColumns)
+        {
+            return IsCleanOption(moc, newColumns, "columnname0");
+        }
+        public bool IsCleanBinaryOperatorOption(MoveOpControl moc, string[] newColumns0, string[] newColumns1)
+        {
+            bool emptyOption0 = IsCleanOption(moc, newColumns0, "columnname0");
+            bool emptyOption1 = IsCleanOption(moc, newColumns1, "columnname1");
+            return emptyOption0 || emptyOption1;
+        }
+        public bool IsCleanOption(MoveOpControl moc, string[] newColumns, string field)
+        {
+            bool emptyOption = false;
+            /*
+             * 判断配置中是field否为空，为空则认为整个配置字典为空
+             */
+            string optionValues = moc.Option.GetOption(field);
+            if (string.IsNullOrEmpty(optionValues))
+                return !emptyOption;
+            string[] oldColumns0 = optionValues.Split('\t');
+            /*
+             * 新旧数据源不一致，清空算子用户配置内容
+             */
+            bool factor0 = newColumns.Length >= oldColumns0.Length && oldColumns0.SequenceEqual(newColumns.Take(oldColumns0.Length));
+            if (!factor0)
+            {
+                emptyOption = true;
+                List<string> keys = new List<string>(moc.Option.OptionDict.Keys); 
+                foreach (string key in keys)
+                    moc.Option.OptionDict[key] = "";
+            } 
+            return emptyOption;
+        }
         public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
         {
             //不存在旧数据源，直接返回
             bool clear = false;
             string optionValues = moc.Option.GetOption(name);
-            if (string.IsNullOrEmpty(optionValues) )
-                return !clear;          
-            
+            if (string.IsNullOrEmpty(optionValues))
+                return !clear;
+
             //复选框配置的判断
             int index;
             int maxIndex = columns.Length - 1;
             if (name.Contains("outfield"))
-                index = Array.ConvertAll<string, int>(optionValues.Split(','), int.Parse).Max();
+                index = Array.ConvertAll<string, int>(optionValues.Split('\t'), int.Parse).Max();
             else//单选框配置的判断
                 index = selectIndex != -1 ? selectIndex : Convert.ToInt32(optionValues);
 
@@ -170,7 +204,7 @@ namespace Citta_T1.Business.Option
         // 情况3：其他情况
         //       后续子图Null状态
         //
-        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)  
+        public void DoOutputCompare(List<string> oldColumns, List<string> nowColumns, int ID)
         {
             int oldCount = oldColumns.Count;
             int nowCount = nowColumns.Count;
@@ -181,9 +215,9 @@ namespace Citta_T1.Business.Option
                 string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
                 return;
-            }    
+            }
             IsNewOut(nowColumns, ID);
-        }     
+        }
 
         public void IsNewOut(List<string> nowColumns, int ID)
         {
@@ -208,31 +242,25 @@ namespace Citta_T1.Business.Option
                 if (!oldIndexs.Contains(index))
                     oldIndexs.Add(index);
             }
-            
+
 
         }
 
         //配置初始化，获取数据源表头信息
-        public Dictionary<string, string> GetDataSourceInfo(int ID)
+        public Dictionary<string, string> GetDataSourceInfoDict(int ID)
         {
-
-            Dictionary<string, string> dataInfo = new Dictionary<string, string>();
+            Dictionary<string, string> dataSourceInfoDict = new Dictionary<string, string>();
             List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
             foreach (ModelRelation mr in relations)
             {
                 ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                dataInfo["dataPath" + mr.EndPin] = me.FullFilePath;
-                dataInfo["encoding" + mr.EndPin] = me.Encoding.ToString();
-                dataInfo["separator" + mr.EndPin] = me.Separator.ToString();
-                dataInfo["extType" + mr.EndPin] = me.ExtType.ToString();
+                dataSourceInfoDict["dataPath" + mr.EndPin] = me.FullFilePath;
+                dataSourceInfoDict["encoding" + mr.EndPin] = me.Encoding.ToString();
+                dataSourceInfoDict["separator" + mr.EndPin] = me.Separator.ToString();
+                dataSourceInfoDict["extType" + mr.EndPin] = me.ExtType.ToString();
+                dataSourceInfoDict["description" + mr.EndPin] = me.Description;
             }
-            return dataInfo;
+            return dataSourceInfoDict;
         }
-     
-        public void GetSelectedItemIndex(object sender, EventArgs e)
-        {
-            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
-        }
-   
     }
 }

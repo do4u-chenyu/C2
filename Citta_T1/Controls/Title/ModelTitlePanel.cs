@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-
-using Citta_T1.Utils;
 
 namespace Citta_T1.Controls.Title
 {
@@ -18,7 +17,7 @@ namespace Citta_T1.Controls.Title
         private int rawModelTitleNum = 9;
         public event NewDocumentEventHandler NewModelDocument;
         public event DocumentSwitchHandler ModelDocumentSwitch;
- 
+
         public ModelTitlePanel()
         {
             models = new List<ModelTitleControl>();
@@ -43,7 +42,7 @@ namespace Citta_T1.Controls.Title
                     mt.SetNewModelTitle(mt.ModelTitle, 0);
             }
         }
-        public void LoadModelDocument(string[] modelTitles) 
+        public void LoadModelDocument(string[] modelTitles)
         {
             int end = modelTitles.Length - 1;
             for (int i = 0; i < modelTitles.Length; i++)
@@ -65,14 +64,14 @@ namespace Citta_T1.Controls.Title
                     UpModelTitle();
                 }
                 if (i == end)
-                { 
+                {
                     mtControl.BorderStyle = BorderStyle.FixedSingle;
                     mtControl.Selected = true;
                 }
-                    
-                
+
+
             }
-           
+
         }
 
         public void AddModel(string modelTitle)
@@ -148,7 +147,7 @@ namespace Citta_T1.Controls.Title
             }
             catch (Exception ex)
             { log.Error("ModelTitlePanel 未将对象引用设置到对象的实例: " + ex.ToString()); }
-            
+
         }
         public void RemoveModel(ModelTitleControl mtControl)
         {
@@ -172,7 +171,7 @@ namespace Citta_T1.Controls.Title
                 AddModel("新建模型");
             UpModelTitle();
             ResizeModel(true);//重新设置model大小
-           
+
 
         }
         public void ClearSelectedBorder()
@@ -184,10 +183,10 @@ namespace Citta_T1.Controls.Title
         {
             foreach (ModelTitleControl mtc in this.models)
             {
-                if(mtc.ModelTitle == modelTitle)
-                 mtc.ShowSelectedBorder();
+                if (mtc.ModelTitle == modelTitle)
+                    mtc.ShowSelectedBorder();
             }
-               
+
         }
 
         private void ModelTitlePanel_SizeChanged(object sender, EventArgs e)

@@ -3,11 +3,6 @@
     partial class SortOperatorView
     {
         /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -28,14 +23,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.bottomPanel = new System.Windows.Forms.Panel();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.confirmButton = new System.Windows.Forms.Button();
             this.keyPanel = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,8 +38,6 @@
             this.sortByNum = new System.Windows.Forms.RadioButton();
             this.endRow = new System.Windows.Forms.TextBox();
             this.firstRow = new System.Windows.Forms.TextBox();
-            this.dataInfo = new System.Windows.Forms.TextBox();
-            this.sortField = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -57,7 +47,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.descendingOrder = new System.Windows.Forms.RadioButton();
             this.ascendingOrder = new System.Windows.Forms.RadioButton();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -130,7 +119,6 @@
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // confirmButton
             // 
@@ -145,7 +133,6 @@
             this.confirmButton.TabIndex = 0;
             this.confirmButton.Text = "确认";
             this.confirmButton.UseVisualStyleBackColor = false;
-            this.confirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // keyPanel
             // 
@@ -200,8 +187,8 @@
             this.valuePanel.Controls.Add(this.groupBox3);
             this.valuePanel.Controls.Add(this.endRow);
             this.valuePanel.Controls.Add(this.firstRow);
-            this.valuePanel.Controls.Add(this.dataInfo);
-            this.valuePanel.Controls.Add(this.sortField);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.comboBox0);
             this.valuePanel.Controls.Add(this.label8);
             this.valuePanel.Controls.Add(this.label7);
             this.valuePanel.Controls.Add(this.label6);
@@ -277,28 +264,26 @@
             // 
             // dataInfo
             // 
-            this.dataInfo.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dataInfo.Location = new System.Drawing.Point(2, 0);
-            this.dataInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.dataInfo.Name = "dataInfo";
-            this.dataInfo.ReadOnly = true;
-            this.dataInfo.Size = new System.Drawing.Size(134, 23);
-            this.dataInfo.TabIndex = 13;
-            this.dataInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataInfo.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataInfo_MouseClick);
-            this.dataInfo.LostFocus += new System.EventHandler(this.DataInfo_LostFocus);
+            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dataSourceTB0.Location = new System.Drawing.Point(2, 0);
+            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
+            this.dataSourceTB0.Name = "dataInfo";
+            this.dataSourceTB0.ReadOnly = true;
+            this.dataSourceTB0.Size = new System.Drawing.Size(134, 23);
+            this.dataSourceTB0.TabIndex = 13;
+            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // sortField
             // 
-            this.sortField.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.sortField.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.sortField.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sortField.FormattingEnabled = true;
-            this.sortField.Location = new System.Drawing.Point(2, 44);
-            this.sortField.Margin = new System.Windows.Forms.Padding(2);
-            this.sortField.Name = "sortField";
-            this.sortField.Size = new System.Drawing.Size(134, 24);
-            this.sortField.TabIndex = 12;
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.FormattingEnabled = true;
+            this.comboBox0.Location = new System.Drawing.Point(2, 44);
+            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox0.Name = "sortField";
+            this.comboBox0.Size = new System.Drawing.Size(134, 24);
+            this.comboBox0.TabIndex = 12;
             // 
             // label8
             // 
@@ -447,8 +432,6 @@
         private System.Windows.Forms.Panel bottomPanel;
         private System.Windows.Forms.Panel keyPanel;
         private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button confirmButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -463,11 +446,8 @@
         private System.Windows.Forms.RadioButton descendingOrder;
         private System.Windows.Forms.RadioButton ascendingOrder;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox sortField;
-        private System.Windows.Forms.TextBox dataInfo;
         private System.Windows.Forms.TextBox endRow;
         private System.Windows.Forms.TextBox firstRow;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton sortByString;

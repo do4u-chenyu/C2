@@ -25,7 +25,7 @@ namespace Citta_T1.Controls.Bottom
             }
 
 
-            
+
         }
 
         private void MenuItemClearAll_Click(object sender, EventArgs e)

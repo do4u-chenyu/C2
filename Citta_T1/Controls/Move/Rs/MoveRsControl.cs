@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Rs
@@ -29,14 +28,11 @@ namespace Citta_T1.Controls.Move.Rs
 
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
-        private Rectangle rectIn;
         private String pinStatus = "noEnter";
         private List<int> linePinArray = new List<int> { };
         private String lineStatus = "noLine";
-        private ControlMoveWrapper controlMoveWrapper;
+        private MoveWrapper moveWrapper;
 
-        private Size changeStatus = new Size(0, 28);
-        private Size normalStatus = new Size(58, 28);
         public override ElementStatus Status
         {
             get => base.Status;
@@ -46,11 +42,11 @@ namespace Citta_T1.Controls.Move.Rs
                 StatusDirty();
             }
         }
-        public Rectangle RectIn { get => rectIn; set => rectIn = value; }
+        public Rectangle RectIn { get; set; }
 
         public MoveRsControl(int size, string desciption, Point loc)
         {
-           
+
             InitializeComponent();
             InitializeContextMenuStrip();
 
@@ -62,20 +58,22 @@ namespace Citta_T1.Controls.Move.Rs
             Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
-            SetOpControlName(Description);
             ChangeSize(size);
-            
+
+            changeStatus = new Size(0, 28);
+            normalStatus = new Size(58, 28);
+
             InitializeOpPinPicture();
-            this.controlMoveWrapper = new ControlMoveWrapper();
+            this.moveWrapper = new MoveWrapper();
 
             endLineIndexs.Add(-1);
 
-            
+
         }
 
         private void InitializeOpPinPicture()
         {
-            rectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
+            RectIn = new Rectangle(this.leftPin.X, this.leftPin.Y, this.pinWidth, this.pinHeight);
             rectOut = new Rectangle(this.rightPin.X, this.rightPin.Y, this.pinWidth, this.pinHeight);
             SetOpControlName(Description);
         }
@@ -92,12 +90,6 @@ namespace Citta_T1.Controls.Move.Rs
             this.ExplorerToolStripMenuItem,
             this.CopyFilePathToClipboardToolStripMenuItem});
         }
-
-        /*
-        System.Windows.Forms.PictureBox leftPicture1 = this.leftPinPictureBox;
-        leftPicture1.Location = new System.Drawing.Point(16, 24);
-        this.Controls.Add(leftPicture1);
-        */
 
 
         #region MOC的事件
@@ -121,8 +113,8 @@ namespace Citta_T1.Controls.Move.Rs
             {
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
-                this.Location = new Point(left, top);
-
+                Global.GetCurrentDocument
+                    ().WorldMap.WorldBoundControl(new Point(left, top), this);
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
@@ -136,8 +128,7 @@ namespace Citta_T1.Controls.Move.Rs
                         mr.UpdatePoints();
                     }
                 }
-                // RS控件必定会连上线，因此不需要isNeedMoveLine
-                this.controlMoveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -161,7 +152,7 @@ namespace Citta_T1.Controls.Move.Rs
                 cmd = ECommandType.Hold;
             }
             oldControlPosition = this.Location;
-            this.controlMoveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -191,7 +182,7 @@ namespace Citta_T1.Controls.Move.Rs
                 }
                 else if (cmd == ECommandType.Hold)
                 {
-                    this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                     cmd = ECommandType.Null;
                 }
 
@@ -211,39 +202,11 @@ namespace Citta_T1.Controls.Move.Rs
             }
 
         }
-
-        public Point UndoRedoMoveLocation(Point location)
-        {
-            oldControlPosition = this.Location;
-            this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
-        }
-
         #endregion
 
         #region 控件名称长短改变时改变控件大小
-        private void SetOpControlName(string name)
-        {
-            this.Description = name;
-            int maxLength = 24;
-            name = ConvertUtil.SubstringByte(name, 0, maxLength);
-            int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
-            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
-            int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
-            this.txtButton.Text = name;
-            if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
-            {
-                txtWidth += 10;
-                this.txtButton.Text = name + "...";
-            }
-            changeStatus.Width = normalStatus.Width + txtWidth;
-            ResizeControl(txtWidth, changeStatus);
-            this.helpToolTip.SetToolTip(this.txtButton, this.Description);
-        }
 
-        private void ResizeControl(int txtWidth, Size controlSize)
+        protected override void ResizeControl(int txtWidth, Size controlSize)
         {
             double f = Math.Pow(factor, sizeLevel);
             int pading = 4;
@@ -308,47 +271,6 @@ namespace Citta_T1.Controls.Move.Rs
             Global.GetMainForm().UpdateRunbuttonImageInfo();
 
         }
-
-
-
-        #endregion
-
-        #region textBox
-        public override void FinishTextChange()
-        {
-            if (this.textBox.Text.Trim().Length == 0)
-                this.textBox.Text = this.oldTextString;
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
-            this.txtButton.Visible = true;
-            if (this.oldTextString == this.textBox.Text)
-                return;
-
-            SetOpControlName(this.textBox.Text);
-            // 构造重命名命令类,压入undo栈
-            ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-            if (element != ModelElement.Empty)
-            {
-                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
-                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
-            }
-
-            this.oldTextString = this.textBox.Text;
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetCurrentDocument().UpdateAllLines();
-            Global.GetCanvasPanel().Invalidate(false);
-        }
-
-
-        public string UndoRedoChangeTextName(string des)
-        {
-            oldTextString = Description;
-            Description = des;
-            SetOpControlName(Description);
-            Global.GetCurrentDocument().UpdateAllLines();
-            Global.GetCanvasPanel().Invalidate(false);
-            return oldTextString;
-        }
         #endregion
 
         private void RightPictureBox_MouseEnter(object sender, EventArgs e)
@@ -359,10 +281,10 @@ namespace Citta_T1.Controls.Move.Rs
         #region 针脚事件
         private void PinOpLeaveAndEnter(Point mousePosition)
         {
-            if (rectIn.Contains(mousePosition))
+            if (RectIn.Contains(mousePosition))
             {
                 if (pinStatus == "rectIn" || linePinArray.Contains(1)) return;
-                rectIn = RectEnter(rectIn);
+                RectIn = RectEnter(RectIn);
                 this.Invalidate();
                 pinStatus = "rectIn";
             }
@@ -378,7 +300,7 @@ namespace Citta_T1.Controls.Move.Rs
                 switch (pinStatus)
                 {
                     case "rectIn":
-                        rectIn = RectLeave(rectIn);
+                        RectIn = RectLeave(RectIn);
                         break;
                     case "rectOut":
                         rectOut = RectLeave(rectOut);
@@ -422,12 +344,12 @@ namespace Citta_T1.Controls.Move.Rs
             ExtensionMethods.SetDouble(this);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-    
+
             factor = zoomUp ? factor : 1 / factor;
 
             SetControlsBySize(factor, this);
             this.rectOut = SetRectBySize(factor, this.rectOut);
-            this.rectIn = SetRectBySize(factor, this.rectIn);
+            this.RectIn = SetRectBySize(factor, this.RectIn);
             this.Invalidate();
         }
         #endregion
@@ -441,17 +363,17 @@ namespace Citta_T1.Controls.Move.Rs
                 this.leftPictureBox.Image = Properties.Resources.resultDone;
             // 状态改变, 需要设置BCP缓冲dirty，以便预览时重新加载
             if (System.IO.File.Exists(this.FullFilePath))
-                BCPBuffer.GetInstance().SetDirty(this.FullFilePath);        
+                BCPBuffer.GetInstance().SetDirty(this.FullFilePath);
         }
 
-    
+
         #endregion
         private void MoveOpControl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             e.Graphics.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
-            e.Graphics.FillEllipse(whiteSmokeBrush, rectIn);
-            e.Graphics.DrawEllipse(pen, rectIn);
+            e.Graphics.FillEllipse(whiteSmokeBrush, RectIn);
+            e.Graphics.DrawEllipse(pen, RectIn);
             e.Graphics.FillEllipse(whiteSmokeBrush, rectOut);
             e.Graphics.DrawEllipse(pen, rectOut);
         }
@@ -472,8 +394,8 @@ namespace Citta_T1.Controls.Move.Rs
         public PointF GetEndPinLoc(int pinIndex)
         {
             return new PointF(
-                this.Location.X + this.rectIn.Location.X + this.rectIn.Width / 2,
-                this.Location.Y + this.rectIn.Location.Y + this.rectIn.Height / 2);
+                this.Location.X + this.RectIn.Location.X + this.RectIn.Width / 2,
+                this.Location.Y + this.RectIn.Location.Y + this.RectIn.Height / 2);
         }
 
         #endregion
@@ -483,7 +405,7 @@ namespace Citta_T1.Controls.Move.Rs
 
             if (pinStatus != "rectIn" && !linePinArray.Contains(1))
             {
-                rectIn = RectEnter(rectIn);
+                RectIn = RectEnter(RectIn);
                 linePinArray.Add(1);
                 this.Invalidate();
             }

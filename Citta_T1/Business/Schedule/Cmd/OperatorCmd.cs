@@ -51,21 +51,21 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> outTitleList = new List<string>();
             if (className == "relate")
             {
-                string[] col0 = this.option.GetOption("columnname0").Split('\t');
-                string[] col1 = this.option.GetOption("columnname1").Split('\t');
+                string[] col0 = this.option.GetOptionSplit("columnname0");
+                string[] col1 = this.option.GetOptionSplit("columnname1");
 
-                foreach (string ind in option.GetOption("outfield0").Split(','))
+                foreach (string ind in option.GetOptionSplit("outfield0"))
                 {
                     outTitleList.Add(col0[int.Parse(ind)]);
                 }
-                foreach (string ind in option.GetOption("outfield1").Split(','))
+                foreach (string ind in option.GetOptionSplit("outfield1"))
                 {
                     outTitleList.Add(col1[int.Parse(ind)]);
                 }
             }
             else if (className == "union" || className == "format")
             {
-                string[] col0 = this.option.GetOption("outname").Split('\t');
+                string[] col0 = this.option.GetOptionSplit("outname");
                 foreach (string ind in col0)
                 {
                     outTitleList.Add(ind);
@@ -73,15 +73,15 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             else if (className == "differ" || className == "collide")
             {
-                string[] col0 = this.option.GetOption("columnname0").Split('\t');
-                foreach (string ind in option.GetOption("outfield").Split(','))
+                string[] col0 = option.GetOptionSplit("columnname0");
+                foreach (string ind in option.GetOptionSplit("outfield"))
                 {
                     outTitleList.Add(col0[int.Parse(ind)]);
                 }
             }
             else
             {
-                foreach (string ind in option.GetOption("outfield").Split(','))
+                foreach (string ind in option.GetOptionSplit("outfield"))
                 {
                     outTitleList.Add(titleList[int.Parse(ind)]);
                 }
@@ -112,7 +112,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 
         public string TransOFSToCmd(string separator)
         {
-            if(separator == "|")
+            if (separator == "|")
             {
                 return "\t";
             }
@@ -120,7 +120,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 return "|";
             }
-            
+
         }
 
         public string TransChoiceToCmd(string choice)
@@ -141,8 +141,8 @@ namespace Citta_T1.Business.Schedule.Cmd
         {
             switch (choice)
             {
-                case "0":return "&&";
-                case "1":return "||";
+                case "0": return "&&";
+                case "1": return "||";
             }
             return "and、or无该选项";
         }
@@ -182,7 +182,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 if (condition.IndexOf('\\') >= 0)
                     condition = condition.Replace("\\", "\\\\");
-                if ( condition.IndexOf('\"') >= 0)
+                if (condition.IndexOf('\"') >= 0)
                     condition = condition.Replace("\"", "\\\"");
                 return "\"" + condition + "\"";
             }
@@ -205,7 +205,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             }
             else
             {
-                if(JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
+                if (JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
                 {
                     return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
                 }
@@ -226,7 +226,7 @@ namespace Citta_T1.Business.Schedule.Cmd
                     num++;
                 }
             }
-            return num; 
+            return num;
         }
 
         public OpUtil.Encoding JudgeInputFileEncoding(string inputFile)
