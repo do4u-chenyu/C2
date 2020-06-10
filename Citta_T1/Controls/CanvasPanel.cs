@@ -6,6 +6,8 @@ using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -245,9 +247,20 @@ namespace Citta_T1.Controls
                 dragWrapper.DragUp(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
             // 非画线落点处理
             else if (cmd == ECommandType.PinDraw)
-                this.MouseUpWhenPinDraw();
+            {
+                this.MouseUpWhenPinDraw(sender, e);
+                if (this.startC != null && this.endC != null)
+                {
+                    ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
+                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID, sEleType);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), addRelationCommand);
+                }
+
+                Global.GetMainForm().SetDocumentDirty();
+            }
+                
         }
-        private void MouseUpWhenPinDraw()
+        private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
             cmd = ECommandType.Null;
             lineWhenMoving = null;
@@ -258,7 +271,7 @@ namespace Citta_T1.Controls
             if (CanNotPinDraw())
             {
                 this.RepaintAllRelations();
-                this.RepaintStartcPin(StartC, StartC.ID);
+                this.RepaintStartcPin(startC, startC.ID);
                 return;
             }
 
@@ -271,11 +284,24 @@ namespace Citta_T1.Controls
                 * endP2  |          |
                 *         ----------
                 */
+            ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
+            this.AddNewRelation(startC, endC, sEleType);
+        }
+        public void AddNewRelation(MoveBaseControl startC, MoveBaseControl endC, ElementType sEleType)
+        {
+
             (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
+            PointF startP;
+            if (sEleType == ElementType.DataSource)
+                startP = (startC as MoveDtControl).GetEndPinLoc(0);
+            else if (sEleType == ElementType.Result)
+                startP = (startC as MoveRsControl).GetEndPinLoc(0);
+            else
+                return;
             ModelRelation mr = new ModelRelation(
-                StartC.ID,
-                EndC.ID,
-                StartP,
+                startC.ID,
+                endC.ID,
+                startP,
                 (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
                 (endC as MoveOpControl).RevisedPinIndex
                 );
@@ -385,14 +411,13 @@ namespace Citta_T1.Controls
             selectLineIndexs.Clear();
             this.Invalidate(false);
         }
-        private void DeleteSelectedLine(ModelRelation mr)
+        public void DeleteSelectedLine(ModelRelation mr)
         {
             try
             {
                 //删除线配置逻辑
                 ModelDocument doc = Global.GetCurrentDocument();
                 doc.StatusChangeWhenDeleteLine(mr.EndID);
-
                 doc.RemoveModelRelation(mr);
                 //关联算子引脚自适应改变
                 MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
