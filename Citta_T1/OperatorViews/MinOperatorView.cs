@@ -57,10 +57,8 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
-
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield", outField);
+            this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
+            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("minfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
 
             ElementStatus oldStatus = this.opControl.Status;

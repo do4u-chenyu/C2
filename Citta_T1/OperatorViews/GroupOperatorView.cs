@@ -87,7 +87,7 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string factor1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);
             this.groupColumn.Add(this.comboBox0.SelectedIndex);
@@ -102,12 +102,12 @@ namespace Citta_T1.OperatorViews
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
-            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
-            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
-            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
-            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked.ToString());
-            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked.ToString());
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked);
+            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);
+            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked);
+            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked);
+            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked);
             this.outList = new List<int>(this.groupColumn);
             int[] columnIndex = Enumerable.Range(0, this.nowColumnsName0.Length).ToArray();
             foreach (int index in columnIndex)
@@ -115,7 +115,7 @@ namespace Citta_T1.OperatorViews
                 if (!this.groupColumn.Contains(index))
                     this.outList.Add(index);
             }
-            this.opControl.Option.SetOption("outfield", string.Join("\t", this.outList));
+            this.opControl.Option.SetOption("outfield", this.outList);
 
             ElementStatus oldStatus = this.opControl.Status;
 

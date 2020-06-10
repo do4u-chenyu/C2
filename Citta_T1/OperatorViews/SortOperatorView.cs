@@ -79,15 +79,15 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
-            this.opControl.Option.SetOption("outfield", String.Join("\t", this.outList));
+            this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
+            this.opControl.Option.SetOption("outfield", this.outList);
             this.opControl.Option.SetOption("sortfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
-            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
-            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
-            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
-            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked.ToString());
-            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked.ToString());
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked);
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
+            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);
+            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked);
+            this.opControl.Option.SetOption("sortByNum", this.sortByNum.Checked);
+            this.opControl.Option.SetOption("sortByString", this.sortByString.Checked);
             this.opControl.Option.SetOption("firstRow", this.firstRow.Text);
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
 

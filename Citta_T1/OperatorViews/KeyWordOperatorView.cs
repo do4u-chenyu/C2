@@ -94,14 +94,12 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             opControl.Option.OptionDict.Clear();
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-
-            opControl.Option.SetOption("outfield", outField);
-            opControl.Option.SetOption("columnname0", string.Join("\t", opControl.FirstDataSourceColumns));
-            opControl.Option.SetOption("columnname1", string.Join("\t", opControl.SecondDataSourceColumns));
-            opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex.ToString());
-            opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex.ToString());
-            opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex.ToString());
+            opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex);
+            opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex);
+            opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex);
             opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
 
 

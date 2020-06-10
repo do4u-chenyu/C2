@@ -99,14 +99,12 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
-            List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
-            this.opControl.Option.SetOption("outfield", string.Join("\t", checkIndexs));
-
-            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
-            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked.ToString());
-            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked.ToString());
+            this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
+            this.opControl.Option.SetOption("outfield", string.Join("\t", outListCCBL0.GetItemCheckIndex()));
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked);
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
+            this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);
+            this.opControl.Option.SetOption("descendingOrder", this.descendingOrder.Checked);
 
             ElementStatus oldStatus = this.opControl.Status;
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
