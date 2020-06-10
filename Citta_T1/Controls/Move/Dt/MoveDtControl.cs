@@ -310,7 +310,7 @@ namespace Citta_T1.Controls.Move.Dt
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
                     cmd = ECommandType.Null;
                 }
-                if (cmd == ECommandType.Hold)
+                else if (cmd == ECommandType.Hold)
                 {
                     this.controlMoveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
                     cmd = ECommandType.Null;
