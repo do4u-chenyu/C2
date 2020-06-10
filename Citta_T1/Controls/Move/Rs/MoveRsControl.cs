@@ -16,7 +16,6 @@ namespace Citta_T1.Controls.Move.Rs
 {
     public partial class MoveRsControl : MoveBaseControl, IMoveControl
     {
-        private bool isMouseDown = false;
         private static LogUtil log = LogUtil.GetInstance("MoveRsControl");
 
         private ECommandType cmd = ECommandType.Null;
@@ -99,17 +98,19 @@ namespace Citta_T1.Controls.Move.Rs
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
-            if (isMouseDown)
+            if (cmd == ECommandType.Null)
+                return;
+            else if (cmd == ECommandType.PinDraw)
             {
-                if (cmd == ECommandType.PinDraw)
-                {
-                    lineStatus = "lineExit";
-                    int startX = this.Location.X + e.X;
-                    int startY = this.Location.Y + e.Y;
-                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
-                    return;
-                }
+                this.lineStatus = "lineExit";
+                int startX = this.Location.X + e.X;
+                int startY = this.Location.Y + e.Y;
+                MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
+                Global.GetCanvasPanel().CanvasPanel_MouseMove(this, e1);
+                return;
+            }
+            else
+            {
                 int left = this.Left + e.X - mouseOffset.X;
                 int top = this.Top + e.Y - mouseOffset.Y;
                 Global.GetCurrentDocument
@@ -142,14 +143,13 @@ namespace Citta_T1.Controls.Move.Rs
                     int startY = this.Location.Y + e.Y;
                     oldControlPosition = this.Location;
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    isMouseDown = true;
                     cmd = ECommandType.PinDraw;
                     Global.GetCanvasPanel().CanvasPanel_MouseDown(this, e1);
                     return;
                 }
                 mouseOffset.X = e.X;
                 mouseOffset.Y = e.Y;
-                isMouseDown = true;
+                cmd = ECommandType.Hold;
             }
             oldControlPosition = this.Location;
             this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
@@ -175,30 +175,32 @@ namespace Citta_T1.Controls.Move.Rs
             {
                 if (cmd == ECommandType.PinDraw)
                 {
-                    isMouseDown = false;
-                    cmd = ECommandType.Null;
                     int startX = this.Location.X + e.X;
                     int startY = this.Location.Y + e.Y;
-                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
+                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
+                    cmd = ECommandType.Null;
                 }
-                isMouseDown = false;
-                moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-                Global.GetNaviViewControl().UpdateNaviView();
+                else if (cmd == ECommandType.Hold)
+                {
+                    this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    cmd = ECommandType.Null;
+                }
 
-            }
-            if (oldControlPosition != this.Location)
-            {
-                // 构造移动命令类,压入undo栈
-                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                if (element != ModelElement.Empty)
-                {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
-                    ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                Global.GetNaviViewControl().UpdateNaviView();
+                if (oldControlPosition != this.Location)
+                {
+                    // 构造移动命令类,压入undo栈
+                    ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                    if (element != ModelElement.Empty)
+                    {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
+                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
+                        ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                        UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                    }
+                    Global.GetMainForm().SetDocumentDirty();
                 }
-                Global.GetMainForm().SetDocumentDirty();
             }
+
         }
         #endregion
 
@@ -286,7 +288,7 @@ namespace Citta_T1.Controls.Move.Rs
                 this.Invalidate();
                 pinStatus = "rectIn";
             }
-            else if (rectOut.Contains(mousePosition) || lineStatus == "lineExit")
+            else if (rectOut.Contains(mousePosition) || this.lineStatus == "lineExit")
             {
                 if (pinStatus == "rectOut") return;
                 rectOut = RectEnter(rectOut);
@@ -328,7 +330,7 @@ namespace Citta_T1.Controls.Move.Rs
         }
         public void OutPinInit(String status)
         {
-            lineStatus = status;
+            this.lineStatus = status;
             PinOpLeaveAndEnter(new Point(0, 0));
         }
         #endregion

@@ -237,6 +237,10 @@ namespace Citta_T1.Controls
 
         public void SetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
+            /* 点击线的时候设置线的状态
+             * 1. 当前线状态取反
+             * 2. 其他线
+             */
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             for (int i = 0; i < mrs.Count; i++)
             {
@@ -338,8 +342,8 @@ namespace Citta_T1.Controls
                  * 3. 
                  */
                 PointF nowP = e.Location;
-                if (lineWhenMoving != null)
-                    invalidateRectWhenMoving = LineUtil.ConvertRect(lineWhenMoving.GetBoundingRect());
+                if (this.lineWhenMoving != null)
+                    invalidateRectWhenMoving = LineUtil.ConvertRect(this.lineWhenMoving.GetBoundingRect());
                 else
                     invalidateRectWhenMoving = new Rectangle();
                 // 遍历所有OpControl的leftPin
@@ -359,13 +363,12 @@ namespace Citta_T1.Controls
                     }
                 }
                 EndP = nowP;
-                lineWhenMoving = new Bezier(StartP, nowP);
+                this.lineWhenMoving = new Bezier(StartP, nowP);
                 // 不应该挡住其他的线
                 CoverPanelByRect(invalidateRectWhenMoving);
-                lineWhenMoving.OnMouseMove(nowP);
-
+                this.lineWhenMoving.OnMouseMove(nowP);
                 // 重绘曲线
-                RepaintObject(lineWhenMoving);
+                RepaintObject(this.lineWhenMoving);
             }
         }
         /*
@@ -412,8 +415,6 @@ namespace Citta_T1.Controls
             if (r.Height > this.staticImage.Height || r.Height < 0)
                 r.Height = this.staticImage.Height;
             // 用保存好的图来局部覆盖当前背景图
-            Pen pen = new Pen(Color.Red);
-            pen.Dispose();
             r.Inflate(1, 1);
             g.DrawImage(this.staticImage, r, r, GraphicsUnit.Pixel);
             g.Dispose();
@@ -444,8 +445,8 @@ namespace Citta_T1.Controls
             lineWhenMoving = null;
 
             /* 不是所有位置Up都能形成曲线的
-                * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
-                */
+             * 如果没有endC，或者endC不是OpControl，那就不形成线，结束绘线动作
+             */
             if (CanNotPinDraw())
             {
                 this.RepaintAllRelations();
@@ -460,7 +461,6 @@ namespace Citta_T1.Controls
                 *         __________
                 * endP1  | MControl | startP
                 * endP2  |          |
-                * 
                 *         ----------
                 */
             (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);

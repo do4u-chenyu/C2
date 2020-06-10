@@ -211,6 +211,7 @@ namespace Citta_T1.Controls.Move.Op
         #region MOC的事件
         private void MoveOpControl_MouseMove(object sender, MouseEventArgs e)
         {
+            bool isNeedMoveLine = false;
             if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
             PinOpLeaveAndEnter(this.PointToClient(MousePosition));
@@ -225,7 +226,6 @@ namespace Citta_T1.Controls.Move.Op
                 Global.GetCurrentDocument().WorldMap
                       .WorldBoundControl(new Point(left, top), this);
                 #endregion
-                bool isNeedMoveLine = false;
                 foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
                 {
                     if (mr.StartID == this.ID)
@@ -242,9 +242,7 @@ namespace Citta_T1.Controls.Move.Op
                     }
                 }
                 if (isNeedMoveLine)
-                {
                     this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
-                }
             }
         }
 
@@ -758,22 +756,6 @@ namespace Citta_T1.Controls.Move.Op
             return new PointF(
                 this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
                 this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
-        }
-
-        public void BindEndLine(int pinIndex, int relationIndex)
-        {
-            try
-            {
-                this.endLineIndexs[pinIndex] = relationIndex;
-            }
-            catch (IndexOutOfRangeException)
-            {
-                log.Error("索引越界");
-            }
-            catch (Exception ex)
-            {
-                log.Error("MoveOpControl BindEndLine 出错: " + ex.ToString());
-            }
         }
 
 
