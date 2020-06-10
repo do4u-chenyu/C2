@@ -14,25 +14,15 @@ namespace Citta_T1.OperatorViews
 {
     public partial class GroupOperatorView : BaseOperatorView
     {
-
         private List<int> groupColumn;
-        private List<bool> oldCheckedItems;
         private List<int> outList;
         public GroupOperatorView(MoveOpControl opControl) : base(opControl)
         {
             this.groupColumn = new List<int>();
-            this.oldCheckedItems = new List<bool>();
 
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
-            this.oldCheckedItems.Add(this.repetition.Checked);
-            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
-            this.oldCheckedItems.Add(this.descendingOrder.Checked);
-            this.oldCheckedItems.Add(this.sortByString.Checked);
-            this.oldCheckedItems.Add(this.sortByNum.Checked);
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -51,7 +41,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 CreateLine(line);
             }
         }
