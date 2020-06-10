@@ -116,15 +116,10 @@ namespace Citta_T1.OperatorViews
             
             string factor1 = this.opControl.Option.GetOption("factor1");
             int[] optionItems0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
-            bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", optionItems0[0]);
-            bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", optionItems0[1]);
-            if (!case0 && !case1)
-            {
-                this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
-                this.comboBox0.Tag = optionItems0[0].ToString();
-                this.comboBox1.Tag = optionItems0[1].ToString();
-            }
+            this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
+            this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
+            this.comboBox0.Tag = optionItems0[0].ToString();
+            this.comboBox1.Tag = optionItems0[1].ToString();
 
             int count = this.opControl.Option.KeysCount("factor");
             if (count <= 1)

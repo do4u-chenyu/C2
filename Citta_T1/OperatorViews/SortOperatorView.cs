@@ -32,7 +32,7 @@ namespace Citta_T1.OperatorViews
             // 窗体自定义的初始化逻辑
             this.comboBox0.Items.AddRange(nowColumnsName0);
             this.outList = Enumerable.Range(0, this.nowColumnsName0.Length).ToList();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
+           
         }
         #endregion
         #region 添加取消
@@ -43,7 +43,7 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("请选择排序字段!");
                 return;
             }
-            if (String.IsNullOrWhiteSpace(this.firstRow.Text) || String.IsNullOrWhiteSpace(this.endRow.Text))
+            if (String.IsNullOrWhiteSpace(this.firstRow.Text))
             {
                 MessageBox.Show("请输出行数!");
                 return;
@@ -79,7 +79,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
             this.opControl.Option.SetOption("outfield", String.Join("\t", this.outList));
             this.opControl.Option.SetOption("sortfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
@@ -103,13 +103,12 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
 
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "sortfield"))
-            {
-                int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
-            }
+            int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+            this.comboBox0.Tag = index.ToString();
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition", "False"));
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder", "True"));
@@ -166,6 +165,7 @@ namespace Citta_T1.OperatorViews
         }
         private bool IsCorrectOutOrder(string firstRow, string endRow)
         {
+            if (endRow == "") return true;
             int first = Convert.ToInt32(firstRow);
             int end = Convert.ToInt32(endRow);
             if (first > end)

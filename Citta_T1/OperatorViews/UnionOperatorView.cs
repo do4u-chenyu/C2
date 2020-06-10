@@ -89,58 +89,47 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
+            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
+
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (this.opControl.Option.GetOption("noRepetition") != String.Empty)
-                this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            if (this.opControl.Option.GetOption("repetition") != String.Empty)
-                this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            if (factor1 != "")
-            {
-                string[] factorList = factor1.Split('\t');
-                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
-                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", Nums[0]);
-                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
-                if (!case0 && !case1)
-                {
-                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[1]].ToString();
-                    this.textBox0.Text = factorList[2];
-                    this.comboBox0.Tag = Nums[0].ToString();
-                    this.comboBox1.Tag = Nums[1].ToString();
-                }
-            }
-            if (count > 1)
-                InitNewFactorControl(count - 1);
-            else
-            {
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+
+            this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
+            this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
+            string[] factorList0 = factor1.Split('\t');
+            int[] itemsList0 = Array.ConvertAll<string, int>(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+            this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+            this.textBox0.Text = factorList0[2];
+            this.comboBox0.Tag = itemsList0[0].ToString();
+            this.comboBox1.Tag = itemsList0[1].ToString();
+
+            if (count <= 1)
                 return;
-            }
+            InitNewFactorControl(count - 1);
+
+
             for (int i = 2; i < (count + 1); i++)
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                string[] factorList = factor.Split('\t');
-                int[] Nums = Array.ConvertAll<string, int>(factorList.Take(factorList.Length - 1).ToArray(), int.Parse);
-                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name, Nums[0]);
-                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, name, Nums[1]);
-                if (case0 || case1) continue;
+                string[] factorList1 = factor.Split('\t');
+                int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
+
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
-                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
+                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
                 Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
-                control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
+                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
-                control3.Text = factorList[2];
-                control1.Tag = Nums[0].ToString();
-                control2.Tag = Nums[1].ToString();
+                control3.Text = factorList1[2];
+                control1.Tag = itemsList1[0].ToString();
+                control2.Tag = itemsList1[1].ToString();
             }
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+         
         }
 
 
@@ -237,11 +226,13 @@ namespace Citta_T1.OperatorViews
             dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
-            ComboBox filterBox = new ComboBox();
-            filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
+            ComboBox filterBox = new ComboBox
+            {
+                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
+                AutoCompleteSource = AutoCompleteSource.ListItems,
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
+            };
             filterBox.Items.AddRange(this.nowColumnsName1);
             filterBox.Leave += new System.EventHandler(this.Control_Leave);
             filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);

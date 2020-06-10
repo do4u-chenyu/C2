@@ -170,29 +170,7 @@ namespace Citta_T1.Business.Option
             } 
             return emptyOption;
         }
-        public bool IsCleanOption(MoveOpControl moc, string[] columns, string name, int selectIndex = -1)
-        {
-            //不存在旧数据源，直接返回
-            bool clear = false;
-            string optionValues = moc.Option.GetOption(name);
-            if (string.IsNullOrEmpty(optionValues))
-                return !clear;
-
-            //复选框配置的判断
-            int index;
-            int maxIndex = columns.Length - 1;
-            if (name.Contains("outfield"))
-                index = Array.ConvertAll<string, int>(optionValues.Split('\t'), int.Parse).Max();
-            else//单选框配置的判断
-                index = selectIndex != -1 ? selectIndex : Convert.ToInt32(optionValues);
-
-            if (index > maxIndex)
-            {
-                moc.Option.OptionDict[name] = "";
-                clear = true;
-            }
-            return clear;
-        }
+        
         //配置窗口输出的改变，引起后续子图状态改变逻辑
 
 

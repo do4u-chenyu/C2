@@ -47,77 +47,55 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
+            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
 
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield0"))
-            {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
-                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList0 = indexs.ToList();
-                this.outListCCBL0.LoadItemCheckIndex(indexs);
-                foreach (int index in indexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-            }
+            string[] checkIndexs0 = this.opControl.Option.GetOptionSplit("outfield0");
+            int[] indexs0 = Array.ConvertAll<string, int>(checkIndexs0, int.Parse);
+            this.oldOutList0 = indexs0.ToList();
+            this.outListCCBL0.LoadItemCheckIndex(indexs0);
+            foreach (int index in indexs0)
+                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
 
 
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "outfield1"))
-            {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
-                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList1 = indexs.ToList();
-                this.outListCCBL1.LoadItemCheckIndex(indexs);
-                foreach (int index in indexs)
-                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
-            }
+            string[] checkIndexs1 = this.opControl.Option.GetOptionSplit("outfield1");
+            int[] indexs1 = Array.ConvertAll<string, int>(checkIndexs1, int.Parse);
+            this.oldOutList1 = indexs1.ToList();
+            this.outListCCBL1.LoadItemCheckIndex(indexs1);
+            foreach (int index in indexs1)
+                this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
 
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (factor1 != "")
-            {
 
-                int[] Nums = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
-                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1", Nums[0]);
-                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, "factor1", Nums[1]);
-                if (!case0 && !case1)
-                {
-                    this.comboBox0.Text = this.comboBox0.Items[Nums[0]].ToString();
-                    this.comboBox1.Text = this.comboBox1.Items[Nums[1]].ToString();
-                    this.comboBox0.Tag = Nums[0].ToString();
-                    this.comboBox1.Tag = Nums[1].ToString();
-                }
+            int[] itemsList0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
+            this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+            this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+            this.comboBox0.Tag = itemsList0[0].ToString();
+            this.comboBox1.Tag = itemsList0[1].ToString();
 
-            }
-            if (count > 1)
-                InitNewFactorControl(count - 1);
-            else
-            {
-                this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-                this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+            if (count <= 1)
                 return;
-            }
+            InitNewFactorControl(count - 1);
+
             for (int i = 2; i < (count + 1); i++)
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
-                int[] Nums = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);
-                bool case0 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name, Nums[1]);
-                bool case1 = Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName1, name, Nums[2]);
-                if (case0 || case1) continue;
-
+                int[] itemsList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);              
 
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
-                control1.Text = (control1 as ComboBox).Items[Nums[0]].ToString();
+                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
                 Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
-                control2.Text = (control2 as ComboBox).Items[Nums[1]].ToString();
+                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 6 + 3];
-                control3.Text = (control3 as ComboBox).Items[Nums[2]].ToString();
-                control1.Tag = Nums[0].ToString();
-                control2.Tag = Nums[1].ToString();
-                control3.Tag = Nums[2].ToString();
-            }
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+                control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
+                control1.Tag = itemsList1[0].ToString();
+                control2.Tag = itemsList1[1].ToString();
+                control3.Tag = itemsList1[2].ToString();
+            }          
         }
         protected override void SaveOption()
         {
@@ -251,11 +229,13 @@ namespace Citta_T1.OperatorViews
             dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
-            Label label = new Label();
-            label.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            label.Text = "等于=";
-            label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            Label label = new Label
+            {
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Text = "等于=",
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            };
             this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
 
             ComboBox data2box = new ComboBox();

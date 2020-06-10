@@ -48,6 +48,10 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
+
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
+
             noRepetition.Checked = Convert.ToBoolean(opControl.Option.GetOption("noRepetition", "False"));
             repetition.Checked = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "True"));
@@ -55,41 +59,29 @@ namespace Citta_T1.OperatorViews
             sortByNum.Checked    = Convert.ToBoolean(opControl.Option.GetOption("sortByNum", "True"));
             sortByString.Checked = Convert.ToBoolean(opControl.Option.GetOption("sortByString", "False"));
 
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
-            {
-                this.oldOutList0 = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
-                foreach (int index in this.oldOutList0)
-                    this.oldOutName0.Add(this.nowColumnsName0[index]);
-            }
-            int count = this.opControl.Option.KeysCount("factor");
+            this.oldOutList0 = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
+            foreach (int i in this.oldOutList0)
+                this.oldOutName0.Add(this.nowColumnsName0[i]);
+
+
             string factor1 = this.opControl.Option.GetOption("factor1");
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "factor1"))
-            {
+            int index = Convert.ToInt32(factor1);
+            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+            this.comboBox0.Tag = index.ToString();
 
-                int index = Convert.ToInt32(factor1);
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
-            }
-            if (count > 1)
-                InitNewFactorControl(count - 1);
-            else
-            {
-                this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
+
+            int count = this.opControl.Option.KeysCount("factor");
+            if (count <= 1)
                 return;
-            }
-
-
+            InitNewFactorControl(count - 1);
             for (int i = 2; i < (count + 1); i++)
             {
                 string name = "factor" + i.ToString();
-                if (Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, name)) continue;
-
-                int index = Convert.ToInt32(this.opControl.Option.GetOption(name));
+                int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
-                control1.Text = (control1 as ComboBox).Items[index].ToString();
-                control1.Tag = index.ToString();
+                control1.Text = (control1 as ComboBox).Items[num].ToString();
+                control1.Tag = num.ToString();
             }
-            this.opControl.Option.SetOption("columnname0", string.Join("\t", this.opControl.FirstDataSourceColumns));
 
         }
         protected override void SaveOption()

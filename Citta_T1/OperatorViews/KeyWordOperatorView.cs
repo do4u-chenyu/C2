@@ -78,9 +78,9 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "outfield");
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName0, "dataSelectIndex");
-            Global.GetOptionDao().IsCleanOption(opControl, nowColumnsName1, "keySelectIndex");
+            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
+
             string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
             int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             oldOutList0 = indexs.ToList();

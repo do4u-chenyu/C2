@@ -32,7 +32,7 @@ namespace Citta_T1.OperatorViews
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
+           
         }
 
 
@@ -99,6 +99,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.nowColumnsName0));
             List<int> checkIndexs = this.outListCCBL0.GetItemCheckIndex();
             this.opControl.Option.SetOption("outfield", string.Join("\t", checkIndexs));
 
@@ -118,19 +119,22 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-            repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
+
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
+
+             repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
             noRepetition.Checked    = Convert.ToBoolean(opControl.Option.GetOption("noRepetition", "False"));
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
-            if (!Global.GetOptionDao().IsCleanOption(this.opControl, this.nowColumnsName0, "outfield"))
-            {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-                int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-                this.oldOutList0 = indexs.ToList();
-                this.outListCCBL0.LoadItemCheckIndex(indexs);
-                foreach (int index in indexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-            }
+
+            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            this.oldOutList0 = indexs.ToList();
+            this.outListCCBL0.LoadItemCheckIndex(indexs);
+            foreach (int index in indexs)
+                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+
 
         }
         #endregion
