@@ -178,7 +178,7 @@ namespace Citta_T1.OperatorViews
 
         protected override bool IsOptionNotReady()
         {
-            bool empty = true;
+            bool notReady = true;
             if (this.dataSourceTB0.Text == "") return true;
             if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 
@@ -188,35 +188,35 @@ namespace Citta_T1.OperatorViews
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
-                return empty;
+                return notReady;
             }
 
             if (opControl.OperatorDimension() == 2 && this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
-                return empty;
+                return notReady;
             }
 
             if (this.rsFullFilePathTextBox.Text == "")
             {
                 MessageBox.Show("请选择结果文件路径");
-                return empty;
+                return notReady;
             }
 
             //有任一框中非数字
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
-                return empty;
+                return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
                 MessageBox.Show("未输入其他类型分隔符内容");
-                return empty;
+                return notReady;
             }
 
-            return !empty;
+            return !notReady;
         }
         #endregion
 

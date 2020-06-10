@@ -126,7 +126,7 @@ namespace Citta_T1.OperatorViews
 
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             List<string> types = new List<string>
             {
                 this.comboBox0.GetType().Name
@@ -136,8 +136,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请选择字段");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -145,11 +144,10 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请选择字段");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
-            return empty;
+            return !notReady;
         }
         #endregion
 

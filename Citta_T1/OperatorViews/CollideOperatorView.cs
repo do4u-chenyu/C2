@@ -35,15 +35,14 @@ namespace Citta_T1.OperatorViews
         #region 判断是否配置完毕
         protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             List<string> types = new List<string>() { this.comboBox0.GetType().Name, this.outListCCBL0.GetType().Name };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写碰撞条件!");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -51,17 +50,15 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
                     MessageBox.Show("请填写碰撞条件!");
-                    empty = true;
-                    return empty;
+                    return notReady;
                 }
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请填写输出字段!");
-                empty = true;
-                return empty;
+                return notReady;
             }
-            return empty;
+            return !notReady;
         }
         #endregion
         #region 保存加载

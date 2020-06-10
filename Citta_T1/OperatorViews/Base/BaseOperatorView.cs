@@ -113,15 +113,9 @@ namespace Citta_T1.OperatorViews.Base
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
             // 输出字段变化，重写BCP文件
-            if (this.oldOutName1 != null)
-            { 
-                //双输出算子
-                List<string> oldOutNames = this.oldOutName0.Concat(this.oldOutName1).ToList();
-                Global.GetOptionDao().DoOutputCompare(oldOutNames, this.selectedColumns, this.opControl.ID);
-            }  
-            else
-                Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-
+            // 单输出算子时oldOutName1为0数组,不影响逻辑
+            List<string> oldOutNames = this.oldOutName0.Concat(this.oldOutName1).ToList();
+            Global.GetOptionDao().DoOutputCompare(oldOutNames, this.selectedColumns, this.opControl.ID);
         }
 
         protected void SetTextBoxName(TextBox textBox)

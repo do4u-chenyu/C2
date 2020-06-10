@@ -1,5 +1,4 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
@@ -35,14 +34,14 @@ namespace Citta_T1.OperatorViews
         #region 是否配置完毕
         protected override bool IsOptionNotReady()
         {
-            bool empty = true;
-            if (this.dataSourceTB0.Text == "") return empty;
+            bool notReady = true;
+            if (this.dataSourceTB0.Text == "") return notReady;
             if (this.comboBox0.Text == "")
             {
                 MessageBox.Show("请选择平均值字段!");
-                return empty;
+                return notReady;
             }
-            return !empty;
+            return !notReady;
         }
         #endregion
         #region 配置信息的保存与加载

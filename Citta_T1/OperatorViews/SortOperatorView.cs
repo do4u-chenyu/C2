@@ -38,21 +38,21 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         protected override bool IsOptionNotReady()
         {
-            bool empty = true;
+            bool notReady = true;
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择排序字段!");
-                return empty;
+                return notReady;
             }
             if (String.IsNullOrWhiteSpace(this.firstRow.Text))
             {
                 MessageBox.Show("请输出行数!");
-                return empty;
+                return notReady;
             }
 
             if (!IsCorrectOutOrder(this.firstRow.Text, this.endRow.Text))
-                return empty;
-            return !empty;
+                return notReady;
+            return !notReady;
         }      
         #endregion
 

@@ -210,7 +210,7 @@ namespace Citta_T1.Business.Model
         }
         private string GetXmlNodeInnerText(XmlNode node, string nodeName)
         {
-            string text = "";
+            string text = String.Empty;
             try
             { text = node.SelectSingleNode(nodeName).InnerText; }
             catch (Exception e)
@@ -295,7 +295,7 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e)
             {
-                log.Error("读配置出错 ： "+e.Message);
+                log.Error("读配置出错 ： " + e.Message);
                 option = new OperatorOption();
             }
             return option;
