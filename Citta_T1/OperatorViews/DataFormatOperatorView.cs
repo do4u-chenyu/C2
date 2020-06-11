@@ -16,6 +16,8 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
+            this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }

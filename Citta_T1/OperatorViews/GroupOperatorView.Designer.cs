@@ -164,7 +164,7 @@
             this.groupBox3.Size = new System.Drawing.Size(208, 25);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
+           
             // 
             // sortByString
             // 
@@ -203,7 +203,7 @@
             this.groupBox2.Size = new System.Drawing.Size(207, 25);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
+            
             // 
             // ascendingOrder
             // 
@@ -277,7 +277,6 @@
             this.groupBox1.Size = new System.Drawing.Size(207, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // repetition
             // 

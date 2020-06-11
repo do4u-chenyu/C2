@@ -16,9 +16,12 @@ namespace Citta_T1.OperatorViews
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            //this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             InitByDataSource();
             LoadOption();
 
+            this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }

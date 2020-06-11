@@ -17,7 +17,10 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             InitByDataSource();
-            LoadOption();  
+            LoadOption();
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
         }
 
         #region 配置初始化

@@ -19,6 +19,9 @@ namespace Citta_T1.OperatorViews
             this.groupColumn = new List<int>();
 
             InitializeComponent();
+            //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
             InitByDataSource();
             LoadOption();
         }
