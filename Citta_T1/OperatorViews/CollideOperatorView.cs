@@ -81,20 +81,20 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Tag = optionItems0[0].ToString();
             this.comboBox1.Tag = optionItems0[1].ToString();
 
-            int count = this.opControl.Option.KeysCount("factor");
-            if (count <= 1)
+            int count = this.opControl.Option.KeysCount("factor") - 1;
+            if (count < 1)
                 return;
-            InitNewFactorControl(count - 1);
+            InitNewFactorControl(count);
 
-            for (int i = 2; i < (count + 1); i++)
+            for (int i = 0; i < count; i++)
             {
-                string name = "factor" + i.ToString();
+                string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 int[] optionItems1 = Array.ConvertAll(factor.Split('\t'), int.Parse);
 
-                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
-                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
-                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2]; 
+                Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
+                Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2]; 
                 control1.Text = (control1 as ComboBox).Items[optionItems1[0]].ToString();
                 control2.Text = (control2 as ComboBox).Items[optionItems1[1]].ToString();
                 control3.Text = (control3 as ComboBox).Items[optionItems1[2]].ToString();

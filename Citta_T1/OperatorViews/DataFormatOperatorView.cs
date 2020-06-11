@@ -41,7 +41,7 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-            int count = this.opControl.Option.KeysCount("factor");
+            
             string factor1 = this.opControl.Option.GetOption("factor1");
             string[] factorList0 = factor1.Split('\t');
             int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
@@ -50,21 +50,22 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Tag = indexs0[0].ToString();
             this.textBox0.Text = factorList0[1];
 
-            if (count <= 1)
+            int count = this.opControl.Option.KeysCount("factor") - 1;
+            if (count < 1)
                 return;
-            InitNewFactorControl(count - 1);
+            InitNewFactorControl(count);
  
-            for (int i = 2; i < (count + 1); i++)
+            for (int i = 0; i < count; i++)
             {
-                string name = "factor" + i.ToString();
+                string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
 
                 string[] factorList1 = factor.Split('\t');
                 int[] indexs1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
-                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i - 2);
-                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i - 2);
+                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
+                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
                 control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                 control1.Tag = indexs1[0].ToString();
                 control2.Text = factorList1[1];
