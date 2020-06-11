@@ -67,6 +67,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            //删除部分过滤条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
@@ -82,10 +83,12 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = this.tableLayoutPanel1.Controls[i * 6 + 0];
-                    Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
-                    Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 2];
-                    Control control4 = this.tableLayoutPanel1.Controls[i * 6 + 3];
+
+                    Control control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i);
+                    Control control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
+                    Control control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
+                    Control control4 = this.tableLayoutPanel1.GetControlFromPosition(3, i);
+
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
                     string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
