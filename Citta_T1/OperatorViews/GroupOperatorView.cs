@@ -191,10 +191,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 3) + 2];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * ColumnCount) + ColumnCount-1];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 3) + 2; j >= (i * 3); j--)
+                    for (int j = (i * ColumnCount) + ColumnCount-1; j >= (i * ColumnCount); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }

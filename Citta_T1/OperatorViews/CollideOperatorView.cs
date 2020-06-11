@@ -93,7 +93,7 @@ namespace Citta_T1.OperatorViews
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
-                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2]; 
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control1.Text = (control1 as ComboBox).Items[optionItems1[0]].ToString();
                 control2.Text = (control2 as ComboBox).Items[optionItems1[1]].ToString();
                 control3.Text = (control3 as ComboBox).Items[optionItems1[2]].ToString();
@@ -199,10 +199,10 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 5) + 4];
+                Control bt1 = this.tableLayoutPanel1.Controls[(i * ColumnCount) + ColumnCount-1];
                 if (bt1.Name == tmp.Name)
                 {
-                    for (int j = (i * 5) + 4; j >= (i * 5); j--)
+                    for (int j = (i * ColumnCount) + ColumnCount-1; j >= (i * ColumnCount); j--)
                     {
                         this.tableLayoutPanel1.Controls.RemoveAt(j);
                     }

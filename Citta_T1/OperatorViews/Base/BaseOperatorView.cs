@@ -25,6 +25,7 @@ namespace Citta_T1.OperatorViews.Base
         protected List<int> oldOutList1;            // 上一次用户选择的右表输出字段的索引
         protected List<string> selectedColumns;     // 本次配置用户选择的输出字段名称
         protected string oldOptionDictStr;          // 旧配置字典的字符串表述
+        protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
 
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
         public BaseOperatorView()
