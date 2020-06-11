@@ -60,7 +60,6 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
-            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -69,7 +68,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
             this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             if (opControl.OperatorDimension() == 2)
-            {               
+            {
+                this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
                 this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
             }
 
@@ -157,7 +157,7 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
+            //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
