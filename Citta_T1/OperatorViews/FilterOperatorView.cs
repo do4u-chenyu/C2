@@ -169,16 +169,8 @@ namespace Citta_T1.OperatorViews
             regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();
             filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;

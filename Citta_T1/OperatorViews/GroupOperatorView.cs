@@ -146,25 +146,14 @@ namespace Citta_T1.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox dataBox = new ComboBox
-            {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
-                Anchor = AnchorStyles.Left | AnchorStyles.Right
-            };
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
-
-
+            // 左表列下拉框
+            ComboBox data0ComoboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComoboBox, 0, addLine);
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 1, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 2, addLine);

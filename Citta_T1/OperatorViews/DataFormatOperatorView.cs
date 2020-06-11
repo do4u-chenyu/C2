@@ -180,19 +180,8 @@ namespace Citta_T1.OperatorViews
             };
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
 
-
-            ComboBox dataBox = new ComboBox
-            {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
-                Anchor = AnchorStyles.Left | AnchorStyles.Right
-            };
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
             TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
