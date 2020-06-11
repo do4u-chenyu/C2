@@ -132,10 +132,12 @@ namespace Citta_T1.Business.Option
             }
             return ElementStatus.Ready;
         }
+        // 判断是否清空单输入算子的配置
         public bool IsCleanSingleOperatorOption(MoveOpControl moc, string[] newColumns)
         {
             return IsCleanOption(moc, newColumns, "columnname0");
         }
+        // 判断是否清空双输入算子的配置
         public bool IsCleanBinaryOperatorOption(MoveOpControl moc, string[] newColumns0, string[] newColumns1)
         {
             bool emptyOption0 = IsCleanOption(moc, newColumns0, "columnname0");
