@@ -59,9 +59,9 @@ namespace Citta_T1.OperatorViews
             outListCCBL0.LoadItemCheckIndex(indexs);
             oldOutName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
-            comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
-            comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
-            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", null));
+            comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
+            comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", "0"));
         }
         protected override void SaveOption()
         {

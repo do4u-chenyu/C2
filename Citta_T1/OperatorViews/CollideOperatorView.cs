@@ -82,7 +82,7 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.Tag = optionItems0[1].ToString();
 
             int count = this.opControl.Option.KeysCount("factor") - 1;
-            if (count < 1)
+            if (count < 1)  // 只有factor1的情况
                 return;
             InitNewFactorControl(count);
 
