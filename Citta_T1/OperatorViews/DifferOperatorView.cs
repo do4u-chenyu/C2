@@ -3,7 +3,6 @@ using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -142,20 +141,9 @@ namespace Citta_T1.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            regBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            regBox.Leave += new System.EventHandler(this.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            // And OR 选择框
+            ComboBox regBox = NewAndORComboBox();
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
@@ -174,27 +162,17 @@ namespace Citta_T1.OperatorViews
 
         private void Add_Click(object sender, EventArgs e)
         {
-            Button tmp = (Button)sender;
-            int addLine;
-            if (this.tableLayoutPanel1.RowCount == 0)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
-                addLine = 0;
-                CreateLine(addLine);
-            }
-            else
-            {
-                if (tmp.Name == "button1")
-                    addLine = 0;
-                else
-                    addLine = int.Parse(tmp.Name) + 1;
+            Button button = (Button)sender;
+            int addLine = 0;
 
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+            this.tableLayoutPanel1.RowCount++;
+            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+            this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
 
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            if (this.tableLayoutPanel1.RowCount > 1)
+            {
+                addLine = button.Name == "button1" ? 0 : int.Parse(button.Name) + 1;
+
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
@@ -209,10 +187,9 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                     ctlNext4.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
-                }
-                CreateLine(addLine);
+                }   
             }
-
+            CreateLine(addLine);
         }
 
         private void Del_Click(object sender, EventArgs e)

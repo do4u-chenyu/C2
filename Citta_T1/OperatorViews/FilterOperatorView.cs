@@ -155,36 +155,14 @@ namespace Citta_T1.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            regBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            regBox.Leave += new System.EventHandler(this.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            // And OR 选择框
+            ComboBox regBox = NewAndORComboBox();
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
-
-            ComboBox filterBox = new ComboBox();
-            filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ComboBox filterBox = NewComboBox();
             filterBox.Items.AddRange(new object[] {
             "大于 >",
             "小于 <",
@@ -192,22 +170,21 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
-            filterBox.Leave += new EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
-            TextBox textBox = new TextBox();
-            textBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TextBox textBox = new TextBox
+            {
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right
+            };
             textBox.Leave += new EventHandler(this.IsIllegalCharacter);
             textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
-
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 4, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 5, addLine);
@@ -215,27 +192,17 @@ namespace Citta_T1.OperatorViews
 
         private void Add_Click(object sender, EventArgs e)
         {
-            Button tmp = (Button)sender;
-            int addLine;
-            if (this.tableLayoutPanel1.RowCount == 0)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                addLine = 0;
-                CreateLine(addLine);
-            }
-            else
-            {
-                if (tmp.Name == "button1")
-                    addLine = 0;
-                else
-                    addLine = int.Parse(tmp.Name) + 1;
+            Button button = (Button)sender;
+            int addLine = 0;
 
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+            this.tableLayoutPanel1.RowCount++;
+            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+            this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
 
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+            if (this.tableLayoutPanel1.RowCount > 1)
+            {
+                addLine = button.Name == "button1" ? 0 : int.Parse(button.Name) + 1;
+
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
@@ -252,10 +219,9 @@ namespace Citta_T1.OperatorViews
                     Control ctlNext5 = this.tableLayoutPanel1.GetControlFromPosition(5, k);
                     ctlNext5.Name = (k + 1).ToString();
                     this.tableLayoutPanel1.SetCellPosition(ctlNext5, new TableLayoutPanelCellPosition(5, k + 1));
-                }
-                CreateLine(addLine);
+                }       
             }
-
+            CreateLine(addLine);
         }
 
         private void Del_Click(object sender, EventArgs e)

@@ -1,7 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
-using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -201,26 +200,7 @@ namespace Citta_T1.Business.Option
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, nowColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
-        //更新输出列表选定项的索引
-        public void UpdateOutputCheckIndexs(List<int> nowIndexs, List<int> oldIndexs)
-        {
-            foreach (int index in oldIndexs)
-            {
-                if (!nowIndexs.Contains(index))
-                {
-                    oldIndexs.Clear();
-                    oldIndexs.AddRange(nowIndexs);
-                    return;
-                }
-            }
-            foreach (int index in nowIndexs)
-            {
-                if (!oldIndexs.Contains(index))
-                    oldIndexs.Add(index);
-            }
 
-
-        }
 
         //配置初始化，获取数据源表头信息
         public Dictionary<string, string> GetDataSourceInfoDict(int ID)

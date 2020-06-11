@@ -253,7 +253,7 @@ namespace Citta_T1.Core
                 return;
             dataPreviewDict[fullFilePath].Dirty = true;
         }
-        public string CreateNewBCPFile(string fileName, List<string> columnName)
+        public string CreateNewBCPFile(string fileName, List<string> columnsName)
         {
             if (!Directory.Exists(Global.GetCurrentDocument().SavePath))
             {
@@ -262,14 +262,14 @@ namespace Citta_T1.Core
             }
 
             string fullFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, fileName);
-            ReWriteBCPFile(fullFilePath, columnName);
+            ReWriteBCPFile(fullFilePath, columnsName);
             return fullFilePath;
         }
-        public void ReWriteBCPFile(string fullFilePath, List<string> columnName)
+        public void ReWriteBCPFile(string fullFilePath, List<string> columnsName)
         {
             using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
             {
-                string columns = String.Join("\t", columnName);
+                string columns = String.Join("\t", columnsName);
                 sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
                 sw.Flush();
             }

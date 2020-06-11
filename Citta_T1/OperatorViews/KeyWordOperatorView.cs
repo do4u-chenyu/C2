@@ -125,51 +125,36 @@ namespace Citta_T1.OperatorViews
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            result = string.Join(" OR ", datas);
-            if (result.Equals(string.Empty))
+            result = string.Join(" OR ", datas);  //TODO， 如果输入关键词本身是"OR",会是什么情况
+            if (String.IsNullOrWhiteSpace(result))
                 result = defaultInfo;
             return result;
         }
-        public void KeywordRead(string fullFilePath,
+
+        private void KeywordRead(string fullFilePath,
                                         char[] separator,
                                         int colIndex,
                                         OpUtil.ExtType extType = OpUtil.ExtType.Text,
-                                        OpUtil.Encoding encoding = OpUtil.Encoding.UTF8,
-                                        bool isForceRead = false,
-                                        int maxNumOfFile = 100)
+                                        OpUtil.Encoding encoding = OpUtil.Encoding.UTF8)
         {
-            List<string> rows;
-            string line;
+            List<string> rows = new List<string>();      
             if (extType == OpUtil.ExtType.Excel)
             {
                 separator = "\t".ToCharArray();
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath,
-                                                                                            isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
             {
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath,
-                                                                                          encoding,
-                                                                                          isForceRead).Split('\n'));
+                                                                                          encoding).Split('\n'));
             }
-            else
+            // 第一行是表头，跳过表头,i从1开始
+            for (int i = 1; i < rows.Count; i++)
             {
-                rows = new List<string>();
-            }
-
-            for (int i = 0; i < Math.Min(rows.Count - 1, maxNumOfFile); i++)
-            {
-                List<string> lines = new List<string>(rows[i + 1].TrimEnd('\r').Split(separator));
-                if (colIndex >= lines.Count)
-                {
+                List<string> lines = new List<string>(rows[i].TrimEnd('\r').Split(separator));
+                if (colIndex >= lines.Count || String.IsNullOrWhiteSpace(lines[colIndex]))
                     continue;
-                }
-                line = lines[colIndex];
-                if (line.Equals(string.Empty))
-                {
-                    continue;
-                }
-                datas.Add(line);
+                datas.Add(lines[colIndex]);
             }
         }
     }

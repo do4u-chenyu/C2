@@ -248,7 +248,6 @@ namespace Citta_T1.OperatorViews.Base
                 Font = new Font("微软雅黑", 9f, FontStyle.Regular),
                 ForeColor = SystemColors.ActiveCaption
             };
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             textBox.Enter += AliasTextBox_Enter;
             textBox.Leave += AliasTextBox_Leave;
             textBox.Leave += new EventHandler(this.IsIllegalCharacter);
@@ -256,7 +255,7 @@ namespace Citta_T1.OperatorViews.Base
             return textBox;
         }
 
-        private ComboBox NewComboBox()
+        protected ComboBox NewComboBox()
         {
             ComboBox combox = new ComboBox
             {
@@ -268,6 +267,16 @@ namespace Citta_T1.OperatorViews.Base
             combox.Leave += new EventHandler(this.Control_Leave);
             combox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
             combox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            return combox;
+        }
+
+        protected ComboBox NewAndORComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Anchor = AnchorStyles.None;
+            combox.Items.AddRange(new object[] {
+            "AND",
+            "OR"});
             return combox;
         }
 
