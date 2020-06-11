@@ -53,12 +53,16 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
 
-            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            oldOutList0 = indexs.ToList();
-            outListCCBL0.LoadItemCheckIndex(indexs);
-            oldOutName0.AddRange(from int index in indexs
+            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                oldOutList0 = indexs.ToList();
+                outListCCBL0.LoadItemCheckIndex(indexs);
+                oldOutName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
+            }
+
             comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
             comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", "0"));

@@ -78,17 +78,22 @@ namespace Citta_T1.OperatorViews
                 return;
 
             
+            
+            this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
+            this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition","False"));
+            
             string factor1 = this.opControl.Option.GetOption("factor1");
-            this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
-            this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
-            string[] factorList0 = factor1.Split('\t');
-            int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-            this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-            this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-            this.textBox0.Text = factorList0[2];
-            this.comboBox0.Tag = itemsList0[0].ToString();
-            this.comboBox1.Tag = itemsList0[1].ToString();
-
+            if (!String.IsNullOrEmpty(factor1))
+            {
+                string[] factorList0 = factor1.Split('\t');
+                int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                this.textBox0.Text = factorList0[2];
+                this.comboBox0.Tag = itemsList0[0].ToString();
+                this.comboBox1.Tag = itemsList0[1].ToString();
+            }
+ 
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
                 return;
@@ -99,7 +104,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == "") continue;
+                if (String.IsNullOrEmpty(factor)) continue;
 
                 string[] factorList1 = factor.Split('\t');
                 int[] itemsList1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);

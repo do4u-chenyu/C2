@@ -74,14 +74,16 @@ namespace Citta_T1.OperatorViews
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
 
-            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            oldOutList0 = indexs.ToList();
-            outListCCBL0.LoadItemCheckIndex(indexs);
-            foreach (int index in indexs)
-                oldOutName0.Add(outListCCBL0.Items[index].ToString());
-            oldOutName0.Add("频率统计结果");
-
+            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                oldOutList0 = indexs.ToList();
+                outListCCBL0.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    oldOutName0.Add(outListCCBL0.Items[index].ToString());
+                oldOutName0.Add("频率统计结果");
+            }
         }
         #endregion
     }

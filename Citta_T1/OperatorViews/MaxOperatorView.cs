@@ -56,19 +56,23 @@ namespace Citta_T1.OperatorViews
             
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
-            int maxIndex = -1;
-            maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-            this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
-            this.comboBox0.Tag = maxIndex.ToString();
 
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] outIndexs = Array.ConvertAll(checkIndexs, int.Parse);
-            this.oldOutList0 = outIndexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(outIndexs);
-            foreach (int i in outIndexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
-
-            
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("maxfield")))
+            {
+                int maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
+                this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
+                this.comboBox0.Tag = maxIndex.ToString();
+            }
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                int[] outIndexs = Array.ConvertAll(checkIndexs, int.Parse);
+                this.oldOutList0 = outIndexs.ToList();
+                this.outListCCBL0.LoadItemCheckIndex(outIndexs);
+                foreach (int i in outIndexs)
+                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+            }
+                  
         }
         #endregion
         #region 初始化配置

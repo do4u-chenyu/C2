@@ -52,16 +52,23 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-            int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-            this.comboBox0.Tag = index.ToString();
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("minfield")))
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
+            }
 
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            this.oldOutList0 = indexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs);
-            foreach (int i in indexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                this.oldOutList0 = indexs.ToList();
+                this.outListCCBL0.LoadItemCheckIndex(indexs);
+                foreach (int i in indexs)
+                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+            }
+           
 
         }
         #endregion

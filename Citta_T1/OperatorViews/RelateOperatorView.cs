@@ -38,29 +38,35 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
 
-            string[] checkIndexs0 = this.opControl.Option.GetOptionSplit("outfield0");
-            int[] indexs0 = Array.ConvertAll(checkIndexs0, int.Parse);
-            this.oldOutList0 = indexs0.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs0);
-            foreach (int index in indexs0)
-                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-
-
-            string[] checkIndexs1 = this.opControl.Option.GetOptionSplit("outfield1");
-            int[] indexs1 = Array.ConvertAll(checkIndexs1, int.Parse);
-            this.oldOutList1 = indexs1.ToList();
-            this.outListCCBL1.LoadItemCheckIndex(indexs1);
-            foreach (int index in indexs1)
-                this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
-
-           
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
+            {
+                string[] checkIndexs0 = this.opControl.Option.GetOptionSplit("outfield0");
+                int[] indexs0 = Array.ConvertAll(checkIndexs0, int.Parse);
+                this.oldOutList0 = indexs0.ToList();
+                this.outListCCBL0.LoadItemCheckIndex(indexs0);
+                foreach (int index in indexs0)
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+            }
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield1")))
+            {
+                string[] checkIndexs1 = this.opControl.Option.GetOptionSplit("outfield1");
+                int[] indexs1 = Array.ConvertAll(checkIndexs1, int.Parse);
+                this.oldOutList1 = indexs1.ToList();
+                this.outListCCBL1.LoadItemCheckIndex(indexs1);
+                foreach (int index in indexs1)
+                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
+            }
+                        
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int[] itemsList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
-            this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-            this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-            this.comboBox0.Tag = itemsList0[0].ToString();
-            this.comboBox1.Tag = itemsList0[1].ToString();
-
+            if (!String.IsNullOrEmpty(factor1))
+            {
+                int[] itemsList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
+                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                this.comboBox0.Tag = itemsList0[0].ToString();
+                this.comboBox1.Tag = itemsList0[1].ToString();
+            }
+                
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
                 return;
@@ -70,7 +76,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == String.Empty) continue;
+                if (String.IsNullOrEmpty(factor)) continue;
 
                 int[] itemsList1 = Array.ConvertAll(factor.Split('\t'), int.Parse);              
 

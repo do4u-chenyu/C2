@@ -43,12 +43,16 @@ namespace Citta_T1.OperatorViews
 
             
             string factor1 = this.opControl.Option.GetOption("factor1");
-            string[] factorList0 = factor1.Split('\t');
-            int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            if (!String.IsNullOrEmpty(factor1))
+            {
+                string[] factorList0 = factor1.Split('\t');
+                int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
 
-            this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
-            this.comboBox0.Tag = indexs0[0].ToString();
-            this.textBox0.Text = factorList0[1];
+                this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
+                this.comboBox0.Tag = indexs0[0].ToString();
+                this.textBox0.Text = factorList0[1];
+            }
+           
 
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)

@@ -37,21 +37,27 @@ namespace Citta_T1.OperatorViews
         {
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                this.oldOutList0 = indexs.ToList();
+                this.outListCCBL0.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+            }
 
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            this.oldOutList0 = indexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs);
-            foreach (int index in indexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
 
-           
+
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
-            this.comboBox0.Text = this.comboBox0.Items[factorList0[0]].ToString();
-            this.comboBox1.Text = this.comboBox1.Items[factorList0[1]].ToString();
-            this.comboBox0.Tag = factorList0[0].ToString();
-            this.comboBox1.Tag = factorList0[1].ToString();
+            if (!String.IsNullOrEmpty(factor1))
+            {
+                int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
+                this.comboBox0.Text = this.comboBox0.Items[factorList0[0]].ToString();
+                this.comboBox1.Text = this.comboBox1.Items[factorList0[1]].ToString();
+                this.comboBox0.Tag = factorList0[0].ToString();
+                this.comboBox1.Tag = factorList0[1].ToString();
+            }               
 
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
@@ -62,7 +68,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == String.Empty) continue;
+                if (String.IsNullOrEmpty(factor)) continue;
 
                 int[] factorList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);               
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
