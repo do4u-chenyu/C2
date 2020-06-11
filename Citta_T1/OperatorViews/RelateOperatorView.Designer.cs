@@ -138,13 +138,6 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Size = new System.Drawing.Size(461, 311);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.label4, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL1, 0);
             // 
             // label4
             // 
@@ -174,9 +167,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 32);
             this.tableLayoutPanel2.TabIndex = 6;
             this.tableLayoutPanel2.Controls.SetChildIndex(this.label5, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox1, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 

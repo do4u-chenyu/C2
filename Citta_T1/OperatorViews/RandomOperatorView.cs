@@ -45,7 +45,7 @@ namespace Citta_T1.OperatorViews
 
             this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)

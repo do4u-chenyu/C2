@@ -42,7 +42,7 @@ namespace Citta_T1.OperatorViews
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
             string[] factorList0 = factor1.Split('\t');
-            int[] indexs0 = Array.ConvertAll<string, int>(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
 
             this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
             this.comboBox0.Tag = indexs0[0].ToString();
@@ -59,7 +59,7 @@ namespace Citta_T1.OperatorViews
                 if (factor == "") continue;
 
                 string[] factorList1 = factor.Split('\t');
-                int[] indexs1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
+                int[] indexs1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
                 Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i - 2);
                 Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i - 2);
@@ -81,14 +81,14 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
                     Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
                     //Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
                     //Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string tmpIndex = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string factor = tmpIndex + "\t" + control2.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control2.Text));
+                    this.selectedColumns.Add(OutColumnName(control1.Text, control2.Text));
                 }
             }
             this.opControl.Option.SetOption("outname",this.selectedColumns);
@@ -169,10 +169,10 @@ namespace Citta_T1.OperatorViews
             // 添加控件
             Label label = new Label
             {
-                Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right))),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
                 AutoSize = true,
-                Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))),
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, 134),
+                TextAlign = ContentAlignment.MiddleCenter,
                 Text = (addLine + 2).ToString()
             };
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
@@ -186,9 +186,9 @@ namespace Citta_T1.OperatorViews
                 Anchor = AnchorStyles.Left | AnchorStyles.Right
             };
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            dataBox.Leave += new EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             TextBox textBox = NewAliasTextBox();

@@ -251,8 +251,7 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 if (this.startC != null && this.endC != null)
                 {
-                    ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
-                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID, sEleType);
+                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), addRelationCommand);
                 }
 
@@ -284,43 +283,11 @@ namespace Citta_T1.Controls
                 * endP2  |          |
                 *         ----------
                 */
-            ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
-            this.AddNewRelation(startC, endC, sEleType);
+            // ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
+            //this.AddNewRelationByCtr(startC, endC, sEleType);
+            this.AddNewRelationByCtr(startC, endC);
         }
-        public void AddNewRelation(MoveBaseControl startC, MoveBaseControl endC, ElementType sEleType)
-        {
 
-            (endC as MoveOpControl).RectInAdd((endC as MoveOpControl).RevisedPinIndex);
-            PointF startP;
-            if (sEleType == ElementType.DataSource)
-                startP = (startC as MoveDtControl).GetEndPinLoc(0);
-            else if (sEleType == ElementType.Result)
-                startP = (startC as MoveRsControl).GetEndPinLoc(0);
-            else
-                return;
-            ModelRelation mr = new ModelRelation(
-                startC.ID,
-                endC.ID,
-                startP,
-                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                (endC as MoveOpControl).RevisedPinIndex
-                );
-            // 1. 关系不能重复
-            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
-            // 3. 成环不能添加
-            ModelDocument cd = Global.GetCurrentDocument();
-            CyclicDetector cdt = new CyclicDetector(cd, mr);
-            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
-            bool isCyclic = cdt.IsCyclic();
-            if (!isDuplicatedRelation && !isCyclic)
-            {
-                cd.AddModelRelation(mr);
-                Global.GetMainForm().SetDocumentDirty();
-                //endC右键菜单设置Enable                     
-                Global.GetOptionDao().EnableOpOptionView(mr);
-            }
-            this.Invalidate();
-        }
         private bool IsValidModelRelation(ModelRelation mr)
         {
             // 合法的线有 Dt-Op Rs-Op
@@ -398,20 +365,40 @@ namespace Citta_T1.Controls
         private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.DeleteSelectedLinesByIndex();
+
         }
 
         public void DeleteSelectedLinesByIndex()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
+            CanvasPanel cp = Global.GetCanvasPanel();
+            ModelDocument doc = Global.GetCurrentDocument();
+            MoveBaseControl startC;
+            MoveBaseControl endC;
             foreach (int i in selectLineIndexs)
             {
                 ModelRelation mr = mrs[i];
-                this.DeleteSelectedLine(mr);
+                this.DeleteRelation(mr);
+
+                startC = doc.SearchElementByID(mr.StartID).InnerControl;
+                endC = doc.SearchElementByID(mr.EndID).InnerControl;
+                if (startC != null && endC != null)
+                {
+                    ICommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
+                }
             }
             selectLineIndexs.Clear();
             this.Invalidate(false);
+
         }
-        public void DeleteSelectedLine(ModelRelation mr)
+        public void DeleteRelationByCtrID(int startID, int endID)
+        {
+            ModelRelation mr = Global.GetCurrentDocument().ModelRelations.Find(t => t.StartID == startID && t.EndID == endID);
+            if (mr != null)
+                this.DeleteRelation(mr); 
+        }
+        private void DeleteRelation(ModelRelation mr)
         {
             try
             {
@@ -431,6 +418,46 @@ namespace Citta_T1.Controls
             {
                 log.Error("CanvasPanel删除线时发生错误:" + e);
             }
+        }
+        public void AddNewRelationByCtrID(int startCID, int endCID)
+        {
+            ModelDocument doc = Global.GetCurrentDocument();
+            MoveBaseControl startC = doc.SearchElementByID(startCID).InnerControl;
+            MoveBaseControl endC = doc.SearchElementByID(endCID).InnerControl;
+            this.AddNewRelationByCtr(startC, endC);
+        }
+        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC)
+        {
+            PointF startP;
+            if (startC is MoveDtControl)
+                startP = (startC as MoveDtControl).GetEndPinLoc(0);
+            else if (startC is MoveRsControl)
+                startP = (startC as MoveRsControl).GetEndPinLoc(0);
+            else
+                return;
+
+            ModelRelation mr = new ModelRelation(
+                startC.ID,
+                endC.ID,
+                startP,
+                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
+                (endC as MoveOpControl).RevisedPinIndex
+                );
+            // 1. 关系不能重复
+            // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
+            // 3. 成环不能添加
+            ModelDocument cd = Global.GetCurrentDocument();
+            CyclicDetector cdt = new CyclicDetector(cd, mr);
+            bool isDuplicatedRelation = cd.IsDuplicatedRelation(mr);
+            bool isCyclic = cdt.IsCyclic();
+            if (!isDuplicatedRelation && !isCyclic)
+            {
+                cd.AddModelRelation(mr);
+                Global.GetMainForm().SetDocumentDirty();
+                //endC右键菜单设置Enable                     
+                Global.GetOptionDao().EnableOpOptionView(mr);
+            }
+            this.Invalidate();
         }
         /// <summary>
         /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1

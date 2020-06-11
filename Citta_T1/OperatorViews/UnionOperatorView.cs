@@ -81,7 +81,7 @@ namespace Citta_T1.OperatorViews
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
             string[] factorList0 = factor1.Split('\t');
-            int[] itemsList0 = Array.ConvertAll<string, int>(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
             this.textBox0.Text = factorList0[2];
@@ -100,7 +100,7 @@ namespace Citta_T1.OperatorViews
                 if (factor == "") continue;
 
                 string[] factorList1 = factor.Split('\t');
-                int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
+                int[] itemsList1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
@@ -182,9 +182,9 @@ namespace Citta_T1.OperatorViews
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            dataBox.Leave += new EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox
@@ -195,9 +195,9 @@ namespace Citta_T1.OperatorViews
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular)
             };
             filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new System.EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            filterBox.Leave += new EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = NewAliasTextBox();

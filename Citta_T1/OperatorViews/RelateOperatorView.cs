@@ -39,7 +39,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             string[] checkIndexs0 = this.opControl.Option.GetOptionSplit("outfield0");
-            int[] indexs0 = Array.ConvertAll<string, int>(checkIndexs0, int.Parse);
+            int[] indexs0 = Array.ConvertAll(checkIndexs0, int.Parse);
             this.oldOutList0 = indexs0.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs0);
             foreach (int index in indexs0)
@@ -47,7 +47,7 @@ namespace Citta_T1.OperatorViews
 
 
             string[] checkIndexs1 = this.opControl.Option.GetOptionSplit("outfield1");
-            int[] indexs1 = Array.ConvertAll<string, int>(checkIndexs1, int.Parse);
+            int[] indexs1 = Array.ConvertAll(checkIndexs1, int.Parse);
             this.oldOutList1 = indexs1.ToList();
             this.outListCCBL1.LoadItemCheckIndex(indexs1);
             foreach (int index in indexs1)
@@ -56,7 +56,7 @@ namespace Citta_T1.OperatorViews
             int count = this.opControl.Option.KeysCount("factor");
             string factor1 = this.opControl.Option.GetOption("factor1");
 
-            int[] itemsList0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
+            int[] itemsList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
             this.comboBox0.Tag = itemsList0[0].ToString();
@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == String.Empty) continue;
 
-                int[] itemsList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);              
+                int[] itemsList1 = Array.ConvertAll(factor.Split('\t'), int.Parse);              
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];  
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];

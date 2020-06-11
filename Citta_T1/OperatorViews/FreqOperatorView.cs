@@ -24,8 +24,6 @@ namespace Citta_T1.OperatorViews
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
            
         }
-
-
         #endregion
         #region 添加取消
         protected override bool IsOptionNotReady()
@@ -48,8 +46,6 @@ namespace Citta_T1.OperatorViews
             }
             return !notReady;
         }
-
-
         #endregion
         #region 配置信息的保存与加载
         protected override void SaveOption()
@@ -69,8 +65,7 @@ namespace Citta_T1.OperatorViews
 
         private void LoadOption()
         {
-
-            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(opControl, nowColumnsName0))
                 return;
 
             repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
@@ -78,13 +73,13 @@ namespace Citta_T1.OperatorViews
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
 
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-            this.oldOutList0 = indexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs);
+            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+            oldOutList0 = indexs.ToList();
+            outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-            this.oldOutName0.Add("频率统计结果");
+                oldOutName0.Add(outListCCBL0.Items[index].ToString());
+            oldOutName0.Add("频率统计结果");
 
         }
         #endregion

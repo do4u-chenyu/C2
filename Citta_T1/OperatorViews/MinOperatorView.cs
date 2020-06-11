@@ -56,7 +56,7 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Tag = index.ToString();
 
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int i in indexs)

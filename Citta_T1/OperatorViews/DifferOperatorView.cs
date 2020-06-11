@@ -40,7 +40,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
@@ -48,7 +48,7 @@ namespace Citta_T1.OperatorViews
 
            
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int[] factorList0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
+            int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[factorList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[factorList0[1]].ToString();
             this.comboBox0.Tag = factorList0[0].ToString();
@@ -63,14 +63,14 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == "") continue;
+                if (factor == String.Empty) continue;
 
                 int[] factorList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);               
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control1.Text = (control1 as ComboBox).Items[factorList1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[factorList1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[factorList1[2]].ToString();
                 control1.Tag = factorList1[0].ToString();
                 control2.Tag = factorList1[1].ToString();
