@@ -499,7 +499,7 @@ namespace Citta_T1
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
-                int notReadyNum = currentManager.TripleList.CountOpStatus(ElementStatus.Null);
+                int notReadyNum = currentManager.TripleListGen.CountOpStatus(ElementStatus.Null);
                 if (notReadyNum > 0)
                 {
                     MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -512,7 +512,7 @@ namespace Citta_T1
                     return;
                 }
                 currentManager.Start();
-                int taskNum = currentManager.TripleList.CountOpStatus(ElementStatus.Ready);
+                int taskNum = currentManager.TripleListGen.CountOpStatus(ElementStatus.Ready);
                 this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
 
                 this.progressBar1.Value = 0;
@@ -579,7 +579,7 @@ namespace Citta_T1
             if (manager.ModelStatus == ModelStatus.Running)
                 this.Invoke(new AsynUpdateProgressBar(delegate ()
                 {
-                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
+                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
                 }));
         }
@@ -656,7 +656,7 @@ namespace Citta_T1
                     this.currentModelRunLab.Show();
                     this.progressBar1.Show();
                     this.progressBarLabel.Show();
-                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleList.CurrentModelTripleList.Count;
+                    this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
                     UnEnableRunningControl();
                     break;
                 case ModelStatus.GifDone:
