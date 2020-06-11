@@ -43,10 +43,8 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(234, 0);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(179, 23);
             this.dataSourceTB1.TabIndex = 8;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
@@ -57,13 +55,11 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(471, 8);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(367, 8);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 

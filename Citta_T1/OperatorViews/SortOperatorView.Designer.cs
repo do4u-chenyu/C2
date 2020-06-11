@@ -88,29 +88,15 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.cancelButton.Location = new System.Drawing.Point(330, 7);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(2);
-            this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // confirmButton
             // 
-            this.confirmButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.confirmButton.FlatAppearance.BorderSize = 0;
-            this.confirmButton.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.confirmButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.confirmButton.Location = new System.Drawing.Point(240, 7);
-            this.confirmButton.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmButton.Name = "confirmButton";
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 0;
-            this.confirmButton.Text = "确认";
-            this.confirmButton.UseVisualStyleBackColor = false;
             // 
             // keyPanel
             // 
@@ -233,14 +219,10 @@
             // 
             // dataInfo
             // 
-            this.dataSourceTB0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB0.Location = new System.Drawing.Point(2, 0);
-            this.dataSourceTB0.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB0.Name = "dataInfo";
-            this.dataSourceTB0.ReadOnly = true;
             this.dataSourceTB0.Size = new System.Drawing.Size(134, 23);
             this.dataSourceTB0.TabIndex = 13;
-            this.dataSourceTB0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // sortField
             // 
