@@ -31,7 +31,7 @@ namespace Citta_T1.Business.Schedule
             TopDataOnlyTriple(); //将数据项type均为datasource的置顶
         }
 
-        public List<int> FindModelLeafNodeIds()
+        private List<int> FindModelLeafNodeIds()
         {
             List<int> leafNodeIds = new List<int>();//叶子节点列表
             List<int> starNodes = new List<int>();
@@ -47,7 +47,7 @@ namespace Citta_T1.Business.Schedule
             return leafNodeIds;
         }
 
-        public void SearchNewTriple(List<int> needSearchNodeIds)
+        private void SearchNewTriple(List<int> needSearchNodeIds)
         {
             List<int> nextNeedSearchNodeIds = new List<int>();//下一次需要找上游的点
             if (needSearchNodeIds.Count == 0)
@@ -81,41 +81,22 @@ namespace Citta_T1.Business.Schedule
             SearchNewTriple(nextNeedSearchNodeIds);
         }
 
-
-
-        public void TopDataOnlyTriple()
+        private void TopDataOnlyTriple()
         {
-
-
             List<Triple> tmpDataTriple = new List<Triple>();
             List<Triple> tmpContainResultTriple = new List<Triple>();
-
             foreach (Triple tmpTri in this.currentModelTripleList)
             {
-                bool hasResultData = false;
-                foreach (ModelElement dataElement in tmpTri.DataElements)
-                {
-                    if (dataElement.Type == ElementType.Result)
-                    {
-                        hasResultData = true;
-                        break;
-                    }
-                }
-                if (hasResultData)
-                {
+                if (tmpTri.DataElements.Exists(me => me.Type == ElementType.Result))
                     tmpContainResultTriple.Add(tmpTri);
-                }
                 else
-                {
                     tmpDataTriple.Add(tmpTri);
-                }
             }
-
-            tmpContainResultTriple.Reverse();
+            tmpContainResultTriple.Reverse();//生成triple时从叶子往根，运行时从根往叶子
             this.currentModelTripleList = tmpDataTriple.Concat(tmpContainResultTriple).ToList();
         }
 
-        public List<int> FindBeforeNodeIds(int id)
+        private List<int> FindBeforeNodeIds(int id)
         {
             List<int> beforeNodeId = new List<int>();
             Dictionary<int, int> nodeIdPinDict = new Dictionary<int, int>();
@@ -132,18 +113,6 @@ namespace Citta_T1.Business.Schedule
             }
 
             return beforeNodeId;
-        }
-        public int CountOpStatus(ElementStatus es)
-        {
-            int count = 0;
-            foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
-            {
-                if (op.Status == es)
-                {
-                    count++;
-                }
-            }
-            return count;
         }
 
     }
