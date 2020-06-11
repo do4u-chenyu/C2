@@ -167,42 +167,26 @@ namespace Citta_T1.OperatorViews
             regBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
             regBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
             Label label = new Label
             {
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular),
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
                 Text = "等于=",
-                TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+                TextAlign = ContentAlignment.MiddleCenter
             };
             this.tableLayoutPanel1.Controls.Add(label, 2, addLine);
-
-            ComboBox data2box = new ComboBox();
-            data2box.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            data2box.AutoCompleteSource = AutoCompleteSource.ListItems;
-            data2box.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            data2box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            data2box.Items.AddRange(this.nowColumnsName1);
-            data2box.Leave += new EventHandler(this.Control_Leave);
-            data2box.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            data2box.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(data2box, 3, addLine);
-
+            // 右表列下拉框
+            ComboBox data1ComboBox = NewColumnsName1ComboBox(); ;
+            this.tableLayoutPanel1.Controls.Add(data1ComboBox, 3, addLine);
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 4, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 5, addLine);

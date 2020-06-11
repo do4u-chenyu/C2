@@ -256,20 +256,33 @@ namespace Citta_T1.OperatorViews.Base
             return textBox;
         }
 
-        protected ComboBox NewFilterComboBox()
+        private ComboBox NewComboBox()
         {
-            ComboBox filterBox = new ComboBox
+            ComboBox combox = new ComboBox
             {
                 AutoCompleteMode = AutoCompleteMode.SuggestAppend,
                 AutoCompleteSource = AutoCompleteSource.ListItems,
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular)
             };
-            filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            return filterBox;
+            combox.Leave += new EventHandler(this.Control_Leave);
+            combox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            return combox;
+        }
+
+        protected ComboBox NewColumnsName1ComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Items.AddRange(this.nowColumnsName1);
+            return combox;
+        }
+
+        protected ComboBox NewColumnsName0ComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Items.AddRange(this.nowColumnsName0);
+            return combox;
         }
 
         protected void AliasTextBox_Enter(object sender, EventArgs e)

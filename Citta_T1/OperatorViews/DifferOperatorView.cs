@@ -156,24 +156,17 @@ namespace Citta_T1.OperatorViews
             regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
-
-            ComboBox filterBox = NewFilterComboBox();
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
-
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
+            // 右表列下拉框
+            ComboBox data2Box = NewColumnsName1ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data2Box, 2, addLine);
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
