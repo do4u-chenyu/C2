@@ -187,17 +187,7 @@ namespace Citta_T1.OperatorViews
             dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
-            ComboBox filterBox = new ComboBox
-            {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
-            };
-            filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            ComboBox filterBox = NewFilterComboBox();
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
             TextBox textBox = NewAliasTextBox();

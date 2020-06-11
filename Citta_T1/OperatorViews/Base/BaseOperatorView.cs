@@ -256,6 +256,22 @@ namespace Citta_T1.OperatorViews.Base
             return textBox;
         }
 
+        protected ComboBox NewFilterComboBox()
+        {
+            ComboBox filterBox = new ComboBox
+            {
+                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
+                AutoCompleteSource = AutoCompleteSource.ListItems,
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
+            };
+            filterBox.Items.AddRange(this.nowColumnsName1);
+            filterBox.Leave += new EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            return filterBox;
+        }
+
         protected void AliasTextBox_Enter(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
