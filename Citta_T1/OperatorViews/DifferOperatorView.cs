@@ -79,6 +79,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override void SaveOption()
         {
+            //删除部分取差集条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
 
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
@@ -94,9 +95,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 5 + 0] as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.Controls[i * 5 + 1] as ComboBox;
-                    ComboBox control3 = this.tableLayoutPanel1.Controls[i * 5 + 2] as ComboBox;
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                     string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
@@ -155,32 +156,17 @@ namespace Citta_T1.OperatorViews
             regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
-
-            ComboBox filterBox = new ComboBox();
-            filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new System.EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
-
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
+            // 右表列下拉框
+            ComboBox data2Box = NewColumnsName1ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data2Box, 2, addLine);
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);

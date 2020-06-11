@@ -19,6 +19,9 @@ namespace Citta_T1.OperatorViews
             this.groupColumn = new List<int>();
 
             InitializeComponent();
+            //this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            //this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
             InitByDataSource();
             LoadOption();
         }
@@ -84,8 +87,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 3 + 0] as ComboBox;
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
                     string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+
                     this.groupColumn.Add(Convert.ToInt32(factor));
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
@@ -259,6 +263,7 @@ namespace Citta_T1.OperatorViews
                     selectedIndex[i + 1] = index1;
                 }
             }
+            //找到所有的“分组字段”，判断是否有完全重复的“分组字段”
             var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             List<int> indexs = new List<int>();
             foreach (var item in duplicateValues)

@@ -256,6 +256,35 @@ namespace Citta_T1.OperatorViews.Base
             return textBox;
         }
 
+        private ComboBox NewComboBox()
+        {
+            ComboBox combox = new ComboBox
+            {
+                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
+                AutoCompleteSource = AutoCompleteSource.ListItems,
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
+            };
+            combox.Leave += new EventHandler(this.Control_Leave);
+            combox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            return combox;
+        }
+
+        protected ComboBox NewColumnsName1ComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Items.AddRange(this.nowColumnsName1);
+            return combox;
+        }
+
+        protected ComboBox NewColumnsName0ComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Items.AddRange(this.nowColumnsName0);
+            return combox;
+        }
+
         protected void AliasTextBox_Enter(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;

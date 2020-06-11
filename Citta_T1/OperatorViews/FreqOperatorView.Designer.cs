@@ -133,10 +133,6 @@
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Size = new System.Drawing.Size(301, 162);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
             // groupBox2
             // 
@@ -149,7 +145,6 @@
             this.groupBox2.Size = new System.Drawing.Size(155, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // repetition
             // 
@@ -188,7 +183,6 @@
             this.groupBox1.Size = new System.Drawing.Size(155, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // descendingOrder
             // 

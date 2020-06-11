@@ -16,9 +16,12 @@ namespace Citta_T1.OperatorViews
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            //this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             InitByDataSource();
             LoadOption();
 
+            this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
@@ -36,6 +39,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            //删除部分取并条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
@@ -48,8 +52,8 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
                     Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
@@ -140,6 +144,8 @@ namespace Citta_T1.OperatorViews
 
                 }
             }
+
+            //找到所有的“取并条件”，判断是否有完全重复的“取并条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
@@ -175,38 +181,20 @@ namespace Citta_T1.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox dataBox = new ComboBox();
-            dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
-
-            ComboBox filterBox = new ComboBox
-            {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
-                Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular)
-            };
-            filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
-
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 0, addLine);
+            // 右表列下拉框
+            ComboBox data1ComboBox = NewColumnsName1ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data1ComboBox, 1, addLine);
+            // 别名文本框
             TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
-
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);

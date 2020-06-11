@@ -16,6 +16,8 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
+            this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
@@ -154,6 +156,7 @@ namespace Citta_T1.OperatorViews
 
                 }
             }
+            //找到所有的“添加条件”，判断是否有完全重复的“添加条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
