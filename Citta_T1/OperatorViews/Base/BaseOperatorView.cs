@@ -218,7 +218,7 @@ namespace Citta_T1.OperatorViews.Base
             e.Graphics.Clear(this.BackColor);
         }
 
-        protected Button NewDelButton(string name)
+        private Button NewButton(string name)
         {
             Button delButton = new Button();
             delButton.FlatAppearance.BorderColor = SystemColors.Control;
@@ -228,16 +228,25 @@ namespace Citta_T1.OperatorViews.Base
             delButton.FlatStyle = FlatStyle.Flat;
             delButton.BackColor = SystemColors.Control;
             delButton.UseVisualStyleBackColor = true;
-            delButton.BackgroundImage = Properties.Resources.div;
             delButton.BackgroundImageLayout = ImageLayout.Center;
             delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             delButton.Name = name;
             return delButton;
         }
 
+
+        protected Button NewDelButton(string name)
+        {
+            Button delButton = NewButton(name);
+            delButton.BackgroundImage = Properties.Resources.div;
+            delButton.Click += new EventHandler(this.Del_Click);
+            return delButton;
+        }
+
+
         protected Button NewAddButton(string name)
         {
-            Button addButton = NewDelButton(name);
+            Button addButton = NewButton(name);
             addButton.BackgroundImage = Properties.Resources.add;
             addButton.Click += new EventHandler(this.Add_Click);
             return addButton;
@@ -352,6 +361,53 @@ namespace Citta_T1.OperatorViews.Base
                 Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
                 ctlNext4.Name = (k + 1).ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
+            }
+        }
+
+        protected void Del_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int lineNumber = int.Parse(button.Name);
+
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
+            {
+                int buttonPosition = (i * ColumnCount) + ColumnCount - 1;
+                Control bt1 = this.tableLayoutPanel1.Controls[buttonPosition];
+                if (bt1.Name == button.Name)
+                {
+                    for (int j = buttonPosition; j >= (i * ColumnCount); j--)
+                    {
+                        this.tableLayoutPanel1.Controls.RemoveAt(j);
+                    }
+                    break;
+                }
+
+            }
+
+            MoveTableLayoutPanelControls(lineNumber);
+
+            this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
+            this.tableLayoutPanel1.RowCount -= 1;
+
+            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+        }
+
+        protected virtual void MoveTableLayoutPanelControls(int lineNumber)
+        {
+            for (int k = lineNumber; k < this.tableLayoutPanel1.RowCount - 1; k++)
+            {
+                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
+                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
+                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
+                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
+                ctlNext3.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
+                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
+                ctlNext4.Name = k.ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
         }
     }

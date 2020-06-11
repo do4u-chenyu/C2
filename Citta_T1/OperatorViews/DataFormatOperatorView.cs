@@ -189,7 +189,6 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
-            delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
 
@@ -214,26 +213,9 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        private void Del_Click(object sender, EventArgs e)
+        protected override void MoveTableLayoutPanelControls(int lineNumber)
         {
-            Button tmp = (Button)sender;
-            int delLine = int.Parse(tmp.Name);
-
-            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-            {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * ColumnCount) + ColumnCount-1];
-                if (bt1.Name == tmp.Name)
-                {
-                    for (int j = (i * ColumnCount) + ColumnCount-1; j >= (i * ColumnCount); j--)
-                    {
-                        this.tableLayoutPanel1.Controls.RemoveAt(j);
-                    }
-                    break;
-                }
-
-            }
-
-            for (int k = delLine; k < this.tableLayoutPanel1.RowCount - 1; k++)
+            for (int k = lineNumber; k < this.tableLayoutPanel1.RowCount - 1; k++)
             {
                 Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
@@ -249,11 +231,6 @@ namespace Citta_T1.OperatorViews
                 ctlNext4.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
-            this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
-            this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;
-
-            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
         }
     }
 }

@@ -154,48 +154,7 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
             // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
-            delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
-        }
-
-        private void Del_Click(object sender, EventArgs e)
-        {
-            Button tmp = (Button)sender;
-            int delLine = int.Parse(tmp.Name);
-
-            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-            {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * ColumnCount) + ColumnCount-1];
-                if (bt1.Name == tmp.Name)
-                {
-                    for (int j = (i * ColumnCount) + ColumnCount-1; j >= (i * ColumnCount); j--)
-                    {
-                        this.tableLayoutPanel1.Controls.RemoveAt(j);
-                    }
-                    break;
-                }
-
-            }
-
-            for (int k = delLine; k < this.tableLayoutPanel1.RowCount - 1; k++)
-            {
-                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
-                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
-                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k + 1);
-                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k));
-                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k + 1);
-                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k));
-                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k + 1);
-                ctlNext3.Name = k.ToString();
-                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k));
-                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k + 1);
-                ctlNext4.Name = k.ToString();
-                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
-            }
-            this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
-            this.tableLayoutPanel1.RowCount -= 1;
-
-            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
         }
     }
 }
