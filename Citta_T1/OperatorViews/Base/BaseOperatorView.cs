@@ -271,6 +271,16 @@ namespace Citta_T1.OperatorViews.Base
             return combox;
         }
 
+        protected ComboBox NewAndORComboBox()
+        {
+            ComboBox combox = NewComboBox();
+            combox.Anchor = AnchorStyles.None;
+            combox.Items.AddRange(new object[] {
+            "AND",
+            "OR"});
+            return combox;
+        }
+
         protected ComboBox NewColumnsName1ComboBox()
         {
             ComboBox combox = NewComboBox();

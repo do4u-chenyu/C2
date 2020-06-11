@@ -155,20 +155,10 @@ namespace Citta_T1.OperatorViews
         #endregion
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            regBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            regBox.Leave += new System.EventHandler(this.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            // And OR 选择框
+            ComboBox regBox = NewAndORComboBox();
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
-
+            // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
@@ -195,11 +185,11 @@ namespace Citta_T1.OperatorViews
             textBox.Leave += new EventHandler(this.IsIllegalCharacter);
             textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
-
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 4, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 5, addLine);

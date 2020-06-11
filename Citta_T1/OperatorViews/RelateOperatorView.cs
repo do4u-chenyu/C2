@@ -154,18 +154,8 @@ namespace Citta_T1.OperatorViews
 
         protected override void CreateLine(int addLine)
         {
-            // 添加控件
-            ComboBox regBox = new ComboBox();
-            regBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            regBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            regBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            regBox.Anchor = AnchorStyles.None;
-            regBox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
-            regBox.Leave += new EventHandler(this.Control_Leave);
-            regBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+            // And OR 选择框
+            ComboBox regBox = NewAndORComboBox();
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
             // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
