@@ -60,7 +60,6 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
-            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -69,7 +68,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
             this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             if (opControl.OperatorDimension() == 2)
-            {               
+            {
+                this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
                 this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
             }
 
