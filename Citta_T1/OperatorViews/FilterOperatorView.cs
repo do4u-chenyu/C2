@@ -67,7 +67,6 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            //删除部分过滤条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();

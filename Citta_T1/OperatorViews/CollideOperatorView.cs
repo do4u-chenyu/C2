@@ -106,7 +106,6 @@ namespace Citta_T1.OperatorViews
 
         protected override void SaveOption()
         {
-            //删除部分碰撞条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
 
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);

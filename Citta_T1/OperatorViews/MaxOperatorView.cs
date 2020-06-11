@@ -38,6 +38,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();

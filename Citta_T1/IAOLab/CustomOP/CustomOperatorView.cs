@@ -62,6 +62,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
