@@ -139,7 +139,7 @@ namespace Citta_T1.Core
         /*
          * 按行读取excel文件
          */
-        private void PreLoadExcelFile(string fullFilePath, string sheetName = "", bool isFirstRowColumn = true)
+        private void PreLoadExcelFile(string fullFilePath, string sheetName = "")
         {
             IWorkbook workbook = null;
             FileStream fs = null;

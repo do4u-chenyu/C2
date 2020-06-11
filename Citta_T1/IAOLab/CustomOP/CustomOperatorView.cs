@@ -14,10 +14,10 @@ namespace Citta_T1.OperatorViews
 {
     public partial class CustomOperatorView : BaseOperatorView
     {
-        private string oldPath;
+        private readonly string oldPath;
         private OpUtil.Encoding encoding;
         private char separator;
-        private string oldResultColumns;
+        private readonly string oldResultColumns;
 
         public CustomOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -251,8 +251,10 @@ namespace Citta_T1.OperatorViews
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "files|*.txt;*.bcp;*.xls;*.xlsx";
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "files|*.txt;*.bcp;*.xls;*.xlsx"
+            };
 
             if (fd.ShowDialog() == DialogResult.OK)
             {
