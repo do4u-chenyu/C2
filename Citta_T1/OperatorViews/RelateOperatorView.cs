@@ -87,6 +87,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override void SaveOption()
         {
+            //删除部分关联条件不清空时，加载根据配置字典内容，旧条件仍会加载
             this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
@@ -102,9 +103,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 6 + 0] as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.Controls[i * 6 + 1] as ComboBox;
-                    ComboBox control3 = this.tableLayoutPanel1.Controls[i * 6 + 3] as ComboBox;
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(3, i) as ComboBox;
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                     string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
