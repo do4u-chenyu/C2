@@ -67,7 +67,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
@@ -75,7 +75,7 @@ namespace Citta_T1.OperatorViews
 
             
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int[] optionItems0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
+            int[] optionItems0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
             this.comboBox0.Tag = optionItems0[0].ToString();
@@ -90,7 +90,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                int[] optionItems1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);
+                int[] optionItems1 = Array.ConvertAll(factor.Split('\t'), int.Parse);
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
@@ -151,9 +151,9 @@ namespace Citta_T1.OperatorViews
             regBox.Items.AddRange(new object[] {
             "AND",
             "OR"});
-            regBox.Leave += new System.EventHandler(this.Control_Leave);
-            regBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            regBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            regBox.Leave += new EventHandler(this.Control_Leave);
+            regBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            regBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(regBox, 0, addLine);
 
 
@@ -163,9 +163,9 @@ namespace Citta_T1.OperatorViews
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            dataBox.Leave += new EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
 
             ComboBox filterBox = new ComboBox();

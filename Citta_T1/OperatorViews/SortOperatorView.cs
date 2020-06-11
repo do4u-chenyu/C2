@@ -122,7 +122,7 @@ namespace Citta_T1.OperatorViews
 
         private bool IsCorrectOutOrder(string firstRow, string endRow)
         {
-            if (endRow == "") return true;
+            if (endRow == String.Empty) return true;
             int first = Convert.ToInt32(firstRow);
             int end = Convert.ToInt32(endRow);
             if (first > end)

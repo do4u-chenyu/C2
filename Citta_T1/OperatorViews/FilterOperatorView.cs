@@ -105,7 +105,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int i in indexs)
@@ -114,7 +114,7 @@ namespace Citta_T1.OperatorViews
            
             string factor1 = this.opControl.Option.GetOption("factor1");
             string[] factorList0 = factor1.Split('\t');
-            int[] itemsList0 = Array.ConvertAll<string, int>(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
             int index = itemsList0[0];
             this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
@@ -133,7 +133,7 @@ namespace Citta_T1.OperatorViews
                 string factor = this.opControl.Option.GetOption(name);
                 if (factor == "") continue;
                 string[] factorList1 = factor.Split('\t');
-                int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);             
+                int[] itemsList1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);             
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 6 + 1];
@@ -189,16 +189,16 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
-            filterBox.Leave += new System.EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            filterBox.Leave += new EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             TextBox textBox = new TextBox();
             textBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Leave += new System.EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IsIllegalCharacter);
+            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
+            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
 
             Button addButton = NewAddButton(addLine.ToString());
@@ -218,7 +218,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 addLine = 0;
                 CreateLine(addLine);
             }
@@ -232,7 +232,7 @@ namespace Citta_T1.OperatorViews
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
 
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);

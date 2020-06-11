@@ -46,7 +46,7 @@ namespace Citta_T1.OperatorViews
             sortByNum.Checked    = Convert.ToBoolean(opControl.Option.GetOption("sortByNum", "True"));
             sortByString.Checked = Convert.ToBoolean(opControl.Option.GetOption("sortByString", "False"));
 
-            this.oldOutList0 = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
+            this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
             foreach (int i in this.oldOutList0)
                 this.oldOutName0.Add(this.nowColumnsName0[i]);
 
@@ -84,8 +84,8 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    string factor = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 3 + 0] as ComboBox;
+                    string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     this.groupColumn.Add(Convert.ToInt32(factor));
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
@@ -151,9 +151,9 @@ namespace Citta_T1.OperatorViews
                 Anchor = AnchorStyles.Left | AnchorStyles.Right
             };
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            dataBox.Leave += new EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
 
@@ -174,7 +174,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 addLine = 0;
                 CreateLine(addLine);
             }
@@ -254,7 +254,7 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 3 + 0];
+                    Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
                     string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
                     selectedIndex[i + 1] = index1;
                 }
