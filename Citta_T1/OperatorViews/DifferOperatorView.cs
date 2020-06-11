@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -35,16 +33,6 @@ namespace Citta_T1.OperatorViews
         #endregion
 
         #region 配置信息的保存与加载
-        private void InitNewFactorControl(int count)
-        {
-            for (int line = 0; line < count; line++)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                CreateLine(line);
-            }
-        }
 
         private void LoadOption()
         {
@@ -52,7 +40,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
@@ -60,7 +48,7 @@ namespace Citta_T1.OperatorViews
 
            
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int[] factorList0 = Array.ConvertAll<string, int>(factor1.Split('\t'), int.Parse);
+            int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[factorList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[factorList0[1]].ToString();
             this.comboBox0.Tag = factorList0[0].ToString();
@@ -75,14 +63,14 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + i.ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == "") continue;
+                if (factor == String.Empty) continue;
 
                 int[] factorList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);               
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control1.Text = (control1 as ComboBox).Items[factorList1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[factorList1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = (control3 as ComboBox).Items[factorList1[2]].ToString();
                 control1.Tag = factorList1[0].ToString();
                 control2.Tag = factorList1[1].ToString();
@@ -106,25 +94,19 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    string index2 = (control2 as ComboBox).Tag == null ? (control2 as ComboBox).SelectedIndex.ToString() : (control2 as ComboBox).Tag.ToString();
-                    string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
+                    ComboBox control1 = this.tableLayoutPanel1.Controls[i * 5 + 0] as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.Controls[i * 5 + 1] as ComboBox;
+                    ComboBox control3 = this.tableLayoutPanel1.Controls[i * 5 + 2] as ComboBox;
+                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                    string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
                     string factor = index1 + "\t" + index2 + "\t" + index3;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
                 }
             }
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
         #endregion
         #region 判断是否配置完毕
@@ -157,7 +139,7 @@ namespace Citta_T1.OperatorViews
             return !notReady;
         }
         #endregion
-        private void CreateLine(int addLine)
+        protected override void CreateLine(int addLine)
         {
             // 添加控件
             ComboBox regBox = new ComboBox();
@@ -195,35 +177,13 @@ namespace Citta_T1.OperatorViews
             filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
-            Button addButton1 = new Button();
-            addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.BorderSize = 0;
-            addButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            addButton1.BackColor = System.Drawing.SystemColors.Control;
-            addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
-            addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.Add_Click);
-            addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            addButton1.Name = addLine.ToString();
-            addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 3, addLine);
+            Button addButton = NewAddButton(addLine.ToString());
+            addButton.Click += new EventHandler(this.Add_Click);
+            this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
 
-            Button delButton1 = new Button();
-            delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.BorderSize = 0;
-            delButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            delButton1.BackColor = System.Drawing.SystemColors.Control;
-            delButton1.UseVisualStyleBackColor = true;
-            delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
-            delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.Del_Click);
-            delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
+            Button delButton = NewDelButton(addLine.ToString());
+            delButton.Click += new EventHandler(this.Del_Click);
+            this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
 
         private void Add_Click(object sender, EventArgs e)

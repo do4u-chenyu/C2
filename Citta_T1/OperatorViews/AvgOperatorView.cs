@@ -1,5 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -27,8 +26,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Items.AddRange(nowColumnsName0);
 
         }
-
-
         #endregion
 
         #region 是否配置完毕
@@ -52,13 +49,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outfield", this.comboBox0.SelectedIndex);
             this.selectedColumns.Add(this.comboBox0.SelectedItem.ToString());
 
-
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
@@ -70,7 +62,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Text = this.comboBox0.Items[index].ToString();
             this.comboBox0.Tag = index.ToString();
             this.oldOutName0 = new List<string>() { this.comboBox0.Items[index].ToString() };
-
         }
         #endregion
     }

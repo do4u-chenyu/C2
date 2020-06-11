@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
@@ -13,14 +11,11 @@ namespace Citta_T1.OperatorViews
 
     public partial class RandomOperatorView : BaseOperatorView
     {
-        private string oldRandomNum;
-
         public RandomOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-            this.oldRandomNum = this.randomNumBox.Text;
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -39,13 +34,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
@@ -55,7 +45,7 @@ namespace Citta_T1.OperatorViews
 
             this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
             string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
             this.oldOutList0 = indexs.ToList();
             this.outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)

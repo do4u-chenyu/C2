@@ -48,8 +48,7 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
-            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+           
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.outListCCBL1.Items.AddRange(nowColumnsName1);
@@ -60,6 +59,8 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
@@ -78,30 +79,26 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
-
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("fix") != String.Empty)
-                this.fixRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("fix"));
-            if (this.opControl.Option.GetOption("random") != String.Empty)
-                this.randomRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("random"));
-            if (this.opControl.Option.GetOption("fixSecond") != String.Empty)
-                this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
-            if (this.opControl.Option.GetOption("randomBegin") != String.Empty)
-                this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
-            if (this.opControl.Option.GetOption("randomEnd") != String.Empty)
-                this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
-            if (this.opControl.Option.GetOption("path") != String.Empty)
-                this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
+
+
+            if (this.Text == "AI实践算子设置" && Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
+            if (this.Text == "多源算子设置" && Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
+
+            this.fixRadioButton.Checked = Convert.ToBoolean(opControl.Option.GetOption("fix", "True"));
+            this.randomRadioButton.Checked = Convert.ToBoolean(opControl.Option.GetOption("random", "False"));
+            this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
+            this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
+            this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
+            this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
+
 
             int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("outfield0") != String.Empty)

@@ -43,7 +43,7 @@ namespace Citta_T1.Business.Schedule
         public delegate void UpdateOpError(TaskManager manager, int id, string errorMessage);//声明一个op算子异常时修改提示内容的委托
         public UpdateOpError UpdateOpErrorDelegate;
 
-        private TripleListGen tripleList;
+        private TripleListGen tripleListGen;
         private Thread scheduleThread = null;
         private ModelStatus modelStatus;
 
@@ -58,7 +58,7 @@ namespace Citta_T1.Business.Schedule
         //cmd进程集合
         private List<Process> cmdProcessList;
 
-        public TripleListGen TripleList { get => tripleList; set => tripleList = value; }
+        public TripleListGen TripleListGen { get => tripleListGen; set => tripleListGen = value; }
         public ModelStatus ModelStatus { get => modelStatus; set => modelStatus = value; }
 
         public TaskManager()
@@ -68,16 +68,18 @@ namespace Citta_T1.Business.Schedule
 
         public void GetCurrentModelTripleList(ModelDocument currentModel)
         {
-            this.tripleList = new TripleListGen(currentModel);
-            this.tripleList.GenerateList();
-            this.currentModelTripleList = this.tripleList.CurrentModelTripleList;
+            //生成当前模型所有三元组列表
+            this.tripleListGen = new TripleListGen(currentModel,"all");
+            this.tripleListGen.GenerateList();
+            this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
         }
 
         public void GetCurrentModelRunhereTripleList(ModelDocument currentModel, ModelElement stopElement)
         {
-            this.tripleList = new TripleListGen(currentModel, stopElement);
-            this.tripleList.GenerateList();
-            this.currentModelTripleList = this.tripleList.CurrentModelTripleList;
+            //生成运行到此分支上的三元组列表
+            this.tripleListGen = new TripleListGen(currentModel, "mid", stopElement);
+            this.tripleListGen.GenerateList();
+            this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
         }
 
         public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
@@ -89,6 +91,29 @@ namespace Citta_T1.Business.Schedule
             }
         }
 
+        public int CurrentModelTripleStatusNum(ElementStatus status)
+        {
+            int count = 0;
+            foreach (Triple tmpTri in currentModelTripleList)
+            {
+                if (tmpTri.OperateElement.Status == status)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        public bool IsAllOperatorDone()
+        {
+            if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
+            {
+                UpdateLogDelegate("当前模型的算子均已运算完毕");
+                return true;
+            }
+            return false;
+        }
+
+        # region 开始暂停终止调度逻辑
         public void Reset()
         {
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
@@ -157,28 +182,6 @@ namespace Citta_T1.Business.Schedule
             }
         }
 
-        public int CurrentModelTripleStatusNum(ElementStatus status)
-        {
-            int count = 0;
-            foreach (Triple tmpTri in currentModelTripleList)
-            {
-                if (tmpTri.OperateElement.Status == status)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
-        public bool IsAllOperatorDone()
-        {
-            if (CurrentModelTripleStatusNum(ElementStatus.Done) == this.currentModelTripleList.Count())
-            {
-                UpdateLogDelegate("当前模型的算子均已运算完毕");
-                return true;
-            }
-            return false;
-        }
 
 
         public void Start()
@@ -266,10 +269,6 @@ namespace Citta_T1.Business.Schedule
             Thread.Sleep(1000);
             UpdateGifDelegate(this);
         }
-
-
-
-
 
         bool TaskMethod(Triple triple)
         {
@@ -359,7 +358,6 @@ namespace Citta_T1.Business.Schedule
             //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
             triple.OperateElement.Status = ElementStatus.Done;
             triple.ResultElement.Status = ElementStatus.Done;
-            triple.IsOperated = true;
             UpdateBarDelegate(this);
             UpdateLogDelegate(triple.TripleName + "结束运行");
 
@@ -418,6 +416,6 @@ namespace Citta_T1.Business.Schedule
             }
             return errorMessage;
         }
-
+        #endregion
     }
 }

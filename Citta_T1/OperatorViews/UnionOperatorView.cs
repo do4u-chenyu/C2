@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -36,16 +34,6 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 配置信息的保存与加载
-        private void InitNewFactorControl(int count)
-        {
-            for (int line = 0; line < count; line++)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                CreateLine(line);
-            }
-        }
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
@@ -75,13 +63,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
         private string OutColumnName(string name, string alias)
         {
@@ -98,7 +81,7 @@ namespace Citta_T1.OperatorViews
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition"));
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition"));
             string[] factorList0 = factor1.Split('\t');
-            int[] itemsList0 = Array.ConvertAll<string, int>(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+            int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
             this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
             this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
             this.textBox0.Text = factorList0[2];
@@ -117,14 +100,14 @@ namespace Citta_T1.OperatorViews
                 if (factor == "") continue;
 
                 string[] factorList1 = factor.Split('\t');
-                int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
+                int[] itemsList1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
 
                 Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
                 Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
+                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                 control3.Text = factorList1[2];
                 control1.Tag = itemsList1[0].ToString();
                 control2.Tag = itemsList1[1].ToString();
@@ -190,19 +173,18 @@ namespace Citta_T1.OperatorViews
             return !notReady;
         }
         #endregion
-        private void CreateLine(int addLine)
+        protected override void CreateLine(int addLine)
         {
             // 添加控件
-
             ComboBox dataBox = new ComboBox();
             dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             dataBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
             dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new System.EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            dataBox.Leave += new EventHandler(this.Control_Leave);
+            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(dataBox, 0, addLine);
 
             ComboBox filterBox = new ComboBox
@@ -213,54 +195,24 @@ namespace Citta_T1.OperatorViews
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular)
             };
             filterBox.Items.AddRange(this.nowColumnsName1);
-            filterBox.Leave += new System.EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            filterBox.Leave += new EventHandler(this.Control_Leave);
+            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
+            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
-            TextBox textBox = new TextBox();
-            textBox.Text = "别名";
-            textBox.Font = new Font("微软雅黑", 9f, FontStyle.Regular);
-            textBox.ForeColor = SystemColors.ActiveCaption;
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Enter += TextBoxEx1_Enter;
-            textBox.Leave += TextBoxEx1_Leave;
-            textBox.Leave += new System.EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IsIllegalCharacter);
+            TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
-            Button addButton1 = new Button();
-            addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.BorderSize = 0;
-            addButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            addButton1.BackColor = System.Drawing.SystemColors.Control;
-            addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
-            addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.AddButton1_Click);
-            addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            addButton1.Name = addLine.ToString();
-            addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 3, addLine);
+            Button addButton = NewAddButton(addLine.ToString());
+            addButton.Click += new EventHandler(this.Add_Click);
+            this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
 
-            Button delButton1 = new Button();
-            delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.BorderSize = 0;
-            delButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            delButton1.BackColor = System.Drawing.SystemColors.Control;
-            delButton1.UseVisualStyleBackColor = true;
-            delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
-            delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.DelButton1_Click);
-            delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
+            Button delButton = NewDelButton(addLine.ToString());
+            delButton.Click += new EventHandler(this.Del_Click);
+            this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
 
-        private void AddButton1_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int addLine;
@@ -268,7 +220,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 addLine = 0;
                 CreateLine(addLine);
             }
@@ -281,8 +233,7 @@ namespace Citta_T1.OperatorViews
 
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
@@ -303,7 +254,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void DelButton1_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);
@@ -341,32 +292,6 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.RowCount -= 1;
 
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
         }
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void TextBoxEx1_Enter(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == "别名")
-            {
-                TextBoxEx.Text = String.Empty;
-            }
-            TextBoxEx.ForeColor = Color.Black;
-        }
-
-        private void TextBoxEx1_Leave(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == String.Empty)
-            {
-                TextBoxEx.Text = "别名";
-                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
-            }
-        }
-
     }
 }

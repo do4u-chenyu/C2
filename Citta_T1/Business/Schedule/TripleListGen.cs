@@ -5,7 +5,7 @@ using System.Linq;
 namespace Citta_T1.Business.Schedule
 {
     /// <summary>
-    /// 根据前台保存模型生成一个三元组列表
+    /// 三元组生成类
     /// </summary>
 
     class TripleListGen
@@ -14,175 +14,70 @@ namespace Citta_T1.Business.Schedule
         private ModelDocument currentModel;
         private string state;
         private ModelElement stopElement;
+        private List<int> haveSearchedNodes;//已经找过的节点，如果在里面，不需要再找了
+        public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
 
-        private List<ModelElement> modelElements;
-        private List<ModelRelation> modelRelations;
-        private List<int> starNodes;
-        private List<int> endNodes;
-        private List<int> leafNodeIds;
-
-        //已经找过的节点，如果在里面，不需要再找了
-        private List<int> haveSearchedNodes;
-
-        public TripleListGen(ModelDocument currentModel)
+        public TripleListGen(ModelDocument currentModel,string state,ModelElement stopElement = null)
         {
-            //“运行”构造方法
-            this.currentModel = currentModel;
-            this.state = "all";
-            this.haveSearchedNodes = new List<int>();
-            this.currentModelTripleList = new List<Triple>();
-        }
-
-        public TripleListGen(ModelDocument currentModel, ModelElement stopElement)
-        {
-            //“运行到此”构造方法,需要传入运行到此的算子（id或者模型元素类实例均可）
             this.currentModel = currentModel;
             this.stopElement = stopElement;
-            this.state = "mid";
+            this.state = state;//“运行”构造方法status为all,stopElement为null.“运行到此”构造方法status为mid,stopElement为指定模型元素
             this.haveSearchedNodes = new List<int>();
             this.currentModelTripleList = new List<Triple>();
         }
-
-        public int CountOpStatus(ElementStatus es)
-        {
-            int count = 0;
-            foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
-            {
-                if (op.Status == es)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-
         public void GenerateList()
         {
-            //寻找当前模型的所有叶子节点
-            FindModelEndNodes();
-
-            //从叶子节点开始找
-            SearchNewTriple(leafNodeIds);
-
-            //将数据项type均为datasource的置顶
-            TopDataOnlyTriple();
-
+            SearchNewTriple(FindModelLeafNodeIds());//寻找当前模型的所有叶子节点的id,从叶子节点开始生成三元组列表
+            TopDataOnlyTriple(); //将数据项type均为datasource的置顶
         }
 
-
-
-
-        public void FindModelEndNodes()
+        public List<int> FindModelLeafNodeIds()
         {
-            modelElements = this.currentModel.ModelElements;
-            modelRelations = this.currentModel.ModelRelations;
+            List<int> leafNodeIds = new List<int>();//叶子节点列表
+            List<int> starNodes = new List<int>();
+            List<int> endNodes = new List<int>();
+            this.currentModel.ModelRelations.ForEach(mr => { starNodes.Add(mr.StartID);endNodes.Add(mr.EndID); });
 
-            //叶子节点列表
-            leafNodeIds = new List<int>();
-
-            starNodes = new List<int>();
-            endNodes = new List<int>();
-
-            foreach (ModelRelation mr in modelRelations)
-            {
-                starNodes.Add(mr.StartID);
-                endNodes.Add(mr.EndID);
-            }
-
+            //从“运行”按钮进入,找到当前模型所有的叶子节点（存在多个），仅在边关系的end出现，没有在start出现，说明这些节点没有出度，即为叶子节点
+            //从“运行到此”右键选项进入，stopElement固定为op算子，需要先找它的rs算子作为叶子节点
             if (this.state == "all")
-            {
-                //从“运行”按钮进入,找到模型的最后一个元素
-                //DONE
-                //结束元素可能有多个,需要判断每个元素的出度 
                 leafNodeIds = endNodes.Except(starNodes).ToList();
-            }
-            else if (this.state == "mid")
-            {
-                //从“运行到此”右键选项进入
-                leafNodeIds.Add(FindNextNodeId(this.stopElement.ID));
-            }
+            else
+                leafNodeIds.Add(this.currentModel.ModelRelations.Find(c => c.StartID == this.stopElement.ID).EndID);
+            return leafNodeIds;
         }
-
-        public List<int> FindBeforeNodeIds(int id)
-        {
-            List<int> beforeNodeId = new List<int>();
-            Dictionary<int, int> nodeIdPinDict = new Dictionary<int, int>();
-
-            foreach (ModelRelation beforeNode in modelRelations.FindAll(c => c.EndID == id))
-            {
-                nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
-            }
-
-            for (int i = 0; i < nodeIdPinDict.Count; i++)
-            {
-                if (nodeIdPinDict.ContainsKey(i))
-                    beforeNodeId.Add(nodeIdPinDict[i]);
-            }
-
-            return beforeNodeId;
-        }
-
-        public int FindNextNodeId(int id)
-        {
-            return modelRelations.Find(c => c.StartID == id).EndID;
-        }
-
-
 
         public void SearchNewTriple(List<int> needSearchNodeIds)
         {
-            //下一次需要找上游的点
-            List<int> nextNeedSearchNodeIds = new List<int>();
-
+            List<int> nextNeedSearchNodeIds = new List<int>();//下一次需要找上游的点
             if (needSearchNodeIds.Count == 0)
-            {
                 return;
-            }
+            List<int> endNodes = new List<int>();
+            this.currentModel.ModelRelations.ForEach(mr => endNodes.Add(mr.EndID));
 
             foreach (int resultNodeId in needSearchNodeIds)
             {
-                /*拿到一个待溯源的节点
-                 *（new）0、判断这个节点是否是结果算子，如果是op算子，说明该算子没有配
-                 * 1、判断这个节点是否在endnode列表里，不在，说明没有入度，即为根，不需要再找上游了。在，下一步。
-                 * 2、通过relation找到它对应的start，可能有1个，可能有2个【我一次直接溯2层吧，算子不可能出现在待溯源的列表里
-                 * 3、找到算子（必定1个），结果\数据（1或多），new 一个triple
-                 * 4、结果\数据 判断是否存在在 haveSearchedNodes, 不在则加入needSearchNodes
-                 */
-                ModelElement resultElement = modelElements.Find(c => c.ID == resultNodeId);
-                if (resultElement.Type != ElementType.Result)
-                {
+                ModelElement resultElement = this.currentModel.ModelElements.Find(c => c.ID == resultNodeId);
+                if (resultElement.Type != ElementType.Result || !endNodes.Exists(c => c == resultNodeId)) //不是结果算子或者没有上游，该节点没有对应三元组
                     continue;
-                }
-
-                if (!endNodes.Exists(c => c == resultNodeId))
-                {
-                    continue;
-                }
 
                 int operateNodeId = FindBeforeNodeIds(resultNodeId).First();
-                List<int> dataNodeIds = FindBeforeNodeIds(operateNodeId);
-                ModelElement operateElement = modelElements.Find(c => c.ID == operateNodeId);
+                ModelElement operateElement = this.currentModel.ModelElements.Find(c => c.ID == operateNodeId);
 
+                List<int> dataNodeIds = FindBeforeNodeIds(operateNodeId);
                 List<ModelElement> dataElements = new List<ModelElement>();
                 foreach (int dataNodeId in dataNodeIds)
                 {
-                    dataElements.Add(modelElements.Find(c => c.ID == dataNodeId));
-
-                    if (!this.haveSearchedNodes.Exists(c => c == dataNodeId))
+                    dataElements.Add(this.currentModel.ModelElements.Find(c => c.ID == dataNodeId));
+                    if (!this.haveSearchedNodes.Exists(c => c == dataNodeId)) //结果\数据 判断是否存在在 haveSearchedNodes, 不在则加入needSearchNodes
                     {
-                        if (!nextNeedSearchNodeIds.Exists(c => c == dataNodeId))
-                        {
-                            nextNeedSearchNodeIds.Add(dataNodeId);
-                        }
+                        nextNeedSearchNodeIds.Add(dataNodeId);
                         this.haveSearchedNodes.Add(dataNodeId);
                     }
                 }
 
                 this.currentModelTripleList.Add(new Triple(dataElements, operateElement, resultElement));
-
             }
-
-
             SearchNewTriple(nextNeedSearchNodeIds);
         }
 
@@ -220,8 +115,36 @@ namespace Citta_T1.Business.Schedule
             this.currentModelTripleList = tmpDataTriple.Concat(tmpContainResultTriple).ToList();
         }
 
+        public List<int> FindBeforeNodeIds(int id)
+        {
+            List<int> beforeNodeId = new List<int>();
+            Dictionary<int, int> nodeIdPinDict = new Dictionary<int, int>();
 
+            foreach (ModelRelation beforeNode in this.currentModel.ModelRelations.FindAll(c => c.EndID == id))
+            {
+                nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
+            }
 
-        public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
+            for (int i = 0; i < nodeIdPinDict.Count; i++)
+            {
+                if (nodeIdPinDict.ContainsKey(i))
+                    beforeNodeId.Add(nodeIdPinDict[i]);
+            }
+
+            return beforeNodeId;
+        }
+        public int CountOpStatus(ElementStatus es)
+        {
+            int count = 0;
+            foreach (ModelElement op in this.currentModel.ModelElements.FindAll(c => c.Type == ElementType.Operator))
+            {
+                if (op.Status == es)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
     }
 }

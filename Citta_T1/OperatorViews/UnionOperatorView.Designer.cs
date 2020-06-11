@@ -178,7 +178,7 @@
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.AddButton1_Click);
+            this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
             // textBox0
             // 
@@ -191,8 +191,8 @@
             this.textBox0.Size = new System.Drawing.Size(86, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.Enter += new System.EventHandler(this.TextBoxEx1_Enter);
-            this.textBox0.Leave += new System.EventHandler(this.TextBoxEx1_Leave);
+            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox1_Enter);
+            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox1_Leave);
             // 
             // groupBox1
             // 

@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
@@ -19,9 +17,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             InitByDataSource();
-            LoadOption();
-
-            
+            LoadOption();  
         }
 
         #region 配置初始化
@@ -72,13 +68,8 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("endRow", this.endRow.Text);
             this.selectedColumns = this.nowColumnsName0.ToList();
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
@@ -100,16 +91,6 @@ namespace Citta_T1.OperatorViews
             this.oldOutName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
         }
         #endregion
-
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
 
         #region 输入非数字，警告
         private void FirstRow_Leave(object sender, EventArgs e)
@@ -139,13 +120,9 @@ namespace Citta_T1.OperatorViews
 
         #endregion
 
-        private void GroupBox3_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
         private bool IsCorrectOutOrder(string firstRow, string endRow)
         {
-            if (endRow == "") return true;
+            if (endRow == String.Empty) return true;
             int first = Convert.ToInt32(firstRow);
             int end = Convert.ToInt32(endRow);
             if (first > end)

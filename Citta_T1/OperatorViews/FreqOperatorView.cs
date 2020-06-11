@@ -1,10 +1,7 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,18 +9,11 @@ namespace Citta_T1.OperatorViews
 {
     public partial class FreqOperatorView : BaseOperatorView
     {
-        private List<bool> oldCheckedItems = new List<bool>();
-
         public FreqOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-
-            this.oldCheckedItems.Add(this.repetition.Checked);
-            this.oldCheckedItems.Add(this.noRepetition.Checked);
-            this.oldCheckedItems.Add(this.ascendingOrder.Checked);
-            this.oldCheckedItems.Add(this.descendingOrder.Checked);
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -34,8 +24,6 @@ namespace Citta_T1.OperatorViews
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
            
         }
-
-
         #endregion
         #region 添加取消
         protected override bool IsOptionNotReady()
@@ -58,8 +46,6 @@ namespace Citta_T1.OperatorViews
             }
             return !notReady;
         }
-
-
         #endregion
         #region 配置信息的保存与加载
         protected override void SaveOption()
@@ -73,19 +59,13 @@ namespace Citta_T1.OperatorViews
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
             this.selectedColumns.Add("频率统计结果");
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
         {
-
-            if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+            if (Global.GetOptionDao().IsCleanSingleOperatorOption(opControl, nowColumnsName0))
                 return;
 
             repetition.Checked      = Convert.ToBoolean(opControl.Option.GetOption("repetition", "True"));
@@ -93,24 +73,15 @@ namespace Citta_T1.OperatorViews
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
 
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
-            this.oldOutList0 = indexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs);
+            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+            oldOutList0 = indexs.ToList();
+            outListCCBL0.LoadItemCheckIndex(indexs);
             foreach (int index in indexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
-            this.oldOutName0.Add("频率统计结果");
+                oldOutName0.Add(outListCCBL0.Items[index].ToString());
+            oldOutName0.Add("频率统计结果");
 
         }
         #endregion
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void GroupBox2_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
     }
 }

@@ -5,6 +5,7 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -180,6 +181,99 @@ namespace Citta_T1.OperatorViews.Base
         protected void GetSelectedItemIndex(object sender, EventArgs e)
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+        }
+
+        //更新后续子图所有节点状态
+        protected void UpdateSubGraphStatus()
+        {
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
+                this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+        }
+
+        protected void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+                CreateLine(line);
+            }
+        }
+
+        protected virtual void CreateLine(int addLine)
+        { 
+        
+        }
+
+        protected void GroupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
+
+        protected Button NewDelButton(string name)
+        {
+            Button delButton = new Button();
+            delButton.FlatAppearance.BorderColor = SystemColors.Control;
+            delButton.FlatAppearance.BorderSize = 0;
+            delButton.FlatAppearance.MouseDownBackColor = SystemColors.Control;
+            delButton.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            delButton.FlatStyle = FlatStyle.Flat;
+            delButton.BackColor = SystemColors.Control;
+            delButton.UseVisualStyleBackColor = true;
+            delButton.BackgroundImage = Properties.Resources.div;
+            delButton.BackgroundImageLayout = ImageLayout.Center;
+            delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            delButton.Name = name;
+            return delButton;
+        }
+
+        protected Button NewAddButton(string name)
+        {
+            Button addButton = NewDelButton(name);
+            addButton.BackgroundImage = Properties.Resources.add;
+            return addButton;
+        }
+
+        protected TextBox NewAliasTextBox()
+        {
+            TextBox textBox = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Text = "别名",
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
+                ForeColor = SystemColors.ActiveCaption
+            };
+            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Enter += AliasTextBox1_Enter;
+            textBox.Leave += AliasTextBox1_Leave;
+            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
+            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+            return textBox;
+        }
+
+        protected void AliasTextBox1_Enter(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == "别名")
+            {
+                TextBoxEx.Text = String.Empty;
+            }
+            TextBoxEx.ForeColor = Color.Black;
+        }
+
+        protected void AliasTextBox1_Leave(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == String.Empty)
+            {
+                TextBoxEx.Text = "别名";
+                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
+            }
         }
     }
 }
