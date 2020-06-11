@@ -149,7 +149,7 @@
             this.groupBox2.Size = new System.Drawing.Size(155, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
+            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // repetition
             // 
@@ -188,7 +188,7 @@
             this.groupBox1.Size = new System.Drawing.Size(155, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
             // 
             // descendingOrder
             // 

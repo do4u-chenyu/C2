@@ -210,7 +210,7 @@ namespace Citta_T1.OperatorViews.Base
         
         }
 
-        protected void GroupBox1_Paint(object sender, PaintEventArgs e)
+        protected void GroupBox_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(this.BackColor);
         }
@@ -249,14 +249,14 @@ namespace Citta_T1.OperatorViews.Base
                 ForeColor = SystemColors.ActiveCaption
             };
             textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Enter += AliasTextBox1_Enter;
-            textBox.Leave += AliasTextBox1_Leave;
+            textBox.Enter += AliasTextBox_Enter;
+            textBox.Leave += AliasTextBox_Leave;
             textBox.Leave += new EventHandler(this.IsIllegalCharacter);
             textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             return textBox;
         }
 
-        protected void AliasTextBox1_Enter(object sender, EventArgs e)
+        protected void AliasTextBox_Enter(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == "别名")
@@ -266,7 +266,7 @@ namespace Citta_T1.OperatorViews.Base
             TextBoxEx.ForeColor = Color.Black;
         }
 
-        protected void AliasTextBox1_Leave(object sender, EventArgs e)
+        protected void AliasTextBox_Leave(object sender, EventArgs e)
         {
             TextBox TextBoxEx = sender as TextBox;
             if (TextBoxEx.Text == String.Empty)
