@@ -162,11 +162,7 @@ namespace Citta_T1.OperatorViews
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
-            ComboBox filterBox = new ComboBox();
-            filterBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            filterBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            filterBox.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            filterBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ComboBox filterBox = NewComboBox();
             filterBox.Items.AddRange(new object[] {
             "大于 >",
             "小于 <",
@@ -174,9 +170,6 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠"});
-            filterBox.Leave += new EventHandler(this.Control_Leave);
-            filterBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            filterBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             TextBox textBox = new TextBox();

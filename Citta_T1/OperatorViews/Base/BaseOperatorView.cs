@@ -256,7 +256,7 @@ namespace Citta_T1.OperatorViews.Base
             return textBox;
         }
 
-        private ComboBox NewComboBox()
+        protected ComboBox NewComboBox()
         {
             ComboBox combox = new ComboBox
             {

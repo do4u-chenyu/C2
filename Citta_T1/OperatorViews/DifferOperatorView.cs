@@ -3,7 +3,6 @@ using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 

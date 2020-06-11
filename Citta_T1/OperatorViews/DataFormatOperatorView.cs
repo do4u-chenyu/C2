@@ -179,17 +179,17 @@ namespace Citta_T1.OperatorViews
                 Text = (addLine + 2).ToString()
             };
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
-
+            // 左表列下拉框
             ComboBox data0ComboBox = NewColumnsName0ComboBox();
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
-
+            // 别名文本框
             TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
-
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
             addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
             delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
