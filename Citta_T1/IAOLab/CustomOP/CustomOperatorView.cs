@@ -15,6 +15,9 @@ namespace Citta_T1.OperatorViews
     public partial class CustomOperatorView : BaseOperatorView
     {
         private string oldPath;
+        private OpUtil.Encoding encoding;
+        private char separator;
+        private string oldResultColumns;
 
         public CustomOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -40,6 +43,7 @@ namespace Citta_T1.OperatorViews
             InitByDataSource();
             //加载配置内容
             LoadOption();
+            oldResultColumns = opControl.Option.GetOption("resultColumns");
         }
 
         #region 初始化配置
@@ -48,7 +52,6 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-           
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.outListCCBL1.Items.AddRange(nowColumnsName1);
@@ -67,6 +70,9 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
             this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
+
+        
+
             if (opControl.OperatorDimension() == 2)
             {
                 this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
@@ -78,6 +84,23 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputEncode", outputEncode);
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
+
+
+            // 获取编码、分隔符类型，以获得结果文件表头
+            encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
+            separator = OpUtil.DefaultSeparator;
+            string radioName = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
+            if (radioName == "commaradio")
+            {
+                separator = ',';
+            }
+            else if (radioName == "otherseparatorradio")
+            {
+                separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultSeparator : this.otherSeparatorText.Text[0];
+            }
+            // 路径相同，改变分编码格式、分隔符内容将会变化，需要强制刷新缓存
+            string oldResultLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.rsFullFilePathTextBox.Text, encoding, true);
+            this.opControl.Option.SetOption("resultColumns", oldResultLine);
 
             //更新子图所有节点状态
             UpdateSubGraphStatus();
@@ -136,7 +159,6 @@ namespace Citta_T1.OperatorViews
             if (IsOptionNotReady()) return;
 
             this.DialogResult = DialogResult.OK;
-
             SaveOption();
 
             //内容修改，引起文档dirty 
@@ -145,6 +167,9 @@ namespace Citta_T1.OperatorViews
 
             //生成结果控件,创建relation,bcp 结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
+
+         
+
             if (resultElement == ModelElement.Empty)
             {
                 MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.rsFullFilePathTextBox.Text);
@@ -159,18 +184,24 @@ namespace Citta_T1.OperatorViews
             //修改结果算子内容
             //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.rsFullFilePathTextBox.Text);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
-            hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
-            hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
-            string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
-            if (separator == "commaradio")
-            {
-                hasResultNew.Separator = ',';
-            }
-            else if (separator == "otherseparatorradio")
-            {
-                hasResultNew.Separator = String.IsNullOrEmpty(this.otherSeparatorText.Text) ? OpUtil.DefaultSeparator : this.otherSeparatorText.Text[0];
-            }
-            BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
+
+            OpUtil.Encoding oldEncoding = hasResultNew.Encoding;
+            char oldSeparator = hasResultNew.Separator;
+
+            hasResultNew.InnerControl.Encoding = encoding;
+            hasResultNew.InnerControl.Separator = separator;
+         
+
+            /*
+             * 结果文件表头不一致、分隔符、编码改变，子图状态降级
+             */
+
+            if(oldResultColumns!=opControl.Option.GetOption("resultColumns")
+                || oldEncoding!= encoding
+                || oldSeparator!= separator )
+
+                Global.GetCurrentDocument().SetChildrenStatusNull(opControl.ID);
+
         }
 
         protected override bool IsOptionNotReady()
