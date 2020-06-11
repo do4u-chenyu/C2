@@ -45,17 +45,23 @@ namespace Citta_T1.OperatorViews
             sortByNum.Checked    = Convert.ToBoolean(opControl.Option.GetOption("sortByNum", "True"));
             sortByString.Checked = Convert.ToBoolean(opControl.Option.GetOption("sortByString", "False"));
 
-            this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
-            foreach (int i in this.oldOutList0)
-                this.oldOutName0.Add(this.nowColumnsName0[i]);
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            {
+                this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
+                foreach (int i in this.oldOutList0)
+                    this.oldOutName0.Add(this.nowColumnsName0[i]);
+            }
+            
 
 
             string factor1 = this.opControl.Option.GetOption("factor1");
-            int index = Convert.ToInt32(factor1);
-            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-            this.comboBox0.Tag = index.ToString();
-
-
+            if (!String.IsNullOrEmpty(factor1))
+            {
+                int index = Convert.ToInt32(factor1);
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
+            }
+           
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
                 return;
@@ -63,6 +69,7 @@ namespace Citta_T1.OperatorViews
             for (int i = 0; i < count; i++)
             {
                 string name = "factor" + (i + 2).ToString();
+                if (String.IsNullOrEmpty(this.opControl.Option.GetOption(name))) continue;
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[num].ToString();

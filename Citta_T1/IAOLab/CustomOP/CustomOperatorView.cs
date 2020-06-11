@@ -125,7 +125,7 @@ namespace Citta_T1.OperatorViews
 
 
             int[] outIndexs = new int[] { };
-            if (this.opControl.Option.GetOption("outfield0") != String.Empty)
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 outIndexs = Array.ConvertAll<string, int>(checkIndexs, int.Parse);
@@ -136,7 +136,7 @@ namespace Citta_T1.OperatorViews
             }
 
             int[] outIndexs1 = new int[] { };
-            if (this.opControl.Option.GetOption("outfield1") != String.Empty)
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield1")))
             {
                 string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield1");
                 outIndexs1 = Array.ConvertAll<string, int>(checkIndexs, int.Parse);

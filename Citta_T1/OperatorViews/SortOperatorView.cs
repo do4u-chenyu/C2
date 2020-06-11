@@ -78,9 +78,13 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-            int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-            this.comboBox0.Tag = index.ToString();
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("sortfield")))
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
+            }
+
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition", "False"));
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder", "True"));
