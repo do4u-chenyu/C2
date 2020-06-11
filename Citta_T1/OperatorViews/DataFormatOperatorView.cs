@@ -85,8 +85,6 @@ namespace Citta_T1.OperatorViews
                 {
                     ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
                     Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    //Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    //Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string factor = tmpIndex + "\t" + control2.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);

@@ -188,8 +188,10 @@ namespace Citta_T1.OperatorViews.Base
         protected void UpdateSubGraphStatus()
         {
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
+            if (this.oldOptionDictStr == this.opControl.Option.ToString() 
+                && oldStatus == ElementStatus.Done)
+                return;
+             this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);

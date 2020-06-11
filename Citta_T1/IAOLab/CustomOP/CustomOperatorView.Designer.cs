@@ -52,10 +52,8 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(302, 41);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(150, 23);
             this.dataSourceTB1.TabIndex = 11;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dataSourceTB0
             // 
@@ -65,21 +63,18 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(401, 286);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(305, 286);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(96, 138);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.outListCCBL0.Size = new System.Drawing.Size(150, 22);
@@ -87,7 +82,6 @@
             // 
             // outListCCBL1
             // 
-            this.outListCCBL1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL1.Location = new System.Drawing.Point(302, 138);
             this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.outListCCBL1.Size = new System.Drawing.Size(150, 22);

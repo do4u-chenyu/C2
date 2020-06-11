@@ -129,11 +129,13 @@ namespace Citta_T1.OperatorViews.Base
             // 
             this.dataSourceTB1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dataSourceTB1.Location = new System.Drawing.Point(0, 0);
+            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Name = "dataSourceTB1";
             this.dataSourceTB1.ReadOnly = true;
             this.dataSourceTB1.Size = new System.Drawing.Size(100, 21);
             this.dataSourceTB1.TabIndex = 1;
             this.dataSourceTB1.Visible = false;
+            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSourceTB1.MouseHover += new System.EventHandler(this.DataSourceTB1_MouseHover);
             // 
             // outListCCBL0
