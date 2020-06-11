@@ -144,6 +144,8 @@ namespace Citta_T1.OperatorViews
 
                 }
             }
+
+            //找到所有的“取并条件”，判断是否有完全重复的“取并条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {

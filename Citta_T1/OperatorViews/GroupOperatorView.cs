@@ -263,6 +263,7 @@ namespace Citta_T1.OperatorViews
                     selectedIndex[i + 1] = index1;
                 }
             }
+            //找到所有的“分组字段”，判断是否有完全重复的“分组字段”
             var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             List<int> indexs = new List<int>();
             foreach (var item in duplicateValues)
