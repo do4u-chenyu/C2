@@ -1,4 +1,5 @@
-﻿using Citta_T1.Controls.Move.Op;
+﻿
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -123,9 +124,9 @@ namespace Citta_T1.OperatorViews
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
                 {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0,i) as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1,i) as ComboBox;
-                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2,i) as ComboBox;
+                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
                     string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                     string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
