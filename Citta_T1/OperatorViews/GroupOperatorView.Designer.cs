@@ -27,13 +27,8 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.topPanel = new System.Windows.Forms.Panel();
-            this.bottomPanel = new System.Windows.Forms.Panel();
-            this.keyPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.valuePanel = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sortByString = new System.Windows.Forms.RadioButton();
             this.sortByNum = new System.Windows.Forms.RadioButton();
@@ -46,7 +41,6 @@
             this.repetition = new System.Windows.Forms.RadioButton();
             this.noRepetition = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.bottomPanel.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
@@ -104,34 +98,17 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "数据信息：";
             // 
             // topPanel
             // 
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Location = new System.Drawing.Point(0, 0);
-            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(527, 21);
-            this.topPanel.TabIndex = 0;
             // 
             // bottomPanel
             // 
-            this.bottomPanel.Controls.Add(this.cancelButton);
-            this.bottomPanel.Controls.Add(this.confirmButton);
-            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomPanel.Location = new System.Drawing.Point(0, 387);
-            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.bottomPanel.Name = "bottomPanel";
             this.bottomPanel.Size = new System.Drawing.Size(527, 49);
-            this.bottomPanel.TabIndex = 1;
             // 
             // keyPanel
             // 
@@ -140,12 +117,8 @@
             this.keyPanel.Controls.Add(this.label3);
             this.keyPanel.Controls.Add(this.label2);
             this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
-            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
-            this.keyPanel.Name = "keyPanel";
             this.keyPanel.Size = new System.Drawing.Size(116, 366);
-            this.keyPanel.TabIndex = 2;
             // 
             // label5
             // 
@@ -177,12 +150,8 @@
             this.valuePanel.Controls.Add(this.tableLayoutPanel2);
             this.valuePanel.Controls.Add(this.groupBox1);
             this.valuePanel.Controls.Add(this.panel1);
-            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
-            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
-            this.valuePanel.Name = "valuePanel";
             this.valuePanel.Size = new System.Drawing.Size(411, 366);
-            this.valuePanel.TabIndex = 3;
             this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
             this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
             this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
@@ -201,7 +170,7 @@
             this.groupBox3.Size = new System.Drawing.Size(208, 25);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox3_Paint);
+            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // sortByString
             // 
@@ -240,7 +209,7 @@
             this.groupBox2.Size = new System.Drawing.Size(207, 25);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox2_Paint);
+            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // ascendingOrder
             // 
@@ -358,11 +327,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 85);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // GroupOperatorView
             // 
@@ -393,14 +358,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.Panel topPanel;
-        private System.Windows.Forms.Panel bottomPanel;
-        private System.Windows.Forms.Panel keyPanel;
-        private System.Windows.Forms.Panel valuePanel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

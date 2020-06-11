@@ -5,6 +5,7 @@ using Citta_T1.Core;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -79,29 +80,31 @@ namespace Citta_T1.OperatorViews.Base
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
+        // 是否配置完毕
         protected virtual bool IsOptionNotReady()
         {
+          
             return false;
         }
         protected virtual void SaveOption()
         {
         }
+        // 判断标准化字段是否重复选择
         protected virtual bool IsDuplicateSelect()
         {
             return false;
         }
         protected virtual void ConfirmButton_Click(object sender, EventArgs e)
         {
-            //配置窗口所有选项是否配置完毕
+            
             if (IsOptionNotReady()) return;
-            //判断标准化字段是否重复选择
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
             this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
+
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
+            // 生成结果控件,relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
@@ -110,8 +113,10 @@ namespace Citta_T1.OperatorViews.Base
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
+            // 输出字段变化，重写BCP文件
+            // 单输出算子时oldOutName1为0数组,不影响逻辑
+            List<string> oldOutNames = this.oldOutName0.Concat(this.oldOutName1).ToList();
+            Global.GetOptionDao().DoOutputCompare(oldOutNames, this.selectedColumns, this.opControl.ID);
         }
 
         protected void SetTextBoxName(TextBox textBox)
@@ -176,6 +181,99 @@ namespace Citta_T1.OperatorViews.Base
         protected void GetSelectedItemIndex(object sender, EventArgs e)
         {
             (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+        }
+
+        //更新后续子图所有节点状态
+        protected void UpdateSubGraphStatus()
+        {
+            ElementStatus oldStatus = this.opControl.Status;
+            if (this.oldOptionDictStr != this.opControl.Option.ToString())
+                this.opControl.Status = ElementStatus.Ready;
+
+            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
+                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
+        }
+
+        protected void InitNewFactorControl(int count)
+        {
+            for (int line = 0; line < count; line++)
+            {
+                this.tableLayoutPanel1.RowCount++;
+                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
+                CreateLine(line);
+            }
+        }
+
+        protected virtual void CreateLine(int addLine)
+        { 
+        
+        }
+
+        protected void GroupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
+
+        protected Button NewDelButton(string name)
+        {
+            Button delButton = new Button();
+            delButton.FlatAppearance.BorderColor = SystemColors.Control;
+            delButton.FlatAppearance.BorderSize = 0;
+            delButton.FlatAppearance.MouseDownBackColor = SystemColors.Control;
+            delButton.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            delButton.FlatStyle = FlatStyle.Flat;
+            delButton.BackColor = SystemColors.Control;
+            delButton.UseVisualStyleBackColor = true;
+            delButton.BackgroundImage = Properties.Resources.div;
+            delButton.BackgroundImageLayout = ImageLayout.Center;
+            delButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            delButton.Name = name;
+            return delButton;
+        }
+
+        protected Button NewAddButton(string name)
+        {
+            Button addButton = NewDelButton(name);
+            addButton.BackgroundImage = Properties.Resources.add;
+            return addButton;
+        }
+
+        protected TextBox NewAliasTextBox()
+        {
+            TextBox textBox = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Text = "别名",
+                Font = new Font("微软雅黑", 9f, FontStyle.Regular),
+                ForeColor = SystemColors.ActiveCaption
+            };
+            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            textBox.Enter += AliasTextBox1_Enter;
+            textBox.Leave += AliasTextBox1_Leave;
+            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
+            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+            return textBox;
+        }
+
+        protected void AliasTextBox1_Enter(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == "别名")
+            {
+                TextBoxEx.Text = String.Empty;
+            }
+            TextBoxEx.ForeColor = Color.Black;
+        }
+
+        protected void AliasTextBox1_Leave(object sender, EventArgs e)
+        {
+            TextBox TextBoxEx = sender as TextBox;
+            if (TextBoxEx.Text == String.Empty)
+            {
+                TextBoxEx.Text = "别名";
+                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
+            }
         }
     }
 }

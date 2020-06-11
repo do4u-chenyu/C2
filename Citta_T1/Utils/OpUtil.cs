@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using NPOI.SS.Formula;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -192,11 +193,13 @@ namespace Citta_T1.Utils
             PointF location = new PointF();
             try
             {
+                if (point == "")
+                    return location;
                 string coordinate = Regex.Replace(point, @"[^\d,-]*", "");
                 string[] xy = coordinate.Split(',');
                 location = new PointF(Convert.ToSingle(xy[0]), Convert.ToSingle(xy[1]));
             }
-            catch (Exception e) { log.Error(e.Message); }
+            catch { }
             return location;
         }
         public static Point ToPointType(string point)

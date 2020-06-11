@@ -12,7 +12,7 @@ namespace Citta_T1.Business.Model
 {
     class ModelXmlWriter
     {
-        private XmlDocument doc;
+        private  readonly XmlDocument doc;
 
         public ModelXmlWriter(string nodeName, XmlDocument xmlDoc, XmlElement parent)
         {
@@ -54,9 +54,9 @@ namespace Citta_T1.Business.Model
     }
     class ModelXmlReader
     {
-        private XmlNode xn;
-        private Dictionary<string, string> dict;
-        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        private readonly XmlNode xn;
+        private readonly Dictionary<string, string> dict;
+        private static readonly LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public ModelXmlReader(XmlNode xmlNode)
         {
             xn = xmlNode;
@@ -64,15 +64,18 @@ namespace Citta_T1.Business.Model
         }
         public ModelXmlReader Read(string label)
         {
+            dict[label] = string.Empty;
             try
             {
-                string value = xn.SelectSingleNode(label).InnerText;
-                dict[label] = value;
+                XmlNode node = xn.SelectSingleNode(label);
+                if (node == null)
+                    return this;
+                dict[label] = node.InnerText;
 
             }
             catch (Exception e)
             {
-                log.Error("读取xml文件出错， error: " + e.Message);
+                log.Error("读取xml文件出错这里， error: " + e.Message);
             }
             return this;
         }
@@ -85,6 +88,12 @@ namespace Citta_T1.Business.Model
         {
             try
             {
+                if(String.IsNullOrEmpty(dict["start"])
+                    || String.IsNullOrEmpty(dict["end"])
+                    || String.IsNullOrEmpty(dict["startlocation"])
+                    || String.IsNullOrEmpty(dict["endlocation"])
+                    || String.IsNullOrEmpty(dict["endpin"]))
+                    return ModelRelation.Empty;
                 return new ModelRelation(Convert.ToInt32(dict["start"]),
                                          Convert.ToInt32(dict["end"]),
                                          OpUtil.ToPointFType(dict["startlocation"]),
@@ -102,12 +111,12 @@ namespace Citta_T1.Business.Model
 
     class DocumentSaveLoad
     {
-        private string modelPath;
-        private string modelFilePath;
-        private ModelDocument modelDocument;
-        private float screenFactor;
+        private readonly string modelPath;
+        private readonly string modelFilePath;
+        private readonly ModelDocument modelDocument;
+        private readonly float screenFactor;
 
-        private static LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
+        private static readonly LogUtil log = LogUtil.GetInstance("DocumentSaveLoad");
         public DocumentSaveLoad(ModelDocument model)
         {
             this.modelPath = model.SavePath;
@@ -207,12 +216,16 @@ namespace Citta_T1.Business.Model
         }
         private string GetXmlNodeInnerText(XmlNode node, string nodeName)
         {
-            string text = "";
+            string text = String.Empty;
             try
-            { text = node.SelectSingleNode(nodeName).InnerText; }
+            {
+                if (node.SelectSingleNode(nodeName)==null)
+                    return text;
+                text = node.SelectSingleNode(nodeName).InnerText;
+            }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("DocumentSaveLoad 读取InnerText: " + e.Message);
             }
             return text;
         }
@@ -226,10 +239,12 @@ namespace Citta_T1.Business.Model
                 XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
                 this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
+                if (rootNode == null || nodeLists == null)
+                    return;
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("DocumentSaveLoad 读取Xml: " + e.Message);
                 return;
             }
 
@@ -269,7 +284,7 @@ namespace Citta_T1.Business.Model
                     if (element == ModelElement.Empty)
                         continue;
                     this.modelDocument.ModelElements.Add(element);
-                    if (GetXmlNodeInnerText(xn, "type") != "Operator")
+                    if (type != "Operator")
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
                     ctl.Option = ReadOption(xn);
@@ -284,12 +299,15 @@ namespace Citta_T1.Business.Model
             OperatorOption option = new OperatorOption();
             try
             {
-                foreach (XmlNode node in xn.SelectSingleNode("option").ChildNodes)
-                    option.SetOption(node.Name, node.InnerText);
+                XmlNode node = xn.SelectSingleNode("option");
+                if (node == null)
+                    return option;
+                foreach (XmlNode child in node.ChildNodes)
+                    option.SetOption(child.Name, child.InnerText);
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                log.Error("读配置出错 ： " + e.Message);
                 option = new OperatorOption();
             }
             return option;

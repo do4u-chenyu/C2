@@ -23,7 +23,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.fixRadioButton = new System.Windows.Forms.RadioButton();
             this.fixSecondTextBox = new System.Windows.Forms.TextBox();
@@ -100,14 +99,8 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(5, 40);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 22);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "数据信息：";
             // 
             // label2
             // 
@@ -376,28 +369,6 @@
             this.MinimizeBox = false;
             this.Name = "CustomOperatorView";
             this.Text = "AI实践算子设置";
-            this.Controls.SetChildIndex(this.confirmButton, 0);
-            this.Controls.SetChildIndex(this.cancelButton, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.Controls.SetChildIndex(this.dataSourceTB1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.fixRadioButton, 0);
-            this.Controls.SetChildIndex(this.fixSecondTextBox, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.randomRadioButton, 0);
-            this.Controls.SetChildIndex(this.randomBeginTextBox, 0);
-            this.Controls.SetChildIndex(this.randomEndTextBox, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.Controls.SetChildIndex(this.outListCCBL1, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.rsFullFilePathTextBox, 0);
-            this.Controls.SetChildIndex(this.browseButton, 0);
-            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
-            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.outputFileEncodeSettingGroup.ResumeLayout(false);
             this.outputFileEncodeSettingGroup.PerformLayout();
             this.outputFileSeparatorSettingGroup.ResumeLayout(false);
@@ -408,8 +379,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton fixRadioButton;
         private System.Windows.Forms.TextBox fixSecondTextBox;

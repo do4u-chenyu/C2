@@ -139,51 +139,51 @@ namespace Citta_T1.Controls.Move.Op
             {
                 case "关联算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RelateOperatorHelpInfo);
-                    SetPictureBoxImage("releateOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.releateOp;
                     break;
                 case "碰撞算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CollideOperatorHelpInfo);
-                    SetPictureBoxImage("collideOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.collideOp;
                     break;
                 case "取并集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.UnionOperatorHelpInfo);
-                    SetPictureBoxImage("unionOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.unionOp;
                     break;
                 case "取差集":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DifferOperatorHelpInfo);
-                    SetPictureBoxImage("differOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.differOp;
                     break;
                 case "随机采样":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.RandomOperatorHelpInfo);
-                    SetPictureBoxImage("randomOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.randomOp;
                     break;
                 case "条件筛选":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FilterOperatorHelpInfo);
-                    SetPictureBoxImage("filterOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.filterOp;
                     break;
                 case "取最大值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MaxOperatorHelpInfo);
-                    SetPictureBoxImage("maxOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.maxOp;
                     break;
                 case "取最小值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.MinOperatorHelpInfo);
-                    SetPictureBoxImage("minOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.minOp;
                     break;
                 case "取平均值":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.AvgOperatorHelpInfo);
-                    SetPictureBoxImage("avgOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.avgOp;
                     break;
                 case "频率算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.FreqOperatorHelpInfo);
-                    SetPictureBoxImage("freqOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.freqOp;
                     break;
                 case "排序算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.SortOperatorHelpInfo);
-                    SetPictureBoxImage("sortOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.sortOp;
                     break;
                 case "分组算子":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.GroupOperatorHelpInfo);
-                    SetPictureBoxImage("groupOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.groupOp;
                     break;
                 case "AI实践":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.CustomOperator1HelpInfo);
@@ -196,11 +196,11 @@ namespace Citta_T1.Controls.Move.Op
                     break;
                 case "关键词过滤":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.KeyWordOperatorHelpInfo);
-                    SetPictureBoxImage("wordFilterOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.wordFilterOp;
                     break;
                 case "数据标准化":
                     this.helpToolTip.SetToolTip(this.rightPictureBox, HelpUtil.DataFormatOperatorHelpInfo);
-                    SetPictureBoxImage("dataStandarOp.png");
+                    this.leftPictureBox.Image = global::Citta_T1.Properties.Resources.dataStandarOp;
                     break;
                 default:
                     break;
@@ -691,7 +691,6 @@ namespace Citta_T1.Controls.Move.Op
                    new Size(mouseR, mouseR));
             CanvasPanel canvas = Global.GetCanvasPanel();
 
-            Graphics e = Global.GetCanvasPanel().CreateGraphics();
             foreach (Rectangle _leftPinRect in leftPinArray)
             {
                 int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
@@ -707,7 +706,6 @@ namespace Citta_T1.Controls.Move.Op
                         )
                     );
 
-                e.DrawRectangle(Pens.Black, leftPinRect);
                 int pinLeftX = leftPinRect.X;
                 int pinTopY = leftPinRect.Y;
 
@@ -728,7 +726,6 @@ namespace Citta_T1.Controls.Move.Op
                     }
                 }
             }
-            e.Dispose();
             if (!isRevised)
                 canvas.EndC = null;
             return revisedP;
@@ -807,16 +804,6 @@ namespace Citta_T1.Controls.Move.Op
             pen = new Pen(Color.DarkGray, 1f);
             double f = Math.Pow(factor, sizeLevel);
             DrawRoundRect((int)(4 * f), 0, this.Width - (int)(11 * f), this.Height - (int)(2 * f), (int)(3 * f));
-        }
-        private void SetPictureBoxImage(string picName)
-        {
-            string appPath = Application.StartupPath;
-            //仅当图片存在时才加载图片
-            if (System.IO.File.Exists(path: appPath + @"\res\opControl\" + picName))
-            {
-                Image img = Image.FromFile(filename: appPath + @"\res\opControl\" + picName);
-                this.leftPictureBox.Image = img;
-            }
         }
     }
 }

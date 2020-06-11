@@ -24,7 +24,6 @@
         private void InitializeComponent()
         {
             this.pythonChosenComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pyParamTextBox = new System.Windows.Forms.TextBox();
@@ -105,15 +104,8 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(45, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 22);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "数据信息：";
-            this.toolTip1.SetToolTip(this.label1, "数据源名称");
             // 
             // label2
             // 
@@ -566,22 +558,6 @@
             this.MinimizeBox = false;
             this.Name = "PythonOperatorView";
             this.Text = "Python算子设置";
-            this.Controls.SetChildIndex(this.confirmButton, 0);
-            this.Controls.SetChildIndex(this.cancelButton, 0);
-            this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.pyParamTextBox, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.pyFullFilePathTextBox, 0);
-            this.Controls.SetChildIndex(this.pyBrowseButton, 0);
-            this.Controls.SetChildIndex(this.previewCmdGroup, 0);
-            this.Controls.SetChildIndex(this.helpLabel, 0);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
-            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
-            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.previewCmdGroup.ResumeLayout(false);
             this.previewCmdGroup.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -600,7 +576,6 @@
 
         #endregion
         private System.Windows.Forms.ComboBox pythonChosenComboBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox pyParamTextBox;

@@ -798,7 +798,7 @@ namespace Citta_T1
             if (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN)
             {
                 if (keyData == Keys.Delete)
-                    this.canvasPanel.DeleteSelectedLines();
+                    this.canvasPanel.DeleteSelectedLinesByIndex();
                 if (keyData == (Keys.C | Keys.Control))
                     this.canvasPanel.ControlSelect_Copy();
                 if (keyData == (Keys.V | Keys.Control))

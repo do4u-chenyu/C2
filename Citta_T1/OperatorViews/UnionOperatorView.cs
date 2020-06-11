@@ -1,6 +1,4 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Business.Option;
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -36,21 +34,11 @@ namespace Citta_T1.OperatorViews
         }
         #endregion
         #region 配置信息的保存与加载
-        private void InitNewFactorControl(int count)
-        {
-            for (int line = 0; line < count; line++)
-            {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                CreateLine(line);
-            }
-        }
         protected override void SaveOption()
         {
             this.opControl.Option.OptionDict.Clear();
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "\t" + index02 + "\t" + this.textBox0.Text;
@@ -71,17 +59,12 @@ namespace Citta_T1.OperatorViews
                     this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
                 }
             }
-            this.opControl.Option.SetOption("outname", String.Join("\t", this.selectedColumns));
-            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked.ToString());
-            this.opControl.Option.SetOption("repetition", this.repetition.Checked.ToString());
+            this.opControl.Option.SetOption("outname", this.selectedColumns);
+            this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
+            this.opControl.Option.SetOption("repetition", this.repetition.Checked);
 
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
         private string OutColumnName(string name, string alias)
         {
@@ -120,11 +103,11 @@ namespace Citta_T1.OperatorViews
                 int[] itemsList1 = Array.ConvertAll<string, int>(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
 
-                Control control1 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 0];
+                Control control2 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
+                Control control3 = this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                Control control2 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 1];
                 control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                Control control3 = (Control)this.tableLayoutPanel1.Controls[(i - 2) * 5 + 2];
                 control3.Text = factorList1[2];
                 control1.Tag = itemsList1[0].ToString();
                 control2.Tag = itemsList1[1].ToString();
@@ -134,29 +117,8 @@ namespace Citta_T1.OperatorViews
 
 
         #endregion
-        #region 添加取消
-        protected override void ConfirmButton_Click(object sender, EventArgs e)
-        {
-            bool empty = HasEmptyOption();
-            if (empty) return;
-            if (IsRepetitionCondition()) return;
-            SaveOption();
-            this.DialogResult = DialogResult.OK;
-            //内容修改，引起文档dirty
-
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                Global.GetMainForm().SetDocumentDirty();
-            //生成结果控件,创建relation,bcp结果文件
-            ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            if (resultElement == ModelElement.Empty)
-            {
-                MoveRsControlFactory.GetInstance().CreateNewMoveRsControl(this.opControl, this.selectedColumns);
-                return;
-            }
-            //输出变化，重写BCP文件
-            Global.GetOptionDao().DoOutputCompare(this.oldOutName0, this.selectedColumns, this.opControl.ID);
-        }
-        private bool IsRepetitionCondition()
+        #region 判断是否配置完毕
+        protected override bool IsDuplicateSelect()
         {
             bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
@@ -186,9 +148,9 @@ namespace Citta_T1.OperatorViews
             }
             return repetition;
         }
-        private bool HasEmptyOption()
+        protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             List<string> types = new List<string>();
             types.Add(this.comboBox0.GetType().Name);
             types.Add(this.textBox0.GetType().Name);
@@ -197,7 +159,7 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    return !empty;
+                    return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
@@ -205,16 +167,15 @@ namespace Citta_T1.OperatorViews
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
                 {
                     MessageBox.Show("请填写过滤条件");
-                    return !empty;
+                    return notReady;
                 }
             }
-            return empty;
+            return !notReady;
         }
         #endregion
-        private void CreateLine(int addLine)
+        protected override void CreateLine(int addLine)
         {
             // 添加控件
-
             ComboBox dataBox = new ComboBox();
             dataBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             dataBox.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -239,49 +200,19 @@ namespace Citta_T1.OperatorViews
             filterBox.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             this.tableLayoutPanel1.Controls.Add(filterBox, 1, addLine);
 
-            TextBox textBox = new TextBox();
-            textBox.Text = "别名";
-            textBox.Font = new Font("微软雅黑", 9f, FontStyle.Regular);
-            textBox.ForeColor = SystemColors.ActiveCaption;
-            textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            textBox.Enter += TextBoxEx1_Enter;
-            textBox.Leave += TextBoxEx1_Leave;
-            textBox.Leave += new System.EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.IsIllegalCharacter);
+            TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
 
-            Button addButton1 = new Button();
-            addButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.BorderSize = 0;
-            addButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            addButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            addButton1.BackColor = System.Drawing.SystemColors.Control;
-            addButton1.BackgroundImage = global::Citta_T1.Properties.Resources.add;
-            addButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            addButton1.Click += new System.EventHandler(this.AddButton1_Click);
-            addButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            addButton1.Name = addLine.ToString();
-            addButton1.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel1.Controls.Add(addButton1, 3, addLine);
+            Button addButton = NewAddButton(addLine.ToString());
+            addButton.Click += new EventHandler(this.Add_Click);
+            this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
 
-            Button delButton1 = new Button();
-            delButton1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.BorderSize = 0;
-            delButton1.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            delButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            delButton1.BackColor = System.Drawing.SystemColors.Control;
-            delButton1.UseVisualStyleBackColor = true;
-            delButton1.BackgroundImage = global::Citta_T1.Properties.Resources.div;
-            delButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            delButton1.Click += new System.EventHandler(this.DelButton1_Click);
-            delButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            delButton1.Name = addLine.ToString();
-            this.tableLayoutPanel1.Controls.Add(delButton1, 4, addLine);
+            Button delButton = NewDelButton(addLine.ToString());
+            delButton.Click += new EventHandler(this.Del_Click);
+            this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
 
-        private void AddButton1_Click(object sender, EventArgs e)
+        private void Add_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int addLine;
@@ -289,7 +220,7 @@ namespace Citta_T1.OperatorViews
             {
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 addLine = 0;
                 CreateLine(addLine);
             }
@@ -302,8 +233,7 @@ namespace Citta_T1.OperatorViews
 
                 this.tableLayoutPanel1.RowCount++;
                 this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
-                this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40));
+                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
                 for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
                 {
                     Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
@@ -324,7 +254,7 @@ namespace Citta_T1.OperatorViews
 
         }
 
-        private void DelButton1_Click(object sender, EventArgs e)
+        private void Del_Click(object sender, EventArgs e)
         {
             Button tmp = (Button)sender;
             int delLine = int.Parse(tmp.Name);
@@ -362,32 +292,6 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.RowCount -= 1;
 
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
         }
-        private void GroupBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-        }
-
-        private void TextBoxEx1_Enter(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == "别名")
-            {
-                TextBoxEx.Text = String.Empty;
-            }
-            TextBoxEx.ForeColor = Color.Black;
-        }
-
-        private void TextBoxEx1_Leave(object sender, EventArgs e)
-        {
-            TextBox TextBoxEx = sender as TextBox;
-            if (TextBoxEx.Text == String.Empty)
-            {
-                TextBoxEx.Text = "别名";
-                TextBoxEx.ForeColor = SystemColors.ActiveCaption;
-            }
-        }
-
     }
 }

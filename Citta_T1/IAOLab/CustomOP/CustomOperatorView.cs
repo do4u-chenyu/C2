@@ -48,8 +48,7 @@ namespace Citta_T1.OperatorViews
             // 初始化左右表数据源配置信息
             this.InitDataSource();
             // 窗体自定义的初始化逻辑
-            this.opControl.Option.SetOption("columnname0", String.Join("\t", this.opControl.FirstDataSourceColumns));
-            this.opControl.Option.SetOption("columnname1", String.Join("\t", this.opControl.SecondDataSourceColumns));
+           
 
             this.outListCCBL0.Items.AddRange(nowColumnsName0);
             this.outListCCBL1.Items.AddRange(nowColumnsName1);
@@ -60,21 +59,18 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked.ToString());
-            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked.ToString());
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
+            this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
+            this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
+            this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
             this.opControl.Option.SetOption("fixSecond", this.fixSecondTextBox.Text);
             this.opControl.Option.SetOption("randomBegin", this.randomBeginTextBox.Text);
             this.opControl.Option.SetOption("randomEnd", this.randomEndTextBox.Text);
             this.opControl.Option.SetOption("path", this.rsFullFilePathTextBox.Text);
-
-            string outField = string.Join("\t", this.outListCCBL0.GetItemCheckIndex());
-            this.opControl.Option.SetOption("outfield0", outField);
-
-
-            if (this.Text != "AI实践算子设置")
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
+            if (opControl.OperatorDimension() == 2)
             {               
-                string outField1 = string.Join("\t", this.outListCCBL1.GetItemCheckIndex());
-                this.opControl.Option.SetOption("outfield1", outField1);
+                this.opControl.Option.SetOption("outfield1", outListCCBL1.GetItemCheckIndex());
             }
 
             string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
@@ -83,30 +79,26 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
 
-
-            ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr != this.opControl.Option.ToString())
-                this.opControl.Status = ElementStatus.Ready;
-
-            if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
-                Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
-
+            //更新子图所有节点状态
+            UpdateSubGraphStatus();
         }
 
         private void LoadOption()
         {
-            if (this.opControl.Option.GetOption("fix") != String.Empty)
-                this.fixRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("fix"));
-            if (this.opControl.Option.GetOption("random") != String.Empty)
-                this.randomRadioButton.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("random"));
-            if (this.opControl.Option.GetOption("fixSecond") != String.Empty)
-                this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
-            if (this.opControl.Option.GetOption("randomBegin") != String.Empty)
-                this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
-            if (this.opControl.Option.GetOption("randomEnd") != String.Empty)
-                this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
-            if (this.opControl.Option.GetOption("path") != String.Empty)
-                this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
+
+
+            if (this.Text == "AI实践算子设置" && Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
+                return;
+            if (this.Text == "多源算子设置" && Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+                return;
+
+            this.fixRadioButton.Checked = Convert.ToBoolean(opControl.Option.GetOption("fix", "True"));
+            this.randomRadioButton.Checked = Convert.ToBoolean(opControl.Option.GetOption("random", "False"));
+            this.fixSecondTextBox.Text = this.opControl.Option.GetOption("fixSecond");
+            this.randomBeginTextBox.Text = this.opControl.Option.GetOption("randomBegin");
+            this.randomEndTextBox.Text = this.opControl.Option.GetOption("randomEnd");
+            this.rsFullFilePathTextBox.Text = this.opControl.Option.GetOption("path");
+
 
             int[] outIndexs = new int[] { };
             if (this.opControl.Option.GetOption("outfield0") != String.Empty)
@@ -127,7 +119,7 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = outIndexs1.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
-                    this.oldOutName0.Add(this.outListCCBL1.Items[i].ToString());
+                    this.oldOutName1.Add(this.outListCCBL1.Items[i].ToString());
             }
 
 
@@ -141,8 +133,7 @@ namespace Citta_T1.OperatorViews
         #region 添加取消
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
-            bool empty = IsOptionReady();
-            if (empty) return;
+            if (IsOptionNotReady()) return;
 
             this.DialogResult = DialogResult.OK;
 
@@ -182,9 +173,9 @@ namespace Citta_T1.OperatorViews
             BCPBuffer.GetInstance().SetDirty(this.rsFullFilePathTextBox.Text);
         }
 
-        private bool IsOptionReady()
+        protected override bool IsOptionNotReady()
         {
-            bool empty = false;
+            bool notReady = true;
             if (this.dataSourceTB0.Text == "") return true;
             if (opControl.OperatorDimension() == 2 && this.dataSourceTB1.Text == "") return true;
 
@@ -194,40 +185,35 @@ namespace Citta_T1.OperatorViews
                     MessageBox.Show("请选择左侧文件输出字段");
                 else
                     MessageBox.Show("请选择文件输出字段");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             if (opControl.OperatorDimension() == 2 && this.outListCCBL1.GetItemCheckIndex().Count == 0)
             {
                 MessageBox.Show("请选择右侧文件输出字段");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             if (this.rsFullFilePathTextBox.Text == "")
             {
                 MessageBox.Show("请选择结果文件路径");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
             //有任一框中非数字
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
-                empty = true;
-                return empty;
+                return notReady;
             }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
                 MessageBox.Show("未输入其他类型分隔符内容");
-                empty = true;
-                return empty;
+                return notReady;
             }
 
-            return empty;
+            return !notReady;
         }
         #endregion
 

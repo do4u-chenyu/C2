@@ -35,8 +35,55 @@ namespace Citta_T1.OperatorViews.Base
             this.outListCCBL1 = new Citta_T1.Controls.Common.ComCheckBoxList();
             this.comboBox0 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.topPanel = new System.Windows.Forms.Panel();
+            this.bottomPanel = new System.Windows.Forms.Panel();
+            this.keyPanel = new System.Windows.Forms.Panel();
+            this.valuePanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.bottomPanel.SuspendLayout();
+            this.keyPanel.SuspendLayout();
+            this.valuePanel.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // topPanel
+            // 
+            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topPanel.Location = new System.Drawing.Point(0, 0);
+            this.topPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.topPanel.Name = "topPanel";
+            this.topPanel.Size = new System.Drawing.Size(0, 0);
+            this.topPanel.TabIndex = 0;
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.cancelButton);
+            this.bottomPanel.Controls.Add(this.confirmButton);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 152);
+            this.bottomPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(0, 0);
+            this.bottomPanel.TabIndex = 1;
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.keyPanel.Location = new System.Drawing.Point(0, 18);
+            this.keyPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.keyPanel.Name = "keyPanel";
+            this.keyPanel.Size = new System.Drawing.Size(0, 0);
+            this.keyPanel.TabIndex = 2;
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.valuePanel.Location = new System.Drawing.Point(116, 18);
+            this.valuePanel.Margin = new System.Windows.Forms.Padding(2);
+            this.valuePanel.Name = "valuePanel";
+            this.valuePanel.Size = new System.Drawing.Size(0, 0);
+            this.valuePanel.TabIndex = 3;
             // 
             // cancelButton
             // 
@@ -143,6 +190,25 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(32, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 0);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "数据信息：";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 0);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
             // BaseOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -154,6 +220,11 @@ namespace Citta_T1.OperatorViews.Base
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BaseOperatorView";
+            this.bottomPanel.ResumeLayout(false);
+            this.keyPanel.ResumeLayout(false);
+            this.keyPanel.PerformLayout();
+            this.valuePanel.ResumeLayout(false);
+            this.valuePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -169,5 +240,13 @@ namespace Citta_T1.OperatorViews.Base
         protected System.Windows.Forms.ComboBox comboBox0;    // 左侧第一行条件选择框
         protected System.Windows.Forms.ComboBox comboBox1;    // 右侧第一行条件选择框
         protected System.ComponentModel.IContainer components;
+
+        protected System.Windows.Forms.Panel topPanel;        // 顶部面板，控制留白用 
+        protected System.Windows.Forms.Panel bottomPanel;     // 底部面板，放置确认，取消两个按钮 
+        protected System.Windows.Forms.Panel keyPanel;        // 左侧面板，放置输入框提示label
+        protected System.Windows.Forms.Panel valuePanel;      // 右侧面板，放置各种选项输入框
+
+        protected System.Windows.Forms.Label label1;          // 数据源提示label
+        protected System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;  // 输入框所在的动态布局layout控件
     }
 }
