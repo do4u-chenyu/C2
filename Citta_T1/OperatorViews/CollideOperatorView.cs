@@ -85,6 +85,7 @@ namespace Citta_T1.OperatorViews
             if (count < 1)  // 只有factor1的情况
                 return;
             InitNewFactorControl(count);
+
             for (int i = 0; i < count; i++)
             {
                 string name = "factor" + (i + 2).ToString();

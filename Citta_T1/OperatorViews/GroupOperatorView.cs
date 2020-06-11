@@ -56,15 +56,15 @@ namespace Citta_T1.OperatorViews
             this.comboBox0.Tag = index.ToString();
 
 
-            int count = this.opControl.Option.KeysCount("factor");
-            if (count <= 1)
+            int count = this.opControl.Option.KeysCount("factor") - 1;
+            if (count < 1)
                 return;
-            InitNewFactorControl(count - 1);
-            for (int i = 2; i < (count + 1); i++)
+            InitNewFactorControl(count);
+            for (int i = 0; i < count; i++)
             {
-                string name = "factor" + i.ToString();
+                string name = "factor" + (i + 2).ToString();
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
-                Control control1 = this.tableLayoutPanel1.Controls[(i - 2) * 3 + 0];
+                Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
                 control1.Text = (control1 as ComboBox).Items[num].ToString();
                 control1.Tag = num.ToString();
             }
