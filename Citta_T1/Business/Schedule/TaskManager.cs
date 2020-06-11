@@ -120,6 +120,7 @@ namespace Citta_T1.Business.Schedule
             {
                 if (triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
                 triple.OperateElement.Status = ElementStatus.Ready;
+                triple.ResultElement.Status = ElementStatus.Null;
             }
         }
 
