@@ -107,7 +107,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (!String.IsNullOrEmpty(factor)) continue;
+                if (String.IsNullOrEmpty(factor)) continue;
                 int[] optionItems1 = Array.ConvertAll(factor.Split('\t'), int.Parse);
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
