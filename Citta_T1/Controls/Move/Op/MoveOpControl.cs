@@ -464,6 +464,14 @@ namespace Citta_T1.Controls.Move.Op
             Global.GetMainForm().UpdateRunbuttonImageInfo();
         }
 
+        private void PushUndoStackWhenDel()
+        {
+            /*
+             * 保存自己的element
+             * 保存所连接的关系，具体是{"startCID": [], "endCID": []}
+             * 保存所连接的10
+             */
+        }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
@@ -473,18 +481,19 @@ namespace Citta_T1.Controls.Move.Op
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
             foreach (ModelRelation mr in modelRelations)
             {
-
+                // 删结果算子
                 if (mr.StartID == this.ID)
                 {
                     DeleteResultControl(mr.EndID, modelRelations);
 
                 }
+                // 如果是上游Dt算子出来只有一根线则改变Dt的Pin状态
                 if ((mr.EndID == this.ID) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
                 {
                     ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
                     (me.InnerControl as IMoveControl).OutPinInit("noLine");
                 }
-
+                // 删关系
                 if (mr.StartID == this.ID || mr.EndID == this.ID)
                 {
                     Global.GetCurrentDocument().RemoveModelRelation(mr);
@@ -501,6 +510,12 @@ namespace Citta_T1.Controls.Move.Op
         public void UndoRedoDeleteElement()
         {
             //TODO undo,redo时关系处理
+            /*
+             * 1. 删自身
+             * 2. 删与之相连的关系
+             * 3. 删与之相连的结果控件
+             * 4. 改变其他控件的Pin状态
+             */
             DeleteMyself();
         }
 
@@ -516,6 +531,12 @@ namespace Citta_T1.Controls.Move.Op
         public void UndoRedoAddElement(ModelElement me)
         {
             //TODO undo,redo时关系处理
+            /*
+             * 1. 恢复自身
+             * 2. 恢复与之相连的关系
+             * 3. 恢复与之相连的结果控件
+             * 4. 改变其他控件的Pin状态
+             */
             Global.GetCanvasPanel().AddElement(this);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
@@ -523,7 +544,9 @@ namespace Citta_T1.Controls.Move.Op
         }
         private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
+            // 改状态
             Global.GetCurrentDocument().StatusChangeWhenDeleteControl(endID);
+            // 删除关系
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == endID || mr.EndID == endID)
@@ -533,6 +556,7 @@ namespace Citta_T1.Controls.Move.Op
                 }
             }
             List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentDocument().ModelElements);
+            // 删除与之相连的结果算子
             foreach (ModelElement mrc in modelElements)
             {
                 if (mrc.ID == endID)
