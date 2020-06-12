@@ -6,6 +6,7 @@ using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 
 namespace Citta_T1.Business.Schedule.Cmd
@@ -99,28 +100,13 @@ namespace Citta_T1.Business.Schedule.Cmd
             this.separators = new List<string>();
             foreach (ModelElement me in triple.DataElements)
             {
-                if (me.Type == ElementType.DataSource)
-                {
-                    separators.Add(me.Separator.ToString());
-                }
-                else
-                {
-                    separators.Add("\t");
-                }
+                separators.Add(me.Type == ElementType.DataSource ? me.Separator.ToString() : "\t");
             }
         }
 
         public string TransOFSToCmd(string separator)
         {
-            if (separator == "|")
-            {
-                return "\t";
-            }
-            else
-            {
-                return "|";
-            }
-
+            return separator == "|" ? "\t" : "|" ;
         }
 
         public string TransChoiceToCmd(string choice)
@@ -133,8 +119,8 @@ namespace Citta_T1.Business.Schedule.Cmd
                 case "3": return ">=";
                 case "4": return "<=";
                 case "5": return "!=";
+                default: return "=="; //设一个参数越界的默认值，除非用户自己修改xml文件，一般不会进来
             }
-            return "无该选项";
         }
 
         public string TransAndOrToCmd(string choice)
@@ -143,8 +129,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 case "0": return "&&";
                 case "1": return "||";
+                default: return "&&"; //设一个参数越界的默认值，除非用户自己修改xml文件，一般不会进来
             }
-            return "and、or无该选项";
         }
 
         public string TransInputLine(string optionLine)
@@ -203,16 +189,13 @@ namespace Citta_T1.Business.Schedule.Cmd
             {
                 return string.Format("sbin\\cat_xls.exe {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
             }
+            else if (JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
+            {
+                return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
+            }
             else
             {
-                if (JudgeInputFileEncoding(inputFile) == OpUtil.Encoding.GBK)
-                {
-                    return string.Format("sbin\\tail.exe -n +2  {0} | sbin\\iconv.exe -f gbk -t utf-8 -c | sbin\\tr.exe -d '\\r' ", inputFile);
-                }
-                else
-                {
-                    return string.Format("sbin\\tail.exe -n +2 {0} | sbin\\tr.exe -d '\\r' ", inputFile);
-                }
+                return string.Format("sbin\\tail.exe -n +2 {0} | sbin\\tr.exe -d '\\r' ", inputFile);
             }
         }
 
