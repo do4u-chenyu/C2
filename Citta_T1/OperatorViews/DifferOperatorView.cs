@@ -14,10 +14,24 @@ namespace Citta_T1.OperatorViews
         public DifferOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            InitializeComponentManual();
             InitByDataSource();
             LoadOption();
         }
+        // 为了兼顾设计器，一些控件需要手工初始化。
+        private void InitializeComponentManual()
+        {
+            this.button1.Click += new EventHandler(this.Add_Click);
 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+        }
         #region 初始化配置
         private void InitByDataSource()
         {

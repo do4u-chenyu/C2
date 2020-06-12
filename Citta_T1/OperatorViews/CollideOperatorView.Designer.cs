@@ -106,6 +106,7 @@
             // 
             // label1
             // 
+            this.label1.Location = new System.Drawing.Point(32, 2);
             this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // label3

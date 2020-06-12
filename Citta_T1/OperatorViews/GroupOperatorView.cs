@@ -16,11 +16,25 @@ namespace Citta_T1.OperatorViews
         public GroupOperatorView(MoveOpControl opControl) : base(opControl)
         {
             this.groupColumn = new List<int>();
-
             InitializeComponent();
+            InitializeComponentManual();
             InitByDataSource();
             LoadOption();
         }
+
+        // 为了兼顾设计器，一些控件需要手工初始化。
+        private void InitializeComponentManual()
+        {
+            this.button1.Click += new EventHandler(this.Add_Click);
+
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(209, 85);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+        }
+
         #region 初始化配置
         private void InitByDataSource()
         {

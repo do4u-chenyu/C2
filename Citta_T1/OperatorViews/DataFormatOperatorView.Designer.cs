@@ -33,7 +33,6 @@
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB0
@@ -44,35 +43,21 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(459, 11);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(358, 11);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(44, 4);
+            this.comboBox0.Location = new System.Drawing.Point(44, 3);
             this.comboBox0.Size = new System.Drawing.Size(116, 25);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(32, 59);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 22);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "添加条件：";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // topPanel
             // 
@@ -89,6 +74,8 @@
             this.keyPanel.Controls.Add(this.label1);
             this.keyPanel.Location = new System.Drawing.Point(0, 21);
             this.keyPanel.Size = new System.Drawing.Size(116, 250);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
             // 
             // valuePanel
             // 
@@ -97,25 +84,25 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Size = new System.Drawing.Size(413, 250);
+            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
-            // tableLayoutPanel2
+            // label1
             // 
-            this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox0, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox0, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 54);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 32);
-            this.tableLayoutPanel2.TabIndex = 6;
+            this.label1.Location = new System.Drawing.Point(32, 1);
+            this.label1.Size = new System.Drawing.Size(90, 22);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(32, 59);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 22);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "添加条件：";
             // 
             // button1
             // 
@@ -133,7 +120,6 @@
             this.button1.Size = new System.Drawing.Size(34, 24);
             this.button1.TabIndex = 5;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Add_Click);
             // 
             // textBox0
             // 
@@ -161,22 +147,34 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(4, 87);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(405, 160);
             this.panel1.TabIndex = 1;
             // 
-            // tableLayoutPanel1
+            // tableLayoutPanel2
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(358, 85);
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.comboBox0, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBox0, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 54);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 32);
+            this.tableLayoutPanel2.TabIndex = 6;
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.label3, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.textBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // DataFormatOperatorView
             // 
@@ -196,7 +194,6 @@
             this.valuePanel.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
