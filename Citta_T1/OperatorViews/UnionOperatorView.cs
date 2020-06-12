@@ -30,6 +30,8 @@ namespace Citta_T1.OperatorViews
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
+            // 利用Paint方式groupBox1附近的虚线留白
+            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
 
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));

@@ -26,6 +26,10 @@ namespace Citta_T1.OperatorViews
         private void InitializeComponentManual()
         {
             this.button1.Click += new EventHandler(this.Add_Click);
+            // 利用Paint方式groupBox附近的虚线留白
+            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
 
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));

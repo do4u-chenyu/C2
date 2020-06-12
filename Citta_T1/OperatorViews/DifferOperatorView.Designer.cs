@@ -61,7 +61,6 @@
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
             this.outListCCBL0.Size = new System.Drawing.Size(112, 21);
             this.outListCCBL0.TabIndex = 8;
