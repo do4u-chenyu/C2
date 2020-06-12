@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule
         private List<int> haveSearchedNodes;//已经找过的节点，如果在里面，不需要再找了
         public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
 
-        public TripleListGen(ModelDocument currentModel,string state,ModelElement stopElement = null)
+        public TripleListGen(ModelDocument currentModel,string state,ModelElement stopElement)
         {
             this.currentModel = currentModel;
             this.stopElement = stopElement;
