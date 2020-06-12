@@ -217,11 +217,11 @@ namespace Citta_T1.Controls
             // 遍历一遍之后如果没有被校正，则this.endC=null
             foreach (ModelElement modelEle in Global.GetCurrentDocument().ModelElements)
             {
-                Control con = modelEle.InnerControl;
+                MoveBaseControl con = modelEle.InnerControl;
                 if (modelEle.Type == ElementType.Operator && con != startC)
                 {
                     // 修正坐标
-                    nowP = (con as IMoveControl).RevisePointLoc(nowP);
+                    nowP = con.RevisePointLoc(nowP);
                     // 完成一次矫正
                     if (this.endC != null)
                         break;
@@ -276,16 +276,15 @@ namespace Citta_T1.Controls
 
             // 画线落点处理
             /* 
-                * 在Canvas_MouseMove的时候，对鼠标的终点进行
-                * 只保存线索引
-                *         __________
-                * endP1  | MControl | startP
-                * endP2  |          |
-                *         ----------
-                */
-            // ElementType sEleType = sender is MoveDtControl ? ElementType.DataSource : ElementType.Result;
-            //this.AddNewRelationByCtr(startC, endC, sEleType);
-            this.AddNewRelationByCtr(startC, endC);
+             * 在Canvas_MouseMove的时候，对鼠标的终点进行
+             * 只保存线索引
+             *         __________
+             * endP1  | MControl | startP
+             * endP2  |          |
+             *         ----------
+             */
+            int endPinIndex = (endC as MoveOpControl).RevisedPinIndex;
+            this.AddNewRelationByCtr(startC, endC, endPinIndex);
         }
 
         private bool IsValidModelRelation(ModelRelation mr)
@@ -398,7 +397,7 @@ namespace Citta_T1.Controls
             if (mr != null)
                 this.DeleteRelation(mr); 
         }
-        private void DeleteRelation(ModelRelation mr)
+        public void DeleteRelation(ModelRelation mr)
         {
             try
             {
@@ -426,22 +425,16 @@ namespace Citta_T1.Controls
             MoveBaseControl endC = doc.SearchElementByID(endCID).InnerControl;
             this.AddNewRelationByCtr(startC, endC, pinIndex);
         }
-        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC, int pinIndex=-1)
+        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC, int endPinIndex)
         {
-            PointF startP;
-            if (startC is MoveDtControl)
-                startP = (startC as MoveDtControl).GetEndPinLoc(0);
-            else if (startC is MoveRsControl)
-                startP = (startC as MoveRsControl).GetEndPinLoc(0);
-            else
-                return;
+            PointF startP = startC.GetEndPinLoc(0);
 
             ModelRelation mr = new ModelRelation(
                 startC.ID,
                 endC.ID,
                 startP,
-                (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                pinIndex > 0 ? pinIndex : (endC as MoveOpControl).RevisedPinIndex
+                endC.GetEndPinLoc(endPinIndex),
+                endPinIndex
                 );
             // 1. 关系不能重复
             // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
@@ -453,6 +446,8 @@ namespace Citta_T1.Controls
             if (!isDuplicatedRelation && !isCyclic)
             {
                 cd.AddModelRelation(mr);
+                // 针脚状态要改变
+
                 Global.GetMainForm().SetDocumentDirty();
                 //endC右键菜单设置Enable                     
                 Global.GetOptionDao().EnableOpOptionView(mr);
@@ -594,13 +589,26 @@ namespace Citta_T1.Controls
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
         #endregion
-
-        public void DeleteElement(Control ctl)
+        public void DeleteEle(ModelElement me)
+        {
+            this.DeleteCtr(me.InnerControl);
+            Global.GetCurrentDocument().DeleteModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+        }
+        public void AddEle(ModelElement me)
+        {
+            this.AddCtr(me.InnerControl);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+        }
+        public void DeleteCtr(Control ctl)
         {
             this.Controls.Remove(ctl);
         }
 
-        public void AddElement(Control ctl)
+        public void AddCtr(Control ctl)
         {
             this.Controls.Add(ctl);
         }

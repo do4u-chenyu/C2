@@ -70,6 +70,7 @@ namespace Citta_T1.Business.Model
         {
             this.ModelElements.Add(modelElement);
         }
+
         public void AddModelRelation(ModelRelation mr)
         {
             this.ModelRelations.Add(mr);
@@ -119,7 +120,8 @@ namespace Citta_T1.Business.Model
             if (me == ModelElement.Empty)
                 return;
             me.Status = ElementStatus.Null;
-            (me.InnerControl as MoveOpControl).EnableOption = false;
+            if (me.InnerControl is MoveOpControl)
+                (me.InnerControl as MoveOpControl).EnableOption = false;
             DegradeChildrenStatus(me.ID);
         }
         public void DegradeChildrenStatus(int opID)
@@ -225,8 +227,8 @@ namespace Citta_T1.Business.Model
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
                     // 坐标更新
-                    mr.StartP = (sEle.InnerControl as IMoveControl).GetStartPinLoc(0);
-                    mr.EndP = (eEle.InnerControl as IMoveControl).GetEndPinLoc(mr.EndPin);
+                    mr.StartP = sEle.InnerControl.GetStartPinLoc(0);
+                    mr.EndP = eEle.InnerControl.GetEndPinLoc(mr.EndPin);
                     // 引脚更新
                     (sEle.InnerControl as IMoveControl).OutPinInit("lineExit");
                     (eEle.InnerControl as IMoveControl).RectInAdd(mr.EndPin);

@@ -61,45 +61,50 @@ namespace Citta_T1.Controls.Move.Dt
         {
             if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
-            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(this.ID);
-            List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
+            this.DeleteMyself();
+        }
+
+        private void DeleteMyself()
+        {
+            CanvasPanel cp = Global.GetCanvasPanel();
+            ModelDocument doc = Global.GetCurrentDocument();
+
+            // 状态改变
+            doc.StatusChangeWhenDeleteControl(this.ID);
+            // 删关系 重置针脚状态
+            List<ModelRelation> modelRelations = new List<ModelRelation>(doc.ModelRelations);
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == this.ID)
                 {
-                    ModelDocument doc = Global.GetCurrentDocument();
-                    doc.RemoveModelRelation(mr);
-                    Control lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
-                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
-                    Global.GetCanvasPanel().Invalidate();
+                    cp.DeleteRelation(mr);
+                    relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 }
             }
-            ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
-            DeleteMyself();
+            cp.Invalidate();
+            ModelElement me = doc.SearchElementByID(ID);
+            ICommand cmd = new ElementDeleteCommand(me, relations);
+            UndoRedoManager.GetInstance().PushCommand(doc, cmd);
+            // 删控件
+            cp.DeleteEle(me);
         }
 
-        public void UndoRedoDeleteElement()
+        public void UndoRedoDeleteElement(List<Tuple<int, int, int>> relations)
         {
             //TODO undo,redo元素时关系的处理
             /*
              * 1. 删自身
              * 2. 删与之相连的关系
-             * 3. 改变其他控件的Pin状态
+             * 3. 改变其他控件的Pin状态 TODO
              */
-            DeleteMyself();
-            
+            CanvasPanel cp = Global.GetCanvasPanel();
+            cp.DeleteEle(Global.GetCurrentDocument().SearchElementByID(ID));
+            foreach (Tuple<int, int, int> rel in relations)
+                cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
         }
-
-        private void DeleteMyself()
-        {
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetCurrentDocument().DeleteModelElement(this);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
-        }
-
-        public void UndoRedoAddElement(ModelElement me)
+        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations)
         {
             //TODO undo,redo元素时关系的处理
             /*
@@ -107,11 +112,12 @@ namespace Citta_T1.Controls.Move.Dt
              * 2. 恢复删除的关系
              * 3. 更新其他控件Pin状态
              */
-            Global.GetCanvasPanel().AddElement(this);
-            Global.GetCurrentDocument().AddModelElement(me);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
+            CanvasPanel cp = Global.GetCanvasPanel();
+            cp.DeleteEle(Global.GetCurrentDocument().SearchElementByID(ID));
+            foreach (Tuple<int, int, int> rel in relations)
+                cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
         }
+
         #endregion
 
         #region 新方法
@@ -355,22 +361,12 @@ namespace Citta_T1.Controls.Move.Dt
         #endregion
 
         #region 接口实现
-        public PointF RevisePointLoc(PointF p)
+        public override PointF RevisePointLoc(PointF p)
         {
             // 不存在连DtControl 的 LeftPin的情况
             return p;
         }
-        public PointF GetEndPinLoc(int pinIndex)
-        {
-            // 不应该被调用
-            return new PointF(0, 0);
-        }
-        public PointF GetStartPinLoc(int pinIndex)
-        {
-            return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
-                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
-        }
+
         #endregion
         private void MoveDtControl_Paint(object sender, PaintEventArgs e)
         {

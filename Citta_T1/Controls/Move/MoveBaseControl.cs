@@ -279,5 +279,19 @@ namespace Citta_T1.Controls.Move
         protected virtual void ResizeControl(int txtWidth, Size controlSize)
         {
         }
+        public virtual PointF GetEndPinLoc(int pinIndex)
+        {
+            return new PointF(0, 0);
+        }
+        public virtual PointF GetStartPinLoc(int pinIndex)
+        {
+            return new PointF(
+                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
+                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
+        }
+        public virtual PointF RevisePointLoc(PointF p)
+        {
+            return p;
+        }
     }
 }

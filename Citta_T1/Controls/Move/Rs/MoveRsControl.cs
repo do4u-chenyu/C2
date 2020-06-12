@@ -384,18 +384,12 @@ namespace Citta_T1.Controls.Move.Rs
 
         #region IMoveControl接口
         // 修正坐标
-        public PointF RevisePointLoc(PointF p)
+        public override PointF RevisePointLoc(PointF p)
         {
             return p;
         }
 
-        public PointF GetStartPinLoc(int pinIndex)
-        {
-            return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
-                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
-        }
-        public PointF GetEndPinLoc(int pinIndex)
+        public override PointF GetEndPinLoc(int pinIndex)
         {
             return new PointF(
                 this.Location.X + this.RectIn.Location.X + this.RectIn.Width / 2,
@@ -469,6 +463,33 @@ namespace Citta_T1.Controls.Move.Rs
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+        private void DeleteMyself()
+        {
+            CanvasPanel cp = Global.GetCanvasPanel();
+            ModelDocument doc = Global.GetCurrentDocument();
+
+            // 状态改变
+            doc.StatusChangeWhenDeleteControl(this.ID);
+            // 删关系 重置针脚状态
+            List<ModelRelation> modelRelations = new List<ModelRelation>(doc.ModelRelations);
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+
+            foreach (ModelRelation mr in modelRelations)
+            {
+                if (mr.StartID == this.ID)
+                {
+                    cp.DeleteRelation(mr);
+                    relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+                }
+            }
+            cp.Invalidate();
+
+            ModelElement me = doc.SearchElementByID(ID);
+            ICommand cmd = new ElementDeleteCommand(me, relations);
+            UndoRedoManager.GetInstance().PushCommand(doc, cmd);
+            // 删控件
+            cp.DeleteEle(me);
         }
     }
 }

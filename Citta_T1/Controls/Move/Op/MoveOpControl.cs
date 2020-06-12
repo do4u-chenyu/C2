@@ -472,45 +472,54 @@ namespace Citta_T1.Controls.Move.Op
         {
             /*
              * 保存自己的element
-             * 保存所连接的关系，具体是{"startCID": [], "endCID": []}
-             * 保存所连接的10
+             * 保存所连接的关系，具体是[(startID, endID, endPin), (startID, endID, endPin)]
+             * 保存所连接的结果控件[RsMe1, RsMe2,...]
              */
+             //ICommand Ele
+
         }
 
         public void DeleteMenuItem_Click(object sender, EventArgs e)
         {
             if (Global.GetFlowControl().SelectDrag || (Global.GetFlowControl().SelectFrame && !Global.GetCanvasPanel().DelEnable))
                 return;
-            //删除连接的结果控件
+
+            this.DeleteMyself();
+        }
+        private void DeleteMyself()
+        {
+            CanvasPanel cp = Global.GetCanvasPanel();
+            ModelDocument doc = Global.GetCurrentDocument();
+
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelElement rsEles = null;
+            Tuple<List<Tuple<int, int, int>>, ModelElement> relationAndRsEles = null;
+
             foreach (ModelRelation mr in modelRelations)
             {
-                // 删结果算子
+                // TODO 删结果算子和任何与结果算子相连的关系 DT-Op-Rs-X del Op-Rs Rs-X Rs
                 if (mr.StartID == this.ID)
-                {
-                    DeleteResultControl(mr.EndID, modelRelations);
-
-                }
-                // 如果是上游Dt算子出来只有一根线则改变Dt的Pin状态
-                if ((mr.EndID == this.ID) & (Global.GetCurrentDocument().ModelRelations.FindAll(c => c.StartID == mr.StartID).Count == 1))
-                {
-                    ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
-                    (me.InnerControl as IMoveControl).OutPinInit("noLine");
-                }
+                    relationAndRsEles = DeleteResultControl(mr.EndID, modelRelations);
                 // 删关系
-                if (mr.StartID == this.ID || mr.EndID == this.ID)
+                if (mr.EndID == this.ID)
                 {
-                    Global.GetCurrentDocument().RemoveModelRelation(mr);
-                    Global.GetCanvasPanel().Invalidate();
+                    cp.DeleteRelation(mr);
+                    relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 }
             }
+            foreach (var r in relationAndRsEles.Item1)
+                relations.Add(r);
+            rsEles = relationAndRsEles.Item2;
+            cp.Invalidate();
 
-            ICommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().SearchElementByID(ID));
-            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            ModelElement me = doc.SearchElementByID(ID);
+            ICommand cmd = new ElementDeleteCommand(me, relations, rsEles);
+            UndoRedoManager.GetInstance().PushCommand(doc, cmd);
+
             //删除自身
-            DeleteMyself();
+            cp.DeleteEle(me);
         }
-
         public void UndoRedoDeleteElement()
         {
             //TODO undo,redo时关系处理
@@ -520,19 +529,9 @@ namespace Citta_T1.Controls.Move.Op
              * 3. 删与之相连的结果控件
              * 4. 改变其他控件的Pin状态
              */
-            DeleteMyself();
+            
         }
-
-        private void DeleteMyself()
-        {
-            Global.GetCurrentDocument().DeleteModelElement(this);
-            Global.GetCanvasPanel().DeleteElement(this);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
-            Global.GetCanvasPanel().EndC = null;
-        }
-
-        public void UndoRedoAddElement(ModelElement me)
+        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement rsEle)
         {
             //TODO undo,redo时关系处理
             /*
@@ -541,37 +540,47 @@ namespace Citta_T1.Controls.Move.Op
              * 3. 恢复与之相连的结果控件
              * 4. 改变其他控件的Pin状态
              */
-            Global.GetCanvasPanel().AddElement(this);
-            Global.GetCurrentDocument().AddModelElement(me);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
+            CanvasPanel cp = Global.GetCanvasPanel();
+            cp.AddEle(me);
+            cp.AddEle(rsEle);
+            
+            foreach (Tuple<int, int, int> rel in relations)
+                cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
         }
-        private void DeleteResultControl(int endID, List<ModelRelation> modelRelations)
+        
+        private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
+            // modelRelations = deepcopy(Global.GetCurrentDocument().modelRelations)
+            CanvasPanel cp = Global.GetCanvasPanel();
+            ModelDocument doc = Global.GetCurrentDocument();
+
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelElement rsEles = null;
+
             // 改状态
-            Global.GetCurrentDocument().StatusChangeWhenDeleteControl(endID);
+            doc.StatusChangeWhenDeleteControl(endID);
             // 删除关系
             foreach (ModelRelation mr in modelRelations)
             {
                 if (mr.StartID == endID || mr.EndID == endID)
                 {
-                    Global.GetCurrentDocument().RemoveModelRelation(mr);
-                    Global.GetCanvasPanel().Invalidate();
+                    cp.DeleteRelation(mr);
+                    relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 }
             }
+            cp.Invalidate();
             List<ModelElement> modelElements = new List<ModelElement>(Global.GetCurrentDocument().ModelElements);
             // 删除与之相连的结果算子
-            foreach (ModelElement mrc in modelElements)
+            foreach (ModelElement me in modelElements)
             {
-                if (mrc.ID == endID)
+                if (me.ID == endID)
                 {
-                    Global.GetCurrentDocument().DeleteModelElement(mrc);
-                    Global.GetCanvasPanel().DeleteElement(mrc.InnerControl);
-                    Global.GetNaviViewControl().UpdateNaviView();
-                    return;
+                    cp.DeleteEle(me);
+                    rsEles = me;
+                    break;
                 }
             }
-
+            return new Tuple<List<Tuple<int, int, int>>, ModelElement>(relations, rsEles);
         }
         private void OptionDirty(ElementStatus status)
         {
@@ -703,7 +712,7 @@ namespace Citta_T1.Controls.Move.Op
         #endregion
 
         #region IMoveControl 接口实现方法
-        public PointF RevisePointLoc(PointF p)
+        public override PointF RevisePointLoc(PointF p)
         {
             /*
              * 1. 遍历当前Document上所有LeftPin，检查该点是否在LeftPin的附近
@@ -759,7 +768,7 @@ namespace Citta_T1.Controls.Move.Op
             return revisedP;
         }
 
-        public PointF GetEndPinLoc(int pinIndex)
+        public override PointF GetEndPinLoc(int pinIndex)
         {
             switch (pinIndex)
             {
@@ -775,12 +784,6 @@ namespace Citta_T1.Controls.Move.Op
                     // TODO [DK] 需要定义一个异常
                     return new PointF(0, 0);
             }
-        }
-        public PointF GetStartPinLoc(int pinIndex)
-        {
-            return new PointF(
-                this.Location.X + this.rectOut.Location.X + this.rectOut.Width / 2,
-                this.Location.Y + this.rectOut.Location.Y + this.rectOut.Height / 2);
         }
 
 
