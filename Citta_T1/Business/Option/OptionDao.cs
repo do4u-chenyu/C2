@@ -117,7 +117,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null)
                 return ElementStatus.Null;
 
-            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow" };
+            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow", "fixSecond", "randomBegin", "randomEnd" };
 
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
