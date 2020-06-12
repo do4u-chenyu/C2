@@ -331,6 +331,8 @@ namespace Citta_T1.Controls.Move
                 foreach (Tuple<int, int, int> rel in relations)
                     cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
+            if (rsEle != null)
+                cp.AddEle(rsEle);
         }
     }
 }

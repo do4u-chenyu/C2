@@ -524,7 +524,6 @@ namespace Citta_T1.Controls.Move.Op
             //删除自身
             cp.DeleteEle(me);
         }
- 
         
         private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
