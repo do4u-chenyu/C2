@@ -524,39 +524,7 @@ namespace Citta_T1.Controls.Move.Op
             //删除自身
             cp.DeleteEle(me);
         }
-        public void UndoRedoDeleteElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement rsEle)
-        {
-            //TODO undo,redo时关系处理
-            /*
-             * 1. 删自身
-             * 2. 删与之相连的关系
-             * 3. 删与之相连的结果控件
-             * 4. 改变其他控件的Pin状态
-             */
-            CanvasPanel cp = Global.GetCanvasPanel();
-            cp.DeleteEle(me);
-            foreach (Tuple<int, int, int> rel in relations)
-                cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
-            if (rsEle != null)
-                cp.DeleteEle(rsEle);
-        }
-        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement rsEle)
-        {
-            //TODO undo,redo时关系处理
-            /*
-             * 1. 恢复自身
-             * 2. 恢复与之相连的关系
-             * 3. 恢复与之相连的结果控件
-             * 4. 改变其他控件的Pin状态
-             */
-            CanvasPanel cp = Global.GetCanvasPanel();
-            cp.AddEle(me);
-            if (rsEle != null)
-                cp.AddEle(rsEle);
-            
-            foreach (Tuple<int, int, int> rel in relations)
-                cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
-        }
+ 
         
         private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResultControl(int endID, List<ModelRelation> modelRelations)
         {
