@@ -131,8 +131,10 @@ namespace Citta_T1.OperatorViews
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "," + index02 + "," + this.textBox0.Text;
-            Dictionary<string, string> factors = new Dictionary<string, string>();
-            factors["factor1"] = factor1;
+            Dictionary<string, string> factors = new Dictionary<string, string>
+            {
+                ["factor1"] = factor1
+            };
             if (this.tableLayoutPanel1.RowCount > 0)
             {
                 for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
@@ -160,9 +162,11 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            List<string> types = new List<string>();
-            types.Add(this.comboBox0.GetType().Name);
-            types.Add(this.textBox0.GetType().Name);
+            List<string> types = new List<string>
+            {
+                this.comboBox0.GetType().Name,
+                this.textBox0.GetType().Name
+            };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)

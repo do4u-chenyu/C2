@@ -111,7 +111,7 @@ namespace Citta_T1.OperatorViews
     {
         private const string defaultInfo = "发生未知的原因，关键词组合失败，您需要联系开发团队或者重命名关键词文件并导入";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
-        private List<string> datas = new List<string>();
+        private readonly List<string> datas = new List<string>();
 
         public string KeywordPreView(string keywordFile,
                                      char[] separator,

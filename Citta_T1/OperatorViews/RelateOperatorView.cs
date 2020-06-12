@@ -128,9 +128,11 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            List<string> types = new List<string>();
-            types.Add(this.comboBox0.GetType().Name);
-            types.Add(this.outListCCBL0.GetType().Name);
+            List<string> types = new List<string>
+            {
+                this.comboBox0.GetType().Name,
+                this.outListCCBL0.GetType().Name
+            };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)

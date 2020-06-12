@@ -16,10 +16,10 @@ namespace Citta_T1.OperatorViews
 {
     public partial class PythonOperatorView : BaseOperatorView
     {
-        private string oldPath;
+        private readonly string oldPath;
         private string fullOutputFilePath;
         private string noChangedOutputFilePath;
-        private List<string> previewTextList = new List<string>(new string[] { "", "", "", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "", "", "" });
 
         public PythonOperatorView(MoveOpControl opControl) : base(opControl)
         {

@@ -11,7 +11,7 @@ namespace Citta_T1.OperatorViews
 {
     public partial class GroupOperatorView : BaseOperatorView
     {
-        private List<int> groupColumn;
+        private readonly List<int> groupColumn;
         private List<int> outList;
         public GroupOperatorView(MoveOpControl opControl) : base(opControl)
         {

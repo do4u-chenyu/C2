@@ -43,7 +43,7 @@ namespace Citta_T1.Core
     }
     class BCPBuffer
     {
-        private Dictionary<string, FileCache> dataPreviewDict = new Dictionary<string, FileCache>(128);
+        private readonly Dictionary<string, FileCache> dataPreviewDict = new Dictionary<string, FileCache>(128);
 
         private static BCPBuffer BcpBufferSingleInstance;
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
