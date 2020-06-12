@@ -1,5 +1,4 @@
-﻿
-using Citta_T1.Controls.Move.Op;
+﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using System;
@@ -15,8 +14,22 @@ namespace Citta_T1.OperatorViews
         public CollideOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            InitializeComponentManual(); // 设计器不支持复用基类中的tablelayoutpanel,需要手工初始化。
             InitByDataSource();
             LoadOption();
+        }
+
+        private void InitializeComponentManual()
+        {
+            this.button1.Click += new EventHandler(this.Add_Click);
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
         #region 初始化配置
         private void InitByDataSource()
@@ -94,7 +107,7 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (!String.IsNullOrEmpty(factor)) continue;
+                if (String.IsNullOrEmpty(factor)) continue;
                 int[] optionItems1 = Array.ConvertAll(factor.Split('\t'), int.Parse);
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];

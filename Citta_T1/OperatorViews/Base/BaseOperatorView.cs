@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Business.Option;
+using Citta_T1.Controls.Common;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
@@ -78,8 +79,34 @@ namespace Citta_T1.OperatorViews.Base
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            // 如果配置条件为空，算子状态置为NULL(针对本地错误修改，异常运算导致的配置条件为空问题)
+
+            List<string> names = new List<string> {comboBox0.GetType().Name,
+                                                   outListCCBL0.GetType().Name,
+                                                   dataSourceTB0.GetType().Name};
+            List<Control> controls=new List<Control>();
+            FindChildControls(this, names, controls);
+            foreach (Control control in controls)
+            {
+                if (names.Contains(control.GetType().Name) && String.IsNullOrEmpty(control.Text))
+                    this.opControl.Status = ElementStatus.Null;  
+            }
+
+            
             this.DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        protected  void FindChildControls(Control root, List<string> names, List<Control> controls)
+        {
+            foreach (Control ct in root.Controls)
+            {               
+                controls.Add(ct);
+                if (ct.Controls.Count > 0)
+                {
+                    FindChildControls(ct, names, controls);
+                }
+            }  
         }
         // 是否配置完毕
         protected virtual bool IsOptionNotReady()

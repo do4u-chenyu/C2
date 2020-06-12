@@ -70,20 +70,11 @@ namespace Citta_T1.Business.Schedule
             this.modelStatus = ModelStatus.Null;
         }
 
-        public void GetCurrentModelTripleList(ModelDocument currentModel)
+        public void GetCurrentModelTripleList(ModelDocument currentModel, string state, ModelElement stopElement = null)
         {
             //生成当前模型所有三元组列表
             this.currentModel = currentModel;
-            this.tripleListGen = new TripleListGen(currentModel,"all");
-            this.tripleListGen.GenerateList();
-            this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
-        }
-
-        public void GetCurrentModelRunhereTripleList(ModelDocument currentModel, ModelElement stopElement)
-        {
-            //生成运行到此分支上的三元组列表
-            this.currentModel = currentModel;
-            this.tripleListGen = new TripleListGen(currentModel, "mid", stopElement);
+            this.tripleListGen = new TripleListGen(currentModel,state,stopElement);
             this.tripleListGen.GenerateList();
             this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
         }
@@ -225,33 +216,29 @@ namespace Citta_T1.Business.Schedule
                 //判断数据节点是否算完，如果数据节点（上一个的结果算子）为warn，跳过这个循环，并将其结果算子也置为warn
                 foreach (ModelElement tmpDE in tmpTri.DataElements)
                 {
-                    string filename = String.Empty;
-                    if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
-                    if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
+                    string filename = tmpDE.FullFilePath;
                     if (!File.Exists(filename))
                     {
-                        tmpTri.OperateElement.Status = ElementStatus.Warn;
                         UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "文件\"" + filename + "\"不存在，请确认后重新运行。");
                         isDataElementError = true;
                         break;
                     }
 
-                    if (tmpDE.Type == ElementType.Result)
+                    while (tmpDE.Type == ElementType.Result && tmpDE.Status != ElementStatus.Done)
                     {
-                        while (tmpDE.Status != ElementStatus.Done)
+                        if (tmpDE.Status == ElementStatus.Warn)
                         {
-                            if (tmpDE.Status == ElementStatus.Warn)
-                            {
-                                isDataElementError = true;
-                                break;
-                            }
-                            Thread.Sleep(1000);
+                            isDataElementError = true;
+                            break;
                         }
+                        Thread.Sleep(1000);
                     }
+                
                     if (isDataElementError) break;
                 }
                 if (isDataElementError)
                 {
+                    tmpTri.OperateElement.Status = ElementStatus.Warn;
                     tmpTri.ResultElement.Status = ElementStatus.Warn;
                     continue;
                 }

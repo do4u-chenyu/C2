@@ -468,7 +468,7 @@ namespace Citta_T1
             Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
             {
-                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");
                 currentManager.Reset();
                 //SetDocumentDirty();//需不需要dirty
                 MessageBox.Show("当前模型的运算结果已重置，点击‘运行’可以重新运算了", "已重置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -498,7 +498,7 @@ namespace Citta_T1
                     MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
+                currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");
                 int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
                 if (notReadyNum > 0)
                 {
@@ -657,6 +657,7 @@ namespace Citta_T1
                     this.progressBar1.Show();
                     this.progressBarLabel.Show();
                     this.progressBar1.Value = manager.CurrentModelTripleStatusNum(ElementStatus.Done) * 100 / manager.TripleListGen.CurrentModelTripleList.Count;
+                    this.progressBarLabel.Text = this.progressBar1.Value.ToString() + "%";
                     UnEnableRunningControl();
                     break;
                 case ModelStatus.GifDone:

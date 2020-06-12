@@ -16,8 +16,17 @@ namespace Citta_T1.OperatorViews
         public SortOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            InitializeComponentManual();
             InitByDataSource();
             LoadOption();
+        }
+        // 为了兼顾设计器，一些控件需要手工初始化。
+        private void InitializeComponentManual()
+        {
+            // 利用Paint方式groupBox附近的虚线留白
+            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            this.groupBox2.Paint += new PaintEventHandler(this.GroupBox_Paint);
+            this.groupBox3.Paint += new PaintEventHandler(this.GroupBox_Paint);
         }
 
         #region 配置初始化

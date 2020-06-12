@@ -15,15 +15,34 @@ namespace Citta_T1.OperatorViews
         public UnionOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
-            //this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox_Paint);
+            InitializeComponentManual();
             InitByDataSource();
             LoadOption();
 
+
+        }
+
+        // 为了兼顾设计器，一些控件需要手工初始化。
+        private void InitializeComponentManual()
+        {
             this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+            this.button1.Click += new EventHandler(this.Add_Click);
+            // 利用Paint方式groupBox1附近的虚线留白
+            this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
+
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(345, 84);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
+
         #region 初始化配置
         private void InitByDataSource()
         {

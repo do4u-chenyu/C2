@@ -457,7 +457,7 @@ namespace Citta_T1.Controls.Move.Op
 
             //需要判断模型当前运行状态，正在运行时，无法执行运行到此
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
-            currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
+            currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
             Global.GetMainForm().BindUiManagerFunc();
             if (currentManager.IsAllOperatorDone())
             {

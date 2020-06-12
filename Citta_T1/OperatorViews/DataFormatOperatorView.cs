@@ -14,12 +14,28 @@ namespace Citta_T1.OperatorViews
         public DataFormatOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            InitializeComponentManual(); // 设计器不支持复用基类中的tablelayoutpanel,需要手工初始化。
             InitByDataSource();
             LoadOption();
+
+        }
+        // 为了兼顾设计器，一些控件需要手工初始化。
+        private void InitializeComponentManual()
+        {
+            this.button1.Click += new EventHandler(this.Add_Click);
             this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
+  
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.Size = new Size(358, 85);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
         }
 
         #region 初始化配置

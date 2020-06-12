@@ -30,6 +30,71 @@
             this.valuePanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(9, 2);
+            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
+            this.dataSourceTB0.TabIndex = 3;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(257, 7);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(175, 7);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // outListCCBL0
+            // 
+            this.outListCCBL0.Location = new System.Drawing.Point(9, 96);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
+            this.outListCCBL0.TabIndex = 2;
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox0.Location = new System.Drawing.Point(9, 47);
+            this.comboBox0.Size = new System.Drawing.Size(150, 25);
+            this.comboBox0.TabIndex = 1;
+            // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(324, 16);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 149);
+            this.bottomPanel.Size = new System.Drawing.Size(324, 42);
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Controls.Add(this.label3);
+            this.keyPanel.Controls.Add(this.label2);
+            this.keyPanel.Controls.Add(this.label1);
+            this.keyPanel.Location = new System.Drawing.Point(0, 16);
+            this.keyPanel.Size = new System.Drawing.Size(116, 133);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label3, 0);
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.outListCCBL0);
+            this.valuePanel.Controls.Add(this.comboBox0);
+            this.valuePanel.Location = new System.Drawing.Point(116, 16);
+            this.valuePanel.Size = new System.Drawing.Size(208, 133);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(31, 3);
+            this.label1.Size = new System.Drawing.Size(90, 22);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -52,91 +117,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "取最小值：";
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(31, 3);
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            // 
-            // topPanel
-            // 
-            this.topPanel.Size = new System.Drawing.Size(324, 16);
-            // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 149);
-            this.bottomPanel.Size = new System.Drawing.Size(324, 42);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(265, 7);
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.Location = new System.Drawing.Point(175, 7);
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label3);
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 16);
-            this.keyPanel.Size = new System.Drawing.Size(116, 133);
-            // 
-            // valuePanel
-            // 
-            this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Location = new System.Drawing.Point(116, 16);
-            this.valuePanel.Size = new System.Drawing.Size(208, 133);
-            // 
-            // DataInfoBox
-            // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(9, 2);
-            this.dataSourceTB0.Name = "DataInfoBox";
-            this.dataSourceTB0.Size = new System.Drawing.Size(150, 23);
-            this.dataSourceTB0.TabIndex = 3;
-            // 
-            // OutList
-            // 
-            this.outListCCBL0.DataSource = null;
-            this.outListCCBL0.Location = new System.Drawing.Point(9, 96);
-            this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.outListCCBL0.Name = "OutList";
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
-            this.outListCCBL0.TabIndex = 2;
-            // 
-            // MinValueBox
-            // 
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.FormattingEnabled = true;
-            this.comboBox0.Location = new System.Drawing.Point(9, 47);
-            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox0.Name = "MinValueBox";
-            this.comboBox0.Size = new System.Drawing.Size(150, 25);
-            this.comboBox0.TabIndex = 1;
-            // 
             // MinOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(324, 191);
-            this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MinOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "取最小值算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
