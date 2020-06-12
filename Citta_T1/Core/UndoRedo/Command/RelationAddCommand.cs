@@ -11,21 +11,23 @@ namespace Citta_T1.Core.UndoRedo.Command
     {
         private readonly int startID;
         private readonly int endID;
-        public RelationAddCommand(int startID, int endID)
+        private readonly int pinIndex;
+        public RelationAddCommand(int startID, int endID, int pinIndex)
         {
             this.startID = startID;
             this.endID = endID;
+            this.pinIndex = pinIndex;
         }
         public bool Undo()
         {
-            Global.GetCanvasPanel().DeleteRelationByCtrID(this.startID, this.endID);
+            Global.GetCanvasPanel().DeleteRelationByCtrID(this.startID, this.endID, this.pinIndex);
             Global.GetCanvasPanel().Invalidate(false);
             return true;
         }
 
         public bool Redo()
         {
-            Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID);
+            Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID, this.pinIndex);
             return true;
         }
     }

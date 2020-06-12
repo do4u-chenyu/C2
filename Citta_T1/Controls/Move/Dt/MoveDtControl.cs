@@ -82,7 +82,13 @@ namespace Citta_T1.Controls.Move.Dt
         public void UndoRedoDeleteElement()
         {
             //TODO undo,redo元素时关系的处理
+            /*
+             * 1. 删自身
+             * 2. 删与之相连的关系
+             * 3. 改变其他控件的Pin状态
+             */
             DeleteMyself();
+            
         }
 
         private void DeleteMyself()
@@ -96,6 +102,11 @@ namespace Citta_T1.Controls.Move.Dt
         public void UndoRedoAddElement(ModelElement me)
         {
             //TODO undo,redo元素时关系的处理
+            /*
+             * 1. 恢复自身
+             * 2. 恢复删除的关系
+             * 3. 更新其他控件Pin状态
+             */
             Global.GetCanvasPanel().AddElement(this);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
