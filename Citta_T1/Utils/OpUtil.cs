@@ -11,7 +11,6 @@ namespace Citta_T1.Utils
     public class OpUtil
     {
         public static readonly char DefaultSeparator = '\t';
-        private static LogUtil log = LogUtil.GetInstance("OpUtil");
         public static float IOU(Rectangle rect1, Rectangle rect2)
         {
             // [top, left, bottom, right]
@@ -41,7 +40,7 @@ namespace Citta_T1.Utils
 
         public static ElementSubType SEType(string subType)
         {
-            string type = "";
+            string type;
             switch (subType)
             {
                 case "关联算子":
@@ -104,7 +103,7 @@ namespace Citta_T1.Utils
 
         public static string SubTypeName(string subType)
         {
-            string type = "";
+            string type;
             switch (subType)
             {
                 case "CollideOperator":

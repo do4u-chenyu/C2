@@ -53,15 +53,19 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
 
-            string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            oldOutList0 = indexs.ToList();
-            outListCCBL0.LoadItemCheckIndex(indexs);
-            oldOutName0.AddRange(from int index in indexs
+            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                oldOutList0 = indexs.ToList();
+                outListCCBL0.LoadItemCheckIndex(indexs);
+                oldOutName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
-            comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", null));
-            comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", null));
-            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", null));
+            }
+
+            comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
+            comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
+            conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", "0"));
         }
         protected override void SaveOption()
         {
@@ -107,7 +111,7 @@ namespace Citta_T1.OperatorViews
     {
         private const string defaultInfo = "发生未知的原因，关键词组合失败，您需要联系开发团队或者重命名关键词文件并导入";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
-        private List<string> datas = new List<string>();
+        private readonly List<string> datas = new List<string>();
 
         public string KeywordPreView(string keywordFile,
                                      char[] separator,
@@ -125,51 +129,36 @@ namespace Citta_T1.OperatorViews
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            result = string.Join(" OR ", datas);
-            if (result.Equals(string.Empty))
+            result = string.Join(" OR ", datas);  //TODO， 如果输入关键词本身是"OR",会是什么情况
+            if (String.IsNullOrWhiteSpace(result))
                 result = defaultInfo;
             return result;
         }
-        public void KeywordRead(string fullFilePath,
+
+        private void KeywordRead(string fullFilePath,
                                         char[] separator,
                                         int colIndex,
                                         OpUtil.ExtType extType = OpUtil.ExtType.Text,
-                                        OpUtil.Encoding encoding = OpUtil.Encoding.UTF8,
-                                        bool isForceRead = false,
-                                        int maxNumOfFile = 100)
+                                        OpUtil.Encoding encoding = OpUtil.Encoding.UTF8)
         {
-            List<string> rows;
-            string line;
+            List<string> rows = new List<string>();      
             if (extType == OpUtil.ExtType.Excel)
             {
                 separator = "\t".ToCharArray();
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath,
-                                                                                            isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
             {
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath,
-                                                                                          encoding,
-                                                                                          isForceRead).Split('\n'));
+                                                                                          encoding).Split('\n'));
             }
-            else
+            // 第一行是表头，跳过表头,i从1开始
+            for (int i = 1; i < rows.Count; i++)
             {
-                rows = new List<string>();
-            }
-
-            for (int i = 0; i < Math.Min(rows.Count - 1, maxNumOfFile); i++)
-            {
-                List<string> lines = new List<string>(rows[i + 1].TrimEnd('\r').Split(separator));
-                if (colIndex >= lines.Count)
-                {
+                List<string> lines = new List<string>(rows[i].TrimEnd('\r').Split(separator));
+                if (colIndex >= lines.Count || String.IsNullOrWhiteSpace(lines[colIndex]))
                     continue;
-                }
-                line = lines[colIndex];
-                if (line.Equals(string.Empty))
-                {
-                    continue;
-                }
-                datas.Add(line);
+                datas.Add(lines[colIndex]);
             }
         }
     }

@@ -43,10 +43,8 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(234, 0);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(179, 23);
             this.dataSourceTB1.TabIndex = 8;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
@@ -57,13 +55,11 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(471, 8);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(367, 8);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
@@ -133,11 +129,6 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Size = new System.Drawing.Size(437, 297);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
             // 
             // tableLayoutPanel2
             // 
@@ -157,10 +148,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 32);
             this.tableLayoutPanel2.TabIndex = 6;
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.textBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox1, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 
@@ -191,8 +178,6 @@
             this.textBox0.Size = new System.Drawing.Size(86, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox1_Enter);
-            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox1_Leave);
             // 
             // groupBox1
             // 
@@ -205,7 +190,6 @@
             this.groupBox1.Size = new System.Drawing.Size(138, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // repetition
             // 

@@ -59,13 +59,11 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(459, 11);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(358, 11);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
@@ -152,12 +150,6 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Size = new System.Drawing.Size(411, 366);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox3, 0);
             // 
             // groupBox3
             // 
@@ -170,7 +162,7 @@
             this.groupBox3.Size = new System.Drawing.Size(208, 25);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
+           
             // 
             // sortByString
             // 
@@ -209,7 +201,7 @@
             this.groupBox2.Size = new System.Drawing.Size(207, 25);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
+            
             // 
             // ascendingOrder
             // 
@@ -283,7 +275,6 @@
             this.groupBox1.Size = new System.Drawing.Size(207, 25);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // repetition
             // 

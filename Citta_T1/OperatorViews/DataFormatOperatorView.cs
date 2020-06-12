@@ -16,6 +16,8 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
+            this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
+            this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
             this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
         }
@@ -39,30 +41,35 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-            int count = this.opControl.Option.KeysCount("factor");
+            
             string factor1 = this.opControl.Option.GetOption("factor1");
-            string[] factorList0 = factor1.Split('\t');
-            int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-
-            this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
-            this.comboBox0.Tag = indexs0[0].ToString();
-            this.textBox0.Text = factorList0[1];
-
-            if (count <= 1)
-                return;
-            InitNewFactorControl(count - 1);
- 
-            for (int i = 2; i < (count + 1); i++)
+            if (!String.IsNullOrEmpty(factor1))
             {
-                string name = "factor" + i.ToString();
+                string[] factorList0 = factor1.Split('\t');
+                int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+
+                this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
+                this.comboBox0.Tag = indexs0[0].ToString();
+                this.textBox0.Text = factorList0[1];
+            }
+           
+
+            int count = this.opControl.Option.KeysCount("factor") - 1;
+            if (count < 1)
+                return;
+            InitNewFactorControl(count);
+ 
+            for (int i = 0; i < count; i++)
+            {
+                string name = "factor" + (i + 2).ToString();
                 string factor = this.opControl.Option.GetOption(name);
-                if (factor == "") continue;
+                if (String.IsNullOrEmpty(factor)) continue;
 
                 string[] factorList1 = factor.Split('\t');
                 int[] indexs1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
 
-                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i - 2);
-                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i - 2);
+                Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
+                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
                 control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                 control1.Tag = indexs1[0].ToString();
                 control2.Text = factorList1[1];
@@ -83,8 +90,6 @@ namespace Citta_T1.OperatorViews
                 {
                     ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
                     Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    //Control control1 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    //Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
                     string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                     string factor = tmpIndex + "\t" + control2.Text;
                     this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
@@ -154,6 +159,7 @@ namespace Citta_T1.OperatorViews
 
                 }
             }
+            //找到所有的“添加条件”，判断是否有完全重复的“添加条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
@@ -176,97 +182,44 @@ namespace Citta_T1.OperatorViews
                 Text = (addLine + 2).ToString()
             };
             this.tableLayoutPanel1.Controls.Add(label, 0, addLine);
-
-
-            ComboBox dataBox = new ComboBox
-            {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
-                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
-                Anchor = AnchorStyles.Left | AnchorStyles.Right
-            };
-            dataBox.Items.AddRange(this.nowColumnsName0);
-            dataBox.Leave += new EventHandler(this.Control_Leave);
-            dataBox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            dataBox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
-            this.tableLayoutPanel1.Controls.Add(dataBox, 1, addLine);
-
+            // 左表列下拉框
+            ComboBox data0ComboBox = NewColumnsName0ComboBox();
+            this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
+            // 别名文本框
             TextBox textBox = NewAliasTextBox();
             this.tableLayoutPanel1.Controls.Add(textBox, 2, addLine);
-
+            // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());
-            addButton.Click += new EventHandler(this.Add_Click);
             this.tableLayoutPanel1.Controls.Add(addButton, 3, addLine);
-
+            // 删除行按钮
             Button delButton = NewDelButton(addLine.ToString());
-            delButton.Click += new EventHandler(this.Del_Click);
             this.tableLayoutPanel1.Controls.Add(delButton, 4, addLine);
         }
 
-        private void Add_Click(object sender, EventArgs e)
+        protected override void AddTableLayoutPanelControls(int lineNumber)
         {
-            Button tmp = (Button)sender;
-            int addLine;
-            if (this.tableLayoutPanel1.RowCount == 0)
+            for (int k = this.tableLayoutPanel1.RowCount - 2; k >= lineNumber; k--)
             {
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                addLine = 0;
-                CreateLine(addLine);
+
+                Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
+                ctlNext.Text = (k + 3).ToString();
+                Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
+                Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
+                this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
+                Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
+                ctlNext3.Name = (k + 1).ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
+                Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
+                ctlNext4.Name = (k + 1).ToString();
+                this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
             }
-            else
-            {
-                if (tmp.Name == "button1")
-                    addLine = 0;
-                else
-                    addLine = int.Parse(tmp.Name) + 1;
-
-                this.tableLayoutPanel1.RowCount++;
-                this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-                this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-                for (int k = this.tableLayoutPanel1.RowCount - 2; k >= addLine; k--)
-                {
-
-                    Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k);
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k + 1));
-                    ctlNext.Text = (k + 3).ToString();
-                    Control ctlNext1 = this.tableLayoutPanel1.GetControlFromPosition(1, k);
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext1, new TableLayoutPanelCellPosition(1, k + 1));
-                    Control ctlNext2 = this.tableLayoutPanel1.GetControlFromPosition(2, k);
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext2, new TableLayoutPanelCellPosition(2, k + 1));
-                    Control ctlNext3 = this.tableLayoutPanel1.GetControlFromPosition(3, k);
-                    ctlNext3.Name = (k + 1).ToString();
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext3, new TableLayoutPanelCellPosition(3, k + 1));
-                    Control ctlNext4 = this.tableLayoutPanel1.GetControlFromPosition(4, k);
-                    ctlNext4.Name = (k + 1).ToString();
-                    this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k + 1));
-                }
-                CreateLine(addLine);
-            }
-
         }
 
-        private void Del_Click(object sender, EventArgs e)
+        protected override void MoveTableLayoutPanelControls(int lineNumber)
         {
-            Button tmp = (Button)sender;
-            int delLine = int.Parse(tmp.Name);
-
-            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-            {
-                Control bt1 = this.tableLayoutPanel1.Controls[(i * 5) + 4];
-                if (bt1.Name == tmp.Name)
-                {
-                    for (int j = (i * 5) + 4; j >= (i * 5); j--)
-                    {
-                        this.tableLayoutPanel1.Controls.RemoveAt(j);
-                    }
-                    break;
-                }
-
-            }
-
-            for (int k = delLine; k < this.tableLayoutPanel1.RowCount - 1; k++)
+            for (int k = lineNumber; k < this.tableLayoutPanel1.RowCount - 1; k++)
             {
                 Control ctlNext = this.tableLayoutPanel1.GetControlFromPosition(0, k + 1);
                 this.tableLayoutPanel1.SetCellPosition(ctlNext, new TableLayoutPanelCellPosition(0, k));
@@ -282,11 +235,6 @@ namespace Citta_T1.OperatorViews
                 ctlNext4.Name = k.ToString();
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
-            this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
-            this.tableLayoutPanel1.RowCount = this.tableLayoutPanel1.RowCount - 1;
-
-            this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
-
         }
     }
 }

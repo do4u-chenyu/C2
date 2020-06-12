@@ -17,7 +17,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             InitByDataSource();
-            LoadOption();  
+            LoadOption();
         }
 
         #region 配置初始化
@@ -55,6 +55,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("outfield", this.outList);
             this.opControl.Option.SetOption("sortfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
@@ -77,9 +78,13 @@ namespace Citta_T1.OperatorViews
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
 
-            int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-            this.comboBox0.Tag = index.ToString();
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("sortfield")))
+            {
+                int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
+            }
+
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition", "False"));
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.ascendingOrder.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("ascendingOrder", "True"));

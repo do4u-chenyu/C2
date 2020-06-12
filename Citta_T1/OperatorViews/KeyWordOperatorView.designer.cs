@@ -41,10 +41,8 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(218, 4);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(121, 23);
             this.dataSourceTB1.TabIndex = 10;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
@@ -55,19 +53,16 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(387, 180);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(320, 180);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(4, 86);
             this.outListCCBL0.Size = new System.Drawing.Size(125, 22);
             this.outListCCBL0.TabIndex = 8;

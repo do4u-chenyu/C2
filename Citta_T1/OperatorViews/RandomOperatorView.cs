@@ -29,6 +29,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.OptionDict.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("randomnum", this.randomNumBox.Text);
             this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
@@ -44,12 +45,16 @@ namespace Citta_T1.OperatorViews
                 return;
 
             this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
-            string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
-            int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
-            this.oldOutList0 = indexs.ToList();
-            this.outListCCBL0.LoadItemCheckIndex(indexs);
-            foreach (int index in indexs)
-                this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            {
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
+                this.oldOutList0 = indexs.ToList();
+                this.outListCCBL0.LoadItemCheckIndex(indexs);
+                foreach (int index in indexs)
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+            }
+           
 
         }
         #endregion

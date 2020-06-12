@@ -16,10 +16,10 @@ namespace Citta_T1.OperatorViews
 {
     public partial class PythonOperatorView : BaseOperatorView
     {
-        private string oldPath;
+        private readonly string oldPath;
         private string fullOutputFilePath;
         private string noChangedOutputFilePath;
-        private List<string> previewTextList = new List<string>(new string[] { "", "", "", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "", "", "" });
 
         public PythonOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -39,8 +39,6 @@ namespace Citta_T1.OperatorViews
         {
             // 初始化左右表数据源配置信息
             this.InitDataSource();
-            // 窗体自定义的初始化逻辑
-            this.opControl.Option.SetOption("columnname0",opControl.FirstDataSourceColumns);
             //初始化输入输出路径
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement != ModelElement.Empty)
@@ -75,6 +73,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
+            this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string inputOption = GetControlRadioName(this.inputFileSettingTab).ToLower();
             string outputOption = GetControlRadioName(this.outputFileSettingTab).ToLower();
             string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
@@ -158,7 +157,7 @@ namespace Citta_T1.OperatorViews
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             //修改结果算子内容
-            hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.fullOutputFilePath);
+            //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.fullOutputFilePath);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;

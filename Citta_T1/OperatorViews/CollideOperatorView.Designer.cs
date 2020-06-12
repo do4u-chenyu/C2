@@ -38,10 +38,8 @@
             // dataSourceTB1
             // 
             this.dataSourceTB1.Location = new System.Drawing.Point(187, 2);
-            this.dataSourceTB1.Margin = new System.Windows.Forms.Padding(2);
             this.dataSourceTB1.Size = new System.Drawing.Size(144, 23);
             this.dataSourceTB1.TabIndex = 10;
-            this.dataSourceTB1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dataSourceTB1.Visible = true;
             // 
             // dataSourceTB0
@@ -51,13 +49,11 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(473, 19);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(370, 19);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
@@ -125,11 +121,6 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Size = new System.Drawing.Size(425, 288);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
             // 
             // tableLayoutPanel2
             // 
@@ -147,9 +138,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(218, 32);
             this.tableLayoutPanel2.TabIndex = 6;
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox1, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 

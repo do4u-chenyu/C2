@@ -48,19 +48,16 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(326, 19);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(236, 19);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
-            this.outListCCBL0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.outListCCBL0.Location = new System.Drawing.Point(0, 42);
             this.outListCCBL0.Size = new System.Drawing.Size(135, 21);
             this.outListCCBL0.TabIndex = 1;
@@ -133,10 +130,6 @@
             this.valuePanel.Controls.Add(this.outListCCBL0);
             this.valuePanel.Location = new System.Drawing.Point(116, 37);
             this.valuePanel.Size = new System.Drawing.Size(301, 162);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
             // groupBox2
             // 
@@ -149,7 +142,6 @@
             this.groupBox2.Size = new System.Drawing.Size(155, 30);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // repetition
             // 
@@ -188,7 +180,6 @@
             this.groupBox1.Size = new System.Drawing.Size(155, 30);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.GroupBox1_Paint);
             // 
             // descendingOrder
             // 

@@ -266,7 +266,11 @@ namespace Citta_T1.Controls.Move.Rs
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelRunhereTripleList(Global.GetCurrentDocument(), currentOp);
             Global.GetMainForm().BindUiManagerFunc();
-
+            if (currentManager.IsAllOperatorDone())
+            {
+                MessageBox.Show("运行到此路径上的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             currentManager.Start();
             Global.GetMainForm().UpdateRunbuttonImageInfo();
 

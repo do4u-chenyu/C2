@@ -21,7 +21,9 @@ namespace Citta_T1.Business.Schedule
         Null       //模型的调度器未初始化
     }
 
-
+    /// <summary>
+    /// 后台调度类
+    /// </summary> 
     class TaskManager
     {
 
@@ -46,6 +48,7 @@ namespace Citta_T1.Business.Schedule
         private TripleListGen tripleListGen;
         private Thread scheduleThread = null;
         private ModelStatus modelStatus;
+        private ModelDocument currentModel;
 
         private List<Triple> currentModelTripleList = new List<Triple>();
 
@@ -63,12 +66,14 @@ namespace Citta_T1.Business.Schedule
 
         public TaskManager()
         {
+            //new document的同时初始化后台调度类
             this.modelStatus = ModelStatus.Null;
         }
 
         public void GetCurrentModelTripleList(ModelDocument currentModel)
         {
             //生成当前模型所有三元组列表
+            this.currentModel = currentModel;
             this.tripleListGen = new TripleListGen(currentModel,"all");
             this.tripleListGen.GenerateList();
             this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
@@ -77,12 +82,14 @@ namespace Citta_T1.Business.Schedule
         public void GetCurrentModelRunhereTripleList(ModelDocument currentModel, ModelElement stopElement)
         {
             //生成运行到此分支上的三元组列表
+            this.currentModel = currentModel;
             this.tripleListGen = new TripleListGen(currentModel, "mid", stopElement);
             this.tripleListGen.GenerateList();
             this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
         }
 
-        public void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
+        #region 当前模型算子类型统计
+        private void ChangeStatus(ElementStatus oldStatus, ElementStatus newStatus)
         {
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == oldStatus))
             {
@@ -113,18 +120,27 @@ namespace Citta_T1.Business.Schedule
             return false;
         }
 
-        # region 开始暂停终止调度逻辑
+        public int CountOpStatus(ElementStatus es)
+        {
+            return this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).Count(op => op.Status ==es);
+        }
+        #endregion
+
+        #region 暂停、继续、终止、重置运算调度逻辑
         public void Reset()
         {
+            //重置，找到所有op状态是 done\stop\warn 的三元组，重置他们的op和rs算子状态，同时将warn算子的错误浮动提示重置成“配置算子”
             foreach (Triple triple in this.currentModelTripleList.FindAll(c => c.OperateElement.Status == ElementStatus.Stop || c.OperateElement.Status == ElementStatus.Done || c.OperateElement.Status == ElementStatus.Warn))
             {
                 if (triple.OperateElement.Status == ElementStatus.Warn) (triple.OperateElement.InnerControl as MoveOpControl).SetStatusBoxErrorContent("配置算子");
                 triple.OperateElement.Status = ElementStatus.Ready;
+                triple.ResultElement.Status = ElementStatus.Null;
             }
         }
 
         public void Pause()
         {
+            //暂停，当前模型状态置pause，op状态由running到suspend，所有task挂起
             this.modelStatus = ModelStatus.Pause;
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Suspend);
             resetEvent.Reset();
@@ -132,6 +148,7 @@ namespace Citta_T1.Business.Schedule
 
         public void Continue()
         {
+            //继续，当前模型状态置running，op状态由suspend到running，所有task继续
             this.modelStatus = ModelStatus.Running;
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Runnnig);
             resetEvent.Set();
@@ -142,6 +159,7 @@ namespace Citta_T1.Business.Schedule
 
         public void Stop()
         {
+            //终止，当前模型状态置stop，op状态由suspend和running到stop，所有task资源释放并关闭，process关闭，后台运算thread关闭
             this.modelStatus = ModelStatus.Stop;
             ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
             ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
@@ -149,26 +167,15 @@ namespace Citta_T1.Business.Schedule
 
             lock (_objLock)
             {
-                foreach (Process p in cmdProcessList)
-                {
-                    UpdateLogDelegate("当前process名字：" + p.ProcessName);
-                    p.Kill();
-                }
+                cmdProcessList.ForEach(p => p.Kill());
             }
 
             foreach (Task currentTask in parallelTasks)
             {
-                if (currentTask != null)
-                {
-                    if (currentTask.Status == TaskStatus.Running)
-                    {
-                        //终止task线程
-                        tokenSource.Cancel();
-                    }
-                }
+                if (currentTask != null)//终止task线程
+                    tokenSource.Cancel();
             }
             CloseThread();
-
         }
 
         public void CloseThread()
@@ -181,11 +188,12 @@ namespace Citta_T1.Business.Schedule
                 }
             }
         }
+        #endregion
 
-
-
+        #region 开始运算调度逻辑
         public void Start()
         {
+            //开始运算，初始化后台运算线程scheduleThread，线程里开启方法StartTask
             this.modelStatus = ModelStatus.Running;
             this.tokenSource = new CancellationTokenSource();
             this.resetEvent = new ManualResetEvent(true);
@@ -195,7 +203,6 @@ namespace Citta_T1.Business.Schedule
             scheduleThread = new Thread(new ThreadStart(() => StartTask()));
             scheduleThread.IsBackground = true;
             scheduleThread.Start();
-
         }
 
         public void StartTask()
@@ -213,50 +220,46 @@ namespace Citta_T1.Business.Schedule
 
                 bool isDataElementError = false;
                 if (tmpTri.OperateElement.Status == ElementStatus.Done)
+                    continue;
+
+                //判断数据节点是否算完，如果数据节点（上一个的结果算子）为warn，跳过这个循环，并将其结果算子也置为warn
+                foreach (ModelElement tmpDE in tmpTri.DataElements)
                 {
+                    string filename = String.Empty;
+                    if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
+                    if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
+                    if (!File.Exists(filename))
+                    {
+                        tmpTri.OperateElement.Status = ElementStatus.Warn;
+                        UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "文件\"" + filename + "\"不存在，请确认后重新运行。");
+                        isDataElementError = true;
+                        break;
+                    }
+
+                    if (tmpDE.Type == ElementType.Result)
+                    {
+                        while (tmpDE.Status != ElementStatus.Done)
+                        {
+                            if (tmpDE.Status == ElementStatus.Warn)
+                            {
+                                isDataElementError = true;
+                                break;
+                            }
+                            Thread.Sleep(1000);
+                        }
+                    }
+                    if (isDataElementError) break;
+                }
+                if (isDataElementError)
+                {
+                    tmpTri.ResultElement.Status = ElementStatus.Warn;
                     continue;
                 }
-                else
-                {
-                    //判断数据节点是否算完，如果数据节点（上一个的结果算子）为error，跳过这个循环，并将其结果算子也置为error
-                    foreach (ModelElement tmpDE in tmpTri.DataElements)
-                    {
-                        string filename = String.Empty;
-                        if (tmpDE.Type == ElementType.DataSource) filename = tmpDE.FullFilePath;
-                        if (tmpDE.Type == ElementType.Result) filename = tmpDE.FullFilePath;
-                        if (!File.Exists(filename))
-                        {
-                            tmpTri.OperateElement.Status = ElementStatus.Warn;
-                            UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "文件\"" + filename + "\"不存在，请确认后重新运行。");
-                            isDataElementError = true;
-                            break;
-                        }
+                //该三元组未算过，且数据节点都已经算完，开一个子任务去算
+                Task t = new Task(() => TaskMethod(tmpTri), tokenSource.Token);
+                t.Start();
+                parallelTasks.Add(t);
 
-                        if (tmpDE.Type == ElementType.Result)
-                        {
-                            while (tmpDE.Status != ElementStatus.Done)
-                            {
-                                if (tmpDE.Status == ElementStatus.Warn)
-                                {
-                                    isDataElementError = true;
-                                    break;
-                                }
-                                Thread.Sleep(1000);
-                            }
-                        }
-                        if (isDataElementError) break;
-                    }
-                    if (isDataElementError)
-                    {
-                        tmpTri.ResultElement.Status = ElementStatus.Warn;
-                        continue;
-                    }
-                    //该三元组未算过，且数据节点都已经算完，开一个子任务去算
-                    Task t = new Task(() => TaskMethod(tmpTri), tokenSource.Token);
-                    t.Start();
-                    parallelTasks.Add(t);
-
-                }
             }
 
             Task.WaitAll(new Task[] { Task.WhenAll(parallelTasks.ToArray()) });

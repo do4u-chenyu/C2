@@ -44,13 +44,11 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(459, 11);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
-            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(358, 11);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
@@ -99,9 +97,6 @@
             this.valuePanel.Controls.Add(this.panel1);
             this.valuePanel.Location = new System.Drawing.Point(116, 21);
             this.valuePanel.Size = new System.Drawing.Size(413, 250);
-            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
             // 
             // tableLayoutPanel2
             // 
@@ -121,10 +116,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(320, 32);
             this.tableLayoutPanel2.TabIndex = 6;
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.label3, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.textBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
-            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 
@@ -154,8 +145,6 @@
             this.textBox0.Size = new System.Drawing.Size(114, 23);
             this.textBox0.TabIndex = 6;
             this.textBox0.Text = "别名";
-            this.textBox0.Enter += new System.EventHandler(this.AliasTextBox1_Enter);
-            this.textBox0.Leave += new System.EventHandler(this.AliasTextBox1_Enter);
             // 
             // label3
             // 

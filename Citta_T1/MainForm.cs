@@ -499,7 +499,7 @@ namespace Citta_T1
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument());
-                int notReadyNum = currentManager.TripleListGen.CountOpStatus(ElementStatus.Null);
+                int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
                 if (notReadyNum > 0)
                 {
                     MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -512,7 +512,7 @@ namespace Citta_T1
                     return;
                 }
                 currentManager.Start();
-                int taskNum = currentManager.TripleListGen.CountOpStatus(ElementStatus.Ready);
+                int taskNum = currentManager.CountOpStatus(ElementStatus.Ready);
                 this.progressBar1.Step = taskNum > 0 ? 100 / taskNum : 100;
 
                 this.progressBar1.Value = 0;

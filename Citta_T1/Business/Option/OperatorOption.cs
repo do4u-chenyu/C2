@@ -7,7 +7,7 @@ namespace Citta_T1.Business.Option
 
     public class OperatorOption
     {
-        private Dictionary<string, string> optionDict = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> optionDict = new Dictionary<string, string>();
 
         public Dictionary<string, string> OptionDict { get => optionDict; }
 
