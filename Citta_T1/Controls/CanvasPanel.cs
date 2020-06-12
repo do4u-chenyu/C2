@@ -251,7 +251,7 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 if (this.startC != null && this.endC != null)
                 {
-                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID);
+                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID, (this.EndC as MoveOpControl).RevisedPinIndex);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), addRelationCommand);
                 }
 
@@ -307,8 +307,8 @@ namespace Citta_T1.Controls
 
             if (mrIndex == -1)
             {
-                if (e.Button == MouseButtons.Right)
-                    this.SetAllLineStatus(null, true);
+                //if (e.Button == MouseButtons.Right)
+                this.SetAllLineStatus(null, true);
             }
             else
             {
@@ -384,7 +384,7 @@ namespace Citta_T1.Controls
                 endC = doc.SearchElementByID(mr.EndID).InnerControl;
                 if (startC != null && endC != null)
                 {
-                    ICommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID);
+                    ICommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID, mr.EndPin);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
                 }
             }
@@ -392,9 +392,9 @@ namespace Citta_T1.Controls
             this.Invalidate(false);
 
         }
-        public void DeleteRelationByCtrID(int startID, int endID)
+        public void DeleteRelationByCtrID(int startID, int endID, int pinIndex)
         {
-            ModelRelation mr = Global.GetCurrentDocument().ModelRelations.Find(t => t.StartID == startID && t.EndID == endID);
+            ModelRelation mr = Global.GetCurrentDocument().ModelRelations.Find(t => t.StartID == startID && t.EndID == endID && t.EndPin == pinIndex);
             if (mr != null)
                 this.DeleteRelation(mr); 
         }
@@ -419,14 +419,14 @@ namespace Citta_T1.Controls
                 log.Error("CanvasPanel删除线时发生错误:" + e);
             }
         }
-        public void AddNewRelationByCtrID(int startCID, int endCID)
+        public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex)
         {
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC = doc.SearchElementByID(startCID).InnerControl;
             MoveBaseControl endC = doc.SearchElementByID(endCID).InnerControl;
-            this.AddNewRelationByCtr(startC, endC);
+            this.AddNewRelationByCtr(startC, endC, pinIndex);
         }
-        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC)
+        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC, int pinIndex=-1)
         {
             PointF startP;
             if (startC is MoveDtControl)
@@ -441,7 +441,7 @@ namespace Citta_T1.Controls
                 endC.ID,
                 startP,
                 (endC as MoveOpControl).GetEndPinLoc((endC as MoveOpControl).RevisedPinIndex),
-                (endC as MoveOpControl).RevisedPinIndex
+                pinIndex > 0 ? pinIndex : (endC as MoveOpControl).RevisedPinIndex
                 );
             // 1. 关系不能重复
             // 2. 一个MoveOpControl的任意一个左引脚至多只能有一个输入
