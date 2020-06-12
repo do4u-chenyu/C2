@@ -38,10 +38,10 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (me.Type)
             {
                 case ElementType.DataSource:
-                    (me.InnerControl as MoveDtControl).UndoRedoDeleteElement(this.me, this.relations);
+                    (me.InnerControl as MoveDtControl).UndoRedoDeleteElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Operator:
-                    (me.InnerControl as MoveOpControl).UndoRedoDeleteElement(me, this.relations, this.rsEle);
+                    (me.InnerControl as MoveOpControl).UndoRedoDeleteElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Result:
                 default:
@@ -54,10 +54,10 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (me.Type)
             {
                 case ElementType.DataSource:
-                    (me.InnerControl as MoveDtControl).UndoRedoAddElement(me, this.relations);
+                    (me.InnerControl as MoveDtControl).UndoRedoAddElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Operator:
-                    (me.InnerControl as MoveOpControl).UndoRedoAddElement(me, this.relations, this.rsEle);
+                    (me.InnerControl as MoveOpControl).UndoRedoAddElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Result:
                 default:
