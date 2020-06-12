@@ -36,7 +36,7 @@ namespace Citta_T1.Core.UndoRedo.Command
             switch (me.Type)
             {
                 case ElementType.DataSource:
-                    (me.InnerControl as MoveDtControl).UndoRedoDeleteElement(this.relations);
+                    (me.InnerControl as MoveDtControl).UndoRedoDeleteElement(this.me, this.relations);
                     break;
                 case ElementType.Operator:
                     (me.InnerControl as MoveOpControl).UndoRedoDeleteElement();

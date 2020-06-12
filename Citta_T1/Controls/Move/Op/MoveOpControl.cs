@@ -508,9 +508,13 @@ namespace Citta_T1.Controls.Move.Op
                     relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 }
             }
-            foreach (var r in relationAndRsEles.Item1)
-                relations.Add(r);
-            rsEles = relationAndRsEles.Item2;
+            if (relationAndRsEles != null)
+            {
+                foreach (var r in relationAndRsEles.Item1)
+                    relations.Add(r);
+                rsEles = relationAndRsEles.Item2;
+            }
+            
             cp.Invalidate();
 
             ModelElement me = doc.SearchElementByID(ID);
@@ -542,7 +546,8 @@ namespace Citta_T1.Controls.Move.Op
              */
             CanvasPanel cp = Global.GetCanvasPanel();
             cp.AddEle(me);
-            cp.AddEle(rsEle);
+            if (rsEle != null)
+                cp.AddEle(rsEle);
             
             foreach (Tuple<int, int, int> rel in relations)
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);

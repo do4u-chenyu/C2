@@ -91,7 +91,7 @@ namespace Citta_T1.Controls.Move.Dt
             cp.DeleteEle(me);
         }
 
-        public void UndoRedoDeleteElement(List<Tuple<int, int, int>> relations)
+        public void UndoRedoDeleteElement(ModelElement me, List<Tuple<int, int, int>> relations)
         {
             //TODO undo,redo元素时关系的处理
             /*
@@ -100,7 +100,7 @@ namespace Citta_T1.Controls.Move.Dt
              * 3. 改变其他控件的Pin状态 TODO
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.DeleteEle(Global.GetCurrentDocument().SearchElementByID(ID));
+            cp.DeleteEle(me);
             foreach (Tuple<int, int, int> rel in relations)
                 cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
         }
@@ -113,7 +113,7 @@ namespace Citta_T1.Controls.Move.Dt
              * 3. 更新其他控件Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.DeleteEle(Global.GetCurrentDocument().SearchElementByID(ID));
+            cp.AddEle(me);
             foreach (Tuple<int, int, int> rel in relations)
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
         }
