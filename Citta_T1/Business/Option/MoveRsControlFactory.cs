@@ -2,11 +2,14 @@
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Controls.Move.Rs;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace Citta_T1.Business.Option
 {
@@ -84,11 +87,30 @@ namespace Citta_T1.Business.Option
 
             NewLineOpControlToRsControl(moc, mrc);
 
+            // UndoRedo
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations.Where(t => t.EndID == me.ID).ToList())
+            {
+                relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+            }
+            ICommand cmd = new ElementAddCommand(me, relations);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
         {
             MoveRsControl mrc = NewMoveRsControl(moc, path, new List<string>());
             NewLineOpControlToRsControl(moc, mrc);
+
+            // UndoRedo
+            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
+            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations.Where(t => t.EndID == me.ID).ToList())
+            {
+                relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+            }
+            ICommand cmd = new ElementAddCommand(me, relations);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
     }
 }

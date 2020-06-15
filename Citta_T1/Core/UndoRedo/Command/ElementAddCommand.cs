@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
+using Citta_T1.Controls.Move.Rs;
 using System;
 using System.Collections.Generic;
 
@@ -42,6 +43,8 @@ namespace Citta_T1.Core.UndoRedo.Command
                     (me.InnerControl as MoveOpControl).UndoRedoDeleteElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Result:
+                    (me.InnerControl as MoveRsControl).UndoRedoDeleteElement(this.me, this.relations, this.rsEle);
+                    break;
                 default:
                     break;
             }
@@ -58,6 +61,8 @@ namespace Citta_T1.Core.UndoRedo.Command
                     (me.InnerControl as MoveOpControl).UndoRedoAddElement(this.me, this.relations, this.rsEle);
                     break;
                 case ElementType.Result:
+                    (me.InnerControl as MoveRsControl).UndoRedoAddElement(this.me, this.relations, this.rsEle);
+                    break;
                 default:
                     break;
             }

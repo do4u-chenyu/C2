@@ -115,9 +115,11 @@ namespace Citta_T1
         {
             ModelElement me = this.modelDocumentDao.AddDocumentOperator(ct);
             SetDocumentDirty();
-            ICommand cmd = new ElementAddCommand(me);
             if (ct is MoveDtControl || ct is MoveOpControl)
+            {
+                ICommand cmd = new ElementAddCommand(me);
                 UndoRedoManager.GetInstance().PushCommand(this.modelDocumentDao.CurrentDocument, cmd);
+            }
         }
 
         public void SaveCurrentDocument()
