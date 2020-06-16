@@ -37,7 +37,7 @@ namespace Citta_T1.Business.Model
         CustomOperator2, //自定义算子, 二元算子
         PythonOperator,  //Python算子
         DataFormatOperator, //数据标准化
-        KeyWordOperator  //关键词过滤  
+        KeywordOperator  //关键词过滤  
     }
     public enum ElementStatus
     {
