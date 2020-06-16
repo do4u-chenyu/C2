@@ -89,7 +89,7 @@ namespace Citta_T1.Utils
                     type = "PythonOperator";
                     break;
                 case "关键词过滤":
-                    type = "KeyWordOperator";
+                    type = "KeywordOperator";
                     break;
                 case "数据标准化":
                     type = "DataFormatOperator";
@@ -151,7 +151,7 @@ namespace Citta_T1.Utils
                 case "PythonOperator":
                     type = "Python算子";
                     break;
-                case "KeyWordOperator":
+                case "KeywordOperator":
                     type = "关键词过滤";
                     break;
                 case "DataFormatOperator":

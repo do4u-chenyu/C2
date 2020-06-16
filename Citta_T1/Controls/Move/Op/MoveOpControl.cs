@@ -500,7 +500,7 @@ namespace Citta_T1.Controls.Move.Op
             {
                 // TODO 删结果算子和任何与结果算子相连的关系 DT-Op-Rs-X del Op-Rs Rs-X Rs
                 if (mr.StartID == this.ID)
-                    relationAndRsEles = DeleteResultControl(mr.EndID, modelRelations);
+                    relationAndRsEles = DeleteResult(mr.EndID, modelRelations);
                 // 删关系
                 if (mr.EndID == this.ID)
                 {
@@ -525,7 +525,7 @@ namespace Citta_T1.Controls.Move.Op
             cp.DeleteEle(me);
         }
         
-        private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResultControl(int endID, List<ModelRelation> modelRelations)
+        private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResult(int endID, List<ModelRelation> modelRelations)
         {
             // modelRelations = deepcopy(Global.GetCurrentDocument().modelRelations)
             CanvasPanel cp = Global.GetCanvasPanel();
