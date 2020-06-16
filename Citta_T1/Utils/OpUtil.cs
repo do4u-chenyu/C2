@@ -177,8 +177,14 @@ namespace Citta_T1.Utils
             Unknow
         }
 
-        public static Encoding EncodingEnum(string type)
-        { return (Encoding)Enum.Parse(typeof(Encoding), type); }
+        public static Encoding EncodingEnum(string type,Encoding defaultEncoding = Encoding.GBK)
+        {
+            if (String.IsNullOrEmpty(type) || !Enum.TryParse<Encoding>(type, true, out Encoding encoding))
+                return defaultEncoding;
+            else
+                return encoding;
+
+        }
 
         public static ExtType ExtTypeEnum(string type)
         { return (ExtType)Enum.Parse(typeof(ExtType), type); }
