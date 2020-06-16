@@ -12,9 +12,14 @@ namespace Citta_T1.OperatorViews
 
     public partial class KeywordOperatorView : BaseOperatorView
     {
-        private const int colIndexDefault = 0;
+        private const int colIndexDefault = -1;
+        private const int colCountDefault = 0;
         private string keywordEncoding, keywordExtType, keywordSep;
         private string keywordXml;
+        private const string outInfo = "您需要选择输出列";
+        private const string dataHelpInfo = "您需要选择需要处理的数据项";
+        private const string keywordInfo = "您需要选择使用的关键词列";
+        private const string conditionInfo = "您需要选择操作为过滤噪音还是命中提取";
 
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -40,13 +45,8 @@ namespace Citta_T1.OperatorViews
             dataInfo.TryGetValue("separator1", out keywordSep);
 
             comboBox0.Items.AddRange(nowColumnsName0);
-            comboBox0.SelectedIndex = colIndexDefault;
-
             comboBox1.Items.AddRange(nowColumnsName1);
-            comboBox1.SelectedIndex = colIndexDefault;
-
             outListCCBL0.Items.AddRange(nowColumnsName0);
-            conditionSelectBox.SelectedIndex = colIndexDefault;
             UpdatePreviewText();
         }
         private void LoadOption()
@@ -91,9 +91,24 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            if (this.outListCCBL0.GetItemCheckIndex().Count == colIndexDefault)
+            if (comboBox0.SelectedIndex.Equals(colIndexDefault))
             {
-                MessageBox.Show("您需要选择输出字段");
+                MessageBox.Show(dataHelpInfo);
+                return notReady;
+            }
+            if (conditionSelectBox.SelectedIndex.Equals(colIndexDefault))
+            {
+                MessageBox.Show(conditionInfo);
+                return notReady;
+            }
+            if (comboBox1.SelectedIndex.Equals(colIndexDefault))
+            {
+                MessageBox.Show(keywordInfo);
+                return notReady;
+            }
+            if (this.outListCCBL0.GetItemCheckIndex().Count.Equals(colCountDefault))
+            {
+                MessageBox.Show(outInfo);
                 return notReady;
             }
             return !notReady;
@@ -116,6 +131,8 @@ namespace Citta_T1.OperatorViews
     {
         private const string defaultInfo = "发生未知的原因，关键词组合失败，您需要联系开发团队或者重命名关键词文件并导入";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
+        private const string blankKeyColInfo = "当前尚未指定关键词列";
+
         private readonly List<string> datas = new List<string>();
 
         public string KeywordPreView(string keywordFile,
@@ -128,6 +145,10 @@ namespace Citta_T1.OperatorViews
             if (separator.Equals(' '))
             {
                 return blankSpaceSepInfo;
+            }
+            if (colIndex.Equals(-1))
+            {
+                return blankKeyColInfo;
             }
             KeywordRead(keywordFile,
                         separator,
