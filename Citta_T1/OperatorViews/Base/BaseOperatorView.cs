@@ -78,20 +78,7 @@ namespace Citta_T1.OperatorViews.Base
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            // 如果配置条件为空，算子状态置为NULL(针对本地错误修改，异常运算导致的配置条件为空问题)
-
-            List<string> names = new List<string> {comboBox0.GetType().Name,
-                                                   outListCCBL0.GetType().Name,
-                                                   dataSourceTB0.GetType().Name};
-            List<Control> controls = new List<Control>();
-            FindChildControls(this, names, controls);
-            foreach (Control control in controls)
-            {
-                if (names.Contains(control.GetType().Name) && String.IsNullOrEmpty(control.Text))
-                    this.opControl.Status = ElementStatus.Null;  
-            }
-
-            
+                      
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
