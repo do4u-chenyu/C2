@@ -229,11 +229,11 @@ namespace Citta_T1.Business.Model
         }
         public void ReadXml()
         {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(modelFilePath);
             XmlNodeList nodeLists;
             try
             {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(modelFilePath);
                 XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
                 this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
@@ -242,7 +242,7 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e)
             {
-                log.Error("DocumentSaveLoad 读取Xml: " + e.Message);
+                log.Error("DocumentSaveLoad Xml文件格式存在问题: " + e.Message);
                 return;
             }
 

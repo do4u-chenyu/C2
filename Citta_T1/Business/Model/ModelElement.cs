@@ -137,13 +137,14 @@ namespace Citta_T1.Business.Model
         public static ModelElement CreateModelElement(Dictionary<string, string> dict)
         {
             if (!(dict.ContainsKey("id")
+                && ConvertUtil.IsInt(dict["id"])
                 && dict.ContainsKey("name")
                 && dict.ContainsKey("location")
                 && dict.ContainsKey("type")))
                 return ModelElement.Empty;
-            string type = dict["type"];
-            string name = dict["name"];
             int id = Convert.ToInt32(dict["id"]);
+            string type = dict["type"];
+            string name = dict["name"];          
             Point location = OpUtil.ToPointType(dict["location"]);
 
             if (type == "DataSource")
