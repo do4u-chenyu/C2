@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
@@ -19,7 +18,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputField = TransInputLine(option.GetOption("dataSelectIndex"));//待匹配字段
             string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
             string invert = option.GetOption("conditionSlect").ToLower() == "0" ? String.Empty : "-v"; //是否包含，0包含，1不包含
-            string[] keyList = Regex.Split(option.GetOption("keyWordText")," OR ");
+            string[] keyList = option.GetOption("keyWordText").Split('\t');
 
             //关键词写入临时配置文件，解决关键词为中文时的编码问题，文件统一为utf-8
             string keyPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_key.bat";

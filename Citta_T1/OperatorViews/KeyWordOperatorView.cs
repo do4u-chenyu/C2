@@ -14,6 +14,7 @@ namespace Citta_T1.OperatorViews
     {
         private const int colIndexDefault = 0;
         private string keywordEncoding, keywordExtType, keywordSep;
+        private string keywordXml;
 
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -50,7 +51,9 @@ namespace Citta_T1.OperatorViews
         }
         private void LoadOption()
         {
-            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
+            if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, 
+                                                                  this.nowColumnsName0, 
+                                                                  this.nowColumnsName1))
                 return;
 
             if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
@@ -76,7 +79,7 @@ namespace Citta_T1.OperatorViews
             opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex);
             opControl.Option.SetOption("keySelectIndex", comboBox1.SelectedIndex);
             opControl.Option.SetOption("conditionSlect", conditionSelectBox.SelectedIndex);
-            opControl.Option.SetOption("keyWordText", keywordPreviewBox.Text);
+            opControl.Option.SetOption("keyWordText", keywordXml);
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             //更新子图所有节点状态
@@ -99,11 +102,13 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与更新
         private void UpdatePreviewText()
         {
-            this.keywordPreviewBox.Text = new KeywordCombine().KeywordPreView(dataSourceFFP1,
-                                                                              keywordSep.ToCharArray(),
-                                                                              comboBox1.SelectedIndex,
-                                                                              keywordExtType,
-                                                                              keywordEncoding);
+
+            keywordXml = new KeywordCombine().KeywordPreView(dataSourceFFP1, 
+                                                             keywordSep.ToCharArray(),
+                                                             comboBox1.SelectedIndex, 
+                                                             keywordExtType, 
+                                                             keywordEncoding);
+            this.keywordPreviewBox.Text = keywordXml.Replace("\t", " OR ");
         }
         #endregion
     }
@@ -129,7 +134,7 @@ namespace Citta_T1.OperatorViews
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            result = string.Join(" OR ", datas);  //TODO， 如果输入关键词本身是"OR",会是什么情况
+            result = string.Join("\t", datas);  //TODO， 如果输入关键词本身是"OR",会是什么情况
             if (String.IsNullOrWhiteSpace(result))
                 result = defaultInfo;
             return result;
