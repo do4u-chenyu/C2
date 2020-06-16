@@ -177,20 +177,30 @@ namespace Citta_T1.Utils
             Unknow
         }
 
-        public static Encoding EncodingEnum(string type,Encoding defaultEncoding = Encoding.GBK)
+        public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)
         {
-            if (String.IsNullOrEmpty(type) || !Enum.TryParse<Encoding>(type, true, out Encoding encoding))
+            if (String.IsNullOrEmpty(encoding) || !Enum.TryParse<Encoding>(encoding, true, out Encoding outEncoding))
                 return defaultEncoding;
             else
-                return encoding;
+                return outEncoding;
 
         }
 
-        public static ExtType ExtTypeEnum(string type)
-        { return (ExtType)Enum.Parse(typeof(ExtType), type); }
+        public static ExtType ExtTypeEnum(string type, ExtType defaultType = ExtType.Unknow) 
+        {
+            if (String.IsNullOrEmpty(type) || !Enum.TryParse<ExtType>(type, true, out ExtType outType))
+                return defaultType;
+            else
+                return outType;
+        }
 
-        public static ElementStatus EStatus(string status)
-        { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
+        public static ElementStatus EStatus(string status, ElementStatus defaultStatus = ElementStatus.Null)
+        {
+            if (String.IsNullOrEmpty(status) || !Enum.TryParse<ElementStatus>(status, true, out ElementStatus outStatus))
+                return defaultStatus;
+            else
+                return outStatus;
+        }
 
 
         public static PointF ToPointFType(string point)

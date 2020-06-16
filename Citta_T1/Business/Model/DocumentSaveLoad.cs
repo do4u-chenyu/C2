@@ -168,8 +168,6 @@ namespace Citta_T1.Business.Model
                     .Write("separator", me.Separator)
                     .Write("encoding", me.Encoding);
 
-                if (me.Type == ElementType.DataSource)
-                    mexw.Write("extType", me.ExtType);
             }
         }
         #region 配置信息存到xml
