@@ -40,65 +40,65 @@ namespace Citta_T1.Utils
 
         public static ElementSubType SEType(string subType)
         {
-            string type;
+            ElementSubType type;
             switch (subType)
             {
                 case "关联算子":
-                    type = "RelateOperator";
+                    type = ElementSubType.RelateOperator;
                     break;
                 case "碰撞算子":
-                    type = "CollideOperator";
+                    type = ElementSubType.CollideOperator;
                     break;
                 case "取并集":
-                    type = "UnionOperator";
+                    type = ElementSubType.UnionOperator;
                     break;
                 case "取差集":
-                    type = "DifferOperator";
+                    type = ElementSubType.DifferOperator;
                     break;
                 case "随机采样":
-                    type = "RandomOperator";
+                    type = ElementSubType.RandomOperator;
                     break;
                 case "条件筛选":
-                    type = "FilterOperator";
+                    type = ElementSubType.FilterOperator;
                     break;
                 case "取最大值":
-                    type = "MaxOperator";
+                    type = ElementSubType.MaxOperator;
                     break;
                 case "取最小值":
-                    type = "MinOperator";
+                    type = ElementSubType.MinOperator;
                     break;
                 case "取平均值":
-                    type = "AvgOperator";
+                    type = ElementSubType.AvgOperator;
                     break;
                 case "频率算子":
-                    type = "FreqOperator";
+                    type = ElementSubType.FreqOperator;
                     break;
                 case "排序算子":
-                    type = "SortOperator";
+                    type = ElementSubType.SortOperator;
                     break;
                 case "分组算子":
-                    type = "GroupOperator";
+                    type = ElementSubType.GroupOperator;
                     break;
                 case "AI实践":
-                    type = "CustomOperator1";
+                    type = ElementSubType.CustomOperator1;
                     break;
                 case "多源算子":
-                    type = "CustomOperator2";
+                    type = ElementSubType.CustomOperator2;
                     break;
                 case "Python算子":
-                    type = "PythonOperator";
+                    type = ElementSubType.PythonOperator;
                     break;
                 case "关键词过滤":
-                    type = "KeywordOperator";
+                    type = ElementSubType.KeywordOperator;
                     break;
                 case "数据标准化":
-                    type = "DataFormatOperator";
+                    type = ElementSubType.DataFormatOperator;
                     break;
                 default:
-                    type = "Null";
+                    type = ElementSubType.Null;
                     break;
             }
-            return (ElementSubType)Enum.Parse(typeof(ElementSubType), type);
+            return type;
         }
 
         public static string SubTypeName(string subType)

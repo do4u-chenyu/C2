@@ -28,6 +28,7 @@ namespace Citta_T1.OperatorViews.Base
         protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
 
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
+        protected CheckUtil CheckUtil;
         public BaseOperatorView()
         {
             this.opControl = null;
@@ -48,6 +49,7 @@ namespace Citta_T1.OperatorViews.Base
         {
             this.opControl = opControl;
             oldOptionDictStr = opControl.Option.ToString();
+            CheckUtil = new CheckUtil(opControl);
         }
         // 初始化左右表数据源
         protected void InitDataSource()
@@ -80,7 +82,10 @@ namespace Citta_T1.OperatorViews.Base
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-                      
+            /*
+             * 外部Xml文件修改等情况，检查配置内容是否完备正确
+             */
+            CheckUtil.CheckOption();
             this.DialogResult = DialogResult.Cancel;
             Close();
         }

@@ -454,6 +454,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CheckUtil.cs" />
     <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Core\CyclicDetector.cs" />

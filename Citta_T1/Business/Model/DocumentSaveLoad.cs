@@ -286,6 +286,11 @@ namespace Citta_T1.Business.Model
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
                     ctl.Option = ReadOption(xn);
+                    /*
+                     * 外部Xml文件修改等情况，检查配置内容是否完备正确
+                     */
+                    CheckUtil checkUtil = new CheckUtil(ctl);
+                    checkUtil.CheckOption();
                     ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
                     ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                 }
