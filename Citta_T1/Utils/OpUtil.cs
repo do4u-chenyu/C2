@@ -89,7 +89,7 @@ namespace Citta_T1.Utils
                     type = "PythonOperator";
                     break;
                 case "关键词过滤":
-                    type = "KeyWordOperator";
+                    type = "KeywordOperator";
                     break;
                 case "数据标准化":
                     type = "DataFormatOperator";
@@ -151,7 +151,7 @@ namespace Citta_T1.Utils
                 case "PythonOperator":
                     type = "Python算子";
                     break;
-                case "KeyWordOperator":
+                case "KeywordOperator":
                     type = "关键词过滤";
                     break;
                 case "DataFormatOperator":
@@ -177,14 +177,30 @@ namespace Citta_T1.Utils
             Unknow
         }
 
-        public static Encoding EncodingEnum(string type)
-        { return (Encoding)Enum.Parse(typeof(Encoding), type); }
+        public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)
+        {
+            if (String.IsNullOrEmpty(encoding) || !Enum.TryParse<Encoding>(encoding, true, out Encoding outEncoding))
+                return defaultEncoding;
+            else
+                return outEncoding;
 
-        public static ExtType ExtTypeEnum(string type)
-        { return (ExtType)Enum.Parse(typeof(ExtType), type); }
+        }
 
-        public static ElementStatus EStatus(string status)
-        { return (ElementStatus)Enum.Parse(typeof(ElementStatus), status); }
+        public static ExtType ExtTypeEnum(string type, ExtType defaultType = ExtType.Unknow) 
+        {
+            if (String.IsNullOrEmpty(type) || !Enum.TryParse<ExtType>(type, true, out ExtType outType))
+                return defaultType;
+            else
+                return outType;
+        }
+
+        public static ElementStatus EStatus(string status, ElementStatus defaultStatus = ElementStatus.Null)
+        {
+            if (String.IsNullOrEmpty(status) || !Enum.TryParse<ElementStatus>(status, true, out ElementStatus outStatus))
+                return defaultStatus;
+            else
+                return outStatus;
+        }
 
 
         public static PointF ToPointFType(string point)

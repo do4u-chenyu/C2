@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Citta_T1.Business.Schedule.Cmd
 {
-    class KeyWordOperatorCmd : OperatorCmd
+    class KeywordOperatorCmd : OperatorCmd
     {
-        public KeyWordOperatorCmd(Triple triple) : base(triple)
+        public KeywordOperatorCmd(Triple triple) : base(triple)
         {
         }
         public List<string> GenCmd()

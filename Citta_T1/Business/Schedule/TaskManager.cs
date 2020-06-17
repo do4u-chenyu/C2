@@ -301,7 +301,7 @@ namespace Citta_T1.Business.Schedule
                         case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.DataFormatOperator: cmds = (new DataFormatOperatorCmd(triple)).GenCmd(); break;
-                        case ElementSubType.KeyWordOperator: cmds = (new KeyWordOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.KeywordOperator: cmds = (new KeywordOperatorCmd(triple)).GenCmd(); break;
                     }
                     break;
                 }
