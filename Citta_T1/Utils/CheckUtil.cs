@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move.Op;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Op;
 
 namespace Citta_T1.Utils
 {
@@ -53,24 +51,26 @@ namespace Citta_T1.Utils
              * 配置项丢失检查
              */
            foreach (string prefix in optionPrefix[OpUtil.SEType(opControl.SubTypeName)])
-            {
-                if (!opControl.Option.OptionDict.ContainsKey(prefix) || String.IsNullOrEmpty(opControl.Option.OptionDict[prefix]))
-                    opControl.Status = ElementStatus.Null;
-            }
+           {
+                opControl.Status = String.IsNullOrEmpty(opControl.Option.GetOption(prefix)) ? ElementStatus.Null : opControl.Status;
+           }
             /*
              * 数据类型、字段数目检测
              */
             foreach (string key in opControl.Option.OptionDict.Keys.ToArray())
             {
+                // 不包含outfield就没必要检查了
                 if (!key.Contains("outfield"))
                     continue;
-                string[] indexs = opControl.Option.OptionDict[key].Split('\t');
+                string[] indexs = opControl.Option.GetOptionSplit(key);
                 foreach (string index in indexs)
+                {
                     if (!ConvertUtil.IsInt(index))
-                    { 
-                        opControl.Option.OptionDict[key] = "";
+                    {
+                        opControl.Option[key] = String.Empty;
                         opControl.Status = ElementStatus.Null;
-                    }                      
+                    }
+                }
             }
 
             /*

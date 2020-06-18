@@ -217,7 +217,7 @@ namespace Citta_T1.Business.Model
             string text = String.Empty;
             try
             {
-                if (node.SelectSingleNode(nodeName)==null)
+                if (node.SelectSingleNode(nodeName) == null)
                     return text;
                 text = node.SelectSingleNode(nodeName).InnerText;
             }

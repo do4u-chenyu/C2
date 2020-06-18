@@ -18,6 +18,8 @@ namespace Citta_T1.Business.Option
             return OptionDict[OpKey];
         }
 
+        public string this[string key] { get { return optionDict[key]; } set { optionDict[key] = value; } }
+
         public override string ToString()
         {
             return string.Join(",", OptionDict.ToList());
@@ -71,6 +73,11 @@ namespace Citta_T1.Business.Option
                     count += 1;
             }
             return count;
+        }
+
+        public void Clear()
+        {
+            OptionDict.Clear();
         }
     }
 

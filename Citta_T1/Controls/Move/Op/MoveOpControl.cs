@@ -33,7 +33,8 @@ namespace Citta_T1.Controls.Move.Op
             get => base.Status;
             set
             {
-                OptionDirty(value);
+                if (base.Status != value)
+                    OptionDirty(value);
                 base.Status = value;
             }
         }

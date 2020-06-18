@@ -162,7 +162,7 @@ namespace Citta_T1.Business.Option
                 emptyOption = true;
                 List<string> keys = new List<string>(moc.Option.OptionDict.Keys); 
                 foreach (string key in keys)
-                    moc.Option.OptionDict[key] = "";
+                    moc.Option[key] = String.Empty;
             } 
             return emptyOption;
         }
