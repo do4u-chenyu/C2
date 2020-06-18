@@ -179,13 +179,6 @@ namespace Citta_T1.Utils
 
         public static Encoding EncodingEnum(string encoding,Encoding defaultEncoding = Encoding.GBK)
         {
-            //if (String.IsNullOrEmpty(encoding) || !Enum.TryParse(encoding, true, out Encoding outEncoding))
-            //    return defaultEncoding;
-            //else
-            //    return outEncoding;
-            bool ret = Enum.TryParse(String.Empty, true, out Encoding outEncoding1);
-            ret = Enum.TryParse(null, true, out Encoding outEncoding2);
-
             if (!Enum.TryParse(encoding, true, out Encoding outEncoding))
                 return defaultEncoding;
             return outEncoding;
@@ -193,18 +186,16 @@ namespace Citta_T1.Utils
 
         public static ExtType ExtTypeEnum(string type, ExtType defaultType = ExtType.Unknow) 
         {
-            if (String.IsNullOrEmpty(type) || !Enum.TryParse(type, true, out ExtType outType))
+            if (!Enum.TryParse(type, true, out ExtType outType))
                 return defaultType;
-            else
-                return outType;
+            return outType;
         }
 
         public static ElementStatus EStatus(string status, ElementStatus defaultStatus = ElementStatus.Null)
         {
-            if (String.IsNullOrEmpty(status) || !Enum.TryParse(status, true, out ElementStatus outStatus))
+            if (!Enum.TryParse(status, true, out ElementStatus outStatus))
                 return defaultStatus;
-            else
-                return outStatus;
+            return outStatus;
         }
 
 

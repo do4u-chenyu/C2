@@ -45,6 +45,7 @@ namespace Citta_T1.Utils
             }
         }
 
+
         public static void ControlTextTryParseInt(Control ct, string errrorMessage = "")
         {
             try

@@ -333,9 +333,7 @@
     <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\Base\BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="OperatorViews\Base\BaseOperatorView.cs" />
     <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </Compile>
@@ -454,7 +452,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utils\CheckUtil.cs" />
     <Compile Include="Utils\ConfigUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Core\CyclicDetector.cs" />
