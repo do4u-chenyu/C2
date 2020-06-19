@@ -14,8 +14,8 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-            RegisterNoEmptyOption("maxfield", DataType.Int, -1);
-            RegisterNoEmptyOption("outfield", DataType.Int, -1);
+            checkOptions.Add("maxfield", DataType.Int, -1)
+                         .Add("outfield", DataType.Int, -1);
 
         }
         #region 判断是否配置完毕

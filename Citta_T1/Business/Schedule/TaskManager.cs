@@ -163,7 +163,7 @@ namespace Citta_T1.Business.Schedule
 
             foreach (Task currentTask in parallelTasks)
             {
-                if (currentTask != null)//终止task线程
+                if (currentTask != null && currentTask.Status == TaskStatus.Running)//终止task线程
                     tokenSource.Cancel();
             }
             CloseThread();

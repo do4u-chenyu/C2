@@ -264,19 +264,6 @@ namespace Citta_T1.OperatorViews.Base
             }
         }
 
-        //注册非空配置项
-        public void RegisterNoEmptyOption(string prefix, DataType dataType)
-        {
-            checkOptions.Add(prefix, dataType);
-        }
-        public void RegisterNoEmptyOption(string prefix, DataType dataType, int count)
-        {
-            checkOptions.Add(prefix, dataType, count);
-        }
-        public void RegisterNoEmptyOption(string prefix, DataType dataType, int[] countList)
-        {
-            checkOptions.Add(prefix, dataType, countList);
-        }
         private void CancelButton_Click(object sender, EventArgs e)
         {
             /*

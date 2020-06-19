@@ -107,6 +107,7 @@ namespace Citta_T1.Controls.Top
             Global.GetMainForm().SetDocumentDirty();
         }
 
+
         private void MoreButton_MouseClick(object sender, MouseEventArgs e)
         {
             ConfigForm config = new ConfigForm();

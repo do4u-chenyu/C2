@@ -36,6 +36,7 @@ namespace Citta_T1
 
         delegate void AsynUpdateLog(string logContent);
         delegate void AsynUpdateGif();
+        delegate void TaskCallBack();
         delegate void AsynUpdateProgressBar();
         delegate void AsynUpdateMask();
         delegate void AsynUpdateOpErrorMessage();
@@ -392,7 +393,6 @@ namespace Citta_T1
                 this.bottomViewPanel.Height = 40;
                 this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
             }
-            // TODO [DK] BUG 这里是因为CanvasPanel设置了Dock属性，在this.bottomViewPanel.Height变化的时候，CanvasPanel的Height也变了，因此控件位置发生了改变，但是线并没有变
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
             {
@@ -532,18 +532,6 @@ namespace Citta_T1
             UpdateRunbuttonImageInfo();
         }
 
-        public void SetCanvasEnable(bool status)
-        {
-            foreach (Control c in Global.GetCanvasPanel().Controls)
-            {
-                //log.Info("暂停该控件：" + c.Name);
-                if (c.Name == "MoveRsControl" || c.Name == "MoveOpControl")
-                {
-                    c.Enabled = status;
-                }
-            }
-        }
-
         public void BindUiManagerFunc()
         {
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
@@ -624,17 +612,18 @@ namespace Citta_T1
         private void Accomplish(TaskManager manager)
         {
             ModelDocument doneModel = Global.GetModelDocumentDao().GetManagerRelateModel(manager);
-            if (doneModel.TaskManager.ModelStatus == ModelStatus.Done)
-            {
-                doneModel.Save();
-            }
-
+            doneModel.Save();
             if (doneModel == Global.GetCurrentDocument())
             {
-                UpdateRunbuttonImageInfo();
+                this.Invoke(new TaskCallBack(delegate ()
+                {
+                    UpdateRunbuttonImageInfo();
+                }));
+                
             }
         }
 
+        //更新状态的节点：1、当前模型开始、终止、运行完成；2、切换文档
         public void UpdateRunbuttonImageInfo()
         {
             TaskManager manager = Global.GetCurrentDocument().TaskManager;
@@ -653,7 +642,9 @@ namespace Citta_T1
                 //点击运行按钮
                 case ModelStatus.Running:
                     this.runButton.Name = "pauseButton";
-                    this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                    //this.runButton.Image = global::Citta_T1.Properties.Resources.pause;
+                    this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    this.runButton.Enabled = false;//暂时隐去暂停功能
                     this.currentModelRunBackLab.Show();
                     this.currentModelRunLab.Show();
                     this.progressBar1.Show();
@@ -665,10 +656,12 @@ namespace Citta_T1
                 case ModelStatus.GifDone:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    this.runButton.Enabled = true;//暂时隐去暂停功能
                     break;
                 default:
                     this.runButton.Name = "runButton";
                     this.runButton.Image = global::Citta_T1.Properties.Resources.run;
+                    this.runButton.Enabled = true;//暂时隐去暂停功能
                     this.currentModelRunBackLab.Hide();
                     this.currentModelRunLab.Hide();
                     this.currentModelFinLab.Hide();
