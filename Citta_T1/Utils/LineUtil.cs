@@ -155,7 +155,6 @@ namespace Citta_T1.Utils
         }
         public RectangleF GetBoundingRect()
         {
-            // TODO [DK] 没有考虑到坐标系放大系数
             return GetRect(startP, endP);
         }
         private RectangleF GetRect(PointF p1, PointF p2, float width = 5)

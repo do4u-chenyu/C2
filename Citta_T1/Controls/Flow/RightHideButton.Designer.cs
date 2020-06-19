@@ -43,9 +43,9 @@
             this.label1.Size = new System.Drawing.Size(36, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "隐藏";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
-            this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
+            this.label1.Click += new System.EventHandler(this.Label1_Click);
+            this.label1.MouseEnter += new System.EventHandler(this.Label1_MouseEnter);
+            this.label1.MouseLeave += new System.EventHandler(this.Label1_MouseLeave);
             // 
             // toolTip1
             // 

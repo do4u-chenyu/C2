@@ -297,7 +297,6 @@ namespace Citta_T1.Controls.Move
         }
         public virtual void UndoRedoDeleteElement(ModelElement me, List<Tuple<int, int, int>> relations=null, ModelElement rsEle = null)
         {
-            //TODO undo,redo时关系处理
             /*
              * 1. 删自身
              * 2. 删与之相连的关系
@@ -316,7 +315,6 @@ namespace Citta_T1.Controls.Move
         }
         public virtual void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement rsEle = null)
         {
-            //TODO undo,redo时关系处理
             /*
              * 1. 恢复自身
              * 2. 恢复与之相连的关系

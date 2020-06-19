@@ -1,6 +1,9 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -16,7 +19,7 @@ namespace Citta_T1.Controls
     class FrameWrapperVFX
     {
         // 拖拽过程中的高级视觉特效类
-        private bool backImgMode = false;
+        private readonly bool backImgMode = false;
         private Pen p = new Pen(Color.Gray, 1f);
         public FrameWrapperVFX()
         {
@@ -26,7 +29,8 @@ namespace Citta_T1.Controls
         #region 静态图生成相关特效
         public Bitmap CreateWorldImage(int worldWidth, int worldHeight, List<Control> controls, bool mode)
         {
-            float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            
             Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
             Graphics g = Graphics.FromImage(staticImage);
 
@@ -193,10 +197,10 @@ namespace Citta_T1.Controls
     }
     class FrameWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private const bool endSelect = false;
         private const bool startSelect = true;
-
+        private const bool dragStatus = true;
+        private const bool noDragStatus = false;
         private const int arcRadius = 2;
         private const double minBoundingRectOffset = 0.4;
         private Bitmap staticImage, moveImage;
@@ -251,6 +255,7 @@ namespace Citta_T1.Controls
         public void FrameWrapper_MouseDown(MouseEventArgs e)
         {
             FramePropertySet();
+          
             startP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
             if (e.Button == MouseButtons.Right)
             {
@@ -267,14 +272,16 @@ namespace Citta_T1.Controls
         public void FrameWrapper_MouseMove(MouseEventArgs e)
         {
             endP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
-            FrameWrapper_MouseEnter(endP);
+            
             if (e.Button != MouseButtons.Left)
             {
+                FrameWrapper_MouseEnter(endP,noDragStatus);
                 return;
             }
             if (selectStatus.Equals(startSelect))
             {
                 SelectFrame_MouseMove();
+
                 return;
             }
             DragFrame_MouseMove();
@@ -292,9 +299,9 @@ namespace Citta_T1.Controls
             }
             DragFrame_MouseUp();
         }
-        public void FrameWrapper_MouseEnter(Point pw)
+        public void FrameWrapper_MouseEnter(Point pw,bool status)
         {
-            if (minBoundingBox.Contains(pw))
+            if (minBoundingBox.Contains(pw) || status)
             {
                 Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
                 return;
@@ -303,8 +310,9 @@ namespace Citta_T1.Controls
         }
         public void FrameDel(object sender, EventArgs e)
         {
-            foreach (Control ct in controls)
-                (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
+            //foreach (Control ct in controls)
+            //(ct as IMoveControl).DeleteMenuItem_Click(sender, e); // TODO [DK] 批量删除
+            Tuple<List<ModelElement>, List<Tuple<int, int, int>>> mesAndMrs = Global.GetCanvasPanel().DeleteSelectedElesByCtrID(this.controls.Select(t => (t as MoveBaseControl).ID));
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
@@ -315,7 +323,13 @@ namespace Citta_T1.Controls
                 staticImage = null;
             }
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
-
+            
+            if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
+            {
+                ICommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            }
+            
         }
         public bool FramePaint(PaintEventArgs e)
         {
@@ -329,15 +343,6 @@ namespace Citta_T1.Controls
             }
             return false;
         }
-        public void FramePaste()
-        {
-            if (controls.Count != 1)
-                return;
-            foreach (Control ct in controls)
-            {
-                //框选后粘贴 暂无实现
-            }
-        }
         #endregion
         #region 控件框选实现
         private void SelectFrame_MouseDown()
@@ -348,6 +353,7 @@ namespace Citta_T1.Controls
         }
         private void SelectFrame_MouseMove()
         {
+            
             CreateRect();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
@@ -378,6 +384,7 @@ namespace Citta_T1.Controls
         }
         private void DragFrame_MouseMove()
         {
+            FrameWrapper_MouseEnter(endP, dragStatus);
             if (this.moveImage == null)
                 return;
             int dx = endP.X - startP.X;
@@ -386,11 +393,19 @@ namespace Citta_T1.Controls
         }
         private void DragFrame_MouseUp()
         {
+            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
+
             foreach (Control ct in controls)
             {
+                idPtsDict.Add((ct as MoveBaseControl).ID, new Point(ct.Left, ct.Top));
                 ct.Left = ct.Left + endP.X - startP.X + moveOffset.X;
                 ct.Top = ct.Top + endP.Y - startP.Y + moveOffset.Y;
             }
+
+            ICommand cmd = new BatchMoveCommand(idPtsDict);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+
+
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
@@ -400,6 +415,7 @@ namespace Citta_T1.Controls
             minBoundingBox.Y = minBoundingBox.Y + endP.Y - startP.Y + moveOffset.Y;
 
             frameWrapperVFX.DrawRoundRect(minBoundingBox, staticImage, arcRadius);
+
         }
         #endregion
         #region 最小外包矩形计算
@@ -445,7 +461,6 @@ namespace Citta_T1.Controls
             minBoundingBuffMaxX.Add(ctW.X + ct.Width + (int)(ct.Height * minBoundingRectOffset));
             minBoundingBuffMaxY.Add(ctW.Y + ct.Height + (int)(ct.Height * minBoundingRectOffset));
             controls.Add(ct);
-
         }
         #endregion
         private void MoveImage_Display(int dx, int dy)
@@ -457,9 +472,9 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-           //// moveOffset = Global.GetCurrentDocument().WorldMap
-           //                    .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
-           //                                       minBoundingBox);
+            moveOffset = Global.GetCurrentDocument().WorldMap
+                               .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
+                                                  minBoundingBox);
             g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);
             n.DrawImageUnscaled(i,
                                 Convert.ToInt32(mapOrigin.X * screenFactor),

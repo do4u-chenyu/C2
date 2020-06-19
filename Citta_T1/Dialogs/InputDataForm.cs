@@ -61,8 +61,10 @@ namespace Citta_T1.Dialogs
              */
             string fileName = "";
             string ext;
-            OpenFileDialog fd = new OpenFileDialog();
-            fd.Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx";
+            OpenFileDialog fd = new OpenFileDialog
+            {
+                Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx"
+            };
             if (this.gbkLable.Font.Bold)
                 this.encoding = OpUtil.Encoding.GBK;
             else
@@ -311,9 +313,11 @@ namespace Citta_T1.Dialogs
                 {
                     for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
                     {
-                        ColumnList[i] = new DataGridViewTextBoxColumn();
-                        ColumnList[i].HeaderText = firstRow.GetCell(i).StringCellValue;
-                        ColumnList[i].Name = "Col " + i.ToString();
+                        ColumnList[i] = new DataGridViewTextBoxColumn
+                        {
+                            HeaderText = firstRow.GetCell(i).StringCellValue,
+                            Name = "Col " + i.ToString()
+                        };
                     }
                     this.dataGridView1.Columns.AddRange(ColumnList);
                     startRow = sheet.FirstRowNum + 1;

@@ -21,7 +21,7 @@ namespace Citta_T1.Dialogs
             titlePostfix = 1;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -191,8 +191,10 @@ namespace Citta_T1.Business.Schedule
 
             this.cmdProcessList = new List<Process>();
 
-            scheduleThread = new Thread(new ThreadStart(() => StartTask()));
-            scheduleThread.IsBackground = true;
+            scheduleThread = new Thread(new ThreadStart(() => StartTask()))
+            {
+                IsBackground = true
+            };
             scheduleThread.Start();
         }
 

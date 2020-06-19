@@ -40,10 +40,12 @@ namespace Citta_T1.Controls.Common
             this.Layout += new LayoutEventHandler(ComCheckBoxList_Layout);
 
             //生成控件
-            tbSelectedValue = new TextBox();
-            tbSelectedValue.ReadOnly = true;
-            tbSelectedValue.BorderStyle = BorderStyle.None;
-            tbSelectedValue.BackColor = Color.White;
+            tbSelectedValue = new TextBox
+            {
+                ReadOnly = true,
+                BorderStyle = BorderStyle.None,
+                BackColor = Color.White
+            };
 
             //下拉箭头
             this.btnSelect = new ButtonS();
@@ -62,14 +64,16 @@ namespace Citta_T1.Controls.Common
             lbSelectAll.Click += new EventHandler(LbSelectAll_Click);
 
             //取消
-            lbSelectNo = new Label();
-            lbSelectNo.Font = new Font("微软雅黑", 8f, FontStyle.Regular);
-            lbSelectNo.BackColor = Color.Transparent;
-            lbSelectNo.Text = "取消";
-            lbSelectNo.Size = new Size(40, 20);
-            lbSelectNo.ForeColor = Color.Blue;
-            lbSelectNo.Cursor = Cursors.Hand;
-            lbSelectNo.TextAlign = ContentAlignment.MiddleCenter;
+            lbSelectNo = new Label
+            {
+                Font = new Font("微软雅黑", 8f, FontStyle.Regular),
+                BackColor = Color.Transparent,
+                Text = "取消",
+                Size = new Size(40, 20),
+                ForeColor = Color.Blue,
+                Cursor = Cursors.Hand,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
             lbSelectNo.Click += new EventHandler(LbSelectNo_Click);
 
             //生成checkboxlist
@@ -90,44 +94,55 @@ namespace Citta_T1.Controls.Common
             checkListBoxTmp.CheckOnClick = true;
             checkListBoxTmp.ScrollAlwaysVisible = true;
             //checkListBoxTmp.LostFocus += new EventHandler(checkListBox_LostFocus);
-            checkListBoxTmp.ItemCheck += new ItemCheckEventHandler(checkListBoxTmp_ItemCheck);
+            checkListBoxTmp.ItemCheck += new ItemCheckEventHandler(CheckListBoxTmp_ItemCheck);
             checkListBoxTmp.Hide();
 
             //窗体
-            frmCheckList = new Form();
-            frmCheckList.FormBorderStyle = FormBorderStyle.None;
-            frmCheckList.StartPosition = FormStartPosition.Manual;
-            frmCheckList.BackColor = SystemColors.Control;
-            frmCheckList.ShowInTaskbar = false;
-            frmCheckList.Activated += new System.EventHandler(this.frmCheckList_Activated);
+            frmCheckList = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                StartPosition = FormStartPosition.Manual,
+                BackColor = SystemColors.Control,
+                ShowInTaskbar = false
+            };
+            frmCheckList.Activated += new System.EventHandler(this.FrmCheckList_Activated);
             frmCheckList.Deactivate += new System.EventHandler(this.FrmCheckList_Deactivate);
 
 
             //可拖动窗体大小变化的LABEL
-            lbGrip = new LabelS();
-            lbGrip.Size = new Size(9, 18);
-            lbGrip.BackColor = Color.Transparent;
-            lbGrip.Cursor = Cursors.SizeNWSE;
+            lbGrip = new LabelS
+            {
+                Size = new Size(9, 18),
+                BackColor = Color.Transparent,
+                Cursor = Cursors.SizeNWSE
+            };
             //lbGrip.MouseDown+=new MouseEventHandler(lbGrip_MouseDown);
             //lbGrip.MouseMove+=new MouseEventHandler(lbGrip_MouseMove);
 
             //panel
-            pnlBack = new Panel();
-            pnlBack.BorderStyle = BorderStyle.Fixed3D;
-            pnlBack.BackColor = Color.White;
-            pnlBack.AutoScroll = false;
+            pnlBack = new Panel
+            {
+                BorderStyle = BorderStyle.Fixed3D,
+                BackColor = Color.White,
+                AutoScroll = false
+            };
             //pnlBack.LostFocus += new EventHandler(checkListBox_LostFocus);
             // 
             // textBox1
             // 
-            textBox1 = new TextBox();
-            textBox1.Size = new System.Drawing.Size(50, 25);
+            textBox1 = new TextBox
+            {
+                Size = new System.Drawing.Size(50, 25)
+            };
             textBox1.TextChanged += new EventHandler(TextBox1_TextChanged);
 
             //
-            pnlCheck = new Panel();
-            pnlCheck.BorderStyle = BorderStyle.FixedSingle;
-            pnlCheck.BackColor = Color.White; ;
+            pnlCheck = new Panel
+            {
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = Color.White
+            };
+            ;
 
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -158,12 +173,12 @@ namespace Citta_T1.Controls.Common
             }
         }
 
-        private void frmCheckList_Activated(object sender, EventArgs e)
+        private void FrmCheckList_Activated(object sender, EventArgs e)
         {
             checkListBox.Focus();
         }
 
-        private void checkListBoxTmp_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CheckListBoxTmp_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (ItemClick != null)
             {
@@ -222,7 +237,7 @@ namespace Citta_T1.Controls.Common
             checkListBox.Hide();
             checkListBoxTmp.Show();
             this.checkListBoxTmp.Items.Clear();
-            checkListBoxTmp.ItemCheck -= checkListBoxTmp_ItemCheck;
+            checkListBoxTmp.ItemCheck -= CheckListBoxTmp_ItemCheck;
 
             for (int i = 0; i < checkListBox.Items.Count; i++)
             {
@@ -239,7 +254,7 @@ namespace Citta_T1.Controls.Common
                 checkListBoxTmp.Items.Add("未找到结果", CheckState.Indeterminate);
             }
 
-            checkListBoxTmp.ItemCheck += checkListBoxTmp_ItemCheck;
+            checkListBoxTmp.ItemCheck += CheckListBoxTmp_ItemCheck;
         }
 
         private void ReloationGrip()

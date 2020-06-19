@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls
@@ -30,13 +31,9 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
-
         //屏幕拖动涉及的变量
-        private float screenFactor = 1;
-        private DragWrapper dragWrapper;
+        private readonly DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
-
-
         private ECommandType cmd = ECommandType.Null;
         private PointF startP;
         private PointF endP;
@@ -45,15 +42,10 @@ namespace Citta_T1.Controls
         private Rectangle invalidateRectWhenMoving;
         private Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
-
-
-
-
         private bool delEnable = false;
         private ClipBoardWrapper clipBoard = new ClipBoardWrapper();
         public MoveBaseControl StartC { get => startC; set => startC = value; }
         public MoveBaseControl EndC { get => endC; set => endC = value; }
-        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
         public PointF StartP { get => startP; set => startP = value; }
@@ -187,10 +179,11 @@ namespace Citta_T1.Controls
         {
             // 别删这句话，删了就出问题
             this.endC = null;
-            if (e.Button != MouseButtons.Left) return;
-            // 画框
+            // 画框涉及存在鼠标ENTENT事件，会自行判断鼠标左键，需要前提
             if (SelectFrame())
                 frameWrapper.FrameWrapper_MouseMove(e);
+            else if (e.Button != MouseButtons.Left) 
+                return;
             // 控件移动
             else if (SelectDrag())
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
@@ -257,7 +250,7 @@ namespace Citta_T1.Controls
 
                 Global.GetMainForm().SetDocumentDirty();
             }
-                
+
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -370,7 +363,6 @@ namespace Citta_T1.Controls
         public void DeleteSelectedLinesByIndex()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            CanvasPanel cp = Global.GetCanvasPanel();
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC;
             MoveBaseControl endC;
@@ -395,7 +387,7 @@ namespace Citta_T1.Controls
         {
             ModelRelation mr = Global.GetCurrentDocument().ModelRelations.Find(t => t.StartID == startID && t.EndID == endID && t.EndPin == pinIndex);
             if (mr != null)
-                this.DeleteRelation(mr); 
+                this.DeleteRelation(mr);
         }
         public void DeleteRelation(ModelRelation mr)
         {
@@ -589,12 +581,108 @@ namespace Citta_T1.Controls
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
         #endregion
-        public void DeleteEle(ModelElement me)
+        public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        {
+            foreach (ModelElement me in mes)
+                this.AddEle(me);
+            foreach (var mr in mrs)
+                this.AddNewRelationByCtrID(mr.Item1, mr.Item2, mr.Item3);
+        }
+        public Tuple<List<ModelElement>, List<Tuple<int, int, int>>> DeleteSelectedElesByCtrID(IEnumerable<int> ids)
+        {
+            // TODO 应该调用MoveCtr的删除方法
+            ModelDocument doc = Global.GetCurrentDocument();
+            List<ModelElement> mes = new List<ModelElement>();
+            List<Tuple<int, int, int>> mrs = new List<Tuple<int, int, int>>();
+            List<ModelRelation> oriMrs = new List<ModelRelation>(doc.ModelRelations);
+            Tuple<List<Tuple<int, int, int>>, ModelElement> relsAndEle = null;
+            int endID = -1;
+            foreach (int id in ids)
+            {
+                ModelElement me = doc.SearchElementByID(id);
+                switch (me.Type)
+                {
+                    case ElementType.DataSource:
+                        this.DeleteEle(me);
+                        mes.Add(me);
+                        foreach(ModelRelation mr in oriMrs.Where(t => t.StartID == me.ID))
+                        {
+                            this.DeleteRelationByCtrID(mr.StartID, mr.EndID, mr.EndPin);
+                            mrs.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+                        }
+                        break;
+                    case ElementType.Operator:
+                        var endIDs = doc.ModelRelations.Where(t => t.StartID == me.ID).ToList();
+                        endID = endIDs.Count == 1 ? endIDs[0].EndID : -1;
+                        if (endID != -1)
+                        {
+                            relsAndEle = (me.InnerControl as MoveOpControl).DeleteResult(endID, oriMrs); // TODO
+                            if (relsAndEle.Item2 != null)
+                            {
+                                this.DeleteEle(relsAndEle.Item2);
+                                mes.Add(relsAndEle.Item2);
+                            }
+                            if (relsAndEle.Item1 != null)
+                            {
+                                foreach (var mr in relsAndEle.Item1)
+                                {
+                                    this.DeleteRelationByCtrID(mr.Item1, mr.Item2, mr.Item3);
+                                    mrs.Add(mr);
+                                }
+                            }
+                        }
+                        this.DeleteEle(me);
+                        mes.Add(me);
+                        foreach (ModelRelation mr in oriMrs.Where(t => t.EndID == me.ID))
+                        {
+                            this.DeleteRelationByCtrID(mr.StartID, mr.EndID, mr.EndPin);
+                            mrs.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+                        }
+                        break;
+                    case ElementType.Result:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+            return new Tuple<List<ModelElement>, List<Tuple<int, int, int>>>(mes, mrs);
+        }
+        public void UndoRedoAddSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        {
+            this.AddElesAndRels(mes, mrs);
+        }
+        public void UndoRedoDelSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        {
+            this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
+        }
+        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
+        {
+            foreach (int id in idPtsDict.Keys)
+                log.Info(string.Format("{0} {1}", id, idPtsDict[id]));
+            ModelDocument doc = Global.GetCurrentDocument();
+            List<int> ids = new List<int>(idPtsDict.Keys);
+            foreach(int id in ids)
+            {
+                ModelElement me = doc.SearchElementByID(id);
+                if (me == null)
+                    return;
+                Point tmp = me.Location;   
+                me.InnerControl.Location = idPtsDict[id];
+                idPtsDict[id] = tmp;
+            }
+            Global.GetCurrentDocument().UpdateAllLines();
+        }
+        public void DeleteEle(ModelElement me, bool isSetDirtyAndUpdate = false)
         {
             this.DeleteCtr(me.InnerControl);
             Global.GetCurrentDocument().DeleteModelElement(me);
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
+            if (isSetDirtyAndUpdate)
+            {
+                Global.GetMainForm().SetDocumentDirty();
+                Global.GetNaviViewControl().UpdateNaviView();
+            }
         }
         public void AddEle(ModelElement me)
         {
@@ -607,7 +695,6 @@ namespace Citta_T1.Controls
         {
             this.Controls.Remove(ctl);
         }
-
         public void AddCtr(Control ctl)
         {
             this.Controls.Add(ctl);
@@ -621,7 +708,6 @@ namespace Citta_T1.Controls
                                 location);
             AddNewElement(btn);
         }
-
         public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             MoveDtControl btn = new MoveDtControl(
@@ -648,6 +734,7 @@ namespace Citta_T1.Controls
 
         private void AddNewElement(MoveBaseControl btn)
         {
+            // NewElementEvent中有压栈操作，可以UndoRedo
             this.Controls.Add(btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
@@ -689,7 +776,6 @@ namespace Citta_T1.Controls
         }
         public void ControlSelect_paste()
         {
-            log.Info("sss");
             clipBoard.ClipBoardPaste();
         }
     }

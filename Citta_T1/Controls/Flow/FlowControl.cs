@@ -234,5 +234,12 @@ namespace Citta_T1.Controls.Flow
             Global.GetCurrentDocument().Show();
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
+        public void InterruptSelectFrame()
+        {
+            SelectFrame = false;
+            FrameChange(SelectFrame);
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetCanvasPanel().Invalidate();
+        }
     }
 }
