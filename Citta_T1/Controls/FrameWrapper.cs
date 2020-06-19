@@ -1,6 +1,9 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move;
 using Citta_T1.Core;
+using Citta_T1.Core.UndoRedo;
+using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -303,8 +306,9 @@ namespace Citta_T1.Controls
         }
         public void FrameDel(object sender, EventArgs e)
         {
-            foreach (Control ct in controls)
-                (ct as IMoveControl).DeleteMenuItem_Click(sender, e);
+            //foreach (Control ct in controls)
+            //(ct as IMoveControl).DeleteMenuItem_Click(sender, e); // TODO [DK] 批量删除
+            Tuple<List<ModelElement>, List<Tuple<int, int, int>>> mesAndMrs = Global.GetCanvasPanel().DeleteSelectedElesByCtrID(this.controls.Select(t => (t as MoveBaseControl).ID));
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
@@ -315,7 +319,13 @@ namespace Citta_T1.Controls
                 staticImage = null;
             }
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
-
+            
+            if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
+            {
+                ICommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+            }
+            
         }
         public bool FramePaint(PaintEventArgs e)
         {

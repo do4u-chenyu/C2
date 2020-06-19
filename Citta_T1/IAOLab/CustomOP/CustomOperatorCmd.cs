@@ -18,12 +18,12 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
-            // 休眠指定时间
-            DoSleepCommand();
+            int sleepSecond = DoSleepCommand();// 休眠指定时间
+            cmds.Add(string.Format("sbin\\sleep.exe {0}s ",sleepSecond));
             return cmds;
-        }
+        } 
 
-        private void DoSleepCommand()
+        private int DoSleepCommand()
         {
             int sleepSecond = DefaultSleepSecond;
 
@@ -39,8 +39,8 @@ namespace Citta_T1.Business.Schedule.Cmd
                 Random rand = new Random();
                 sleepSecond = randomBegin <= 0 || randomEnd <= 0 || randomEnd - randomBegin < 0 ? DefaultSleepSecond : rand.Next(randomBegin, randomEnd);
             }
-            Thread.Sleep(sleepSecond * 1000);
-
+            //Thread.Sleep(sleepSecond * 1000);
+            return sleepSecond;
         }
     }
 }
