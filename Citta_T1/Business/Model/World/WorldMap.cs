@@ -136,17 +136,17 @@ namespace Citta_T1.Business.Model.World
         {
 
             Point dragOffset = new Point(0, 0);
-            float screenFactor = ScreenFactor;
 
-            if (Ps.Y < 70 * screenFactor)
+
+            if (Ps.Y < 70 * ScreenFactor)
             {
                 dragOffset.Y = Ps.Y - 70;
             }
-            if (Ps.X > 2000 * screenFactor)
+            if (Ps.X > 2000 * ScreenFactor)
             {
                 dragOffset.X = Ps.X - 2000;
             }
-            if (Ps.Y > 900 * screenFactor)
+            if (Ps.Y > 900 * ScreenFactor)
             {
                 dragOffset.Y = Ps.Y - 900;
             }
@@ -176,7 +176,6 @@ namespace Citta_T1.Business.Model.World
         public Point WorldBoundControl(Point Pm, Rectangle minBoundingBox)
         {
             Point off = new Point(0, 0);
-            float factor = Global.GetCanvasPanel().ScreenFactor;
             if (Pm.X < 20)
             {
                 off.X = 20 - Pm.X;
@@ -185,32 +184,15 @@ namespace Citta_T1.Business.Model.World
             {
                 off.Y = 70 - Pm.Y;
             }
-            if (Pm.X > Convert.ToInt32(2000 * factor) - minBoundingBox.Width)
+            if (Pm.X > Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width)
             {
-                off.X = Convert.ToInt32(2000 * factor) - minBoundingBox.Width - Pm.X;
+                off.X = Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width - Pm.X;
             }
-            if (Pm.Y > Convert.ToInt32(980 * factor) - minBoundingBox.Height)
+            if (Pm.Y > Convert.ToInt32(980 * ScreenFactor) - minBoundingBox.Height)
             {
-                off.Y = Convert.ToInt32(980 * factor) - minBoundingBox.Height - Pm.Y;
+                off.Y = Convert.ToInt32(980 * ScreenFactor) - minBoundingBox.Height - Pm.Y;
             }
             return off;
-        }
-        public Point WorldBoundControlQuick(Point Ps)
-        {
-
-            Point dragOffset = new Point(0, 0);
-            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
-
-
-            if (Ps.X > 2000 * screenFactor)
-            {
-                dragOffset.X = Ps.X - 2000;
-            }
-            if (Ps.Y > 900 * screenFactor)
-            {
-                dragOffset.Y = Ps.Y - 900;
-            }
-            return dragOffset;
         }
         #endregion
 

@@ -19,7 +19,7 @@ namespace Citta_T1.Controls
     class FrameWrapperVFX
     {
         // 拖拽过程中的高级视觉特效类
-        private bool backImgMode = false;
+        private readonly bool backImgMode = false;
         private Pen p = new Pen(Color.Gray, 1f);
         public FrameWrapperVFX()
         {
@@ -29,7 +29,8 @@ namespace Citta_T1.Controls
         #region 静态图生成相关特效
         public Bitmap CreateWorldImage(int worldWidth, int worldHeight, List<Control> controls, bool mode)
         {
-            float screenFactor = Global.GetCanvasPanel().ScreenFactor;
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            
             Bitmap staticImage = new Bitmap(Convert.ToInt32(worldWidth * screenFactor), Convert.ToInt32(worldHeight * screenFactor));
             Graphics g = Graphics.FromImage(staticImage);
 
@@ -255,6 +256,7 @@ namespace Citta_T1.Controls
         public void FrameWrapper_MouseDown(MouseEventArgs e)
         {
             FramePropertySet();
+          
             startP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
             if (e.Button == MouseButtons.Right)
             {

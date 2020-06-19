@@ -198,13 +198,13 @@ namespace Citta_T1.Controls
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
 
-                    dx = dx + ct.Width;
+                    dx += ct.Width;
                     count += 1;
                 }
 
                 if (count == 6)
                 {
-                    dy = dy + ct.Height;
+                    dy += ct.Height;
                     count = 0;
                     dx = 0;
                 }
