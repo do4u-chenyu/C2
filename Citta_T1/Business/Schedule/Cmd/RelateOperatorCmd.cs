@@ -24,8 +24,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFileEncoding2 = JudgeInputFileEncoding(inputFilePath2).ToString();
 
             //关联条件拼接
-            List<string> relateList = new List<string>();
-            relateList.Add("0," + option.GetOption("factor1"));
+            List<string> relateList = new List<string>
+            {
+                "0," + option.GetOption("factor1")
+            };
             for (int i = 2; i <= GetOptionFactorCount(); i++)
                 relateList.Add(option.GetOption("factor" + i.ToString()));
 

@@ -54,16 +54,18 @@ namespace Citta_T1.Controls.Bottom
 
         private ConsoleControl.ConsoleControl CreateNewConsoleControl(string controlName, bool visible = false)
         {
-            ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl();
-            consoleControl.BorderStyle = BorderStyle.FixedSingle;
-            consoleControl.Dock = DockStyle.Fill;
-            consoleControl.IsInputEnabled = true;
-            consoleControl.Location = new System.Drawing.Point(3, 37);
-            consoleControl.Name = controlName;
-            consoleControl.SendKeyboardCommandsToProcess = false;
-            consoleControl.ShowDiagnostics = false;
-            consoleControl.Size = new System.Drawing.Size(1005, 97);
-            consoleControl.Visible = visible;
+            ConsoleControl.ConsoleControl consoleControl = new ConsoleControl.ConsoleControl
+            {
+                BorderStyle = BorderStyle.FixedSingle,
+                Dock = DockStyle.Fill,
+                IsInputEnabled = true,
+                Location = new System.Drawing.Point(3, 37),
+                Name = controlName,
+                SendKeyboardCommandsToProcess = false,
+                ShowDiagnostics = false,
+                Size = new System.Drawing.Size(1005, 97),
+                Visible = visible
+            };
             consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
             return consoleControl;
         }

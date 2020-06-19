@@ -23,8 +23,10 @@ namespace Citta_T1.Controls.Bottom
 
         private void InitializeDgv()
         {
-            List<List<string>> datas = new List<List<string>>();
-            datas.Add(new List<string>() { "姓名", "身份证号", "手机号", "年龄", "地址" });
+            List<List<string>> datas = new List<List<string>>
+            {
+                new List<string>() { "姓名", "身份证号", "手机号", "年龄", "地址" }
+            };
             List<string> headers = datas[0];
             int numOfCols = headers.Count;
             for (int i = 0; i < maxNumOfRows; i++)

@@ -131,8 +131,10 @@ namespace Citta_T1.Controls
                 }
                 return;
             }
-            key = new List<List<List<int>>>();
-            key.Add(treeB);
+            key = new List<List<List<int>>>
+            {
+                treeB
+            };
             foreach (List<List<List<int>>> tmp in ht.Keys)
             {
                 if (tmp.Contains(treeB) & tmp.Count == 1)
@@ -227,8 +229,10 @@ namespace Citta_T1.Controls
             {
                 log.Info("leafNode：" + leafNode.ToString());
                 this.treeNodes = new List<List<int>>();
-                List<int> tmp = new List<int>();
-                tmp.Add(leafNode);
+                List<int> tmp = new List<int>
+                {
+                    leafNode
+                };
                 this.treeNodes.Add(tmp);
                 SearchTree(tmp);
                 this.treeGroup.Add(this.treeNodes);

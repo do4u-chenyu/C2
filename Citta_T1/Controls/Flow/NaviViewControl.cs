@@ -11,7 +11,6 @@ namespace Citta_T1.Controls.Flow
 {
     public partial class NaviViewControl : UserControl
     {
-        private static LogUtil log = LogUtil.GetInstance("NaviViewControl");
         private Pen p1;  // 小元素画笔
         private Pen p2;  // 视野画笔
         private SolidBrush viewFrameBrush; // 视野框画刷

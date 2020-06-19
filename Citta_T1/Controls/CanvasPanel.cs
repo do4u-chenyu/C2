@@ -32,7 +32,7 @@ namespace Citta_T1.Controls
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
         //屏幕拖动涉及的变量
-        private DragWrapper dragWrapper;
+        private readonly DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
         private ECommandType cmd = ECommandType.Null;
         private PointF startP;
@@ -363,7 +363,6 @@ namespace Citta_T1.Controls
         public void DeleteSelectedLinesByIndex()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            CanvasPanel cp = Global.GetCanvasPanel();
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC;
             MoveBaseControl endC;

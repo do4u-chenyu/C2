@@ -197,7 +197,6 @@ namespace Citta_T1.Controls
     }
     class FrameWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private const bool endSelect = false;
         private const bool startSelect = true;
         private const bool dragStatus = true;
