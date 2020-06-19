@@ -713,6 +713,9 @@
     <None Include="res\toolbox\continue.png" />
     <None Include="res\toolbox\run.png" />
     <None Include="res\toolbox\continual.png" />
+    <Content Include="sbin\sleep.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\xargs.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
