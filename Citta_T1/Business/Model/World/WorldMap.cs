@@ -113,7 +113,7 @@ namespace Citta_T1.Business.Model.World
 
             Point dragOffset = new Point(0, 0);
             Point Pw = ScreenToWorld(new Point(50, 30), true);
-
+            
             if (Pw.X < 50)
             {
                 dragOffset.X = 50 - Pw.X;
@@ -177,21 +177,22 @@ namespace Citta_T1.Business.Model.World
         {
             Point Pw = ScreenToWorld(Pm, true);
             Point off = new Point(0, 0);
+            float factor = Global.GetCanvasPanel().ScreenFactor;
             if (Pw.X < 20)
             {
-                off.X = 20 - Pm.X;
+                off.X = 20 - Pw.X;
             }
             if (Pw.Y < 70)
             {
-                off.Y = 70 - Pm.Y;
+                off.Y = 70 - Pw.Y;
             }
-            if (Pw.X > 2000 - minBoundingBox.Width)
+            if (Pw.X > 2000 - Convert.ToInt32(minBoundingBox.Width / factor))
             {
-                off.X = Global.GetCanvasPanel().Width - minBoundingBox.Width;
+                off.X = 2000 - Convert.ToInt32(minBoundingBox.Width / factor) - Pw.X;
             }
-            if (Pw.Y > 980 - minBoundingBox.Height)
+            if (Pw.Y > 980 - Convert.ToInt32(minBoundingBox.Height/factor))
             {
-                off.Y = Global.GetCanvasPanel().Height - minBoundingBox.Height;
+                off.Y = 980 - Convert.ToInt32(minBoundingBox.Height / factor) - Pw.Y;
             }
             return off;
         }
