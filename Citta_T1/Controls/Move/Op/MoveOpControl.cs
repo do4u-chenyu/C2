@@ -288,6 +288,7 @@ namespace Citta_T1.Controls.Move.Op
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
         {   // 只处理左键点击
+            log.Info(Global.GetCurrentDocument().Dirty.ToString());
             if (e.Button != MouseButtons.Left)
                 return;
             // 单击视为移动,按父控件鼠标点击处理
@@ -331,7 +332,7 @@ namespace Citta_T1.Controls.Move.Op
                 Global.GetNaviViewControl().UpdateNaviView();
             }
 
-            if (oldControlPosition != this.Location)
+            if (oldControlPosition != this.Location && !oldControlPosition.Equals(new Point(0,0)))
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
@@ -498,7 +499,7 @@ namespace Citta_T1.Controls.Move.Op
 
             foreach (ModelRelation mr in modelRelations)
             {
-                // TODO 删结果算子和任何与结果算子相连的关系 DT-Op-Rs-X del Op-Rs Rs-X Rs
+                // 删结果算子和任何与结果算子相连的关系 DT-Op-Rs-X del Op-Rs Rs-X Rs
                 if (mr.StartID == this.ID)
                     relationAndRsEles = DeleteResult(mr.EndID, modelRelations);
                 // 删关系
@@ -524,8 +525,17 @@ namespace Citta_T1.Controls.Move.Op
             //删除自身
             cp.DeleteEle(me);
         }
-        
-        private Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResult(int endID, List<ModelRelation> modelRelations)
+        //public Tuple<ModelElement, List<ModelRelation>> DeleteResult()
+        //{
+        //    ModelDocument doc = Global.GetCurrentDocument();
+        //    int endID = -1;
+        //    foreach(ModelRelation mr in doc.ModelRelations)
+        //    {
+        //        if (mr.StartID == this.ID)
+        //            endID = mr.EndID;
+        //    }
+        //}
+        public Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResult(int endID, List<ModelRelation> modelRelations)
         {
             // modelRelations = deepcopy(Global.GetCurrentDocument().modelRelations)
             CanvasPanel cp = Global.GetCanvasPanel();
@@ -758,7 +768,6 @@ namespace Citta_T1.Controls.Move.Op
                         this.Location.X + this.rectIn_down.Location.X + this.rectIn_down.Width / 2,
                         this.Location.Y + this.rectIn_down.Location.Y + this.rectIn_down.Height / 2);
                 default:
-                    // TODO [DK] 需要定义一个异常
                     return new PointF(0, 0);
             }
         }

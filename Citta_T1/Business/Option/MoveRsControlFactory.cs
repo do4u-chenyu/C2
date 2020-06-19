@@ -89,12 +89,15 @@ namespace Citta_T1.Business.Option
 
             // UndoRedo
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelDocument doc = Global.GetCurrentDocument();
             ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations.Where(t => t.EndID == me.ID).ToList())
+            ModelElement opEle = null;
+            foreach (ModelRelation mr in doc.ModelRelations.Where(t => t.EndID == me.ID))
             {
                 relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+                opEle = doc.SearchElementByID(mr.StartID);
             }
-            ICommand cmd = new ElementAddCommand(me, relations);
+            ICommand cmd = new ElementAddCommand(me, relations, opEle);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
@@ -104,12 +107,15 @@ namespace Citta_T1.Business.Option
 
             // UndoRedo
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
+            ModelDocument doc = Global.GetCurrentDocument();
             ModelElement me = Global.GetCurrentDocument().SearchElementByID(mrc.ID);
-            foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations.Where(t => t.EndID == me.ID).ToList())
+            ModelElement opEle = null;
+            foreach (ModelRelation mr in doc.ModelRelations.Where(t => t.EndID == me.ID))
             {
                 relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
+                opEle = doc.SearchElementByID(mr.StartID);
             }
-            ICommand cmd = new ElementAddCommand(me, relations);
+            ICommand cmd = new ElementAddCommand(me, relations, opEle);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
     }

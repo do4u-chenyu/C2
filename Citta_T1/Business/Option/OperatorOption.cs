@@ -7,9 +7,9 @@ namespace Citta_T1.Business.Option
 
     public class OperatorOption
     {
-        private readonly Dictionary<string, string> optionDict = new Dictionary<string, string>();
+        private Dictionary<string, string> optionDict = new Dictionary<string, string>();
 
-        public Dictionary<string, string> OptionDict { get => optionDict; }
+        public Dictionary<string, string> OptionDict { get => optionDict; set => this.optionDict = value; }
 
         public string GetOption(string OpKey, string defaultValue = "")
         {

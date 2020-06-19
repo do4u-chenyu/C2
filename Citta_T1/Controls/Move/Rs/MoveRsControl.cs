@@ -1,6 +1,7 @@
 using Citta_T1.Business.Model;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core.UndoRedo.Command;
@@ -464,32 +465,38 @@ namespace Citta_T1.Controls.Move.Rs
         {
 
         }
-        private void DeleteMyself()
+        public override void UndoRedoDeleteElement(ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement opEle = null)
         {
+            /*
+             * 1. 删自身
+             * 2. 删与之相连的关系
+             * 3. 删与之相连的结果控件
+             * 4. 改变其他控件的Pin状态
+             */
             CanvasPanel cp = Global.GetCanvasPanel();
-            ModelDocument doc = Global.GetCurrentDocument();
-
-            // 状态改变
-            doc.StatusChangeWhenDeleteControl(this.ID);
-            // 删关系 重置针脚状态
-            List<ModelRelation> modelRelations = new List<ModelRelation>(doc.ModelRelations);
-            List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
-
-            foreach (ModelRelation mr in modelRelations)
-            {
-                if (mr.StartID == this.ID)
-                {
-                    cp.DeleteRelation(mr);
-                    relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
-                }
-            }
-            cp.Invalidate();
-
-            ModelElement me = doc.SearchElementByID(ID);
-            ICommand cmd = new ElementDeleteCommand(me, relations);
-            UndoRedoManager.GetInstance().PushCommand(doc, cmd);
-            // 删控件
             cp.DeleteEle(me);
+            if (relations != null)
+            {
+                foreach (Tuple<int, int, int> rel in relations)
+                    cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
+            }
+            opEle.Status = ElementStatus.Null;
+            (opEle.InnerControl as MoveOpControl).Option.OptionDict.Clear();
+        }
+        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
+        {
+            /*
+             * 1. 恢复自身
+             * 2. 恢复与之相连的关系
+             * 3. 恢复与之相连的结果控件
+             * 4. 改变其他控件的Pin状态
+             */
+            CanvasPanel cp = Global.GetCanvasPanel();
+            cp.AddEle(me);
+            foreach (Tuple<int, int, int> rel in relations)
+                cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
+            opEle.Status = status;
+            (opEle.InnerControl as MoveOpControl).Option.OptionDict = opOptDict;
         }
     }
 }
