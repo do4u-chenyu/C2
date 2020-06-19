@@ -291,7 +291,7 @@ namespace Citta_T1.Business.Model
                      * 外部Xml文件修改等情况，检查并处理异常配置内容
                      */
                     CheckOption checkOption = new CheckOption(ctl);
-                   // checkOption.DealAbnormalOption();
+                    checkOption.DealAbnormalOption(ctl.Option);
 
 
                     ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");

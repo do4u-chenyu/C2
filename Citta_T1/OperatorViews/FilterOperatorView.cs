@@ -18,7 +18,7 @@ namespace Citta_T1.OperatorViews
             InitializeComponentManual();
             InitByDataSource();
             LoadOption();
-            checkOptions.Add("factor0", DataType.Int, new int[]{ -1,5})
+            checkOptions.Add("factor1", DataType.Int, new int[]{ -1,5})
                         .Add("factorI", DataType.Int, new int[]{ 1,-1,5 })
                         .Add("outfield", DataType.Int, -1);
         }

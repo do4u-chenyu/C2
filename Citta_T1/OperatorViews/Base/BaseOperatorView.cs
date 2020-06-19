@@ -25,12 +25,15 @@ namespace Citta_T1.OperatorViews.Base
         private readonly Dictionary<string,int> itemCounts0;
         private readonly Dictionary<string, int[]> itemCounts1;
         private readonly MoveOpControl opControl;
+        private int maxIndex0;
+        private int maxIndex1;
         public CheckOption(MoveOpControl opControl)
         {
             this.dataTypes = new Dictionary<string, DataType>();
             this.itemCounts0 = new Dictionary<string, int>();
             this.itemCounts1 = new Dictionary<string, int[]>();
             this.opControl = opControl;
+            
         }
         public CheckOption Add(string prefix, DataType dataType)
         {
@@ -49,44 +52,45 @@ namespace Citta_T1.OperatorViews.Base
             this.itemCounts1[prefix] = countList;
             return this;
         }
-        public void DealAbnormalOption()
+        public void DealAbnormalOption(OperatorOption option)
         {
+            maxIndex0 = opControl.Option.GetOptionSplit("columname0").Length - 1;
+            maxIndex1 = opControl.Option.GetOptionSplit("columname1").Length - 1;
             // 判断表头信息是否存在
             // 不存在，清空所有配置
-            OperatorOption option = this.opControl.Option;
             if (WithoutInputColumns(option))
             {
                 option.Clear();
                 this.opControl.Status = ElementStatus.Null;
                 return;
             }
-            int maxIndex0 = option.GetOptionSplit("columname0").Length - 1;
-            int maxIndex1 = option.GetOptionSplit("columname1").Length - 1;
+          
             foreach (string prefix in dataTypes.Keys)
             {
-
+               
                 // 配置项丢失检查
                 if (String.IsNullOrEmpty(option.GetOption(prefix)))
                     opControl.Status = ElementStatus.Null;
 
-                // 数据类型检测
+                // 数据类型检测与异常类型处理
                 if (dataTypes[prefix] == DataType.Int)
-                    CheckIntType(option, prefix);
+                    CheckAndDealIntType(option, prefix);
 
-                // 索引数目、索引值超限判断
+                // 索引值超限判断
                 if (string.IsNullOrEmpty(option.GetOption(prefix)))
                     continue;
 
                 string[] items = option.GetOptionSplit(prefix);
-                int[] indexs = Array.ConvertAll(items,int.Parse);
-                if (itemCounts0.Keys.Contains(prefix) && indexs.Max() > maxIndex0)
+                string[] Keys = itemCounts0.Keys.ToArray();
+                
+                if (Keys.Contains(prefix) && Array.ConvertAll(items, int.Parse).Max() > maxIndex0)
                 {
                     opControl.Option[prefix] = String.Empty;
                     opControl.Status = ElementStatus.Null;
                 }
-                if (itemCounts1.Count > 0)
+                else if (itemCounts1.Keys.Contains(prefix))
                 {
-
+                    DealOutOfRangeIndex(itemCounts1, option);
                 }
 
             }
@@ -102,7 +106,7 @@ namespace Citta_T1.OperatorViews.Base
                 return true;
             return false;
         }
-        private void CheckIntType(OperatorOption option, string key)
+        private void CheckAndDealIntType(OperatorOption option, string key)
         {
             if (string.IsNullOrEmpty(option[key]))
                 return;
@@ -111,15 +115,14 @@ namespace Citta_T1.OperatorViews.Base
                 option[key] = String.Empty;
                 opControl.Status = ElementStatus.Null;
             }
-            else if (key.Contains("factorI"))
+            else if (key.Equals("factor1"))
                 DealNotIntChange(option);
-            else
+            else if (key.Equals("factorI"))
+            { }
+            else if(!ConvertUtil.IsInt(option[key]))
             {
-                if (!ConvertUtil.IsInt(option[key]))
-                {
-                    opControl.Option[key] = String.Empty;
-                    opControl.Status = ElementStatus.Null;
-                }
+                opControl.Option[key] = String.Empty;
+                opControl.Status = ElementStatus.Null;
             }
 
         }
@@ -153,30 +156,35 @@ namespace Citta_T1.OperatorViews.Base
         }
         public void DealOutOfRangeIndex(Dictionary<string, int[]> itemCounts1, OperatorOption option)
         {
-            int count0 = itemCounts1["factor0"].Length;
+            int count0 = itemCounts1["factor1"].Length;
             int count1 = itemCounts1["factorI"].Length;
 
             List<string> factors = option.Keys.FindAll(x => x.Contains("factor"));
-            if (factors.Contains("factor0") )
+            foreach (string factor in factors)
             {
-              
+                if (factor.Equals("factor1"))
+                    IsOutOfIndex(option.GetOptionSplit(factor), itemCounts1["factor1"], maxIndex0);
+                else
+                    IsOutOfIndex(option.GetOptionSplit(factor), itemCounts1["factorI"], maxIndex1);
             }
+         
 
         }
-        private bool IsOutOfIndex(String[] itemList, int count,List<int> maxIndexs)
+        private bool IsOutOfIndex(String[] itemList, int[] maxIndexs, int columnCount)
         {
-            bool judge0 = itemList.Length >= count;
-            if (!judge0) return true;
+            int count = maxIndexs.Length;
+            //索引数目小于正常数目，异常：直接返回
+            if (itemList.Length < count) return true;
             if (IsNotAllInt(itemList.Take(count).ToArray())) return true;
             for (int i = 0; i < count; i++)
             {
-                if (maxIndexs[i] == -1 && Convert.ToInt32(itemList[i]) < maxIndexs[i])
+                if (maxIndexs[i] == -1 && Convert.ToInt32(itemList[i]) > maxIndex0)
                 {
                     return true;
                 }
-                else if (maxIndexs[i] == -2 && true)
+                else if (maxIndexs[i] == -2 && Convert.ToInt32(itemList[i]) > maxIndex1)
                     return true;
-                else if (true)
+                else if (maxIndexs[i] < Convert.ToInt32(itemList[i]))
                     return true;
             }
             return false;
