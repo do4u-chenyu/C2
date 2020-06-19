@@ -720,7 +720,6 @@ namespace Citta_T1
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.ScreenFactor = 1F;
             this.canvasPanel.Size = new System.Drawing.Size(906, 232);
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));

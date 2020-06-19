@@ -33,7 +33,6 @@ namespace Citta_T1.Controls
         private Bitmap staticImage;
 
         //屏幕拖动涉及的变量
-        private float screenFactor = 1;
         private DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
 
@@ -54,7 +53,6 @@ namespace Citta_T1.Controls
         private ClipBoardWrapper clipBoard = new ClipBoardWrapper();
         public MoveBaseControl StartC { get => startC; set => startC = value; }
         public MoveBaseControl EndC { get => endC; set => endC = value; }
-        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
         public PointF StartP { get => startP; set => startP = value; }
