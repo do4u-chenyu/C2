@@ -175,24 +175,23 @@ namespace Citta_T1.Business.Model.World
         }
         public Point WorldBoundControl(Point Pm, Rectangle minBoundingBox)
         {
-            Point Pw = ScreenToWorld(Pm, true);
             Point off = new Point(0, 0);
             float factor = Global.GetCanvasPanel().ScreenFactor;
-            if (Pw.X < 20)
+            if (Pm.X < 20)
             {
-                off.X = 20 - Pw.X;
+                off.X = 20 - Pm.X;
             }
-            if (Pw.Y < 70)
+            if (Pm.Y < 70)
             {
-                off.Y = 70 - Pw.Y;
+                off.Y = 70 - Pm.Y;
             }
-            if (Pw.X > 2000 - Convert.ToInt32(minBoundingBox.Width / factor))
+            if (Pm.X > Convert.ToInt32(2000 * factor) - minBoundingBox.Width)
             {
-                off.X = 2000 - Convert.ToInt32(minBoundingBox.Width / factor) - Pw.X;
+                off.X = Convert.ToInt32(2000 * factor) - minBoundingBox.Width - Pm.X;
             }
-            if (Pw.Y > 980 - Convert.ToInt32(minBoundingBox.Height/factor))
+            if (Pm.Y > Convert.ToInt32(980 * factor) - minBoundingBox.Height)
             {
-                off.Y = 980 - Convert.ToInt32(minBoundingBox.Height / factor) - Pw.Y;
+                off.Y = Convert.ToInt32(980 * factor) - minBoundingBox.Height - Pm.Y;
             }
             return off;
         }
