@@ -12,8 +12,6 @@ namespace Citta_T1.Controls
     class MoveWrapper
     {
         private static LogUtil log = LogUtil.GetInstance("MoveWrapper");
-        private int width;
-        private int height;
         private Point start, now;
         private bool startDrag;
 

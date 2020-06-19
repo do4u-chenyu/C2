@@ -31,12 +31,9 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
-
         //屏幕拖动涉及的变量
         private DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
-
-
         private ECommandType cmd = ECommandType.Null;
         private PointF startP;
         private PointF endP;
@@ -45,10 +42,6 @@ namespace Citta_T1.Controls
         private Rectangle invalidateRectWhenMoving;
         private Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
-
-
-
-
         private bool delEnable = false;
         private ClipBoardWrapper clipBoard = new ClipBoardWrapper();
         public MoveBaseControl StartC { get => startC; set => startC = value; }
@@ -605,7 +598,6 @@ namespace Citta_T1.Controls
             List<ModelRelation> oriMrs = new List<ModelRelation>(doc.ModelRelations);
             Tuple<List<Tuple<int, int, int>>, ModelElement> relsAndEle = null;
             int endID = -1;
-
             foreach (int id in ids)
             {
                 ModelElement me = doc.SearchElementByID(id);
