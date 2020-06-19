@@ -199,7 +199,8 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("FrameWrapper");
         private const bool endSelect = false;
         private const bool startSelect = true;
-
+        private const bool dragStatus = true;
+        private const bool noDragStatus = false;
         private const int arcRadius = 2;
         private const double minBoundingRectOffset = 0.4;
         private Bitmap staticImage, moveImage;
@@ -270,14 +271,16 @@ namespace Citta_T1.Controls
         public void FrameWrapper_MouseMove(MouseEventArgs e)
         {
             endP = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
-            FrameWrapper_MouseEnter(endP);
+            
             if (e.Button != MouseButtons.Left)
             {
+                FrameWrapper_MouseEnter(endP,noDragStatus);
                 return;
             }
             if (selectStatus.Equals(startSelect))
             {
                 SelectFrame_MouseMove();
+
                 return;
             }
             DragFrame_MouseMove();
@@ -295,9 +298,9 @@ namespace Citta_T1.Controls
             }
             DragFrame_MouseUp();
         }
-        public void FrameWrapper_MouseEnter(Point pw)
+        public void FrameWrapper_MouseEnter(Point pw,bool status)
         {
-            if (minBoundingBox.Contains(pw))
+            if (minBoundingBox.Contains(pw) || status)
             {
                 Global.GetCanvasPanel().Cursor = Cursors.SizeAll;
                 return;
@@ -339,15 +342,6 @@ namespace Citta_T1.Controls
             }
             return false;
         }
-        public void FramePaste()
-        {
-            if (controls.Count != 1)
-                return;
-            foreach (Control ct in controls)
-            {
-                //框选后粘贴 暂无实现
-            }
-        }
         #endregion
         #region 控件框选实现
         private void SelectFrame_MouseDown()
@@ -358,6 +352,7 @@ namespace Citta_T1.Controls
         }
         private void SelectFrame_MouseMove()
         {
+            
             CreateRect();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
@@ -388,6 +383,7 @@ namespace Citta_T1.Controls
         }
         private void DragFrame_MouseMove()
         {
+            FrameWrapper_MouseEnter(endP, dragStatus);
             if (this.moveImage == null)
                 return;
             int dx = endP.X - startP.X;
@@ -410,6 +406,7 @@ namespace Citta_T1.Controls
             minBoundingBox.Y = minBoundingBox.Y + endP.Y - startP.Y + moveOffset.Y;
 
             frameWrapperVFX.DrawRoundRect(minBoundingBox, staticImage, arcRadius);
+
         }
         #endregion
         #region 最小外包矩形计算
