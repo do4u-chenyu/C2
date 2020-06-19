@@ -1,24 +1,20 @@
-﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class BatchDeleteCommand : ICommand
+    class BatchMoveCommand : ICommand
     {
-        private List<ModelElement> mes;
-        private List<Tuple<int, int, int>> mrs;
-        public BatchDeleteCommand(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
-        {
-            this.mes = mes;
-            this.mrs = mrs;
-        }
+        private Dictionary<int, Point> idPtsDict;
 
+        public BatchMoveCommand(Dictionary<int, Point> idPtsDict)
+        {
+            this.idPtsDict = idPtsDict;
+        }
         public bool Redo()
         {
             return DoDelete();
@@ -33,13 +29,13 @@ namespace Citta_T1.Core.UndoRedo.Command
 
         private bool DoDelete()
         {
-            Global.GetCanvasPanel().UndoRedoDelSelectedEles(this.mes, this.mrs);
+            Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict);
             Global.GetFlowControl().InterruptSelectFrame();
             return true;
         }
         private bool DoAdd()
         {
-            Global.GetCanvasPanel().UndoRedoAddSelectedEles(this.mes, this.mrs);
+            Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict);
             Global.GetFlowControl().InterruptSelectFrame();
             return true;
         }

@@ -658,33 +658,30 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().UpdateNaviView();
             return new Tuple<List<ModelElement>, List<Tuple<int, int, int>>>(mes, mrs);
         }
-        public Tuple<List<ModelElement>, List<ModelRelation>> DeleteSelectedElesByCtrID(List<int> ids)
-        {
-            ModelDocument doc = Global.GetCurrentDocument();
-            List<ModelElement> mes = new List<ModelElement>();
-            List<ModelRelation> mrs = new List<ModelRelation>();
-
-            foreach(int id in ids)
-            {
-                ModelElement me = doc.SearchElementByID(id);
-                this.DeleteCtr(me.InnerControl);
-                Global.GetCurrentDocument().DeleteModelElement(me);
-                mes.Add(me);
-
-                foreach (ModelRelation mr in doc.ModelRelations.Where(t => t.StartID == id || t.EndID == id))
-                    mrs.Add(mr);
-            }
-            Global.GetMainForm().SetDocumentDirty();
-            Global.GetNaviViewControl().UpdateNaviView();
-            return new Tuple<List<ModelElement>, List<ModelRelation>>(mes, mrs);
-        }
-        public void UndoRedoAddSelectedEleAndRel(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        public void UndoRedoAddSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.AddElesAndRels(mes, mrs);
         }
-        public void UndoRedoDelSelectedEleAndRel(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        public void UndoRedoDelSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
+        }
+        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
+        {
+            foreach (int id in idPtsDict.Keys)
+                log.Info(string.Format("{0} {1}", id, idPtsDict[id]));
+            ModelDocument doc = Global.GetCurrentDocument();
+            List<int> ids = new List<int>(idPtsDict.Keys);
+            foreach(int id in ids)
+            {
+                ModelElement me = doc.SearchElementByID(id);
+                if (me == null)
+                    return;
+                Point tmp = me.Location;   
+                me.InnerControl.Location = idPtsDict[id];
+                idPtsDict[id] = tmp;
+            }
+            Global.GetCurrentDocument().UpdateAllLines();
         }
         public void DeleteEle(ModelElement me, bool isSetDirtyAndUpdate = false)
         {

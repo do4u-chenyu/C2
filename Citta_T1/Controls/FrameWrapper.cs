@@ -394,11 +394,19 @@ namespace Citta_T1.Controls
         }
         private void DragFrame_MouseUp()
         {
+            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
+
             foreach (Control ct in controls)
             {
+                idPtsDict.Add((ct as MoveBaseControl).ID, new Point(ct.Left, ct.Top));
                 ct.Left = ct.Left + endP.X - startP.X + moveOffset.X;
                 ct.Top = ct.Top + endP.Y - startP.Y + moveOffset.Y;
             }
+
+            ICommand cmd = new BatchMoveCommand(idPtsDict);
+            UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
+
+
             Global.GetCurrentDocument().Show();
             Global.GetCurrentDocument().UpdateAllLines();
             Global.GetNaviViewControl().UpdateNaviView();
