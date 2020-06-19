@@ -147,6 +147,7 @@
       <DependentUpon>MoveBaseControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\UndoRedo\Command\BatchDeleteCommand.cs" />
+    <Compile Include="Core\UndoRedo\Command\BatchMoveCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\ElementAddCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\ElementDeleteCommand.cs" />
     <Compile Include="Core\UndoRedo\Command\ElementMoveCommand.cs" />

@@ -239,6 +239,7 @@ namespace Citta_T1.Controls.Flow
             SelectFrame = false;
             FrameChange(SelectFrame);
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
+            Global.GetCanvasPanel().Invalidate();
         }
     }
 }
