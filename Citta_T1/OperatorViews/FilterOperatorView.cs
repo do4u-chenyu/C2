@@ -18,9 +18,9 @@ namespace Citta_T1.OperatorViews
             InitializeComponentManual();
             InitByDataSource();
             LoadOption();
-            RegisterNoEmptyOption("factor0", DataType.Int, new int[]{ -1,5});
-            RegisterNoEmptyOption("factorI", DataType.Int, new int[]{ 1,-1,5 });
-            RegisterNoEmptyOption("outfield", DataType.Int, -1);
+            checkOptions.Add("factor0", DataType.Int, new int[]{ -1,5})
+                        .Add("factorI", DataType.Int, new int[]{ 1,-1,5 })
+                        .Add("outfield", DataType.Int, -1);
         }
         // 为了兼顾设计器，一些控件需要手工初始化。
         private void InitializeComponentManual()

@@ -90,7 +90,7 @@ namespace Citta_T1.Controls.Move.Op
 
             FirstDataSourceColumns = new string[0];
             SecondDataSourceColumns = new string[0];
-
+            oldControlPosition = this.Location;
 
         }
 
@@ -332,7 +332,7 @@ namespace Citta_T1.Controls.Move.Op
                 Global.GetNaviViewControl().UpdateNaviView();
             }
 
-            if (oldControlPosition != this.Location)
+            if (oldControlPosition != this.Location )
             {
                 // 构造移动命令类,压入undo栈
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
