@@ -187,10 +187,11 @@ namespace Citta_T1.Controls
         {
             // 别删这句话，删了就出问题
             this.endC = null;
-            if (e.Button != MouseButtons.Left) return;
-            // 画框
+            // 画框涉及存在鼠标ENTENT事件，会自行判断鼠标左键，需要前提
             if (SelectFrame())
                 frameWrapper.FrameWrapper_MouseMove(e);
+            else if (e.Button != MouseButtons.Left) 
+                return;
             // 控件移动
             else if (SelectDrag())
                 dragWrapper.DragMove(this.Size, Global.GetCurrentDocument().WorldMap.ScreenFactor, e);
@@ -689,7 +690,6 @@ namespace Citta_T1.Controls
         }
         public void ControlSelect_paste()
         {
-            log.Info("sss");
             clipBoard.ClipBoardPaste();
         }
     }

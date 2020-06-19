@@ -457,9 +457,9 @@ namespace Citta_T1.Controls
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             Bitmap i = new Bitmap(staticImage);
             Graphics g = Graphics.FromImage(i);
-           //// moveOffset = Global.GetCurrentDocument().WorldMap
-           //                    .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
-           //                                       minBoundingBox);
+            //moveOffset = Global.GetCurrentDocument().WorldMap
+            //                   .WorldBoundControl(new Point(minBoundingBox.X + dx, minBoundingBox.Y + dy),
+            //                                      minBoundingBox);
             g.DrawImage(moveImage, minBoundingBox.X + dx + moveOffset.X, minBoundingBox.Y + dy + moveOffset.Y);
             n.DrawImageUnscaled(i,
                                 Convert.ToInt32(mapOrigin.X * screenFactor),
