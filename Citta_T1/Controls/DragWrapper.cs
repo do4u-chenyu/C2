@@ -86,7 +86,7 @@ namespace Citta_T1.Controls
         {
             Bitmap staticImage = new Bitmap(Convert.ToInt32(WorldWidth * Factor), Convert.ToInt32(WorldHeight * Factor));
             Graphics g = Graphics.FromImage(staticImage);
-
+            
             g.SmoothingMode = SmoothingMode.HighQuality;//去掉锯齿
             g.CompositingQuality = CompositingQuality.HighQuality;//合成图像的质量
             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;//去掉文字的锯齿
