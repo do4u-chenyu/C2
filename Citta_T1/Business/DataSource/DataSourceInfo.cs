@@ -102,11 +102,13 @@ namespace Citta_T1.Business.DataSource
                     char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
                     OpUtil.ExtType extType = OpUtil.ExtTypeEnum(xn.SelectSingleNode("extType").InnerText);
                     OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
-                    DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
-                    dataButton.Count = ConvertUtil.TryParseInt(xn.SelectSingleNode("count").InnerText);
+                    DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding)
+                    {
+                        Count = ConvertUtil.TryParseInt(xn.SelectSingleNode("count").InnerText)
+                    };
                     dataSourceList.Add(dataButton);
                 }
-                catch (Exception e) { log.Error(e.Message); }
+                catch (Exception e) { log.Error("DataSourceInfo :" + e.Message); }
             }
             return dataSourceList;
         }

@@ -31,6 +31,7 @@ namespace Citta_T1.Utils
                 return defaultValue;
             }
         }
+
         public static bool IsInt(string value)
         {
             try
@@ -43,6 +44,7 @@ namespace Citta_T1.Utils
                 return false;
             }
         }
+
 
         public static void ControlTextTryParseInt(Control ct, string errrorMessage = "")
         {

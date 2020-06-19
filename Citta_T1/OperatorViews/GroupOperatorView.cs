@@ -97,7 +97,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string factor1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             this.opControl.Option.SetOption("factor1", factor1);

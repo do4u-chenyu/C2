@@ -163,7 +163,7 @@ namespace Citta_T1.Business.Schedule
 
             foreach (Task currentTask in parallelTasks)
             {
-                if (currentTask != null)//终止task线程
+                if (currentTask != null && currentTask.Status == TaskStatus.Running)//终止task线程
                     tokenSource.Cancel();
             }
             CloseThread();
@@ -269,8 +269,8 @@ namespace Citta_T1.Business.Schedule
             }
             //阻止当前线程
             resetEvent.WaitOne();
-
             tokenSource.Token.ThrowIfCancellationRequested();
+
 
             triple.OperateElement.Status = ElementStatus.Runnnig;
             UpdateLogDelegate(triple.TripleName + "开始运行");
@@ -301,7 +301,7 @@ namespace Citta_T1.Business.Schedule
                         case ElementSubType.CustomOperator2: cmds = (new CustomOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.PythonOperator: cmds = (new PythonOperatorCmd(triple)).GenCmd(); break;
                         case ElementSubType.DataFormatOperator: cmds = (new DataFormatOperatorCmd(triple)).GenCmd(); break;
-                        case ElementSubType.KeyWordOperator: cmds = (new KeyWordOperatorCmd(triple)).GenCmd(); break;
+                        case ElementSubType.KeywordOperator: cmds = (new KeywordOperatorCmd(triple)).GenCmd(); break;
                     }
                     break;
                 }
@@ -344,7 +344,7 @@ namespace Citta_T1.Business.Schedule
             }
             //阻止当前线程
             resetEvent.WaitOne();
-
+            tokenSource.Token.ThrowIfCancellationRequested();
             //在改变状态之前设置暂停，虽然暂停了但是后台还在继续跑
             triple.OperateElement.Status = ElementStatus.Done;
             triple.ResultElement.Status = ElementStatus.Done;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Move.Op;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +10,12 @@ namespace Citta_T1.Business.Option
 
     public class OperatorOption
     {
-        private Dictionary<string, string> optionDict = new Dictionary<string, string>();
+        private Dictionary<string, string> optionDict;
+        public OperatorOption()
+        {
+            optionDict = new Dictionary<string, string>();
+           
+        }
 
         public Dictionary<string, string> OptionDict { get => optionDict; set => this.optionDict = value; }
 
@@ -17,6 +25,9 @@ namespace Citta_T1.Business.Option
                 return defaultValue;
             return OptionDict[OpKey];
         }
+
+        public string this[string key] { get { return optionDict[key]; } set { optionDict[key] = value; } }
+        public List<string> Keys { get { return optionDict.Keys.ToList(); } }
 
         public override string ToString()
         {
@@ -72,6 +83,12 @@ namespace Citta_T1.Business.Option
             }
             return count;
         }
+        public void Clear()
+        {
+            OptionDict.Clear();
+        }
+
     }
+    
 
 }

@@ -68,7 +68,7 @@ namespace Citta_T1.Controls.Move.Rs
             this.moveWrapper = new MoveWrapper();
 
             endLineIndexs.Add(-1);
-
+            oldControlPosition = this.Location;
 
         }
 

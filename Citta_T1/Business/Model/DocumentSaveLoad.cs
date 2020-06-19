@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
+using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
@@ -168,8 +169,6 @@ namespace Citta_T1.Business.Model
                     .Write("separator", me.Separator)
                     .Write("encoding", me.Encoding);
 
-                if (me.Type == ElementType.DataSource)
-                    mexw.Write("extType", me.ExtType);
             }
         }
         #region 配置信息存到xml
@@ -219,7 +218,7 @@ namespace Citta_T1.Business.Model
             string text = String.Empty;
             try
             {
-                if (node.SelectSingleNode(nodeName)==null)
+                if (node.SelectSingleNode(nodeName) == null)
                     return text;
                 text = node.SelectSingleNode(nodeName).InnerText;
             }
@@ -231,11 +230,11 @@ namespace Citta_T1.Business.Model
         }
         public void ReadXml()
         {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(modelFilePath);
             XmlNodeList nodeLists;
             try
             {
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(modelFilePath);
                 XmlNode rootNode = xDoc.SelectSingleNode("ModelDocument");
                 this.modelDocument.WorldMap.MapOrigin = OpUtil.ToPointType(GetXmlNodeInnerText(rootNode, "MapOrigin"));
                 nodeLists = rootNode.SelectNodes("ModelElement");
@@ -244,7 +243,7 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e)
             {
-                log.Error("DocumentSaveLoad 读取Xml: " + e.Message);
+                log.Error("DocumentSaveLoad Xml文件格式存在问题: " + e.Message);
                 return;
             }
 
@@ -288,6 +287,13 @@ namespace Citta_T1.Business.Model
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
                     ctl.Option = ReadOption(xn);
+                    /*
+                     * 外部Xml文件修改等情况，检查并处理异常配置内容
+                     */
+                    CheckOption checkOption = new CheckOption(ctl);
+                   // checkOption.DealAbnormalOption();
+
+
                     ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
                     ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                 }

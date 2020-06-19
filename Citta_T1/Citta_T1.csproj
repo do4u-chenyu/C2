@@ -131,7 +131,7 @@
     <Compile Include="Business\Schedule\Cmd\AvgOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\CollideOperatorCmd.cs" />
     <Compile Include="Business\Schedule\Cmd\DataFormatOperatorCmd.cs" />
-    <Compile Include="Business\Schedule\Cmd\KeyWordOperatorCmd.cs" />
+    <Compile Include="Business\Schedule\Cmd\KeywordOperatorCmd.cs" />
     <Compile Include="Controls\ClipboardWrapper.cs" />
     <Compile Include="Controls\Common\ComCheckBoxList.cs">
       <SubType>UserControl</SubType>
@@ -334,9 +334,7 @@
     <Compile Include="OperatorViews\AvgOperatorView.Designer.cs">
       <DependentUpon>AvgOperatorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="OperatorViews\Base\BaseOperatorView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="OperatorViews\Base\BaseOperatorView.cs" />
     <Compile Include="OperatorViews\Base\BaseOperatorView.Designer.cs">
       <DependentUpon>BaseOperatorView.cs</DependentUpon>
     </Compile>
@@ -714,6 +712,9 @@
     <None Include="res\toolbox\continue.png" />
     <None Include="res\toolbox\run.png" />
     <None Include="res\toolbox\continual.png" />
+    <Content Include="sbin\sleep.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="sbin\xargs.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

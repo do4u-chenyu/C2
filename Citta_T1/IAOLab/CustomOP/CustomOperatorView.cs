@@ -58,11 +58,10 @@ namespace Citta_T1.OperatorViews
 
         }
         #endregion
-
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("fix", this.fixRadioButton.Checked);
             this.opControl.Option.SetOption("random", this.randomRadioButton.Checked);
@@ -236,6 +235,17 @@ namespace Citta_T1.OperatorViews
             if (!IsValidNum(this.fixSecondTextBox.Text) || !IsValidNum(this.randomBeginTextBox.Text) || !IsValidNum(this.randomEndTextBox.Text))
             {
                 MessageBox.Show("输入时间非纯数字，请重新输入");
+                return notReady;
+            }
+            //设定时间空值检测
+            if (this.fixRadioButton.Checked && String.IsNullOrEmpty(this.fixSecondTextBox.Text))
+            {
+                MessageBox.Show("请设置固定运行时间");
+                return notReady;
+            }
+            if (this.randomRadioButton.Checked && (String.IsNullOrEmpty(this.randomBeginTextBox.Text) || String.IsNullOrEmpty(this.randomEndTextBox.Text)))
+            {
+                MessageBox.Show("请设置随机运行时间");
                 return notReady;
             }
             //分隔符-其他，是否有值

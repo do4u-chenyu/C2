@@ -1,4 +1,5 @@
-﻿using Citta_T1.Core;
+﻿using Citta_T1.Business.Schedule;
+using Citta_T1.Core;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -84,6 +85,23 @@ namespace Citta_T1.Controls.Title
                 return;
             ModelTitlePanel parentPanel = Global.GetModelTitlePanel();
             MainForm mainForm = Global.GetMainForm();
+            //判断当前模型是否正在运行，运行中的不能关闭
+            if(Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running || Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Pause)
+            {
+                DialogResult isDocClose = MessageBox.Show(string.Format("\"{0}\"正在运行中，是否强制关闭？", modelTitle),"关闭", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                // 取消关闭，直接return
+                // 强制关闭
+                if (isDocClose == DialogResult.Yes)
+                {
+                    Global.GetCurrentDocument().TaskManager.Stop();
+                    mainForm.UpdateRunbuttonImageInfo();
+                    Global.GetMyModelControl().EnableClosedDocumentMenu(this.modelTitle);
+                    mainForm.DeleteCurrentDocument();
+                    parentPanel.RemoveModel(this);
+                }
+                return;
+            }
+
             if (!Global.GetCurrentDocument().Dirty)
             {
                 if (parentPanel.Controls.Count != 2)
@@ -92,7 +110,7 @@ namespace Citta_T1.Controls.Title
                     mainForm.DeleteCurrentDocument();
                     parentPanel.RemoveModel(this);
                 }
-                Global.GetCurrentDocument().TaskManager.CloseThread(); // 此处可能是个bug,需要讨论
+                //Global.GetCurrentDocument().TaskManager.CloseThread(); // 此处可能是个bug,需要讨论
                 return;
             }
             DialogResult result = MessageBox.Show(String.Format("保存文件\"{0}\"?", modelTitle),
@@ -117,7 +135,7 @@ namespace Citta_T1.Controls.Title
                 mainForm.DeleteCurrentDocument();
                 parentPanel.RemoveModel(this);
             }
-            Global.GetCurrentDocument().TaskManager.CloseThread();
+            //Global.GetCurrentDocument().TaskManager.CloseThread();
         }
 
         public void ShowSelectedBorder()
