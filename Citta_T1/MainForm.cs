@@ -225,14 +225,8 @@ namespace Citta_T1
 
         private void InitializeControlsLocation()
         {
-            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
-
-            Point org = new Point(this.canvasPanel.Width, 0);
-            Point org2 = new Point(0, this.canvasPanel.Height);
-            int x = org.X - 10 - this.naviViewControl.Width;
-            int y = org2.Y - 5 - this.naviViewControl.Height;
-            log.Info("缩略图定位：" + x.ToString() + "," + y.ToString());
-            log.Info("x：" + x.ToString() + ",y:" + y.ToString());
+            int x = this.canvasPanel.Width - 10 - this.naviViewControl.Width;
+            int y = this.canvasPanel.Height - 5 - this.naviViewControl.Height;
 
             // 缩略图定位
             this.naviViewControl.Location = new Point(x, y);
@@ -250,20 +244,12 @@ namespace Citta_T1
             this.progressBar1.Location = new Point(x, this.canvasPanel.Height / 2 + 54);
             this.progressBarLabel.Location = new Point(x + 125, this.canvasPanel.Height / 2 + 50);
 
-
             // 顶层浮动工具栏和右侧工具及隐藏按钮定位
-            Point loc = new Point(org.X - 70 - this.flowControl.Width, org.Y + 50);
-            Point loc_flowcontrol2 = new Point(org.X - this.rightShowButton.Width, loc.Y);
-            Point loc_flowcontrol3 = new Point(loc_flowcontrol2.X, loc.Y + this.rightHideButton.Width + 10);
-            Point loc_panel3 = new Point(loc.X, loc.Y + this.flowControl.Height + 10);
-
-            this.flowControl.Location = loc;
-
-            this.rightShowButton.Location = loc_flowcontrol2;
-            this.rightHideButton.Location = loc_flowcontrol3;
-
-            this.remarkControl.Location = loc_panel3;
-
+            this.flowControl.Location     = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50);
+            this.remarkControl.Location   = new Point(this.canvasPanel.Width - 70 - this.flowControl.Width, 50 + this.flowControl.Height + 10);
+            this.rightShowButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50);
+            this.rightHideButton.Location = new Point(this.canvasPanel.Width - this.rightShowButton.Width , 50 + this.rightHideButton.Width + 10);
+            
             // 右上用户名，头像
             int count = System.Text.RegularExpressions.Regex.Matches(userName, "[a-z0-9]").Count;
             int rightMargin = (this.userName.Length - (count / 3) - 3) * 14;
@@ -272,27 +258,21 @@ namespace Citta_T1
             this.usernamelabel.Location = new Point(userNameLocation.X + 65 - rightMargin, userNameLocation.Y + 2);
             this.helpPictureBox.Location = new Point(userNameLocation.X - rightMargin, userNameLocation.Y + 1);
             this.portraitpictureBox.Location = new Point(userNameLocation.X + 30 - rightMargin, userNameLocation.Y + 1);
-
-            log.Info("画布大小：" + this.canvasPanel.Width.ToString() + "," + this.canvasPanel.Height.ToString());
         }
 
         private void MyModelButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
             this.myModelControl.Visible = true;
-
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
-
         }
 
         private void OprateButton_Click(object sender, EventArgs e)
         {
             this.ShowLeftFold();
-
             this.operatorControl.Visible = true;
-
             this.dataSourceControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -302,7 +282,6 @@ namespace Citta_T1
         {
             this.ShowLeftFold();
             this.dataSourceControl.Visible = true;
-
             this.operatorControl.Visible = false;
             this.flowChartControl.Visible = false;
             this.myModelControl.Visible = false;
@@ -312,11 +291,9 @@ namespace Citta_T1
         {
             this.ShowLeftFold();
             this.flowChartControl.Visible = true;
-
             this.dataSourceControl.Visible = false;
             this.operatorControl.Visible = false;
             this.myModelControl.Visible = false;
-
         }
 
 
@@ -365,7 +342,7 @@ namespace Citta_T1
             {
                 this.isBottomViewPanelMinimum = false;
                 this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\minfold.png");
+                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.minfold;
             }
             InitializeControlsLocation();
             if (bottomViewPanel.Height == 280)
@@ -385,13 +362,13 @@ namespace Citta_T1
             {
                 this.isBottomViewPanelMinimum = false;
                 this.bottomViewPanel.Height = 280;
-                this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\minfold.png");
+                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.minfold;
             }
             else
             {
                 this.isBottomViewPanelMinimum = true;
                 this.bottomViewPanel.Height = 40;
-                this.minMaxPictureBox.Image = Image.FromFile(Application.StartupPath + "\\res\\displaypanel\\maxunfold.png");
+                this.minMaxPictureBox.Image = global::Citta_T1.Properties.Resources.maxunfold;
             }
             // TODO [DK] BUG 这里是因为CanvasPanel设置了Dock属性，在this.bottomViewPanel.Height变化的时候，CanvasPanel的Height也变了，因此控件位置发生了改变，但是线并没有变
             InitializeControlsLocation();

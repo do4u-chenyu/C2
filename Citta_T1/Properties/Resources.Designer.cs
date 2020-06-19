@@ -253,6 +253,26 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap maxunfold {
+            get {
+                object obj = ResourceManager.GetObject("maxunfold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap minfold {
+            get {
+                object obj = ResourceManager.GetObject("minfold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap minOp {
             get {
                 object obj = ResourceManager.GetObject("minOp", resourceCulture);
