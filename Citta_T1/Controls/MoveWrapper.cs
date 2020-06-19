@@ -81,7 +81,7 @@ namespace Citta_T1.Controls
         {
             width = canvasSize.Width;
             height = canvasSize.Height;
-            Factor = canvasFactor;
+            Factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
         }
         public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
         {
