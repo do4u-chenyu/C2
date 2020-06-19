@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override void SaveOption()
         {
-            opControl.Option.OptionDict.Clear();
+            opControl.Option.Clear();
             opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
             opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);

@@ -98,7 +98,7 @@ namespace Citta_T1.OperatorViews
         }
         protected override void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.Clear();
 
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);

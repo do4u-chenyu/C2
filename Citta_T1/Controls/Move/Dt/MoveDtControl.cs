@@ -49,6 +49,7 @@ namespace Citta_T1.Controls.Move.Dt
             InitializeOpPinPicture();
             ChangeSize(sizeL);
             this.moveWrapper = new MoveWrapper();
+            oldControlPosition = this.Location;
         }
 
         #region 重写方法

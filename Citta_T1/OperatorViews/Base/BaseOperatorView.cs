@@ -3,6 +3,7 @@ using Citta_T1.Business.Option;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,6 +13,190 @@ using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews.Base
 {
+    public enum DataType
+    {
+         String,
+         Int,
+         Bool
+    }
+    public class CheckOption
+    {
+        private readonly Dictionary<string, DataType> dataTypes;        
+        private readonly Dictionary<string,int> itemCounts0;
+        private readonly Dictionary<string, int[]> itemCounts1;
+        private readonly MoveOpControl opControl;
+        public CheckOption(MoveOpControl opControl)
+        {
+            this.dataTypes = new Dictionary<string, DataType>();
+            this.itemCounts0 = new Dictionary<string, int>();
+            this.itemCounts1 = new Dictionary<string, int[]>();
+            this.opControl = opControl;
+        }
+        public CheckOption Add(string prefix, DataType dataType)
+        {
+            this.dataTypes[prefix] = dataType;
+            return this;
+        }
+        public CheckOption Add(string prefix, DataType dataType, int count)
+        {
+            this.dataTypes[prefix] = dataType;
+            this.itemCounts0[prefix] = count;
+            return this;
+        }
+        public CheckOption Add(string prefix, DataType dataType, int[] countList)
+        {
+            this.dataTypes[prefix] = dataType;
+            this.itemCounts1[prefix] = countList;
+            return this;
+        }
+        public void DealAbnormalOption()
+        {
+            // 判断表头信息是否存在
+            // 不存在，清空所有配置
+            OperatorOption option = this.opControl.Option;
+            if (WithoutInputColumns(option))
+            {
+                option.Clear();
+                this.opControl.Status = ElementStatus.Null;
+                return;
+            }
+            int maxIndex0 = option.GetOptionSplit("columname0").Length - 1;
+            int maxIndex1 = option.GetOptionSplit("columname1").Length - 1;
+            foreach (string prefix in dataTypes.Keys)
+            {
+
+                // 配置项丢失检查
+                if (String.IsNullOrEmpty(option.GetOption(prefix)))
+                    opControl.Status = ElementStatus.Null;
+
+                // 数据类型检测
+                if (dataTypes[prefix] == DataType.Int)
+                    CheckIntType(option, prefix);
+
+                // 索引数目、索引值超限判断
+                if (string.IsNullOrEmpty(option.GetOption(prefix)))
+                    continue;
+
+                string[] items = option.GetOptionSplit(prefix);
+                int[] indexs = Array.ConvertAll(items,int.Parse);
+                if (itemCounts0.Keys.Contains(prefix) && indexs.Max() > maxIndex0)
+                {
+                    opControl.Option[prefix] = String.Empty;
+                    opControl.Status = ElementStatus.Null;
+                }
+                if (itemCounts1.Count > 0)
+                {
+
+                }
+
+            }
+
+        }
+        private bool WithoutInputColumns(OperatorOption option)
+        {
+            bool hasInput0 = String.IsNullOrEmpty(option.GetOption("columname0"));
+            bool hasInput1 = String.IsNullOrEmpty(option.GetOption("columname1"));
+            bool binaryInput = this.opControl.IsBinaryDimension();
+
+            if ( hasInput1 && binaryInput || hasInput0)
+                return true;
+            return false;
+        }
+        private void CheckIntType(OperatorOption option, string key)
+        {
+            if (string.IsNullOrEmpty(option[key]))
+                return;
+            if (key.Contains("outfield") && IsNotAllInt(option.GetOptionSplit(key)))
+            {
+                option[key] = String.Empty;
+                opControl.Status = ElementStatus.Null;
+            }
+            else if (key.Contains("factorI"))
+                DealNotIntChange(option);
+            else
+            {
+                if (!ConvertUtil.IsInt(option[key]))
+                {
+                    opControl.Option[key] = String.Empty;
+                    opControl.Status = ElementStatus.Null;
+                }
+            }
+
+        }
+        private void DealNotIntChange(OperatorOption option)
+        {
+
+            List<ElementSubType> mixTypes = new List<ElementSubType>()
+            {
+                ElementSubType.FilterOperator,
+                ElementSubType.DataFormatOperator,
+                ElementSubType.UnionOperator
+            };
+            ElementSubType ctlType = OpUtil.SEType(opControl.SubTypeName);
+            List<string> factors = option.Keys.FindAll(x => x.Contains("factor"));
+
+            foreach (string factor in factors)
+            {
+                if (string.IsNullOrEmpty(option[factor]))
+                    continue;
+                
+                string[] items = option.GetOptionSplit(factor);
+                int maxIndex = items.Length - 1;
+                string[] indexs = mixTypes.Contains(ctlType) ? items.Take(maxIndex).ToArray() : items;
+
+                if (IsNotAllInt(indexs))
+                {
+                    opControl.Option[factor] = String.Empty;
+                    opControl.Status = ElementStatus.Null;
+                }
+            }
+        }
+        public void DealOutOfRangeIndex(Dictionary<string, int[]> itemCounts1, OperatorOption option)
+        {
+            int count0 = itemCounts1["factor0"].Length;
+            int count1 = itemCounts1["factorI"].Length;
+
+            List<string> factors = option.Keys.FindAll(x => x.Contains("factor"));
+            if (factors.Contains("factor0") )
+            {
+              
+            }
+
+        }
+        private bool IsOutOfIndex(String[] itemList, int count,List<int> maxIndexs)
+        {
+            bool judge0 = itemList.Length >= count;
+            if (!judge0) return true;
+            if (IsNotAllInt(itemList.Take(count).ToArray())) return true;
+            for (int i = 0; i < count; i++)
+            {
+                if (maxIndexs[i] == -1 && Convert.ToInt32(itemList[i]) < maxIndexs[i])
+                {
+                    return true;
+                }
+                else if (maxIndexs[i] == -2 && true)
+                    return true;
+                else if (true)
+                    return true;
+            }
+            return false;
+
+        }
+        private bool IsNotAllInt(string[] indexs)
+        {
+            foreach (string index in indexs)
+            {
+                if (!ConvertUtil.IsInt(index))
+                    return true;
+            }
+            return false;
+        }
+
+
+    }
+
+
+
     public partial class BaseOperatorView : Form
     {
         protected MoveOpControl opControl;          // 对应的OP算子 
@@ -28,6 +213,7 @@ namespace Citta_T1.OperatorViews.Base
         protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
 
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
+        protected CheckOption checkOptions;
         public BaseOperatorView()
         {
             this.opControl = null;
@@ -42,6 +228,7 @@ namespace Citta_T1.OperatorViews.Base
             oldOutList1 = new List<int>();
             selectedColumns = new List<string>();
             dataInfo = new Dictionary<string, string>();
+            checkOptions = new CheckOption(this.opControl);
             InitializeComponent();
         }
         public BaseOperatorView(MoveOpControl opControl) : this()
@@ -77,25 +264,16 @@ namespace Citta_T1.OperatorViews.Base
             }
         }
 
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
-                      
+            /*
+             * 外部Xml文件修改等情况，检查并处理异常配置内容
+             */
+           // checkOptions.DealAbnormalOption();
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        protected  void FindChildControls(Control root, List<string> names, List<Control> controls)
-        {
-            foreach (Control ct in root.Controls)
-            {               
-                controls.Add(ct);
-                if (ct.Controls.Count > 0)
-                {
-                    FindChildControls(ct, names, controls);
-                }
-            }  
-        }
         // 是否配置完毕
         protected virtual bool IsOptionNotReady()
         {
@@ -144,7 +322,7 @@ namespace Citta_T1.OperatorViews.Base
             int sumcountDigit = Regex.Matches(dataName, "[a-zA-Z0-9]").Count;
 
             //防止截取字符串时中文乱码
-            foreach (Match mc in chs)
+            foreach (System.Text.RegularExpressions.Match mc in chs)
             {
                 if (dataName.IndexOf(mc.ToString()) == maxLength)
                 {

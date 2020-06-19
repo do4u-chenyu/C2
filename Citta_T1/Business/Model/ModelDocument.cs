@@ -226,6 +226,8 @@ namespace Citta_T1.Business.Model
                 {
                     ModelElement sEle = SearchElementByID(mr.StartID);
                     ModelElement eEle = SearchElementByID(mr.EndID);
+                    if (sEle == ModelElement.Empty || eEle == ModelElement.Empty)
+                        continue;
                     // 坐标更新
                     mr.StartP = sEle.InnerControl.GetStartPinLoc(0);
                     mr.EndP = eEle.InnerControl.GetEndPinLoc(mr.EndPin);

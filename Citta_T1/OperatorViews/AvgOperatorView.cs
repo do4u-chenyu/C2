@@ -44,10 +44,9 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("avgfield", comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString());
-            this.opControl.Option.SetOption("outfield", this.comboBox0.SelectedIndex);
             this.selectedColumns.Add(this.comboBox0.SelectedItem.ToString());
 
             //更新子图所有节点状态

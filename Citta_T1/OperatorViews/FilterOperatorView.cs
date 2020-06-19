@@ -18,6 +18,9 @@ namespace Citta_T1.OperatorViews
             InitializeComponentManual();
             InitByDataSource();
             LoadOption();
+            checkOptions.Add("factor0", DataType.Int, new int[]{ -1,5})
+                        .Add("factorI", DataType.Int, new int[]{ 1,-1,5 })
+                        .Add("outfield", DataType.Int, -1);
         }
         // 为了兼顾设计器，一些控件需要手工初始化。
         private void InitializeComponentManual()
@@ -82,7 +85,7 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与加载
         protected override void SaveOption()
         {
-            this.opControl.Option.OptionDict.Clear();
+            this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 

@@ -67,6 +67,7 @@ namespace Citta_T1.Controls.Move
         public MoveBaseControl()
         {
             InitializeComponent();
+
         }
 
         // 单元素拖拽
