@@ -250,7 +250,7 @@ namespace Citta_T1.Business.Option
             string key = ori.Prefix;
             if (key.Contains("outfield") && IsNotAllInt(GetOptionSplit(key)))
                 notInt = true;
-            else if (!ConvertUtil.IsInt(this[ori.Prefix]))
+            else if (!key.Contains("outfield") && !ConvertUtil.IsInt(this[ori.Prefix]))
                 notInt = true;
             if (notInt)
             {
