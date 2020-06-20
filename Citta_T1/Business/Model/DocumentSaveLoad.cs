@@ -287,15 +287,13 @@ namespace Citta_T1.Business.Model
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
                     ctl.Option = ReadOption(xn);
+                    ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
+                    ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                     /*
                      * 外部Xml文件修改等情况，检查并处理异常配置内容
                      */
-                    CheckOption checkOption = new CheckOption(ctl);
-                    checkOption.DealAbnormalOption(ctl.Option);
 
-
-                    ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
-                    ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
+                    ctl.Option.DealAbnormalOption(ctl);     
                 }
             }
         }

@@ -14,8 +14,6 @@ namespace Citta_T1.OperatorViews
             InitializeComponent();
             InitByDataSource();
             LoadOption();
-            checkOptions.Add("maxfield", DataType.Int, -1)
-                         .Add("outfield", DataType.Int, -1);
 
         }
         #region 判断是否配置完毕
