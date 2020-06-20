@@ -185,7 +185,8 @@ namespace Citta_T1.Business.Option
             int nowCount = nowColumns.Count;
             if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
-            if (nowCount > oldCount && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
+            bool isContain = nowCount > oldCount && oldCount > 0;
+            if (isContain && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
             {
                 string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
