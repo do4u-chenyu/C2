@@ -76,7 +76,7 @@ namespace Citta_T1.Controls.Move.Op
             Separator = OpUtil.DefaultSeparator;
 
             SubTypeName = subTypeName;
-            Option = new OperatorOption();
+            Option = new OperatorOption(this);
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.moveWrapper = new MoveWrapper();

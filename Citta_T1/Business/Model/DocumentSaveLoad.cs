@@ -286,21 +286,21 @@ namespace Citta_T1.Business.Model
                     if (type != "Operator")
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
-                    ctl.Option = ReadOption(xn);
+                    ctl.Option = ReadOption(xn,ctl);
                     ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
                     ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                     /*
                      * 外部Xml文件修改等情况，检查并处理异常配置内容
                      */
 
-                    ctl.Option.DealAbnormalOption(ctl);     
+                    ctl.Option.DealAbnormalOption();     
                 }
             }
         }
 
-        private OperatorOption ReadOption(XmlNode xn)
+        private OperatorOption ReadOption(XmlNode xn, MoveOpControl opControl)
         {
-            OperatorOption option = new OperatorOption();
+            OperatorOption option = new OperatorOption(opControl);
             try
             {
                 XmlNode node = xn.SelectSingleNode("option");
@@ -312,7 +312,7 @@ namespace Citta_T1.Business.Model
             catch (Exception e)
             {
                 log.Error("读配置出错 ： " + e.Message);
-                option = new OperatorOption();
+                option = new OperatorOption(opControl);
             }
             return option;
         }

@@ -48,11 +48,13 @@ namespace Citta_T1.Business.Option
     {
         private Dictionary<string, string> optionDict;
         private Dictionary<ElementSubType, RegisterInfo[]> allRegisterInfo;
+        private MoveOpControl opControl;
         private int maxIndex0;
         private int maxIndex1;
-        public OperatorOption()
+        public OperatorOption(MoveOpControl opControl)
         {
             optionDict = new Dictionary<string, string>();
+            this.opControl = opControl;
             OptionPrefixInit();
         }
         private void OptionPrefixInit()
@@ -76,24 +78,24 @@ namespace Citta_T1.Business.Option
                                                                            new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, 5 }),
                                                                            new RegisterInfo("factorI", TypeCode.Int32, new int[] { 1, -1, 5 }) },
 
-                [ElementSubType.FreqOperator] = new RegisterInfo[]      { new RegisterInfo("outfield", TypeCode.Int32, -1) },
+                [ElementSubType.FreqOperator] = new RegisterInfo[]       { new RegisterInfo("outfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.GroupOperator] = new RegisterInfo[]     {  new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1 }),
+                [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1 }),
                                                                            new RegisterInfo("factorI", TypeCode.Int32, new int[] { -1 })},
 
-                [ElementSubType.KeywordOperator] = new RegisterInfo[]   { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                          new RegisterInfo("dataSelectIndex", TypeCode.Int32, -1),
-                                                                          new RegisterInfo("conditionSlect", TypeCode.Int32, 1),
-                                                                          new RegisterInfo("keySelectIndex", TypeCode.Int32, -2),},
+                [ElementSubType.KeywordOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("dataSelectIndex", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("conditionSlect", TypeCode.Int32, 1),
+                                                                           new RegisterInfo("keySelectIndex", TypeCode.Int32, -2),},
 
-                [ElementSubType.MaxOperator] = new RegisterInfo[]       { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                          new RegisterInfo("maxfield", TypeCode.Int32, -1) },
+                [ElementSubType.MaxOperator] = new RegisterInfo[]        { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("maxfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.MinOperator] = new RegisterInfo[]       { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                          new RegisterInfo("minfield", TypeCode.Int32, -1) },
+                [ElementSubType.MinOperator] = new RegisterInfo[]        { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("minfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.RandomOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                          new RegisterInfo("randomnum", TypeCode.Int32) },
+                [ElementSubType.RandomOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("randomnum", TypeCode.Int32) },
 
                 [ElementSubType.RelateOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                           new RegisterInfo("outfield1", TypeCode.Int32, -2),
@@ -193,11 +195,11 @@ namespace Citta_T1.Business.Option
 
 
 
-        public void DealAbnormalOption(MoveOpControl opControl)
+        public void DealAbnormalOption()
         {
             
             // 判断表头是否存在
-            if (WithoutInputColumns(opControl))
+            if (WithoutInputColumns())
                 return;
             maxIndex0 = GetOptionSplit("columnname0").Length - 1;
             maxIndex1 = GetOptionSplit("columnname1").Length - 1;
@@ -221,14 +223,14 @@ namespace Citta_T1.Business.Option
                 }
                 // 数据异常类型检查与处理
                 if (ori.DataType == TypeCode.Int32)
-                    DealNonIntType(ori, opControl);
+                    DealNonIntType(ori);
             }
             if (factorInfo.Count == 0)
                 return;
             //包含Factor字段的数据异常类型检查与处理
-            DealFactorNotIntType(factorInfo, opControl);
+            DealFactorNotIntType(factorInfo);
         }
-        private bool WithoutInputColumns(MoveOpControl opControl)
+        private bool WithoutInputColumns()
         {
             bool notHasInput0 = String.IsNullOrEmpty(GetOption("columnname0"));
             bool notHasInput1 = String.IsNullOrEmpty(GetOption("columnname1"));
@@ -243,38 +245,35 @@ namespace Citta_T1.Business.Option
             }
             return false;
         }
-        private void DealNonIntType(RegisterInfo ori, MoveOpControl opControl)
+        private void DealNonIntType(RegisterInfo ori)
         {
             // 非整形检查与处理
-            bool notInt = false;
+           
             string key = ori.Prefix;
-            if (key.Contains("outfield") && IsNotAllInt(GetOptionSplit(key)))
-                notInt = true;
-            else if (!key.Contains("outfield") && !ConvertUtil.IsInt(this[ori.Prefix]))
-                notInt = true;
+            string[] items = GetOptionSplit(key);
+            bool notInt = key.Contains("outfield") ? IsNotAllInt(items) : !ConvertUtil.IsInt(this[key]);
             if (notInt)
             {
-                ModifyInfo(opControl, key);
+                ModifyInfo(key);
                 return;
             }
 
             // 判断是否需要超限检查
-            if (ori.OtherIndexLimit==0)
+            if (ori.OtherIndexLimit == 0)
                 return;
             // 索引值超限检查与处理
             
             bool outRange = false;
-            string[] items = GetOptionSplit(key);
             int maxIndex = Array.ConvertAll(items, int.Parse).Max();
-            if (ori.OtherIndexLimit == -1 && maxIndex > maxIndex0)
-                outRange = true;
-            else if (ori.OtherIndexLimit == -2 && maxIndex > maxIndex1)
-                outRange = true;
+            if (ori.OtherIndexLimit == -1)
+                outRange = maxIndex > maxIndex0;
+            else if (ori.OtherIndexLimit == -2 )
+                outRange = maxIndex > maxIndex1;
             if (outRange)
-                ModifyInfo(opControl,key);
+                ModifyInfo(key);
 
         }
-        private void DealFactorNotIntType(Dictionary<string, RegisterInfo> factorInfo, MoveOpControl opControl)
+        private void DealFactorNotIntType(Dictionary<string, RegisterInfo> factorInfo)
         {
             List<string> factors = Keys.FindAll(x => x.Contains("factor"));
             int[] limit0 = factorInfo["factor1"].FactorIndexLimit;
@@ -289,14 +288,10 @@ namespace Citta_T1.Business.Option
 
                 string[] items = GetOptionSplit(factor);
                 // Int型数据检查
-                bool notInt=false;
-                if (factor.Contains("factor1") && CheckFactorNonInt(items, limit0))
-                    notInt = true;
-                else if (!factor.Contains("factor1") && CheckFactorNonInt(items, limit1))
-                    notInt = true;
+                bool notInt = factor.Contains("factor1") ? CheckFactorNonInt(items, limit0) : CheckFactorNonInt(items, limit1);
                 // 非Int型-异常情况处理
                 if (notInt)
-                    ModifyInfo(opControl, factor);
+                    ModifyInfo(factor);
             }
         }
         private bool CheckFactorNonInt(String[] itemList, int[] maxIndexs)
@@ -310,12 +305,12 @@ namespace Citta_T1.Business.Option
             for (int i = 0; i < count; i++)
             {
                 int index = Convert.ToInt32(itemList[i]);
-                if (maxIndexs[i] == -1 && index > maxIndex0)
-                    outRange = true;
-                else if (maxIndexs[i] == -2 && index > maxIndex1)
-                    outRange = true;
-                else if ( maxIndexs[i] >=0 && maxIndexs[i] < index)
-                    outRange = true;
+                if (maxIndexs[i] == -1)
+                    outRange = index > maxIndex0;
+                else if (maxIndexs[i] == -2)
+                    outRange = index > maxIndex1;
+                else if ( maxIndexs[i] >=0)
+                    outRange = maxIndexs[i] < index;
             }
             return outRange;
 
@@ -329,10 +324,10 @@ namespace Citta_T1.Business.Option
             }
             return false;
         }
-        private void ModifyInfo(MoveOpControl control,string key)
+        private void ModifyInfo(string key)
         {
             this[key] = String.Empty;
-            control.Status = ElementStatus.Null;
+            opControl.Status = ElementStatus.Null;
         }
     }
     
