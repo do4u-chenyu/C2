@@ -84,7 +84,7 @@ namespace Citta_T1.OperatorViews.Base
             /*
              * 外部Xml文件修改等情况，检查并处理异常配置内容
              */
-            //opControl.Option.DealAbnormalOption(opControl);
+            opControl.Option.DealAbnormalOption(opControl);
             this.DialogResult = DialogResult.Cancel;
             Close();
         }
