@@ -126,7 +126,7 @@ namespace Citta_T1.Business.Option
                 if (keys.Contains(kvp.Key))
                     continue;
 
-                if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
+                if (String.IsNullOrWhiteSpace(kvp.Value))
                     return ElementStatus.Null;
             }
             return ElementStatus.Ready;

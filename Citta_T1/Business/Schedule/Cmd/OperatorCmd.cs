@@ -201,15 +201,7 @@ namespace Citta_T1.Business.Schedule.Cmd
 
         public int GetOptionFactorCount()
         {
-            int num = 0;
-            foreach (string key in option.OptionDict.Keys)
-            {
-                if (key.Contains("factor"))
-                {
-                    num++;
-                }
-            }
-            return num;
+            return option.KeysCount("factor");
         }
 
         public OpUtil.Encoding JudgeInputFileEncoding(string inputFile)

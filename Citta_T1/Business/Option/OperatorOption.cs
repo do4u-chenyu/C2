@@ -1,14 +1,13 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Utils;
-using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Citta_T1.Business.Option
 {
-     
+
     public class RegisterInfo
     {
 
@@ -180,8 +179,7 @@ namespace Citta_T1.Business.Option
         public int KeysCount(string name)
         {
             int count = 0;
-            List<string> keys = this.OptionDict.Keys.ToList();
-            foreach (string key in keys)
+            foreach (string key in this.OptionDict.Keys)
             {
                 if (key.Contains(name))
                     count += 1;
@@ -195,7 +193,7 @@ namespace Citta_T1.Business.Option
 
 
 
-        public void DealAbnormalOption()
+        public void OptionValidating()
         {
             
             // 判断表头是否存在
