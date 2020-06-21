@@ -143,7 +143,6 @@ namespace Citta_T1.OperatorViews
         #region 判断是否配置完毕
         protected override bool IsDuplicateSelect()
         {
-            bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "," + index02 + "," + this.textBox0.Text;
@@ -171,9 +170,9 @@ namespace Citta_T1.OperatorViews
             foreach (var item in duplicateValues)
             {
                 MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
-                repetition = true;
+                return true;
             }
-            return repetition;
+            return false;
         }
         protected override bool IsOptionNotReady()
         {

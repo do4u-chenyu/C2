@@ -153,7 +153,6 @@ namespace Citta_T1.OperatorViews
         #region 分组字段重复选择判断
         protected override bool IsDuplicateSelect()
         {
-            bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string factor1 = index01 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>
@@ -177,9 +176,9 @@ namespace Citta_T1.OperatorViews
             foreach (var item in duplicateValues)
             {
                 MessageBox.Show("数据标准化存在完全重复选项,请重新选择添加条件");
-                repetition = true;
+                return true;
             }
-            return repetition;
+            return false;
         }
         #endregion
 
