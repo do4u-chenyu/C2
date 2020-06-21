@@ -64,24 +64,24 @@ namespace Citta_T1.Business.Option
                 [ElementSubType.AvgOperator] = new RegisterInfo[]        { new RegisterInfo("avgfield", TypeCode.Int32, -1) },
 
                 [ElementSubType.CollideOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                           new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, -2 }),
-                                                                           new RegisterInfo("factorI", TypeCode.Int32, new int[] { 1, -1, -2 })},
+                                                                           new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
+                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 })},
 
-                [ElementSubType.DataFormatOperator] = new RegisterInfo[] { new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1}),
-                                                                           new RegisterInfo("factorI", TypeCode.Int32, new int[] { -1})},
+                [ElementSubType.DataFormatOperator] = new RegisterInfo[] { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1}),
+                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1})},
 
                 [ElementSubType.DifferOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                           new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, -2 }),
-                                                                           new RegisterInfo("factorI", TypeCode.Int32, new int[] { 1, -1, -2 }) },
+                                                                           new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
+                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 }) },
 
                 [ElementSubType.FilterOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
-                                                                           new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, 5 }),
-                                                                           new RegisterInfo("factorI", TypeCode.Int32, new int[] { 1, -1, 5 }) },
+                                                                           new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, 5 }),
+                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, 5 }) },
 
                 [ElementSubType.FreqOperator] = new RegisterInfo[]       { new RegisterInfo("outfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1 }),
-                                                                           new RegisterInfo("factorI", TypeCode.Int32, new int[] { -1 })},
+                [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1 }),
+                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1 })},
 
                 [ElementSubType.KeywordOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
                                                                            new RegisterInfo("dataSelectIndex", TypeCode.Int32, -1),
@@ -99,14 +99,14 @@ namespace Citta_T1.Business.Option
 
                 [ElementSubType.RelateOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                           new RegisterInfo("outfield1", TypeCode.Int32, -2),
-                                                                          new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, -2 }),
-                                                                          new RegisterInfo("factorI", TypeCode.Int32, new int[] { 1, -1, -2 })},
+                                                                          new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
+                                                                          new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 })},
 
                 [ElementSubType.SortOperator] = new RegisterInfo[]      { new RegisterInfo("outfield", TypeCode.Int32, -1),
                                                                           new RegisterInfo("sortfield", TypeCode.Int32, -1), },
 
-                [ElementSubType.UnionOperator] = new RegisterInfo[]     { new RegisterInfo("factor1", TypeCode.Int32, new int[] { -1, -2 }),
-                                                                          new RegisterInfo("factorI", TypeCode.Int32, new int[] { -1, -2 })},
+                [ElementSubType.UnionOperator] = new RegisterInfo[]     { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
+                                                                          new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1, -2 })},
 
                 [ElementSubType.CustomOperator1] = new RegisterInfo[]   { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                           new RegisterInfo("path", TypeCode.String)},
@@ -276,8 +276,8 @@ namespace Citta_T1.Business.Option
         private void DealFactorNotIntType(Dictionary<string, RegisterInfo> factorInfo)
         {
             List<string> factors = Keys.FindAll(x => x.Contains("factor"));
-            int[] limit0 = factorInfo["factor1"].FactorIndexLimit;
-            int[] limit1 = factorInfo["factorI"].FactorIndexLimit;
+            int[] limit0 = factorInfo["factor0"].FactorIndexLimit;
+            int[] limit1 = factorInfo["factorH"].FactorIndexLimit;
             foreach (string factor in factors)
             {
                 if (string.IsNullOrEmpty(this[factor]))
@@ -288,7 +288,7 @@ namespace Citta_T1.Business.Option
 
                 string[] items = GetOptionSplit(factor);
                 // Int型数据检查
-                bool notInt = factor.Contains("factor1") ? CheckFactorNonInt(items, limit0) : CheckFactorNonInt(items, limit1);
+                bool notInt = factor.Contains("factor0") ? CheckFactorNonInt(items, limit0) : CheckFactorNonInt(items, limit1);
                 // 非Int型-异常情况处理
                 if (notInt)
                     ModifyInfo(factor);

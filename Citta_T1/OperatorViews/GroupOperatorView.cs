@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
             
 
 
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 int index = Convert.ToInt32(factor1);
@@ -86,7 +86,7 @@ namespace Citta_T1.OperatorViews
             InitNewFactorControl(count);
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 if (String.IsNullOrEmpty(this.opControl.Option.GetOption(name))) continue;
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
@@ -100,7 +100,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string factor1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             this.groupColumn.Add(this.comboBox0.SelectedIndex);
 
 
@@ -110,7 +110,7 @@ namespace Citta_T1.OperatorViews
                 string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
 
                 this.groupColumn.Add(Convert.ToInt32(factor));
-                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);

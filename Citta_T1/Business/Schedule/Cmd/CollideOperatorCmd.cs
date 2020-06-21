@@ -26,10 +26,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             //碰撞条件拼接
             List<List<string[]>> collideList = new List<List<string[]>>();
             List<string[]> collideTmpList = new List<string[]>();
-            string[] factor1 = option.GetOptionSplit("factor1");
+            string[] factor1 = option.GetOptionSplit("factor0");
 
             collideTmpList.Add(factor1);
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 string andOr = tmpFactor[0];

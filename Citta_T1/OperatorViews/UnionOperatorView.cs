@@ -63,7 +63,7 @@ namespace Citta_T1.OperatorViews
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "\t" + index02 + "\t" + this.textBox0.Text;
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
@@ -74,7 +74,7 @@ namespace Citta_T1.OperatorViews
                 string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
 
                 string factor = index1 + "\t" + index2 + "\t" + control3.Text;
-                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
                 this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
             }
             this.opControl.Option.SetOption("outname", this.selectedColumns);
@@ -98,7 +98,7 @@ namespace Citta_T1.OperatorViews
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition","False"));
             
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
@@ -118,7 +118,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
 
@@ -148,7 +148,7 @@ namespace Citta_T1.OperatorViews
             string factor1 = index01 + "," + index02 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>
             {
-                ["factor1"] = factor1
+                ["factor0"] = factor1
             };
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
@@ -158,7 +158,7 @@ namespace Citta_T1.OperatorViews
                 string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
                 string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                 string factor = index1 + "," + index2 + "," + control3.Text;
-                factors["factor" + (i + 2).ToString()] = factor;
+                factors["factor" + (i + 1).ToString()] = factor;
 
             }
 

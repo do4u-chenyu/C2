@@ -87,9 +87,9 @@ namespace Citta_T1.OperatorViews
                 foreach (int index in indexs)
                     this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
             }
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("factor1")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("factor0")))
             {
-                string factor1 = this.opControl.Option.GetOption("factor1");
+                string factor1 = this.opControl.Option.GetOption("factor0");
                 int[] optionItems0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
                 this.comboBox0.Text = this.comboBox0.Items[optionItems0[0]].ToString();
                 this.comboBox1.Text = this.comboBox1.Items[optionItems0[1]].ToString();
@@ -105,7 +105,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
                 int[] optionItems1 = Array.ConvertAll(factor.Split('\t'), int.Parse);
@@ -135,7 +135,7 @@ namespace Citta_T1.OperatorViews
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string factor1 = index00 + "\t" + index11;
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
 
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
@@ -146,7 +146,7 @@ namespace Citta_T1.OperatorViews
                 string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
                 string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
                 string factor = index1 + "\t" + index2 + "\t" + index3;
-                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
             }
             //更新子图所有节点状态
             UpdateSubGraphStatus();

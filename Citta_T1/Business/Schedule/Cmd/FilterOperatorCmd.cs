@@ -19,9 +19,9 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             //过滤条件拼接
 
-            string[] factor1 = option.GetOptionSplit("factor1");
+            string[] factor1 = option.GetOptionSplit("factor0");
             string awkIfCmd = String.Format("(${0}{1}{2})", TransInputLine(factor1[0]), TransChoiceToCmd(factor1[1]), TransConditionToCmd(factor1[2]));
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 awkIfCmd = String.Format("{0} {1}(${2}{3}{4})", awkIfCmd, TransAndOrToCmd(tmpFactor[0]), TransInputLine(tmpFactor[1]), TransChoiceToCmd(tmpFactor[2]), TransConditionToCmd(tmpFactor[3]));

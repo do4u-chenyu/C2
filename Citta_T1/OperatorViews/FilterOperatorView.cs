@@ -92,7 +92,7 @@ namespace Citta_T1.OperatorViews
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
 
             string factor1 = index00 + "\t" + index11 + "\t" + this.textBoxEx1.Text;
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
 
@@ -106,7 +106,7 @@ namespace Citta_T1.OperatorViews
                 string index3 = (control3 as ComboBox).Tag == null ? (control3 as ComboBox).SelectedIndex.ToString() : (control3 as ComboBox).Tag.ToString();
                 string factor = index1 + "\t" + index2 + "\t" + index3 + "\t" + control4.Text;
 
-                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
             }
 
             //更新子图所有节点状态
@@ -128,7 +128,7 @@ namespace Citta_T1.OperatorViews
             }
           
            
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
@@ -149,7 +149,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
                 string[] factorList1 = factor.Split('\t');
