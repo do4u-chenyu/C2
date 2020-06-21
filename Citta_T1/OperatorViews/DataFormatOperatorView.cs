@@ -179,7 +179,7 @@ namespace Citta_T1.OperatorViews
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
-                MessageBox.Show("数据标准化存在完全重复选项,请重新选择并集条件");
+                MessageBox.Show("数据标准化存在完全重复选项,请重新选择添加条件");
                 repetition = true;
             }
             return repetition;
