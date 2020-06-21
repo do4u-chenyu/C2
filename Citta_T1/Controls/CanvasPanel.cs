@@ -674,15 +674,12 @@ namespace Citta_T1.Controls
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }
-        public void DeleteEle(ModelElement me, bool isSetDirtyAndUpdate = false)
+        public void DeleteEle(ModelElement me)
         {
             this.DeleteCtr(me.InnerControl);
             Global.GetCurrentDocument().DeleteModelElement(me);
-            if (isSetDirtyAndUpdate)
-            {
-                Global.GetMainForm().SetDocumentDirty();
-                Global.GetNaviViewControl().UpdateNaviView();
-            }
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         public void AddEle(ModelElement me)
         {
