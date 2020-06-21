@@ -229,7 +229,7 @@ namespace Citta_T1.OperatorViews
 
             if (indexs.Count < 0)
                 return false;
-            string name = "";
+            string name = String.Empty;
             foreach (int num in indexs)
                 name += "\"" + this.nowColumnsName0[num] + "\"" + "、";
             MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
