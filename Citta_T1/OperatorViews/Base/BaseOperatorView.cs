@@ -171,6 +171,11 @@ namespace Citta_T1.OperatorViews.Base
                 comboBox.Text = String.Empty;
                 MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
             }
+            if (comboBox.Text.Contains('\t'))
+            {
+                comboBox.Text = String.Empty;
+                MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
+            }
         }
         protected void Control_KeyUp(object sender, KeyEventArgs e)
         {
