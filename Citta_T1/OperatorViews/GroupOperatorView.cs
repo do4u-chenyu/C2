@@ -208,21 +208,18 @@ namespace Citta_T1.OperatorViews
         #region 分组字段重复选择判断
         protected override bool IsDuplicateSelect()
         {
-            bool ret = false;
             Dictionary<int, string> selectedIndex = new Dictionary<int, string>();
 
             string index0 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             selectedIndex[0] = index0;
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    selectedIndex[i + 1] = index1;
-                }
+                Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
+                string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                selectedIndex[i + 1] = index1;
             }
+
             //找到所有的“分组字段”，判断是否有完全重复的“分组字段”
             var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             List<int> indexs = new List<int>();
@@ -234,9 +231,9 @@ namespace Citta_T1.OperatorViews
                 foreach (int num in indexs)
                     name += this.nowColumnsName0[num];
                 MessageBox.Show("分组字段" + name + "重复选择，请保持每个字段只被选择一次");
-                ret = true;
+                return true;
             }
-            return ret;
+            return false;
         }
         #endregion
     }
