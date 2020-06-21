@@ -100,17 +100,14 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string factor = tmpIndex + "\t" + control2.Text;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectedColumns.Add(OutColumnName(control1.Text, control2.Text));
-                }
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
+                string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string factor = tmpIndex + "\t" + control2.Text;
+                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.selectedColumns.Add(OutColumnName(control1.Text, control2.Text));
             }
             this.opControl.Option.SetOption("outname",this.selectedColumns);
 

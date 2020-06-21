@@ -104,16 +104,13 @@ namespace Citta_T1.OperatorViews
             this.groupColumn.Add(this.comboBox0.SelectedIndex);
 
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
 
-                    this.groupColumn.Add(Convert.ToInt32(factor));
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                }
+                this.groupColumn.Add(Convert.ToInt32(factor));
+                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);

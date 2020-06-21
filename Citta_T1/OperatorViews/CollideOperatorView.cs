@@ -136,19 +136,17 @@ namespace Citta_T1.OperatorViews
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string factor1 = index00 + "\t" + index11;
             this.opControl.Option.SetOption("factor1", factor1);
-            if (this.tableLayoutPanel1.RowCount > 0)
+
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
-                    string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
-                    string factor = index1 + "\t" + index2 + "\t" + index3;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                }
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
+                string factor = index1 + "\t" + index2 + "\t" + index3;
+                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
             }
             //更新子图所有节点状态
             UpdateSubGraphStatus();

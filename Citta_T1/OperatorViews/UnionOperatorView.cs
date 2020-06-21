@@ -65,20 +65,17 @@ namespace Citta_T1.OperatorViews
             string factor1 = index01 + "\t" + index02 + "\t" + this.textBox0.Text;
             this.opControl.Option.SetOption("factor1", factor1);
             this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    Control control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                Control control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
 
-                    string factor = index1 + "\t" + index2 + "\t" + control3.Text;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
-                }
+                string factor = index1 + "\t" + index2 + "\t" + control3.Text;
+                this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
+                this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
             }
             this.opControl.Option.SetOption("outname", this.selectedColumns);
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
