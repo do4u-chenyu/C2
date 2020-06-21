@@ -310,7 +310,7 @@ namespace Citta_T1.Business.Option
                 else if (maxIndexs[i] == -2)
                     outRange = index > maxIndex1;
                 else if ( maxIndexs[i] >=0)
-                    outRange = maxIndexs[i] < index;
+                    outRange = index > maxIndexs[i];
             }
             return outRange;
 

@@ -481,7 +481,7 @@ namespace Citta_T1.Controls.Move.Rs
                     cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
             opEle.Status = ElementStatus.Null;
-            (opEle.InnerControl as MoveOpControl).Option.OptionDict.Clear();
+            (opEle.InnerControl as MoveOpControl).Option.Clear();
         }
         public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
         {
