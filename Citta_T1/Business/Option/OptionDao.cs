@@ -160,8 +160,7 @@ namespace Citta_T1.Business.Option
             if (!factor0)
             {
                 emptyOption = true;
-                List<string> keys = new List<string>(moc.Option.Keys); 
-                foreach (string key in keys)
+                foreach (string key in moc.Option.Keys)
                     moc.Option[key] = String.Empty;
             } 
             return emptyOption;
