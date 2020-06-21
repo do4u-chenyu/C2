@@ -274,11 +274,14 @@ namespace Citta_T1.Business.Option
         private void DealFactorNotIntType(Dictionary<string, RegisterInfo> factorInfo)
         {
             List<string> factors = Keys.FindAll(x => x.Contains("factor"));
+            if (factors.Count == 0) return;
+            int realCount = GetRealFactorOder(factors);
             int[] limit0 = factorInfo["factor0"].FactorIndexLimit;
             int[] limit1 = factorInfo["factorH"].FactorIndexLimit;
-            foreach (string factor in factors)
+            for (int i = 0; i < realCount; i++)
             {
-                if (string.IsNullOrEmpty(this[factor]))
+                string factor = "factor" + i.ToString();
+                if (string.IsNullOrEmpty(GetOption(factor)))
                 {
                     opControl.Status = ElementStatus.Null;
                     continue;
@@ -291,6 +294,17 @@ namespace Citta_T1.Business.Option
                 if (notInt)
                     ModifyInfo(factor);
             }
+        }
+        private int GetRealFactorOder(List<string> factors)
+        {
+            List<int> nums = new List<int>();
+            foreach (string factor in factors)             
+            {
+                string num = factor.Substring(factor.Length - 1, 1);
+                if (ConvertUtil.IsInt(num))
+                    nums.Add(int.Parse(num));
+            }
+            return nums.Max();
         }
         private bool CheckFactorNonInt(String[] itemList, int[] maxIndexs)
         {
