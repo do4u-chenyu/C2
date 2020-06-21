@@ -225,15 +225,17 @@ namespace Citta_T1.OperatorViews
             List<int> indexs = new List<int>();
             foreach (var item in duplicateValues)
                 indexs.Add(Convert.ToInt32(item.Key));
-            if (indexs != null && indexs.Count() > 0)
-            {
-                string name = "";
-                foreach (int num in indexs)
-                    name += "\"" + this.nowColumnsName0[num] + "\""+"、";
-                MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
-                return true;
-            }
-            return false;
+
+
+            if (indexs.Count < 0)
+                return false;
+            string name = "";
+            foreach (int num in indexs)
+                name += "\"" + this.nowColumnsName0[num] + "\"" + "、";
+            MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
+            return true;
+
+
         }
         #endregion
     }
