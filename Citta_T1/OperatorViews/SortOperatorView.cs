@@ -44,19 +44,23 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
+            string firstText = this.firstRow.Text;
+            string endText = this.endRow.Text;
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择排序字段!");
                 return notReady;
             }
-            if (String.IsNullOrWhiteSpace(this.firstRow.Text))
+            if (String.IsNullOrWhiteSpace(firstText))
             {
                 MessageBox.Show("请输出行数!");
                 return notReady;
             }
-
-            if (!IsCorrectOutOrder(this.firstRow.Text, this.endRow.Text))
+            if (!String.IsNullOrEmpty(endText) && Convert.ToInt32(firstText) > Convert.ToInt32(endText))
+            {
+                MessageBox.Show("输出行数选择中，起始行数大于结束行数");
                 return notReady;
+            }
             return !notReady;
         }      
         #endregion
@@ -109,42 +113,15 @@ namespace Citta_T1.OperatorViews
         #region 输入非数字，警告
         private void FirstRow_Leave(object sender, EventArgs e)
         {
-            if (!ConvertUtil.IsInt(this.firstRow.Text))
-            {
-                MessageBox.Show("请输入数字");
-                this.firstRow.Text = String.Empty;
-            }
-
-            else
-                this.firstRow.Text = int.Parse(this.firstRow.Text).ToString();
+            ConvertUtil.ControlTextTryParseInt(firstRow, "请输入数字");
         }
 
         private void EndRow_Leave(object sender, EventArgs e)
         {
-            if (!ConvertUtil.IsInt(this.endRow.Text))
-            {
-                MessageBox.Show("请输入数字");
-                this.endRow.Text = String.Empty;
-            }
-
-            else
-                this.endRow.Text = int.Parse(this.endRow.Text).ToString();
-
+            ConvertUtil.ControlTextTryParseInt(endRow, "请输入数字");
         }
-
+         
         #endregion
 
-        private bool IsCorrectOutOrder(string firstRow, string endRow)
-        {
-            if (endRow == String.Empty) return true;
-            int first = Convert.ToInt32(firstRow);
-            int end = Convert.ToInt32(endRow);
-            if (first > end)
-            {
-                MessageBox.Show("输出行数选择中，起始行数大于结束行数");
-                return false;
-            }
-            return true;
-        }
     }
 }
