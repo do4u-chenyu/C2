@@ -159,17 +159,14 @@ namespace Citta_T1.OperatorViews
             {
                 ["factor1"] = factor1
             };
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string factor = index1 + "," + control2.Text;
-                    factors["factor" + (i + 2).ToString()] = factor;
+                ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string factor = index1 + "," + control2.Text;
+                factors["factor" + (i + 2).ToString()] = factor;
 
-                }
             }
             //找到所有的“添加条件”，判断是否有完全重复的“添加条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);

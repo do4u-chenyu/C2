@@ -150,19 +150,16 @@ namespace Citta_T1.OperatorViews
             {
                 ["factor1"] = factor1
             };
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
-                    string factor = index1 + "," + index2 + "," + control3.Text;
-                    factors["factor" + (i + 2).ToString()] = factor;
+                ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                string factor = index1 + "," + index2 + "," + control3.Text;
+                factors["factor" + (i + 2).ToString()] = factor;
 
-                }
             }
 
             //找到所有的“取并条件”，判断是否有完全重复的“取并条件”

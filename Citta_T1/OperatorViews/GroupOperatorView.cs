@@ -229,8 +229,8 @@ namespace Citta_T1.OperatorViews
             {
                 string name = "";
                 foreach (int num in indexs)
-                    name += this.nowColumnsName0[num];
-                MessageBox.Show("分组字段" + name + "重复选择，请保持每个字段只被选择一次");
+                    name += "\"" + this.nowColumnsName0[num] + "\""+"、";
+                MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
                 return true;
             }
             return false;
