@@ -17,9 +17,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
 
             //两个文件的输出字段分别合并
-            string inputField1 = "$" + TransInputLine(option.GetOptionSplit("factor1")[0]);
-            string inputField2 = "$" + TransInputLine(option.GetOptionSplit("factor1")[1]);
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            string inputField1 = "$" + TransInputLine(option.GetOptionSplit("factor0")[0]);
+            string inputField2 = "$" + TransInputLine(option.GetOptionSplit("factor0")[1]);
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string[] tmpfactor = option.GetOptionSplit("factor" + i.ToString());
                 inputField1 = inputField1 + ",$" + TransInputLine(tmpfactor[0]);

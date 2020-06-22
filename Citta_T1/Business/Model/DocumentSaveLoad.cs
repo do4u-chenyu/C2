@@ -44,6 +44,11 @@ namespace Citta_T1.Business.Model
             return Write(key, value.ToString());
         }
 
+        public ModelXmlWriter Write(string key, bool value)
+        {
+            return Write(key, value.ToString());
+        }
+
         public ModelXmlWriter Write(string key, int value)
         {
             return Write(key, value.ToString());
@@ -158,10 +163,9 @@ namespace Citta_T1.Business.Model
 
                 if (me.Type == ElementType.Operator)
                 {
-                    mexw.Write("enableoption", (me.InnerControl as MoveOpControl).EnableOption.ToString());
-                    //有配置信息才保存到xml中
-                    if ((me.InnerControl as MoveOpControl).Option.OptionDict.Count() > 0)
-                        WriteModelOption((me.InnerControl as MoveOpControl).Option, xDoc, mexw.Element);
+                    MoveOpControl moc = me.InnerControl as MoveOpControl;
+                    mexw.Write("enableoption", moc.EnableOption);
+                    WriteModelOption(moc.Option, xDoc, mexw.Element);
                     continue;
                 }
 
@@ -286,37 +290,32 @@ namespace Citta_T1.Business.Model
                     if (type != "Operator")
                         continue;
                     MoveOpControl ctl = element.InnerControl as MoveOpControl;
-                    ctl.Option = ReadOption(xn);
+                    ReadOption(xn, ctl);
+                    ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
+                    ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
                     /*
                      * 外部Xml文件修改等情况，检查并处理异常配置内容
                      */
-                    CheckOption checkOption = new CheckOption(ctl);
-                    checkOption.DealAbnormalOption(ctl.Option);
 
-
-                    ctl.FirstDataSourceColumns = ctl.Option.GetOptionSplit("columnname0");
-                    ctl.SecondDataSourceColumns = ctl.Option.GetOptionSplit("columnname1");
+                    ctl.Option.OptionValidating();     
                 }
             }
         }
 
-        private OperatorOption ReadOption(XmlNode xn)
+        private void ReadOption(XmlNode xn, MoveOpControl opControl)
         {
-            OperatorOption option = new OperatorOption();
             try
             {
                 XmlNode node = xn.SelectSingleNode("option");
                 if (node == null)
-                    return option;
+                    return;
                 foreach (XmlNode child in node.ChildNodes)
-                    option.SetOption(child.Name, child.InnerText);
+                    opControl.Option.SetOption(child.Name, child.InnerText);
             }
             catch (Exception e)
             {
                 log.Error("读配置出错 ： " + e.Message);
-                option = new OperatorOption();
             }
-            return option;
         }
     }
 }

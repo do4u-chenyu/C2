@@ -129,7 +129,7 @@ namespace Citta_T1.Controls.Move.Rs
                         mr.UpdatePoints();
                     }
                 }
-                this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.moveWrapper.DragMove(e);
             }
         }
         private void MoveRsControl_MouseDown(object sender, MouseEventArgs e)
@@ -153,7 +153,7 @@ namespace Citta_T1.Controls.Move.Rs
                 cmd = ECommandType.Hold;
             }
             oldControlPosition = this.Location;
-            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(e);
         }
 
         private void TxtButton_MouseDown(object sender, MouseEventArgs e)
@@ -183,7 +183,7 @@ namespace Citta_T1.Controls.Move.Rs
                 }
                 else if (cmd == ECommandType.Hold)
                 {
-                    this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragUp(e);
                     cmd = ECommandType.Null;
                 }
 
@@ -481,7 +481,7 @@ namespace Citta_T1.Controls.Move.Rs
                     cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
             opEle.Status = ElementStatus.Null;
-            (opEle.InnerControl as MoveOpControl).Option.OptionDict.Clear();
+            (opEle.InnerControl as MoveOpControl).Option.Clear();
         }
         public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
         {

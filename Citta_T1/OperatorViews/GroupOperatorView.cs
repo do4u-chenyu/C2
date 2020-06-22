@@ -72,7 +72,7 @@ namespace Citta_T1.OperatorViews
             
 
 
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 int index = Convert.ToInt32(factor1);
@@ -86,7 +86,7 @@ namespace Citta_T1.OperatorViews
             InitNewFactorControl(count);
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 if (String.IsNullOrEmpty(this.opControl.Option.GetOption(name))) continue;
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
@@ -100,20 +100,17 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string factor1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             this.groupColumn.Add(this.comboBox0.SelectedIndex);
 
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                string factor = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
 
-                    this.groupColumn.Add(Convert.ToInt32(factor));
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                }
+                this.groupColumn.Add(Convert.ToInt32(factor));
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
             }
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);
@@ -211,35 +208,34 @@ namespace Citta_T1.OperatorViews
         #region 分组字段重复选择判断
         protected override bool IsDuplicateSelect()
         {
-            bool ret = false;
             Dictionary<int, string> selectedIndex = new Dictionary<int, string>();
 
             string index0 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             selectedIndex[0] = index0;
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
-                    string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
-                    selectedIndex[i + 1] = index1;
-                }
+                Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
+                string index1 = (control1 as ComboBox).Tag == null ? (control1 as ComboBox).SelectedIndex.ToString() : (control1 as ComboBox).Tag.ToString();
+                selectedIndex[i + 1] = index1;
             }
+
             //找到所有的“分组字段”，判断是否有完全重复的“分组字段”
             var duplicateValues = selectedIndex.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             List<int> indexs = new List<int>();
             foreach (var item in duplicateValues)
                 indexs.Add(Convert.ToInt32(item.Key));
-            if (indexs != null && indexs.Count() > 0)
-            {
-                string name = "";
-                foreach (int num in indexs)
-                    name += this.nowColumnsName0[num];
-                MessageBox.Show("分组字段" + name + "重复选择，请保持每个字段只被选择一次");
-                ret = true;
-            }
-            return ret;
+
+
+            if (indexs.Count < 1)
+                return false;
+            string name = String.Empty;
+            foreach (int num in indexs)
+                name += "\"" + this.nowColumnsName0[num] + "\"" + "、";
+            MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
+            return true;
+
+
         }
         #endregion
     }

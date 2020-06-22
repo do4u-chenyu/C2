@@ -31,13 +31,9 @@ namespace Citta_T1.Controls
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
-
         //屏幕拖动涉及的变量
-        private float screenFactor = 1;
-        private DragWrapper dragWrapper;
+        private readonly DragWrapper dragWrapper;
         private FrameWrapper frameWrapper;
-
-
         private ECommandType cmd = ECommandType.Null;
         private PointF startP;
         private PointF endP;
@@ -46,15 +42,10 @@ namespace Citta_T1.Controls
         private Rectangle invalidateRectWhenMoving;
         private Bezier lineWhenMoving;
         private List<int> selectLineIndexs = new List<int> { };
-
-
-
-
         private bool delEnable = false;
         private ClipBoardWrapper clipBoard = new ClipBoardWrapper();
         public MoveBaseControl StartC { get => startC; set => startC = value; }
         public MoveBaseControl EndC { get => endC; set => endC = value; }
-        public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         internal FrameWrapper FrameWrapper { get => frameWrapper; set => frameWrapper = value; }
         public bool DelEnable { get => delEnable; set => delEnable = value; }
         public PointF StartP { get => startP; set => startP = value; }
@@ -372,7 +363,6 @@ namespace Citta_T1.Controls
         public void DeleteSelectedLinesByIndex()
         {
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
-            CanvasPanel cp = Global.GetCanvasPanel();
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC;
             MoveBaseControl endC;
@@ -607,7 +597,6 @@ namespace Citta_T1.Controls
             List<ModelRelation> oriMrs = new List<ModelRelation>(doc.ModelRelations);
             Tuple<List<Tuple<int, int, int>>, ModelElement> relsAndEle = null;
             int endID = -1;
-
             foreach (int id in ids)
             {
                 ModelElement me = doc.SearchElementByID(id);
@@ -685,15 +674,12 @@ namespace Citta_T1.Controls
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }
-        public void DeleteEle(ModelElement me, bool isSetDirtyAndUpdate = false)
+        public void DeleteEle(ModelElement me)
         {
             this.DeleteCtr(me.InnerControl);
             Global.GetCurrentDocument().DeleteModelElement(me);
-            if (isSetDirtyAndUpdate)
-            {
-                Global.GetMainForm().SetDocumentDirty();
-                Global.GetNaviViewControl().UpdateNaviView();
-            }
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         public void AddEle(ModelElement me)
         {

@@ -76,7 +76,7 @@ namespace Citta_T1.Controls.Move.Op
             Separator = OpUtil.DefaultSeparator;
 
             SubTypeName = subTypeName;
-            Option = new OperatorOption();
+            Option = new OperatorOption(this);
 
             doublelPinFlag = doublePin.Contains(SubTypeName);
             this.moveWrapper = new MoveWrapper();
@@ -243,7 +243,7 @@ namespace Citta_T1.Controls.Move.Op
                     }
                 }
                 if (isNeedMoveLine)
-                    this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragMove(e);
             }
         }
 
@@ -269,7 +269,7 @@ namespace Citta_T1.Controls.Move.Op
                 mouseOffset.Y = e.Y;
                 cmd = ECommandType.Hold;
             }
-            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown(e);
             oldControlPosition = this.Location;
         }
 
@@ -329,7 +329,7 @@ namespace Citta_T1.Controls.Move.Op
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
                 cmd = ECommandType.Null;
-                this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                this.moveWrapper.DragUp(e);
                 Global.GetNaviViewControl().UpdateNaviView();
             }
 

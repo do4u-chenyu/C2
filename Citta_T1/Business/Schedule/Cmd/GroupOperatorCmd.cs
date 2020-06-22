@@ -22,9 +22,9 @@ namespace Citta_T1.Business.Schedule.Cmd
             string type = option.GetOption("sortByNum").ToLower() == "true" ? "-n" : String.Empty;
 
             //拼接分组字段
-            string groupFieldCmd = "-k" + TransInputLine(option.GetOption("factor1"));
+            string groupFieldCmd = "-k" + TransInputLine(option.GetOption("factor0"));
             //TODO
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string tmpFactor = option.GetOption("factor" + i.ToString());
                 groupFieldCmd = groupFieldCmd + " -k" + TransInputLine(tmpFactor);

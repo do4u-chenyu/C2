@@ -58,7 +58,7 @@ namespace Citta_T1.OperatorViews
                 return;
 
             
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
@@ -77,7 +77,7 @@ namespace Citta_T1.OperatorViews
  
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
 
@@ -97,20 +97,17 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             string index1 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string factor1 = index1 + "\t" + this.textBox0.Text;
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
 
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string factor = tmpIndex + "\t" + control2.Text;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectedColumns.Add(OutColumnName(control1.Text, control2.Text));
-                }
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
+                string tmpIndex = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string factor = tmpIndex + "\t" + control2.Text;
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
+                this.selectedColumns.Add(OutColumnName(control1.Text, control2.Text));
             }
             this.opControl.Option.SetOption("outname",this.selectedColumns);
 
@@ -156,33 +153,29 @@ namespace Citta_T1.OperatorViews
         #region 分组字段重复选择判断
         protected override bool IsDuplicateSelect()
         {
-            bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string factor1 = index01 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>
             {
-                ["factor1"] = factor1
+                ["factor0"] = factor1
             };
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string factor = index1 + "," + control2.Text;
-                    factors["factor" + (i + 2).ToString()] = factor;
+                ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                Control control2 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string factor = index1 + "," + control2.Text;
+                factors["factor" + (i + 1).ToString()] = factor;
 
-                }
             }
             //找到所有的“添加条件”，判断是否有完全重复的“添加条件”
             var duplicateValues = factors.Where(x => x.Key.Contains("factor")).GroupBy(x => x.Value).Where(x => x.Count() > 1);
             foreach (var item in duplicateValues)
             {
-                MessageBox.Show("数据标准化存在完全重复选项,请重新选择并集条件");
-                repetition = true;
+                MessageBox.Show("数据标准化存在完全重复选项,请重新选择添加条件");
+                return true;
             }
-            return repetition;
+            return false;
         }
         #endregion
 

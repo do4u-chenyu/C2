@@ -38,8 +38,10 @@ namespace Citta_T1.Controls.Left
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
-            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
-            dataButton.Location = new Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
+            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding)
+            {
+                Location = new Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY) // 递增
+            };
 
             // 判断是否有路径文件
             if (this.DataSourceDictI2B.ContainsKey(fullFilePath))

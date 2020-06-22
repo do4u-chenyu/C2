@@ -11,9 +11,6 @@ namespace Citta_T1.Controls
 {
     class MoveWrapper
     {
-        private static LogUtil log = LogUtil.GetInstance("MoveWrapper");
-        private int width;
-        private int height;
         private Point start, now;
         private bool startDrag;
 
@@ -21,8 +18,7 @@ namespace Citta_T1.Controls
         private int worldHeight;
         private Bitmap staticImage;
 
-        public int Width { get => width; set => width = value; }
-        public int Height { get => height; set => height = value; }
+
         public float Factor { get; set; }
         public bool StartDrag { get => startDrag; set => startDrag = value; }
         public int WorldWidth { get => worldWidth; set => worldWidth = value; }
@@ -77,24 +73,22 @@ namespace Citta_T1.Controls
             this.RepaintCtrs();
         }
 
-        public void InitDragWrapper(Size canvasSize, float canvasFactor)
+        public void InitDragWrapper()
         {
-            width = canvasSize.Width;
-            height = canvasSize.Height;
             Factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
         }
-        public void DragUp(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public void DragUp( MouseEventArgs e)
         {
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
             this.Now = e.Location;
-            this.InitDragWrapper(canvasSize, canvasFactor);
+            this.InitDragWrapper();
             this.MoveWorldImage(n);
             Global.GetCanvasPanel().Invalidate();
             n.Dispose();
             this.StartDrag = false;
             this.Start = e.Location;
         }
-        public void DragDown(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public void DragDown(MouseEventArgs e)
         {
             this.startDrag = true;
             this.start = e.Location;
@@ -103,15 +97,15 @@ namespace Citta_T1.Controls
                 this.staticImage.Dispose();
                 this.staticImage = null;
             }
-            this.InitDragWrapper(canvasSize, canvasFactor);
+            this.InitDragWrapper();
             this.staticImage = this.CreateWorldImage();
         }
-        public void DragMove(Size canvasSize, float canvasFactor, MouseEventArgs e)
+        public void DragMove(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
                 return;
             this.now = e.Location;
-            this.InitDragWrapper(canvasSize, canvasFactor);
+            this.InitDragWrapper();
             Graphics n = Global.GetCanvasPanel().CreateGraphics();
 
             this.MoveWorldImage(n);

@@ -52,9 +52,11 @@ namespace Citta_T1.Utils
         {
             try
             {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = "/e,/select," + fullFilePath;
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",  //资源管理器
+                    Arguments = "/e,/select," + fullFilePath
+                };
                 System.Diagnostics.Process.Start(processStartInfo);
             }
             catch (Exception)
@@ -69,9 +71,11 @@ namespace Citta_T1.Utils
         {
             try
             {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "explorer.exe";  //资源管理器
-                processStartInfo.Arguments = System.IO.Path.GetDirectoryName(fullFilePath);
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",  //资源管理器
+                    Arguments = System.IO.Path.GetDirectoryName(fullFilePath)
+                };
                 System.Diagnostics.Process.Start(processStartInfo);
             }
             catch { }; // 非核心功能, Double异常就不用管了

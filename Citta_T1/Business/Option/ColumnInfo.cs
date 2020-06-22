@@ -5,7 +5,9 @@
         String,  // 字符串类型
         Int,     // 整数型
         Date,    // 日期型
-        Float    // 有理数
+        Float,    // 有理数
+        ID,
+        Phone,
     }
 
     class ColumnInfo

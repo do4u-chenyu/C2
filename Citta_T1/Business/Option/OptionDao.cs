@@ -126,7 +126,7 @@ namespace Citta_T1.Business.Option
                 if (keys.Contains(kvp.Key))
                     continue;
 
-                if (String.IsNullOrWhiteSpace(optionDict[kvp.Key]))
+                if (String.IsNullOrWhiteSpace(kvp.Value))
                     return ElementStatus.Null;
             }
             return ElementStatus.Ready;
@@ -160,8 +160,7 @@ namespace Citta_T1.Business.Option
             if (!factor0)
             {
                 emptyOption = true;
-                List<string> keys = new List<string>(moc.Option.Keys); 
-                foreach (string key in keys)
+                foreach (string key in moc.Option.Keys)
                     moc.Option[key] = String.Empty;
             } 
             return emptyOption;
@@ -185,7 +184,8 @@ namespace Citta_T1.Business.Option
             int nowCount = nowColumns.Count;
             if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
-            if (nowCount > oldCount && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
+            bool isContain = nowCount > oldCount && oldCount > 0;
+            if (isContain && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
             {
                 string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);

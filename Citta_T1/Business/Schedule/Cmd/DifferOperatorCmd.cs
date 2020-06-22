@@ -27,9 +27,9 @@ namespace Citta_T1.Business.Schedule.Cmd
 
             //取差条件拼接
             List<string[]> differTmpList = new List<string[]>();
-            string[] factor1 = option.GetOptionSplit("factor1");
+            string[] factor1 = option.GetOptionSplit("factor0");
             differTmpList.Add(factor1);
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
 
                 string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());

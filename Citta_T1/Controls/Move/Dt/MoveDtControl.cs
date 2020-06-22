@@ -179,7 +179,7 @@ namespace Citta_T1.Controls.Move.Dt
                     }
                 }
                 if (isNeedMoveLine)
-                    this.moveWrapper.DragMove(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragMove(e);
             }
         }
 
@@ -205,7 +205,7 @@ namespace Citta_T1.Controls.Move.Dt
                 cmd = ECommandType.Hold;
             }
             oldControlPosition = this.Location;
-            this.moveWrapper.DragDown(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+            this.moveWrapper.DragDown( e);
         }
 
 
@@ -237,7 +237,7 @@ namespace Citta_T1.Controls.Move.Dt
                 }
                 else if (cmd == ECommandType.Hold)
                 {
-                    this.moveWrapper.DragUp(this.Size, Global.GetCanvasPanel().ScreenFactor, e);
+                    this.moveWrapper.DragUp(e);
                     cmd = ECommandType.Null;
                 }
                 cmd = ECommandType.Null;

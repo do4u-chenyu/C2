@@ -14,8 +14,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputFilePath = inputFilePaths.First();//输入文件
 
             //拼接输出字段facotr1\factor2...\factorN
-            string outField = "$" + TransInputLine(option.GetOptionSplit("factor1")[0]);
-            for (int i = 2; i <= GetOptionFactorCount(); i++)
+            string outField = "$" + TransInputLine(option.GetOptionSplit("factor0")[0]);
+            for (int i = 1; i < GetOptionFactorCount(); i++)
             {
                 string[] tmpFactor = option.GetOptionSplit("factor" + i.ToString());
                 outField = outField + ",$" + TransInputLine(tmpFactor[0]);

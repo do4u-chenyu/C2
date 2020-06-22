@@ -29,19 +29,19 @@ namespace Citta_T1.Controls.Flow
             FlowControlHidden();
         }
 
-        private void label1_MouseEnter(object sender, EventArgs e)
+        private void Label1_MouseEnter(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.blueshadow;
             this.label1.ForeColor = Color.White;
         }
 
-        private void label1_MouseLeave(object sender, EventArgs e)
+        private void Label1_MouseLeave(object sender, EventArgs e)
         {
             this.BackgroundImage = global::Citta_T1.Properties.Resources.shadow;
             this.label1.ForeColor = Color.Black;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Label1_Click(object sender, EventArgs e)
         {
             FlowControlHidden();
         }

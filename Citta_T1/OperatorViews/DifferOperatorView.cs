@@ -63,7 +63,7 @@ namespace Citta_T1.OperatorViews
 
 
 
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
@@ -80,7 +80,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
 
@@ -108,20 +108,17 @@ namespace Citta_T1.OperatorViews
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();
             string index11 = comboBox1.Tag == null ? comboBox1.SelectedIndex.ToString() : comboBox1.Tag.ToString();
             string factor1 = index00 + "\t" + index11;
-            this.opControl.Option.SetOption("factor1", factor1);
-            if (this.tableLayoutPanel1.RowCount > 0)
+            this.opControl.Option.SetOption("factor0", factor1);
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
-                    string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
-                    string factor = index1 + "\t" + index2 + "\t" + index3;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                }
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                ComboBox control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i) as ComboBox;
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                string index3 = control3.Tag == null ? control3.SelectedIndex.ToString() : control3.Tag.ToString();
+                string factor = index1 + "\t" + index2 + "\t" + index3;
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
             }
 
             //更新子图所有节点状态

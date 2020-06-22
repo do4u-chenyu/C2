@@ -63,22 +63,19 @@ namespace Citta_T1.OperatorViews
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "\t" + index02 + "\t" + this.textBox0.Text;
-            this.opControl.Option.SetOption("factor1", factor1);
+            this.opControl.Option.SetOption("factor0", factor1);
             this.selectedColumns.Add(OutColumnName(this.comboBox0.Text, this.textBox0.Text));
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
-                    ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
-                    Control control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                ComboBox control1 = this.tableLayoutPanel1.GetControlFromPosition(0, i) as ComboBox;
+                ComboBox control2 = this.tableLayoutPanel1.GetControlFromPosition(1, i) as ComboBox;
+                Control control3 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
 
-                    string factor = index1 + "\t" + index2 + "\t" + control3.Text;
-                    this.opControl.Option.SetOption("factor" + (i + 2).ToString(), factor);
-                    this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
-                }
+                string factor = index1 + "\t" + index2 + "\t" + control3.Text;
+                this.opControl.Option.SetOption("factor" + (i + 1).ToString(), factor);
+                this.selectedColumns.Add(OutColumnName((control1 as ComboBox).Text, control3.Text));
             }
             this.opControl.Option.SetOption("outname", this.selectedColumns);
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
@@ -101,7 +98,7 @@ namespace Citta_T1.OperatorViews
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition","False"));
             
-            string factor1 = this.opControl.Option.GetOption("factor1");
+            string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
@@ -121,7 +118,7 @@ namespace Citta_T1.OperatorViews
 
             for (int i = 0; i < count; i++)
             {
-                string name = "factor" + (i + 2).ToString();
+                string name = "factor" + (i + 1).ToString();
                 string factor = this.opControl.Option.GetOption(name);
                 if (String.IsNullOrEmpty(factor)) continue;
 
@@ -146,27 +143,23 @@ namespace Citta_T1.OperatorViews
         #region 判断是否配置完毕
         protected override bool IsDuplicateSelect()
         {
-            bool repetition = false;
             string index01 = this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString();
             string index02 = this.comboBox1.Tag == null ? this.comboBox1.SelectedIndex.ToString() : this.comboBox1.Tag.ToString();
             string factor1 = index01 + "," + index02 + "," + this.textBox0.Text;
             Dictionary<string, string> factors = new Dictionary<string, string>
             {
-                ["factor1"] = factor1
+                ["factor0"] = factor1
             };
-            if (this.tableLayoutPanel1.RowCount > 0)
+            for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
-                for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
-                {
-                    ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
-                    ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
-                    Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
-                    string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
-                    string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
-                    string factor = index1 + "," + index2 + "," + control3.Text;
-                    factors["factor" + (i + 2).ToString()] = factor;
+                ComboBox control1 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 0];
+                ComboBox control2 = (ComboBox)this.tableLayoutPanel1.Controls[i * 5 + 1];
+                Control control3 = (Control)this.tableLayoutPanel1.Controls[i * 5 + 2];
+                string index1 = control1.Tag == null ? control1.SelectedIndex.ToString() : control1.Tag.ToString();
+                string index2 = control2.Tag == null ? control2.SelectedIndex.ToString() : control2.Tag.ToString();
+                string factor = index1 + "," + index2 + "," + control3.Text;
+                factors["factor" + (i + 1).ToString()] = factor;
 
-                }
             }
 
             //找到所有的“取并条件”，判断是否有完全重复的“取并条件”
@@ -174,9 +167,9 @@ namespace Citta_T1.OperatorViews
             foreach (var item in duplicateValues)
             {
                 MessageBox.Show("取并集条件存在完全重复选项,请重新选择并集条件");
-                repetition = true;
+                return true;
             }
-            return repetition;
+            return false;
         }
         protected override bool IsOptionNotReady()
         {
