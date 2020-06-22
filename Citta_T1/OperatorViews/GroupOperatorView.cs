@@ -227,7 +227,7 @@ namespace Citta_T1.OperatorViews
                 indexs.Add(Convert.ToInt32(item.Key));
 
 
-            if (indexs.Count < 0)
+            if (indexs.Count < 1)
                 return false;
             string name = String.Empty;
             foreach (int num in indexs)
