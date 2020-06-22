@@ -62,38 +62,38 @@ namespace Citta_T1.Business.Option
             {
                 [ElementSubType.AvgOperator] = new RegisterInfo[]        { new RegisterInfo("avgfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.CollideOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.CollideOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 })},
 
                 [ElementSubType.DataFormatOperator] = new RegisterInfo[] { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1}),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1})},
 
-                [ElementSubType.DifferOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.DifferOperator] = new RegisterInfo[]     { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 }) },
 
-                [ElementSubType.FilterOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.FilterOperator] = new RegisterInfo[]     { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, 5 }),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, 5 }) },
 
-                [ElementSubType.FreqOperator] = new RegisterInfo[]       { new RegisterInfo("outfield", TypeCode.Int32, -1) },
+                [ElementSubType.FreqOperator] = new RegisterInfo[]       { new RegisterInfo("outfield0", TypeCode.Int32, -1) },
 
                 [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1 }),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1 })},
 
-                [ElementSubType.KeywordOperator] = new RegisterInfo[]    { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.KeywordOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("dataSelectIndex", TypeCode.Int32, -1),
                                                                            new RegisterInfo("conditionSlect", TypeCode.Int32, 1),
                                                                            new RegisterInfo("keySelectIndex", TypeCode.Int32, -2),},
 
-                [ElementSubType.MaxOperator] = new RegisterInfo[]        { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.MaxOperator] = new RegisterInfo[]        { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("maxfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.MinOperator] = new RegisterInfo[]        { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.MinOperator] = new RegisterInfo[]        { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("minfield", TypeCode.Int32, -1) },
 
-                [ElementSubType.RandomOperator] = new RegisterInfo[]     { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.RandomOperator] = new RegisterInfo[]     { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                            new RegisterInfo("randomnum", TypeCode.Int32) },
 
                 [ElementSubType.RelateOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
@@ -101,7 +101,7 @@ namespace Citta_T1.Business.Option
                                                                           new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),
                                                                           new RegisterInfo("factorH", TypeCode.Int32, new int[] { 1, -1, -2 })},
 
-                [ElementSubType.SortOperator] = new RegisterInfo[]      { new RegisterInfo("outfield", TypeCode.Int32, -1),
+                [ElementSubType.SortOperator] = new RegisterInfo[]      { new RegisterInfo("outfield0", TypeCode.Int32, -1),
                                                                           new RegisterInfo("sortfield", TypeCode.Int32, -1), },
 
                 [ElementSubType.UnionOperator] = new RegisterInfo[]     { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1, -2 }),

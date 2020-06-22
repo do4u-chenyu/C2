@@ -15,7 +15,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             string inputFilePath1 = inputFilePaths.First();//左输入文件
             string inputFilePath2 = inputFilePaths.Count > 1 ? inputFilePaths[1] : String.Empty;//右输入文件
-            string outField = TransDifferOutputField(option.GetOptionSplit("outfield"));//输出字段
+            string outField = TransDifferOutputField(option.GetOptionSplit("outfield0"));//输出字段
 
             //目前一个算子固定生成4个临时文件
             string filterBatPath1 = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_collide1.tmp";

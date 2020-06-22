@@ -60,7 +60,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
-            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);
             this.opControl.Option.SetOption("ascendingOrder", this.ascendingOrder.Checked);
@@ -82,9 +82,9 @@ namespace Citta_T1.OperatorViews
             ascendingOrder.Checked  = Convert.ToBoolean(opControl.Option.GetOption("ascendingOrder", "False"));
             descendingOrder.Checked = Convert.ToBoolean(opControl.Option.GetOption("descendingOrder", "True"));
 
-            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield0")))
             {
-                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield0");
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);

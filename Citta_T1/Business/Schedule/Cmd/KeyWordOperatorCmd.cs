@@ -17,7 +17,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();//输入文件
             string inputField = TransInputLine(option.GetOption("dataSelectIndex"));//待匹配字段
-            string outField = TransDifferOutputField(option.GetOptionSplit("outfield"));//输出字段
+            string outField = TransDifferOutputField(option.GetOptionSplit("outfield0"));//输出字段
             string invert = option.GetOption("conditionSlect").ToLower() == "0" ? String.Empty : "-v"; //是否包含，0包含，1不包含
             string[] keyList = option.GetOption("keyWordText").Split('\t');
            

@@ -75,14 +75,14 @@ namespace Citta_T1.Business.Schedule.Cmd
             else if (className == "differ" || className == "collide")
             {
                 string[] col0 = option.GetOptionSplit("columnname0");
-                foreach (string ind in option.GetOptionSplit("outfield"))
+                foreach (string ind in option.GetOptionSplit("outfield0"))
                 {
                     outTitleList.Add(col0[int.Parse(ind)]);
                 }
             }
             else
             {
-                foreach (string ind in option.GetOptionSplit("outfield"))
+                foreach (string ind in option.GetOptionSplit("outfield0"))
                 {
                     outTitleList.Add(titleList[int.Parse(ind)]);
                 }

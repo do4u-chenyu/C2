@@ -56,9 +56,9 @@ namespace Citta_T1.OperatorViews
                                                                   this.nowColumnsName1))
                 return;
 
-            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(opControl.Option.GetOption("outfield0")))
             {
-                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield");
+                string[] checkIndexs = opControl.Option.GetOptionSplit("outfield0");
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
@@ -73,7 +73,7 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             opControl.Option.Clear();
-            opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
             opControl.Option.SetOption("dataSelectIndex", comboBox0.SelectedIndex);
