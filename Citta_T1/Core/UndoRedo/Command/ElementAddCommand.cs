@@ -9,11 +9,11 @@ namespace Citta_T1.Core.UndoRedo.Command
 {
     class ElementAddCommand : ICommand
     {
-        private readonly ModelElement me;
-        private readonly List<Tuple<int, int, int>> relations;
-        private readonly ModelElement ele;
-        private readonly ElementStatus status;
-        private readonly Dictionary<string, string> opOptDict;
+        private ModelElement me;
+        private List<Tuple<int, int, int>> relations;
+        private ModelElement ele;
+        private ElementStatus status;
+        private Dictionary<string, string> opOptDict;
         public ElementAddCommand(ModelElement element)
         {
             this.me = element;
@@ -26,7 +26,7 @@ namespace Citta_T1.Core.UndoRedo.Command
             if (this.ele != null && this.ele.Type == ElementType.Operator)
             {
                 this.status = connectedEle.Status;
-                this.opOptDict = (connectedEle.InnerControl as MoveOpControl).Option.OptionDict;
+                this.opOptDict = new Dictionary<string, string>((connectedEle.InnerControl as MoveOpControl).Option.OptionDict);
             }
         }
         public bool Redo()
@@ -55,6 +55,7 @@ namespace Citta_T1.Core.UndoRedo.Command
                 default:
                     break;
             }
+            Global.GetCanvasPanel().Invalidate(false);
             return true;
         }
         private bool DoAdd()
@@ -73,6 +74,7 @@ namespace Citta_T1.Core.UndoRedo.Command
                 default:
                     break;
             }
+            Global.GetCanvasPanel().Invalidate(false);
             return true;
         }
     }

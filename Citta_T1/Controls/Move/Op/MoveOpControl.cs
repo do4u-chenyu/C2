@@ -339,7 +339,7 @@ namespace Citta_T1.Controls.Move.Op
                 ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
                 if (element != ModelElement.Empty)
                 {
-                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
                     ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                 }

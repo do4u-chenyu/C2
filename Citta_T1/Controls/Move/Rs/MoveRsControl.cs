@@ -496,7 +496,7 @@ namespace Citta_T1.Controls.Move.Rs
             foreach (Tuple<int, int, int> rel in relations)
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             opEle.Status = status;
-            (opEle.InnerControl as MoveOpControl).Option.OptionDict = opOptDict;
+            (opEle.InnerControl as MoveOpControl).Option.OptionDict = new Dictionary<string, string>(opOptDict);
         }
     }
 }

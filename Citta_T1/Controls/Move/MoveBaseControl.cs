@@ -244,7 +244,7 @@ namespace Citta_T1.Controls.Move
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
             Global.GetMainForm().SetDocumentDirty();
-            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, false);
+            return Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
         }
 
         public string UndoRedoChangeTextName(string des)
