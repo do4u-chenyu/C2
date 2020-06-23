@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Title
@@ -13,14 +14,14 @@ namespace Citta_T1.Controls.Title
         private static LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
 
         private static Point OriginalLocation = new System.Drawing.Point(1, 6);
-        private List<ModelTitleControl> models;
+        private List<ModelTitleControl> modelTitleControls;
         private int rawModelTitleNum = 9;
         public event NewDocumentEventHandler NewModelDocument;
         public event DocumentSwitchHandler ModelDocumentSwitch;
 
         public ModelTitlePanel()
         {
-            models = new List<ModelTitleControl>();
+            modelTitleControls = new List<ModelTitleControl>();
             InitializeComponent();
         }
 
@@ -28,19 +29,20 @@ namespace Citta_T1.Controls.Title
         public void UpModelTitle()
         {
             rawModelTitleNum = this.Width / 142;
-            foreach (ModelTitleControl mt in models)
+            foreach (ModelTitleControl mt in modelTitleControls)
             {
-                if (models.Count <= rawModelTitleNum)
+                if (modelTitleControls.Count <= rawModelTitleNum)
                     mt.SetOriginalModelTitle(mt.ModelTitle);
-                else if (models.Count > rawModelTitleNum && models.Count < 17)
+                else if (modelTitleControls.Count > rawModelTitleNum && modelTitleControls.Count < 17)
                     mt.SetNewModelTitle(mt.ModelTitle, 3);
-                else if (models.Count >= 17 && models.Count < 20)
+                else if (modelTitleControls.Count >= 17 && modelTitleControls.Count < 20)
                     mt.SetNewModelTitle(mt.ModelTitle, 2);
-                else if (models.Count >= 20 && models.Count < 24)
+                else if (modelTitleControls.Count >= 20 && modelTitleControls.Count < 24)
                     mt.SetNewModelTitle(mt.ModelTitle, 1);
-                else if (models.Count >= 24)
+                else if (modelTitleControls.Count >= 24)
                     mt.SetNewModelTitle(mt.ModelTitle, 0);
             }
+            //log.Info("modetitle :标题长度" +)
         }
         public void LoadModelDocument(string[] modelTitles)
         {
@@ -49,7 +51,7 @@ namespace Citta_T1.Controls.Title
             {
                 ModelTitleControl mtControl = new ModelTitleControl();
                 mtControl.ModelDocumentSwitch += DocumentSwitch;
-                this.models.Add(mtControl);
+                this.modelTitleControls.Add(mtControl);
                 this.Controls.Add(mtControl);
 
                 // 根据元素个数调整位置和大小
@@ -58,7 +60,7 @@ namespace Citta_T1.Controls.Title
                     mtControl.Location = OriginalLocation;
                 else
                 {
-                    ModelTitleControl preMTC = models[models.Count - 2];
+                    ModelTitleControl preMTC = modelTitleControls[modelTitleControls.Count - 2];
                     mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                     ResizeModel();
                     UpModelTitle();
@@ -78,7 +80,7 @@ namespace Citta_T1.Controls.Title
         {
             ModelTitleControl mtControl = new ModelTitleControl();
             mtControl.ModelDocumentSwitch += DocumentSwitch;
-            models.Add(mtControl);
+            modelTitleControls.Add(mtControl);
             mtControl.SetOriginalModelTitle(modelTitle);
             NewModelDocument?.Invoke(modelTitle);
 
@@ -86,7 +88,7 @@ namespace Citta_T1.Controls.Title
 
             // 根据容器中最后一个ModelTitleControl的Location
             // 设置新控件在ModelTitlePanel中的Location
-            if (models.Count <= 1)
+            if (modelTitleControls.Count <= 1)
             {
                 mtControl.Location = OriginalLocation;
                 this.Controls.Add(mtControl);
@@ -94,7 +96,7 @@ namespace Citta_T1.Controls.Title
             }
             else // models.Count > 1
             {
-                ModelTitleControl preMTC = models[models.Count - 2];
+                ModelTitleControl preMTC = modelTitleControls[modelTitleControls.Count - 2];
                 mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                 this.Controls.Add(mtControl);
                 ResizeModel();
@@ -112,33 +114,33 @@ namespace Citta_T1.Controls.Title
             rawModelTitleNum = this.Width / 142;
             try
             {
-                if (0 < models.Count && models.Count <= rawModelTitleNum && removeTag)
+                if (0 < modelTitleControls.Count && modelTitleControls.Count <= rawModelTitleNum && removeTag)
                 {
-                    for (int i = 0; i < models.Count; i++)
+                    for (int i = 0; i < modelTitleControls.Count; i++)
                     {
-                        models[i].Size = new Size(140, 26);
+                        modelTitleControls[i].Size = new Size(140, 26);
                         if (i == 0)
-                            models[i].Location = OriginalLocation;
+                            modelTitleControls[i].Location = OriginalLocation;
                         else
                         {
-                            ModelTitleControl preMTC = models[i - 1];
-                            models[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
+                            ModelTitleControl preMTC = modelTitleControls[i - 1];
+                            modelTitleControls[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                         }
                     }
                 }
-                if (models.Count > rawModelTitleNum)
+                if (modelTitleControls.Count > rawModelTitleNum)
                 {
-                    for (int i = 0; i < models.Count; i++)
+                    for (int i = 0; i < modelTitleControls.Count; i++)
                     {
-                        ModelTitleControl mtc = models[i];
-                        mtc.Width = (this.Size.Width - 1) / models.Count - 2;
+                        ModelTitleControl mtc = modelTitleControls[i];
+                        mtc.Width = (this.Size.Width - 1) / modelTitleControls.Count - 2;
                         int origWidth = mtc.Width;
                         if (i == 0)
                             mtc.Location = OriginalLocation;
-                        else if (i >= models.Count - 3)
+                        else if (i >= modelTitleControls.Count - 3)
                         {
-                            mtc.Width = (this.Size.Width - (origWidth + 2) * models.Count) / 3 + origWidth;
-                            mtc.Location = new Point((origWidth + 2) * (models.Count - 3) + (mtc.Width + 2) * (i - models.Count + 3), 6);
+                            mtc.Width = (this.Size.Width - (origWidth + 2) * modelTitleControls.Count) / 3 + origWidth;
+                            mtc.Location = new Point((origWidth + 2) * (modelTitleControls.Count - 3) + (mtc.Width + 2) * (i - modelTitleControls.Count + 3), 6);
                         }
                         else
                             mtc.Location = new Point((mtc.Width + 2) * i, 6);
@@ -154,20 +156,20 @@ namespace Citta_T1.Controls.Title
             // 关闭正是当前文档，需要重新选定左右两边的文档中的一个
             if (mtControl.Selected)
             {
-                int index = models.IndexOf(mtControl);
+                int index = modelTitleControls.IndexOf(mtControl);
                 // 优先选择右边的
-                if (index != -1 && index + 1 < models.Count)
-                    models[index + 1].ShowSelectedBorder();
+                if (index != -1 && index + 1 < modelTitleControls.Count)
+                    modelTitleControls[index + 1].ShowSelectedBorder();
                 // 其次选择左边的
                 else if (index != -1 && index - 1 >= 0)
-                    models[index - 1].ShowSelectedBorder();
+                    modelTitleControls[index - 1].ShowSelectedBorder();
                 log.Info("删除的index为" + index.ToString());
             }
-            models.Remove(mtControl);
+            modelTitleControls.Remove(mtControl);
             this.Controls.Remove(mtControl);
             mtControl.Dispose();
             // 当文档全部关闭时，自动创建一个新的默认文档
-            if (models.Count == 0)
+            if (modelTitleControls.Count == 0)
                 AddModel("新建模型");
             UpModelTitle();
             ResizeModel(true);//重新设置model大小
@@ -176,17 +178,8 @@ namespace Citta_T1.Controls.Title
         }
         public void ClearSelectedBorder()
         {
-            foreach (ModelTitleControl mtc in this.models)
+            foreach (ModelTitleControl mtc in this.modelTitleControls)
                 mtc.BorderStyle = BorderStyle.None;
-        }
-        public void SelectedModel(string modelTitle)
-        {
-            foreach (ModelTitleControl mtc in this.models)
-            {
-                if (mtc.ModelTitle == modelTitle)
-                    mtc.ShowSelectedBorder();
-            }
-
         }
 
         private void ModelTitlePanel_SizeChanged(object sender, EventArgs e)
@@ -217,13 +210,7 @@ namespace Citta_T1.Controls.Title
         }
         private List<ModelTitleControl> SearchModelTitleControl(string modelTitle)
         {
-            List<ModelTitleControl> mtc = new List<ModelTitleControl>();
-            foreach (Control ct in this.Controls)
-            {
-                if (ct is ModelTitleControl && (ct as ModelTitleControl).ModelTitle == modelTitle)
-                    mtc.Add(ct as ModelTitleControl);
-            }
-            return mtc;
+            return modelTitleControls.Where(x => x.ModelTitle == modelTitle).ToList();
         }
     }
 }
