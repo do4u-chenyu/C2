@@ -29,7 +29,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             this.outputFileTitle = this.option.GetOption("columnname0");
             this.outputFilePath = triple.ResultElement.FullFilePath;
             this.operatorId = triple.OperateElement.ID.ToString();
-            this.sortConfig = " -S 200M -T " + Global.WorkspaceDirectory;
+            this.sortConfig = " -S 600M -T " + Global.WorkspaceDirectory;
             InitSeparator();
         }
 
