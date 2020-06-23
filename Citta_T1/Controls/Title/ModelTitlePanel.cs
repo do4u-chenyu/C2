@@ -13,9 +13,9 @@ namespace Citta_T1.Controls.Title
     {
         private static LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
 
-        private static Point OriginalLocation = new System.Drawing.Point(1, 6);
+        private static Point OriginalPoint = new System.Drawing.Point(1, 6);            //第一个模型标题的位置
         private List<ModelTitleControl> modelTitleControls;
-        private int rawModelTitleNum = 9;
+        private int threshold = 9;                                                      //模型标题长度变化阈值
         public event NewDocumentEventHandler NewModelDocument;
         public event DocumentSwitchHandler ModelDocumentSwitch;
 
@@ -28,12 +28,12 @@ namespace Citta_T1.Controls.Title
 
         public void UpModelTitle()
         {
-            rawModelTitleNum = this.Width / 142;
+            threshold = this.Width / 142;
             foreach (ModelTitleControl mt in modelTitleControls)
             {
-                if (modelTitleControls.Count <= rawModelTitleNum)
+                if (modelTitleControls.Count <= threshold)
                     mt.SetOriginalModelTitle(mt.ModelTitle);
-                else if (modelTitleControls.Count > rawModelTitleNum && modelTitleControls.Count < 17)
+                else if (modelTitleControls.Count > threshold && modelTitleControls.Count < 17)
                     mt.SetNewModelTitle(mt.ModelTitle, 3);
                 else if (modelTitleControls.Count >= 17 && modelTitleControls.Count < 20)
                     mt.SetNewModelTitle(mt.ModelTitle, 2);
@@ -41,8 +41,10 @@ namespace Citta_T1.Controls.Title
                     mt.SetNewModelTitle(mt.ModelTitle, 1);
                 else if (modelTitleControls.Count >= 24)
                     mt.SetNewModelTitle(mt.ModelTitle, 0);
+              
             }
-            //log.Info("modetitle :标题长度" +)
+           if(modelTitleControls.Count > 0)
+                log.Info("modetitle :标题长度" + modelTitleControls[0].Width);
         }
         public void LoadModelDocument(string[] modelTitles)
         {
@@ -57,7 +59,7 @@ namespace Citta_T1.Controls.Title
                 // 根据元素个数调整位置和大小
                 mtControl.SetOriginalModelTitle(modelTitles[i]);
                 if (i == 0)
-                    mtControl.Location = OriginalLocation;
+                    mtControl.Location = OriginalPoint;
                 else
                 {
                     ModelTitleControl preMTC = modelTitleControls[modelTitleControls.Count - 2];
@@ -90,7 +92,7 @@ namespace Citta_T1.Controls.Title
             // 设置新控件在ModelTitlePanel中的Location
             if (modelTitleControls.Count <= 1)
             {
-                mtControl.Location = OriginalLocation;
+                mtControl.Location = OriginalPoint;
                 this.Controls.Add(mtControl);
                 mtControl.ShowSelectedBorder();
             }
@@ -110,45 +112,41 @@ namespace Citta_T1.Controls.Title
          */
         public void ResizeModel(bool removeTag = false)
         {
-
-            rawModelTitleNum = this.Width / 142;
+            if (modelTitleControls == null)
+                return;
+            threshold = this.Width / 142;
             try
-            {
-                if (0 < modelTitleControls.Count && modelTitleControls.Count <= rawModelTitleNum && removeTag)
+            {       
+                int count = modelTitleControls.Count;
+                // 删除ModelTitle（数目 <= rawModelTitleNum）,其大小改变
+                if (count <= threshold && removeTag)
                 {
-                    for (int i = 0; i < modelTitleControls.Count; i++)
+
+                    for (int i = 0; i < count; i++)
                     {
                         modelTitleControls[i].Size = new Size(140, 26);
-                        if (i == 0)
-                            modelTitleControls[i].Location = OriginalLocation;
-                        else
-                        {
-                            ModelTitleControl preMTC = modelTitleControls[i - 1];
-                            modelTitleControls[i].Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
-                        }
+                        modelTitleControls[i].Location = i == 0 ? OriginalPoint : new Point(modelTitleControls[i - 1].Location.X + modelTitleControls[i - 1].Width + 2, 6);                    
                     }
                 }
-                if (modelTitleControls.Count > rawModelTitleNum)
+
+                // 增加、删除ModelTitle(数目 > rawModelTitleNum),其大小改变
+                if (modelTitleControls.Count <= threshold)
+                    return;
+                // 标题缩小后的宽度
+                int shrinkWidth= (this.Size.Width - 1) / count - 2;
+                // 第一个标题的位置、宽度
+                modelTitleControls[0].Location = OriginalPoint;
+                modelTitleControls[0].Width = shrinkWidth;
+                for (int i = 0; i < count; i++)
                 {
-                    for (int i = 0; i < modelTitleControls.Count; i++)
-                    {
-                        ModelTitleControl mtc = modelTitleControls[i];
-                        mtc.Width = (this.Size.Width - 1) / modelTitleControls.Count - 2;
-                        int origWidth = mtc.Width;
-                        if (i == 0)
-                            mtc.Location = OriginalLocation;
-                        else if (i >= modelTitleControls.Count - 3)
-                        {
-                            mtc.Width = (this.Size.Width - (origWidth + 2) * modelTitleControls.Count) / 3 + origWidth;
-                            mtc.Location = new Point((origWidth + 2) * (modelTitleControls.Count - 3) + (mtc.Width + 2) * (i - modelTitleControls.Count + 3), 6);
-                        }
-                        else
-                            mtc.Location = new Point((mtc.Width + 2) * i, 6);
-                    }
+                    ModelTitleControl mtc = modelTitleControls[i];
+                    // 最后三个补一下余数造成的ModelTitlePanel最后的空余
+                    mtc.Width = i >= count - 3 ? (this.Size.Width - (shrinkWidth + 2) * count) / 3 + shrinkWidth : shrinkWidth;
+                    mtc.Location= i >= count - 3 ? new Point((shrinkWidth + 2) * (count - 3) + (mtc.Width + 2) * (i - count + 3), 6): new Point((mtc.Width + 2) * i, 6);
                 }
             }
             catch (Exception ex)
-            { log.Error("ModelTitlePanel 未将对象引用设置到对象的实例: " + ex.ToString()); }
+            { log.Error("ModelTitlePanel : " + ex.ToString()); }
 
         }
         public void RemoveModel(ModelTitleControl mtControl)
