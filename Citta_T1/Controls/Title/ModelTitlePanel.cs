@@ -201,35 +201,29 @@ namespace Citta_T1.Controls.Title
 
         public bool ContainModel(string modelTitle)
         {
-            bool ret = false;
-            foreach (Control ct in this.Controls)
-            {
-                if (ct is ModelTitleControl && (ct as ModelTitleControl).ModelTitle == modelTitle)
-                {
-                    ret = true;
-                    break;
-                }
-            }
-
-            return ret;
+            return SearchModelTitleControl(modelTitle).Count > 0;
         }
 
-        public bool ResetDirtyPictureBox(string modelTitle, bool dirty)
+        public void ResetDirtyPictureBox(string modelTitle, bool dirty)
         {
-            bool ret = false;
+            foreach (ModelTitleControl mtc in SearchModelTitleControl(modelTitle))
+            {
+                if (dirty)
+                    mtc.SetDirtyPictureBox();
+                else
+                    mtc.ClearDirtyPictureBox();
+            }
+
+        }
+        private List<ModelTitleControl> SearchModelTitleControl(string modelTitle)
+        {
+            List<ModelTitleControl> mtc = new List<ModelTitleControl>();
             foreach (Control ct in this.Controls)
             {
                 if (ct is ModelTitleControl && (ct as ModelTitleControl).ModelTitle == modelTitle)
-                {
-                    if (dirty)
-                        (ct as ModelTitleControl).SetDirtyPictureBox();
-                    else
-                        (ct as ModelTitleControl).ClearDirtyPictureBox();
-
-                    ret = true;
-                }
+                    mtc.Add(ct as ModelTitleControl);
             }
-            return ret;
+            return mtc;
         }
     }
 }
