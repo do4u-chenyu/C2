@@ -26,26 +26,6 @@ namespace Citta_T1.Controls.Title
         }
 
 
-        public void UpModelTitle()
-        {
-            threshold = this.Width / 142;
-            foreach (ModelTitleControl mt in modelTitleControls)
-            {
-                if (modelTitleControls.Count <= threshold)
-                    mt.SetOriginalModelTitle(mt.ModelTitle);
-                else if (modelTitleControls.Count > threshold && modelTitleControls.Count < 17)
-                    mt.SetNewModelTitle(mt.ModelTitle, 3);
-                else if (modelTitleControls.Count >= 17 && modelTitleControls.Count < 20)
-                    mt.SetNewModelTitle(mt.ModelTitle, 2);
-                else if (modelTitleControls.Count >= 20 && modelTitleControls.Count < 24)
-                    mt.SetNewModelTitle(mt.ModelTitle, 1);
-                else if (modelTitleControls.Count >= 24)
-                    mt.SetNewModelTitle(mt.ModelTitle, 0);
-              
-            }
-           if(modelTitleControls.Count > 0)
-                log.Info("modetitle :标题长度" + modelTitleControls[0].Width);
-        }
         public void LoadModelDocument(string[] modelTitles)
         {
             int end = modelTitles.Length - 1;
@@ -65,7 +45,6 @@ namespace Citta_T1.Controls.Title
                     ModelTitleControl preMTC = modelTitleControls[modelTitleControls.Count - 2];
                     mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                     ResizeModel();
-                    UpModelTitle();
                 }
                 if (i == end)
                 {
@@ -102,7 +81,6 @@ namespace Citta_T1.Controls.Title
                 mtControl.Location = new Point(preMTC.Location.X + preMTC.Width + 2, 6);
                 this.Controls.Add(mtControl);
                 ResizeModel();
-                UpModelTitle();
                 mtControl.ShowSelectedBorder();
             }
         }
@@ -110,29 +88,28 @@ namespace Citta_T1.Controls.Title
         /*
          * removeTag  删除动作引起的ResizeModel
          */
-        public void ResizeModel(bool removeTag = false)
+        public void ResizeModel()
         {
+            // 增加、删除ModelTitle(数目 > rawModelTitleNum),其大小改变
             if (modelTitleControls == null)
                 return;
             threshold = this.Width / 142;
             try
             {       
                 int count = modelTitleControls.Count;
-                // 删除ModelTitle（数目 <= rawModelTitleNum）,其大小改变
-                if (count <= threshold && removeTag)
+                if (count <= threshold)
                 {
 
                     for (int i = 0; i < count; i++)
                     {
                         modelTitleControls[i].Size = new Size(140, 26);
-                        modelTitleControls[i].Location = i == 0 ? OriginalPoint : new Point(modelTitleControls[i - 1].Location.X + modelTitleControls[i - 1].Width + 2, 6);                    
+                        modelTitleControls[i].Location = i == 0 ? OriginalPoint : new Point(modelTitleControls[i - 1].Location.X + modelTitleControls[i - 1].Width + 2, 6);
+                        ChangeTitleLength(modelTitleControls[i]);
                     }
+                    return;
                 }
 
-                // 增加、删除ModelTitle(数目 > rawModelTitleNum),其大小改变
-                if (modelTitleControls.Count <= threshold)
-                    return;
-                // 标题缩小后的宽度
+                // 标题控件宽度缩小后的设定值
                 int shrinkWidth= (this.Size.Width - 1) / count - 2;
                 // 第一个标题的位置、宽度
                 modelTitleControls[0].Location = OriginalPoint;
@@ -143,11 +120,32 @@ namespace Citta_T1.Controls.Title
                     // 最后三个补一下余数造成的ModelTitlePanel最后的空余
                     mtc.Width = i >= count - 3 ? (this.Size.Width - (shrinkWidth + 2) * count) / 3 + shrinkWidth : shrinkWidth;
                     mtc.Location= i >= count - 3 ? new Point((shrinkWidth + 2) * (count - 3) + (mtc.Width + 2) * (i - count + 3), 6): new Point((mtc.Width + 2) * i, 6);
+                    ChangeTitleLength(mtc);
                 }
             }
             catch (Exception ex)
             { log.Error("ModelTitlePanel : " + ex.ToString()); }
 
+        }
+
+
+        private void ChangeTitleLength(ModelTitleControl mtc)
+        {
+            // 改变Title显示的标题字数
+            int width = mtc.Width;
+            string title = mtc.ModelTitle;
+            if (width == 140)
+                mtc.SetOriginalModelTitle(title);
+            else if (91 <= width && width < 140)
+                mtc.SetNewModelTitle(title, 3);
+            else if (77 <= width && width < 91)
+                mtc.SetNewModelTitle(title, 2);
+            else if (64 <= width && width < 77)
+                mtc.SetNewModelTitle(title, 1);
+            else if (41 <= width && width < 64)
+                mtc.SetNewModelTitle(title, 0);
+            else
+                mtc.SetNewModelTitle(title, -1);
         }
         public void RemoveModel(ModelTitleControl mtControl)
         {
@@ -169,8 +167,7 @@ namespace Citta_T1.Controls.Title
             // 当文档全部关闭时，自动创建一个新的默认文档
             if (modelTitleControls.Count == 0)
                 AddModel("新建模型");
-            UpModelTitle();
-            ResizeModel(true);//重新设置model大小
+            ResizeModel();//重新设置model大小
 
 
         }
@@ -182,8 +179,7 @@ namespace Citta_T1.Controls.Title
 
         private void ModelTitlePanel_SizeChanged(object sender, EventArgs e)
         {
-            ResizeModel(true);
-            UpModelTitle();
+            ResizeModel();
         }
         public void DocumentSwitch(string modelTitle)
         {

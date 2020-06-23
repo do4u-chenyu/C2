@@ -12,10 +12,8 @@ namespace Citta_T1.Controls.Title
     {
         private string modelTitle;
         private bool selected;
-        private bool dirty;
         public bool Selected { get => selected; set => selected = value; }
         public string ModelTitle { get => modelTitle; }
-        public bool Dirty { get => dirty; set => dirty = value; }
         public event DocumentSwitchEventHandler ModelDocumentSwitch;
 
 
@@ -23,21 +21,18 @@ namespace Citta_T1.Controls.Title
         {
             InitializeComponent();
             SetOriginalModelTitle("我的新模型");
-            dirty = false;
             ClearDirtyPictureBox();
 
         }
 
         public void SetDirtyPictureBox()
         {
-            dirty = true;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModelTitleControl));
             this.dirtyPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dirtyPictureBox.Image")));
         }
 
         public void ClearDirtyPictureBox()
         {
-            dirty = false;
             this.dirtyPictureBox.Image = null;
         }
 
@@ -46,35 +41,40 @@ namespace Citta_T1.Controls.Title
 
             this.modelTitle = modelTitle;
             int maxLength = 6;
-            int digitLetterCount = 0;
             this.toolTip.SetToolTip(this.modelTitlelabel, modelTitle);
 
             if (modelTitle.Length <= maxLength)
-                this.modelTitlelabel.Text = modelTitle;
-            else
             {
-                digitLetterCount = Regex.Matches(modelTitle.Substring(0, maxLength), "[a-zA-Z0-9]").Count;
-                if (digitLetterCount < 4)
-                    this.modelTitlelabel.Text = modelTitle.Substring(0, maxLength) + "...";
-                else //>=4
-                {
-                    this.modelTitlelabel.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
-                    if (modelTitle.Length > 8)
-                        this.modelTitlelabel.Text += "...";
-                }
+                this.modelTitlelabel.Text = modelTitle;
+                return;
+            }
+
+            int digitLetterCount = Regex.Matches(modelTitle.Substring(0, maxLength), "[a-zA-Z0-9]").Count;
+            if (digitLetterCount < 4)
+                this.modelTitlelabel.Text = modelTitle.Substring(0, maxLength) + "...";
+            else 
+            {
+                this.modelTitlelabel.Text = modelTitle.Substring(0, Math.Min(8, modelTitle.Length));
+                if (modelTitle.Length > 8)
+                    this.modelTitlelabel.Text += "...";
             }
 
         }
         public void SetNewModelTitle(string modelTitle, int nr)
         {
-            if (nr == 0)
-                this.modelTitlelabel.Text = "";
+            if (String.IsNullOrEmpty(modelTitle))
+                return;
+            if (nr == -1)
+                this.modelTitlelabel.Text = string.Empty;
+            else if (nr == 0)
+                this.modelTitlelabel.Text = modelTitle.Substring(0, 1);
             else
             {
                 this.modelTitlelabel.Text = modelTitle.Substring(0, Math.Min(modelTitle.Length, nr));
                 if (modelTitle.Length > nr)
                     this.modelTitlelabel.Text += "...";
             }
+            
         }
 
 
