@@ -576,11 +576,10 @@ namespace Citta_T1.Controls.Move.Op
                 this.statusBox.Image = Properties.Resources.set;
             else if (status == ElementStatus.Done)
                 this.statusBox.Image = Properties.Resources.done;
-            else if (status == ElementStatus.Ready)
+            else if (status == ElementStatus.Ready || status == ElementStatus.Stop || status == ElementStatus.Runnnig || status == ElementStatus.Suspend)
                 this.statusBox.Image = Properties.Resources.setSuccess;
             else if (status == ElementStatus.Warn)
                 this.statusBox.Image = Properties.Resources.warn;
-
         }
         #endregion
 
