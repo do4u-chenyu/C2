@@ -221,6 +221,8 @@ namespace Citta_T1.Controls.Flow
         }
         private void FrameChange(bool flag)
         {
+            Global.GetCurrentDocument().Show();
+            Global.GetCanvasPanel().FrameWrapper.InitFrame();
             if (flag)
             {
                 this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectFrame.png")));
@@ -231,8 +233,6 @@ namespace Citta_T1.Controls.Flow
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
             this.framePictureBox.Location = new System.Drawing.Point(167, 5);
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
-            Global.GetCurrentDocument().Show();
-            Global.GetCanvasPanel().FrameWrapper.InitFrame();
         }
         public void InterruptSelectFrame()
         {
