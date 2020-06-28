@@ -657,19 +657,22 @@ namespace Citta_T1.Controls
         {
             this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
         }
+        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
+        {
+            Global.GetCurrentDocument().WorldMap.MapOrigin = worldMapOrigin;
+            this.UndoRedoMoveEles(idPtsDict);
+        }
         public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
         {
-            foreach (int id in idPtsDict.Keys)
-                log.Info(string.Format("{0} {1}", id, idPtsDict[id]));
             ModelDocument doc = Global.GetCurrentDocument();
             List<int> ids = new List<int>(idPtsDict.Keys);
-            foreach(int id in ids)
+            foreach (int id in ids)
             {
                 ModelElement me = doc.SearchElementByID(id);
                 if (me == null)
                     return;
-                Point tmp = me.Location;   
-                me.InnerControl.Location = idPtsDict[id];
+                Point tmp = me.Location;
+                me.InnerControl.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(idPtsDict[id]);
                 idPtsDict[id] = tmp;
             }
             Global.GetCurrentDocument().UpdateAllLines();

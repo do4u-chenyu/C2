@@ -10,33 +10,45 @@ namespace Citta_T1.Core.UndoRedo.Command
     class BatchMoveCommand : ICommand
     {
         private Dictionary<int, Point> idPtsDict;
+        private Point worldMapOrigin;
 
         public BatchMoveCommand(Dictionary<int, Point> idPtsDict)
         {
             this.idPtsDict = idPtsDict;
+            this.worldMapOrigin = Point.Empty;
+        }
+        public BatchMoveCommand(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
+        {
+            this.idPtsDict = idPtsDict;
+            this.worldMapOrigin = worldMapOrigin;
         }
         public bool Redo()
         {
-            return DoDelete();
+            if (this.worldMapOrigin.IsEmpty)
+                return DoMove();
+            else
+                return DoMove(new Point(0, 0));
         }
 
         public bool Undo()
         {
-            // 正好和ElementAddComman操作相反
-            return DoAdd();
+            if (this.worldMapOrigin.IsEmpty)
+                return DoMove();
+            else
+                return DoMove(this.worldMapOrigin);
         }
-
-
-        private bool DoDelete()
+        private bool DoMove(Point wmo)
         {
-            Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict);
+            Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict, wmo);
             Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetNaviViewControl().UpdateNaviView();
             return true;
         }
-        private bool DoAdd()
+        private bool DoMove()
         {
             Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict);
             Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetNaviViewControl().UpdateNaviView();
             return true;
         }
     }

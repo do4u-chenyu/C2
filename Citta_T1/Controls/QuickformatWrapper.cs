@@ -176,7 +176,6 @@ namespace Citta_T1.Controls
                     int top = dy + 100;
                     Point moveOffset = Global.GetCurrentDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top));
-                    log.Info(moveOffset.ToString());
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
@@ -223,11 +222,11 @@ namespace Citta_T1.Controls
             FindModelEndNodes();
             this.treeGroup = new List<List<List<int>>>();
             ht = new Hashtable();
-            log.Info("叶子数" + this.leafNodeIds.Count.ToString());
+            // log.Info("叶子数" + this.leafNodeIds.Count.ToString());
             //遍历所有叶子
             foreach (int leafNode in this.leafNodeIds)
             {
-                log.Info("leafNode：" + leafNode.ToString());
+                // log.Info("leafNode：" + leafNode.ToString());
                 this.treeNodes = new List<List<int>>();
                 List<int> tmp = new List<int>
                 {
@@ -237,7 +236,7 @@ namespace Citta_T1.Controls
                 SearchTree(tmp);
                 this.treeGroup.Add(this.treeNodes);
             }
-            log.Info("待合并数" + this.treeGroup.Count.ToString());
+            //log.Info("待合并数" + this.treeGroup.Count.ToString());
             //对堆取交集
             this.recordSearch = new List<List<List<int>>>();
             List<List<List<int>>> key = new List<List<List<int>>>();

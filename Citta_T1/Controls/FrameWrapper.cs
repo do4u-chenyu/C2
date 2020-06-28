@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Model.World;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
 using Citta_T1.Core;
@@ -394,10 +395,10 @@ namespace Citta_T1.Controls
         private void DragFrame_MouseUp()
         {
             Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
-
+            WorldMap wm = Global.GetCurrentDocument().WorldMap;
             foreach (Control ct in controls)
             {
-                idPtsDict.Add((ct as MoveBaseControl).ID, new Point(ct.Left, ct.Top));
+                idPtsDict.Add((ct as MoveBaseControl).ID, wm.ScreenToWorld(ct.Location, true));
                 ct.Left = ct.Left + endP.X - startP.X + moveOffset.X;
                 ct.Top = ct.Top + endP.Y - startP.Y + moveOffset.Y;
             }

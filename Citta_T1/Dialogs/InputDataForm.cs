@@ -362,7 +362,12 @@ namespace Citta_T1.Dialogs
                     fs.Dispose();
                 }
                 if (workbook != null)
+                {
                     workbook.Close();
+                    workbook = null;
+                }
+                if (sheet != null)
+                    sheet = null;
             }
         }
 
