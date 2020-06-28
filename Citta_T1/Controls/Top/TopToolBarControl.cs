@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Model.World;
 using Citta_T1.Controls.Move;
 using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
@@ -103,6 +104,7 @@ namespace Citta_T1.Controls.Top
         private void FormatButton_MouseClick(object sender, MouseEventArgs e)
         {
             ModelDocument currentModel = Global.GetCurrentDocument();
+            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
             // 文档为空时,返回,不需要触发dirty动作
             if (currentModel.ModelElements.Count == 0)
                 return;
@@ -111,10 +113,10 @@ namespace Citta_T1.Controls.Top
             foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
             {
                 MoveBaseControl mbc = me.InnerControl;
-                Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(me.Location, true);
+                Point oldControlPostionInWorld = curWorldMap.ScreenToWorld(me.Location, true);
                 idPtsDict.Add(mbc.ID, oldControlPostionInWorld);
             }
-            ICommand cmd = new BatchMoveCommand(idPtsDict, Global.GetCurrentDocument().WorldMap.MapOrigin);
+            ICommand cmd = new BatchMoveCommand(idPtsDict, curWorldMap.MapOrigin);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
 
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);

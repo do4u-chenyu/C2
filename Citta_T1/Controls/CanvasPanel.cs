@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Model.World;
 using Citta_T1.Business.Schedule;
 using Citta_T1.Controls.Interface;
 using Citta_T1.Controls.Move;
@@ -590,7 +591,6 @@ namespace Citta_T1.Controls
         }
         public Tuple<List<ModelElement>, List<Tuple<int, int, int>>> DeleteSelectedElesByCtrID(IEnumerable<int> ids)
         {
-            // TODO 应该调用MoveCtr的删除方法
             ModelDocument doc = Global.GetCurrentDocument();
             List<ModelElement> mes = new List<ModelElement>();
             List<Tuple<int, int, int>> mrs = new List<Tuple<int, int, int>>();
@@ -616,7 +616,7 @@ namespace Citta_T1.Controls
                         endID = endIDs.Count == 1 ? endIDs[0].EndID : -1;
                         if (endID != -1)
                         {
-                            relsAndEle = (me.InnerControl as MoveOpControl).DeleteResult(endID, oriMrs); // TODO
+                            relsAndEle = (me.InnerControl as MoveOpControl).DeleteResult(endID, oriMrs);
                             if (relsAndEle.Item2 != null)
                             {
                                 this.DeleteEle(relsAndEle.Item2);
@@ -659,11 +659,10 @@ namespace Citta_T1.Controls
         }
         public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
         {
-            Global.GetCurrentDocument().WorldMap.MapOrigin = worldMapOrigin;
-            this.UndoRedoMoveEles(idPtsDict);
-        }
-        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
-        {
+            // TODO 前后两个坐标的世界坐标原点不一致时，使用该方法
+            WorldMap oldWorldMap = new WorldMap(Global.GetCurrentDocument().WorldMap.MapOrigin);
+            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
+            curWorldMap.MapOrigin = worldMapOrigin;
             ModelDocument doc = Global.GetCurrentDocument();
             List<int> ids = new List<int>(idPtsDict.Keys);
             foreach (int id in ids)
@@ -671,9 +670,25 @@ namespace Citta_T1.Controls
                 ModelElement me = doc.SearchElementByID(id);
                 if (me == null)
                     return;
-                Point tmp = me.Location;
+                Point tmp = me.InnerControl.Location;
+                me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
+                idPtsDict[id] = oldWorldMap.ScreenToWorld(tmp, true);
+            }
+            Global.GetCurrentDocument().UpdateAllLines();
+        }
+        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
+        {
+            // 前后两个坐标的世界坐标原点一致时，使用该方法
+            ModelDocument doc = Global.GetCurrentDocument();
+            List<int> ids = new List<int>(idPtsDict.Keys);
+            foreach (int id in ids)
+            {
+                ModelElement me = doc.SearchElementByID(id);
+                if (me == null)
+                    return;
+                Point tmp = me.InnerControl.Location;
                 me.InnerControl.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = tmp;
+                idPtsDict[id] = Global.GetCurrentDocument().WorldMap.ScreenToWorld(tmp, true);
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }
