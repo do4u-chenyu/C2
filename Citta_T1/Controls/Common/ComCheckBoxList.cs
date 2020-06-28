@@ -228,6 +228,8 @@ namespace Citta_T1.Controls.Common
             {
                 checkListBoxTmp.Hide();
                 checkListBox.Show();
+                lbSelectAll.Enabled = true;
+                lbSelectNo.Enabled = true;
                 return;
             }
             //每次搜索文本改变，就是对字典重新赋值
@@ -237,6 +239,8 @@ namespace Citta_T1.Controls.Common
             checkListBox.Hide();
             checkListBoxTmp.Show();
             this.checkListBoxTmp.Items.Clear();
+            lbSelectAll.Enabled = false;
+            lbSelectNo.Enabled = false;
             checkListBoxTmp.ItemCheck -= CheckListBoxTmp_ItemCheck;
 
             for (int i = 0; i < checkListBox.Items.Count; i++)

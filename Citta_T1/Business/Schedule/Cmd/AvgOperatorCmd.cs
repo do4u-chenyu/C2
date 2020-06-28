@@ -19,7 +19,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             ReWriteBCPFile();
 
             //满足数字、小数的才算，结果保留3位小数
-            cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{1}\" -v OFS='\\t' \"BEGIN{{count=0;}}{{if( ${2}~/^[0-9]+\\.?[0-9]*$/) {{count+=1;a+=${2} }} }}END{{printf(\\\"%.3f\\\",a/count)}}\" >> {3}", TransInputfileToCmd(inputFilePath), this.separators[0], avgField, this.outputFilePath));
+            cmds.Add(string.Format("{0} | sbin\\awk.exe -F\"{1}\" -v OFS='\\t' \"BEGIN{{count=0;}}{{if( ${2}~/^[0-9]+\\.?[0-9]*$/) {{count+=1;a+=${2} }} }}END{{if(count>0){{printf(\\\"%.3f\\\",a/count)}} }}\" >> {3}", TransInputfileToCmd(inputFilePath), this.separators[0], avgField, this.outputFilePath));
             return cmds;
         }
     }

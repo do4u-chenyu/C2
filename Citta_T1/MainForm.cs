@@ -155,6 +155,11 @@ namespace Citta_T1
                 this.remarkControl.Show();
             else
                 this.remarkControl.Hide();
+            // 切换文档时，浮动工具栏的显示和隐藏
+            if (Global.GetCurrentDocument().FlowControlVisible)
+                this.flowControl.Show();
+            else
+                this.flowControl.Hide();
             // 切换文档时, 浮动框备注框选中状态切换
             Global.GetFlowControl().SelectRemark = Global.GetCurrentDocument().RemarkVisible;
             Global.GetFlowControl().RemarkChange(Global.GetFlowControl().SelectRemark);

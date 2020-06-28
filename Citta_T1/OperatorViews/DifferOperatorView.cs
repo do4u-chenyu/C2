@@ -51,9 +51,9 @@ namespace Citta_T1.OperatorViews
         {
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
@@ -102,7 +102,7 @@ namespace Citta_T1.OperatorViews
 
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
             this.opControl.Option.SetOption("columnname1", opControl.SecondDataSourceColumns);
-            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             string index00 = comboBox0.Tag == null ? comboBox0.SelectedIndex.ToString() : comboBox0.Tag.ToString();

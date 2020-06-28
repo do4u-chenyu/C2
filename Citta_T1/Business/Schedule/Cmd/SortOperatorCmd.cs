@@ -27,7 +27,7 @@ namespace Citta_T1.Business.Schedule.Cmd
                 string endRow = ConvertUtil.TryParseInt(tmpEndRow) <= 0 || ConvertUtil.TryParseInt(tmpEndRow) - ConvertUtil.TryParseInt(firstRow) <= 0 ? firstRow : tmpEndRow;//结束行数
                 endRowCmd = string.Format("| sbin\\head.exe -n{0}", endRow);
             }
-            string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
+            string outField = TransOutputField(option.GetOptionSplit("outfield0"));//输出字段
 
             //是否去重(是对整个文件去重)、升降序
             string repetition = option.GetOption("noRepetition").ToLower() == "true" ? string.Format("sbin\\sort.exe {0} -u |", this.sortConfig) : "";

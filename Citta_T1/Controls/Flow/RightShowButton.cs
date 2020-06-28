@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Citta_T1.Core;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,11 +26,7 @@ namespace Citta_T1.Controls.Flow
 
         private void RightShowButton_Click(object sender, EventArgs e)
         {
-            foreach (Control ct in this.Parent.Controls)
-            {
-                if (ct.Name == "flowControl")
-                    ct.Visible = true;
-            }
+            FlowControlShow();
         }
 
         private void Label1_MouseEnter(object sender, EventArgs e)
@@ -47,11 +44,14 @@ namespace Citta_T1.Controls.Flow
         private void Label1_Click(object sender, EventArgs e)
         {
 
-            foreach (Control ct in this.Parent.Controls)
-            {
-                if (ct.Name == "flowControl")
-                    ct.Visible = true;
-            }
+            FlowControlShow();
+
+        }
+
+        private void FlowControlShow()
+        {
+            Global.GetFlowControl().Visible = true;
+            Global.GetCurrentDocument().FlowControlVisible = true;
 
         }
     }
