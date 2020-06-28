@@ -32,7 +32,11 @@ namespace Citta_T1.Business.Model.World
 
         public int SizeLevel { get => wmInfo.SizeLevel; set => wmInfo.SizeLevel = value; }
 
-
+        public WorldMap() { }
+        public WorldMap(Point mo)
+        {
+            this.MapOrigin = mo;
+        }
         //  Pw = Ps / Factor - Pm
         public Point ScreenToWorld(Point Ps, bool mode)
         {
