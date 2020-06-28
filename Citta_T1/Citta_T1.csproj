@@ -702,9 +702,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Demo\demo_txt.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
     <None Include="Resources\avgOp.bmp" />
     <Content Include="res\Icon\Icon.ico">
