@@ -28,6 +28,8 @@ namespace Citta_T1.Controls
     }
     public partial class CanvasPanel : UserControl
     {
+        private const int drgOffsetX = 380;
+        private const int drgOffsetY = 100;
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
@@ -110,7 +112,12 @@ namespace Citta_T1.Controls
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
             ElementType type = (ElementType)e.Data.GetData("Type");
-            Point location = this.Parent.PointToClient(new Point(e.X - 300, e.Y - 100));
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
+            int locX = Convert.ToInt32(e.X / screenFactor);
+            int locY = Convert.ToInt32(e.Y / screenFactor);
+            int dx = Convert.ToInt32(drgOffsetX / screenFactor);
+            int dy = Convert.ToInt32(drgOffsetY / screenFactor);
+            Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
             Point moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(location);
             location.X -= moveOffset.X;
             location.Y -= moveOffset.Y;
