@@ -13,7 +13,7 @@ namespace Citta_T1.Controls.Title
     {
         private static LogUtil log = LogUtil.GetInstance("ModelTitlePanel");
 
-        private static Point OriginalPoint = new System.Drawing.Point(1, 6);            //第一个模型标题的位置
+        private static Point OriginalPoint = new System.Drawing.Point(2, 6);            //第一个模型标题的位置
         private List<ModelTitleControl> modelTitleControls;
         private int threshold = 9;                                                      //模型标题长度变化阈值
         public event NewDocumentEventHandler NewModelDocument;
@@ -109,17 +109,17 @@ namespace Citta_T1.Controls.Title
                     return;
                 }
 
-                // 标题控件宽度缩小后的设定值
-                int shrinkWidth= (this.Size.Width - 1) / count - 2;
-                // 第一个标题的位置、宽度
-                modelTitleControls[0].Location = OriginalPoint;
-                modelTitleControls[0].Width = shrinkWidth;
+                // 标题控件宽度缩小后的设定值,this.Size.Width - 2让第一个标题和左侧有个空隙，-2是每个title留的间距
+                int rawWidth = (this.Size.Width - 2) / count;
+                int shrinkWidth = rawWidth - 2;
+               
                 for (int i = 0; i < count; i++)
                 {
                     ModelTitleControl mtc = modelTitleControls[i];
-                    // 最后三个补一下余数造成的ModelTitlePanel最后的空余
-                    mtc.Width = i >= count - 3 ? (this.Size.Width - (shrinkWidth + 2) * count) / 3 + shrinkWidth : shrinkWidth;
-                    mtc.Location= i >= count - 3 ? new Point((shrinkWidth + 2) * (count - 3) + (mtc.Width + 2) * (i - count + 3), 6): new Point((mtc.Width + 2) * i, 6);
+                    mtc.Width = shrinkWidth;
+                    mtc.Location = new Point(rawWidth * i, 6);
+                    // 第一个标题和左侧有长度为1的间隙，所以后续标题位置整体右移2
+                    mtc.Location = new Point(mtc.Location.X + 2, mtc.Location.Y);
                     ChangeTitleLength(mtc);
                 }
             }
@@ -142,7 +142,7 @@ namespace Citta_T1.Controls.Title
                 mtc.SetNewModelTitle(title, 2);
             else if (64 <= width && width < 77)
                 mtc.SetNewModelTitle(title, 1);
-            else if (41 <= width && width < 64)
+            else if (44 <= width && width < 64)
                 mtc.SetNewModelTitle(title, 0);
             else
                 mtc.SetNewModelTitle(title, -1);
