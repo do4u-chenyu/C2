@@ -63,9 +63,9 @@ namespace Citta_T1.OperatorViews
             sortByNum.Checked    = Convert.ToBoolean(opControl.Option.GetOption("sortByNum", "True"));
             sortByString.Checked = Convert.ToBoolean(opControl.Option.GetOption("sortByString", "False"));
 
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
-                this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield"), int.Parse).ToList();
+                this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield0"), int.Parse).ToList();
                 foreach (int i in this.oldOutList0)
                     this.oldOutName0.Add(this.nowColumnsName0[i]);
             }
@@ -125,7 +125,7 @@ namespace Citta_T1.OperatorViews
                 if (!this.groupColumn.Contains(index))
                     this.outList.Add(index);
             }
-            this.opControl.Option.SetOption("outfield", this.outList);
+            this.opControl.Option.SetOption("outfield0", this.outList);
             foreach (int index in this.outList)
                 this.selectedColumns.Add(this.nowColumnsName0[index]);
 

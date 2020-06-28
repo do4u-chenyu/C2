@@ -133,13 +133,15 @@ namespace Citta_T1.OperatorViews
             if (IsOptionNotReady()) return;
 
             this.DialogResult = DialogResult.OK;
+            // 旧的输出结果文件选项
+            string oldOptionOut = this.opControl.Option.GetOption("outputOption");
             SaveOption();
 
-            //内容修改，引起文档dirty 
+            // 内容修改，引起文档dirty 
             if (this.oldOptionDictStr != this.opControl.Option.ToString())
                 Global.GetMainForm().SetDocumentDirty();
 
-            //生成结果控件,创建relation,bcp结果文件
+            // 生成结果控件,创建relation,bcp结果文件
             ModelElement resultElement = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
             if (resultElement == ModelElement.Empty)
             {
@@ -148,7 +150,7 @@ namespace Citta_T1.OperatorViews
             }
 
 
-            //输出变化，修改结果算子路径
+            // 输出变化，修改结果算子路径
             if (resultElement != ModelElement.Empty && !this.oldPath.SequenceEqual(this.fullOutputFilePath))
             {
                 resultElement.FullFilePath = this.fullOutputFilePath;
@@ -156,12 +158,20 @@ namespace Citta_T1.OperatorViews
             }
 
             ModelElement hasResultNew = Global.GetCurrentDocument().SearchResultElementByOpID(this.opControl.ID);
-            //修改结果算子内容
+            // 修改结果算子内容
             //hasResultNew.InnerControl.Description = Path.GetFileNameWithoutExtension(this.fullOutputFilePath);
             //hasResultNew.InnerControl.FinishTextChange();//TODO 此处可能有BUG
+            // 旧的编码和分隔符
+            OpUtil.Encoding oldEncoding = hasResultNew.Encoding;
+            char oldSeparator = hasResultNew.Separator;
+
+
             hasResultNew.InnerControl.Encoding = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower() == "utfradio" ? OpUtil.Encoding.UTF8 : OpUtil.Encoding.GBK;
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
+
+         
+
             if (separator == "commaradio")
             {
                 hasResultNew.Separator = ',';
@@ -172,6 +182,15 @@ namespace Citta_T1.OperatorViews
             }
             BCPBuffer.GetInstance().SetDirty(this.fullOutputFilePath);
 
+            /*
+            *  结果文件、分隔符、编码改变，子图状态降级
+            */
+
+            if (oldOptionOut != this.opControl.Option.GetOption("outputOption")
+                || oldEncoding != hasResultNew.Encoding
+                || oldSeparator != hasResultNew.Separator)
+
+                Global.GetCurrentDocument().SetChildrenStatusNull(opControl.ID);
         }
         protected override bool IsOptionNotReady()
         {

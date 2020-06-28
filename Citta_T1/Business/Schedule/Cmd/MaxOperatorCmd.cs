@@ -14,7 +14,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             List<string> cmds = new List<string>();
             string inputFilePath = inputFilePaths.First();//输入文件
             string maxField = TransInputLine(option.GetOption("maxfield"));//最大值字段
-            string outField = TransOutputField(option.GetOptionSplit("outfield"));//输出字段
+            string outField = TransOutputField(option.GetOptionSplit("outfield0"));//输出字段
 
             //重写表头（覆盖）
             ReWriteBCPFile();

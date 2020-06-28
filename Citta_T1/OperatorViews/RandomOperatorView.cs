@@ -32,7 +32,7 @@ namespace Citta_T1.OperatorViews
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
             this.opControl.Option.SetOption("randomnum", this.randomNumBox.Text);
-            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
 
             //更新子图所有节点状态
@@ -45,9 +45,9 @@ namespace Citta_T1.OperatorViews
                 return;
 
             this.randomNumBox.Text = this.opControl.Option.GetOption("randomnum");
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);

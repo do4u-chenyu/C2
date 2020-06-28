@@ -49,7 +49,16 @@ namespace Citta_T1.Utils
         {
             try
             {
-                ct.Text = int.Parse(ct.Text).ToString();
+                int value = int.Parse(ct.Text);
+                if (value >= 0)
+                    ct.Text = int.Parse(ct.Text).ToString();
+                else
+                {
+                    ct.Text = String.Empty;
+                    MessageBox.Show("请输非负数");
+                }
+                    
+
             }
             catch
             {

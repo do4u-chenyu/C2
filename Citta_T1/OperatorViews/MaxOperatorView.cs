@@ -41,7 +41,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
-            this.opControl.Option.SetOption("outfield", outListCCBL0.GetItemCheckIndex());
+            this.opControl.Option.SetOption("outfield0", outListCCBL0.GetItemCheckIndex());
             this.selectedColumns = this.outListCCBL0.GetItemCheckText();
             if (this.comboBox0.Text == String.Empty)
                 this.opControl.Option.SetOption("maxfield", String.Empty);
@@ -64,9 +64,9 @@ namespace Citta_T1.OperatorViews
                 this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
                 this.comboBox0.Tag = maxIndex.ToString();
             }
-            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield")))
+            if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
-                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield");
+                string[] checkIndexs = this.opControl.Option.GetOptionSplit("outfield0");
                 int[] outIndexs = Array.ConvertAll(checkIndexs, int.Parse);
                 this.oldOutList0 = outIndexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);

@@ -70,7 +70,7 @@ namespace Citta_T1.OperatorViews
         {
             this.opControl.Option.Clear();
             this.opControl.Option.SetOption("columnname0", this.nowColumnsName0);
-            this.opControl.Option.SetOption("outfield", this.outList);
+            this.opControl.Option.SetOption("outfield0", this.outList);
             this.opControl.Option.SetOption("sortfield", this.comboBox0.Tag == null ? this.comboBox0.SelectedIndex.ToString() : this.comboBox0.Tag.ToString());
             this.opControl.Option.SetOption("repetition", this.repetition.Checked);
             this.opControl.Option.SetOption("noRepetition", this.noRepetition.Checked);

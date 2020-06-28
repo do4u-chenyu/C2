@@ -190,15 +190,15 @@ namespace Citta_T1.OperatorViews
 
             hasResultNew.InnerControl.Encoding = encoding;
             hasResultNew.InnerControl.Separator = separator;
-         
+
 
             /*
              * 结果文件表头不一致、分隔符、编码改变，子图状态降级
              */
 
-            if(oldResultColumns!=opControl.Option.GetOption("resultColumns")
-                || oldEncoding!= encoding
-                || oldSeparator!= separator )
+            if (oldResultColumns != opControl.Option.GetOption("resultColumns")
+                || oldEncoding != encoding
+                || oldSeparator != separator)
 
                 Global.GetCurrentDocument().SetChildrenStatusNull(opControl.ID);
 

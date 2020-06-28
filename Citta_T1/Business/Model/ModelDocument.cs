@@ -36,6 +36,7 @@ namespace Citta_T1.Business.Model
 
         public string UserPath { get; set; }
         public bool RemarkVisible { get; set; }
+        public bool FlowControlVisible { get; set; }
         // 当前模型,以ID为key的图描述
         public Dictionary<int, List<int>> ModelGraphDict { get; }
 
@@ -52,6 +53,7 @@ namespace Citta_T1.Business.Model
             this.ModelGraphDict = new Dictionary<int, List<int>>();
             this.RemarkDescription = String.Empty;
             this.RemarkVisible = false;
+            this.FlowControlVisible = true;
             this.UserPath = Path.Combine(Global.WorkspaceDirectory, userName);
             this.SavePath = Path.Combine(this.UserPath, modelTitle);
             this.ElementCount = 0;
