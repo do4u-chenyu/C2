@@ -50,4 +50,5 @@ UserInstallSet/obj/Debug/UserInstallSet.pdb
 /tools/cat_xls/bin
 /tools/relate/obj
 /tools/relate/bin
-
+/CittaTestProject/obj/
+/CittaTestProject/obj/Release
