@@ -265,7 +265,7 @@ namespace Citta_T1.Controls.Move
             int maxLength = 24;
             name = ConvertUtil.SubstringByte(name, 0, maxLength);
             int sumCount = Regex.Matches(name, "[\u4E00-\u9FA5]").Count;
-            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9]").Count;
+            int sumCountDigit = Regex.Matches(name, "[a-zA-Z0-9_-]").Count;
             int txtWidth = ConvertUtil.CountTextWidth(sumCount, sumCountDigit);
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)

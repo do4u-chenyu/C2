@@ -626,8 +626,6 @@ namespace Citta_T1.Controls.Move.Op
 
         public void OutPinInit(String status)
         {
-            log.Info("pinStatus:" + pinStatus);
-            log.Info("status:" + status);
             if ((pinStatus != "rectOut") && (status == "lineExit") && (!linePinArray.Contains(-1)))
             {
                 rectOut = RectEnter(rectOut);
