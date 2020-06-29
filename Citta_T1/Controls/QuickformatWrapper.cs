@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
 using Citta_T1.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +15,6 @@ namespace Citta_T1.Controls
         private List<ModelRelation> modelRelations;
         private ModelDocument currentModel;
         private List<ModelElement> modelElements;
-        private static LogUtil log = LogUtil.GetInstance("QuickformatWrapper");
         private List<int> leafNodeIds;
         private List<int> starNodes;
         private List<int> endNodes;
@@ -159,27 +159,23 @@ namespace Citta_T1.Controls
                     return;
                 }
             }
-
-
-
         }
         private void FormatLoc(int id, int dx, int dy, List<ModelElement> modelElements)
         {
-
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             foreach (ModelElement me in modelElements)
             {
                 if (me.ID == id)
                 {
                     Control ct = me.InnerControl;
-                    int left = dx + 40;
-
-                    int top = dy + 100;
+                    int left = dx + Convert.ToInt32(40 * screenFactor);
+                    int top = dy + Convert.ToInt32(100 * screenFactor);
                     Point moveOffset = Global.GetCurrentDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top));
                     ct.Left = left - moveOffset.X;
                     ct.Top = top - moveOffset.Y;
                     ctWidths.Add(ct.Width);
-                    ctHeight = ctHeight + ct.Height + 10;
+                    ctHeight = ctHeight + ct.Height + Convert.ToInt32(10 * screenFactor);
                 }
             }
         }
@@ -187,13 +183,14 @@ namespace Citta_T1.Controls
         {
             int count = 0;
             this.ctWidths = new List<int>();
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             foreach (ModelElement me in modelElements)
             {
                 Control ct = me.InnerControl;
                 if (!nodes.Contains(me.ID))
                 {
-                    int left = dx + 60;
-                    int top = dy + 100;
+                    int left = dx + Convert.ToInt32(60 * screenFactor);
+                    int top =  dy + Convert.ToInt32(100 * screenFactor);
                     Point moveOffset = Global.GetCurrentDocument().WorldMap
                                              .WorldBoundControl(new Point(left, top));
                     ct.Left = left - moveOffset.X;
@@ -202,7 +199,6 @@ namespace Citta_T1.Controls
                     dx += ct.Width;
                     count += 1;
                 }
-
                 if (count == 6)
                 {
                     dy += ct.Height;
@@ -257,7 +253,7 @@ namespace Citta_T1.Controls
             }
             modelElements = Global.GetCurrentDocument().ModelElements;
 
-
+            float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(0, 0);
             int countDeep = 0;
             ctHeight = 0;
@@ -267,12 +263,11 @@ namespace Citta_T1.Controls
             this.ctWidths = new List<int>();
             foreach (List<List<int>> tree in ht.Values)
             {
-
                 tree.Reverse();
                 foreach (List<int> leavel in tree)
                 {
                     ctHeight = count;
-                    countDeep = countDeep + 20;
+                    countDeep = countDeep + Convert.ToInt32(20 * screenFactor);
                     if (this.ctWidths.Count != 0)
                     {
                         countDeep = countDeep + this.ctWidths.Max();
