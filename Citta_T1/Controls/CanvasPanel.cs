@@ -409,7 +409,8 @@ namespace Citta_T1.Controls
                 MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
                 this.RepaintStartcPin(lineStartC, mr.StartID);
                 MoveBaseControl lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
-                (lineEndC as IMoveControl).InPinInit(mr.EndPin);
+                if (lineEndC != null)
+                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                 //删除线文档dirty
                 Global.GetMainForm().SetDocumentDirty();
             }
