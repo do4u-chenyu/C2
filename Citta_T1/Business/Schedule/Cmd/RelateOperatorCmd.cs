@@ -26,7 +26,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             //关联条件拼接
             List<string> relateList = new List<string>
             {
-                "0," + option.GetOption("factor0")
+                "0\t" + option.GetOption("factor0")
             };
             for (int i = 1; i < GetOptionFactorCount(); i++)
                 relateList.Add(option.GetOption("factor" + i.ToString()));
