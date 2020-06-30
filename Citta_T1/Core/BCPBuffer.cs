@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -67,7 +68,7 @@ namespace Citta_T1.Core
                 switch (type)
                 {
                     case OpUtil.ExtType.Excel:
-                        PreLoadExcelFile(fullFilePath);
+                        PreLoadExcelFileNew(fullFilePath);
                         break;
                     case OpUtil.ExtType.Text:
                         PreLoadBcpFile(fullFilePath, encoding);
@@ -89,7 +90,7 @@ namespace Citta_T1.Core
             {
                 if (regexXls.IsMatch(fullFilePath))
                 {
-                    PreLoadExcelFile(fullFilePath);
+                    PreLoadExcelFileNew(fullFilePath);
                 }
                 else
                     PreLoadBcpFile(fullFilePath, encoding);
@@ -110,7 +111,7 @@ namespace Citta_T1.Core
             switch (extType)
             {
                 case OpUtil.ExtType.Excel:
-                    PreLoadExcelFile(fullFilePath);
+                    PreLoadExcelFileNew(fullFilePath);
                     break;
                 case OpUtil.ExtType.Text:
                     PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
@@ -135,10 +136,22 @@ namespace Citta_T1.Core
             dataPreviewDict.Remove(bcpFullPath);
         }
 
+        private void PreLoadExcelFileNew(string fullFilePath, string sheetName = "")
+        {
+            List<List<String>> rowContentList = new List<List<String>>();
+            rowContentList = FileUtil.ReadExcel(fullFilePath, maxRow);
+            if (rowContentList.Count == 0)
+                return;
+            StringBuilder sb = new StringBuilder(1024 * 16);
+            string firstLine = String.Join("\t", rowContentList[0]);
+            for (int i = 0; i < rowContentList.Count; i++)
+                sb.AppendLine(String.Join("\t", rowContentList[i]));
+            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
+        }
 
         /*
-         * 按行读取excel文件
-         */
+        * 按行读取excel文件
+        */
         private void PreLoadExcelFile(string fullFilePath, string sheetName = "")
         {
             IWorkbook workbook = null;
