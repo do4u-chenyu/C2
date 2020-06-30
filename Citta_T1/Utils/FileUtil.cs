@@ -1,4 +1,8 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using OfficeOpenXml;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
@@ -151,5 +155,102 @@ namespace Citta_T1.Utils
                 return new string[0];
             }
         }
+
+        public static List<List<string>> ReadExcel(string fullFilePath, int maxRow, string sheetName = "") 
+        {
+            FileStream fs = null;
+            List<List<string>> rowContentList = new List<List<string>>(); 
+            try
+            {
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                //03版(xls)用npoi,07版(xlsx)用epplus
+                //npoi的索引从0开始，epplus的索引从1开始
+                if (fullFilePath.EndsWith(".xlsx"))
+                {
+                    using (ExcelPackage package = new ExcelPackage(fs))
+                    {
+                        ExcelWorksheet worksheet = string.IsNullOrEmpty(sheetName)? package.Workbook.Worksheets[0] : package.Workbook.Worksheets[sheetName];
+                        if (worksheet == null)
+                        {
+                            fs.Close();
+                            return rowContentList;
+                        }
+                        int rowCount =  worksheet.Dimension.End.Row;
+                        int colCount = worksheet.Dimension.End.Column;
+                        int realColCount = colCount;
+                        //因为是最大列数，可能出现表头列数小于最大列数的情况
+                        for (int i = colCount; i > 0; i--)
+                        {
+                            if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
+                                realColCount--;
+                            else
+                                break;//从后往前，遇到不为空的代表剩下的表头均有值
+                        }
+
+                        //遍历单元格赋值
+                        for (int row = 1; row <= Math.Min(maxRow, rowCount); row++)
+                        {
+                            List<string> tmpRowValueList = new List<string>();
+                            for (int col = 1; col <= realColCount; col++)
+                            {
+                                var cellValue = worksheet.Cells[row, col].Value;
+                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString() : string.Empty);
+                            }
+                            rowContentList.Add(tmpRowValueList);
+                        }
+                    }
+                }
+                else
+                {
+                    IWorkbook workbook = new HSSFWorkbook(fs);
+                    ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
+                    if (sheet == null)
+                    {
+                        fs.Close();
+                        return rowContentList;
+                    }
+                    IRow firstRow = sheet.GetRow(0);
+                    int rowCount = sheet.LastRowNum;
+                    int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
+
+                    for (int i = 0; i < Math.Min(maxRow+1, rowCount); i++)
+                    {
+                        List<string> tmpRowValueList = new List<string>();
+                        for (int j = 0; j < cellCount; j++)
+                        {
+                            if (sheet.GetRow(i) == null || sheet.GetRow(i).GetCell(j) == null) //同理，没有数据的单元格都默认是null
+                            {
+                                tmpRowValueList.Add(string.Empty);
+                            }
+                            else
+                            {
+                                string cellValue = sheet.GetRow(i).GetCell(j).ToString();
+                                tmpRowValueList.Add(cellValue);
+                            }
+                        }
+                        rowContentList.Add(tmpRowValueList);
+                    }
+
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }
+
+            return rowContentList;
+        }
+
+
+
     }
 }

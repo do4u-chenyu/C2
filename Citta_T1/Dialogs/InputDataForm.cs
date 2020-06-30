@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Core;
 using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -77,7 +79,8 @@ namespace Citta_T1.Dialogs
                 if (ext == ".xls" || ext == ".xlsx")
                 {
                     this.extType = OpUtil.ExtType.Excel;
-                    PreViewExcelFile();
+                    //PreViewExcelFile();
+                    PreViewExcelFileNew();
                 }
                 else
                 {
@@ -279,6 +282,39 @@ namespace Citta_T1.Dialogs
                 sr.Close();
             }
         }
+
+        private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
+        {
+            List<List<String>> rowContentList = new List<List<String>>();
+            rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
+            if (rowContentList.Count == 0)
+            {
+                MessageBox.Show("导入excel文件失败，请检查后重新导入。");
+                this.Clean();
+                return;
+            }
+
+            int cellCount = rowContentList[0].Count;
+            DataGridViewTextBoxColumn[] ColumnList = new DataGridViewTextBoxColumn[cellCount];
+            DvgClean(false);
+            for (int i = 0; i < cellCount; i++)
+            {
+                ColumnList[i] = new DataGridViewTextBoxColumn
+                {
+                    HeaderText = rowContentList[0][i],
+                    Name = "Col " + i.ToString()
+                };
+            }
+            this.dataGridView1.Columns.AddRange(ColumnList);
+            for (int i = 1; i < rowContentList.Count; i++)
+            {
+                DataGridViewRow dr = new DataGridViewRow();
+                this.dataGridView1.Rows.Add(dr);
+                for (int j = 0; j < cellCount; ++j)
+                    this.dataGridView1.Rows[i-1].Cells[j].Value = rowContentList[i][j];
+            }
+        }
+
 
         private void PreViewExcelFile(string sheetName = null, bool isFirstRowColumn = true)
         {
