@@ -403,7 +403,7 @@ namespace Citta_T1.Controls
             {
                 //删除线配置逻辑
                 ModelDocument doc = Global.GetCurrentDocument();
-                doc.StatusChangeWhenDeleteLine(mr.EndID);
+                doc.StatusChangeWhenDeleteLine(mr.EndID); // 这里会改变算子状态
                 doc.RemoveModelRelation(mr);
                 //关联算子引脚自适应改变
                 MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
@@ -455,7 +455,7 @@ namespace Citta_T1.Controls
 
                 Global.GetMainForm().SetDocumentDirty();
                 //endC右键菜单设置Enable                     
-                Global.GetOptionDao().EnableOpOptionView(mr);
+                Global.GetOptionDao().EnableOpOptionView(mr); // 这里会改变算子的状态
             }
             this.Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
