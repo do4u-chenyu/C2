@@ -77,8 +77,6 @@ namespace Citta_T1.Business.Model
         {
             this.ModelRelations.Add(mr);
             this.AddEdge(mr);
-
-
         }
         public void RemoveModelRelation(ModelRelation mr)
         {

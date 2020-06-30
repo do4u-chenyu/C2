@@ -409,13 +409,18 @@ namespace Citta_T1.Controls
                 MoveBaseControl lineStartC = doc.SearchElementByID(mr.StartID).InnerControl;
                 this.RepaintStartcPin(lineStartC, mr.StartID);
                 MoveBaseControl lineEndC = doc.SearchElementByID(mr.EndID).InnerControl;
-                (lineEndC as IMoveControl).InPinInit(mr.EndPin);
+                if (lineEndC != null)
+                    (lineEndC as IMoveControl).InPinInit(mr.EndPin);
                 //删除线文档dirty
                 Global.GetMainForm().SetDocumentDirty();
             }
             catch (Exception e)
             {
                 log.Error("CanvasPanel删除线时发生错误:" + e);
+            }
+            finally
+            {
+                Global.GetNaviViewControl().UpdateNaviView();
             }
         }
         public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex)
@@ -453,6 +458,7 @@ namespace Citta_T1.Controls
                 Global.GetOptionDao().EnableOpOptionView(mr);
             }
             this.Invalidate();
+            Global.GetNaviViewControl().UpdateNaviView();
         }
         /// <summary>
         /// 如果点在某条先附近，则返回该条线的索引，如果不在则返回-1

@@ -526,16 +526,7 @@ namespace Citta_T1.Controls.Move.Op
             //删除自身
             cp.DeleteEle(me);
         }
-        //public Tuple<ModelElement, List<ModelRelation>> DeleteResult()
-        //{
-        //    ModelDocument doc = Global.GetCurrentDocument();
-        //    int endID = -1;
-        //    foreach(ModelRelation mr in doc.ModelRelations)
-        //    {
-        //        if (mr.StartID == this.ID)
-        //            endID = mr.EndID;
-        //    }
-        //}
+
         public Tuple<List<Tuple<int, int, int>>, ModelElement> DeleteResult(int endID, List<ModelRelation> modelRelations)
         {
             // modelRelations = deepcopy(Global.GetCurrentDocument().modelRelations)
@@ -639,6 +630,13 @@ namespace Citta_T1.Controls.Move.Op
             {
                 rectOut = RectEnter(rectOut);
                 linePinArray.Add(-1);
+                this.Invalidate();
+            }
+            if ((pinStatus == "noEnter") && (status == "noLine") && (linePinArray.Contains(-1)))
+            {
+                
+                linePinArray.Remove(-1);
+                rectOut = RectLeave(rectOut);
                 this.Invalidate();
             }
             PinOpLeaveAndEnter(new Point(0, 0));
