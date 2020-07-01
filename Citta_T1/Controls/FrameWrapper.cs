@@ -6,6 +6,7 @@ using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -334,6 +335,18 @@ namespace Citta_T1.Controls
         }
         public bool FramePaint(PaintEventArgs e)
         {
+            if (selectStatus.Equals(startSelect))
+            {
+                Bitmap i = new Bitmap(staticImage);
+                Graphics g = Graphics.FromImage(i);
+                g.DrawRectangle(p, frameRec);
+                e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
+                g.Dispose();
+                i.Dispose();
+                i = null;
+                return true;
+            }
+
             if (Global.GetFlowControl().SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
@@ -356,15 +369,7 @@ namespace Citta_T1.Controls
         {
             
             CreateRect();
-            Bitmap i = new Bitmap(staticImage);
-            Graphics g = Graphics.FromImage(i);
-            g.DrawRectangle(p, frameRec);
-            Graphics n = Global.GetCanvasPanel().CreateGraphics();
-            n.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
-            n.Dispose();
-            g.Dispose();
-            i.Dispose();
-            i = null;
+            Global.GetCanvasPanel().Invalidate();
         }
         private void SelectFrame_MouseUp()
         {
