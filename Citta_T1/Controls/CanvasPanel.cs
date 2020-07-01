@@ -283,6 +283,7 @@ namespace Citta_T1.Controls
              */
             int endPinIndex = (endC as MoveOpControl).RevisedPinIndex;
             this.AddNewRelationByCtr(startC, endC, endPinIndex);
+            this.RepaintStartcPin(startC, startC.ID);
         }
 
         private bool IsValidModelRelation(ModelRelation mr)
