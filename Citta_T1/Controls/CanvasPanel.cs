@@ -119,9 +119,6 @@ namespace Citta_T1.Controls
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
             Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
-            Point moveOffset = Global.GetCurrentDocument().WorldMap.WorldBoundControl(location);
-            location.X -= moveOffset.X;
-            location.Y -= moveOffset.Y;
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
             if (type == ElementType.DataSource)
@@ -734,6 +731,7 @@ namespace Citta_T1.Controls
                                 text,
                                 text,
                                 location);
+            
             AddNewElement(btn);
         }
         public void AddNewDataSource(string path, int sizeL, string text, Point location, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
@@ -763,6 +761,7 @@ namespace Citta_T1.Controls
         private void AddNewElement(MoveBaseControl btn)
         {
             // NewElementEvent中有压栈操作，可以UndoRedo
+            Global.GetCurrentDocument().WorldMap.WorldBoundControl(btn.Location, btn);
             this.Controls.Add(btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);

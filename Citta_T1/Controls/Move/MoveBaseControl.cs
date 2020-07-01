@@ -3,6 +3,7 @@ using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,6 +16,7 @@ namespace Citta_T1.Controls.Move
 {
     public partial class MoveBaseControl : UserControl
     {
+        private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
         public ElementType Type { get; set; }
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
@@ -128,7 +130,8 @@ namespace Citta_T1.Controls.Move
             control.Left = Convert.ToInt32(control.Left * f);
             control.Top = Convert.ToInt32(control.Top * f);
             control.Font = new Font(control.Font.Name, control.Font.Size * f, control.Font.Style, control.Font.Unit);
-
+            
+            
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in control.Controls)
                 SetControlsBySize(f, con);
