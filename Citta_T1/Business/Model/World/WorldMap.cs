@@ -136,26 +136,6 @@ namespace Citta_T1.Business.Model.World
             }
             return dragOffset;
         }
-        public Point WorldBoundControl(Point Ps)
-        {
-
-            Point dragOffset = new Point(0, 0);
-
-
-            if (Ps.Y < 70 * ScreenFactor)
-            {
-                dragOffset.Y = Ps.Y - 70;
-            }
-            if (Ps.X > 2000 * ScreenFactor)
-            {
-                dragOffset.X = Ps.X - 2000;
-            }
-            if (Ps.Y > 900 * ScreenFactor)
-            {
-                dragOffset.Y = Ps.Y - 900;
-            }
-            return dragOffset;
-        }
         public void WorldBoundControl(Point Pm, Control ct)
         {
             Point Pw = ScreenToWorld(Pm, true);

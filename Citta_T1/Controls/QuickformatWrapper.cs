@@ -170,10 +170,8 @@ namespace Citta_T1.Controls
                     Control ct = me.InnerControl;
                     int left = dx + Convert.ToInt32(40 * screenFactor);
                     int top = dy + Convert.ToInt32(100 * screenFactor);
-                    Point moveOffset = Global.GetCurrentDocument().WorldMap
-                                             .WorldBoundControl(new Point(left, top));
-                    ct.Left = left - moveOffset.X;
-                    ct.Top = top - moveOffset.Y;
+                    Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top), ct);
                     ctWidths.Add(ct.Width);
                     ctHeight = ctHeight + ct.Height + Convert.ToInt32(10 * screenFactor);
                 }
@@ -191,10 +189,8 @@ namespace Citta_T1.Controls
                 {
                     int left = dx + Convert.ToInt32(60 * screenFactor);
                     int top =  dy + Convert.ToInt32(100 * screenFactor);
-                    Point moveOffset = Global.GetCurrentDocument().WorldMap
-                                             .WorldBoundControl(new Point(left, top));
-                    ct.Left = left - moveOffset.X;
-                    ct.Top = top - moveOffset.Y;
+                    Global.GetCurrentDocument().WorldMap
+                                             .WorldBoundControl(new Point(left, top),ct);
 
                     dx += ct.Width;
                     count += 1;
