@@ -267,6 +267,14 @@ namespace Citta_T1.Controls.Move.Rs
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(), "mid", currentOp);
             Global.GetMainForm().BindUiManagerFunc();
+
+            int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
+            if (notReadyNum > 0)
+            {
+                MessageBox.Show("运行到此路径上有" + notReadyNum + "个未配置的算子，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (currentManager.IsAllOperatorDone())
             {
                 MessageBox.Show("运行到此路径上的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
