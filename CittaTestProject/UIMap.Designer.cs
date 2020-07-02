@@ -53,12 +53,96 @@ namespace CittaTestProject
                 return this.mUI烽火FiberHomeWindow;
             }
         }
+        
+        public UI开发调试Window UI开发调试Window
+        {
+            get
+            {
+                if ((this.mUI开发调试Window == null))
+                {
+                    this.mUI开发调试Window = new UI开发调试Window();
+                }
+                return this.mUI开发调试Window;
+            }
+        }
+        
+        public UI新建模型Window UI新建模型Window
+        {
+            get
+            {
+                if ((this.mUI新建模型Window == null))
+                {
+                    this.mUI新建模型Window = new UI新建模型Window();
+                }
+                return this.mUI新建模型Window;
+            }
+        }
+        
+        public UI导入数据Window UI导入数据Window
+        {
+            get
+            {
+                if ((this.mUI导入数据Window == null))
+                {
+                    this.mUI导入数据Window = new UI导入数据Window();
+                }
+                return this.mUI导入数据Window;
+            }
+        }
+        
+        public UI打开Window UI打开Window
+        {
+            get
+            {
+                if ((this.mUI打开Window == null))
+                {
+                    this.mUI打开Window = new UI打开Window();
+                }
+                return this.mUI打开Window;
+            }
+        }
+        
+        public UI取最大值算子设置Window UI取最大值算子设置Window
+        {
+            get
+            {
+                if ((this.mUI取最大值算子设置Window == null))
+                {
+                    this.mUI取最大值算子设置Window = new UI取最大值算子设置Window();
+                }
+                return this.mUI取最大值算子设置Window;
+            }
+        }
+        
+        public UIItemWindow3 UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new UIItemWindow3();
+                }
+                return this.mUIItemWindow;
+            }
+        }
         #endregion
         
         #region Fields
         private UI用户登录Window mUI用户登录Window;
         
         private UI烽火FiberHomeWindow mUI烽火FiberHomeWindow;
+        
+        private UI开发调试Window mUI开发调试Window;
+        
+        private UI新建模型Window mUI新建模型Window;
+        
+        private UI导入数据Window mUI导入数据Window;
+        
+        private UI打开Window mUI打开Window;
+        
+        private UI取最大值算子设置Window mUI取最大值算子设置Window;
+        
+        private UIItemWindow3 mUIItemWindow;
         #endregion
     }
     
@@ -697,6 +781,81 @@ namespace CittaTestProject
                 return this.mUIModelTitleControlWindow;
             }
         }
+        
+        public UI中英文测试Window UI中英文测试Window
+        {
+            get
+            {
+                if ((this.mUI中英文测试Window == null))
+                {
+                    this.mUI中英文测试Window = new UI中英文测试Window(this);
+                }
+                return this.mUI中英文测试Window;
+            }
+        }
+        
+        public UI算子Window UI算子Window
+        {
+            get
+            {
+                if ((this.mUI算子Window == null))
+                {
+                    this.mUI算子Window = new UI算子Window(this);
+                }
+                return this.mUI算子Window;
+            }
+        }
+        
+        public UIMoveDtControlWindow1 UIMoveDtControlWindow1
+        {
+            get
+            {
+                if ((this.mUIMoveDtControlWindow1 == null))
+                {
+                    this.mUIMoveDtControlWindow1 = new UIMoveDtControlWindow1(this);
+                }
+                return this.mUIMoveDtControlWindow1;
+            }
+        }
+        
+        public UIMoveOpControlWindow1 UIMoveOpControlWindow1
+        {
+            get
+            {
+                if ((this.mUIMoveOpControlWindow1 == null))
+                {
+                    this.mUIMoveOpControlWindow1 = new UIMoveOpControlWindow1(this);
+                }
+                return this.mUIMoveOpControlWindow1;
+            }
+        }
+        
+        public UIStatusBoxWindow UIStatusBoxWindow
+        {
+            get
+            {
+                if ((this.mUIStatusBoxWindow == null))
+                {
+                    this.mUIStatusBoxWindow = new UIStatusBoxWindow(this);
+                }
+                return this.mUIStatusBoxWindow;
+            }
+        }
+        
+        public WinTitleBar UI烽火FiberHomeTitleBar
+        {
+            get
+            {
+                if ((this.mUI烽火FiberHomeTitleBar == null))
+                {
+                    this.mUI烽火FiberHomeTitleBar = new WinTitleBar(this);
+                    #region 搜索条件
+                    this.mUI烽火FiberHomeTitleBar.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUI烽火FiberHomeTitleBar;
+            }
+        }
         #endregion
         
         #region Fields
@@ -783,6 +942,18 @@ namespace CittaTestProject
         private UIMoveDtControlWindow mUIMoveDtControlWindow;
         
         private UIModelTitleControlWindow mUIModelTitleControlWindow;
+        
+        private UI中英文测试Window mUI中英文测试Window;
+        
+        private UI算子Window mUI算子Window;
+        
+        private UIMoveDtControlWindow1 mUIMoveDtControlWindow1;
+        
+        private UIMoveOpControlWindow1 mUIMoveOpControlWindow1;
+        
+        private UIStatusBoxWindow mUIStatusBoxWindow;
+        
+        private WinTitleBar mUI烽火FiberHomeTitleBar;
         #endregion
     }
     
@@ -2300,6 +2471,1033 @@ namespace CittaTestProject
         
         #region Fields
         private WinClient mUIModelTitleControlClient;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI中英文测试Window : WinWindow
+    {
+        
+        public UI中英文测试Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "D:\\datas\\中英文测试.bcp";
+            this.WindowTitles.Add("烽火FiberHome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI中英文测试Button
+        {
+            get
+            {
+                if ((this.mUI中英文测试Button == null))
+                {
+                    this.mUI中英文测试Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI中英文测试Button.SearchProperties[WinButton.PropertyNames.Name] = "中英文测试";
+                    this.mUI中英文测试Button.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUI中英文测试Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI中英文测试Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI算子Window : WinWindow
+    {
+        
+        public UI算子Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "oprateButton";
+            this.WindowTitles.Add("烽火FiberHome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI算子Button
+        {
+            get
+            {
+                if ((this.mUI算子Button == null))
+                {
+                    this.mUI算子Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI算子Button.SearchProperties[WinButton.PropertyNames.Name] = "算子";
+                    this.mUI算子Button.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUI算子Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI算子Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIMoveDtControlWindow1 : WinWindow
+    {
+        
+        public UIMoveDtControlWindow1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "MoveDtControl";
+            this.WindowTitles.Add("烽火FiberHome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UIItem0Client
+        {
+            get
+            {
+                if ((this.mUIItem0Client == null))
+                {
+                    this.mUIItem0Client = new WinClient(this);
+                    #region 搜索条件
+                    this.mUIItem0Client.SearchProperties[WinControl.PropertyNames.Name] = "0%";
+                    this.mUIItem0Client.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUIItem0Client;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUIItem0Client;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIMoveOpControlWindow1 : WinWindow
+    {
+        
+        public UIMoveOpControlWindow1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "MoveOpControl";
+            this.WindowTitles.Add("烽火FiberHome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UIMoveOpControlClient
+        {
+            get
+            {
+                if ((this.mUIMoveOpControlClient == null))
+                {
+                    this.mUIMoveOpControlClient = new WinClient(this);
+                    #region 搜索条件
+                    this.mUIMoveOpControlClient.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUIMoveOpControlClient;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUIMoveOpControlClient;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIStatusBoxWindow : WinWindow
+    {
+        
+        public UIStatusBoxWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "statusBox";
+            this.WindowTitles.Add("烽火FiberHome");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UIStatusBoxClient
+        {
+            get
+            {
+                if ((this.mUIStatusBoxClient == null))
+                {
+                    this.mUIStatusBoxClient = new WinClient(this);
+                    #region 搜索条件
+                    this.mUIStatusBoxClient.WindowTitles.Add("烽火FiberHome");
+                    #endregion
+                }
+                return this.mUIStatusBoxClient;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUIStatusBoxClient;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI开发调试Window : WinWindow
+    {
+        
+        public UI开发调试Window()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "开发调试";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "CabinetWClass";
+            this.WindowTitles.Add("开发调试");
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemWindow UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new UIItemWindow(this);
+                }
+                return this.mUIItemWindow;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemWindow mUIItemWindow;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemWindow : WinWindow
+    {
+        
+        public UIItemWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.AccessibleName] = "项目视图";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "DirectUIHWND";
+            this.WindowTitles.Add("开发调试");
+            #endregion
+        }
+        
+        #region Properties
+        public UICitta_T1exeListItem UICitta_T1exeListItem
+        {
+            get
+            {
+                if ((this.mUICitta_T1exeListItem == null))
+                {
+                    this.mUICitta_T1exeListItem = new UICitta_T1exeListItem(this);
+                }
+                return this.mUICitta_T1exeListItem;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UICitta_T1exeListItem mUICitta_T1exeListItem;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UICitta_T1exeListItem : WinListItem
+    {
+        
+        public UICitta_T1exeListItem(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinListItem.PropertyNames.Name] = "Citta_T1.exe";
+            this.WindowTitles.Add("开发调试");
+            #endregion
+        }
+        
+        #region Properties
+        public WinEdit UI名称Edit
+        {
+            get
+            {
+                if ((this.mUI名称Edit == null))
+                {
+                    this.mUI名称Edit = new WinEdit(this);
+                    #region 搜索条件
+                    this.mUI名称Edit.SearchProperties[WinEdit.PropertyNames.Name] = "名称";
+                    this.mUI名称Edit.WindowTitles.Add("开发调试");
+                    #endregion
+                }
+                return this.mUI名称Edit;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinEdit mUI名称Edit;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI新建模型Window : WinWindow
+    {
+        
+        public UI新建模型Window()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "新建模型";
+            this.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.Window", PropertyExpressionOperator.Contains));
+            this.WindowTitles.Add("新建模型");
+            #endregion
+        }
+        
+        #region Properties
+        public UI添加Window UI添加Window
+        {
+            get
+            {
+                if ((this.mUI添加Window == null))
+                {
+                    this.mUI添加Window = new UI添加Window(this);
+                }
+                return this.mUI添加Window;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UI添加Window mUI添加Window;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI添加Window : WinWindow
+    {
+        
+        public UI添加Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "AddButton";
+            this.WindowTitles.Add("新建模型");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI添加Button
+        {
+            get
+            {
+                if ((this.mUI添加Button == null))
+                {
+                    this.mUI添加Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI添加Button.SearchProperties[WinButton.PropertyNames.Name] = "添加";
+                    this.mUI添加Button.WindowTitles.Add("新建模型");
+                    #endregion
+                }
+                return this.mUI添加Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI添加Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI导入数据Window : WinWindow
+    {
+        
+        public UI导入数据Window()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "导入数据";
+            this.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.Window", PropertyExpressionOperator.Contains));
+            this.WindowTitles.Add("导入数据");
+            #endregion
+        }
+        
+        #region Properties
+        public UI浏览Window UI浏览Window
+        {
+            get
+            {
+                if ((this.mUI浏览Window == null))
+                {
+                    this.mUI浏览Window = new UI浏览Window(this);
+                }
+                return this.mUI浏览Window;
+            }
+        }
+        
+        public UIUTF8Window UIUTF8Window
+        {
+            get
+            {
+                if ((this.mUIUTF8Window == null))
+                {
+                    this.mUIUTF8Window = new UIUTF8Window(this);
+                }
+                return this.mUIUTF8Window;
+            }
+        }
+        
+        public UI添加Window1 UI添加Window
+        {
+            get
+            {
+                if ((this.mUI添加Window == null))
+                {
+                    this.mUI添加Window = new UI添加Window1(this);
+                }
+                return this.mUI添加Window;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UI浏览Window mUI浏览Window;
+        
+        private UIUTF8Window mUIUTF8Window;
+        
+        private UI添加Window1 mUI添加Window;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI浏览Window : WinWindow
+    {
+        
+        public UI浏览Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "previewButton";
+            this.WindowTitles.Add("导入数据");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI浏览Button
+        {
+            get
+            {
+                if ((this.mUI浏览Button == null))
+                {
+                    this.mUI浏览Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI浏览Button.SearchProperties[WinButton.PropertyNames.Name] = "浏览";
+                    this.mUI浏览Button.WindowTitles.Add("导入数据");
+                    #endregion
+                }
+                return this.mUI浏览Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI浏览Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIUTF8Window : WinWindow
+    {
+        
+        public UIUTF8Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "utf8Lable";
+            this.WindowTitles.Add("导入数据");
+            #endregion
+        }
+        
+        #region Properties
+        public WinText UIUTF8Text
+        {
+            get
+            {
+                if ((this.mUIUTF8Text == null))
+                {
+                    this.mUIUTF8Text = new WinText(this);
+                    #region 搜索条件
+                    this.mUIUTF8Text.SearchProperties[WinText.PropertyNames.Name] = "UTF-8";
+                    this.mUIUTF8Text.WindowTitles.Add("导入数据");
+                    #endregion
+                }
+                return this.mUIUTF8Text;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinText mUIUTF8Text;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI添加Window1 : WinWindow
+    {
+        
+        public UI添加Window1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "addButton";
+            this.WindowTitles.Add("导入数据");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI添加Button
+        {
+            get
+            {
+                if ((this.mUI添加Button == null))
+                {
+                    this.mUI添加Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI添加Button.SearchProperties[WinButton.PropertyNames.Name] = "添加";
+                    this.mUI添加Button.WindowTitles.Add("导入数据");
+                    #endregion
+                }
+                return this.mUI添加Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI添加Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI打开Window : WinWindow
+    {
+        
+        public UI打开Window()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "打开";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "#32770";
+            this.WindowTitles.Add("打开");
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemWindow1 UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new UIItemWindow1(this);
+                }
+                return this.mUIItemWindow;
+            }
+        }
+        
+        public UI打开OWindow UI打开OWindow
+        {
+            get
+            {
+                if ((this.mUI打开OWindow == null))
+                {
+                    this.mUI打开OWindow = new UI打开OWindow(this);
+                }
+                return this.mUI打开OWindow;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemWindow1 mUIItemWindow;
+        
+        private UI打开OWindow mUI打开OWindow;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemWindow1 : WinWindow
+    {
+        
+        public UIItemWindow1(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.AccessibleName] = "项目视图";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "DirectUIHWND";
+            this.WindowTitles.Add("打开");
+            #endregion
+        }
+        
+        #region Properties
+        public UI中英文测试bcpListItem UI中英文测试bcpListItem
+        {
+            get
+            {
+                if ((this.mUI中英文测试bcpListItem == null))
+                {
+                    this.mUI中英文测试bcpListItem = new UI中英文测试bcpListItem(this);
+                }
+                return this.mUI中英文测试bcpListItem;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UI中英文测试bcpListItem mUI中英文测试bcpListItem;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI中英文测试bcpListItem : WinListItem
+    {
+        
+        public UI中英文测试bcpListItem(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinListItem.PropertyNames.Name] = "中英文测试.bcp";
+            this.WindowTitles.Add("打开");
+            #endregion
+        }
+        
+        #region Properties
+        public WinEdit UI名称Edit
+        {
+            get
+            {
+                if ((this.mUI名称Edit == null))
+                {
+                    this.mUI名称Edit = new WinEdit(this);
+                    #region 搜索条件
+                    this.mUI名称Edit.SearchProperties[WinEdit.PropertyNames.Name] = "名称";
+                    this.mUI名称Edit.WindowTitles.Add("打开");
+                    #endregion
+                }
+                return this.mUI名称Edit;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinEdit mUI名称Edit;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI打开OWindow : WinWindow
+    {
+        
+        public UI打开OWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlId] = "1";
+            this.WindowTitles.Add("打开");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI打开OButton
+        {
+            get
+            {
+                if ((this.mUI打开OButton == null))
+                {
+                    this.mUI打开OButton = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI打开OButton.SearchProperties[WinButton.PropertyNames.Name] = "打开(O)";
+                    this.mUI打开OButton.WindowTitles.Add("打开");
+                    #endregion
+                }
+                return this.mUI打开OButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI打开OButton;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI取最大值算子设置Window : WinWindow
+    {
+        
+        public UI取最大值算子设置Window()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "取最大值算子设置";
+            this.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.Window", PropertyExpressionOperator.Contains));
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public UIComboBox0Window UIComboBox0Window
+        {
+            get
+            {
+                if ((this.mUIComboBox0Window == null))
+                {
+                    this.mUIComboBox0Window = new UIComboBox0Window(this);
+                }
+                return this.mUIComboBox0Window;
+            }
+        }
+        
+        public UIOutListCCBL0Window UIOutListCCBL0Window
+        {
+            get
+            {
+                if ((this.mUIOutListCCBL0Window == null))
+                {
+                    this.mUIOutListCCBL0Window = new UIOutListCCBL0Window(this);
+                }
+                return this.mUIOutListCCBL0Window;
+            }
+        }
+        
+        public UIItemWindow2 UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new UIItemWindow2(this);
+                }
+                return this.mUIItemWindow;
+            }
+        }
+        
+        public UIValuePanelWindow UIValuePanelWindow
+        {
+            get
+            {
+                if ((this.mUIValuePanelWindow == null))
+                {
+                    this.mUIValuePanelWindow = new UIValuePanelWindow(this);
+                }
+                return this.mUIValuePanelWindow;
+            }
+        }
+        
+        public UI确认Window UI确认Window
+        {
+            get
+            {
+                if ((this.mUI确认Window == null))
+                {
+                    this.mUI确认Window = new UI确认Window(this);
+                }
+                return this.mUI确认Window;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIComboBox0Window mUIComboBox0Window;
+        
+        private UIOutListCCBL0Window mUIOutListCCBL0Window;
+        
+        private UIItemWindow2 mUIItemWindow;
+        
+        private UIValuePanelWindow mUIValuePanelWindow;
+        
+        private UI确认Window mUI确认Window;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIComboBox0Window : WinWindow
+    {
+        
+        public UIComboBox0Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "comboBox0";
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public WinComboBox UI数据信息ComboBox
+        {
+            get
+            {
+                if ((this.mUI数据信息ComboBox == null))
+                {
+                    this.mUI数据信息ComboBox = new WinComboBox(this);
+                    #region 搜索条件
+                    this.mUI数据信息ComboBox.SearchProperties[WinComboBox.PropertyNames.Name] = "数据信息：";
+                    this.mUI数据信息ComboBox.WindowTitles.Add("取最大值算子设置");
+                    #endregion
+                }
+                return this.mUI数据信息ComboBox;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinComboBox mUI数据信息ComboBox;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIOutListCCBL0Window : WinWindow
+    {
+        
+        public UIOutListCCBL0Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "outListCCBL0";
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public WinWindow UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new WinWindow(this);
+                    #region 搜索条件
+                    this.mUIItemWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.Window", PropertyExpressionOperator.Contains));
+                    this.mUIItemWindow.SearchConfigurations.Add(SearchConfiguration.DisambiguateChild);
+                    this.mUIItemWindow.WindowTitles.Add("取最大值算子设置");
+                    #endregion
+                }
+                return this.mUIItemWindow;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinWindow mUIItemWindow;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemWindow2 : WinWindow
+    {
+        
+        public UIItemWindow2(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.BUTTON", PropertyExpressionOperator.Contains));
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UIItemButton
+        {
+            get
+            {
+                if ((this.mUIItemButton == null))
+                {
+                    this.mUIItemButton = new WinButton(this);
+                    #region 搜索条件
+                    this.mUIItemButton.WindowTitles.Add("取最大值算子设置");
+                    #endregion
+                }
+                return this.mUIItemButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUIItemButton;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIValuePanelWindow : WinWindow
+    {
+        
+        public UIValuePanelWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "valuePanel";
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UI数据信息Client
+        {
+            get
+            {
+                if ((this.mUI数据信息Client == null))
+                {
+                    this.mUI数据信息Client = new WinClient(this);
+                    #region 搜索条件
+                    this.mUI数据信息Client.SearchProperties[WinControl.PropertyNames.Name] = "数据信息：";
+                    this.mUI数据信息Client.WindowTitles.Add("取最大值算子设置");
+                    #endregion
+                }
+                return this.mUI数据信息Client;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUI数据信息Client;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UI确认Window : WinWindow
+    {
+        
+        public UI确认Window(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "confirmButton";
+            this.WindowTitles.Add("取最大值算子设置");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UI确认Button
+        {
+            get
+            {
+                if ((this.mUI确认Button == null))
+                {
+                    this.mUI确认Button = new WinButton(this);
+                    #region 搜索条件
+                    this.mUI确认Button.SearchProperties[WinButton.PropertyNames.Name] = "确认";
+                    this.mUI确认Button.WindowTitles.Add("取最大值算子设置");
+                    #endregion
+                }
+                return this.mUI确认Button;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUI确认Button;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemWindow3 : WinWindow
+    {
+        
+        public UIItemWindow3()
+        {
+            #region 搜索条件
+            this.SearchProperties[WinWindow.PropertyNames.AccessibleName] = "桌面 1";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "#32769";
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemWindow11 UIItemWindow1
+        {
+            get
+            {
+                if ((this.mUIItemWindow1 == null))
+                {
+                    this.mUIItemWindow1 = new UIItemWindow11(this);
+                }
+                return this.mUIItemWindow1;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemWindow11 mUIItemWindow1;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemWindow11 : WinWindow
+    {
+        
+        public UIItemWindow11(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region 搜索条件
+            this.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "WindowsForms10.LISTBOX", PropertyExpressionOperator.Contains));
+            #endregion
+        }
+        
+        #region Properties
+        public UIItemList UIItemList
+        {
+            get
+            {
+                if ((this.mUIItemList == null))
+                {
+                    this.mUIItemList = new UIItemList(this);
+                }
+                return this.mUIItemList;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIItemList mUIItemList;
+        #endregion
+    }
+    
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class UIItemList : WinList
+    {
+        
+        public UIItemList(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+        }
+        
+        #region Properties
+        public WinCheckBox UI姓名CheckBox
+        {
+            get
+            {
+                if ((this.mUI姓名CheckBox == null))
+                {
+                    this.mUI姓名CheckBox = new WinCheckBox(this);
+                    #region 搜索条件
+                    this.mUI姓名CheckBox.SearchProperties[WinCheckBox.PropertyNames.Name] = "姓名";
+                    #endregion
+                }
+                return this.mUI姓名CheckBox;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinCheckBox mUI姓名CheckBox;
         #endregion
     }
 }

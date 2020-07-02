@@ -16,16 +16,22 @@ namespace CittaTestProject
     /// CodedUITest1 的摘要说明
     /// </summary>
     [CodedUITest]
-    public class GlobalBaseMethod
+    public class GlobalDocumentModels
     {
-        public GlobalBaseMethod()
+        public GlobalDocumentModels()
         {
         }
 
-        [TestMethod]
-        public void CodedUITestMethod1()
+        [TestMethod,TestCategory("CommonDocumentModels")]
+        
+        public void CreateDocumentModels()
+
         {
-            // 若要为此测试生成代码，请从快捷菜单中选择“为编码的 UI 测试生成代码”，然后选择菜单项之一。
+            /*
+             *  在此可创建一些模型，供全局调用
+             */
+            this.UIMap.CreateNewModelTest();
+
         }
 
         #region 附加测试特性
