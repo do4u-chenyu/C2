@@ -250,12 +250,6 @@ namespace Citta_T1.Controls
             else if (cmd == ECommandType.PinDraw)
             {
                 this.MouseUpWhenPinDraw(sender, e);
-                if (this.startC != null && this.endC != null)
-                {
-                    ICommand addRelationCommand = new RelationAddCommand(this.StartC.ID, this.EndC.ID, (this.EndC as MoveOpControl).RevisedPinIndex);
-                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), addRelationCommand);
-                }
-
                 Global.GetMainForm().SetDocumentDirty();
             }
 
@@ -452,10 +446,12 @@ namespace Citta_T1.Controls
             {
                 cd.AddModelRelation(mr);
                 // 针脚状态要改变
-
                 Global.GetMainForm().SetDocumentDirty();
                 //endC右键菜单设置Enable                     
                 Global.GetOptionDao().EnableOpOptionView(mr); // 这里会改变算子的状态
+                // UndoRedo
+                ICommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
+                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
             }
             this.Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();

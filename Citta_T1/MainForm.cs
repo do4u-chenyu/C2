@@ -781,6 +781,9 @@ namespace Citta_T1
                     this.canvasPanel.ControlSelect_Copy();
                 if (keyData == (Keys.V | Keys.Control))
                     this.canvasPanel.ControlSelect_paste();
+                if (keyData == (Keys.S | Keys.Control))
+                    SaveModelButton_Click(this, null);
+
             }
             return false;
         }

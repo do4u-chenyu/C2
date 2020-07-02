@@ -499,7 +499,6 @@ namespace Citta_T1.Controls.Move.Op
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
             ModelElement rsEles = null;
             ElementStatus opStatus = me.Status;
-            ElementStatus reStatus = ElementStatus.Ready;
             Tuple<List<Tuple<int, int, int>>, ModelElement> relationAndRsEles = null;
 
             foreach (ModelRelation mr in modelRelations)
