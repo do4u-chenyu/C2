@@ -415,14 +415,14 @@ namespace Citta_T1.Controls
                 Global.GetNaviViewControl().UpdateNaviView();
             }
         }
-        public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex)
+        public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex, bool isPushCmd=true)
         {
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC = doc.SearchElementByID(startCID).InnerControl;
             MoveBaseControl endC = doc.SearchElementByID(endCID).InnerControl;
-            this.AddNewRelationByCtr(startC, endC, pinIndex);
+            this.AddNewRelationByCtr(startC, endC, pinIndex, isPushCmd);
         }
-        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC, int endPinIndex)
+        private void AddNewRelationByCtr(MoveBaseControl startC, MoveBaseControl endC, int endPinIndex, bool isPushCmd=true)
         {
             PointF startP = startC.GetEndPinLoc(0);
 
@@ -448,8 +448,11 @@ namespace Citta_T1.Controls
                 //endC右键菜单设置Enable                     
                 Global.GetOptionDao().EnableOpOptionView(mr); // 这里会改变算子的状态
                 // UndoRedo
-                ICommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
-                UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
+                if (isPushCmd)
+                {
+                    ICommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
+                }
             }
             this.Invalidate();
             Global.GetNaviViewControl().UpdateNaviView();
