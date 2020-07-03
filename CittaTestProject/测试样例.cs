@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UITest.Extension;
 using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
+using System.IO;
 
 
 namespace CittaTestProject
@@ -16,42 +17,34 @@ namespace CittaTestProject
     /// CodedUITest1 的摘要说明
     /// </summary>
     [CodedUITest]
-    public class GlobalDocumentModels
+    public class 测试样例
     {
-        public GlobalDocumentModels()
+        public 测试样例()
         {
         }
 
         [TestMethod, TestCategory("CommonDocumentModels")]
 
-        public void CreateDocumentModels()
+        public void 登陆拖拽算子测试样例()
 
         {
-
-            /*
-             *  在此可创建一些模型，供全局调用
-             */
-
-
+            this.UIMap.ExampleTest();
         }
 
         #region 附加测试特性
 
-        // 编写测试时，可以使用以下附加特性: 
+        //运行每项测试之前使用 TestInitialize 运行代码 ,为测试准备一下初始环境
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            // 删除本地90模型，测试样例会新建90
+            string path = @"D:\FiberHomeIAOModelDocument\90";
+            if (Directory.Exists(path))
+                Directory.Delete(path, true);
 
-        ////运行每项测试之前使用 TestInitialize 运行代码 
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{        
-        //    // 若要为此测试生成代码，请从快捷菜单中选择“为编码的 UI 测试生成代码”，然后选择菜单项之一。
-        //}
 
-        ////运行每项测试之后使用 TestCleanup 运行代码
-        //[TestCleanup()]
-        //public void MyTestCleanup()
-        //{        
-        //    // 若要为此测试生成代码，请从快捷菜单中选择“为编码的 UI 测试生成代码”，然后选择菜单项之一。
-        //}
+        }
+
 
         #endregion
 

@@ -53,9 +53,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalDocumentModels.cs" />
-    <Compile Include="ModuleTest_lxf.cs" />
-    <Compile Include="ModuleTest_sqy.cs" />
+    <Compile Include="Document_新建模型文档测试_刘晓凤.cs" />
+    <Compile Include="测试样例.cs" />
+    <Compile Include="Config_最大值算子配置测试_刘晓凤.cs" />
+    <Compile Include="Config_最小值算子配置测试_刘晓凤.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
       <DependentUpon>UIMap.uitest</DependentUpon>
