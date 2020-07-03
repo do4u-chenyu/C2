@@ -27,7 +27,7 @@ namespace Citta_T1.Core.UndoRedo.Command
 
         public bool Redo()
         {
-            Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID, this.pinIndex, false);
+            Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID, this.pinIndex);
             return true;
         }
     }

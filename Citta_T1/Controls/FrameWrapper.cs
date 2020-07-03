@@ -325,8 +325,9 @@ namespace Citta_T1.Controls
                 staticImage = null;
             }
             staticImage = frameWrapperVFX.CreateWorldImage(worldWidth, worldHeight, controls, false);
-            
-            if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
+
+            if (mesAndMrs != null && mesAndMrs.Item1.Count != 0)
+                //if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
             {
                 ICommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);

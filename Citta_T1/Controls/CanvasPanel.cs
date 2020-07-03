@@ -415,7 +415,7 @@ namespace Citta_T1.Controls
                 Global.GetNaviViewControl().UpdateNaviView();
             }
         }
-        public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex, bool isPushCmd=true)
+        public void AddNewRelationByCtrID(int startCID, int endCID, int pinIndex, bool isPushCmd=false)
         {
             ModelDocument doc = Global.GetCurrentDocument();
             MoveBaseControl startC = doc.SearchElementByID(startCID).InnerControl;
@@ -592,12 +592,12 @@ namespace Citta_T1.Controls
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
         }
         #endregion
-        public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
         {
             foreach (ModelElement me in mes)
                 this.AddEle(me);
             foreach (var mr in mrs)
-                this.AddNewRelationByCtrID(mr.Item1, mr.Item2, mr.Item3);
+                this.AddNewRelationByCtrID(mr.Item1, mr.Item2, mr.Item3, isPushCmd);
         }
         public Tuple<List<ModelElement>, List<Tuple<int, int, int>>> DeleteSelectedElesByCtrID(IEnumerable<int> ids)
         {
