@@ -490,6 +490,8 @@ namespace Citta_T1.Controls.Move.Rs
             }
             opEle.Status = ElementStatus.Null;
             (opEle.InnerControl as MoveOpControl).Option.Clear();
+            (opEle.InnerControl as MoveOpControl).FirstDataSourceColumns = new string[] { };
+            (opEle.InnerControl as MoveOpControl).SecondDataSourceColumns = new string[] { };
         }
         public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
         {
