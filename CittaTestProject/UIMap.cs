@@ -61,12 +61,16 @@
         public WinText UI运行日志;
         public WinText UI控制台;
         public WinClient UI隐藏底层面板;
+        public WinComboBox UI用户名;
+        public WinClient UICanvasPanel;
+        public WinButton UI保存模型;
         #endregion
 
         public UIMap()
         {
             // 登陆窗体
             UI登录 = this.UI用户登录主窗体.UI登录.UI登录Button;
+            UI用户名 = this.UI用户登录主窗体.UI用户名.UI用户名ComboBox;
 
             // 左侧任务栏
             UI我的模型Left = this.UICitta主界面.UI左侧_我的模型.UI我的模型LeftButton;
@@ -98,6 +102,7 @@
             UI一键排版 = this.UICitta主界面.UI一键排版.UI一键排版Button;
             UI新建 = this.UICitta主界面.UI新建.UI新建Button;
             UI添加 = this.UI新建模型.UI添加.UI添加Button;
+            UI保存模型 = this.UICitta主界面.UI保存.UI保存Button;
 
             UI导入 = this.UICitta主界面.UI导入.UI导入Button;
             UI浏览 = this.UI导入数据.UI浏览.UI浏览Button;
@@ -105,18 +110,18 @@
             UI取消 = this.UI导入数据.UI取消Window.UI取消Button;
 
             // 系统自带
-            UI关闭 = this.UI打开Window.UI打开TitleBar.UI关闭Button;
-           
-           
+            UI关闭 = this.UICitta主界面.UI烽火FiberHomeTitleBar.UI关闭Button;
+
+
             // 浮动工具栏
             UI拖动 = this.UICitta主界面.UI浮动工具栏_拖动.UI拖动Client;
             UI放大 = this.UICitta主界面.UI浮动工具栏_放大.UI放大Client;
-            UI缩小 = this.UICitta主界面.UI浮动工具栏_缩小.UI缩小Client; 
+            UI缩小 = this.UICitta主界面.UI浮动工具栏_缩小.UI缩小Client;
             UI备注 = this.UICitta主界面.UI浮动工具栏_备注.UI备注Client;
             UI框选 = this.UICitta主界面.UI浮动工具栏_框选.UI框选Client;
 
             // 运算控件
-            UI运行 = this.UICitta主界面.UI运行.UI运行Button;           
+            UI运行 = this.UICitta主界面.UI运行.UI运行Button;
             UI终止 = this.UICitta主界面.UI终止.UI终止Button;
             UI重置 = this.UICitta主界面.UI重置.UI重置Button;
 
@@ -126,16 +131,53 @@
             UI控制台 = this.UICitta主界面.UI控制台.UI控制台Text;
             UI隐藏底层面板 = this.UICitta主界面.UI隐藏底层面板.UI隐藏底层面板Client;
 
-
-
+            // CanvasPanel
+            UICanvasPanel = this.UICitta主界面.UICanvasPanel.UICanvasPanelClient;
         }
 
+        public void ExampleTest()
+        {
 
-        
+            // 单击 列表框
+            //Mouse.Click(uIItemList, new Point(1242, 423));
 
+            //启动Citta程序
+            ApplicationUnderTest citta登陆 = ApplicationUnderTest.Launch(@"D:\work\\Citta\Citta_T1\bin\开发调试\Citta_T1.exe");
+            Mouse.Click(citta登陆);
 
+            // 在 “用户名” 组合框 中选择“90”
+            UI用户名.EditableItem = "90";
 
+            // 单击 “登录” 按钮
+            Mouse.Click(UI登录, new Point(130, 12));
+
+            // 单击 “算子” 按钮
+            Mouse.Click(UI算子, new Point(61, 25));
+
+            // 鼠标悬停在取差集算子
+            Mouse.Hover(UI取差集, UI取差集.BoundingRectangle.Location, 1000);
+
+            // 将  “取差集” 按钮 移至 “canvasPanel” 客户端
+            UICanvasPanel.EnsureClickable(new Point(252, 115));
+            Mouse.StartDragging(UI取差集, new Point(58, 17));
+            Mouse.StopDragging(UICanvasPanel, new Point(252, 115));
+
+            // 鼠标悬停在取最大值算子
+            Mouse.Hover(UI取最大值, UI取最大值.BoundingRectangle.Location, 1000);
+
+            // 将  “取最大值” 按钮 移至 “canvasPanel” 客户端
+            UICanvasPanel.EnsureClickable(new Point(394, 170));
+            Mouse.StartDragging(UI取最大值, new Point(44, 28));
+            Mouse.StopDragging(UICanvasPanel, new Point(394, 170));
+
+            // 单击 “saveModelButton” 按钮
+            Mouse.Click(UI保存模型, new Point(25, 9));
+
+            // 单击 “关闭”
+            Mouse.Click(UI关闭);
+        }
+
+       
+      
     }
-
-   
 }
