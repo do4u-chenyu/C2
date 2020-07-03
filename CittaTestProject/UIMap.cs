@@ -17,196 +17,125 @@
 
     public partial class UIMap
     {
-        public WinEdit uI名称Edit;
-        public WinComboBox uI用户名ComboBox;
-        public WinButton uI登录Button;
-        public WinButton uI新建Button;
-        public WinButton uI添加Button;
-        public WinButton uI导入Button;
-        public WinButton uI浏览Button;
-        public WinEdit uI名称Edit1;
-        public WinButton uI打开OButton;
-        public WinText uIUTF8Text;
-        public WinButton uI添加Button1;
-        public WinButton uI中英文测试Button;
-        public WinClient uICanvasPanelClient;
-        public WinButton uI算子Button;
-        public WinButton uI取最大值Button;
-        public WinClient uIItem0Client;
-        public WinClient uIMoveOpControlClient;
-        public WinClient uIStatusBoxClient;
-        public WinComboBox uI数据信息ComboBox;
-        public WinWindow uIItemWindow;
-        public WinButton uIItemButton;
-        public WinCheckBox uI姓名CheckBox;
-        public WinClient uI数据信息Client;
-        public WinButton uI确认Button;
-        public WinButton uI保存Button;
-        public WinTitleBar uI烽火FiberHomeTitleBar;
-        public WinButton uI数据Button;
+        #region Variable Declarations
+        public WinButton UI登录;
+        public WinButton UI我的模型Left;
+        public WinButton UI数据;
+        public WinButton UI算子;
+        public WinButton UIIAO实验室Left;
+        public WinButton UIAI实践;
+        public WinButton UI多源算子;
+        public WinButton UIPython算子;
+        public WinButton UI关联算子;
+        public WinButton UI碰撞算子;
+        public WinButton UI取并集;
+        public WinButton UI取差集;
+        public WinButton UI随机采样;
+        public WinButton UI条件筛选;
+        public WinButton UI取最大值;
+        public WinButton UI取最小值;
+        public WinButton UI取平均值;
+        public WinButton UI频率算子;
+        public WinButton UI排序算子;
+        public WinButton UI分组算子;
+        public WinButton UI关键词过滤;
+        public WinButton UI数据标准化;
+        public WinButton UI新建;
+        public WinButton UI添加;
+        public WinButton UI导入;
+        public WinButton UI浏览;
+        public WinButton UI关闭;
+        public WinText UIGBK;
+        public WinButton UI取消;
+        public WinButton UI全部保存;
+        public WinButton UI一键排版;
+        public WinClient UI拖动;
+        public WinClient UI放大;
+        public WinClient UI缩小;
+        public WinClient UI备注;
+        public WinClient UI框选;
+        public WinButton UI运行;
+        public WinButton UI终止;
+        public WinButton UI重置;
+        public WinText UI数据预览;
+        public WinText UI运行日志;
+        public WinText UI控制台;
+        public WinClient UI隐藏底层面板;
+        #endregion
+
         public UIMap()
         {
-            #region Variable Declarations
-            uI名称Edit = this.UI开发调试Window.UIItemWindow.UICitta_T1exeListItem.UI名称Edit;
-            uI用户名ComboBox = this.UI用户登录Window.UIUserNameComboBoxWindow.UI用户名ComboBox;
-            uI登录Button = this.UI用户登录Window.UI登录Window.UI登录Button;
-            uI新建Button = this.UI烽火FiberHomeWindow.UINewModelButtonWindow.UI新建Button;
-            uI添加Button = this.UI新建模型Window.UI添加Window.UI添加Button;
-            uI导入Button = this.UI烽火FiberHomeWindow.UIImportButtonWindow.UI导入Button;
-            uI浏览Button = this.UI导入数据Window.UI浏览Window.UI浏览Button;
-            uI名称Edit1 = this.UI打开Window.UIItemWindow.UI中英文测试bcpListItem.UI名称Edit;
-            uI打开OButton = this.UI打开Window.UI打开OWindow.UI打开OButton;
-            uIUTF8Text = this.UI导入数据Window.UIUTF8Window.UIUTF8Text;
-            uI添加Button1 = this.UI导入数据Window.UI添加Window.UI添加Button;
-            uI中英文测试Button = this.UI烽火FiberHomeWindow.UI中英文测试Window.UI中英文测试Button;
-            uICanvasPanelClient = this.UI烽火FiberHomeWindow.UICanvasPanelWindow.UICanvasPanelClient;
-            uI算子Button = this.UI烽火FiberHomeWindow.UI算子Window.UI算子Button;
-            uI取最大值Button = this.UI烽火FiberHomeWindow.UI取最大值Window.UI取最大值Button;
-            uIItem0Client = this.UI烽火FiberHomeWindow.UIMoveDtControlWindow1.UIItem0Client;
-            uIMoveOpControlClient = this.UI烽火FiberHomeWindow.UIMoveOpControlWindow1.UIMoveOpControlClient;
-            uIStatusBoxClient = this.UI烽火FiberHomeWindow.UIStatusBoxWindow.UIStatusBoxClient;
-            uI数据信息ComboBox = this.UI取最大值算子设置Window.UIComboBox0Window.UI数据信息ComboBox;
-            uIItemWindow = this.UI取最大值算子设置Window.UIOutListCCBL0Window.UIItemWindow;
-            uIItemButton = this.UI取最大值算子设置Window.UIItemWindow.UIItemButton;
-            uI姓名CheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UI姓名CheckBox;
-            uI数据信息Client = this.UI取最大值算子设置Window.UIValuePanelWindow.UI数据信息Client;
-            uI确认Button = this.UI取最大值算子设置Window.UI确认Window.UI确认Button;
-            uI保存Button = this.UI烽火FiberHomeWindow.UISaveModelButtonWindow.UI保存Button;
-            uI烽火FiberHomeTitleBar = this.UI烽火FiberHomeWindow.UI烽火FiberHomeTitleBar;
-            uI数据Button = this.UI烽火FiberHomeWindow.UI数据Window.UI数据LeftButton;
-            #endregion
+            // 登陆窗体
+            UI登录 = this.UI用户登录主窗体.UI登录.UI登录Button;
+
+            // 左侧任务栏
+            UI我的模型Left = this.UICitta主界面.UI左侧_我的模型.UI我的模型LeftButton;
+            UI数据 = this.UICitta主界面.UI数据Window.UI数据Button;
+            UI算子 = this.UICitta主界面.UI算子.UI算子Button;
+            UIIAO实验室Left = this.UICitta主界面.UIIAO实验室.UIIAO实验室LeftButton;
+
+            // 算子列表
+            UIAI实践 = this.UICitta主界面.UIAI实践算子.UIAI实践Button;
+            UI多源算子 = this.UICitta主界面.UI多源算子.UI多源算子Button;
+            UIPython算子 = this.UICitta主界面.UIPython算子.UIPython算子Button;
+            UI关联算子 = this.UICitta主界面.UI关联算子.UI关联算子Button;
+            UI碰撞算子 = this.UICitta主界面.UI碰撞算子.UI碰撞算子Button;
+            UI取并集 = this.UICitta主界面.UI取并集.UI取并集Button;
+            UI取差集 = this.UICitta主界面.UI取差集.UI取差集Button;
+            UI随机采样 = this.UICitta主界面.UI随机采样.UI随机采样Button;
+            UI条件筛选 = this.UICitta主界面.UI条件筛选.UI条件筛选Button;
+            UI取最大值 = this.UICitta主界面.UI取最大值.UI取最大值Button;
+            UI取最小值 = this.UICitta主界面.UI取最小值.UI取最小值Button;
+            UI取平均值 = this.UICitta主界面.UI取平均值.UI取平均值Button;
+            UI频率算子 = this.UICitta主界面.UI频率算子.UI频率算子Button;
+            UI排序算子 = this.UICitta主界面.UI排序算子.UI排序算子Button;
+            UI分组算子 = this.UICitta主界面.UI分组算子.UI分组算子Button;
+            UI关键词过滤 = this.UICitta主界面.UI关键词过滤.UI关键词过滤Button;
+            UI数据标准化 = this.UICitta主界面.UI数据标准化.UI数据标准化Button;
+
+            //上侧菜单栏
+            UI全部保存 = this.UICitta主界面.UI全部保存.UI全部保存Button;
+            UI一键排版 = this.UICitta主界面.UI一键排版.UI一键排版Button;
+            UI新建 = this.UICitta主界面.UI新建.UI新建Button;
+            UI添加 = this.UI新建模型.UI添加.UI添加Button;
+
+            UI导入 = this.UICitta主界面.UI导入.UI导入Button;
+            UI浏览 = this.UI导入数据.UI浏览.UI浏览Button;
+            UIGBK = this.UI导入数据.UIGBKWindow.UIGBKText;
+            UI取消 = this.UI导入数据.UI取消Window.UI取消Button;
+
+            // 系统自带
+            UI关闭 = this.UI打开Window.UI打开TitleBar.UI关闭Button;
+           
+           
+            // 浮动工具栏
+            UI拖动 = this.UICitta主界面.UI浮动工具栏_拖动.UI拖动Client;
+            UI放大 = this.UICitta主界面.UI浮动工具栏_放大.UI放大Client;
+            UI缩小 = this.UICitta主界面.UI浮动工具栏_缩小.UI缩小Client; 
+            UI备注 = this.UICitta主界面.UI浮动工具栏_备注.UI备注Client;
+            UI框选 = this.UICitta主界面.UI浮动工具栏_框选.UI框选Client;
+
+            // 运算控件
+            UI运行 = this.UICitta主界面.UI运行.UI运行Button;           
+            UI终止 = this.UICitta主界面.UI终止.UI终止Button;
+            UI重置 = this.UICitta主界面.UI重置.UI重置Button;
+
+            // 底层面板
+            UI数据预览 = this.UICitta主界面.UI数据预览.UI数据预览Text;
+            UI运行日志 = this.UICitta主界面.UI运行日志.UI运行日志Text;
+            UI控制台 = this.UICitta主界面.UI控制台.UI控制台Text;
+            UI隐藏底层面板 = this.UICitta主界面.UI隐藏底层面板.UI隐藏底层面板Client;
+
+
+
         }
 
-        /// <summary>
-        /// ExampleTestMethod - 使用“ExampleTestMethodParams”将参数传递到此方法中。
-        /// </summary>
-        public void CreateNewModelTest()
-        {
 
-            // 双击 “名称” 文本框
-            Mouse.DoubleClick(uI名称Edit, new Point(14, 8));
+        
 
-            // 在 “用户名” 组合框 中选择“tests1”
-            uI用户名ComboBox.EditableItem = this.ExampleTestMethodParams.UI用户名ComboBoxEditableItem;
 
-            // 单击 “登录” 按钮
-            Mouse.Click(uI登录Button, new Point(116, 8));
 
-            // 单击 “newModelButton” 按钮
-            Mouse.Click(uI新建Button, new Point(39, 21));
-
-            // 单击 “添加” 按钮
-            Mouse.Click(uI添加Button, new Point(15, 16));
-
-            // 单击 “ImportButton” 按钮
-            //Mouse.Click(uI导入Button, new Point(55, 13));
-
-            // 单击 “浏览” 按钮
-            //Mouse.Click(uI浏览Button, new Point(21, 23));
-
-            // 单击 “名称” 文本框
-            // Mouse.Click(uI名称Edit1, new Point(36, 16));
-
-            // 单击 “打开(&O)” 按钮
-            //Mouse.Click(uI打开OButton, new Point(25, 12));
-
-            // 单击 “UTF-8” 标签
-            //Mouse.Click(uIUTF8Text, new Point(30, 13));
-
-            // 单击 “添加” 按钮
-            // Mouse.Click(uI添加Button1, new Point(34, 18));
-
-            // 单击 “数据” 按钮
-            Mouse.Click(uI数据Button);
-
-            // 数据悬停在数据源上
-            Mouse.Hover(uI中英文测试Button, uI中英文测试Button.BoundingRectangle.Location,1000);
-
-            // 将  “中英文测试” 按钮 移至 “canvasPanel” 客户端
-            uICanvasPanelClient.EnsureClickable(new Point(130, 144));
-            Mouse.StartDragging(uI中英文测试Button, new Point(58, 17));
-            Mouse.StopDragging(uICanvasPanelClient, new Point(130, 144));
-
-            // 单击 “算子” 按钮
-            Mouse.Click(uI算子Button, new Point(67, 18));
-
-            // 数据悬停在最大值算子上
-            Mouse.Hover(uI取最大值Button, uI取最大值Button.BoundingRectangle.Location,1000);
-
-            // 将  “取最大值” 按钮 移至 “canvasPanel” 客户端
-            uICanvasPanelClient.EnsureClickable(new Point(265, 146));
-            Mouse.StartDragging(uI取最大值Button, new Point(62, 19));
-            Mouse.StopDragging(uICanvasPanelClient, new Point(265, 146));
-
-            // 将  “0%” 客户端 移至 “MoveOpControl” 客户端
-            //uIMoveOpControlClient.EnsureClickable(new Point(6, 9));
-            //Mouse.StartDragging(uIItem0Client, new Point(127, 11));
-            //Mouse.StopDragging(uIMoveOpControlClient, new Point(6, 9));
-
-            // 双击 “statusBox” 客户端
-            //Mouse.DoubleClick(uIStatusBoxClient, new Point(5, 6));
-
-            // 在 “数据信息：” 组合框 中选择“name”
-            //uI数据信息ComboBox.SelectedItem = this.ExampleTestMethodParams.UI数据信息ComboBoxSelectedItem;
-
-            // 单击 窗口
-            //Mouse.Click(uIItemWindow, new Point(149, 11));
-
-            // 单击 按钮
-            //Mouse.Click(uIItemButton, new Point(11, 9));
-
-            // 选择 “姓名” 复选框
-            //uI姓名CheckBox.Checked = this.ExampleTestMethodParams.UI姓名CheckBoxChecked;
-
-            // 单击 “数据信息：” 客户端
-            //Mouse.Click(uI数据信息Client, new Point(165, 89));
-
-            // 单击 “确认” 按钮
-            //Mouse.Click(uI确认Button, new Point(10, 17));
-
-            // 单击 “saveModelButton” 按钮
-            Mouse.Click(uI保存Button, new Point(44, 24));
-
-            // 单击 “烽火FiberHome” 标题栏
-            Mouse.Click(uI烽火FiberHomeTitleBar, new Point(1343, 12));
-        }
-
-        public virtual ExampleTestMethodParams ExampleTestMethodParams
-        {
-            get
-            {
-                if ((this.mExampleTestMethodParams == null))
-                {
-                    this.mExampleTestMethodParams = new ExampleTestMethodParams();
-                }
-                return this.mExampleTestMethodParams;
-            }
-        }
-
-        private ExampleTestMethodParams mExampleTestMethodParams;
     }
-    /// <summary>
-    /// 要传递到“ExampleTestMethod”中的参数
-    /// </summary>
-    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
-    public class ExampleTestMethodParams
-    {
 
-        #region Fields
-        /// <summary>
-        /// 在 “用户名” 组合框 中选择“tests1”
-        /// </summary>
-        public string UI用户名ComboBoxEditableItem = "tests1";
-
-        /// <summary>
-        /// 在 “数据信息：” 组合框 中选择“name”
-        /// </summary>
-        public string UI数据信息ComboBoxSelectedItem = "name";
-
-        /// <summary>
-        /// 选择 “姓名” 复选框
-        /// </summary>
-        public bool UI姓名CheckBoxChecked = true;
-        #endregion
-    }
+   
 }

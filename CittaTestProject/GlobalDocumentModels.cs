@@ -22,15 +22,16 @@ namespace CittaTestProject
         {
         }
 
-        [TestMethod,TestCategory("CommonDocumentModels")]
-        
+        [TestMethod, TestCategory("CommonDocumentModels")]
+
         public void CreateDocumentModels()
 
         {
+
             /*
              *  在此可创建一些模型，供全局调用
              */
-            this.UIMap.CreateNewModelTest();
+
 
         }
 

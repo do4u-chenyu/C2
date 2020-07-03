@@ -47,7 +47,7 @@
   <Maps>
     <UIMap Id="UIMap">
       <TopLevelWindows>
-        <TopLevelWindow ControlType="Window" Id="UI用户登录Window" FriendlyName="用户登录" SpecialControlType="None" SessionId="1443432">
+        <TopLevelWindow ControlType="Window" Id="UI用户登录主窗体" FriendlyName="用户登录" SpecialControlType="None" SessionId="1443432">
           <TechnologyName>MSAA</TechnologyName>
           <WindowTitles>
             <WindowTitle>用户登录</WindowTitle>
@@ -62,7 +62,7 @@
           </AndCondition>
           <SupportLevel>100</SupportLevel>
           <Descendants>
-            <UIObject ControlType="Window" Id="UI登录Window" FriendlyName="登录" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI登录" FriendlyName="登录" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>用户登录</WindowTitle>
@@ -93,7 +93,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIUserNameComboBoxWindow" FriendlyName="userNameComboBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI用户名" FriendlyName="userNameComboBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>用户登录</WindowTitle>
@@ -126,7 +126,7 @@
             </UIObject>
           </Descendants>
         </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI烽火FiberHomeWindow" FriendlyName="烽火FiberHome" SpecialControlType="None" SessionId="3475264">
+        <TopLevelWindow ControlType="Window" Id="UICitta主界面" FriendlyName="烽火FiberHome" SpecialControlType="None" SessionId="3475264">
           <TechnologyName>MSAA</TechnologyName>
           <WindowTitles>
             <WindowTitle>烽火FiberHome</WindowTitle>
@@ -141,7 +141,7 @@
           </AndCondition>
           <SupportLevel>100</SupportLevel>
           <Descendants>
-            <UIObject ControlType="Window" Id="UINewModelButtonWindow" FriendlyName="newModelButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI新建" FriendlyName="newModelButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -171,7 +171,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIImportButtonWindow" FriendlyName="ImportButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI导入" FriendlyName="ImportButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -201,7 +201,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UISaveAllButtonWindow" FriendlyName="saveAllButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI全部保存" FriendlyName="saveAllButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -231,7 +231,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI关联算子Window" FriendlyName="关联算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI关联算子" FriendlyName="关联算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -262,7 +262,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI碰撞算子Window" FriendlyName="碰撞算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI碰撞算子" FriendlyName="碰撞算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -293,7 +293,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI取并集Window" FriendlyName="取并集" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取并集" FriendlyName="取并集" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -324,7 +324,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI条件筛选Window" FriendlyName="条件筛选" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI条件筛选" FriendlyName="条件筛选" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -355,7 +355,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI取最大值Window" FriendlyName="取最大值" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取最大值" FriendlyName="取最大值" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -386,7 +386,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI取差集Window" FriendlyName="取差集" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取差集" FriendlyName="取差集" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -417,7 +417,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI随机采样Window" FriendlyName="随机采样" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI随机采样" FriendlyName="随机采样" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -448,7 +448,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI取最小值Window" FriendlyName="取最小值" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取最小值" FriendlyName="取最小值" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -479,7 +479,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI取平均值Window" FriendlyName="取平均值" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取平均值" FriendlyName="取平均值" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -510,7 +510,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI频率算子Window" FriendlyName="频率算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI频率算子" FriendlyName="频率算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -541,7 +541,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI排序算子Window" FriendlyName="排序算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI排序算子" FriendlyName="排序算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -572,7 +572,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI分组算子Window" FriendlyName="分组算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI分组算子" FriendlyName="分组算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -603,7 +603,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI关键词过滤Window" FriendlyName="关键词过滤" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI关键词过滤" FriendlyName="关键词过滤" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -634,7 +634,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI数据标准化Window" FriendlyName="数据标准化" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI数据标准化" FriendlyName="数据标准化" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -665,7 +665,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI我的模型Window" FriendlyName="我的模型" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI左侧_我的模型" FriendlyName="我的模型" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -696,7 +696,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI数据Window" FriendlyName="数据" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI左侧_数据" FriendlyName="数据" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -728,7 +728,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIIAO实验室Window" FriendlyName="IAO实验室" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIIAO实验室" FriendlyName="IAO实验室" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -759,7 +759,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIAI实践Window" FriendlyName="AI实践" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIAI实践算子" FriendlyName="AI实践" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -790,7 +790,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI多源算子Window" FriendlyName="多源算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI多源算子" FriendlyName="多源算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -821,7 +821,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIPython算子Window" FriendlyName="Python算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIPython算子" FriendlyName="Python算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -852,7 +852,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIZoomDownPictureBoxWindow" FriendlyName="zoomDownPictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浮动工具栏_缩小" FriendlyName="zoomDownPictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -882,7 +882,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMovePictureBoxWindow" FriendlyName="movePictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浮动工具栏_拖动" FriendlyName="movePictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -912,7 +912,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIZoomUpPictureBoxWindow" FriendlyName="zoomUpPictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浮动工具栏_放大" FriendlyName="zoomUpPictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -942,7 +942,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIRemarkPictureBoxWindow" FriendlyName="remarkPictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浮动工具栏_备注" FriendlyName="remarkPictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -972,7 +972,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIFramePictureBoxWindow" FriendlyName="framePictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浮动工具栏_框选" FriendlyName="framePictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1002,7 +1002,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIFormatButtonWindow" FriendlyName="formatButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI一键排版" FriendlyName="formatButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1032,7 +1032,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMoreButtonWindow" FriendlyName="moreButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI首选项" FriendlyName="moreButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1062,7 +1062,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMoveOpControlWindow" FriendlyName="MoveOpControl" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIMoveOpControl" FriendlyName="MoveOpControl" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1093,7 +1093,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UICanvasPanelWindow" FriendlyName="canvasPanel" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UICanvasPanel" FriendlyName="canvasPanel" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1139,7 +1139,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI数据预览Window" FriendlyName="数据预览" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI数据预览" FriendlyName="数据预览" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1170,7 +1170,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI运行日志Window" FriendlyName="运行日志" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI运行日志" FriendlyName="运行日志" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1201,7 +1201,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI控制台Window" FriendlyName="控制台" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI控制台" FriendlyName="控制台" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1232,7 +1232,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMinMaxPictureBoxWindow" FriendlyName="minMaxPictureBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI隐藏底层面板" FriendlyName="minMaxPictureBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1263,7 +1263,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIUndoButtonWindow" FriendlyName="undoButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI撤销" FriendlyName="undoButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1293,7 +1293,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIRedoButtonWindow" FriendlyName="redoButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI恢复" FriendlyName="redoButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1323,7 +1323,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UINaviViewControlWindow" FriendlyName="naviViewControl" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI导航窗" FriendlyName="naviViewControl" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1353,7 +1353,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UISaveModelButtonWindow" FriendlyName="saveModelButton" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI保存" FriendlyName="saveModelButton" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1383,7 +1383,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMoveDtControlWindow" FriendlyName="MoveDtControl" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIMoveDtControl" FriendlyName="MoveDtControl" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1414,69 +1414,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIModelTitleControlWindow" FriendlyName="ModelTitleControl" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>烽火FiberHome</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlName">ModelTitleControl</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-                <PropertyCondition Name="Instance">2</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>100</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Client" Id="UIModelTitleControlClient" FriendlyName="ModelTitleControl" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>烽火FiberHome</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>100</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UI中英文测试Window" FriendlyName="中英文测试" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>烽火FiberHome</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlName">D:\datas\中英文测试.bcp</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Button" Id="UI中英文测试Button" FriendlyName="中英文测试" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>烽火FiberHome</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">中英文测试</PropertyCondition>
-                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UI算子Window" FriendlyName="算子" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI算子" FriendlyName="算子" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1507,68 +1445,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIMoveDtControlWindow1" FriendlyName="MoveDtControl" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>烽火FiberHome</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlName">MoveDtControl</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Client" Id="UIItem0Client" FriendlyName="0%" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>烽火FiberHome</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">0%</PropertyCondition>
-                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UIMoveOpControlWindow1" FriendlyName="MoveOpControl" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>烽火FiberHome</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlName">MoveOpControl</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Client" Id="UIMoveOpControlClient" FriendlyName="MoveOpControl" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>烽火FiberHome</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UIStatusBoxWindow" FriendlyName="statusBox" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI算子_设置" FriendlyName="statusBox" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1582,7 +1459,7 @@
               </AndCondition>
               <SupportLevel>0</SupportLevel>
               <Descendants>
-                <UIObject ControlType="Client" Id="UIStatusBoxClient" FriendlyName="statusBox" SpecialControlType="None">
+                <UIObject ControlType="Client" Id="UI设置Client" FriendlyName="statusBox" SpecialControlType="None">
                   <TechnologyName>MSAA</TechnologyName>
                   <WindowTitles>
                     <WindowTitle>烽火FiberHome</WindowTitle>
@@ -1610,73 +1487,314 @@
                 <PropertyCondition Name="ControlType">TitleBar</PropertyCondition>
               </AndCondition>
               <SupportLevel>0</SupportLevel>
-              <Descendants />
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI关闭Button" FriendlyName="关闭" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">关闭</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+                <UIObject ControlType="Button" Id="UI最小化Button" FriendlyName="最小化" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">最小化</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+                <UIObject ControlType="Button" Id="UI还原Button" FriendlyName="还原" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">还原</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+                <UIObject ControlType="Button" Id="UI最大化Button" FriendlyName="最大化" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">最大化</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
             </UIObject>
-          </Descendants>
-        </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI开发调试Window" FriendlyName="开发调试" SpecialControlType="None" SessionId="1837522">
-          <TechnologyName>MSAA</TechnologyName>
-          <WindowTitles>
-            <WindowTitle>开发调试</WindowTitle>
-          </WindowTitles>
-          <SearchConfigurations>
-            <SearchConfiguration>VisibleOnly</SearchConfiguration>
-          </SearchConfigurations>
-          <AndCondition Id="SearchCondition">
-            <PropertyCondition Name="Name">开发调试</PropertyCondition>
-            <PropertyCondition Name="ClassName">CabinetWClass</PropertyCondition>
-            <PropertyCondition Name="ControlType">Window</PropertyCondition>
-          </AndCondition>
-          <SupportLevel>0</SupportLevel>
-          <Descendants>
-            <UIObject ControlType="Window" Id="UIItemWindow" FriendlyName="" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI我的模型栏" FriendlyName="myModelControl" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
-                <WindowTitle>开发调试</WindowTitle>
+                <WindowTitle>烽火FiberHome</WindowTitle>
               </WindowTitles>
               <SearchConfigurations>
                 <SearchConfiguration>VisibleOnly</SearchConfiguration>
               </SearchConfigurations>
               <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="AccessibleName">项目视图</PropertyCondition>
-                <PropertyCondition Name="ClassName">DirectUIHWND</PropertyCondition>
+                <PropertyCondition Name="ControlName">myModelControl</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Client" Id="UI我的模型栏Client" FriendlyName="myModelControl" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI本地数据栏" FriendlyName="localFrame" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">localFrame</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Client" Id="UI本地数据Client" FriendlyName="外部数据" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">外部数据</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI工具" FriendlyName="rightShowButton" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">rightShowButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Client" Id="UI工具Client" FriendlyName="rightShowButton" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI隐藏" FriendlyName="rightHideButton" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">rightHideButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Client" Id="UI隐藏Client" FriendlyName="rightHideButton" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI运行" FriendlyName="runButton" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">runButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI运行Button" FriendlyName="runButton" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI终止" FriendlyName="stopButton" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">stopButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI终止Button" FriendlyName="stopButton" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI重置" FriendlyName="resetButton" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">resetButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI重置Button" FriendlyName="resetButton" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI数据Window" FriendlyName="数据" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>烽火FiberHome</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">dataButton</PropertyCondition>
                 <PropertyCondition Name="ControlType">Window</PropertyCondition>
               </AndCondition>
               <SupportLevel>0</SupportLevel>
               <Descendants>
-                <UIObject ControlType="ListItem" Id="UICitta_T1exeListItem" FriendlyName="Citta_T1.exe" SpecialControlType="None">
+                <UIObject ControlType="Button" Id="UI数据Button" FriendlyName="数据" SpecialControlType="None">
                   <TechnologyName>MSAA</TechnologyName>
                   <WindowTitles>
-                    <WindowTitle>开发调试</WindowTitle>
+                    <WindowTitle>烽火FiberHome</WindowTitle>
                   </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
                   <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">Citta_T1.exe</PropertyCondition>
-                    <PropertyCondition Name="ControlType">ListItem</PropertyCondition>
+                    <PropertyCondition Name="Name">数据</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
-                  <Descendants>
-                    <UIObject ControlType="Edit" Id="UI名称Edit" FriendlyName="名称" SpecialControlType="None">
-                      <TechnologyName>MSAA</TechnologyName>
-                      <WindowTitles>
-                        <WindowTitle>开发调试</WindowTitle>
-                      </WindowTitles>
-                      <SearchConfigurations>
-                        <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                      </SearchConfigurations>
-                      <AndCondition Id="SearchCondition">
-                        <PropertyCondition Name="Name">名称</PropertyCondition>
-                        <PropertyCondition Name="ControlType">Edit</PropertyCondition>
-                      </AndCondition>
-                      <SupportLevel>0</SupportLevel>
-                      <Descendants />
-                    </UIObject>
-                  </Descendants>
+                  <Descendants />
                 </UIObject>
               </Descendants>
             </UIObject>
           </Descendants>
         </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI新建模型Window" FriendlyName="新建模型" SpecialControlType="None" SessionId="3148516">
+        <TopLevelWindow ControlType="Window" Id="UI新建模型" FriendlyName="新建模型" SpecialControlType="None" SessionId="3148516">
           <TechnologyName>MSAA</TechnologyName>
           <WindowTitles>
             <WindowTitle>新建模型</WindowTitle>
@@ -1691,7 +1809,7 @@
           </AndCondition>
           <SupportLevel>0</SupportLevel>
           <Descendants>
-            <UIObject ControlType="Window" Id="UI添加Window" FriendlyName="添加" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI添加" FriendlyName="添加" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>新建模型</WindowTitle>
@@ -1724,7 +1842,7 @@
             </UIObject>
           </Descendants>
         </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI导入数据Window" FriendlyName="导入数据" SpecialControlType="None" SessionId="854776">
+        <TopLevelWindow ControlType="Window" Id="UI导入数据" FriendlyName="导入数据" SpecialControlType="None" SessionId="854776">
           <TechnologyName>MSAA</TechnologyName>
           <WindowTitles>
             <WindowTitle>导入数据</WindowTitle>
@@ -1739,7 +1857,7 @@
           </AndCondition>
           <SupportLevel>0</SupportLevel>
           <Descendants>
-            <UIObject ControlType="Window" Id="UI浏览Window" FriendlyName="浏览" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI浏览" FriendlyName="浏览" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>导入数据</WindowTitle>
@@ -1770,7 +1888,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIUTF8Window" FriendlyName="UTF-8" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIUTF8" FriendlyName="UTF-8" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>导入数据</WindowTitle>
@@ -1801,7 +1919,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UI添加Window" FriendlyName="添加" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI添加" FriendlyName="添加" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>导入数据</WindowTitle>
@@ -1832,92 +1950,61 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-          </Descendants>
-        </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI打开Window" FriendlyName="打开" SpecialControlType="None" SessionId="1050036">
-          <TechnologyName>MSAA</TechnologyName>
-          <WindowTitles>
-            <WindowTitle>打开</WindowTitle>
-          </WindowTitles>
-          <SearchConfigurations>
-            <SearchConfiguration>VisibleOnly</SearchConfiguration>
-          </SearchConfigurations>
-          <AndCondition Id="SearchCondition">
-            <PropertyCondition Name="Name">打开</PropertyCondition>
-            <PropertyCondition Name="ClassName">#32770</PropertyCondition>
-            <PropertyCondition Name="ControlType">Window</PropertyCondition>
-          </AndCondition>
-          <SupportLevel>0</SupportLevel>
-          <Descendants>
-            <UIObject ControlType="Window" Id="UIItemWindow" FriendlyName="" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UIGBKWindow" FriendlyName="GBK" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
-                <WindowTitle>打开</WindowTitle>
+                <WindowTitle>导入数据</WindowTitle>
               </WindowTitles>
               <SearchConfigurations>
                 <SearchConfiguration>VisibleOnly</SearchConfiguration>
               </SearchConfigurations>
               <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="AccessibleName">项目视图</PropertyCondition>
-                <PropertyCondition Name="ClassName">DirectUIHWND</PropertyCondition>
+                <PropertyCondition Name="ControlName">gbkLable</PropertyCondition>
                 <PropertyCondition Name="ControlType">Window</PropertyCondition>
               </AndCondition>
               <SupportLevel>0</SupportLevel>
               <Descendants>
-                <UIObject ControlType="ListItem" Id="UI中英文测试bcpListItem" FriendlyName="中英文测试.bcp" SpecialControlType="None">
+                <UIObject ControlType="Text" Id="UIGBKText" FriendlyName="GBK" SpecialControlType="None">
                   <TechnologyName>MSAA</TechnologyName>
                   <WindowTitles>
-                    <WindowTitle>打开</WindowTitle>
-                  </WindowTitles>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">中英文测试.bcp</PropertyCondition>
-                    <PropertyCondition Name="ControlType">ListItem</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants>
-                    <UIObject ControlType="Edit" Id="UI名称Edit" FriendlyName="名称" SpecialControlType="None">
-                      <TechnologyName>MSAA</TechnologyName>
-                      <WindowTitles>
-                        <WindowTitle>打开</WindowTitle>
-                      </WindowTitles>
-                      <SearchConfigurations>
-                        <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                      </SearchConfigurations>
-                      <AndCondition Id="SearchCondition">
-                        <PropertyCondition Name="Name">名称</PropertyCondition>
-                        <PropertyCondition Name="ControlType">Edit</PropertyCondition>
-                      </AndCondition>
-                      <SupportLevel>0</SupportLevel>
-                      <Descendants />
-                    </UIObject>
-                  </Descendants>
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UI打开OWindow" FriendlyName="打开(&amp;O)" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>打开</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlId">1</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Button" Id="UI打开OButton" FriendlyName="打开(&amp;O)" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>打开</WindowTitle>
+                    <WindowTitle>导入数据</WindowTitle>
                   </WindowTitles>
                   <SearchConfigurations>
                     <SearchConfiguration>VisibleOnly</SearchConfiguration>
                   </SearchConfigurations>
                   <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">打开(O)</PropertyCondition>
+                    <PropertyCondition Name="Name">GBK</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Text</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI取消Window" FriendlyName="取消" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>导入数据</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">cancelButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI取消Button" FriendlyName="取消" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>导入数据</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">取消</PropertyCondition>
                     <PropertyCondition Name="ControlType">Button</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
@@ -1927,7 +2014,7 @@
             </UIObject>
           </Descendants>
         </TopLevelWindow>
-        <TopLevelWindow ControlType="Window" Id="UI取最大值算子设置Window" FriendlyName="取最大值算子设置" SpecialControlType="None" SessionId="1247992">
+        <TopLevelWindow ControlType="Window" Id="UI取最大值算子设置" FriendlyName="取最大值算子设置" SpecialControlType="None" SessionId="1247992">
           <TechnologyName>MSAA</TechnologyName>
           <WindowTitles>
             <WindowTitle>取最大值算子设置</WindowTitle>
@@ -1942,7 +2029,7 @@
           </AndCondition>
           <SupportLevel>0</SupportLevel>
           <Descendants>
-            <UIObject ControlType="Window" Id="UIComboBox0Window" FriendlyName="comboBox0" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI取最大值" FriendlyName="comboBox0" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>取最大值算子设置</WindowTitle>
@@ -1956,7 +2043,7 @@
               </AndCondition>
               <SupportLevel>0</SupportLevel>
               <Descendants>
-                <UIObject ControlType="ComboBox" Id="UI数据信息ComboBox" FriendlyName="数据信息：" SpecialControlType="None">
+                <UIObject ControlType="ComboBox" Id="UI取最大值ComboBox" FriendlyName="数据信息：" SpecialControlType="None">
                   <TechnologyName>MSAA</TechnologyName>
                   <WindowTitles>
                     <WindowTitle>取最大值算子设置</WindowTitle>
@@ -1973,7 +2060,7 @@
                 </UIObject>
               </Descendants>
             </UIObject>
-            <UIObject ControlType="Window" Id="UIOutListCCBL0Window" FriendlyName="outListCCBL0" SpecialControlType="None">
+            <UIObject ControlType="Window" Id="UI输出字段" FriendlyName="outListCCBL0" SpecialControlType="None">
               <TechnologyName>MSAA</TechnologyName>
               <WindowTitles>
                 <WindowTitle>取最大值算子设置</WindowTitle>
@@ -1999,67 +2086,6 @@
                   <AndCondition Id="SearchCondition">
                     <PropertyCondition Name="ClassName" Operator="Contains">WindowsForms10.Window</PropertyCondition>
                     <PropertyCondition Name="ControlType">Window</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UIItemWindow" FriendlyName="" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>取最大值算子设置</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ClassName" Operator="Contains">WindowsForms10.BUTTON</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Button" Id="UIItemButton" FriendlyName="" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>取最大值算子设置</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
-                  </AndCondition>
-                  <SupportLevel>0</SupportLevel>
-                  <Descendants />
-                </UIObject>
-              </Descendants>
-            </UIObject>
-            <UIObject ControlType="Window" Id="UIValuePanelWindow" FriendlyName="valuePanel" SpecialControlType="None">
-              <TechnologyName>MSAA</TechnologyName>
-              <WindowTitles>
-                <WindowTitle>取最大值算子设置</WindowTitle>
-              </WindowTitles>
-              <SearchConfigurations>
-                <SearchConfiguration>VisibleOnly</SearchConfiguration>
-              </SearchConfigurations>
-              <AndCondition Id="SearchCondition">
-                <PropertyCondition Name="ControlName">valuePanel</PropertyCondition>
-                <PropertyCondition Name="ControlType">Window</PropertyCondition>
-              </AndCondition>
-              <SupportLevel>0</SupportLevel>
-              <Descendants>
-                <UIObject ControlType="Client" Id="UI数据信息Client" FriendlyName="数据信息：" SpecialControlType="None">
-                  <TechnologyName>MSAA</TechnologyName>
-                  <WindowTitles>
-                    <WindowTitle>取最大值算子设置</WindowTitle>
-                  </WindowTitles>
-                  <SearchConfigurations>
-                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
-                  </SearchConfigurations>
-                  <AndCondition Id="SearchCondition">
-                    <PropertyCondition Name="Name">数据信息：</PropertyCondition>
-                    <PropertyCondition Name="ControlType">Client</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
                   <Descendants />
@@ -2093,6 +2119,67 @@
                     <PropertyCondition Name="ControlType">Button</PropertyCondition>
                   </AndCondition>
                   <SupportLevel>0</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI数据信息" FriendlyName="中英文测试" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>取最大值算子设置</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">dataSourceTB0</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Edit" Id="UI数据信息Edit" FriendlyName="dataSourceTB0" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>取最大值算子设置</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="ControlType">Edit</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+            <UIObject ControlType="Window" Id="UI取消" FriendlyName="取消" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>取最大值算子设置</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlName">cancelButton</PropertyCondition>
+                <PropertyCondition Name="ControlType">Window</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>100</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI取消Button" FriendlyName="取消" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>取最大值算子设置</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">取消</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>100</SupportLevel>
                   <Descendants />
                 </UIObject>
               </Descendants>
@@ -2149,6 +2236,147 @@
                       <Descendants />
                     </UIObject>
                   </Descendants>
+                </UIObject>
+              </Descendants>
+            </UIObject>
+          </Descendants>
+        </TopLevelWindow>
+        <TopLevelWindow ControlType="Window" Id="UI打开Window" FriendlyName="打开" SpecialControlType="None" SessionId="594492">
+          <TechnologyName>MSAA</TechnologyName>
+          <WindowTitles>
+            <WindowTitle>打开</WindowTitle>
+          </WindowTitles>
+          <SearchConfigurations>
+            <SearchConfiguration>VisibleOnly</SearchConfiguration>
+          </SearchConfigurations>
+          <AndCondition Id="SearchCondition">
+            <PropertyCondition Name="Name">打开</PropertyCondition>
+            <PropertyCondition Name="ClassName">#32770</PropertyCondition>
+            <PropertyCondition Name="ControlType">Window</PropertyCondition>
+          </AndCondition>
+          <SupportLevel>0</SupportLevel>
+          <Descendants>
+            <UIObject ControlType="TitleBar" Id="UI打开TitleBar" FriendlyName="打开" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>打开</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlType">TitleBar</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI关闭Button" FriendlyName="关闭" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>打开</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">关闭</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+          </Descendants>
+        </TopLevelWindow>
+        <TopLevelWindow ControlType="Window" Id="UI运算完毕Window" FriendlyName="运算完毕" SpecialControlType="None" SessionId="11406294">
+          <TechnologyName>MSAA</TechnologyName>
+          <WindowTitles>
+            <WindowTitle>运算完毕</WindowTitle>
+          </WindowTitles>
+          <SearchConfigurations>
+            <SearchConfiguration>VisibleOnly</SearchConfiguration>
+          </SearchConfigurations>
+          <AndCondition Id="SearchCondition">
+            <PropertyCondition Name="Name">运算完毕</PropertyCondition>
+            <PropertyCondition Name="ClassName">#32770</PropertyCondition>
+            <PropertyCondition Name="ControlType">Window</PropertyCondition>
+          </AndCondition>
+          <SupportLevel>0</SupportLevel>
+          <Descendants>
+            <UIObject ControlType="TitleBar" Id="UI运算完毕TitleBar" FriendlyName="运算完毕" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>运算完毕</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlType">TitleBar</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI关闭Button" FriendlyName="关闭" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>运算完毕</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">关闭</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants />
+                </UIObject>
+              </Descendants>
+            </UIObject>
+          </Descendants>
+        </TopLevelWindow>
+        <TopLevelWindow ControlType="Window" Id="UI已重置Window" FriendlyName="已重置" SpecialControlType="None" SessionId="11471830">
+          <TechnologyName>MSAA</TechnologyName>
+          <WindowTitles>
+            <WindowTitle>已重置</WindowTitle>
+          </WindowTitles>
+          <SearchConfigurations>
+            <SearchConfiguration>VisibleOnly</SearchConfiguration>
+          </SearchConfigurations>
+          <AndCondition Id="SearchCondition">
+            <PropertyCondition Name="Name">已重置</PropertyCondition>
+            <PropertyCondition Name="ClassName">#32770</PropertyCondition>
+            <PropertyCondition Name="ControlType">Window</PropertyCondition>
+          </AndCondition>
+          <SupportLevel>0</SupportLevel>
+          <Descendants>
+            <UIObject ControlType="TitleBar" Id="UI已重置TitleBar" FriendlyName="已重置" SpecialControlType="None">
+              <TechnologyName>MSAA</TechnologyName>
+              <WindowTitles>
+                <WindowTitle>已重置</WindowTitle>
+              </WindowTitles>
+              <SearchConfigurations>
+                <SearchConfiguration>VisibleOnly</SearchConfiguration>
+              </SearchConfigurations>
+              <AndCondition Id="SearchCondition">
+                <PropertyCondition Name="ControlType">TitleBar</PropertyCondition>
+              </AndCondition>
+              <SupportLevel>0</SupportLevel>
+              <Descendants>
+                <UIObject ControlType="Button" Id="UI关闭Button" FriendlyName="关闭" SpecialControlType="None">
+                  <TechnologyName>MSAA</TechnologyName>
+                  <WindowTitles>
+                    <WindowTitle>已重置</WindowTitle>
+                  </WindowTitles>
+                  <SearchConfigurations>
+                    <SearchConfiguration>VisibleOnly</SearchConfiguration>
+                  </SearchConfigurations>
+                  <AndCondition Id="SearchCondition">
+                    <PropertyCondition Name="Name">关闭</PropertyCondition>
+                    <PropertyCondition Name="ControlType">Button</PropertyCondition>
+                  </AndCondition>
+                  <SupportLevel>0</SupportLevel>
+                  <Descendants />
                 </UIObject>
               </Descendants>
             </UIObject>
