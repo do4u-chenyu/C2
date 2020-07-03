@@ -613,13 +613,13 @@ namespace Citta_T1.Controls
                 switch (me.Type)
                 {
                     case ElementType.DataSource:
-                        this.DeleteEle(me);
-                        mes.Add(me);
                         foreach(ModelRelation mr in oriMrs.Where(t => t.StartID == me.ID))
                         {
                             this.DeleteRelationByCtrID(mr.StartID, mr.EndID, mr.EndPin);
                             mrs.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                         }
+                        this.DeleteEle(me);
+                        mes.Add(me);
                         break;
                     case ElementType.Operator:
                         var endIDs = doc.ModelRelations.Where(t => t.StartID == me.ID).ToList();

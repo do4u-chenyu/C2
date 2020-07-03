@@ -307,12 +307,12 @@ namespace Citta_T1.Controls.Move
              * 4. 改变其他控件的Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.DeleteEle(me);
             if (relations != null)
             {
                 foreach (Tuple<int, int, int> rel in relations)
                     cp.DeleteRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
+            cp.DeleteEle(me);
             if (rsEle != null)
                 cp.DeleteEle(rsEle);
         }
