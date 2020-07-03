@@ -146,7 +146,7 @@ namespace Citta_T1.Core
             string firstLine = String.Join("\t", rowContentList[0]);
             for (int i = 0; i < rowContentList.Count; i++)
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
-            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
+            dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
         }
 
         /*
@@ -194,7 +194,7 @@ namespace Citta_T1.Core
 
                     sb.AppendLine(String.Join("\t", rowContent));
                 }
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
             }
             catch (System.IO.IOException ex)
             {
@@ -235,7 +235,7 @@ namespace Citta_T1.Core
 
                 for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
                     sb.AppendLine(sr.ReadLine());                                   // 分隔符
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine.Trim());
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
             }
             catch (Exception e)
             {

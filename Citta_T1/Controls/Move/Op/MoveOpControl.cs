@@ -501,9 +501,12 @@ namespace Citta_T1.Controls.Move.Op
             CanvasPanel cp = Global.GetCanvasPanel();
             ModelDocument doc = Global.GetCurrentDocument();
 
+            ModelElement me = doc.SearchElementByID(ID);
+
             List<ModelRelation> modelRelations = new List<ModelRelation>(Global.GetCurrentDocument().ModelRelations);
             List<Tuple<int, int, int>> relations = new List<Tuple<int, int, int>>();
             ModelElement rsEles = null;
+            ElementStatus opStatus = me.Status;
             Tuple<List<Tuple<int, int, int>>, ModelElement> relationAndRsEles = null;
 
             foreach (ModelRelation mr in modelRelations)
@@ -514,7 +517,7 @@ namespace Citta_T1.Controls.Move.Op
                 // 删关系
                 if (mr.EndID == this.ID)
                 {
-                    cp.DeleteRelation(mr);
+                    cp.DeleteRelation(mr); // 改变me的状态
                     relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 }
             }
@@ -527,8 +530,8 @@ namespace Citta_T1.Controls.Move.Op
             
             cp.Invalidate();
 
-            ModelElement me = doc.SearchElementByID(ID);
-            ICommand cmd = new ElementDeleteCommand(me, relations, rsEles);
+            me.Status = opStatus;
+            ICommand cmd = new ElementDeleteCommand(me, relations, rsEles); // 此时压栈，me状态已经改变了, 需要改成删除之前的状态
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
 
             //删除自身
