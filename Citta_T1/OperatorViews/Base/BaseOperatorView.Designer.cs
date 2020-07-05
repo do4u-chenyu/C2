@@ -162,8 +162,8 @@ namespace Citta_T1.OperatorViews.Base
             // comboBox1
             // 
             this.comboBox0.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox0.FormattingEnabled = true;
             this.comboBox0.Location = new System.Drawing.Point(2, 4);
@@ -173,13 +173,15 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox0.TabIndex = 2;
             this.comboBox0.Leave += new System.EventHandler(this.Control_Leave);
             this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetLeftSelectedItemIndex);
+            this.comboBox0.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
+            this.comboBox0.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
             // 
             // comboBox2
             // 
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(92, 4);
@@ -190,7 +192,9 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox1.Visible = false;
             this.comboBox1.Leave += new System.EventHandler(this.Control_Leave);
             this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetSelectedItemIndex);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetRightSelectedItemIndex);
+            this.comboBox1.TextUpdate += new System.EventHandler(RightComboBox_TextUpdate);
+            this.comboBox1.DropDownClosed += new System.EventHandler(RightComboBox_ClosedEvent);
             // 
             // label1
             // 

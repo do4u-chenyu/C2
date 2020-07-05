@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.OperatorViews.Base
 {
-   
+
     public partial class BaseOperatorView : Form
     {
         protected MoveOpControl opControl;          // 对应的OP算子 
@@ -92,7 +92,7 @@ namespace Citta_T1.OperatorViews.Base
         // 是否配置完毕
         protected virtual bool IsOptionNotReady()
         {
-          
+
             return false;
         }
         protected virtual void SaveOption()
@@ -105,7 +105,7 @@ namespace Citta_T1.OperatorViews.Base
         }
         protected virtual void ConfirmButton_Click(object sender, EventArgs e)
         {
-            
+
             if (IsOptionNotReady()) return;
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
@@ -191,20 +191,34 @@ namespace Citta_T1.OperatorViews.Base
                 MessageBox.Show("输入非法字TAB键，请重新输入过滤条件");
             }
         }
-
-        protected void GetSelectedItemIndex(object sender, EventArgs e)
+        protected void GetLeftSelectedItemIndex(object sender, EventArgs e)
         {
-            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+            ComboBox comboBox = sender as ComboBox;
+            GetSelectedItemIndex(comboBox, nowColumnsName0);
         }
-
+        protected void GetRightSelectedItemIndex(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            GetSelectedItemIndex(comboBox, nowColumnsName1);
+        }
+        protected void GetComparedSelectedItemIndex(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            GetSelectedItemIndex(comboBox, comparedItems);
+        }
+        protected void GetLogicalSelectedItemIndex(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            GetSelectedItemIndex(comboBox, comparedItems);
+        }
         //更新后续子图所有节点状态
         protected void UpdateSubGraphStatus()
         {
             ElementStatus oldStatus = this.opControl.Status;
-            if (this.oldOptionDictStr == this.opControl.Option.ToString() 
+            if (this.oldOptionDictStr == this.opControl.Option.ToString()
                 && oldStatus == ElementStatus.Done)
                 return;
-             this.opControl.Status = ElementStatus.Ready;
+            this.opControl.Status = ElementStatus.Ready;
 
             if (oldStatus == ElementStatus.Done && this.opControl.Status == ElementStatus.Ready)
                 Global.GetCurrentDocument().DegradeChildrenStatus(this.opControl.ID);
@@ -222,8 +236,8 @@ namespace Citta_T1.OperatorViews.Base
         }
 
         protected virtual void CreateLine(int addLine)
-        { 
-        
+        {
+
         }
 
         protected void GroupBox_Paint(object sender, PaintEventArgs e)
@@ -285,24 +299,24 @@ namespace Citta_T1.OperatorViews.Base
         {
             ComboBox combox = new ComboBox
             {
-                AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-                AutoCompleteSource = AutoCompleteSource.ListItems,
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular)
             };
             combox.Leave += new EventHandler(this.Control_Leave);
             combox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-            combox.SelectionChangeCommitted += new EventHandler(this.GetSelectedItemIndex);
+
             return combox;
         }
-
+        
         protected ComboBox NewAndORComboBox()
         {
             ComboBox combox = NewComboBox();
             combox.Anchor = AnchorStyles.None;
-            combox.Items.AddRange(new object[] {
-            "AND",
-            "OR"});
+            logicItems = new string[] { "AND", "OR" };
+            combox.Items.AddRange(logicItems);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetLogicalSelectedItemIndex);
+            combox.TextUpdate += new System.EventHandler(LogicalComboBox_TextUpdate);
+            combox.DropDownClosed += new System.EventHandler(LogicalComboBox_ClosedEvent);
             return combox;
         }
 
@@ -310,6 +324,9 @@ namespace Citta_T1.OperatorViews.Base
         {
             ComboBox combox = NewComboBox();
             combox.Items.AddRange(this.nowColumnsName1);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetRightSelectedItemIndex);
+            combox.TextUpdate += new System.EventHandler(RightComboBox_TextUpdate);
+            combox.DropDownClosed += new System.EventHandler(RightComboBox_ClosedEvent);
             return combox;
         }
 
@@ -317,6 +334,9 @@ namespace Citta_T1.OperatorViews.Base
         {
             ComboBox combox = NewComboBox();
             combox.Items.AddRange(this.nowColumnsName0);
+            combox.SelectionChangeCommitted += new EventHandler(this.GetLeftSelectedItemIndex);
+            combox.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
+            combox.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
             return combox;
         }
 
@@ -423,5 +443,115 @@ namespace Citta_T1.OperatorViews.Base
                 this.tableLayoutPanel1.SetCellPosition(ctlNext4, new TableLayoutPanelCellPosition(4, k));
             }
         }
+        protected void GetSelectedItemIndex(ComboBox comboBox, string[] nowColumns)
+        {
+            if (nowColumns.Length == 0)
+                return;
+            List<string> filterItems = new List<string>();
+            for (int i = 0; i < comboBox.Items.Count; i++)
+                filterItems.Add(comboBox.Items[i].ToString());
+
+
+            // 下拉列表中选取值
+            if (filterItems.SequenceEqual(nowColumns))
+            {
+                comboBox.Tag = comboBox.SelectedIndex.ToString();
+                return;
+            }
+
+            // 保存下拉列表选择字段的索引
+            if (filterDict.Keys.Contains(comboBox.SelectedIndex))
+                comboBox.Tag = filterDict[comboBox.SelectedIndex];
+
+        }
+        protected void GetSelectedItemIndex(object sender, EventArgs e)
+        {
+            (sender as ComboBox).Tag = (sender as ComboBox).SelectedIndex.ToString();
+        }
+        #region 下拉列表关闭后 下拉列表内容重置和选中的索引校验
+        public void LeftComboBox_ClosedEvent(object sender, EventArgs e)
+        { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName0); }
+        public void RightComboBox_ClosedEvent(object sender, EventArgs e) 
+        { ComboBox_ClosedEvent(sender as ComboBox, nowColumnsName1); }
+        public void ComparedComboBox_ClosedEvent(object sender, EventArgs e)
+        { ComboBox_ClosedEvent(sender as ComboBox, comparedItems); }
+        public void LogicalComboBox_ClosedEvent(object sender, EventArgs e)
+        { ComboBox_ClosedEvent(sender as ComboBox, logicItems); }
+        public void ComboBox_ClosedEvent(ComboBox comboBox, string[] nowColumns)
+        {
+           
+            if (nowColumns.Length == 0)
+                return;
+            // 手动将字段全部输入，这时候selectItem.index=-1,我们将设成下拉列表第一个匹配字段的索引
+            if (comboBox.SelectedIndex == -1 && !string.IsNullOrEmpty(comboBox.Text))
+            {
+                for (int i = 0; i < nowColumns.Length; i++)
+                {
+                    if (nowColumns[i].Equals(comboBox.Text))
+                    {
+                        comboBox.SelectedIndex = i;
+                        comboBox.Tag = i;
+                        break;
+                    }
+                }
+            }
+           
+            // 恢复下拉列表原始字段
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(nowColumns);
+            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            {
+                int index = Convert.ToInt32(comboBox.Tag.ToString());
+                comboBox.Text = nowColumns[index];
+            }
+        
+        }
+        #endregion
+        protected readonly Dictionary<int, int> filterDict = new Dictionary<int, int>();
+        protected string[] comparedItems = new string[] { };
+        protected string[] logicItems = new string[] { };
+        public void LeftComboBox_TextUpdate(object sender, EventArgs e)
+        { ComboBox_TextUpdate(sender as ComboBox, nowColumnsName0); }
+        public void RightComboBox_TextUpdate(object sender, EventArgs e)
+        { ComboBox_TextUpdate(sender as ComboBox, nowColumnsName1); }
+        public void ComparedComboBox_TextUpdate(object sender, EventArgs e)
+        { ComboBox_TextUpdate(sender as ComboBox, comparedItems); }
+        public void LogicalComboBox_TextUpdate(object sender, EventArgs e)
+        { ComboBox_TextUpdate(sender as ComboBox, logicItems); }
+        public void ComboBox_TextUpdate(ComboBox comboBox, string[] nowColumns)
+        {
+
+            comboBox.SelectedIndex = -1;
+            comboBox.Tag = null;
+            int count = nowColumns.Length;
+            if (comboBox.Text == "" || count == 0)
+            {
+                comboBox.DroppedDown = false;
+                return;
+            }
+
+            filterDict.Clear();
+
+            //每次搜索文本改变，就是对字典重新赋值
+            comboBox.Items.Clear();
+            List<string> filterItems = new List<string>();
+
+            for (int i = 0; i < count; i++)
+            {
+                if (nowColumns[i].Contains(comboBox.Text))
+                {
+                    filterItems.Add(nowColumns[i]);
+                    // 模糊搜索得到的下拉列表字段索引对应原始下拉列表字段索引
+                    filterDict[filterItems.Count - 1] = i;
+                }
+            }
+
+            comboBox.Items.AddRange(filterItems.ToArray());
+            comboBox.SelectionStart = comboBox.Text.Length;
+            //保持鼠标指针原来状态，有时候鼠标指针会被下拉框覆盖，所以要进行一次设置。
+            Cursor = Cursors.Default;
+            comboBox.DroppedDown = true;
+        }
+       
     }
 }

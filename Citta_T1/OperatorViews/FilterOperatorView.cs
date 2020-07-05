@@ -18,10 +18,24 @@ namespace Citta_T1.OperatorViews
             InitializeComponentManual();
             InitByDataSource();
             LoadOption();
+            this.comparedItems = new string[] {
+            "大于 >",
+            "小于 <",
+            "等于 =",
+            "大于等于 ≥",
+            "小于等于 ≦",
+            "不等于 ≠" };
         }
         // 为了兼顾设计器，一些控件需要手工初始化。
         private void InitializeComponentManual()
         {
+            this.comboBox1.SelectionChangeCommitted -= new EventHandler(this.GetRightSelectedItemIndex);
+            this.comboBox1.TextUpdate -= new System.EventHandler(RightComboBox_TextUpdate);
+            this.comboBox1.DropDownClosed -= new System.EventHandler(RightComboBox_ClosedEvent);
+            this.comboBox1.SelectionChangeCommitted += new EventHandler(this.GetComparedSelectedItemIndex);
+            this.comboBox1.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
+            this.comboBox1.DropDownClosed += new System.EventHandler(ComparedComboBox_ClosedEvent);
+
             this.textBoxEx1.Leave += new EventHandler(this.IsIllegalCharacter);
             this.textBoxEx1.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
@@ -170,6 +184,7 @@ namespace Citta_T1.OperatorViews
             
         }
         #endregion
+
         protected override void CreateLine(int addLine)
         {
             // And OR 选择框
@@ -180,13 +195,11 @@ namespace Citta_T1.OperatorViews
             this.tableLayoutPanel1.Controls.Add(data0ComboBox, 1, addLine);
 
             ComboBox filterBox = NewComboBox();
-            filterBox.Items.AddRange(new object[] {
-            "大于 >",
-            "小于 <",
-            "等于 =",
-            "大于等于 ≥",
-            "小于等于 ≦",
-            "不等于 ≠"});
+            filterBox.Items.AddRange(this.comparedItems);
+            filterBox.SelectionChangeCommitted += new EventHandler(this.GetComparedSelectedItemIndex);
+            filterBox.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
+            filterBox.DropDownClosed += new System.EventHandler(ComparedComboBox_ClosedEvent);
+
             this.tableLayoutPanel1.Controls.Add(filterBox, 2, addLine);
 
             TextBox textBox = new TextBox

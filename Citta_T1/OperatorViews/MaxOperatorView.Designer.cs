@@ -57,8 +57,9 @@
             // 
             // comboBox0
             // 
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.IntegralHeight = false;
             this.comboBox0.Location = new System.Drawing.Point(0, 54);
             this.comboBox0.Size = new System.Drawing.Size(150, 25);
             this.comboBox0.TabIndex = 1;
