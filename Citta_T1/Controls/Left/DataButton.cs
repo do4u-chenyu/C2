@@ -95,8 +95,8 @@ namespace Citta_T1.Controls.Left
             // 卸载数据源
             Global.GetDataSourceControl().RemoveDataButton(this);
             // 引用不为0时,有可能还会预览该数据源的数据,此时不用移除buffer
-            if (count == 0)
-                BCPBuffer.GetInstance().Remove(this.FullFilePath);
+            //if (count == 0)//不管是否有引用，均清空缓存
+            BCPBuffer.GetInstance().Remove(this.FullFilePath);
 
         }
         #endregion
