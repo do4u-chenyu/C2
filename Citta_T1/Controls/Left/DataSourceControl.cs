@@ -93,11 +93,18 @@ namespace Citta_T1.Controls.Left
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             this.SuspendLayout();
-            for (int i = 0; i < this.localFrame.Controls.Count; i++)
+            List<Control> tmp = new List<Control>();
+            foreach (DataButton ct in this.localFrame.Controls)
+                tmp.Add(ct);
+
+            this.localFrame.Controls.Clear();
+            // 重新排序
+            foreach (Control ct in tmp)
             {
-                Control ct = this.localFrame.Controls[i];
-                ct.Location = new Point(ButtonLeftX, ButtonGapHeight * (i + 1) - ButtonBottomOffsetY);
+                LayoutModelButtonLocation(ct as DataButton);
+                this.localFrame.Controls.Add(ct);
             }
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }
