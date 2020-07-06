@@ -19,7 +19,6 @@ namespace Citta_T1.Controls.Left
             ModelButton mb = new ModelButton(modelName);
             // 获得当前要添加的model button的初始位置
             LayoutModelButtonLocation(mb);
-
             this.Controls.Add(mb);
         }
 
