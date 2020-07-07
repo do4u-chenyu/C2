@@ -63,12 +63,14 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(401, 286);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(305, 286);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
@@ -77,14 +79,14 @@
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(96, 138);
             this.outListCCBL0.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL0.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
             this.outListCCBL0.TabIndex = 23;
             // 
             // outListCCBL1
             // 
             this.outListCCBL1.Location = new System.Drawing.Point(302, 138);
             this.outListCCBL1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.outListCCBL1.Size = new System.Drawing.Size(150, 22);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 24);
             this.outListCCBL1.TabIndex = 24;
             // 
             // comboBox0
@@ -360,9 +362,33 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(490, 359);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(490, 359);
             this.Name = "CustomOperatorView";
             this.Text = "AI实践算子设置";
+            this.Controls.SetChildIndex(this.confirmButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.fixRadioButton, 0);
+            this.Controls.SetChildIndex(this.fixSecondTextBox, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.randomRadioButton, 0);
+            this.Controls.SetChildIndex(this.randomBeginTextBox, 0);
+            this.Controls.SetChildIndex(this.randomEndTextBox, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.Controls.SetChildIndex(this.outListCCBL1, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.rsFullFilePathTextBox, 0);
+            this.Controls.SetChildIndex(this.browseButton, 0);
+            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
+            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.outputFileEncodeSettingGroup.ResumeLayout(false);
             this.outputFileEncodeSettingGroup.PerformLayout();
             this.outputFileSeparatorSettingGroup.ResumeLayout(false);

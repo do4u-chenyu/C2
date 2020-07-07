@@ -186,6 +186,10 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(557, 428);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(557, 428);
             this.Name = "CollideOperatorView";
             this.Text = "碰撞算子设置";
             this.bottomPanel.ResumeLayout(false);
