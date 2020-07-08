@@ -24,6 +24,9 @@ namespace Citta_T1.OperatorViews
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
+            this.comparedItems = new string[] {
+            "命中提取",
+            "过滤去噪"};
             InitByDataSource();
             LoadOption();
         }
@@ -47,6 +50,12 @@ namespace Citta_T1.OperatorViews
             comboBox0.Items.AddRange(nowColumnsName0);
             comboBox1.Items.AddRange(nowColumnsName1);
             outListCCBL0.Items.AddRange(nowColumnsName0);
+
+            // conditionSelectBox模糊查找功能
+            this.conditionSelectBox.Items.AddRange(this.comparedItems);
+            this.conditionSelectBox.SelectionChangeCommitted += new EventHandler(this.GetComparedSelectedItemIndex);
+            this.conditionSelectBox.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
+            this.conditionSelectBox.DropDownClosed += new System.EventHandler(ComparedComboBox_ClosedEvent);
             UpdatePreviewText();
         }
         private void LoadOption()
