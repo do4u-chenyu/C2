@@ -209,7 +209,7 @@ namespace Citta_T1.OperatorViews.Base
         protected void GetLogicalSelectedItemIndex(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            GetSelectedItemIndex(comboBox, comparedItems);
+            GetSelectedItemIndex(comboBox, logicItems);
         }
         //更新后续子图所有节点状态
         protected void UpdateSubGraphStatus()
