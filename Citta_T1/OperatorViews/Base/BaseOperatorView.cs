@@ -481,7 +481,18 @@ namespace Citta_T1.OperatorViews.Base
         {
            
             if (nowColumns.Length == 0)
-                return;
+                return;          
+           
+            // 恢复下拉列表原始字段
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(nowColumns);
+            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            {
+                int index = Convert.ToInt32(comboBox.Tag.ToString());
+                comboBox.SelectedIndex = index;
+                comboBox.Text = nowColumns[index];
+            }
+
             // 手动将字段全部输入，这时候selectItem.index=-1,我们将设成下拉列表第一个匹配字段的索引
             if (comboBox.SelectedIndex == -1 && !string.IsNullOrEmpty(comboBox.Text))
             {
@@ -495,16 +506,7 @@ namespace Citta_T1.OperatorViews.Base
                     }
                 }
             }
-           
-            // 恢复下拉列表原始字段
-            comboBox.Items.Clear();
-            comboBox.Items.AddRange(nowColumns);
-            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
-            {
-                int index = Convert.ToInt32(comboBox.Tag.ToString());
-                comboBox.Text = nowColumns[index];
-            }
-        
+
         }
         #endregion
         protected readonly Dictionary<int, int> filterDict = new Dictionary<int, int>();
