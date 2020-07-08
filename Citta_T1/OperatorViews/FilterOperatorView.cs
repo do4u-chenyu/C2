@@ -16,8 +16,7 @@ namespace Citta_T1.OperatorViews
         {
             InitializeComponent();
             InitializeComponentManual();
-            InitByDataSource();
-            LoadOption();
+            InitByDataSource();          
             this.comparedItems = new string[] {
             "大于 >",
             "小于 <",
@@ -25,6 +24,7 @@ namespace Citta_T1.OperatorViews
             "大于等于 ≥",
             "小于等于 ≦",
             "不等于 ≠" };
+            LoadOption();
         }
         // 为了兼顾设计器，一些控件需要手工初始化。
         private void InitializeComponentManual()
