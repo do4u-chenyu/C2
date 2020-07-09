@@ -112,13 +112,19 @@ namespace Citta_T1.Business.Option
         //获取算子上次配置状态
         private ElementStatus RestoreOptionStatus(ModelElement me)
         {
-            Dictionary<string, string> optionDict = (me.InnerControl as MoveOpControl).Option.OptionDict;
+            MoveOpControl moveOpControl = me.InnerControl as MoveOpControl;
+            Dictionary<string, string> optionDict = moveOpControl.Option.OptionDict;
 
             if (optionDict == null)
                 return ElementStatus.Null;
 
             string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow", "fixSecond", "randomBegin", "randomEnd" };
-
+            List<string> keyList = new List<string>();
+            foreach (RegisterInfo register in moveOpControl.Option.AllRegisterInfo[me.SubType])
+            {
+                if (register.Prefix != "factorH")
+                    keyList.Add(register.Prefix);
+            }
             foreach (KeyValuePair<string, string> kvp in optionDict)
             {
                 //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空题 ，  
@@ -127,6 +133,11 @@ namespace Citta_T1.Business.Option
                     continue;
 
                 if (String.IsNullOrWhiteSpace(kvp.Value))
+                    return ElementStatus.Null;
+            }
+            foreach (string key in keyList)
+            {
+                if (!optionDict.Keys.Contains(key) || string.IsNullOrWhiteSpace(optionDict[key]))
                     return ElementStatus.Null;
             }
             return ElementStatus.Ready;

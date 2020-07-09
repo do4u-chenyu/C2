@@ -133,6 +133,8 @@ namespace Citta_T1.Business.Option
         public string this[string key] { get { return optionDict[key]; } set { optionDict[key] = value; } }
         public List<string> Keys { get { return optionDict.Keys.ToList(); } }
 
+        public Dictionary<ElementSubType, RegisterInfo[]> AllRegisterInfo { get => allRegisterInfo; }
+
         public override string ToString()
         {
             return string.Join(",", OptionDict.ToList());
