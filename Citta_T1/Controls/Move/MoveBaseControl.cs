@@ -273,7 +273,7 @@ namespace Citta_T1.Controls.Move
             this.txtButton.Text = name;
             if (ConvertUtil.GB2312.GetBytes(this.Description).Length > maxLength)
             {
-                txtWidth += 10;
+                txtWidth += 11;
                 this.txtButton.Text = name + "...";
             }
             changeStatus.Width = normalStatus.Width + txtWidth;
