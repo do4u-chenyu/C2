@@ -479,7 +479,7 @@ namespace Citta_T1.Dialogs
                     }
                     catch (Exception ex)
                     {
-                        log.Error(ex.ToString());
+                        //log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
                     }
                 PreViewBcpFile();

@@ -108,7 +108,7 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e)
             {
-                log.Info(e.Message);
+                //log.Info(e.Message);
                 return ModelRelation.Empty;
             }
 
