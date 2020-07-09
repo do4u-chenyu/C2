@@ -171,7 +171,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.movePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectDrag.png")));
+                this.movePictureBox.Image = global::Citta_T1.Properties.Resources.selectDrag;
                 this.movePictureBox.Location = new System.Drawing.Point(13, 3);
                 this.movePictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -184,7 +184,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomUpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZommUp.png")));
+                this.zoomUpPictureBox.Image = global::Citta_T1.Properties.Resources.selectZommUp;
                 this.zoomUpPictureBox.Location = new System.Drawing.Point(45, 3);
                 this.zoomUpPictureBox.Size = new System.Drawing.Size(35, 29);
                 return;
@@ -197,7 +197,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.zoomDownPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectZoomDown.png")));
+                this.zoomDownPictureBox.Image = global::Citta_T1.Properties.Resources.selectZoomDown;
                 this.zoomDownPictureBox.Location = new System.Drawing.Point(87, 3);
                 this.zoomDownPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -210,7 +210,7 @@ namespace Citta_T1.Controls.Flow
         {
             if (flag)
             {
-                this.remarkPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectRemark.png")));
+                this.remarkPictureBox.Image = global::Citta_T1.Properties.Resources.selectRemark;
                 this.remarkPictureBox.Location = new System.Drawing.Point(124, 2);
                 this.remarkPictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
@@ -225,13 +225,13 @@ namespace Citta_T1.Controls.Flow
             Global.GetCanvasPanel().FrameWrapper.InitFrame();
             if (flag)
             {
-                this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("selectFrame.png")));
-                this.framePictureBox.Location = new System.Drawing.Point(162, 2);
+                this.framePictureBox.Image = global::Citta_T1.Properties.Resources.selectFrame;
+                this.framePictureBox.Location = new System.Drawing.Point(167, 2);
                 this.framePictureBox.Size = new System.Drawing.Size(29, 29);
                 return;
             }
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(167, 5);
+            this.framePictureBox.Location = new System.Drawing.Point(171, 5);
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
         }
         public void InterruptSelectFrame()

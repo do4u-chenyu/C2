@@ -710,6 +710,7 @@
   <ItemGroup>
     <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
     <None Include="Resources\avgOp.bmp" />
+    <Content Include="res\flow\flow.png" />
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -836,7 +837,6 @@
     <Content Include="res\flowchart\roundrectange.png" />
     <Content Include="res\flowchart\uparrow.png" />
     <Content Include="res\flow\drop.png" />
-    <Content Include="res\flow\flow.png" />
     <Content Include="res\flow\selectDrag.png" />
     <Content Include="res\flow\selectFrame.png" />
     <Content Include="res\flow\selectRemark.png" />
