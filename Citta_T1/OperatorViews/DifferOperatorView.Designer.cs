@@ -62,7 +62,7 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
-            this.outListCCBL0.Size = new System.Drawing.Size(112, 21);
+            this.outListCCBL0.Size = new System.Drawing.Size(112, 24);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox1
@@ -185,6 +185,10 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(576, 428);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(576, 428);
             this.Name = "DifferOperatorView";
             this.Text = "取差集算子设置";
             this.bottomPanel.ResumeLayout(false);

@@ -1,4 +1,5 @@
-﻿using Citta_T1.Utils;
+﻿using Citta_T1.OperatorViews;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +20,10 @@ namespace Citta_T1.Business.Schedule.Cmd
             string inputField = TransInputLine(option.GetOption("dataSelectIndex"));//待匹配字段
             string outField = TransDifferOutputField(option.GetOptionSplit("outfield0"));//输出字段
             string invert = option.GetOption("conditionSlect").ToLower() == "0" ? String.Empty : "-v"; //是否包含，0包含，1不包含
-            string[] keyList = option.GetOption("keyWordText").Split('\t');
+
+            //每次运行从缓存中读一份关键词
+            string keywordXml = new KeywordCombine().KeywordPreView(inputFilePaths[1],this.separators[1].ToCharArray(),int.Parse(option.GetOption("keySelectIndex")),triple.DataElements[1].ExtType.ToString(),triple.DataElements[1].Encoding.ToString());
+            string[] keyList = keywordXml.Split('\t');
            
             //关键词写入临时配置文件，解决关键词为中文时的编码问题，文件统一为utf-8
             string keyPath = System.IO.Path.GetDirectoryName(this.outputFilePath) + "\\O" + this.operatorId + "_key.bat";

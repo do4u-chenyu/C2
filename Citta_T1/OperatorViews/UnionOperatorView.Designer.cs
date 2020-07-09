@@ -37,7 +37,6 @@
             this.valuePanel.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB1
@@ -55,11 +54,13 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(471, 8);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(367, 8);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
@@ -75,6 +76,45 @@
             this.comboBox1.Location = new System.Drawing.Point(92, 3);
             this.comboBox1.Size = new System.Drawing.Size(86, 25);
             this.comboBox1.Visible = true;
+            // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(553, 37);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 334);
+            this.bottomPanel.Size = new System.Drawing.Size(553, 44);
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Controls.Add(this.label3);
+            this.keyPanel.Controls.Add(this.label2);
+            this.keyPanel.Controls.Add(this.label1);
+            this.keyPanel.Location = new System.Drawing.Point(0, 37);
+            this.keyPanel.Size = new System.Drawing.Size(116, 297);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label3, 0);
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Controls.Add(this.dataSourceTB1);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.tableLayoutPanel2);
+            this.valuePanel.Controls.Add(this.groupBox1);
+            this.valuePanel.Controls.Add(this.panel1);
+            this.valuePanel.Location = new System.Drawing.Point(116, 37);
+            this.valuePanel.Size = new System.Drawing.Size(437, 297);
+            this.valuePanel.Controls.SetChildIndex(this.panel1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
+            // 
+            // label1
+            // 
+            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // label3
             // 
@@ -98,38 +138,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "并集条件：";
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            // 
-            // topPanel
-            // 
-            this.topPanel.Size = new System.Drawing.Size(553, 37);
-            // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 334);
-            this.bottomPanel.Size = new System.Drawing.Size(553, 44);
-            // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label3);
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 297);
-            // 
-            // valuePanel
-            // 
-            this.valuePanel.Controls.Add(this.dataSourceTB1);
-            this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.tableLayoutPanel2);
-            this.valuePanel.Controls.Add(this.groupBox1);
-            this.valuePanel.Controls.Add(this.panel1);
-            this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(437, 297);
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 4;
@@ -148,6 +156,10 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 32);
             this.tableLayoutPanel2.TabIndex = 6;
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.textBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox1, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.comboBox0, 0);
+            this.tableLayoutPanel2.Controls.SetChildIndex(this.button1, 0);
             // 
             // button1
             // 
@@ -234,6 +246,10 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(569, 417);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(569, 417);
             this.Name = "UnionOperatorView";
             this.Text = "取并集算子设置";
             this.bottomPanel.ResumeLayout(false);
@@ -245,7 +261,6 @@
             this.tableLayoutPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

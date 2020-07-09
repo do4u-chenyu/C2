@@ -362,7 +362,7 @@ namespace Citta_T1
 
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
-            log.Info("MinMaxPictureBox_Click");
+            //log.Info("MinMaxPictureBox_Click");
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
@@ -449,7 +449,7 @@ namespace Citta_T1
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
 
             //在模型运行完成，及终止的情况下，可以重置
-            Console.WriteLine(currentManager.ModelStatus.ToString());
+            //Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
             {
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");

@@ -33,9 +33,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.conditionSelectBox = new System.Windows.Forms.ComboBox();
             this.bottomPanel.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.keyPanel.SuspendLayout();
             this.valuePanel.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataSourceTB1
@@ -53,18 +53,20 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(387, 180);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(320, 180);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(4, 86);
-            this.outListCCBL0.Size = new System.Drawing.Size(125, 22);
+            this.outListCCBL0.Size = new System.Drawing.Size(125, 24);
             this.outListCCBL0.TabIndex = 8;
             // 
             // comboBox0
@@ -82,6 +84,54 @@
             this.comboBox1.TabIndex = 13;
             this.comboBox1.Visible = true;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.KeywordComBox_SelectedIndexChanged);
+            // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(461, 22);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Controls.Add(this.groupBox1);
+            this.bottomPanel.Location = new System.Drawing.Point(0, 145);
+            this.bottomPanel.Size = new System.Drawing.Size(461, 212);
+            this.bottomPanel.Controls.SetChildIndex(this.confirmButton, 0);
+            this.bottomPanel.Controls.SetChildIndex(this.cancelButton, 0);
+            this.bottomPanel.Controls.SetChildIndex(this.groupBox1, 0);
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Controls.Add(this.label3);
+            this.keyPanel.Controls.Add(this.label2);
+            this.keyPanel.Controls.Add(this.label1);
+            this.keyPanel.Location = new System.Drawing.Point(0, 22);
+            this.keyPanel.Size = new System.Drawing.Size(102, 123);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label3, 0);
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Controls.Add(this.label6);
+            this.valuePanel.Controls.Add(this.comboBox1);
+            this.valuePanel.Controls.Add(this.conditionSelectBox);
+            this.valuePanel.Controls.Add(this.comboBox0);
+            this.valuePanel.Controls.Add(this.dataSourceTB1);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.outListCCBL0);
+            this.valuePanel.Location = new System.Drawing.Point(102, 22);
+            this.valuePanel.Size = new System.Drawing.Size(359, 123);
+            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.comboBox0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.conditionSelectBox, 0);
+            this.valuePanel.Controls.SetChildIndex(this.comboBox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label6, 0);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(11, 3);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // label3
             // 
@@ -104,24 +154,6 @@
             this.label2.Size = new System.Drawing.Size(90, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "过滤条件：";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(11, 3);
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            // 
-            // topPanel
-            // 
-            this.topPanel.Size = new System.Drawing.Size(461, 22);
-            // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Controls.Add(this.groupBox1);
-            this.bottomPanel.Location = new System.Drawing.Point(0, 145);
-            this.bottomPanel.Size = new System.Drawing.Size(461, 212);
-            this.bottomPanel.Controls.SetChildIndex(this.confirmButton, 0);
-            this.bottomPanel.Controls.SetChildIndex(this.cancelButton, 0);
-            this.bottomPanel.Controls.SetChildIndex(this.groupBox1, 0);
             // 
             // groupBox1
             // 
@@ -168,33 +200,6 @@
             this.keywordPreviewBox.Size = new System.Drawing.Size(434, 89);
             this.keywordPreviewBox.TabIndex = 0;
             // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label3);
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 22);
-            this.keyPanel.Size = new System.Drawing.Size(102, 123);
-            // 
-            // valuePanel
-            // 
-            this.valuePanel.Controls.Add(this.label6);
-            this.valuePanel.Controls.Add(this.comboBox1);
-            this.valuePanel.Controls.Add(this.conditionSelectBox);
-            this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Controls.Add(this.dataSourceTB1);
-            this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Location = new System.Drawing.Point(102, 22);
-            this.valuePanel.Size = new System.Drawing.Size(359, 123);
-            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.comboBox0, 0);
-            this.valuePanel.Controls.SetChildIndex(this.conditionSelectBox, 0);
-            this.valuePanel.Controls.SetChildIndex(this.comboBox1, 0);
-            this.valuePanel.Controls.SetChildIndex(this.label6, 0);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -210,9 +215,6 @@
             // 
             this.conditionSelectBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.conditionSelectBox.FormattingEnabled = true;
-            this.conditionSelectBox.Items.AddRange(new object[] {
-            "命中提取",
-            "过滤去噪"});
             this.conditionSelectBox.Location = new System.Drawing.Point(135, 44);
             this.conditionSelectBox.Name = "conditionSelectBox";
             this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
@@ -227,15 +229,19 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(477, 396);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(477, 396);
             this.Name = "KeywordOperatorView";
             this.Text = "关键词过滤算子设置";
             this.bottomPanel.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();
             this.valuePanel.ResumeLayout(false);
             this.valuePanel.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -74,12 +74,14 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(462, 437);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(377, 437);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             this.confirmButton.TabIndex = 1;
@@ -87,6 +89,11 @@
             // comboBox0
             // 
             this.comboBox0.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(45, 14);
+            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // pythonChosenComboBox
             // 
@@ -99,11 +106,6 @@
             this.pythonChosenComboBox.Text = "未配置Python虚拟机";
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(45, 14);
-            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // label2
             // 
@@ -553,9 +555,27 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.confirmButton);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(547, 518);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(547, 518);
             this.Name = "PythonOperatorView";
             this.Text = "Python算子设置";
+            this.Controls.SetChildIndex(this.confirmButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
+            this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.pyParamTextBox, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.pyFullFilePathTextBox, 0);
+            this.Controls.SetChildIndex(this.pyBrowseButton, 0);
+            this.Controls.SetChildIndex(this.previewCmdGroup, 0);
+            this.Controls.SetChildIndex(this.helpLabel, 0);
+            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
+            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
             this.previewCmdGroup.ResumeLayout(false);
             this.previewCmdGroup.PerformLayout();
             this.tabControl1.ResumeLayout(false);

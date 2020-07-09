@@ -289,7 +289,7 @@ namespace Citta_T1.Controls.Move.Op
 
         private void StatusBox_MouseDown(object sender, MouseEventArgs e)
         {   // 只处理左键点击
-            log.Info(Global.GetCurrentDocument().Dirty.ToString());
+            //log.Info(Global.GetCurrentDocument().Dirty.ToString());
             if (e.Button != MouseButtons.Left)
                 return;
             // 单击视为移动,按父控件鼠标点击处理

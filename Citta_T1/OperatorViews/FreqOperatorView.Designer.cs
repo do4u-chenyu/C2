@@ -48,23 +48,64 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
             this.cancelButton.Location = new System.Drawing.Point(326, 19);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             // 
             // confirmButton
             // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
             this.confirmButton.Location = new System.Drawing.Point(236, 19);
             this.confirmButton.Size = new System.Drawing.Size(60, 27);
             // 
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(0, 42);
-            this.outListCCBL0.Size = new System.Drawing.Size(135, 21);
+            this.outListCCBL0.Size = new System.Drawing.Size(135, 24);
             this.outListCCBL0.TabIndex = 1;
             // 
             // comboBox0
             // 
             this.comboBox0.Visible = false;
+            // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(417, 37);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 199);
+            this.bottomPanel.Size = new System.Drawing.Size(417, 64);
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Controls.Add(this.label4);
+            this.keyPanel.Controls.Add(this.label3);
+            this.keyPanel.Controls.Add(this.label2);
+            this.keyPanel.Controls.Add(this.label1);
+            this.keyPanel.Location = new System.Drawing.Point(0, 37);
+            this.keyPanel.Size = new System.Drawing.Size(116, 162);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label3, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label4, 0);
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.groupBox2);
+            this.valuePanel.Controls.Add(this.groupBox1);
+            this.valuePanel.Controls.Add(this.outListCCBL0);
+            this.valuePanel.Location = new System.Drawing.Point(116, 37);
+            this.valuePanel.Size = new System.Drawing.Size(301, 162);
+            this.valuePanel.Controls.SetChildIndex(this.outListCCBL0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            // 
+            // label1
+            // 
+            this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // label3
             // 
@@ -88,29 +129,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "统计字段：";
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            // 
-            // topPanel
-            // 
-            this.topPanel.Size = new System.Drawing.Size(417, 37);
-            // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 199);
-            this.bottomPanel.Size = new System.Drawing.Size(417, 64);
-            // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label4);
-            this.keyPanel.Controls.Add(this.label3);
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 37);
-            this.keyPanel.Size = new System.Drawing.Size(116, 162);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -121,15 +139,6 @@
             this.label4.Size = new System.Drawing.Size(90, 22);
             this.label4.TabIndex = 0;
             this.label4.Text = "是否去重：";
-            // 
-            // valuePanel
-            // 
-            this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.groupBox2);
-            this.valuePanel.Controls.Add(this.groupBox1);
-            this.valuePanel.Controls.Add(this.outListCCBL0);
-            this.valuePanel.Location = new System.Drawing.Point(116, 37);
-            this.valuePanel.Size = new System.Drawing.Size(301, 162);
             // 
             // groupBox2
             // 
@@ -216,6 +225,10 @@
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(433, 302);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(433, 302);
             this.Name = "FreqOperatorView";
             this.Text = "频率统计算子设置";
             this.bottomPanel.ResumeLayout(false);

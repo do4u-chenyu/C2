@@ -38,10 +38,8 @@ namespace Citta_T1.Controls.Left
         public void GenDataButton(string dataName, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)
         {
             // 根据导入数据动态生成一个button
-            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding)
-            {
-                Location = new Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY) // 递增
-            };
+            DataButton dataButton = new DataButton(fullFilePath, dataName, separator, extType, encoding);
+            LayoutModelButtonLocation(dataButton);
 
             // 判断是否有路径文件
             if (this.DataSourceDictI2B.ContainsKey(fullFilePath))
@@ -56,13 +54,21 @@ namespace Citta_T1.Controls.Left
             DataSourceInfo dataSource = new DataSourceInfo(Global.GetMainForm().UserName);
             dataSource.WriteDataSourceInfo(dataButton);
         }
+        private void LayoutModelButtonLocation(DataButton ct)
+        {
+            Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            if (this.localFrame.Controls.Count > 0)
+                startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
+            startPoint.Y += ButtonGapHeight;
+            ct.Location = startPoint;
+        }
         // 程序启动加载时调用
         public void GenDataButton(DataButton dataButton)
         {
             // 供load时调用
 
-            dataButton.Location = new System.Drawing.Point(ButtonLeftX, ButtonGapHeight * (this.DataSourceDictI2B.Count() + 1) - ButtonBottomOffsetY); // 递增
+            LayoutModelButtonLocation(dataButton); // 递增
             this.DataSourceDictI2B.Add(dataButton.FullFilePath, dataButton);
             this.localFrame.Controls.Add(dataButton);
         }
@@ -87,11 +93,18 @@ namespace Citta_T1.Controls.Left
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
             this.SuspendLayout();
-            for (int i = 0; i < this.localFrame.Controls.Count; i++)
+            List<Control> tmp = new List<Control>();
+            foreach (DataButton ct in this.localFrame.Controls)
+                tmp.Add(ct);
+
+            this.localFrame.Controls.Clear();
+            // 重新排序
+            foreach (Control ct in tmp)
             {
-                Control ct = this.localFrame.Controls[i];
-                ct.Location = new Point(ButtonLeftX, ButtonGapHeight * (i + 1) - ButtonBottomOffsetY);
+                LayoutModelButtonLocation(ct as DataButton);
+                this.localFrame.Controls.Add(ct);
             }
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }

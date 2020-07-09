@@ -50,6 +50,87 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // dataSourceTB0
+            // 
+            this.dataSourceTB0.Location = new System.Drawing.Point(2, 0);
+            this.dataSourceTB0.Size = new System.Drawing.Size(134, 23);
+            this.dataSourceTB0.TabIndex = 13;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.Location = new System.Drawing.Point(330, 7);
+            this.cancelButton.Size = new System.Drawing.Size(63, 27);
+            // 
+            // confirmButton
+            // 
+            this.confirmButton.FlatAppearance.BorderSize = 0;
+            this.confirmButton.Location = new System.Drawing.Point(240, 7);
+            this.confirmButton.Size = new System.Drawing.Size(60, 27);
+            // 
+            // comboBox0
+            // 
+            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox0.Location = new System.Drawing.Point(2, 44);
+            this.comboBox0.Size = new System.Drawing.Size(134, 24);
+            this.comboBox0.TabIndex = 12;
+            // 
+            // topPanel
+            // 
+            this.topPanel.Size = new System.Drawing.Size(405, 19);
+            // 
+            // bottomPanel
+            // 
+            this.bottomPanel.Location = new System.Drawing.Point(0, 272);
+            this.bottomPanel.Size = new System.Drawing.Size(405, 40);
+            // 
+            // keyPanel
+            // 
+            this.keyPanel.Controls.Add(this.label9);
+            this.keyPanel.Controls.Add(this.label5);
+            this.keyPanel.Controls.Add(this.label4);
+            this.keyPanel.Controls.Add(this.label3);
+            this.keyPanel.Controls.Add(this.label2);
+            this.keyPanel.Controls.Add(this.label1);
+            this.keyPanel.Location = new System.Drawing.Point(0, 19);
+            this.keyPanel.Size = new System.Drawing.Size(116, 253);
+            this.keyPanel.Controls.SetChildIndex(this.label1, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label2, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label3, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label4, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label5, 0);
+            this.keyPanel.Controls.SetChildIndex(this.label9, 0);
+            // 
+            // valuePanel
+            // 
+            this.valuePanel.Controls.Add(this.groupBox3);
+            this.valuePanel.Controls.Add(this.endRow);
+            this.valuePanel.Controls.Add(this.firstRow);
+            this.valuePanel.Controls.Add(this.dataSourceTB0);
+            this.valuePanel.Controls.Add(this.comboBox0);
+            this.valuePanel.Controls.Add(this.label8);
+            this.valuePanel.Controls.Add(this.label7);
+            this.valuePanel.Controls.Add(this.label6);
+            this.valuePanel.Controls.Add(this.groupBox2);
+            this.valuePanel.Controls.Add(this.groupBox1);
+            this.valuePanel.Location = new System.Drawing.Point(116, 19);
+            this.valuePanel.Size = new System.Drawing.Size(289, 253);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox1, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox2, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label6, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label7, 0);
+            this.valuePanel.Controls.SetChildIndex(this.label8, 0);
+            this.valuePanel.Controls.SetChildIndex(this.comboBox0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.dataSourceTB0, 0);
+            this.valuePanel.Controls.SetChildIndex(this.firstRow, 0);
+            this.valuePanel.Controls.SetChildIndex(this.endRow, 0);
+            this.valuePanel.Controls.SetChildIndex(this.groupBox3, 0);
+            // 
+            // label1
+            // 
+            this.label1.Size = new System.Drawing.Size(90, 22);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -71,43 +152,6 @@
             this.label2.Size = new System.Drawing.Size(90, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "排序字段：";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(32, 0);
-            this.label1.Size = new System.Drawing.Size(90, 22);
-            // 
-            // topPanel
-            // 
-            this.topPanel.Size = new System.Drawing.Size(405, 19);
-            // 
-            // bottomPanel
-            // 
-            this.bottomPanel.Location = new System.Drawing.Point(0, 272);
-            this.bottomPanel.Size = new System.Drawing.Size(405, 40);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(330, 7);
-            this.cancelButton.Size = new System.Drawing.Size(63, 27);
-            this.cancelButton.TabIndex = 1;
-            // 
-            // confirmButton
-            // 
-            this.confirmButton.Location = new System.Drawing.Point(240, 7);
-            this.confirmButton.Size = new System.Drawing.Size(60, 27);
-            this.confirmButton.TabIndex = 0;
-            // 
-            // keyPanel
-            // 
-            this.keyPanel.Controls.Add(this.label9);
-            this.keyPanel.Controls.Add(this.label5);
-            this.keyPanel.Controls.Add(this.label4);
-            this.keyPanel.Controls.Add(this.label3);
-            this.keyPanel.Controls.Add(this.label2);
-            this.keyPanel.Controls.Add(this.label1);
-            this.keyPanel.Location = new System.Drawing.Point(0, 19);
-            this.keyPanel.Size = new System.Drawing.Size(116, 253);
             // 
             // label9
             // 
@@ -141,21 +185,6 @@
             this.label4.Size = new System.Drawing.Size(90, 22);
             this.label4.TabIndex = 0;
             this.label4.Text = "是否去重：";
-            // 
-            // valuePanel
-            // 
-            this.valuePanel.Controls.Add(this.groupBox3);
-            this.valuePanel.Controls.Add(this.endRow);
-            this.valuePanel.Controls.Add(this.firstRow);
-            this.valuePanel.Controls.Add(this.dataSourceTB0);
-            this.valuePanel.Controls.Add(this.comboBox0);
-            this.valuePanel.Controls.Add(this.label8);
-            this.valuePanel.Controls.Add(this.label7);
-            this.valuePanel.Controls.Add(this.label6);
-            this.valuePanel.Controls.Add(this.groupBox2);
-            this.valuePanel.Controls.Add(this.groupBox1);
-            this.valuePanel.Location = new System.Drawing.Point(116, 19);
-            this.valuePanel.Size = new System.Drawing.Size(289, 253);
             // 
             // groupBox3
             // 
@@ -216,25 +245,6 @@
             this.firstRow.TabIndex = 14;
             this.firstRow.Text = "1";
             this.firstRow.Leave += new System.EventHandler(this.FirstRow_Leave);
-            // 
-            // dataInfo
-            // 
-            this.dataSourceTB0.Location = new System.Drawing.Point(2, 0);
-            this.dataSourceTB0.Name = "dataInfo";
-            this.dataSourceTB0.Size = new System.Drawing.Size(134, 23);
-            this.dataSourceTB0.TabIndex = 13;
-            // 
-            // sortField
-            // 
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.FormattingEnabled = true;
-            this.comboBox0.Location = new System.Drawing.Point(2, 44);
-            this.comboBox0.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox0.Name = "sortField";
-            this.comboBox0.Size = new System.Drawing.Size(134, 24);
-            this.comboBox0.TabIndex = 12;
             // 
             // label8
             // 
@@ -349,17 +359,16 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(405, 312);
-            this.ControlBox = false;
             this.Controls.Add(this.valuePanel);
             this.Controls.Add(this.keyPanel);
             this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.topPanel);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(421, 351);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(421, 351);
             this.Name = "SortOperatorView";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "排序算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
