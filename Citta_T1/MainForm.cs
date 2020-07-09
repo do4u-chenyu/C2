@@ -562,7 +562,7 @@ namespace Citta_T1
         {
             this.Invoke(new AsynUpdateLog(delegate (string tlog)
             {
-               // log.Info(tlog);
+                log.Info(tlog);
             }), logContent);
         }
 
