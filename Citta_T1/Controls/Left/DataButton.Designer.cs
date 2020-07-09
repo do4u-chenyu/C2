@@ -77,7 +77,7 @@
             // rightPictureBox
             // 
             this.rightPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("rightPictureBox.Image")));
-            this.rightPictureBox.Location = new System.Drawing.Point(139, 3);
+            this.rightPictureBox.Location = new System.Drawing.Point(125, 3);
             this.rightPictureBox.Name = "rightPictureBox";
             this.rightPictureBox.Size = new System.Drawing.Size(19, 21);
             this.rightPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -145,7 +145,7 @@
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(112, 23);
+            this.textBox.Size = new System.Drawing.Size(97, 23);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
@@ -164,7 +164,7 @@
             this.Controls.Add(this.txtButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataButton";
-            this.Size = new System.Drawing.Size(159, 27);
+            this.Size = new System.Drawing.Size(145, 27);
             this.Load += new System.EventHandler(this.DataButton_Load);
             ((System.ComponentModel.ISupportInitialize)(this.leftPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rightPictureBox)).EndInit();

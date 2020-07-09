@@ -419,10 +419,14 @@ namespace Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByFullFilePath(string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
+        public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             if (!System.IO.File.Exists(fullFilePath))
+            {
+                if (sender is MoveDtControl)
+                    MessageBox.Show("该数据文件不存在");
                 return;
+            }
             this.ShowBottomPanel();
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();

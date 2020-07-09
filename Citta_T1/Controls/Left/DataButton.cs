@@ -58,7 +58,7 @@ namespace Citta_T1.Controls.Left
         #region 右键菜单
         private void ReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(FullFilePath, this.separator, this.extType, this.encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(sender, FullFilePath, this.separator, this.extType, this.encoding);
         }
 
         private void RenameToolStripMenuItem_Click(object sender, EventArgs e)
