@@ -423,7 +423,7 @@ namespace Citta_T1
         {
             if (!System.IO.File.Exists(fullFilePath))
             {
-                if (sender is MoveDtControl)
+                if (sender is MoveDtControl || sender is DataButton)
                     MessageBox.Show("该数据文件不存在");
                 return;
             }
