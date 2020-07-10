@@ -224,7 +224,7 @@ namespace Citta_T1.Utils
                             }
                             else
                             {
-                                string cellValue = sheet.GetRow(i).GetCell(j).ToString();
+                                string cellValue = sheet.GetRow(i).GetCell(j).ToString().Replace('\n',' ');
                                 tmpRowValueList.Add(cellValue);
                             }
                         }
