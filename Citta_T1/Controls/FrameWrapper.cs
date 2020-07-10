@@ -336,6 +336,10 @@ namespace Citta_T1.Controls
         }
         public bool FramePaint(PaintEventArgs e)
         {
+            if (staticImage.Equals(null))
+            {
+                return false;
+            }
             if (selectStatus.Equals(startSelect))
             {
                 Bitmap i = new Bitmap(staticImage);
@@ -347,8 +351,7 @@ namespace Citta_T1.Controls
                 i = null;
                 return true;
             }
-
-            if (Global.GetFlowControl().SelectFrame & staticImage != null)
+            if (Global.GetFlowControl().SelectFrame)
             {
                 Bitmap i = new Bitmap(staticImage);
                 e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
