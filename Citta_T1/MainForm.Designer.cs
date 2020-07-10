@@ -129,7 +129,7 @@ namespace Citta_T1
             this.headPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headPanel.Location = new System.Drawing.Point(0, 0);
             this.headPanel.Name = "headPanel";
-            this.headPanel.Size = new System.Drawing.Size(1229, 46);
+            this.headPanel.Size = new System.Drawing.Size(1233, 46);
             this.headPanel.TabIndex = 0;
             // 
             // panel2
@@ -138,7 +138,7 @@ namespace Citta_T1
             this.panel2.Controls.Add(this.portraitpictureBox);
             this.panel2.Controls.Add(this.usernamelabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(902, 0);
+            this.panel2.Location = new System.Drawing.Point(906, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(327, 46);
             this.panel2.TabIndex = 1;
@@ -319,7 +319,7 @@ namespace Citta_T1
             this.bottomViewPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bottomViewPanel.Location = new System.Drawing.Point(323, 326);
             this.bottomViewPanel.Name = "bottomViewPanel";
-            this.bottomViewPanel.Size = new System.Drawing.Size(906, 280);
+            this.bottomViewPanel.Size = new System.Drawing.Size(910, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
             // bottomPreview
@@ -328,7 +328,7 @@ namespace Citta_T1
             this.bottomPreview.Location = new System.Drawing.Point(0, 39);
             this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
             this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(906, 241);
+            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
             this.bottomPreview.TabIndex = 27;
             // 
             // bottomLogControl
@@ -337,7 +337,7 @@ namespace Citta_T1
             this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
             this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
             this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(906, 241);
+            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
             this.bottomLogControl.TabIndex = 1;
             // 
             // bottomPyConsole
@@ -346,7 +346,7 @@ namespace Citta_T1
             this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
             this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
             this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(906, 241);
+            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
             this.bottomPyConsole.TabIndex = 2;
             // 
             // panel4
@@ -358,7 +358,7 @@ namespace Citta_T1
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(906, 39);
+            this.panel4.Size = new System.Drawing.Size(910, 39);
             this.panel4.TabIndex = 0;
             // 
             // dragLineControl
@@ -369,14 +369,14 @@ namespace Citta_T1
             this.dragLineControl.Location = new System.Drawing.Point(394, 36);
             this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
             this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(364, 3);
+            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
             this.dragLineControl.TabIndex = 3;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.minMaxPictureBox);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(758, 0);
+            this.panel9.Location = new System.Drawing.Point(762, 0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(148, 39);
             this.panel9.TabIndex = 2;
@@ -447,14 +447,14 @@ namespace Citta_T1
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(323, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(906, 48);
+            this.panel1.Size = new System.Drawing.Size(910, 48);
             this.panel1.TabIndex = 4;
             // 
             // commonPanel
             // 
             this.commonPanel.Controls.Add(this.topToolBarControl);
             this.commonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.commonPanel.Location = new System.Drawing.Point(351, 0);
+            this.commonPanel.Location = new System.Drawing.Point(355, 0);
             this.commonPanel.Name = "commonPanel";
             this.commonPanel.Size = new System.Drawing.Size(555, 48);
             this.commonPanel.TabIndex = 5;
@@ -610,7 +610,7 @@ namespace Citta_T1
             this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
             this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
             this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(906, 36);
+            this.modelTitlePanel.Size = new System.Drawing.Size(910, 36);
             this.modelTitlePanel.TabIndex = 1;
             this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
             // 
@@ -621,7 +621,7 @@ namespace Citta_T1
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox2.Location = new System.Drawing.Point(0, 33);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(906, 3);
+            this.pictureBox2.Size = new System.Drawing.Size(910, 3);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -720,7 +720,7 @@ namespace Citta_T1
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(906, 232);
+            this.canvasPanel.Size = new System.Drawing.Size(910, 232);
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
             this.canvasPanel.TabIndex = 5;
@@ -806,13 +806,13 @@ namespace Citta_T1
             this.flowControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowControl.BackgroundImage")));
             this.flowControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.flowControl.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flowControl.Location = new System.Drawing.Point(694, 50);
+            this.flowControl.Location = new System.Drawing.Point(687, 50);
             this.flowControl.Margin = new System.Windows.Forms.Padding(4);
             this.flowControl.Name = "flowControl";
             this.flowControl.SelectDrag = false;
             this.flowControl.SelectFrame = false;
             this.flowControl.SelectRemark = false;
-            this.flowControl.Size = new System.Drawing.Size(209, 51);
+            this.flowControl.Size = new System.Drawing.Size(220, 51);
             this.flowControl.TabIndex = 25;
             // 
             // rightHideButton
@@ -844,7 +844,7 @@ namespace Citta_T1
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox3.Location = new System.Drawing.Point(0, 36);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(906, 36);
+            this.pictureBox3.Size = new System.Drawing.Size(910, 36);
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
             // 
@@ -863,7 +863,7 @@ namespace Citta_T1
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1229, 606);
+            this.ClientSize = new System.Drawing.Size(1233, 606);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bottomViewPanel);
