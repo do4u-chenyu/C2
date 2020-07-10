@@ -227,7 +227,7 @@ namespace Citta_T1.Controls.Move.Rs
         #region 右键菜单
         private void PreviewMenuItem_Click(object sender, EventArgs e)
         {
-            Global.GetMainForm().PreViewDataByFullFilePath(this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
+            Global.GetMainForm().PreViewDataByFullFilePath(this, this.FullFilePath, this.Separator, this.ExtType, this.Encoding);
         }
 
         public void RunMenuItem_Click(object sender, EventArgs e)

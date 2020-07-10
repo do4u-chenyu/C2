@@ -209,7 +209,7 @@ namespace Citta_T1.OperatorViews.Base
         protected void GetLogicalSelectedItemIndex(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
-            GetSelectedItemIndex(comboBox, comparedItems);
+            GetSelectedItemIndex(comboBox, logicItems);
         }
         //更新后续子图所有节点状态
         protected void UpdateSubGraphStatus()
@@ -481,7 +481,18 @@ namespace Citta_T1.OperatorViews.Base
         {
            
             if (nowColumns.Length == 0)
-                return;
+                return;          
+           
+            // 恢复下拉列表原始字段
+            comboBox.Items.Clear();
+            comboBox.Items.AddRange(nowColumns);
+            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            {
+                int index = Convert.ToInt32(comboBox.Tag.ToString());
+                comboBox.SelectedIndex = index;
+                comboBox.Text = nowColumns[index];
+            }
+
             // 手动将字段全部输入，这时候selectItem.index=-1,我们将设成下拉列表第一个匹配字段的索引
             if (comboBox.SelectedIndex == -1 && !string.IsNullOrEmpty(comboBox.Text))
             {
@@ -495,16 +506,7 @@ namespace Citta_T1.OperatorViews.Base
                     }
                 }
             }
-           
-            // 恢复下拉列表原始字段
-            comboBox.Items.Clear();
-            comboBox.Items.AddRange(nowColumns);
-            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
-            {
-                int index = Convert.ToInt32(comboBox.Tag.ToString());
-                comboBox.Text = nowColumns[index];
-            }
-        
+
         }
         #endregion
         protected readonly Dictionary<int, int> filterDict = new Dictionary<int, int>();
@@ -520,7 +522,6 @@ namespace Citta_T1.OperatorViews.Base
         { ComboBox_TextUpdate(sender as ComboBox, logicItems); }
         public void ComboBox_TextUpdate(ComboBox comboBox, string[] nowColumns)
         {
-
             comboBox.SelectedIndex = -1;
             comboBox.Tag = null;
             int count = nowColumns.Length;
@@ -547,10 +548,10 @@ namespace Citta_T1.OperatorViews.Base
             }
 
             comboBox.Items.AddRange(filterItems.ToArray());
-            comboBox.SelectionStart = comboBox.Text.Length;
+            comboBox.SelectionStart = comboBox.Text.Length;         
+            comboBox.DroppedDown = true;
             //保持鼠标指针原来状态，有时候鼠标指针会被下拉框覆盖，所以要进行一次设置。
             Cursor = Cursors.Default;
-            comboBox.DroppedDown = true;
         }
        
     }

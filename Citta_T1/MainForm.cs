@@ -362,7 +362,7 @@ namespace Citta_T1
 
         private void MinMaxPictureBox_Click(object sender, EventArgs e)
         {
-            log.Info("MinMaxPictureBox_Click");
+            //log.Info("MinMaxPictureBox_Click");
             if (this.isBottomViewPanelMinimum == true)
             {
                 this.isBottomViewPanelMinimum = false;
@@ -419,10 +419,14 @@ namespace Citta_T1
             this.flowChartControl.Visible = false;
         }
 
-        public void PreViewDataByFullFilePath(string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
+        public void PreViewDataByFullFilePath(object sender, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             if (!System.IO.File.Exists(fullFilePath))
+            {
+                if (sender is MoveDtControl || sender is DataButton)
+                    MessageBox.Show("该数据文件不存在");
                 return;
+            }
             this.ShowBottomPanel();
             this.bottomPreview.PreViewDataByFullFilePath(fullFilePath, separator, extType, encoding, isForceRead);
             this.ShowBottomPreview();
@@ -449,7 +453,7 @@ namespace Citta_T1
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
 
             //在模型运行完成，及终止的情况下，可以重置
-            Console.WriteLine(currentManager.ModelStatus.ToString());
+            //Console.WriteLine(currentManager.ModelStatus.ToString());
             if (currentManager.ModelStatus != ModelStatus.GifDone && currentManager.ModelStatus != ModelStatus.Pause && currentManager.ModelStatus != ModelStatus.Running)
             {
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");

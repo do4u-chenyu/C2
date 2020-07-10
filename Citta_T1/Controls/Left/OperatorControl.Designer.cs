@@ -81,7 +81,7 @@
             this.leftPanelOpRelate.FlatAppearance.BorderSize = 0;
             this.leftPanelOpRelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpRelate.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpRelate.Location = new System.Drawing.Point(33, 3);
+            this.leftPanelOpRelate.Location = new System.Drawing.Point(58, 26);
             this.leftPanelOpRelate.Name = "leftPanelOpRelate";
             this.leftPanelOpRelate.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpRelate.TabIndex = 0;
@@ -92,7 +92,7 @@
             // relateOpPictureBox
             // 
             this.relateOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("relateOpPictureBox.Image")));
-            this.relateOpPictureBox.Location = new System.Drawing.Point(13, 11);
+            this.relateOpPictureBox.Location = new System.Drawing.Point(34, 34);
             this.relateOpPictureBox.Name = "relateOpPictureBox";
             this.relateOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.relateOpPictureBox.TabIndex = 1;
@@ -101,7 +101,7 @@
             // collideOpPictureBox
             // 
             this.collideOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("collideOpPictureBox.Image")));
-            this.collideOpPictureBox.Location = new System.Drawing.Point(13, 46);
+            this.collideOpPictureBox.Location = new System.Drawing.Point(34, 69);
             this.collideOpPictureBox.Name = "collideOpPictureBox";
             this.collideOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.collideOpPictureBox.TabIndex = 3;
@@ -111,7 +111,7 @@
             // 
             this.differOpPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.differOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("differOpPictureBox.Image")));
-            this.differOpPictureBox.Location = new System.Drawing.Point(13, 114);
+            this.differOpPictureBox.Location = new System.Drawing.Point(34, 137);
             this.differOpPictureBox.Name = "differOpPictureBox";
             this.differOpPictureBox.Size = new System.Drawing.Size(20, 27);
             this.differOpPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -121,7 +121,7 @@
             // randomOpPictureBox
             // 
             this.randomOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("randomOpPictureBox.Image")));
-            this.randomOpPictureBox.Location = new System.Drawing.Point(13, 154);
+            this.randomOpPictureBox.Location = new System.Drawing.Point(34, 177);
             this.randomOpPictureBox.Name = "randomOpPictureBox";
             this.randomOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.randomOpPictureBox.TabIndex = 6;
@@ -130,7 +130,7 @@
             // maxOpPictureBox
             // 
             this.maxOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("maxOpPictureBox.Image")));
-            this.maxOpPictureBox.Location = new System.Drawing.Point(13, 226);
+            this.maxOpPictureBox.Location = new System.Drawing.Point(34, 249);
             this.maxOpPictureBox.Name = "maxOpPictureBox";
             this.maxOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.maxOpPictureBox.TabIndex = 7;
@@ -139,7 +139,7 @@
             // filterOpPictureBox
             // 
             this.filterOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("filterOpPictureBox.Image")));
-            this.filterOpPictureBox.Location = new System.Drawing.Point(13, 190);
+            this.filterOpPictureBox.Location = new System.Drawing.Point(34, 213);
             this.filterOpPictureBox.Name = "filterOpPictureBox";
             this.filterOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.filterOpPictureBox.TabIndex = 8;
@@ -148,7 +148,7 @@
             // avgOpPictureBox
             // 
             this.avgOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("avgOpPictureBox.Image")));
-            this.avgOpPictureBox.Location = new System.Drawing.Point(13, 296);
+            this.avgOpPictureBox.Location = new System.Drawing.Point(34, 319);
             this.avgOpPictureBox.Name = "avgOpPictureBox";
             this.avgOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.avgOpPictureBox.TabIndex = 9;
@@ -157,7 +157,7 @@
             // minOpPictureBox
             // 
             this.minOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("minOpPictureBox.Image")));
-            this.minOpPictureBox.Location = new System.Drawing.Point(13, 262);
+            this.minOpPictureBox.Location = new System.Drawing.Point(34, 285);
             this.minOpPictureBox.Name = "minOpPictureBox";
             this.minOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.minOpPictureBox.TabIndex = 10;
@@ -169,7 +169,7 @@
             this.leftPanelOpCollide.FlatAppearance.BorderSize = 0;
             this.leftPanelOpCollide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpCollide.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpCollide.Location = new System.Drawing.Point(33, 39);
+            this.leftPanelOpCollide.Location = new System.Drawing.Point(58, 62);
             this.leftPanelOpCollide.Name = "leftPanelOpCollide";
             this.leftPanelOpCollide.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpCollide.TabIndex = 18;
@@ -180,7 +180,7 @@
             // unionOpPictureBox
             // 
             this.unionOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("unionOpPictureBox.Image")));
-            this.unionOpPictureBox.Location = new System.Drawing.Point(13, 82);
+            this.unionOpPictureBox.Location = new System.Drawing.Point(34, 105);
             this.unionOpPictureBox.Name = "unionOpPictureBox";
             this.unionOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.unionOpPictureBox.TabIndex = 4;
@@ -193,7 +193,7 @@
             this.lefPanelOpUnion.FlatAppearance.BorderSize = 0;
             this.lefPanelOpUnion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lefPanelOpUnion.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.lefPanelOpUnion.Location = new System.Drawing.Point(33, 78);
+            this.lefPanelOpUnion.Location = new System.Drawing.Point(58, 101);
             this.lefPanelOpUnion.Name = "lefPanelOpUnion";
             this.lefPanelOpUnion.Size = new System.Drawing.Size(61, 30);
             this.lefPanelOpUnion.TabIndex = 19;
@@ -209,7 +209,7 @@
             this.leftPanelOpDiffer.FlatAppearance.BorderSize = 0;
             this.leftPanelOpDiffer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpDiffer.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDiffer.Location = new System.Drawing.Point(33, 110);
+            this.leftPanelOpDiffer.Location = new System.Drawing.Point(58, 133);
             this.leftPanelOpDiffer.Name = "leftPanelOpDiffer";
             this.leftPanelOpDiffer.Size = new System.Drawing.Size(61, 37);
             this.leftPanelOpDiffer.TabIndex = 20;
@@ -223,7 +223,7 @@
             this.leftPanelOpRandom.FlatAppearance.BorderSize = 0;
             this.leftPanelOpRandom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpRandom.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpRandom.Location = new System.Drawing.Point(33, 147);
+            this.leftPanelOpRandom.Location = new System.Drawing.Point(58, 170);
             this.leftPanelOpRandom.Name = "leftPanelOpRandom";
             this.leftPanelOpRandom.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpRandom.TabIndex = 21;
@@ -237,7 +237,7 @@
             this.leftPanelOpFilter.FlatAppearance.BorderSize = 0;
             this.leftPanelOpFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFilter.Location = new System.Drawing.Point(33, 183);
+            this.leftPanelOpFilter.Location = new System.Drawing.Point(58, 206);
             this.leftPanelOpFilter.Name = "leftPanelOpFilter";
             this.leftPanelOpFilter.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpFilter.TabIndex = 22;
@@ -251,7 +251,7 @@
             this.leftPanelOpMax.FlatAppearance.BorderSize = 0;
             this.leftPanelOpMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpMax.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpMax.Location = new System.Drawing.Point(33, 219);
+            this.leftPanelOpMax.Location = new System.Drawing.Point(58, 242);
             this.leftPanelOpMax.Name = "leftPanelOpMax";
             this.leftPanelOpMax.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpMax.TabIndex = 23;
@@ -265,7 +265,7 @@
             this.leftPanelOpMin.FlatAppearance.BorderSize = 0;
             this.leftPanelOpMin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpMin.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpMin.Location = new System.Drawing.Point(33, 255);
+            this.leftPanelOpMin.Location = new System.Drawing.Point(58, 278);
             this.leftPanelOpMin.Name = "leftPanelOpMin";
             this.leftPanelOpMin.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpMin.TabIndex = 24;
@@ -279,7 +279,7 @@
             this.leftPanelOpAvg.FlatAppearance.BorderSize = 0;
             this.leftPanelOpAvg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpAvg.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpAvg.Location = new System.Drawing.Point(33, 291);
+            this.leftPanelOpAvg.Location = new System.Drawing.Point(58, 314);
             this.leftPanelOpAvg.Name = "leftPanelOpAvg";
             this.leftPanelOpAvg.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpAvg.TabIndex = 25;
@@ -291,7 +291,7 @@
             // freqOpPictureBox
             // 
             this.freqOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("freqOpPictureBox.Image")));
-            this.freqOpPictureBox.Location = new System.Drawing.Point(13, 333);
+            this.freqOpPictureBox.Location = new System.Drawing.Point(34, 356);
             this.freqOpPictureBox.Name = "freqOpPictureBox";
             this.freqOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.freqOpPictureBox.TabIndex = 26;
@@ -300,7 +300,7 @@
             // sortOpPictureBox
             // 
             this.sortOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("sortOpPictureBox.Image")));
-            this.sortOpPictureBox.Location = new System.Drawing.Point(13, 369);
+            this.sortOpPictureBox.Location = new System.Drawing.Point(34, 392);
             this.sortOpPictureBox.Name = "sortOpPictureBox";
             this.sortOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.sortOpPictureBox.TabIndex = 27;
@@ -309,7 +309,7 @@
             // groupOpPictureBox
             // 
             this.groupOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("groupOpPictureBox.Image")));
-            this.groupOpPictureBox.Location = new System.Drawing.Point(13, 406);
+            this.groupOpPictureBox.Location = new System.Drawing.Point(34, 429);
             this.groupOpPictureBox.Name = "groupOpPictureBox";
             this.groupOpPictureBox.Size = new System.Drawing.Size(20, 30);
             this.groupOpPictureBox.TabIndex = 28;
@@ -321,7 +321,7 @@
             this.leftPanelOpFreq.FlatAppearance.BorderSize = 0;
             this.leftPanelOpFreq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpFreq.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpFreq.Location = new System.Drawing.Point(33, 327);
+            this.leftPanelOpFreq.Location = new System.Drawing.Point(58, 350);
             this.leftPanelOpFreq.Name = "leftPanelOpFreq";
             this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpFreq.TabIndex = 29;
@@ -336,7 +336,7 @@
             this.leftPanelOpSort.FlatAppearance.BorderSize = 0;
             this.leftPanelOpSort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpSort.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpSort.Location = new System.Drawing.Point(33, 363);
+            this.leftPanelOpSort.Location = new System.Drawing.Point(58, 386);
             this.leftPanelOpSort.Name = "leftPanelOpSort";
             this.leftPanelOpSort.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpSort.TabIndex = 30;
@@ -351,7 +351,7 @@
             this.leftPanelOpGroup.FlatAppearance.BorderSize = 0;
             this.leftPanelOpGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpGroup.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpGroup.Location = new System.Drawing.Point(33, 399);
+            this.leftPanelOpGroup.Location = new System.Drawing.Point(58, 422);
             this.leftPanelOpGroup.Name = "leftPanelOpGroup";
             this.leftPanelOpGroup.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpGroup.TabIndex = 31;
@@ -366,7 +366,7 @@
             this.leftPanelOpWordFilter.FlatAppearance.BorderSize = 0;
             this.leftPanelOpWordFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpWordFilter.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(33, 435);
+            this.leftPanelOpWordFilter.Location = new System.Drawing.Point(58, 458);
             this.leftPanelOpWordFilter.Name = "leftPanelOpWordFilter";
             this.leftPanelOpWordFilter.Size = new System.Drawing.Size(89, 37);
             this.leftPanelOpWordFilter.TabIndex = 32;
@@ -378,7 +378,7 @@
             // wordFilterOpPictureBox
             // 
             this.wordFilterOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("wordFilterOpPictureBox.Image")));
-            this.wordFilterOpPictureBox.Location = new System.Drawing.Point(13, 443);
+            this.wordFilterOpPictureBox.Location = new System.Drawing.Point(34, 466);
             this.wordFilterOpPictureBox.Name = "wordFilterOpPictureBox";
             this.wordFilterOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.wordFilterOpPictureBox.TabIndex = 33;
@@ -390,7 +390,7 @@
             this.leftPanelOpDataStandar.FlatAppearance.BorderSize = 0;
             this.leftPanelOpDataStandar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.leftPanelOpDataStandar.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(33, 471);
+            this.leftPanelOpDataStandar.Location = new System.Drawing.Point(58, 494);
             this.leftPanelOpDataStandar.Name = "leftPanelOpDataStandar";
             this.leftPanelOpDataStandar.Size = new System.Drawing.Size(89, 37);
             this.leftPanelOpDataStandar.TabIndex = 34;
@@ -402,7 +402,7 @@
             // dataStandarOpPictureBox
             // 
             this.dataStandarOpPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("dataStandarOpPictureBox.Image")));
-            this.dataStandarOpPictureBox.Location = new System.Drawing.Point(13, 478);
+            this.dataStandarOpPictureBox.Location = new System.Drawing.Point(34, 501);
             this.dataStandarOpPictureBox.Name = "dataStandarOpPictureBox";
             this.dataStandarOpPictureBox.Size = new System.Drawing.Size(20, 21);
             this.dataStandarOpPictureBox.TabIndex = 35;

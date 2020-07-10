@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlowChartControl));
-            this.networkOPButton = new Citta_T1.Controls.Common.NoFocusButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.customOPButton1 = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -39,33 +37,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.customOPButton2 = new Citta_T1.Controls.Common.NoFocusButton();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
-            // 
-            // networkOPButton
-            // 
-            this.networkOPButton.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.networkOPButton.FlatAppearance.BorderSize = 0;
-            this.networkOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.networkOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.networkOPButton.Location = new System.Drawing.Point(66, 17);
-            this.networkOPButton.Name = "networkOPButton";
-            this.networkOPButton.Size = new System.Drawing.Size(104, 40);
-            this.networkOPButton.TabIndex = 2;
-            this.networkOPButton.Text = "社交网络分析";
-            this.networkOPButton.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(32, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(20, 21);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // customOPButton1
             // 
@@ -73,9 +48,9 @@
             this.customOPButton1.FlatAppearance.BorderSize = 0;
             this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton1.Location = new System.Drawing.Point(66, 63);
+            this.customOPButton1.Location = new System.Drawing.Point(55, 23);
             this.customOPButton1.Name = "customOPButton1";
-            this.customOPButton1.Size = new System.Drawing.Size(104, 40);
+            this.customOPButton1.Size = new System.Drawing.Size(74, 37);
             this.customOPButton1.TabIndex = 20;
             this.customOPButton1.Text = "AI实践";
             this.customOPButton1.UseVisualStyleBackColor = true;
@@ -84,7 +59,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(32, 72);
+            this.pictureBox2.Location = new System.Drawing.Point(34, 31);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 21);
             this.pictureBox2.TabIndex = 19;
@@ -93,7 +68,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(32, 162);
+            this.pictureBox3.Location = new System.Drawing.Point(32, 102);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 21);
             this.pictureBox3.TabIndex = 21;
@@ -105,9 +80,9 @@
             this.pythonOPButton.FlatAppearance.BorderSize = 0;
             this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pythonOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton.Location = new System.Drawing.Point(66, 153);
+            this.pythonOPButton.Location = new System.Drawing.Point(55, 95);
             this.pythonOPButton.Name = "pythonOPButton";
-            this.pythonOPButton.Size = new System.Drawing.Size(104, 40);
+            this.pythonOPButton.Size = new System.Drawing.Size(99, 37);
             this.pythonOPButton.TabIndex = 22;
             this.pythonOPButton.Text = "Python算子";
             this.pythonOPButton.UseVisualStyleBackColor = true;
@@ -119,9 +94,9 @@
             this.customOPButton2.FlatAppearance.BorderSize = 0;
             this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton2.Location = new System.Drawing.Point(66, 108);
+            this.customOPButton2.Location = new System.Drawing.Point(59, 58);
             this.customOPButton2.Name = "customOPButton2";
-            this.customOPButton2.Size = new System.Drawing.Size(104, 40);
+            this.customOPButton2.Size = new System.Drawing.Size(74, 37);
             this.customOPButton2.TabIndex = 24;
             this.customOPButton2.Text = "多源算子";
             this.customOPButton2.UseVisualStyleBackColor = true;
@@ -130,7 +105,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(32, 118);
+            this.pictureBox4.Location = new System.Drawing.Point(34, 66);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(20, 21);
             this.pictureBox4.TabIndex = 23;
@@ -146,11 +121,8 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.customOPButton1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.networkOPButton);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "FlowChartControl";
             this.Size = new System.Drawing.Size(187, 637);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -159,9 +131,6 @@
         }
 
         #endregion
-
-        private Common.NoFocusButton networkOPButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private Common.NoFocusButton customOPButton1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;

@@ -108,7 +108,7 @@
             // 
             this.framePictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(235)))), ((int)(((byte)(235)))));
             this.framePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("framePictureBox.Image")));
-            this.framePictureBox.Location = new System.Drawing.Point(167, 4);
+            this.framePictureBox.Location = new System.Drawing.Point(171, 4);
             this.framePictureBox.Name = "framePictureBox";
             this.framePictureBox.Size = new System.Drawing.Size(24, 24);
             this.framePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -133,7 +133,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
             this.Name = "FlowControl";
-            this.Size = new System.Drawing.Size(209, 51);
+            this.Size = new System.Drawing.Size(218, 51);
             ((System.ComponentModel.ISupportInitialize)(this.movePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomUpPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zoomDownPictureBox)).EndInit();

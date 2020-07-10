@@ -215,9 +215,6 @@
             // 
             this.conditionSelectBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.conditionSelectBox.FormattingEnabled = true;
-            this.conditionSelectBox.Items.AddRange(new object[] {
-            "命中提取",
-            "过滤去噪"});
             this.conditionSelectBox.Location = new System.Drawing.Point(135, 44);
             this.conditionSelectBox.Name = "conditionSelectBox";
             this.conditionSelectBox.Size = new System.Drawing.Size(74, 25);
