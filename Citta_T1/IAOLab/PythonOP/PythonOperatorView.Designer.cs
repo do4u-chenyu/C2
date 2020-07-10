@@ -47,7 +47,6 @@
             this.previewCmdText = new System.Windows.Forms.TextBox();
             this.gbkRadio = new System.Windows.Forms.RadioButton();
             this.utfRadio = new System.Windows.Forms.RadioButton();
-            this.helpLabel = new System.Windows.Forms.Label();
             this.otherSeparatorText = new System.Windows.Forms.TextBox();
             this.otherSeparatorRadio = new System.Windows.Forms.RadioButton();
             this.commaRadio = new System.Windows.Forms.RadioButton();
@@ -381,20 +380,6 @@
             this.utfRadio.Text = "UTF-8";
             this.utfRadio.UseVisualStyleBackColor = true;
             // 
-            // helpLabel
-            // 
-            this.helpLabel.AutoSize = true;
-            this.helpLabel.Font = new System.Drawing.Font("微软雅黑 Light", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.helpLabel.Image = global::Citta_T1.Properties.Resources.div;
-            this.helpLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.helpLabel.Location = new System.Drawing.Point(11, 439);
-            this.helpLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpLabel.Name = "helpLabel";
-            this.helpLabel.Size = new System.Drawing.Size(73, 16);
-            this.helpLabel.TabIndex = 33;
-            this.helpLabel.Text = "       帮助说明";
-            this.helpLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // otherSeparatorText
             // 
             this.otherSeparatorText.Location = new System.Drawing.Point(214, 16);
@@ -541,7 +526,6 @@
             this.Controls.Add(this.outputFileSeparatorSettingGroup);
             this.Controls.Add(this.outputFileEncodeSettingGroup);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.helpLabel);
             this.Controls.Add(this.previewCmdGroup);
             this.Controls.Add(this.pyBrowseButton);
             this.Controls.Add(this.pyFullFilePathTextBox);
@@ -572,7 +556,6 @@
             this.Controls.SetChildIndex(this.pyFullFilePathTextBox, 0);
             this.Controls.SetChildIndex(this.pyBrowseButton, 0);
             this.Controls.SetChildIndex(this.previewCmdGroup, 0);
-            this.Controls.SetChildIndex(this.helpLabel, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);
             this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
             this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
@@ -610,7 +593,6 @@
         private System.Windows.Forms.TextBox rsFullFileNameTextBox;
         private System.Windows.Forms.RadioButton noOutputFileRadio;
         private System.Windows.Forms.GroupBox previewCmdGroup;
-        private System.Windows.Forms.Label helpLabel;
         private System.Windows.Forms.RadioButton gbkRadio;
         private System.Windows.Forms.RadioButton utfRadio;
         private System.Windows.Forms.RadioButton otherSeparatorRadio;
