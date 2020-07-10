@@ -3,6 +3,7 @@ using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Citta_T1.Business.Option
@@ -196,18 +197,17 @@ namespace Citta_T1.Business.Option
             if (nowCount == oldCount && oldColumns.SequenceEqual(nowColumns))
                 return;
             bool isContain = nowCount > oldCount && oldCount > 0;
+            string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
             if (isContain && oldColumns.SequenceEqual(nowColumns.Take(oldCount)))
-            {
-                string path = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
+            {            
                 BCPBuffer.GetInstance().ReWriteBCPFile(path, nowColumns);
                 return;
             }
-            IsNewOut(nowColumns, ID);
+            IsNewOut(nowColumns, ID, path);
         }
 
-        public void IsNewOut(List<string> nowColumns, int ID)
-        {
-            string fullFilePath = Global.GetCurrentDocument().SearchResultElementByOpID(ID).FullFilePath;
+        public void IsNewOut(List<string> nowColumns, int ID, string fullFilePath)
+        { 
             BCPBuffer.GetInstance().ReWriteBCPFile(fullFilePath, nowColumns);
             Global.GetCurrentDocument().SetChildrenStatusNull(ID);
         }
