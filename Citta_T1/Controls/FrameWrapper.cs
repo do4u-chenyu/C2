@@ -336,7 +336,7 @@ namespace Citta_T1.Controls
         }
         public bool FramePaint(PaintEventArgs e)
         {
-            if (selectStatus.Equals(startSelect))
+            if (selectStatus.Equals(startSelect) & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
                 Graphics g = Graphics.FromImage(i);
