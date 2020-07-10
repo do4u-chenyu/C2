@@ -446,14 +446,20 @@ namespace Citta_T1.Controls.Move.Op
             ModelElement currentOp = Global.GetCurrentDocument().SearchElementByID(this.ID);
             if (currentOp.Status == ElementStatus.Null)
             {
-                MessageBox.Show("该算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //判断模型是否保存
             if (Global.GetCurrentDocument().Dirty)
             {
-                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Global.GetCurrentDocument().SearchResultElementByOpID(this.ID) == ModelElement.Empty)
+            {
+                MessageBox.Show("该算子未找到结果算子，请重新配置。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -465,7 +471,7 @@ namespace Citta_T1.Controls.Move.Op
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
             if (notReadyNum > 0)
             {
-                MessageBox.Show("运行到此路径上有" + notReadyNum + "个未配置的算子，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("运行到此路径上有" + notReadyNum + "个未配置的算子，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -474,6 +480,9 @@ namespace Citta_T1.Controls.Move.Op
                 MessageBox.Show("运行到此路径上的算子均已运算完毕，重新运算需要先点击‘重置’按钮。", "运算完毕", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+
+
             currentManager.Start();
             Global.GetMainForm().UpdateRunbuttonImageInfo();
         }

@@ -177,24 +177,24 @@ namespace Citta_T1.Utils
                         }
                         int rowCount =  worksheet.Dimension.End.Row;
                         int colCount = worksheet.Dimension.End.Column;
-                        int realColCount = colCount;
+                        //int realColCount = colCount;
                         //因为是最大列数，可能出现表头列数小于最大列数的情况
-                        for (int i = colCount; i > 0; i--)
-                        {
-                            if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
-                                realColCount--;
-                            else
-                                break;//从后往前，遇到不为空的代表剩下的表头均有值
-                        }
+                        //for (int i = colCount; i > 0; i--)
+                        //{
+                        //    if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
+                        //        realColCount--;
+                        //    else
+                        //        break;//从后往前，遇到不为空的代表剩下的表头均有值
+                        //}
 
                         //遍历单元格赋值
                         for (int row = 1; row <= Math.Min(maxRow, rowCount); row++)
                         {
                             List<string> tmpRowValueList = new List<string>();
-                            for (int col = 1; col <= realColCount; col++)
+                            for (int col = 1; col <= colCount; col++)
                             {
                                 var cellValue = worksheet.Cells[row, col].Value;
-                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString() : string.Empty);
+                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString().Replace('\n',' ') : string.Empty);
                             }
                             rowContentList.Add(tmpRowValueList);
                         }

@@ -234,7 +234,7 @@ namespace Citta_T1.Controls.Move.Rs
         {
             //运行到此
             //找到对应的op算子
-            ModelElement currentOp = null;
+            ModelElement currentOp = ModelElement.Empty;
             foreach (ModelRelation mr in Global.GetCurrentDocument().ModelRelations)
             {
                 if (mr.EndID == this.ID)
@@ -246,20 +246,20 @@ namespace Citta_T1.Controls.Move.Rs
             //未找到op算子？？
             if (currentOp == ModelElement.Empty)
             {
-                MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子没有对应的操作算子，请检查模型后再运行。", "未找到", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (currentOp.Status == ElementStatus.Null)
             {
-                MessageBox.Show("该算子对应的操作算子未配置，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("该算子对应的操作算子未配置，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //判断模型是否保存
             if (Global.GetCurrentDocument().Dirty)
             {
-                MessageBox.Show("当前模型没有保存，请保存后再运行模型", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("当前模型没有保存，请保存后再运行模型。", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -271,7 +271,7 @@ namespace Citta_T1.Controls.Move.Rs
             int notReadyNum = currentManager.CurrentModelTripleStatusNum(ElementStatus.Null);
             if (notReadyNum > 0)
             {
-                MessageBox.Show("运行到此路径上有" + notReadyNum + "个未配置的算子，请配置后再运行", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("运行到此路径上有" + notReadyNum + "个未配置的算子，请配置后再运行。", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
