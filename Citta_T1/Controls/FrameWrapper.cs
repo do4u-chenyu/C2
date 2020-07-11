@@ -347,7 +347,7 @@ namespace Citta_T1.Controls
                 i = null;
                 return true;
             }
-            if (Global.GetFlowControl().SelectFrame)
+            if (Global.GetFlowControl().SelectFrame & staticImage != null)
             {
                 Bitmap i = new Bitmap(staticImage);
                 e.Graphics.DrawImageUnscaled(i, Convert.ToInt32(mapOrigin.X * screenFactor), Convert.ToInt32(mapOrigin.Y * screenFactor));
