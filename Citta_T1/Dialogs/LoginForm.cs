@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Citta_T1.Utils;
 
 namespace Citta_T1.Dialogs
 {
@@ -28,9 +29,20 @@ namespace Citta_T1.Dialogs
         }
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            // 输入用户名长度、非法字符限制
             string userName = this.userNameComboBox.Text;
-            if (userName == "")
+            if (String.IsNullOrEmpty(userName))
+            {
+                MessageBox.Show("请输入用户名");
                 return;
+            }
+            if (FileUtil.ContainIllegalCharacters(userName, "用户名")
+                || FileUtil.NameTooLong(userName, "用户名"))
+            {
+                this.userNameComboBox.Text = String.Empty;
+                return;
+            }
+
             LoginInfo lgInfo = new LoginInfo();
             lgInfo.CreatNewXml();
             if (this.loginCheckBox.Checked && !users.Contains(userName))
@@ -44,6 +56,7 @@ namespace Citta_T1.Dialogs
             this.Close();
 
         }
+      
 
     }
 }
