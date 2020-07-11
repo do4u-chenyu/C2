@@ -80,7 +80,7 @@ namespace Citta_T1.OperatorViews
 
         private void RandomNumBox_Leave(object sender, EventArgs e)
         {
-            ConvertUtil.ControlTextTryParseInt(randomNumBox, "\"{0}\" 不是数字, 请输入一个整数.");
+            ConvertUtil.ControlTextTryParseInt(randomNumBox, "请输入小于"+int.MaxValue+"的正整数.");
         }
     }
 }

@@ -113,12 +113,12 @@ namespace Citta_T1.OperatorViews
         #region 输入非数字，警告
         private void FirstRow_Leave(object sender, EventArgs e)
         {
-            ConvertUtil.ControlTextTryParseInt(firstRow, "请输入数字");
+            ConvertUtil.ControlTextTryParseInt(firstRow, "请输入小于" + int.MaxValue + "的正整数.");
         }
 
         private void EndRow_Leave(object sender, EventArgs e)
         {
-            ConvertUtil.ControlTextTryParseInt(endRow, "请输入数字");
+            ConvertUtil.ControlTextTryParseInt(endRow, "请输入小于" + int.MaxValue + "的正整数.");
         }
          
         #endregion
