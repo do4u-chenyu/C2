@@ -1,4 +1,6 @@
-﻿using Citta_T1.Business.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Citta_T1.Business.Model;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 
@@ -47,7 +49,18 @@ namespace Citta_T1.Business.Option
         private void InitColumnInfo()
         {
             this.ColumnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullFilePath, encoding);
-            ColumnArray = this.ColumnLine.Split(this.separator);
+            //暂定预览保持文件不变，下拉选项去掉尾部空表头
+            List<string> tmpColumnArray = new List<string>(this.ColumnLine.Split(this.separator));
+            int realColCount = tmpColumnArray.Count;
+            for(int i = tmpColumnArray.Count-1 ; i>=0;i--) 
+            {
+                if (string.IsNullOrEmpty(tmpColumnArray[i]))
+                    realColCount--;
+                else
+                    break;
+            }
+            ColumnArray = tmpColumnArray.Take(realColCount).ToArray();
+
         }
     }
 }

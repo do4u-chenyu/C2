@@ -7,6 +7,7 @@ using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -122,6 +123,14 @@ namespace Citta_T1.OperatorViews.Base
             }
             // 对应的结果文件置脏
             BCPBuffer.GetInstance().SetDirty(resultElement.FullFilePath);
+            // 判断结果算子有没有异常删除，或者结果算子存储的路径与当前工作路径不一致
+            string path = resultElement.FullFilePath;
+            string filePath = Path.Combine(Global.GetCurrentDocument().SavePath, Path.GetFileName(path));
+            if (filePath != path)
+                resultElement.FullFilePath = filePath;
+            if (Directory.Exists(Global.GetCurrentDocument().SavePath) && !File.Exists(filePath))
+                File.Create(filePath);
+
             // 输出字段变化，重写BCP文件
             // 单输出算子时oldOutName1为0数组,不影响逻辑
             List<string> oldOutNames = this.oldOutName0.Concat(this.oldOutName1).ToList();

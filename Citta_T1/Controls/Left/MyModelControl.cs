@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Core;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ namespace Citta_T1.Controls.Left
 
         private static readonly int ButtonLeftX = 15;
         private static readonly int ButtonBottomOffsetY = 12;
+        private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
         public void AddModel(string modelName)
         {
             ModelButton mb = new ModelButton(modelName);
@@ -24,12 +26,12 @@ namespace Citta_T1.Controls.Left
 
         private void LayoutModelButtonLocation(Control ct)
         {
-            Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+           
             if (this.Controls.Count > 0)
-                startPoint = this.Controls[this.Controls.Count - 1].Location;
+                this.startPoint = this.Controls[this.Controls.Count - 1].Location;
 
-            startPoint.Y += ct.Height + ButtonBottomOffsetY;
-            ct.Location = startPoint;
+            this.startPoint.Y += ct.Height + ButtonBottomOffsetY;
+            ct.Location = this.startPoint;
         }
 
         public bool ContainModel(string modelTitle)
@@ -58,9 +60,13 @@ namespace Citta_T1.Controls.Left
 
         public void RemoveModelButton(ModelButton modelButton)
         {
+            // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
+            if (this.Controls.Count > 0)
+                this.startPoint.Y = Controls[0].Location.Y - Controls[0].Height - ButtonBottomOffsetY;
+
             this.Controls.Remove(modelButton);
             // 重新布局
-            ReLayoutLocalFrame();
+            ReLayoutLocalFrame();           
         }
 
         private void ReLayoutLocalFrame()

@@ -156,10 +156,10 @@ namespace Citta_T1.Utils
             }
         }
 
-        public static List<List<string>> ReadExcel(string fullFilePath, int maxRow, string sheetName = "") 
+        public static List<List<string>> ReadExcel(string fullFilePath, int maxRow, string sheetName = "")
         {
             FileStream fs = null;
-            List<List<string>> rowContentList = new List<List<string>>(); 
+            List<List<string>> rowContentList = new List<List<string>>();
             try
             {
                 fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
@@ -169,32 +169,32 @@ namespace Citta_T1.Utils
                 {
                     using (ExcelPackage package = new ExcelPackage(fs))
                     {
-                        ExcelWorksheet worksheet = string.IsNullOrEmpty(sheetName)? package.Workbook.Worksheets[0] : package.Workbook.Worksheets[sheetName];
+                        ExcelWorksheet worksheet = string.IsNullOrEmpty(sheetName) ? package.Workbook.Worksheets[0] : package.Workbook.Worksheets[sheetName];
                         if (worksheet == null)
                         {
                             fs.Close();
                             return rowContentList;
                         }
-                        int rowCount =  worksheet.Dimension.End.Row;
+                        int rowCount = worksheet.Dimension.End.Row;
                         int colCount = worksheet.Dimension.End.Column;
-                        int realColCount = colCount;
+                        //int realColCount = colCount;
                         //因为是最大列数，可能出现表头列数小于最大列数的情况
-                        for (int i = colCount; i > 0; i--)
-                        {
-                            if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
-                                realColCount--;
-                            else
-                                break;//从后往前，遇到不为空的代表剩下的表头均有值
-                        }
+                        //for (int i = colCount; i > 0; i--)
+                        //{
+                        //    if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
+                        //        realColCount--;
+                        //    else
+                        //        break;//从后往前，遇到不为空的代表剩下的表头均有值
+                        //}
 
                         //遍历单元格赋值
                         for (int row = 1; row <= Math.Min(maxRow, rowCount); row++)
                         {
                             List<string> tmpRowValueList = new List<string>();
-                            for (int col = 1; col <= realColCount; col++)
+                            for (int col = 1; col <= colCount; col++)
                             {
                                 var cellValue = worksheet.Cells[row, col].Value;
-                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString() : string.Empty);
+                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString().Replace('\n', ' ') : string.Empty);
                             }
                             rowContentList.Add(tmpRowValueList);
                         }
@@ -213,7 +213,7 @@ namespace Citta_T1.Utils
                     int rowCount = sheet.LastRowNum;
                     int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
 
-                    for (int i = 0; i < Math.Min(maxRow+1, rowCount); i++)
+                    for (int i = 0; i < Math.Min(maxRow + 1, rowCount); i++)
                     {
                         List<string> tmpRowValueList = new List<string>();
                         for (int j = 0; j < cellCount; j++)
@@ -224,7 +224,7 @@ namespace Citta_T1.Utils
                             }
                             else
                             {
-                                string cellValue = sheet.GetRow(i).GetCell(j).ToString();
+                                string cellValue = sheet.GetRow(i).GetCell(j).ToString().Replace('\n', ' ');
                                 tmpRowValueList.Add(cellValue);
                             }
                         }
@@ -250,7 +250,28 @@ namespace Citta_T1.Utils
             return rowContentList;
         }
 
-
+        public static bool ContainIllegalCharacters(string userName, string target)
+        {
+            string[] illegalCharacters = new string[] { "*", "\\", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
+            foreach (string character in illegalCharacters)
+            {
+                if (userName.Contains(character))
+                {
+                    MessageBox.Show(target + "包含非法字符，请输入新的" + target + "." + System.Environment.NewLine + "非法字符包含：*, \\, $, [, ], +, -, &, %, #, !, ~, `, \\t, \\n, \\r, :, 空格");
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static bool NameTooLong(string userName, string target)
+        {
+            if (userName.Length > 128)
+            {
+                MessageBox.Show(target + "长度过长,请重新输入" + target);
+                return true;
+            }
+            return false;
+        }
 
     }
 }

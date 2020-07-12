@@ -1,5 +1,6 @@
 ﻿using Citta_T1.Business.Model;
 using Citta_T1.Core;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,6 +39,12 @@ namespace Citta_T1.Dialogs
 
             if (inputTitleModel.Length == 0)
                 return;
+            if (FileUtil.ContainIllegalCharacters(inputTitleModel, "模型名")
+               || FileUtil.NameTooLong(inputTitleModel, "模型名"))
+            {
+                this.textBox.Text = String.Empty;
+                return;
+            }
             // 模型已存在,提示并推出
             if (CheckModelTitelExists(inputTitleModel))
             {

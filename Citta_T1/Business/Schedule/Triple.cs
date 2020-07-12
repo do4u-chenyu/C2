@@ -19,7 +19,7 @@ namespace Citta_T1.Business.Schedule
             this.DataElements = dataElements;
             this.OperateElement = operateElement;
             this.ResultElement = resultElement;
-            this.TripleName =  string.Format("{0}-{1}-{2}",string.Join("", dataElements.Select(c => c.Description).ToArray()), operateElement.Description, resultElement.Description);
+            this.TripleName =  string.Format("{0}----{1}----{2}",string.Join("&&", dataElements.Select(c => c.Description).ToArray()), operateElement.Description, resultElement.Description);
         }
     }
 }

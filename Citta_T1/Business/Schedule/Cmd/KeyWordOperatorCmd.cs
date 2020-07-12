@@ -42,7 +42,8 @@ namespace Citta_T1.Business.Schedule.Cmd
             ReWriteBCPFile();
             cmds.Add(string.Format("{0}|sbin\\awk.exe -F\"{1}\"  '{{print ${2}}}' | sbin\\grep.exe -E {3} -f {4} -n | sbin\\awk.exe -F':' '{{print $1}}' >  {5} ",TransInputfileToCmd(inputFilePath),this.separators[0],inputField,invert,keyPath,keyTmpPath1));
             cmds.Add(string.Format("{0}|sbin\\awk.exe -v OFS=\"{1}\" '{{print NR,$0}}' > {2}", TransInputfileToCmd(inputFilePath),this.separators[0],keyTmpPath2));
-            cmds.Add(string.Format("sbin\\join.exe  -t\"{4}\" {0} {1} | sbin\\awk.exe -F\"{4}\" -v OFS='\\t' '{{print {2}}}' >> {3}", keyTmpPath1, keyTmpPath2, outField, this.outputFilePath, this.separators[0]));
+            cmds.Add(string.Format("sbin\\awk.exe  -F\"{0}\"  '{{if(NR==FNR){{S[$1]=$0;next}}else{{print S[$1]}} }}' {1} {2} | sbin\\awk.exe -F\"{0}\" -v OFS='\\t' '{{print {3}}}' >> {4}", this.separators[0],keyTmpPath2,keyTmpPath1, outField, this.outputFilePath));
+            //cmds.Add(string.Format("sbin\\join.exe  -t\"{4}\" {0} {1} | sbin\\awk.exe -F\"{4}\" -v OFS='\\t' '{{print {2}}}' >> {3}", keyTmpPath1, keyTmpPath2, outField, this.outputFilePath, this.separators[0]));
             cmds.Add(string.Format("sbin\\rm.exe - f {0} {1} {2}", keyPath, keyTmpPath1, keyTmpPath2));
 
             return cmds;

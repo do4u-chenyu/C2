@@ -48,9 +48,9 @@
             this.customOPButton1.FlatAppearance.BorderSize = 0;
             this.customOPButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton1.Location = new System.Drawing.Point(66, 9);
+            this.customOPButton1.Location = new System.Drawing.Point(55, 23);
             this.customOPButton1.Name = "customOPButton1";
-            this.customOPButton1.Size = new System.Drawing.Size(104, 40);
+            this.customOPButton1.Size = new System.Drawing.Size(74, 37);
             this.customOPButton1.TabIndex = 20;
             this.customOPButton1.Text = "AI实践";
             this.customOPButton1.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(32, 18);
+            this.pictureBox2.Location = new System.Drawing.Point(34, 31);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 21);
             this.pictureBox2.TabIndex = 19;
@@ -68,7 +68,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(32, 108);
+            this.pictureBox3.Location = new System.Drawing.Point(32, 102);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 21);
             this.pictureBox3.TabIndex = 21;
@@ -80,9 +80,9 @@
             this.pythonOPButton.FlatAppearance.BorderSize = 0;
             this.pythonOPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pythonOPButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.pythonOPButton.Location = new System.Drawing.Point(66, 99);
+            this.pythonOPButton.Location = new System.Drawing.Point(55, 95);
             this.pythonOPButton.Name = "pythonOPButton";
-            this.pythonOPButton.Size = new System.Drawing.Size(104, 40);
+            this.pythonOPButton.Size = new System.Drawing.Size(99, 37);
             this.pythonOPButton.TabIndex = 22;
             this.pythonOPButton.Text = "Python算子";
             this.pythonOPButton.UseVisualStyleBackColor = true;
@@ -94,9 +94,9 @@
             this.customOPButton2.FlatAppearance.BorderSize = 0;
             this.customOPButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOPButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.customOPButton2.Location = new System.Drawing.Point(66, 54);
+            this.customOPButton2.Location = new System.Drawing.Point(59, 58);
             this.customOPButton2.Name = "customOPButton2";
-            this.customOPButton2.Size = new System.Drawing.Size(104, 40);
+            this.customOPButton2.Size = new System.Drawing.Size(74, 37);
             this.customOPButton2.TabIndex = 24;
             this.customOPButton2.Text = "多源算子";
             this.customOPButton2.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(32, 64);
+            this.pictureBox4.Location = new System.Drawing.Point(34, 66);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(20, 21);
             this.pictureBox4.TabIndex = 23;

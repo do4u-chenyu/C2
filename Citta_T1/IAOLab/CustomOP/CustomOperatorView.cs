@@ -254,7 +254,11 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("未输入其他类型分隔符内容");
                 return notReady;
             }
-
+            if (Convert.ToInt32(randomBeginTextBox.Text) > Convert.ToInt32(randomEndTextBox.Text))
+            {
+                MessageBox.Show("随机运行时间设置中，起始时间大于结束时间");
+                return notReady;
+            }
             return !notReady;
         }
         #endregion

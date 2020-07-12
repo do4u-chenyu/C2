@@ -18,11 +18,13 @@ namespace Citta_T1.Controls.Left
         {
             dataSourceDictI2B = new Dictionary<string, DataButton>();
             InitializeComponent();
+           
         }
 
         private static readonly int ButtonGapHeight = 50;
         private static readonly int ButtonLeftX = 17;
         private static readonly int ButtonBottomOffsetY = 40;
+        private Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
 
         private Dictionary<string, DataButton> dataSourceDictI2B;
 
@@ -56,7 +58,7 @@ namespace Citta_T1.Controls.Left
         }
         private void LayoutModelButtonLocation(DataButton ct)
         {
-            Point startPoint = new Point(ButtonLeftX, -ButtonBottomOffsetY);
+            
             if (this.localFrame.Controls.Count > 0)
                 startPoint = this.localFrame.Controls[this.localFrame.Controls.Count - 1].Location;
 
@@ -92,7 +94,7 @@ namespace Citta_T1.Controls.Left
         private void ReLayoutLocalFrame()
         {
             // 先暂停布局,然后调整button位置,最后恢复布局,可以避免闪烁
-            this.SuspendLayout();
+            this.localFrame.SuspendLayout();
             List<Control> tmp = new List<Control>();
             foreach (DataButton ct in this.localFrame.Controls)
                 tmp.Add(ct);
@@ -105,18 +107,22 @@ namespace Citta_T1.Controls.Left
                 this.localFrame.Controls.Add(ct);
             }
 
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            this.localFrame.ResumeLayout(false);
+            this.localFrame.PerformLayout();
         }
 
         public void RemoveDataButton(DataButton dataButton)
         {
+            // panel左上角坐标随着滑动条改变而改变，以下就是将panel左上角坐标校验
+            if (this.localFrame.Controls.Count > 0)
+                this.startPoint.Y = this.localFrame.Controls[0].Location.Y - ButtonGapHeight;
+
             this.DataSourceDictI2B.Remove(dataButton.FullFilePath);
             this.localFrame.Controls.Remove(dataButton);
             // 重新布局
             ReLayoutLocalFrame();
             // 保存
-            SaveDataSourceInfo();
+            SaveDataSourceInfo();   
         }
         public void SaveDataSourceInfo()
         {
