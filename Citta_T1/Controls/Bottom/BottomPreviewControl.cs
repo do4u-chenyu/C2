@@ -13,11 +13,6 @@ namespace Citta_T1.Controls.Bottom
         {
             InitializeComponent();
             this.dataGridView.DoubleBuffered(true);
-            this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridView.ReadOnly = true;
             InitializeDgv();
         }
 
@@ -84,6 +79,7 @@ namespace Citta_T1.Controls.Bottom
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
+            this.dataGridView.ColumnHeadersHeight = 23;
             this.ResetColumnsWidth();
 
             // 取消重命名
