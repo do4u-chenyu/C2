@@ -76,6 +76,7 @@
             // localFrame
             // 
             this.localFrame.AutoScroll = true;
+            this.localFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.localFrame.BackColor = System.Drawing.Color.White;
             this.localFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.localFrame.Location = new System.Drawing.Point(0, 51);
@@ -86,6 +87,8 @@
             // 
             // externalFrame
             // 
+            this.externalFrame.AutoScroll = true;
+            this.externalFrame.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.externalFrame.BackColor = System.Drawing.Color.White;
             this.externalFrame.Dock = System.Windows.Forms.DockStyle.Fill;
             this.externalFrame.Location = new System.Drawing.Point(0, 51);
@@ -97,6 +100,7 @@
             // DataSourceControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.externalFrame);
             this.Controls.Add(this.localFrame);
             this.Controls.Add(this.dataSourceFrame);
