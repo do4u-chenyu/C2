@@ -143,15 +143,17 @@ namespace Citta_T1.Controls
                 this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right)
             {
+                log.Info("rrrrrrrrrrrrrrrrrrr");
                 Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
                 if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
                     this.DelSelectControl.Show(this, e.Location);
                     return;
                 }
-
+                
                 Global.GetFlowControl().ResetStatus();
-                frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态         
+                frameWrapper.MinBoundingBox = new Rectangle(0, 0, 0, 0);// 点击右键, 清空操作状态,进入到正常编辑状态 
+                this.Invalidate();
             }
             else if (e.Button == MouseButtons.Left)
             {
@@ -579,6 +581,7 @@ namespace Citta_T1.Controls
         }
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
+            
             // 拖动时的OnPaint处理
             if (Global.GetCurrentDocument() == null)
                 return;
@@ -597,6 +600,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+            log.Info("ppppppppppppppppppppp");
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
@@ -808,7 +812,7 @@ namespace Citta_T1.Controls
         }
         public void ControlSelect_Copy()
         {
-            clipBoard.ClipBoardCts = frameWrapper.Controls;
+            clipBoard.ClipBoardCts = frameWrapper.Controls.ToList();
         }
         public void ControlSelect_paste()
         {
