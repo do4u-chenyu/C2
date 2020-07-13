@@ -450,6 +450,10 @@ namespace Citta_T1
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
+            //重置前打断框选、选中线
+            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetCanvasPanel().ClearAllLineStatus();
+
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
 
             //在模型运行完成，及终止的情况下，可以重置
@@ -466,6 +470,9 @@ namespace Citta_T1
 
         private void StopButton_Click(object sender, EventArgs e)
         {
+            //终止前打断框选、选中线
+            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetCanvasPanel().ClearAllLineStatus();
 
             if (this.runButton.Name == "pauseButton" || this.runButton.Name == "continueButton")
             {
@@ -476,6 +483,10 @@ namespace Citta_T1
 
         private void RunButton_Click(object sender, EventArgs e)
         {
+            //运算前打断框选、选中线
+            Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetCanvasPanel().ClearAllLineStatus();
+
             TaskManager currentManager = Global.GetCurrentDocument().TaskManager;
             BindUiManagerFunc();
 
