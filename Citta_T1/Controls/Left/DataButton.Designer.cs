@@ -57,7 +57,7 @@
             this.txtButton.Location = new System.Drawing.Point(25, 1);
             this.txtButton.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton.Name = "txtButton";
-            this.txtButton.Size = new System.Drawing.Size(112, 25);
+            this.txtButton.Size = new System.Drawing.Size(95, 25);
             this.txtButton.TabIndex = 9;
             this.txtButton.UseVisualStyleBackColor = false;
             this.txtButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TxtButton_MouseDown);
@@ -145,7 +145,7 @@
             this.textBox.Location = new System.Drawing.Point(25, 3);
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
-            this.textBox.Size = new System.Drawing.Size(97, 23);
+            this.textBox.Size = new System.Drawing.Size(94, 23);
             this.textBox.TabIndex = 12;
             this.textBox.Visible = false;
             this.textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
