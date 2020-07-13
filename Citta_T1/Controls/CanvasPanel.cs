@@ -338,8 +338,8 @@ namespace Citta_T1.Controls
         public void SetAllLineStatus(List<int> exceptLineIndex = null, bool isInvalidate = false)
         {
             /* 点击线的时候设置线的状态
-             * 1. 当前线状态取反
-             * 2. 其他线
+             * 1. 当前线（exceptLineIndex）状态取反
+             * 2. 其他线状态置为false
              */
             List<ModelRelation> mrs = Global.GetCurrentDocument().ModelRelations;
             for (int i = 0; i < mrs.Count; i++)
@@ -572,6 +572,7 @@ namespace Citta_T1.Controls
         }
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
+            log.Info(Global.GetMainForm().TopMost.ToString());
             // 拖动时的OnPaint处理
             if (Global.GetCurrentDocument() == null)
                 return;
@@ -711,7 +712,9 @@ namespace Citta_T1.Controls
         }
         public void AddEle(ModelElement me)
         {
-            this.AddCtr(me.InnerControl);
+            MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
+            mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel); 
+            this.AddCtr(mbc);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();

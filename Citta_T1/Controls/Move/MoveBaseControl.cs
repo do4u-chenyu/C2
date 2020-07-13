@@ -50,7 +50,7 @@ namespace Citta_T1.Controls.Move
         protected string oldTextString;
         protected Bitmap staticImage;
         // 缩放等级
-        protected int sizeLevel;
+        public int sizeLevel;
 
         // 画布上的缩放倍率
         protected float factor = Global.Factor;
