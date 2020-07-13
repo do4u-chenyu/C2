@@ -1,4 +1,6 @@
 ﻿using Citta_T1.Core;
+using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -24,6 +26,7 @@ namespace Citta_T1.Business.Model.World
     }
     class WorldMap
     {
+        private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private static readonly bool canvasUse = false;
         private readonly WorldMapInfo wmInfo = new WorldMapInfo();
 
@@ -99,7 +102,7 @@ namespace Citta_T1.Business.Model.World
 
             Point Pm = new Point(moc.Location.X + moc.Width + 25, moc.Location.Y);
             Point Pw = ScreenToWorld(Pm, true);
-
+            
             if (Pw.X > rightBorder)
             {
                 Pm.X = moc.Location.X;
