@@ -1,15 +1,15 @@
 ﻿namespace Citta_T1.Core.UndoRedo.Command
 {
     // 测试Command,仅作测试UndoRedoManager功能使用
-    class TestCommand : ICommand
+    class TestCommand : BaseCommand
     {
-        public bool Redo()
+        public override bool _Redo()
         {
             System.Console.WriteLine("TestCommand: Do");
             return true;
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             System.Console.WriteLine("TestCommand: Rollback");
             return true;

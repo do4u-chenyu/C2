@@ -97,7 +97,7 @@ namespace Citta_T1.Business.Option
                 relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 opEle = doc.SearchElementByID(mr.StartID);
             }
-            ICommand cmd = new ElementAddCommand(me, relations, opEle);
+            BaseCommand cmd = new ElementAddCommand(me, relations, opEle);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
         public void CreateNewMoveRsControl(MoveOpControl moc, string path)
@@ -115,7 +115,7 @@ namespace Citta_T1.Business.Option
                 relations.Add(new Tuple<int, int, int>(mr.StartID, mr.EndID, mr.EndPin));
                 opEle = doc.SearchElementByID(mr.StartID);
             }
-            ICommand cmd = new ElementAddCommand(me, relations, opEle);
+            BaseCommand cmd = new ElementAddCommand(me, relations, opEle);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
         }
     }

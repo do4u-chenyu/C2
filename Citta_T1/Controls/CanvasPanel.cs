@@ -384,7 +384,7 @@ namespace Citta_T1.Controls
                 endC = doc.SearchElementByID(mr.EndID).InnerControl;
                 if (startC != null && endC != null)
                 {
-                    ICommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID, mr.EndPin);
+                    BaseCommand delRelationCommand = new RelationDeleteCommand(startC.ID, endC.ID, mr.EndPin);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
                 }
             }
@@ -459,7 +459,7 @@ namespace Citta_T1.Controls
                 // UndoRedo
                 if (isPushCmd)
                 {
-                    ICommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
+                    BaseCommand delRelationCommand = new RelationAddCommand(startC.ID, endC.ID, mr.EndPin);
                     UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), delRelationCommand);
                 }
             }

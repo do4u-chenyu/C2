@@ -53,7 +53,7 @@ namespace Citta_T1.Core.UndoRedo
         }
 
         // 普通执行命令
-        public void PushCommand(ModelDocument md, ICommand cmd)
+        public void PushCommand(ModelDocument md, BaseCommand cmd)
         {
             if (md == null || cmd == null)
                 return;
@@ -76,7 +76,7 @@ namespace Citta_T1.Core.UndoRedo
                 return;
 
             // 回滚操作
-            ICommand cmd = undoRedoDict[md].UndoStack.Pop();
+            BaseCommand cmd = undoRedoDict[md].UndoStack.Pop();
             cmd.Undo();
 
             if (undoRedoDict[md].UndoStack.IsEmpty())
@@ -92,7 +92,7 @@ namespace Citta_T1.Core.UndoRedo
             if (!undoRedoDict.ContainsKey(md) || undoRedoDict[md].RedoStack.IsEmpty())
                 return;
 
-            ICommand cmd = undoRedoDict[md].RedoStack.Pop();
+            BaseCommand cmd = undoRedoDict[md].RedoStack.Pop();
 
             // 重新执行命令
             cmd.Redo();

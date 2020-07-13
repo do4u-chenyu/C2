@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class RelationAddCommand : ICommand
+    class RelationAddCommand : BaseCommand
     {
         private readonly int startID;
         private readonly int endID;
@@ -18,14 +18,14 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.endID = endID;
             this.pinIndex = pinIndex;
         }
-        public bool Undo()
+        public override bool _Undo()
         {
             Global.GetCanvasPanel().DeleteRelationByCtrID(this.startID, this.endID, this.pinIndex);
             Global.GetCanvasPanel().Invalidate(false);
             return true;
         }
 
-        public bool Redo()
+        public override bool _Redo()
         {
             Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID, this.pinIndex);
             return true;

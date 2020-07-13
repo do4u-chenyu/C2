@@ -231,7 +231,7 @@ namespace Citta_T1.Controls.Move
             ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
             if (element != ModelElement.Empty)
             {
-                ICommand renameCommand = new ElementRenameCommand(element, oldTextString);
+                BaseCommand renameCommand = new ElementRenameCommand(element, oldTextString);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), renameCommand);
             }
 

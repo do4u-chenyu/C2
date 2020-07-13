@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class ElementDeleteCommand : ICommand
+    class ElementDeleteCommand : BaseCommand
     {
         private readonly ModelElement me;
         private readonly List<Tuple<int, int, int>> relations;
@@ -22,12 +22,12 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.relations = relations;
             this.ele = connectedEle;
         }
-        public bool Redo()
+        public override bool _Redo()
         {
             return DoDelete();
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             // 正好和ElementAddComman操作相反
             return DoAdd();

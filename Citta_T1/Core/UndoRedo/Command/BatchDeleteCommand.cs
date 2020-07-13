@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class BatchDeleteCommand : ICommand
+    class BatchDeleteCommand : BaseCommand
     {
         private List<ModelElement> mes;
         private List<Tuple<int, int, int>> mrs;
@@ -19,12 +19,12 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.mrs = mrs;
         }
 
-        public bool Redo()
+        public override bool _Redo()
         {
             return DoDelete();
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             // 正好和ElementAddComman操作相反
             return DoAdd();

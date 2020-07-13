@@ -86,7 +86,7 @@ namespace Citta_T1.Controls.Move.Dt
             }
             cp.Invalidate();
             ModelElement me = doc.SearchElementByID(ID);
-            ICommand cmd = new ElementDeleteCommand(me, relations);
+            BaseCommand cmd = new ElementDeleteCommand(me, relations);
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
             // 删控件
             cp.DeleteEle(me);
@@ -250,7 +250,7 @@ namespace Citta_T1.Controls.Move.Dt
                     if (element != ModelElement.Empty)
                     {
                         Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
-                        ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                        BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
 
