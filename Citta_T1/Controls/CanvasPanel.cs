@@ -572,7 +572,6 @@ namespace Citta_T1.Controls
         }
         private void CanvasPanel_Paint(object sender, PaintEventArgs e)
         {
-            log.Info(Global.GetMainForm().TopMost.ToString());
             // 拖动时的OnPaint处理
             if (Global.GetCurrentDocument() == null)
                 return;
