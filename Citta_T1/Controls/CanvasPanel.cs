@@ -763,8 +763,8 @@ namespace Citta_T1.Controls
         private void AddNewElement(MoveBaseControl btn)
         {
             // NewElementEvent中有压栈操作，可以UndoRedo
-            Global.GetCurrentDocument().WorldMap.WorldBoundControl(btn.Location, btn);
             this.Controls.Add(btn);
+            Global.GetCurrentDocument().WorldMap.WorldBoundControl(btn.Location, btn);
             Global.GetNaviViewControl().UpdateNaviView();
             NewElementEvent?.Invoke(btn);
         }
