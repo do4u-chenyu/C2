@@ -300,7 +300,7 @@ namespace Citta_T1.Controls
             if (mrIndex == -1)
             {
                 //if (e.Button == MouseButtons.Right)
-                this.SetAllLineStatus(null, true);
+                this.ClearAllLineStatus();
             }
             else
             {
@@ -352,6 +352,13 @@ namespace Citta_T1.Controls
             }
             if (isInvalidate)
                 this.Invalidate(false);
+        }
+
+        public void ClearAllLineStatus()
+        {
+            this.SetAllLineStatus(null, true);
+            if (this.selectLineIndexs != null)
+                this.selectLineIndexs.Clear();
         }
 
         private void DeleteLineToolStripMenuItem_Click(object sender, EventArgs e)
