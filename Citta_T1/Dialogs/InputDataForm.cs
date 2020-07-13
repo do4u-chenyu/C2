@@ -497,7 +497,7 @@ namespace Citta_T1.Dialogs
             DialogResult dr = this.saveFileDialog.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                string srcFilePath = Path.Combine(Application.StartupPath, src);
+                string srcFilePath = Application.StartupPath + src;
                 string dstFilePath = this.saveFileDialog.FileName;
                 try
                 {
