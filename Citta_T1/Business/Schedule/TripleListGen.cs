@@ -15,6 +15,7 @@ namespace Citta_T1.Business.Schedule
         private string state;
         private ModelElement stopElement;
         private List<int> haveSearchedNodes;//已经找过的节点，如果在里面，不需要再找了
+        private List<ElementSubType> doubleSubType = new List<ElementSubType> { ElementSubType.CustomOperator2, ElementSubType.CollideOperator, ElementSubType.DifferOperator, ElementSubType.RelateOperator, ElementSubType.UnionOperator };
         public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
 
         public TripleListGen(ModelDocument currentModel,string state,ModelElement stopElement)
@@ -63,12 +64,17 @@ namespace Citta_T1.Business.Schedule
 
                 int operateNodeId = FindBeforeNodeIds(resultNodeId).First();
                 ModelElement operateElement = this.currentModel.ModelElements.Find(c => c.ID == operateNodeId);
+                if (operateElement == null || operateElement.Type != ElementType.Operator || !endNodes.Exists(c => c == operateNodeId)) //不是op算子或者没有上游，该节点没有对应三元组
+                    continue;
 
                 List<int> dataNodeIds = FindBeforeNodeIds(operateNodeId);
                 List<ModelElement> dataElements = new List<ModelElement>();
                 foreach (int dataNodeId in dataNodeIds)
                 {
-                    dataElements.Add(this.currentModel.ModelElements.Find(c => c.ID == dataNodeId));
+                    ModelElement dataElement = this.currentModel.ModelElements.Find(c => c.ID == dataNodeId);
+                    if (dataElement == null || dataElement.Type == ElementType.Operator) //不是dt算子,找不到关系对应id,该节点没有对应三元组
+                        continue;
+                    dataElements.Add(dataElement);
                     if (!this.haveSearchedNodes.Exists(c => c == dataNodeId)) //结果\数据 判断是否存在在 haveSearchedNodes, 不在则加入needSearchNodes
                     {
                         nextNeedSearchNodeIds.Add(dataNodeId);
@@ -76,7 +82,9 @@ namespace Citta_T1.Business.Schedule
                     }
                 }
 
-                this.currentModelTripleList.Add(new Triple(dataElements, operateElement, resultElement));
+                //数据源不为空的个数满足op算子引脚个数，才加入
+                if(dataElements.Count.Equals(doubleSubType.Contains(operateElement.SubType)? 2 : 1))
+                    this.currentModelTripleList.Add(new Triple(dataElements, operateElement, resultElement));
             }
             SearchNewTriple(nextNeedSearchNodeIds);
         }
@@ -103,7 +111,8 @@ namespace Citta_T1.Business.Schedule
 
             foreach (ModelRelation beforeNode in this.currentModel.ModelRelations.FindAll(c => c.EndID == id))
             {
-                nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
+                if(!nodeIdPinDict.ContainsKey(beforeNode.EndPin))
+                    nodeIdPinDict.Add(beforeNode.EndPin, beforeNode.StartID);
             }
 
             for (int i = 0; i < nodeIdPinDict.Count; i++)
