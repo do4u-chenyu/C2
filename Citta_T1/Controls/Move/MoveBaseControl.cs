@@ -17,6 +17,7 @@ namespace Citta_T1.Controls.Move
     public partial class MoveBaseControl : UserControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
+        public static bool leftButtonDown = false;
         public ElementType Type { get; set; }
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }
@@ -333,6 +334,11 @@ namespace Citta_T1.Controls.Move
                 foreach (Tuple<int, int, int> rel in relations)
                     cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
+        }
+
+        private void MoveBaseControl_MouseDown(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

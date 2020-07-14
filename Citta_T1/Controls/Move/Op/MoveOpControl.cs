@@ -252,9 +252,13 @@ namespace Citta_T1.Controls.Move.Op
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-
+            if (e.Button == MouseButtons.Right && !leftButtonDown)
+            {
+                this.contextMenuStrip.Show(this, e.Location);
+            }
             if (e.Button == MouseButtons.Left)
             {
+                leftButtonDown = true;
                 // 点中划线部分，将事件发送给CanvasPanel
                 if (rectOut.Contains(e.Location))
                 {
@@ -321,6 +325,7 @@ namespace Citta_T1.Controls.Move.Op
 
             if (e.Button == MouseButtons.Left)
             {
+                leftButtonDown = false;
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
