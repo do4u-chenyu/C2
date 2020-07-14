@@ -131,13 +131,13 @@ namespace Citta_T1.Controls.Top
             config.ShowDialog();
         }
 
-        private void UndoButton_Click(object sender, EventArgs e)
+        public void UndoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Undo(Global.GetCurrentDocument());
             Global.GetMainForm().SetDocumentDirty();
         }
 
-        private void RedoButton_Click(object sender, EventArgs e)
+        public void RedoButton_Click(object sender, EventArgs e)
         {
             UndoRedoManager.GetInstance().Redo(Global.GetCurrentDocument());
             Global.GetMainForm().SetDocumentDirty();
