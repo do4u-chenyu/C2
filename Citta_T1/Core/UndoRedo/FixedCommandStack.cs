@@ -8,15 +8,15 @@ namespace Citta_T1.Core.UndoRedo
     class FixedCommandStack
     {
         private int capacity;
-        private LinkedList<ICommand> fixedStack;
+        private LinkedList<BaseCommand> fixedStack;
 
         public FixedCommandStack(int capacity = 100)
         {
             this.capacity = capacity;
-            fixedStack = new LinkedList<ICommand>();
+            fixedStack = new LinkedList<BaseCommand>();
         }
 
-        public int Push(ICommand cmd)
+        public int Push(BaseCommand cmd)
         {
             if (fixedStack.Count >= capacity)
                 fixedStack.RemoveLast();
@@ -25,7 +25,7 @@ namespace Citta_T1.Core.UndoRedo
             return fixedStack.Count;
         }
 
-        public ICommand Top()
+        public BaseCommand Top()
         {
             return fixedStack.First();
         }
@@ -35,9 +35,9 @@ namespace Citta_T1.Core.UndoRedo
             return fixedStack.Count <= 0;
         }
 
-        public ICommand Pop()
+        public BaseCommand Pop()
         {
-            ICommand cmd = Top();
+            BaseCommand cmd = Top();
             fixedStack.RemoveFirst();
             return cmd;
         }

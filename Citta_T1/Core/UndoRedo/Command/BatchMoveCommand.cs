@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class BatchMoveCommand : ICommand
+    class BatchMoveCommand : BaseCommand
     {
         private Dictionary<int, Point> idPtsDict;
         private Point worldMapOrigin;
@@ -22,7 +22,7 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.idPtsDict = idPtsDict;
             this.worldMapOrigin = worldMapOrigin;
         }
-        public bool Redo()
+        public override bool _Redo()
         {
             if (this.worldMapOrigin.IsEmpty)
                 return DoMove();
@@ -30,7 +30,7 @@ namespace Citta_T1.Core.UndoRedo.Command
                 return DoMove(new Point(0, 0));
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             if (this.worldMapOrigin.IsEmpty)
                 return DoMove();

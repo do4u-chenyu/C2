@@ -329,7 +329,7 @@ namespace Citta_T1.Controls
             if (mesAndMrs != null && mesAndMrs.Item1.Count != 0)
                 //if (mesAndMrs != null && mesAndMrs.Item1.Count != 0 && mesAndMrs.Item2.Count != 0)
             {
-                ICommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
+                BaseCommand cmd = new BatchDeleteCommand(mesAndMrs.Item1, mesAndMrs.Item2);
                 UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
             }
             
@@ -408,7 +408,7 @@ namespace Citta_T1.Controls
                 ct.Top = ct.Top + endP.Y - startP.Y + moveOffset.Y;
             }
 
-            ICommand cmd = new BatchMoveCommand(idPtsDict);
+            BaseCommand cmd = new BatchMoveCommand(idPtsDict);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
 
 

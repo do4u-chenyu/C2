@@ -3,7 +3,7 @@ using Citta_T1.Business.Model;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class ElementRenameCommand : ICommand
+    class ElementRenameCommand : BaseCommand
     {
         private string oldName;
         private readonly ModelElement element;
@@ -12,13 +12,13 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.oldName = oldName;
             this.element = me;
         }
-        public bool Redo()
+        public override bool _Redo()
         {
             return DoCommand();
         }
 
 
-        public bool Undo()
+        public override bool _Undo()
         {
             return DoCommand();
         }

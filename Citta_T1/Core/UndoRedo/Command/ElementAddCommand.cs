@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class ElementAddCommand : ICommand
+    class ElementAddCommand : BaseCommand
     {
         private ModelElement me;
         private List<Tuple<int, int, int>> relations;
@@ -29,12 +29,12 @@ namespace Citta_T1.Core.UndoRedo.Command
                 this.opOptDict = new Dictionary<string, string>((connectedEle.InnerControl as MoveOpControl).Option.OptionDict);
             }
         }
-        public bool Redo()
+        public override bool _Redo()
         {
             return DoAdd();
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             return DoDelete();
         }

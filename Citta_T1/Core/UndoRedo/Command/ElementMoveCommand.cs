@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
-    class ElementMoveCommand : ICommand
+    class ElementMoveCommand : BaseCommand
     {
         Point oldLocation; // 每次回滚时保存当前位置
         private readonly ModelElement element;
@@ -14,12 +14,12 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.oldLocation = oldLocation;
         }
 
-        public bool Redo()
+        public override bool _Redo()
         {
             return Move();
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             return Move();
         }

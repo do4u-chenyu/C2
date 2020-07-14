@@ -3,7 +3,7 @@
 namespace Citta_T1.Core.UndoRedo.Command
 {
 
-    class RelationDeleteCommand : ICommand
+    class RelationDeleteCommand : BaseCommand
     {
         private readonly int startID;
         private readonly int endID;
@@ -14,14 +14,14 @@ namespace Citta_T1.Core.UndoRedo.Command
             this.endID = endID;
             this.pinIndex = pinIndex;
         }
-        public bool Redo()
+        public override bool _Redo()
         {
             Global.GetCanvasPanel().DeleteRelationByCtrID(this.startID, this.endID, this.pinIndex);
             Global.GetCanvasPanel().Invalidate(false);
             return true;
         }
 
-        public bool Undo()
+        public override bool _Undo()
         {
             Global.GetCanvasPanel().AddNewRelationByCtrID(this.startID, this.endID, this.pinIndex);
             return true;

@@ -116,7 +116,7 @@ namespace Citta_T1.Controls.Top
                 Point oldControlPostionInWorld = curWorldMap.ScreenToWorld(me.Location, true);
                 idPtsDict.Add(mbc.ID, oldControlPostionInWorld);
             }
-            ICommand cmd = new BatchMoveCommand(idPtsDict, curWorldMap.MapOrigin);
+            BaseCommand cmd = new BatchMoveCommand(idPtsDict, curWorldMap.MapOrigin);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
 
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);

@@ -195,7 +195,7 @@ namespace Citta_T1.Controls.Move.Rs
                     if (element != ModelElement.Empty)
                     {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
                         Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
-                        ICommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                        BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
                         UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
                     }
                     Global.GetMainForm().SetDocumentDirty();
