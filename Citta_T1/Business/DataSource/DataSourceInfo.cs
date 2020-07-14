@@ -108,7 +108,7 @@ namespace Citta_T1.Business.DataSource
                     };
                     dataSourceList.Add(dataButton);
                 }
-                catch (Exception e) { log.Error("DataSourceInfo :" + e.Message); }
+                catch (Exception e) { log.Error("LoadDataSourceInfo 发生错误，错误 :" + e.Message); }
             }
             return dataSourceList;
         }

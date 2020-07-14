@@ -810,8 +810,11 @@ namespace Citta_T1
         
         private void MainForm_Deactivate(object sender, EventArgs e)
         {
-            Global.GetCanvasPanel().DragWrapper.StartDrag = false;
-            Global.GetCanvasPanel().DragWrapper.ControlChange();
+            if(Global.GetCanvasPanel().DragWrapper.StartDrag)
+            {
+                Global.GetCanvasPanel().DragWrapper.StartDrag = false;
+                Global.GetCanvasPanel().DragWrapper.ControlChange();
+            }
         }
     }
 }

@@ -115,7 +115,15 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            ElementType type = (ElementType)e.Data.GetData("Type");
+            ElementType type;
+            try
+            {
+                type = (ElementType)e.Data.GetData("Type");
+            }
+            catch (Exception)
+            {
+                return;
+            }
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
@@ -134,6 +142,8 @@ namespace Citta_T1.Controls
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
+            
+
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
@@ -256,7 +266,10 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 Global.GetMainForm().SetDocumentDirty();
             }
+<<<<<<< HEAD
+=======
             leftButtonDown = false;
+>>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -605,7 +618,10 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+<<<<<<< HEAD
+=======
             
+>>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
