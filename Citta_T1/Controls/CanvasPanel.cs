@@ -31,6 +31,7 @@ namespace Citta_T1.Controls
     {
         private const int drgOffsetX = 380;
         private const int drgOffsetY = 100;
+        private static bool leftButtonDown = false;
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         public event NewElementEventHandler NewElementEvent;
         private Bitmap staticImage;
@@ -139,13 +140,13 @@ namespace Citta_T1.Controls
         {
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
+            log.Info("dddd");
             Global.GetMainForm().BlankButtonFocus();
             ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
                 this.ClickOnLine(e);
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && !leftButtonDown)
             {
-                log.Info("rrrrrrrrrrrrrrrrrrr");
                 Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
                 if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
@@ -159,6 +160,7 @@ namespace Citta_T1.Controls
             }
             else if (e.Button == MouseButtons.Left)
             {
+                leftButtonDown = true;
                 if (sender is MoveDtControl || sender is MoveRsControl)
                     this.MouseDownWhenPinDraw(sender, e);
                 else if (SelectFrame())
@@ -242,6 +244,7 @@ namespace Citta_T1.Controls
             if (e.Button != MouseButtons.Left)
                 return;
             // 画框处理
+            
             if (SelectFrame())
                 frameWrapper.FrameWrapper_MouseUp(e);
             // 拖拽处理
@@ -253,7 +256,7 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 Global.GetMainForm().SetDocumentDirty();
             }
-
+            leftButtonDown = false;
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -602,7 +605,7 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
-            log.Info("ppppppppppppppppppppp");
+            
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
