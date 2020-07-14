@@ -320,20 +320,11 @@ namespace Citta_T1.Controls.Move.Op
 
             if (e.Button == MouseButtons.Left)
             {
-                if (cmd == ECommandType.PinDraw)
-                {
-                    cmd = ECommandType.Null;
-                    int startX = this.Location.X + e.X;
-                    int startY = this.Location.Y + e.Y;
-                    MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
-                    Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
-                }
-                //cmd = ECommandType.Null;
-                this.moveWrapper.DragUp(e);
+                if (cmd == ECommandType.Hold)
+                    this.moveWrapper.DragUp(e);
                 Global.GetNaviViewControl().UpdateNaviView();
             }
             cmd = ECommandType.Null;
-
             if (oldControlPosition != this.Location )
             {
                 // 构造移动命令类,压入undo栈

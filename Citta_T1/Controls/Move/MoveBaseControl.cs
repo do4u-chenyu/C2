@@ -334,6 +334,5 @@ namespace Citta_T1.Controls.Move
                     cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
         }
-
     }
 }

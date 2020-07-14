@@ -233,31 +233,24 @@ namespace Citta_T1.Controls.Move.Dt
                     int startX = this.Location.X + e.X;
                     int startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
-                    cmd = ECommandType.Null;
                 }
                 else if (cmd == ECommandType.Hold)
-                {
                     this.moveWrapper.DragUp(e);
-                    cmd = ECommandType.Null;
-                }
-                cmd = ECommandType.Null;
-
                 Global.GetNaviViewControl().UpdateNaviView();
-                if (oldControlPosition != this.Location)
-                {
-                    // 构造移动命令类,压入undo栈
-                    ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                    if (element != ModelElement.Empty)
-                    {
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
-                        BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                        UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
-                    }
-
-                    Global.GetMainForm().SetDocumentDirty();
-                }
             }
-
+            cmd = ECommandType.Null;
+            if (oldControlPosition != this.Location)
+            {
+                // 构造移动命令类,压入undo栈
+                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                if (element != ModelElement.Empty)
+                {
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+                    BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                }
+                Global.GetMainForm().SetDocumentDirty();
+            }
         }
         #endregion
 
