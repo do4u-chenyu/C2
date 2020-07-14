@@ -57,6 +57,8 @@ namespace Citta_T1.Controls
 
         internal DragWrapper DragWrapper => dragWrapper;
 
+        public  bool LeftButtonDown { get => leftButtonDown; set => leftButtonDown = value; }
+
         public CanvasPanel()
         {
             dragWrapper = new DragWrapper();
@@ -780,6 +782,7 @@ namespace Citta_T1.Controls
                 Separator = separator,
                 Encoding = encoding
             };
+            btn.Location = location;
             AddNewElement(btn);
             return btn;
         }

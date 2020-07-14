@@ -59,12 +59,13 @@ namespace Citta_T1.Controls.Move.Rs
             Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
-            ChangeSize(size);
+            
 
             changeStatus = new Size(0, 28);
             normalStatus = new Size(58, 28);
 
             InitializeOpPinPicture();
+            ChangeSize(size);
             this.moveWrapper = new MoveWrapper();
 
             endLineIndexs.Add(-1);
