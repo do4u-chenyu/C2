@@ -98,7 +98,7 @@ namespace Citta_T1.Controls.Move
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            //this.ContextMenuStrip = this.contextMenuStrip;
+            this.ContextMenuStrip = this.contextMenuStrip;
             this.Controls.Add(this.txtButton);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.rightPictureBox);
