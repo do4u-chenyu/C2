@@ -15,7 +15,8 @@ namespace Citta_T1.Business.Schedule
         private string state;
         private ModelElement stopElement;
         private List<int> haveSearchedNodes;//已经找过的节点，如果在里面，不需要再找了
-        private List<ElementSubType> doubleSubType = new List<ElementSubType> { ElementSubType.CustomOperator2, ElementSubType.CollideOperator, ElementSubType.DifferOperator, ElementSubType.RelateOperator, ElementSubType.UnionOperator };
+        //双输入的op算子集合，保证存triple的时候数据源个数正确
+        private List<ElementSubType> doubleSubType = new List<ElementSubType> { ElementSubType.CustomOperator2, ElementSubType.CollideOperator, ElementSubType.DifferOperator, ElementSubType.RelateOperator, ElementSubType.UnionOperator, ElementSubType.KeywordOperator };
         public List<Triple> CurrentModelTripleList { get => currentModelTripleList; set => currentModelTripleList = value; }
 
         public TripleListGen(ModelDocument currentModel,string state,ModelElement stopElement)
