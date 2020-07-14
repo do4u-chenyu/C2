@@ -259,6 +259,7 @@ namespace Citta_T1.Controls.Move.Op
             if (e.Button == MouseButtons.Left)
             {
                 leftButtonDown = true;
+                // 点中划线部分，将事件发送给CanvasPanel
                 if (rectOut.Contains(e.Location))
                 {
                     int startX = this.Location.X + e.X;
@@ -333,10 +334,11 @@ namespace Citta_T1.Controls.Move.Op
                     MouseEventArgs e1 = new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0);
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, e1);
                 }
-                cmd = ECommandType.Null;
+                //cmd = ECommandType.Null;
                 this.moveWrapper.DragUp(e);
                 Global.GetNaviViewControl().UpdateNaviView();
             }
+            cmd = ECommandType.Null;
 
             if (oldControlPosition != this.Location )
             {

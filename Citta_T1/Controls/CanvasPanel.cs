@@ -266,7 +266,10 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 Global.GetMainForm().SetDocumentDirty();
             }
+<<<<<<< HEAD
+=======
             leftButtonDown = false;
+>>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -615,7 +618,10 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
+<<<<<<< HEAD
+=======
             
+>>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
