@@ -95,12 +95,12 @@ namespace Citta_T1.Business.Model.World
             /*
              * 结果算子位置不超过地图右边界、下边界
              */
-
+            float factor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int rightBorder = 2000 - 2 * moc.Width;
             int lowerBorder = 980 - moc.Height;
-            int interval = moc.Height + 5;
+            int interval = moc.Height + Convert.ToInt32(factor * 5);
 
-            Point Pm = new Point(moc.Location.X + moc.Width + 25, moc.Location.Y);
+            Point Pm = new Point(moc.Location.X + moc.Width + Convert.ToInt32(factor * 25), moc.Location.Y);
             Point Pw = ScreenToWorld(Pm, true);
             
             if (Pw.X > rightBorder)
