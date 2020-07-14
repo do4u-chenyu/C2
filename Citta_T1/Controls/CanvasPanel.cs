@@ -115,7 +115,15 @@ namespace Citta_T1.Controls
         #region 各种事件
         public void CanvasPanel_DragDrop(object sender, DragEventArgs e)
         {
-            ElementType type = (ElementType)e.Data.GetData("Type");
+            ElementType type;
+            try
+            {
+                type = (ElementType)e.Data.GetData("Type");
+            }
+            catch (Exception)
+            {
+                return;
+            }
             float screenFactor = Global.GetCurrentDocument().WorldMap.ScreenFactor;
             int locX = Convert.ToInt32(e.X / screenFactor);
             int locY = Convert.ToInt32(e.Y / screenFactor);
@@ -134,6 +142,8 @@ namespace Citta_T1.Controls
             }
             else if (type == ElementType.Operator)
                 AddNewOperator(sizeLevel, text, location);
+            
+
         }
 
         public void CanvasPanel_MouseDown(object sender, MouseEventArgs e)
