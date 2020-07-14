@@ -65,7 +65,7 @@ namespace Citta_T1.Controls
             this.Now = e.Location;
             this.InitDragWrapper(canvasSize, canvasFactor);
             this.MoveWorldImage(n);
-            this.ControlChange(Start, Now);
+            this.ControlChange();
             n.Dispose();
             this.StartDrag = false;
             this.Start = e.Location;
@@ -134,15 +134,15 @@ namespace Citta_T1.Controls
             n.DrawImageUnscaled(this.StaticImage, mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
         }
 
-        public void ControlChange(Point start, Point now)
+        public void ControlChange()
         {
             DragEdgeCheck(out Point mapOrigin, out Point moveOffset);
-            int dx = Convert.ToInt32((now.X - start.X) / this.Factor);
-            int dy = Convert.ToInt32((now.Y - start.Y) / this.Factor);
+            int dx = Convert.ToInt32((Now.X - Start.X) / this.Factor);
+            int dy = Convert.ToInt32((Now.Y - Start.Y) / this.Factor);
 
             // 移动当前文档中的所有控件
-            LineUtil.ChangeLoc(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
-            OpUtil.CanvasDragLocation(now.X - start.X - moveOffset.X * Factor, now.Y - start.Y - moveOffset.Y * Factor);
+            LineUtil.ChangeLoc(Now.X - Start.X - moveOffset.X * Factor, Now.Y - Start.Y - moveOffset.Y * Factor);
+            OpUtil.CanvasDragLocation(Now.X - Start.X - moveOffset.X * Factor, Now.Y - Start.Y - moveOffset.Y * Factor);
             // 获得移动获得世界坐标原点
 
             Global.GetCurrentDocument().WorldMap.MapOrigin = new Point(mapOrigin.X + dx - moveOffset.X, mapOrigin.Y + dy - moveOffset.Y);

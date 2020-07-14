@@ -54,6 +54,8 @@ namespace Citta_T1.Controls
         public PointF StartP { get => startP; set => startP = value; }
         public PointF EndP { get => endP; set => endP = value; }
 
+        internal DragWrapper DragWrapper => dragWrapper;
+
         public CanvasPanel()
         {
             dragWrapper = new DragWrapper();

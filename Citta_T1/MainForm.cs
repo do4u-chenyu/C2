@@ -807,5 +807,11 @@ namespace Citta_T1
         {
             SaveAllDocuments();
         }
+        
+        private void MainForm_Deactivate(object sender, EventArgs e)
+        {
+            Global.GetCanvasPanel().DragWrapper.StartDrag = false;
+            Global.GetCanvasPanel().DragWrapper.ControlChange();
+        }
     }
 }
