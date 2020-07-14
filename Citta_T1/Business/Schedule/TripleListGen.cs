@@ -58,7 +58,7 @@ namespace Citta_T1.Business.Schedule
             foreach (int resultNodeId in needSearchNodeIds)
             {
                 ModelElement resultElement = this.currentModel.ModelElements.Find(c => c.ID == resultNodeId);
-                if (resultElement.Type != ElementType.Result || !endNodes.Exists(c => c == resultNodeId)) //不是结果算子或者没有上游，该节点没有对应三元组
+                if (resultElement == null || resultElement.Type != ElementType.Result || !endNodes.Exists(c => c == resultNodeId)) //不是结果算子或者没有上游，该节点没有对应三元组
                     continue;
 
                 int operateNodeId = FindBeforeNodeIds(resultNodeId).First();
