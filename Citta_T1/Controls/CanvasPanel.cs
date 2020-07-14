@@ -140,7 +140,6 @@ namespace Citta_T1.Controls
         {
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            log.Info("dddd");
             Global.GetMainForm().BlankButtonFocus();
             ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
@@ -256,10 +255,7 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 Global.GetMainForm().SetDocumentDirty();
             }
-<<<<<<< HEAD
-=======
             leftButtonDown = false;
->>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -608,10 +604,6 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
-<<<<<<< HEAD
-=======
-            
->>>>>>> ffd4900631ed5756be1370bb58cbe4cf0d6c6216
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
