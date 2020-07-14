@@ -17,7 +17,7 @@ namespace Citta_T1.Controls.Move
     public partial class MoveBaseControl : UserControl
     {
         private static LogUtil log = LogUtil.GetInstance("MoveDtContorl");
-        private static bool leftButtonDown = false;
+        public static bool leftButtonDown = false;
         public ElementType Type { get; set; }
         public int ID { get; set; }
         public string Description { get => this.textBox.Text; set => this.textBox.Text = value; }

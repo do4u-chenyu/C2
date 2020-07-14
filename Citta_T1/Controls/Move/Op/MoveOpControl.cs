@@ -252,9 +252,13 @@ namespace Citta_T1.Controls.Move.Op
         {
             if (Global.GetFlowControl().SelectDrag || Global.GetFlowControl().SelectFrame)
                 return;
-
+            if (e.Button == MouseButtons.Right && !leftButtonDown)
+            {
+                this.contextMenuStrip.Show(this, e.Location);
+            }
             if (e.Button == MouseButtons.Left)
             {
+                leftButtonDown = true;
                 if (rectOut.Contains(e.Location))
                 {
                     int startX = this.Location.X + e.X;
@@ -320,6 +324,7 @@ namespace Citta_T1.Controls.Move.Op
 
             if (e.Button == MouseButtons.Left)
             {
+                leftButtonDown = false;
                 if (cmd == ECommandType.PinDraw)
                 {
                     cmd = ECommandType.Null;
