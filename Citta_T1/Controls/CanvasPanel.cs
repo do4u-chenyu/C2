@@ -143,7 +143,6 @@ namespace Citta_T1.Controls
                 this.ClickOnLine(e);
             if (e.Button == MouseButtons.Right)
             {
-                log.Info("rrrrrrrrrrrrrrrrrrr");
                 Point pw = Global.GetCurrentDocument().WorldMap.ScreenToWorld(e.Location, false);
                 if (frameWrapper.MinBoundingBox.Contains(pw))
                 {
@@ -251,7 +250,6 @@ namespace Citta_T1.Controls
                 this.MouseUpWhenPinDraw(sender, e);
                 Global.GetMainForm().SetDocumentDirty();
             }
-
         }
         private void MouseUpWhenPinDraw(object sender, MouseEventArgs e)
         {
@@ -600,7 +598,6 @@ namespace Citta_T1.Controls
             Global.GetCurrentDocument().UpdateAllLines();
             foreach (ModelRelation mr in doc.ModelRelations)
                 LineUtil.DrawBezier(e.Graphics, mr.StartP, mr.A, mr.B, mr.EndP, mr.Selected);
-            log.Info("ppppppppppppppppppppp");
         }
         #endregion
         public void AddElesAndRels(List<ModelElement> mes, List<Tuple<int, int, int>> mrs, bool isPushCmd=false)
