@@ -815,6 +815,8 @@ namespace Citta_T1
                 Global.GetCanvasPanel().DragWrapper.StartDrag = false;
                 Global.GetCanvasPanel().DragWrapper.ControlChange();
             }
+            if (Global.GetCanvasPanel().LeftButtonDown)
+                Global.GetCanvasPanel().LeftButtonDown = false;
         }
     }
 }
