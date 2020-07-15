@@ -312,7 +312,8 @@ namespace Citta_T1.Business.Model
             List<ModelElement> elementsCopy = new List<ModelElement>(this.modelDocument.ModelElements);
             foreach (ModelRelation relation in relationsCopy)
             {
-                bool hasStartControl = elementsCopy.Find(me => me.ID == relation.StartID) != null;
+                ModelElement startElement = elementsCopy.Find(me => me.ID == relation.StartID);
+                bool hasStartControl = startElement != null;
                 ModelElement endElement = elementsCopy.Find(me => me.ID == relation.EndID);
                 bool hasEndControl = endElement != null;
 
@@ -326,10 +327,18 @@ namespace Citta_T1.Business.Model
                     if (endElement.Type == ElementType.Result)
                         this.modelDocument.ModelElements.Remove(endElement);
                     else if (endElement.Type == ElementType.Operator)
+                    {
                         (endElement.InnerControl as MoveOpControl).EnableOption = false;
+                        (endElement.InnerControl as MoveOpControl).Status = ElementStatus.Null;
+                    }
+                       
                 }
                 else
+                {
+                    startElement.Status = ElementStatus.Null;
                     this.modelDocument.ModelRelations.Remove(relation);
+                }
+                    
 
             }
         }
