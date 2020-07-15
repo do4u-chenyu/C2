@@ -205,6 +205,8 @@ namespace Citta_T1.Business.Option
             maxIndex1 = GetOptionSplit("columnname1").Length - 1;
 
             ElementSubType subType = OpUtil.SEType(opControl.SubTypeName);
+            if (subType == ElementSubType.Null)
+                return;
             RegisterInfo[] registerInfo = this.allRegisterInfo[subType];
             Dictionary<string, RegisterInfo> factorInfo = new Dictionary<string, RegisterInfo>();
             foreach (RegisterInfo ori in registerInfo)
