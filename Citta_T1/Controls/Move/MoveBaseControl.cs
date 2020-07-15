@@ -243,6 +243,7 @@ namespace Citta_T1.Controls.Move
 
         public Point UndoRedoMoveLocation(Point location)
         {
+            // TODO 需要处理坐标原点变化的情况
             oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();

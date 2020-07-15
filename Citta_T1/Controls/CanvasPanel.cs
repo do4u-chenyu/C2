@@ -693,12 +693,12 @@ namespace Citta_T1.Controls
         {
             this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
         }
-        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
+        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, WorldMap wm)
         {
-            // TODO 前后两个坐标的世界坐标原点不一致时，使用该方法
-            WorldMap oldWorldMap = new WorldMap(Global.GetCurrentDocument().WorldMap.MapOrigin);
+            // 前后两个坐标的世界坐标原点不一致时，使用该方法，如一键排版
+            WorldMap oldWorldMap = new WorldMap(wm);
             WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
-            curWorldMap.MapOrigin = worldMapOrigin;
+            curWorldMap.MapOrigin = wm.MapOrigin;
             ModelDocument doc = Global.GetCurrentDocument();
             List<int> ids = new List<int>(idPtsDict.Keys);
             foreach (int id in ids)
@@ -706,9 +706,9 @@ namespace Citta_T1.Controls
                 ModelElement me = doc.SearchElementByID(id);
                 if (me == null)
                     return;
-                Point tmp = me.InnerControl.Location;
+                Point meOldLocation = me.InnerControl.Location;
                 me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = oldWorldMap.ScreenToWorld(tmp, true);
+                idPtsDict[id] = oldWorldMap.ScreenToWorld(meOldLocation, true);
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }
@@ -716,15 +716,16 @@ namespace Citta_T1.Controls
         {
             // 前后两个坐标的世界坐标原点一致时，使用该方法
             ModelDocument doc = Global.GetCurrentDocument();
+            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
             List<int> ids = new List<int>(idPtsDict.Keys);
             foreach (int id in ids)
             {
                 ModelElement me = doc.SearchElementByID(id);
                 if (me == null)
                     return;
-                Point tmp = me.InnerControl.Location;
-                me.InnerControl.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = Global.GetCurrentDocument().WorldMap.ScreenToWorld(tmp, true);
+                Point meOldLocation = me.InnerControl.Location;
+                me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
+                idPtsDict[id] = curWorldMap.ScreenToWorld(meOldLocation, true);
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }

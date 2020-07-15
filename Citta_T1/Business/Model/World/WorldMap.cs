@@ -19,12 +19,18 @@ namespace Citta_T1.Business.Model.World
             screenFactor = 1;
             sizeLevel = 0;
         }
+        public WorldMapInfo(WorldMapInfo wmi)
+        {
+            this.mapOrigin = wmi.mapOrigin;
+            this.screenFactor = wmi.screenFactor;
+            this.sizeLevel = wmi.sizeLevel;
+        }
         public Point MapOrigin { get => mapOrigin; set => mapOrigin = value; }
         public float ScreenFactor { get => screenFactor; set => screenFactor = value; }
         public int SizeLevel { get => sizeLevel; set => sizeLevel = value; }
 
     }
-    class WorldMap
+    public class WorldMap
     {
         private static LogUtil log = LogUtil.GetInstance("CanvasPanel");
         private static readonly bool canvasUse = false;
@@ -35,10 +41,17 @@ namespace Citta_T1.Business.Model.World
 
         public int SizeLevel { get => wmInfo.SizeLevel; set => wmInfo.SizeLevel = value; }
 
-        public WorldMap() { }
+        public WorldMap() 
+        {
+            this.MapOrigin = Point.Empty;
+        }
         public WorldMap(Point mo)
         {
             this.MapOrigin = mo;
+        }
+        public WorldMap(WorldMap wm)
+        {
+            this.wmInfo = new WorldMapInfo(wm.wmInfo);
         }
         //  Pw = Ps / Factor - Pm
         public Point ScreenToWorld(Point Ps, bool mode)
