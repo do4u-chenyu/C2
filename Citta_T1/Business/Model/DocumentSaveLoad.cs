@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace Citta_T1.Business.Model
@@ -300,8 +302,46 @@ namespace Citta_T1.Business.Model
                     ctl.Option.OptionValidating();     
                 }
             }
-        }
+            //检查是否relation单独存在，两侧算子至少与一个缺失
+            CheckXmlRalations();
 
+        }
+        private void CheckXmlRalations()
+        { //检查是否relation单独存在，两侧算子消失
+            List<ModelRelation> relationsCopy = new List<ModelRelation>(this.modelDocument.ModelRelations);
+            List<ModelElement> elementsCopy = new List<ModelElement>(this.modelDocument.ModelElements);
+            foreach (ModelRelation relation in relationsCopy)
+            {
+                ModelElement startElement = elementsCopy.Find(me => me.ID == relation.StartID);
+                bool hasStartControl = startElement != null;
+                ModelElement endElement = elementsCopy.Find(me => me.ID == relation.EndID);
+                bool hasEndControl = endElement != null;
+
+                // StartControl存在 EndControl存在
+                if (hasStartControl && hasEndControl)
+                    continue;
+                else if (!hasStartControl && hasEndControl)
+                {
+                    // StartControl不存在 EndControl存在
+                    this.modelDocument.ModelRelations.Remove(relation);
+                    if (endElement.Type == ElementType.Result)
+                        this.modelDocument.ModelElements.Remove(endElement);
+                    else if (endElement.Type == ElementType.Operator)
+                    {
+                        (endElement.InnerControl as MoveOpControl).EnableOption = false;
+                        (endElement.InnerControl as MoveOpControl).Status = ElementStatus.Null;
+                    }
+                       
+                }
+                else
+                {
+                    startElement.Status = ElementStatus.Null;
+                    this.modelDocument.ModelRelations.Remove(relation);
+                }
+                    
+
+            }
+        }
         private void ReadOption(XmlNode xn, MoveOpControl opControl)
         {
             try
