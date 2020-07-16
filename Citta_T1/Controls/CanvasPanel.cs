@@ -685,32 +685,16 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().UpdateNaviView();
             return new Tuple<List<ModelElement>, List<Tuple<int, int, int>>>(mes, mrs);
         }
-        public void UndoRedoAddSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        public void UndoRedoAddSelectedEles(Dictionary<int, Point> eleWorldCordDict, List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.AddElesAndRels(mes, mrs);
+            WorldMap currWM = Global.GetCurrentDocument().WorldMap;
+            foreach (ModelElement me in mes)
+                me.Location = currWM.WorldToScreen(eleWorldCordDict[me.ID]);
         }
         public void UndoRedoDelSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
-        }
-        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, WorldMap wm)
-        {
-            // 前后两个坐标的世界坐标原点不一致时，使用该方法，如一键排版
-            WorldMap oldWorldMap = new WorldMap(wm);
-            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
-            curWorldMap.MapOrigin = wm.MapOrigin;
-            ModelDocument doc = Global.GetCurrentDocument();
-            List<int> ids = new List<int>(idPtsDict.Keys);
-            foreach (int id in ids)
-            {
-                ModelElement me = doc.SearchElementByID(id);
-                if (me == null)
-                    return;
-                Point meOldLocation = me.InnerControl.Location;
-                me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = oldWorldMap.ScreenToWorld(meOldLocation, true);
-            }
-            Global.GetCurrentDocument().UpdateAllLines();
         }
         public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
         {

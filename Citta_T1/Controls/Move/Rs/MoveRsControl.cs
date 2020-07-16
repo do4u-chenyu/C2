@@ -489,7 +489,7 @@ namespace Citta_T1.Controls.Move.Rs
             (opEle.InnerControl as MoveOpControl).FirstDataSourceColumns = new string[] { };
             (opEle.InnerControl as MoveOpControl).SecondDataSourceColumns = new string[] { };
         }
-        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
+        public void UndoRedoAddElement(Dictionary<int, Point> eleWorldCordDict, ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
         {
             /*
              * 1. 恢复自身
@@ -503,6 +503,7 @@ namespace Citta_T1.Controls.Move.Rs
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             opEle.Status = status;
             (opEle.InnerControl as MoveOpControl).Option.OptionDict = new Dictionary<string, string>(opOptDict);
+            ControlUtil.UpdateElesWorldCord(eleWorldCordDict);
         }
     }
 }

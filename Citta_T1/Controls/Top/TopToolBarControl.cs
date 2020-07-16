@@ -108,15 +108,9 @@ namespace Citta_T1.Controls.Top
             // 文档为空时,返回,不需要触发dirty动作
             if (currentModel.ModelElements.Count == 0)
                 return;
-
             Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
-            foreach (ModelElement me in Global.GetCurrentDocument().ModelElements)
-            {
-                MoveBaseControl mbc = me.InnerControl;
-                Point oldControlPostionInWorld = curWorldMap.ScreenToWorld(me.Location, true);
-                idPtsDict.Add(mbc.ID, oldControlPostionInWorld);
-            }
-            BaseCommand cmd = new BatchMoveCommand(idPtsDict, curWorldMap);
+            idPtsDict = ControlUtil.SaveElesWorldCord(currentModel.ModelElements);
+            BaseCommand cmd = new BatchMoveCommand(idPtsDict);
             UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), cmd);
 
             QuickformatWrapper quickformatWrapper = new QuickformatWrapper(currentModel);

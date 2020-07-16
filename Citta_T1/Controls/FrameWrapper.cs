@@ -6,7 +6,6 @@ using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
-using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -399,8 +398,9 @@ namespace Citta_T1.Controls
         }
         private void DragFrame_MouseUp()
         {
-            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
             WorldMap wm = Global.GetCurrentDocument().WorldMap;
+            Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
+            
             foreach (Control ct in controls)
             {
                 idPtsDict.Add((ct as MoveBaseControl).ID, wm.ScreenToWorld(ct.Location, true));

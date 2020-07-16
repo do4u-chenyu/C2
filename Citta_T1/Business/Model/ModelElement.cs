@@ -74,7 +74,6 @@ namespace Citta_T1.Business.Model
         }
 
         public Point Location { get => ctl.Location; set => ctl.Location = value; }
-        public Point WorldCord { get => ctl.WorldCord; set => ctl.WorldCord = value; }
 
         public int ID { get => ctl.ID; }
 

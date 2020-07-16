@@ -318,7 +318,7 @@ namespace Citta_T1.Controls.Move
             if (rsEle != null)
                 cp.DeleteEle(rsEle);
         }
-        public virtual void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement rsEle = null)
+        public virtual void UndoRedoAddElement(Dictionary<int, Point> eleWorldCordDict, ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement rsEle = null)
         {
             /*
              * 1. 恢复自身
@@ -335,6 +335,7 @@ namespace Citta_T1.Controls.Move
                 foreach (Tuple<int, int, int> rel in relations)
                     cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
+            ControlUtil.UpdateElesWorldCord(eleWorldCordDict);
         }
     }
 }
