@@ -1,11 +1,9 @@
 ﻿using Citta_T1.Business.Model;
-using Citta_T1.Controls.Move.Dt;
-using Citta_T1.Controls.Move.Op;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
@@ -13,10 +11,12 @@ namespace Citta_T1.Core.UndoRedo.Command
     {
         private List<ModelElement> mes;
         private List<Tuple<int, int, int>> mrs;
+        private Dictionary<int, Point> eleWorldCordDict;
         public BatchDeleteCommand(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.mes = mes;
             this.mrs = mrs;
+            this.eleWorldCordDict = ControlUtil.SaveElesWorldCord(mes);
         }
 
         public override bool _Redo()
@@ -39,7 +39,7 @@ namespace Citta_T1.Core.UndoRedo.Command
         }
         private bool DoAdd()
         {
-            Global.GetCanvasPanel().UndoRedoAddSelectedEles(this.mes, this.mrs);
+            Global.GetCanvasPanel().UndoRedoAddSelectedEles(this.eleWorldCordDict, this.mes, this.mrs);
             Global.GetFlowControl().InterruptSelectFrame();
             return true;
         }

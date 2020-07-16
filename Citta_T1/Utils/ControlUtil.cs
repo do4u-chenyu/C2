@@ -1,4 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Model.World;
+using Citta_T1.Controls.Move;
+using Citta_T1.Core;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
@@ -41,6 +47,30 @@ namespace Citta_T1.Utils
             for (int i = 0; i < dgv.Columns.Count; i++)
             {
                 dgv.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        public static Dictionary<int, Point> SaveElesWorldCord(List<ModelElement> mes)
+        {
+            Dictionary<int, Point> eleWorldCordDict = new Dictionary<int, Point>();
+            WorldMap wm = Global.GetCurrentDocument().WorldMap;
+            foreach (ModelElement me in mes)
+            {
+                if (me == null)
+                    continue;
+                MoveBaseControl mbc = (me.InnerControl as MoveBaseControl);
+                eleWorldCordDict.Add(mbc.ID, wm.ScreenToWorld(mbc.Location, true));
+            }
+            return eleWorldCordDict;
+        }
+        public static void UpdateElesWorldCord(Dictionary<int, Point> eleWorldCordDict)
+        {
+            ModelDocument doc = Global.GetCurrentDocument();
+            WorldMap wm = doc.WorldMap;
+            foreach(int eleID in eleWorldCordDict.Keys)
+            {
+                ModelElement me = doc.SearchElementByID(eleID);
+                me.Location = wm.WorldToScreen(eleWorldCordDict[eleID]);
             }
         }
     }
