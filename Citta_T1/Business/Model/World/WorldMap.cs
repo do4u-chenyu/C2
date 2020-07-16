@@ -163,11 +163,11 @@ namespace Citta_T1.Business.Model.World
             {
                 Pm.Y = 70;
             }
-            if (Pw.X > 2030 - ct.Width)
+            if (Pw.X > 2000 - ct.Width)
             {
                 Pm.X = ct.Parent.Width - ct.Width;
             }
-            if (Pw.Y > 1030 - ct.Height)
+            if (Pw.Y > 1000 - ct.Height)
             {
                 Pm.Y = ct.Parent.Height - ct.Height;
             }
@@ -184,13 +184,13 @@ namespace Citta_T1.Business.Model.World
             {
                 off.Y = 70 - Pm.Y;
             }
-            if (Pm.X > Convert.ToInt32(2030 * ScreenFactor) - minBoundingBox.Width)
+            if (Pm.X > Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width)
             {
-                off.X = Convert.ToInt32(2030 * ScreenFactor) - minBoundingBox.Width - Pm.X;
+                off.X = Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width - Pm.X;
             }
-            if (Pm.Y > Convert.ToInt32(1030 * ScreenFactor) - minBoundingBox.Height)
+            if (Pm.Y > Convert.ToInt32(1000 * ScreenFactor) - minBoundingBox.Height)
             {
-                off.Y = Convert.ToInt32(1030 * ScreenFactor) - minBoundingBox.Height - Pm.Y;
+                off.Y = Convert.ToInt32(1000 * ScreenFactor) - minBoundingBox.Height - Pm.Y;
             }
             return off;
         }
