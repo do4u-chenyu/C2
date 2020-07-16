@@ -798,7 +798,10 @@ namespace Citta_T1
                     this.canvasPanel.ControlSelect_paste();
                 if (keyData == (Keys.S | Keys.Control))
                     SaveModelButton_Click(this, null);
-
+                if (keyData == (Keys.Z | Keys.Control))
+                    this.topToolBarControl.UndoButton_Click(this, null);
+                if(keyData == (Keys.Y | Keys.Control))
+                    this.topToolBarControl.RedoButton_Click(this, null);
             }
             return false;
         }
@@ -815,6 +818,8 @@ namespace Citta_T1
                 Global.GetCanvasPanel().DragWrapper.StartDrag = false;
                 Global.GetCanvasPanel().DragWrapper.ControlChange();
             }
+            if (Global.GetCanvasPanel().LeftButtonDown)
+                Global.GetCanvasPanel().LeftButtonDown = false;
         }
     }
 }

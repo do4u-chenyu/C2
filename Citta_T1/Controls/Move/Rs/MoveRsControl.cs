@@ -59,12 +59,13 @@ namespace Citta_T1.Controls.Move.Rs
             Separator = OpUtil.DefaultSeparator;
             Status = ElementStatus.Null;
 
-            ChangeSize(size);
+            
 
             changeStatus = new Size(0, 28);
             normalStatus = new Size(58, 28);
 
             InitializeOpPinPicture();
+            ChangeSize(size);
             this.moveWrapper = new MoveWrapper();
 
             endLineIndexs.Add(-1);
@@ -179,29 +180,24 @@ namespace Citta_T1.Controls.Move.Rs
                     int startX = this.Location.X + e.X;
                     int startY = this.Location.Y + e.Y;
                     Global.GetCanvasPanel().CanvasPanel_MouseUp(this, new MouseEventArgs(e.Button, e.Clicks, startX, startY, 0));
-                    cmd = ECommandType.Null;
                 }
                 else if (cmd == ECommandType.Hold)
-                {
                     this.moveWrapper.DragUp(e);
-                    cmd = ECommandType.Null;
-                }
-
                 Global.GetNaviViewControl().UpdateNaviView();
-                if (oldControlPosition != this.Location)
-                {
-                    // 构造移动命令类,压入undo栈
-                    ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
-                    if (element != ModelElement.Empty)
-                    {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
-                        Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
-                        BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
-                        UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
-                    }
-                    Global.GetMainForm().SetDocumentDirty();
-                }
             }
-
+            cmd = ECommandType.Null;
+            if (oldControlPosition != this.Location)
+            {
+                // 构造移动命令类,压入undo栈
+                ModelElement element = Global.GetCurrentDocument().SearchElementByID(ID);
+                if (element != ModelElement.Empty)
+                {   // Command类中存储世界坐标系,避免不同放大系数情况下出现问题
+                    Point oldControlPostionInWorld = Global.GetCurrentDocument().WorldMap.ScreenToWorld(oldControlPosition, true);
+                    BaseCommand moveCommand = new ElementMoveCommand(element, oldControlPostionInWorld);
+                    UndoRedoManager.GetInstance().PushCommand(Global.GetCurrentDocument(), moveCommand);
+                }
+                Global.GetMainForm().SetDocumentDirty();
+            }
         }
         #endregion
 
@@ -493,7 +489,7 @@ namespace Citta_T1.Controls.Move.Rs
             (opEle.InnerControl as MoveOpControl).FirstDataSourceColumns = new string[] { };
             (opEle.InnerControl as MoveOpControl).SecondDataSourceColumns = new string[] { };
         }
-        public void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
+        public void UndoRedoAddElement(Dictionary<int, Point> eleWorldCordDict, ModelElement me, List<Tuple<int, int, int>> relations, ModelElement opEle, ElementStatus status, Dictionary<string, string> opOptDict)
         {
             /*
              * 1. 恢复自身
@@ -502,11 +498,12 @@ namespace Citta_T1.Controls.Move.Rs
              * 4. 改变其他控件的Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.AddEle(me);
+            cp.AddEleWhenUndoRedo(me);
             foreach (Tuple<int, int, int> rel in relations)
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             opEle.Status = status;
             (opEle.InnerControl as MoveOpControl).Option.OptionDict = new Dictionary<string, string>(opOptDict);
+            ControlUtil.UpdateElesWorldCord(eleWorldCordDict);
         }
     }
 }

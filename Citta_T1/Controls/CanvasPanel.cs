@@ -57,6 +57,8 @@ namespace Citta_T1.Controls
 
         internal DragWrapper DragWrapper => dragWrapper;
 
+        public  bool LeftButtonDown { get => leftButtonDown; set => leftButtonDown = value; }
+
         public CanvasPanel()
         {
             dragWrapper = new DragWrapper();
@@ -150,7 +152,6 @@ namespace Citta_T1.Controls
         {
             selectLineIndexs.Clear();
             // 强制编辑控件失去焦点,触发算子控件的Leave事件
-            log.Info("dddd");
             Global.GetMainForm().BlankButtonFocus();
             ModelStatus currentModelStatus = Global.GetCurrentDocument().TaskManager.ModelStatus;
             if (!(sender is MoveBaseControl) && currentModelStatus != ModelStatus.Running && currentModelStatus != ModelStatus.Pause)
@@ -684,46 +685,31 @@ namespace Citta_T1.Controls
             Global.GetNaviViewControl().UpdateNaviView();
             return new Tuple<List<ModelElement>, List<Tuple<int, int, int>>>(mes, mrs);
         }
-        public void UndoRedoAddSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
+        public void UndoRedoAddSelectedEles(Dictionary<int, Point> eleWorldCordDict, List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.AddElesAndRels(mes, mrs);
+            WorldMap currWM = Global.GetCurrentDocument().WorldMap;
+            foreach (ModelElement me in mes)
+                me.Location = currWM.WorldToScreen(eleWorldCordDict[me.ID]);
         }
         public void UndoRedoDelSelectedEles(List<ModelElement> mes, List<Tuple<int, int, int>> mrs)
         {
             this.DeleteSelectedElesByCtrID(mes.Select(t => t.ID));
         }
-        public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
-        {
-            // TODO 前后两个坐标的世界坐标原点不一致时，使用该方法
-            WorldMap oldWorldMap = new WorldMap(Global.GetCurrentDocument().WorldMap.MapOrigin);
-            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
-            curWorldMap.MapOrigin = worldMapOrigin;
-            ModelDocument doc = Global.GetCurrentDocument();
-            List<int> ids = new List<int>(idPtsDict.Keys);
-            foreach (int id in ids)
-            {
-                ModelElement me = doc.SearchElementByID(id);
-                if (me == null)
-                    return;
-                Point tmp = me.InnerControl.Location;
-                me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = oldWorldMap.ScreenToWorld(tmp, true);
-            }
-            Global.GetCurrentDocument().UpdateAllLines();
-        }
         public void UndoRedoMoveEles(Dictionary<int, Point> idPtsDict)
         {
             // 前后两个坐标的世界坐标原点一致时，使用该方法
             ModelDocument doc = Global.GetCurrentDocument();
+            WorldMap curWorldMap = Global.GetCurrentDocument().WorldMap;
             List<int> ids = new List<int>(idPtsDict.Keys);
             foreach (int id in ids)
             {
                 ModelElement me = doc.SearchElementByID(id);
                 if (me == null)
                     return;
-                Point tmp = me.InnerControl.Location;
-                me.InnerControl.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(idPtsDict[id]);
-                idPtsDict[id] = Global.GetCurrentDocument().WorldMap.ScreenToWorld(tmp, true);
+                Point meOldLocation = me.InnerControl.Location;
+                me.InnerControl.Location = curWorldMap.WorldToScreen(idPtsDict[id]);
+                idPtsDict[id] = curWorldMap.ScreenToWorld(meOldLocation, true);
             }
             Global.GetCurrentDocument().UpdateAllLines();
         }
@@ -738,6 +724,16 @@ namespace Citta_T1.Controls
         {
             MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
             mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel); 
+            this.AddCtr(mbc);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+        }
+        public void AddEleWhenUndoRedo(ModelElement me)
+        {
+            MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
+            mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel);
+            mbc.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(mbc.WorldCord);
             this.AddCtr(mbc);
             Global.GetCurrentDocument().AddModelElement(me);
             Global.GetMainForm().SetDocumentDirty();
@@ -781,6 +777,7 @@ namespace Citta_T1.Controls
                 Separator = separator,
                 Encoding = encoding
             };
+            btn.Location = location;
             AddNewElement(btn);
             return btn;
         }

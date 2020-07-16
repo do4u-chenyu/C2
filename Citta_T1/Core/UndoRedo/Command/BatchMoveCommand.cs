@@ -1,53 +1,32 @@
-﻿using System;
+﻿using Citta_T1.Business.Model.World;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Citta_T1.Core.UndoRedo.Command
 {
     class BatchMoveCommand : BaseCommand
     {
         private Dictionary<int, Point> idPtsDict;
-        private Point worldMapOrigin;
+        private WorldMap worldMap;
 
         public BatchMoveCommand(Dictionary<int, Point> idPtsDict)
         {
             this.idPtsDict = idPtsDict;
-            this.worldMapOrigin = Point.Empty;
-        }
-        public BatchMoveCommand(Dictionary<int, Point> idPtsDict, Point worldMapOrigin)
-        {
-            this.idPtsDict = idPtsDict;
-            this.worldMapOrigin = worldMapOrigin;
+            this.worldMap = new WorldMap();
         }
         public override bool _Redo()
         {
-            if (this.worldMapOrigin.IsEmpty)
-                return DoMove();
-            else
-                return DoMove(new Point(0, 0));
+            return DoMove();
         }
 
         public override bool _Undo()
         {
-            if (this.worldMapOrigin.IsEmpty)
-                return DoMove();
-            else
-                return DoMove(this.worldMapOrigin);
-        }
-        private bool DoMove(Point wmo)
-        {
-            Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict, wmo);
-            Global.GetFlowControl().InterruptSelectFrame();
-            Global.GetNaviViewControl().UpdateNaviView();
-            return true;
+            return DoMove();
         }
         private bool DoMove()
         {
             Global.GetCanvasPanel().UndoRedoMoveEles(this.idPtsDict);
-            Global.GetFlowControl().InterruptSelectFrame();
             Global.GetNaviViewControl().UpdateNaviView();
             return true;
         }

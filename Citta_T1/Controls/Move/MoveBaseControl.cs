@@ -24,6 +24,7 @@ namespace Citta_T1.Controls.Move
         public char Separator { get; set; }
         public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
+        public Point WorldCord { get; set; }
         public OpUtil.ExtType ExtType
         {
             get
@@ -243,6 +244,7 @@ namespace Citta_T1.Controls.Move
 
         public Point UndoRedoMoveLocation(Point location)
         {
+            // TODO 需要处理坐标原点变化的情况
             oldControlPosition = this.Location;
             this.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(location);
             Global.GetNaviViewControl().UpdateNaviView();
@@ -316,7 +318,7 @@ namespace Citta_T1.Controls.Move
             if (rsEle != null)
                 cp.DeleteEle(rsEle);
         }
-        public virtual void UndoRedoAddElement(ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement rsEle = null)
+        public virtual void UndoRedoAddElement(Dictionary<int, Point> eleWorldCordDict, ModelElement me, List<Tuple<int, int, int>> relations = null, ModelElement rsEle = null)
         {
             /*
              * 1. 恢复自身
@@ -325,15 +327,15 @@ namespace Citta_T1.Controls.Move
              * 4. 改变其他控件的Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.AddEle(me);
+            cp.AddEleWhenUndoRedo(me);
             if (rsEle != null)
-                cp.AddEle(rsEle);
+                cp.AddEleWhenUndoRedo(rsEle);
             if (relations != null)
             {
                 foreach (Tuple<int, int, int> rel in relations)
                     cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             }
+            ControlUtil.UpdateElesWorldCord(eleWorldCordDict);
         }
-
     }
 }
