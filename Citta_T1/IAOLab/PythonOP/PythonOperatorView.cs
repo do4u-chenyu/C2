@@ -48,6 +48,7 @@ namespace Citta_T1.OperatorViews
             else
             {
                 string tmpOutFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+                this.fullOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
                 this.noChangedOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
                 this.opControl.Option.SetOption("outputParamPath", this.noChangedOutputFilePath);
             }

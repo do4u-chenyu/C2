@@ -86,7 +86,7 @@ namespace Citta_T1.Controls.Move.Dt
             }
             cp.Invalidate();
             ModelElement me = doc.SearchElementByID(ID);
-            BaseCommand cmd = new ElementDeleteCommand(me, relations);
+            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().WorldMap, me, relations);
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
             // 删控件
             cp.DeleteEle(me);

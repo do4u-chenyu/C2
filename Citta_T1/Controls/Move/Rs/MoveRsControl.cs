@@ -498,7 +498,7 @@ namespace Citta_T1.Controls.Move.Rs
              * 4. 改变其他控件的Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.AddEle(me);
+            cp.AddEleWhenUndoRedo(me);
             foreach (Tuple<int, int, int> rel in relations)
                 cp.AddNewRelationByCtrID(rel.Item1, rel.Item2, rel.Item3);
             opEle.Status = status;

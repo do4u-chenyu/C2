@@ -532,7 +532,7 @@ namespace Citta_T1.Controls.Move.Op
             cp.Invalidate();
 
             me.Status = opStatus;
-            BaseCommand cmd = new ElementDeleteCommand(me, relations, rsEles); // 此时压栈，me状态已经改变了, 需要改成删除之前的状态
+            BaseCommand cmd = new ElementDeleteCommand(Global.GetCurrentDocument().WorldMap, me, relations, rsEles); // 此时压栈，me状态已经改变了, 需要改成删除之前的状态
             UndoRedoManager.GetInstance().PushCommand(doc, cmd);
 
             //删除自身

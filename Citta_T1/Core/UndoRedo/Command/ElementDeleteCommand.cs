@@ -1,4 +1,5 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Business.Model.World;
 using Citta_T1.Controls.Move.Dt;
 using Citta_T1.Controls.Move.Op;
 using Citta_T1.Utils;
@@ -17,9 +18,10 @@ namespace Citta_T1.Core.UndoRedo.Command
         public ElementDeleteCommand(ModelElement element)
         {
             this.me = element;
+            this.eleWorldCordDict = ControlUtil.SaveElesWorldCord(new List<ModelElement> { this.me });
         }
 
-        public ElementDeleteCommand(ModelElement ele, List<Tuple<int, int, int>> relations=null, ModelElement connectedEle = null)
+        public ElementDeleteCommand(WorldMap wm, ModelElement ele, List<Tuple<int, int, int>> relations=null, ModelElement connectedEle = null)
         {
             this.me = ele;
             this.relations = relations;

@@ -63,13 +63,15 @@ namespace Citta_T1.Utils
             }
             return eleWorldCordDict;
         }
-        public static void UpdateElesWorldCord(Dictionary<int, Point> eleWorldCordDict)
+        public static void UpdateElesWorldCord(Dictionary<int, Point> eleWorldCordDict, bool onlyUpdateRs=false)
         {
             ModelDocument doc = Global.GetCurrentDocument();
             WorldMap wm = doc.WorldMap;
             foreach(int eleID in eleWorldCordDict.Keys)
             {
                 ModelElement me = doc.SearchElementByID(eleID);
+                if (onlyUpdateRs && me.Type != ElementType.Result)
+                    continue;
                 me.Location = wm.WorldToScreen(eleWorldCordDict[eleID]);
             }
         }
