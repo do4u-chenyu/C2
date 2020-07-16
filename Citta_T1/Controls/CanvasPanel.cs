@@ -745,6 +745,16 @@ namespace Citta_T1.Controls
             Global.GetMainForm().SetDocumentDirty();
             Global.GetNaviViewControl().UpdateNaviView();
         }
+        public void AddEleWhenUndoRedo(ModelElement me)
+        {
+            MoveBaseControl mbc = me.InnerControl as MoveBaseControl;
+            mbc.ChangeSize(Global.GetCurrentDocument().WorldMap.SizeLevel);
+            mbc.Location = Global.GetCurrentDocument().WorldMap.WorldToScreen(mbc.WorldCord);
+            this.AddCtr(mbc);
+            Global.GetCurrentDocument().AddModelElement(me);
+            Global.GetMainForm().SetDocumentDirty();
+            Global.GetNaviViewControl().UpdateNaviView();
+        }
         public void DeleteCtr(Control ctl)
         {
             this.Controls.Remove(ctl);

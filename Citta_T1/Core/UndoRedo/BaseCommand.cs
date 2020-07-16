@@ -7,13 +7,15 @@
         public bool Redo()
         {
             Global.GetFlowControl().InterruptSelectFrame();
-            return this._Redo();
+            bool retCode = this._Redo();
+            return retCode;
         }
         // 对应undo操作
         public bool Undo()
         {
             Global.GetFlowControl().InterruptSelectFrame();
-            return this._Undo();
+            bool retCode = this._Undo();
+            return retCode;
         }
         public virtual bool _Redo()
         {

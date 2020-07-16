@@ -24,6 +24,7 @@ namespace Citta_T1.Controls.Move
         public char Separator { get; set; }
         public virtual ElementStatus Status { get; set; }
         public string FullFilePath { get; set; }
+        public Point WorldCord { get; set; }
         public OpUtil.ExtType ExtType
         {
             get
@@ -326,9 +327,9 @@ namespace Citta_T1.Controls.Move
              * 4. 改变其他控件的Pin状态
              */
             CanvasPanel cp = Global.GetCanvasPanel();
-            cp.AddEle(me);
+            cp.AddEleWhenUndoRedo(me);
             if (rsEle != null)
-                cp.AddEle(rsEle);
+                cp.AddEleWhenUndoRedo(rsEle);
             if (relations != null)
             {
                 foreach (Tuple<int, int, int> rel in relations)
