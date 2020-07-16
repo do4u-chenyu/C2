@@ -143,7 +143,7 @@ namespace Citta_T1.Controls
                 AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
-                AddNewOperator(sizeLevel, text, location);
+                AddNewOperator(sizeLevel, text,text, location);
             
 
         }
@@ -747,12 +747,12 @@ namespace Citta_T1.Controls
         {
             this.Controls.Add(ctl);
         }
-        public void AddNewOperator(int sizeL, string text, Point location)
+        public void AddNewOperator(int sizeL, string description, string subTypeName, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
-                                text,
-                                text,
+                                description,
+                                subTypeName,
                                 location);
             
             AddNewElement(btn);

@@ -1,5 +1,6 @@
 ﻿
 using Citta_T1.Controls.Move.Dt;
+using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.Utils;
 using System.Collections.Generic;
@@ -21,12 +22,13 @@ namespace Citta_T1.Controls
         {
             foreach(Control ct in clipBoardCts)
             {
-                string text = ct.Controls["textBox"].Text;
+                string description = ct.Controls["textBox"].Text;
                 int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;  
                 Point location = new Point(ct.Left + ct.Width/2,ct.Top + ct.Height/2);
                 if (ct.Name.Equals("MoveOpControl"))
                 {
-                    Global.GetCanvasPanel().AddNewOperator(sizeLevel, text, location);
+                    string subTypeName = (ct as MoveOpControl).SubTypeName;
+                    Global.GetCanvasPanel().AddNewOperator(sizeLevel, description, subTypeName, location);
                 }
                 if (ct.Name.Equals("MoveDtControl"))
                 {
@@ -34,7 +36,7 @@ namespace Citta_T1.Controls
                     char separator = (ct as MoveDtControl).Separator;
                     OpUtil.Encoding encoding = (ct as MoveDtControl).Encoding;
                     OpUtil.ExtType extType = (ct as MoveDtControl).ExtType;
-                    Global.GetCanvasPanel().AddNewDataSource(path, sizeLevel, text,
+                    Global.GetCanvasPanel().AddNewDataSource(path, sizeLevel, description,
                         location, separator, extType, encoding);
                 }
             }
