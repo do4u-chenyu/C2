@@ -178,7 +178,7 @@ namespace Citta_T1.OperatorViews.Base
             if (!comboBox.Items.Contains(comboBox.Text))
             {
                 comboBox.Text = String.Empty;
-                MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
+                MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
             }
             if (comboBox.Text.Contains('\t'))
             {
