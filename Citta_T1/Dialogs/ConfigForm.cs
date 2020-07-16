@@ -176,6 +176,8 @@ namespace Citta_T1.Dialogs
                 Match mat = PythonVersionRegex.Match(version);
                 if (mat.Success)
                     pythonVersion = mat.Groups[1].Value.Trim();
+                else // 可能不是python.exe程序, 报错
+                    defaultExitCode = 1;
             }
             catch
             {
