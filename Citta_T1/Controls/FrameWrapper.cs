@@ -282,7 +282,6 @@ namespace Citta_T1.Controls
             if (selectStatus.Equals(startSelect))
             {
                 SelectFrame_MouseMove();
-
                 return;
             }
             DragFrame_MouseMove();
@@ -400,7 +399,7 @@ namespace Citta_T1.Controls
         {
             WorldMap wm = Global.GetCurrentDocument().WorldMap;
             Dictionary<int, Point> idPtsDict = new Dictionary<int, Point>();
-            
+            DragFrame_MouseMove();
             foreach (Control ct in controls)
             {
                 idPtsDict.Add((ct as MoveBaseControl).ID, wm.ScreenToWorld(ct.Location, true));
