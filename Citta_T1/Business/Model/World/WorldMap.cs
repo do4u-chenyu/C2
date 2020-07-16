@@ -134,21 +134,21 @@ namespace Citta_T1.Business.Model.World
             Point dragOffset = new Point(0, 0);
             Point Pw = ScreenToWorld(new Point(50, 30), true);
             
-            if (Pw.X < 50)
+            if (Pw.X < 30)
             {
-                dragOffset.X = 50 - Pw.X;
+                dragOffset.X = 30 - Pw.X;
             }
             if (Pw.Y < 30)
             {
                 dragOffset.Y = 30 - Pw.Y;
             }
-            if (Pw.X > 2000 - Convert.ToInt32(width / factor))
+            if (Pw.X > 2030 - Convert.ToInt32(width / factor))
             {
-                dragOffset.X = 2000 - Convert.ToInt32(width / factor) - Pw.X;
+                dragOffset.X = 2030 - Convert.ToInt32(width / factor) - Pw.X;
             }
-            if (Pw.Y > 1000 - Convert.ToInt32(height / factor))
+            if (Pw.Y > 1030 - Convert.ToInt32(height / factor))
             {
-                dragOffset.Y = 980 - Convert.ToInt32(height / factor) - Pw.Y;
+                dragOffset.Y = 1030 - Convert.ToInt32(height / factor) - Pw.Y;
             }
             return dragOffset;
         }
@@ -163,11 +163,11 @@ namespace Citta_T1.Business.Model.World
             {
                 Pm.Y = 70;
             }
-            if (Pw.X > 2000 - ct.Width)
+            if (Pw.X > 2030 - ct.Width)
             {
                 Pm.X = ct.Parent.Width - ct.Width;
             }
-            if (Pw.Y > 980 - ct.Height)
+            if (Pw.Y > 1030 - ct.Height)
             {
                 Pm.Y = ct.Parent.Height - ct.Height;
             }
@@ -184,13 +184,13 @@ namespace Citta_T1.Business.Model.World
             {
                 off.Y = 70 - Pm.Y;
             }
-            if (Pm.X > Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width)
+            if (Pm.X > Convert.ToInt32(2030 * ScreenFactor) - minBoundingBox.Width)
             {
-                off.X = Convert.ToInt32(2000 * ScreenFactor) - minBoundingBox.Width - Pm.X;
+                off.X = Convert.ToInt32(2030 * ScreenFactor) - minBoundingBox.Width - Pm.X;
             }
-            if (Pm.Y > Convert.ToInt32(980 * ScreenFactor) - minBoundingBox.Height)
+            if (Pm.Y > Convert.ToInt32(1030 * ScreenFactor) - minBoundingBox.Height)
             {
-                off.Y = Convert.ToInt32(980 * ScreenFactor) - minBoundingBox.Height - Pm.Y;
+                off.Y = Convert.ToInt32(1030 * ScreenFactor) - minBoundingBox.Height - Pm.Y;
             }
             return off;
         }
