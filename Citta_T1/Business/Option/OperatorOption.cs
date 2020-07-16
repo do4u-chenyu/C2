@@ -79,7 +79,8 @@ namespace Citta_T1.Business.Option
 
                 [ElementSubType.FreqOperator] = new RegisterInfo[]       { new RegisterInfo("outfield0", TypeCode.Int32, -1) },
 
-                [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1 }),
+                [ElementSubType.GroupOperator] = new RegisterInfo[]      { new RegisterInfo("outfield0", TypeCode.Int32, -1),
+                                                                           new RegisterInfo("factor0", TypeCode.Int32, new int[] { -1 }),
                                                                            new RegisterInfo("factorH", TypeCode.Int32, new int[] { -1 })},
 
                 [ElementSubType.KeywordOperator] = new RegisterInfo[]    { new RegisterInfo("outfield0", TypeCode.Int32, -1),
@@ -308,7 +309,7 @@ namespace Citta_T1.Business.Option
                 if (ConvertUtil.IsInt(num))
                     nums.Add(int.Parse(num));
             }
-            return nums.Max();
+            return nums.Max() + 1;
         }
         private bool CheckFactorNonInt(String[] itemList, int[] maxIndexs)
         {
