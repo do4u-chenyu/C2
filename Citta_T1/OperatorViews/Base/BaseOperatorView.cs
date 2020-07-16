@@ -495,7 +495,7 @@ namespace Citta_T1.OperatorViews.Base
             // 恢复下拉列表原始字段
             comboBox.Items.Clear();
             comboBox.Items.AddRange(nowColumns);
-            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            if (!comboBox.Tag.ToString().Equals("-1") && comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
             {
                 int index = Convert.ToInt32(comboBox.Tag.ToString());
                 comboBox.SelectedIndex = index;
