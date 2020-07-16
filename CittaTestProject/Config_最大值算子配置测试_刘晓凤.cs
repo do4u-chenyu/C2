@@ -34,10 +34,14 @@ namespace CittaTestProject
             配置最大值算子();
             删除最大值算子();
         }
-        private void 创建最大值算子()
+        [TestMethod, TestCategory("快速测试")]
+        public void 创建最大值算子()
         { }
-        private void 配置最大值算子()
-        { }
+        [TestMethod, TestCategory("快速测试")]
+        public void 配置最大值算子()
+        {
+        
+        }
         private void 删除最大值算子()
         { }
         private void 最大值算子输出字段为空()
