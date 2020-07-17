@@ -24,8 +24,8 @@ namespace Citta_T1.Controls.Move.Rs
         List<int> endLineIndexs = new List<int>() { };
 
         //绘制引脚
-        private Point leftPin = new Point(2, 11);
-        private Point rightPin = new Point(130, 8);
+        private Point leftPin = new Point(1, 10);
+        private Point rightPin = new Point(129, 7);
 
         private Pen pen = new Pen(Color.DarkGray, 1f);
         private SolidBrush whiteSmokeBrush = new SolidBrush(Color.WhiteSmoke);
@@ -326,7 +326,8 @@ namespace Citta_T1.Controls.Move.Rs
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 - 1, oriCenter.Y - oriSize.Height / 2 - 1);
             Size dstSize = new Size(oriSize.Width + 2, oriSize.Height + 2);
-            return new Rectangle(dstLtCorner, dstSize);
+            //return new Rectangle(dstLtCorner, dstSize);
+            return rect;
         }
         public Rectangle RectLeave(Rectangle rect)
         {
@@ -335,7 +336,8 @@ namespace Citta_T1.Controls.Move.Rs
             Point oriCenter = new Point(oriLtCorner.X + oriSize.Width / 2, oriLtCorner.Y + oriSize.Height / 2);
             Point dstLtCorner = new Point(oriCenter.X - oriSize.Width / 2 + 1, oriCenter.Y - oriSize.Height / 2 + 1);
             Size dstSize = new Size(oriSize.Width - 2, oriSize.Height - 2);
-            return new Rectangle(dstLtCorner, dstSize);
+            //return new Rectangle(dstLtCorner, dstSize);
+            return rect;
         }
         public void OutPinInit(String status)
         {

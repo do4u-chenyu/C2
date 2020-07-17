@@ -63,8 +63,8 @@ namespace Citta_T1.Controls.Move
         protected Point mouseOffset;
 
 
-        protected int pinWidth = 6;
-        protected int pinHeight = 6;
+        protected int pinWidth = 8;
+        protected int pinHeight = 8;
         public Rectangle RectOut { get => rectOut; set => rectOut = value; }
 
         public MoveBaseControl()
