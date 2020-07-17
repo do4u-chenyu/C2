@@ -54,8 +54,6 @@ namespace Citta_T1.Business
             {
                 log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
                 // 创建、重写Xml文件
-                Directory.CreateDirectory(path);
-                Utils.FileUtil.AddPathPower(path, "FullControl");
                 CreatNewXmlHead();
 
                 xDoc.Load(UserInfoPath);
