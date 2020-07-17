@@ -125,11 +125,10 @@ namespace Citta_T1.Controls.Flow
 
                 Point moveOffset = Global.GetCurrentDocument().WorldMap
                                          .WorldBoundControl(factor, Parent.Width, Parent.Height);
-                OpUtil.CanvasDragLocation(-moveOffset.X, -moveOffset.Y);
-
+                OpUtil.CanvasDragLocation(-Convert.ToInt32(moveOffset.X * factor), 
+                                          -Convert.ToInt32(moveOffset.Y * factor));
                 currentDocument.WorldMap.MapOrigin = new Point(mapOrigin.X - moveOffset.X, mapOrigin.Y - moveOffset.Y);
                 mapOrigin = currentDocument.WorldMap.MapOrigin;
-
                 viewBoxPosition = currentDocument.WorldMap.ScreenToWorld(new Point(50, 30), true);
             }
             catch
