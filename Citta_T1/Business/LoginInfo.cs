@@ -1,4 +1,6 @@
 ﻿using Citta_T1.Core;
+using Citta_T1.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -9,6 +11,7 @@ namespace Citta_T1.Business
     {
         private string path;
         private string UserInfoPath;
+        private static readonly LogUtil log = LogUtil.GetInstance("LoginInfo");
         public LoginInfo()
         {
             this.path = Global.WorkspaceDirectory;
@@ -22,23 +25,42 @@ namespace Citta_T1.Business
 
             if (!File.Exists(UserInfoPath))
             {
-                XmlDocument xDoc = new XmlDocument();
-                XmlElement rootElement = xDoc.CreateElement("login");
-                xDoc.AppendChild(rootElement);
-
-
-                XmlElement versionElement = xDoc.CreateElement("Version");
-                versionElement.InnerText = "V1.0";
-                rootElement.AppendChild(versionElement);
-                xDoc.Save(UserInfoPath);
+                CreatNewXmlHead();
             }
 
+        }
+        private void CreatNewXmlHead()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            XmlElement rootElement = xDoc.CreateElement("login");
+            xDoc.AppendChild(rootElement);
+
+
+            XmlElement versionElement = xDoc.CreateElement("Version");
+            versionElement.InnerText = "V1.0";
+            rootElement.AppendChild(versionElement);
+            xDoc.Save(UserInfoPath);
         }
         public void WriteUserInfo(string userName)
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(UserInfoPath);
-            var node = xDoc.SelectSingleNode("login");
+            XmlNode node;
+            try
+            {              
+                xDoc.Load(UserInfoPath);
+                node = xDoc.SelectSingleNode("login");
+            }
+            catch (Exception e)
+            {
+                log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
+                // 创建、重写Xml文件
+                Directory.CreateDirectory(path);
+                Utils.FileUtil.AddPathPower(path, "FullControl");
+                CreatNewXmlHead();
+
+                xDoc.Load(UserInfoPath);
+                node = xDoc.SelectSingleNode("login");
+            }                      
             XmlElement userNode = xDoc.CreateElement("user");
             node.AppendChild(userNode);
             XmlElement nameNode = xDoc.CreateElement("name");
@@ -70,13 +92,22 @@ namespace Citta_T1.Business
             List<string> usersList = new List<string>();
             if (!File.Exists(UserInfoPath))
                 return usersList;
-            xDoc.Load(UserInfoPath);
-            XmlNode node = xDoc.SelectSingleNode("login");
-            XmlNodeList nodeLists = node.ChildNodes;
-            foreach (XmlNode xn in nodeLists)
-                if (xn.Name == userType && xn.SelectSingleNode("name") != null)
-                    usersList.Add(xn.SelectSingleNode("name").InnerText);
-            return usersList;
+            try
+            {
+                xDoc.Load(UserInfoPath);
+                XmlNode node = xDoc.SelectSingleNode("login");
+                XmlNodeList nodeLists = node.ChildNodes;
+                foreach (XmlNode xn in nodeLists)
+                    if (xn.Name == userType && xn.SelectSingleNode("name") != null)
+                        usersList.Add(xn.SelectSingleNode("name").InnerText);
+                return usersList;
+            }
+            catch (Exception e)
+            {
+                log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
+                return usersList;
+            }
+           
         }
 
 
