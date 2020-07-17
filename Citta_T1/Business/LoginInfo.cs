@@ -50,7 +50,7 @@ namespace Citta_T1.Business
                 xDoc.Load(UserInfoPath);
                 node = xDoc.SelectSingleNode("login");
             }
-            catch (Exception e)
+            catch (XmlException e)
             {
                 log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
                 // 创建、重写Xml文件
@@ -102,7 +102,7 @@ namespace Citta_T1.Business
                         usersList.Add(xn.SelectSingleNode("name").InnerText);
                 return usersList;
             }
-            catch (Exception e)
+            catch (XmlException e)
             {
                 log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
                 return usersList;

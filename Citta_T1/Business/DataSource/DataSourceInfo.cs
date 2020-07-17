@@ -10,9 +10,9 @@ namespace Citta_T1.Business.DataSource
 {
     class DataSourceInfo
     {
-        private string userPath;
-        private string dataSourcePath;
-        private static LogUtil log = LogUtil.GetInstance("DataSourceInfo");
+        private readonly string userPath;
+        private readonly string dataSourcePath;
+        private readonly static LogUtil log = LogUtil.GetInstance("DataSourceInfo");
         public DataSourceInfo(string userName)
         {
             this.userPath = Path.Combine(Global.WorkspaceDirectory, userName);
@@ -25,20 +25,30 @@ namespace Citta_T1.Business.DataSource
             Utils.FileUtil.AddPathPower(userPath, "FullControl");
             XmlDocument xDoc = new XmlDocument();
             if (!File.Exists(dataSourcePath))
-            {
-                XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
-                xDoc.AppendChild(rootElement);
-
-                XmlElement versionElement = xDoc.CreateElement("Version");
-                versionElement.InnerText = "V1.0";
-                rootElement.AppendChild(versionElement);
-                xDoc.Save(dataSourcePath);
+                CreatNewXmlHead(xDoc);
+            try
+            { 
+                xDoc.Load(dataSourcePath);
             }
-            xDoc.Load(dataSourcePath);
+            catch (XmlException e)
+            {
+                log.Error("LoginInfo Xml文件格式存在问题: " + e.Message);
+                CreatNewXmlHead(xDoc);
+            }
+          
             WriteOneDataSource(db, xDoc);
             xDoc.Save(dataSourcePath);
         }
+        private void CreatNewXmlHead(XmlDocument xDoc)
+        {
+            XmlElement rootElement = xDoc.CreateElement("DataSourceDocument");
+            xDoc.AppendChild(rootElement);
 
+            XmlElement versionElement = xDoc.CreateElement("Version");
+            versionElement.InnerText = "V1.0";
+            rootElement.AppendChild(versionElement);
+            xDoc.Save(dataSourcePath);
+        }
         public void SaveDataSourceInfo(DataButton[] dbs)
         {
             Directory.CreateDirectory(userPath);
@@ -47,9 +57,7 @@ namespace Citta_T1.Business.DataSource
             xDoc.AppendChild(rootElement);
 
             foreach (DataButton db in dbs)
-            {
                 WriteOneDataSource(db, xDoc);
-            }
             // 保存时覆盖原文件
             xDoc.Save(dataSourcePath);
         }
@@ -90,9 +98,18 @@ namespace Citta_T1.Business.DataSource
             List<DataButton> dataSourceList = new List<DataButton>();
             if (!File.Exists(dataSourcePath))
                 return dataSourceList;
-            xDoc.Load(dataSourcePath);
-            XmlNode rootNode = xDoc.SelectSingleNode("DataSourceDocument");
-            XmlNodeList nodeList = rootNode.SelectNodes("DataSource");
+            XmlNodeList nodeList;
+            try
+            {
+                xDoc.Load(dataSourcePath);
+                XmlNode rootNode = xDoc.SelectSingleNode("DataSourceDocument");
+                nodeList = rootNode.SelectNodes("DataSource");
+            }
+            catch (XmlException e)
+            {
+                log.Error("DocumentSaveLoad Xml文件格式存在问题: " + e.Message);
+                return dataSourceList; 
+            }           
             foreach (XmlNode xn in nodeList)
             {
                 try
@@ -108,7 +125,7 @@ namespace Citta_T1.Business.DataSource
                     };
                     dataSourceList.Add(dataButton);
                 }
-                catch (Exception e) { log.Error("LoadDataSourceInfo 发生错误，错误 :" + e.Message); }
+                catch (XmlException e) { log.Error("LoadDataSourceInfo 发生错误，错误 :" + e.Message); }
             }
             return dataSourceList;
         }
