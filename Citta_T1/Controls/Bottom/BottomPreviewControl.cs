@@ -79,6 +79,7 @@ namespace Citta_T1.Controls.Bottom
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
+            this.ResetColumnsWidth();
 
             // 取消重命名
             for (int i = 0; i < this.dataGridView.Columns.Count; i++)
@@ -152,6 +153,7 @@ namespace Citta_T1.Controls.Bottom
 
             DvgClean();
             FileUtil.FillTable(this.dataGridView, headers, datas, numOfCols);
+            this.ResetColumnsWidth();
             ControlUtil.DisableOrder(this.dataGridView);
         }
     }

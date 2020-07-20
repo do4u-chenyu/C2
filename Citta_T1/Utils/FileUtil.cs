@@ -330,14 +330,14 @@ namespace Citta_T1.Utils
                 DataTable table = new DataTable();
                 DataRow newRow;
                 DataView view;
-                int numOfCol = headers.Count;
-                DataColumn[] cols = new DataColumn[numOfCol];
+                int maxNumOfCol = headers.Count;
+                DataColumn[] cols = new DataColumn[maxNumOfCol];
                 Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
                 string headerText;
                 char[] seperator = new char[] { '_' };
 
                 // 可能有同名列，这里需要重命名一下
-                for (int i = 0; i < numOfCol; i++)
+                for (int i = 0; i < maxNumOfCol; i++)
                 {
                     cols[i] = new DataColumn();
                     headerText = headers[i];
@@ -358,17 +358,10 @@ namespace Citta_T1.Utils
                 {
                     List<string> row = rows[rowIndex];
                     newRow = table.NewRow();
-                    int colIndex = 0;
-                    while (colIndex < row.Count)
-                    {
+                    for (int colIndex = 0; colIndex < row.Count; colIndex++)
                         newRow[colIndex] = row[colIndex];
-                        colIndex += 1;
-                    }
-                    while (colIndex < numOfCol)
-                    {
+                    for (int colIndex = row.Count; colIndex < maxNumOfCol; colIndex++)
                         newRow[colIndex] = "";
-                        colIndex += 1;
-                    }
                     table.Rows.Add(newRow);
                 }
 

@@ -215,11 +215,18 @@ namespace Citta_T1.Core
         }
         public void ReWriteBCPFile(string fullFilePath, List<string> columnsName)
         {
-            using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+            try
             {
-                string columns = String.Join("\t", columnsName);
-                sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
-                sw.Flush();
+                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+                {
+                    string columns = String.Join("\t", columnsName);
+                    sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
+                    sw.Flush();
+                }
+            }
+            catch(Exception e)
+            {
+                log.Error("重写BCP文件失败， error: " + e.ToString());
             }
         }
     }
