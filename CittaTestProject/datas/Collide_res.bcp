@@ -1,0 +1,52 @@
+REFERER	USERNAME	PASSWORD	code
+http://8899j.cn/index.php/Admin/Public/login.html##http://8899j.cn/index.php/Admin/Public/login.html	...username=admin	password=14521287...	password=14521287...
+http://8899j.cn/index.php/Admin/Public/login.html##http://8899j.cn/index.php/Admin/Public/login.html	...username=admin	password=tzhuti.com6...	password=tzhuti.com6...
+http://admin.data1866.com/excel##http://admin.data1866.com/excel	...username=admin.ruan	password=ruandi050920...	password=ruandi050920...
+http://admin.express2global.cn/	name=admin	password=admin123...	...code=admin.express2global.cn
+http://admin.nex16888.com/login##http://admin.nex16888.com/login	name=admin	password=admin9.0...	...code=admin.nex16888.com
+http://admin.nex16888.com/login##http://admin.nex16888.com/login	name=admin	password=admin*10.0...	...code=admin.nex16888.com
+http://e12.dms.eccang.com/default/index/erp-login?company_code=DELANGSI&user_name=admin&sign=969268d0425a146d20d6f39734d31f1a	user_name=admin		
+http://e12.dms.eccang.com/default/index/erp-login?company_code=CTYG&user_name=admin&sign=8efb5d544c66a445379f7a78e774c85b##http://e12.dms.eccang.com/default/index/erp-login?company_code=CTYG&user_name=admin&sign=8efb5d544c66a445379f7a78e774c85b	user_name=admin		
+http://e12.dms.eccang.com/default/index/erp-login?company_code=NFL&user_name=admin&sign=6e26dc3506a611431b15aeb3a9d5efa3	user_name=admin		
+http://ghs309.huanqiu169.top/Auth/Login##http://ghs309.huanqiu169.top/Auth/Login	useraccount=admin	password=djk606	password=djk606
+http://ghs309.huanqiu169.top/Auth/Login##http://ghs309.huanqiu169.top/Auth/Login	useraccount=admin	password=djk606	password=djk606
+http://one.bond520.com/admin/login.php?act=login##http://one.bond520.com/admin/login.php?act=login	act=do_login	admin_pwd=renqi1234	
+http://one.bond520.com/admin/login.php?act=login##http://one.bond520.com/admin/login.php?act=login	act=do_login	admin_pwd=Qlinlin520	
+http://one.bond520.com/admin/login.php?act=login&err=密码不能为空##http://one.bond520.com/admin/login.php?act=login&err=密码不能为空	act=do_login		
+http://one.bond520.com/admin/login.php?act=login&err=用户名或密码错误##http://one.bond520.com/admin/login.php?act=login&err=用户名或密码错误	act=do_login	admin_pwd=dh123456	
+http://seller.51microshop.com/admin/mallsettings/pagedit.aspx?id=11498555	 sitename=smartoby		 sitename=smartoby
+http://shop.beta.bcc021.com/admin/points/mall/product/index	columns[0][data]=p_id		
+http://shop.beta.bcc021.com/admin/points/mall/product/index##http://shop.beta.bcc021.com/admin/points/mall/product/index	columns[7][data]=p_stock		
+http://sjlm.tztk168.com/Auth/Login##http://sjlm.tztk168.com/Auth/Login	useraccount=admin	password=999	password=999
+http://sjlm.tztk168.com/	useraccount=admin	password=999	password=999
+http://tt.dwdp56.cn/admin/Home/Login	...loginname=admin	password=admin!@#$%^...	password=admin!@#$%^...
+http://tt.dwdp56.cn/admin/Home/Login	...loginname=admin	password=admin!@#...	password=admin!@#...
+http://www.021gpsonline.cn/	useraccount=admin	customerid=58776	
+http://www.021gpsonline.cn/##http://www.021gpsonline.cn/	useraccount=admin	customerid=01	
+http://www.seo6.vip/RpxyKDmw.php/index/login?url=/RpxyKDmw.php/dashboard?ref=addtabs	username=admin	password=qifeiseo168	password=qifeiseo168
+http://www.021gpsonline.cn/	useraccount=admin	customerid=58776	
+http://47.254.81.174:8080/	...username=admin	userpass=1738161750	userpass=1738161750
+http://e12.dms.eccang.com/default/index/erp-login?company_code=DELANGSI&user_name=admin&sign=969268d0425a146d20d6f39734d31f1a	user_name=admin		
+http://shop.beta.bcc021.com/admin/points/mall/product/index	columns[0][data]=p_id		
+http://shop.beta.bcc021.com/admin/points/mall/product/index##http://shop.beta.bcc021.com/admin/points/mall/product/index	columns[7][data]=p_stock		
+http://tt.dwdp56.cn/admin/Home/Login	...loginname=admin	password=admin!@#$%^...	password=admin!@#$%^...
+http://tt.dwdp56.cn/admin/Home/Login	...loginname=admin	password=admin!@#...	password=admin!@#...
+http://www.seo6.vip/RpxyKDmw.php/index/login?url=/RpxyKDmw.php/dashboard?ref=addtabs	username=admin	password=qifeiseo168	password=qifeiseo168
+http://8899j.cn/index.php/Admin/Public/login.html##http://8899j.cn/index.php/Admin/Public/login.html	...username=admin	password=14521287...	password=14521287...
+http://8899j.cn/index.php/Admin/Public/login.html##http://8899j.cn/index.php/Admin/Public/login.html	...username=admin	password=tzhuti.com6...	password=tzhuti.com6...
+http://admin.express2global.cn/	name=admin	password=admin123...	...code=admin.express2global.cn
+http://admin.nex16888.com/login##http://admin.nex16888.com/login	name=admin	password=admin9.0...	...code=admin.nex16888.com
+http://admin.nex16888.com/login##http://admin.nex16888.com/login	name=admin	password=admin*10.0...	...code=admin.nex16888.com
+http://www.021gpsonline.cn/##http://www.021gpsonline.cn/	useraccount=admin	customerid=01	
+http://one.bond520.com/admin/login.php?act=login##http://one.bond520.com/admin/login.php?act=login	act=do_login	admin_pwd=renqi1234	
+http://one.bond520.com/admin/login.php?act=login##http://one.bond520.com/admin/login.php?act=login	act=do_login	admin_pwd=Qlinlin520	
+http://sjlm.tztk168.com/Auth/Login##http://sjlm.tztk168.com/Auth/Login	useraccount=admin	password=999	password=999
+http://e12.dms.eccang.com/default/index/erp-login?company_code=CTYG&user_name=admin&sign=8efb5d544c66a445379f7a78e774c85b##http://e12.dms.eccang.com/default/index/erp-login?company_code=CTYG&user_name=admin&sign=8efb5d544c66a445379f7a78e774c85b	user_name=admin		
+http://seller.51microshop.com/admin/mallsettings/pagedit.aspx?id=11498555	 sitename=smartoby		 sitename=smartoby
+http://e12.dms.eccang.com/default/index/erp-login?company_code=NFL&user_name=admin&sign=6e26dc3506a611431b15aeb3a9d5efa3	user_name=admin		
+http://sjlm.tztk168.com/	useraccount=admin	password=999	password=999
+http://ghs309.huanqiu169.top/Auth/Login##http://ghs309.huanqiu169.top/Auth/Login	useraccount=admin	password=djk606	password=djk606
+http://ghs309.huanqiu169.top/Auth/Login##http://ghs309.huanqiu169.top/Auth/Login	useraccount=admin	password=djk606	password=djk606
+http://one.bond520.com/admin/login.php?act=login&err=密码不能为空##http://one.bond520.com/admin/login.php?act=login&err=密码不能为空	act=do_login		
+http://one.bond520.com/admin/login.php?act=login&err=用户名或密码错误##http://one.bond520.com/admin/login.php?act=login&err=用户名或密码错误	act=do_login	admin_pwd=dh123456	
+http://admin.data1866.com/excel##http://admin.data1866.com/excel	...username=admin.ruan	password=ruandi050920...	password=ruandi050920...
