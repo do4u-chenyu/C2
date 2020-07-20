@@ -116,11 +116,6 @@ namespace Citta_T1.Dialogs
             {
                 MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
             }
-            // 非法字符不得成为文件名
-            //else if (IsContainsInvalidChars(this.textBox1.Text))
-            //{
-            //    MessageBox.Show(String.Format("数据源命名不能有、&、\"等特殊字符, 当前数据源名为: {0}", this.textBox1.Text));
-            //}
             else
             {
                 if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
@@ -128,7 +123,7 @@ namespace Citta_T1.Dialogs
                 else
                     this.extType = OpUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
@@ -175,112 +170,17 @@ namespace Citta_T1.Dialogs
             this.DvgClean();
         }
 
+        
         private void PreViewBcpFile()
         {
-            /*
-             * @param this.isUTF8
-             * @param this.fileName
-             * 预览文件
-             * 1. 编码格式
-             * 2. 分隔符
-             * 3. 初始化表头
-             * 4. 清理表格数据
-             * 5. 写入数据
-             */
-            if (this.fullFilePath == null)
-                return;
-            System.IO.StreamReader sr;
-            FileStream fs = null;
-            if (this.encoding == OpUtil.Encoding.UTF8)
-            {
-                sr = File.OpenText(fullFilePath);
-            }
-            else
-            {
-                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs, System.Text.Encoding.Default);
-            }
-            String header = sr.ReadLine();
-            if (header == null)
+            Tuple<List<string>, List<List<string>>> headersAndRows = FileUtil.ReadBcpFile(this.fullFilePath, this.encoding, this.separator, this.maxNumOfRow);
+            if (headersAndRows.Item1.Count == 0 && headersAndRows.Item2.Count == 0)
             {
                 MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
                 this.Clean();
                 return;
             }
-            String[] headers = header.Split(this.separator);
-            int numOfCol = header.Split(this.separator).Length;
-            this.dataGridView1.DataSource = null;
-            DvgClean(false);
-            try
-            {
-                DataTable table = new DataTable();
-                DataRow row;
-                DataView view;
-                DataColumn[] cols = new DataColumn[numOfCol];
-                Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
-                string headerText;
-                char[] seperator = new char[] { '_' };
-
-                // 可能有同名列，这里需要重命名一下
-                for (int i = 0; i < numOfCol; i++)
-                {
-                    cols[i] = new DataColumn();
-                    headerText = headers[i];
-                    if (!induplicatedName.ContainsKey(headerText))
-                        induplicatedName.Add(headerText, 0);
-                    else
-                    {
-                        induplicatedName[headerText] += 1;
-                        induplicatedName[headerText] = induplicatedName[headerText];
-                    }
-                    headerText = induplicatedName[headerText] + "_" + headerText;
-                    cols[i].ColumnName = headerText;
-                }
-
-                table.Columns.AddRange(cols);
-
-                for (int rowIndex = 0; rowIndex < maxNumOfRow && !sr.EndOfStream; rowIndex++)
-                {
-                    String line = sr.ReadLine();
-                    if (line == null)
-                        continue;
-                    row = table.NewRow();
-                    String[] eles = line.Split(this.separator);
-                    for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Length); colIndex++)
-                    {
-                        row[colIndex] = eles[colIndex];
-                    }
-                    table.Rows.Add(row);
-                }
-
-                view = new DataView(table);
-                this.dataGridView1.DataSource = view;
-
-
-                // 取消重命名
-                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
-                {
-                    try
-                    {
-                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name.Split(seperator, 2)[1];
-                    }
-                    catch
-                    {
-                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name;
-                        log.Error("读取文件时，去重命名过程出错");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-                sr.Close();
-            }
+            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, headersAndRows.Item2, this.maxNumOfRow);
         }
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)

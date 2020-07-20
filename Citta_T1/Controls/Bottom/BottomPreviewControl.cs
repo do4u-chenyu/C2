@@ -28,7 +28,7 @@ namespace Citta_T1.Controls.Bottom
                 datas.Add(new List<string>() { "", "", "", "", "", "" });
             //_InitializeColumns(headers);
             //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
-            _InitializeDGV(datas, headers, numOfCols);
+            InitializeDGV(datas, headers, numOfCols);
 
         }
         public void DvgClean(bool isCleanDataName = true)
@@ -37,7 +37,7 @@ namespace Citta_T1.Controls.Bottom
             this.dataGridView.Rows.Clear();
             this.dataGridView.Columns.Clear();
         }
-        private void _InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
+        private void InitializeDGV(List<List<string>> datas, List<string> headers, int numOfCol)
         {
             DataTable table = new DataTable();
             DataRow row;
@@ -79,8 +79,6 @@ namespace Citta_T1.Controls.Bottom
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
-            this.dataGridView.ColumnHeadersHeight = 23;
-            this.ResetColumnsWidth();
 
             // 取消重命名
             for (int i = 0; i < this.dataGridView.Columns.Count; i++)
@@ -126,7 +124,7 @@ namespace Citta_T1.Controls.Bottom
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, separator, isForceRead).Split('\n'));
             else
                 rows = new List<string>();
 
@@ -153,7 +151,7 @@ namespace Citta_T1.Controls.Bottom
 
 
             DvgClean();
-            _InitializeDGV(datas, headers, numOfCols);
+            FileUtil.FillTable(this.dataGridView, headers, datas, numOfCols);
             ControlUtil.DisableOrder(this.dataGridView);
         }
     }

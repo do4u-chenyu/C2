@@ -3,6 +3,7 @@ using NPOI.SS.UserModel;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
@@ -12,6 +13,7 @@ namespace Citta_T1.Utils
 {
     class FileUtil
     {
+        public static LogUtil log = LogUtil.GetInstance("FileUtil");
         public static void AddPathPower(string pathName, string power)
         {
             string userName = System.Environment.UserName;
@@ -273,5 +275,135 @@ namespace Citta_T1.Utils
             return false;
         }
 
+        public static Tuple<List<string>, List<List<string>>> ReadBcpFile(string fullFilePath, OpUtil.Encoding encoding, char separator, int maxNumOfRow)
+        {
+            List<string> headers = new List<string> { };
+            int maxColsNum = 0;
+            List<List<string>> rows = new List<List<string>> { new List<string> { } };
+            Tuple<List<string>, List<List<string>>> result;
+            if (fullFilePath == null)
+                return new Tuple<List<string>, List<List<string>>>(headers, rows);
+
+            System.IO.StreamReader sr = null;
+            FileStream fs = null;
+            if (encoding == OpUtil.Encoding.UTF8)
+                sr = File.OpenText(fullFilePath);
+            else
+            {
+                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs, System.Text.Encoding.Default);
+            }
+            try
+            {
+                headers = new List<string>(sr.ReadLine().Split(separator));
+                for (int rowIndex = 1; rowIndex < maxNumOfRow && !sr.EndOfStream; rowIndex++)
+                {
+                    String line = sr.ReadLine();
+                    if (line == null)
+                        continue;
+                    String[] eles = line.Split(separator);
+                    if (eles.Length > maxColsNum)
+                        maxColsNum = eles.Length;
+                    rows.Add(new List<string>(eles));
+                }
+                for (int headersColNum = headers.Count; headersColNum < maxColsNum; headersColNum++)
+                    headers.Add("");
+            }
+            catch (Exception e)
+            {
+                log.Error(string.Format("加载数据 '{0}' 失败, error: {1}", fullFilePath, e.ToString()));
+            }
+            finally
+            {
+                result = new Tuple<List<string>, List<List<string>>>(headers, rows);
+                if (fs != null)
+                    fs.Close();
+                if (sr != null)
+                    sr.Close();
+            }
+            return result;
+        }
+        public static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                DataRow newRow;
+                DataView view;
+                int numOfCol = headers.Count;
+                DataColumn[] cols = new DataColumn[numOfCol];
+                Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
+                string headerText;
+                char[] seperator = new char[] { '_' };
+
+                // 可能有同名列，这里需要重命名一下
+                for (int i = 0; i < numOfCol; i++)
+                {
+                    cols[i] = new DataColumn();
+                    headerText = headers[i];
+                    if (!induplicatedName.ContainsKey(headerText))
+                        induplicatedName.Add(headerText, 0);
+                    else
+                    {
+                        induplicatedName[headerText] += 1;
+                        induplicatedName[headerText] = induplicatedName[headerText];
+                    }
+                    headerText = induplicatedName[headerText] + "_" + headerText;
+                    cols[i].ColumnName = headerText;
+                }
+                // 表头
+                table.Columns.AddRange(cols);
+
+                for (int rowIndex = 0; rowIndex < Math.Min(maxNumOfRow, rows.Count); rowIndex++)
+                {
+                    List<string> row = rows[rowIndex];
+                    newRow = table.NewRow();
+                    int colIndex = 0;
+                    while (colIndex < row.Count)
+                    {
+                        newRow[colIndex] = row[colIndex];
+                        colIndex += 1;
+                    }
+                    while (colIndex < numOfCol)
+                    {
+                        newRow[colIndex] = "";
+                        colIndex += 1;
+                    }
+                    table.Rows.Add(newRow);
+                }
+
+                view = new DataView(table);
+                dgv.DataSource = view;
+
+
+                // 取消重命名
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    try
+                    {
+                        dgv.Columns[i].HeaderText = dgv.Columns[i].Name.Split(seperator, 2)[1];
+                    }
+                    catch
+                    {
+                        dgv.Columns[i].HeaderText = dgv.Columns[i].Name;
+                        log.Error("读取文件时，去重命名过程出错");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
+            }
+            finally
+            {
+
+            }
+        }
+        public static void CleanDgv(DataGridView dgv)
+        {
+            dgv.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+        }
     }
 }

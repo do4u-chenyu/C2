@@ -6,6 +6,7 @@ using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -50,17 +51,17 @@ namespace Citta_T1.Core
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
-        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
+        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, separator, isForceRead);
         }
 
         public string GetCachePreViewExcelContent(string fullFilePath, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, '\t', isForceRead);
         }
 
-        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
+        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
         {
             string ret = String.Empty;
             // 数据不存在 或 需要强制读取时 按照路径重新读取
@@ -71,7 +72,7 @@ namespace Citta_T1.Core
                         PreLoadExcelFileNew(fullFilePath);
                         break;
                     case OpUtil.ExtType.Text:
-                        PreLoadBcpFile(fullFilePath, encoding);
+                        PreLoadBcpFile(fullFilePath, encoding, separator);
                         break;
                     default:
                         break;
@@ -81,7 +82,7 @@ namespace Citta_T1.Core
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
             return ret;
         }
-        public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
+        public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
         {
 
             string ret = String.Empty;
@@ -93,7 +94,7 @@ namespace Citta_T1.Core
                     PreLoadExcelFileNew(fullFilePath);
                 }
                 else
-                    PreLoadBcpFile(fullFilePath, encoding);
+                    PreLoadBcpFile(fullFilePath, encoding, separator);
 
             }
             if (HitCache(fullFilePath))
@@ -102,7 +103,7 @@ namespace Citta_T1.Core
         }
 
 
-        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
@@ -114,7 +115,7 @@ namespace Citta_T1.Core
                     PreLoadExcelFileNew(fullFilePath);
                     break;
                 case OpUtil.ExtType.Text:
-                    PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
+                    PreLoadBcpFile(fullFilePath, encoding, separator);  // 按行读取文件 不分割
                     break;
                 case OpUtil.ExtType.Unknow:
                 default:
@@ -148,94 +149,19 @@ namespace Citta_T1.Core
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
         }
-
-        /*
-        * 按行读取excel文件
-        */
-        private void PreLoadExcelFile(string fullFilePath, string sheetName = "")
-        {
-            IWorkbook workbook = null;
-            FileStream fs = null;
-            try
-            {
-                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-
-                if (fullFilePath.EndsWith(".xlsx")) // 2007版本
-                    workbook = new XSSFWorkbook(fs);
-                else
-                    workbook = new HSSFWorkbook(fs);   // 2003版本
-                // 不指定sheetName的话, 用第一个sheet
-                ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
-                if (sheet == null)
-                    return;
-
-                IRow firstRow = sheet.GetRow(0);            // 此处会不会为空,会，然后报异常，被下面捕捉
-                int colNum = firstRow.Cells.Count;
-                string[] headers = new string[colNum];
-                string[] rowContent = new string[colNum];
-                for (int i = 0; i < colNum; i++)
-                    headers[i] = firstRow.Cells[i].ToString();
-
-                string firstLine = String.Join("\t", headers);     // 大师说默认第一行就是表头   
-                StringBuilder sb = new StringBuilder(1024 * 16);
-                sb.AppendLine(firstLine);
-                //下标从0开始,且第一列是表头
-                for (int i = 0; i < Math.Min(maxRow, sheet.LastRowNum + 1); i++)
-                {
-                    IRow row = sheet.GetRow(i + sheet.FirstRowNum + 1);
-                    if (row == null)  // 
-                    {
-                        sb.AppendLine(String.Empty);
-                        continue;
-                    }
-
-                    for (int j = 0; j < colNum; j++)
-                        rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
-
-                    sb.AppendLine(String.Join("\t", rowContent));
-                }
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
-            }
-            catch (System.IO.IOException ex)
-            {
-                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath));
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-                if (workbook != null)
-                    workbook.Close();
-            }
-        }
-
         /*
          * 按行读取文件，不分割
          */
-        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
+        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding, char separator)
         {
-            StreamReader sr = null;
+            StringBuilder sb = new StringBuilder(1024 * 16);
             try
             {
-                if (encoding == OpUtil.Encoding.UTF8)
-                    sr = File.OpenText(fullFilePath);
-                else
-                {
-                    FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-                    sr = new StreamReader(fs, Encoding.Default);
-                }
-                string firstLine = sr.ReadLine();
-                StringBuilder sb = new StringBuilder(1024 * 16);
-                sb.AppendLine(firstLine);
-
-                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
-                    sb.AppendLine(sr.ReadLine());                                   // 分隔符
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
+                Tuple<List<string>, List<List<string>>> result = FileUtil.ReadBcpFile(fullFilePath, encoding, separator, 100);
+                sb.AppendLine(string.Join(separator.ToString(), result.Item1));
+                foreach (List<string> row in result.Item2)
+                    sb.AppendLine(string.Join(separator.ToString(), row));
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), result.Item1.ToString());
             }
             catch (Exception e)
             {
@@ -243,8 +169,6 @@ namespace Citta_T1.Core
             }
             finally
             {
-                if (sr != null)
-                    sr.Close();
             }
         }
 
