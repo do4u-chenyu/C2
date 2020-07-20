@@ -124,7 +124,7 @@ namespace Citta_T1.Controls.Bottom
                 rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewExcelContent(fullFilePath, isForceRead).Split('\n'));
             }
             else if (extType == OpUtil.ExtType.Text)
-                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, separator, isForceRead).Split('\n'));
+                rows = new List<string>(BCPBuffer.GetInstance().GetCachePreViewBcpContent(fullFilePath, encoding, isForceRead).Split('\n'));
             else
                 rows = new List<string>();
 

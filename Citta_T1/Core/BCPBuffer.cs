@@ -51,17 +51,17 @@ namespace Citta_T1.Core
         private static readonly LogUtil log = LogUtil.GetInstance("BCPBuffer");
         private static readonly Regex regexXls = new Regex(@"\.xl(s?[xmb]?|t[xm]|am)$");
         private static readonly int maxRow = 100;
-        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
+        public string GetCachePreViewBcpContent(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, separator, isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Text, encoding, isForceRead);
         }
 
         public string GetCachePreViewExcelContent(string fullFilePath, bool isForceRead = false)
         {
-            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, '\t', isForceRead);
+            return GetCachePreViewFileContent(fullFilePath, OpUtil.ExtType.Excel, OpUtil.Encoding.NoNeed, isForceRead);
         }
 
-        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
+        private string GetCachePreViewFileContent(string fullFilePath, OpUtil.ExtType type, OpUtil.Encoding encoding, bool isForceRead = false)
         {
             string ret = String.Empty;
             // 数据不存在 或 需要强制读取时 按照路径重新读取
@@ -72,7 +72,7 @@ namespace Citta_T1.Core
                         PreLoadExcelFileNew(fullFilePath);
                         break;
                     case OpUtil.ExtType.Text:
-                        PreLoadBcpFile(fullFilePath, encoding, separator);
+                        PreLoadBcpFile(fullFilePath, encoding);
                         break;
                     default:
                         break;
@@ -82,7 +82,7 @@ namespace Citta_T1.Core
                 ret = dataPreviewDict[fullFilePath].PreviewFileContent;
             return ret;
         }
-        public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, char separator, bool isForceRead = false)
+        public string GetCacheColumnLine(string fullFilePath, OpUtil.Encoding encoding, bool isForceRead = false)
         {
 
             string ret = String.Empty;
@@ -94,7 +94,7 @@ namespace Citta_T1.Core
                     PreLoadExcelFileNew(fullFilePath);
                 }
                 else
-                    PreLoadBcpFile(fullFilePath, encoding, separator);
+                    PreLoadBcpFile(fullFilePath, encoding);
 
             }
             if (HitCache(fullFilePath))
@@ -115,7 +115,7 @@ namespace Citta_T1.Core
                     PreLoadExcelFileNew(fullFilePath);
                     break;
                 case OpUtil.ExtType.Text:
-                    PreLoadBcpFile(fullFilePath, encoding, separator);  // 按行读取文件 不分割
+                    PreLoadBcpFile(fullFilePath, encoding);  // 按行读取文件 不分割
                     break;
                 case OpUtil.ExtType.Unknow:
                 default:
@@ -152,16 +152,25 @@ namespace Citta_T1.Core
         /*
          * 按行读取文件，不分割
          */
-        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding, char separator)
+        private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
-            StringBuilder sb = new StringBuilder(1024 * 16);
+            StreamReader sr = null;
             try
             {
-                Tuple<List<string>, List<List<string>>> result = FileUtil.ReadBcpFile(fullFilePath, encoding, separator, 100);
-                sb.AppendLine(string.Join(separator.ToString(), result.Item1));
-                foreach (List<string> row in result.Item2)
-                    sb.AppendLine(string.Join(separator.ToString(), row));
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), result.Item1.ToString());
+                if (encoding == OpUtil.Encoding.UTF8)
+                    sr = File.OpenText(fullFilePath);
+                else
+                {
+                    FileStream fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
+                    sr = new StreamReader(fs, Encoding.Default);
+                }
+                string firstLine = sr.ReadLine();
+                StringBuilder sb = new StringBuilder(1024 * 16);
+                sb.AppendLine(firstLine);
+
+                for (int row = 1; row < maxRow && !sr.EndOfStream; row++)
+                    sb.AppendLine(sr.ReadLine());                                   // 分隔符
+                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
             }
             catch (Exception e)
             {
@@ -169,6 +178,8 @@ namespace Citta_T1.Core
             }
             finally
             {
+                if (sr != null)
+                    sr.Close();
             }
         }
 
