@@ -116,6 +116,8 @@ namespace Citta_T1.Business.DataSource
                 {
                     string fullFilePath = xn.SelectSingleNode("path").InnerText;
                     string dataName = xn.SelectSingleNode("name").InnerText;
+                    if (string.IsNullOrEmpty(fullFilePath)|| string.IsNullOrEmpty(dataName))
+                        continue;
                     char separator = ConvertUtil.TryParseAscii(xn.SelectSingleNode("separator").InnerText);
                     OpUtil.ExtType extType = OpUtil.ExtTypeEnum(xn.SelectSingleNode("extType").InnerText);
                     OpUtil.Encoding encoding = OpUtil.EncodingEnum(xn.SelectSingleNode("encoding").InnerText);
