@@ -3,6 +3,8 @@ using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Bottom
@@ -79,7 +81,7 @@ namespace Citta_T1.Controls.Bottom
             }
             view = new DataView(table);
             this.dataGridView.DataSource = view;
-            this.ResetColumnsWidth();
+            FileUtil.ResetColumnsWidth(this.dataGridView);
 
             // 取消重命名
             for (int i = 0; i < this.dataGridView.Columns.Count; i++)
@@ -92,18 +94,6 @@ namespace Citta_T1.Controls.Bottom
                 {
                     this.dataGridView.Columns[i].HeaderText = this.dataGridView.Columns[i].Name;
                 }
-            }
-        }
-
-        private void ResetColumnsWidth(int minWidth = 50)
-        {
-            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
-            {
-                this.dataGridView.Columns[i].MinimumWidth = minWidth;
-            }
-            for (int i = 0; i < this.dataGridView.Columns.Count; i++)
-            {
-                this.dataGridView.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
         }
 
@@ -129,32 +119,26 @@ namespace Citta_T1.Controls.Bottom
             else
                 rows = new List<string>();
 
-            int numOfRows = rows.Count;
-            for (int i = 0; i < numOfRows; i++)
-            {
-                blankRow.Add(" ");
-            }
-            for (int i = 0; i < Math.Max(numOfRows, maxNumOfFile); i++)
-            {
-                if (i >= numOfRows)
-                    datas.Add(blankRow);
-                else
-                    datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
-            }
-
+            for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
+                datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
+            datas = FileUtil.FormatDatas(datas, maxNumOfFile + 1);
             List<string> headers = datas[0];
+            datas.RemoveAt(0);
             int numOfCols = headers.Count;
-            // 不足100行时,补足剩余的空行,这样视觉效果上好一些
-            for (int i = 0; i < maxNumOfFile - numOfRows; i++)
-            {
-                datas.Add(new List<string>(numOfCols));
-            }
-
 
             DvgClean();
-            FileUtil.FillTable(this.dataGridView, headers, datas, numOfCols);
-            this.ResetColumnsWidth();
+            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile);
             ControlUtil.DisableOrder(this.dataGridView);
+        }
+
+        private void dataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                this.dataGridView.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dataGridView.RowHeadersDefaultCellStyle.Font, rect,
+                this.dataGridView.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
     }
 }

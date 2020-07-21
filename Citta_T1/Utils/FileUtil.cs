@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Security.AccessControl;
 using System.Windows.Forms;
 
@@ -252,6 +253,31 @@ namespace Citta_T1.Utils
             return rowContentList;
         }
 
+        public static List<List<string>> FormatDatas(List<List<string>> datas, int maxNumOfRow)
+        {
+            int maxNumOfCol = 0;
+            List<string> blankRow = new List<string> { };
+            List<string> headers = datas[0];
+            if (datas.Count <=1)
+                return new List<List<string>> { headers };
+            for (int i = 0; i < datas.Count; i++)
+                maxNumOfCol = Math.Max(datas[i].Count, maxNumOfCol);
+            for (int i = 0; i < maxNumOfCol; i++)
+                blankRow.Add("");
+            for (int i = 0; i < Math.Max(maxNumOfRow, datas.Count); i++)
+            {
+                if (i >= datas.Count)
+                    datas.Add(blankRow);
+                else
+                {
+                    int numOfCurRow = datas[i].Count;
+                    for (int j = 0; j < maxNumOfCol - numOfCurRow; j++)
+                        datas[i].Add("");
+                }
+            }
+            return datas;
+        }
+
         public static bool ContainIllegalCharacters(string userName, string target)
         {
             string[] illegalCharacters = new string[] { "*", "\\", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
@@ -279,7 +305,7 @@ namespace Citta_T1.Utils
         {
             List<string> headers = new List<string> { };
             int maxColsNum = 0;
-            List<List<string>> rows = new List<List<string>> { new List<string> { } };
+            List<List<string>> rows = new List<List<string>> {  };
             Tuple<List<string>, List<List<string>>> result;
             if (fullFilePath == null)
                 return new Tuple<List<string>, List<List<string>>>(headers, rows);
@@ -354,7 +380,7 @@ namespace Citta_T1.Utils
                 // 表头
                 table.Columns.AddRange(cols);
 
-                for (int rowIndex = 0; rowIndex < Math.Min(maxNumOfRow, rows.Count); rowIndex++)
+                for (int rowIndex = 0; rowIndex < Math.Max(maxNumOfRow, rows.Count); rowIndex++)
                 {
                     List<string> row = rows[rowIndex];
                     newRow = table.NewRow();
@@ -367,6 +393,7 @@ namespace Citta_T1.Utils
 
                 view = new DataView(table);
                 dgv.DataSource = view;
+                FileUtil.ResetColumnsWidth(dgv);
 
 
                 // 取消重命名
@@ -397,6 +424,17 @@ namespace Citta_T1.Utils
             dgv.DataSource = null; // System.InvalidOperationException:“操作无效，原因是它导致对 SetCurrentCellAddressCore 函数的可重入调用。”
             dgv.Rows.Clear();
             dgv.Columns.Clear();
+        }
+        public static void ResetColumnsWidth(DataGridView dgv, int minWidth = 50)
+        {
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                dgv.Columns[i].MinimumWidth = minWidth;
+            }
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
         }
     }
 }

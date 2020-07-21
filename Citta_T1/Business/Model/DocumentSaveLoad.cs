@@ -184,7 +184,6 @@ namespace Citta_T1.Business.Model
             modelElementXml.AppendChild(optionNode);
             foreach (KeyValuePair<string, string> kvp in option.OptionDict)
             {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
                 XmlElement fieldNode = xDoc.CreateElement(kvp.Key);
                 fieldNode.InnerText = kvp.Value;
                 optionNode.AppendChild(fieldNode);

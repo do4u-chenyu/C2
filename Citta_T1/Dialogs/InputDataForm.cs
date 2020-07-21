@@ -180,7 +180,8 @@ namespace Citta_T1.Dialogs
                 this.Clean();
                 return;
             }
-            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, headersAndRows.Item2, this.maxNumOfRow);
+            List<List<string>> rows = FileUtil.FormatDatas(headersAndRows.Item2, this.maxNumOfRow);
+            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow);
         }
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
@@ -367,9 +368,12 @@ namespace Citta_T1.Dialogs
 
         private void TextBoxEx1_TextChanged(object sender, EventArgs e)
         {
+            if (this.fullFilePath == null)
+                return;
             if (this.extType == OpUtil.ExtType.Text)
             {
                 this.radioButton3.Checked = true;
+                // 没有指定分隔符
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
                     this.separator = this.emptySep;
                 else
@@ -381,6 +385,7 @@ namespace Citta_T1.Dialogs
                     {
                         //log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                        return;
                     }
                 PreViewBcpFile();
             }
@@ -429,6 +434,17 @@ namespace Citta_T1.Dialogs
         private void DemoDownloadBcp_Click(object sender, EventArgs e)
         {
             Demo("demo_bcp.bcp", @"\Demo\demo_bcp.bcp");
+        }
+
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                this.dataGridView1.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dataGridView1.RowHeadersDefaultCellStyle.Font, rect,
+                this.dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
     }
 }
