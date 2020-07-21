@@ -29,6 +29,7 @@ namespace Citta_T1.Controls
     }
     public partial class CanvasPanel : UserControl
     {
+        
         private const int drgOffsetX = 380;
         private const int drgOffsetY = 100;
         private static bool leftButtonDown = false;
@@ -75,6 +76,7 @@ namespace Citta_T1.Controls
         //画布右上角的放大与缩小功能实现
         public void ChangSize(bool isLarger, float factor = Global.Factor)
         {
+            
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);//禁止擦除背景.
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);//双缓冲
@@ -111,6 +113,7 @@ namespace Citta_T1.Controls
 
             Global.GetCurrentDocument().WorldMap.SizeLevel = sizeLevel;
             Global.GetNaviViewControl().UpdateNaviView();
+            
         }
 
         #endregion
@@ -143,7 +146,7 @@ namespace Citta_T1.Controls
                 AddNewDataSource(path, sizeLevel, text, location, separator, extType, encoding);
             }
             else if (type == ElementType.Operator)
-                AddNewOperator(sizeLevel, text, location);
+                AddNewOperator(sizeLevel, text,text, location);
             
 
         }
@@ -747,12 +750,12 @@ namespace Citta_T1.Controls
         {
             this.Controls.Add(ctl);
         }
-        public void AddNewOperator(int sizeL, string text, Point location)
+        public void AddNewOperator(int sizeL, string description, string subTypeName, Point location)
         {
             MoveOpControl btn = new MoveOpControl(
                                 sizeL,
-                                text,
-                                text,
+                                description,
+                                subTypeName,
                                 location);
             
             AddNewElement(btn);

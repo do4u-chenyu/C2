@@ -178,7 +178,7 @@ namespace Citta_T1.OperatorViews.Base
             if (!comboBox.Items.Contains(comboBox.Text))
             {
                 comboBox.Text = String.Empty;
-                MessageBox.Show("未输入正确列名，请从下拉列表中选择正确列名");
+                MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
             }
             if (comboBox.Text.Contains('\t'))
             {
@@ -495,7 +495,7 @@ namespace Citta_T1.OperatorViews.Base
             // 恢复下拉列表原始字段
             comboBox.Items.Clear();
             comboBox.Items.AddRange(nowColumns);
-            if (comboBox.Tag != null && ConvertUtil.IsInt(comboBox.Tag.ToString()))
+            if (comboBox.Tag != null && !comboBox.Tag.ToString().Equals("-1") && ConvertUtil.IsInt(comboBox.Tag.ToString()))
             {
                 int index = Convert.ToInt32(comboBox.Tag.ToString());
                 comboBox.SelectedIndex = index;
