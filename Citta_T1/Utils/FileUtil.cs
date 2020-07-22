@@ -280,7 +280,7 @@ namespace Citta_T1.Utils
 
         public static bool ContainIllegalCharacters(string userName, string target)
         {
-            string[] illegalCharacters = new string[] { "*", "\\", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
+            string[] illegalCharacters = new string[] { "*", "\\", "/", "$", "[", "]", "+", "-", "&", "%", "#", "!", "~", "`", " ", "\\t", "\\n", "\\r", ":" };
             foreach (string character in illegalCharacters)
             {
                 if (userName.Contains(character))
