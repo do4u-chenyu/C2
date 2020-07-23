@@ -163,6 +163,12 @@ namespace Citta_T1.Utils
         {
             FileStream fs = null;
             List<List<string>> rowContentList = new List<List<string>>();
+            if (!System.IO.File.Exists(fullFilePath))
+            {
+                MessageBox.Show(fullFilePath + "文件不存在");
+                return rowContentList;
+            }
+
             try
             {
                 fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
