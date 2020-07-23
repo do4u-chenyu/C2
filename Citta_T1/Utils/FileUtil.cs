@@ -196,8 +196,9 @@ namespace Citta_T1.Utils
                             List<string> tmpRowValueList = new List<string>();
                             for (int col = 1; col <= colCount; col++)
                             {
-                                var cellValue = worksheet.Cells[row, col].Value;
-                                tmpRowValueList.Add(cellValue != null ? cellValue.ToString().Replace('\n', ' ') : string.Empty);
+                                ExcelRange cell = worksheet.Cells[row, col];
+                                string unit = ExcelUtil.GetCellValue(cell);
+                                tmpRowValueList.Add(unit);
                             }
                             rowContentList.Add(tmpRowValueList);
                         }
@@ -213,7 +214,7 @@ namespace Citta_T1.Utils
                         return rowContentList;
                     }
                     IRow firstRow = sheet.GetRow(0);
-                    int rowCount = sheet.LastRowNum;
+                    int rowCount = sheet.LastRowNum + 1;
                     int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
 
                     for (int i = 0; i < Math.Min(maxRow + 1, rowCount); i++)
@@ -227,8 +228,9 @@ namespace Citta_T1.Utils
                             }
                             else
                             {
-                                string cellValue = sheet.GetRow(i).GetCell(j).ToString().Replace('\n', ' ');
-                                tmpRowValueList.Add(cellValue);
+                                ICell cell = sheet.GetRow(i).GetCell(j);
+                                string unit = ExcelUtil.GetCellValue(workbook, cell);
+                                tmpRowValueList.Add(unit);
                             }
                         }
                         rowContentList.Add(tmpRowValueList);
@@ -238,11 +240,13 @@ namespace Citta_T1.Utils
             }
             catch (System.IO.IOException)
             {
-                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath));
+                string errorMsg = string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath);
+                MessageBox.Show(errorMsg);
+                log.Error(errorMsg);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
+                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
             }
             finally
             {
@@ -252,7 +256,6 @@ namespace Citta_T1.Utils
 
             return rowContentList;
         }
-
         public static List<List<string>> FormatDatas(List<List<string>> datas, int maxNumOfRow)
         {
             int maxNumOfCol = 0;

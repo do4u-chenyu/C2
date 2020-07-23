@@ -98,24 +98,27 @@ namespace Citta_T1.Dialogs
         public event DelegateInputData InputDataEvent;
         private void AddButton_Click(object sender, EventArgs e)
         {
+            /*
+             * 导入规则 0722
+             * 1. 关于数据源名称。
+             *      必须修改名字。即名字不能为默认
+             *      名字不能为空。
+             * 2. 关于数据源路径。路径必须不为空
+             * 3. 关于是否可导入重复数据。重复数据源不予导入
+             * 4. 关于数据源路径是否可包含所有字符。数据源路径不包含非法字符（如空格、等于号、大于号小于号等）
+             */
             string name = this.textBox1.Text;
-            if (this.textBox1.Text == "请输入数据名称")
-            {
+            if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
                 MessageBox.Show("请输入数据名称！");
-            }
             else if (String.IsNullOrEmpty(this.fullFilePath))
-            {
                 MessageBox.Show("请选择数据路径！");
-            }
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
                 String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName + ", 如需重新导入请先卸载该数据");
             }
             else if (IsContainsInvalidChars(this.fullFilePath))
-            {
                 MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
-            }
             else
             {
                 if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
