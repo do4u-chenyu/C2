@@ -197,7 +197,7 @@ namespace Citta_T1.Utils
                             for (int col = 1; col <= colCount; col++)
                             {
                                 ExcelRange cell = worksheet.Cells[row, col];
-                                string unit = ExcelUtil.GetCellValue(cell);
+                                string unit = ExcelUtil.GetCellValue(cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
                             }
                             rowContentList.Add(tmpRowValueList);
@@ -229,7 +229,7 @@ namespace Citta_T1.Utils
                             else
                             {
                                 ICell cell = sheet.GetRow(i).GetCell(j);
-                                string unit = ExcelUtil.GetCellValue(workbook, cell);
+                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
                             }
                         }
