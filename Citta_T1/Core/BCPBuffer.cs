@@ -6,6 +6,7 @@ using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -28,7 +29,8 @@ namespace Citta_T1.Core
         public bool IsEmpty()
         {
             // 必须有表头,如果连表头都没有,就认定为空
-            return String.IsNullOrEmpty(headColumnLine);
+            // TODO dk 然而存在表头为空的文件
+            return String.IsNullOrEmpty(headColumnLine) && String.IsNullOrEmpty(previewFileContent);
         }
 
         public bool IsNotEmpty()
@@ -102,7 +104,7 @@ namespace Citta_T1.Core
         }
 
 
-        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding)
+        public void TryLoadFile(string fullFilePath, OpUtil.ExtType extType, OpUtil.Encoding encoding, char separator)
         {
             // 命中缓存,直接返回,不再加载文件
             if (HitCache(fullFilePath))
@@ -148,72 +150,6 @@ namespace Citta_T1.Core
                 sb.AppendLine(String.Join("\t", rowContentList[i]));
             dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
         }
-
-        /*
-        * 按行读取excel文件
-        */
-        private void PreLoadExcelFile(string fullFilePath, string sheetName = "")
-        {
-            IWorkbook workbook = null;
-            FileStream fs = null;
-            try
-            {
-                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-
-                if (fullFilePath.EndsWith(".xlsx")) // 2007版本
-                    workbook = new XSSFWorkbook(fs);
-                else
-                    workbook = new HSSFWorkbook(fs);   // 2003版本
-                // 不指定sheetName的话, 用第一个sheet
-                ISheet sheet = String.IsNullOrEmpty(sheetName) ? workbook.GetSheetAt(0) : workbook.GetSheet(sheetName);
-                if (sheet == null)
-                    return;
-
-                IRow firstRow = sheet.GetRow(0);            // 此处会不会为空,会，然后报异常，被下面捕捉
-                int colNum = firstRow.Cells.Count;
-                string[] headers = new string[colNum];
-                string[] rowContent = new string[colNum];
-                for (int i = 0; i < colNum; i++)
-                    headers[i] = firstRow.Cells[i].ToString();
-
-                string firstLine = String.Join("\t", headers);     // 大师说默认第一行就是表头   
-                StringBuilder sb = new StringBuilder(1024 * 16);
-                sb.AppendLine(firstLine);
-                //下标从0开始,且第一列是表头
-                for (int i = 0; i < Math.Min(maxRow, sheet.LastRowNum + 1); i++)
-                {
-                    IRow row = sheet.GetRow(i + sheet.FirstRowNum + 1);
-                    if (row == null)  // 
-                    {
-                        sb.AppendLine(String.Empty);
-                        continue;
-                    }
-
-                    for (int j = 0; j < colNum; j++)
-                        rowContent[j] = row.GetCell(j) == null ? String.Empty : row.GetCell(j).ToString();
-
-                    sb.AppendLine(String.Join("\t", rowContent));
-                }
-                dataPreviewDict[fullFilePath] = new FileCache(sb.ToString(), firstLine);
-            }
-            catch (System.IO.IOException ex)
-            {
-                MessageBox.Show(string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath));
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                log.Error("预读Excel: " + fullFilePath + " 失败, error: " + ex.Message);
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-                if (workbook != null)
-                    workbook.Close();
-            }
-        }
-
         /*
          * 按行读取文件，不分割
          */
@@ -280,11 +216,18 @@ namespace Citta_T1.Core
         }
         public void ReWriteBCPFile(string fullFilePath, List<string> columnsName)
         {
-            using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+            try
             {
-                string columns = String.Join("\t", columnsName);
-                sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
-                sw.Flush();
+                using (StreamWriter sw = new StreamWriter(fullFilePath, false, Encoding.UTF8))
+                {
+                    string columns = String.Join("\t", columnsName);
+                    sw.WriteLine(columns.Trim(OpUtil.DefaultSeparator));
+                    sw.Flush();
+                }
+            }
+            catch(Exception e)
+            {
+                log.Error("重写BCP文件失败， error: " + e.ToString());
             }
         }
     }

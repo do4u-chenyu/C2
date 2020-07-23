@@ -135,11 +135,19 @@
             UICanvasPanel = this.UICitta主界面.UICanvasPanel.UICanvasPanelClient;
         }
 
-        public void ExampleTest()
-        {
 
-            // 单击 列表框
-            //Mouse.Click(uIItemList, new Point(1242, 423));
+
+        /// <summary>
+        /// 算子模型文档构建 - 使用“算子模型文档构建Params”将参数传递到此方法中。
+        /// </summary>
+        public void 算子模型文档构建()
+        {
+            #region Variable Declarations
+            WinButton uI登录Button = this.UI用户登录主窗体.UI登录.UI登录Button;
+            WinButton uI新建Button = this.UICitta主界面.UI新建.UI新建Button;
+            WinEdit uITextBoxEdit = this.UI新建模型.UI我的新模型Window.UITextBoxEdit;
+            WinButton uI添加Button = this.UI新建模型.UI添加.UI添加Button;
+            #endregion
 
             //启动Citta程序
             ApplicationUnderTest citta登陆 = ApplicationUnderTest.Launch(@"D:\work\\Citta\Citta_T1\bin\开发调试\Citta_T1.exe");
@@ -149,35 +157,255 @@
             UI用户名.EditableItem = "90";
 
             // 单击 “登录” 按钮
-            Mouse.Click(UI登录, new Point(130, 12));
+            Mouse.Click(uI登录Button, new Point(114, 12));
 
-            // 单击 “算子” 按钮
-            Mouse.Click(UI算子, new Point(61, 25));
+            // 单击 “newModelButton” 按钮
+            Mouse.Click(uI新建Button, new Point(56, 19));
 
-            // 鼠标悬停在取差集算子
-            Mouse.Hover(UI取差集, UI取差集.BoundingRectangle.Location, 1000);
+            // 在 “textBox” 文本框 中键入“最大值算子测试”
+            uITextBoxEdit.Text = this.算子模型文档构建Params.UITextBoxEditText;
 
-            // 将  “取差集” 按钮 移至 “canvasPanel” 客户端
-            UICanvasPanel.EnsureClickable(new Point(252, 115));
-            Mouse.StartDragging(UI取差集, new Point(58, 17));
-            Mouse.StopDragging(UICanvasPanel, new Point(252, 115));
-
-            // 鼠标悬停在取最大值算子
-            Mouse.Hover(UI取最大值, UI取最大值.BoundingRectangle.Location, 1000);
-
-            // 将  “取最大值” 按钮 移至 “canvasPanel” 客户端
-            UICanvasPanel.EnsureClickable(new Point(394, 170));
-            Mouse.StartDragging(UI取最大值, new Point(44, 28));
-            Mouse.StopDragging(UICanvasPanel, new Point(394, 170));
-
-            // 单击 “saveModelButton” 按钮
-            Mouse.Click(UI保存模型, new Point(25, 9));
-
-            // 单击 “关闭”
-            Mouse.Click(UI关闭);
+            // 单击 “添加” 按钮
+            Mouse.Click(uI添加Button, new Point(26, 12));
         }
 
-       
-      
+        public virtual 算子模型文档构建Params 算子模型文档构建Params
+        {
+            get
+            {
+                if ((this.m算子模型文档构建Params == null))
+                {
+                    this.m算子模型文档构建Params = new 算子模型文档构建Params();
+                }
+                return this.m算子模型文档构建Params;
+            }
+        }
+
+        private 算子模型文档构建Params m算子模型文档构建Params;
+
+        /// <summary>
+        /// 创建最大值算子模型
+        /// </summary>
+        public void 创建最大值算子模型()
+        {
+            #region Variable Declarations
+            WinButton uI算子Button = this.UICitta主界面.UI算子.UI算子Button;
+            WinButton uI取最大值Button = this.UICitta主界面.UI取最大值.UI取最大值Button;
+            WinClient uICanvasPanelClient = this.UICitta主界面.UICanvasPanel.UICanvasPanelClient;
+            WinButton uI数据Button = this.UICitta主界面.UI数据Window.UI数据Button;
+            WinButton uITest_data_1Button = this.UICitta主界面.UITest_data_1Window.UITest_data_1Button;
+            #endregion
+
+            // 单击 “算子” 按钮
+            Mouse.Click(uI算子Button, new Point(62, 24));
+
+            Mouse.Hover(uI取最大值Button, uI取最大值Button.BoundingRectangle.Location, 1000);
+
+            // 将  “取最大值” 按钮 移至 “canvasPanel” 客户端
+            uICanvasPanelClient.EnsureClickable(new Point(503, 188));
+            Mouse.StartDragging(uI取最大值Button, new Point(35, 17));
+            Mouse.StopDragging(uICanvasPanelClient, new Point(503, 188));
+
+            // 单击 “数据” 按钮
+            Mouse.Click(uI数据Button, new Point(32, 26));
+
+            Mouse.Hover(uITest_data_1Button, uITest_data_1Button.BoundingRectangle.Location, 1000);
+
+            // 将  “test_data_1” 按钮 移至 “canvasPanel” 客户端
+            uICanvasPanelClient.EnsureClickable(new Point(248, 195));
+            Mouse.StartDragging(uITest_data_1Button, new Point(46, 16));
+            Mouse.StopDragging(uICanvasPanelClient, new Point(248, 195));
+        }
+
+
+        /// <summary>
+        /// 最大值算子配置结果生成 - 使用“最大值算子配置结果生成Params”将参数传递到此方法中。
+        /// </summary>
+        public void 最大值算子配置结果生成()
+        {
+            #region Variable Declarations
+            WinClient uI设置Client = this.UICitta主界面.UI算子_设置.UI设置Client;
+            WinComboBox uI取最大值ComboBox = this.UI取最大值算子设置.UI取最大值.UI取最大值ComboBox;
+            WinButton uIItemButton = this.UI取最大值算子设置.UIItemWindow.UIItemButton;
+            WinCheckBox uIHOSTCheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UIHOSTCheckBox;
+            WinCheckBox uIREFERERCheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UIREFERERCheckBox;
+            WinCheckBox uIUSERNAMECheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UIUSERNAMECheckBox;
+            WinCheckBox uIPASSWORDCheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UIPASSWORDCheckBox;
+            WinCheckBox uICodeCheckBox = this.UIItemWindow.UIItemWindow1.UIItemList.UICodeCheckBox;
+            WinButton uI确认Button = this.UI取最大值算子设置.UI确认Window.UI确认Button;
+            WinButton uI保存Button = this.UICitta主界面.UI保存.UI保存Button;
+            WinButton uI取最大值Button = this.UICitta主界面.UI取最大值Window1.UI取最大值Button;
+            WinMenuItem uI运行到此MenuItem = this.UIItemWindow1.UIDropDownMenu.UI运行到此MenuItem;
+            #endregion
+
+            // 双击 “statusBox” 客户端
+            Mouse.DoubleClick(uI设置Client, new Point(8, 6));
+
+            // 在 “数据信息：” 组合框 中选择“mem_num”
+            uI取最大值ComboBox.SelectedItem = this.最大值算子配置结果生成Params.UI取最大值ComboBoxSelectedItem;
+
+            // 单击 按钮
+            Mouse.Click(uIItemButton, new Point(10, 1));
+
+            // 选择 “HOST” 复选框
+            uIHOSTCheckBox.Checked = this.最大值算子配置结果生成Params.UIHOSTCheckBoxChecked;
+
+            // 选择 “REFERER” 复选框
+            uIREFERERCheckBox.Checked = this.最大值算子配置结果生成Params.UIREFERERCheckBoxChecked;
+
+            // 选择 “USERNAME” 复选框
+            uIUSERNAMECheckBox.Checked = this.最大值算子配置结果生成Params.UIUSERNAMECheckBoxChecked;
+
+            // 选择 “PASSWORD” 复选框
+            uIPASSWORDCheckBox.Checked = this.最大值算子配置结果生成Params.UIPASSWORDCheckBoxChecked;
+
+            // 选择 “code” 复选框
+            uICodeCheckBox.Checked = this.最大值算子配置结果生成Params.UICodeCheckBoxChecked;
+
+            // 单击 “确认” 按钮
+            Mouse.Click(uI确认Button, new Point(34, 12));
+
+            // 单击 “saveModelButton” 按钮
+            Mouse.Click(uI保存Button, new Point(35, 14));
+
+            // 单击 “取最大值” 按钮
+            Mouse.Click(uI取最大值Button, new Point(31, 10));
+
+            // 右-单击 “取最大值” 按钮
+            Mouse.Click(uI取最大值Button, MouseButtons.Right, ModifierKeys.None, new Point(46, 9));
+
+            // 单击 “运行到此” 菜单项
+            Mouse.Click(uI运行到此MenuItem, new Point(50, 12));
+        }
+
+        public virtual 最大值算子配置结果生成Params 最大值算子配置结果生成Params
+        {
+            get
+            {
+                if ((this.m最大值算子配置结果生成Params == null))
+                {
+                    this.m最大值算子配置结果生成Params = new 最大值算子配置结果生成Params();
+                }
+                return this.m最大值算子配置结果生成Params;
+            }
+        }
+
+        private 最大值算子配置结果生成Params m最大值算子配置结果生成Params;
+
+        /// <summary>
+        /// 单目算子模型测试数据导入 - 使用“单目算子模型测试数据导入Params”将参数传递到此方法中。
+        /// </summary>
+        public void 单目算子模型测试数据导入()
+        {
+            #region Variable Declarations
+            WinButton uI导入Button = this.UICitta主界面.UI导入.UI导入Button;
+            WinButton uI浏览Button = this.UI导入数据.UI浏览.UI浏览Button;
+            WinComboBox uI文件名NComboBox = this.UI打开Window.UIItemWindow5.UI文件名NComboBox;
+            WinButton uI打开OButton = this.UI打开Window.UI打开OWindow.UI打开OButton;
+            WinText uIUTF8Text = this.UI导入数据.UIUTF8.UIUTF8Text;
+            WinButton uI添加Button = this.UI导入数据.UI添加.UI添加Button;
+            #endregion
+
+            // 单击 “ImportButton” 按钮
+            Mouse.Click(uI导入Button, new Point(40, 11));
+
+            // 单击 “浏览” 按钮
+            Mouse.Click(uI浏览Button, new Point(36, 9));
+
+            // 在 “文件名(N):” 组合框 中选择“test_data_1.bcp”
+            uI文件名NComboBox.EditableItem = this.单目算子模型测试数据导入Params.UI文件名NComboBoxEditableItem;
+
+            // 单击 “打开(&O)” 按钮
+            Mouse.Click(uI打开OButton, new Point(44, 6));
+
+            // 单击 “UTF-8” 标签
+            Mouse.Click(uIUTF8Text, new Point(26, 9));
+
+            // 单击 “添加” 按钮
+            Mouse.Click(uI添加Button, new Point(27, 26));
+        }
+
+        public virtual 单目算子模型测试数据导入Params 单目算子模型测试数据导入Params
+        {
+            get
+            {
+                if ((this.m单目算子模型测试数据导入Params == null))
+                {
+                    this.m单目算子模型测试数据导入Params = new 单目算子模型测试数据导入Params();
+                }
+                return this.m单目算子模型测试数据导入Params;
+            }
+        }
+
+        private 单目算子模型测试数据导入Params m单目算子模型测试数据导入Params;
     }
+
+    /// <summary>
+    /// 要传递到“算子模型文档构建”中的参数
+    /// </summary>
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class 算子模型文档构建Params
+    {
+
+        #region Fields
+        /// <summary>
+        /// 在 “textBox” 文本框 中键入“最大值算子测试”
+        /// </summary>
+        public string UITextBoxEditText = "最大值算子测试";
+        #endregion
+    }
+
+    /// <summary>
+    /// 要传递到“最大值算子配置结果生成”中的参数
+    /// </summary>
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class 最大值算子配置结果生成Params
+    {
+
+        #region Fields
+        /// <summary>
+        /// 在 “数据信息：” 组合框 中选择“mem_num”
+        /// </summary>
+        public string UI取最大值ComboBoxSelectedItem = "mem_num";
+
+        /// <summary>
+        /// 选择 “HOST” 复选框
+        /// </summary>
+        public bool UIHOSTCheckBoxChecked = true;
+
+        /// <summary>
+        /// 选择 “REFERER” 复选框
+        /// </summary>
+        public bool UIREFERERCheckBoxChecked = true;
+
+        /// <summary>
+        /// 选择 “USERNAME” 复选框
+        /// </summary>
+        public bool UIUSERNAMECheckBoxChecked = true;
+
+        /// <summary>
+        /// 选择 “PASSWORD” 复选框
+        /// </summary>
+        public bool UIPASSWORDCheckBoxChecked = true;
+
+        /// <summary>
+        /// 选择 “code” 复选框
+        /// </summary>
+        public bool UICodeCheckBoxChecked = true;
+        #endregion
+    }
+    /// <summary>
+    /// 要传递到“单目算子模型测试数据导入”中的参数
+    /// </summary>
+    [GeneratedCode("编码的 UI 测试生成器", "16.0.29514.35")]
+    public class 单目算子模型测试数据导入Params
+    {
+
+        #region Fields
+        /// <summary>
+        /// 在 “文件名(N):” 组合框 中选择“test_data_1.bcp”
+        /// </summary>
+        public string UI文件名NComboBoxEditableItem = "test_data_1.bcp";
+        #endregion
+    }  
 }

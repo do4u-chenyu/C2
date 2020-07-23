@@ -98,29 +98,27 @@ namespace Citta_T1.Dialogs
         public event DelegateInputData InputDataEvent;
         private void AddButton_Click(object sender, EventArgs e)
         {
+            /*
+             * 导入规则 0722
+             * 1. 关于数据源名称。
+             *      必须修改名字。即名字不能为默认
+             *      名字不能为空。
+             * 2. 关于数据源路径。路径必须不为空
+             * 3. 关于是否可导入重复数据。重复数据源不予导入
+             * 4. 关于数据源路径是否可包含所有字符。数据源路径不包含非法字符（如空格、等于号、大于号小于号等）
+             */
             string name = this.textBox1.Text;
-            if (this.textBox1.Text == "请输入数据名称")
-            {
+            if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
                 MessageBox.Show("请输入数据名称！");
-            }
             else if (String.IsNullOrEmpty(this.fullFilePath))
-            {
                 MessageBox.Show("请选择数据路径！");
-            }
             else if (Global.GetDataSourceControl().DataSourceDictI2B.ContainsKey(this.fullFilePath))
             {
                 String dsName = Global.GetDataSourceControl().DataSourceDictI2B[this.fullFilePath].DataSourceName;
                 MessageBox.Show("该文件已导入，数据源名为：" + dsName + ", 如需重新导入请先卸载该数据");
             }
             else if (IsContainsInvalidChars(this.fullFilePath))
-            {
                 MessageBox.Show(String.Format("数据源路径中不能有空格、&、\"等特殊字符,当前选择的路径为: {0}", this.fullFilePath));
-            }
-            // 非法字符不得成为文件名
-            //else if (IsContainsInvalidChars(this.textBox1.Text))
-            //{
-            //    MessageBox.Show(String.Format("数据源命名不能有、&、\"等特殊字符, 当前数据源名为: {0}", this.textBox1.Text));
-            //}
             else
             {
                 if (this.fullFilePath.EndsWith(".xls") || this.fullFilePath.EndsWith(".xlsx"))
@@ -128,7 +126,7 @@ namespace Citta_T1.Dialogs
                 else
                     this.extType = OpUtil.ExtType.Text;
 
-                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding);
+                BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
@@ -175,112 +173,18 @@ namespace Citta_T1.Dialogs
             this.DvgClean();
         }
 
+        
         private void PreViewBcpFile()
         {
-            /*
-             * @param this.isUTF8
-             * @param this.fileName
-             * 预览文件
-             * 1. 编码格式
-             * 2. 分隔符
-             * 3. 初始化表头
-             * 4. 清理表格数据
-             * 5. 写入数据
-             */
-            if (this.fullFilePath == null)
-                return;
-            System.IO.StreamReader sr;
-            FileStream fs = null;
-            if (this.encoding == OpUtil.Encoding.UTF8)
-            {
-                sr = File.OpenText(fullFilePath);
-            }
-            else
-            {
-                fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs, System.Text.Encoding.Default);
-            }
-            String header = sr.ReadLine();
-            if (header == null)
+            Tuple<List<string>, List<List<string>>> headersAndRows = FileUtil.ReadBcpFile(this.fullFilePath, this.encoding, this.separator, this.maxNumOfRow);
+            if (headersAndRows.Item1.Count == 0 && headersAndRows.Item2.Count == 0)
             {
                 MessageBox.Show("导入文件错误，文件\"" + this.fullFilePath + "\" 为空");
                 this.Clean();
                 return;
             }
-            String[] headers = header.Split(this.separator);
-            int numOfCol = header.Split(this.separator).Length;
-            this.dataGridView1.DataSource = null;
-            DvgClean(false);
-            try
-            {
-                DataTable table = new DataTable();
-                DataRow row;
-                DataView view;
-                DataColumn[] cols = new DataColumn[numOfCol];
-                Dictionary<string, int> induplicatedName = new Dictionary<string, int>() { };
-                string headerText;
-                char[] seperator = new char[] { '_' };
-
-                // 可能有同名列，这里需要重命名一下
-                for (int i = 0; i < numOfCol; i++)
-                {
-                    cols[i] = new DataColumn();
-                    headerText = headers[i];
-                    if (!induplicatedName.ContainsKey(headerText))
-                        induplicatedName.Add(headerText, 0);
-                    else
-                    {
-                        induplicatedName[headerText] += 1;
-                        induplicatedName[headerText] = induplicatedName[headerText];
-                    }
-                    headerText = induplicatedName[headerText] + "_" + headerText;
-                    cols[i].ColumnName = headerText;
-                }
-
-                table.Columns.AddRange(cols);
-
-                for (int rowIndex = 0; rowIndex < maxNumOfRow && !sr.EndOfStream; rowIndex++)
-                {
-                    String line = sr.ReadLine();
-                    if (line == null)
-                        continue;
-                    row = table.NewRow();
-                    String[] eles = line.Split(this.separator);
-                    for (int colIndex = 0; colIndex < Math.Min(numOfCol, eles.Length); colIndex++)
-                    {
-                        row[colIndex] = eles[colIndex];
-                    }
-                    table.Rows.Add(row);
-                }
-
-                view = new DataView(table);
-                this.dataGridView1.DataSource = view;
-
-
-                // 取消重命名
-                for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
-                {
-                    try
-                    {
-                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name.Split(seperator, 2)[1];
-                    }
-                    catch
-                    {
-                        this.dataGridView1.Columns[i].HeaderText = this.dataGridView1.Columns[i].Name;
-                        log.Error("读取文件时，去重命名过程出错");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("FromInputData.OverViewFile occurs error! " + ex);
-            }
-            finally
-            {
-                if (fs != null)
-                    fs.Close();
-                sr.Close();
-            }
+            List<List<string>> rows = FileUtil.FormatDatas(headersAndRows.Item2, this.maxNumOfRow);
+            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow);
         }
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)
@@ -467,9 +371,12 @@ namespace Citta_T1.Dialogs
 
         private void TextBoxEx1_TextChanged(object sender, EventArgs e)
         {
+            if (this.fullFilePath == null)
+                return;
             if (this.extType == OpUtil.ExtType.Text)
             {
                 this.radioButton3.Checked = true;
+                // 没有指定分隔符
                 if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
                     this.separator = this.emptySep;
                 else
@@ -481,6 +388,7 @@ namespace Citta_T1.Dialogs
                     {
                         //log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
+                        return;
                     }
                 PreViewBcpFile();
             }
@@ -529,6 +437,17 @@ namespace Citta_T1.Dialogs
         private void DemoDownloadBcp_Click(object sender, EventArgs e)
         {
             Demo("demo_bcp.bcp", @"\Demo\demo_bcp.bcp");
+        }
+
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y,
+                this.dataGridView1.RowHeadersWidth - 4, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                this.dataGridView1.RowHeadersDefaultCellStyle.Font, rect,
+                this.dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
     }
 }

@@ -53,10 +53,20 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Document_新建模型文档测试_刘晓凤.cs" />
-    <Compile Include="测试样例.cs" />
-    <Compile Include="Config_最大值算子配置测试_刘晓凤.cs" />
-    <Compile Include="Config_最小值算子配置测试_刘晓凤.cs" />
+    <Compile Include="Config_关联算子配置测试.cs" />
+    <Compile Include="Config_关键词过滤算子配置测试.cs" />
+    <Compile Include="Config_分组算子配置测试.cs" />
+    <Compile Include="Config_取差集算子配置测试.cs" />
+    <Compile Include="Config_取平均值算子配置测试.cs" />
+    <Compile Include="Config_取并集算子配置测试.cs" />
+    <Compile Include="Config_排序算子配置测试.cs" />
+    <Compile Include="Config_数据标准化算子配置测试.cs" />
+    <Compile Include="Config_条件筛选算子配置测试.cs" />
+    <Compile Include="Config_碰撞算子配置测试.cs" />
+    <Compile Include="Config_随机采样算子配置测试.cs" />
+    <Compile Include="Config_频率算子配置测试.cs" />
+    <Compile Include="Config_最大值算子配置测试.cs" />
+    <Compile Include="Config_最小值算子配置测试.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
       <DependentUpon>UIMap.uitest</DependentUpon>
