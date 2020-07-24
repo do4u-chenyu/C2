@@ -765,12 +765,27 @@ namespace Citta_T1
         {
             foreach (ModelDocument md in this.modelDocumentDao.ModelDocuments)
             {
-                if (md.Dirty)
+                if (!md.Dirty)
+                    continue;
+                DialogResult result = MessageBox.Show("有尚未保存的模型，是否保存后关闭？",
+                                               "保存", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                // 取消操作
+                if (result == DialogResult.Cancel)
                 {
-                    MessageBox.Show("有未保存的文件!", "保存", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     e.Cancel = true;
                     return;
                 }
+
+                // 保存文件
+                if (result == DialogResult.Yes)
+                {
+                    foreach (ModelDocument modelDocument in this.modelDocumentDao.ModelDocuments)
+                        modelDocument.Save();
+                    return;
+                }
+                // 不保存关闭文件
+                if (result == DialogResult.No)
+                    return;
             }
         }
 
