@@ -229,5 +229,17 @@ namespace Citta_T1.Business.Option
             }
             return dataSourceInfoDict;
         }
+        public List<ModelElement> GetDataSources(int ID)
+        {
+            Dictionary<string, string> dataSourceInfoDict = new Dictionary<string, string>();
+            List<ModelElement> dataSources = new List<ModelElement>();
+            List<ModelRelation> relations = Global.GetCurrentDocument().ModelRelations.FindAll(mr => mr.EndID == ID);
+            foreach (ModelRelation mr in relations)
+            {
+                ModelElement me = Global.GetCurrentDocument().SearchElementByID(mr.StartID);
+                dataSources.Add(me);
+            }
+            return dataSources;
+        }
     }
 }
