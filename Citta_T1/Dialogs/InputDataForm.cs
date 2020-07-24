@@ -401,12 +401,14 @@ namespace Citta_T1.Dialogs
 
         public void Demo(string demo, string src)
         {
-            this.saveFileDialog.FileName = demo;
-            DialogResult dr = this.saveFileDialog.ShowDialog();
-            if (dr == DialogResult.OK)
+            SaveFileDialog saveDataSend = new SaveFileDialog();
+            saveDataSend.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            saveDataSend.Filter = "files|*.txt;*.csv;*.bcp;*.xls;*.xlsx";
+            saveDataSend.FileName = demo;
+            if (saveDataSend.ShowDialog() == DialogResult.OK)
             {
                 string srcFilePath = Application.StartupPath + src;
-                string dstFilePath = this.saveFileDialog.FileName;
+                string dstFilePath = saveDataSend.FileName;
                 try
                 {
                     FileInfo file = new FileInfo(srcFilePath);
@@ -417,7 +419,6 @@ namespace Citta_T1.Dialogs
                     log.Error("导出文件出错:" + ex.Message);
                 }
             }
-
         }
         private void DemoDownloadExcel_Click(object sender, EventArgs e)
         {

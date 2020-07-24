@@ -76,8 +76,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="test_datas\Avg_res.bcp" />
+    <None Include="test_datas\Collide_res.bcp" />
+    <None Include="test_datas\DataFormat_res.bcp" />
+    <None Include="test_datas\Differ_res.bcp" />
+    <None Include="test_datas\Filter_res.bcp" />
+    <None Include="test_datas\Freq_res.bcp" />
+    <None Include="test_datas\Group_res.bcp" />
+    <None Include="test_datas\Keyword_res.bcp" />
+    <None Include="test_datas\Max_res.bcp" />
+    <None Include="test_datas\Min_res.bcp" />
+    <None Include="test_datas\Relate_res.bcp" />
+    <None Include="test_datas\Sort_res.bcp" />
+    <None Include="test_datas\test_data_1.bcp" />
+    <None Include="test_datas\test_data_2.bcp" />
+    <None Include="test_datas\Union_res.bcp" />
+    <None Include="test_datas\算子条件设置.xlsx" />
     <None Include="UIMap.uitest" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
