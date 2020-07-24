@@ -155,6 +155,12 @@ namespace Citta_T1.Core
          */
         private void PreLoadBcpFile(string fullFilePath, OpUtil.Encoding encoding)
         {
+            if (!File.Exists(fullFilePath))
+            {
+                MessageBox.Show(fullFilePath + "该文件不存在");
+                return;
+            }
+
             StreamReader sr = null;
             try
             {

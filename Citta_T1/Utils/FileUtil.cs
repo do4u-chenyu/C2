@@ -163,6 +163,12 @@ namespace Citta_T1.Utils
         {
             FileStream fs = null;
             List<List<string>> rowContentList = new List<List<string>>();
+            if (!System.IO.File.Exists(fullFilePath))
+            {
+                MessageBox.Show(fullFilePath + "文件不存在");
+                return rowContentList;
+            }
+
             try
             {
                 fs = new FileStream(fullFilePath, FileMode.Open, FileAccess.Read);
@@ -197,7 +203,7 @@ namespace Citta_T1.Utils
                             for (int col = 1; col <= colCount; col++)
                             {
                                 ExcelRange cell = worksheet.Cells[row, col];
-                                string unit = ExcelUtil.GetCellValue(cell);
+                                string unit = ExcelUtil.GetCellValue(cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
                             }
                             rowContentList.Add(tmpRowValueList);
@@ -229,7 +235,7 @@ namespace Citta_T1.Utils
                             else
                             {
                                 ICell cell = sheet.GetRow(i).GetCell(j);
-                                string unit = ExcelUtil.GetCellValue(workbook, cell);
+                                string unit = ExcelUtil.GetCellValue(workbook, cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
                             }
                         }
