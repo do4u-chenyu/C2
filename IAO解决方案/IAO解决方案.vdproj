@@ -45,6 +45,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_174859D1CC3C49A3AED884B0E89CB831"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_220F69D5E9CC4F8086792C5022E0AFD4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -250,13 +256,13 @@
         "Entry"
         {
         "MsmKey" = "8:_99D3CBB69A557F188D9073E05B427E2D"
-        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_99D3CBB69A557F188D9073E05B427E2D"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -268,6 +274,12 @@
         "Entry"
         {
         "MsmKey" = "8:_9A3A159BCCE740B983087DF6DB1B4211"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C31EC94A04C462491D6D1EACB855C6A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -327,6 +339,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_BAE32A61CD1540CABD0A7CB112402251"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_BD52F80A86EF42FBB05849DAF92665E1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -381,6 +399,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E63DE2FAB01244028ACF4B5D3540666F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EB97D9C2FFE7471D9BA7113B99A51DC3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -424,13 +448,13 @@
         "Entry"
         {
         "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F75119EB65DC4BA895C0E3C09CD3CAFF"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -460,13 +484,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
+        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_74AC330CAC3A4B279C7A7FCE3A224089"
+        "OwnerKey" = "8:_53791E3427E6419DB30CF8043D1FF94F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -748,6 +772,26 @@
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_174859D1CC3C49A3AED884B0E89CB831"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_excel.xlsx"
+            "TargetName" = "8:demo_excel.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1419,6 +1463,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C31EC94A04C462491D6D1EACB855C6A"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_txt.txt"
+            "TargetName" = "8:demo_txt.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0102B5326A345CB922ED94E499C34C4"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\awk.exe"
@@ -1552,6 +1616,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAE32A61CD1540CABD0A7CB112402251"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_bcp.bcp"
+            "TargetName" = "8:demo_bcp.bcp"
+            "Tag" = "8:"
+            "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD52F80A86EF42FBB05849DAF92665E1"
             {
             "SourcePath" = "8:..\\Citta_T1\\sbin\\msys-mpfr-6.dll"
@@ -1669,6 +1753,26 @@
             "TargetName" = "8:sleep.exe"
             "Tag" = "8:"
             "Folder" = "8:_47D478B73B7841EFA5C2FD0B864BC849"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E63DE2FAB01244028ACF4B5D3540666F"
+            {
+            "SourcePath" = "8:..\\Citta_T1\\Demo\\demo_csv.csv"
+            "TargetName" = "8:demo_csv.csv"
+            "Tag" = "8:"
+            "Folder" = "8:_9382BCC0C5F5404FACD53E5A008CA47C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
