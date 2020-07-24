@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Citta_T1.Controls.Move.Op
@@ -371,6 +372,17 @@ namespace Citta_T1.Controls.Move.Op
             {
                 MessageBox.Show("该算子没有对应的数据源，暂时还无法配置，请先连接数据，再进行算子设置。");
                 return;
+            }
+
+            // 判断数据源文件是否存在
+            List<ModelElement>  dataSources = Global.GetOptionDao().GetDataSources(this.ID);
+            foreach (ModelElement dataSource in dataSources)
+            {
+                if (!File.Exists(dataSource.FullFilePath))
+                {
+                    MessageBox.Show(dataSource.FullFilePath + " 该文件不存在");
+                    return;
+                }
             }
             switch (SubTypeName)
             {
