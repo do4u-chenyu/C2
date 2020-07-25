@@ -183,8 +183,13 @@ namespace Citta_T1.Dialogs
                 this.Clean();
                 return;
             }
-            List<List<string>> rows = FileUtil.FormatDatas(headersAndRows.Item2, this.maxNumOfRow);
-            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow);
+            // 特殊情况，表头有一行数据
+            List<List<string>> rows = new List<List<string>>();
+            rows.Add(headersAndRows.Item1);
+            rows.AddRange(headersAndRows.Item2);
+            rows = FileUtil.FormatDatas(rows, this.maxNumOfRow);
+            rows.RemoveAt(0);
+            FileUtil.FillTable(this.dataGridView1, headersAndRows.Item1, rows, this.maxNumOfRow - 1);
         }
 
         private void PreViewExcelFileNew(string sheetName = null, bool isFirstRowColumn = true)

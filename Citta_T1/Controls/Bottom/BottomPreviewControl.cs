@@ -121,13 +121,13 @@ namespace Citta_T1.Controls.Bottom
 
             for (int i = 0; i < Math.Min(rows.Count, maxNumOfFile); i++)
                 datas.Add(new List<string>(rows[i].TrimEnd('\r').Split(separator)));                                                 // TODO 没考虑到分隔符
-            datas = FileUtil.FormatDatas(datas, maxNumOfFile + 1);
+            datas = FileUtil.FormatDatas(datas, maxNumOfFile);
             List<string> headers = datas[0];
             datas.RemoveAt(0);
             int numOfCols = headers.Count;
 
             DvgClean();
-            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile);
+            FileUtil.FillTable(this.dataGridView, headers, datas, maxNumOfFile - 1);
             ControlUtil.DisableOrder(this.dataGridView);
         }
 

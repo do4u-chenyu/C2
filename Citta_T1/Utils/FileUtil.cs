@@ -258,11 +258,25 @@ namespace Citta_T1.Utils
         }
         public static List<List<string>> FormatDatas(List<List<string>> datas, int maxNumOfRow)
         {
+            /*
+             *  返回一个maxNumOfRow长的二维数组
+             *  datas.Count = 0
+             *  datas.Count = 1
+             *  datas.Count > 1
+             */
+            if (datas.Count == 0)
+            {
+                List<List<string>> result = new List<List<string>>();
+                for (int i = 0; i < maxNumOfRow; i++)
+                {
+                    List<string> row = new List<string> { "" };
+                    result.AddRange((IEnumerable<List<string>>)row);
+                }
+                return result;
+            }
             int maxNumOfCol = 0;
             List<string> blankRow = new List<string> { };
             List<string> headers = datas[0];
-            if (datas.Count <=1)
-                return new List<List<string>> { headers };
             for (int i = 0; i < datas.Count; i++)
                 maxNumOfCol = Math.Max(datas[i].Count, maxNumOfCol);
             for (int i = 0; i < maxNumOfCol; i++)
