@@ -142,83 +142,91 @@ namespace Citta_T1.Utils
 		public static DataFormatter EXCEL_07_DATA_FORMAT = new DataFormatter();
 
 		//public static String GetFormatDateStringValue(short dataFormat, String dataFormatString, object value)
-  //      {
+		//      {
 
-  //      }
+		//      }
+		public static String GetFormatTimeStringValue(short dataFormat, String dataFormatString, double value)
+		{
+			if (!DateUtil.IsValidExcelDate(value))
+				return null;
+			DateTime date = DateUtil.GetJavaDate(value);
+			return ExcelUtil.COMMON_TIME_FORMAT.Format(date);
+		}
 		public static String GetFormatDateStringValue(short dataFormat, String dataFormatString, double value)
 		{
 			if (!DateUtil.IsValidExcelDate(value))
 				return null;
 			DateTime date = DateUtil.GetJavaDate(value);
+			return ExcelUtil.COMMON_DATE_FORMAT.Format(date);
 			/**
 			 * 年月日时分秒
 			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_NYRSFM_STRING.Contains(dataFormatString))
-			{
-				return ExcelUtil.COMMON_DATE_FORMAT.Format(date);
-			}
-			/**
-			 * 年月日
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_NYR_STRING.Contains(dataFormatString))
-			{
-				return ExcelUtil.COMMON_DATE_FORMAT_NYR.Format(date);
-			}
-			/**
-			 * 年月
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_NY_STRING.Contains(dataFormatString)
-					|| Constants.EXCEL_FORMAT_INDEX_DATA_EXACT_NY.Equals(dataFormat))
-			{
-				return ExcelUtil.COMMON_DATE_FORMAT_NY.Format(date);
-			}
-			/**
-			 * 月日
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_YR_STRING.Contains(dataFormatString)
-					|| Constants.EXCEL_FORMAT_INDEX_DATA_EXACT_YR.Equals(dataFormat))
-			{
-				return ExcelUtil.COMMON_DATE_FORMAT_YR.Format(date);
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_NYRSFM_STRING.Contains(dataFormatString))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT.Format(date);
+			//}
+			///**
+			// * 年月日
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_NYR_STRING.Contains(dataFormatString))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT_NYR.Format(date);
+			//}
+			///**
+			// * 年月
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_NY_STRING.Contains(dataFormatString)
+			//		|| Constants.EXCEL_FORMAT_INDEX_DATA_EXACT_NY.Equals(dataFormat))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT_NY.Format(date);
+			//}
+			///**
+			// * 月日
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_YR_STRING.Contains(dataFormatString)
+			//		|| Constants.EXCEL_FORMAT_INDEX_DATA_EXACT_YR.Equals(dataFormat))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT_YR.Format(date);
 
-			}
-			/**
-			 * 月
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_Y_STRING.Contains(dataFormatString))
-			{
-				return ExcelUtil.COMMON_DATE_FORMAT_Y.Format(date);
-			}
-			/**
-			 * 星期X
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_XQ_STRING.Contains(dataFormatString))
-			{
-				return Constants.COMMON_DATE_FORMAT_XQ + date.DayOfWeek;
-			}
-			/**
-			 * 周X
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_DATE_Z_STRING.Contains(dataFormatString))
-			{
-				return Constants.COMMON_DATE_FORMAT_Z + date.DayOfWeek;
-			}
-			/**
-			 * 时间格式
-			 */
-			if (Constants.EXCEL_FORMAT_INDEX_TIME_STRING.Contains(dataFormatString)
-					|| Constants.EXCEL_FORMAT_INDEX_TIME_EXACT.Contains(dataFormat))
-			{
-				return ExcelUtil.COMMON_TIME_FORMAT.Format(DateUtil.GetJavaDate(value));
-			}
-			/**
-			 * 单元格为其他未覆盖到的类型
-			 */
-			if (DateUtil.IsADateFormat(dataFormat, dataFormatString))
-			{
-				return ExcelUtil.COMMON_TIME_FORMAT.Format(value);
-			}
+			//}
+			///**
+			// * 月
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_Y_STRING.Contains(dataFormatString))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT_Y.Format(date);
+			//}
+			///**
+			// * 星期X
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_XQ_STRING.Contains(dataFormatString))
+			//{
+			//	return Constants.COMMON_DATE_FORMAT_XQ + date.DayOfWeek;
+			//}
+			///**
+			// * 周X
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_DATE_Z_STRING.Contains(dataFormatString))
+			//{
+			//	return Constants.COMMON_DATE_FORMAT_Z + date.DayOfWeek;
+			//}
+			///**
+			// * 时间格式
+			// */
+			//if (Constants.EXCEL_FORMAT_INDEX_TIME_STRING.Contains(dataFormatString)
+			//		|| Constants.EXCEL_FORMAT_INDEX_TIME_EXACT.Contains(dataFormat))
+			//{
+			//	return ExcelUtil.COMMON_TIME_FORMAT.Format(DateUtil.GetJavaDate(value));
+			//}
+			///**
+			// * 单元格为其他未覆盖到的类型
+			// */
+			//if (DateUtil.IsADateFormat(dataFormat, dataFormatString))
+			//{
+			//	return ExcelUtil.COMMON_DATE_FORMAT.Format(date);
+			//}
 
-			return null;
+			//return null;
 		}
 
 		/**
@@ -277,10 +285,24 @@ namespace Citta_T1.Utils
 				switch (cell.CellType)
 				{
 					case CellType.Numeric:
-						if (ExcelUtil.IsDataFormat(cell.CellStyle.GetDataFormatString()))
-							cellValue = GetFormatDateStringValue(cell.CellStyle.DataFormat, cell.CellStyle.GetDataFormatString(), cell.NumericCellValue);
+						short formatID = cell.CellStyle.DataFormat;
+						string formatString = cell.CellStyle.GetDataFormatString();
+						if (IsDateFormat(formatID, formatString))
+						{
+							cellValue = ExcelUtil.GetFormatDateStringValue(
+								formatID,
+								formatString,
+								cell.NumericCellValue);
+						}
+						else if (IsTimeFormat(formatID, formatString))
+						{
+							cellValue = ExcelUtil.GetFormatTimeStringValue(
+									formatID,
+									formatString,
+									cell.NumericCellValue);
+						}
 						else
-							cellValue = cell.NumericCellValue.ToString();
+							cellValue = cell.StringCellValue != null ? cell.StringCellValue.Replace('\n', ' ') : string.Empty;
 						break;
 					case CellType.Formula:
 						/**
@@ -322,22 +344,31 @@ namespace Citta_T1.Utils
 
 		public static String GetCellValue(ExcelRange cell)
         {
-			String cellValue = "";
+			String cellValue = String.Empty;
             try
             {
 				if (cell == null)
 					return cellValue;
-				if (ExcelUtil.IsDataFormat(cell.Style.Numberformat.Format))
+				short formatID = Convert.ToInt16(cell.Style.Numberformat.NumFmtID);
+				string formatString = cell.Style.Numberformat.Format;
+				if (IsDateFormat(formatID, formatString))
                 {
 					if (cell.Value is DateTime)
 						return cell.Value.ToString();
 					else if (cell.Value is double)
 						cellValue = ExcelUtil.GetFormatDateStringValue(
-							Convert.ToInt16(cell.Style.Numberformat.NumFmtID),
-							cell.Style.Numberformat.Format,
+							formatID,
+							formatString,
 							Convert.ToDouble(cell.Value));
 					else
 						return cell.Value.ToString(); // 实在不行就直接转str吧，以后如果有其他更细致的解决方案再填上
+				}
+				else if (IsTimeFormat(formatID, formatString))
+                {
+					cellValue = ExcelUtil.GetFormatTimeStringValue(
+							formatID,
+							formatString,
+							Convert.ToDouble(cell.Value));
 				}
 				else
 					cellValue =  cell.Value != null ? cell.Value.ToString().Replace('\n', ' ') : string.Empty;
@@ -348,9 +379,17 @@ namespace Citta_T1.Utils
 			}
 			return cellValue;
 		}
-		public static bool IsDataFormat(string formatString)
+		public static bool IsDateFormat(short formatID, string formatString)
         {
-			return formatString.Contains("yy") || formatString.Contains("mm");
+			return formatString.Contains("yy") || formatString.Contains("mm") || 
+				Constants.EXCEL_FORMAT_INDEX_03_DATE.Contains(formatID) ||
+				Constants.EXCEL_FORMAT_INDEX_07_DATE.Contains(formatID);
+		}
+		public static bool IsTimeFormat(short formatID, string formatString)
+        {
+			return formatString.Contains("mm") || formatString.Contains("ss") ||
+				Constants.EXCEL_FORMAT_INDEX_03_TIME.Contains(formatID) ||
+				Constants.EXCEL_FORMAT_INDEX_07_TIME.Contains(formatID);
 		}
 	}
 }
