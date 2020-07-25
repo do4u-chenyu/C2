@@ -56,7 +56,7 @@ namespace Citta_T1
             // 存在workspace配置项,但配置项为空
             if (String.IsNullOrEmpty(workspaceDirectory))
                 workspaceDirectory = ConfigUtil.DefaultWorkspaceDirectory;
-
+            
             string root = FileUtil.TryGetPathRoot(workspaceDirectory);
             // 如果硬盘不存在,用程序所在目录
             if (!System.IO.Directory.Exists(root))

@@ -709,7 +709,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Demo\demo_txt.txt" />
+    <None Include="Demo\demo_txt.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
     <None Include="Resources\avgOp.bmp" />
     <Content Include="res\flow\flow.png" />

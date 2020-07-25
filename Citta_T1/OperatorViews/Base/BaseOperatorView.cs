@@ -371,6 +371,7 @@ namespace Citta_T1.OperatorViews.Base
 
         protected void Add_Click(object sender, EventArgs e)
         {
+            this.tableLayoutPanel1.SuspendLayout();
             Button button = sender as Button;
             int lineNumber = 0;
 
@@ -384,6 +385,7 @@ namespace Citta_T1.OperatorViews.Base
                 AddTableLayoutPanelControls(lineNumber);
             }
             CreateLine(lineNumber);
+            this.tableLayoutPanel1.ResumeLayout(true);
         }
 
 
@@ -408,9 +410,11 @@ namespace Citta_T1.OperatorViews.Base
 
         protected void Del_Click(object sender, EventArgs e)
         {
+            this.tableLayoutPanel1.SuspendLayout();
             Button button = (Button)sender;
             int lineNumber = int.Parse(button.Name);
 
+            
             for (int i = 0; i < this.tableLayoutPanel1.RowCount; i++)
             {
                 int buttonPosition = (i * ColumnCount) + ColumnCount - 1;
@@ -425,13 +429,14 @@ namespace Citta_T1.OperatorViews.Base
                 }
 
             }
-
+            
             MoveTableLayoutPanelControls(lineNumber);
-
+            
             this.tableLayoutPanel1.RowStyles.RemoveAt(this.tableLayoutPanel1.RowCount - 1);
             this.tableLayoutPanel1.RowCount -= 1;
-
             this.tableLayoutPanel1.Height = this.tableLayoutPanel1.RowCount * 40;
+
+            this.tableLayoutPanel1.ResumeLayout(true);
         }
 
         protected virtual void MoveTableLayoutPanelControls(int lineNumber)
