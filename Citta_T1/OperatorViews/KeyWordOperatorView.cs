@@ -138,7 +138,7 @@ namespace Citta_T1.OperatorViews
     }
     public class KeywordCombine
     {
-        private const string defaultInfo = "发生未知的原因，关键词组合失败，您需要联系开发团队或者检查您的关键词输入是否有问题";
+        private const string defaultInfo = "发生未知的原因，关键词组合失败，检查您的关键词输入是否有问题";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
         private const string blankKeyColInfo = "当前尚未指定关键词列";
 
@@ -150,7 +150,7 @@ namespace Citta_T1.OperatorViews
                                      string extType,
                                      string encoding)
         {
-            string result = "";
+            string result = String.Empty;
             if (separator.Equals(' '))
             {
                 return blankSpaceSepInfo;
