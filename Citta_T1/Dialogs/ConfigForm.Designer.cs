@@ -53,8 +53,6 @@
             this.browseButton = new System.Windows.Forms.Button();
             this.pythonFFPTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.socialNetworkConfigPage = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
             this.aboutPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -70,7 +68,6 @@
             this.userModelConfigPage.SuspendLayout();
             this.pythonConfigPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.socialNetworkConfigPage.SuspendLayout();
             this.aboutPage.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +75,6 @@
             // 
             this.tabControl.Controls.Add(this.userModelConfigPage);
             this.tabControl.Controls.Add(this.pythonConfigPage);
-            this.tabControl.Controls.Add(this.socialNetworkConfigPage);
             this.tabControl.Controls.Add(this.aboutPage);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -317,26 +313,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pyhton虚拟机路径(Python Interpreter)";
             // 
-            // socialNetworkConfigPage
-            // 
-            this.socialNetworkConfigPage.Controls.Add(this.label9);
-            this.socialNetworkConfigPage.Location = new System.Drawing.Point(4, 26);
-            this.socialNetworkConfigPage.Name = "socialNetworkConfigPage";
-            this.socialNetworkConfigPage.Size = new System.Drawing.Size(634, 380);
-            this.socialNetworkConfigPage.TabIndex = 2;
-            this.socialNetworkConfigPage.Text = "社交关系分析";
-            this.socialNetworkConfigPage.UseVisualStyleBackColor = true;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.Location = new System.Drawing.Point(251, 170);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 26);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "施 工 中 ...";
-            // 
             // aboutPage
             // 
             this.aboutPage.Controls.Add(this.label8);
@@ -462,8 +438,6 @@
             this.pythonConfigPage.ResumeLayout(false);
             this.pythonConfigPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.socialNetworkConfigPage.ResumeLayout(false);
-            this.socialNetworkConfigPage.PerformLayout();
             this.aboutPage.ResumeLayout(false);
             this.aboutPage.PerformLayout();
             this.ResumeLayout(false);
@@ -475,7 +449,6 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage userModelConfigPage;
         private System.Windows.Forms.TabPage pythonConfigPage;
-        private System.Windows.Forms.TabPage socialNetworkConfigPage;
         private System.Windows.Forms.TabPage aboutPage;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button browseButton;
@@ -504,6 +477,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn interpreterFFPColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn aliasColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chosenColumn;
-        private System.Windows.Forms.Label label9;
     }
 }
