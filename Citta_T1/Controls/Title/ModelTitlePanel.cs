@@ -159,7 +159,7 @@ namespace Citta_T1.Controls.Title
                 // 其次选择左边的
                 else if (index != -1 && index - 1 >= 0)
                     modelTitleControls[index - 1].ShowSelectedBorder();
-                log.Info("删除的文档index为" + index.ToString());
+                //log.Info("删除的文档index为" + index.ToString());
             }
             modelTitleControls.Remove(mtControl);
             this.Controls.Remove(mtControl);

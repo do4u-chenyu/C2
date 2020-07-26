@@ -286,7 +286,7 @@ namespace Citta_T1.Business.Model
             }
             catch (Exception e)
             {
-                log.Info("ModelDocument ModifyRSPath 出错: " + e.ToString());
+                log.Error("ModelDocument ModifyRSPath 出错: " + e.ToString());
                 ret = false;
             }
             return ret;
