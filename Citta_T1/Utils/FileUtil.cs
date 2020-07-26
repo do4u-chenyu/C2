@@ -374,6 +374,7 @@ namespace Citta_T1.Utils
         }
         public static void FillTable(DataGridView dgv, List<string> headers, List<List<string>> rows, int maxNumOfRow=100)
         {
+            CleanDgv(dgv);
             try
             {
                 DataTable table = new DataTable();
