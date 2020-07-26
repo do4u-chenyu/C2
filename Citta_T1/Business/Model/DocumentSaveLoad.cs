@@ -108,7 +108,7 @@ namespace Citta_T1.Business.Model
                                          OpUtil.ToPointFType(dict["endlocation"]),
                                          Convert.ToInt32(dict["endpin"]));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //log.Info(e.Message);
                 return ModelRelation.Empty;
