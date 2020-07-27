@@ -236,5 +236,9 @@ namespace Citta_T1.Core
                 log.Error("重写BCP文件失败， error: " + e.ToString());
             }
         }
+        public bool IsEmptyHeader(string fullFilePath)
+        {
+            return !dataPreviewDict.ContainsKey(fullFilePath) || string.IsNullOrEmpty(dataPreviewDict[fullFilePath].HeadColumnLine);
+        }
     }
 }

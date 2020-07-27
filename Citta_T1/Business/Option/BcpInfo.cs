@@ -49,10 +49,13 @@ namespace Citta_T1.Business.Option
         private void InitColumnInfo()
         {
             this.ColumnLine = BCPBuffer.GetInstance().GetCacheColumnLine(this.fullFilePath, encoding);
+            this.ColumnArray = new string[] { };
+            if (this.ColumnLine == null)
+                return;
             //暂定预览保持文件不变，下拉选项去掉尾部空表头
             List<string> tmpColumnArray = new List<string>(this.ColumnLine.Split(this.separator));
             int realColCount = tmpColumnArray.Count;
-            for(int i = tmpColumnArray.Count-1 ; i>=0;i--) 
+            for (int i = tmpColumnArray.Count - 1; i >= 0; i--)
             {
                 if (string.IsNullOrEmpty(tmpColumnArray[i]))
                     realColCount--;
@@ -60,7 +63,6 @@ namespace Citta_T1.Business.Option
                     break;
             }
             ColumnArray = tmpColumnArray.Take(realColCount).ToArray();
-
         }
     }
 }

@@ -106,6 +106,9 @@ namespace Citta_T1.Dialogs
              * 2. 关于数据源路径。路径必须不为空
              * 3. 关于是否可导入重复数据。重复数据源不予导入
              * 4. 关于数据源路径是否可包含所有字符。数据源路径不包含非法字符（如空格、等于号、大于号小于号等）
+             * 
+             * 导入规则 0727
+             * 1. 先没有表头的文件可以预览但是不能导入
              */
             string name = this.textBox1.Text;
             if (name == "请输入数据名称" || name == "" || String.IsNullOrEmpty(name))
@@ -127,6 +130,12 @@ namespace Citta_T1.Dialogs
                     this.extType = OpUtil.ExtType.Text;
 
                 BCPBuffer.GetInstance().TryLoadFile(this.fullFilePath, this.extType, this.encoding, this.separator);
+                if (BCPBuffer.GetInstance().IsEmptyHeader(this.fullFilePath))
+                {
+                    BCPBuffer.GetInstance().Remove(this.fullFilePath);
+                    MessageBox.Show("数据源表头不能为空，请检查数据源文件。");
+                    return;
+                }
                 InputDataEvent(name, this.fullFilePath, this.separator, this.extType, this.encoding);
                 DvgClean();
                 Close();
@@ -134,6 +143,7 @@ namespace Citta_T1.Dialogs
             this.extType = OpUtil.ExtType.Unknow;
             this.encoding = OpUtil.Encoding.UTF8;
         }
+
         private void InitInvalidCharPattern()
         {
             this.invalidStringArr = new string[this.invalidChars.Length];

@@ -202,6 +202,8 @@ namespace Citta_T1.Utils
                             List<string> tmpRowValueList = new List<string>();
                             for (int col = 1; col <= colCount; col++)
                             {
+                                if (col % 4 == 0) 
+                                { }
                                 ExcelRange cell = worksheet.Cells[row, col];
                                 string unit = ExcelUtil.GetCellValue(cell).Replace('\n',' ');
                                 tmpRowValueList.Add(unit);
