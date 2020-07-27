@@ -22,7 +22,7 @@ namespace Citta_T1.Business.Schedule.Cmd
             string invert = option.GetOption("conditionSlect").ToLower() == "0" ? String.Empty : "-v"; //是否包含，0包含，1不包含
 
             //每次运行从缓存中读一份关键词
-            string keywordXml = new KeywordCombine().KeywordPreView(inputFilePaths[1],this.separators[1].ToCharArray(),int.Parse(option.GetOption("keySelectIndex")),triple.DataElements[1].ExtType.ToString(),triple.DataElements[1].Encoding.ToString());
+            string keywordXml = new KeywordCombine().KeywordPreView(inputFilePaths[1],this.separators[1],int.Parse(option.GetOption("keySelectIndex")),triple.DataElements[1].ExtType.ToString(),triple.DataElements[1].Encoding.ToString());
             string[] keyList = keywordXml.Split('\t');
            
             //关键词写入临时配置文件，解决关键词为中文时的编码问题，文件统一为utf-8

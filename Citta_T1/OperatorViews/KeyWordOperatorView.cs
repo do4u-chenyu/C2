@@ -2,6 +2,7 @@
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Citta_T1.OperatorViews
         private const string dataHelpInfo = "您需要选择需要处理的数据项";
         private const string keywordInfo = "您需要选择使用的关键词列";
         private const string conditionInfo = "您需要选择操作为过滤噪音还是命中提取";
-
+        
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
             InitializeComponent();
@@ -45,8 +46,7 @@ namespace Citta_T1.OperatorViews
             // 每个控件自定义的数据源配置逻辑
             dataInfo.TryGetValue("encoding1", out keywordEncoding);
             dataInfo.TryGetValue("extType1", out keywordExtType);
-            dataInfo.TryGetValue("separator1", out keywordSep);
-
+            dataInfo.TryGetValue("separator1", out keywordSep);           
             comboBox0.Items.AddRange(nowColumnsName0);
             comboBox1.Items.AddRange(nowColumnsName1);
             outListCCBL0.Items.AddRange(nowColumnsName0);
@@ -74,7 +74,6 @@ namespace Citta_T1.OperatorViews
                 oldOutName0.AddRange(from int index in indexs
                                      select outListCCBL0.Items[index].ToString());
             }
-
             comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
             comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
             conditionSelectBox.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("conditionSlect", "0"));
@@ -126,9 +125,9 @@ namespace Citta_T1.OperatorViews
         #region 配置信息的保存与更新
         private void UpdatePreviewText()
         {
-
+            
             keywordXml = new KeywordCombine().KeywordPreView(dataSourceFFP1, 
-                                                             keywordSep.ToCharArray(),
+                                                             keywordSep,
                                                              comboBox1.SelectedIndex, 
                                                              keywordExtType, 
                                                              keywordEncoding);
@@ -141,18 +140,19 @@ namespace Citta_T1.OperatorViews
         private const string defaultInfo = "发生未知的原因，关键词组合失败，检查您的关键词输入是否有问题";
         private const string blankSpaceSepInfo = "空格分隔符与当前的关键词组合逻辑冲突，组合效果会有误差，建议您更换文件格式";
         private const string blankKeyColInfo = "当前尚未指定关键词列";
-
+        private const string blankSpace = " ";
         private readonly List<string> datas = new List<string>();
 
         public string KeywordPreView(string keywordFile,
-                                     char[] separator,
+                                     string separator,
                                      int colIndex,
                                      string extType,
                                      string encoding)
         {
             string result = String.Empty;
-            if (separator.Equals(' '))
+            if (separator.Equals(blankSpace))
             {
+                
                 return blankSpaceSepInfo;
             }
             if (colIndex.Equals(-1))
@@ -160,11 +160,11 @@ namespace Citta_T1.OperatorViews
                 return blankKeyColInfo;
             }
             KeywordRead(keywordFile,
-                        separator,
+                        separator.ToCharArray(),
                         colIndex,
                         OpUtil.ExtTypeEnum(extType),
                         OpUtil.EncodingEnum(encoding));
-            if (datas.Count.Equals(0))
+            if (datas.Count > 0)
                 result = string.Join("\t", datas);  //TODO， 如果输入关键词本身是"OR",会是什么情况
             if (String.IsNullOrWhiteSpace(result))
                 result = defaultInfo;

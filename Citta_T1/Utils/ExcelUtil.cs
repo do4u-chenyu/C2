@@ -302,7 +302,7 @@ namespace Citta_T1.Utils
 									cell.NumericCellValue);
 						}
 						else
-							cellValue = cell.StringCellValue != null ? cell.StringCellValue.Replace('\n', ' ') : string.Empty;
+							cellValue = cell.NumericCellValue.ToString() != null ? cell.NumericCellValue.ToString().Replace('\n', ' ') : string.Empty;
 						break;
 					case CellType.Formula:
 						/**

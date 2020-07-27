@@ -399,7 +399,7 @@ namespace Citta_T1.Dialogs
                     {
                         this.separator = Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //log.Error(ex.ToString());
                         MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
