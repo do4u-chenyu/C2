@@ -170,7 +170,7 @@ namespace Citta_T1.OperatorViews.Base
             this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
 
-        protected void Control_Leave(object sender, EventArgs e)
+        protected virtual void Control_Leave(object sender, EventArgs e)
         {
             ComboBox comboBox = sender as ComboBox;
             if (comboBox.Items.Count == 0 || String.IsNullOrEmpty(comboBox.Text)) return;
@@ -185,7 +185,7 @@ namespace Citta_T1.OperatorViews.Base
                 MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
             }
         }
-        protected void Control_KeyUp(object sender, KeyEventArgs e)
+        protected virtual void Control_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 Control_Leave(sender, e);
