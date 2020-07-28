@@ -204,6 +204,7 @@
             this.cmdConsoleControl.BackColor = System.Drawing.Color.Black;
             this.cmdConsoleControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cmdConsoleControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cmdConsoleControl.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmdConsoleControl.IsInputEnabled = true;
             this.cmdConsoleControl.Location = new System.Drawing.Point(0, 0);
             this.cmdConsoleControl.Name = "cmdConsoleControl";

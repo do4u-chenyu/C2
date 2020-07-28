@@ -19,7 +19,7 @@ namespace Citta_T1.Controls.Bottom
             piis = new List<PythonInterpreterInfo>();
             consoles = new Dictionary<string, ConsoleControl.ConsoleControl>();
             InitializeComponent();
-            this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
+            this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmdConsoleControl.Name = CmdConsoleString;
             consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
             this.Disposed += new EventHandler(BottomConsoleControl_Disposed);
@@ -66,7 +66,7 @@ namespace Citta_T1.Controls.Bottom
                 Size = new System.Drawing.Size(1005, 97),
                 Visible = visible
             };
-            consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
+            consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             return consoleControl;
         }
 
