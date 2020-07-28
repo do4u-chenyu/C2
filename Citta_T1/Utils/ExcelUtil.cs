@@ -354,7 +354,7 @@ namespace Citta_T1.Utils
 				if (IsDateFormat(formatID, formatString))
                 {
 					if (cell.Value is DateTime)
-						return cell.Value.ToString();
+						return ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value);
 					else if (cell.Value is double)
 						cellValue = ExcelUtil.GetFormatDateStringValue(
 							formatID,
