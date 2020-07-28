@@ -425,7 +425,7 @@ namespace Citta_T1
             this.pyControlLabel.Size = new System.Drawing.Size(72, 27);
             this.pyControlLabel.TabIndex = 2;
             this.pyControlLabel.Text = "控制台";
-            this.toolTip1.SetToolTip(this.pyControlLabel, "Python和Cmd控制台,用来调试第三方脚本");
+            this.toolTip1.SetToolTip(this.pyControlLabel, "Cmd控制台,用来调试第三方脚本");
             this.pyControlLabel.Click += new System.EventHandler(this.PyControlLabel_Click);
             // 
             // previewLabel
@@ -718,6 +718,7 @@ namespace Citta_T1
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvasPanel.EndC = null;
             this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
+            this.canvasPanel.LeftButtonDown = false;
             this.canvasPanel.Location = new System.Drawing.Point(323, 94);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
