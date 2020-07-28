@@ -31,7 +31,7 @@ namespace Citta_T1.Controls.Bottom
             //_InitializeColumns(headers);
             //_InitializeRowse(datas.GetRange(1, datas.Count - 1), numOfCols);
             InitializeDGV(datas, headers, numOfCols);
-
+            ControlUtil.DisableOrder(this.dataGridView);
         }
         public void DvgClean(bool isCleanDataName = true)
         {
