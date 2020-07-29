@@ -208,7 +208,6 @@ namespace Citta_T1.Dialogs
             rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
             if (rowContentList.Count == 0)
             {
-                MessageBox.Show("导入excel文件失败，请检查后重新导入。");
                 this.Clean();
                 return;
             }
@@ -392,19 +391,13 @@ namespace Citta_T1.Dialogs
             {
                 this.radioButton3.Checked = true;
                 // 没有指定分隔符
-                if (this.textBoxEx1.Text == null || this.textBoxEx1.Text == "")
-                    this.separator = this.emptySep;
-                else
-                    try
-                    {
-                        this.separator = Regex.Unescape(this.textBoxEx1.Text).ToCharArray()[0];
-                    }
-                    catch (Exception)
-                    {
-                        //log.Error(ex.ToString());
-                        MessageBox.Show("指定的分隔符有误！目前分隔符为：" + this.textBoxEx1.Text);
-                        return;
-                    }
+                this.separator = this.emptySep;
+                if (!string.IsNullOrEmpty(this.textBoxEx1.Text))
+                {
+                    char[] seps = Regex.Unescape(this.textBoxEx1.Text).ToCharArray();
+                    if (seps.Length > 0)
+                        this.separator = seps[0];
+                }
                 PreViewBcpFile();
             }
         }

@@ -220,8 +220,13 @@ namespace Citta_T1.Utils
                         return rowContentList;
                     }
                     IRow firstRow = sheet.GetRow(0);
+                    if (firstRow == null)
+                    {
+                        MessageBox.Show("不支持预览和导入没有表头的xls文件，请给文件添加合适的表头");
+                        return rowContentList;
+                    }
                     int rowCount = sheet.LastRowNum + 1;
-                    int cellCount = firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
+                    int cellCount = firstRow is null ? 1 : firstRow.LastCellNum; //一行最后一个cell的编号 即总的列数
 
                     for (int i = 0; i < Math.Min(maxRow + 1, rowCount); i++)
                     {
