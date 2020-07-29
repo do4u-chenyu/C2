@@ -32,17 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\relate\relate\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.dll</HintPath>
+      <HintPath>..\..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML">
-      <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OOXML.dll</HintPath>
+      <HintPath>..\..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OOXML.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+      <HintPath>..\..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+      <HintPath>..\..\ThirdPartyLibrary\NPOI.2.5.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealRelate.cs" />
+    <Compile Include="ExcelUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

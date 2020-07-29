@@ -4,13 +4,10 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using Citta_T1.Utils;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-
-
+using OfficeOpenXml;
 namespace relate
 {
     class DealRelate
@@ -31,6 +28,7 @@ namespace relate
         private DataTable leftTable = new DataTable();//左表
         private DataTable rightTable = new DataTable();//右表
         private DataTable resultTable = new DataTable();//结果表
+
         public DealRelate(string[] param)
         {
             this.leftFilePath = param[0];
@@ -43,16 +41,16 @@ namespace relate
             this.leftOutputField = param[6];
             this.rightOutputField = param[7];
             this.option = param[8].Split('|');
-            //this.option = "0,0,0|0,1,1|1,2,2|0,3,3".Split('|');
+            //this.option = "0\t0\t0".Split('|');
 
-            //this.leftFilePath = "D:\\sqy\\datas\\text_gbk_gang4.txt";
+            //this.leftFilePath = @"D:\sqy\datas\100W_test.xls";
             //this.leftFileEncoding = "GBK";
-            //this.leftFileSeparator = '|';
-            //this.rightFilePath = "D:\\sqy\\datas\\text_utf8_tab1.txt";
+            //this.leftFileSeparator = "\t"[0];
+            //this.rightFilePath = @"D:\FiberHomeIAOModelDocument\phx\我的新模型16\L13_20200701_102245.bcp";
             //this.rightFileEncoding = "UTF8";
-            //this.rightFileSeparator = '\t';
-            //this.leftOutputField = "0,1,2";
-            //this.rightOutputField = "0,2";
+            //this.rightFileSeparator = "\t"[0];
+            //this.leftOutputField = "0\t1\t2\t3\t4";
+            //this.rightOutputField = "0";
 
             InitTable();//初始化左右表
             GenOption();//规整化option
@@ -64,7 +62,7 @@ namespace relate
             CreateTable(this.leftTable, this.leftFilePath, this.leftFileEncoding, this.leftFileSeparator);
             CreateTable(this.rightTable, this.rightFilePath, this.rightFileEncoding, this.rightFileSeparator);
 
-            for (int i = 0; i < (leftOutputField.Split(',').Length + rightOutputField.Split(',').Length); i++)
+            for (int i = 0; i < (leftOutputField.Split('\t').Length + rightOutputField.Split('\t').Length); i++)
             {
                 resultTable.Columns.Add(i.ToString(), typeof(string));
             }
@@ -135,65 +133,92 @@ namespace relate
 
         public static void CreateExcelDataTable(DataTable dt, string filePath)
         {
-            ISheet sheet = null;
-            IWorkbook workbook = null;
-            FileStream fs = null;
-            ICell cell;
-            string sheetName = null;
             DataRow dataRow = null;
-
+            FileStream fs = null;
             try
             {
                 fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                if (filePath.IndexOf(".xlsx") > 0)
+                //03版(xls)用npoi,07版(xlsx)用epplus
+                //npoi的索引从0开始，epplus的索引从1开始
+                if (filePath.EndsWith(".xlsx"))
                 {
-                    workbook = new XSSFWorkbook(fs);
-
-                }
-                else if (filePath.IndexOf(".xls") > 0)
-                {
-                    workbook = new HSSFWorkbook(fs);
-                }
-
-                if (workbook != null)
-                {
-                    if (sheetName != null)
+                    using (ExcelPackage package = new ExcelPackage(fs))
                     {
-                        sheet = workbook.GetSheet(sheetName);
-                    }
-                    else
-                    {
-                        sheet = workbook.GetSheetAt(0);
-                    }
-                }
-
-                if (sheet != null)
-                {
-                    int rowCount = sheet.LastRowNum;//总行数
-                    //列名加入datatable
-                    IRow firstRow = sheet.GetRow(0);//第一行
-                    int cellCount = firstRow.LastCellNum;//列数
-                    for (int i = firstRow.FirstCellNum; i < cellCount; ++i)
-                    {
-                        dt.Columns.Add(i.ToString(), typeof(string));
-                    }
-
-
-                    if (rowCount > 1)
-                    {
-
-                        for (int rowNum = 1; rowNum <= rowCount; rowNum++)
+                        ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                        if (worksheet == null)
                         {
-                            IRow tmpRow = sheet.GetRow(rowNum);//从第2行（索引1）开始
-                            if (tmpRow == null) continue;
+                            fs.Close();
+                            return;
+                        }
+                        int rowCount = worksheet.Dimension.End.Row;
+                        int colCount = worksheet.Dimension.End.Column;
+                        int realColCount = colCount;
+
+                        if (rowCount < 2)
+                        {
+                            fs.Close();
+                            return;
+                        }
+                        //因为是最大列数，可能出现表头列数小于最大列数的情况
+                        for (int i = colCount; i > 0; i--)
+                        {
+                            if (worksheet.Cells[1, i].Value == null || worksheet.Cells[1, i].Value.ToString() == string.Empty)
+                                realColCount--;
+                            else
+                                break;//从后往前，遇到不为空的代表剩下的表头均有值
+                        }
+
+                        for (int i = 0; i < realColCount; i++)
+                            dt.Columns.Add(i.ToString(), typeof(string));
+
+                        for (int row = 2; row <= rowCount; row++)
+                        {
                             dataRow = dt.NewRow();
-                            for (int cellNum = 0; cellNum < cellCount; cellNum++)
+                            for (int col = 0; col < realColCount; col++)
                             {
-                                cell = tmpRow.GetCell(cellNum);
-                                dataRow[cellNum] = cell != null ? cell.ToString() : "";
+                                ExcelRange cell = worksheet.Cells[row, col + 1];
+                                dataRow[col] = cell != null ? ExcelUtil.GetCellValue(cell).Replace('\n', ' ') : string.Empty;
                             }
                             dt.Rows.Add(dataRow);
                         }
+                    }
+                }
+                else
+                {
+                    IWorkbook workbook = new HSSFWorkbook(fs);
+                    ISheet sheet = null;
+                    ICell cell = null;
+                    string sheetName = null;
+                    if (workbook != null)
+                        sheet = sheetName != null ? workbook.GetSheet(sheetName) : workbook.GetSheetAt(0);
+                    if (sheet == null)
+                    {
+                        fs.Close();
+                        return;
+                    }
+                    int rowCount = sheet.LastRowNum + 1;//总行数  
+                    if (rowCount < 2)
+                    {
+                        fs.Close();
+                        return;
+                    }
+
+                    int cellCount = sheet.GetRow(0).LastCellNum;//列数
+                    for (int i = sheet.GetRow(0).FirstCellNum; i < cellCount; ++i)
+                    {
+                        dt.Columns.Add(i.ToString(), typeof(string));
+                    }
+                    for (int rowNum = 1; rowNum < rowCount; rowNum++)
+                    {
+                        IRow tmpRow = sheet.GetRow(rowNum);//从第2行（索引1）开始
+                        if (tmpRow == null) continue;
+                        dataRow = dt.NewRow();
+                        for (int cellNum = 0; cellNum < cellCount; cellNum++)
+                        {
+                            cell = tmpRow.GetCell(cellNum);
+                            dataRow[cellNum] = cell != null ? ExcelUtil.GetCellValue(workbook, cell).Replace('\n', ' ') : string.Empty;
+                        }
+                        dt.Rows.Add(dataRow);
                     }
                 }
             }
@@ -220,7 +245,7 @@ namespace relate
             List<string[]> relateTmpList = new List<string[]>();
             foreach (string tmp in option)
             {
-                string[] singleOption = tmp.Split(',');//[[0,0,0],[0,1,1],[1,2,2],[0,3,3]]
+                string[] singleOption = tmp.Split('\t');//[[0,0,0],[0,1,1],[1,2,2],[0,3,3]]
                 string andor = singleOption[0];
                 string leftField = singleOption[1];
                 string rightField = singleOption[2];
@@ -239,11 +264,11 @@ namespace relate
             }
             optionLists.Add(relateTmpList);
 
-            foreach (string tmp in leftOutputField.Split(','))
+            foreach (string tmp in leftOutputField.Split('\t'))
             {
                 lout.Add(tmp);
             }
-            foreach (string tmp in rightOutputField.Split(','))
+            foreach (string tmp in rightOutputField.Split('\t'))
             {
                 rout.Add(tmp);
             }
@@ -251,7 +276,7 @@ namespace relate
         }
         #endregion
 
-        #region 初始化左右表
+        #region 关联左右表（笛卡尔集）
         public void RelateTwoTables()
         {
             foreach (DataRow rowa in leftTable.Rows)
@@ -310,14 +335,12 @@ namespace relate
 
             foreach (DataRow dr in resultTable.Rows)
             {
-                foreach (object dia in dr.ItemArray)
-                {
-                    Console.Write(dia.ToString() + "\t");
-                }
+                Console.Write(string.Join("\t", dr.ItemArray));
                 Console.Write("\n");
             }
         }
 
         #endregion
+
     }
 }
