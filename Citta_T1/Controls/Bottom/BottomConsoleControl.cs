@@ -19,8 +19,10 @@ namespace Citta_T1.Controls.Bottom
             piis = new List<PythonInterpreterInfo>();
             consoles = new Dictionary<string, ConsoleControl.ConsoleControl>();
             InitializeComponent();
-            this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
+            //this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdConsoleControl.InternalRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmdConsoleControl.Name = CmdConsoleString;
+            this.cmdConsoleControl.InternalRichTextBox.KeyDown += InternalRichTextBox_KeyDown;
             consoles.Add(this.cmdConsoleControl.Name, this.cmdConsoleControl);
             this.Disposed += new EventHandler(BottomConsoleControl_Disposed);
         }
@@ -66,8 +68,18 @@ namespace Citta_T1.Controls.Bottom
                 Size = new System.Drawing.Size(1005, 97),
                 Visible = visible
             };
-            consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("新宋体", 10F);
+            consoleControl.InternalRichTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            consoleControl.InternalRichTextBox.KeyDown += InternalRichTextBox_KeyDown;
             return consoleControl;
+        }
+
+        private void InternalRichTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.V)
+            {
+                e.SuppressKeyPress = true;
+                ((RichTextBox)sender).Paste(DataFormats.GetFormat(DataFormats.Text));
+            }
         }
 
         private void ReleaseConsoleControl(ConsoleControl.ConsoleControl consoleControl)
