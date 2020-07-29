@@ -208,7 +208,7 @@ namespace Citta_T1.Dialogs
             rowContentList = FileUtil.ReadExcel(this.fullFilePath, maxNumOfRow);
             if (rowContentList.Count == 0)
             {
-                MessageBox.Show("导入excel文件失败，请检查后重新导入。");
+                //MessageBox.Show("导入excel文件失败，请检查后重新导入。");
                 this.Clean();
                 return;
             }

@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Citta_T1
@@ -813,11 +814,45 @@ namespace Citta_T1
                 if (keyData == (Keys.S | Keys.Control))
                     SaveModelButton_Click(this, null);
                 if (keyData == (Keys.Z | Keys.Control))
-                    this.topToolBarControl.UndoButton_Click(this, null);
-                if(keyData == (Keys.Y | Keys.Control))
-                    this.topToolBarControl.RedoButton_Click(this, null);
+                    this.UndoByHotkey();
+                if (keyData == (Keys.Y | Keys.Control))
+                    this.RedoByHotkey();
             }
             return false;
+        }
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+
+        internal static extern IntPtr GetFocus();
+
+        ///获取 当前拥有焦点的控件
+        private Control GetFocusedControl()
+        {
+
+            Control focusedControl = null;
+
+            // To get hold of the focused control:
+
+            IntPtr focusedHandle = GetFocus();
+
+            if (focusedHandle != IntPtr.Zero)
+
+                //focusedControl = Control.FromHandle(focusedHandle);
+
+                focusedControl = Control.FromChildHandle(focusedHandle);
+
+            return focusedControl;
+
+        }
+
+        private void UndoByHotkey()
+        {
+            if (GetFocusedControl().Name != "remarkCtrTextBox" && GetFocusedControl().Name != "richTextBoxConsole")
+                this.topToolBarControl.UndoButton_Click(this, null);
+        }
+        private void RedoByHotkey()
+        {
+            if (GetFocusedControl().Name != "remarkCtrTextBox" && GetFocusedControl().Name != "richTextBoxConsole")
+                this.topToolBarControl.RedoButton_Click(this, null);
         }
 
         private void SaveAllButton_Click(object sender, EventArgs e)
