@@ -803,7 +803,7 @@ namespace Citta_T1
             int WM_KEYDOWN = 256;
             int WM_SYSKEYDOWN = 260;
 
-            if (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN)
+            if (this.IsClickOnEditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
             {
                 if (keyData == Keys.Delete)
                     this.canvasPanel.DeleteSelectedLinesByIndex();
@@ -812,47 +812,32 @@ namespace Citta_T1
                 if (keyData == (Keys.V | Keys.Control))
                     this.canvasPanel.ControlSelect_paste();
                 if (keyData == (Keys.S | Keys.Control))
-                    SaveModelButton_Click(this, null);
+                    this.SaveModelButton_Click(this, null);
                 if (keyData == (Keys.Z | Keys.Control))
-                    this.UndoByHotkey();
+                    this.topToolBarControl.UndoButton_Click(this, null);
                 if (keyData == (Keys.Y | Keys.Control))
-                    this.RedoByHotkey();
+                    this.topToolBarControl.RedoButton_Click(this, null);
             }
             return false;
         }
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
-
         internal static extern IntPtr GetFocus();
-
         ///获取 当前拥有焦点的控件
         private Control GetFocusedControl()
         {
-
             Control focusedControl = null;
-
             // To get hold of the focused control:
-
             IntPtr focusedHandle = GetFocus();
-
             if (focusedHandle != IntPtr.Zero)
-
-                //focusedControl = Control.FromHandle(focusedHandle);
-
+                //focusedControl = Control.FromHandle(focusedHandle)
                 focusedControl = Control.FromChildHandle(focusedHandle);
-
             return focusedControl;
 
         }
-
-        private void UndoByHotkey()
+        private bool IsClickOnEditableCtr()
         {
-            if (GetFocusedControl().Name != "remarkCtrTextBox" && GetFocusedControl().Name != "richTextBoxConsole")
-                this.topToolBarControl.UndoButton_Click(this, null);
-        }
-        private void RedoByHotkey()
-        {
-            if (GetFocusedControl().Name != "remarkCtrTextBox" && GetFocusedControl().Name != "richTextBoxConsole")
-                this.topToolBarControl.RedoButton_Click(this, null);
+            // TODO 目前解决方案属于穷举法，最好能找到当前控件是否有可编辑的属性
+            return GetFocusedControl() != null && !(GetFocusedControl() is TextBox) && !(GetFocusedControl() is RichTextBox); 
         }
 
         private void SaveAllButton_Click(object sender, EventArgs e)
