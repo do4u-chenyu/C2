@@ -118,6 +118,11 @@ namespace Citta_T1.Controls.Left
         private void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
+                this.textBox.Text = this.oldTextString;
+            this.textBox.ReadOnly = true;
+            this.textBox.Visible = false;
+            this.textButton.Visible = true;
+            if (this.oldTextString == this.textBox.Text)
                 return;
 
             this.textBox.ReadOnly = true;
