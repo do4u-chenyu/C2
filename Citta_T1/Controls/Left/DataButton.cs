@@ -171,10 +171,7 @@ namespace Citta_T1.Controls.Left
             if (this.oldTextString == this.textBox.Text)
                 return;
 
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
             this.txtButton.Text = this.textBox.Text;
-            this.txtButton.Visible = true;
             if (this.oldTextString != this.textBox.Text)
             {
                 this.oldTextString = this.textBox.Text;
