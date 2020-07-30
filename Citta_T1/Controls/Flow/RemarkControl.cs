@@ -11,7 +11,7 @@ namespace Citta_T1.Controls.Flow
         {
             InitializeComponent();
         }
-        public string RemarkDescription { get => textBox1.Text; set => textBox1.Text = value; }
+        public string RemarkDescription { get => remarkCtrTextBox.Text; set => remarkCtrTextBox.Text = value; }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {

@@ -118,12 +118,13 @@ namespace Citta_T1.Controls.Left
         private void FinishTextChange()
         {
             if (this.textBox.Text.Trim().Length == 0)
-                return;
-
+                this.textBox.Text = this.oldTextString;
             this.textBox.ReadOnly = true;
             this.textBox.Visible = false;
-            this.textButton.Text = this.textBox.Text.Trim();
             this.textButton.Visible = true;
+            if (this.oldTextString == this.textBox.Text)
+                return;
+            this.textButton.Text = this.textBox.Text.Trim();
 
             // 新旧名称相同, 不需要做目录操作
             if (ModelTitle == oldTextString)

@@ -29,34 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemarkControl));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel1.SuspendLayout();
+            this.remarkCtrPanel = new System.Windows.Forms.Panel();
+            this.remarkCtrTextBox = new System.Windows.Forms.TextBox();
+            this.remarkCtrPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(160, 160);
-            this.panel1.TabIndex = 0;
+            this.remarkCtrPanel.BackColor = System.Drawing.Color.White;
+            this.remarkCtrPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.remarkCtrPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.remarkCtrPanel.Controls.Add(this.remarkCtrTextBox);
+            this.remarkCtrPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.remarkCtrPanel.Location = new System.Drawing.Point(0, 0);
+            this.remarkCtrPanel.Name = "remarkCtrPanel";
+            this.remarkCtrPanel.Size = new System.Drawing.Size(160, 160);
+            this.remarkCtrPanel.TabIndex = 0;
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(37)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(2, 5);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(146, 143);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            this.remarkCtrTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(37)))));
+            this.remarkCtrTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.remarkCtrTextBox.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remarkCtrTextBox.Location = new System.Drawing.Point(2, 5);
+            this.remarkCtrTextBox.Multiline = true;
+            this.remarkCtrTextBox.Name = "remarkCtrTextBox";
+            this.remarkCtrTextBox.Size = new System.Drawing.Size(146, 143);
+            this.remarkCtrTextBox.TabIndex = 0;
+            this.remarkCtrTextBox.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
             // 
             // RemarkControl
             // 
@@ -64,19 +64,19 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.remarkCtrPanel);
             this.DoubleBuffered = true;
             this.Name = "RemarkControl";
             this.Size = new System.Drawing.Size(160, 160);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.remarkCtrPanel.ResumeLayout(false);
+            this.remarkCtrPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel remarkCtrPanel;
+        private System.Windows.Forms.TextBox remarkCtrTextBox;
     }
 }
