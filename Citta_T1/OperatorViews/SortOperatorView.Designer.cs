@@ -70,8 +70,6 @@
             // 
             // comboBox0
             // 
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox0.Location = new System.Drawing.Point(2, 44);
             this.comboBox0.Size = new System.Drawing.Size(134, 24);
             this.comboBox0.TabIndex = 12;
