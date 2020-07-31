@@ -535,6 +535,5 @@ namespace Citta_T1.OperatorViews
         {
             base.Control_KeyUp(sender, e);
         }
-
     }
 }

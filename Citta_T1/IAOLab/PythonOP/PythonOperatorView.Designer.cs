@@ -105,8 +105,8 @@
             this.pythonChosenComboBox.Text = "未配置Python虚拟机";
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
-            this.pythonChosenComboBox.Leave += new System.EventHandler(this.Control_Leave);
             this.pythonChosenComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.pythonChosenComboBox.Leave += new System.EventHandler(this.Control_Leave);
             // 
             // label2
             // 
@@ -310,7 +310,7 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "*.bcp";
-            this.saveFileDialog1.Filter = "Bcp文件|*.bcp|Txt文件|*.txt";
+            this.saveFileDialog1.Filter = "txt文件|*.txt|bcp文件|*.bcp|csv文件|*.csv";
             this.saveFileDialog1.Title = "选择外部Python脚本计划生成的结果文件名,系统将该文件作为结果展示";
             // 
             // pyFullFilePathTextBox
