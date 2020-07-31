@@ -136,6 +136,7 @@ namespace Citta_T1.OperatorViews
             this.DialogResult = DialogResult.OK;
             // 旧的输出结果文件选项
             string oldOptionOut = this.opControl.Option.GetOption("outputOption");
+            string oldBrowseChosen = this.opControl.Option.GetOption("browseChosen");
             SaveOption();
 
             // 内容修改，引起文档dirty 
@@ -188,6 +189,7 @@ namespace Citta_T1.OperatorViews
             */
 
             if (oldOptionOut != this.opControl.Option.GetOption("outputOption")
+                || oldBrowseChosen != this.opControl.Option.GetOption("browseChosen")
                 || oldEncoding != hasResultNew.Encoding
                 || oldSeparator != hasResultNew.Separator)
 
