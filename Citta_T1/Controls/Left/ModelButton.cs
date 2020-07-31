@@ -124,11 +124,7 @@ namespace Citta_T1.Controls.Left
             this.textButton.Visible = true;
             if (this.oldTextString == this.textBox.Text)
                 return;
-
-            this.textBox.ReadOnly = true;
-            this.textBox.Visible = false;
             this.textButton.Text = this.textBox.Text.Trim();
-            this.textButton.Visible = true;
 
             // 新旧名称相同, 不需要做目录操作
             if (ModelTitle == oldTextString)

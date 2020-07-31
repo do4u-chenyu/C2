@@ -209,7 +209,7 @@ namespace Citta_T1
             this.flowChartButton.Size = new System.Drawing.Size(124, 42);
             this.flowChartButton.TabIndex = 3;
             this.flowChartButton.Text = "IAO实验室";
-            this.toolTip1.SetToolTip(this.flowChartButton, "高大上的东西");
+            this.toolTip1.SetToolTip(this.flowChartButton, "数据分析建模需要的复杂模型探索");
             this.flowChartButton.UseVisualStyleBackColor = true;
             this.flowChartButton.Click += new System.EventHandler(this.FlowChartButton_Click);
             // 
