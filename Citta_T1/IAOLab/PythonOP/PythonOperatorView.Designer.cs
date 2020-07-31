@@ -77,6 +77,7 @@
             this.cancelButton.Location = new System.Drawing.Point(462, 437);
             this.cancelButton.Size = new System.Drawing.Size(63, 27);
             this.cancelButton.TabIndex = 2;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // confirmButton
             // 
