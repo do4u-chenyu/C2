@@ -7,6 +7,7 @@
         public bool Redo()
         {
             Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetFlowControl().ResetStatus();
             bool retCode = this._Redo();
             return retCode;
         }
@@ -14,6 +15,7 @@
         public bool Undo()
         {
             Global.GetFlowControl().InterruptSelectFrame();
+            Global.GetFlowControl().ResetStatus();
             bool retCode = this._Undo();
             return retCode;
         }
