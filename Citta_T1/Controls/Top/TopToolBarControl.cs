@@ -56,7 +56,7 @@ namespace Citta_T1.Controls.Top
             this.toolTip1.SetToolTip(this.collideButton, HelpUtil.CollideOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.unionButton, HelpUtil.UnionOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.differButton, HelpUtil.DifferOperatorHelpInfo);
-            this.toolTip1.SetToolTip(this.filterButton, HelpUtil.FilterOperatorHelpInfo);
+            this.toolTip1.SetToolTip(this.filterButton, HelpUtil.KeyWordOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.randomButton, HelpUtil.RandomOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.formatButton, HelpUtil.FormatOperatorHelpInfo);
             this.toolTip1.SetToolTip(this.undoButton, HelpUtil.UndoButtonHelpInfo);
@@ -92,7 +92,7 @@ namespace Citta_T1.Controls.Top
                     text = "取差集";
                     break;
                 case "filterButton":
-                    text = "条件筛选";
+                    text = "关键词过滤";
                     break;
                 case "randomButton":
                     text = "随机采样";
