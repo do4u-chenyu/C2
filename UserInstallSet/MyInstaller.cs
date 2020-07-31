@@ -59,7 +59,6 @@ namespace UserInstallSet
             using (System.IO.StreamWriter sw = new System.IO.StreamWriter(LogPath + @"setup.log", true))
             {
                 sw.WriteLine(DateTime.Now.ToString("[yyyy-MM-dd HH:mm:ss] ") + str + "\n");
-
             }
         }
         public void ConfigWrite(string str)
