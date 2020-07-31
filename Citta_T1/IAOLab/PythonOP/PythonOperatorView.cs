@@ -536,7 +536,7 @@ namespace Citta_T1.OperatorViews
             base.Control_KeyUp(sender, e);
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
             bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";
