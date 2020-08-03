@@ -367,7 +367,7 @@ namespace Citta_T1.OperatorViews
         {
             // 此时不需要 rsChosenButton
             this.rsChosenButton.Enabled = false;
-            if (this.noInputFileRadio.Checked)
+            if (this.noOutputFileRadio.Checked)
             {
                 this.previewTextList[4] = String.Empty;
                 UpdatePreviewText();
