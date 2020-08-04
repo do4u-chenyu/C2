@@ -32,6 +32,8 @@ namespace Citta_T1.OperatorViews
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
             InitPreViewText();
+            //注册python算子的ComboBox
+            this.comboBoxes.Add(this.pythonChosenComboBox);
         }
 
         #region 初始化配置
@@ -132,7 +134,7 @@ namespace Citta_T1.OperatorViews
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (IsOptionNotReady()) return;
-
+            if (IsIllegalFieldName()) return;
             this.DialogResult = DialogResult.OK;
             // 旧的输出结果文件选项
             string oldOptionOut = this.opControl.Option.GetOption("outputOption");
@@ -513,30 +515,6 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        protected override void Control_Leave(object sender, EventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.Items.Count == 0 || String.IsNullOrEmpty(comboBox.Text))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                return; 
-            }
-            if (!comboBox.Items.Contains(comboBox.Text))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
-            }
-            if (comboBox.Text.Contains('\t'))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
-            }
-        }
-
-        protected override void Control_KeyUp(object sender, KeyEventArgs e)
-        {
-            base.Control_KeyUp(sender, e);
-        }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {

@@ -157,7 +157,7 @@ namespace Citta_T1.OperatorViews
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (IsOptionNotReady()) return;
-
+            if (IsIllegalFieldName()) return;
             this.DialogResult = DialogResult.OK;
             SaveOption();
 

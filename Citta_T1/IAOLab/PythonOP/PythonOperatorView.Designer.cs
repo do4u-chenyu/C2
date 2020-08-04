@@ -106,8 +106,6 @@
             this.pythonChosenComboBox.Text = "未配置Python虚拟机";
             this.toolTip1.SetToolTip(this.pythonChosenComboBox, "当前已配置的Python虚拟机,如果还没有配置,可以在首选项-Python引擎中配置");
             this.pythonChosenComboBox.SelectedIndexChanged += new System.EventHandler(this.PythonChosenComboBox_SelectedIndexChanged);
-            this.pythonChosenComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            this.pythonChosenComboBox.Leave += new System.EventHandler(this.Control_Leave);
             // 
             // label2
             // 

@@ -135,7 +135,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写取差集条件!");
                     return notReady;
                 }
             }
@@ -143,7 +143,7 @@ namespace Citta_T1.OperatorViews
             {
                 if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
                 {
-                    MessageBox.Show("请填写过滤条件!");
+                    MessageBox.Show("请填写取差集条件!");
                     return notReady;
                 }
             }

@@ -171,8 +171,6 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox0.Name = "comboBox0";
             this.comboBox0.Size = new System.Drawing.Size(86, 24);
             this.comboBox0.TabIndex = 2;
-            this.comboBox0.Leave += new System.EventHandler(this.Control_Leave);
-            this.comboBox0.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.comboBox0.SelectionChangeCommitted += new System.EventHandler(this.GetLeftSelectedItemIndex);
             this.comboBox0.TextUpdate += new System.EventHandler(LeftComboBox_TextUpdate);
             this.comboBox0.DropDownClosed += new System.EventHandler(LeftComboBox_ClosedEvent);
@@ -190,8 +188,6 @@ namespace Citta_T1.OperatorViews.Base
             this.comboBox1.Size = new System.Drawing.Size(86, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.Visible = false;
-            this.comboBox1.Leave += new System.EventHandler(this.Control_Leave);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.GetRightSelectedItemIndex);
             this.comboBox1.TextUpdate += new System.EventHandler(RightComboBox_TextUpdate);
             this.comboBox1.DropDownClosed += new System.EventHandler(RightComboBox_ClosedEvent);

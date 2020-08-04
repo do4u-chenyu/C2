@@ -29,7 +29,10 @@ namespace Citta_T1.OperatorViews.Base
         protected List<string> selectedColumns;     // 本次配置用户选择的输出字段名称
         protected string oldOptionDictStr;          // 旧配置字典的字符串表述
         protected int ColumnCount { get => this.tableLayoutPanel1.ColumnCount; }       // 有增减条件的表格步长
+  
+
         protected Dictionary<string, string> dataInfo; // 加载左右表数据源基本信息: FFP, Description, EXTType, encoding, sep等
+        protected List<ComboBox> comboBoxes;
         public BaseOperatorView()
         {
             this.opControl = null;
@@ -50,6 +53,7 @@ namespace Citta_T1.OperatorViews.Base
         {
             this.opControl = opControl;
             oldOptionDictStr = opControl.Option.ToString();
+            comboBoxes = new List<ComboBox>() { this.comboBox0, this.comboBox1 };
         }
         // 初始化左右表数据源
         protected void InitDataSource()
@@ -77,6 +81,7 @@ namespace Citta_T1.OperatorViews.Base
                     this.nowColumnsName1 = bcpInfo.ColumnArray;
                 SetTextBoxName(this.dataSourceTB1); // 一元算子,TB1是不可见,赋值了也没事,统一逻辑后可以减少重复代码
             }
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -107,6 +112,7 @@ namespace Citta_T1.OperatorViews.Base
         {
 
             if (IsOptionNotReady()) return;
+            if (IsIllegalFieldName()) return;
             if (IsDuplicateSelect()) return;//数据标准化窗口
             SaveOption();
             this.DialogResult = DialogResult.OK;
@@ -169,28 +175,29 @@ namespace Citta_T1.OperatorViews.Base
         {
             this.toolTip1.SetToolTip(dataSourceTB0, this.dataSourceFFP0);
         }
-
-        protected virtual void Control_Leave(object sender, EventArgs e)
+       
+        protected bool IsIllegalFieldName()
         {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.Items.Count == 0 || String.IsNullOrEmpty(comboBox.Text)) return;
-            if (!comboBox.Items.Contains(comboBox.Text))
+            bool isIllegal = true;
+            foreach (ComboBox cbb in this.comboBoxes)
             {
-                comboBox.Text = String.Empty;
-                MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
+                if (String.IsNullOrEmpty(cbb.Text))
+                    continue;
+                if (!cbb.Items.Contains(cbb.Text))
+                {
+                    cbb.Text = String.Empty;
+                    MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
+                    return isIllegal;
+                }
+                if (cbb.Text.Contains('\t'))
+                {
+                    cbb.Text = String.Empty;
+                    MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
+                    return isIllegal;
+                }
             }
-            if (comboBox.Text.Contains('\t'))
-            {
-                comboBox.Text = String.Empty;
-                MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
-            }
+            return !isIllegal;
         }
-        protected virtual void Control_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                Control_Leave(sender, e);
-        }
-
         protected void IsIllegalCharacter(object sender, EventArgs e)
         {
             if ((sender as TextBox).Text.Contains("\\t"))
@@ -310,9 +317,7 @@ namespace Citta_T1.OperatorViews.Base
                 Anchor = AnchorStyles.Left | AnchorStyles.Right,
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular)
             };
-            combox.Leave += new EventHandler(this.Control_Leave);
-            combox.KeyUp += new KeyEventHandler(this.Control_KeyUp);
-
+            comboBoxes.Add(combox);
             return combox;
         }
         
