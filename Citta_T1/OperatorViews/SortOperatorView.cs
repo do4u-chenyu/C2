@@ -46,6 +46,7 @@ namespace Citta_T1.OperatorViews
             bool notReady = true;
             string firstText = this.firstRow.Text;
             string endText = this.endRow.Text;
+           
             if (String.IsNullOrWhiteSpace(this.comboBox0.Text))
             {
                 MessageBox.Show("请选择排序字段!");
@@ -53,7 +54,13 @@ namespace Citta_T1.OperatorViews
             }
             if (String.IsNullOrWhiteSpace(firstText))
             {
-                MessageBox.Show("请输出行数!");
+                MessageBox.Show("请选择输出行数!");
+                return notReady;
+            }
+            if (ConvertUtil.ControlTextTryParseInt(firstRow) 
+                || !String.IsNullOrWhiteSpace(endText)&& ConvertUtil.ControlTextTryParseInt(endRow))
+            {
+                MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
                 return notReady;
             }
             if (!String.IsNullOrEmpty(endText) && Convert.ToInt32(firstText) > Convert.ToInt32(endText))
@@ -108,19 +115,6 @@ namespace Citta_T1.OperatorViews
             this.endRow.Text = this.opControl.Option.GetOption("endRow");
             this.oldOutName0 = this.opControl.Option.GetOptionSplit("columnname0").ToList();
         }
-        #endregion
-
-        #region 输入非数字，警告
-        private void FirstRow_Leave(object sender, EventArgs e)
-        {
-            ConvertUtil.ControlTextTryParseInt(firstRow, "请输入小于" + int.MaxValue + "的正整数.");
-        }
-
-        private void EndRow_Leave(object sender, EventArgs e)
-        {
-            ConvertUtil.ControlTextTryParseInt(endRow, "请输入小于" + int.MaxValue + "的正整数.");
-        }
-         
         #endregion
 
     }
