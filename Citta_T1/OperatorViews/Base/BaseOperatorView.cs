@@ -200,7 +200,7 @@ namespace Citta_T1.OperatorViews.Base
         }
         protected void IsIllegalCharacter(object sender, EventArgs e)
         {
-            if ((sender as TextBox).Text.Contains("\\t"))
+            if ((sender as TextBox).Text.Contains('\t'))
             {
                 (sender as TextBox).Text = String.Empty;
                 MessageBox.Show("输入非法字TAB键，请重新输入过滤条件");
