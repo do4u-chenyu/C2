@@ -249,7 +249,10 @@ namespace Citta_T1.OperatorViews
         {
             // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
             // 则从App.Config中加载
-            return LoadFromModelDocumentXml() || LoadFromAppConfig();
+            bool canLoad= LoadFromModelDocumentXml() || LoadFromAppConfig();
+            if (!canLoad && this.opControl.Option.Keys.Contains("virtualMachine"))
+                this.opControl.Option["virtualMachine"] = String.Empty;
+            return canLoad;
         }
 
         private bool LoadFromModelDocumentXml()
