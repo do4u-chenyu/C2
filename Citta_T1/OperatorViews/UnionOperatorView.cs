@@ -102,12 +102,20 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
-                int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-                this.textBox0.Text = factorList0[2];
-                this.comboBox0.Tag = itemsList0[0].ToString();
-                this.comboBox1.Tag = itemsList0[1].ToString();
+                int[] itemsList0 = new int[] { };
+                if (factorList0.Length > 1)
+                {
+                    itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                    this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                    this.comboBox0.Tag = itemsList0[0].ToString();
+                }
+                if (factorList0.Length > 2)
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                    this.textBox0.Text = factorList0[2];
+                    this.comboBox1.Tag = itemsList0[1].ToString();
+                }
+             
             }
  
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -129,11 +137,22 @@ namespace Citta_T1.OperatorViews
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                control3.Text = factorList1[2];
-                control1.Tag = itemsList1[0].ToString();
-                control2.Tag = itemsList1[1].ToString();
+                if (itemsList1[0] < (control1 as ComboBox).Items.Count)
+                {
+                    control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                    control1.Tag = itemsList1[0].ToString();
+                }
+
+                if (itemsList1[1] < (control2 as ComboBox).Items.Count)
+                {
+                    control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
+                    control2.Tag = itemsList1[1].ToString();
+                }
+            
+                if (factorList1.Length > 3)
+                    control3.Text = factorList1[2];
+
+
             }
          
         }
