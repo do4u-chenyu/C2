@@ -89,7 +89,12 @@ namespace Citta_T1.OperatorViews
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    oldOutName0.Add(outListCCBL0.Items[index].ToString());
+                {
+                    if (index >= outListCCBL0.Items.Count)
+                        continue;
+                    oldOutName0.Add(outListCCBL0.Items[index].ToString()); 
+                }
+                    
                 oldOutName0.Add("频率统计结果");
             }
         }
