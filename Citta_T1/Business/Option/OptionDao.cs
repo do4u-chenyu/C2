@@ -119,7 +119,7 @@ namespace Citta_T1.Business.Option
             if (optionDict == null)
                 return ElementStatus.Null;
 
-            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow", "fixSecond", "randomBegin", "randomEnd", "resultColumns" };
+            string[] keys = new string[] { "otherSeparator", "browseChosen", "endRow", "fixSecond", "randomBegin", "randomEnd", "resultColumns", "pyParam" };
             List<string> keyList = new List<string>();
             foreach (RegisterInfo register in moveOpControl.Option.AllRegisterInfo[me.SubType])
             {

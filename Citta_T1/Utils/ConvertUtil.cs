@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPOI.SS.Formula.Functions;
+using System;
 using System.Text;
 using System.Windows.Forms;
 
@@ -45,8 +46,9 @@ namespace Citta_T1.Utils
             }
         }
 
-        public static void ControlTextTryParseInt(Control ct, string errrorMessage = "")
+        public static bool ControlTextTryParseInt(Control ct)
         {
+            bool notInt = false;
             try
             {
                 int value = int.Parse(ct.Text);
@@ -55,14 +57,15 @@ namespace Citta_T1.Utils
                 else
                 {
                     ct.Text = String.Empty;
-                    MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
+                    notInt = true;
                 }                  
             }
             catch
             {
-                MessageBox.Show(String.Format(errrorMessage, ct.Text));
+                notInt = true;
                 ct.Text = String.Empty;
             }
+            return notInt;
         }
 
         public static char TryParseAscii(string asciiChar, char defaultValue = '\t')

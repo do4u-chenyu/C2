@@ -126,7 +126,6 @@
             this.randomNumBox.Name = "randomNumBox";
             this.randomNumBox.Size = new System.Drawing.Size(150, 23);
             this.randomNumBox.TabIndex = 4;
-            this.randomNumBox.Leave += new System.EventHandler(this.RandomNumBox_Leave);
             // 
             // RandomOperatorView
             // 
