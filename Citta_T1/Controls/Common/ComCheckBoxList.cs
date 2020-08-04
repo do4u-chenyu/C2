@@ -409,7 +409,7 @@ namespace Citta_T1.Controls.Common
         public void LoadItemCheckIndex(int[] checkIndexs)
         {
             // 防止越界
-            if (checkIndexs.Length > 0 && checkListBox.Items.Count > checkIndexs.Max())
+            if (checkIndexs.Length > 0 && checkListBox.Items.Count <= checkIndexs.Max())
             {
                 tbSelectedValue.Text = "已选择0项";
                 return;
