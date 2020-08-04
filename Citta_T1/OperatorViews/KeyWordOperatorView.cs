@@ -71,8 +71,12 @@ namespace Citta_T1.OperatorViews
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
-                oldOutName0.AddRange(from int index in indexs
-                                     select outListCCBL0.Items[index].ToString());
+                if (indexs.Max() < outListCCBL0.Items.Count)
+                {
+                    oldOutName0.AddRange(from int index in indexs
+                                         select outListCCBL0.Items[index].ToString());
+                }
+
             }
             comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
             comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
