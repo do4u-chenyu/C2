@@ -61,9 +61,13 @@ namespace Citta_T1.OperatorViews
             if (String.IsNullOrEmpty(this.opControl.Option.GetOption("avgfield")))
                 return;
             int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
-            this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-            this.comboBox0.Tag = index.ToString();
-            this.oldOutName0 = new List<string>() { this.comboBox0.Items[index].ToString() };
+            if (index < this.comboBox0.Items.Count)
+            {
+                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                this.comboBox0.Tag = index.ToString();
+                this.oldOutName0 = new List<string>() { this.comboBox0.Items[index].ToString() };
+            }
+ 
         }
         #endregion
     }
