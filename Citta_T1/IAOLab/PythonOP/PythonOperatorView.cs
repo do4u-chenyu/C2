@@ -249,10 +249,9 @@ namespace Citta_T1.OperatorViews
         {
             // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
             // 则从App.Config中加载
-            bool canLoad= LoadFromModelDocumentXml() || LoadFromAppConfig();
-            if (!canLoad && this.opControl.Option.Keys.Contains("virtualMachine"))
-                this.opControl.Option["virtualMachine"] = String.Empty;
-            return canLoad;
+
+          
+            return LoadFromModelDocumentXml() || LoadFromAppConfig();
         }
 
         private bool LoadFromModelDocumentXml()
@@ -262,7 +261,11 @@ namespace Citta_T1.OperatorViews
             //判断xml里是否有值，有值，判断是否在config里有？没有return false，有return true
             string xmlVirtualMachineName = this.opControl.Option.GetOption("virtualMachine");
             if (String.IsNullOrEmpty(xmlVirtualMachineName)) return false;
-            if (String.IsNullOrEmpty(GetVirtualMachinFullPath(xmlVirtualMachineName))) return false;
+            if (String.IsNullOrEmpty(GetVirtualMachinFullPath(xmlVirtualMachineName)))
+            {
+                this.opControl.Option["virtualMachine"] = String.Empty;
+                return false;
+            }
 
             //加载到items
             string pythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
