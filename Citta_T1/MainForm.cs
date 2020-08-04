@@ -498,7 +498,8 @@ namespace Citta_T1
                     return;
                 }
                 currentManager.GetCurrentModelTripleList(Global.GetCurrentDocument(),"all");
-                int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
+                //int notReadyNum = currentManager.CountOpStatus(ElementStatus.Null);
+                int notReadyNum = currentManager.CountOpNullAndNoRelation();
                 if (notReadyNum > 0)
                 {
                     MessageBox.Show("有" + notReadyNum + "个未配置的算子，请配置后再运行模型", "未配置", MessageBoxButtons.OK, MessageBoxIcon.Warning);
