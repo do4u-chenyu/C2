@@ -204,7 +204,7 @@ namespace Citta_T1.OperatorViews
             if (String.IsNullOrEmpty(this.dataSourceTB0.Text)) return notReady;
 
             //虚拟机是否勾选
-            if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
+            if (string.IsNullOrEmpty(this.pythonChosenComboBox.Text))
             {
                 MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
                 return notReady;
@@ -255,7 +255,6 @@ namespace Citta_T1.OperatorViews
         private bool LoadFromModelDocumentXml()
         {
             //先清空,再加载
-            this.pythonChosenComboBox.Text = "选择Python虚拟机";
             this.pythonChosenComboBox.Items.Clear();
             //判断xml里是否有值，有值，判断是否在config里有？没有return false，有return true
             string xmlVirtualMachineName = this.opControl.Option.GetOption("virtualMachine");
@@ -278,7 +277,6 @@ namespace Citta_T1.OperatorViews
             PythonOPConfig config = new PythonOPConfig(pythonConfigString);
             if (config.Empty())
             {
-                this.pythonChosenComboBox.Text = "未配置Python虚拟机";
                 this.pythonChosenComboBox.Items.Clear();
                 return false;
             }
