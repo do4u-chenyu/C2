@@ -251,7 +251,7 @@ namespace Citta_T1.Utils
             }
             catch (System.IO.IOException)
             {
-                string errorMsg = string.Format("文件{0}已被打开，请先关闭该文件", fullFilePath);
+                string errorMsg = string.Format("文件{0}可能是空文件或者已被其他应用打开。", fullFilePath);
                 MessageBox.Show(errorMsg);
                 log.Error(errorMsg);
             }
