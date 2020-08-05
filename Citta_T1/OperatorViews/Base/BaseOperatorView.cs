@@ -189,22 +189,23 @@ namespace Citta_T1.OperatorViews.Base
                     MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
                     return isIllegal;
                 }
-                if (cbb.Text.Contains('\t'))
+                if (IsIllegalCharacter(cbb))
                 {
-                    cbb.Text = String.Empty;
                     MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
                     return isIllegal;
                 }
             }
             return !isIllegal;
         }
-        protected void IsIllegalCharacter(object sender, EventArgs e)
+        //请重新输入过滤条件
+        protected bool IsIllegalCharacter(Control control)
         {
-            if ((sender as TextBox).Text.Contains('\t'))
+            if (control.Text.Contains('\t'))
             {
-                (sender as TextBox).Text = String.Empty;
-                MessageBox.Show("输入非法字TAB键，请重新输入过滤条件");
+                control.Text = String.Empty;
+                return true;
             }
+            return false;
         }
         protected void GetLeftSelectedItemIndex(object sender, EventArgs e)
         {
@@ -305,8 +306,6 @@ namespace Citta_T1.OperatorViews.Base
             };
             textBox.Enter += AliasTextBox_Enter;
             textBox.Leave += AliasTextBox_Leave;
-            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             return textBox;
         }
 

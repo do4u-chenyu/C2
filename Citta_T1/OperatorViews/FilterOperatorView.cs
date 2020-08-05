@@ -36,8 +36,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
             this.comboBox1.DropDownClosed += new System.EventHandler(ComparedComboBox_ClosedEvent);
 
-            this.textBoxEx1.Leave += new EventHandler(this.IsIllegalCharacter);
-            this.textBoxEx1.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
 
             this.tableLayoutPanel1.ColumnCount = 6;
@@ -62,17 +60,27 @@ namespace Citta_T1.OperatorViews
             };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请填写过滤条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请填写过滤条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
@@ -230,8 +238,6 @@ namespace Citta_T1.OperatorViews
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular),
                 Anchor = AnchorStyles.Left | AnchorStyles.Right
             };
-            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());

@@ -27,8 +27,6 @@ namespace Citta_T1.OperatorViews
         {
             this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
-            this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
-            this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
             // 利用Paint方式groupBox1附近的虚线留白
             this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
@@ -200,17 +198,27 @@ namespace Citta_T1.OperatorViews
             };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    MessageBox.Show("请填写并集条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    MessageBox.Show("请填写并集条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }

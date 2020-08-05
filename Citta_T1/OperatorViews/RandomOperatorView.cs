@@ -68,10 +68,10 @@ namespace Citta_T1.OperatorViews
         {
             bool notReady = true;
 
-            if (this.dataSourceTB0.Text == String.Empty)
+            if (String.IsNullOrEmpty(this.dataSourceTB0.Text))
                 return notReady;
 
-            if (this.randomNumBox.Text == String.Empty)
+            if (String.IsNullOrEmpty(this.randomNumBox.Text))
             {
                 MessageBox.Show("随机条数字段不能为空,请输入一个整数");
                 return notReady;
