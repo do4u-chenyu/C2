@@ -325,7 +325,7 @@
             this.leftPanelOpFreq.Name = "leftPanelOpFreq";
             this.leftPanelOpFreq.Size = new System.Drawing.Size(74, 37);
             this.leftPanelOpFreq.TabIndex = 29;
-            this.leftPanelOpFreq.Text = "频率统计";
+            this.leftPanelOpFreq.Text = "频率算子";
             this.leftPanelOpFreq.UseMnemonic = false;
             this.leftPanelOpFreq.UseVisualStyleBackColor = true;
             this.leftPanelOpFreq.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPaneOp_MouseDown);

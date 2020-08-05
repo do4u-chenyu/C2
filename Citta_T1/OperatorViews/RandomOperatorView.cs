@@ -52,7 +52,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+                {
+                    if (index >= this.outListCCBL0.Items.Count)
+                        continue;
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString()); 
+                }
+                   
             }
            
 
@@ -62,11 +67,18 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
+
             if (this.dataSourceTB0.Text == String.Empty)
                 return notReady;
+
             if (this.randomNumBox.Text == String.Empty)
             {
                 MessageBox.Show("随机条数字段不能为空,请输入一个整数");
+                return notReady;
+            }
+            if (ConvertUtil.ControlTextTryParseInt(randomNumBox))
+            {
+                MessageBox.Show("请输入小于" + int.MaxValue + "的正整数.");
                 return notReady;
             }
             if (this.outListCCBL0.GetItemCheckIndex().Count == 0)
@@ -78,9 +90,5 @@ namespace Citta_T1.OperatorViews
         }       
         #endregion
 
-        private void RandomNumBox_Leave(object sender, EventArgs e)
-        {
-            ConvertUtil.ControlTextTryParseInt(randomNumBox, "请输入小于"+int.MaxValue+"的正整数.");
-        }
     }
 }

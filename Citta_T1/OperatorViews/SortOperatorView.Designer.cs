@@ -70,8 +70,6 @@
             // 
             // comboBox0
             // 
-            this.comboBox0.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox0.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox0.Location = new System.Drawing.Point(2, 44);
             this.comboBox0.Size = new System.Drawing.Size(134, 24);
             this.comboBox0.TabIndex = 12;
@@ -232,7 +230,6 @@
             this.endRow.Name = "endRow";
             this.endRow.Size = new System.Drawing.Size(39, 23);
             this.endRow.TabIndex = 15;
-            this.endRow.Leave += new System.EventHandler(this.EndRow_Leave);
             // 
             // firstRow
             // 
@@ -244,7 +241,6 @@
             this.firstRow.Size = new System.Drawing.Size(39, 23);
             this.firstRow.TabIndex = 14;
             this.firstRow.Text = "1";
-            this.firstRow.Leave += new System.EventHandler(this.FirstRow_Leave);
             // 
             // label8
             // 

@@ -56,7 +56,7 @@
             // comboBox0
             // 
             this.comboBox0.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox0.Location = new System.Drawing.Point(44, 3);
+            this.comboBox0.Location = new System.Drawing.Point(44, 4);
             this.comboBox0.Size = new System.Drawing.Size(116, 25);
             // 
             // topPanel

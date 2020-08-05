@@ -61,8 +61,12 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("maxfield")))
             {
                 int maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
-                this.comboBox0.Tag = maxIndex.ToString();
+                if (maxIndex < this.comboBox0.Items.Count)
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
+                    this.comboBox0.Tag = maxIndex.ToString();
+                }
+
             }
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
             {
@@ -71,7 +75,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = outIndexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+                {
+                    if (i >= this.outListCCBL0.Items.Count)
+                        continue;
+                    this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString()); 
+                }
+                   
             }
                   
         }

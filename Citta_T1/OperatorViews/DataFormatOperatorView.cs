@@ -64,9 +64,14 @@ namespace Citta_T1.OperatorViews
                 string[] factorList0 = factor1.Split('\t');
                 int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
 
-                this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
-                this.comboBox0.Tag = indexs0[0].ToString();
-                this.textBox0.Text = factorList0[1];
+                if (indexs0[0] < this.comboBox0.Items.Count)
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
+                    this.comboBox0.Tag = indexs0[0].ToString();
+                }
+                if (factorList0.Length > 1)
+                    this.textBox0.Text = factorList0[1];
+
             }
            
 
@@ -86,9 +91,13 @@ namespace Citta_T1.OperatorViews
 
                 Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
                 Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
-                control1.Tag = indexs1[0].ToString();
-                control2.Text = factorList1[1];
+                if (indexs1[0] < (control1 as ComboBox).Items.Count)
+                {
+                    control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
+                    control1.Tag = indexs1[0].ToString();
+                }
+                if (factorList1.Length > 1)
+                    control2.Text = factorList1[1];
             }   
         }
         protected override void SaveOption()

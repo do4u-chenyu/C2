@@ -32,6 +32,8 @@ namespace Citta_T1.OperatorViews
             //旧状态记录
             this.oldPath = this.fullOutputFilePath;
             InitPreViewText();
+            //注册python算子的ComboBox
+            this.comboBoxes.Add(this.pythonChosenComboBox);
         }
 
         #region 初始化配置
@@ -132,10 +134,11 @@ namespace Citta_T1.OperatorViews
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (IsOptionNotReady()) return;
-
+            if (IsIllegalFieldName()) return;
             this.DialogResult = DialogResult.OK;
             // 旧的输出结果文件选项
             string oldOptionOut = this.opControl.Option.GetOption("outputOption");
+            string oldBrowseChosen = this.opControl.Option.GetOption("browseChosen");
             SaveOption();
 
             // 内容修改，引起文档dirty 
@@ -188,6 +191,7 @@ namespace Citta_T1.OperatorViews
             */
 
             if (oldOptionOut != this.opControl.Option.GetOption("outputOption")
+                || oldBrowseChosen != this.opControl.Option.GetOption("browseChosen")
                 || oldEncoding != hasResultNew.Encoding
                 || oldSeparator != hasResultNew.Separator)
 
@@ -200,7 +204,7 @@ namespace Citta_T1.OperatorViews
             if (String.IsNullOrEmpty(this.dataSourceTB0.Text)) return notReady;
 
             //虚拟机是否勾选
-            if (this.pythonChosenComboBox.Text == "未配置Python虚拟机")
+            if (string.IsNullOrEmpty(this.pythonChosenComboBox.Text))
             {
                 MessageBox.Show("请选择python虚拟机，若无选项请前往‘首选项-python引擎’中配置。");
                 return notReady;
@@ -245,18 +249,23 @@ namespace Citta_T1.OperatorViews
         {
             // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
             // 则从App.Config中加载
+
+          
             return LoadFromModelDocumentXml() || LoadFromAppConfig();
         }
 
         private bool LoadFromModelDocumentXml()
         {
             //先清空,再加载
-            this.pythonChosenComboBox.Text = "选择Python虚拟机";
             this.pythonChosenComboBox.Items.Clear();
             //判断xml里是否有值，有值，判断是否在config里有？没有return false，有return true
             string xmlVirtualMachineName = this.opControl.Option.GetOption("virtualMachine");
             if (String.IsNullOrEmpty(xmlVirtualMachineName)) return false;
-            if (String.IsNullOrEmpty(GetVirtualMachinFullPath(xmlVirtualMachineName))) return false;
+            if (String.IsNullOrEmpty(GetVirtualMachinFullPath(xmlVirtualMachineName)))
+            {
+                this.opControl.Option["virtualMachine"] = String.Empty;
+                return false;
+            }
 
             //加载到items
             string pythonConfigString = ConfigUtil.TryGetAppSettingsByKey("python");
@@ -274,7 +283,6 @@ namespace Citta_T1.OperatorViews
             PythonOPConfig config = new PythonOPConfig(pythonConfigString);
             if (config.Empty())
             {
-                this.pythonChosenComboBox.Text = "未配置Python虚拟机";
                 this.pythonChosenComboBox.Items.Clear();
                 return false;
             }
@@ -365,7 +373,7 @@ namespace Citta_T1.OperatorViews
         {
             // 此时不需要 rsChosenButton
             this.rsChosenButton.Enabled = false;
-            if (this.noInputFileRadio.Checked)
+            if (this.noOutputFileRadio.Checked)
             {
                 this.previewTextList[4] = String.Empty;
                 UpdatePreviewText();
@@ -511,30 +519,13 @@ namespace Citta_T1.OperatorViews
             }
         }
 
-        protected override void Control_Leave(object sender, EventArgs e)
-        {
-            ComboBox comboBox = sender as ComboBox;
-            if (comboBox.Items.Count == 0 || String.IsNullOrEmpty(comboBox.Text))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                return; 
-            }
-            if (!comboBox.Items.Contains(comboBox.Text))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                MessageBox.Show("未输入正确字段名，请从下拉列表中选择正确字段名");
-            }
-            if (comboBox.Text.Contains('\t'))
-            {
-                comboBox.Text = "未配置Python虚拟机";
-                MessageBox.Show("字段名中包含分隔符TAB，请检查与算子相连数据源的分隔符选择是否正确");
-            }
-        }
 
-        protected override void Control_KeyUp(object sender, KeyEventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            base.Control_KeyUp(sender, e);
+            bool isReady = this.opControl.Status == ElementStatus.Done || this.opControl.Status == ElementStatus.Ready;
+            bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";
+            if (isReady && notHasVirtualMachine)
+                this.opControl.Status = ElementStatus.Null;
         }
-
     }
 }

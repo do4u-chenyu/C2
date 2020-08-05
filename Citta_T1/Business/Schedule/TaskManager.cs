@@ -115,6 +115,17 @@ namespace Citta_T1.Business.Schedule
         {
             return this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).Count(op => op.Status ==es);
         }
+
+        public int CountOpNullAndNoRelation()
+        {
+            int nullNoRelationCount = 0;
+            foreach(ModelElement me in this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).FindAll(op => op.Status == ElementStatus.Null))
+            {
+                if (this.currentModel.ModelRelations.FindAll(mr => mr.EndID == me.ID).Count > 0 || this.currentModel.ModelRelations.FindAll(mr => mr.StartID == me.ID).Count > 0)
+                    nullNoRelationCount += 1;
+            }
+            return nullNoRelationCount;
+         }
         #endregion
 
         #region 暂停、继续、终止、重置运算调度逻辑
