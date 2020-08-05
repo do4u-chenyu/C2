@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -147,7 +148,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int i in indexs)
                 {
-                    if (i >= this.outListCCBL0.Items.Count)
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
                         continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
                 }
@@ -194,17 +195,17 @@ namespace Citta_T1.OperatorViews
                 Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 2];
                 Control control4 = this.tableLayoutPanel1.Controls[i * 6 + 3];
-                if (itemsList1[0] < (control1 as ComboBox).Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, itemsList1[0]))
                 {
                     control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
                     control1.Tag = itemsList1[0].ToString();
                 }
-                if (itemsList1[1] < (control2 as ComboBox).Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(control2, itemsList1[1]))
                 {
                     control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                     control2.Tag = itemsList1[1].ToString();
                 }
-                if (itemsList1[2] < (control3 as ComboBox).Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(control3, itemsList1[2]))
                 {
                     control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
                     control3.Tag = itemsList1[2].ToString();

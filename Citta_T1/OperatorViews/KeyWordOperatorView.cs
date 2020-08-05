@@ -71,7 +71,7 @@ namespace Citta_T1.OperatorViews
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
-                if (indexs.Max() < outListCCBL0.Items.Count)
+                if (indexs.Max() < outListCCBL0.Items.Count && indexs.Min()>0)
                 {
                     oldOutName0.AddRange(from int index in indexs
                                          select outListCCBL0.Items[index].ToString());

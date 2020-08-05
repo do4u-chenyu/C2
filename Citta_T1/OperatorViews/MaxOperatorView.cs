@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -61,7 +62,7 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("maxfield")))
             {
                 int maxIndex = Convert.ToInt32(this.opControl.Option.GetOption("maxfield"));
-                if (maxIndex < this.comboBox0.Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, maxIndex))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[maxIndex].ToString();
                     this.comboBox0.Tag = maxIndex.ToString();
@@ -76,7 +77,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
                 {
-                    if (i >= this.outListCCBL0.Items.Count)
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
                         continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString()); 
                 }

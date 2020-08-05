@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -62,7 +63,7 @@ namespace Citta_T1.OperatorViews
                 string[] factorList0 = factor1.Split('\t');
                 int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
 
-                if (indexs0[0] < this.comboBox0.Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
                     this.comboBox0.Tag = indexs0[0].ToString();
@@ -89,7 +90,7 @@ namespace Citta_T1.OperatorViews
 
                 Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
                 Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                if (indexs1[0] < (control1 as ComboBox).Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, indexs1[0]))
                 {
                     control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                     control1.Tag = indexs1[0].ToString();

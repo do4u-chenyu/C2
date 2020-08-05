@@ -101,7 +101,7 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("sortfield")))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("sortfield"));
-                if (index < this.comboBox0.Items.Count)
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, index))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[index].ToString();
                     this.comboBox0.Tag = index.ToString();

@@ -1,10 +1,13 @@
 ﻿using Citta_T1.Business.Model;
+using Citta_T1.Controls.Common;
 using Citta_T1.Core;
 using NPOI.SS.Formula;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Citta_T1.Utils
 {
@@ -216,6 +219,16 @@ namespace Citta_T1.Utils
         public static Point ToPointType(string point)
         {
             return Point.Round(ToPointFType(point));
+        }
+        public static bool IsArrayIndexOutOfBounds(Control control,int index)
+        {
+            if (control is ComboBox)
+                return (index >= (control as ComboBox).Items.Count || index < 0);
+            else if (control is ComCheckBoxList)
+                return (index >= (control as ComCheckBoxList).Items.Count || index < 0);
+            else
+                return true;
+
         }
     }
 }

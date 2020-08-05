@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -61,7 +62,7 @@ namespace Citta_T1.OperatorViews
             if (String.IsNullOrEmpty(this.opControl.Option.GetOption("avgfield")))
                 return;
             int index = Convert.ToInt32(this.opControl.Option.GetOption("avgfield"));
-            if (index < this.comboBox0.Items.Count)
+            if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, index))
             {
                 this.comboBox0.Text = this.comboBox0.Items[index].ToString();
                 this.comboBox0.Tag = index.ToString();

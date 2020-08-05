@@ -132,7 +132,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
                 {
-                    if (i >= this.outListCCBL0.Items.Count)
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
                         continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
                 }
@@ -148,7 +148,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
                 {
-                    if (i >= this.outListCCBL1.Items.Count)
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL1, i))
                         continue;
                     this.oldOutName1.Add(this.outListCCBL1.Items[i].ToString()); 
                 }

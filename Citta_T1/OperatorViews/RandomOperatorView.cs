@@ -53,7 +53,7 @@ namespace Citta_T1.OperatorViews
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
                 {
-                    if (index >= this.outListCCBL0.Items.Count)
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, index))
                         continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString()); 
                 }
