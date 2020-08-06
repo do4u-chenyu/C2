@@ -64,13 +64,13 @@
             // outListCCBL0
             // 
             this.outListCCBL0.Location = new System.Drawing.Point(4, 263);
-            this.outListCCBL0.Size = new System.Drawing.Size(143, 24);
+            this.outListCCBL0.Size = new System.Drawing.Size(150, 24);
             this.outListCCBL0.TabIndex = 8;
             // 
             // outListCCBL1
             // 
-            this.outListCCBL1.Location = new System.Drawing.Point(233, 263);
-            this.outListCCBL1.Size = new System.Drawing.Size(143, 24);
+            this.outListCCBL1.Location = new System.Drawing.Point(238, 263);
+            this.outListCCBL1.Size = new System.Drawing.Size(150, 24);
             this.outListCCBL1.TabIndex = 13;
             this.outListCCBL1.Visible = true;
             // 
