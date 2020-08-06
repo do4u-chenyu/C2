@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -63,7 +64,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs0.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs0);
                 foreach (int index in indexs0)
-                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString());
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, index))
+                        continue;
+                    this.oldOutName0.Add(this.outListCCBL0.Items[index].ToString()); 
+                }
+                   
             }
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield1")))
             {
@@ -72,17 +78,28 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = indexs1.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(indexs1);
                 foreach (int index in indexs1)
-                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString());
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL1, index))
+                        continue;
+                    this.oldOutName1.Add(this.outListCCBL1.Items[index].ToString()); 
+                }
+                   
             }
                         
             string factor1 = this.opControl.Option.GetOption("factor0");
             if (!String.IsNullOrEmpty(factor1))
             {
                 int[] itemsList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
-                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-                this.comboBox0.Tag = itemsList0[0].ToString();
-                this.comboBox1.Tag = itemsList0[1].ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, itemsList0[0]))
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                    this.comboBox0.Tag = itemsList0[0].ToString();
+                }
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox1, itemsList0[1]))
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                    this.comboBox1.Tag = itemsList0[1].ToString();
+                }             
             }
                 
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -101,12 +118,21 @@ namespace Citta_T1.OperatorViews
                 Control control1 = this.tableLayoutPanel1.Controls[i * 6 + 0];  
                 Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 3];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
-                control1.Tag = itemsList1[0].ToString();
-                control2.Tag = itemsList1[1].ToString();
-                control3.Tag = itemsList1[2].ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, itemsList1[0]))
+                {
+                    control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                    control1.Tag = itemsList1[0].ToString();
+                }
+                if (!OpUtil.IsArrayIndexOutOfBounds(control2, itemsList1[1]))
+                {
+                    control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
+                    control2.Tag = itemsList1[1].ToString();
+                }
+                if (!OpUtil.IsArrayIndexOutOfBounds(control3, itemsList1[2]))
+                {
+                    control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
+                    control3.Tag = itemsList1[2].ToString();
+                }                             
             }          
         }
         protected override void SaveOption()

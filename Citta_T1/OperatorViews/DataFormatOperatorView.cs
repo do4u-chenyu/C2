@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,8 +26,6 @@ namespace Citta_T1.OperatorViews
             this.button1.Click += new EventHandler(this.Add_Click);
             this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
-            this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
-            this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
   
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42F));
@@ -64,9 +63,14 @@ namespace Citta_T1.OperatorViews
                 string[] factorList0 = factor1.Split('\t');
                 int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
 
-                this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
-                this.comboBox0.Tag = indexs0[0].ToString();
-                this.textBox0.Text = factorList0[1];
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
+                    this.comboBox0.Tag = indexs0[0].ToString();
+                }
+                if (factorList0.Length > 1)
+                    this.textBox0.Text = factorList0[1];
+
             }
            
 
@@ -86,9 +90,13 @@ namespace Citta_T1.OperatorViews
 
                 Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
                 Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
-                control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
-                control1.Tag = indexs1[0].ToString();
-                control2.Text = factorList1[1];
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, indexs1[0]))
+                {
+                    control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
+                    control1.Tag = indexs1[0].ToString();
+                }
+                if (factorList1.Length > 1)
+                    control2.Text = factorList1[1];
             }   
         }
         protected override void SaveOption()
@@ -126,23 +134,29 @@ namespace Citta_T1.OperatorViews
         protected override bool IsOptionNotReady()
         {
             bool notReady = true;
-            List<string> types = new List<string>
-            {
-                this.comboBox0.GetType().Name
-            };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (ctl is ComboBox && String.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请选择字段");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == "")
+                if (ctl is ComboBox && string.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请选择字段");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }

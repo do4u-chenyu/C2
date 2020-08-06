@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -36,8 +37,6 @@ namespace Citta_T1.OperatorViews
             this.comboBox1.TextUpdate += new System.EventHandler(ComparedComboBox_TextUpdate);
             this.comboBox1.DropDownClosed += new System.EventHandler(ComparedComboBox_ClosedEvent);
 
-            this.textBoxEx1.Leave += new EventHandler(this.IsIllegalCharacter);
-            this.textBoxEx1.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
 
             this.tableLayoutPanel1.ColumnCount = 6;
@@ -62,17 +61,27 @@ namespace Citta_T1.OperatorViews
             };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请填写过滤条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
                     MessageBox.Show("请填写过滤条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
@@ -138,7 +147,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int i in indexs)
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
+                        continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+                }
+                    
             }
           
            
@@ -146,13 +160,21 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
-                int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-                int index = itemsList0[0];
-                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-                this.textBoxEx1.Text = factorList0[2];
-                this.comboBox0.Tag = itemsList0[0].ToString();
-                this.comboBox1.Tag = itemsList0[1].ToString();
+                int[] itemsList0 = new int[] { };
+                if(factorList0.Length > 1)
+                {
+                    itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                    int index = itemsList0[0];
+                    this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                    this.comboBox0.Tag = itemsList0[0].ToString();
+                }
+                if (factorList0.Length > 2)
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                    this.comboBox1.Tag = itemsList0[1].ToString();
+                    this.textBoxEx1.Text = factorList0[2];
+                }              
+                
             }
             
 
@@ -173,13 +195,23 @@ namespace Citta_T1.OperatorViews
                 Control control2 = this.tableLayoutPanel1.Controls[i * 6 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 6 + 2];
                 Control control4 = this.tableLayoutPanel1.Controls[i * 6 + 3];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
-                control4.Text = factorList1[3];
-                control1.Tag = itemsList1[0].ToString();
-                control2.Tag = itemsList1[1].ToString();
-                control3.Tag = itemsList1[2].ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, itemsList1[0]))
+                {
+                    control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                    control1.Tag = itemsList1[0].ToString();
+                }
+                if (!OpUtil.IsArrayIndexOutOfBounds(control2, itemsList1[1]))
+                {
+                    control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
+                    control2.Tag = itemsList1[1].ToString();
+                }
+                if (!OpUtil.IsArrayIndexOutOfBounds(control3, itemsList1[2]))
+                {
+                    control3.Text = (control3 as ComboBox).Items[itemsList1[2]].ToString();
+                    control3.Tag = itemsList1[2].ToString();
+                }
+                if (factorList1.Length > 3)
+                    control4.Text = factorList1[3];
             }
             
         }
@@ -207,8 +239,6 @@ namespace Citta_T1.OperatorViews
                 Font = new Font("微软雅黑", 8f, FontStyle.Regular),
                 Anchor = AnchorStyles.Left | AnchorStyles.Right
             };
-            textBox.Leave += new EventHandler(this.IsIllegalCharacter);
-            textBox.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.tableLayoutPanel1.Controls.Add(textBox, 3, addLine);
             // 添加行按钮
             Button addButton = NewAddButton(addLine.ToString());

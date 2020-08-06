@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -89,7 +90,12 @@ namespace Citta_T1.OperatorViews
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int index in indexs)
-                    oldOutName0.Add(outListCCBL0.Items[index].ToString());
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(outListCCBL0, index))
+                        continue;
+                    oldOutName0.Add(outListCCBL0.Items[index].ToString()); 
+                }
+                    
                 oldOutName0.Add("频率统计结果");
             }
         }

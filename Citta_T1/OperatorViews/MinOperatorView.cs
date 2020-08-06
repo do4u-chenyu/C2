@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -55,8 +56,11 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("minfield")))
             {
                 int index = Convert.ToInt32(this.opControl.Option.GetOption("minfield"));
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, index))
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                    this.comboBox0.Tag = index.ToString();
+                }
             }
 
             if (!String.IsNullOrEmpty(this.opControl.Option.GetOption("outfield0")))
@@ -66,7 +70,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = indexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(indexs);
                 foreach (int i in indexs)
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
+                        continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+                }
+                   
             }
            
 

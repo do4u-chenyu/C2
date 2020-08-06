@@ -17,10 +17,10 @@ namespace Citta_T1.OperatorViews
         private const int colCountDefault = 0;
         private string keywordEncoding, keywordExtType, keywordSep;
         private string keywordXml;
-        private const string outInfo = "您需要选择输出列";
-        private const string dataHelpInfo = "您需要选择需要处理的数据项";
-        private const string keywordInfo = "您需要选择使用的关键词列";
-        private const string conditionInfo = "您需要选择操作为过滤噪音还是命中提取";
+        private const string outInfo = "请选择输出列";
+        private const string dataHelpInfo = "请选择需要处理的数据项";
+        private const string keywordInfo = "请选择使用的关键词列";
+        private const string conditionInfo = "请选择:过滤噪音还是命中提取";
         
         public KeywordOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -71,8 +71,12 @@ namespace Citta_T1.OperatorViews
                 int[] indexs = Array.ConvertAll(checkIndexs, int.Parse);
                 oldOutList0 = indexs.ToList();
                 outListCCBL0.LoadItemCheckIndex(indexs);
-                oldOutName0.AddRange(from int index in indexs
-                                     select outListCCBL0.Items[index].ToString());
+                if (indexs.Max() < outListCCBL0.Items.Count && indexs.Min()>0)
+                {
+                    oldOutName0.AddRange(from int index in indexs
+                                         select outListCCBL0.Items[index].ToString());
+                }
+
             }
             comboBox0.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("dataSelectIndex", "0"));
             comboBox1.SelectedIndex = Convert.ToInt32(opControl.Option.GetOption("keySelectIndex", "0"));
@@ -101,16 +105,19 @@ namespace Citta_T1.OperatorViews
             bool notReady = true;
             if (comboBox0.SelectedIndex.Equals(colIndexDefault))
             {
+                comboBox0.Text = string.Empty;
                 MessageBox.Show(dataHelpInfo);
                 return notReady;
             }
             if (conditionSelectBox.SelectedIndex.Equals(colIndexDefault))
             {
+                conditionSelectBox.Text = string.Empty;
                 MessageBox.Show(conditionInfo);
                 return notReady;
             }
             if (comboBox1.SelectedIndex.Equals(colIndexDefault))
             {
+                comboBox1.Text = string.Empty;
                 MessageBox.Show(keywordInfo);
                 return notReady;
             }

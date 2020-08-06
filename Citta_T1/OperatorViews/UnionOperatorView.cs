@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,8 +28,6 @@ namespace Citta_T1.OperatorViews
         {
             this.textBox0.Enter += new EventHandler(this.AliasTextBox_Enter);
             this.textBox0.Leave += new EventHandler(this.AliasTextBox_Leave);
-            this.textBox0.Leave += new EventHandler(this.IsIllegalCharacter);
-            this.textBox0.KeyUp += new KeyEventHandler(this.IsIllegalCharacter);
             this.button1.Click += new EventHandler(this.Add_Click);
             // 利用Paint方式groupBox1附近的虚线留白
             this.groupBox1.Paint += new PaintEventHandler(this.GroupBox_Paint);
@@ -102,12 +101,20 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
-                int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-                this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
-                this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
-                this.textBox0.Text = factorList0[2];
-                this.comboBox0.Tag = itemsList0[0].ToString();
-                this.comboBox1.Tag = itemsList0[1].ToString();
+                int[] itemsList0 = new int[] { };
+                if (factorList0.Length > 1)
+                {
+                    itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                    this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
+                    this.comboBox0.Tag = itemsList0[0].ToString();
+                }
+                if (factorList0.Length > 2)
+                {
+                    this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();
+                    this.textBox0.Text = factorList0[2];
+                    this.comboBox1.Tag = itemsList0[1].ToString();
+                }
+             
             }
  
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -129,11 +136,22 @@ namespace Citta_T1.OperatorViews
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
-                control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
-                control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
-                control3.Text = factorList1[2];
-                control1.Tag = itemsList1[0].ToString();
-                control2.Tag = itemsList1[1].ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, itemsList1[0]))
+                {
+                    control1.Text = (control1 as ComboBox).Items[itemsList1[0]].ToString();
+                    control1.Tag = itemsList1[0].ToString();
+                }
+
+                if (!OpUtil.IsArrayIndexOutOfBounds(control2, itemsList1[1]))
+                {
+                    control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
+                    control2.Tag = itemsList1[1].ToString();
+                }
+            
+                if (factorList1.Length > 3)
+                    control3.Text = factorList1[2];
+
+
             }
          
         }
@@ -181,17 +199,27 @@ namespace Citta_T1.OperatorViews
             };
             foreach (Control ctl in this.tableLayoutPanel2.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    MessageBox.Show("请填写并集条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }
             foreach (Control ctl in this.tableLayoutPanel1.Controls)
             {
-                if (types.Contains(ctl.GetType().Name) && ctl.Text == String.Empty)
+                if (types.Contains(ctl.GetType().Name) && String.IsNullOrEmpty(ctl.Text))
                 {
-                    MessageBox.Show("请填写过滤条件");
+                    MessageBox.Show("请填写并集条件");
+                    return notReady;
+                }
+                if (ctl is TextBox && IsIllegalCharacter(ctl))
+                {
+                    MessageBox.Show("字段名中包含不合法字符TAB，请重新输入");
                     return notReady;
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using Citta_T1.Controls.Move.Op;
 using Citta_T1.Core;
 using Citta_T1.OperatorViews.Base;
+using Citta_T1.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,7 +68,12 @@ namespace Citta_T1.OperatorViews
             {
                 this.oldOutList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("outfield0"), int.Parse).ToList();
                 foreach (int i in this.oldOutList0)
+                {
+                    if (i >= this.nowColumnsName0.Length || i < 0)
+                        continue;
                     this.oldOutName0.Add(this.nowColumnsName0[i]);
+                }
+                    
             }
             
 
@@ -76,8 +82,12 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(factor1))
             {
                 int index = Convert.ToInt32(factor1);
-                this.comboBox0.Text = this.comboBox0.Items[index].ToString();
-                this.comboBox0.Tag = index.ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, index))
+                {
+                    this.comboBox0.Text = this.comboBox0.Items[index].ToString();
+                    this.comboBox0.Tag = index.ToString();
+                }
+                
             }
            
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -90,8 +100,12 @@ namespace Citta_T1.OperatorViews
                 if (String.IsNullOrEmpty(this.opControl.Option.GetOption(name))) continue;
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
-                control1.Text = (control1 as ComboBox).Items[num].ToString();
-                control1.Tag = num.ToString();
+                if (!OpUtil.IsArrayIndexOutOfBounds(control1, num))
+                {
+                    control1.Text = (control1 as ComboBox).Items[num].ToString();
+                    control1.Tag = num.ToString();
+                }
+               
             }
 
         }
@@ -127,7 +141,12 @@ namespace Citta_T1.OperatorViews
             }
             this.opControl.Option.SetOption("outfield0", this.outList);
             foreach (int index in this.outList)
+            {
+                if (index >= this.nowColumnsName0.Length || index < 0)
+                    continue;
                 this.selectedColumns.Add(this.nowColumnsName0[index]);
+            }
+                
 
             //更新子图所有节点状态
             UpdateSubGraphStatus();
@@ -231,7 +250,12 @@ namespace Citta_T1.OperatorViews
                 return false;
             string name = String.Empty;
             foreach (int num in indexs)
+            {
+                if (num >= this.nowColumnsName0.Length || num < 0)
+                    continue;
                 name += "\"" + this.nowColumnsName0[num] + "\"" + "、";
+            }
+               
             MessageBox.Show("分组字段" + name.Trim('、') + "重复选择，请保持每个字段只被选择一次");
             return true;
 

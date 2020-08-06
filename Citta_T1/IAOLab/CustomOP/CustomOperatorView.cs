@@ -131,7 +131,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList0 = outIndexs.ToList();
                 this.outListCCBL0.LoadItemCheckIndex(outIndexs);
                 foreach (int i in outIndexs)
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL0, i))
+                        continue;
                     this.oldOutName0.Add(this.outListCCBL0.Items[i].ToString());
+                }
+                   
             }
 
             int[] outIndexs1 = new int[] { };
@@ -142,7 +147,12 @@ namespace Citta_T1.OperatorViews
                 this.oldOutList1 = outIndexs1.ToList();
                 this.outListCCBL1.LoadItemCheckIndex(outIndexs1);
                 foreach (int i in outIndexs1)
-                    this.oldOutName1.Add(this.outListCCBL1.Items[i].ToString());
+                {
+                    if (OpUtil.IsArrayIndexOutOfBounds(this.outListCCBL1, i))
+                        continue;
+                    this.oldOutName1.Add(this.outListCCBL1.Items[i].ToString()); 
+                }
+                   
             }
 
 
@@ -157,7 +167,7 @@ namespace Citta_T1.OperatorViews
         protected override void ConfirmButton_Click(object sender, System.EventArgs e)
         {
             if (IsOptionNotReady()) return;
-
+            if (IsIllegalFieldName()) return;
             this.DialogResult = DialogResult.OK;
             SaveOption();
 

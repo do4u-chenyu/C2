@@ -354,9 +354,10 @@ namespace Citta_T1.Utils
 				if (IsDateFormat(formatID, formatString))
                 {
 					if (cell.Value is DateTime)
-						return ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value);
+						return ((DateTime)cell.Value).ToString(formatString);
+						//return ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value);
 					else if (cell.Value is double)
-						cellValue = ExcelUtil.GetFormatDateStringValue(
+						return ExcelUtil.GetFormatDateStringValue(
 							formatID,
 							formatString,
 							Convert.ToDouble(cell.Value));
@@ -365,13 +366,16 @@ namespace Citta_T1.Utils
 				}
 				else if (IsTimeFormat(formatID, formatString))
                 {
-					cellValue = ExcelUtil.GetFormatTimeStringValue(
+					if (cell.Value is DateTime)
+						return ExcelUtil.COMMON_TIME_FORMAT.Format((DateTime)cell.Value);
+					else if (cell.Value is double)
+						return ExcelUtil.GetFormatTimeStringValue(
 							formatID,
 							formatString,
 							Convert.ToDouble(cell.Value));
 				}
 				else
-					cellValue =  cell.Value != null ? cell.Value.ToString().Replace('\n', ' ') : string.Empty;
+					return cell.Value != null ? cell.Value.ToString().Replace('\n', ' ') : string.Empty;
 			}
 			catch (Exception e)
             {
@@ -381,15 +385,15 @@ namespace Citta_T1.Utils
 		}
 		public static bool IsDateFormat(short formatID, string formatString)
         {
-			return formatString.Contains("yy") || formatString.Contains("mm") || 
-				Constants.EXCEL_FORMAT_INDEX_03_DATE.Contains(formatID) ||
-				Constants.EXCEL_FORMAT_INDEX_07_DATE.Contains(formatID);
+			return formatString.Contains("y") && formatString.Contains("m");
+				//Constants.EXCEL_FORMAT_INDEX_03_DATE.Contains(formatID) ||
+				//Constants.EXCEL_FORMAT_INDEX_07_DATE.Contains(formatID);
 		}
 		public static bool IsTimeFormat(short formatID, string formatString)
         {
-			return formatString.Contains("mm") || formatString.Contains("ss") ||
-				Constants.EXCEL_FORMAT_INDEX_03_TIME.Contains(formatID) ||
-				Constants.EXCEL_FORMAT_INDEX_07_TIME.Contains(formatID);
+			return formatString.Contains("m") && formatString.Contains("s");
+				//Constants.EXCEL_FORMAT_INDEX_03_TIME.Contains(formatID) ||
+				//Constants.EXCEL_FORMAT_INDEX_07_TIME.Contains(formatID);
 		}
 	}
 }
