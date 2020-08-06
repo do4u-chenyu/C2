@@ -204,7 +204,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(605, 442);
             this.Name = "FilterOperatorView";
-            this.Text = "过滤算子设置";
+            this.Text = "条件筛选算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();

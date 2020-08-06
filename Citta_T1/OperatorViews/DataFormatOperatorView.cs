@@ -55,27 +55,19 @@ namespace Citta_T1.OperatorViews
         {
             if (Global.GetOptionDao().IsCleanSingleOperatorOption(this.opControl, this.nowColumnsName0))
                 return;
-
             
-            string factor1 = this.opControl.Option.GetOption("factor0");
-            if (!String.IsNullOrEmpty(factor1))
+            string[] factorList0 = this.opControl.Option.GetOptionSplit("factor0");
+            if (factorList0.Length > 1)
             {
-                string[] factorList0 = factor1.Split('\t');
-                int[] indexs0 = new int[] { };
-                if (factorList0.Length > 1)
-                { 
-                    indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-                    this.textBox0.Text = factorList0[1];
-                }
-                  
-
-                if (indexs0.Length > 0 && !OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
+                int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                this.textBox0.Text = factorList0[1];
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
                     this.comboBox0.Tag = indexs0[0].ToString();
-                }                   
+                }
             }
-           
+
 
             int count = this.opControl.Option.KeysCount("factor") - 1;
             if (count < 1)
@@ -89,8 +81,9 @@ namespace Citta_T1.OperatorViews
                 if (String.IsNullOrEmpty(factor)) continue;
 
                 string[] factorList1 = factor.Split('\t');
-                int[] indexs1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
+                if (factorList1.Length < 2) continue;
 
+                int[] indexs1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);                
                 Control control1 = this.tableLayoutPanel1.GetControlFromPosition(1, i);
                 Control control2 = this.tableLayoutPanel1.GetControlFromPosition(2, i);
                 if (!OpUtil.IsArrayIndexOutOfBounds(control1, indexs1[0]))
@@ -98,8 +91,8 @@ namespace Citta_T1.OperatorViews
                     control1.Text = (control1 as ComboBox).Items[indexs1[0]].ToString();
                     control1.Tag = indexs1[0].ToString();
                 }
-                if (factorList1.Length > 1)
-                    control2.Text = factorList1[1];
+               
+                 control2.Text = factorList1[1];
             }   
         }
         protected override void SaveOption()

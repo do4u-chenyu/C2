@@ -91,36 +91,28 @@ namespace Citta_T1.OperatorViews
         {
             if (Global.GetOptionDao().IsCleanBinaryOperatorOption(this.opControl, this.nowColumnsName0, this.nowColumnsName1))
                 return;
-
-            
-            
+      
             this.noRepetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("noRepetition", "True"));
             this.repetition.Checked = Convert.ToBoolean(this.opControl.Option.GetOption("repetition","False"));
-            
-            string factor1 = this.opControl.Option.GetOption("factor0");
-            if (!String.IsNullOrEmpty(factor1))
+
+            string[] factorList0 = this.opControl.Option.GetOptionSplit("factor0");
+            if (factorList0.Length > 2)
             {
-                string[] factorList0 = factor1.Split('\t');
-                int[] itemsList0 = new int[] { };
-                if (factorList0.Length > 2)
-                {
-                    itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
-                    this.textBox0.Text = factorList0[2];
-                }
-                    
-                if (itemsList0.Length > 1 && !OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, itemsList0[0]))
+
+                int[] itemsList0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                this.textBox0.Text = factorList0[2];
+
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, itemsList0[0]))
                 {
                     
                     this.comboBox0.Text = this.comboBox0.Items[itemsList0[0]].ToString();
                     this.comboBox0.Tag = itemsList0[0].ToString();
                 }
-                if (itemsList0.Length > 1 && !OpUtil.IsArrayIndexOutOfBounds(this.comboBox1, itemsList0[1]))
+                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox1, itemsList0[1]))
                 {
                     this.comboBox1.Text = this.comboBox1.Items[itemsList0[1]].ToString();                  
                     this.comboBox1.Tag = itemsList0[1].ToString();
-                }
-      
-                
+                }                     
             }
  
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -136,9 +128,9 @@ namespace Citta_T1.OperatorViews
                 if (String.IsNullOrEmpty(factor)) continue;
 
                 string[] factorList1 = factor.Split('\t');
+                if (factorList1.Length < 3) continue;
+
                 int[] itemsList1 = Array.ConvertAll(factorList1.Take(factorList1.Length - 1).ToArray(), int.Parse);
-
-
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
@@ -152,10 +144,8 @@ namespace Citta_T1.OperatorViews
                 {
                     control2.Text = (control2 as ComboBox).Items[itemsList1[1]].ToString();
                     control2.Tag = itemsList1[1].ToString();
-                }
-            
-                if (factorList1.Length > 3)
-                    control3.Text = factorList1[2];
+                }           
+                 control3.Text = factorList1[2];
 
 
             }
