@@ -61,16 +61,19 @@ namespace Citta_T1.OperatorViews
             if (!String.IsNullOrEmpty(factor1))
             {
                 string[] factorList0 = factor1.Split('\t');
-                int[] indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                int[] indexs0 = new int[] { };
+                if (factorList0.Length > 1)
+                { 
+                    indexs0 = Array.ConvertAll(factorList0.Take(factorList0.Length - 1).ToArray(), int.Parse);
+                    this.textBox0.Text = factorList0[1];
+                }
+                  
 
-                if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
+                if (indexs0.Length > 0 && !OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, indexs0[0]))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[indexs0[0]].ToString();
                     this.comboBox0.Tag = indexs0[0].ToString();
-                }
-                if (factorList0.Length > 1)
-                    this.textBox0.Text = factorList0[1];
-
+                }                   
             }
            
 
