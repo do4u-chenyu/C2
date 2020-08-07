@@ -76,18 +76,15 @@ namespace Citta_T1.OperatorViews
                     
             }
             
-
-
             string factor1 = this.opControl.Option.GetOption("factor0");
-            if (!String.IsNullOrEmpty(factor1))
+            if (ConvertUtil.IsInt(factor1))
             {
                 int index = Convert.ToInt32(factor1);
                 if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, index))
                 {
                     this.comboBox0.Text = this.comboBox0.Items[index].ToString();
                     this.comboBox0.Tag = index.ToString();
-                }
-                
+                }                
             }
            
             int count = this.opControl.Option.KeysCount("factor") - 1;
@@ -97,17 +94,15 @@ namespace Citta_T1.OperatorViews
             for (int i = 0; i < count; i++)
             {
                 string name = "factor" + (i + 1).ToString();
-                if (String.IsNullOrEmpty(this.opControl.Option.GetOption(name))) continue;
+                if (!ConvertUtil.IsInt(this.opControl.Option.GetOption(name))) continue;
                 int num = Convert.ToInt32(this.opControl.Option.GetOption(name));
                 Control control1 = this.tableLayoutPanel1.Controls[i * 3 + 0];
                 if (!OpUtil.IsArrayIndexOutOfBounds(control1, num))
                 {
                     control1.Text = (control1 as ComboBox).Items[num].ToString();
                     control1.Tag = num.ToString();
-                }
-               
+                }             
             }
-
         }
         protected override void SaveOption()
         {

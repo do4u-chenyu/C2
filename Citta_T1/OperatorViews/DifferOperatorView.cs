@@ -66,13 +66,10 @@ namespace Citta_T1.OperatorViews
                 }
                     
             }
-
-
-
-            string factor1 = this.opControl.Option.GetOption("factor0");
-            if (!String.IsNullOrEmpty(factor1))
+            int[] factorList0 = Array.ConvertAll(this.opControl.Option.GetOptionSplit("factor0"), int.Parse);
+            if (factorList0.Length > 1)
             {
-                int[] factorList0 = Array.ConvertAll(factor1.Split('\t'), int.Parse);
+               
                 if (!OpUtil.IsArrayIndexOutOfBounds(this.comboBox0, factorList0[0]) )
                 {
                     this.comboBox0.Text = this.comboBox0.Items[factorList0[0]].ToString();
@@ -95,10 +92,8 @@ namespace Citta_T1.OperatorViews
             for (int i = 0; i < count; i++)
             {
                 string name = "factor" + (i + 1).ToString();
-                string factor = this.opControl.Option.GetOption(name);
-                if (String.IsNullOrEmpty(factor)) continue;
-
-                int[] factorList1 = Array.ConvertAll<string, int>(factor.Split('\t'), int.Parse);               
+                int[] factorList1 = Array.ConvertAll<string, int>(this.opControl.Option.GetOptionSplit(name), int.Parse);
+                if (factorList1.Length < 3) continue;
                 Control control1 = this.tableLayoutPanel1.Controls[i * 5 + 0];
                 Control control2 = this.tableLayoutPanel1.Controls[i * 5 + 1];
                 Control control3 = this.tableLayoutPanel1.Controls[i * 5 + 2];
