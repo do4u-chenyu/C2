@@ -141,7 +141,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(340, 230);
             this.Name = "RandomOperatorView";
-            this.Text = "随机算子设置";
+            this.Text = "随机采样算子设置";
             this.bottomPanel.ResumeLayout(false);
             this.keyPanel.ResumeLayout(false);
             this.keyPanel.PerformLayout();
