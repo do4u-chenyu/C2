@@ -72,7 +72,7 @@ namespace Citta_T1.Utils
         {
             int ascii = TryParseInt(asciiChar, defaultValue);
 
-            if (ascii < 0 || ascii > 255)
+            if (ascii < 0)
                 return defaultValue;
 
             try
