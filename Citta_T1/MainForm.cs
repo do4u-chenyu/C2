@@ -840,12 +840,12 @@ namespace Citta_T1
         {
             // TODO 目前解决方案属于穷举法，最好能找到当前控件是否有可编辑的属性
             Control focusedCtr = GetFocusedControl();
-            if (!(focusedCtr is TextBox) && !(focusedCtr is RichTextBox))
-                return true;
-            else if (focusedCtr is TextBox)
+            if (focusedCtr is TextBox)
                 return (focusedCtr as TextBox).ReadOnly;
-            else
+            else if (focusedCtr is RichTextBox)
                 return (focusedCtr as RichTextBox).ReadOnly;
+            else
+                return true;
         }
 
         private void SaveAllButton_Click(object sender, EventArgs e)
