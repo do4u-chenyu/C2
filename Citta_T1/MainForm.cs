@@ -11,6 +11,7 @@ using Citta_T1.Core;
 using Citta_T1.Core.UndoRedo;
 using Citta_T1.Core.UndoRedo.Command;
 using Citta_T1.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -804,7 +805,7 @@ namespace Citta_T1
             int WM_KEYDOWN = 256;
             int WM_SYSKEYDOWN = 260;
 
-            if (this.IsClickOnEditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
+            if (this.IsClickOnUneditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
             {
                 if (keyData == Keys.Delete)
                     this.canvasPanel.DeleteSelectedLinesByIndex();
@@ -835,10 +836,16 @@ namespace Citta_T1
             return focusedControl;
 
         }
-        private bool IsClickOnEditableCtr()
+        private bool IsClickOnUneditableCtr()
         {
             // TODO 目前解决方案属于穷举法，最好能找到当前控件是否有可编辑的属性
-            return GetFocusedControl() != null && !(GetFocusedControl() is TextBox) && !(GetFocusedControl() is RichTextBox); 
+            Control focusedCtr = GetFocusedControl();
+            if (!(focusedCtr is TextBox) && !(focusedCtr is RichTextBox))
+                return true;
+            else if (focusedCtr is TextBox)
+                return (focusedCtr as TextBox).ReadOnly;
+            else
+                return (focusedCtr as RichTextBox).ReadOnly;
         }
 
         private void SaveAllButton_Click(object sender, EventArgs e)
