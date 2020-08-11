@@ -613,7 +613,6 @@ namespace Citta_T1
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 36);
             this.modelTitlePanel.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.modelTitlePanel, "新建模型");
             // 
             // pictureBox2
             // 
