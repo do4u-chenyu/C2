@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
@@ -54,6 +55,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -123,10 +125,10 @@
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.Location = new System.Drawing.Point(95, 245);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(594, 112);
+            this.label7.Size = new System.Drawing.Size(594, 125);
             this.label7.TabIndex = 11;
             this.label7.Text = "说明：\r\n1. 导入文件格式支持bcp、txt、csv、excel；\r\n2. 导入文件必须包括表头；\r\n3. 导入文件默认GBK编码，如预览出现乱码，请尝试右上角" +
-    "切换文件编码方式；\r\n4. 建议使用数据导入模板。";
+    "切换文件编码方式；\r\n4. 建议使用数据导入模板；\r\n5. 支持tab、逗号、英文、数字等常见分隔符，暂不支持全角、中文字符作为分隔符。";
             // 
             // textBox1
             // 
@@ -277,6 +279,7 @@
             this.textBoxEx1.TabIndex = 23;
             this.textBoxEx1.TextChanged += new System.EventHandler(this.TextBoxEx1_TextChanged);
             this.textBoxEx1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBoxEx1_MouseDown);
+            this.toolTip1.SetToolTip(this.textBoxEx1, "暂不支持全角、中文字符作为分隔符");
             // 
             // radioButton3
             // 
@@ -412,5 +415,6 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
