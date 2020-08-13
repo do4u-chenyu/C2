@@ -302,7 +302,7 @@ namespace Citta_T1.Utils
 									cell.NumericCellValue);
 						}
 						else
-							cellValue = cell.NumericCellValue.ToString() != null ? cell.NumericCellValue.ToString().Replace('\n', ' ') : string.Empty;
+							cellValue = cell.NumericCellValue.ToString() != null ? cell.NumericCellValue.ToString() : string.Empty;
 						break;
 					case CellType.Formula:
 						/**
@@ -339,7 +339,7 @@ namespace Citta_T1.Utils
 			{
 				Console.Write("读取单元格失败, error: " + e.ToString());
 			}
-			return cellValue;
+			return cellValue.Replace('\n', ' ').Replace('\t', ' ').Replace('\r', ' ');
 		}
 
 		public static String GetCellValue(ExcelRange cell)
@@ -354,34 +354,34 @@ namespace Citta_T1.Utils
 				if (IsDateFormat(formatID, formatString))
 				{
 					if (cell.Value is DateTime)
-						return ((DateTime)cell.Value).ToString(formatString);
-					//return ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value);
+						//cellValue = ((DateTime)cell.Value).ToString(formatString); // TODO 有误
+						cellValue = ExcelUtil.COMMON_DATE_FORMAT.Format((DateTime)cell.Value); // TODO 补全的时候会出问题，可能只有时间差一个H或者一个M或者一个S
 					else if (cell.Value is double)
-						return ExcelUtil.GetFormatDateStringValue(
+						cellValue = ExcelUtil.GetFormatDateStringValue(
 							formatID,
 							formatString,
 							Convert.ToDouble(cell.Value));
 					else
-						return cell.Value.ToString(); // 实在不行就直接转str吧，以后如果有其他更细致的解决方案再填上
+						cellValue = cell.Value.ToString(); // 实在不行就直接转str吧，以后如果有其他更细致的解决方案再填上
 				}
 				else if (IsTimeFormat(formatID, formatString))
 				{
 					if (cell.Value is DateTime)
-						return ExcelUtil.COMMON_TIME_FORMAT.Format((DateTime)cell.Value);
+						cellValue = ExcelUtil.COMMON_TIME_FORMAT.Format((DateTime)cell.Value);
 					else if (cell.Value is double)
-						return ExcelUtil.GetFormatTimeStringValue(
+						cellValue = ExcelUtil.GetFormatTimeStringValue(
 							formatID,
 							formatString,
 							Convert.ToDouble(cell.Value));
 				}
 				else
-					return cell.Value != null ? cell.Value.ToString().Replace('\n', ' ') : string.Empty;
+					cellValue = cell.Value != null ? cell.Value.ToString() : string.Empty;
 			}
 			catch (Exception e)
 			{
 				Console.Write("读取单元格失败, error: " + e.ToString());
 			}
-			return cellValue;
+			return cellValue.Replace('\n', ' ').Replace('\t', ' ').Replace('\r', ' ');
 		}
 		public static bool IsDateFormat(short formatID, string formatString)
 		{
