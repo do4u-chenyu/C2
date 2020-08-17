@@ -805,7 +805,7 @@ namespace Citta_T1
             int WM_KEYDOWN = 256;
             int WM_SYSKEYDOWN = 260;
 
-            if (this.IsClickOnUneditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
+            if (this.IsCurrentModelNotRun() && this.IsClickOnUneditableCtr() && (msg.Msg == WM_KEYDOWN | msg.Msg == WM_SYSKEYDOWN))
             {
                 if (keyData == Keys.Delete)
                     this.canvasPanel.DeleteSelectedLinesByIndex();
@@ -836,6 +836,11 @@ namespace Citta_T1
             return focusedControl;
 
         }
+        private bool IsCurrentModelNotRun()
+        {
+            return Global.GetCurrentDocument().TaskManager.ModelStatus == ModelStatus.Running ? false : true;
+        }
+
         private bool IsClickOnUneditableCtr()
         {
             // TODO 目前解决方案属于穷举法，最好能找到当前控件是否有可编辑的属性
