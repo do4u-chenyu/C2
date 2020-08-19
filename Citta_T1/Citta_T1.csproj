@@ -680,7 +680,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Doc\CITTA算子设计文档v4.docx" />
-    <None Include="Doc\IAO解决方案帮助文档v1.chm" />
+    <None Include="Doc\IAO解决方案帮助文档v1.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Doc\undo_redo功能设计文档.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
     <None Include="Doc\框选功能设计文档.docx" />
@@ -711,7 +713,9 @@
     <None Include="Demo\demo_txt.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Doc\Citta项目 C#编码风格规范.txt" />
+    <Content Include="Doc\Citta项目 C#编码风格规范.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\avgOp.bmp" />
     <Content Include="res\flow\flow.png" />
     <Content Include="res\Icon\Icon.ico">
