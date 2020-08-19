@@ -741,7 +741,7 @@ namespace Citta_T1
         private void HelpPictureBox_Click(object sender, EventArgs e)
         {
             string helpfile = Application.StartupPath;
-            helpfile += @"\Doc\citta帮助文档.chm";
+            helpfile += @"\Doc\IAO解决方案帮助文档v1.chm";
             Help.ShowHelp(this, helpfile);
         }
 

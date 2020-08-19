@@ -679,10 +679,8 @@
     <None Include="Demo\demo_excel.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Doc\citta帮助文档.chm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Doc\CITTA算子设计文档v4.docx" />
+    <None Include="Doc\IAO解决方案帮助文档v1.chm" />
     <None Include="Doc\undo_redo功能设计文档.docx" />
     <None Include="Doc\导航地图设计文档.docx" />
     <None Include="Doc\框选功能设计文档.docx" />

@@ -15,8 +15,8 @@ namespace CittaTestProject
         [TestMethod, TestCategory("业务逻辑测试")]
         public void 算子生成结果检测()
         {
-            //模型文档构建();
-            模型测试数据导入();
+            模型文档构建();
+            //模型测试数据导入();
             //创建最大值算子();
             //配置最大值算子();
             //最大值算子生成结果检测();
