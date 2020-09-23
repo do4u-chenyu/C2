@@ -903,6 +903,14 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Blumind\Code\Blumind\Blumind.csproj">
+      <Project>{ee33fcc4-93b5-426b-8f71-5c2b2aee143e}</Project>
+      <Name>Blumind</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

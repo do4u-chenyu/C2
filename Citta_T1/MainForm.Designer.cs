@@ -30,7 +30,6 @@ namespace Citta_T1
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.headPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -78,26 +77,28 @@ namespace Citta_T1
             this.filterButton = new System.Windows.Forms.Button();
             this.connectOpButton = new System.Windows.Forms.Button();
             this.blankButton = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.progressBarLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.currentModelFinLab = new System.Windows.Forms.Label();
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
             this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
+            this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.mdiWorkSpace1 = new Blumind.Controls.MdiWorkSpace();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -112,13 +113,14 @@ namespace Citta_T1
             this.panel1.SuspendLayout();
             this.commonPanel.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.modelTitlePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
+            this.modelTitlePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // headPanel
@@ -604,94 +606,24 @@ namespace Citta_T1
             this.blankButton.Text = "button1";
             this.blankButton.UseVisualStyleBackColor = true;
             // 
-            // modelTitlePanel
+            // panel3
             // 
-            this.modelTitlePanel.Controls.Add(this.pictureBox2);
-            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
-            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.modelTitlePanel.Name = "modelTitlePanel";
-            this.modelTitlePanel.Size = new System.Drawing.Size(910, 36);
-            this.modelTitlePanel.TabIndex = 1;
+            this.panel3.Controls.Add(this.mdiWorkSpace1);
+            this.panel3.Controls.Add(this.canvasPanel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(323, 130);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(910, 196);
+            this.panel3.TabIndex = 7;
             // 
-            // pictureBox2
+            // panel6
             // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(910, 3);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // leftFoldButton
-            // 
-            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
-            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
-            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldButton";
-            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.leftFoldButton.TabIndex = 0;
-            this.leftFoldButton.TabStop = false;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            this.leftFoldButton.Click += new System.EventHandler(this.LeftFoldButton_Click);
-            // 
-            // resetButton
-            // 
-            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.BorderSize = 0;
-            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(507, 354);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(52, 53);
-            this.resetButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // stopButton
-            // 
-            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.BorderSize = 0;
-            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(450, 354);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(52, 53);
-            this.stopButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
-            // 
-            // runButton
-            // 
-            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.BorderSize = 0;
-            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
-            this.runButton.Location = new System.Drawing.Point(398, 354);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(52, 53);
-            this.runButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
-            this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
+            this.panel6.Controls.Add(this.modelTitlePanel);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(323, 94);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(910, 32);
+            this.panel6.TabIndex = 8;
             // 
             // canvasPanel
             // 
@@ -701,13 +633,11 @@ namespace Citta_T1
             this.canvasPanel.Controls.Add(this.progressBar1);
             this.canvasPanel.Controls.Add(this.currentModelFinLab);
             this.canvasPanel.Controls.Add(this.currentModelRunBackLab);
-            this.canvasPanel.Controls.Add(this.panel3);
+            this.canvasPanel.Controls.Add(this.panel7);
             this.canvasPanel.Controls.Add(this.remarkControl);
             this.canvasPanel.Controls.Add(this.flowControl);
             this.canvasPanel.Controls.Add(this.rightHideButton);
             this.canvasPanel.Controls.Add(this.rightShowButton);
-            this.canvasPanel.Controls.Add(this.pictureBox3);
-            this.canvasPanel.Controls.Add(this.modelTitlePanel);
             this.canvasPanel.Controls.Add(this.resetButton);
             this.canvasPanel.Controls.Add(this.stopButton);
             this.canvasPanel.Controls.Add(this.runButton);
@@ -718,13 +648,13 @@ namespace Citta_T1
             this.canvasPanel.EndC = null;
             this.canvasPanel.EndP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.EndP")));
             this.canvasPanel.LeftButtonDown = false;
-            this.canvasPanel.Location = new System.Drawing.Point(323, 94);
+            this.canvasPanel.Location = new System.Drawing.Point(0, 0);
             this.canvasPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(910, 232);
+            this.canvasPanel.Size = new System.Drawing.Size(910, 196);
             this.canvasPanel.StartC = null;
             this.canvasPanel.StartP = ((System.Drawing.PointF)(resources.GetObject("canvasPanel.StartP")));
-            this.canvasPanel.TabIndex = 5;
+            this.canvasPanel.TabIndex = 6;
             // 
             // progressBarLabel
             // 
@@ -779,14 +709,26 @@ namespace Citta_T1
             this.currentModelRunLab.TabIndex = 28;
             this.currentModelRunLab.Visible = false;
             // 
-            // panel3
+            // panel7
             // 
-            this.panel3.Controls.Add(this.leftFoldButton);
-            this.panel3.Location = new System.Drawing.Point(0, 200);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(8, 101);
-            this.panel3.TabIndex = 1;
+            this.panel7.Controls.Add(this.leftFoldButton);
+            this.panel7.Location = new System.Drawing.Point(0, 200);
+            this.panel7.Margin = new System.Windows.Forms.Padding(0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(8, 101);
+            this.panel7.TabIndex = 1;
+            // 
+            // leftFoldButton
+            // 
+            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
+            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
+            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
+            this.leftFoldButton.Name = "leftFoldButton";
+            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
+            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.leftFoldButton.TabIndex = 0;
+            this.leftFoldButton.TabStop = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
             // 
             // remarkControl
             // 
@@ -838,16 +780,56 @@ namespace Citta_T1
             this.rightShowButton.Size = new System.Drawing.Size(55, 55);
             this.rightShowButton.TabIndex = 22;
             // 
-            // pictureBox3
+            // resetButton
             // 
-            this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 36);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(910, 36);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.BorderSize = 0;
+            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
+            this.resetButton.Location = new System.Drawing.Point(507, 354);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(52, 53);
+            this.resetButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
+            this.resetButton.UseVisualStyleBackColor = true;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
+            this.stopButton.Location = new System.Drawing.Point(450, 354);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(52, 53);
+            this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
+            this.stopButton.UseVisualStyleBackColor = true;
+            // 
+            // runButton
+            // 
+            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.BorderSize = 0;
+            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+            this.runButton.Location = new System.Drawing.Point(398, 354);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(52, 53);
+            this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
+            this.runButton.UseVisualStyleBackColor = true;
             // 
             // naviViewControl
             // 
@@ -861,11 +843,42 @@ namespace Citta_T1
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
+            // modelTitlePanel
+            // 
+            this.modelTitlePanel.Controls.Add(this.pictureBox2);
+            this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.modelTitlePanel.Location = new System.Drawing.Point(0, 0);
+            this.modelTitlePanel.Margin = new System.Windows.Forms.Padding(4);
+            this.modelTitlePanel.Name = "modelTitlePanel";
+            this.modelTitlePanel.Size = new System.Drawing.Size(910, 36);
+            this.modelTitlePanel.TabIndex = 2;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 33);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(910, 3);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 196);
+            this.mdiWorkSpace1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
-            this.Controls.Add(this.canvasPanel);
+            this.Controls.Add(this.panel6);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
@@ -900,15 +913,16 @@ namespace Citta_T1
             this.panel1.ResumeLayout(false);
             this.commonPanel.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
-            this.modelTitlePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
+            this.modelTitlePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -937,7 +951,6 @@ namespace Citta_T1
         private System.Windows.Forms.Label logLabel;
         private System.Windows.Forms.PictureBox minMaxPictureBox;
         private System.Windows.Forms.Panel panel9;
-        private Controls.Flow.NaviViewControl naviViewControl;
         private System.Windows.Forms.Button moreButton;
         private System.Windows.Forms.Button formatButton;
         private System.Windows.Forms.Button groupButton;
@@ -946,9 +959,6 @@ namespace Citta_T1
         private System.Windows.Forms.Button diffButton;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.Button connectOpButton;
-        private Citta_T1.Controls.Title.ModelTitlePanel modelTitlePanel;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button ImportButton;
         private Controls.Left.OperatorControl operatorControl;
         private Controls.Left.FlowChartControl flowChartControl;
@@ -958,28 +968,34 @@ namespace Citta_T1
         private System.Windows.Forms.PictureBox portraitpictureBox;
         private Citta_T1.Controls.Bottom.BottomLogControl bottomLogControl;
         private Citta_T1.Controls.Bottom.BottomConsoleControl bottomPyConsole;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button stopButton;
-        private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button flowChartButton;
-        private Controls.Flow.RightHideButton rightHideButton;
-        private Controls.Flow.RightShowButton rightShowButton;
-        private Controls.Flow.FlowControl flowControl;
         private Controls.Title.DragLineControl dragLineControl;
-        private Controls.Flow.RemarkControl remarkControl;
         private Citta_T1.Controls.Bottom.BottomPreviewControl bottomPreview;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button blankButton;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.PictureBox leftFoldButton;
-        private Controls.CanvasPanel canvasPanel;
-        private System.Windows.Forms.Label currentModelRunLab;
-        private System.Windows.Forms.Label currentModelRunBackLab;
-        private System.Windows.Forms.Label currentModelFinLab;
         private Button saveAllButton;
         private Controls.Top.TopToolBarControl topToolBarControl;
-        private ProgressBar progressBar1;
+        private Panel panel3;
+        private Controls.CanvasPanel canvasPanel;
         private Label progressBarLabel;
+        private ProgressBar progressBar1;
+        private Label currentModelFinLab;
+        private Label currentModelRunBackLab;
+        private Label currentModelRunLab;
+        private Panel panel7;
+        private PictureBox leftFoldButton;
+        private Controls.Flow.RemarkControl remarkControl;
+        private Controls.Flow.FlowControl flowControl;
+        private Controls.Flow.RightHideButton rightHideButton;
+        private Controls.Flow.RightShowButton rightShowButton;
+        private Button resetButton;
+        private Button stopButton;
+        private Button runButton;
+        private Controls.Flow.NaviViewControl naviViewControl;
+        private Panel panel6;
+        private Controls.Title.ModelTitlePanel modelTitlePanel;
+        private PictureBox pictureBox2;
+        private Blumind.Controls.MdiWorkSpace mdiWorkSpace1;
     }
 }
