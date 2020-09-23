@@ -65,6 +65,8 @@ namespace Citta_T1
 
             InitializeGlobalVariable();
             InitializeControlsLocation();
+
+            MdiClient = this.mdiWorkSpace1;
         }
 
         private void InitializeMainFormEventHandler()
