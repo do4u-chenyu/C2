@@ -7,7 +7,7 @@ using Blumind.Model.MindMaps;
 
 namespace Blumind.Controls.MapViews
 {
-    class MindMapLayoutArgs
+    public class MindMapLayoutArgs
     {
         public MindMapLayoutArgs()
         {

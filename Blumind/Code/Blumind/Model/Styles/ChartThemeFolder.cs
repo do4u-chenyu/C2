@@ -6,7 +6,7 @@ using Blumind.Globalization;
 
 namespace Blumind.Model.Styles
 {
-    class ChartThemeFolder
+    public class ChartThemeFolder
     {
         private string _Name;
         private XList<ChartTheme> _Themes;

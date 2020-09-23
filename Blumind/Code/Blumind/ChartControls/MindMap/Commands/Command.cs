@@ -3,7 +3,7 @@ using Blumind.Model.Documents;
 
 namespace Blumind.Controls.MapViews
 {
-    abstract class Command
+    public abstract class Command
     {
         public abstract string Name { get; }
 

@@ -8,7 +8,7 @@ using Blumind.Core;
 
 namespace Blumind.Model.MindMaps
 {
-    class TopicLine : ISerializable
+    public class TopicLine : ISerializable
     {
         public TopicLine()
         {

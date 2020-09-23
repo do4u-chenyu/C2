@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Blumind.Controls
 {
-    class DropFilesEventArgs : HandledEventArgs
+    public class DropFilesEventArgs : HandledEventArgs
     {
         public DropFilesEventArgs(string[] files, Point mousePosition)
         {

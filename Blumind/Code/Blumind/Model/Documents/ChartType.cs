@@ -6,7 +6,7 @@ using System.Text;
 namespace Blumind.Model.Documents
 {
     [Serializable]
-    enum ChartType
+    public enum ChartType
     {
         MindMap,
         FlowDiagram,

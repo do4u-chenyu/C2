@@ -2,9 +2,9 @@
 
 namespace Blumind.Model.MindMaps
 {
-    delegate void LinkEventHandler(object sender, LinkEventArgs e);
+    public delegate void LinkEventHandler(object sender, LinkEventArgs e);
 
-    class LinkEventArgs : EventArgs
+    public class LinkEventArgs : EventArgs
     {
         private Link _Link;
 

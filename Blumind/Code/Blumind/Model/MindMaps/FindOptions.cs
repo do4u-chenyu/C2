@@ -6,7 +6,7 @@ using Blumind.Configuration;
 
 namespace Blumind.Model.MindMaps
 {
-    class FindOptions
+    public class FindOptions
     {
         bool _CaseSensitive;
         bool _WholeWordOnly;

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Blumind.Model.Widgets
 {
-    delegate void WidgetEventHandler(object sender, WidgetEventArgs e);
+    public delegate void WidgetEventHandler(object sender, WidgetEventArgs e);
 
-    class WidgetEventArgs : EventArgs
+    public class WidgetEventArgs : EventArgs
     {
         private Widget _Widget;
 

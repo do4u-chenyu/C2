@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Blumind.ChartPageView
 {
-    class NeedShowPropertyEventArgs : EventArgs
+    public class NeedShowPropertyEventArgs : EventArgs
     {
         public bool Force { get; private set; }
 
@@ -14,5 +14,5 @@ namespace Blumind.ChartPageView
         }
     }
 
-    delegate void NeedShowPropertyEventHandler(object sender, NeedShowPropertyEventArgs e);
+    public delegate void NeedShowPropertyEventHandler(object sender, NeedShowPropertyEventArgs e);
 }

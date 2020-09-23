@@ -13,7 +13,7 @@ using Blumind.Model.Styles;
 
 namespace Blumind.Controls
 {
-    abstract class ChartControl : Chart, ICommandHost, IChartControl
+    public abstract class ChartControl : Chart, ICommandHost, IChartControl
     {
         public event EventHandler ModifiedChanged;
         public event ChartObjectEventHandler ChartObjectAdded;

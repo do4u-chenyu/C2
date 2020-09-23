@@ -6,14 +6,14 @@ using System.Text;
 
 namespace Blumind.Core
 {
-    interface IModifyObject
+    public interface IModifyObject
     {
         event EventHandler ModifiedChanged;
 
         bool Modified { get; set; }
     }
 
-    class ModifyObject : IModifyObject
+    public class ModifyObject : IModifyObject
     {
         bool _Modified;
         int ModifySuspendCount;

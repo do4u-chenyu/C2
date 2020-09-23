@@ -4,9 +4,9 @@ using Blumind.Model;
 
 namespace Blumind.Model.MindMaps
 {
-    delegate void TopicEventHandler(object sender, TopicEventArgs e);
+    public delegate void TopicEventHandler(object sender, TopicEventArgs e);
 
-    class TopicEventArgs : EventArgs
+    public class TopicEventArgs : EventArgs
     {
         Topic _Topic;
         ChangeTypes _Changes;

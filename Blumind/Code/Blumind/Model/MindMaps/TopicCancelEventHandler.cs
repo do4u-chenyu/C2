@@ -2,9 +2,9 @@
 
 namespace Blumind.Model.MindMaps
 {
-    delegate void TopicCancelEventHandler(object sender, TopicCancelEventArgs e);
+    public delegate void TopicCancelEventHandler(object sender, TopicCancelEventArgs e);
 
-    class TopicCancelEventArgs : CancelEventArgs
+    public class TopicCancelEventArgs : CancelEventArgs
     {
         private Topic _Topic;
 

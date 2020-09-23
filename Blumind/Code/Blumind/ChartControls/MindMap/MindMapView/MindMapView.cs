@@ -14,7 +14,7 @@ using Blumind.Model.Styles;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView : ChartControl, IDropFilesHandler
+    public partial class MindMapView : ChartControl, IDropFilesHandler
     {
         bool HasScrollToCenter = false;
         LinesLayer LinksLayer;

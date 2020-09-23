@@ -8,7 +8,7 @@ using Blumind.Core;
 
 namespace Blumind.Globalization
 {
-    class Language
+    public class Language
     {
         Hashtable _Words;
 

@@ -7,7 +7,7 @@ using Blumind.Model.MindMaps;
 
 namespace Blumind.Controls.MapViews
 {
-    interface IMindMapRender
+    public interface IMindMapRender
     {
         //Size Layout(MindMap map, RenderArgs e);
 

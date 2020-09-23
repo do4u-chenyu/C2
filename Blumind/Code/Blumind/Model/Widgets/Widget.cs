@@ -11,7 +11,7 @@ using Blumind.Model.MindMaps;
 
 namespace Blumind.Model.Widgets
 {
-    abstract class Widget : ChartObject
+    public abstract class Widget : ChartObject
         , IHyperlink
         , IColorToolTip
     {

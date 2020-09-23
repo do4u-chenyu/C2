@@ -11,7 +11,7 @@ using Blumind.Model.Widgets;
 
 namespace Blumind.Controls.MapViews
 {
-    abstract class Layouter
+    public abstract class Layouter
     {
         protected class TopicLayoutInfo
         {

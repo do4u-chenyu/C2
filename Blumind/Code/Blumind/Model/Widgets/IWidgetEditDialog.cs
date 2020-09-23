@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Blumind.Model.Widgets
 {
-    interface IWidgetEditDialog
+    public interface IWidgetEditDialog
     {
         DialogResult ShowDialog(IWin32Window owner);
 

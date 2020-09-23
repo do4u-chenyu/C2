@@ -5,9 +5,9 @@ using Blumind.Model;
 
 namespace Blumind.Core
 {
-    delegate void ChartObjectEventHandler(object sender, ChartObjectEventArgs e);
+    public delegate void ChartObjectEventHandler(object sender, ChartObjectEventArgs e);
 
-    class ChartObjectEventArgs : EventArgs
+    public class ChartObjectEventArgs : EventArgs
     {
         public ChartObjectEventArgs(ChartObject chartObject)
         {

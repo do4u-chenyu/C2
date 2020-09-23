@@ -408,13 +408,14 @@ namespace Citta_T1
 
         private void NewModelButton_Click(object sender, EventArgs e)
         {
-            this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
-            this.createNewModelForm.Owner = this;
-            DialogResult dialogResult = this.createNewModelForm.ShowDialog();
+            //this.createNewModelForm.StartPosition = FormStartPosition.CenterScreen;
+            //this.createNewModelForm.Owner = this;
+            //DialogResult dialogResult = this.createNewModelForm.ShowDialog();
 
-            // 模型标题栏添加新标题
-            if (dialogResult == DialogResult.OK)
-                this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
+            //// 模型标题栏添加新标题
+            //if (dialogResult == DialogResult.OK)
+            //    this.modelTitlePanel.AddModel(this.createNewModelForm.ModelTitle);
+            NewDocument();
         }
 
         private void InputDataFormEvent(string name, string fullFilePath, char separator, OpUtil.ExtType extType, OpUtil.Encoding encoding)

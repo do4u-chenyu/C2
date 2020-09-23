@@ -15,7 +15,7 @@ using Blumind.Model.Widgets;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView
+    public partial class MindMapView
     {
         HitTestResult _HoverObject;
         HitTestResult _PressObject;

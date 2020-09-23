@@ -9,7 +9,7 @@ using Blumind.Globalization;
 
 namespace Blumind.Model.MindMaps
 {
-    partial class Topic
+    public partial class Topic
     {
         int? _CustomWidth;
         int? _CustomHeight;

@@ -9,7 +9,7 @@ using Blumind.Model.MindMaps;
 
 namespace Blumind.Controls.MapViews
 {
-    class RenderArgs
+    public class RenderArgs
     {
         RenderMode _Mode = RenderMode.UserInface;
 

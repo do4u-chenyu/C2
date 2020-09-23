@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blumind.Controls.Paint
 {
-    struct BezierControlPoint
+    public struct BezierControlPoint
     {
         int _Angle;
         int _Length;

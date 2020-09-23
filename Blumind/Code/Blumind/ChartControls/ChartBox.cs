@@ -4,7 +4,7 @@ using Blumind.Configuration;
 
 namespace Blumind.Controls
 {
-    class ChartBox : Control
+    public class ChartBox : Control
     {
         private Keys _ExtentInputKey = Keys.None;
 

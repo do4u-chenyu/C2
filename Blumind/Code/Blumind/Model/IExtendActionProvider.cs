@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Blumind.Model
 {
-    interface IExtendActionProvider
+    public interface IExtendActionProvider
     {
         IEnumerable<ExtendActionInfo> GetExtendActions(bool readOnly);
     }
 
-    class ExtendActionInfo
+    public class ExtendActionInfo
     {
         public ExtendActionInfo()
         {

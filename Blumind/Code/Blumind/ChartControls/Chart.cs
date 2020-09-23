@@ -13,7 +13,7 @@ using Blumind.Model;
 
 namespace Blumind.Controls
 {
-    abstract class Chart : ScrollableControlBase
+    public abstract class Chart : ScrollableControlBase
     {
         private ChartBox _ChartBox;
 

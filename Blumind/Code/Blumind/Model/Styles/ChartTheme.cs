@@ -10,7 +10,7 @@ using Blumind.Model;
 namespace Blumind.Model.Styles
 {
     [DefaultProperty("Name")]
-    class ChartTheme
+    public class ChartTheme
     {
         public const int DefaultLayerSpace = 80;
         public const int DefaultItemsSpace = 10;

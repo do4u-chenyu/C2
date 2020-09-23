@@ -9,7 +9,7 @@ using Blumind.Model.MindMaps;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView
+    public partial class MindMapView
     {
         [Browsable(false)]
         public Topic[] SelectedTopics { get; private set; }

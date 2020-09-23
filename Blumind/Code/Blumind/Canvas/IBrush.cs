@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blumind.Canvas
 {
-    interface IBrush
+    public interface IBrush
     {
         object Raw { get; }
     }

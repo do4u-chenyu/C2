@@ -13,7 +13,7 @@ using Blumind.Globalization;
 
 namespace Blumind.ChartPageView
 {
-    class BaseChartPage : UserControl, IIconProvider
+    public class BaseChartPage : UserControl, IIconProvider
     {
         Model.Documents.ChartPage _Chart;
         object[] _SelectedObjects;

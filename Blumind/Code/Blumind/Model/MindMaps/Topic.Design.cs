@@ -10,7 +10,7 @@ using Blumind.Model.Styles;
 namespace Blumind.Model.MindMaps
 {
     //Design Time Only, Style Members
-    partial class Topic
+    public partial class Topic
     {
         [DefaultValue(typeof(Color), "Empty")]
         [DesignOnly(true), LocalDisplayName("Back Color"), LocalCategory("Color")]

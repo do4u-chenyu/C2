@@ -11,7 +11,7 @@ using Blumind.Model.Widgets;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView
+    public partial class MindMapView
     {
         private bool _EditMode;
         private TopicEditControl EditControl;

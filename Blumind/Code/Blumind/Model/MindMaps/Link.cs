@@ -17,7 +17,7 @@ using Blumind.Model.Documents;
 
 namespace Blumind.Model.MindMaps
 {
-    class Link : ChartObject
+    public class Link : ChartObject
         , ITextObject
         , IHyperlink
         , Blumind.Core.INotifyPropertyChanged

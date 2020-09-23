@@ -8,7 +8,7 @@ using Blumind.Core;
 
 namespace Blumind.Controls
 {
-    class MyTabControl : BaseControl
+    public class MyTabControl : BaseControl
     {
         //TabBar TabBar;
         TabAlignment _Alignment = TabAlignment.Top;

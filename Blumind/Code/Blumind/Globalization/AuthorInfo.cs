@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Blumind.Globalization
 {
-    class AuthorInfo
+    public class AuthorInfo
     {
         public string Name { get; set; }
 

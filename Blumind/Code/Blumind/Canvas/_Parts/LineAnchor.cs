@@ -7,7 +7,7 @@ using System.Text;
 namespace Blumind.Canvas
 {
     [Serializable]
-    enum LineAnchor
+    public enum LineAnchor
     {
         None = 0,
         Arrow,
@@ -16,7 +16,7 @@ namespace Blumind.Canvas
         Diamond,
     }
 
-    static class LineAnchorExtensions
+    public static class LineAnchorExtensions
     {
         public static LineAnchor ToLineAnchor(this LineCap cap)
         {

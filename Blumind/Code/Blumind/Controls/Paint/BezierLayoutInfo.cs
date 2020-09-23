@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Blumind.Controls.Paint
 {
-    class BezierLayoutInfo
+    public class BezierLayoutInfo
     {
         public RectangleF Bounds;
         public Region Region;

@@ -5,5 +5,5 @@ using System.Windows.Forms;
 
 namespace Blumind.Controls
 {
-    delegate void UIPaintEventHandler(object sender, PaintEventArgs e, UIControlStatus ucs);
+    public delegate void UIPaintEventHandler(object sender, PaintEventArgs e, UIControlStatus ucs);
 }

@@ -9,7 +9,7 @@ using Blumind.Model;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView
+    public partial class MindMapView
     {
         public override bool CustomDoubleBuffer
         {

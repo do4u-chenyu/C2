@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Blumind.Canvas
 {
-    interface IPen
+    public interface IPen
     {
         object Raw { get; }
 

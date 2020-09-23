@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace Blumind.Controls
 {
-    class TabItemPaintEventArgs : PaintEventArgs
+    public class TabItemPaintEventArgs : PaintEventArgs
     {
         public TabItemPaintEventArgs(PaintEventArgs e, TabBar tabBar, TabItem item)
             : base(e.Graphics, e.ClipRectangle)

@@ -17,7 +17,7 @@ using Blumind.Model.Widgets;
 namespace Blumind.Model.MindMaps
 {
     [DefaultProperty("Text")]
-    partial class Topic : ChartObject
+    public partial class Topic : ChartObject
         , ITextObject
         , IWidgetContainer
         , IHyperlink

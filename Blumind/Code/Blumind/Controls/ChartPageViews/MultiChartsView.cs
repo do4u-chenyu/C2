@@ -13,7 +13,7 @@ using Blumind.Model.Documents;
 
 namespace Blumind.ChartPageView
 {
-    class MultiChartsView : MyTabControl
+    public class MultiChartsView : MyTabControl
     {
         Document _Document;
         SpecialTabItem BtnNewChart;

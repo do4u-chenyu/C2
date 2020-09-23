@@ -11,7 +11,7 @@ using Blumind.Model.Documents;
 
 namespace Blumind.Core
 {
-    class DocumentType
+    public class DocumentType
     {
         string _Name;
         string _TypeMime;

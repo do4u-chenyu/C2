@@ -31,7 +31,7 @@ namespace Blumind.Model.Widgets
     }
 
     [DefaultProperty("Image")]
-    class PictureWidget : Widget, IExtendActionProvider
+    public class PictureWidget : Widget, IExtendActionProvider
     {
         public const string TypeID = "PICTURE";
         Image _Data;

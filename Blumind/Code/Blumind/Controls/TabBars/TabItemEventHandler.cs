@@ -9,7 +9,7 @@ namespace Blumind.Controls
 
     public delegate void TabItemCancelEventHandler(object sender, TabItemCancelEventArgs e);
 
-    class TabItemEventArgs : EventArgs
+    public class TabItemEventArgs : EventArgs
     {
         public TabItem Item { get; private set; }
 
@@ -22,7 +22,7 @@ namespace Blumind.Controls
         }
     }
 
-    class TabItemCancelEventArgs : CancelEventArgs
+    public class TabItemCancelEventArgs : CancelEventArgs
     {
         public TabItem Item { get; private set; }
 

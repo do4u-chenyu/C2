@@ -6,7 +6,7 @@ using Blumind.Model;
 
 namespace Blumind.Model.MindMaps
 {
-    class MindMapFinder
+    public class MindMapFinder
     {
         string LastFindWhat;
         Regex LastRegex;

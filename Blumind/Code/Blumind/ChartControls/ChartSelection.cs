@@ -6,7 +6,7 @@ using Blumind.Model;
 
 namespace Blumind.Controls.MapViews
 {
-    class ChartSelection : XList<ChartObject>
+    public class ChartSelection : XList<ChartObject>
     {
         internal SelectHistory SelectHistory;
 

@@ -2,7 +2,7 @@
 
 namespace Blumind.Model.Widgets
 {
-    interface IWidgetContainer
+    public interface IWidgetContainer
     {
         void Add(Widget widget);
 

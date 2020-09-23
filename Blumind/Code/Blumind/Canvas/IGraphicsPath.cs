@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blumind.Canvas
 {
-    interface IGraphicsPath
+    public interface IGraphicsPath
     {
         object Raw { get; }
 

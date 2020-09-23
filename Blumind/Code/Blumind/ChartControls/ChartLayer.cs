@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Blumind.Controls
 {
-    class ChartLayer
+    public class ChartLayer
     {
         Chart _Owner;
 

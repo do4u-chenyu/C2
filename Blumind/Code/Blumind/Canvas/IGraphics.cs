@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Blumind.Canvas
 {
-    interface IGraphics
+    public interface IGraphics
     {
         SmoothingMode SmoothingMode { get; set; }
 

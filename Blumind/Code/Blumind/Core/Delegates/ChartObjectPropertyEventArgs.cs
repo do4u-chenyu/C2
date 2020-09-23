@@ -6,7 +6,7 @@ using Blumind.Model;
 
 namespace Blumind.Core
 {
-    class ChartObjectPropertyEventArgs : EventArgs
+    public class ChartObjectPropertyEventArgs : EventArgs
     {
         public ChartObjectPropertyEventArgs(ChartObject chartObject, string propertyName, ChangeTypes changeTypes)
         {
@@ -22,5 +22,5 @@ namespace Blumind.Core
         public ChangeTypes Changes { get; private set; }
     }
 
-    delegate void ChartObjectPropertyEventHandler(object sender, ChartObjectPropertyEventArgs e);
+    public delegate void ChartObjectPropertyEventHandler(object sender, ChartObjectPropertyEventArgs e);
 }

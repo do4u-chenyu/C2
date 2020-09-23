@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Blumind.Controls.MapViews
 {
-    partial class MindMapView 
+    public partial class MindMapView 
     {
         #region Common Commands
 

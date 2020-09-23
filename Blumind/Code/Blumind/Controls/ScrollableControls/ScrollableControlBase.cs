@@ -7,7 +7,7 @@ namespace Blumind.Controls
 {
     delegate void SetScrollValueProc(ScrollBars scrollBar, int value);
 
-    class ScrollableControlBase : BaseControl
+    public class ScrollableControlBase : BaseControl
     {
         bool _ShowBorder = true;
         Size _ContentSize = Size.Empty;
