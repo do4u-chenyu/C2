@@ -1,4 +1,4 @@
-.vs
+﻿.vs
 Citta_T1/obj/Debug
 Citta_T1/bin/Debug
 Citta_T1/bin/Release
@@ -54,7 +54,6 @@ UserInstallSet/obj/Debug/UserInstallSet.pdb
 /CittaTestProject/obj/
 /CittaTestProject/obj/Release
 /Citta_T1/datas/allresult_20191018_1571385078.txt
-/Blumind
 /Citta_T1/datas/7月胶水运营分配.txt
 /Citta_T1/datas/jiangsu.txt
 /Citta_T1/datas/test_1xlsx.xlsx

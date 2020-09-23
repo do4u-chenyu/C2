@@ -18,10 +18,16 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Blumind.Controls;
+using Blumind.Model.Documents;
+using Blumind;
+using Blumind.Model.MindMaps;
+using Blumind.Model.Styles;
+using Blumind.Globalization;
 
 namespace Citta_T1
 {
-    public partial class MainForm : Form
+    public partial class MainForm : DocumentManageForm
     {
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
@@ -398,7 +404,6 @@ namespace Citta_T1
             this.inputDataForm.ShowDialog();
             this.inputDataForm.ReSetParams();
         }
-
 
 
         private void NewModelButton_Click(object sender, EventArgs e)
@@ -868,5 +873,34 @@ namespace Citta_T1
             if (Global.GetCanvasPanel().LeftButtonDown)
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
+        #region blumind
+        public void NewDocument()
+        {
+            Document doc = CreateNewMap();
+
+            DocumentForm form = new DocumentForm(doc);
+            ShowForm(form);
+        }
+
+        Document CreateNewMap()
+        {
+            MindMap map = new MindMap();
+            map.Name = string.Format("{0} 1", Lang._("New Chart"));
+            map.Root.Text = Lang._("Center Topic");
+            map.Author = System.Environment.UserName;
+
+            if (ChartThemeManage.Default.DefaultTheme != null)
+            {
+                map.ApplyTheme(ChartThemeManage.Default.DefaultTheme);
+            }
+
+            Document doc = new Document();
+            doc.Name = Lang._("New Document");
+            doc.Author = System.Environment.UserName;
+            doc.Charts.Add(map);
+            //doc.Modified = true;
+            return doc;
+        }
+        #endregion
     }
 }
