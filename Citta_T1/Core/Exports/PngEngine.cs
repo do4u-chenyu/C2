@@ -15,7 +15,7 @@ namespace Citta_T1.Core.Exports
         class PngExportOptions
         {
             [DefaultValue(true), LocalDisplayName("Transparent Background")]
-            [TypeConverter(typeof(Blumind.Design.BoolConverter))]
+            [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
             public bool TransparentBackground { get; set; }
         }
 

@@ -258,13 +258,13 @@ namespace Citta_T1.Model.Documents
             dom.AppendChild(dom.CreateXmlDeclaration("1.0", "utf-8", null));
 
             XmlElement root = dom.CreateElement("document");
-            root.SetAttribute("type", "BLUMIND");
+            root.SetAttribute("type", "Citta_T1");
             root.SetAttribute("editor_version", ProductInfo.Version);
             root.SetAttribute("document_version", Document.DocumentVersion.ToString());
             dom.AppendChild(root);
             
             //
-            XmlComment comment = dom.CreateComment("Create by Blumind, you can download it free from http://www.blumind.org");
+            XmlComment comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://www.Citta_T1.org");
             root.AppendChild(comment); 
 
             // information

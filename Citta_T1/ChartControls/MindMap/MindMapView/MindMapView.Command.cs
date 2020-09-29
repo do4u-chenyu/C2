@@ -188,7 +188,7 @@ namespace Citta_T1.Controls.MapViews
             if (SelectedTopic != null && Clipboard.ContainsImage())
             {
                 PictureWidget template = new PictureWidget();
-                template.Image = Blumind.Model.Widgets.PictureWidget.PictureDesign.FromClipboard();
+                template.Image = Citta_T1.Model.Widgets.PictureWidget.PictureDesign.FromClipboard();
                 if (template.Image.Data != null)
                 {
                     Size size = template.Image.Data.Size;

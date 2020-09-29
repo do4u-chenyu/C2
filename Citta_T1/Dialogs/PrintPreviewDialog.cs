@@ -39,7 +39,7 @@ namespace Citta_T1
         }
 
         [Browsable(false)]
-        public Blumind.Controls.PrintPreviewControl PrintPreviewControl
+        public Citta_T1.Controls.PrintPreviewControl PrintPreviewControl
         {
             get
             {

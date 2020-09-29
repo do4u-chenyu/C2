@@ -164,12 +164,12 @@ namespace Citta_T1
 
         public static bool HasQuickHelp()
         {
-            return File.Exists(Path.Combine(Application.StartupPath, "Blumind Quick Help.bmd"));
+            return File.Exists(Path.Combine(Application.StartupPath, "Citta_T1 Quick Help.bmd"));
         }
 
         public static void OpenQuickHelp()
         {
-            string file = Path.Combine(Application.StartupPath, "Blumind Quick Help.bmd");
+            string file = Path.Combine(Application.StartupPath, "Citta_T1 Quick Help.bmd");
             if (File.Exists(file))
             {
                 Program.MainForm.OpenDocument(file, true);

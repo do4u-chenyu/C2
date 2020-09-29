@@ -119,7 +119,7 @@
             // 
             // MenuDeleteTab
             // 
-            this.MenuDeleteTab.Image = global::Blumind.Properties.Resources.delete;
+            this.MenuDeleteTab.Image = global::Citta_T1.Properties.Resources.delete;
             this.MenuDeleteTab.Name = "MenuDeleteTab";
             this.MenuDeleteTab.Size = new System.Drawing.Size(132, 22);
             this.MenuDeleteTab.Text = "&Delete...";
@@ -132,7 +132,7 @@
             // 
             // MenuRenameTab
             // 
-            this.MenuRenameTab.Image = global::Blumind.Properties.Resources.edit;
+            this.MenuRenameTab.Image = global::Citta_T1.Properties.Resources.edit;
             this.MenuRenameTab.Name = "MenuRenameTab";
             this.MenuRenameTab.Size = new System.Drawing.Size(132, 22);
             this.MenuRenameTab.Text = "&Rename...";
@@ -178,7 +178,7 @@
             // TsbSave
             // 
             this.TsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbSave.Image = global::Blumind.Properties.Resources.save;
+            this.TsbSave.Image = global::Citta_T1.Properties.Resources.save;
             this.TsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbSave.Name = "TsbSave";
             this.TsbSave.Padding = new System.Windows.Forms.Padding(2);
@@ -196,7 +196,7 @@
             // 
             this.TsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TsbUndo.Enabled = false;
-            this.TsbUndo.Image = global::Blumind.Properties.Resources.undo;
+            this.TsbUndo.Image = global::Citta_T1.Properties.Resources.undo;
             this.TsbUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbUndo.Name = "TsbUndo";
             this.TsbUndo.Padding = new System.Windows.Forms.Padding(2);
@@ -208,7 +208,7 @@
             // 
             this.TsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TsbRedo.Enabled = false;
-            this.TsbRedo.Image = global::Blumind.Properties.Resources.redo;
+            this.TsbRedo.Image = global::Citta_T1.Properties.Resources.redo;
             this.TsbRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbRedo.Name = "TsbRedo";
             this.TsbRedo.Padding = new System.Windows.Forms.Padding(2);
@@ -225,7 +225,7 @@
             // TsbCut
             // 
             this.TsbCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbCut.Image = global::Blumind.Properties.Resources.cut;
+            this.TsbCut.Image = global::Citta_T1.Properties.Resources.cut;
             this.TsbCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCut.Name = "TsbCut";
             this.TsbCut.Padding = new System.Windows.Forms.Padding(2);
@@ -236,7 +236,7 @@
             // TsbCopy
             // 
             this.TsbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbCopy.Image = global::Blumind.Properties.Resources.copy;
+            this.TsbCopy.Image = global::Citta_T1.Properties.Resources.copy;
             this.TsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCopy.Name = "TsbCopy";
             this.TsbCopy.Padding = new System.Windows.Forms.Padding(2);
@@ -247,7 +247,7 @@
             // TsbPaste
             // 
             this.TsbPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbPaste.Image = global::Blumind.Properties.Resources.paste;
+            this.TsbPaste.Image = global::Citta_T1.Properties.Resources.paste;
             this.TsbPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbPaste.Name = "TsbPaste";
             this.TsbPaste.Padding = new System.Windows.Forms.Padding(2);
@@ -258,7 +258,7 @@
             // TsbDelete
             // 
             this.TsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbDelete.Image = global::Blumind.Properties.Resources.delete;
+            this.TsbDelete.Image = global::Citta_T1.Properties.Resources.delete;
             this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbDelete.Name = "TsbDelete";
             this.TsbDelete.Padding = new System.Windows.Forms.Padding(2);
@@ -276,7 +276,7 @@
             // 
             this.TsbFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TsbFind.Enabled = false;
-            this.TsbFind.Image = global::Blumind.Properties.Resources.find;
+            this.TsbFind.Image = global::Citta_T1.Properties.Resources.find;
             this.TsbFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFind.Name = "TsbFind";
             this.TsbFind.Padding = new System.Windows.Forms.Padding(2);
@@ -288,7 +288,7 @@
             // 
             this.TsbReplace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TsbReplace.Enabled = false;
-            this.TsbReplace.Image = global::Blumind.Properties.Resources.replace;
+            this.TsbReplace.Image = global::Citta_T1.Properties.Resources.replace;
             this.TsbReplace.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbReplace.Name = "TsbReplace";
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
@@ -306,7 +306,7 @@
             // 
             this.TsbFormatPainter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TsbFormatPainter.Enabled = false;
-            this.TsbFormatPainter.Image = global::Blumind.Properties.Resources.format_painter;
+            this.TsbFormatPainter.Image = global::Citta_T1.Properties.Resources.format_painter;
             this.TsbFormatPainter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFormatPainter.Name = "TsbFormatPainter";
             this.TsbFormatPainter.Padding = new System.Windows.Forms.Padding(2);
@@ -328,7 +328,7 @@
             this.MenuSaveThemeAs,
             this.MenuRefreshThemes,
             this.toolStripSeparator4});
-            this.TsbThemes.Image = global::Blumind.Properties.Resources.theme;
+            this.TsbThemes.Image = global::Citta_T1.Properties.Resources.theme;
             this.TsbThemes.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbThemes.Name = "TsbThemes";
             this.TsbThemes.Padding = new System.Windows.Forms.Padding(2);
@@ -338,7 +338,7 @@
             // 
             // MenuThemes
             // 
-            this.MenuThemes.Image = global::Blumind.Properties.Resources.theme_manage;
+            this.MenuThemes.Image = global::Citta_T1.Properties.Resources.theme_manage;
             this.MenuThemes.Name = "MenuThemes";
             this.MenuThemes.Size = new System.Drawing.Size(202, 22);
             this.MenuThemes.Text = "Themes...";
@@ -346,7 +346,7 @@
             // 
             // MenuSaveThemeAs
             // 
-            this.MenuSaveThemeAs.Image = global::Blumind.Properties.Resources.save;
+            this.MenuSaveThemeAs.Image = global::Citta_T1.Properties.Resources.save;
             this.MenuSaveThemeAs.Name = "MenuSaveThemeAs";
             this.MenuSaveThemeAs.Size = new System.Drawing.Size(202, 22);
             this.MenuSaveThemeAs.Text = "Save Current Theme...";
@@ -354,7 +354,7 @@
             // 
             // MenuRefreshThemes
             // 
-            this.MenuRefreshThemes.Image = global::Blumind.Properties.Resources.refresh;
+            this.MenuRefreshThemes.Image = global::Citta_T1.Properties.Resources.refresh;
             this.MenuRefreshThemes.Name = "MenuRefreshThemes";
             this.MenuRefreshThemes.Size = new System.Drawing.Size(202, 22);
             this.MenuRefreshThemes.Text = "&Refresh";
@@ -374,7 +374,7 @@
             // TsbSelectMode
             // 
             this.TsbSelectMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbSelectMode.Image = global::Blumind.Properties.Resources.cursor;
+            this.TsbSelectMode.Image = global::Citta_T1.Properties.Resources.cursor;
             this.TsbSelectMode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbSelectMode.Name = "TsbSelectMode";
             this.TsbSelectMode.Padding = new System.Windows.Forms.Padding(2);
@@ -385,7 +385,7 @@
             // TsbScrollMode
             // 
             this.TsbScrollMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbScrollMode.Image = global::Blumind.Properties.Resources.hand;
+            this.TsbScrollMode.Image = global::Citta_T1.Properties.Resources.hand;
             this.TsbScrollMode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbScrollMode.Name = "TsbScrollMode";
             this.TsbScrollMode.Padding = new System.Windows.Forms.Padding(2);
@@ -399,7 +399,7 @@
             this.TsbTimer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuStartTimer,
             this.toolStripMenuItem3});
-            this.TsbTimer.Image = global::Blumind.Properties.Resources.hourglass;
+            this.TsbTimer.Image = global::Citta_T1.Properties.Resources.hourglass;
             this.TsbTimer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbTimer.Name = "TsbTimer";
             this.TsbTimer.Padding = new System.Windows.Forms.Padding(2);
@@ -427,7 +427,7 @@
             // TsbZoomOut
             // 
             this.TsbZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbZoomOut.Image = global::Blumind.Properties.Resources.zoom_out;
+            this.TsbZoomOut.Image = global::Citta_T1.Properties.Resources.zoom_out;
             this.TsbZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbZoomOut.Name = "TsbZoomOut";
             this.TsbZoomOut.Padding = new System.Windows.Forms.Padding(2);
@@ -479,7 +479,7 @@
             // TsbZoomIn
             // 
             this.TsbZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbZoomIn.Image = global::Blumind.Properties.Resources.zoom_in;
+            this.TsbZoomIn.Image = global::Citta_T1.Properties.Resources.zoom_in;
             this.TsbZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbZoomIn.Name = "TsbZoomIn";
             this.TsbZoomIn.Padding = new System.Windows.Forms.Padding(2);
@@ -496,7 +496,7 @@
             // TsbFullScreen
             // 
             this.TsbFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbFullScreen.Image = global::Blumind.Properties.Resources.full_screen;
+            this.TsbFullScreen.Image = global::Citta_T1.Properties.Resources.full_screen;
             this.TsbFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFullScreen.Name = "TsbFullScreen";
             this.TsbFullScreen.Padding = new System.Windows.Forms.Padding(2);
@@ -510,7 +510,7 @@
             this.TsbSidebar.Checked = true;
             this.TsbSidebar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TsbSidebar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbSidebar.Image = global::Blumind.Properties.Resources.sidebar;
+            this.TsbSidebar.Image = global::Citta_T1.Properties.Resources.sidebar;
             this.TsbSidebar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbSidebar.Name = "TsbSidebar";
             this.TsbSidebar.Padding = new System.Windows.Forms.Padding(2);

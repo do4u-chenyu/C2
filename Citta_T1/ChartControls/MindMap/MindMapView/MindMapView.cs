@@ -181,7 +181,7 @@ namespace Citta_T1.Controls.MapViews
             ScrollToCenter();
         }
 
-        private void Map_ChartObjectPropertyChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        private void Map_ChartObjectPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (e.Rollbackable)
             {
@@ -218,7 +218,7 @@ namespace Citta_T1.Controls.MapViews
 
         #region Map & Topic Events
 
-        void Map_StyleChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        void Map_StyleChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Visual))
             {
@@ -271,7 +271,7 @@ namespace Citta_T1.Controls.MapViews
         //    //InvalidateTopic(e.Topic);
         //}
 
-        private void Map_TopicWidgetChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        private void Map_TopicWidgetChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (!IsUpdating)
             {
@@ -347,7 +347,7 @@ namespace Citta_T1.Controls.MapViews
             }
         }
 
-        private void Map_LinkChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        private void Map_LinkChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Layout))
                 UpdateView(e.Changes);

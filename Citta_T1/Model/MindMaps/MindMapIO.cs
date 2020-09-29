@@ -164,11 +164,11 @@ namespace Citta_T1.Model.MindMaps
 
             XmlElement document = dom.DocumentElement;
             document.SetAttribute("name", map.Name);
-            document.SetAttribute("document_type", DocumentType.Blumind.Name);
+            document.SetAttribute("document_type", DocumentType.Citta_T1.Name);
             document.SetAttribute("editor_version", ProductInfo.Version);
 
             // comment
-            XmlComment comment = dom.CreateComment("Create by Blumind, you can download it free from http://www.blumind.org ");
+            XmlComment comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://www.Citta_T1.org ");
             document.AppendChild(comment);
 
             // info

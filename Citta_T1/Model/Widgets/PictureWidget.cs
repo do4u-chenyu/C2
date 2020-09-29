@@ -141,7 +141,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Embed In"), LocalCategory("Data")]
-        [TypeConverter(typeof(Blumind.Design.BoolConverter))]
+        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
         public bool EmbedIn
         {
             get { return _EmbedIn; }
@@ -504,7 +504,7 @@ namespace Citta_T1.Model.Widgets
             }
         }
 
-        [Editor(typeof(Blumind.Design.PictureEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(Citta_T1.Design.PictureEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public class PictureDesign
         {
             public PictureDesign()

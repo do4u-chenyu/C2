@@ -160,7 +160,7 @@
             // TsbNew
             // 
             this.TsbNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbNew.Image = global::Blumind.Properties.Resources._new;
+            this.TsbNew.Image = global::Citta_T1.Properties.Resources._new;
             this.TsbNew.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbNew.Name = "TsbNew";
             this.TsbNew.Padding = new System.Windows.Forms.Padding(2);
@@ -171,7 +171,7 @@
             // TsbCopy
             // 
             this.TsbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbCopy.Image = global::Blumind.Properties.Resources.copy;
+            this.TsbCopy.Image = global::Citta_T1.Properties.Resources.copy;
             this.TsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbCopy.Name = "TsbCopy";
             this.TsbCopy.Padding = new System.Windows.Forms.Padding(2);
@@ -188,7 +188,7 @@
             // TsbDelete
             // 
             this.TsbDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbDelete.Image = global::Blumind.Properties.Resources.delete;
+            this.TsbDelete.Image = global::Citta_T1.Properties.Resources.delete;
             this.TsbDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbDelete.Name = "TsbDelete";
             this.TsbDelete.Padding = new System.Windows.Forms.Padding(2);
@@ -205,7 +205,7 @@
             // TsbRefresh
             // 
             this.TsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TsbRefresh.Image = global::Blumind.Properties.Resources.refresh;
+            this.TsbRefresh.Image = global::Citta_T1.Properties.Resources.refresh;
             this.TsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbRefresh.Name = "TsbRefresh";
             this.TsbRefresh.Padding = new System.Windows.Forms.Padding(2);
@@ -252,10 +252,10 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private Blumind.Controls.MultiSelectTreeView treeView1;
+        private Citta_T1.Controls.MultiSelectTreeView treeView1;
         private System.Windows.Forms.ImageList imageList1;
-        private Blumind.Controls.MyTabControl tabControl1;
-        private Blumind.Controls.ToolStripPro toolStrip1;
+        private Citta_T1.Controls.MyTabControl tabControl1;
+        private Citta_T1.Controls.ToolStripPro toolStrip1;
         private System.Windows.Forms.ToolStripButton TsbNew;
         private System.Windows.Forms.ToolStripButton TsbDelete;
         private System.Windows.Forms.ToolStripButton TsbCopy;
@@ -263,7 +263,7 @@
         private System.Windows.Forms.TextBox TxbThemeName;
         private System.Windows.Forms.Label LalName;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private Blumind.Controls.PushButton BtnApply;
+        private Citta_T1.Controls.PushButton BtnApply;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton TsbRefresh;
         private System.Windows.Forms.CheckBox CkbDefaultTheme;

@@ -476,8 +476,8 @@ namespace Citta_T1
             //    remarkEditor.Text = Lang._("Remark");
 
             saveFileDialog1.Filter = string.Format("{0} (*{1})|*{1}",
-                Lang._("Blumind Mind Map File"),
-                DocumentType.Blumind.DefaultExtension);
+                Lang._("Citta_T1 Mind Map File"),
+                DocumentType.Citta_T1.DefaultExtension);
 
             multiChartsView1.NotifyCurrentLanguageChanged();
             InitializeTimers();
@@ -971,7 +971,7 @@ namespace Citta_T1
         {
             if (ActiveChartBox != null)
             {
-                Program.MainForm.ShowFindDialog(this.ActiveChartBox, mode);
+                MainForm.ShowFindDialog(this.ActiveChartBox, mode);
             }
         }
 

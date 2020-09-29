@@ -28,7 +28,7 @@ namespace Citta_T1.Dialogs
             LabInfo.Text = string.Empty;
             MinimumSize = Size;
             this.SetFontNotScale(SystemFonts.MessageBoxFont);
-            ImageEmbedIn = Options.Current.GetBool(Blumind.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn);
+            ImageEmbedIn = Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn);
 
             // list history
             for (int i = HistoryUrls.Count - 1; i >= 0; i--)
@@ -262,7 +262,7 @@ namespace Citta_T1.Dialogs
 
         void CkbEmbedIn_CheckedChanged(object sender, System.EventArgs e)
         {
-            Options.Current.SetValue(Blumind.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn, CkbEmbedIn.Checked);
+            Options.Current.SetValue(Citta_T1.Configuration.OptionNames.Miscellaneous.WebImageEmbedIn, CkbEmbedIn.Checked);
         }
     }
 }

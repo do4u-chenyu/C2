@@ -73,7 +73,7 @@ namespace Citta_T1.Model.MindMaps
             get
             {
                 var rect = Bounds;
-                if (this.HaveRemark && Options.Current.GetBool(Blumind.Configuration.OptionNames.Charts.ShowRemarkIcon))
+                if (this.HaveRemark && Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowRemarkIcon))
                 {
                     rect = Rectangle.Union(rect, RemarkIconBounds);
                 }

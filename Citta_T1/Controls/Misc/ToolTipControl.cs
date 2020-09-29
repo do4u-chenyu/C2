@@ -152,7 +152,7 @@ namespace Citta_T1.Controls
             {
                 if (User32.IsWindowVisible(Handle))
                 {
-                    User32.ShowWindow(Handle, Blumind.Controls.OS.ShowWindowFlags.SW_HIDE);
+                    User32.ShowWindow(Handle, Citta_T1.Controls.OS.ShowWindowFlags.SW_HIDE);
                 }
             }
         }

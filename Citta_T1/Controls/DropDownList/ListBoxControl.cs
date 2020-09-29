@@ -127,7 +127,7 @@ namespace Citta_T1.Controls
                 var cp = base.CreateParams;
                 if (BorderStyle != System.Windows.Forms.BorderStyle.None)
                 {
-                    cp.Style |= (int)Blumind.Controls.OS.WindowStyle.WS_BORDER;
+                    cp.Style |= (int)Citta_T1.Controls.OS.WindowStyle.WS_BORDER;
                 }
                 return cp;
             }

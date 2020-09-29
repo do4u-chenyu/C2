@@ -21,8 +21,8 @@ namespace Citta_T1.Configuration
         const string ARG_UNREG_BMD = "-unregbmd";
 
         const string DOC_TYPE_BMD_EXT = Document.Extension;
-        const string DOC_TYPE_BMD_NAME = "Blumind.MindMap";
-        const string DOC_TYPE_BMD_DESC = "Blumind Mind Map Document";
+        const string DOC_TYPE_BMD_NAME = "Citta_T1.MindMap";
+        const string DOC_TYPE_BMD_DESC = "Citta_T1 Mind Map Document";
 
         public static bool TestBmdAssociation()
         {

@@ -38,8 +38,8 @@ namespace Citta_T1.Controls.MapViews
             catch(System.Exception ex)
             {
                 Helper.WriteLog(ex);
-                StyleBrushCursor = Blumind.Resources.RS.GetCursor("cur_style_brush");
-                ScrollCursor = Blumind.Resources.RS.GetCursor("cur_scroll");
+                StyleBrushCursor = Citta_T1.Resources.RS.GetCursor("cur_style_brush");
+                ScrollCursor = Citta_T1.Resources.RS.GetCursor("cur_scroll");
             }
 
             DragBox = new MindMapViewDragBox(this);
@@ -538,7 +538,7 @@ namespace Citta_T1.Controls.MapViews
 
                 return new HitTestResult(topic, null, false, false);
             }
-            else if (topic.HaveRemark && Options.Current.GetBool(Blumind.Configuration.OptionNames.Charts.ShowRemarkIcon))
+            else if (topic.HaveRemark && Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowRemarkIcon))
             {
                 int x1 = x - topic.Bounds.Left;
                 int y1 = y - topic.Bounds.Top;

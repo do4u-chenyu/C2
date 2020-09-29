@@ -18,17 +18,41 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Blumind.Controls;
-using Blumind.Model.Documents;
-using Blumind;
-using Blumind.Model.MindMaps;
-using Blumind.Model.Styles;
-using Blumind.Globalization;
+using Citta_T1.Controls;
+using Citta_T1.Model.Documents;
+using Citta_T1;
+using Citta_T1.Model.MindMaps;
+using Citta_T1.Model.Styles;
+using Citta_T1.Globalization;
+#region
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using Citta_T1.Configuration;
+using Citta_T1.Controls.OS;
+using Citta_T1.Core.Exports;
+using Citta_T1.Dialogs;
+using Citta_T1.Core.Win32Apis;
+#endregion
 
 namespace Citta_T1
 {
     public partial class MainForm : DocumentManageForm
     {
+        #region
+        StartMenuButton BtnStart;
+        SpecialTabItem TabNew;
+        TabBarButton BtnOpen;
+        TabBarButton BtnHelp;
+        AboutDialogBox AboutDialog;
+        FindDialog MyFindDialog;
+        ShortcutKeysMapDialog ShortcutsMapDialog;
+        CheckUpdate CheckUpdateForm;
+        ToolStripMenuItem MenuClearRecentFiles;
+        ShortcutKeysTable ShortcutKeys;
+        bool ImportMenusHasBuilded;
+        StartPage startPage;
+        #endregion
         private bool isBottomViewPanelMinimum;
         private bool isLeftViewPanelMinimum;
 
@@ -876,7 +900,7 @@ namespace Citta_T1
             if (Global.GetCanvasPanel().LeftButtonDown)
                 Global.GetCanvasPanel().LeftButtonDown = false;
         }
-        #region blumind
+        #region Citta_T1
         public void NewDocument()
         {
             Document doc = CreateNewMap();
@@ -903,6 +927,27 @@ namespace Citta_T1
             doc.Charts.Add(map);
             //doc.Modified = true;
             return doc;
+        }
+        private void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
+        {
+            if (MyFindDialog == null || MyFindDialog.IsDisposed)
+            {
+                FindDialog fd = MyFindDialog;
+                MyFindDialog = new FindDialog(this);
+                if (fd != null)
+                {
+                    MyFindDialog.StartPosition = FormStartPosition.Manual;
+                    MyFindDialog.Location = fd.Location;
+                    MyFindDialog.OpenOptions = fd.OpenOptions;
+                }
+            }
+
+            MyFindDialog.Mode = mode;
+            if (MyFindDialog.Visible)
+                MyFindDialog.Activate();
+            else
+                MyFindDialog.Show(this);
+            MyFindDialog.ResetFocus();
         }
         #endregion
     }

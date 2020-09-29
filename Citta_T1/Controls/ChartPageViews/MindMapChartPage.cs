@@ -311,7 +311,7 @@ namespace Citta_T1.ChartPageView
                 MenuProperty});
 
             // MenuOpenHyperlink
-            MenuOpenHyperlink.Image = Blumind.Properties.Resources.hyperlink;
+            MenuOpenHyperlink.Image = Citta_T1.Properties.Resources.hyperlink;
             MenuOpenHyperlink.Name = "MenuOpenHyperlink";
             MenuOpenHyperlink.Text = "&Open Hyperlink";
             MenuOpenHyperlink.Click += new System.EventHandler(MenuOpenHyperlink_Click);
@@ -320,14 +320,14 @@ namespace Citta_T1.ChartPageView
             toolStripSeparator15.Name = "toolStripSeparator15";
 
             // MenuAddTopic
-            MenuAddTopic.Image = Blumind.Properties.Resources.add_topic;
+            MenuAddTopic.Image = Citta_T1.Properties.Resources.add_topic;
             MenuAddTopic.Name = "MenuAddTopic";
             MenuAddTopic.ShortcutKeyDisplayString = "Enter";
             MenuAddTopic.Text = "Add Topic";
             MenuAddTopic.Click += new System.EventHandler(MenuAddTopic_Click);
 
             // MenuAddSubTopic
-            MenuAddSubTopic.Image = Blumind.Properties.Resources.add_sub_topic;
+            MenuAddSubTopic.Image = Citta_T1.Properties.Resources.add_sub_topic;
             MenuAddSubTopic.Name = "MenuAddSubTopic";
             MenuAddSubTopic.ShortcutKeyDisplayString = "Tab/Insert";
             MenuAddSubTopic.Text = "Add Sub Topic";
@@ -342,19 +342,19 @@ namespace Citta_T1.ChartPageView
             MenuAdd.Text = "Add";
 
             // MenuAddIcon
-            MenuAddIcon.Image = Blumind.Properties.Resources.image;
+            MenuAddIcon.Image = Citta_T1.Properties.Resources.image;
             MenuAddIcon.Name = "MenuAddIcon";
             MenuAddIcon.Text = "&Icon";
             MenuAddIcon.Click += new System.EventHandler(MenuAddIcon_Click);
 
             // MenuAddProgressBar
-            MenuAddProgressBar.Image = Blumind.Properties.Resources.progress_bar;
+            MenuAddProgressBar.Image = Citta_T1.Properties.Resources.progress_bar;
             MenuAddProgressBar.Name = "MenuAddProgressBar";
             MenuAddProgressBar.Text = "&Progress Bar";
             MenuAddProgressBar.Click += new System.EventHandler(MenuAddProgressBar_Click);
 
             // MenuAddRemark
-            MenuAddRemark.Image = Blumind.Properties.Resources.notes;
+            MenuAddRemark.Image = Citta_T1.Properties.Resources.notes;
             MenuAddRemark.Name = "MenuAddRemark";
             MenuAddRemark.Text = "&Notes";
             MenuAddRemark.Click += new System.EventHandler(MenuAddRemark_Click);
@@ -428,28 +428,28 @@ namespace Citta_T1.ChartPageView
             toolStripMenuItem2.Name = "toolStripMenuItem2";
 
             // MenuCut
-            MenuCut.Image = Blumind.Properties.Resources.cut;
+            MenuCut.Image = Citta_T1.Properties.Resources.cut;
             MenuCut.Name = "MenuCut";
             MenuCut.ShortcutKeyDisplayString = "Ctrl+X";
             MenuCut.Text = "Cu&t";
             MenuCut.Click += new System.EventHandler(MenuCut_Click);
 
             // MenuCopy
-            MenuCopy.Image = Blumind.Properties.Resources.copy;
+            MenuCopy.Image = Citta_T1.Properties.Resources.copy;
             MenuCopy.Name = "MenuCopy";
             MenuCopy.ShortcutKeyDisplayString = "Ctrl+C";
             MenuCopy.Text = "&Copy";
             MenuCopy.Click += new System.EventHandler(MenuCopy_Click);
 
             // MenuPaste
-            MenuPaste.Image = Blumind.Properties.Resources.paste;
+            MenuPaste.Image = Citta_T1.Properties.Resources.paste;
             MenuPaste.Name = "MenuPaste";
             MenuPaste.ShortcutKeyDisplayString = "Ctrl+V";
             MenuPaste.Text = "&Paste";
             MenuPaste.Click += new System.EventHandler(MenuPaste_Click);
 
             // MenuDelete
-            MenuDelete.Image = Blumind.Properties.Resources.delete;
+            MenuDelete.Image = Citta_T1.Properties.Resources.delete;
             MenuDelete.Name = "MenuDelete";
             MenuDelete.ShortcutKeyDisplayString = "Del";
             MenuDelete.Text = "&Delete";
@@ -469,14 +469,14 @@ namespace Citta_T1.ChartPageView
             MenuNewChartFromHere.Click += MenuNewChartFromHere_Click;
 
             // MenuEdit
-            MenuEdit.Image = Blumind.Properties.Resources.edit;
+            MenuEdit.Image = Citta_T1.Properties.Resources.edit;
             MenuEdit.Name = "MenuEdit";
             MenuEdit.ShortcutKeyDisplayString = "F2";
             MenuEdit.Text = "&Edit";
             MenuEdit.Click += new System.EventHandler(MenuEdit_Click);
 
             // MenuProperty
-            MenuProperty.Image = Blumind.Properties.Resources.property;
+            MenuProperty.Image = Citta_T1.Properties.Resources.property;
             MenuProperty.Name = "MenuProperty";
             MenuProperty.Text = "&Property";
             MenuProperty.Click += new System.EventHandler(MenuProperty_Click);

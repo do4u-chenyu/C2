@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<theme name="Blumind" type="blumind-ui-theme" version="1.0">
+<theme name="Citta_T1" type="Citta_T1-ui-theme" version="1.0">
   <colors>
     <color name="Dark" value="Black" />
     <color name="Light" value="White" />

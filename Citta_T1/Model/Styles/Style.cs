@@ -9,7 +9,7 @@ namespace Citta_T1.Model.Styles
 {
     [TypeConverter(typeof(StyleConverter))]
     [Editor(typeof(StyleEditor), typeof(UITypeEditor))]
-    public abstract class Style : Blumind.Model.ISerializable
+    public abstract class Style : Citta_T1.Model.ISerializable
     {
         public event EventHandler ValueChanged;
 

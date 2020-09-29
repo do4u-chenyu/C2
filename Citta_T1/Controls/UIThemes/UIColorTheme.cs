@@ -8,7 +8,7 @@ namespace Citta_T1.Controls
 {
     public class UIColorTheme
     {
-        const string FileType = "blumind-ui-theme";
+        const string FileType = "Citta_T1-ui-theme";
 
         public UIColorTheme()
         {

@@ -11,7 +11,7 @@ namespace Citta_T1.Configuration.Models
 {
     class FileSystemOptions : Options
     {
-        const string FileName = "Blumind.xml";
+        const string FileName = "Citta_T1.xml";
         const string ForceRunAsPortable = "-p";
 
         public FileSystemOptions()

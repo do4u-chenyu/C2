@@ -71,7 +71,7 @@ namespace Citta_T1.Model.MindMaps
 
         [DefaultValue(typeof(Padding), "2, 2, 2, 2")]
         [DesignOnly(true), LocalDisplayName("Padding"), LocalCategory("Layout")]
-        [Editor(typeof(PaddingEditor), typeof(UITypeEditor)), TypeConverter(typeof(Blumind.Design.PaddingConverter))]
+        [Editor(typeof(PaddingEditor), typeof(UITypeEditor)), TypeConverter(typeof(Citta_T1.Design.PaddingConverter))]
         public Padding Padding
         {
             get { return Style.Padding; }

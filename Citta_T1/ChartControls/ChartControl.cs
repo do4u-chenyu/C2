@@ -188,7 +188,7 @@ namespace Citta_T1.Controls
         #endregion
 
         #region IChartControl Members
-        public void OnChartObjectPropertyChanged(ChartObject chartObject, Blumind.Core.PropertyChangedEventArgs e)
+        public void OnChartObjectPropertyChanged(ChartObject chartObject, Citta_T1.Core.PropertyChangedEventArgs e)
         {
         }
 

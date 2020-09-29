@@ -68,7 +68,7 @@ namespace Citta_T1.Model.Documents
                 e.Graphics.Restore(state);
 
                 // print document title
-                if (Options.Current.GetBool(Blumind.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
+                if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
                 {
                     var ptTitle = e.MarginBounds.Location;
                     var brush = new SolidBrush(Color.Black);

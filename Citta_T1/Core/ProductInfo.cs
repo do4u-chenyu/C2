@@ -83,32 +83,32 @@ namespace Citta_T1
 
         public static string WebSite
         {
-            get { return "https://github.com/funwaywang/Blumind"; }
+            get { return "https://github.com/funwaywang/Citta_T1"; }
         }
 
         public static string HelpUrl
         {
-            get { return "https://github.com/funwaywang/Blumind/wiki"; }
+            get { return "https://github.com/funwaywang/Citta_T1/wiki"; }
         }
 
         public static string UpdateUrl
         {
-            get { return "https://github.com/funwaywang/Blumind/releases"; }
+            get { return "https://github.com/funwaywang/Citta_T1/releases"; }
         }
 
         public static string FeedbackUrl
         {
-            get { return "https://github.com/funwaywang/Blumind/issues"; }
+            get { return "https://github.com/funwaywang/Citta_T1/issues"; }
         }
 
         public static string SupportEmail
         {
-            get { return "blumindorg@gmail.com"; }
+            get { return "Citta_T1org@gmail.com"; }
         }
 
         public static string GetInformation()
         {
-            return "Blumind is a lightweight and powerful mind mapping tool, and it is free for everyone.";
+            return "Citta_T1 is a lightweight and powerful mind mapping tool, and it is free for everyone.";
         }
     }
 }

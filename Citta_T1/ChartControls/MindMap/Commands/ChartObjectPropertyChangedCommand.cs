@@ -46,9 +46,9 @@ namespace Citta_T1.Controls.MapViews
                 if (pif == null)
                     return false;
 
-                if (ChartObject is Blumind.Core.INotifyPropertyChanged)
+                if (ChartObject is Citta_T1.Core.INotifyPropertyChanged)
                 {
-                    ((Blumind.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = true;
+                    ((Citta_T1.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = true;
                 }
 
                 pif.SetValue(ChartObject, NewValue, null);
@@ -61,9 +61,9 @@ namespace Citta_T1.Controls.MapViews
                         Chart.InvalidateChart();
                 }
 
-                if (ChartObject is Blumind.Core.INotifyPropertyChanged)
+                if (ChartObject is Citta_T1.Core.INotifyPropertyChanged)
                 {
-                    ((Blumind.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = false;
+                    ((Citta_T1.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = false;
                 }
             }
 
@@ -79,9 +79,9 @@ namespace Citta_T1.Controls.MapViews
             if (pif == null)
                 return false;
 
-            if (ChartObject is Blumind.Core.INotifyPropertyChanged)
+            if (ChartObject is Citta_T1.Core.INotifyPropertyChanged)
             {
-                ((Blumind.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = true;
+                ((Citta_T1.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = true;
             }
 
             pif.SetValue(ChartObject, OldValue, null);
@@ -95,9 +95,9 @@ namespace Citta_T1.Controls.MapViews
                     Chart.InvalidateChart();
             }
 
-            if (ChartObject is Blumind.Core.INotifyPropertyChanged)
+            if (ChartObject is Citta_T1.Core.INotifyPropertyChanged)
             {
-                ((Blumind.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = false;
+                ((Citta_T1.Core.INotifyPropertyChanged)ChartObject).PropertyChangeSuspending = false;
             }
 
             return true;

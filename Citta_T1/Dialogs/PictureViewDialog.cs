@@ -129,13 +129,13 @@ namespace Citta_T1.Dialogs
 
             // TsbZoomIn
             TsbZoomIn.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbZoomIn.Image = Blumind.Properties.Resources.zoom_in;
+            TsbZoomIn.Image = Citta_T1.Properties.Resources.zoom_in;
             TsbZoomIn.Text = "Zoom In";
             TsbZoomIn.Click += TsbZoomIn_Click;
 
             //
             TsbZoomOut.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbZoomOut.Image = Blumind.Properties.Resources.zoom_out;
+            TsbZoomOut.Image = Citta_T1.Properties.Resources.zoom_out;
             TsbZoomOut.Text = "Zoom Out";
             TsbZoomOut.Click += tsbZoomOut_Click;
 
@@ -176,7 +176,7 @@ namespace Citta_T1.Dialogs
 
             // TsbFullScreen
             TsbFullScreen.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            TsbFullScreen.Image = global::Blumind.Properties.Resources.full_screen;
+            TsbFullScreen.Image = global::Citta_T1.Properties.Resources.full_screen;
             TsbFullScreen.Text = "Full Screen";
             TsbFullScreen.Click += TsbFullScreen_Click;
             

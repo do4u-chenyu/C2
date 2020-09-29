@@ -41,7 +41,7 @@ namespace Citta_T1.Dialogs
             BtnNo.Text = Lang._("No");
             BtnCancel.Text = Lang._("Cancel");
             CkbDoNotAskMeAgain.Text = Lang._("Do not ask me again");
-            LabMessage.Text = Lang._("Do you want Blumind save tabs and open them next startup?");
+            LabMessage.Text = Lang._("Do you want Citta_T1 save tabs and open them next startup?");
         }
 
         private void OnDoNotAskAgainChanged()

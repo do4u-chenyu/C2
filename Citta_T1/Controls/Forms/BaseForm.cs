@@ -9,7 +9,7 @@ using Citta_T1.Globalization;
 
 namespace Citta_T1.Controls
 {
-    public class BaseForm : Form, IThemableUI//Blumind.Controls.Aero.GlassForm//, IGlobalBackground
+    public class BaseForm : Form, IThemableUI//Citta_T1.Controls.Aero.GlassForm//, IGlobalBackground
     {
         Image _IconImage = null;
 

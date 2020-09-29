@@ -12,7 +12,7 @@ using Citta_T1.Model.Styles;
 
 namespace Citta_T1.Model.Documents
 {
-    public abstract class ChartPage : ModifyObject, Blumind.Core.INotifyPropertyChanged, IRemark, ISerializable
+    public abstract class ChartPage : ModifyObject, Citta_T1.Core.INotifyPropertyChanged, IRemark, ISerializable
     {
         string _Name;
         string _Remark;
@@ -20,7 +20,7 @@ namespace Citta_T1.Model.Documents
         Padding _Margin = new Padding(20);
 
         public event ChartObjectEventHandler ChartObjectAdded;
-        public event Blumind.Core.PropertyChangedEventHandler ChartObjectPropertyChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler ChartObjectPropertyChanged;
         public event EventHandler NameChanged;
         public event EventHandler RemarkChanged;
         public event ChartObjectPropertyEventHandler ObjectStyleChanged;
@@ -114,7 +114,7 @@ namespace Citta_T1.Model.Documents
                 ChartObjectAdded(this, new ChartObjectEventArgs(chartObject));
         }
 
-        public virtual void OnChartObjectPropertyChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        public virtual void OnChartObjectPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (e.HasChanges(ChangeTypes.Data))
             {
@@ -413,12 +413,12 @@ namespace Citta_T1.Model.Documents
         #endregion
 
         #region INotifyPropertyChanged
-        public event Blumind.Core.PropertyChangedEventHandler PropertyChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler PropertyChanged;
 
         [Browsable(false)]
         public bool PropertyChangeSuspending { get; set; }
 
-        protected virtual void OnPropertyChanged(Blumind.Core.PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged(Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (PropertyChangeSuspending)
                 return;

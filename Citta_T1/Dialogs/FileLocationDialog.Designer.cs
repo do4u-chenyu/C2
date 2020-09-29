@@ -109,7 +109,7 @@
 
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.TextBox textBox1;
-        private Blumind.Controls.IconBox pictureBox1;
+        private Citta_T1.Controls.IconBox pictureBox1;
         private System.Windows.Forms.Button BtnOpen;
         private System.Windows.Forms.Button BtnOpenFolder;
     }

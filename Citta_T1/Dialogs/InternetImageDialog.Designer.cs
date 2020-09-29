@@ -83,7 +83,7 @@
             this.PicPreview.Size = new System.Drawing.Size(61, 59);
             this.PicPreview.TabIndex = 10006;
             this.PicPreview.TabStop = false;
-            this.PicPreview.ZoomType = Blumind.Controls.ZoomType.FitPage;
+            this.PicPreview.ZoomType = Citta_T1.Controls.ZoomType.FitPage;
             // 
             // LabInfo
             // 
@@ -198,7 +198,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox CmbUrl;
         private System.Windows.Forms.CheckBox CkbAddToLibrary;
-        private Blumind.Controls.ImageBox PicPreview;
+        private Citta_T1.Controls.ImageBox PicPreview;
         private System.Windows.Forms.Label LabInfo;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button BtnPreview;

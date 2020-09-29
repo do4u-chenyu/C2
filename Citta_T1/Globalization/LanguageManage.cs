@@ -73,7 +73,7 @@ namespace Citta_T1.Globalization
         {
             LoadLanguages();
 
-            var langid = Options.Current.GetString(Blumind.Configuration.OptionNames.Localization.LanguageID);
+            var langid = Options.Current.GetString(Citta_T1.Configuration.OptionNames.Localization.LanguageID);
             if (string.IsNullOrEmpty(langid))
             {
                 SetDefaultLanguage();
@@ -89,7 +89,7 @@ namespace Citta_T1.Globalization
             //D.Message("LoadLanguages...");
             _Languages.Clear();
 
-            string path = Blumind.Configuration.ProgramEnvironment.LanguagesDirectory;
+            string path = Citta_T1.Configuration.ProgramEnvironment.LanguagesDirectory;
             LoadLanguages(path);
 
             //AddLanguage(Language.LoadXml(Properties.Resources.ca_ES));

@@ -197,7 +197,7 @@ namespace Citta_T1.Model.Widgets
         //}
 
         //[DefaultValue(true), LocalDisplayName("Visible")]
-        //[TypeConverter(typeof(Blumind.Design.BoolConverter))]
+        //[TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
         //public bool Visible
         //{
         //    get { return _Visible; }
@@ -236,7 +236,7 @@ namespace Citta_T1.Model.Widgets
         public event EventHandler HyperlinkChanged;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Blumind.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Hyperlink
         {
             get

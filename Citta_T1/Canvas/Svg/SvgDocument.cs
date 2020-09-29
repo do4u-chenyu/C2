@@ -169,7 +169,7 @@ namespace Citta_T1.Canvas.Svg
             svg.SetAttribute("viewBox", string.Format("{0} {1} {2} {3}", 0, 0, Width, Height));
 
             // comment
-            var comment = dom.CreateComment("Create by Blumind, you can download it free from http://blumind.org ");
+            var comment = dom.CreateComment("Create by Citta_T1, you can download it free from http://Citta_T1.org ");
             svg.AppendChild(comment);
 
             // title

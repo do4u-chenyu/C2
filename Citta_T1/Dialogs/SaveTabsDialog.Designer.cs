@@ -39,7 +39,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Blumind.Properties.Resources.question_large;
+            this.pictureBox1.Image = global::Citta_T1.Properties.Resources.question_large;
             this.pictureBox1.Location = new System.Drawing.Point(11, 11);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(32, 32);
@@ -54,7 +54,7 @@
             this.LabMessage.Name = "LabMessage";
             this.LabMessage.Size = new System.Drawing.Size(347, 12);
             this.LabMessage.TabIndex = 3;
-            this.LabMessage.Text = "Do you want Blumind save tabs and open them next startup?";
+            this.LabMessage.Text = "Do you want Citta_T1 save tabs and open them next startup?";
             // 
             // BtnYes
             // 
@@ -125,9 +125,9 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label LabMessage;
-        private Blumind.Controls.PushButton BtnYes;
-        private Blumind.Controls.PushButton BtnNo;
+        private Citta_T1.Controls.PushButton BtnYes;
+        private Citta_T1.Controls.PushButton BtnNo;
         private System.Windows.Forms.CheckBox CkbDoNotAskMeAgain;
-        private Blumind.Controls.PushButton BtnCancel;
+        private Citta_T1.Controls.PushButton BtnCancel;
     }
 }

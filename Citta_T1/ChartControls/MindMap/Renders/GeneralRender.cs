@@ -687,7 +687,7 @@ namespace Citta_T1.Controls.MapViews
         {
             var pen = graphics.Pen(color, width);
 
-            if (Options.Current.GetBool(Blumind.Configuration.OptionNames.Charts.ShowLineArrowCap))
+            if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowLineArrowCap))
             {
                 /*int arrowSize = width;
                 int arrowSize2 = width * 2;

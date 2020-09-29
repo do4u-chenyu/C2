@@ -19,7 +19,7 @@ namespace Citta_T1.Configuration
         Dictionary<string, object> ChangedItems { get; set; }
 
         public event EventHandler OpitonsChanged;
-        public event Blumind.Core.PropertyChangedEventHandler OptionChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler OptionChanged;
 
         static Options()
         {

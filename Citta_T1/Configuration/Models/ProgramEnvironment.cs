@@ -51,7 +51,7 @@ namespace Citta_T1.Configuration
                     return Application.StartupPath;
                 case ProgramRunMode.Standard:
                 default:
-                    return Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Blumind");
+                    return Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Citta_T1");
             }
         }
 

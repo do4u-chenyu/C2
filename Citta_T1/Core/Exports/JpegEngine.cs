@@ -22,7 +22,7 @@ namespace Citta_T1.Core.Exports
             }
 
             [DefaultValue(80), LocalDisplayName("Quality")]
-            [Editor(typeof(Blumind.Design.JpegQualityEditor), typeof(UITypeEditor))]
+            [Editor(typeof(Citta_T1.Design.JpegQualityEditor), typeof(UITypeEditor))]
             public int Quality
             {
                 get { return _Quality; }

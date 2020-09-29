@@ -297,7 +297,7 @@
     <item name="The same filename already exists. Do you want to replace it?">The same filename already exists. Do you want to replace it?</item>
     <item name="Save tabs">Save tabs</item>
     <item name="Do not ask me again">Do not ask me again</item>
-    <item name="Do you want Blumind save tabs and open them next startup?">Do you want Blumind save tabs and open them next startup?</item>
+    <item name="Do you want Citta_T1 save tabs and open them next startup?">Do you want Citta_T1 save tabs and open them next startup?</item>
     <item name="Format Painter Description">Copy the format of a topic, and apply it to another one.
       Double-click this button to apply the format to multiple topics
     </item>
@@ -306,7 +306,7 @@
     <item name="There is a new version available">There is a new version available</item>
     <item name="Your current version is the latest">Your current version is the latest</item>
     <item name="Invalid URL">Invalid URL</item>
-    <item name="Unable to connect to the remote server, please visit our website.">Unable to connect to the remote server, please visit our website. (http://www.blumind.org)</item>
+    <item name="Unable to connect to the remote server, please visit our website.">Unable to connect to the remote server, please visit our website. (http://www.Citta_T1.org)</item>
     <item name="Please input Url below">Please input Url below</item>
 
     <item name="Save Recent Files">Save Recent Files</item>
@@ -358,7 +358,7 @@
     <item name="External">External</item>
     <item name="Decoration">Decoration</item>
     <item name="Strike Through">Strike Through</item>
-    <item name="Support Blumind development, Save the Poor programmer!">Support Blumind development, Save the Poor programmer!</item>
+    <item name="Support Citta_T1 development, Save the Poor programmer!">Support Citta_T1 development, Save the Poor programmer!</item>
     <item name="Advance">Advance</item>
     <item name="New Chart From Here">New Chart From Here</item>
     <item name="Text Alignment">Text Alignment</item>

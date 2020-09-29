@@ -465,7 +465,7 @@ namespace Citta_T1.Controls.MapViews
             PaintHelper.DrawDot(graphics, PenLine, point, ControlHandleSize);
         }
 
-        void Line_Changed(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        void Line_Changed(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (!SelectedObject.IsEmpty)
             {

@@ -131,7 +131,7 @@ namespace Citta_T1.Controls.MapViews
                 e.Graphics.Clip = new Region(e.MarginBounds);
 
                 // print document title
-                if (Options.Current.GetBool(Blumind.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
+                if (Options.Current.GetBool(Citta_T1.Configuration.OptionNames.PageSettigs.PrintDocumentTitle))
                 {
                     Point ptTitle = e.MarginBounds.Location;
                     var brush = new SolidBrush(Color.Black);

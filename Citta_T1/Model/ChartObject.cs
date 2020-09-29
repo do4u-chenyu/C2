@@ -12,7 +12,7 @@ using Citta_T1.Model.Documents;
 
 namespace Citta_T1.Model
 {
-    public abstract class ChartObject : Blumind.Core.INotifyPropertyChanged, IRemark, Blumind.Model.ISerializable//, IComponent
+    public abstract class ChartObject : Citta_T1.Core.INotifyPropertyChanged, IRemark, Citta_T1.Model.ISerializable//, IComponent
     {
         ChartPage _Chart;
         string _Text;
@@ -65,8 +65,8 @@ namespace Citta_T1.Model
         }
 
         [DefaultValue(null), LocalDisplayName("Remark"), LocalCategory("Data")]
-        [Editor(typeof(Blumind.Design.RemarkDesignEditor), typeof(UITypeEditor))]
-        [TypeConverter(typeof(Blumind.Design.RemarkTypeConverter))]
+        [Editor(typeof(Citta_T1.Design.RemarkDesignEditor), typeof(UITypeEditor))]
+        [TypeConverter(typeof(Citta_T1.Design.RemarkTypeConverter))]
         public string Remark
         {
             get { return _Remark; }
@@ -140,7 +140,7 @@ namespace Citta_T1.Model
         }
 
         #region Property Change
-        public event Blumind.Core.PropertyChangedEventHandler PropertyChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler PropertyChanged;
 
         [Browsable(false), DefaultValue(false)]
         public bool PropertyChangeSuspending { get; set; }
@@ -155,7 +155,7 @@ namespace Citta_T1.Model
             PropertyChangeSuspending = false;
         }
 
-        protected virtual void OnPropertyChanged(Blumind.Core.PropertyChangedEventArgs e)
+        protected virtual void OnPropertyChanged(Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if (PropertyChangeSuspending)
                 return;

@@ -291,7 +291,7 @@
 		<item name="The same filename already exists. Do you want to replace it?">Файл с таким именем уже существует. Хотите заменить его?</item>
 		<item name="Save tabs">Сохранить вкладки</item>
 		<item name="Do not ask me again">Не спрашивайте меня, снова</item>
-		<item name="Do you want Blumind save tabs and open them next startup?">Вы хотите, что бы Blumind сохранил вкладки и открыл их при следующем запуске?</item>
+		<item name="Do you want Citta_T1 save tabs and open them next startup?">Вы хотите, что бы Citta_T1 сохранил вкладки и открыл их при следующем запуске?</item>
 		<item name="Format Painter Description">Copy the format of a topic, and apply it to another one.		
 		Double-click this button to apply the format to multiple topics</item>
 		<item name="Checking">Проверяю…</item>

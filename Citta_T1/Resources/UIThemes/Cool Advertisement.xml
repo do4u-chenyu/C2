@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<theme name="Cool Advertisement" type="blumind-ui-theme" version="1.0">
+<theme name="Cool Advertisement" type="Citta_T1-ui-theme" version="1.0">
   <colors>
     <color name="Dark" value="#0F0F0F" />
     <color name="Light" value="#DFF299" />

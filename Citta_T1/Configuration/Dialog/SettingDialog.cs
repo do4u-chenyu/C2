@@ -12,7 +12,7 @@ namespace Citta_T1.Configuration.Dialog
     {
         //TabControl tabControl1;
         GeneralPage settingControl1;
-        Blumind.Controls.PushButton BtnRestoreDefault;
+        Citta_T1.Controls.PushButton BtnRestoreDefault;
 
         public SettingDialog()
         {

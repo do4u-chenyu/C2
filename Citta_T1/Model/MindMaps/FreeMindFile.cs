@@ -201,7 +201,7 @@ namespace Citta_T1.Model.MindMaps
 
             XmlElement root = dom.CreateElement("map");
             root.SetAttribute("version", "0.9.0");
-            root.AppendChild(dom.CreateComment(@"Export from the Blumind, download free mind mapping software Blumind from http://www.blumind.org"));
+            root.AppendChild(dom.CreateComment(@"Export from the Citta_T1, download free mind mapping software Citta_T1 from http://www.Citta_T1.org"));
             root.AppendChild(dom.CreateComment(@"To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net"));
             dom.AppendChild(root);
             SaveMindMap(root, mindMap.Root, mindMap);
@@ -231,9 +231,9 @@ namespace Citta_T1.Model.MindMaps
             if (!string.IsNullOrEmpty(topic.ID))
                 node.SetAttribute("ID", topic.ID);
             
-            if (topic.Vector == Blumind.Controls.Vector4.Left)
+            if (topic.Vector == Citta_T1.Controls.Vector4.Left)
                 node.SetAttribute("POSITION", "left");
-            else if (topic.Vector == Blumind.Controls.Vector4.Right)
+            else if (topic.Vector == Citta_T1.Controls.Vector4.Right)
                 node.SetAttribute("POSITION", "right");
 
             node.SetAttribute("TEXT", topic.Text);

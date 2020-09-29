@@ -95,8 +95,8 @@
 
         #endregion
 
-        private Blumind.Controls.PushButton BtnCancel;
-        private Blumind.Controls.PushButton BtnDownload;
+        private Citta_T1.Controls.PushButton BtnCancel;
+        private Citta_T1.Controls.PushButton BtnDownload;
         private System.Windows.Forms.Label LabMessage;
         private System.Windows.Forms.TextBox TxbVersions;
     }

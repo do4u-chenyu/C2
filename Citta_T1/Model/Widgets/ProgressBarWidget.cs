@@ -78,7 +78,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Auto Calculation"), LocalCategory("Data")]
-        [TypeConverter(typeof(Blumind.Design.BoolConverter))]
+        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
         public bool AutoCalculation
         {
             get { return _AutoCalculation; }
@@ -138,7 +138,7 @@ namespace Citta_T1.Model.Widgets
         }
 
         [DefaultValue(false), LocalDisplayName("Show Text"), LocalCategory("Style")]
-        [TypeConverter(typeof(Blumind.Design.BoolConverter))]
+        [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
         public bool ShowText
         {
             get { return _ShowText; }
@@ -389,7 +389,7 @@ namespace Citta_T1.Model.Widgets
                 string text = string.Format("{0}%", Value);
                 Rectangle rect = Bounds;
                 rect.Offset(translate);
-                Blumind.Core.Exports.SvgEngine.ExportText(text, ForeColor, font, g, rect);
+                Citta_T1.Core.Exports.SvgEngine.ExportText(text, ForeColor, font, g, rect);
             }
         }*/
 

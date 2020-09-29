@@ -62,7 +62,7 @@
             // 
             // TsbFind
             // 
-            this.TsbFind.Image = global::Blumind.Properties.Resources.find;
+            this.TsbFind.Image = global::Citta_T1.Properties.Resources.find;
             this.TsbFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbFind.Name = "TsbFind";
             this.TsbFind.Padding = new System.Windows.Forms.Padding(2);
@@ -78,7 +78,7 @@
             // 
             // TsbReplace
             // 
-            this.TsbReplace.Image = global::Blumind.Properties.Resources.replace;
+            this.TsbReplace.Image = global::Citta_T1.Properties.Resources.replace;
             this.TsbReplace.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TsbReplace.Name = "TsbReplace";
             this.TsbReplace.Padding = new System.Windows.Forms.Padding(2);
@@ -249,11 +249,11 @@
 
         #endregion
 
-        private Blumind.Controls.ToolStripPro myToolStrip1;
+        private Citta_T1.Controls.ToolStripPro myToolStrip1;
         private System.Windows.Forms.ToolStripButton TsbFind;
         private System.Windows.Forms.ToolStripButton TsbReplace;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private Blumind.Controls.FoldingBox FbOptions;
+        private Citta_T1.Controls.FoldingBox FbOptions;
         private System.Windows.Forms.CheckBox CkbCaseSensitive;
         private System.Windows.Forms.CheckBox CkbWholeWordOnly;
         private System.Windows.Forms.CheckBox CkbRegularExpression;
@@ -261,9 +261,9 @@
         private System.Windows.Forms.ComboBox CmbFindWhat;
         private System.Windows.Forms.Label LabReplaceWith;
         private System.Windows.Forms.ComboBox CmbReplaceWith;
-        private Blumind.Controls.PushButton BtnClose;
-        private Blumind.Controls.PushButton BtnReplace;
-        private Blumind.Controls.PushButton BtnFind;
+        private Citta_T1.Controls.PushButton BtnClose;
+        private Citta_T1.Controls.PushButton BtnReplace;
+        private Citta_T1.Controls.PushButton BtnFind;
         private System.Windows.Forms.CheckBox CkbWithHiddenItems;
     }
 }

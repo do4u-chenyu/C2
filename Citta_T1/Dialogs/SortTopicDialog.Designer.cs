@@ -54,6 +54,6 @@
 
         #endregion
 
-        private Blumind.Controls.SortBox sortBox1;
+        private Citta_T1.Controls.SortBox sortBox1;
     }
 }

@@ -21,7 +21,7 @@ namespace Citta_T1.Model.MindMaps
         , ITextObject
         , IWidgetContainer
         , IHyperlink
-        , Blumind.Core.INotifyPropertyChanged
+        , Citta_T1.Core.INotifyPropertyChanged
         , IColorToolTip
     {
         public Topic()
@@ -55,7 +55,7 @@ namespace Citta_T1.Model.MindMaps
         XList<Widget> _Widgets;
 
         public event EventHandler StyleChanged;
-        //public event Blumind.Model.PropertyChangedEventHandler WidgetChanged;
+        //public event Citta_T1.Model.PropertyChangedEventHandler WidgetChanged;
         public event EventHandler FoldedChanged;
         public event EventHandler DescriptionChanged;
         public event EventHandler IconChanged;
@@ -168,7 +168,7 @@ namespace Citta_T1.Model.MindMaps
 
         [DefaultValue(null)]
         [LocalDisplayName("Icon"), LocalCategory("Data")]
-        public Blumind.Model.Widgets.PictureWidget.PictureDesign Icon
+        public Citta_T1.Model.Widgets.PictureWidget.PictureDesign Icon
         {
             get 
             {
@@ -514,7 +514,7 @@ namespace Citta_T1.Model.MindMaps
             }
         }
 
-        private void OnWidgetChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        private void OnWidgetChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             //if (WidgetChanged != null)
             //{
@@ -535,7 +535,7 @@ namespace Citta_T1.Model.MindMaps
         public event EventHandler HyperlinkChanged;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Blumind.Design.HyperlinkEditor), typeof(UITypeEditor))]
+        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(UITypeEditor))]
         public string Hyperlink
         {
             get
@@ -1213,7 +1213,7 @@ namespace Citta_T1.Model.MindMaps
                 e.Item.PropertyChanged += new Citta_T1.Core.PropertyChangedEventHandler(Widget_Changed);
             }
 
-            Blumind.Core.PropertyChangedEventArgs arg = new Citta_T1.Core.PropertyChangedEventArgs("Items", null, null, ChangeTypes.All, false);
+            Citta_T1.Core.PropertyChangedEventArgs arg = new Citta_T1.Core.PropertyChangedEventArgs("Items", null, null, ChangeTypes.All, false);
             OnPropertyChanged(arg);
             //OnWidgetChanged(sender, PropertyChangeTypes.All);
         }
@@ -1233,7 +1233,7 @@ namespace Citta_T1.Model.MindMaps
             }
         }
 
-        void Widget_Changed(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        void Widget_Changed(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             OnWidgetChanged(sender as Widget, e);
         }

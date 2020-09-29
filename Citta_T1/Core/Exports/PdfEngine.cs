@@ -35,7 +35,7 @@ namespace Citta_T1.Core.Exports
             public PageOrientation Orientation { get; set; }
 
             [DefaultValue(true), LocalDisplayName("With Background")]
-            [TypeConverter(typeof(Blumind.Design.BoolConverter))]
+            [TypeConverter(typeof(Citta_T1.Design.BoolConverter))]
             public bool WithBackground { get; set; }
         }
 

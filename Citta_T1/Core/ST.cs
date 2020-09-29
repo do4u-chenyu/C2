@@ -651,7 +651,7 @@ namespace Citta_T1.Core
             if (iconNode == null || image == null)
                 throw new ArgumentNullException();
 
-            Image image2 = Blumind.Controls.PaintHelper.CopyImage(image);
+            Image image2 = Citta_T1.Controls.PaintHelper.CopyImage(image);
 
             XmlCDataSection cdata = iconNode.OwnerDocument.CreateCDataSection(ImageBase64String(image2));
             iconNode.AppendChild(cdata);

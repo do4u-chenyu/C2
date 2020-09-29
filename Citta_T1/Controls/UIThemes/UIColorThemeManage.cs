@@ -54,7 +54,7 @@ namespace Citta_T1.Controls
         {
             AllThemes.Clear();
 
-            string path = Blumind.Configuration.ProgramEnvironment.UIThemesDirectory;
+            string path = Citta_T1.Configuration.ProgramEnvironment.UIThemesDirectory;
             if (Directory.Exists(path))
             {
                 var files = Directory.GetFiles(path, string.Format("*{0}", ColorThemeFileExtension));

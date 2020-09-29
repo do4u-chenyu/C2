@@ -11,7 +11,7 @@ namespace Citta_T1.Controls.MapViews
     {
         public MindMapLayoutArgs()
         {
-            ShowRemarkIcon = Options.Current.GetBool(Blumind.Configuration.OptionNames.Charts.ShowRemarkIcon);
+            ShowRemarkIcon = Options.Current.GetBool(Citta_T1.Configuration.OptionNames.Charts.ShowRemarkIcon);
             ShowLineArrowCap = Options.Current.GetBool(OptionNames.Charts.ShowLineArrowCap);
         }
 

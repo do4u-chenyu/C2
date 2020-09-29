@@ -310,7 +310,7 @@
     <item name="The same filename already exists. Do you want to replace it?">Un fichier portant le même nom existe déjà. Voulez-vous le remplacer ?</item>
     <item name="Save tabs">Sauvegarder les onglets</item>
     <item name="Do not ask me again">Ne plus me demander</item>
-    <item name="Do you want Blumind save tabs and open them next startup?">Souhaitez-vous que Blumind sauvegarde les onglets et les ouvre de nouveau lors du prochain démarrage ?</item>
+    <item name="Do you want Citta_T1 save tabs and open them next startup?">Souhaitez-vous que Citta_T1 sauvegarde les onglets et les ouvre de nouveau lors du prochain démarrage ?</item>
     <item name="Format Painter Description">Copier le style d'un objet et l'appliquer à un autre. Double-cliquez sur ce bouton pour appliquer le style à plusieurs objets.</item>
     <item name="Checking">Vérification en cours</item>
     <item name="There is a new version available">Une nouvelle version ("{0}") est disponible</item>
@@ -364,7 +364,7 @@
     <item name="External">Externe</item>
     <item name="Decoration">Décoration</item>
     <item name="Strike Through">Barré</item>
-    <item name="Support Blumind development, Save the Poor programmer!">Soutenir le développement de Blumind, sauvez le pauvre programmeur!</item>
+    <item name="Support Citta_T1 development, Save the Poor programmer!">Soutenir le développement de Citta_T1, sauvez le pauvre programmeur!</item>
     <item name="Advance">Avance</item>
     <item name="New Chart From Here">Nouvelle carte à partir d'ici</item>
     <item name="Text Alignment">Alignement du texte</item>

@@ -25,8 +25,8 @@ namespace Citta_T1.Dialogs
 
         Thread CheckThread;
         VersionInfo NewVersionInfo;
-        const string LastVersionUrl = "http://www.blumind.org/products/blumind/last_version.txt";
-        const string ChangesUrl = "http://www.blumind.org/products/blumind/changes.txt";
+        const string LastVersionUrl = "http://www.Citta_T1.org/products/Citta_T1/last_version.txt";
+        const string ChangesUrl = "http://www.Citta_T1.org/products/Citta_T1/changes.txt";
 
         private delegate void CheckEndCallBack(bool haveNew, VersionInfo version);
 

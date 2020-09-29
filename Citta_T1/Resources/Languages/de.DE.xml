@@ -295,7 +295,7 @@
     <item name="The same filename already exists. Do you want to replace it?">Die Datei ist bereits vorhanden. Vorhandene Datei ersetzen?</item>
     <item name="Save tabs">Reiter speichern</item>
     <item name="Do not ask me again">Nicht noch einmal fragen.</item>
-    <item name="Do you want Blumind save tabs and open them next startup?">Soll Blumind die Reiter speichern und beim nächsten Start wieder öffnen?</item>
+    <item name="Do you want Citta_T1 save tabs and open them next startup?">Soll Citta_T1 die Reiter speichern und beim nächsten Start wieder öffnen?</item>
     <item name="Format Painter Description">Kopiert das Diagramm eines Themas in ein anderes Thema. Doppelklicken Sie dieses Symbol um das Format in mehreren Diagrammen einzufügen.</item>
     <item name="Checking">Prüfe</item>
     <item name="There is a new version available">Eine neue Version: "{0}" kann benutzt werden.</item>

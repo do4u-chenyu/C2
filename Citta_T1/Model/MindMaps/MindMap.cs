@@ -288,7 +288,7 @@ namespace Citta_T1.Model.MindMaps
         #region Topic Events
         //public event TopicEventHandler TopicStyleChanged;
         //public event TopicEventHandler TopicTextChanged;
-        public event Blumind.Core.PropertyChangedEventHandler TopicWidgetChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler TopicWidgetChanged;
         public event TopicEventHandler TopicDescriptionChanged;
         public event TopicEventHandler TopicIconChanged;
         public event TopicEventHandler TopicFoldedChanged;
@@ -323,7 +323,7 @@ namespace Citta_T1.Model.MindMaps
         //    }
         //}
 
-        internal void OnTopicWidgetChanged(Topic topic, Widget widget, Blumind.Core.PropertyChangedEventArgs e)
+        internal void OnTopicWidgetChanged(Topic topic, Widget widget, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             if(e.HasChanges(ChangeTypes.Data))
                 Modified = true;
@@ -469,12 +469,12 @@ namespace Citta_T1.Model.MindMaps
 
         #region Links Events
         [Category("Link Events")]
-        public event Blumind.Core.PropertyChangedEventHandler LinkPropertyChanged;
+        public event Citta_T1.Core.PropertyChangedEventHandler LinkPropertyChanged;
 
         [Category("Link Events")]
         public event LinkEventHandler LinkVisibleChanged;
 
-        public void OnLinkPropertyChanged(object sender, Blumind.Core.PropertyChangedEventArgs e)
+        public void OnLinkPropertyChanged(object sender, Citta_T1.Core.PropertyChangedEventArgs e)
         {
             Modified = true;
 

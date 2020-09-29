@@ -25,7 +25,7 @@ namespace Citta_T1.Core
         public static readonly DocumentType Txt;
         public static readonly DocumentType Csv;
         public static readonly DocumentType FreeMind;
-        public static readonly DocumentType Blumind;
+        public static readonly DocumentType Citta_T1;
         public static readonly DocumentType Pdf;
 
         static DocumentType()
@@ -63,8 +63,8 @@ namespace Citta_T1.Core
             FreeMind = new DocumentType("FreeMind", 
                 "application/freemind",
                 new string[] { ".mm" });
-            Blumind = new DocumentType("Blumind",
-                "application/blumind",
+            Citta_T1 = new DocumentType("Citta_T1",
+                "application/Citta_T1",
                 new string[] { Document.Extension });
             Pdf = new DocumentType("PDF",
                 "application/pdf",
@@ -162,7 +162,7 @@ namespace Citta_T1.Core
                  FreeMind,
                  Txt,
                  Csv,
-                 Blumind,
+                 Citta_T1,
                  Pdf,
             };
         }

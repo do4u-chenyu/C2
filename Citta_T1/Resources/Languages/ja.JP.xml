@@ -16,7 +16,7 @@
     <item name="Options">オプション</item>
     <item name="Recent Files">最近使用したファイル</item>
     <item name="Export">エクスポート</item>
-    <item name="Exit">Blumind の終了</item>
+    <item name="Exit">Citta_T1 の終了</item>
     <item name="Save">上書き保存</item>
     <item name="Save As">名前を付けて保存</item>
     <item name="More">その他</item>
@@ -123,7 +123,7 @@
     <item name="Refresh">更新</item>
     <item name="Associate .bmd File">.bmd ファイルを関連付ける</item>
     <item name="Shape">形状</item>
-    <item name="Home Page">Blumind Web サイト</item>
+    <item name="Home Page">Citta_T1 Web サイト</item>
     <item name="Width">幅</item>
     <item name="Height">高さ</item>
     <item name="Custom Width">幅 (カスタム)</item>
@@ -290,15 +290,15 @@
     <item name="The same filename already exists. Do you want to replace it?">ファイル名は既に存在します。 置き換えますか?</item>
     <item name="Save tabs">タブの保存</item>
     <item name="Do not ask me again">今後は確認しない</item>
-    <item name="Do you want Blumind save tabs and open them next startup?">タブを保存し、次回の起動時に開きますか?</item>
+    <item name="Do you want Citta_T1 save tabs and open them next startup?">タブを保存し、次回の起動時に開きますか?</item>
     <item name="Format Painter Description">"トピックの書式を保持して別のトピックにコピーします。
 
     使い方: 1. コピーする書式のトピックを選択します。
     2. このボタンをクリックします。 (複数の別のトピックに貼り付けるには、このボタンをダブルクリックします。)
     3. 貼り付けるトピックをクリックします。"</item>
     <item name="Checking">確認しています</item>
-    <item name="There is a new version available">新しいバージョン "{0}" の Blumind をご利用いただけます。</item>
-    <item name="Your current version is the latest">お使いの Blumind は最新です。</item>
+    <item name="There is a new version available">新しいバージョン "{0}" の Citta_T1 をご利用いただけます。</item>
+    <item name="Your current version is the latest">お使いの Citta_T1 は最新です。</item>
     <item name="Invalid URL">無効な URL</item>
     <item name="Unable to connect to the remote server, please visit our website.">リモート サーバーに接続できません、弊社の Web サイトを参照してください。</item>
     <item name="Please input Url below">URLを入力してください</item>

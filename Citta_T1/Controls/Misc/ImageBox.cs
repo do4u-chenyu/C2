@@ -66,7 +66,7 @@ namespace Citta_T1.Controls
 
         protected virtual void OnZoomChanged()
         {
-            if (Image != null && ZoomType == Blumind.Controls.ZoomType.Custom)
+            if (Image != null && ZoomType == Citta_T1.Controls.ZoomType.Custom)
             {
                 CalcaluteImageViewSize();
                 Invalidate();
@@ -193,7 +193,7 @@ namespace Citta_T1.Controls
                     }
                     catch
                     {
-                        _ScrollCursor = Blumind.Resources.RS.GetCursor("cur_scroll");
+                        _ScrollCursor = Citta_T1.Resources.RS.GetCursor("cur_scroll");
                     }
                 }
 
@@ -298,13 +298,13 @@ namespace Citta_T1.Controls
         public void ZoomIn()
         {
             Zoom = (int)(ZoomValue / 0.25f + 1) * 0.25f;
-            ZoomType = Blumind.Controls.ZoomType.Custom;
+            ZoomType = Citta_T1.Controls.ZoomType.Custom;
         }
 
         public void ZoomOut()
         {
             Zoom = (int)(ZoomValue / 0.25f - 1) * 0.25f;
-            ZoomType = Blumind.Controls.ZoomType.Custom;
+            ZoomType = Citta_T1.Controls.ZoomType.Custom;
         }
         #endregion
     }

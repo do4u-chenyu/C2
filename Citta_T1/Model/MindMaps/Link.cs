@@ -20,7 +20,7 @@ namespace Citta_T1.Model.MindMaps
     public class Link : ChartObject
         , ITextObject
         , IHyperlink
-        , Blumind.Core.INotifyPropertyChanged
+        , Citta_T1.Core.INotifyPropertyChanged
         //, IColorToolTip
     {
         //string _FromID;
@@ -252,7 +252,7 @@ namespace Citta_T1.Model.MindMaps
         private string _Hyperlink = null;
 
         [DefaultValue(null), LocalDisplayName("Hyperlink"), LocalCategory("Data")]
-        [Editor(typeof(Blumind.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [Editor(typeof(Citta_T1.Design.HyperlinkEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public string Hyperlink
         {
             get
@@ -449,7 +449,7 @@ namespace Citta_T1.Model.MindMaps
 
         public void SetChanged()
         {
-            Blumind.Core.PropertyChangedEventArgs e = new Citta_T1.Core.PropertyChangedEventArgs(null, null, null, ChangeTypes.All, false);
+            Citta_T1.Core.PropertyChangedEventArgs e = new Citta_T1.Core.PropertyChangedEventArgs(null, null, null, ChangeTypes.All, false);
             OnPropertyChanged(e);
         }
 
