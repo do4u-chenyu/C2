@@ -100,7 +100,7 @@ namespace Citta_T1
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new Blumind.Controls.MdiWorkSpace();
+            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -1003,6 +1003,6 @@ namespace Citta_T1
         private Button stopButton;
         private Button runButton;
         private Controls.Flow.NaviViewControl naviViewControl;
-        private Blumind.Controls.MdiWorkSpace mdiWorkSpace1;
+        private Citta_T1.Controls.MdiWorkSpace mdiWorkSpace1;
     }
 }

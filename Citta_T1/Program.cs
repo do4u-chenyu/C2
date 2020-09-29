@@ -18,6 +18,7 @@ namespace Citta_T1
         private DesignerModelClass() { }
         //用于标识运行时/设计时的bool型静态成员，初始值设为false  
         public static bool IsDesignerMode = true;
+        public static MainForm MainForm { get; private set; }
     }
     static class Program
     {
@@ -36,7 +37,6 @@ namespace Citta_T1
             if (instance == null)
             {
                 //1.1 没有实例在运行
-
                 Application.Run(new LoginForm());
                 Application.EnableVisualStyles();
 
