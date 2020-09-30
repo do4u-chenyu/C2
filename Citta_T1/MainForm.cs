@@ -905,5 +905,10 @@ namespace Citta_T1
             return doc;
         }
         #endregion
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
