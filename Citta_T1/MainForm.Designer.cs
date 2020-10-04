@@ -72,7 +72,7 @@ namespace Citta_T1
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.mdiWorkSpace1 = new Blumind.Controls.MdiWorkSpace();
+            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
