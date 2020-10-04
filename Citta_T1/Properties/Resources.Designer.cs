@@ -241,6 +241,16 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon check_update1 {
+            get {
+                object obj = ResourceManager.GetObject("check_update1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap chevron {
@@ -333,10 +343,20 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap cross_large1 {
+        internal static System.Drawing.Bitmap cross_large {
             get {
-                object obj = ResourceManager.GetObject("cross_large1", resourceCulture);
+                object obj = ResourceManager.GetObject("cross_large", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] cur_style_brush {
+            get {
+                object obj = ResourceManager.GetObject("cur_style_brush", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -479,23 +499,23 @@ namespace Citta_T1.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
         /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Icon document_icon
-        {
-            get
-            {
+        internal static System.Drawing.Icon document_icon {
+            get {
                 object obj = ResourceManager.GetObject("document_icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap donation1 {
+        internal static System.Drawing.Bitmap donation {
             get {
-                object obj = ResourceManager.GetObject("donation1", resourceCulture);
+                object obj = ResourceManager.GetObject("donation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -597,6 +617,41 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("edit_font_size_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;dictionary&gt;
+        ///	&lt;information id=&quot;en-US&quot; name=&quot;English&quot; nature_name=&quot;English&quot; stable=&quot;true&quot; &gt;
+        ///    &lt;author name=&quot;&quot; email=&quot;&quot;/&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;compatibility&gt;
+        ///    &lt;culture id=&quot;en&quot;/&gt;
+        ///    &lt;culture id=&quot;english&quot;/&gt;
+        ///    &lt;culture id=&quot;en-uk&quot;/&gt;
+        ///  &lt;/compatibility&gt;
+        ///	&lt;words&gt;
+        ///		&lt;item name=&quot;Menu&quot;&gt;MENU&lt;/item&gt;
+        ///    
+        ///		&lt;item name=&quot;Show Line Arrow&quot;&gt;Show Line Arrow Cap&lt;/item&gt;
+        ///		&lt;item name=&quot;Key_Add&quot;&gt;+&lt;/item&gt;
+        ///		&lt;item name=&quot;Key_Subtract&quot;&gt;-&lt;/item&gt;
+        ///		&lt;item name=&quot;Key_Multiply&quot;&gt;*&lt;/ [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string en_US {
+            get {
+                return ResourceManager.GetString("en_US", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon exclamation {
+            get {
+                object obj = ResourceManager.GetObject("exclamation", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -781,6 +836,16 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon globe_network {
+            get {
+                object obj = ResourceManager.GetObject("globe_network", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap groupOp {
@@ -797,6 +862,16 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("hand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] hand_cur {
+            get {
+                object obj = ResourceManager.GetObject("hand_cur", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -821,6 +896,42 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon hourglass_ico {
+            get {
+                object obj = ResourceManager.GetObject("hourglass_ico", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+        ///&lt;!-- 
+        /// Copyright © 2008 by Gert van &apos;t Slot
+        /// License: Microsoft Public License (Ms-PL)
+        /// Full license text at: http://www.codeplex.com/WinformHtmlTextbox/license
+        ///--&gt;
+        ///&lt;html&gt;
+        ///	&lt;head&gt;
+        ///		&lt;title&gt;&lt;/title&gt;
+        ///		&lt;style id=&quot;styleFixed&quot; type=&quot;text/css&quot;&gt;
+        ///		    body {
+        ///                margin: 2px;
+        ///                font-family: Corbel, Arial, Helvetica, sans-serif;
+        ///                font-size: small;
+        ///            }
+        ///		    .clsTextBox 
+        ///		    {
+        ///		       [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string html_content {
+            get {
+                return ResourceManager.GetString("html_content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap hyperlink {
@@ -831,12 +942,32 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon icon_lib {
+            get {
+                object obj = ResourceManager.GetObject("icon_lib", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon image_icon {
+            get {
+                object obj = ResourceManager.GetObject("image_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -907,6 +1038,16 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("keyboard", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon keyboard_icon {
+            get {
+                object obj = ResourceManager.GetObject("keyboard_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1001,6 +1142,16 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon layout_type {
+            get {
+                object obj = ResourceManager.GetObject("layout_type", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap list_bullets {
@@ -1017,6 +1168,16 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("list_numbered", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon logo_icon {
+            get {
+                object obj = ResourceManager.GetObject("logo_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1361,6 +1522,16 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon preferences_icon {
+            get {
+                object obj = ResourceManager.GetObject("preferences_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap preview {
@@ -1437,6 +1608,16 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("property", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon property_icon {
+            get {
+                object obj = ResourceManager.GetObject("property_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -1783,9 +1964,9 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap tab_button1 {
+        internal static System.Drawing.Bitmap tab_button {
             get {
-                object obj = ResourceManager.GetObject("tab_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("tab_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1803,10 +1984,25 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap taskbar_close_button1 {
+        internal static System.Drawing.Bitmap taskbar_close_button {
             get {
-                object obj = ResourceManager.GetObject("taskbar_close_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("taskbar_close_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;thanks&gt;
+        ///  &lt;people name=&quot;Yusuke Kamiyamane&quot; jobs=&quot;Icon&quot; email=&quot;&quot;/&gt;
+        ///  &lt;people name=&quot;Corinne Lombardo&quot; jobs=&quot;Quick Help&quot; email=&quot;afrenchy@orange.fr&quot;/&gt;
+        ///  &lt;people name=&quot;easyhappy&quot; jobs=&quot;启发解决输入法问题&quot; email=&quot;easyhappy@163.com&quot;/&gt;&gt;
+        ///  &lt;people name=&quot;Michael&quot; jobs=&quot;Donation&quot; email=&quot;mkmurphym@yahoo.com&quot;/&gt;
+        ///&lt;/thanks&gt; 的本地化字符串。
+        /// </summary>
+        internal static string thanks {
+            get {
+                return ResourceManager.GetString("thanks", resourceCulture);
             }
         }
         
@@ -1827,6 +2023,28 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("theme_manage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos; ?&gt;
+        ///&lt;themes name=&quot;Internal&quot;&gt;
+        ///	&lt;folder name=&quot;General&quot;&gt;
+        ///		&lt;theme name=&quot;Garden&quot;&gt;
+        ///			&lt;back_color&gt;#D8CAA8&lt;/back_color&gt;
+        ///			&lt;fore_color&gt;Black&lt;/fore_color&gt;
+        ///			&lt;line_color&gt;#88785E&lt;/line_color&gt;
+        ///			&lt;border_color&gt;#382513&lt;/border_color&gt;
+        ///			&lt;node_back_color&gt;#5C832F&lt;/node_back_color&gt;
+        ///			&lt;node_fore_color&gt;Black&lt;/node_fore_color&gt;
+        ///			&lt;select_color&gt;#284907&lt;/select_color&gt;
+        ///			&lt;hover_color&gt;#284907&lt;/hover_color&gt;
+        ///			&lt;root_back_color&gt;#363942&lt;/root_back_color&gt;
+        ///			&lt;root_fore_color&gt;#F2F0 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string themes {
+            get {
+                return ResourceManager.GetString("themes", resourceCulture);
             }
         }
         
@@ -1853,9 +2071,9 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap tip_close_button1 {
+        internal static System.Drawing.Bitmap tip_close_button {
             get {
-                object obj = ResourceManager.GetObject("tip_close_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("tip_close_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1863,9 +2081,9 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap tip_pin_button1 {
+        internal static System.Drawing.Bitmap tip_pin_button {
             get {
-                object obj = ResourceManager.GetObject("tip_pin_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("tip_pin_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1873,9 +2091,9 @@ namespace Citta_T1.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap tip_pin_pressed_button1 {
+        internal static System.Drawing.Bitmap tip_pin_pressed_button {
             get {
-                object obj = ResourceManager.GetObject("tip_pin_pressed_button1", resourceCulture);
+                object obj = ResourceManager.GetObject("tip_pin_pressed_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1971,6 +2189,28 @@ namespace Citta_T1.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;themes name=&quot;Windows Color Schemes&quot;&gt;
+        ///	&lt;theme name=&quot;Brick&quot;&gt;
+        ///		&lt;back_color&gt;#FFFFFF&lt;/back_color&gt;
+        ///		&lt;fore_color&gt;#000000&lt;/fore_color&gt;
+        ///		&lt;line_color&gt;#000000&lt;/line_color&gt;
+        ///		&lt;border_color&gt;#8D8961&lt;/border_color&gt;
+        ///		&lt;node_back_color&gt;#C2BFA5&lt;/node_back_color&gt;
+        ///		&lt;node_fore_color&gt;#000000&lt;/node_fore_color&gt;
+        ///		&lt;select_color&gt;#8D8961&lt;/select_color&gt;
+        ///		&lt;hover_color&gt;#800000&lt;/hover_color&gt;
+        ///		&lt;root_back_color&gt;#800000&lt;/root_back_color&gt;
+        ///		&lt;root_fore_color&gt;#E1E0D2&lt;/root_fore_color&gt;
+        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string windows_themes {
+            get {
+                return ResourceManager.GetString("windows_themes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap wordFilterOp {
@@ -1997,6 +2237,32 @@ namespace Citta_T1.Properties {
             get {
                 object obj = ResourceManager.GetObject("yes", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;dictionary&gt;
+        ///	&lt;information id=&quot;zh-CHS&quot; name=&quot;Chinese Simplified&quot; nature_name=&quot;简体中文&quot; stable=&quot;true&quot; &gt;
+        ///    &lt;author name=&quot;&quot; email=&quot;&quot;/&gt;
+        ///  &lt;/information&gt;
+        ///  &lt;compatibility&gt;
+        ///    &lt;culture id=&quot;chinese&quot;/&gt;
+        ///    &lt;culture id=&quot;zh&quot;/&gt;
+        ///    &lt;culture id=&quot;chs&quot;/&gt;
+        ///    &lt;culture id=&quot;zh-cn&quot;/&gt;
+        ///    &lt;culture id=&quot;zh-mo&quot;/&gt;
+        ///    &lt;culture id=&quot;zh-sg&quot;/&gt;
+        ///  &lt;/compatibility&gt;
+        ///	&lt;words&gt;		
+        ///		&lt;item name=&quot;About&quot;&gt;关于&lt;/item&gt;
+        ///		&lt;item name=&quot;Menu&quot;&gt;菜 单&lt;/item&gt;
+        ///		&lt;item name=&quot;Open&quot;&gt;打开&lt;/item&gt;
+        ///		&lt;item name=&quot;N [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string zh_CHS {
+            get {
+                return ResourceManager.GetString("zh_CHS", resourceCulture);
             }
         }
         

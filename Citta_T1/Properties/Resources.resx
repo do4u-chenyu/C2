@@ -643,10 +643,10 @@
   <data name="tabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tab_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tab_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tab_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="taskbar_close_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="taskbar_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\taskbar_close_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="theme" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -661,13 +661,13 @@
   <data name="tick_small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tick_small.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tip_close_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tip_close_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tip_close_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tip_pin_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tip_pin_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tip_pin_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="tip_pin_pressed_button1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="tip_pin_pressed_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tip_pin_pressed_button1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tool_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -705,5 +705,65 @@
   </data>
   <data name="_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check_update1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\check_update.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cur_style_brush" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cur_style_brush1.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="document_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\document.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="en_US" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\en.US.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="exclamation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exclamation.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="globe_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\globe_network.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hand_cur" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hand_cur.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="hourglass_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hourglass_ico.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="html_content" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\html_content.htm;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="icon_lib" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_lib.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="image_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\image.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keyboard_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keyboard.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="layout_type" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\layout_type.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="preferences_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\preferences_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="property_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\property.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="thanks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thanks1.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="themes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\themes1.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="windows_themes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\windows_themes1.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="zh_CHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zh.CHS.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

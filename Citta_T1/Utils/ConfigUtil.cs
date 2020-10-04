@@ -23,7 +23,7 @@ namespace Citta_T1.Utils
         }
         public static bool TrySetAppSettingsByKey(string key, string configValue)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            System.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             try
             {
                 // 先清空
