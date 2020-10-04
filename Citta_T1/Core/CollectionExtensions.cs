@@ -74,10 +74,10 @@ namespace Citta_T1.Core
             return false;
         }
 
-        public static bool Contains<T>(this IEnumerable<T> list, T value)
-        {
-            return Contains<T>(list, value, EqualityComparer<T>.Default);
-        }
+        //public static bool Contains<T>(this IEnumerable<T> list, T value)
+        //{
+        //    return Contains<T>(list, value, EqualityComparer<T>.Default);
+        //}
 
         public static bool Contains<T>(this IEnumerable<T> list, T value, EqualityComparer<T> equalityComparer)
         {
