@@ -259,7 +259,7 @@ namespace Citta_T1.Controls
             if (button == null)
                 throw new ArgumentNullException();
 
-            if (Buttons.Contains(button))
+            if (Buttons._Contains(button))
             {
                 Buttons = Buttons.Where(b => b != button).ToArray();
                 ResetControlsBounds();

@@ -115,7 +115,7 @@ namespace Citta_T1.Core.Documents
                     continue;
                 accessedObjects.Add(subTopic);
 
-                if (recursive || allObjects.Contains(subTopic))
+                if (recursive || allObjects._Contains(subTopic))
                 {
                     SerializeTopic(sb, subTopic, level + 1, recursive, allObjects, accessedObjects);
                 }

@@ -24,7 +24,7 @@ using Citta_T1;
 using Citta_T1.Model.MindMaps;
 using Citta_T1.Model.Styles;
 using Citta_T1.Globalization;
-#region
+#region Blumind
 using System.ComponentModel;
 using System.IO;
 using System.Text;
@@ -246,7 +246,7 @@ namespace Citta_T1
             foreach (string modelTitle in allModelTitle)
             {
                 this.myModelControl.AddModel(modelTitle);
-                if (!modelTitles.Contains(modelTitle))
+                if (!modelTitles._Contains(modelTitle))
                     this.myModelControl.EnableClosedDocumentMenu(modelTitle);
             }
             // 显示当前模型
@@ -928,7 +928,7 @@ namespace Citta_T1
             //doc.Modified = true;
             return doc;
         }
-        private void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
+        public void ShowFindDialog(ChartControl chartControl, FindDialog.FindDialogMode mode)
         {
             if (MyFindDialog == null || MyFindDialog.IsDisposed)
             {
@@ -948,6 +948,111 @@ namespace Citta_T1
             else
                 MyFindDialog.Show(this);
             MyFindDialog.ResetFocus();
+        }
+        public void OpenDocument(string filename)
+        {
+            if (string.IsNullOrEmpty(filename))
+                return;
+
+            if (!File.Exists(filename))
+            {
+                this.ShowMessage(string.Format(Lang._("File \"{0}\" Not Exists"), filename), MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(filename) && File.Exists(filename))
+            {
+                FileInfo fif = new FileInfo(filename);
+                OpenDocument(filename, fif.IsReadOnly);
+            }
+        }
+
+        public void OpenDocument(string filename, bool readOnly)
+        {
+            BaseDocumentForm form = FindDocumentForm(filename);
+            if (form != null)
+            {
+                SelectForm(form);
+            }
+            else
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    Document doc = null;
+                    string ext = Path.GetExtension(filename);
+                    if (ext.ToLower() == ".mm")
+                        doc = FreeMindFile.LoadFile(filename);
+                    else
+                        doc = Document.Load(filename);
+
+                    if (doc != null)
+                    {
+                        form = OpenDocument(doc, readOnly);
+                        if (form != null)
+                            form.Filename = filename;
+                    }
+
+                    RecentFilesManage.Default.Push(filename);
+                    Cursor.Current = Cursors.Default;
+                }
+                catch (System.Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    Helper.WriteLog(ex);
+                    this.ShowMessage("File name is invalid or the format is not supported", MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public BaseDocumentForm OpenDocument(Document doc, bool readOnly)
+        {
+            if (doc != null)
+            {
+                BaseDocumentForm form = new DocumentForm(doc);
+                form.ReadOnly = readOnly;
+                ShowForm(form);
+                return form;
+            }
+
+            return null;
+        }
+
+        void OpenDocuments(string[] filenames)
+        {
+            if (filenames != null)
+            {
+                for (int i = 0; i < filenames.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(filenames[i]))
+                        continue;
+                    OpenDocument(filenames[i]);
+                }
+            }
+        }
+        public void OpenDocument()
+        {
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                OpenDocument(openFileDialog1.FileName, openFileDialog1.ReadOnlyChecked);
+            }
+        }
+        public void ShowOptionsDialog()
+        {
+            var dialog = new Citta_T1.Configuration.Dialog.SettingDialog();
+            dialog.ShowDialog(this);
+        }
+        BaseDocumentForm FindDocumentForm(string filename)
+        {
+            foreach (Form form in Forms)
+            {
+                if (form is BaseDocumentForm && StringComparer.OrdinalIgnoreCase.Equals(((BaseDocumentForm)form).Filename, filename))
+                {
+                    return (BaseDocumentForm)form;
+                }
+            }
+
+            return null;
         }
         #endregion
 

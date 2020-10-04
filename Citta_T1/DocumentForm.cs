@@ -969,9 +969,8 @@ namespace Citta_T1
 
         void ShowFindDialog(FindDialog.FindDialogMode mode)
         {
-            if (ActiveChartBox != null)
             {
-                MainForm.ShowFindDialog(this.ActiveChartBox, mode);
+                Program.MainForm.ShowFindDialog(this.ActiveChartBox, mode);
             }
         }
 

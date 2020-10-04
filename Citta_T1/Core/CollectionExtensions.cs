@@ -61,7 +61,7 @@ namespace Citta_T1.Core
             return false;
         }
 
-        public static bool Contains<T>(this T[] array, T value)
+        public static bool _Contains<T>(this T[] array, T value)
         {
             if (array == null)
                 throw new ArgumentNullException();
@@ -74,12 +74,12 @@ namespace Citta_T1.Core
             return false;
         }
 
-        //public static bool Contains<T>(this IEnumerable<T> list, T value)
-        //{
-        //    return Contains<T>(list, value, EqualityComparer<T>.Default);
-        //}
+        public static bool _Contains<T>(this IEnumerable<T> list, T value)
+        {
+            return _Contains<T>(list, value, EqualityComparer<T>.Default);
+        }
 
-        public static bool Contains<T>(this IEnumerable<T> list, T value, EqualityComparer<T> equalityComparer)
+        public static bool _Contains<T>(this IEnumerable<T> list, T value, EqualityComparer<T> equalityComparer)
         {
             if (list == null)
                 throw new ArgumentNullException();
@@ -96,7 +96,7 @@ namespace Citta_T1.Core
             return false;
         }
 
-        public static bool Contains<T>(this IEnumerable<T> list, T value, EqualityComparison<T> comparison)
+        public static bool _Contains<T>(this IEnumerable<T> list, T value, EqualityComparison<T> comparison)
         {
             if (list == null)
                 throw new ArgumentNullException();
@@ -173,7 +173,7 @@ namespace Citta_T1.Core
 
             foreach (var item in first)
             {
-                if (!second.Contains(item))
+                if (!second._Contains(item))
                     return false;
             }
 

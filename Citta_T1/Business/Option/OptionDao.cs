@@ -130,7 +130,7 @@ namespace Citta_T1.Business.Option
             {
                 //python算子、IA多源算子中的其他分隔符字段允许为空,输入其他参数\指定结果文件也可能为空题 ，  
                 //sort的结束行数也能为空。。。，直接判断为空会出问
-                if (keys.Contains(kvp.Key))
+                if (keys._Contains(kvp.Key))
                     continue;
 
                 if (String.IsNullOrWhiteSpace(kvp.Value))

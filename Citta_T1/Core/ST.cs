@@ -1196,7 +1196,7 @@ namespace Citta_T1.Core
 
             var illegal = Path.GetInvalidFileNameChars();
             var charts = from c in filename
-                         where !illegal.Contains(c)
+                         where !illegal._Contains(c)
                          select c;
             return new string(charts.ToArray());
         }
@@ -1208,7 +1208,7 @@ namespace Citta_T1.Core
 
             var illegal = Path.GetInvalidPathChars();
             var charts = from c in path
-                         where !illegal.Contains(c)
+                         where !illegal._Contains(c)
                          select c;
             return new string(charts.ToArray());
         }

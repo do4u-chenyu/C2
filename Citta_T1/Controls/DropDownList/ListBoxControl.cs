@@ -169,7 +169,7 @@ namespace Citta_T1.Controls
         void Items_ItemRemoved(object sender, XListEventArgs<T> e)
         {
             var li = FindListItem(e.Item);
-            if (li != null && SelectedIndices != null && SelectedIndices.Contains(li.Index))
+            if (li != null && SelectedIndices != null && SelectedIndices._Contains(li.Index))
             {
                 _SelectedIndices = SelectedIndices.Where(si => si != li.Index).ToArray();
             }
@@ -353,7 +353,7 @@ namespace Citta_T1.Controls
                     return new T[0];
                 else
                     return (from li in ListItems
-                            where _SelectedIndices.Contains(li.Index)
+                            where _SelectedIndices._Contains(li.Index)
                             select li.Value).ToArray();
             }
             set
@@ -365,7 +365,7 @@ namespace Citta_T1.Controls
                 else
                 {
                     SelectedIndices = (from li in ListItems
-                                       where value.Contains(li.Value)
+                                       where value._Contains(li.Value)
                                        select li.Index).ToArray();
                 }
             }
@@ -649,7 +649,7 @@ namespace Citta_T1.Controls
                 if (rectItem.Y > viewPort.Bottom)
                     break;
 
-                bool selected = SelectedIndices != null && SelectedIndices.Contains(item.Index);
+                bool selected = SelectedIndices != null && SelectedIndices._Contains(item.Index);
                 bool hover = HoverItem != null && HoverItem == item;
 
                 DrawItem(e, item, rectItem, selected, hover, globalHaveIcon);

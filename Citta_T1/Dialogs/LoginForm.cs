@@ -9,7 +9,7 @@ namespace Citta_T1.Dialogs
     public partial class LoginForm : Form
     {
         private List<string> users;
-        private MainForm mainForm;
+        public static MainForm mainForm { get; set; }
         public LoginForm()
         {
             InitializeComponent();

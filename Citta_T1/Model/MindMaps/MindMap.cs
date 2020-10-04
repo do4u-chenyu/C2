@@ -1065,7 +1065,7 @@ namespace Citta_T1.Model.MindMaps
 
                 foreach (var link in t.Links)
                 {
-                    if (!onlyVisible || topics.Contains(link.Target))
+                    if (!onlyVisible || topics._Contains(link.Target))
                         list.Add(link);
                 }
             }

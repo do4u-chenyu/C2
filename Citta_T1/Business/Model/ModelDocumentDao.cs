@@ -132,14 +132,14 @@ namespace Citta_T1.Business.Model
                         return;
                     foreach (ModelDocument mb in this.ModelDocuments)
                     {
-                        if (!saveTitle.Contains(mb.ModelTitle))
+                        if (!saveTitle._Contains(mb.ModelTitle))
                             continue;
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = mb.ModelTitle;
                         xn.AppendChild(childElement);
                     }
                     //关闭界面，用户只留下一个未保存的文档，则加载时随机打开一个文档
-                    if (this.ModelDocuments.Count == 1 && !saveTitle.Contains(this.ModelDocuments[0].ModelTitle))
+                    if (this.ModelDocuments.Count == 1 && !saveTitle._Contains(this.ModelDocuments[0].ModelTitle))
                     {
                         XmlElement childElement = xDoc.CreateElement("modeltitle");
                         childElement.InnerText = saveTitle[0];
