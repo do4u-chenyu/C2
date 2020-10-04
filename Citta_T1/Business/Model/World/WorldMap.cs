@@ -155,13 +155,13 @@ namespace Citta_T1.Business.Model.World
         public void WorldBoundControl(Point Pm, Control ct)
         {
             Point Pw = ScreenToWorld(Pm, true);
-            if (Pw.X < 20)
+            if (Pw.X < 15)
             {
-                Pm.X = 20;
+                Pm.X = 15;
             }
-            if (Pw.Y < 70)
+            if (Pw.Y < 40)
             {
-                Pm.Y = 70;
+                Pm.Y = 40;
             }
             if (Pw.X > 2000 - ct.Width)
             {

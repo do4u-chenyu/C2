@@ -950,5 +950,10 @@ namespace Citta_T1
             MyFindDialog.ResetFocus();
         }
         #endregion
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
