@@ -9,7 +9,7 @@ using Citta_T1.Core;
 
 namespace Citta_T1.Controls
 {
-    class BaseDialog : BaseForm
+    public class BaseDialog : BaseForm
     {
         public BaseDialog()
         {

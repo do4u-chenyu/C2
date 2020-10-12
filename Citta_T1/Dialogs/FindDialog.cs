@@ -13,7 +13,7 @@ using Citta_T1.Model.MindMaps;
 
 namespace Citta_T1.Dialogs
 {
-    partial class FindDialog : BaseDialog
+    public partial class FindDialog : BaseDialog
     {
         public enum FindDialogMode
         {

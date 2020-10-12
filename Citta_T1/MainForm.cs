@@ -73,6 +73,7 @@ namespace Citta_T1
         delegate void AsynUpdateOpErrorMessage();
 
         private static LogUtil log = LogUtil.GetInstance("MainForm"); // 获取日志模块
+        private OpenFileDialog openFileDialog1;
         public MainForm(string userName)
         {
             this.UserName = userName;
@@ -91,6 +92,7 @@ namespace Citta_T1
             InitializeControlsLocation();
 
             MdiClient = this.mdiWorkSpace1;
+            openFileDialog1 = new OpenFileDialog();
         }
 
         private void InitializeMainFormEventHandler()

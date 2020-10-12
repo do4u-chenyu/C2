@@ -44,8 +44,16 @@ namespace Citta_T1
             this.oprateButton = new System.Windows.Forms.Button();
             this.myModelButton = new System.Windows.Forms.Button();
             this.leftToolBoxPanel = new System.Windows.Forms.Panel();
+            this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
+            this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
+            this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
+            this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.bottomViewPanel = new System.Windows.Forms.Panel();
+            this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
+            this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
+            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
             this.panel9 = new System.Windows.Forms.Panel();
             this.minMaxPictureBox = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -69,11 +77,13 @@ namespace Citta_T1
             this.connectOpButton = new System.Windows.Forms.Button();
             this.blankButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.leftFoldButton = new System.Windows.Forms.PictureBox();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.progressBarLabel = new System.Windows.Forms.Label();
@@ -82,25 +92,14 @@ namespace Citta_T1
             this.currentModelRunBackLab = new System.Windows.Forms.Label();
             this.currentModelRunLab = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.leftFoldButton = new System.Windows.Forms.PictureBox();
             this.remarkControl = new Citta_T1.Controls.Flow.RemarkControl();
             this.flowControl = new Citta_T1.Controls.Flow.FlowControl();
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
             this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
-            this.bottomPreview = new Citta_T1.Controls.Bottom.BottomPreviewControl();
-            this.bottomLogControl = new Citta_T1.Controls.Bottom.BottomLogControl();
-            this.bottomPyConsole = new Citta_T1.Controls.Bottom.BottomConsoleControl();
-            this.dragLineControl = new Citta_T1.Controls.Title.DragLineControl();
-            this.operatorControl = new Citta_T1.Controls.Left.OperatorControl();
-            this.flowChartControl = new Citta_T1.Controls.Left.FlowChartControl();
-            this.dataSourceControl = new Citta_T1.Controls.Left.DataSourceControl();
-            this.myModelControl = new Citta_T1.Controls.Left.MyModelControl();
             this.headPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.helpPictureBox)).BeginInit();
@@ -112,14 +111,14 @@ namespace Citta_T1
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
             this.panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // headPanel
@@ -263,6 +262,55 @@ namespace Citta_T1
             this.leftToolBoxPanel.Size = new System.Drawing.Size(187, 560);
             this.leftToolBoxPanel.TabIndex = 2;
             // 
+            // operatorControl
+            // 
+            this.operatorControl.AllowDrop = true;
+            this.operatorControl.BackColor = System.Drawing.Color.White;
+            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.operatorControl.Location = new System.Drawing.Point(0, 0);
+            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
+            this.operatorControl.Name = "operatorControl";
+            this.operatorControl.Size = new System.Drawing.Size(185, 558);
+            this.operatorControl.TabIndex = 0;
+            // 
+            // flowChartControl
+            // 
+            this.flowChartControl.AllowDrop = true;
+            this.flowChartControl.BackColor = System.Drawing.Color.White;
+            this.flowChartControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowChartControl.Location = new System.Drawing.Point(0, 0);
+            this.flowChartControl.Margin = new System.Windows.Forms.Padding(4);
+            this.flowChartControl.Name = "flowChartControl";
+            this.flowChartControl.Size = new System.Drawing.Size(185, 558);
+            this.flowChartControl.TabIndex = 0;
+            // 
+            // dataSourceControl
+            // 
+            this.dataSourceControl.AllowDrop = true;
+            this.dataSourceControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.dataSourceControl.BackColor = System.Drawing.Color.White;
+            this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
+            this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
+            this.dataSourceControl.Name = "dataSourceControl";
+            this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
+            this.dataSourceControl.TabIndex = 0;
+            // 
+            // myModelControl
+            // 
+            this.myModelControl.AutoScroll = true;
+            this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.myModelControl.BackColor = System.Drawing.Color.White;
+            this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.myModelControl.Location = new System.Drawing.Point(0, 0);
+            this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
+            this.myModelControl.Name = "myModelControl";
+            this.myModelControl.Size = new System.Drawing.Size(185, 558);
+            this.myModelControl.TabIndex = 0;
+            // 
             // bottomViewPanel
             // 
             this.bottomViewPanel.Controls.Add(this.bottomPreview);
@@ -275,6 +323,33 @@ namespace Citta_T1
             this.bottomViewPanel.Size = new System.Drawing.Size(910, 280);
             this.bottomViewPanel.TabIndex = 3;
             // 
+            // bottomPreview
+            // 
+            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomPreview.Location = new System.Drawing.Point(0, 39);
+            this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomPreview.Name = "bottomPreview";
+            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
+            this.bottomPreview.TabIndex = 27;
+            // 
+            // bottomLogControl
+            // 
+            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
+            this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomLogControl.Name = "bottomLogControl";
+            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
+            this.bottomLogControl.TabIndex = 1;
+            // 
+            // bottomPyConsole
+            // 
+            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
+            this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
+            this.bottomPyConsole.Name = "bottomPyConsole";
+            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
+            this.bottomPyConsole.TabIndex = 2;
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
@@ -286,6 +361,17 @@ namespace Citta_T1
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(910, 39);
             this.panel4.TabIndex = 0;
+            // 
+            // dragLineControl
+            // 
+            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
+            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
+            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
+            this.dragLineControl.Name = "dragLineControl";
+            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
+            this.dragLineControl.TabIndex = 3;
             // 
             // panel9
             // 
@@ -497,6 +583,69 @@ namespace Citta_T1
             this.blankButton.Text = "button1";
             this.blankButton.UseVisualStyleBackColor = true;
             // 
+            // leftFoldButton
+            // 
+            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
+            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
+            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
+            this.leftFoldButton.Name = "leftFoldButton";
+            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
+            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.leftFoldButton.TabIndex = 0;
+            this.leftFoldButton.TabStop = false;
+            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
+            // 
+            // resetButton
+            // 
+            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.BorderSize = 0;
+            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
+            this.resetButton.Location = new System.Drawing.Point(507, 354);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(52, 53);
+            this.resetButton.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
+            this.resetButton.UseVisualStyleBackColor = true;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
+            this.stopButton.Location = new System.Drawing.Point(450, 354);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(52, 53);
+            this.stopButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
+            this.stopButton.UseVisualStyleBackColor = true;
+            // 
+            // runButton
+            // 
+            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.BorderSize = 0;
+            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+            this.runButton.Location = new System.Drawing.Point(398, 354);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(52, 53);
+            this.runButton.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
+            this.runButton.UseVisualStyleBackColor = true;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.panel7);
@@ -521,30 +670,13 @@ namespace Citta_T1
             // 
             this.panel10.Controls.Add(this.saveModelButton);
             this.panel10.Controls.Add(this.saveAllButton);
-            this.panel10.Controls.Add(this.canvasPanel);
             this.panel10.Controls.Add(this.mdiWorkSpace1);
+            this.panel10.Controls.Add(this.canvasPanel);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(910, 248);
             this.panel10.TabIndex = 0;
-            // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.modelTitlePanel);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(910, 32);
-            this.panel6.TabIndex = 9;
             // 
             // canvasPanel
             // 
@@ -648,18 +780,6 @@ namespace Citta_T1
             this.panel11.Size = new System.Drawing.Size(8, 101);
             this.panel11.TabIndex = 1;
             // 
-            // leftFoldButton
-            // 
-            this.leftFoldButton.Image = ((System.Drawing.Image)(resources.GetObject("leftFoldButton.Image")));
-            this.leftFoldButton.Location = new System.Drawing.Point(0, 0);
-            this.leftFoldButton.Margin = new System.Windows.Forms.Padding(0);
-            this.leftFoldButton.Name = "leftFoldButton";
-            this.leftFoldButton.Size = new System.Drawing.Size(7, 100);
-            this.leftFoldButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.leftFoldButton.TabIndex = 0;
-            this.leftFoldButton.TabStop = false;
-            this.toolTip1.SetToolTip(this.leftFoldButton, "隐藏左侧面板");
-            // 
             // remarkControl
             // 
             this.remarkControl.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
@@ -710,57 +830,6 @@ namespace Citta_T1
             this.rightShowButton.Size = new System.Drawing.Size(55, 55);
             this.rightShowButton.TabIndex = 22;
             // 
-            // resetButton
-            // 
-            this.resetButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resetButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.BorderSize = 0;
-            this.resetButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.resetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resetButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.resetButton.Image = global::Citta_T1.Properties.Resources.reset;
-            this.resetButton.Location = new System.Drawing.Point(507, 354);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(52, 53);
-            this.resetButton.TabIndex = 21;
-            this.toolTip1.SetToolTip(this.resetButton, "清空模型运算结果,让模型可以重新运算");
-            this.resetButton.UseVisualStyleBackColor = true;
-            // 
-            // stopButton
-            // 
-            this.stopButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.stopButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.BorderSize = 0;
-            this.stopButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
-            this.stopButton.Location = new System.Drawing.Point(450, 354);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(52, 53);
-            this.stopButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.stopButton, "停止调试当前模型");
-            this.stopButton.UseVisualStyleBackColor = true;
-            // 
-            // runButton
-            // 
-            this.runButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.runButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.BorderSize = 0;
-            this.runButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.runButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.runButton.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
-            this.runButton.Location = new System.Drawing.Point(398, 354);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(52, 53);
-            this.runButton.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
-            this.runButton.UseVisualStyleBackColor = true;
-            // 
             // naviViewControl
             // 
             this.naviViewControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -773,6 +842,23 @@ namespace Citta_T1
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.modelTitlePanel);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(910, 32);
+            this.panel6.TabIndex = 9;
+            // 
             // modelTitlePanel
             // 
             this.modelTitlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -780,93 +866,6 @@ namespace Citta_T1
             this.modelTitlePanel.Name = "modelTitlePanel";
             this.modelTitlePanel.Size = new System.Drawing.Size(910, 32);
             this.modelTitlePanel.TabIndex = 0;
-            // 
-            // bottomPreview
-            // 
-            this.bottomPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPreview.Location = new System.Drawing.Point(0, 39);
-            this.bottomPreview.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPreview.Name = "bottomPreview";
-            this.bottomPreview.Size = new System.Drawing.Size(910, 241);
-            this.bottomPreview.TabIndex = 27;
-            // 
-            // bottomLogControl
-            // 
-            this.bottomLogControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomLogControl.Location = new System.Drawing.Point(0, 39);
-            this.bottomLogControl.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomLogControl.Name = "bottomLogControl";
-            this.bottomLogControl.Size = new System.Drawing.Size(910, 241);
-            this.bottomLogControl.TabIndex = 1;
-            // 
-            // bottomPyConsole
-            // 
-            this.bottomPyConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bottomPyConsole.Location = new System.Drawing.Point(0, 39);
-            this.bottomPyConsole.Margin = new System.Windows.Forms.Padding(4);
-            this.bottomPyConsole.Name = "bottomPyConsole";
-            this.bottomPyConsole.Size = new System.Drawing.Size(910, 241);
-            this.bottomPyConsole.TabIndex = 2;
-            // 
-            // dragLineControl
-            // 
-            this.dragLineControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
-            this.dragLineControl.Cursor = System.Windows.Forms.Cursors.SizeNS;
-            this.dragLineControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dragLineControl.Location = new System.Drawing.Point(394, 36);
-            this.dragLineControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dragLineControl.Name = "dragLineControl";
-            this.dragLineControl.Size = new System.Drawing.Size(368, 3);
-            this.dragLineControl.TabIndex = 3;
-            // 
-            // operatorControl
-            // 
-            this.operatorControl.AllowDrop = true;
-            this.operatorControl.BackColor = System.Drawing.Color.White;
-            this.operatorControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.operatorControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.operatorControl.Location = new System.Drawing.Point(0, 0);
-            this.operatorControl.Margin = new System.Windows.Forms.Padding(4);
-            this.operatorControl.Name = "operatorControl";
-            this.operatorControl.Size = new System.Drawing.Size(185, 558);
-            this.operatorControl.TabIndex = 0;
-            // 
-            // flowChartControl
-            // 
-            this.flowChartControl.AllowDrop = true;
-            this.flowChartControl.BackColor = System.Drawing.Color.White;
-            this.flowChartControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.flowChartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowChartControl.Location = new System.Drawing.Point(0, 0);
-            this.flowChartControl.Margin = new System.Windows.Forms.Padding(4);
-            this.flowChartControl.Name = "flowChartControl";
-            this.flowChartControl.Size = new System.Drawing.Size(185, 558);
-            this.flowChartControl.TabIndex = 0;
-            // 
-            // dataSourceControl
-            // 
-            this.dataSourceControl.AllowDrop = true;
-            this.dataSourceControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.dataSourceControl.BackColor = System.Drawing.Color.White;
-            this.dataSourceControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.dataSourceControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataSourceControl.Location = new System.Drawing.Point(0, 0);
-            this.dataSourceControl.Margin = new System.Windows.Forms.Padding(4);
-            this.dataSourceControl.Name = "dataSourceControl";
-            this.dataSourceControl.Size = new System.Drawing.Size(185, 558);
-            this.dataSourceControl.TabIndex = 0;
-            // 
-            // myModelControl
-            // 
-            this.myModelControl.AutoScroll = true;
-            this.myModelControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.myModelControl.BackColor = System.Drawing.Color.White;
-            this.myModelControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.myModelControl.Location = new System.Drawing.Point(0, 0);
-            this.myModelControl.Margin = new System.Windows.Forms.Padding(4);
-            this.myModelControl.Name = "myModelControl";
-            this.myModelControl.Size = new System.Drawing.Size(185, 558);
-            this.myModelControl.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -903,16 +902,16 @@ namespace Citta_T1
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
