@@ -81,9 +81,10 @@ namespace Citta_T1
             this.resetButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.BaseWorkSpace = new System.Windows.Forms.Panel();
+            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.progressBarLabel = new System.Windows.Forms.Label();
@@ -97,7 +98,6 @@ namespace Citta_T1
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
-            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.headPanel.SuspendLayout();
@@ -112,9 +112,9 @@ namespace Citta_T1
             ((System.ComponentModel.ISupportInitialize)(this.minMaxPictureBox)).BeginInit();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.MainPanel.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.panel10.SuspendLayout();
+            this.BaseWorkSpace.SuspendLayout();
             this.canvasPanel.SuspendLayout();
             this.currentModelRunBackLab.SuspendLayout();
             this.panel11.SuspendLayout();
@@ -646,37 +646,45 @@ namespace Citta_T1
             this.toolTip1.SetToolTip(this.runButton, "开始调试当前模型");
             this.runButton.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // MainPanel
             // 
-            this.panel3.Controls.Add(this.panel7);
-            this.panel3.Controls.Add(this.panel6);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(323, 46);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(910, 280);
-            this.panel3.TabIndex = 7;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            this.MainPanel.Controls.Add(this.panel7);
+            this.MainPanel.Controls.Add(this.panel6);
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(323, 46);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(910, 280);
+            this.MainPanel.TabIndex = 7;
+            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.panel10);
+            this.panel7.Controls.Add(this.BaseWorkSpace);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 32);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(910, 248);
             this.panel7.TabIndex = 10;
             // 
-            // panel10
+            // BaseWorkSpace
             // 
-            this.panel10.Controls.Add(this.saveModelButton);
-            this.panel10.Controls.Add(this.saveAllButton);
-            this.panel10.Controls.Add(this.mdiWorkSpace1);
-            this.panel10.Controls.Add(this.canvasPanel);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(910, 248);
-            this.panel10.TabIndex = 0;
+            this.BaseWorkSpace.Controls.Add(this.saveModelButton);
+            this.BaseWorkSpace.Controls.Add(this.saveAllButton);
+            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
+            this.BaseWorkSpace.Controls.Add(this.canvasPanel);
+            this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
+            this.BaseWorkSpace.Name = "BaseWorkSpace";
+            this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
+            this.BaseWorkSpace.TabIndex = 0;
+            // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // canvasPanel
             // 
@@ -842,14 +850,6 @@ namespace Citta_T1
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
             // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
-            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.modelTitlePanel);
@@ -871,7 +871,7 @@ namespace Citta_T1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1233, 606);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.bottomViewPanel);
             this.Controls.Add(this.leftToolBoxPanel);
             this.Controls.Add(this.leftMainMenuPanel);
@@ -903,9 +903,9 @@ namespace Citta_T1
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.leftFoldButton)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.MainPanel.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
+            this.BaseWorkSpace.ResumeLayout(false);
             this.canvasPanel.ResumeLayout(false);
             this.canvasPanel.PerformLayout();
             this.currentModelRunBackLab.ResumeLayout(false);
@@ -964,11 +964,11 @@ namespace Citta_T1
         private System.Windows.Forms.Button blankButton;
         private Button saveAllButton;
         private Controls.Top.TopToolBarControl topToolBarControl;
-        private Panel panel3;
+        private Panel MainPanel;
         private Panel panel7;
         private Panel panel6;
         private Controls.Title.ModelTitlePanel modelTitlePanel;
-        private Panel panel10;
+        private Panel BaseWorkSpace;
         private Controls.CanvasPanel canvasPanel;
         private Label progressBarLabel;
         private ProgressBar progressBar1;
