@@ -38,7 +38,7 @@ namespace Citta_T1
             {
                 //1.1 没有实例在运行
                 LoginForm loginForm = new LoginForm();
-                Application.Run(loginForm);
+                RunByVersion();
                 Application.EnableVisualStyles();
                 MainForm = LoginForm.mainForm;
 
@@ -65,9 +65,26 @@ namespace Citta_T1
                 workspaceDirectory = Path.Combine(Directory.GetCurrentDirectory(), "FiberHomeIAOModelDocument");
 
             Global.WorkspaceDirectory = workspaceDirectory;
+            Global.VersionType = ConfigUtil.TryGetAppSettingsByKey("versionType", ConfigUtil.DefaultVersionType);
+            if (Global.VersionType.Equals(Global.GreenVersion))
+                Global.WorkspaceDirectory = Path.Combine(System.Environment.CurrentDirectory, Global.GreenPath);
+
         }
 
-
+        private static void RunByVersion()
+        {
+            if (Global.VersionType.Equals(Global.GreenVersion))
+            {
+                string userName = "IAO";
+                Business.LoginInfo lgInfo = new Business.LoginInfo();
+                lgInfo.CreatNewXml();
+                lgInfo.WriteUserInfo(userName);
+                lgInfo.WriteLastLogin(userName);
+                Application.Run(new MainForm(userName));
+            }
+            else
+                Application.Run(new LoginForm());
+        }
         #region 确保程序只运行一个实例
         private static Process RunningInstance()
         {

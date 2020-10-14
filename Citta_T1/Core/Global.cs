@@ -69,6 +69,10 @@ namespace Citta_T1.Core
         public static string WorkspaceDirectory { get => workspaceDirectory; set => workspaceDirectory = value; }
 
         public const float Factor = 1.3F;
+        private static string versionType;
+        public static string VersionType { get => versionType; set => versionType = value; }
+        public const string GreenVersion = "Green";
+        public const string GreenPath = "source";
 
     }
 }

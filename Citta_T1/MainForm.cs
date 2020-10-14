@@ -774,6 +774,8 @@ namespace Citta_T1
 
         private void HelpPictureBox_Click(object sender, EventArgs e)
         {
+            if (Global.VersionType.Equals(Global.GreenVersion))
+                return;
             string helpfile = Application.StartupPath;
             helpfile += @"\Doc\IAO解决方案帮助文档v1.chm";
             Help.ShowHelp(this, helpfile);
