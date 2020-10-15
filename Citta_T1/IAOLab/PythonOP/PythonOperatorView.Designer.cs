@@ -27,19 +27,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pyParamTextBox = new System.Windows.Forms.TextBox();
-            this.noOutputFileRadio = new System.Windows.Forms.RadioButton();
-            this.rsFullFileNameTextBox = new System.Windows.Forms.TextBox();
-            this.browseChosenRadioButton = new System.Windows.Forms.RadioButton();
-            this.paramRadioButton = new System.Windows.Forms.RadioButton();
-            this.stdoutRadioButton = new System.Windows.Forms.RadioButton();
-            this.browseChosenTextBox = new System.Windows.Forms.TextBox();
-            this.paramPrefixTagTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.pyBrowseButton = new System.Windows.Forms.Button();
-            this.rsChosenButton = new System.Windows.Forms.Button();
-            this.paramInputFileFullPath = new System.Windows.Forms.TextBox();
-            this.paramInputFileRadio = new System.Windows.Forms.RadioButton();
-            this.paramInputFileTextBox = new System.Windows.Forms.TextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pyFullFilePathTextBox = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -51,18 +40,24 @@
             this.otherSeparatorRadio = new System.Windows.Forms.RadioButton();
             this.commaRadio = new System.Windows.Forms.RadioButton();
             this.tabRadio = new System.Windows.Forms.RadioButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.inputFileSettingTab = new System.Windows.Forms.TabPage();
-            this.noInputFileRadio = new System.Windows.Forms.RadioButton();
-            this.outputFileSettingTab = new System.Windows.Forms.TabPage();
-            this.outputFileEncodeSettingGroup = new System.Windows.Forms.GroupBox();
+            this.browseChosenTextBox = new System.Windows.Forms.TextBox();
+            this.rsChosenButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.outputFileSeparatorSettingGroup = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.outputFileEncodeSettingGroup = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.previewCmdGroup.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.inputFileSettingTab.SuspendLayout();
-            this.outputFileSettingTab.SuspendLayout();
-            this.outputFileEncodeSettingGroup.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.outputFileSeparatorSettingGroup.SuspendLayout();
+            this.outputFileEncodeSettingGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataSourceTB0
@@ -92,14 +87,14 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(45, 14);
+            this.label1.Location = new System.Drawing.Point(45, 16);
             this.label1.Size = new System.Drawing.Size(90, 22);
             // 
             // pythonChosenComboBox
             // 
             this.pythonChosenComboBox.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.pythonChosenComboBox.FormattingEnabled = true;
-            this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 49);
+            this.pythonChosenComboBox.Location = new System.Drawing.Point(137, 57);
             this.pythonChosenComboBox.Name = "pythonChosenComboBox";
             this.pythonChosenComboBox.Size = new System.Drawing.Size(150, 25);
             this.pythonChosenComboBox.TabIndex = 3;
@@ -110,7 +105,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(3, 50);
+            this.label2.Location = new System.Drawing.Point(3, 60);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 22);
@@ -122,7 +117,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(15, 122);
+            this.label4.Location = new System.Drawing.Point(13, 144);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 22);
@@ -133,107 +128,18 @@
             // pyParamTextBox
             // 
             this.pyParamTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pyParamTextBox.Location = new System.Drawing.Point(137, 122);
+            this.pyParamTextBox.Location = new System.Drawing.Point(137, 143);
             this.pyParamTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyParamTextBox.Name = "pyParamTextBox";
-            this.pyParamTextBox.Size = new System.Drawing.Size(367, 23);
+            this.pyParamTextBox.Size = new System.Drawing.Size(311, 23);
             this.pyParamTextBox.TabIndex = 17;
             this.pyParamTextBox.TextChanged += new System.EventHandler(this.PyParamTextBox_TextChanged);
-            // 
-            // noOutputFileRadio
-            // 
-            this.noOutputFileRadio.AutoSize = true;
-            this.noOutputFileRadio.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noOutputFileRadio.Location = new System.Drawing.Point(10, 9);
-            this.noOutputFileRadio.Margin = new System.Windows.Forms.Padding(2);
-            this.noOutputFileRadio.Name = "noOutputFileRadio";
-            this.noOutputFileRadio.Size = new System.Drawing.Size(86, 21);
-            this.noOutputFileRadio.TabIndex = 31;
-            this.noOutputFileRadio.TabStop = true;
-            this.noOutputFileRadio.Text = "无结果文件";
-            this.noOutputFileRadio.UseVisualStyleBackColor = true;
-            this.noOutputFileRadio.CheckedChanged += new System.EventHandler(this.NoOutputFileRadio_CheckedChanged);
-            // 
-            // rsFullFileNameTextBox
-            // 
-            this.rsFullFileNameTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rsFullFileNameTextBox.Location = new System.Drawing.Point(171, 56);
-            this.rsFullFileNameTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.rsFullFileNameTextBox.Name = "rsFullFileNameTextBox";
-            this.rsFullFileNameTextBox.ReadOnly = true;
-            this.rsFullFileNameTextBox.Size = new System.Drawing.Size(329, 23);
-            this.rsFullFileNameTextBox.TabIndex = 30;
-            this.rsFullFileNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.rsFullFileNameTextBox, "自动指定的结果文件路径");
-            // 
-            // browseChosenRadioButton
-            // 
-            this.browseChosenRadioButton.AutoSize = true;
-            this.browseChosenRadioButton.Checked = true;
-            this.browseChosenRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browseChosenRadioButton.Location = new System.Drawing.Point(10, 84);
-            this.browseChosenRadioButton.Name = "browseChosenRadioButton";
-            this.browseChosenRadioButton.Size = new System.Drawing.Size(122, 21);
-            this.browseChosenRadioButton.TabIndex = 29;
-            this.browseChosenRadioButton.TabStop = true;
-            this.browseChosenRadioButton.Text = "浏览指定结果文件";
-            this.browseChosenRadioButton.UseVisualStyleBackColor = true;
-            this.browseChosenRadioButton.CheckedChanged += new System.EventHandler(this.BrowseChosenRadioButton_CheckedChanged);
-            // 
-            // paramRadioButton
-            // 
-            this.paramRadioButton.AutoSize = true;
-            this.paramRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.paramRadioButton.Location = new System.Drawing.Point(10, 57);
-            this.paramRadioButton.Name = "paramRadioButton";
-            this.paramRadioButton.Size = new System.Drawing.Size(122, 21);
-            this.paramRadioButton.TabIndex = 28;
-            this.paramRadioButton.Text = "传参指定结果文件";
-            this.toolTip1.SetToolTip(this.paramRadioButton, "结果文件路径以参数的形式传入自定义脚本中");
-            this.paramRadioButton.UseVisualStyleBackColor = true;
-            this.paramRadioButton.CheckedChanged += new System.EventHandler(this.ParamRadioButton_CheckedChanged);
-            // 
-            // stdoutRadioButton
-            // 
-            this.stdoutRadioButton.AutoSize = true;
-            this.stdoutRadioButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.stdoutRadioButton.Location = new System.Drawing.Point(10, 33);
-            this.stdoutRadioButton.Name = "stdoutRadioButton";
-            this.stdoutRadioButton.Size = new System.Drawing.Size(195, 21);
-            this.stdoutRadioButton.TabIndex = 27;
-            this.stdoutRadioButton.Text = "将脚本stdout重定向到结果文件";
-            this.toolTip1.SetToolTip(this.stdoutRadioButton, "Python脚本的标准输出流(stdout)作为运算结果重定向到结果文件");
-            this.stdoutRadioButton.UseVisualStyleBackColor = true;
-            this.stdoutRadioButton.CheckedChanged += new System.EventHandler(this.StdoutRadioButton_CheckedChanged);
-            // 
-            // browseChosenTextBox
-            // 
-            this.browseChosenTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browseChosenTextBox.Location = new System.Drawing.Point(133, 83);
-            this.browseChosenTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.browseChosenTextBox.Name = "browseChosenTextBox";
-            this.browseChosenTextBox.ReadOnly = true;
-            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 23);
-            this.browseChosenTextBox.TabIndex = 25;
-            // 
-            // paramPrefixTagTextBox
-            // 
-            this.paramPrefixTagTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.paramPrefixTagTextBox.Location = new System.Drawing.Point(134, 56);
-            this.paramPrefixTagTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.paramPrefixTagTextBox.Name = "paramPrefixTagTextBox";
-            this.paramPrefixTagTextBox.Size = new System.Drawing.Size(32, 23);
-            this.paramPrefixTagTextBox.TabIndex = 24;
-            this.paramPrefixTagTextBox.Text = "-f2";
-            this.paramPrefixTagTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.paramPrefixTagTextBox, "参数标识");
-            this.paramPrefixTagTextBox.TextChanged += new System.EventHandler(this.ParamPrefixTagTextBox_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(19, 86);
+            this.label6.Location = new System.Drawing.Point(19, 103);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(116, 22);
@@ -244,7 +150,7 @@
             // pyBrowseButton
             // 
             this.pyBrowseButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pyBrowseButton.Location = new System.Drawing.Point(453, 87);
+            this.pyBrowseButton.Location = new System.Drawing.Point(454, 102);
             this.pyBrowseButton.Name = "pyBrowseButton";
             this.pyBrowseButton.Size = new System.Drawing.Size(49, 23);
             this.pyBrowseButton.TabIndex = 30;
@@ -253,57 +159,6 @@
             this.toolTip1.SetToolTip(this.pyBrowseButton, "选择你要运行的外部Python脚本");
             this.pyBrowseButton.UseVisualStyleBackColor = true;
             this.pyBrowseButton.Click += new System.EventHandler(this.PyBrowseButton_Click);
-            // 
-            // rsChosenButton
-            // 
-            this.rsChosenButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rsChosenButton.Location = new System.Drawing.Point(449, 83);
-            this.rsChosenButton.Name = "rsChosenButton";
-            this.rsChosenButton.Size = new System.Drawing.Size(49, 23);
-            this.rsChosenButton.TabIndex = 32;
-            this.rsChosenButton.Text = "约定+";
-            this.rsChosenButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.rsChosenButton, "选择你的Python脚本生成结果文件的全路径");
-            this.rsChosenButton.UseVisualStyleBackColor = true;
-            this.rsChosenButton.Click += new System.EventHandler(this.RsChosenButton_Click);
-            // 
-            // paramInputFileFullPath
-            // 
-            this.paramInputFileFullPath.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.paramInputFileFullPath.Location = new System.Drawing.Point(171, 59);
-            this.paramInputFileFullPath.Margin = new System.Windows.Forms.Padding(2);
-            this.paramInputFileFullPath.Name = "paramInputFileFullPath";
-            this.paramInputFileFullPath.ReadOnly = true;
-            this.paramInputFileFullPath.Size = new System.Drawing.Size(329, 23);
-            this.paramInputFileFullPath.TabIndex = 35;
-            this.paramInputFileFullPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.paramInputFileFullPath, "自动指定的结果文件路径");
-            // 
-            // paramInputFileRadio
-            // 
-            this.paramInputFileRadio.AutoSize = true;
-            this.paramInputFileRadio.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.paramInputFileRadio.Location = new System.Drawing.Point(11, 61);
-            this.paramInputFileRadio.Name = "paramInputFileRadio";
-            this.paramInputFileRadio.Size = new System.Drawing.Size(122, 21);
-            this.paramInputFileRadio.TabIndex = 34;
-            this.paramInputFileRadio.Text = "传参指定输入文件";
-            this.toolTip1.SetToolTip(this.paramInputFileRadio, "结果文件路径以参数的形式传入自定义脚本中");
-            this.paramInputFileRadio.UseVisualStyleBackColor = true;
-            this.paramInputFileRadio.CheckedChanged += new System.EventHandler(this.ParamInputFileRadio_CheckedChanged);
-            // 
-            // paramInputFileTextBox
-            // 
-            this.paramInputFileTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.paramInputFileTextBox.Location = new System.Drawing.Point(135, 59);
-            this.paramInputFileTextBox.Margin = new System.Windows.Forms.Padding(2);
-            this.paramInputFileTextBox.Name = "paramInputFileTextBox";
-            this.paramInputFileTextBox.Size = new System.Drawing.Size(32, 23);
-            this.paramInputFileTextBox.TabIndex = 33;
-            this.paramInputFileTextBox.Text = "-f1";
-            this.paramInputFileTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.paramInputFileTextBox, "参数标识");
-            this.paramInputFileTextBox.TextChanged += new System.EventHandler(this.ParamInputFileTextBox_TextChanged);
             // 
             // saveFileDialog1
             // 
@@ -316,7 +171,7 @@
             this.pyFullFilePathTextBox.BackColor = System.Drawing.Color.White;
             this.pyFullFilePathTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pyFullFilePathTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pyFullFilePathTextBox.Location = new System.Drawing.Point(137, 87);
+            this.pyFullFilePathTextBox.Location = new System.Drawing.Point(137, 102);
             this.pyFullFilePathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.pyFullFilePathTextBox.Name = "pyFullFilePathTextBox";
             this.pyFullFilePathTextBox.ReadOnly = true;
@@ -333,11 +188,11 @@
             // 
             this.previewCmdGroup.Controls.Add(this.previewCmdText);
             this.previewCmdGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.previewCmdGroup.Location = new System.Drawing.Point(11, 355);
+            this.previewCmdGroup.Location = new System.Drawing.Point(10, 185);
             this.previewCmdGroup.Margin = new System.Windows.Forms.Padding(2);
             this.previewCmdGroup.Name = "previewCmdGroup";
             this.previewCmdGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.previewCmdGroup.Size = new System.Drawing.Size(513, 77);
+            this.previewCmdGroup.Size = new System.Drawing.Size(513, 80);
             this.previewCmdGroup.TabIndex = 31;
             this.previewCmdGroup.TabStop = false;
             this.previewCmdGroup.Text = "执行脚本命令预览：";
@@ -352,13 +207,13 @@
             this.previewCmdText.Multiline = true;
             this.previewCmdText.Name = "previewCmdText";
             this.previewCmdText.ReadOnly = true;
-            this.previewCmdText.Size = new System.Drawing.Size(509, 57);
+            this.previewCmdText.Size = new System.Drawing.Size(509, 60);
             this.previewCmdText.TabIndex = 2;
             // 
             // gbkRadio
             // 
             this.gbkRadio.AutoSize = true;
-            this.gbkRadio.Location = new System.Drawing.Point(109, 18);
+            this.gbkRadio.Location = new System.Drawing.Point(217, 13);
             this.gbkRadio.Margin = new System.Windows.Forms.Padding(2);
             this.gbkRadio.Name = "gbkRadio";
             this.gbkRadio.Size = new System.Drawing.Size(51, 21);
@@ -371,7 +226,7 @@
             // 
             this.utfRadio.AutoSize = true;
             this.utfRadio.Checked = true;
-            this.utfRadio.Location = new System.Drawing.Point(11, 18);
+            this.utfRadio.Location = new System.Drawing.Point(119, 15);
             this.utfRadio.Margin = new System.Windows.Forms.Padding(2);
             this.utfRadio.Name = "utfRadio";
             this.utfRadio.Size = new System.Drawing.Size(60, 21);
@@ -382,7 +237,7 @@
             // 
             // otherSeparatorText
             // 
-            this.otherSeparatorText.Location = new System.Drawing.Point(214, 16);
+            this.otherSeparatorText.Location = new System.Drawing.Point(358, 13);
             this.otherSeparatorText.Margin = new System.Windows.Forms.Padding(2);
             this.otherSeparatorText.MaxLength = 1;
             this.otherSeparatorText.Name = "otherSeparatorText";
@@ -393,7 +248,7 @@
             // otherSeparatorRadio
             // 
             this.otherSeparatorRadio.AutoSize = true;
-            this.otherSeparatorRadio.Location = new System.Drawing.Point(159, 18);
+            this.otherSeparatorRadio.Location = new System.Drawing.Point(309, 15);
             this.otherSeparatorRadio.Margin = new System.Windows.Forms.Padding(2);
             this.otherSeparatorRadio.Name = "otherSeparatorRadio";
             this.otherSeparatorRadio.Size = new System.Drawing.Size(50, 21);
@@ -405,7 +260,7 @@
             // commaRadio
             // 
             this.commaRadio.AutoSize = true;
-            this.commaRadio.Location = new System.Drawing.Point(87, 18);
+            this.commaRadio.Location = new System.Drawing.Point(217, 15);
             this.commaRadio.Margin = new System.Windows.Forms.Padding(2);
             this.commaRadio.Name = "commaRadio";
             this.commaRadio.Size = new System.Drawing.Size(50, 21);
@@ -418,7 +273,7 @@
             // 
             this.tabRadio.AutoSize = true;
             this.tabRadio.Checked = true;
-            this.tabRadio.Location = new System.Drawing.Point(13, 18);
+            this.tabRadio.Location = new System.Drawing.Point(118, 15);
             this.tabRadio.Margin = new System.Windows.Forms.Padding(2);
             this.tabRadio.Name = "tabRadio";
             this.tabRadio.Size = new System.Drawing.Size(49, 21);
@@ -427,105 +282,162 @@
             this.tabRadio.Text = "TAB";
             this.tabRadio.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // browseChosenTextBox
             // 
-            this.tabControl1.Controls.Add(this.inputFileSettingTab);
-            this.tabControl1.Controls.Add(this.outputFileSettingTab);
-            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl1.Location = new System.Drawing.Point(9, 158);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 1;
-            this.tabControl1.Size = new System.Drawing.Size(519, 144);
-            this.tabControl1.TabIndex = 35;
+            this.browseChosenTextBox.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.browseChosenTextBox.Location = new System.Drawing.Point(128, 21);
+            this.browseChosenTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.browseChosenTextBox.Name = "browseChosenTextBox";
+            this.browseChosenTextBox.ReadOnly = true;
+            this.browseChosenTextBox.Size = new System.Drawing.Size(311, 23);
+            this.browseChosenTextBox.TabIndex = 25;
             // 
-            // inputFileSettingTab
+            // rsChosenButton
             // 
-            this.inputFileSettingTab.BackColor = System.Drawing.SystemColors.Control;
-            this.inputFileSettingTab.Controls.Add(this.paramInputFileFullPath);
-            this.inputFileSettingTab.Controls.Add(this.paramInputFileRadio);
-            this.inputFileSettingTab.Controls.Add(this.paramInputFileTextBox);
-            this.inputFileSettingTab.Controls.Add(this.noInputFileRadio);
-            this.inputFileSettingTab.Location = new System.Drawing.Point(4, 26);
-            this.inputFileSettingTab.Margin = new System.Windows.Forms.Padding(2);
-            this.inputFileSettingTab.Name = "inputFileSettingTab";
-            this.inputFileSettingTab.Padding = new System.Windows.Forms.Padding(2);
-            this.inputFileSettingTab.Size = new System.Drawing.Size(511, 114);
-            this.inputFileSettingTab.TabIndex = 3;
-            this.inputFileSettingTab.Text = "输入文件设置";
+            this.rsChosenButton.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rsChosenButton.Location = new System.Drawing.Point(444, 20);
+            this.rsChosenButton.Name = "rsChosenButton";
+            this.rsChosenButton.Size = new System.Drawing.Size(49, 23);
+            this.rsChosenButton.TabIndex = 32;
+            this.rsChosenButton.Text = "指定+";
+            this.rsChosenButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.rsChosenButton, "选择你的Python脚本生成结果文件的全路径");
+            this.rsChosenButton.UseVisualStyleBackColor = true;
+            this.rsChosenButton.Click += new System.EventHandler(this.RsChosenButton_Click);
             // 
-            // noInputFileRadio
+            // groupBox1
             // 
-            this.noInputFileRadio.AutoSize = true;
-            this.noInputFileRadio.Checked = true;
-            this.noInputFileRadio.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.noInputFileRadio.Location = new System.Drawing.Point(11, 19);
-            this.noInputFileRadio.Margin = new System.Windows.Forms.Padding(2);
-            this.noInputFileRadio.Name = "noInputFileRadio";
-            this.noInputFileRadio.Size = new System.Drawing.Size(434, 21);
-            this.noInputFileRadio.TabIndex = 32;
-            this.noInputFileRadio.TabStop = true;
-            this.noInputFileRadio.Text = "无指定输入文件（脚本中输入文件的路径可与算子连接的数据源路径不一致）";
-            this.noInputFileRadio.UseVisualStyleBackColor = true;
-            this.noInputFileRadio.CheckedChanged += new System.EventHandler(this.NoInputFileRadio_CheckedChanged);
-            // 
-            // outputFileSettingTab
-            // 
-            this.outputFileSettingTab.BackColor = System.Drawing.SystemColors.Control;
-            this.outputFileSettingTab.Controls.Add(this.rsChosenButton);
-            this.outputFileSettingTab.Controls.Add(this.browseChosenRadioButton);
-            this.outputFileSettingTab.Controls.Add(this.browseChosenTextBox);
-            this.outputFileSettingTab.Controls.Add(this.rsFullFileNameTextBox);
-            this.outputFileSettingTab.Controls.Add(this.noOutputFileRadio);
-            this.outputFileSettingTab.Controls.Add(this.stdoutRadioButton);
-            this.outputFileSettingTab.Controls.Add(this.paramRadioButton);
-            this.outputFileSettingTab.Controls.Add(this.paramPrefixTagTextBox);
-            this.outputFileSettingTab.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outputFileSettingTab.Location = new System.Drawing.Point(4, 26);
-            this.outputFileSettingTab.Margin = new System.Windows.Forms.Padding(2);
-            this.outputFileSettingTab.Name = "outputFileSettingTab";
-            this.outputFileSettingTab.Padding = new System.Windows.Forms.Padding(2);
-            this.outputFileSettingTab.Size = new System.Drawing.Size(511, 114);
-            this.outputFileSettingTab.TabIndex = 0;
-            this.outputFileSettingTab.Text = "结果文件设置";
-            // 
-            // outputFileEncodeSettingGroup
-            // 
-            this.outputFileEncodeSettingGroup.Controls.Add(this.gbkRadio);
-            this.outputFileEncodeSettingGroup.Controls.Add(this.utfRadio);
-            this.outputFileEncodeSettingGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outputFileEncodeSettingGroup.Location = new System.Drawing.Point(11, 307);
-            this.outputFileEncodeSettingGroup.Margin = new System.Windows.Forms.Padding(2);
-            this.outputFileEncodeSettingGroup.Name = "outputFileEncodeSettingGroup";
-            this.outputFileEncodeSettingGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.outputFileEncodeSettingGroup.Size = new System.Drawing.Size(187, 44);
-            this.outputFileEncodeSettingGroup.TabIndex = 36;
-            this.outputFileEncodeSettingGroup.TabStop = false;
-            this.outputFileEncodeSettingGroup.Text = "结果文件编码";
+            this.groupBox1.Controls.Add(this.outputFileSeparatorSettingGroup);
+            this.groupBox1.Controls.Add(this.outputFileEncodeSettingGroup);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.browseChosenTextBox);
+            this.groupBox1.Controls.Add(this.rsChosenButton);
+            this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.Location = new System.Drawing.Point(10, 297);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(511, 135);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "结果文件展示设置：";
             // 
             // outputFileSeparatorSettingGroup
             // 
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.commaRadio);
             this.outputFileSeparatorSettingGroup.Controls.Add(this.otherSeparatorText);
+            this.outputFileSeparatorSettingGroup.Controls.Add(this.label8);
             this.outputFileSeparatorSettingGroup.Controls.Add(this.tabRadio);
             this.outputFileSeparatorSettingGroup.Controls.Add(this.otherSeparatorRadio);
-            this.outputFileSeparatorSettingGroup.Controls.Add(this.commaRadio);
-            this.outputFileSeparatorSettingGroup.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.outputFileSeparatorSettingGroup.Location = new System.Drawing.Point(213, 307);
-            this.outputFileSeparatorSettingGroup.Margin = new System.Windows.Forms.Padding(2);
+            this.outputFileSeparatorSettingGroup.Location = new System.Drawing.Point(9, 90);
             this.outputFileSeparatorSettingGroup.Name = "outputFileSeparatorSettingGroup";
-            this.outputFileSeparatorSettingGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.outputFileSeparatorSettingGroup.Size = new System.Drawing.Size(310, 44);
+            this.outputFileSeparatorSettingGroup.Size = new System.Drawing.Size(484, 41);
             this.outputFileSeparatorSettingGroup.TabIndex = 37;
             this.outputFileSeparatorSettingGroup.TabStop = false;
-            this.outputFileSeparatorSettingGroup.Text = "结果文件分隔符";
+            this.outputFileSeparatorSettingGroup.Paint += new System.Windows.Forms.PaintEventHandler(this.OutputFileSeparatorSettingGroup_Paint);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(1, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 17);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "结果文件分隔符：";
+            // 
+            // outputFileEncodeSettingGroup
+            // 
+            this.outputFileEncodeSettingGroup.Controls.Add(this.label7);
+            this.outputFileEncodeSettingGroup.Controls.Add(this.utfRadio);
+            this.outputFileEncodeSettingGroup.Controls.Add(this.gbkRadio);
+            this.outputFileEncodeSettingGroup.Location = new System.Drawing.Point(9, 49);
+            this.outputFileEncodeSettingGroup.Name = "outputFileEncodeSettingGroup";
+            this.outputFileEncodeSettingGroup.Size = new System.Drawing.Size(484, 35);
+            this.outputFileEncodeSettingGroup.TabIndex = 36;
+            this.outputFileEncodeSettingGroup.TabStop = false;
+            this.outputFileEncodeSettingGroup.Paint += new System.Windows.Forms.PaintEventHandler(this.OutputFileEncodeSettingGroup_Paint);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(1, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 17);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "结果文件编码：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(8, 26);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 17);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "指定展示结果文件：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(453, 146);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "(非必填项)";
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Location = new System.Drawing.Point(10, 281);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(512, 2);
+            this.label9.TabIndex = 38;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(465, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 17);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "帮助文档";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::Citta_T1.Properties.Resources.controlhelp;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(442, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(18, 17);
+            this.pictureBox1.TabIndex = 40;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(293, 60);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 17);
+            this.label11.TabIndex = 41;
+            this.label11.Text = "(必选项)";
             // 
             // PythonOperatorView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(531, 479);
-            this.Controls.Add(this.outputFileSeparatorSettingGroup);
-            this.Controls.Add(this.outputFileEncodeSettingGroup);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.previewCmdGroup);
             this.Controls.Add(this.pyBrowseButton);
             this.Controls.Add(this.pyFullFilePathTextBox);
@@ -544,6 +456,7 @@
             this.MinimumSize = new System.Drawing.Size(547, 518);
             this.Name = "PythonOperatorView";
             this.Text = "Python算子设置";
+            this.Load += new System.EventHandler(this.PythonOperatorView_Load);
             this.Controls.SetChildIndex(this.confirmButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.pythonChosenComboBox, 0);
@@ -556,20 +469,21 @@
             this.Controls.SetChildIndex(this.pyFullFilePathTextBox, 0);
             this.Controls.SetChildIndex(this.pyBrowseButton, 0);
             this.Controls.SetChildIndex(this.previewCmdGroup, 0);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
-            this.Controls.SetChildIndex(this.outputFileEncodeSettingGroup, 0);
-            this.Controls.SetChildIndex(this.outputFileSeparatorSettingGroup, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.pictureBox1, 0);
+            this.Controls.SetChildIndex(this.label11, 0);
             this.previewCmdGroup.ResumeLayout(false);
             this.previewCmdGroup.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.inputFileSettingTab.ResumeLayout(false);
-            this.inputFileSettingTab.PerformLayout();
-            this.outputFileSettingTab.ResumeLayout(false);
-            this.outputFileSettingTab.PerformLayout();
-            this.outputFileEncodeSettingGroup.ResumeLayout(false);
-            this.outputFileEncodeSettingGroup.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.outputFileSeparatorSettingGroup.ResumeLayout(false);
             this.outputFileSeparatorSettingGroup.PerformLayout();
+            this.outputFileEncodeSettingGroup.ResumeLayout(false);
+            this.outputFileEncodeSettingGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,18 +494,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox pyParamTextBox;
-        private System.Windows.Forms.TextBox paramPrefixTagTextBox;
-        private System.Windows.Forms.TextBox browseChosenTextBox;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.RadioButton browseChosenRadioButton;
-        private System.Windows.Forms.RadioButton paramRadioButton;
-        private System.Windows.Forms.RadioButton stdoutRadioButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox pyFullFilePathTextBox;
         private System.Windows.Forms.Button pyBrowseButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox rsFullFileNameTextBox;
-        private System.Windows.Forms.RadioButton noOutputFileRadio;
         private System.Windows.Forms.GroupBox previewCmdGroup;
         private System.Windows.Forms.RadioButton gbkRadio;
         private System.Windows.Forms.RadioButton utfRadio;
@@ -599,16 +506,19 @@
         private System.Windows.Forms.RadioButton commaRadio;
         private System.Windows.Forms.RadioButton tabRadio;
         private System.Windows.Forms.TextBox otherSeparatorText;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage outputFileSettingTab;
-        private System.Windows.Forms.Button rsChosenButton;
-        private System.Windows.Forms.TabPage inputFileSettingTab;
-        private System.Windows.Forms.TextBox paramInputFileFullPath;
-        private System.Windows.Forms.RadioButton paramInputFileRadio;
-        private System.Windows.Forms.TextBox paramInputFileTextBox;
-        private System.Windows.Forms.RadioButton noInputFileRadio;
         private System.Windows.Forms.TextBox previewCmdText;
+        private System.Windows.Forms.TextBox browseChosenTextBox;
+        private System.Windows.Forms.Button rsChosenButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox outputFileEncodeSettingGroup;
         private System.Windows.Forms.GroupBox outputFileSeparatorSettingGroup;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label11;
     }
 }
