@@ -35,6 +35,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.undoButton = new System.Windows.Forms.Button();
             this.redoButton = new System.Windows.Forms.Button();
+            this.ImportModel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // formatButton
@@ -93,10 +94,21 @@
             this.redoButton.UseVisualStyleBackColor = false;
             this.redoButton.Click += new System.EventHandler(this.RedoButton_Click);
             // 
+            // ImportModel
+            // 
+            this.ImportModel.Location = new System.Drawing.Point(207, 5);
+            this.ImportModel.Name = "ImportModel";
+            this.ImportModel.Size = new System.Drawing.Size(70, 23);
+            this.ImportModel.TabIndex = 1;
+            this.ImportModel.Text = "导入模型";
+            this.ImportModel.UseVisualStyleBackColor = true;
+            this.ImportModel.Click += new System.EventHandler(this.ImportModel_Click);
+            // 
             // TopToolBarControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.GhostWhite;
+            this.Controls.Add(this.ImportModel);
             this.Controls.Add(this.redoButton);
             this.Controls.Add(this.undoButton);
             this.Controls.Add(this.moreButton);
@@ -114,5 +126,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button undoButton;
         private System.Windows.Forms.Button redoButton;
+        private System.Windows.Forms.Button ImportModel;
     }
 }
