@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -74,7 +75,7 @@ namespace Citta_T1.Business.Schedule
         {
             //生成当前模型所有三元组列表
             this.currentModel = currentModel;
-            this.tripleListGen = new TripleListGen(currentModel,state,stopElement);
+            this.tripleListGen = new TripleListGen(currentModel, state, stopElement);
             this.tripleListGen.GenerateList();
             this.currentModelTripleList = this.tripleListGen.CurrentModelTripleList;
         }
@@ -113,19 +114,19 @@ namespace Citta_T1.Business.Schedule
 
         public int CountOpStatus(ElementStatus es)
         {
-            return this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).Count(op => op.Status ==es);
+            return this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).Count(op => op.Status == es);
         }
 
         public int CountOpNullAndNoRelation()
         {
             int nullNoRelationCount = 0;
-            foreach(ModelElement me in this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).FindAll(op => op.Status == ElementStatus.Null))
+            foreach (ModelElement me in this.currentModel.ModelElements.FindAll(me => me.Type == ElementType.Operator).FindAll(op => op.Status == ElementStatus.Null))
             {
                 if (this.currentModel.ModelRelations.FindAll(mr => mr.EndID == me.ID).Count > 0 || this.currentModel.ModelRelations.FindAll(mr => mr.StartID == me.ID).Count > 0)
                     nullNoRelationCount += 1;
             }
             return nullNoRelationCount;
-         }
+        }
         #endregion
 
         #region 暂停、继续、终止、重置运算调度逻辑
@@ -159,25 +160,93 @@ namespace Citta_T1.Business.Schedule
         //锁
         private readonly object _objLock = new object();
 
+        /*
+         * 现在终止的问题是 只能kill控制台进程，在上面执行的脚本进程不会kill，导致资源无法正常释放
+         * 目前解决办法：获取控制台进程，键入ctrl+c，最多等待2秒后kill控制台进程
+         */
+        [DllImport("kernel32.dll")]
+        private static extern bool AttachConsole(uint dwProcessId);
+
+        [DllImport("kernel32.dll")]
+        private static extern bool FreeConsole();
+
+        [DllImport("kernel32.dll")]
+        private static extern bool SetConsoleCtrlHandler(ConsoleCtrlDelegate HandlerRoutine, bool Add);
+
+        enum CtrlTypes : uint
+        {
+            CTRL_C_EVENT = 0,
+            CTRL_BREAK_EVENT,
+            CTRL_CLOSE_EVENT,
+            CTRL_LOGOFF_EVENT = 5,
+            CTRL_SHUTDOWN_EVENT
+        }
+
+        private delegate bool ConsoleCtrlDelegate(CtrlTypes CtrlType);
+
+        [DllImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GenerateConsoleCtrlEvent(CtrlTypes dwCtrlEvent, uint dwProcessGroupId);
+
         public void Stop()
         {
-            //终止，当前模型状态置stop，op状态由suspend和running到stop，所有task资源释放并关闭，process关闭，后台运算thread关闭
-            this.modelStatus = ModelStatus.Stop;
-            ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
-            ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
-            resetEvent.Dispose();
-
-            lock (_objLock)
+            try
             {
-                cmdProcessList.ForEach(p => p.Kill());
-            }
+                //终止，当前模型状态置stop，op状态由suspend和running到stop，所有task资源释放并关闭，process关闭，后台运算thread关闭
+                this.modelStatus = ModelStatus.Stop;
+                ChangeStatus(ElementStatus.Suspend, ElementStatus.Stop);
+                ChangeStatus(ElementStatus.Runnnig, ElementStatus.Stop);
+                resetEvent.Dispose();
 
-            foreach (Task currentTask in parallelTasks)
-            {
-                if (currentTask != null && currentTask.Status == TaskStatus.Running)//终止task线程
-                    tokenSource.Cancel();
+                lock (_objLock)
+                {
+                    // 我们自己的进程需要忽略掉 Ctrl+C 信号，否则自己也会退出。
+                    SetConsoleCtrlHandler(null, true);
+
+                    foreach (Process p in cmdProcessList)
+                    {
+                        if (p != null)
+                        {
+                            UpdateLogDelegate("关闭进程" + p.Id + "  " + p.ProcessName);
+
+                            if (AttachConsole((uint)p.Id))
+                            {
+                                // 将 Ctrl+C 信号发送到前面已关联（附加）的控制台进程中。
+                                GenerateConsoleCtrlEvent(CtrlTypes.CTRL_C_EVENT, 0);
+
+                                // 拾前面已经附加的控制台。
+                                FreeConsole();
+
+                                // 如果没有超时处理，则一直等待，直到最终进程停止。
+                                p.WaitForExit(2000);
+
+                            }
+                            else
+                            {
+                                p.Kill();
+                            }
+                            p.Dispose();
+                            p.Close();
+                        }
+                    }
+                    // 重新恢复我们自己的进程对 Ctrl+C 信号的响应。
+                    SetConsoleCtrlHandler(null, false);
+                    //cmdProcessList.ForEach(p => { p.Kill(); p.Dispose(); p.Close(); });
+                }
             }
-            CloseThread();
+            catch (Exception ex)
+            {
+                UpdateLogDelegate("终止异常:" + ex.Message);
+            }
+            finally
+            {
+                foreach (Task currentTask in parallelTasks)
+                {
+                    if (currentTask != null && currentTask.Status == TaskStatus.Running)//终止task线程
+                        tokenSource.Cancel();
+                }
+                CloseThread();
+            }
         }
 
         public void CloseThread()
@@ -233,6 +302,7 @@ namespace Citta_T1.Business.Schedule
                     if (!File.Exists(filename))
                     {
                         UpdateOpErrorDelegate(this, tmpTri.OperateElement.ID, "文件\"" + filename + "\"不存在，请确认后重新运行。");
+                        tmpTri.OperateElement.Status = ElementStatus.Warn;
                         isDataElementError = true;
                         break;
                     }
@@ -246,12 +316,12 @@ namespace Citta_T1.Business.Schedule
                         }
                         Thread.Sleep(1000);
                     }
-                
+
                     if (isDataElementError) break;
                 }
                 if (isDataElementError)
                 {
-                    tmpTri.OperateElement.Status = ElementStatus.Warn;
+                    //tmpTri.OperateElement.Status = ElementStatus.Warn;
                     tmpTri.ResultElement.Status = ElementStatus.Warn;
                     continue;
                 }
@@ -342,9 +412,10 @@ namespace Citta_T1.Business.Schedule
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(RunLinuxCommand(cmds)))
+            errorMessage = RunLinuxCommand(cmds);
+            if (!string.IsNullOrEmpty(errorMessage))
             {
-                UpdateOpErrorDelegate(this, triple.OperateElement.ID, errorMessage + "cmd执行语句异常，请确认问题后重新运行。");
+                UpdateOpErrorDelegate(this, triple.OperateElement.ID, errorMessage);
                 triple.OperateElement.Status = ElementStatus.Warn;
                 triple.ResultElement.Status = ElementStatus.Warn;
                 return false;
@@ -397,27 +468,55 @@ namespace Citta_T1.Business.Schedule
                         UpdateLogDelegate("执行命令: " + cmd);
                         p.StandardInput.WriteLine(cmd);
                     }
+
+                    //多线程下异步读取
+                    //p.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
+
+                    p.BeginErrorReadLine();
+                    p.BeginOutputReadLine();
+
                     p.StandardInput.WriteLine("exit");
-                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒   
+                    p.WaitForExit(); //等待进程结束，等待时间为指定的毫秒
+
+                    UpdateLogDelegate("退出码" + p.ExitCode.ToString());
+                    if (p.ExitCode != 0)
+                    {
+                        errorMessage = "执行程序非正常退出，请检查程序后再运行。";
+                        UpdateLogDelegate("执行程序非正常退出，请检查程序后再运行。");
+                    }
+
                 }
+            }
+            catch (System.InvalidOperationException)
+            {
+                //没有关联进程的异常，是由于用户点击终止按钮，导致进程被关闭
+                //UpdateLogDelegate("InvalidOperationException: " + ex.Message);
             }
             catch (Exception ex)
             {
                 //异常停止的处理方法
                 errorMessage = ex.Message;
                 UpdateLogDelegate("RunLinuxCommand进程异常: " + ex.Message);
-
             }
             finally
             {
                 if (p != null)
-                    p.Close();
+                    p.Dispose();//释放资源
+                p.Close();
                 lock (_objLock)
                 {
                     this.cmdProcessList.Remove(p);
                 }
             }
             return errorMessage;
+        }
+
+        void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.Data))
+            {
+                UpdateLogDelegate(e.Data);
+            }
         }
         #endregion
     }

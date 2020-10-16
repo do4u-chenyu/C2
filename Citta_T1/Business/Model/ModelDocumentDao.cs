@@ -82,7 +82,7 @@ namespace Citta_T1.Business.Model
             return e;
         }
 
-        private ModelDocument FindModelDocument(string modelTitle)
+        public ModelDocument FindModelDocument(string modelTitle)
         {
             return this.ModelDocuments.Find(md => md.ModelTitle == modelTitle);
         }

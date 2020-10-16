@@ -149,5 +149,10 @@ namespace Citta_T1.Controls.Top
         {
             this.redoButton.Enabled = value;
         }
+
+        private void ImportModel_Click(object sender, EventArgs e)
+        {
+            Citta_T1.Business.Model.ImportModel.GetInstance().ImportIaoFile(Global.GetMainForm().UserName);
+        }
     }
 }

@@ -18,8 +18,7 @@ namespace Citta_T1.OperatorViews
     {
         private readonly string oldPath;
         private string fullOutputFilePath;
-        private string noChangedOutputFilePath;
-        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "", "", "" });
+        private readonly List<string> previewTextList = new List<string>(new string[] { "", "", "" });
 
         public PythonOperatorView(MoveOpControl opControl) : base(opControl)
         {
@@ -51,12 +50,11 @@ namespace Citta_T1.OperatorViews
             {
                 string tmpOutFileName = String.Format("L{0}_{1}.bcp", Global.GetCurrentDocument().ElementCount, DateTime.Now.ToString("yyyyMMdd_hhmmss"));
                 this.fullOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
-                this.noChangedOutputFilePath = Path.Combine(Global.GetCurrentDocument().SavePath, tmpOutFileName);
-                this.opControl.Option.SetOption("outputParamPath", this.noChangedOutputFilePath);
+                this.opControl.Option.SetOption("browseChosen", this.fullOutputFilePath);
+                this.browseChosenTextBox.Text = fullOutputFilePath;
             }
-            this.paramInputFileFullPath.Text = dataInfo["dataPath0"];
-
-            this.rsFullFileNameTextBox.Text = noChangedOutputFilePath;
+            //this.paramInputFileFullPath.Text = dataInfo["dataPath0"];
+            //this.rsFullFileNameTextBox.Text = noChangedOutputFilePath;
         }
 
         private void InitPreViewText()
@@ -65,10 +63,10 @@ namespace Citta_T1.OperatorViews
             this.previewTextList[0] = GetVirtualMachinFullPath(this.pythonChosenComboBox.Text);
             this.previewTextList[1] = this.pyFullFilePathTextBox.Text;
             this.previewTextList[2] = this.pyParamTextBox.Text;
-            string previewInput = GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" ? this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text : "";
-            this.previewTextList[3] = previewInput;
-            string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
-            this.previewTextList[4] = previewOutput;
+            //string previewInput = GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" ? this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text : "";
+            //this.previewTextList[3] = previewInput;
+            //string previewOutput = GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" ? this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text : GetControlRadioName(this.outputFileSettingTab) == "stdoutRadioButton" ? " > " + this.fullOutputFilePath : "";
+            //this.previewTextList[4] = previewOutput;
             this.previewCmdText.Text = string.Join(" ", this.previewTextList);
         }
         #endregion
@@ -77,30 +75,18 @@ namespace Citta_T1.OperatorViews
         protected override void SaveOption()
         {
             this.opControl.Option.SetOption("columnname0", opControl.FirstDataSourceColumns);
-            string inputOption = GetControlRadioName(this.inputFileSettingTab).ToLower();
-            string outputOption = GetControlRadioName(this.outputFileSettingTab).ToLower();
-            string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
-            string outputSeparator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
 
             this.opControl.Option.SetOption("virtualMachine", this.pythonChosenComboBox.Text);
             this.opControl.Option.SetOption("pyFullPath", this.pyFullFilePathTextBox.Text);
             this.opControl.Option.SetOption("pyParam", this.pyParamTextBox.Text);
-            this.opControl.Option.SetOption("inputOption", inputOption);
-            //this.opControl.Option.SetOption("paramInput", (inputOption == "paramInputFileRadio".ToLower()) ?this.paramInputFileTextBox.Text:"-f1");
-            this.opControl.Option.SetOption("paramInput", this.paramInputFileTextBox.Text);
-            this.opControl.Option.SetOption("outputOption", outputOption);
-            //this.opControl.Option.SetOption("paramPrefixTag", (outputOption == "paramRadioButton".ToLower()) ? this.paramPrefixTagTextBox.Text : "-f2");
-            this.opControl.Option.SetOption("paramPrefixTag", this.paramPrefixTagTextBox.Text);
+
             this.opControl.Option.SetOption("browseChosen", this.browseChosenTextBox.Text);
-            if (outputOption == "browseChosenRadioButton".ToLower())
-            {
-                this.fullOutputFilePath = this.browseChosenTextBox.Text;
-            }
-            else
-            {
-                this.fullOutputFilePath = this.noChangedOutputFilePath;
-            }
-            //this.opControl.Option.SetOption("browseChosen", (outputOption == "browseChosenRadioButton".ToLower()) ? this.browseChosenTextBox.Text : "");
+            this.fullOutputFilePath = this.browseChosenTextBox.Text;
+            //暂去掉
+            //this.fullOutputFilePath = this.noChangedOutputFilePath;
+
+            string outputEncode = GetControlRadioName(this.outputFileEncodeSettingGroup).ToLower();
+            string outputSeparator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
             this.opControl.Option.SetOption("outputEncode", outputEncode);
             this.opControl.Option.SetOption("outputSeparator", outputSeparator);
             this.opControl.Option.SetOption("otherSeparator", (outputSeparator == "otherSeparatorRadio".ToLower()) ? this.otherSeparatorText.Text : "");
@@ -116,14 +102,8 @@ namespace Citta_T1.OperatorViews
             this.pyFullFilePathTextBox.Text = this.opControl.Option.GetOption("pyFullPath");
             this.pyParamTextBox.Text = this.opControl.Option.GetOption("pyParam");
 
-            SetControlRadioCheck(this.inputFileSettingTab, this.opControl.Option.GetOption("inputOption"), this.noInputFileRadio);
-            SetControlRadioCheck(this.outputFileSettingTab, this.opControl.Option.GetOption("outputOption"), this.browseChosenRadioButton);
             SetControlRadioCheck(this.outputFileEncodeSettingGroup, this.opControl.Option.GetOption("outputEncode"), this.utfRadio);
             SetControlRadioCheck(this.outputFileSeparatorSettingGroup, this.opControl.Option.GetOption("outputSeparator"), this.tabRadio);
-            this.paramInputFileTextBox.Text = String.IsNullOrEmpty(this.opControl.Option.GetOption("paramInput")) ? "-f1" : this.opControl.Option.GetOption("paramInput");
-            this.paramPrefixTagTextBox.Text = String.IsNullOrEmpty(this.opControl.Option.GetOption("paramPrefixTag")) ? "-f2" : this.opControl.Option.GetOption("paramPrefixTag");
-            this.rsFullFileNameTextBox.Text = this.opControl.Option.GetOption("outputParamPath");
-            this.noChangedOutputFilePath = this.opControl.Option.GetOption("outputParamPath");
             this.browseChosenTextBox.Text = this.opControl.Option.GetOption("browseChosen");
             this.otherSeparatorText.Text = this.opControl.Option.GetOption("otherSeparator");
             this.previewCmdText.Text = this.opControl.Option.GetOption("cmd");
@@ -174,7 +154,7 @@ namespace Citta_T1.OperatorViews
             hasResultNew.InnerControl.Separator = OpUtil.DefaultSeparator;
             string separator = GetControlRadioName(this.outputFileSeparatorSettingGroup).ToLower();
 
-         
+
 
             if (separator == "commaradio")
             {
@@ -215,24 +195,6 @@ namespace Citta_T1.OperatorViews
                 MessageBox.Show("没有配置需要运行的Python脚本，请点击浏览按钮导入脚本。");
                 return notReady;
             }
-            //输入文件设置，选2时是否写了参数
-            if (GetControlRadioName(this.inputFileSettingTab) == "paramInputFileRadio" && String.IsNullOrEmpty(this.paramInputFileTextBox.Text))
-            {
-                MessageBox.Show("未配置输入文件设置中的指定输入文件参数。");
-                return notReady;
-            }
-            //结果文件设置，选3时是否写了参数
-            if (GetControlRadioName(this.outputFileSettingTab) == "paramRadioButton" && String.IsNullOrEmpty(this.paramPrefixTagTextBox.Text))
-            {
-                MessageBox.Show("未配置结果文件设置中的指定结果文件参数。");
-                return notReady;
-            }
-            //结果文件设置，选4时是否选择约定路径
-            if (GetControlRadioName(this.outputFileSettingTab) == "browseChosenRadioButton" && String.IsNullOrEmpty(this.browseChosenTextBox.Text))
-            {
-                MessageBox.Show("结果文件设置中的浏览指定结果文件未导入，请点击约定按钮添加结果文件路径。");
-                return notReady;
-            }
             //分隔符-其他，是否有值
             if (GetControlRadioName(this.outputFileSeparatorSettingGroup) == "otherSeparatorRadio" && String.IsNullOrEmpty(this.otherSeparatorText.Text))
             {
@@ -250,7 +212,7 @@ namespace Citta_T1.OperatorViews
             // 先从模型文档中加载配置项, 如果模型文档中没有相关信息
             // 则从App.Config中加载
 
-          
+
             return LoadFromModelDocumentXml() || LoadFromAppConfig();
         }
 
@@ -342,102 +304,16 @@ namespace Citta_T1.OperatorViews
             UpdatePreviewText();
         }
 
-        private void NoInputFileRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.noInputFileRadio.Checked)
-            {
-                this.previewTextList[3] = String.Empty;
-                UpdatePreviewText();
-            }
-        }
-
-        private void ParamInputFileRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.paramInputFileRadio.Checked)
-            {
-                this.previewTextList[3] = this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text;
-                UpdatePreviewText();
-            }
-        }
-
-        private void ParamInputFileTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.paramInputFileRadio.Checked)
-            {
-                this.previewTextList[3] = this.paramInputFileTextBox.Text + " " + this.paramInputFileFullPath.Text;
-                UpdatePreviewText();
-            }
-        }
-
-        private void NoOutputFileRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            // 此时不需要 rsChosenButton
-            this.rsChosenButton.Enabled = false;
-            if (this.noOutputFileRadio.Checked)
-            {
-                this.previewTextList[4] = String.Empty;
-                UpdatePreviewText();
-            }
-        }
-
-        private void StdoutRadioButton_CheckedChanged(object sender, System.EventArgs e)
-        {
-            // 此时不需要 rsChosenButton
-            this.rsChosenButton.Enabled = false;
-            if (this.stdoutRadioButton.Checked)
-            {
-                this.previewTextList[4] = " > " + this.noChangedOutputFilePath;
-                UpdatePreviewText();
-            }
-        }
-        private void ParamRadioButton_CheckedChanged(object sender, System.EventArgs e)
-        {
-            // 此时不需要 rsChosenButton
-            this.rsChosenButton.Enabled = false;
-            if (this.paramRadioButton.Checked)
-            {
-                this.previewTextList[4] = this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text;
-                UpdatePreviewText();
-            }
-        }
-        private void ParamPrefixTagTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.paramRadioButton.Checked)
-            {
-                this.fullOutputFilePath = this.rsFullFileNameTextBox.Text;
-                this.previewTextList[4] = this.paramPrefixTagTextBox.Text + " " + this.rsFullFileNameTextBox.Text;
-                UpdatePreviewText();
-            }
-        }
-
         private void RsChosenButton_Click(object sender, System.EventArgs e)
         {   // 由用户自己指定Py脚本生成的文件路径名,因此在配置的时候,py脚本还没运行
             // 此时结果文件还不存在,故使用saveFileDialog对话框
+            this.saveFileDialog1.OverwritePrompt = false;
             DialogResult rs = this.saveFileDialog1.ShowDialog();
             if (rs != DialogResult.OK)
                 return;
             this.browseChosenTextBox.Text = this.saveFileDialog1.FileName;
             this.toolTip1.SetToolTip(this.browseChosenTextBox, this.browseChosenTextBox.Text);
-
-            if (this.browseChosenRadioButton.Checked)
-            {
-                this.previewTextList[4] = String.Empty;
-                UpdatePreviewText();
-            }
         }
-
-        private void BrowseChosenRadioButton_CheckedChanged(object sender, System.EventArgs e)
-        {
-            // 此时需要 rsChosenButton
-            this.rsChosenButton.Enabled = true;
-            if (this.browseChosenRadioButton.Checked)
-            {
-                this.fullOutputFilePath = this.browseChosenTextBox.Text;
-                this.previewTextList[4] = String.Empty;
-                UpdatePreviewText();
-            }
-        }
-
 
         private void UpdatePreviewText()
         {
@@ -526,6 +402,28 @@ namespace Citta_T1.OperatorViews
             bool notHasVirtualMachine = this.pythonChosenComboBox.Text == "未配置Python虚拟机";
             if (isReady && notHasVirtualMachine)
                 this.opControl.Status = ElementStatus.Null;
+        }
+
+
+        private void PythonOperatorView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OutputFileEncodeSettingGroup_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
+
+        private void OutputFileSeparatorSettingGroup_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            //打开一个窗口
+            new PythonOperatorHelper().ShowDialog();
         }
     }
 }

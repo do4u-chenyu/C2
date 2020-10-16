@@ -13,8 +13,10 @@ namespace Citta_T1.Business.Schedule.Cmd
         public List<string> GenCmd()
         {
             List<string> cmds = new List<string>();
+            string path = System.IO.Path.GetDirectoryName(option.GetOption("pyFullPath"));
             string cmdPython = option.GetOption("cmd");
 
+            cmds.Add("cd /d " + path);
             cmds.Add(cmdPython);
             return cmds;
         }

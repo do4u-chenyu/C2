@@ -136,6 +136,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DataSource\DataSourceInfo.cs" />
+    <Compile Include="Business\Model\ExportModel.cs" />
+    <Compile Include="Business\Model\ImportModel.cs" />
     <Compile Include="Business\Model\World\WorldMap.cs" />
     <Compile Include="Business\Option\BcpInfo.cs" />
     <Compile Include="Business\Option\ColumnInfo.cs" />
@@ -985,6 +987,12 @@
     <Compile Include="IAOLab\PythonOP\PythonInterpreterInfo.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOPConfig.cs" />
     <Compile Include="IAOLab\PythonOP\PythonOperatorCmd.cs" />
+    <Compile Include="IAOLab\PythonOP\PythonOperatorHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAOLab\PythonOP\PythonOperatorHelper.Designer.cs">
+      <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="IAOLab\PythonOP\PythonOperatorView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1200,6 +1208,7 @@
     <Compile Include="Utils\ControlUtil.cs" />
     <Compile Include="Utils\LogUtil.cs" />
     <Compile Include="Utils\OpUtil.cs" />
+    <Compile Include="Utils\ZipUtil.cs" />
     <EmbeddedResource Include="Configuration\Dialog\GeneralPage.resx">
       <DependentUpon>GeneralPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1347,6 +1356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\CustomOP\CustomOperatorView.resx">
       <DependentUpon>CustomOperatorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IAOLab\PythonOP\PythonOperatorHelper.resx">
+      <DependentUpon>PythonOperatorHelper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IAOLab\PythonOP\PythonOperatorView.resx">
       <DependentUpon>PythonOperatorView.cs</DependentUpon>
@@ -2161,6 +2173,14 @@
     <None Include="Resources\zoom_out1.png" />
     <None Include="Resources\windows_themes1.xml" />
     <None Include="Resources\zh.CHS.xml" />
+    <Content Include="res\datasource\pythonHelper1.png" />
+    <Content Include="res\datasource\pythonHelper2.png" />
+    <Content Include="res\datasource\pythonHelper3.png" />
+    <Content Include="res\datasource\pythonHelper4.png" />
+    <Content Include="res\datasource\pythonHelper5.png" />
+    <Content Include="res\datasource\pythonHelper6.png" />
+    <Content Include="res\datasource\u72.png" />
+    <Content Include="res\datasource\u721.png" />
     <Content Include="res\flow\flow.png" />
     <Content Include="res\Icon\Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

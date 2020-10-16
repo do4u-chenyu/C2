@@ -73,6 +73,6 @@ namespace Citta_T1.Core
         public static string VersionType { get => versionType; set => versionType = value; }
         public const string GreenVersion = "Green";
         public const string GreenPath = "source";
-
+        public const string regPath = @"^(?<fpath>([a-zA-Z]:\\)([\s\.\-\w]+\\)*)(?<fname>[\w]+.[\w]+)";
     }
 }
