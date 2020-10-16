@@ -84,7 +84,6 @@ namespace Citta_T1
             this.MainPanel = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BaseWorkSpace = new System.Windows.Forms.Panel();
-            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.canvasPanel = new Citta_T1.Controls.CanvasPanel();
             this.topToolBarControl = new Citta_T1.Controls.Top.TopToolBarControl();
             this.progressBarLabel = new System.Windows.Forms.Label();
@@ -98,6 +97,7 @@ namespace Citta_T1
             this.rightHideButton = new Citta_T1.Controls.Flow.RightHideButton();
             this.rightShowButton = new Citta_T1.Controls.Flow.RightShowButton();
             this.naviViewControl = new Citta_T1.Controls.Flow.NaviViewControl();
+            this.mdiWorkSpace1 = new Citta_T1.Controls.MdiWorkSpace();
             this.panel6 = new System.Windows.Forms.Panel();
             this.modelTitlePanel = new Citta_T1.Controls.Title.ModelTitlePanel();
             this.headPanel.SuspendLayout();
@@ -670,21 +670,13 @@ namespace Citta_T1
             // 
             this.BaseWorkSpace.Controls.Add(this.saveModelButton);
             this.BaseWorkSpace.Controls.Add(this.saveAllButton);
-            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Controls.Add(this.canvasPanel);
+            this.BaseWorkSpace.Controls.Add(this.mdiWorkSpace1);
             this.BaseWorkSpace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BaseWorkSpace.Location = new System.Drawing.Point(0, 0);
             this.BaseWorkSpace.Name = "BaseWorkSpace";
             this.BaseWorkSpace.Size = new System.Drawing.Size(910, 248);
             this.BaseWorkSpace.TabIndex = 0;
-            // 
-            // mdiWorkSpace1
-            // 
-            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
-            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
-            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
-            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // canvasPanel
             // 
@@ -849,6 +841,14 @@ namespace Citta_T1
             this.naviViewControl.Name = "naviViewControl";
             this.naviViewControl.Size = new System.Drawing.Size(205, 105);
             this.naviViewControl.TabIndex = 0;
+            // 
+            // mdiWorkSpace1
+            // 
+            this.mdiWorkSpace1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mdiWorkSpace1.Location = new System.Drawing.Point(0, 0);
+            this.mdiWorkSpace1.Name = "mdiWorkSpace1";
+            this.mdiWorkSpace1.Size = new System.Drawing.Size(910, 248);
+            this.mdiWorkSpace1.TabIndex = 8;
             // 
             // panel6
             // 

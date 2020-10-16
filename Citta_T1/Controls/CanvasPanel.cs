@@ -134,7 +134,8 @@ namespace Citta_T1.Controls
             int locY = Convert.ToInt32(e.Y / screenFactor);
             int dx = Convert.ToInt32(drgOffsetX / screenFactor);
             int dy = Convert.ToInt32(drgOffsetY / screenFactor);
-            Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
+            //Point location = this.Parent.PointToClient(new Point(locX - dx, locY - dy));
+            Point location = Global.GetMainForm().PointToClient(new Point(locX - dx, locY - dy));
             string text = e.Data.GetData("Text").ToString();
             int sizeLevel = Global.GetCurrentDocument().WorldMap.SizeLevel;
             if (type == ElementType.DataSource)

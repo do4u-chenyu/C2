@@ -36,6 +36,10 @@ namespace Citta_T1.Controls.Title
                 this.modelTitleControls.Add(mtControl);
                 this.Controls.Add(mtControl);
 
+                // RightModelTitleButton
+                RightModelTitleControl rmtControl = new RightModelTitleControl();
+                this.Controls.Add(rmtControl);
+
                 // 根据元素个数调整位置和大小
                 mtControl.SetOriginalModelTitle(modelTitles[i]);
                 if (i == 0)

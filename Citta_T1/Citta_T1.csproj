@@ -14,6 +14,8 @@
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,8 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -52,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -569,6 +570,9 @@
     <Compile Include="Controls\ThumbViews\ThumbViewPaintEventArgs.cs" />
     <Compile Include="Controls\Tip.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Title\RightModelTitleControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ToolStrips\ToolStripExtensions.cs" />
     <Compile Include="Controls\ToolStrips\ToolStripNumericUpDown.cs">
@@ -1253,6 +1257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\ModelTitlePanel.resx">
       <DependentUpon>ModelTitlePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Title\RightModelTitleControl.resx">
+      <DependentUpon>RightModelTitleControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
@@ -2161,6 +2168,7 @@
     <None Include="res\toolbox\continue.png" />
     <None Include="res\toolbox\run.png" />
     <None Include="res\toolbox\continual.png" />
+    <None Include="res\modeltitlepanel\u700.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
