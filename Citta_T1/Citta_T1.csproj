@@ -2189,6 +2189,7 @@
     <None Include="res\toolbox\run.png" />
     <None Include="res\toolbox\continual.png" />
     <None Include="res\modeltitlepanel\u700.png" />
+    <None Include="res\toolbox\importmodel.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
