@@ -23,9 +23,15 @@ namespace Citta_T1.Controls.Title
         {
             modelTitleControls = new List<ModelTitleControl>();
             InitializeComponent();
+            InitStartPageTitle();
         }
 
-
+        private void InitStartPageTitle()
+        {
+            StartPageTitle startPageTitle = new StartPageTitle();
+            startPageTitle.Location = OriginalPoint;
+            this.Controls.Add(startPageTitle);
+        }
         public void LoadModelDocument(string[] modelTitles)
         {
             int end = modelTitles.Length - 1;

@@ -576,6 +576,12 @@
     <Compile Include="Controls\Title\RightModelTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Controls\Title\StartPageTitle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Title\StartPageTitle.Designer.cs">
+      <DependentUpon>StartPageTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ToolStrips\ToolStripExtensions.cs" />
     <Compile Include="Controls\ToolStrips\ToolStripNumericUpDown.cs">
       <SubType>Component</SubType>
@@ -1269,6 +1275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Title\RightModelTitleControl.resx">
       <DependentUpon>RightModelTitleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Title\StartPageTitle.resx">
+      <DependentUpon>StartPageTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Top\TopToolBarControl.resx">
       <DependentUpon>TopToolBarControl.cs</DependentUpon>
@@ -2190,6 +2199,9 @@
     <None Include="res\toolbox\continual.png" />
     <None Include="res\modeltitlepanel\u700.png" />
     <None Include="res\toolbox\importmodel.png" />
+    <Content Include="res\leftpanelmenu\startPageTitle.jpg" />
+    <Content Include="res\leftpanelmenu\startPageTitle_1.jpg" />
+    <Content Include="res\leftpanelmenu\startPageTitle_gray.png" />
     <Content Include="sbin\sleep.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
